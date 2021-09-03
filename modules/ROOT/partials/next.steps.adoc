@@ -1,0 +1,12 @@
+== Next steps
+
+* link:#[Run Teradata Express on your local machine using VirtualBox]
+* link:#[Run Teradata Developer in public cloud]
+* link:#[Query data stored in object storage, e.g. S3, Azure Blob, GCS]
+* link:#[Train an ML model without leaving Teradata Vantage]
+* link:#[Interact with Teradata Vantage from a Jupyter notebook]
+* link:#[Query Teradata from your application using REST API]
+* link:#[Connect to Teradata using JDBC from your Java application]
+* link:#[Tune performance with indices]
+* link:#[Load data into Teradata efficiently using Teradata Parallel Transporter (TPT)]
+* link:#[Extend Teradata with user defined functions]

@@ -1,0 +1,32 @@
+= Getting Started with Teradata Vantage on Your Local Machine Using VirtualBox
+
+include::partial$getting.started.intro.adoc[]
+
+include::partial$getting.started.prereqs.adoc[]
+
+== Installation
+
+=== Download required software
+
+. link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Teradata Express for VMware Player]. If you have not used the Teradata downloads website before, you will need to link:https://downloads.teradata.com/user/register[register].
+. link:https://www.virtualbox.org/wiki/Downloads[VirtualBox].
++
+NOTE: You can also install VirtualBox using `brew` and other package managers.
+
+=== Run installers
+
+Install VirtualBox by running the installer and accepting the default values.
+
+=== Run Teradata Vantage Express
+
+. Go to the directory where you downloaded Teradata Vantage Express and unzip the downloaded file.
+. Copy link:{attachmentsdir}/VE.vbox[VE.vbox] file to the directory where you unzipped Vantage Express.
+. Double-click on the `VE.vbox` file. This will start the VM image in VirtualBox.
+
+include::partial$run.vantage.adoc[]
+
+include::partial$running.sample.queries.adoc[]
+
+include::partial$getting.started.summary.adoc[]
+
+include::partial$next.steps.adoc[]

@@ -1,0 +1,65 @@
+=== Run sample queries
+
+. We will now run some queries in the VM. To avoid copy/paste issues between the host and the VM, we will open this how-to in the VM. Go to the virtual desktop, start Firefox and point it to this how-to.
+
+. Once in Teradata Studio Express, go to `Query Development` perspective (go to the top menu and select `Window` -> `Query Development`). 
+
+. Connect using the previously created connection profile by double-clicking on `Database Connections` -> `New Teradata`.
+
+. Using `dbc` user, we will create a new database called `HR`. Copy/paste this query and run it by hitting the run query button (image:run.query.button.png[Run Query Button, 24, 24]) or pressing kbd:[F5] key:
++
+[source, sql]
+----
+CREATE DATABASE HR 
+AS PERMANENT = 60000000, -- 60MB
+    SPOOL = 120000000; -- 120MB
+----
+. Let's create a sample table and insert some data and query it. We will first create a table to hold employee information:
++
+[source, sql]
+----
+-- TODO: We need to come up with original queries. The ones below came from
+-- TODO: https://www.tutorialspoint.com/teradata/teradata_create_table.htm
+
+CREATE SET TABLE HR.Employee (
+   EmployeeNo INTEGER,
+   FirstName VARCHAR(30),
+   LastName VARCHAR(30),
+   DOB DATE FORMAT 'YYYY-MM-DD',
+   JoinedDate DATE FORMAT 'YYYY-MM-DD',
+   DepartmentNo BYTEINT
+)
+UNIQUE PRIMARY INDEX ( EmployeeNo );
+----
+. Now, let's insert a record:
++
+[source, sql]
+----
+INSERT INTO HR.Employee (
+   EmployeeNo, 
+   FirstName, 
+   LastName, 
+   DOB, 
+   JoinedDate, 
+   DepartmentNo 
+)
+VALUES ( 
+   101, 
+   'Mike', 
+   'James', 
+   '1980-01-05', 
+   '2005-03-27', 
+   01
+);
+----
+. Finally, let's see if we can retrieve the data:
++
+[source, sql]
+----
+SELECT EmployeeNo,FirstName,LastName 
+FROM HR.Employee;
+----
++
+You should get the following results:
++
+image::select.results.png[Select Results, width=400]

@@ -1,0 +1,14 @@
+site:
+  title: Teradata Vantage Quickstarts
+  url: https://teradata.github.io/quickstarts
+  start_page: docs::getting.started.vmware.adoc
+content:
+  sources:
+  - url: ./
+    branches: HEAD
+    edit_url: '{web_url}/blob/{refname}/{path}'
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/master/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+  supplemental_files: ./supplemental_ui
