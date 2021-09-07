@@ -9,21 +9,12 @@
 <link rel="stylesheet" href="/quickstarts/_/css/search.css">
 <style>
   .navbar {
-      height: 64px;
-      background: #616d73;
-      color: #fff;
-      align-items: center;
-      display: flex;
-  }
-
-  body::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    height: 2px;
-    width: 100%;
-    z-index: 1000;
-    background-color: #f3753f;
+    height: 64px;
+    background: #616d73;
+    color: #fff;
+    align-items: center;
+    display: flex;
+    border-top: #f3753f solid 2px;
   }
 
   .navbar-brand {
@@ -48,7 +39,16 @@
     margin-right: 10px;
   }
 </style>
-    <script>var uiRootPath = '/quickstarts/_'</script>
+
+  body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 2px;
+    width: 100%;
+    z-index: 1000;
+    background-color: #f3753f;
+  }    <script>var uiRootPath = '/quickstarts/_'</script>
   </head>
   <body class="status-404">
 <header class="header" role="banner">
