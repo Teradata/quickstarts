@@ -1,1 +1,42 @@
 <link rel="stylesheet" href="{{uiRootPath}}/css/search.css">
+<style>
+  .navbar {
+      height: 64px;
+      background: #616d73;
+      color: #fff;
+      align-items: center;
+      display: flex;
+  }
+
+  body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 2px;
+    width: 100%;
+    z-index: 1000;
+    background-color: #f3753f;
+  }
+
+  .navbar-brand {
+    padding-left: 0px;
+  }
+
+  .navbar-brand .navbar-item:first-child {
+    font-family: RidleyGrotesk-Medium, Arial, Helvetica, sans-serif;
+    font-size: 19px;
+    padding-top: 4px;
+  }
+  
+  .navbar-item .navbar-link {
+    line-height: inherit;
+    
+  }
+
+  .navbar-logo {
+    width: 100px; 
+    height: 24px; 
+    margin-left: 16px; 
+    margin-right: 10px;
+  }
+</style>
