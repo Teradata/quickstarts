@@ -1,9 +1,3 @@
 == Next steps
 
 * link:#[Query data stored in object storage, e.g. S3, Azure Blob, GCS]
-* link:#[Train an ML model without leaving Teradata Vantage]
-* link:#[Interact with Teradata Vantage from a Jupyter notebook]
-* link:#[Connect to Teradata using JDBC from your Java application]
-* link:#[Tune performance with indices]
-* link:#[Load data into Teradata efficiently using Teradata Parallel Transporter (TPT)]
-* link:#[Extend Teradata with user defined functions]

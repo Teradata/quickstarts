@@ -174,13 +174,3 @@ In this quickstart we have learned how to read data from object storage using Na
 
 == Further reading
 * link:https://docs.teradata.com/r/2mw8ooFr~xX0EaaGFaDW8A/AXD7Ef41qpq~w80wY4OACA#[Teradata Vantage™ - Native Object Store Getting Started Guide]
-
-== Next steps
-
-* link:#[Train an ML model without leaving Teradata Vantage]
-* link:#[Interact with Teradata Vantage from a Jupyter notebook]
-* link:#[Query Teradata from your application using REST API]
-* link:#[Connect to Teradata using JDBC from your Java application]
-* link:#[Tune performance with indices]
-* link:#[Load data into Teradata efficiently using Teradata Parallel Transporter (TPT)]
-* link:#[Extend Teradata with user defined functions]
