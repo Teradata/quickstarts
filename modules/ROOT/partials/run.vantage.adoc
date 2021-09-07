@@ -1,4 +1,4 @@
-. Once the VM is up, you will see its desktop environment. When prompted for username/password enter `root` for both. 
+. Once the VM is up, you will see its desktop environment. When prompted for username/password enter `root` for both.
 +
 image::vm.login.png[VM Login, width=500]
 . The database is configured to autostart with the VM. To confirm that the database has started go to the virtual desktop and start `Gnome Terminal`. In the terminal execute:
@@ -12,7 +12,7 @@ If the database is up and running you will see:
 +
 ----
 PDE state is RUN/STARTED.
-DBS state is 5: Logons are enable - The system is quiescent
+DBS state is 5: Logons are enabled - The system is quiescent
 ----
 +
 If the database is still starting, the DBS state will be less than 5. Rerun `pdestate -a` to get the latest state.

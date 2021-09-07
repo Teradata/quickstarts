@@ -1,4 +1,9 @@
 = Getting Started with Teradata Vantage on Your Local Machine Using VirtualBox
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: September 7th, 2021
+:description: Run Teradata Vantage express on your laptop using Virtualbox.
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics
 
 include::partial$getting.started.intro.adoc[]
 

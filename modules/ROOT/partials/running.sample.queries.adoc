@@ -2,7 +2,7 @@
 
 . We will now run some queries in the VM. To avoid copy/paste issues between the host and the VM, we will open this how-to in the VM. Go to the virtual desktop, start Firefox and point it to this how-to.
 
-. Once in Teradata Studio Express, go to `Query Development` perspective (go to the top menu and select `Window` -> `Query Development`). 
+. Once in Teradata Studio Express, go to `Query Development` perspective (go to the top menu and select `Window` -> `Query Development`).
 
 . Connect using the previously created connection profile by double-clicking on `Database Connections` -> `New Teradata`.
 
@@ -10,7 +10,7 @@
 +
 [source, sql]
 ----
-CREATE DATABASE HR 
+CREATE DATABASE HR
 AS PERMANENT = 60000000, -- 60MB
     SPOOL = 120000000; -- 120MB
 ----
@@ -18,37 +18,35 @@ AS PERMANENT = 60000000, -- 60MB
 +
 [source, sql]
 ----
--- TODO: We need to come up with original queries. The ones below came from
--- TODO: https://www.tutorialspoint.com/teradata/teradata_create_table.htm
 
-CREATE SET TABLE HR.Employee (
-   EmployeeNo INTEGER,
+CREATE SET TABLE HR.Employees (
+   GlobalID INTEGER,
    FirstName VARCHAR(30),
    LastName VARCHAR(30),
-   DOB DATE FORMAT 'YYYY-MM-DD',
+   DateOfBirth DATE FORMAT 'YYYY-MM-DD',
    JoinedDate DATE FORMAT 'YYYY-MM-DD',
-   DepartmentNo BYTEINT
+   DepartmentCode BYTEINT
 )
-UNIQUE PRIMARY INDEX ( EmployeeNo );
+UNIQUE PRIMARY INDEX ( GlobalID );
 ----
 . Now, let's insert a record:
 +
 [source, sql]
 ----
-INSERT INTO HR.Employee (
-   EmployeeNo, 
-   FirstName, 
-   LastName, 
-   DOB, 
-   JoinedDate, 
-   DepartmentNo 
+INSERT INTO HR.Employees (
+   GlobalID,
+   FirstName,
+   LastName,
+   DateOfBirth,
+   JoinedDate,
+   DepartmentCode
 )
-VALUES ( 
-   101, 
-   'Mike', 
-   'James', 
-   '1980-01-05', 
-   '2005-03-27', 
+VALUES (
+   101,
+   'Adam',
+   'Tworkowski',
+   '1980-01-05',
+   '2004-08-01',
    01
 );
 ----
@@ -56,10 +54,10 @@ VALUES (
 +
 [source, sql]
 ----
-SELECT EmployeeNo,FirstName,LastName 
-FROM HR.Employee;
+SELECT *
+FROM HR.Employees;
 ----
 +
 You should get the following results:
 +
-image::select.results.png[Select Results, width=400]
+image::select.results.png[Select Results, width=800]

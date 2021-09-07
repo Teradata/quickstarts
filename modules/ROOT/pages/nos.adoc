@@ -1,22 +1,27 @@
 = Query Data Stored in Object Storage, e.g. S3, Azure Blob, GCS
 :experimental:
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: September 7th, 2021
+:description: Teradata Vantage Native Object Storage - read and write from/to object storage, unified SQL interface for Vantage and object storage.
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics
 
 == Overview
 
-Native Object Storage (NOS) is a Vantage feature that allows you to query data stored in files in object storage such as AWS S3, Google GCS, Azure Blob or on-prem implementations. It's useful in scenarios where you want to explore data without building a data pipeline to bring it into Vantage. 
+Native Object Storage (NOS) is a Vantage feature that allows you to query data stored in files in object storage such as AWS S3, Google GCS, Azure Blob or on-prem implementations. It's useful in scenarios where you want to explore data without building a data pipeline to bring it into Vantage.
 
 == Prerequsites
 
-You need access to a Teradata Vantage instance. NOS is enabled in all Vantage editions from Vantage Express through Developer, DYI to Vantage as a Service. If you need a new instance of Vantage the easiest way to start is to xref:getting.started.vmware.adoc[install Vantage Express on your local machine].
+You need access to a Teradata Vantage instance. NOS is enabled in all Vantage editions from Vantage Express through Developer, DYI to Vantage as a Service starting from version 17.10. If you need a new instance of Vantage the easiest way is to xref:getting.started.vmware.adoc[install Vantage Express on your local machine].
 
 == Explore data with NOS
 
-NOTE: Currently, NOS support CSV, JSON (as array or new-line delimited), and Parquet data formats.
+NOTE: Currently, NOS supports CSV, JSON (as array or new-line delimited), and Parquet data formats.
 
 Let's say you have a dataset stored as CSV files in an S3 bucket. You want to explore the dataset before you decide if you want to bring it into Vantage. For this scenario, we are going to use a public dataset published by Teradata that contains river flow data collected by the
 U.S. Geological Survey. The bucket is at https://td-usgs-public.s3.amazonaws.com/.
 
-Let's first have a look at sample CSV data. Here, we take 10 first rows that Vantage will fetch from the bucket:
+Let's first have a look at sample CSV data. We take the first 10 rows that Vantage will fetch from the bucket:
 
 [source, sql]
 ----
@@ -64,9 +69,9 @@ Note how we still have to dereference CSV columns with `Payload..`. To make our 
 
 [source, sql]
 ----
--- if you are running this sample as dbc user you will not have permissions
+-- If you are running this sample as dbc user you will not have permissions
 -- to create a table in dbc database. Instead, create a new database and use
--- the newly create database to create a foreign table
+-- the newly create database to create a foreign table.
 
 CREATE DATABASE Riverflow
     AS PERMANENT = 60000000,
@@ -82,7 +87,7 @@ Result:
 
 image::csv.foreign.table.select.png[CSV Aggregation, width=800]
 
-This time, the `SELECT` statement looks like a regular select against an in-database table. Also, the returned data uses column names from the CSV file. No need to dereference with `Payload..`. There is still an issue though. The query was still slow. There an easy way to bring the CSV data into Vantage to speed things up. Read to on to find out how.
+This time, the `SELECT` statement looks like a regular select against an in-database table. Also, the returned data uses column names from the CSV file. No need to dereference with `Payload..`. There is still an issue though. The query was slow. There is an easy way to bring the CSV data into Vantage to speed things up. Read on to find out how.
 
 == Load data from NOS into Vantage
 
@@ -93,10 +98,10 @@ IMPORTANT: This query assumes you created database `Riverflow` and a foreign tab
 [source, sql]
 ----
 
--- This query assumes you created database `Riverflow` 
+-- This query assumes you created database `Riverflow`
 -- and a foreign table called `Riverflow.riverflow` in the previous step.
 
-CREATE MULTISET TABLE 
+CREATE MULTISET TABLE
     Riverflow.riverflow_native(site_no, Flow, GageHeight, datetime)
 AS (
     SELECT site_no, Flow, GageHeight, datetime FROM Riverflow.riverflow
@@ -166,6 +171,9 @@ Here, we instruct Vantage to take data from `Riverflow.riverflow_native` and sav
 == Summary
 
 In this quickstart we have learned how to read data from object storage using Native Object Storage (NOS) functionality in Vantage. NOS supports reading and importing data stored in CSV, JSON and Parquet formats. NOS can also export data from Vantage to object storage.
+
+== Further reading
+* link:https://docs.teradata.com/r/2mw8ooFr~xX0EaaGFaDW8A/AXD7Ef41qpq~w80wY4OACA#[Teradata Vantage™ - Native Object Store Getting Started Guide]
 
 == Next steps
 
