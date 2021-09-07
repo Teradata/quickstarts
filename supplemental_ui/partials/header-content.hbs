@@ -22,16 +22,20 @@
     </span>
     <div class="navbar-brand">
       <a class="navbar-item" href="{{or site.url (or siteRootUrl siteRootPath)}}">{{site.title}}</a>
-      {{#if env.DOCSEARCH_ENABLED}}
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://docs.teradata.com/">Documentation</a>
+        <a class="navbar-item" href="https://downloads.teradata.com/">Downloads</a>
+        <a class="navbar-item" href="https://support.teradata.com/community ">Community</a>
+        <a class="navbar-item" href="https://www.teradata.com/Blogs">Blog</a>
+        {{#if env.DOCSEARCH_ENABLED}}
         <div class="navbar-item">
           <input id="search-input" type="text" placeholder="Search docs">
         </div>
-      {{/if}}
-      <button class="navbar-burger" data-target="topbar-nav">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+        {{/if}}
+      </div>
     </div>
   </nav>
 </header>
+
