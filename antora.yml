@@ -1,6 +1,6 @@
 name: docs
 title: Quickstarts
-version: master
+version: '17.10'
 start_page: getting.started.vmware.adoc
 nav:
 - modules/ROOT/nav.adoc
