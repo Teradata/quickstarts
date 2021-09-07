@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Query Data Stored in Object Storage, e.g. S3, Azure Blob, GCS :: Teradata Vantage Quickstarts</title>
+    <link rel="canonical" href="https://teradata.github.io/quickstarts/docs/nos.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="stylesheet" href="../_/css/search.css">
+    <script>var uiRootPath = '../_'</script>
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://teradata.github.io/quickstarts">Teradata Vantage Quickstarts</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="docs" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="getting.started.vmware.html">Quickstarts</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="getting.started.vmware.html">Getting started with Vantage Express on VMware</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="getting.started.vbox.html">Getting started with Vantage Express on VirtualBox</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="nos.html">Query data stored in object storage, e.g. S3, Azure Blob, GCS</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">TODO</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#:.adoc">Run Teradata Developer in Public Cloud</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#:.adoc">Connect to Teradata using JDBC from your Java application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#:.adoc">Interact with Teradata Vantage from a Jupyter notebook</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#:.adoc">Train an ML model without leaving Teradata Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#:.adoc">Tune performance with indices</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#:.adoc">Load data into Teradata efficiently using Teradata Parallel Transporter (TPT)</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#:.adoc">Extend Teradata with user defined functions</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Quickstarts</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="getting.started.vmware.html">Quickstarts</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="getting.started.vmware.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="getting.started.vmware.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="getting.started.vmware.html">Quickstarts</a></li>
+    <li><a href="nos.html">Query data stored in object storage, e.g. S3, Azure Blob, GCS</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/nos.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Query Data Stored in Object Storage, e.g. S3, Azure Blob, GCS</h1>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Native Object Storage (NOS) is a Vantage feature that allows you to query data stored in files in object storage such as AWS S3, Google GCS, Azure Blob or on-prem implementations. It&#8217;s useful in scenarios where you want to explore data without building a data pipeline to bring it into Vantage.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You need access to a Teradata Vantage instance. NOS is enabled in all Vantage editions from Vantage Express through Developer, DYI to Vantage as a Service. If you need a new instance of Vantage the easiest way to start is to <a href="getting.started.vmware.html" class="page">install Vantage Express on your local machine</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_explore_data_with_nos"><a class="anchor" href="#_explore_data_with_nos"></a>Explore data with NOS</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Currently, NOS support CSV, JSON (as array or new-line delimited), and Parquet data formats.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s say you have a dataset stored as CSV files in an S3 bucket. You want to explore the dataset before you decide if you want to bring it into Vantage. For this scenario, we are going to use a public dataset published by Teradata that contains river flow data collected by the
+U.S. Geological Survey. The bucket is at <a href="https://td-usgs-public.s3.amazonaws.com/" class="bare">https://td-usgs-public.s3.amazonaws.com/</a>.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s first have a look at sample CSV data. Here, we take 10 first rows that Vantage will fetch from the bucket:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT top 10 payload..* FROM (
+	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+) AS d;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is what I&#8217;ve got:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/csv.result.png" alt="Select Results" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>We have got plenty of numbers, but what do they mean? To answer this question, we will ask Vantage to detect the schema of the CSV files:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM (
+	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+	RETURNTYPE='NOSREAD_SCHEMA'
+) AS d;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Vantage will now fetch a data sample to analyze the schema and return results:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/csv.schema.png" alt="CSV Schema" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>We see that the CSV files have 7 columns. For each column, we get the name, the datatype and the file coordinates that were used to infer the schema.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_query_data_with_nos"><a class="anchor" href="#_query_data_with_nos"></a>Query data with NOS</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that we know the schema, we can work with the dataset as if it was a regular SQL table. To prove the point, let&#8217;s try to do some data aggregation. Let&#8217;s get an average temperature per site.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT AVG(Payload..Temp) FROM (
+	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+) AS d GROUP BY Payload..site_no</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Result:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/csv.aggregation.png" alt="CSV Aggregation" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>Note how we still have to dereference CSV columns with <code>Payload..</code>. To make our experience more similar to a table we can define a foreign table:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- if you are running this sample as dbc user you will not have permissions
+-- to create a table in dbc database. Instead, create a new database and use
+-- the newly create database to create a foreign table
+
+CREATE DATABASE Riverflow
+    AS PERMANENT = 60000000,
+    SPOOL = 120000000;
+
+CREATE FOREIGN TABLE Riverflow.riverflow
+    USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
+
+SELECT top 10 * FROM Riverflow.riverflow</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Result:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/csv.foreign.table.select.png" alt="CSV Aggregation" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>This time, the <code>SELECT</code> statement looks like a regular select against an in-database table. Also, the returned data uses column names from the CSV file. No need to dereference with <code>Payload..</code>. There is still an issue though. The query was still slow. There an easy way to bring the CSV data into Vantage to speed things up. Read to on to find out how.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_load_data_from_nos_into_vantage"><a class="anchor" href="#_load_data_from_nos_into_vantage"></a>Load data from NOS into Vantage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Querying object storage takes time. What if you decided that the data looks interesting and you want to do some more analysis with a solution that will you quicker answers? The good news is that data returned with NOS can be used as a source for <code>CREATE TABLE</code> statements. Assuming you have <code>CREATE TABLE</code> privilege, you will be able to run:</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This query assumes you created database <code>Riverflow</code> and a foreign table called <code>Riverflow.riverflow</code> in the previous step.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- This query assumes you created database `Riverflow`
+-- and a foreign table called `Riverflow.riverflow` in the previous step.
+
+CREATE MULTISET TABLE
+    Riverflow.riverflow_native(site_no, Flow, GageHeight, datetime)
+AS (
+    SELECT site_no, Flow, GageHeight, datetime FROM Riverflow.riverflow
+) WITH DATA
+NO PRIMARY INDEX;
+
+SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Result:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/csv.data.import.png" alt="CSV Aggregation" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>This time, the <code>SELECT</code> query returned in less than a second as it answered the query using data that was already on Vantage nodes. There was no need to fetch the data from the bucket.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_access_private_buckets"><a class="anchor" href="#_access_private_buckets"></a>Access private buckets</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>So far, we have used a public bucket. What if you have a private bucket? How do you tell Vantage what credentials it should use?</p>
+</div>
+<div class="paragraph">
+<p>It is possible to inline your credentials directly into your query:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT top 10 payload..* FROM (
+	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+    AUTHORIZATION='{"ACCESS_ID":"","ACCESS_KEY":""}'
+) AS d;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Entering these credentials all the time can be tedious and less secure. In Vantage, you can create an authorization object that will serve as a container for your credentials:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE AUTHORIZATION aws_authorization
+    USER 'YOUR-ACCESS-KEY-ID'
+    PASSWORD 'YOUR-SECRET-ACCESS-KEY';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can then reference your authorization object when you create a foreign table:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE FOREIGN TABLE Riverflow.riverflow, EXTERNAL SECURITY aws_authorization
+    USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_export_data_from_vantage_to_object_storage"><a class="anchor" href="#_export_data_from_vantage_to_object_storage"></a>Export data from Vantage to object storage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>So far, we have talked about reading and importing data from object storage. Would it not be nice if we had a way to use SQL to export data from Vantage to object storage? This is exactly what <code>WRITE_NOS</code> function is for. Let&#8217;s say we want to export data from <code>Riverflow.riverflow_native</code> table to object storage. You can do so with the following query:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM WRITE_NOS (
+    ON ( SELECT * FROM Riverflow.riverflow_native )
+    PARTITION BY site_no ORDER BY site_no
+    USING
+        LOCATION('YOUR-OBJECT-STORE-URI')
+        STOREDAS('PARQUET')
+        COMPRESSION('SNAPPY')
+        NAMING('RANGE')
+        INCLUDE_ORDERING('TRUE')
+) AS d;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, we instruct Vantage to take data from <code>Riverflow.riverflow_native</code> and save it in <code>YOUR-OBJECT-STORE-URI</code> bucket using <code>parquet</code> format. The data will be split into files by <code>site_no</code> attribute. The files will be compressed.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this quickstart we have learned how to read data from object storage using Native Object Storage (NOS) functionality in Vantage. NOS supports reading and importing data stored in CSV, JSON and Parquet formats. NOS can also export data from Vantage to object storage.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#">Train an ML model without leaving Teradata Vantage</a></p>
+</li>
+<li>
+<p><a href="#">Interact with Teradata Vantage from a Jupyter notebook</a></p>
+</li>
+<li>
+<p><a href="#">Query Teradata from your application using REST API</a></p>
+</li>
+<li>
+<p><a href="#">Connect to Teradata using JDBC from your Java application</a></p>
+</li>
+<li>
+<p><a href="#">Tune performance with indices</a></p>
+</li>
+<li>
+<p><a href="#">Load data into Teradata efficiently using Teradata Parallel Transporter (TPT)</a></p>
+</li>
+<li>
+<p><a href="#">Extend Teradata with user defined functions</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
