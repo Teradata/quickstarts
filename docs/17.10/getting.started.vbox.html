@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Query Data Stored in Object Storage, e.g. S3, Azure Blob, GCS :: Teradata Vantage Quickstarts</title>
-    <link rel="canonical" href="https://teradata.github.io/quickstarts/docs/nos.html">
+    <title>Getting Started with Teradata Vantage on Your Local Machine Using VirtualBox :: Teradata Vantage Quickstarts</title>
+    <link rel="canonical" href="https://teradata.github.io/quickstarts/docs/17.10/getting.started.vbox.html">
     <meta name="generator" content="Antora 2.3.4">
-    <link rel="stylesheet" href="../_/css/site.css">
-<link rel="stylesheet" href="../_/css/search.css">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="stylesheet" href="../../_/css/search.css">
 <style>
   .navbar {
     height: 64px;
@@ -40,7 +40,7 @@
     margin-right: 10px;
   }
 </style>
-    <script>var uiRootPath = '../_'</script>
+    <script>var uiRootPath = '../../_'</script>
   </head>
   <body class="article">
 <header class="header" role="banner">
@@ -79,7 +79,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="docs" data-version="master">
+<div class="nav-container" data-component="docs" data-version="17.10">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -91,10 +91,10 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="getting.started.vmware.html">Getting started with Vantage Express on VMware</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="getting.started.vbox.html">Getting started with Vantage Express on VirtualBox</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="nos.html">Query data stored in object storage, e.g. S3, Azure Blob, GCS</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -132,14 +132,14 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context" style="visibility: hidden;">
     <span class="title">Quickstarts</span>
-    <span class="version">master</span>
+    <span class="version">17.10</span>
   </div>
   <ul class="components">
     <li class="component is-current">
       <a class="title" href="getting.started.vmware.html">Quickstarts</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="getting.started.vmware.html">master</a>
+          <a href="getting.started.vmware.html">17.10</a>
         </li>
       </ul>
     </li>
@@ -155,36 +155,38 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="getting.started.vmware.html">Quickstarts</a></li>
-    <li><a href="nos.html">Query data stored in object storage, e.g. S3, Azure Blob, GCS</a></li>
+    <li><a href="getting.started.vbox.html">Getting started with Vantage Express on VirtualBox</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/nos.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/getting.started.vbox.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Query Data Stored in Object Storage, e.g. S3, Azure Blob, GCS</h1>
+<h1 class="page">Getting Started with Teradata Vantage on Your Local Machine Using VirtualBox</h1>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Native Object Storage (NOS) is a Vantage feature that allows you to query data stored in files in object storage such as AWS S3, Google GCS, Azure Blob or on-prem implementations. It&#8217;s useful in scenarios where you want to explore data without building a data pipeline to bring it into Vantage.</p>
+<p>This how-to shows the quickest way to gain access to a Teradata database by running it on your local machine. There are many ways to install Teradata. This document optimizes for the lowest time to first query without spending money on cloud resources. Once you finish the steps you will have a working Teradata Vantage Express database on your computer.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h2>
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>You need access to a Teradata Vantage instance. NOS is enabled in all Vantage editions from Vantage Express through Developer, DYI to Vantage as a Service. If you need a new instance of Vantage the easiest way to start is to <a href="getting.started.vmware.html" class="page">install Vantage Express on your local machine</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_explore_data_with_nos"><a class="anchor" href="#_explore_data_with_nos"></a>Explore data with NOS</h2>
-<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>A computer using one of the following operating systems: Windows, Linux or MacOS.</p>
+</li>
+<li>
+<p>30GB of disk space and enough CPU and RAM to be able to dedicate at least one core and 4GB RAM to the virtual machine.</p>
+</li>
+<li>
+<p>Admin rights to be able to install and run the software.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -192,216 +194,194 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Currently, NOS support CSV, JSON (as array or new-line delimited), and Parquet data formats.
+No admin rights on your local machine? No problem! Have a look at how to run Teradata Express in <a href="#">AWS</a>, <a href="#">Azure</a>, <a href="#">GCP</a>.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Let&#8217;s say you have a dataset stored as CSV files in an S3 bucket. You want to explore the dataset before you decide if you want to bring it into Vantage. For this scenario, we are going to use a public dataset published by Teradata that contains river flow data collected by the
-U.S. Geological Survey. The bucket is at <a href="https://td-usgs-public.s3.amazonaws.com/" class="bare">https://td-usgs-public.s3.amazonaws.com/</a>.</p>
-</div>
-<div class="paragraph">
-<p>Let&#8217;s first have a look at sample CSV data. Here, we take 10 first rows that Vantage will fetch from the bucket:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT top 10 payload..* FROM (
-	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-) AS d;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Here is what I&#8217;ve got:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/csv.result.png" alt="Select Results" width="400">
-</div>
-</div>
-<div class="paragraph">
-<p>We have got plenty of numbers, but what do they mean? To answer this question, we will ask Vantage to detect the schema of the CSV files:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM (
-	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-	RETURNTYPE='NOSREAD_SCHEMA'
-) AS d;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Vantage will now fetch a data sample to analyze the schema and return results:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/csv.schema.png" alt="CSV Schema" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>We see that the CSV files have 7 columns. For each column, we get the name, the datatype and the file coordinates that were used to infer the schema.</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_query_data_with_nos"><a class="anchor" href="#_query_data_with_nos"></a>Query data with NOS</h2>
+<h2 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Now that we know the schema, we can work with the dataset as if it was a regular SQL table. To prove the point, let&#8217;s try to do some data aggregation. Let&#8217;s get an average temperature per site.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT AVG(Payload..Temp) FROM (
-	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-) AS d GROUP BY Payload..site_no</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Result:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/csv.aggregation.png" alt="CSV Aggregation" width="400">
-</div>
-</div>
-<div class="paragraph">
-<p>Note how we still have to dereference CSV columns with <code>Payload..</code>. To make our experience more similar to a table we can define a foreign table:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- if you are running this sample as dbc user you will not have permissions
--- to create a table in dbc database. Instead, create a new database and use
--- the newly create database to create a foreign table
-
-CREATE DATABASE Riverflow
-    AS PERMANENT = 60000000,
-    SPOOL = 120000000;
-
-CREATE FOREIGN TABLE Riverflow.riverflow
-    USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
-
-SELECT top 10 * FROM Riverflow.riverflow</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Result:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/csv.foreign.table.select.png" alt="CSV Aggregation" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>This time, the <code>SELECT</code> statement looks like a regular select against an in-database table. Also, the returned data uses column names from the CSV file. No need to dereference with <code>Payload..</code>. There is still an issue though. The query was still slow. There an easy way to bring the CSV data into Vantage to speed things up. Read to on to find out how.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_load_data_from_nos_into_vantage"><a class="anchor" href="#_load_data_from_nos_into_vantage"></a>Load data from NOS into Vantage</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Querying object storage takes time. What if you decided that the data looks interesting and you want to do some more analysis with a solution that will you quicker answers? The good news is that data returned with NOS can be used as a source for <code>CREATE TABLE</code> statements. Assuming you have <code>CREATE TABLE</code> privilege, you will be able to run:</p>
-</div>
-<div class="admonitionblock important">
+<div class="sect2">
+<h3 id="_download_required_software"><a class="anchor" href="#_download_required_software"></a>Download required software</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Teradata Express for VMware Player</a>. If you have not used the Teradata downloads website before, you will need to <a href="https://downloads.teradata.com/user/register">register</a>.</p>
+</li>
+<li>
+<p><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>.</p>
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-important" title="Important"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This query assumes you created database <code>Riverflow</code> and a foreign table called <code>Riverflow.riverflow</code> in the previous step.
+You can also install VirtualBox using <code>brew</code> and other package managers.
 </td>
 </tr>
 </table>
 </div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_run_installers"><a class="anchor" href="#_run_installers"></a>Run installers</h3>
+<div class="paragraph">
+<p>Install VirtualBox by running the installer and accepting the default values.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_run_teradata_vantage_express"><a class="anchor" href="#_run_teradata_vantage_express"></a>Run Teradata Vantage Express</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to the directory where you downloaded Teradata Vantage Express and unzip the downloaded file.</p>
+</li>
+<li>
+<p>Copy <a href="_attachments/VE.vbox">VE.vbox</a> file to the directory where you unzipped Vantage Express.</p>
+</li>
+<li>
+<p>Double-click on the <code>VE.vbox</code> file. This will start the VM image in VirtualBox.</p>
+</li>
+<li>
+<p>Once the VM is up, you will see its desktop environment. When prompted for username/password enter <code>root</code> for both.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/vm.login.png" alt="VM Login" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>The database is configured to autostart with the VM. To confirm that the database has started go to the virtual desktop and start <code>Gnome Terminal</code>. In the terminal execute:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- This query assumes you created database `Riverflow`
--- and a foreign table called `Riverflow.riverflow` in the previous step.
-
-CREATE MULTISET TABLE
-    Riverflow.riverflow_native(site_no, Flow, GageHeight, datetime)
-AS (
-    SELECT site_no, Flow, GageHeight, datetime FROM Riverflow.riverflow
-) WITH DATA
-NO PRIMARY INDEX;
-
-SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pdestate -a</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Result:</p>
+<p>If the database is up and running you will see:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>PDE state is RUN/STARTED.
+DBS state is 5: Logons are enable - The system is quiescent</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the database is still starting, the DBS state will be less than 5. Rerun <code>pdestate -a</code> to get the latest state.</p>
+</div>
+</li>
+<li>
+<p>Go back to the virtual desktop and launch <code>Teradata Studio Express</code>. When you first start it you will be offered a tour. Once you close the tour, you will see a wizard window to add a new connection. Select <code>Teradata</code>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/new.connection.profile.png" alt="New Connection Profile" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>On the next screen, connect to the database on your localhost using <code>dbc</code> for the username and password:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/new.connection.png" alt="New Connection" width="500">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_run_sample_queries"><a class="anchor" href="#_run_sample_queries"></a>Run sample queries</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>We will now run some queries in the VM. To avoid copy/paste issues between the host and the VM, we will open this how-to in the VM. Go to the virtual desktop, start Firefox and point it to this how-to.</p>
+</li>
+<li>
+<p>Once in Teradata Studio Express, go to <code>Query Development</code> perspective (go to the top menu and select <code>Window</code> &#8594; <code>Query Development</code>).</p>
+</li>
+<li>
+<p>Connect using the previously created connection profile by double-clicking on <code>Database Connections</code> &#8594; <code>New Teradata</code>.</p>
+</li>
+<li>
+<p>Using <code>dbc</code> user, we will create a new database called <code>HR</code>. Copy/paste this query and run it by hitting the run query button (<span class="image"><img src="_images/run.query.button.png" alt="Run Query Button" width="24" height="24"></span>) or pressing <kbd>F5</kbd> key:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE DATABASE HR
+AS PERMANENT = 60000000, -- 60MB
+    SPOOL = 120000000; -- 120MB</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Let&#8217;s create a sample table and insert some data and query it. We will first create a table to hold employee information:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- TODO: We need to come up with original queries. The ones below came from
+-- TODO: https://www.tutorialspoint.com/teradata/teradata_create_table.htm
+
+CREATE SET TABLE HR.Employee (
+   EmployeeNo INTEGER,
+   FirstName VARCHAR(30),
+   LastName VARCHAR(30),
+   DOB DATE FORMAT 'YYYY-MM-DD',
+   JoinedDate DATE FORMAT 'YYYY-MM-DD',
+   DepartmentNo BYTEINT
+)
+UNIQUE PRIMARY INDEX ( EmployeeNo );</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Now, let&#8217;s insert a record:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO HR.Employee (
+   EmployeeNo,
+   FirstName,
+   LastName,
+   DOB,
+   JoinedDate,
+   DepartmentNo
+)
+VALUES (
+   101,
+   'Mike',
+   'James',
+   '1980-01-05',
+   '2005-03-27',
+   01
+);</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Finally, let&#8217;s see if we can retrieve the data:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT EmployeeNo,FirstName,LastName
+FROM HR.Employee;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should get the following results:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/csv.data.import.png" alt="CSV Aggregation" width="400">
+<img src="_images/select.results.png" alt="Select Results" width="400">
 </div>
 </div>
-<div class="paragraph">
-<p>This time, the <code>SELECT</code> query returned in less than a second as it answered the query using data that was already on Vantage nodes. There was no need to fetch the data from the bucket.</p>
+</li>
+</ol>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_access_private_buckets"><a class="anchor" href="#_access_private_buckets"></a>Access private buckets</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>So far, we have used a public bucket. What if you have a private bucket? How do you tell Vantage what credentials it should use?</p>
-</div>
-<div class="paragraph">
-<p>It is possible to inline your credentials directly into your query:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT top 10 payload..* FROM (
-	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-    AUTHORIZATION='{"ACCESS_ID":"","ACCESS_KEY":""}'
-) AS d;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Entering these credentials all the time can be tedious and less secure. In Vantage, you can create an authorization object that will serve as a container for your credentials:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE AUTHORIZATION aws_authorization
-    USER 'YOUR-ACCESS-KEY-ID'
-    PASSWORD 'YOUR-SECRET-ACCESS-KEY';</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You can then reference your authorization object when you create a foreign table:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE FOREIGN TABLE Riverflow.riverflow, EXTERNAL SECURITY aws_authorization
-    USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_export_data_from_vantage_to_object_storage"><a class="anchor" href="#_export_data_from_vantage_to_object_storage"></a>Export data from Vantage to object storage</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>So far, we have talked about reading and importing data from object storage. Would it not be nice if we had a way to use SQL to export data from Vantage to object storage? This is exactly what <code>WRITE_NOS</code> function is for. Let&#8217;s say we want to export data from <code>Riverflow.riverflow_native</code> table to object storage. You can do so with the following query:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM WRITE_NOS (
-    ON ( SELECT * FROM Riverflow.riverflow_native )
-    PARTITION BY site_no ORDER BY site_no
-    USING
-        LOCATION('YOUR-OBJECT-STORE-URI')
-        STOREDAS('PARQUET')
-        COMPRESSION('SNAPPY')
-        NAMING('RANGE')
-        INCLUDE_ORDERING('TRUE')
-) AS d;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Here, we instruct Vantage to take data from <code>Riverflow.riverflow_native</code> and save it in <code>YOUR-OBJECT-STORE-URI</code> bucket using <code>parquet</code> format. The data will be split into files by <code>site_no</code> attribute. The files will be compressed.</p>
 </div>
 </div>
 </div>
@@ -409,7 +389,7 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this quickstart we have learned how to read data from object storage using Native Object Storage (NOS) functionality in Vantage. NOS supports reading and importing data stored in CSV, JSON and Parquet formats. NOS can also export data from Vantage to object storage.</p>
+<p>In this guide we have covered how to quickly create a working Teradata environment. We used Teradata Vantage Express in a VM running on VMware. In the same VM, we ran Teradata Studio Express to issue queries. We installed all software locally and didn&#8217;t have to pay for cloud resources.</p>
 </div>
 </div>
 </div>
@@ -418,6 +398,15 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
+<li>
+<p><a href="#">Run Teradata Express on your local machine using VirtualBox</a></p>
+</li>
+<li>
+<p><a href="#">Run Teradata Developer in public cloud</a></p>
+</li>
+<li>
+<p><a href="#">Query data stored in object storage, e.g. S3, Azure Blob, GCS</a></p>
+</li>
 <li>
 <p><a href="#">Train an ML model without leaving Teradata Vantage</a></p>
 </li>
@@ -447,7 +436,7 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
   </div>
 </main>
 </div>
-<script src="../_/js/site.js"></script>
-<script async src="../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
   </body>
 </html>
