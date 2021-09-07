@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Query Data Stored in Object Storage, e.g. S3, Azure Blob, GCS :: Teradata Vantage Quickstarts</title>
     <link rel="canonical" href="https://teradata.github.io/quickstarts/docs/17.10/nos.html">
+    <meta name="description" content="Teradata Vantage Native Object Storage - read and write from/to object storage, unified SQL interface for Vantage and object storage.">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="stylesheet" href="../../_/css/search.css">
@@ -166,6 +168,8 @@
 </aside>
 <article class="doc">
 <h1 class="page">Query Data Stored in Object Storage, e.g. S3, Azure Blob, GCS</h1>
+Author: Adam Tworkiewicz &lt;<a href="mailto:adam.tworkiewicz@teradata.com">adam.tworkiewicz@teradata.com</a>&gt;<br/>
+Last updated: September 7th, 2021
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
@@ -178,7 +182,7 @@
 <h2 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You need access to a Teradata Vantage instance. NOS is enabled in all Vantage editions from Vantage Express through Developer, DYI to Vantage as a Service. If you need a new instance of Vantage the easiest way to start is to <a href="getting.started.vmware.html" class="page">install Vantage Express on your local machine</a>.</p>
+<p>You need access to a Teradata Vantage instance. NOS is enabled in all Vantage editions from Vantage Express through Developer, DYI to Vantage as a Service starting from version 17.10. If you need a new instance of Vantage the easiest way is to <a href="getting.started.vmware.html" class="page">install Vantage Express on your local machine</a>.</p>
 </div>
 </div>
 </div>
@@ -192,7 +196,7 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Currently, NOS support CSV, JSON (as array or new-line delimited), and Parquet data formats.
+Currently, NOS supports CSV, JSON (as array or new-line delimited), and Parquet data formats.
 </td>
 </tr>
 </table>
@@ -202,7 +206,7 @@ Currently, NOS support CSV, JSON (as array or new-line delimited), and Parquet d
 U.S. Geological Survey. The bucket is at <a href="https://td-usgs-public.s3.amazonaws.com/" class="bare">https://td-usgs-public.s3.amazonaws.com/</a>.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s first have a look at sample CSV data. Here, we take 10 first rows that Vantage will fetch from the bucket:</p>
+<p>Let&#8217;s first have a look at sample CSV data. We take the first 10 rows that Vantage will fetch from the bucket:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -269,9 +273,9 @@ U.S. Geological Survey. The bucket is at <a href="https://td-usgs-public.s3.amaz
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- if you are running this sample as dbc user you will not have permissions
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- If you are running this sample as dbc user you will not have permissions
 -- to create a table in dbc database. Instead, create a new database and use
--- the newly create database to create a foreign table
+-- the newly create database to create a foreign table.
 
 CREATE DATABASE Riverflow
     AS PERMANENT = 60000000,
@@ -292,7 +296,7 @@ SELECT top 10 * FROM Riverflow.riverflow</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This time, the <code>SELECT</code> statement looks like a regular select against an in-database table. Also, the returned data uses column names from the CSV file. No need to dereference with <code>Payload..</code>. There is still an issue though. The query was still slow. There an easy way to bring the CSV data into Vantage to speed things up. Read to on to find out how.</p>
+<p>This time, the <code>SELECT</code> statement looks like a regular select against an in-database table. Also, the returned data uses column names from the CSV file. No need to dereference with <code>Payload..</code>. There is still an issue though. The query was slow. There is an easy way to bring the CSV data into Vantage to speed things up. Read on to find out how.</p>
 </div>
 </div>
 </div>
@@ -410,6 +414,18 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In this quickstart we have learned how to read data from object storage using Native Object Storage (NOS) functionality in Vantage. NOS supports reading and importing data stored in CSV, JSON and Parquet formats. NOS can also export data from Vantage to object storage.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further reading</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.teradata.com/r/2mw8ooFr<sub>xX0EaaGFaDW8A/AXD7Ef41qpq</sub>w80wY4OACA#">Teradata Vantage™ - Native Object Store Getting Started Guide</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Getting Started with Teradata Vantage on Your Local Machine Using WMware :: Teradata Vantage Quickstarts</title>
     <link rel="canonical" href="https://teradata.github.io/quickstarts/docs/17.10/getting.started.vmware.html">
+    <meta name="description" content="Run Teradata Vantage express on your laptop using WMware.">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="stylesheet" href="../../_/css/search.css">
@@ -166,6 +168,8 @@
 </aside>
 <article class="doc">
 <h1 class="page">Getting Started with Teradata Vantage on Your Local Machine Using WMware</h1>
+Author: Adam Tworkiewicz &lt;<a href="mailto:adam.tworkiewicz@teradata.com">adam.tworkiewicz@teradata.com</a>&gt;<br/>
+Last updated: September 7th, 2021
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
@@ -187,18 +191,6 @@
 </li>
 <li>
 <p>Admin rights to be able to install and run the software.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-No admin rights on your local machine? No problem! Have a look at how to run Teradata Express in <a href="#">AWS</a>, <a href="#">Azure</a>, <a href="#">GCP</a>.
-</td>
-</tr>
-</table>
-</div>
 </li>
 </ol>
 </div>
@@ -269,7 +261,7 @@ VMware doesn&#8217;t offer VMware Player for MacOS. If you are on a Mac, you wil
 <div class="listingblock">
 <div class="content">
 <pre>PDE state is RUN/STARTED.
-DBS state is 5: Logons are enable - The system is quiescent</pre>
+DBS state is 5: Logons are enabled - The system is quiescent</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -322,18 +314,15 @@ AS PERMANENT = 60000000, -- 60MB
 <p>Let&#8217;s create a sample table and insert some data and query it. We will first create a table to hold employee information:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- TODO: We need to come up with original queries. The ones below came from
--- TODO: https://www.tutorialspoint.com/teradata/teradata_create_table.htm
-
-CREATE SET TABLE HR.Employee (
-   EmployeeNo INTEGER,
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE SET TABLE HR.Employees (
+   GlobalID INTEGER,
    FirstName VARCHAR(30),
    LastName VARCHAR(30),
-   DOB DATE FORMAT 'YYYY-MM-DD',
+   DateOfBirth DATE FORMAT 'YYYY-MM-DD',
    JoinedDate DATE FORMAT 'YYYY-MM-DD',
-   DepartmentNo BYTEINT
+   DepartmentCode BYTEINT
 )
-UNIQUE PRIMARY INDEX ( EmployeeNo );</code></pre>
+UNIQUE PRIMARY INDEX ( GlobalID );</code></pre>
 </div>
 </div>
 </li>
@@ -341,20 +330,20 @@ UNIQUE PRIMARY INDEX ( EmployeeNo );</code></pre>
 <p>Now, let&#8217;s insert a record:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO HR.Employee (
-   EmployeeNo,
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO HR.Employees (
+   GlobalID,
    FirstName,
    LastName,
-   DOB,
+   DateOfBirth,
    JoinedDate,
-   DepartmentNo
+   DepartmentCode
 )
 VALUES (
    101,
-   'Mike',
-   'James',
+   'Adam',
+   'Tworkowski',
    '1980-01-05',
-   '2005-03-27',
+   '2004-08-01',
    01
 );</code></pre>
 </div>
@@ -364,8 +353,8 @@ VALUES (
 <p>Finally, let&#8217;s see if we can retrieve the data:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT EmployeeNo,FirstName,LastName
-FROM HR.Employee;</code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT *
+FROM HR.Employees;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -373,7 +362,7 @@ FROM HR.Employee;</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/select.results.png" alt="Select Results" width="400">
+<img src="_images/select.results.png" alt="Select Results" width="800">
 </div>
 </div>
 </li>
