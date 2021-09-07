@@ -1,1 +1,1 @@
-# quickstarts-source
+# Teradata Vantage Quickstarts
