@@ -21,21 +21,32 @@
     padding-left: 0px;
   }
 
+  .navbar-brand .navbar-item {
+    font-family: RidleyGrotesk-Medium, Arial, Helvetica, sans-serif;
+    font-size: 19px;
+    padding: 4px 0px 0px 0px;
+    color: #fff;
+  }
+
+  .navbar-end .navbar-item.has-dropdown:hover .navbar-link, .navbar-end .navbar-link:hover, .navbar-end>a.navbar-item:hover {
+    background: initial;
+  }
+
   .navbar-brand .navbar-item:first-child {
     font-family: RidleyGrotesk-Medium, Arial, Helvetica, sans-serif;
     font-size: 19px;
     padding-top: 4px;
   }
-  
+
   .navbar-item .navbar-link {
     line-height: inherit;
-    
+
   }
 
   .navbar-logo {
-    width: 100px; 
-    height: 24px; 
-    margin-left: 16px; 
+    width: 100px;
+    height: 24px;
+    margin-left: 16px;
     margin-right: 10px;
   }
 </style>
@@ -66,17 +77,21 @@
     </span>
     <div class="navbar-brand">
       <a class="navbar-item" href="https://teradata.github.io/quickstarts">Teradata Vantage Quickstarts</a>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://docs.teradata.com/">Documentation</a>
+        <a class="navbar-item" href="https://downloads.teradata.com/">Downloads</a>
+        <a class="navbar-item" href="https://support.teradata.com/community ">Community</a>
+        <a class="navbar-item" href="https://www.teradata.com/Blogs">Blog</a>
         <div class="navbar-item">
           <input id="search-input" type="text" placeholder="Search docs">
         </div>
-      <button class="navbar-burger" data-target="topbar-nav">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      </div>
     </div>
   </nav>
 </header>
+
 <div class="body">
 <div class="nav-container">
   <aside class="nav">
