@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Getting Started with Teradata Vantage on Your Local Machine Using VirtualBox :: Teradata Vantage Quickstarts</title>
-    <link rel="canonical" href="https://teradata.github.io/quickstarts/docs/17.10/getting.started.vbox.html">
-    <meta name="description" content="Run Teradata Vantage express on your laptop using Virtualbox.">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics">
+    <title>Connect to Teradata using JDBC :: Teradata Vantage Quickstarts</title>
+    <link rel="canonical" href="https://teradata.github.io/quickstarts/docs/17.10/jdbc.html">
+    <meta name="description" content="How to connect to Teradata Vantage using JDBC">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, JDBC, java applications, business intelligence, enterprise analytics">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="stylesheet" href="../../_/css/search.css">
@@ -113,13 +113,13 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="getting.started.vmware.html">Getting started with Vantage Express on VMware</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="getting.started.vbox.html">Getting started with Vantage Express on VirtualBox</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="nos.html">Query data stored in object storage, e.g. S3, Azure Blob, GCS</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="jdbc.html">Connect to Teradata using JDBC</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -177,57 +177,86 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="getting.started.vmware.html">Quickstarts</a></li>
-    <li><a href="getting.started.vbox.html">Getting started with Vantage Express on VirtualBox</a></li>
+    <li><a href="jdbc.html">Connect to Teradata using JDBC</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/getting.started.vbox.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/jdbc.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Getting Started with Teradata Vantage on Your Local Machine Using VirtualBox</h1>
+<h1 class="page">Connect to Teradata using JDBC</h1>
 Author: Adam Tworkiewicz &lt;<a href="mailto:adam.tworkiewicz@teradata.com">adam.tworkiewicz@teradata.com</a>&gt;<br/>
-Last updated: September 7th, 2021
+Last updated: September 8th, 2021
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This how-to shows the quickest way to gain access to a Teradata database by running it on your local machine. There are many ways to install Teradata. This document optimizes for the lowest time to first query without spending money on cloud resources. Once you finish the steps you will have a working Teradata Vantage Express database on your computer.</p>
+<p>This quickstart demonstrates how to connect to Teradata Vantage using JDBC. We will go through a sample JDBC project. The entire project is published in GitHub at <a href="https://github.com/Teradata/jdbc-sample-app" class="bare">https://github.com/Teradata/jdbc-sample-app</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
+<h2 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>You need access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to <a href="getting.started.vmware.html" class="page">install Vantage Express on your local machine</a>.</p>
+</li>
+<li>
+<p>JDK</p>
+</li>
+<li>
+<p>Maven</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_the_driver"><a class="anchor" href="#_install_the_driver"></a>Install the driver</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>A computer using one of the following operating systems: Windows, Linux or MacOS.</p>
+<p>Go to <a href="https://downloads.teradata.com/download/connectivity/jdbc-driver">the Teradata JDBC download page</a> and download the driver (you can choose zip or tar). The website will ask you to login (if you don&#8217;t have an account you will need to register first) and accept the license before you download the file.</p>
 </li>
 <li>
-<p>30GB of disk space and enough CPU and RAM to be able to dedicate at least one core and 4GB RAM to the virtual machine.</p>
+<p>Unzip the driver.</p>
 </li>
 <li>
-<p>Admin rights to be able to install and run the software.</p>
+<p>Add the driver to your local Maven repository:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mvn install:install-file \
+   -Dfile=terajdbc4.jar \
+   -DgroupId=com.teradata \
+   -DartifactId=terajdbc4 \
+   -Dversion=17.00.00.03 \
+   -Dpackaging=jar \
+   -DgeneratePom=true</code></pre>
+</div>
+</div>
 </li>
 </ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h2>
+<h2 id="_add_dependency_to_your_maven_project"><a class="anchor" href="#_add_dependency_to_your_maven_project"></a>Add dependency to your maven project</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_download_required_software"><a class="anchor" href="#_download_required_software"></a>Download required software</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Teradata Express for VMware Player</a>. If you have not used the Teradata downloads website before, you will need to <a href="https://downloads.teradata.com/user/register">register</a>.</p>
-</li>
-<li>
-<p><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>.</p>
+<div class="paragraph">
+<p>Now that we have the jar in the local repository, we can reference the jar as a dependency in our Maven pom:</p>
+</div>
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fjdbc-sample-app%2Fblob%2F9b4693f4324920165289f79641f158cf0293a66b%2Fpom.xml%23L22-L26&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_code_to_send_a_query"><a class="anchor" href="#_code_to_send_a_query"></a>Code to send a query</h2>
+<div class="sectionbody">
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -235,182 +264,22 @@ Last updated: September 7th, 2021
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-You can also install VirtualBox using <code>brew</code> and other package managers.
+This step assumes that your Vantage database is available on <code>localhost</code> on port <code>1025</code>. If you are running Vantage Express on your laptop, you need to expose the port from the VM to the host machine. Refer to your virtualization software documentation how to forward ports.
 </td>
 </tr>
 </table>
 </div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_run_installers"><a class="anchor" href="#_run_installers"></a>Run installers</h3>
 <div class="paragraph">
-<p>Install VirtualBox by running the installer and accepting the default values.</p>
+<p>The project is set up. All that is left, is to load the driver, pass connection and authentication parameters and run a query:</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_run_teradata_vantage_express"><a class="anchor" href="#_run_teradata_vantage_express"></a>Run Teradata Vantage Express</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Go to the directory where you downloaded Teradata Vantage Express and unzip the downloaded file.</p>
-</li>
-<li>
-<p>Copy <a href="_attachments/VE.vbox">VE.vbox</a> file to the directory where you unzipped Vantage Express.</p>
-</li>
-<li>
-<p>Double-click on the <code>VE.vbox</code> file. This will start the VM image in VirtualBox.</p>
-</li>
-<li>
-<p>Once the VM is up, you will see its desktop environment. When prompted for username/password enter <code>root</code> for both.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/vm.login.png" alt="VM Login" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>The database is configured to autostart with the VM. To confirm that the database has started go to the virtual desktop and start <code>Gnome Terminal</code>. In the terminal execute:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pdestate -a</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If the database is up and running you will see:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>PDE state is RUN/STARTED.
-DBS state is 5: Logons are enabled - The system is quiescent</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If the database is still starting, the DBS state will be less than 5. Rerun <code>pdestate -a</code> to get the latest state.</p>
-</div>
-</li>
-<li>
-<p>Go back to the virtual desktop and launch <code>Teradata Studio Express</code>. When you first start it you will be offered a tour. Once you close the tour, you will see a wizard window to add a new connection. Select <code>Teradata</code>:</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/new.connection.profile.png" alt="New Connection Profile" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>On the next screen, connect to the database on your localhost using <code>dbc</code> for the username and password:</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/new.connection.png" alt="New Connection" width="500">
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_run_sample_queries"><a class="anchor" href="#_run_sample_queries"></a>Run sample queries</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>We will now run some queries in the VM. To avoid copy/paste issues between the host and the VM, we will open this how-to in the VM. Go to the virtual desktop, start Firefox and point it to this how-to.</p>
-</li>
-<li>
-<p>Once in Teradata Studio Express, go to <code>Query Development</code> perspective (go to the top menu and select <code>Window</code> &#8594; <code>Query Development</code>).</p>
-</li>
-<li>
-<p>Connect using the previously created connection profile by double-clicking on <code>Database Connections</code> &#8594; <code>New Teradata</code>.</p>
-</li>
-<li>
-<p>Using <code>dbc</code> user, we will create a new database called <code>HR</code>. Copy/paste this query and run it by hitting the run query button (<span class="image"><img src="_images/run.query.button.png" alt="Run Query Button" width="24" height="24"></span>) or pressing <kbd>F5</kbd> key:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE DATABASE HR
-AS PERMANENT = 60000000, -- 60MB
-    SPOOL = 120000000; -- 120MB</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Let&#8217;s create a sample table and insert some data and query it. We will first create a table to hold employee information:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE SET TABLE HR.Employees (
-   GlobalID INTEGER,
-   FirstName VARCHAR(30),
-   LastName VARCHAR(30),
-   DateOfBirth DATE FORMAT 'YYYY-MM-DD',
-   JoinedDate DATE FORMAT 'YYYY-MM-DD',
-   DepartmentCode BYTEINT
-)
-UNIQUE PRIMARY INDEX ( GlobalID );</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Now, let&#8217;s insert a record:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO HR.Employees (
-   GlobalID,
-   FirstName,
-   LastName,
-   DateOfBirth,
-   JoinedDate,
-   DepartmentCode
-)
-VALUES (
-   101,
-   'Adam',
-   'Tworkowski',
-   '1980-01-05',
-   '2004-08-01',
-   01
-);</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Finally, let&#8217;s see if we can retrieve the data:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT *
-FROM HR.Employees;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You should get the following results:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/select.results.png" alt="Select Results" width="800">
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fjdbc-sample-app%2Fblob%2F9b4693f4324920165289f79641f158cf0293a66b%2Fsrc%2Fmain%2Fjava%2Fcom%2Fteradata%2Fapp%2FApp.java&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this guide we have covered how to quickly create a working Teradata environment. We used Teradata Vantage Express in a VM running on VMware. In the same VM, we ran Teradata Studio Express to issue queries. We installed all software locally and didn&#8217;t have to pay for cloud resources.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#">Query data stored in object storage, e.g. S3, Azure Blob, GCS</a></p>
-</li>
-</ul>
+<p>In this quickstart we have learned how to connect to Teradata Vantage using JDBC. We went through the process of installing the latest JDBC driver and later used it in a Java application with Maven as the build tool.</p>
 </div>
 </div>
 </div>
@@ -420,7 +289,7 @@ FROM HR.Employees;</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://docs.teradata.com/r/KEoAHNnh~EbZLtVJNRo0Sg/root">Teradata® Studio™ and Studio™ Express Installation Guide</a></p>
+<p><a href="https://teradata-docs.s3.amazonaws.com/doc/connectivity/jdbc/reference/current/frameset.html">Teradata JDBC Driver Reference</a></p>
 </li>
 </ul>
 </div>
@@ -436,7 +305,7 @@ FROM HR.Employees;</code></pre>
 </footer>
 <script src="../../_/js/site.js"></script>
 <script src="../../_/js/vendor/lunr.js"></script>
-<script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/getting.started.vbox.html"></script>
+<script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/jdbc.html"></script>
 <script async src="../../_/../search-index.js"></script>
 <script async src="../../_/js/vendor/highlight.js"></script>
   </body>
