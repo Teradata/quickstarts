@@ -33,3 +33,6 @@ include::partial$running.sample.queries.adoc[]
 include::partial$getting.started.summary.adoc[]
 
 include::partial$next.steps.adoc[]
+
+== Further reading
+* link:https://docs.teradata.com/r/KEoAHNnh~EbZLtVJNRo0Sg/root[Teradata® Studio™ and Studio™ Express Installation Guide]
