@@ -12,40 +12,121 @@ In this quickstart we will go through connecting to Teradata Vantage from a Jupy
 
 == Options
 
-There are several ways to connect to Vantage from a Jupyter Notebook:
+There are a couple of ways to connect to Vantage from a Jupyter Notebook:
 
-1. Use the Teradata Jupyter Docker image - it bundles the Teradata SQL kernel (more on this later), `teradataml` library, python and R drivers. It also contains Jupyter extensions that allow you to manage Teradata connections, explore objects in Vantage database. It's convenient when you work a lot with SQL.
-2. Use the python driver in your existing Jupyter notebook. This works well when you are in a restricted environment that doesn't allow you to spawn your own Docker images.
-3. Use `%%sql` magic provided by `ipython-sql` with `teradatasql` SQLAlchemy dialect. Similar to option 2 but offers a compact syntax. It's convenient if you have to run many SQL queries and intertwine them with regular Python cells.
+1. <<_teradata_python_driver,Use python libraries in a regular Python/R kernel notebook>> - this option works well when you are in a restricted environment that doesn't allow you to spawn your own Docker images. Also, it's useful in traditional datascience scenarios when you have to mix SQL and Python/R in a notebook.
+2. <<_teradata_jupyter_docker_image,Use the Teradata Jupyter Docker image>> - the Teradata Jupyter Docker image bundles the Teradata SQL kernel (more on this later), `teradataml` library, python and R drivers. It also contains Jupyter extensions that allow you to manage Teradata connections, explore objects in Vantage database. It's convenient when you work a lot with SQL.
 
-=== Teradata Jupyter Docker image
+=== Teradata libraries
 
-=== Teradata Python driver
+This option uses a regular Jupyter Lab notebook. We will see how to load the Teradata Python driver and use it from Python code. We will also examine `ipython-sql` extension that adds support for SQL-only cells.
 
-=== Ipython-sql
-
-`ipython-sql` is a Python module that adds `%%sql` magic support to Jupyter notebooks. Internally, `ipython-sql` uses `SQLAlchemy`. Since there is an existing `SQLAlchemy` for Teradata Vantage, it's trivial to configure `ipython-sql` with Vantage.
-
-1. First, we need to run a plain Jupyter Lab notebook. Here, I'm using docker but any method of starting a notebook, including Jupyter Hub, GCP AI Platform Notebooks, AWS SageMaker Notebooks, Azure ML Notebooks will do.
+1. We start with a plain Jupyter Lab notebook. Here, I'm using docker but any method of starting a notebook, including Jupyter Hub, GCP AI Platform Notebooks, AWS SageMaker Notebooks, Azure ML Notebooks will do.
 +
 [source, bash]
 ----
 docker run --rm -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes -v "${PWD}":/home/jovyan/work jupyter/datascience-notebook
 ----
-2. We now need to install required Python extensions and import `sql` magic. I've an example notebook that demonstrates the installation steps and shows how to use `%%sql`. To load the notebook file, using the Launcher to start a terminal session and download the notebook file:
+2. We will open a new notebook and create a cell to install the required libraries:
++
+NOTE: I've published a notebook with all the cells described below on GitHub: https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/attachments/vantage-with-python-libraries.ipynb
++
+[source, python]
+----
+import sys
+!{sys.executable} -m pip install teradatasqlalchemy
+----
+3. Now, we will import `Pandas` and define the connection string to connect to Teradata. Since I'm running my notebook in Docker on my local machine and I want to connect to a local Vantage Express VM, I'm using `host.docker.internal` DNS name provided by Docker to reference the IP of my machine.
++
+[source, python]
+----
+import pandas as pd
+db_connection_string = "teradatasql://dbc:dbc@host.docker.internal/dbc"
+----
+4. I can now call Pandas to query Vantage and move the result to a Pandas dataframe:
++
+[source, python]
+----
+pd.read_sql("SELECT * FROM dbc.dbcinfo", con = db_connection_string)
+----
+5. The syntax above is concise but it can get tedious if all you need is to explore data in Vantage. We will use `ipython-sql` and its `%%sql` magic to create SQL-only cells. We start with importing the required libraries.
++
+[source, python]
+----
+import sys
+!{sys.executable} -m pip install ipython-sql teradatasqlalchemy
+----
+6. We load `ipython-sql` and define the db connection string:
++
+[source, python]
+----
+%load_ext sql
+%sql teradatasql://dbc:dbc@host.docker.internal/dbc
+----
+7. We can now use `%sql` and `%%sql` magic. Let's say we want to explore data in a table. We can create a cell that says:
++
+[source, python]
+----
+%%sql
+SELECT * FROM dbc.dbcinfo
+----
+8. If we want to move the data to a Pandas frame, we can say:
++
+[source, python]
+----
+result = %sql SELECT * FROM dbc.dbcinfo
+result.DataFrame()
+----
+
+There are many other features that ipython-sql provides, including variable substitution, plotting with `matplotlib`, writting results to a local csv file or back to the database. See link:https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/attachments/vantage-with-python-libraries.ipynb[the demo notebook] for examples and link:https://github.com/catherinedevlin/ipython-sql/[ipython-sql github repo] for a complete reference.
+
+=== Teradata Jupyter Docker image
+
+The Teradata Jupyter Docker image builds on `jupyter/datascience-notebook` Docker image. It adds the Teradata SQL kernel, Teradata Python and R libraries, Jupyter extensions to make you productive while interacting with Teradata Vantage. The image also contains sample notebooks that demonstrate how to use the SQL kernel and Teradata libraries.
+
+The SQL kernel and Teradata Jupyter extensions are useful for people that spend a lot of time with the SQL interface. Think about it as a notebook experience that, in many cases, is more convenient than using Teradata Studio. The Teradata Jupyter Docker image doesn't try to replace Teradata Studio. It doesn't have all the features. It's designed for people who need a lightweight, web-based interface and enjoy the notebook UI.
+
+The Teradata Jupyter Docker image can be used when you want to run Jupyter locally or you have a place where you can run custom Jupyter docker images, .e.g. JupyterHub or GCP AI Platform Notebooks, AWS SageMaker Notebooks. The steps below demonstrate how to use the image locally.
+
+1. Download link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[the Teradata Vantage Modules for Jupyter docker image]. If you don't have an account with Teradata Downloads, you will need to register first.
+2. Unzip the image.
+3. Import the image to your local registry:
 +
 [source, bash]
 ----
-wget https://raw.githubusercontent.com/Teradata/quickstarts/main/modules/ROOT/attachments/vantage-with-ipython-sql.ipynb
+docker load -i teradatajupyterlabext_<version>.tar.gz
 ----
-3. Open the workbook by double-clicking on `vantage-with-ipython-sql.ipynb` file.
-4. Go through installation and examples:
+4. Run the image:
 +
-image::vantage-with-ipython-sql.ipynb.png[Select Results, width=800]
+NOTE: Replace `/path/to/my/directory/with/notebooks` with a directory on your machine where you intend to keep notebook files. Docker must be allowed to map this directory.
++
+[source, bash]
+----
+docker run -p 127.0.0.1:8888:8888 -v /path/to/my/directory/with/notebooks:/home/jovyan/JupyterLabRoot teradatajupyterlabext
+----
+5. Docker logs will display the url that you need to go to:
++
+[source, bash]
+----
+Starting JupyterLab ...
+Docker Build ID = 3.0.0-ec03292021
+Using unencrypted HTTP
+
+Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
+
+* Or enter this token when prompted by Jupyter: 96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
+* If you used a different port to run your Docker, replace 8888 with your port number
+----
+6. Open up the URL and use the file explorer to open the following notebook: `jupyterextensions -> notebookes -> sql -> GettingStartedDemo.ipynb`.
+7. Go through the demo of the Teradata SQL Kernel:
++
+image::gettingstarteddemo.ipynb.png[GettingStartedDemo.ipynb screenshot, width=100%]
 
 == Summary
 
-In this quickstart we have learned how to connect to Teradata Vantage using JDBC. We went through the process of installing the latest JDBC driver and later used it in a Java application with Maven as the build tool.
+This quickstart covered different options to connect to Teradata Vantage from a Jupyter Notebook. We learned about the Teradata Jupyter Docker image that bundles multiple Teradata Python and R libraries. It also provides an SQL kernel, database object explorer and connection management. These features are useful when you spend a lot of time with the SQL interface. For more traditional data science scenarios, we explored the standalone Teradata Python driver and integration through the ipython sql extension.
 
 == Further reading
-* link:https://teradata-docs.s3.amazonaws.com/doc/connectivity/jdbc/reference/current/frameset.html[Teradata JDBC Driver Reference]
+* link:https://teradata.github.io/jupyterextensions[Teradata Jupyter Extensions Website]
+* link:https://docs.teradata.com/r/KQLs1kPXZ02rGWaS9Ktoww/root[Teradata Vantage™ Modules for Jupyter Installation Guide]
+* link:https://docs.teradata.com/r/1YKutX2ODdO9ppo_fnguTA/root[Teradata® Package for Python User Guide]
