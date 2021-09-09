@@ -225,7 +225,8 @@ Last updated: September 8th, 2021
 <p>We start with a plain Jupyter Lab notebook. Here, I&#8217;m using docker but any method of starting a notebook, including Jupyter Hub, GCP AI Platform Notebooks, AWS SageMaker Notebooks, Azure ML Notebooks will do.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run --rm -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes -v "${PWD}":/home/jovyan/work jupyter/datascience-notebook</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run --rm -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes \
+  -v "${PWD}":/home/jovyan/work jupyter/datascience-notebook</code></pre>
 </div>
 </div>
 </li>
@@ -367,7 +368,9 @@ Replace <code>/path/to/my/directory/with/notebooks</code> with a directory on yo
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -p 127.0.0.1:8888:8888 -v /path/to/my/directory/with/notebooks:/home/jovyan/JupyterLabRoot teradatajupyterlabext</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -p 127.0.0.1:8888:8888 \
+  -v /path/to/my/directory/with/notebooks:/home/jovyan/JupyterLabRoot \
+  teradatajupyterlabext</code></pre>
 </div>
 </div>
 </li>
