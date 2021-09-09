@@ -25,7 +25,8 @@ This option uses a regular Jupyter Lab notebook. We will see how to load the Ter
 +
 [source, bash]
 ----
-docker run --rm -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes -v "${PWD}":/home/jovyan/work jupyter/datascience-notebook
+docker run --rm -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes \
+  -v "${PWD}":/home/jovyan/work jupyter/datascience-notebook
 ----
 2. Docker logs will display the url that you need to go to:
 +
@@ -115,7 +116,9 @@ NOTE: Replace `/path/to/my/directory/with/notebooks` with a directory on your ma
 +
 [source, bash]
 ----
-docker run -p 127.0.0.1:8888:8888 -v /path/to/my/directory/with/notebooks:/home/jovyan/JupyterLabRoot teradatajupyterlabext
+docker run -p 127.0.0.1:8888:8888 \
+  -v /path/to/my/directory/with/notebooks:/home/jovyan/JupyterLabRoot \
+  teradatajupyterlabext
 ----
 5. Docker logs will display the url that you need to go to:
 +
