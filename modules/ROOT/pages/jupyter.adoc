@@ -27,7 +27,20 @@ This option uses a regular Jupyter Lab notebook. We will see how to load the Ter
 ----
 docker run --rm -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes -v "${PWD}":/home/jovyan/work jupyter/datascience-notebook
 ----
-2. We will open a new notebook and create a cell to install the required libraries:
+2. Docker logs will display the url that you need to go to:
++
+[source, bash]
+----
+Starting JupyterLab ...
+Docker Build ID = 3.0.0-ec03292021
+Using unencrypted HTTP
+
+Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
+
+* Or enter this token when prompted by Jupyter: 96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
+* If you used a different port to run your Docker, replace 8888 with your port number
+----
+3. We will open a new notebook and create a cell to install the required libraries:
 +
 NOTE: I've published a notebook with all the cells described below on GitHub: https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/attachments/vantage-with-python-libraries.ipynb
 +
@@ -36,41 +49,41 @@ NOTE: I've published a notebook with all the cells described below on GitHub: ht
 import sys
 !{sys.executable} -m pip install teradatasqlalchemy
 ----
-3. Now, we will import `Pandas` and define the connection string to connect to Teradata. Since I'm running my notebook in Docker on my local machine and I want to connect to a local Vantage Express VM, I'm using `host.docker.internal` DNS name provided by Docker to reference the IP of my machine.
+4. Now, we will import `Pandas` and define the connection string to connect to Teradata. Since I'm running my notebook in Docker on my local machine and I want to connect to a local Vantage Express VM, I'm using `host.docker.internal` DNS name provided by Docker to reference the IP of my machine.
 +
 [source, python]
 ----
 import pandas as pd
 db_connection_string = "teradatasql://dbc:dbc@host.docker.internal/dbc"
 ----
-4. I can now call Pandas to query Vantage and move the result to a Pandas dataframe:
+5. I can now call Pandas to query Vantage and move the result to a Pandas dataframe:
 +
 [source, python]
 ----
 pd.read_sql("SELECT * FROM dbc.dbcinfo", con = db_connection_string)
 ----
-5. The syntax above is concise but it can get tedious if all you need is to explore data in Vantage. We will use `ipython-sql` and its `%%sql` magic to create SQL-only cells. We start with importing the required libraries.
+6. The syntax above is concise but it can get tedious if all you need is to explore data in Vantage. We will use `ipython-sql` and its `%%sql` magic to create SQL-only cells. We start with importing the required libraries.
 +
 [source, python]
 ----
 import sys
 !{sys.executable} -m pip install ipython-sql teradatasqlalchemy
 ----
-6. We load `ipython-sql` and define the db connection string:
+7. We load `ipython-sql` and define the db connection string:
 +
 [source, python]
 ----
 %load_ext sql
 %sql teradatasql://dbc:dbc@host.docker.internal/dbc
 ----
-7. We can now use `%sql` and `%%sql` magic. Let's say we want to explore data in a table. We can create a cell that says:
+8. We can now use `%sql` and `%%sql` magic. Let's say we want to explore data in a table. We can create a cell that says:
 +
 [source, python]
 ----
 %%sql
 SELECT * FROM dbc.dbcinfo
 ----
-8. If we want to move the data to a Pandas frame, we can say:
+9. If we want to move the data to a Pandas frame, we can say:
 +
 [source, python]
 ----
