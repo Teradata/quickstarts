@@ -2,8 +2,8 @@
 {{#with page.title}}
 <h1 class="page">{{{this}}}</h1>
 {{/with}}
-Author: {{page.attributes.author}} &lt;<a href="mailto:{{page.attributes.email}}">{{page.attributes.email}}</a>&gt;<br/>
-Last updated: {{page.attributes.revdate}}
+<p>Author: <a href="mailto:{{page.attributes.email}}">{{page.attributes.author}}</a><br/>
+Last updated: {{page.attributes.revdate}}</p>
 {{{page.contents}}}
 {{> pagination}}
 </article>
