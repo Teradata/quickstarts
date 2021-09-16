@@ -60,4 +60,9 @@ FROM HR.Employees;
 +
 You should get the following results:
 +
-image::select.results.png[Select Results, width=800]
+[source]
+----
+   GlobalID  FirstName                       LastName                        DateOfBirth  JoinedDate  DepartmentCode
+-----------  ------------------------------  ------------------------------  -----------  ----------  --------------
+        101  Adam                            Tworkowski                       1980-01-05  2004-08-01               1
+----

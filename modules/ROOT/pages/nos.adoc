@@ -31,8 +31,21 @@ SELECT top 10 payload..* FROM (
 ----
 
 Here is what I've got:
-
-image::csv.result.png[Select Results, width=400]
+[source]
+----
+Payload..*
+------------------------------------------------------------------
+["10.9","15300","09380000","2018-06-28 00:30","671","0.00","9.80"]
+["10.8","14500","09380000","2018-06-28 01:00","673","0.00","9.64"]
+["10.7","14100","09380000","2018-06-28 01:15","672","0.00","9.56"]
+["11.0","16200","09380000","2018-06-27 00:00","669","0.00","9.97"]
+["10.9","15700","09380000","2018-06-27 00:30","668","0.00","9.88"]
+["10.8","15400","09380000","2018-06-27 00:45","672","0.00","9.82"]
+["10.8","15100","09380000","2018-06-27 01:00","672","0.00","9.77"]
+["10.8","14700","09380000","2018-06-27 01:15","672","0.00","9.68"]
+["10.9","16000","09380000","2018-06-27 00:15","668","0.00","9.93"]
+["10.8","14900","09380000","2018-06-28 00:45","672","0.00","9.72"]
+----
 
 We have got plenty of numbers, but what do they mean? To answer this question, we will ask Vantage to detect the schema of the CSV files:
 
@@ -46,9 +59,21 @@ SELECT * FROM (
 
 Vantage will now fetch a data sample to analyze the schema and return results:
 
-image::csv.schema.png[CSV Schema, width=800]
+[source]
+----
+Name            Datatype                            FileType  Location
+--------------- ----------------------------------- --------- -------------------------------------------------------------------
+GageHeight2     decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+Flow            decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+site_no         int                                 csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+datetime        TIMESTAMP(0) FORMAT'Y4-MM-DDBHH:MI' csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+Precipitation   decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+GageHeight      decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+----
 
-We see that the CSV files have 7 columns. For each column, we get the name, the datatype and the file coordinates that were used to infer the schema.
+
+
+We see that the CSV files have 6 columns. For each column, we get the name, the datatype and the file coordinates that were used to infer the schema.
 
 == Query data with NOS
 
@@ -56,14 +81,22 @@ Now that we know the schema, we can work with the dataset as if it was a regular
 
 [source, sql]
 ----
-SELECT AVG(Payload..Temp) FROM (
+SELECT Payload..site_no AS Site_no, AVG(Payload..Temp) as Avg_Temp FROM (
 	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-) AS d GROUP BY Payload..site_no
+) AS d GROUP BY Payload..site_no;
 ----
 
 Result:
 
-image::csv.aggregation.png[CSV Aggregation, width=400]
+[source, sql]
+----
+Site_no  Avg_Temp
+-------- ---------
+09380000 11
+09423560 73
+09424900 93
+09429070 81
+----
 
 Note how we still have to dereference CSV columns with `Payload..`. To make our experience more similar to a table we can define a foreign table:
 
@@ -80,12 +113,23 @@ CREATE DATABASE Riverflow
 CREATE FOREIGN TABLE Riverflow.riverflow
     USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
 
-SELECT top 10 * FROM Riverflow.riverflow
+SELECT top 10 * FROM Riverflow.riverflow;
 ----
 
 Result:
 
-image::csv.foreign.table.select.png[CSV Aggregation, width=800]
+[source]
+----
+Location                                                            GageHeight2 Flow site_no datetime            Precipitation GageHeight
+------------------------------------------------------------------- ----------- ---- ------- ------------------- ------------- ----------
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09429070/2018/07/02.csv null        null 9429070 2018-07-02 14:40:00 1.21          null
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:30:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:45:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 01:00:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:15:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09429070/2018/07/02.csv null        null 9429070 2018-07-02 14:38:00 1.06          null
+----
+
 
 This time, the `SELECT` statement looks like a regular select against an in-database table. Also, the returned data uses column names from the CSV file. No need to dereference with `Payload..`. There is still an issue though. The query was slow. There is an easy way to bring the CSV data into Vantage to speed things up. Read on to find out how.
 
@@ -113,9 +157,23 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;
 
 Result:
 
-image::csv.data.import.png[CSV Aggregation, width=400]
+[source]
+----
+site_no   Flow  GageHeight  datetime
+-------  -----  ----------  -------------------
+9400815    .00        -.01  2018-07-10 00:30:00
+9400815    .00        -.01  2018-07-10 01:00:00
+9400815    .00        -.01  2018-07-10 01:15:00
+9400815    .00        -.01  2018-07-10 01:30:00
+9400815    .00        -.01  2018-07-10 02:00:00
+9400815    .00        -.01  2018-07-10 02:15:00
+9400815    .00        -.01  2018-07-10 01:45:00
+9400815    .00        -.01  2018-07-10 00:45:00
+9400815    .00        -.01  2018-07-10 00:15:00
+9400815    .00        -.01  2018-07-10 00:00:00
+----
 
-This time, the `SELECT` query returned in less than a second as it answered the query using data that was already on Vantage nodes. There was no need to fetch the data from the bucket.
+This time, the `SELECT` query returned in less than a second. Vantage didn't have to fetch the data from NOS. Instead, it answered using data that was already on its nodes.
 
 == Access private buckets
 
