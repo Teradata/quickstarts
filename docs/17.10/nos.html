@@ -260,9 +260,20 @@ U.S. Geological Survey. The bucket is at <a href="https://td-usgs-public.s3.amaz
 <div class="paragraph">
 <p>Here is what I&#8217;ve got:</p>
 </div>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="_images/csv.result.png" alt="Select Results" width="400">
+<pre class="highlightjs highlight"><code>Payload..*
+------------------------------------------------------------------
+["10.9","15300","09380000","2018-06-28 00:30","671","0.00","9.80"]
+["10.8","14500","09380000","2018-06-28 01:00","673","0.00","9.64"]
+["10.7","14100","09380000","2018-06-28 01:15","672","0.00","9.56"]
+["11.0","16200","09380000","2018-06-27 00:00","669","0.00","9.97"]
+["10.9","15700","09380000","2018-06-27 00:30","668","0.00","9.88"]
+["10.8","15400","09380000","2018-06-27 00:45","672","0.00","9.82"]
+["10.8","15100","09380000","2018-06-27 01:00","672","0.00","9.77"]
+["10.8","14700","09380000","2018-06-27 01:15","672","0.00","9.68"]
+["10.9","16000","09380000","2018-06-27 00:15","668","0.00","9.93"]
+["10.8","14900","09380000","2018-06-28 00:45","672","0.00","9.72"]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -279,13 +290,20 @@ U.S. Geological Survey. The bucket is at <a href="https://td-usgs-public.s3.amaz
 <div class="paragraph">
 <p>Vantage will now fetch a data sample to analyze the schema and return results:</p>
 </div>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="_images/csv.schema.png" alt="CSV Schema" width="800">
+<pre class="highlightjs highlight"><code>Name            Datatype                            FileType  Location
+--------------- ----------------------------------- --------- -------------------------------------------------------------------
+GageHeight2     decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+Flow            decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+site_no         int                                 csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+datetime        TIMESTAMP(0) FORMAT'Y4-MM-DDBHH:MI' csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+Precipitation   decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+GageHeight      decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>We see that the CSV files have 7 columns. For each column, we get the name, the datatype and the file coordinates that were used to infer the schema.</p>
+<p>We see that the CSV files have 6 columns. For each column, we get the name, the datatype and the file coordinates that were used to infer the schema.</p>
 </div>
 </div>
 </div>
@@ -297,17 +315,22 @@ U.S. Geological Survey. The bucket is at <a href="https://td-usgs-public.s3.amaz
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT AVG(Payload..Temp) FROM (
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT Payload..site_no AS Site_no, AVG(Payload..Temp) as Avg_Temp FROM (
 	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-) AS d GROUP BY Payload..site_no</code></pre>
+) AS d GROUP BY Payload..site_no;</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Result:</p>
 </div>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="_images/csv.aggregation.png" alt="CSV Aggregation" width="400">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">Site_no  Avg_Temp
+-------- ---------
+09380000 11
+09423560 73
+09424900 93
+09429070 81</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -326,15 +349,22 @@ CREATE DATABASE Riverflow
 CREATE FOREIGN TABLE Riverflow.riverflow
     USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
 
-SELECT top 10 * FROM Riverflow.riverflow</code></pre>
+SELECT top 10 * FROM Riverflow.riverflow;</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Result:</p>
 </div>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="_images/csv.foreign.table.select.png" alt="CSV Aggregation" width="800">
+<pre class="highlightjs highlight"><code>Location                                                            GageHeight2 Flow site_no datetime            Precipitation GageHeight
+------------------------------------------------------------------- ----------- ---- ------- ------------------- ------------- ----------
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09429070/2018/07/02.csv null        null 9429070 2018-07-02 14:40:00 1.21          null
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:30:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:45:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 01:00:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:15:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09429070/2018/07/02.csv null        null 9429070 2018-07-02 14:38:00 1.06          null</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -378,13 +408,24 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 <div class="paragraph">
 <p>Result:</p>
 </div>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="_images/csv.data.import.png" alt="CSV Aggregation" width="400">
+<pre class="highlightjs highlight"><code>site_no   Flow  GageHeight  datetime
+-------  -----  ----------  -------------------
+9400815    .00        -.01  2018-07-10 00:30:00
+9400815    .00        -.01  2018-07-10 01:00:00
+9400815    .00        -.01  2018-07-10 01:15:00
+9400815    .00        -.01  2018-07-10 01:30:00
+9400815    .00        -.01  2018-07-10 02:00:00
+9400815    .00        -.01  2018-07-10 02:15:00
+9400815    .00        -.01  2018-07-10 01:45:00
+9400815    .00        -.01  2018-07-10 00:45:00
+9400815    .00        -.01  2018-07-10 00:15:00
+9400815    .00        -.01  2018-07-10 00:00:00</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This time, the <code>SELECT</code> query returned in less than a second as it answered the query using data that was already on Vantage nodes. There was no need to fetch the data from the bucket.</p>
+<p>This time, the <code>SELECT</code> query returned in less than a second. Vantage didn&#8217;t have to fetch the data from NOS. Instead, it answered using data that was already on its nodes.</p>
 </div>
 </div>
 </div>
