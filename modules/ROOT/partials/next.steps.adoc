@@ -1,3 +1,3 @@
 == Next steps
 
-* link:#[Query data stored in object storage, e.g. S3, Azure Blob, GCS]
+* xref:nos.adoc[]
