@@ -11,8 +11,8 @@
 [source, sql]
 ----
 CREATE DATABASE HR
-AS PERMANENT = 60000000, -- 60MB
-    SPOOL = 120000000; -- 120MB
+AS PERMANENT = 60e6, -- 60MB
+    SPOOL = 120e6; -- 120MB
 ----
 . Let's create a sample table and insert some data and query it. We will first create a table to hold employee information:
 +

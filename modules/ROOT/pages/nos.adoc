@@ -107,8 +107,8 @@ Note how we still have to dereference CSV columns with `Payload..`. To make our 
 -- the newly create database to create a foreign table.
 
 CREATE DATABASE Riverflow
-    AS PERMANENT = 60000000,
-    SPOOL = 120000000;
+  AS PERMANENT = 60e6, -- 60MB
+  SPOOL = 120e6; -- 120MB
 
 CREATE FOREIGN TABLE Riverflow.riverflow
     USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
