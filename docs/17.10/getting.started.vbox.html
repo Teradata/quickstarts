@@ -350,8 +350,8 @@ DBS state is 5: Logons are enabled - The system is quiescent</pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE DATABASE HR
-AS PERMANENT = 60000000, -- 60MB
-    SPOOL = 120000000; -- 120MB</code></pre>
+AS PERMANENT = 60e6, -- 60MB
+    SPOOL = 120e6; -- 120MB</code></pre>
 </div>
 </div>
 </li>
