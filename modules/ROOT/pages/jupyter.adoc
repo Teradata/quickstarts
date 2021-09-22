@@ -14,7 +14,7 @@ In this quickstart we will go through connecting to Teradata Vantage from a Jupy
 
 There are a couple of ways to connect to Vantage from a Jupyter Notebook:
 
-1. <<_teradata_libraries,Use python libraries in a regular Python/R kernel notebook>> - this option works well when you are in a restricted environment that doesn't allow you to spawn your own Docker images. Also, it's useful in traditional datascience scenarios when you have to mix SQL and Python/R in a notebook. If you are proficient with Jupyter and have your set of preferred libraries and extensions, start with this option.
+1. <<_teradata_libraries,Use python libraries in a regular Python/R kernel notebook>> - this option works well when you are in a restricted environment that doesn't allow you to spawn your own Docker images. Also, it's useful in traditional datascience scenarios when you have to mix SQL and Python/R in a notebook. If you are proficient with Jupyter and have your own set of preferred libraries and extensions, start with this option.
 2. <<_teradata_jupyter_docker_image,Use the Teradata Jupyter Docker image>> - the Teradata Jupyter Docker image bundles the Teradata SQL kernel (more on this later), `teradataml` library, python and R drivers. It also contains Jupyter extensions that allow you to manage Teradata connections, explore objects in Vantage database. It's convenient when you work a lot with SQL. If you are new to Jupyter or if you prefer to get a currated assembly of libraries and extensions, start with this option.
 
 === Teradata libraries
