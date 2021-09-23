@@ -229,7 +229,7 @@ Last updated: September 7th, 2021</p>
 <p>A computer using one of the following operating systems: Windows, Linux or MacOS.</p>
 </li>
 <li>
-<p>30GB of disk space and enough CPU and RAM to be able to dedicate at least one core and 4GB RAM to the virtual machine.</p>
+<p>30GB of disk space and enough CPU and RAM to be able to dedicate at least one core and 6GB RAM to the virtual machine.</p>
 </li>
 <li>
 <p>Admin rights to be able to install and run the software.</p>
@@ -280,14 +280,14 @@ You can also install VirtualBox using <code>brew</code> and other package manage
 <p>Go to the directory where you downloaded Teradata Vantage Express and unzip the downloaded file.</p>
 </li>
 <li>
-<p>We will now create a VirtualBox VM that uses the downloaded image:</p>
+<p>We will now create a VirtualBox VM that uses the downloaded image. Replace <code>DISK_DIR</code> value with the path to the unzipped image directory and execute the commands:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export DISK_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"
 
 export VM_NAME='Vantage Express 17.10'
 vboxmanage createvm --name $VM_NAME --register --ostype openSUSE_64
-vboxmanage modifyvm $VM_NAME --ioapic on --memory 8096 --vram 128 --nic1 nat --graphicscontroller vmsvga --usb on --mouse usbtablet --clipboard-mode bidirectional
+vboxmanage modifyvm $VM_NAME --ioapic on --memory 6000 --vram 128 --nic1 nat --graphicscontroller vmsvga --usb on --mouse usbtablet --clipboard-mode bidirectional
 vboxmanage storagectl $VM_NAME --name "SATA Controller" --add sata --controller IntelAhci
 vboxmanage storageattach $VM_NAME --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium  "$(find $DISK_DIR -name '*disk1*')"
 vboxmanage storageattach $VM_NAME --storagectl "SATA Controller" --port 1 --device 0 --type hdd --medium  "$(find $DISK_DIR -name '*disk2*')"
@@ -329,14 +329,40 @@ vboxmanage startvm $VM_NAME</code></pre>
 </div>
 </li>
 <li>
-<p>The database is configured to autostart with the VM. To confirm that the database has started go to the virtual desktop and start <code>Gnome Terminal</code>. In the terminal execute:</p>
+<p>The database is configured to autostart with the VM. To confirm that the database has started go to the virtual desktop and start <code>Gnome Terminal</code>. In the terminal execute <code>pdestate</code> command that will inform you if Vantage has already started:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pdestate -a</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">watch pdestate -a</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If the database is up and running you will see:</p>
+<p>Here are examples of messages that <code>pdestate</code> returns when the database is still initializing:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>PDE state is DOWN/HARDSTOP.
+
+PDE state is START/NETCONFIG.
+
+PDE state is START/GDOSYNC.
+
+PDE state is START/TVSASTART.
+
+PDE state is START/READY.
+PDE state is RUN/STARTED.
+
+DBS state is 1/1: DBS Startup - Initializing DBS Vprocs
+PDE state is RUN/STARTED.
+
+DBS state is 1/5: DBS Startup - Voting for Transaction Recovery
+PDE state is RUN/STARTED.
+
+DBS state is 1/4: DBS Startup - Starting PE Partitions
+PDE state is RUN/STARTED.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You want to wait till you see the following message:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -344,12 +370,9 @@ vboxmanage startvm $VM_NAME</code></pre>
 DBS state is 5: Logons are enabled - The system is quiescent</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>If the database is still starting, the DBS state will be less than 5. Rerun <code>pdestate -a</code> to get the latest state.</p>
-</div>
 </li>
 <li>
-<p>Go back to the virtual desktop and launch <code>Teradata Studio Express</code>. When you first start it you will be offered a tour. Once you close the tour, you will see a wizard window to add a new connection. Select <code>Teradata</code>:</p>
+<p>Now that the database is up, go back to the virtual desktop and launch <code>Teradata Studio Express</code>. When you first start it you will be offered a tour. Once you close the tour, you will see a wizard window to add a new connection. Select <code>Teradata</code>:</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/new.connection.profile.png" alt="New Connection Profile" width="500">
@@ -371,9 +394,6 @@ DBS state is 5: Logons are enabled - The system is quiescent</pre>
 <h3 id="_run_sample_queries"><a class="anchor" href="#_run_sample_queries"></a>Run sample queries</h3>
 <div class="olist arabic">
 <ol class="arabic">
-<li>
-<p>We will now run some queries in the VM. To avoid copy/paste issues between the host and the VM, we will open this how-to in the VM. Go to the virtual desktop, start Firefox and point it to this how-to.</p>
-</li>
 <li>
 <p>Once in Teradata Studio Express, go to <code>Query Development</code> perspective (go to the top menu and select <code>Window</code> &#8594; <code>Query Development</code>).</p>
 </li>
@@ -442,9 +462,9 @@ FROM HR.Employees;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code>   GlobalID  FirstName                       LastName                        DateOfBirth  JoinedDate  DepartmentCode
------------  ------------------------------  ------------------------------  -----------  ----------  --------------
-        101  Adam                            Tworkowski                       1980-01-05  2004-08-01               1</code></pre>
+<pre class="highlightjs highlight"><code>GlobalID  FirstName  LastName   DateOfBirth  JoinedDate  DepartmentCode
+--------  ---------  ---------- -----------  ----------  --------------
+     101  Adam       Tworkowski  1980-01-05  2004-08-01               1</code></pre>
 </div>
 </div>
 </li>
