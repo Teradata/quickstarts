@@ -28,6 +28,10 @@ Install VMware Player or VMware Fusion by running the installer and accepting th
 . Double-click on the `.vmx` file. This will start the VM image in VMware Player/Fusion.
 include::partial$run.vantage.adoc[]
 
+=== Run sample queries
+
+. We will now run some queries in the VM. To avoid copy/paste issues between the host and the VM, we will open this how-to in the VM. Go to the virtual desktop, start Firefox and point it to this how-to.
+
 include::partial$running.sample.queries.adoc[]
 
 include::partial$getting.started.summary.adoc[]

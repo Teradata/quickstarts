@@ -1,23 +1,46 @@
 . Once the VM is up, you will see its desktop environment. When prompted for username/password enter `root` for both.
 +
 image::vm.login.png[VM Login, width=500]
-. The database is configured to autostart with the VM. To confirm that the database has started go to the virtual desktop and start `Gnome Terminal`. In the terminal execute:
+. The database is configured to autostart with the VM. To confirm that the database has started go to the virtual desktop and start `Gnome Terminal`. In the terminal execute `pdestate` command that will inform you if Vantage has already started:
 +
 [source, bash]
 ----
-pdestate -a
+watch pdestate -a
 ----
 +
-If the database is up and running you will see:
+Here are examples of messages that `pdestate` returns when the database is still initializing:
++
+----
+PDE state is DOWN/HARDSTOP.
+
+PDE state is START/NETCONFIG.
+
+PDE state is START/GDOSYNC.
+
+PDE state is START/TVSASTART.
+
+PDE state is START/READY.
+PDE state is RUN/STARTED.
+
+DBS state is 1/1: DBS Startup - Initializing DBS Vprocs
+PDE state is RUN/STARTED.
+
+DBS state is 1/5: DBS Startup - Voting for Transaction Recovery
+PDE state is RUN/STARTED.
+
+DBS state is 1/4: DBS Startup - Starting PE Partitions
+PDE state is RUN/STARTED.
+
+----
++
+You want to wait till you see the following message:
 +
 ----
 PDE state is RUN/STARTED.
 DBS state is 5: Logons are enabled - The system is quiescent
 ----
-+
-If the database is still starting, the DBS state will be less than 5. Rerun `pdestate -a` to get the latest state.
 
-. Go back to the virtual desktop and launch `Teradata Studio Express`. When you first start it you will be offered a tour. Once you close the tour, you will see a wizard window to add a new connection. Select `Teradata`:
+. Now that the database is up, go back to the virtual desktop and launch `Teradata Studio Express`. When you first start it you will be offered a tour. Once you close the tour, you will see a wizard window to add a new connection. Select `Teradata`:
 +
 image::new.connection.profile.png[New Connection Profile, width=500]
 . On the next screen, connect to the database on your localhost using `dbc` for the username and password:

@@ -25,7 +25,7 @@ Install VirtualBox by running the installer and accepting the default values. Vi
 === Run Teradata Vantage Express
 
 . Go to the directory where you downloaded Teradata Vantage Express and unzip the downloaded file.
-. We will now create a VirtualBox VM that uses the downloaded image:
+. We will now create a VirtualBox VM that uses the downloaded image. Replace `DISK_DIR` value with the path to the unzipped image directory and execute the commands:
 +
 [source, bash]
 ----
@@ -33,7 +33,7 @@ export DISK_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"
 
 export VM_NAME='Vantage Express 17.10'
 vboxmanage createvm --name $VM_NAME --register --ostype openSUSE_64
-vboxmanage modifyvm $VM_NAME --ioapic on --memory 8096 --vram 128 --nic1 nat --graphicscontroller vmsvga --usb on --mouse usbtablet --clipboard-mode bidirectional
+vboxmanage modifyvm $VM_NAME --ioapic on --memory 6000 --vram 128 --nic1 nat --graphicscontroller vmsvga --usb on --mouse usbtablet --clipboard-mode bidirectional
 vboxmanage storagectl $VM_NAME --name "SATA Controller" --add sata --controller IntelAhci
 vboxmanage storageattach $VM_NAME --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium  "$(find $DISK_DIR -name '*disk1*')"
 vboxmanage storageattach $VM_NAME --storagectl "SATA Controller" --port 1 --device 0 --type hdd --medium  "$(find $DISK_DIR -name '*disk2*')"
@@ -66,6 +66,8 @@ vboxmanage startvm $VM_NAME
 ----
 
 include::partial$run.vantage.adoc[]
+
+=== Run sample queries
 
 include::partial$running.sample.queries.adoc[]
 
