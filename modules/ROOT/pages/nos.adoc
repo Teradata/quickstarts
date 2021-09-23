@@ -77,13 +77,13 @@ We see that the CSV files have 6 columns. For each column, we get the name, the 
 
 == Query data with NOS
 
-Now that we know the schema, we can work with the dataset as if it was a regular SQL table. To prove the point, let's try to do some data aggregation. Let's get an average temperature per site.
+Now that we know the schema, we can work with the dataset as if it was a regular SQL table. To prove the point, let's try to do some data aggregation. Let's get an average temperature per site for sites that collect temperatures.
 
 [source, sql]
 ----
 SELECT Payload..site_no AS Site_no, AVG(Payload..Temp) as Avg_Temp FROM (
-	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-) AS d GROUP BY Payload..site_no;
+        LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+) AS d GROUP BY Payload..site_no HAVING Avg_Temp IS NOT NULL;
 ----
 
 Result:
