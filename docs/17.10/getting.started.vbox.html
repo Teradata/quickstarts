@@ -10,6 +10,7 @@
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="stylesheet" href="../../_/css/search.css">
+<link rel="stylesheet" href="../../_/css/styles.css">
 <style>
   .navbar {
     height: 64px;
@@ -70,6 +71,7 @@
 </style>
 <script type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z3YS7HF6FZ"></script>
+<script async src="../../_/js/behavior.js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -280,43 +282,87 @@ You can also install VirtualBox using <code>brew</code> and other package manage
 <p>Go to the directory where you downloaded Teradata Vantage Express and unzip the downloaded file.</p>
 </li>
 <li>
-<p>We will now create a VirtualBox VM that uses the downloaded image. Replace <code>DISK_DIR</code> value with the path to the unzipped image directory and execute the commands:</p>
+<p>Set env variable <code>DISK_DIR</code> to the path of the unzipped image directory. Also, set <code>VM_NAME</code> to name the VM. For example:</p>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_macos"></a>MacOS</p>
+</li>
+<li>
+<p><a id="tabset1_windows"></a>Windows</p>
+</li>
+<li>
+<p><a id="tabset1_linux"></a>Linux</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_macos">
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export DISK_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"
-
-export VM_NAME='Vantage Express 17.10'
-vboxmanage createvm --name "$VM_NAME" --register --ostype openSUSE_64
-vboxmanage modifyvm "$VM_NAME" --ioapic on --memory 6000 --vram 128 --nic1 nat --graphicscontroller vmsvga --usb on --mouse usbtablet --clipboard-mode bidirectional
-vboxmanage storagectl "$VM_NAME" --name "SATA Controller" --add sata --controller IntelAhci
-vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium  "$(find $DISK_DIR -name '*disk1*')"
-vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 1 --device 0 --type hdd --medium  "$(find $DISK_DIR -name '*disk2*')"
-vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 2 --device 0 --type hdd --medium  "$(find $DISK_DIR -name '*disk3*')"
-vboxmanage storagectl "$VM_NAME" --name IDE --add ide
-
-vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 3 --type dvddrive --medium $(vboxmanage list dvds | grep UUID | cut -d" " -f 3- | sed -e 's/^[[:space:]]*//' )
-vboxmanage modifyvm "$VM_NAME" --natpf1 "tdssh,tcp,,4422,,22"
-vboxmanage startvm "$VM_NAME" --type headless
-
-n=1
-until [ "$n" -ge 10 ]
-do
-  echo "Attempting to ssh into the vm. Attempt $n"
-  ssh -p 4422 -o StrictHostKeyChecking=no root@localhost 'mount /dev/cdrom /media/dvd; /media/dvd/VBoxLinuxAdditions.run; echo $?' &amp;&amp; break
-  n=$((n+1))
-  sleep 10
-done
-
-vboxmanage controlvm "$VM_NAME" acpipowerbutton
-
-until [ "$n" -ge 10 ]
-do
-  echo "Checking if the vm is still running. Attempt $n"
-  vboxmanage showvminfo "$VM_NAME" | grep -c "running" | grep 0 &amp;&amp; break
-  n=$((n+1))
-  sleep 10
-done
-vboxmanage startvm "$VM_NAME"</code></pre>
+export VM_NAME='Vantage Express 17.10'</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_windows">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">$env:DISK_DIR = "$HOME\Downloads"
+$env:VM_NAME = "Vantage Express 17.10"</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_linux">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export DISK_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"
+export VM_NAME='Vantage Express 17.10'</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>We will now create a VirtualBox VM that uses the downloaded image. Run the following command. The script will take several minutes to complete. During the execution, the script will ask for a password to login to the VM and perform some setup. The password is <code>root</code>.</p>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset2_macos"></a>MacOS</p>
+</li>
+<li>
+<p><a id="tabset2_windows"></a>Windows</p>
+</li>
+<li>
+<p><a id="tabset2_linux"></a>Linux</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset2_macos">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -s -o /tmp/tde-install.sh https://raw.githubusercontent.com/Teradata/quickstarts/main/modules/ROOT/attachments/vbox-install-nix.sh &amp;&amp; bash /tmp/tde-install.sh</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_windows">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">Support for Windows is coming soon</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_linux">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -s -o /tmp/tde-install.sh https://raw.githubusercontent.com/Teradata/quickstarts/main/modules/ROOT/attachments/vbox-install-nix.sh &amp;&amp; bash /tmp/tde-install.sh</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </li>
