@@ -8,6 +8,13 @@ image::vm.login.png[VM Login, width=500]
 watch pdestate -a
 ----
 +
+You want to wait till you see the following message:
++
+----
+PDE state is RUN/STARTED.
+DBS state is 5: Logons are enabled - The system is quiescent
+----
++
 Here are examples of messages that `pdestate` returns when the database is still initializing:
 +
 ----
@@ -30,16 +37,7 @@ PDE state is RUN/STARTED.
 
 DBS state is 1/4: DBS Startup - Starting PE Partitions
 PDE state is RUN/STARTED.
-
 ----
-+
-You want to wait till you see the following message:
-+
-----
-PDE state is RUN/STARTED.
-DBS state is 5: Logons are enabled - The system is quiescent
-----
-
 . Now that the database is up, go back to the virtual desktop and launch `Teradata Studio Express`. When you first start it you will be offered a tour. Once you close the tour, you will see a wizard window to add a new connection. Select `Teradata`:
 +
 image::new.connection.profile.png[New Connection Profile, width=500]
