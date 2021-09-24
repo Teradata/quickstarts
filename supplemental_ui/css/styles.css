@@ -21,6 +21,9 @@
 
 .tabs.ulist li {
   margin-bottom: 0;
+}
+
+.tabs.ulist li + li {
   margin-top: 0;
 }
 
