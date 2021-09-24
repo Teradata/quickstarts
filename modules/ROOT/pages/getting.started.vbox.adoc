@@ -67,7 +67,7 @@ MacOS::
 --
 [source, bash]
 ----
-curl -s -o /tmp/tde-install.sh https://raw.githubusercontent.com/Teradata/quickstarts/main/modules/ROOT/attachments/vbox-install-nix.sh && bash /tmp/tde-install.sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/Teradata/quickstarts/main/modules/ROOT/attachments/vbox-install-nix.sh)"
 ----
 --
 Windows::
@@ -83,7 +83,7 @@ Linux::
 --
 [source, bash]
 ----
-curl -s -o /tmp/tde-install.sh https://raw.githubusercontent.com/Teradata/quickstarts/main/modules/ROOT/attachments/vbox-install-nix.sh && bash /tmp/tde-install.sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/Teradata/quickstarts/main/modules/ROOT/attachments/vbox-install-nix.sh)"
 ----
 --
 ====
