@@ -19,7 +19,6 @@ n=1
 until [ "$n" -ge 10 ]
 do
   echo "Attempting to ssh into the vm. Attempt $n. This might take a minute."
-  sleep 30
   ssh -p 4422 -o StrictHostKeyChecking=no root@localhost 'mount /dev/cdrom /media/dvd; /media/dvd/VBoxLinuxAdditions.run; echo $?' && break
   n=$((n+1))
   echo "Waiting 10 seconds before the next attempt."
