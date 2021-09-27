@@ -15,7 +15,7 @@ include::partial$getting.started.prereqs.adoc[]
 === Download required software
 
 . link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Teradata Express for VMware Player]. If you have not used the Teradata downloads website before, you will need to link:https://downloads.teradata.com/user/register[register].
-. link:https://www.virtualbox.org/wiki/Downloads[VirtualBox].
+. link:https://www.virtualbox.org/wiki/Downloads[VirtualBox], version 6.1.
 +
 NOTE: You can also install VirtualBox using `brew` and other package managers.
 
