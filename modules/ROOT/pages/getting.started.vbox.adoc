@@ -67,7 +67,7 @@ MacOS::
 --
 [source, bash]
 ----
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/Teradata/quickstarts/main/modules/ROOT/attachments/vbox-install.sh)"
+bash -c "$(curl -fsSL https://git.io/Jz7rX)"
 ----
 --
 Windows::
@@ -75,7 +75,7 @@ Windows::
 --
 [source, powershell]
 ----
-iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/Teradata/quickstarts/main/modules/ROOT/attachments/vbox-install.ps1'))
+iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/Jz7rd'))
 ----
 --
 Linux::
@@ -83,7 +83,7 @@ Linux::
 --
 [source, bash]
 ----
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/Teradata/quickstarts/main/modules/ROOT/attachments/vbox-install.sh)"
+bash -c "$(curl -fsSL https://git.io/Jz7rX)"
 ----
 --
 ====
