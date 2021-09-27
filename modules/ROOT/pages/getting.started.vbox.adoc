@@ -44,7 +44,7 @@ Windows::
 --
 [source, powershell]
 ----
-$env:DISK_DIR = "$HOME\Downloads"
+$env:DISK_DIR = "$HOME\Downloads\VantageExpress17.10_Sles12"
 $env:VM_NAME = "Vantage Express 17.10"
 ----
 --
