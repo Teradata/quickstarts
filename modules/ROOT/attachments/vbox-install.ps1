@@ -4,12 +4,15 @@ $disk1 = Get-ChildItem -Path $diskDir -Recurse -Filter "*disk1*"
 $disk2 = Get-ChildItem -Path $diskDir -Recurse -Filter "*disk2*"
 $disk3 = Get-ChildItem -Path $diskDir -Recurse -Filter "*disk3*"
 
+#add virtualbox bin to the path
+$env:Path += ";C:\Program Files\Oracle\VirtualBox"
+
 Invoke-Expression "vboxmanage createvm --name `"$vmName`" --register --ostype openSUSE_64"
 Invoke-Expression "vboxmanage modifyvm `"$vmName`" --ioapic on --memory 6000 --vram 128 --nic1 nat --graphicscontroller vmsvga --usb on --mouse usbtablet --clipboard-mode bidirectional"
 Invoke-Expression "vboxmanage storagectl `"$vmName`" --name 'SATA Controller' --add sata --controller IntelAhci"
-Invoke-Expression "vboxmanage storageattach `"$vmName`" --storagectl 'SATA Controller' --port 0 --device 0 --type hdd --medium $($disk1)"
-Invoke-Expression "vboxmanage storageattach `"$vmName`" --storagectl 'SATA Controller' --port 1 --device 0 --type hdd --medium $($disk2)"
-Invoke-Expression "vboxmanage storageattach `"$vmName`" --storagectl 'SATA Controller' --port 2 --device 0 --type hdd --medium $($disk3)"
+Invoke-Expression "vboxmanage storageattach `"$vmName`" --storagectl 'SATA Controller' --port 0 --device 0 --type hdd --medium $($disk1.FullName)"
+Invoke-Expression "vboxmanage storageattach `"$vmName`" --storagectl 'SATA Controller' --port 1 --device 0 --type hdd --medium $($disk2.FullName)"
+Invoke-Expression "vboxmanage storageattach `"$vmName`" --storagectl 'SATA Controller' --port 2 --device 0 --type hdd --medium $($disk3.FullName)"
 # this operation is necessary to work around a bug in `storageattach --type dvddrive --medium additions`
 Invoke-Expression "vboxmanage storageattach `"$vmName`" --storagectl 'SATA Controller' --port 3 --medium emptydrive"
 Invoke-Expression "vboxmanage storageattach `"$vmName`" --storagectl 'SATA Controller' --port 3 --type dvddrive --medium additions"
