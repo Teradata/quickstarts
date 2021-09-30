@@ -42,7 +42,7 @@ Install VirtualBox by running the installer and accepting the default values. Vi
 Windows::
 +
 --
-Run these commands in Powershell:
+Run these commands in Powershell as Administrator:
 [source, powershell, role="content-editable"]
 ----
 $env:DISK_DIR = "$HOME\Downloads\VantageExpress17.10_Sles12"
