@@ -75,6 +75,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     margin-right: 4px;
     vertical-align: bottom;
   }
+
+  .doc .source-toolbox {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    visibility: visible;
+    position: absolute;
+    top: .25rem;
+    right: .5rem;
+    color: grey;
+    font-family: Roboto,sans-serif;
+    font-size: .75rem;
+    line-height: 1;
+ }
+
+  .content-editable {
+      -webkit-user-modify: read-write;
+      -moz-user-modify: read-write;
+      user-modify: read-write;
+  }
+
+
 </style>
 <script type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
 <script async src="../../_/js/behavior.js"></script>
@@ -240,7 +262,7 @@ Last updated: September 7th, 2021</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>A computer using one of the following operating systems: Windows, Linux or MacOS.</p>
+<p>A computer using one of the following operating systems: Windows 10, Linux or MacOS.</p>
 </li>
 <li>
 <p>30GB of disk space and enough CPU and RAM to be able to dedicate at least one core and 6GB RAM to the virtual machine.</p>
@@ -260,7 +282,19 @@ Last updated: September 7th, 2021</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Teradata Express for VMware Player</a>. If you have not used the Teradata downloads website before, you will need to <a href="https://downloads.teradata.com/user/register">register</a>.</p>
+<p><a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Teradata Express</a>. The download package is called <em>"Teradata Express for VMware Player"</em> but don&#8217;t worry, it will work with VirtualBox.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you have not used the Teradata downloads website before, you will need to register first.
+</td>
+</tr>
+</table>
+</div>
 </li>
 <li>
 <p><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>, version 6.1.</p>
@@ -276,6 +310,9 @@ You can also install VirtualBox using <code>brew</code> and other package manage
 </tr>
 </table>
 </div>
+</li>
+<li>
+<p>On Windows, you will also need <a href="https://www.7-zip.org/download.html">7zip</a> to unzip Teradata Express.</p>
 </li>
 </ol>
 </div>
@@ -299,10 +336,10 @@ You can also install VirtualBox using <code>brew</code> and other package manage
 <div class="ulist tabs">
 <ul>
 <li>
-<p><a id="tabset1_macos"></a>MacOS</p>
+<p><a id="tabset1_windows"></a>Windows</p>
 </li>
 <li>
-<p><a id="tabset1_windows"></a>Windows</p>
+<p><a id="tabset1_macos"></a>MacOS</p>
 </li>
 <li>
 <p><a id="tabset1_linux"></a>Linux</p>
@@ -310,24 +347,27 @@ You can also install VirtualBox using <code>brew</code> and other package manage
 </ul>
 </div>
 <div class="content">
-<div class="tab-pane" aria-labelledby="tabset1_macos">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export DISK_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"
-export VM_NAME='Vantage Express 17.10'</code></pre>
-</div>
-</div>
-</div>
 <div class="tab-pane" aria-labelledby="tabset1_windows">
-<div class="listingblock">
+<div class="paragraph">
+<p>Run these commands in Powershell:</p>
+</div>
+<div class="listingblock content-editable">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">$env:DISK_DIR = "$HOME\Downloads\VantageExpress17.10_Sles12"
 $env:VM_NAME = "Vantage Express 17.10"</code></pre>
 </div>
 </div>
 </div>
+<div class="tab-pane" aria-labelledby="tabset1_macos">
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export DISK_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"
+export VM_NAME='Vantage Express 17.10'</code></pre>
+</div>
+</div>
+</div>
 <div class="tab-pane" aria-labelledby="tabset1_linux">
-<div class="listingblock">
+<div class="listingblock content-editable">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export DISK_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"
 export VM_NAME='Vantage Express 17.10'</code></pre>
@@ -343,10 +383,10 @@ export VM_NAME='Vantage Express 17.10'</code></pre>
 <div class="ulist tabs">
 <ul>
 <li>
-<p><a id="tabset2_macos"></a>MacOS</p>
+<p><a id="tabset2_windows"></a>Windows</p>
 </li>
 <li>
-<p><a id="tabset2_windows"></a>Windows</p>
+<p><a id="tabset2_macos"></a>MacOS</p>
 </li>
 <li>
 <p><a id="tabset2_linux"></a>Linux</p>
@@ -354,17 +394,17 @@ export VM_NAME='Vantage Express 17.10'</code></pre>
 </ul>
 </div>
 <div class="content">
-<div class="tab-pane" aria-labelledby="tabset2_macos">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bash -c "$(curl -fsSL https://git.io/Jz7rX)"</code></pre>
-</div>
-</div>
-</div>
 <div class="tab-pane" aria-labelledby="tabset2_windows">
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/Jz7rd'))</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_macos">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bash -c "$(curl -fsSL https://git.io/Jz7rX)"</code></pre>
 </div>
 </div>
 </div>
