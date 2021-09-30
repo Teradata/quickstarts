@@ -281,7 +281,7 @@ Last updated: September 8th, 2021</p>
 <ol class="arabic">
 <li>
 <p>We start with a plain Jupyter Lab notebook. Here, I&#8217;m using docker but any method of starting a notebook, including Jupyter Hub, GCP AI Platform Notebooks, AWS SageMaker Notebooks, Azure ML Notebooks will do.</p>
-<div class="listingblock">
+<div class="listingblock content-editable">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run --rm -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes \
   -v "${PWD}":/home/jovyan/work jupyter/datascience-notebook</code></pre>
@@ -292,14 +292,14 @@ Last updated: September 8th, 2021</p>
 <p>Docker logs will display the url that you need to go to:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Starting JupyterLab ...
+<pre>Starting JupyterLab ...
 Docker Build ID = 3.0.0-ec03292021
 Using unencrypted HTTP
 
 Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
 
 * Or enter this token when prompted by Jupyter: 96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
-* If you used a different port to run your Docker, replace 8888 with your port number</code></pre>
+* If you used a different port to run your Docker, replace 8888 with your port number</pre>
 </div>
 </div>
 </li>
@@ -319,16 +319,16 @@ I&#8217;ve published a notebook with all the cells described below on GitHub: <a
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import sys
+<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">import sys
 !{sys.executable} -m pip install teradatasqlalchemy</code></pre>
 </div>
 </div>
 </li>
 <li>
 <p>Now, we will import <code>Pandas</code> and define the connection string to connect to Teradata. Since I&#8217;m running my notebook in Docker on my local machine and I want to connect to a local Vantage Express VM, I&#8217;m using <code>host.docker.internal</code> DNS name provided by Docker to reference the IP of my machine.</p>
-<div class="listingblock">
+<div class="listingblock content-editable">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import pandas as pd
+<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">import pandas as pd
 db_connection_string = "teradatasql://dbc:dbc@host.docker.internal/dbc"</code></pre>
 </div>
 </div>
@@ -337,7 +337,7 @@ db_connection_string = "teradatasql://dbc:dbc@host.docker.internal/dbc"</code></
 <p>I can now call Pandas to query Vantage and move the result to a Pandas dataframe:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">pd.read_sql("SELECT * FROM dbc.dbcinfo", con = db_connection_string)</code></pre>
+<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">pd.read_sql("SELECT * FROM dbc.dbcinfo", con = db_connection_string)</code></pre>
 </div>
 </div>
 </li>
@@ -345,16 +345,16 @@ db_connection_string = "teradatasql://dbc:dbc@host.docker.internal/dbc"</code></
 <p>The syntax above is concise but it can get tedious if all you need is to explore data in Vantage. We will use <code>ipython-sql</code> and its <code>%%sql</code> magic to create SQL-only cells. We start with importing the required libraries.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import sys
+<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">import sys
 !{sys.executable} -m pip install ipython-sql teradatasqlalchemy</code></pre>
 </div>
 </div>
 </li>
 <li>
 <p>We load <code>ipython-sql</code> and define the db connection string:</p>
-<div class="listingblock">
+<div class="listingblock content-editable">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">%load_ext sql
+<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">%load_ext sql
 %sql teradatasql://dbc:dbc@host.docker.internal/dbc</code></pre>
 </div>
 </div>
@@ -363,7 +363,7 @@ db_connection_string = "teradatasql://dbc:dbc@host.docker.internal/dbc"</code></
 <p>We can now use <code>%sql</code> and <code>%%sql</code> magic. Let&#8217;s say we want to explore data in a table. We can create a cell that says:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">%%sql
+<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">%%sql
 SELECT * FROM dbc.dbcinfo</code></pre>
 </div>
 </div>
@@ -372,7 +372,7 @@ SELECT * FROM dbc.dbcinfo</code></pre>
 <p>If we want to move the data to a Pandas frame, we can say:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">result = %sql SELECT * FROM dbc.dbcinfo
+<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">result = %sql SELECT * FROM dbc.dbcinfo
 result.DataFrame()</code></pre>
 </div>
 </div>
@@ -404,7 +404,7 @@ result.DataFrame()</code></pre>
 </li>
 <li>
 <p>Import the image to your local registry:</p>
-<div class="listingblock">
+<div class="listingblock content-editable">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker load -i teradatajupyterlabext_&lt;version&gt;.tar.gz</code></pre>
 </div>
@@ -424,7 +424,7 @@ Replace <code>/path/to/my/directory/with/notebooks</code> with a directory on yo
 </tr>
 </table>
 </div>
-<div class="listingblock">
+<div class="listingblock content-editable">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -p 127.0.0.1:8888:8888 \
   -v /path/to/my/directory/with/notebooks:/home/jovyan/JupyterLabRoot \
@@ -436,14 +436,14 @@ Replace <code>/path/to/my/directory/with/notebooks</code> with a directory on yo
 <p>Docker logs will display the url that you need to go to:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Starting JupyterLab ...
+<pre>Starting JupyterLab ...
 Docker Build ID = 3.0.0-ec03292021
 Using unencrypted HTTP
 
 Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
 
 * Or enter this token when prompted by Jupyter: 96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
-* If you used a different port to run your Docker, replace 8888 with your port number</code></pre>
+* If you used a different port to run your Docker, replace 8888 with your port number</pre>
 </div>
 </div>
 </li>

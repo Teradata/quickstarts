@@ -298,7 +298,7 @@ U.S. Geological Survey. The bucket is at <a href="https://td-usgs-public.s3.amaz
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code>Payload..*
+<pre>Payload..*
 ------------------------------------------------------------------
 ["10.9","15300","09380000","2018-06-28 00:30","671","0.00","9.80"]
 ["10.8","14500","09380000","2018-06-28 01:00","673","0.00","9.64"]
@@ -309,7 +309,7 @@ U.S. Geological Survey. The bucket is at <a href="https://td-usgs-public.s3.amaz
 ["10.8","15100","09380000","2018-06-27 01:00","672","0.00","9.77"]
 ["10.8","14700","09380000","2018-06-27 01:15","672","0.00","9.68"]
 ["10.9","16000","09380000","2018-06-27 00:15","668","0.00","9.93"]
-["10.8","14900","09380000","2018-06-28 00:45","672","0.00","9.72"]</code></pre>
+["10.8","14900","09380000","2018-06-28 00:45","672","0.00","9.72"]</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -328,14 +328,14 @@ U.S. Geological Survey. The bucket is at <a href="https://td-usgs-public.s3.amaz
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code>Name            Datatype                            FileType  Location
+<pre>Name            Datatype                            FileType  Location
 --------------- ----------------------------------- --------- -------------------------------------------------------------------
 GageHeight2     decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
 Flow            decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
 site_no         int                                 csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
 datetime        TIMESTAMP(0) FORMAT'Y4-MM-DDBHH:MI' csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
 Precipitation   decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
-GageHeight      decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv</code></pre>
+GageHeight      decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -361,12 +361,12 @@ GageHeight      decimal(3,2)                        csv       /S3/s3.amazonaws.c
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">Site_no  Avg_Temp
+<pre>Site_no  Avg_Temp
 -------- ---------
 09380000 11
 09423560 73
 09424900 93
-09429070 81</code></pre>
+09429070 81</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -393,14 +393,14 @@ SELECT top 10 * FROM Riverflow.riverflow;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code>Location                                                            GageHeight2 Flow site_no datetime            Precipitation GageHeight
+<pre>Location                                                            GageHeight2 Flow site_no datetime            Precipitation GageHeight
 ------------------------------------------------------------------- ----------- ---- ------- ------------------- ------------- ----------
 /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09429070/2018/07/02.csv null        null 9429070 2018-07-02 14:40:00 1.21          null
 /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:30:00 0.00          -0.01
 /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:45:00 0.00          -0.01
 /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 01:00:00 0.00          -0.01
 /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:15:00 0.00          -0.01
-/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09429070/2018/07/02.csv null        null 9429070 2018-07-02 14:38:00 1.06          null</code></pre>
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09429070/2018/07/02.csv null        null 9429070 2018-07-02 14:38:00 1.06          null</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -446,7 +446,7 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code>site_no   Flow  GageHeight  datetime
+<pre>site_no   Flow  GageHeight  datetime
 -------  -----  ----------  -------------------
 9400815    .00        -.01  2018-07-10 00:30:00
 9400815    .00        -.01  2018-07-10 01:00:00
@@ -457,7 +457,7 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 9400815    .00        -.01  2018-07-10 01:45:00
 9400815    .00        -.01  2018-07-10 00:45:00
 9400815    .00        -.01  2018-07-10 00:15:00
-9400815    .00        -.01  2018-07-10 00:00:00</code></pre>
+9400815    .00        -.01  2018-07-10 00:00:00</pre>
 </div>
 </div>
 <div class="paragraph">
