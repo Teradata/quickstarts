@@ -23,14 +23,13 @@ This option uses a regular Jupyter Lab notebook. We will see how to load the Ter
 
 1. We start with a plain Jupyter Lab notebook. Here, I'm using docker but any method of starting a notebook, including Jupyter Hub, GCP AI Platform Notebooks, AWS SageMaker Notebooks, Azure ML Notebooks will do.
 +
-[source, bash]
+[source, bash, role="content-editable"]
 ----
 docker run --rm -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes \
   -v "${PWD}":/home/jovyan/work jupyter/datascience-notebook
 ----
 2. Docker logs will display the url that you need to go to:
 +
-[source, bash]
 ----
 Starting JupyterLab ...
 Docker Build ID = 3.0.0-ec03292021
@@ -45,48 +44,48 @@ Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400
 +
 NOTE: I've published a notebook with all the cells described below on GitHub: https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/attachments/vantage-with-python-libraries.ipynb
 +
-[source, python]
+[source, ipython]
 ----
 import sys
 !{sys.executable} -m pip install teradatasqlalchemy
 ----
 4. Now, we will import `Pandas` and define the connection string to connect to Teradata. Since I'm running my notebook in Docker on my local machine and I want to connect to a local Vantage Express VM, I'm using `host.docker.internal` DNS name provided by Docker to reference the IP of my machine.
 +
-[source, python]
+[source, ipython, role="content-editable"]
 ----
 import pandas as pd
 db_connection_string = "teradatasql://dbc:dbc@host.docker.internal/dbc"
 ----
 5. I can now call Pandas to query Vantage and move the result to a Pandas dataframe:
 +
-[source, python]
+[source, ipython]
 ----
 pd.read_sql("SELECT * FROM dbc.dbcinfo", con = db_connection_string)
 ----
 6. The syntax above is concise but it can get tedious if all you need is to explore data in Vantage. We will use `ipython-sql` and its `%%sql` magic to create SQL-only cells. We start with importing the required libraries.
 +
-[source, python]
+[source, ipython]
 ----
 import sys
 !{sys.executable} -m pip install ipython-sql teradatasqlalchemy
 ----
 7. We load `ipython-sql` and define the db connection string:
 +
-[source, python]
+[source, ipython, role="content-editable"]
 ----
 %load_ext sql
 %sql teradatasql://dbc:dbc@host.docker.internal/dbc
 ----
 8. We can now use `%sql` and `%%sql` magic. Let's say we want to explore data in a table. We can create a cell that says:
 +
-[source, python]
+[source, ipython]
 ----
 %%sql
 SELECT * FROM dbc.dbcinfo
 ----
 9. If we want to move the data to a Pandas frame, we can say:
 +
-[source, python]
+[source, ipython]
 ----
 result = %sql SELECT * FROM dbc.dbcinfo
 result.DataFrame()
@@ -106,7 +105,7 @@ The Teradata Jupyter Docker image can be used when you want to run Jupyter local
 2. Unzip the image.
 3. Import the image to your local registry:
 +
-[source, bash]
+[source, bash, role="content-editable"]
 ----
 docker load -i teradatajupyterlabext_<version>.tar.gz
 ----
@@ -114,7 +113,7 @@ docker load -i teradatajupyterlabext_<version>.tar.gz
 +
 NOTE: Replace `/path/to/my/directory/with/notebooks` with a directory on your machine where you intend to keep notebook files. Docker must be allowed to map this directory.
 +
-[source, bash]
+[source, bash, role="content-editable"]
 ----
 docker run -p 127.0.0.1:8888:8888 \
   -v /path/to/my/directory/with/notebooks:/home/jovyan/JupyterLabRoot \
@@ -122,7 +121,6 @@ docker run -p 127.0.0.1:8888:8888 \
 ----
 5. Docker logs will display the url that you need to go to:
 +
-[source, bash]
 ----
 Starting JupyterLab ...
 Docker Build ID = 3.0.0-ec03292021

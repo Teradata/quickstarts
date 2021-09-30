@@ -56,7 +56,6 @@ FROM HR.Employees;
 +
 You should get the following results:
 +
-[source]
 ----
 GlobalID  FirstName  LastName   DateOfBirth  JoinedDate  DepartmentCode
 --------  ---------  ---------- -----------  ----------  --------------

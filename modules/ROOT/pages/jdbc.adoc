@@ -22,7 +22,7 @@ This quickstart demonstrates how to connect to Teradata Vantage using JDBC. We w
 2. Unzip the driver.
 3. Add the driver to your local Maven repository:
 +
-[source, bash]
+[source, bash, role="content-editable"]
 ----
 mvn install:install-file \
    -Dfile=terajdbc4.jar \
