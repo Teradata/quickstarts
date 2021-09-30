@@ -3,6 +3,8 @@
 image::vm.login.png[VM Login, width=500]
 . The database is configured to autostart with the VM. To confirm that the database has started go to the virtual desktop and start `Gnome Terminal`. In the terminal execute `pdestate` command that will inform you if Vantage has already started:
 +
+NOTE: To paste into Gnome Terminal press kbd:[SHIFT+CTRL+V].
++
 [source, bash]
 ----
 watch pdestate -a
