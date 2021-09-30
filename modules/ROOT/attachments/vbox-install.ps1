@@ -4,8 +4,11 @@ $disk1 = Get-ChildItem -Path $diskDir -Recurse -Filter "*disk1*"
 $disk2 = Get-ChildItem -Path $diskDir -Recurse -Filter "*disk2*"
 $disk3 = Get-ChildItem -Path $diskDir -Recurse -Filter "*disk3*"
 
+#make sure ssh is enabled
+Add-WindowsCapability -Online -Name OpenSSH.Client*
+
 #add virtualbox bin to the path
-$env:Path += ";C:\Program Files\Oracle\VirtualBox"
+$env:Path += ";C:\Program Files\Oracle\VirtualBox;c:\windows\system32\OpenSSH\"
 
 Invoke-Expression "vboxmanage createvm --name `"$vmName`" --register --ostype openSUSE_64"
 Invoke-Expression "vboxmanage modifyvm `"$vmName`" --ioapic on --memory 6000 --vram 128 --nic1 nat --graphicscontroller vmsvga --usb on --mouse usbtablet --clipboard-mode bidirectional"
