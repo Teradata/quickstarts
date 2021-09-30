@@ -8,16 +8,25 @@
 
 include::partial$getting.started.intro.adoc[]
 
-include::partial$getting.started.prereqs.adoc[]
+== Prerequisites
+
+. A computer using one of the following operating systems: Windows 10, Linux or MacOS.
+. 30GB of disk space and enough CPU and RAM to be able to dedicate at least one core and 6GB RAM to the virtual machine.
+. Admin rights to be able to install and run the software.
++
+// NOTE: No admin rights on your local machine? No problem! Have a look at how to run Teradata Express in link:#[AWS], link:#[Azure], link:#[GCP].
 
 == Installation
 
 === Download required software
 
-. link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Teradata Express for VMware Player]. If you have not used the Teradata downloads website before, you will need to link:https://downloads.teradata.com/user/register[register].
+. link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Teradata Express]. The download package is called __"Teradata Express for VMware Player"__ but don't worry, it will work with VirtualBox.
++
+NOTE: If you have not used the Teradata downloads website before, you will need to register first.
 . link:https://www.virtualbox.org/wiki/Downloads[VirtualBox], version 6.1.
 +
 NOTE: You can also install VirtualBox using `brew` and other package managers.
+. On Windows, you will also need link:https://www.7-zip.org/download.html[7zip] to unzip Teradata Express.
 
 === Run installers
 
@@ -30,28 +39,29 @@ Install VirtualBox by running the installer and accepting the default values. Vi
 +
 [tabs]
 ====
-MacOS::
-+
---
-[source, bash]
-----
-export DISK_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"
-export VM_NAME='Vantage Express 17.10'
-----
---
 Windows::
 +
 --
-[source, powershell]
+Run these commands in Powershell:
+[source, powershell, role="content-editable"]
 ----
 $env:DISK_DIR = "$HOME\Downloads\VantageExpress17.10_Sles12"
 $env:VM_NAME = "Vantage Express 17.10"
 ----
 --
+MacOS::
++
+--
+[source, bash, role="content-editable"]
+----
+export DISK_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"
+export VM_NAME='Vantage Express 17.10'
+----
+--
 Linux::
 +
 --
-[source, bash]
+[source, bash, role="content-editable"]
 ----
 export DISK_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"
 export VM_NAME='Vantage Express 17.10'
@@ -62,20 +72,20 @@ export VM_NAME='Vantage Express 17.10'
 +
 [tabs]
 ====
-MacOS::
-+
---
-[source, bash]
-----
-bash -c "$(curl -fsSL https://git.io/Jz7rX)"
-----
---
 Windows::
 +
 --
 [source, powershell]
 ----
 iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/Jz7rd'))
+----
+--
+MacOS::
++
+--
+[source, bash]
+----
+bash -c "$(curl -fsSL https://git.io/Jz7rX)"
 ----
 --
 Linux::

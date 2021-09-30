@@ -7,7 +7,13 @@
 
 include::partial$getting.started.intro.adoc[]
 
-include::partial$getting.started.prereqs.adoc[]
+== Prerequisites
+
+. A computer using one of the following operating systems: Windows, Linux or MacOS.
+. 30GB of disk space and enough CPU and RAM to be able to dedicate at least one core and 6GB RAM to the virtual machine.
+. Admin rights to be able to install and run the software.
++
+// NOTE: No admin rights on your local machine? No problem! Have a look at how to run Teradata Express in link:#[AWS], link:#[Azure], link:#[GCP].
 
 == Installation
 
