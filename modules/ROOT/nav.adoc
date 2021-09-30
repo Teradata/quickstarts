@@ -10,3 +10,4 @@
 ** xref::#[Tune performance with indices]
 ** xref::#[Load data into Teradata efficiently using Teradata Parallel Transporter (TPT)]
 ** xref::#[Extend Teradata with user defined functions]
+** xref::#[Run applications on Teradata]
