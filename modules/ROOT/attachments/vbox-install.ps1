@@ -1,5 +1,5 @@
 $vmName = If([System.Environment]::GetEnvironmentVariable('VM_NAME')) {[System.Environment]::GetEnvironmentVariable('VM_NAME')} Else {"Vantage Express 17.10"}
-$diskDir = [System.Environment]::GetEnvironmentVariable('DISK_DIR')
+$diskDir = [System.Environment]::GetEnvironmentVariable('VM_IMAGE_DIR')
 $disk1 = Get-ChildItem -Path $diskDir -Recurse -Filter "*disk1*"
 $disk2 = Get-ChildItem -Path $diskDir -Recurse -Filter "*disk2*"
 $disk3 = Get-ChildItem -Path $diskDir -Recurse -Filter "*disk3*"

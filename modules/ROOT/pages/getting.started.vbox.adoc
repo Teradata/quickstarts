@@ -20,7 +20,7 @@ include::partial$getting.started.intro.adoc[]
 
 === Download required software
 
-. link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Teradata Express]. The download package is called __"Teradata Express for VMware Player"__ but don't worry, it will work with VirtualBox.
+. link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Teradata Express] VM image. The download package is called __"Teradata Express for VMware Player"__ but don't worry, it will work with VirtualBox.
 +
 NOTE: If you have not used the Teradata downloads website before, you will need to register first.
 . link:https://www.virtualbox.org/wiki/Downloads[VirtualBox], version 6.1.
@@ -30,12 +30,13 @@ NOTE: You can also install VirtualBox using `brew` and other package managers.
 
 === Run installers
 
-Install VirtualBox by running the installer and accepting the default values. VirtualBox includes functionality that requires elevated privileges. When you start VirtualBox for the first time, you will be asked to confirm these elevated access. You will also need to reboot your machine to activate a VirtualBox kernel plugin.
+. Install VirtualBox by running the installer and accepting the default values. VirtualBox includes functionality that requires elevated privileges. When you start VirtualBox for the first time, you will be asked to confirm these elevated access. You will also need to reboot your machine to activate a VirtualBox kernel plugin.
+. If on Windows, install `7zip`.
 
 === Run Teradata Vantage Express
 
 . Go to the directory where you downloaded Teradata Vantage Express and unzip the downloaded file.
-. Set env variable `DISK_DIR` to the path of the unzipped image directory. For example:
+. Set env variable `VM_IMAGE_DIR` to the path of the unzipped image directory. For example:
 +
 [tabs]
 ====
@@ -45,7 +46,7 @@ Windows::
 Run in Powershell as Administrator:
 [source, powershell, role="content-editable"]
 ----
-$env:DISK_DIR = "$HOME\Downloads\VantageExpress17.10_Sles12"
+$env:VM_IMAGE_DIR = "$HOME\Downloads\VantageExpress17.10_Sles12"
 ----
 --
 MacOS::
@@ -53,7 +54,7 @@ MacOS::
 --
 [source, bash, role="content-editable"]
 ----
-export DISK_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"
+export VM_IMAGE_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"
 ----
 --
 Linux::
@@ -61,7 +62,7 @@ Linux::
 --
 [source, bash, role="content-editable"]
 ----
-export DISK_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"
+export VM_IMAGE_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"
 ----
 --
 ====
