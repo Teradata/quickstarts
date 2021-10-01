@@ -291,7 +291,7 @@ Last updated: September 7th, 2021</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Teradata Express</a>. The download package is called <em>"Teradata Express for VMware Player"</em> but don&#8217;t worry, it will work with VirtualBox.</p>
+<p><a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Teradata Express</a> VM image. The download package is called <em>"Teradata Express for VMware Player"</em> but don&#8217;t worry, it will work with VirtualBox.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -328,8 +328,15 @@ You can also install VirtualBox using <code>brew</code> and other package manage
 </div>
 <div class="sect2">
 <h3 id="_run_installers"><a class="anchor" href="#_run_installers"></a>Run installers</h3>
-<div class="paragraph">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
 <p>Install VirtualBox by running the installer and accepting the default values. VirtualBox includes functionality that requires elevated privileges. When you start VirtualBox for the first time, you will be asked to confirm these elevated access. You will also need to reboot your machine to activate a VirtualBox kernel plugin.</p>
+</li>
+<li>
+<p>If on Windows, install <code>7zip</code>.</p>
+</li>
+</ol>
 </div>
 </div>
 <div class="sect2">
@@ -340,7 +347,7 @@ You can also install VirtualBox using <code>brew</code> and other package manage
 <p>Go to the directory where you downloaded Teradata Vantage Express and unzip the downloaded file.</p>
 </li>
 <li>
-<p>Set env variable <code>DISK_DIR</code> to the path of the unzipped image directory. For example:</p>
+<p>Set env variable <code>VM_IMAGE_DIR</code> to the path of the unzipped image directory. For example:</p>
 <div class="tabset is-loading">
 <div class="ulist tabs">
 <ul>
@@ -362,21 +369,21 @@ You can also install VirtualBox using <code>brew</code> and other package manage
 </div>
 <div class="listingblock content-editable">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">$env:DISK_DIR = "$HOME\Downloads\VantageExpress17.10_Sles12"</code></pre>
+<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">$env:VM_IMAGE_DIR = "$HOME\Downloads\VantageExpress17.10_Sles12"</code></pre>
 </div>
 </div>
 </div>
 <div class="tab-pane" aria-labelledby="tabset1_macos">
 <div class="listingblock content-editable">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export DISK_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export VM_IMAGE_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"</code></pre>
 </div>
 </div>
 </div>
 <div class="tab-pane" aria-labelledby="tabset1_linux">
 <div class="listingblock content-editable">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export DISK_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export VM_IMAGE_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"</code></pre>
 </div>
 </div>
 </div>
