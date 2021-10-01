@@ -35,18 +35,17 @@ Install VirtualBox by running the installer and accepting the default values. Vi
 === Run Teradata Vantage Express
 
 . Go to the directory where you downloaded Teradata Vantage Express and unzip the downloaded file.
-. Set env variable `DISK_DIR` to the path of the unzipped image directory. Also, set `VM_NAME` to name the VM. For example:
+. Set env variable `DISK_DIR` to the path of the unzipped image directory. For example:
 +
 [tabs]
 ====
 Windows::
 +
 --
-Run these commands in Powershell as Administrator:
+Run in Powershell as Administrator:
 [source, powershell, role="content-editable"]
 ----
 $env:DISK_DIR = "$HOME\Downloads\VantageExpress17.10_Sles12"
-$env:VM_NAME = "Vantage Express 17.10"
 ----
 --
 MacOS::
@@ -55,7 +54,6 @@ MacOS::
 [source, bash, role="content-editable"]
 ----
 export DISK_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"
-export VM_NAME='Vantage Express 17.10'
 ----
 --
 Linux::
@@ -64,7 +62,6 @@ Linux::
 [source, bash, role="content-editable"]
 ----
 export DISK_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"
-export VM_NAME='Vantage Express 17.10'
 ----
 --
 ====
@@ -75,6 +72,7 @@ export VM_NAME='Vantage Express 17.10'
 Windows::
 +
 --
+Continue in the same Powershell as Administrator:
 [source, powershell]
 ----
 iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/Jz7rd'))
