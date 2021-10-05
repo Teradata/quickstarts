@@ -1,6 +1,6 @@
 site:
   title: Quickstarts
-  url: https://teradata.github.io/quickstarts
+  url: https://quickstarts.teradata.com/
   start_page: docs::getting.started.vmware.adoc
 content:
   sources:
