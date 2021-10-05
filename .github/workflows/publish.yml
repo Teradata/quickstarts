@@ -15,6 +15,11 @@ jobs:
           antora_playbook: antora-playbook.yml
           antora_generator: 'antora-site-generator-lunr'
           antora_docsearch_enabled: 'true'
+      - name: Turnstyle
+        if: ${{ ! env.GITHUB_TOKEN == '' }}
+        uses: softprops/turnstyle@v1
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
