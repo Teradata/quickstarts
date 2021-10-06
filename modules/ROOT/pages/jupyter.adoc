@@ -143,7 +143,7 @@ image::gettingstarteddemo.ipynb.png[GettingStartedDemo.ipynb screenshot, width=1
 
 == Summary
 
-This quickstart covered different options to connect to Teradata Vantage from a Jupyter Notebook. We learned about the Teradata Jupyter Docker image that bundles multiple Teradata Python and R libraries. It also provides an SQL kernel, database object explorer and connection management. These features are useful when you spend a lot of time with the SQL interface. For more traditional data science scenarios, we explored the standalone Teradata Python driver and integration through the ipython sql extension.
+This quick start covered different options to connect to Teradata Vantage from a Jupyter Notebook. We learned about the Teradata Jupyter Docker image that bundles multiple Teradata Python and R libraries. It also provides an SQL kernel, database object explorer and connection management. These features are useful when you spend a lot of time with the SQL interface. For more traditional data science scenarios, we explored the standalone Teradata Python driver and integration through the ipython sql extension.
 
 == Further reading
 * link:https://teradata.github.io/jupyterextensions[Teradata Jupyter Extensions Website]

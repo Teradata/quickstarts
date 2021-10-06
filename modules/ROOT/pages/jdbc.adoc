@@ -8,7 +8,7 @@
 
 == Overview
 
-This quickstart demonstrates how to connect to Teradata Vantage using JDBC. We will go through a sample JDBC project. The entire project is published in GitHub at link:https://github.com/Teradata/jdbc-sample-app[].
+This quick start demonstrates how to connect to Teradata Vantage using JDBC. We will go through a sample JDBC project. The entire project is published in GitHub at link:https://github.com/Teradata/jdbc-sample-app[].
 
 == Prerequsites
 
@@ -53,7 +53,7 @@ The project is set up. All that is left, is to load the driver, pass connection 
 
 == Summary
 
-In this quickstart we have learned how to connect to Teradata Vantage using JDBC. We went through the process of installing the latest JDBC driver and later used it in a Java application with Maven as the build tool.
+In this quick start we have learned how to connect to Teradata Vantage using JDBC. We went through the process of installing the latest JDBC driver and later used it in a Java application with Maven as the build tool.
 
 == Further reading
 * link:https://teradata-docs.s3.amazonaws.com/doc/connectivity/jdbc/reference/current/frameset.html[Teradata JDBC Driver Reference]

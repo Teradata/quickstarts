@@ -224,7 +224,7 @@ Here, we instruct Vantage to take data from `Riverflow.riverflow_native` and sav
 
 == Summary
 
-In this quickstart we have learned how to read data from object storage using Native Object Storage (NOS) functionality in Vantage. NOS supports reading and importing data stored in CSV, JSON and Parquet formats. NOS can also export data from Vantage to object storage.
+In this quick start we have learned how to read data from object storage using Native Object Storage (NOS) functionality in Vantage. NOS supports reading and importing data stored in CSV, JSON and Parquet formats. NOS can also export data from Vantage to object storage.
 
 == Further reading
 * link:https://docs.teradata.com/r/2mw8ooFr~xX0EaaGFaDW8A/root[Teradata Vantage™ - Native Object Store Getting Started Guide]
