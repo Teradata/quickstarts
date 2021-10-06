@@ -19,14 +19,16 @@ include::partial$getting.started.intro.adoc[]
 
 === Download required software
 
-. link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Teradata Express for VMware Player]. If you have not used the Teradata downloads website before, you will need to link:https://downloads.teradata.com/user/register[register].
+. The latest version of link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Teradata Express for VMware Player]. If you have not used the Teradata downloads website before, you will need to register.
 . link:https://www.vmware.com/products/workstation-player.html[VMware Player].
 +
 IMPORTANT: VMware doesn't offer VMware Player for MacOS. If you are on a Mac, you will need to install link:https://www.vmware.com/products/fusion/fusion-evaluation.html[VMware Fusion] instead. It's a paid product but VMware offers a free 30-day trial. Alternatively, you can xref:getting.started.vbox.adoc[run Teradata Express on VirtualBox].
+. On Windows, you will also need link:https://www.7-zip.org/download.html[7zip] to unzip Teradata Express.
 
 === Run installers
 
-Install VMware Player or VMware Fusion by running the installer and accepting the default values.
+. Install VMware Player or VMware Fusion by running the installer and accepting the default values.
+. If on Windows, install `7zip`.
 
 === Run Teradata Vantage Express
 
