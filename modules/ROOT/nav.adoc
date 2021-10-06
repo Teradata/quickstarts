@@ -2,7 +2,7 @@
 * xref::getting.started.vbox.adoc[Getting started with Vantage Express on VirtualBox]
 * xref::nos.adoc[Query data stored in object storage, e.g. S3, Azure Blob, GCS]
 * xref::jdbc.adoc[Connect to Teradata using JDBC]
-* xref::jupyter.adoc#[Interact with Teradata Vantage from a Jupyter notebook]
+* xref::jupyter.adoc[Interact with Teradata Vantage from a Jupyter notebook]
 
 * Planned
 ** xref::#[Run Teradata Developer in Public Cloud]
