@@ -32,7 +32,7 @@ IMPORTANT: VMware doesn't offer VMware Workstation Player for MacOS. If you are 
 . Install VMware Player or VMware Fusion by running the installer and accepting the default values.
 . If on Windows, install `7zip`.
 
-=== Run Teradata Vantage Express
+=== Run Vantage Express
 
 . Go to the directory where you downloaded Teradata Vantage Express and unzip the downloaded file.
 . Double-click on the `.vmx` file. This will start the VM image in VMware Player/Fusion.

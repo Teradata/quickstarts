@@ -33,7 +33,7 @@ NOTE: You can also install VirtualBox using `brew` and other package managers.
 . Install VirtualBox by running the installer and accepting the default values. VirtualBox includes functionality that requires elevated privileges. When you start VirtualBox for the first time, you will be asked to confirm these elevated access. You will also need to reboot your machine to activate a VirtualBox kernel plugin.
 . If on Windows, install `7zip`.
 
-=== Run Teradata Vantage Express
+=== Run Vantage Express
 
 . Go to the directory where you downloaded Teradata Vantage Express and unzip the downloaded file.
 . Set env variable `VM_IMAGE_DIR` to the path of the unzipped image directory. For example:
