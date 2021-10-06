@@ -102,16 +102,21 @@ The SQL kernel and Teradata Jupyter extensions are useful for people that spend 
 The Teradata Jupyter Docker image can be used when you want to run Jupyter locally or you have a place where you can run custom Jupyter docker images, .e.g. JupyterHub or GCP AI Platform Notebooks, AWS SageMaker Notebooks. The steps below demonstrate how to use the image locally.
 
 1. Download link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[the Teradata Vantage Modules for Jupyter docker image]. If you don't have an account with Teradata Downloads, you will need to register first.
-2. Unzip the image.
-3. Import the image to your local registry:
+2. Import the image to your local registry:
 +
 [source, bash, role="content-editable"]
 ----
 docker load -i teradatajupyterlabext_<version>.tar.gz
 ----
+3. Let's verify that the image has been imported correctly and get the name of the image. Look for `teradatajupyterlabext_`. Copy the image name. We will need it in the next step.
++
+[source, bash]
+----
+docker image ls
+----
 4. Run the image:
 +
-NOTE: Replace `/path/to/my/directory/with/notebooks` with a directory on your machine where you intend to keep notebook files. Docker must be allowed to map this directory.
+NOTE: Replace `/path/to/my/directory/with/notebooks` with a directory on your machine where you intend to keep notebook files. Docker must be allowed to map this directory. Also, replace `teradatajupyterlabext` with the image name from the previous step.
 +
 [source, bash, role="content-editable"]
 ----
@@ -119,7 +124,7 @@ docker run -p 127.0.0.1:8888:8888 \
   -v /path/to/my/directory/with/notebooks:/home/jovyan/JupyterLabRoot \
   teradatajupyterlabext
 ----
-5. Docker logs will display the url that you need to go to:
+5. Docker logs will display the url that you need to go to. For example, this is what I've got:
 +
 ----
 Starting JupyterLab ...
@@ -131,7 +136,7 @@ Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400
 * Or enter this token when prompted by Jupyter: 96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
 * If you used a different port to run your Docker, replace 8888 with your port number
 ----
-6. Open up the URL and use the file explorer to open the following notebook: `jupyterextensions -> notebookes -> sql -> GettingStartedDemo.ipynb`.
+6. Open up the URL and use the file explorer to open the following notebook: `jupyterextensions -> notebooks -> sql -> GettingStartedDemo.ipynb`.
 7. Go through the demo of the Teradata SQL Kernel:
 +
 image::gettingstarteddemo.ipynb.png[GettingStartedDemo.ipynb screenshot, width=100%]
