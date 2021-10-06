@@ -40,7 +40,7 @@ include::partial$run.vantage.adoc[]
 
 === Run sample queries
 
-. We will now run some queries in the VM. To avoid copy/paste issues between the host and the VM, we will open this how-to in the VM. Go to the virtual desktop, start Firefox and point it to this how-to.
+. We will now run some queries in the VM. To avoid copy/paste issues between the host and the VM, we will open thisquick start in the VM. Go to the virtual desktop, start Firefox and point it to thisquick start.
 
 include::partial$running.sample.queries.adoc[]
 
