@@ -409,13 +409,18 @@ result.DataFrame()</code></pre>
 <p>Download <a href="https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter">the Teradata Vantage Modules for Jupyter docker image</a>. If you don&#8217;t have an account with Teradata Downloads, you will need to register first.</p>
 </li>
 <li>
-<p>Unzip the image.</p>
-</li>
-<li>
 <p>Import the image to your local registry:</p>
 <div class="listingblock content-editable">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker load -i teradatajupyterlabext_&lt;version&gt;.tar.gz</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Let&#8217;s verify that the image has been imported correctly and get the name of the image. Look for <code>teradatajupyterlabext_</code>. Copy the image name. We will need it in the next step.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker image ls</code></pre>
 </div>
 </div>
 </li>
@@ -428,7 +433,7 @@ result.DataFrame()</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Replace <code>/path/to/my/directory/with/notebooks</code> with a directory on your machine where you intend to keep notebook files. Docker must be allowed to map this directory.
+Replace <code>/path/to/my/directory/with/notebooks</code> with a directory on your machine where you intend to keep notebook files. Docker must be allowed to map this directory. Also, replace <code>teradatajupyterlabext</code> with the image name from the previous step.
 </td>
 </tr>
 </table>
@@ -442,7 +447,7 @@ Replace <code>/path/to/my/directory/with/notebooks</code> with a directory on yo
 </div>
 </li>
 <li>
-<p>Docker logs will display the url that you need to go to:</p>
+<p>Docker logs will display the url that you need to go to. For example, this is what I&#8217;ve got:</p>
 <div class="listingblock">
 <div class="content">
 <pre>Starting JupyterLab ...
@@ -457,7 +462,7 @@ Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400
 </div>
 </li>
 <li>
-<p>Open up the URL and use the file explorer to open the following notebook: <code>jupyterextensions &#8594; notebookes &#8594; sql &#8594; GettingStartedDemo.ipynb</code>.</p>
+<p>Open up the URL and use the file explorer to open the following notebook: <code>jupyterextensions &#8594; notebooks &#8594; sql &#8594; GettingStartedDemo.ipynb</code>.</p>
 </li>
 <li>
 <p>Go through the demo of the Teradata SQL Kernel:</p>
