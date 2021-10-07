@@ -1,4 +1,4 @@
-= Query Data Stored in Object Storage, e.g. S3, Azure Blob, GCS
+= Query Data Stored in Object Storage
 :experimental:
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com

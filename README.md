@@ -1,1 +1,1 @@
-# Teradata Vantage Quickstarts
+# Teradata Vantage Getting Started Guides

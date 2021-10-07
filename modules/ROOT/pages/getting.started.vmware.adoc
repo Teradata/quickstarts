@@ -1,4 +1,4 @@
-= Getting Started with Teradata Vantage on Your Local Machine Using VMware
+= Run Vantage Express on VMware
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
 :page-revdate: September 7th, 2021

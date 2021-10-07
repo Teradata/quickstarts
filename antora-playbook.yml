@@ -1,5 +1,5 @@
 site:
-  title: Quickstarts
+  title: Getting Started Guides
   url: https://quickstarts.teradata.com/
   start_page: docs::getting.started.vmware.adoc
 content:

@@ -1,4 +1,4 @@
-= Getting Started with Teradata Vantage on Your Local Machine Using VirtualBox
+= Run Vantage Express on VirtualBox
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
 :page-revdate: September 7th, 2021
