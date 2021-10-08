@@ -17,10 +17,13 @@ PDE state is RUN/STARTED.
 DBS state is 5: Logons are enabled - The system is quiescent
 ----
 +
-Here are examples of messages that `pdestate` returns when the database is still initializing:
-+
-----
-PDE state is DOWN/HARDSTOP.
+++++
+<details>
+<summary class="title">See examples of messages that <code>pdestate</code> returns when the database is still initializing.</summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>PDE state is DOWN/HARDSTOP.
 
 PDE state is START/NETCONFIG.
 
@@ -38,8 +41,11 @@ DBS state is 1/5: DBS Startup - Voting for Transaction Recovery
 PDE state is RUN/STARTED.
 
 DBS state is 1/4: DBS Startup - Starting PE Partitions
-PDE state is RUN/STARTED.
-----
+PDE state is RUN/STARTED.</pre>
+</div>
+</div>
+</details>
+++++
 . Now that the database is up, go back to the virtual desktop and launch `Teradata Studio Express`. When you first start it you will be offered a tour. Once you close the tour, you will see a wizard window to add a new connection. Select `Teradata`:
 +
 image::new.connection.profile.png[New Connection Profile, width=500]
