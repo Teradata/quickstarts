@@ -3,6 +3,7 @@
 * xref::nos.adoc[]
 * xref::jdbc.adoc[]
 * xref::jupyter.adoc[]
+* xref::sto.adoc[]
 
 * Planned
 ** xref::#[Run Teradata Developer in Public Cloud]
@@ -10,4 +11,4 @@
 ** xref::#[Tune performance with indices]
 ** xref::#[Load data into Teradata efficiently using Teradata Parallel Transporter (TPT)]
 ** xref::#[Extend Teradata with user defined functions]
-** xref::#[Run applications on Teradata]
+
