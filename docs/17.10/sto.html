@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Query Data Stored in Object Storage :: Getting Started Guides</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/docs/17.10/nos.html">
-    <meta name="description" content="Teradata Vantage Native Object Storage - read and write from/to object storage, unified SQL interface for Vantage and object storage.">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics">
+    <title>Run Applications on Vantage :: Getting Started Guides</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/docs/17.10/sto.html">
+    <meta name="description" content="Run Applications on Teradata - use Script Table Operator to run applications on your data without data movement.">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, script table operator, cloud data platform, object storage, business intelligence, enterprise analytics">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
 <!-- Google Tag Manager -->
@@ -184,7 +184,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="getting.started.vbox.html">Run Vantage Express on VirtualBox</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="nos.html">Query Data Stored in Object Storage</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -193,7 +193,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="jupyter.html">Use Teradata Vantage from a Jupyter notebook</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="sto.html">Run Applications on Vantage</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -248,7 +248,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="getting.started.vmware.html">Getting Started Guides</a></li>
-    <li><a href="nos.html">Query Data Stored in Object Storage</a></li>
+    <li><a href="sto.html">Run Applications on Vantage</a></li>
   </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/issues"><img
@@ -256,25 +256,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     alt="GitHub icon"
     height="18"
     width="18" /></a><a href="https://github.com/Teradata/quickstarts/issues">Report an issue</a></div>
-  <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/nos.adoc"><img
+  <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/sto.adoc"><img
     src="https://camo.githubusercontent.com/b079fe922f00c4b86f1b724fbc2e8141c468794ce8adbc9b7456e5e1ad09c622/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f6769746875622e737667"
     alt="GitHub icon"
     height="18"
-    width="18" /></a><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/nos.adoc">Edit this page</a></div>
+    width="18" /></a><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/sto.adoc">Edit this page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Query Data Stored in Object Storage</h1>
+<h1 class="page">Run Applications on Vantage</h1>
 <p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
 Last updated: September 7th, 2021</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Native Object Storage (NOS) is a Vantage feature that allows you to query data stored in files in object storage such as AWS S3, Google GCS, Azure Blob or on-prem implementations. It&#8217;s useful in scenarios where you want to explore data without building a data pipeline to bring it into Vantage.</p>
+<p>Sometimes, you need to apply complex logic to your data that can&#8217;t be easily expressed in SQL. One option is to wrap your logic in a User Defined Function (UDF). What if you already have this logic coded in a language that is not supported by UDF? Script Table Operator is a Vantage feature that allows you to bring your logic to the data and run it on Vantage. The advantage of this approach is that you don&#8217;t have to retrieve data from Vantage to operate on it. Also, by running your data applications on Vantage, you leverage its parallel nature. You don&#8217;t have to think how your applications will scale. You can let Vantage take care of it.</p>
 </div>
 </div>
 </div>
@@ -282,37 +282,21 @@ Last updated: September 7th, 2021</p>
 <h2 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You need access to a Teradata Vantage instance. NOS is enabled in all Vantage editions from Vantage Express through Developer, DYI to Vantage as a Service starting from version 17.10. If you need a new instance of Vantage the easiest way is to <a href="getting.started.vmware.html" class="page">install Vantage Express on your local machine</a>.</p>
+<p>You need access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using <a href="getting.started.vmware.html" class="page">VMware</a> or <a href="getting.started.vbox.html" class="page">VirtualBox</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_explore_data_with_nos"><a class="anchor" href="#_explore_data_with_nos"></a>Explore data with NOS</h2>
+<h2 id="_hello_world"><a class="anchor" href="#_hello_world"></a>Hello World</h2>
 <div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Currently, NOS supports CSV, JSON (as array or new-line delimited), and Parquet data formats.
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
-<p>Let&#8217;s say you have a dataset stored as CSV files in an S3 bucket. You want to explore the dataset before you decide if you want to bring it into Vantage. For this scenario, we are going to use a public dataset published by Teradata that contains river flow data collected by the
-U.S. Geological Survey. The bucket is at <a href="https://td-usgs-public.s3.amazonaws.com/" class="bare">https://td-usgs-public.s3.amazonaws.com/</a>.</p>
-</div>
-<div class="paragraph">
-<p>Let&#8217;s first have a look at sample CSV data. We take the first 10 rows that Vantage will fetch from the bucket:</p>
+<p>Let&#8217;s start with something simple. What if you wanted the database to print "Hello World"?</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT top 10 payload..* FROM (
-	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-) AS d;</code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT *
+FROM
+  SCRIPT(script_command('echo Hello World!') RETURNS ('Message varchar(512)'));</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -320,233 +304,261 @@ U.S. Geological Survey. The bucket is at <a href="https://td-usgs-public.s3.amaz
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>Payload..*
-------------------------------------------------------------------
-["10.9","15300","09380000","2018-06-28 00:30","671","0.00","9.80"]
-["10.8","14500","09380000","2018-06-28 01:00","673","0.00","9.64"]
-["10.7","14100","09380000","2018-06-28 01:15","672","0.00","9.56"]
-["11.0","16200","09380000","2018-06-27 00:00","669","0.00","9.97"]
-["10.9","15700","09380000","2018-06-27 00:30","668","0.00","9.88"]
-["10.8","15400","09380000","2018-06-27 00:45","672","0.00","9.82"]
-["10.8","15100","09380000","2018-06-27 01:00","672","0.00","9.77"]
-["10.8","14700","09380000","2018-06-27 01:15","672","0.00","9.68"]
-["10.9","16000","09380000","2018-06-27 00:15","668","0.00","9.93"]
-["10.8","14900","09380000","2018-06-28 00:45","672","0.00","9.72"]</pre>
+<pre>Message
+------------
+Hello World!
+Hello World!</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>We have got plenty of numbers, but what do they mean? To answer this question, we will ask Vantage to detect the schema of the CSV files:</p>
+<p>Let&#8217;s analyze what just happened here. The SQL includes <code>echo Hello World!</code>. This is a Bash command. OK, so now we know how to run Bash commands. But why did we get 2 rows and not one? That&#8217;s because our simple script was run once on each AMP and I happen to have 2 AMPs:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM (
-	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-	RETURNTYPE='NOSREAD_SCHEMA'
-) AS d;</code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- Teradata magic that returns the number of AMPs in a system
+SELECT hashamp()+1 AS number_of_amps;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Vantage will now fetch a data sample to analyze the schema and return results:</p>
+<p>Returns:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>Name            Datatype                            FileType  Location
---------------- ----------------------------------- --------- -------------------------------------------------------------------
-GageHeight2     decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
-Flow            decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
-site_no         int                                 csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
-datetime        TIMESTAMP(0) FORMAT'Y4-MM-DDBHH:MI' csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
-Precipitation   decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
-GageHeight      decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv</pre>
+<pre>number_of_amps
+--------------
+             2</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>We see that the CSV files have 6 columns. For each column, we get the name, the datatype and the file coordinates that were used to infer the schema.</p>
+<p>This simple script demonstrates the idea behind the Script Table Operator (STO). You provide your script and the database runs it in parallel, once for each AMP. This is an attractive model in case you have transformation logic in a script and a lot of data to process. Normally, you would need to build concurrency into your application. By letting STO do it, you let Teradata select the right concurrency level for your data.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_query_data_with_nos"><a class="anchor" href="#_query_data_with_nos"></a>Query data with NOS</h2>
+<h2 id="_supported_languages"><a class="anchor" href="#_supported_languages"></a>Supported languages</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that we know the schema, we can work with the dataset as if it was a regular SQL table. To prove the point, let&#8217;s try to do some data aggregation. Let&#8217;s get an average temperature per site for sites that collect temperatures.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT Payload..site_no AS Site_no, AVG(Payload..Temp) as Avg_Temp FROM (
-        LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-) AS d GROUP BY Payload..site_no HAVING Avg_Temp IS NOT NULL;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Result:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>Site_no  Avg_Temp
--------- ---------
-09380000 11
-09423560 73
-09424900 93
-09429070 81</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Note how we still have to dereference CSV columns with <code>Payload..</code>. To make our experience more similar to a table we can define a foreign table:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- If you are running this sample as dbc user you will not have permissions
--- to create a table in dbc database. Instead, create a new database and use
--- the newly create database to create a foreign table.
-
-CREATE DATABASE Riverflow
-  AS PERMANENT = 60e6, -- 60MB
-  SPOOL = 120e6; -- 120MB
-
-CREATE FOREIGN TABLE Riverflow.riverflow
-    USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
-
-SELECT top 10 * FROM Riverflow.riverflow;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Result:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>Location                                                            GageHeight2 Flow site_no datetime            Precipitation GageHeight
-------------------------------------------------------------------- ----------- ---- ------- ------------------- ------------- ----------
-/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09429070/2018/07/02.csv null        null 9429070 2018-07-02 14:40:00 1.21          null
-/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:30:00 0.00          -0.01
-/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:45:00 0.00          -0.01
-/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 01:00:00 0.00          -0.01
-/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:15:00 0.00          -0.01
-/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09429070/2018/07/02.csv null        null 9429070 2018-07-02 14:38:00 1.06          null</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This time, the <code>SELECT</code> statement looks like a regular select against an in-database table. Also, the returned data uses column names from the CSV file. No need to dereference with <code>Payload..</code>. There is still an issue though. The query was slow. There is an easy way to bring the CSV data into Vantage to speed things up. Read on to find out how.</p>
+<p>OK, so we did <code>echo</code> in Bash but Bash is hardly a productive environment to express complex logic. What other languages are supported then? The good news is that any binary that can run on Vantage nodes can be used in STO. Remember, that the binary and all its dependencies need to be installed on all your Vantage nodes. In practice, it means that your options will be limited to what your administrator is willing and able to maintain on your servers. Python is a very popular choice.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_load_data_from_nos_into_vantage"><a class="anchor" href="#_load_data_from_nos_into_vantage"></a>Load data from NOS into Vantage</h2>
+<h2 id="_uploading_scripts"><a class="anchor" href="#_uploading_scripts"></a>Uploading scripts</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Querying object storage takes time. What if you decided that the data looks interesting and you want to do some more analysis with a solution that will you quicker answers? The good news is that data returned with NOS can be used as a source for <code>CREATE TABLE</code> statements. Assuming you have <code>CREATE TABLE</code> privilege, you will be able to run:</p>
+<p>Ok, Hello World is super exciting, but what if we have existing logic in a large file. Surely, you don&#8217;t want to paste your entire script and escape quotes in an SQL query. We solve the script upload issue with the User Installed Files (UIF) feature.</p>
 </div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-This query assumes you created database <code>Riverflow</code> and a foreign table called <code>Riverflow.riverflow</code> in the previous step.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Say you have <code>helloworld.py</code> script with the following content:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- This query assumes you created database `Riverflow`
--- and a foreign table called `Riverflow.riverflow` in the previous step.
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">print("Hello World!")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s assume the script is on your local machine at <code>/tmp/helloworld.py</code>.</p>
+</div>
+<div class="paragraph">
+<p>First, we need to setup permissions in Vantage. We are going to do this using a new database to keep it clean.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- Create a new database called sto
+CREATE DATABASE STO
+AS PERMANENT = 60e6, -- 60MB
+    SPOOL = 120e6; -- 120MB
+
+-- Allow dbc user to create scripts in database STO
+GRANT CREATE EXTERNAL PROCEDURE ON STO to dbc;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can upload the script to Vantage using the following procedure call:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">call SYSUIF.install_file('helloworld',
+                         'helloworld.py', 'cz!/tmp/helloworld.py');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now that the script has been uploaded, you can call it like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- We switch to STO database
+DATABASE STO
+
+-- We tell Vantage where to look for the script. This can be
+-- any string and it will create a symbolic link to the directory
+-- where our script got uploaded. By convention, we use the
+-- database name.
+SET SESSION SEARCHUIFDBPATH = sto;
+
+-- We now call the script. Note, how we use a relative path that
+-- starts with `./sto/`, which is where SEARCHUIFDBPATH
+-- is pointing.
+SELECT *
+FROM SCRIPT(
+  SCRIPT_COMMAND('python3 ./sto/helloworld.py')
+  RETURNS ('Message varchar(512)'));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The last call should return:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Message
+------------
+Hello World!
+Hello World!</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That was a lot of work and we are still at Hello World. Let&#8217;s try to pass some data into <code>SCRIPT</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_passing_data_stored_in_vantage_to_script"><a class="anchor" href="#_passing_data_stored_in_vantage_to_script"></a>Passing data stored in Vantage to SCRIPT</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>So far, we have been using <code>SCRIPT</code> operator to run standalone scripts. But the main purpose to run scripts on Vantage is to process data that is in Vantage. Let&#8217;s see how we can retrieve data from Vantage and pass it to <code>SCRIPT</code>.</p>
+</div>
+<div class="paragraph">
+<p>We will start with creating a table with a few rows.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- Switch to STO database.
+DATABASE STO
+
+-- Create a table with a few urls
+CREATE TABLE urls(url varchar(10000));
+INS urls('https://www.google.com/finance?q=NYSE:TDC');
+INS urls('http://www.ebay.com/sch/i.html?_trksid=p2050601.m570.l1313.TR0.TRC0.H0.Xteradata+merchandise&amp;_nkw=teradata+merchandise&amp;_sacat=0&amp;_from=R40');
+INS urls('https://www.youtube.com/results?search_query=teradata%20commercial&amp;sm=3');
+INS urls('https://www.contrivedexample.com/example?mylist=1&amp;mylist=2&amp;mylist=...testing');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We will use the following script to parse out query parameters:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">from urllib.parse import urlparse
+from urllib.parse import parse_qsl
+import sys
+
+for line in sys.stdin:
+    # remove leading and trailing whitespace
+    url = line.strip()
+    parsed_url = urlparse(url)
+    query_params = parse_qsl(parsed_url.query)
+
+    for element in query_params:
+        print("\t".join(element))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note, how the scripts assumes that urls will be fed into <code>stdin</code> one by one, line by line. Also, note how it prints results line by line, using the tab character as a delimiter between values.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s install the script. Here, we assume that the script file is at <code>/tmp/urlparser.py</code> on our local machine:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CALL SYSUIF.install_file('urlparser',
+	'urlparser.py', 'cz!/tmp/urlparser.py');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With the script installed, we will now retrieve data from <code>urls</code> table and feed it into the script to retrieve query parameters:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- We inform Vantage to create a symbolic link from the UIF directory to ./sto/
+SET SESSION SEARCHUIFDBPATH = sto ;
+
+SELECT *
+  FROM SCRIPT(
+    ON(SELECT url FROM urls)
+    SCRIPT_COMMAND('python3 ./sto/urlparser.py')
+    RETURNS ('param_key varchar(512)', 'param_value varchar(512)'));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As a result, we get query params and their values. There are as many rows as key/value pairs. Also, since we inserted a tab between the key and the value output in the script, we get 2 columns from STO.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>param_key   |param_value
+------------+-----------------------------------------------------
+q           |NYSE:TDC
+_trksid     |p2050601.m570.l1313.TR0.TRC0.H0.Xteradata merchandise
+search_query|teradata commercial
+_nkw        |teradata merchandise
+sm          |3
+_sacat      |0
+mylist      |1
+_from       |R40
+mylist      |2
+mylist      |...testing</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_inserting_script_output_into_a_table"><a class="anchor" href="#_inserting_script_output_into_a_table"></a>Inserting SCRIPT output into a table</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We have learned how to take data from Vantage, pass it to a script and get output. Is there an easy way to store this output in a table? Sure, there is. We can combine the select above with <code>CREATE TABLE</code> statement:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- We inform Vantage to create a symbolic link from the UIF directory to ./sto/
+SET SESSION SEARCHUIFDBPATH = sto ;
 
 CREATE MULTISET TABLE
-    Riverflow.riverflow_native(site_no, Flow, GageHeight, datetime)
+    url_params(param_key, param_value)
 AS (
-    SELECT site_no, Flow, GageHeight, datetime FROM Riverflow.riverflow
+    SELECT *
+    FROM SCRIPT(
+      ON(SELECT url FROM urls)
+      SCRIPT_COMMAND('python3 ./sto/urlparser.py')
+      RETURNS ('param_key varchar(512)', 'param_value varchar(512)'))
 ) WITH DATA
-NO PRIMARY INDEX;
-
-SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
+NO PRIMARY INDEX;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Result:</p>
+<p>Now, let&#8217;s inspect the contents of <code>url_params</code> table:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>site_no   Flow  GageHeight  datetime
--------  -----  ----------  -------------------
-9400815    .00        -.01  2018-07-10 00:30:00
-9400815    .00        -.01  2018-07-10 01:00:00
-9400815    .00        -.01  2018-07-10 01:15:00
-9400815    .00        -.01  2018-07-10 01:30:00
-9400815    .00        -.01  2018-07-10 02:00:00
-9400815    .00        -.01  2018-07-10 02:15:00
-9400815    .00        -.01  2018-07-10 01:45:00
-9400815    .00        -.01  2018-07-10 00:45:00
-9400815    .00        -.01  2018-07-10 00:15:00
-9400815    .00        -.01  2018-07-10 00:00:00</pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM url_params;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This time, the <code>SELECT</code> query returned in less than a second. Vantage didn&#8217;t have to fetch the data from NOS. Instead, it answered using data that was already on its nodes.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_access_private_buckets"><a class="anchor" href="#_access_private_buckets"></a>Access private buckets</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>So far, we have used a public bucket. What if you have a private bucket? How do you tell Vantage what credentials it should use?</p>
-</div>
-<div class="paragraph">
-<p>It is possible to inline your credentials directly into your query:</p>
+<p>You should see the following output:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT top 10 payload..* FROM (
-	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-    AUTHORIZATION='{"ACCESS_ID":"","ACCESS_KEY":""}'
-) AS d;</code></pre>
+<pre>param_key   |param_value
+------------+-----------------------------------------------------
+q           |NYSE:TDC
+_trksid     |p2050601.m570.l1313.TR0.TRC0.H0.Xteradata merchandise
+search_query|teradata commercial
+_nkw        |teradata merchandise
+sm          |3
+_sacat      |0
+mylist      |1
+_from       |R40
+mylist      |2
+mylist      |...testing</pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Entering these credentials all the time can be tedious and less secure. In Vantage, you can create an authorization object that will serve as a container for your credentials:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE AUTHORIZATION aws_authorization
-    USER 'YOUR-ACCESS-KEY-ID'
-    PASSWORD 'YOUR-SECRET-ACCESS-KEY';</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You can then reference your authorization object when you create a foreign table:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE FOREIGN TABLE Riverflow.riverflow, EXTERNAL SECURITY aws_authorization
-    USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_export_data_from_vantage_to_object_storage"><a class="anchor" href="#_export_data_from_vantage_to_object_storage"></a>Export data from Vantage to object storage</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>So far, we have talked about reading and importing data from object storage. Would it not be nice if we had a way to use SQL to export data from Vantage to object storage? This is exactly what <code>WRITE_NOS</code> function is for. Let&#8217;s say we want to export data from <code>Riverflow.riverflow_native</code> table to object storage. You can do so with the following query:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM WRITE_NOS (
-    ON ( SELECT * FROM Riverflow.riverflow_native )
-    PARTITION BY site_no ORDER BY site_no
-    USING
-        LOCATION('YOUR-OBJECT-STORE-URI')
-        STOREDAS('PARQUET')
-        COMPRESSION('SNAPPY')
-        NAMING('RANGE')
-        INCLUDE_ORDERING('TRUE')
-) AS d;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Here, we instruct Vantage to take data from <code>Riverflow.riverflow_native</code> and save it in <code>YOUR-OBJECT-STORE-URI</code> bucket using <code>parquet</code> format. The data will be split into files by <code>site_no</code> attribute. The files will be compressed.</p>
 </div>
 </div>
 </div>
@@ -554,7 +566,7 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this quick start we have learned how to read data from object storage using Native Object Storage (NOS) functionality in Vantage. NOS supports reading and importing data stored in CSV, JSON and Parquet formats. NOS can also export data from Vantage to object storage.</p>
+<p>In this quick start we have learned how to run scripts against data in Vantage. We ran scripts using Script Table Operator (STO). The operator allows us to bring logic to the data. It offloads concurrency considerations to the database by running our scripts in parallel, one per AMP. All you need to do is provide a script and the database will execute it in parallel.</p>
 </div>
 </div>
 </div>
@@ -564,7 +576,7 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://docs.teradata.com/r/2mw8ooFr~xX0EaaGFaDW8A/root">Teradata Vantage™ - Native Object Store Getting Started Guide</a></p>
+<p><a href="https://docs.teradata.com/r/9VmItX3V2Ni9Ts70HbDzVg/CBAaRxUyOdF0t1SQIuXeug">Teradata Vantage™ - SQL Operators and User-Defined Functions - SCRIPT</a></p>
 </li>
 </ul>
 </div>
@@ -580,7 +592,7 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 </footer>
 <script src="../../_/js/site.js"></script>
 <script src="../../_/js/vendor/lunr.js"></script>
-<script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/nos.html"></script>
+<script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/sto.html"></script>
 <script async src="../../_/../search-index.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/powershell.min.js"></script>
