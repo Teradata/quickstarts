@@ -296,7 +296,9 @@ Last updated: September 7th, 2021</p>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT *
 FROM
-  SCRIPT(script_command('echo Hello World!') RETURNS ('Message varchar(512)'));</code></pre>
+  SCRIPT(
+    SCRIPT_COMMAND('echo Hello World!')
+    RETURNS ('Message varchar(512)'));</code></pre>
 </div>
 </div>
 <div class="paragraph">
