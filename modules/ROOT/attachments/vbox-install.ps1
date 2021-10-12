@@ -20,6 +20,7 @@ Invoke-Expression "vboxmanage storageattach `"$vmName`" --storagectl 'SATA Contr
 Invoke-Expression "vboxmanage storageattach `"$vmName`" --storagectl 'SATA Controller' --port 3 --medium emptydrive"
 Invoke-Expression "vboxmanage storageattach `"$vmName`" --storagectl 'SATA Controller' --port 3 --type dvddrive --medium additions"
 Invoke-Expression "vboxmanage modifyvm `"$vmName`" --natpf1 `"tdssh,tcp,,4422,,22`""
+Invoke-Expression "vboxmanage modifyvm `"$vmName`" --natpf1 `"tddb,tcp,,1025,,1025`""
 Invoke-Expression "vboxmanage startvm `"$vmName`" --type headless"
 
 #advance through grub options to speed things up

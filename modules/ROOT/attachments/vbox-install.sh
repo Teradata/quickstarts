@@ -12,6 +12,7 @@ vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 2 --de
 vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 3 --medium emptydrive
 vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 3 --type dvddrive --medium additions
 vboxmanage modifyvm "$VM_NAME" --natpf1 "tdssh,tcp,,4422,,22"
+vboxmanage modifyvm "$VM_NAME" --natpf1 "tddb,tcp,,1025,,1025"
 vboxmanage startvm "$VM_NAME" --type headless
 
 #advance through grub options to speed things up
