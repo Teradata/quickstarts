@@ -4,10 +4,10 @@
 * xref::jdbc.adoc[]
 * xref::jupyter.adoc[]
 * xref::sto.adoc[]
+* xref::ml.adoc[]
 
 * Planned
 ** xref::#[Run Teradata Developer in Public Cloud]
-** xref::#[Train an ML model without leaving Teradata Vantage]
 ** xref::#[Tune performance with indices]
 ** xref::#[Load data into Teradata efficiently using Teradata Parallel Transporter (TPT)]
 ** xref::#[Extend Teradata with user defined functions]
