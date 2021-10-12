@@ -22,7 +22,9 @@ Let's start with something simple. What if you wanted the database to print "Hel
 ----
 SELECT *
 FROM
-  SCRIPT(script_command('echo Hello World!') RETURNS ('Message varchar(512)'));
+  SCRIPT(
+    SCRIPT_COMMAND('echo Hello World!')
+    RETURNS ('Message varchar(512)'));
 ----
 
 Here is what I've got:
