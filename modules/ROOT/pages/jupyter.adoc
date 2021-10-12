@@ -1,4 +1,4 @@
-= Use Teradata Vantage from a Jupyter notebook
+= Use Vantage from a Jupyter notebook
 :experimental:
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com

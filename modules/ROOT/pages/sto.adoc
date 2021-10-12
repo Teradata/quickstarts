@@ -1,4 +1,4 @@
-= Run Applications on Vantage
+= Run scripts on Vantage
 :experimental:
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com

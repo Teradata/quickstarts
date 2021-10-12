@@ -1,4 +1,4 @@
-= Query Data Stored in Object Storage
+= Query data stored in object storage
 :experimental:
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com

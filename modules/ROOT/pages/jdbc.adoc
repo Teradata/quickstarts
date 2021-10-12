@@ -1,4 +1,4 @@
-= Connect to Teradata using JDBC
+= Connect to Vantage using JDBC
 :experimental:
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
