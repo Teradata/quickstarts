@@ -2,7 +2,7 @@
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
 :page-revdate: September 7th, 2021
-:description: Run Teradata Vantage express on your laptop using Virtualbox.
+:description: Run Vantage Express on your laptop using VirtualBox.
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics
 :tabs:
 
@@ -20,7 +20,7 @@ include::partial$getting.started.intro.adoc[]
 
 === Download required software
 
-. link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Express] VM image. The download package is called __"Vantage Express for VMware Player"__ but don't worry, it will work with VirtualBox.
+. The latest version of link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Express] VM image.
 +
 NOTE: If you have not used the Teradata downloads website before, you will need to register first.
 . link:https://www.virtualbox.org/wiki/Downloads[VirtualBox], version 6.1.

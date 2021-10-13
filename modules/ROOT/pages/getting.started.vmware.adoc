@@ -2,7 +2,7 @@
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
 :page-revdate: September 7th, 2021
-:description: Run Teradata Vantage express on your laptop using VMware.
+:description: Run Vantage Express on your laptop using VMware.
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics
 
 include::partial$getting.started.intro.adoc[]
@@ -19,7 +19,7 @@ include::partial$getting.started.intro.adoc[]
 
 === Download required software
 
-. The latest version of link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Express for VMware Player]. If you have not used the Teradata downloads website before, you will need to register.
+. The latest version of link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Express]. If you have not used the Teradata downloads website before, you will need to register.
 . link:https://www.vmware.com/products/workstation-player.html[VMware Workstation Player].
 +
 IMPORTANT: Commercial organizations require commercial licenses to use VMware Workstation Player. If you don't want to acquire licenses you can xref:getting.started.vbox.adoc[run Vantage Express on VirtualBox].
@@ -34,7 +34,7 @@ IMPORTANT: VMware doesn't offer VMware Workstation Player for MacOS. If you are 
 
 === Run Vantage Express
 
-. Go to the directory where you downloaded Teradata Vantage Express and unzip the downloaded file.
+. Go to the directory where you downloaded Vantage Express and unzip the downloaded file.
 . Double-click on the `.vmx` file. This will start the VM image in VMware Player/Fusion.
 include::partial$run.vantage.adoc[]
 
