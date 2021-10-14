@@ -62,11 +62,11 @@ rpm -Uvh --nodeps ~/Desktop/VAL-2.0.0.3-1.x86_64.rpm
 * Hostname: `localhost`
 * Userid: `dbc`
 * Password: `dbc`
-* Account string: leave empty, press kbd:[Enter]
-* BTEQ or FASTLOAD command: leave empty, press kbd:[Enter]
+* Account string: leave empty, press kbd:[ENTER]
+* BTEQ or FASTLOAD command: leave empty, press kbd:[ENTER]
 
 6. The wizard will ask you to choose which part of VAL you want to install.
-We want to start with installing `td_analyze` procedure, i.e. option 1. Once you select option 1, the script will ask for the database name where `td_analyze` will be installed. Enter `val` and press kbd:[Enter].
+We want to start with installing `td_analyze` procedure, i.e. option 1. Once you select option 1, the script will ask for the database name where `td_analyze` will be installed. Enter `val` and press kbd:[ENTER].
 7. While still in the wizard, install option 5, i.e. `Tutorial Tables`. These are sample tables with data that we are going to use to build a sample model.
 
 == Sample data
