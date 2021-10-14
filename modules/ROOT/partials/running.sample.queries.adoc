@@ -4,7 +4,7 @@
 
 . Using `dbc` user, we will create a new database called `HR`. Copy/paste this query and run it by hitting the run query button (image:run.query.button.png[Run Query Button, 24, 24]) or pressing kbd:[F5] key:
 +
-[source, sql]
+[source, sql, id="first-query"]
 ----
 CREATE DATABASE HR
 AS PERMANENT = 60e6, -- 60MB
