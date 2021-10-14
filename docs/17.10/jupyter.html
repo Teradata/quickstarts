@@ -531,6 +531,14 @@ Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/powershell.min.js"></script>
 <script>hljs.highlightAll();</script>
+<script>
+  // this script instruments elements to emit GTM events
+  for (let e of document.getElementsByClassName("emits-gtm-events")) {
+  e.addEventListener("click", function() {
+    dataLayer.push({'event': e.id});
+  });
+}
+</script>
 
   </body>
 </html>

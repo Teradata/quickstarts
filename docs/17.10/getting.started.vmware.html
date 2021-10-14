@@ -460,7 +460,7 @@ PDE state is RUN/STARTED.</pre>
 </li>
 <li>
 <p>Using <code>dbc</code> user, we will create a new database called <code>HR</code>. Copy/paste this query and run it by hitting the run query button (<span class="image"><img src="_images/run.query.button.png" alt="Run Query Button" width="24" height="24"></span>) or pressing <kbd>F5</kbd> key:</p>
-<div id="first-query" class="listingblock">
+<div id="first-query" class="listingblock emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE DATABASE HR
 AS PERMANENT = 60e6, -- 60MB
@@ -578,6 +578,14 @@ FROM HR.Employees;</code></pre>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/powershell.min.js"></script>
 <script>hljs.highlightAll();</script>
+<script>
+  // this script instruments elements to emit GTM events
+  for (let e of document.getElementsByClassName("emits-gtm-events")) {
+  e.addEventListener("click", function() {
+    dataLayer.push({'event': e.id});
+  });
+}
+</script>
 
   </body>
 </html>
