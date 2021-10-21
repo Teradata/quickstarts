@@ -1,4 +1,4 @@
-= Bulkloads with TPT
+= Run large bulkloads efficiently
 :experimental:
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
