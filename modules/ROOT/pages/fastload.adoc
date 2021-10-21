@@ -1,0 +1,89 @@
+= Load data into Vantage efficiently using Fastload
+:experimental:
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: September 7th, 2021
+:description: Load data into Vantage efficiently using Fastload.
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, fastload, tpt, teradata parallel transporter
+
+== Overview
+
+How to load data fast.
+
+== Prerequsites
+
+* You need access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using xref:getting.started.vmware.adoc[VMware] or xref:getting.started.vbox.adoc[VirtualBox].
+* Download Teradata Tools and Utilities (TTU) -  supported platforms: link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-windows-installation-package[Windows], link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-macos-installation-package[MacOS], link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-linux-installation-package-0[Linux] (requires registration).
+
+== Install TTU
+
+== Get Sample data
+
+== Create database
+
+== Run Fastload
+
+[source, fastload]
+----
+LOGON localhost/dbc,dbc;
+DATABASE demo_teradata_python;
+DROP TABLE irs_returns;
+DROP TABLE irs_returns_err1;
+DROP TABLE irs_returns_err2;
+CREATE MULTISET TABLE demo_teradata_python.irs_returns (
+    return_id INT,
+    filing_type VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
+    ein INT,
+    tax_period INT,
+    sub_date VARCHAR(100) CHARACTER SET LATIN NOT CASESPECIFIC,
+    taxpayer_name VARCHAR(100) CHARACTER SET LATIN NOT CASESPECIFIC,
+    return_type VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
+    dln BIGINT,
+    object_id BIGINT
+)
+PRIMARY INDEX ( return_id );
+
+BEGIN LOADING irs_returns
+    ERRORFILES irs_returns_err1, irs_returns_err2;
+    CHECKPOINT 100;
+    RECORD 2;
+    SET RECORD VARTEXT ",";
+    DEFINE in_return_id (VARCHAR(19)),
+    in_filing_type (VARCHAR(5)),
+    in_ein (VARCHAR(19)),
+    in_tax_period (VARCHAR(19)),
+    in_sub_date (VARCHAR(22)),
+    in_taxpayer_name (VARCHAR(100)),
+    in_return_type (VARCHAR(5)),
+    in_dln (VARCHAR(19)),
+    in_object_id (VARCHAR(19)),
+    FILE = /root/demo-teradata-python/demo_data/index_2011.csv;
+    INSERT INTO irs_returns (
+        return_id,
+        filing_type,
+        ein,
+        tax_period,
+        sub_date,
+        taxpayer_name,
+        return_type,
+        dln,
+        object_id
+    ) VALUES (
+        :in_return_id,
+        :in_filing_type,
+        :in_ein,
+        :in_tax_period,
+        :in_sub_date (FORMAT 'mm/dd/YYYYbHH:MI:SSbT'),
+        :in_taxpayer_name,
+        :in_return_type,
+        :in_dln,
+        :in_object_id
+    );
+END LOADING;
+LOGOFF;
+----
+
+== Summary
+
+== Further reading
+* link:https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root[Teradata® FastLoad Reference]
