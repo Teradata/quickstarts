@@ -5,10 +5,10 @@
 * xref::jupyter.adoc[]
 * xref::sto.adoc[]
 * xref::ml.adoc[]
+* xref::fastload.adoc[]
 
 * Planned
 ** xref::#[Run Teradata Developer in Public Cloud]
 ** xref::#[Tune performance with indices]
-** xref::fastload.adoc[]
 ** xref::#[Extend Teradata with user defined functions]
 
