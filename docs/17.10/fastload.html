@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Load data into Vantage efficiently using Fastload :: Getting Started Guides</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/docs/17.10/fastload.html">
+    <meta name="description" content="Load data into Vantage efficiently using Fastload.">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, fastload, tpt, teradata parallel transporter">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T7Q6CLV');</script>
+<!-- End Google Tag Manager -->
+<link rel="stylesheet" href="../../_/css/search.css">
+<link rel="stylesheet" href="../../_/css/styles.css">
+<style>
+  .navbar {
+    height: 64px;
+    background: #616d73;
+    color: #fff;
+    align-items: center;
+    display: flex;
+    border-top: #f3753f solid 2px;
+  }
+
+  .navbar-brand {
+    padding-left: 0px;
+  }
+
+  .navbar-brand .navbar-item {
+    font-family: RidleyGrotesk-Medium, Arial, Helvetica, sans-serif;
+    font-size: 19px;
+    padding: 4px 0px 0px 0px;
+    color: #fff;
+  }
+
+  .navbar-end .navbar-item.has-dropdown:hover .navbar-link, .navbar-end .navbar-link:hover, .navbar-end>a.navbar-item:hover {
+    background: initial;
+  }
+
+  .navbar-brand .navbar-item:first-child {
+    font-family: RidleyGrotesk-Medium, Arial, Helvetica, sans-serif;
+    font-size: 19px;
+    padding-top: 4px;
+  }
+
+  .navbar-item .navbar-link {
+    line-height: inherit;
+
+  }
+
+  .navbar-logo {
+    width: 100px;
+    height: 24px;
+    margin-left: 16px;
+    margin-right: 10px;
+  }
+
+  #search-input {
+    font-family: RidleyGrotesk-Medium, Arial, Helvetica, sans-serif;
+    font-size: 15px;
+  }
+
+  aside.toc.sidebar {
+      -ms-flex-preferred-size: 15rem !important;
+      flex-basis: 15rem !important;
+  }
+
+  .edit-this-page img {
+    margin-right: 4px;
+    vertical-align: bottom;
+  }
+
+  .doc .source-toolbox {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    visibility: visible;
+    position: absolute;
+    top: .25rem;
+    right: .5rem;
+    color: grey;
+    font-family: Roboto,sans-serif;
+    font-size: .75rem;
+    line-height: 1;
+ }
+
+  .content-editable {
+      -webkit-user-modify: read-write;
+      -moz-user-modify: read-write;
+      user-modify: read-write;
+  }
+
+  .tabs li {
+    align-items: center;
+    border: 1px solid #616d73;
+    border-bottom: 0;
+    cursor: pointer;
+    display: flex;
+    height: 2rem;
+    line-height: 1;
+    margin-right: 0.25rem;
+    padding: 0 1.25rem;
+    position: relative;
+  }
+
+  pre.highlight code.hljs {
+    background: #fafafa;
+    -webkit-box-shadow: inset 0 0 1.75px #e1e1e1;
+    box-shadow: inset 0 0 1.75px #e1e1e1;
+    display: block;
+    overflow-x: auto;
+    padding: 1.25rem .75rem .75rem .75rem;
+}
+
+
+</style>
+<script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
+<script async src="../../_/js/behavior.js"></script>
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7Q6CLV"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="header" role="banner">
+  <nav class="navbar">
+    <span class="navbar-logo">
+      <svg width="100%" height="100%" viewBox="0 0 696 133" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
+          <title>Teradata</title>
+          <desc>Copyright Teradata</desc>
+          <defs></defs>
+          <g id="teradata" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g id="text" fill="#FFFFFE">
+                  <path d="M78.882,72.796 L123.941,72.796 C120.763,60.83 111.788,55.595 101.878,55.595 C92.53,55.595 81.873,61.204 78.882,72.796 Z M149.182,90.184 L78.134,90.184 C80.564,103.646 90.099,111.873 101.504,111.873 C108.796,111.873 117.957,110.937 124.689,99.533 L146.751,104.206 C138.524,123.652 121.884,133 101.504,133 C75.142,133 53.64,112.994 53.64,83.64 C53.64,54.286 75.142,34.093 101.878,34.093 C126.745,34.093 148.246,53.351 149.182,81.771 L149.182,90.184 Z" id="Fill-1"></path>
+                  <path d="M387.843,83.64 C387.843,66.439 374.568,55.595 361.294,55.595 C346.336,55.595 335.118,66.439 335.118,83.64 C335.118,100.841 346.336,111.498 361.294,111.498 C374.568,111.498 387.843,100.841 387.843,83.64 Z M412.523,130.195 L387.843,130.195 L387.843,122.156 C380.364,129.074 370.081,133 356.993,133 C333.248,133 311.186,112.994 311.186,83.64 C311.186,54.286 333.248,34.093 356.993,34.093 C370.081,34.093 380.364,38.019 387.843,44.937 L387.843,0.937 L412.523,0.937 L412.523,130.195 Z" id="Fill-3"></path>
+                  <path d="M630.3,92.427 C630.3,104.393 618.894,113.368 605.807,113.368 C596.271,113.368 589.915,108.88 589.915,101.962 C589.915,95.606 595.149,91.306 603.003,91.306 L630.3,91.306 L630.3,92.427 Z M614.407,37.117 L614.407,37.093 L580.299,37.093 L580.299,57.658 L614.407,57.658 C623.943,57.658 630.3,61.765 630.3,71.113 L630.3,72.61 L603.377,72.61 C579.818,72.61 566.356,84.576 566.356,102.524 C566.356,120.846 580.566,133 601.881,133 C614.595,133 623.943,128.7 630.3,122.53 L630.3,130.195 L653.858,130.195 L653.858,69.244 C653.858,47.082 638.243,37.617 614.407,37.117 Z" id="Fill-4"></path>
+                  <path d="M484.378,92.427 C484.378,104.393 472.973,113.368 459.885,113.368 C450.349,113.368 443.992,108.88 443.992,101.962 C443.992,95.606 449.227,91.306 457.08,91.306 L484.378,91.306 L484.378,92.427 Z M468.485,37.117 L468.485,37.093 L434.377,37.093 L434.377,57.658 L468.485,57.658 C478.02,57.658 484.378,61.765 484.378,71.113 L484.378,72.61 L457.454,72.61 C433.895,72.61 420.434,84.576 420.434,102.524 C420.434,120.846 434.644,133 455.958,133 C468.672,133 478.02,128.7 484.378,122.53 L484.378,130.195 L507.935,130.195 L507.935,69.244 C507.935,47.082 492.321,37.617 468.485,37.117 Z" id="Fill-5"></path>
+                  <path d="M279.3,92.427 C279.3,104.393 267.894,113.368 254.807,113.368 C245.271,113.368 238.914,108.88 238.914,101.962 C238.914,95.606 244.15,91.306 252.003,91.306 L279.3,91.306 L279.3,92.427 Z M263.408,37.117 L263.408,37.093 L229.299,37.093 L229.299,57.658 L263.408,57.658 C272.943,57.658 279.3,61.765 279.3,71.113 L279.3,72.61 L252.376,72.61 C228.818,72.61 215.356,84.576 215.356,102.524 C215.356,120.846 229.566,133 250.881,133 C263.595,133 272.943,128.7 279.3,122.53 L279.3,130.195 L302.858,130.195 L302.858,69.244 C302.858,47.082 287.244,37.617 263.408,37.117 Z" id="Fill-6"></path>
+                  <path d="M216.11,37.026 C200.966,37.026 190.121,43.069 182.643,53.913 L182.643,36.899 L157.963,36.899 L157.963,130.197 L182.643,130.197 L182.643,100.095 C182.643,74.106 193.113,57.776 215.923,57.776 L217.044,57.776 L217.044,37.029 C216.741,37.027 216.431,37.026 216.11,37.026" id="Fill-7"></path>
+                  <path d="M48.982,107.707 C45.229,109.115 41.291,110.002 38.328,110.002 C30.102,110.002 24.68,105.142 24.68,93.923 L24.68,57.09 L49.982,57.09 L49.982,36.898 L24.68,36.898 L24.68,14.007 L0,14.007 L0,95.793 C0,121.408 14.584,133 36.646,133 C44.438,133 51.879,131.338 61.481,126.199 C56.364,121.123 51.667,114.8 48.982,107.707" id="Fill-8"></path>
+                  <path d="M558.509,109.788 C557.521,109.926 556.586,110.002 555.733,110.002 C547.507,110.002 542.085,105.142 542.085,93.923 L542.085,57.09 L568.068,57.09 L568.068,36.898 L542.085,36.898 L542.085,14.007 L517.404,14.007 L517.404,95.793 C517.404,121.408 531.988,133 554.051,133 C559.44,133 564.302,132.206 569.964,130.017 C562.645,124.774 559.799,116.281 558.509,109.788" id="Fill-9"></path>
+              </g>
+              <path d="M695.029,116.028 C695.029,124.853 688.257,131.624 678.817,131.624 C669.377,131.624 662.605,124.853 662.605,116.028 C662.605,107.615 669.377,100.227 678.817,100.227 C688.257,100.227 695.029,107.615 695.029,116.028" id="Fill-11" fill="#E46C42"></path>
+          </g>
+      </svg>
+    </span>
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://quickstarts.teradata.com">Getting Started Guides</a>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://docs.teradata.com/">Documentation</a>
+        <a class="navbar-item" href="https://downloads.teradata.com/">Downloads</a>
+        <a class="navbar-item" href="https://support.teradata.com/community ">Community</a>
+        <a class="navbar-item" href="https://www.teradata.com/Blogs">Blog</a>
+        <div class="navbar-item">
+          <input id="search-input" type="text" placeholder="Search Getting Started">
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div class="body">
+<div class="nav-container" data-component="docs" data-version="17.10">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="getting.started.vmware.html">Run Vantage Express on VMware</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="getting.started.vbox.html">Run Vantage Express on VirtualBox</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nos.html">Query data stored in object storage</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ml.html">Train ML models in Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Planned</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#:.adoc">Run Teradata Developer in Public Cloud</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#:.adoc">Tune performance with indices</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#:.adoc">Load data into Teradata efficiently using Teradata Parallel Transporter (TPT)</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#:.adoc">Extend Teradata with user defined functions</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context" style="visibility: hidden;">
+    <span class="title">Getting Started Guides</span>
+    <span class="version">17.10</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="getting.started.vmware.html">Getting Started Guides</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="getting.started.vmware.html">17.10</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="getting.started.vmware.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="getting.started.vmware.html">Getting Started Guides</a></li>
+    <li><a href="fastload.html">Load data into Vantage efficiently using Fastload</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/issues"><img
+    src="https://camo.githubusercontent.com/b079fe922f00c4b86f1b724fbc2e8141c468794ce8adbc9b7456e5e1ad09c622/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f6769746875622e737667"
+    alt="GitHub icon"
+    height="18"
+    width="18" /></a><a href="https://github.com/Teradata/quickstarts/issues">Report an issue</a></div>
+  <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/fastload.adoc"><img
+    src="https://camo.githubusercontent.com/b079fe922f00c4b86f1b724fbc2e8141c468794ce8adbc9b7456e5e1ad09c622/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f6769746875622e737667"
+    alt="GitHub icon"
+    height="18"
+    width="18" /></a><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/fastload.adoc">Edit this page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Load data into Vantage efficiently using Fastload</h1>
+<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
+Last updated: September 7th, 2021</p>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>How to load data fast.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>You need access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using <a href="getting.started.vmware.html" class="page">VMware</a> or <a href="getting.started.vbox.html" class="page">VirtualBox</a>.</p>
+</li>
+<li>
+<p>Download Teradata Tools and Utilities (TTU) -  supported platforms: <a href="https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-windows-installation-package">Windows</a>, <a href="https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-macos-installation-package">MacOS</a>, <a href="https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-linux-installation-package-0">Linux</a> (requires registration).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_ttu"><a class="anchor" href="#_install_ttu"></a>Install TTU</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_get_sample_data"><a class="anchor" href="#_get_sample_data"></a>Get Sample data</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_database"><a class="anchor" href="#_create_database"></a>Create database</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_run_fastload"><a class="anchor" href="#_run_fastload"></a>Run Fastload</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-fastload hljs" data-lang="fastload">LOGON localhost/dbc,dbc;
+DATABASE demo_teradata_python;
+DROP TABLE irs_returns;
+DROP TABLE irs_returns_err1;
+DROP TABLE irs_returns_err2;
+CREATE MULTISET TABLE demo_teradata_python.irs_returns (
+    return_id INT,
+    filing_type VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
+    ein INT,
+    tax_period INT,
+    sub_date VARCHAR(100) CHARACTER SET LATIN NOT CASESPECIFIC,
+    taxpayer_name VARCHAR(100) CHARACTER SET LATIN NOT CASESPECIFIC,
+    return_type VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
+    dln BIGINT,
+    object_id BIGINT
+)
+PRIMARY INDEX ( return_id );
+
+BEGIN LOADING irs_returns
+    ERRORFILES irs_returns_err1, irs_returns_err2;
+    CHECKPOINT 100;
+    RECORD 2;
+    SET RECORD VARTEXT ",";
+    DEFINE in_return_id (VARCHAR(19)),
+    in_filing_type (VARCHAR(5)),
+    in_ein (VARCHAR(19)),
+    in_tax_period (VARCHAR(19)),
+    in_sub_date (VARCHAR(22)),
+    in_taxpayer_name (VARCHAR(100)),
+    in_return_type (VARCHAR(5)),
+    in_dln (VARCHAR(19)),
+    in_object_id (VARCHAR(19)),
+    FILE = /root/demo-teradata-python/demo_data/index_2011.csv;
+    INSERT INTO irs_returns (
+        return_id,
+        filing_type,
+        ein,
+        tax_period,
+        sub_date,
+        taxpayer_name,
+        return_type,
+        dln,
+        object_id
+    ) VALUES (
+        :in_return_id,
+        :in_filing_type,
+        :in_ein,
+        :in_tax_period,
+        :in_sub_date (FORMAT 'mm/dd/YYYYbHH:MI:SSbT'),
+        :in_taxpayer_name,
+        :in_return_type,
+        :in_dln,
+        :in_object_id
+    );
+END LOADING;
+LOGOFF;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further reading</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root">Teradata® FastLoad Reference</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer" style="display: flex;">
+      <span>©2021 Teradata. All Rights Reserved.</span>
+      <span style="margin-left: auto"><a href="#tracking-consent">Tracking Consent</a></span>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/fastload.html"></script>
+<script async src="../../_/../search-index.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/powershell.min.js"></script>
+<script>hljs.highlightAll();</script>
+<script>
+  // this script instruments elements to emit GTM events
+  for (let e of document.getElementsByClassName("emits-gtm-events")) {
+  e.addEventListener("click", function() {
+    dataLayer.push({'event': e.id});
+  });
+}
+</script>
+
+  </body>
+</html>
