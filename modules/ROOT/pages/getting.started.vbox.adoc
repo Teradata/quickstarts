@@ -44,7 +44,7 @@ Windows::
 +
 --
 Run in Powershell as Administrator:
-[source, powershell, role="content-editable"]
+[source, powershell, role="content-editable emits-gtm-events", id="vm_image_dir_win"]
 ----
 $env:VM_IMAGE_DIR = "$HOME\Downloads\VantageExpress17.10_Sles12"
 ----
@@ -52,7 +52,7 @@ $env:VM_IMAGE_DIR = "$HOME\Downloads\VantageExpress17.10_Sles12"
 MacOS::
 +
 --
-[source, bash, role="content-editable"]
+[source, powershell, role="content-editable emits-gtm-events", id="vm_image_dir_macos"]
 ----
 export VM_IMAGE_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"
 ----
@@ -60,7 +60,7 @@ export VM_IMAGE_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"
 Linux::
 +
 --
-[source, bash, role="content-editable"]
+[source, powershell, role="content-editable emits-gtm-events", id="vm_image_dir_linux"]
 ----
 export VM_IMAGE_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"
 ----
@@ -74,7 +74,7 @@ Windows::
 +
 --
 Continue in the same Powershell as Administrator:
-[source, powershell]
+[source, powershell, role="content-editable emits-gtm-events", id="install_win"]
 ----
 iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/Jz7rd'))
 ----
@@ -82,7 +82,7 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/Jz7rd'))
 MacOS::
 +
 --
-[source, bash]
+[source, powershell, role="content-editable emits-gtm-events", id="install_macos"]
 ----
 bash -c "$(curl -fsSL https://git.io/Jz7rX)"
 ----
@@ -90,7 +90,7 @@ bash -c "$(curl -fsSL https://git.io/Jz7rX)"
 Linux::
 +
 --
-[source, bash]
+[source, powershell, role="content-editable emits-gtm-events", id="install_linux"]
 ----
 bash -c "$(curl -fsSL https://git.io/Jz7rX)"
 ----

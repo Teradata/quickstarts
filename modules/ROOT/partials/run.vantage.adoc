@@ -5,7 +5,7 @@ image::vm.login.png[VM Login, width=500]
 +
 NOTE: To paste into Gnome Terminal press kbd:[SHIFT+CTRL+V].
 +
-[source, bash]
+[source, bash, role="content-editable emits-gtm-events", id="pdestate"]
 ----
 watch pdestate -a
 ----
