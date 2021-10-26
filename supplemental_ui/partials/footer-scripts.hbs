@@ -8,9 +8,34 @@
 <script>
   // this script instruments elements to emit GTM events
   for (let e of document.getElementsByClassName("emits-gtm-events")) {
-  e.addEventListener("click", function() {
-    dataLayer.push({'event': e.id});
-  });
-}
+    e.addEventListener("click", function() {
+      dataLayer.push({'event': e.id});
+    });
+  }
+
+  function toggleFeedbackWidgets(elem) {
+    feedback = elem.getAttribute('data-icon');
+    currentState = elem.getAttribute('data-prefix');
+
+    // if already clicked then exit
+    if (currentState === 'fas') return;
+    newState = 'fas';
+
+
+    document.querySelectorAll(`svg[name="feedback-icon"][data-icon="${feedback}"]`).forEach(
+      (e) => {
+        e.setAttribute("data-prefix", newState);
+      }
+    );
+
+    oppositeFeedback = (feedback === 'thumbs-up')? 'thumbs-down': 'thumbs-up';
+    document.querySelectorAll(`svg[name="feedback-icon"][data-icon="${oppositeFeedback}"]`).forEach(
+      (e) => {
+        e.setAttribute("data-prefix", currentState);
+      }
+    );
+
+    dataLayer.push({ 'event': feedback, 'value': (feedback === 'thumbs-up')? 'positive': 'negative' });
+  }
 </script>
 
