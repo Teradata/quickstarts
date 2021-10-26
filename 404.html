@@ -312,6 +312,35 @@ If you typed the URL of this page manually, please double check that you entered
 
     dataLayer.push({ 'event': (feedback)? 'feedback_positive': 'feedback_negative' });
   }
+
+  function toggleThumbs(elem, eventName) {
+    // is feedback positive or negative
+    feedback = elem.classList.contains('fa-thumbs-up');
+
+    // has this feedback been previously recorded?
+    currentState = elem.classList.contains('fas');
+
+    // if already clicked then exit
+    if (currentState) return;
+
+    // inactive must be activated
+    elem.parentElement.querySelectorAll(`i.far.${(feedback)?'fa-thumbs-up':'fa-thumbs-down'}`).forEach(
+      (e) => {
+        e.classList.add('fas');
+        e.classList.remove('far');
+      }
+    );
+
+    // active must be disabled
+    elem.parentElement.querySelectorAll(`i.fas.${(!feedback)?'fa-thumbs-up':'fa-thumbs-down'}`).forEach(
+      (e) => {
+        e.classList.add('far');
+        e.classList.remove('fas');
+      }
+    );
+
+    dataLayer.push({ 'event': (feedback)? `${eventName}_successful`: `${eventName}_unsuccessful` });
+  }
 </script>
 
   </body>

@@ -522,6 +522,27 @@ AS PERMANENT = 60e6, -- 60MB
     SPOOL = 120e6; -- 120MB</code></pre>
 </div>
 </div>
+<div class="sidebarblock">
+    <div id="right" style="float: right">
+    <a style="cursor: pointer; color: grey" onclick="this.parentElement.parentElement.style.display = 'none'">x</a>
+  </div>
+  <div class="content">
+    <div class="paragraph">Where you able to run the query?
+      <i class="far fa-thumbs-up click-icon" style="padding: 0rem 0.2rem;" onclick="toggleThumbs(this, 'first_query')"></i>
+      <i class="far fa-thumbs-down click-icon" onclick="toggleThumbs(this 'first_query')"></i>
+    </div>
+  </div>
+</div>
+<style>
+.closebtn {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+</style>
 </li>
 <li>
 <p>Let&#8217;s create a sample table and insert some data and query it. We will first create a table to hold employee information:</p>
@@ -673,6 +694,35 @@ FROM HR.Employees;</code></pre>
     );
 
     dataLayer.push({ 'event': (feedback)? 'feedback_positive': 'feedback_negative' });
+  }
+
+  function toggleThumbs(elem, eventName) {
+    // is feedback positive or negative
+    feedback = elem.classList.contains('fa-thumbs-up');
+
+    // has this feedback been previously recorded?
+    currentState = elem.classList.contains('fas');
+
+    // if already clicked then exit
+    if (currentState) return;
+
+    // inactive must be activated
+    elem.parentElement.querySelectorAll(`i.far.${(feedback)?'fa-thumbs-up':'fa-thumbs-down'}`).forEach(
+      (e) => {
+        e.classList.add('fas');
+        e.classList.remove('far');
+      }
+    );
+
+    // active must be disabled
+    elem.parentElement.querySelectorAll(`i.fas.${(!feedback)?'fa-thumbs-up':'fa-thumbs-down'}`).forEach(
+      (e) => {
+        e.classList.add('far');
+        e.classList.remove('fas');
+      }
+    );
+
+    dataLayer.push({ 'event': (feedback)? `${eventName}_successful`: `${eventName}_unsuccessful` });
   }
 </script>
 
