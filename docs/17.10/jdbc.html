@@ -129,6 +129,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     margin: 0 2rem;
     max-width: 100%;
     min-width: 0;
+    padding: 0 1rem 2rem;
 }
 .toc.sidebar .toc-menu {
     margin-right: .75rem;
@@ -138,8 +139,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 .page-feedback {
   font-size: .9rem;
+  color: #333;
 }
 
+.page-feedback.bottom {
+  text-align: center;
+  padding-top: 1rem;
+}
+
+.click-icon {
+  cursor: pointer;
+}
 
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
@@ -290,8 +300,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="toc-menu">
     <div class="page-feedback">
       <span>Did this page help?</span>
-      <i class="far fa-thumbs-up" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
-      <i class="far fa-thumbs-down" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
+      <i class="far fa-thumbs-up click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
+      <i class="far fa-thumbs-down click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
     </div>
   </div>
 </aside>
@@ -404,6 +414,11 @@ This step assumes that your Vantage database is available on <code>localhost</co
 </div>
 </div>
 </div>
+<div class="page-feedback bottom">
+  <span>Did this page help?</span>
+  <i class="far fa-thumbs-up click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
+  <i class="far fa-thumbs-down click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
+</div>
 </article>
   </div>
 </main>
@@ -449,7 +464,7 @@ This step assumes that your Vantage database is available on <code>localhost</co
       }
     );
 
-    dataLayer.push({ 'event': feedback, 'value': (feedback === 'thumbs-up')? 'positive': 'negative' });
+    dataLayer.push({ 'event': feedback });
   }
 </script>
 
