@@ -14,28 +14,32 @@
   }
 
   function toggleFeedbackWidgets(elem) {
-    feedback = elem.getAttribute('data-icon');
-    currentState = elem.getAttribute('data-prefix');
+    // is feedback positive or negative
+    feedback = elem.classList.contains('fa-thumbs-up');
+
+    // has this feedback been previously recorded?
+    currentState = elem.classList.contains('fas');
 
     // if already clicked then exit
-    if (currentState === 'fas') return;
-    newState = 'fas';
+    if (currentState) return;
 
-
-    document.querySelectorAll(`svg[name="feedback-icon"][data-icon="${feedback}"]`).forEach(
+    // inactive must be activated
+    document.querySelectorAll(`i.far.${(feedback)?'fa-thumbs-up':'fa-thumbs-down'}[name="feedback-icon"]`).forEach(
       (e) => {
-        e.setAttribute("data-prefix", newState);
+        e.classList.add('fas');
+        e.classList.remove('far');
       }
     );
 
-    oppositeFeedback = (feedback === 'thumbs-up')? 'thumbs-down': 'thumbs-up';
-    document.querySelectorAll(`svg[name="feedback-icon"][data-icon="${oppositeFeedback}"]`).forEach(
+    // active must be disabled
+    document.querySelectorAll(`i.fas.${(!feedback)?'fa-thumbs-up':'fa-thumbs-down'}[name="feedback-icon"]`).forEach(
       (e) => {
-        e.setAttribute("data-prefix", currentState);
+        e.classList.add('far');
+        e.classList.remove('fas');
       }
     );
 
-    dataLayer.push({ 'event': (feedback === 'thumbs-up')? 'feedback_positive': 'feedback_negative' });
+    dataLayer.push({ 'event': (feedback)? 'feedback_positive': 'feedback_negative' });
   }
 </script>
 

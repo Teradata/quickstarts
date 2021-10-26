@@ -4,6 +4,7 @@
 :page-revdate: September 7th, 2021
 :description: Run Vantage Express on your laptop using VMware.
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics
+:icons: font
 
 include::partial$getting.started.intro.adoc[]
 

@@ -7,6 +7,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
 <link rel="stylesheet" href="{{uiRootPath}}/css/search.css">
 <link rel="stylesheet" href="{{uiRootPath}}/css/styles.css">
+<link rel="stylesheet" href="{{uiRootPath}}/css/fontawesome.all.min.css">
+<link rel="stylesheet" href="{{uiRootPath}}/css/admonitions.css">
 <style>
   .navbar {
     height: 64px;
@@ -140,8 +142,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   cursor: pointer;
 }
 
+.doc .admonitionblock .icon {
+    border-radius: 1rem;
+}
+
+i.fa[class^='icon-'],
+i.fa[class*=' icon-']::before {
+    content: "";
+    height: 1.25rem;
+    width: 1.25rem;
+    margin-right: 0.25rem;
+    margin-left: -0.5rem;
+}
+
+
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
 <script async src="{{uiRootPath}}/js/behavior.js"></script>
 <link rel="icon" href="{{{uiRootPath}}}/img/favicon.ico" type="image/x-icon">
- <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+
