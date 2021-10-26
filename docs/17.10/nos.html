@@ -130,12 +130,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     max-width: 100%;
     min-width: 0;
 }
+.toc.sidebar .toc-menu {
+    margin-right: .75rem;
+    position: sticky;
+    top: 8rem;
+}
+
+.page-feedback {
+  font-size: .9rem;
+}
 
 
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
 <script async src="../../_/js/behavior.js"></script>
 <link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+ <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
     <script>var uiRootPath = '../../_'</script>
   </head>
   <body class="article">
@@ -277,7 +287,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
-  <div class="toc-menu"></div>
+  <div class="toc-menu">
+    <div class="page-feedback">
+      <span>Did this page help?</span>
+      <i class="far fa-thumbs-up" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
+      <i class="far fa-thumbs-down" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
+    </div>
+  </div>
 </aside>
 <article class="doc">
 <h1 class="page">Query data stored in object storage</h1>
@@ -601,10 +617,35 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 <script>
   // this script instruments elements to emit GTM events
   for (let e of document.getElementsByClassName("emits-gtm-events")) {
-  e.addEventListener("click", function() {
-    dataLayer.push({'event': e.id});
-  });
-}
+    e.addEventListener("click", function() {
+      dataLayer.push({'event': e.id});
+    });
+  }
+
+  function toggleFeedbackWidgets(elem) {
+    feedback = elem.getAttribute('data-icon');
+    currentState = elem.getAttribute('data-prefix');
+
+    // if already clicked then exit
+    if (currentState === 'fas') return;
+    newState = 'fas';
+
+
+    document.querySelectorAll(`svg[name="feedback-icon"][data-icon="${feedback}"]`).forEach(
+      (e) => {
+        e.setAttribute("data-prefix", newState);
+      }
+    );
+
+    oppositeFeedback = (feedback === 'thumbs-up')? 'thumbs-down': 'thumbs-up';
+    document.querySelectorAll(`svg[name="feedback-icon"][data-icon="${oppositeFeedback}"]`).forEach(
+      (e) => {
+        e.setAttribute("data-prefix", currentState);
+      }
+    );
+
+    dataLayer.push({ 'event': feedback, 'value': (feedback === 'thumbs-up')? 'positive': 'negative' });
+  }
 </script>
 
   </body>
