@@ -640,7 +640,7 @@ GROUP BY T1.cust_id) WITH DATA UNIQUE PRIMARY INDEX (cust_id);</code></pre>
       }
     );
 
-    dataLayer.push({ 'event': feedback });
+    dataLayer.push({ 'event': (feedback === 'thumbs-up')? 'feedback_positive': 'feedback_negative' });
   }
 </script>
 

@@ -659,7 +659,7 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
       }
     );
 
-    dataLayer.push({ 'event': feedback });
+    dataLayer.push({ 'event': (feedback === 'thumbs-up')? 'feedback_positive': 'feedback_negative' });
   }
 </script>
 

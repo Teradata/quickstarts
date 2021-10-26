@@ -605,7 +605,7 @@ Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400
       }
     );
 
-    dataLayer.push({ 'event': feedback });
+    dataLayer.push({ 'event': (feedback === 'thumbs-up')? 'feedback_positive': 'feedback_negative' });
   }
 </script>
 

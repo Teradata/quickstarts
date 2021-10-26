@@ -464,7 +464,7 @@ This step assumes that your Vantage database is available on <code>localhost</co
       }
     );
 
-    dataLayer.push({ 'event': feedback });
+    dataLayer.push({ 'event': (feedback === 'thumbs-up')? 'feedback_positive': 'feedback_negative' });
   }
 </script>
 
