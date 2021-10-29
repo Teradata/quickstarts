@@ -1,14 +1,15 @@
-* xref::getting.started.vmware.adoc[]
-* xref::getting.started.vbox.adoc[]
-* xref::nos.adoc[]
-* xref::jdbc.adoc[]
-* xref::jupyter.adoc[]
-* xref::sto.adoc[]
-* xref::ml.adoc[]
-* xref::fastload.adoc[]
-
+* Get access to Vantage
+** xref::getting.started.vmware.adoc[Vantage Express on VMware]
+** xref::getting.started.vbox.adoc[Vantage Express on VirtualBox]
+* Basics
+** xref::nos.adoc[]
+** xref::jdbc.adoc[]
+** xref::jupyter.adoc[]
+** xref::sto.adoc[]
+** xref::ml.adoc[]
+** xref::fastload.adoc[]
 * Planned
-** xref::#[Run Teradata Developer in Public Cloud]
-** xref::#[Tune performance with indices]
-** xref::#[Extend Teradata with user defined functions]
+** Run Teradata Developer in Public Cloud
+** Tune performance with indices
+** Extend Teradata with user defined functions
 
