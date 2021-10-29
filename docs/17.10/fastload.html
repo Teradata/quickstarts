@@ -228,41 +228,53 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="getting.started.vmware.html">Run Vantage Express on VMware</a>
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Get access to Vantage</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="getting.started.vbox.html">Run Vantage Express on VirtualBox</a>
-  </li>
-  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Basics</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="nos.html">Query data stored in object storage</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="ml.html">Train ML models in Vantage</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="fastload.html">Run large bulkloads efficiently</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Planned</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#:.adoc">Run Teradata Developer in Public Cloud</a>
+    <span class="nav-text">Run Teradata Developer in Public Cloud</span>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#:.adoc">Tune performance with indices</a>
+    <span class="nav-text">Tune performance with indices</span>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#:.adoc">Extend Teradata with user defined functions</a>
+    <span class="nav-text">Extend Teradata with user defined functions</span>
   </li>
 </ul>
   </li>
@@ -297,6 +309,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="getting.started.vmware.html">Getting Started Guides</a></li>
+    <li>Basics</li>
     <li><a href="fastload.html">Run large bulkloads efficiently</a></li>
   </ul>
 </nav>
@@ -776,6 +789,9 @@ NO PRIMARY INDEX;</code></pre>
 
     dataLayer.push({ 'event': (feedback)? `${eventName}_successful`: `${eventName}_unsuccessful` });
   }
+
+  // expand the nav menu
+  document.querySelectorAll('.nav-item').forEach(function (item) { item.classList.add('is-active') })
 </script>
 
   </body>

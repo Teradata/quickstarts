@@ -341,6 +341,9 @@ If you typed the URL of this page manually, please double check that you entered
 
     dataLayer.push({ 'event': (feedback)? `${eventName}_successful`: `${eventName}_unsuccessful` });
   }
+
+  // expand the nav menu
+  document.querySelectorAll('.nav-item').forEach(function (item) { item.classList.add('is-active') })
 </script>
 
   </body>
