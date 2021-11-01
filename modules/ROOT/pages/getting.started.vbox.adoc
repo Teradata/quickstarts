@@ -108,4 +108,5 @@ include::partial$getting.started.summary.adoc[]
 include::partial$next.steps.adoc[]
 
 == Further reading
+* link:https://downloads.teradata.com/download/files/7671/201588/3/B035-5948-051K-VantageExpress-17.10_SLES12.pdf?license=898/218656[Teradata® Vantage™ Express Installation and Configuration Guide]
 * link:https://docs.teradata.com/r/KEoAHNnh~EbZLtVJNRo0Sg/root[Teradata® Studio™ and Studio™ Express Installation Guide]
