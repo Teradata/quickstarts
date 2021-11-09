@@ -403,7 +403,7 @@ If do not wish to pay for cloud usage you can install Vantage Express locally us
 <pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">gcloud compute instances create teradata-vantage-express `
   --zone=us-central1-a `
   --machine-type=n2-custom-4-8192 `
-  --create-disk=boot=yes,device-name=ve-disk,image-family=ubuntu-2004-lts,size=70,type=pd-balanced `
+  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced `
   --enable-nested-virtualization `
   --tags=ve</code></pre>
 </div>
@@ -415,7 +415,7 @@ If do not wish to pay for cloud usage you can install Vantage Express locally us
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute instances create teradata-vantage-express \
   --zone=us-central1-a \
   --machine-type=n2-custom-4-8192 \
-  --create-disk=boot=yes,device-name=ve-disk,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
+  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
   --enable-nested-virtualization \
   --tags=ve</code></pre>
 </div>
@@ -427,7 +427,7 @@ If do not wish to pay for cloud usage you can install Vantage Express locally us
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute instances create teradata-vantage-express \
   --zone=us-central1-a \
   --machine-type=n2-custom-4-8192 \
-  --create-disk=boot=yes,device-name=ve-disk,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
+  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
   --enable-nested-virtualization \
   --tags=ve</code></pre>
 </div>
@@ -456,8 +456,7 @@ If do not wish to pay for cloud usage you can install Vantage Express locally us
 <p>Install VirtualBox and 7zip:</p>
 <div id="apt" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apt update
-DEBIAN_FRONTEND=noninteractive apt-get install -qq p7zip-full p7zip-rar virtualbox &lt; /dev/null &gt; /dev/null</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apt update &amp;&amp; apt-get install p7zip-full p7zip-rar virtualbox -y</code></pre>
 </div>
 </div>
 </li>
