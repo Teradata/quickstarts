@@ -762,6 +762,27 @@ systemctl start vantage-express-17.10</code></pre>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_cleanup"><a class="anchor" href="#_cleanup"></a>Cleanup</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To stop incurring charges delete the VM:</p>
+</div>
+<div id="delete_vm" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute instances delete teradata-vantage-express --zone=us-central1-a</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Also, remember to remove any firewall rules that you have added, e.g.:</p>
+</div>
+<div id="delete_fw_rule" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute firewall-rules delete vantage-express</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h2>
 <div class="sectionbody">
 <div class="ulist">
