@@ -231,7 +231,7 @@ gcloud compute firewall-rules create vantage-express --allow=tcp:1025 --directio
 
 == Cleanup
 
-To stop incurring charges delete the VM:
+To stop incurring charges, delete the VM:
 [source, bash, role="content-editable emits-gtm-events", id="delete_vm"]
 ----
 gcloud compute instances delete teradata-vantage-express --zone=us-central1-a
