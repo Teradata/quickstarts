@@ -34,7 +34,7 @@ Run in Powershell:
 gcloud compute instances create teradata-vantage-express `
   --zone=us-central1-a `
   --machine-type=n2-custom-4-8192 `
-  --create-disk=boot=yes,device-name=ve-disk,image-family=ubuntu-2004-lts,size=70,type=pd-balanced `
+  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced `
   --enable-nested-virtualization `
   --tags=ve
 ----
@@ -47,7 +47,7 @@ MacOS::
 gcloud compute instances create teradata-vantage-express \
   --zone=us-central1-a \
   --machine-type=n2-custom-4-8192 \
-  --create-disk=boot=yes,device-name=ve-disk,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
+  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
   --enable-nested-virtualization \
   --tags=ve
 ----
@@ -60,7 +60,7 @@ Linux::
 gcloud compute instances create teradata-vantage-express \
   --zone=us-central1-a \
   --machine-type=n2-custom-4-8192 \
-  --create-disk=boot=yes,device-name=ve-disk,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
+  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
   --enable-nested-virtualization \
   --tags=ve
 ----
@@ -82,8 +82,7 @@ sudo -i
 +
 [source, bash, role="content-editable emits-gtm-events", id="apt"]
 ----
-apt update
-DEBIAN_FRONTEND=noninteractive apt-get install -qq p7zip-full p7zip-rar virtualbox < /dev/null > /dev/null
+apt update && apt-get install p7zip-full p7zip-rar virtualbox -y
 ----
 . Prepare the download directory for Vantage Express:
 +
