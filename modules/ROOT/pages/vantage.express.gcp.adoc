@@ -229,6 +229,20 @@ MODIFY USER dbc AS PASSWORD = new_password;
 gcloud compute firewall-rules create vantage-express --allow=tcp:1025 --direction=IN --target-tags=ve
 ----
 
+== Cleanup
+
+To stop incurring charges delete the VM:
+[source, bash, role="content-editable emits-gtm-events", id="delete_vm"]
+----
+gcloud compute instances delete teradata-vantage-express --zone=us-central1-a
+----
+
+Also, remember to remove any firewall rules that you have added, e.g.:
+[source, bash, role="content-editable emits-gtm-events", id="delete_fw_rule"]
+----
+gcloud compute firewall-rules delete vantage-express
+----
+
 include::partial$next.steps.adoc[]
 
 == Further reading
