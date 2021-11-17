@@ -1,0 +1,2 @@
+#!/bin/bash
+docker run -v $(pwd):/antora -e CI=true -e FORCE_SHOW_EDIT_PAGE_LINK=true -e DOCSEARCH_ENABLED=true -e DOCSEARCH_ENGINE=lunr antora/antora:3.0.0-beta.2 antora-playbook.yml
