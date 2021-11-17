@@ -146,7 +146,7 @@ pdestate -a
 +
 If the command returns `PDE state is RUN/STARTED. DBS state is 5: Logons are enabled - The system is quiescent`, it means that Vantage Express has started.
 If the status is different, repeat `pdestate -a` till you get the correct status.
-. Once Vantage Express is up and running, start `bteq` client command line client:
+. Once Vantage Express is up and running, start `bteq` client command line client. BTEQ (pronounced “bee-teek”) is a general-purpose, command-based client tool used to submit SQL queries to a Teradata Database.
 +
 [source, bash, role="content-editable emits-gtm-events", id="bteq"]
 ----
@@ -248,4 +248,5 @@ include::partial$next.steps.adoc[]
 == Further reading
 * link:https://downloads.teradata.com/download/files/7671/201588/3/B035-5948-051K-VantageExpress-17.10_SLES12.pdf?license=898/218656[Teradata® Vantage™ Express Installation and Configuration Guide (must be logged in to downloads.teradata.com)]
 * link:https://docs.teradata.com/r/KEoAHNnh~EbZLtVJNRo0Sg/root[Teradata® Studio™ and Studio™ Express Installation Guide]
+* link:https://docs.teradata.com/r/jmAxXLdiDu6NiyjT6hhk7g/root[Introduction to BTEQ]
 
