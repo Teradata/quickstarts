@@ -23,7 +23,7 @@ There are two ways to build documentation locally:
     ```
     ./build-docker
     ```
-1. The resulting website files will be saved in `./build/site` directory. Open the directory in your browser to browse your local copy of the website.
+1. The resulting website files will be saved in `./build/site` directory. Open the directory in your browser to view your local copy of the website.
 
 ### Build directly on your machine
 
@@ -49,4 +49,4 @@ There are two ways to build documentation locally:
     ```
     ./buildw
     ```
-1. The resulting website files will be saved in `./build/site` directory. Open the directory in your browser to browse your local copy of the website.
+1. The resulting website files will be saved in `./build/site` directory. Open the directory in your browser to view your local copy of the website.
