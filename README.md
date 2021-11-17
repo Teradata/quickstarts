@@ -27,7 +27,7 @@ There are two ways to build documentation locally:
 
 ### Build directly on your machine
 
-> :info: These instructions are for MacOS. Adjust the instructions for your operating system. 
+> :information_source: These instructions are for MacOS. Adjust the instructions for your operating system. 
 
 1. Install Node.js:
     ```
