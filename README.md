@@ -3,11 +3,14 @@
 Quickstarts for learning the Teradata Vantage database. The documents use the AsciiDoc format. The website is built with Antora. 
 
 Contributions are welcome :). See below how to build the documentation website locally.
+
+## Contributor's guide
+
 ## Building documentation locally
 
 There are two ways to build documentation locally:
-1. Run Antora in Docker - this method is quick to setup but the build process takes longer. It's best for occasional contributors.
-2. Install all tools directly on your machine - this method takes longer to setup but builds are much faster. Use it if you intend to contribute on ongoing basis.
+1. Build using Docker - this method is quick to setup but the build process takes longer. It's best for occasional contributors.
+2. Build directly on your machine - this method takes longer to setup but builds are much faster. Use it if you intend to contribute on ongoing basis.
 
 ### Build using Docker
 
