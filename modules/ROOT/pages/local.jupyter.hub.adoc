@@ -1,6 +1,6 @@
 = Deploy Teradata Jupyter extensions in customer JupyterHub clusters
 :experimental:
-:page-author: Hailing Jiang 
+:page-author: Hailing Jiang
 :page-email: Hailing.iang@teradata.com
 :page-revdate: November 17th, 2021
 :description: Deploy Teradata Jupyter extensions in customer JupyterHub clusters
@@ -55,15 +55,12 @@ image name>" to modify the name.
 
 To use the Teradata Jupyter Docker image directly in your JupyterHub
 cluster, modify the override file as described in link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#choose-and-use-an-existing-docker-image[herein the JupyterHub documentation]
-[source, bash, role="content-editable"]
+[source, yaml, role="content-editable"]
 ----
 singleuser:
-
-image:
-
-name: REGISTRY_URL/teradatajupyterlabext_VERSION
-
-tag: latest
+  image:
+  name: REGISTRY_URL/teradatajupyterlabext_VERSION
+  tag: latest
 ----
 
 Replace REGISTRY_URL and VERSION with appropriate values from the step
@@ -85,16 +82,14 @@ image as a base image and build a new one on top of it.
 
 Here is an example Dockerfile that builds on top of Teradata image and
 adds additional packages and notebooks:
-[source, bash, role="content-editable"]
+[source, Dockerfile, role="content-editable"]
 ----
 From REGISTRY_URL/teradatajupyterlabext_VERSION:latest
 
 # install additional packages
-
 RUN pip install --no-cache-dir astropy
 
 # copy notebooks
-
 COPY notebooks/. /tmp/JupyterLabRoot/DemoNotebooks/
 ----
 
@@ -118,64 +113,48 @@ the download.  Otherwise, download for the platform you are using.  The
 .zip file contains the Teradata SQL Kernel, extensions and sample
 notebooks.
 
-Unzip the bundle file to your working directory
+Unzip the bundle file to your working directory.
 
 Below is an example Dockerfile to add Teradata Jupyter extensions to
-your existing Docker image
-[source, bash, role="content-editable"]
+your existing Docker image:
+[source, Dockerfile, role="content-editable"]
 ----
-From REGISTRY_URL/your-existing-image:tag
-
+FROM REGISTRY_URL/your-existing-image:tag
 ENV NB_USER=jovyan \
-
 HOME=/home/jovyan \
-
 EXT_DIR=/opt/teradata/jupyterext/packages
-
 USER root
 
 ##############################################################
-
 # Install kernel and copy supporting files
-
 ##############################################################
 
 # Copy the kernel
-
 COPY ./teradatakernel /usr/local/bin
-
 RUN chmod 755 /usr/local/bin/teradatakernel
 
 # Copy directory with kernel.json file into image
-
 COPY ./teradatasql teradatasql/
 
 ##############################################################
-
 # Switch to user jovyan to copy the notebooks and license files.
-
 ##############################################################
 
 USER $NB_USER
 
 # Copy notebooks
-
 COPY ./notebooks/ /tmp/JupyterLabRoot/TeradataSampleNotebooks/
 
 # Copy license files
-
 COPY ./ThirdPartyLicenses /tmp/JupyterLabRoot/ThirdPartyLicenses/
 
 USER root
 
 # Install the kernel file to /opt/conda jupyter lab instance
-
 RUN jupyter kernelspec install ./teradatasql --prefix=/opt/conda
 
 ##############################################################
-
 # Install Teradata extensions
-
 ##############################################################
 
 COPY ./teradata_*.tgz $EXT_DIR
@@ -183,28 +162,19 @@ COPY ./teradata_*.tgz $EXT_DIR
 WORKDIR $EXT_DIR
 
 RUN jupyter labextension install --no-build teradata_database* && \
-
-jupyter labextension install --no-build teradata_resultset* && \
-
-jupyter labextension install --no-build teradata_sqlhighlighter* && \
-
-jupyter labextension install --no-build teradata_connection_manager* &&
-\
-
-jupyter labextension install --no-build teradata_preferences* && \
-
-jupyter lab build --dev-build=False --minimize=False && \
-
-rm -rf *
+  jupyter labextension install --no-build teradata_resultset* && \
+  jupyter labextension install --no-build teradata_sqlhighlighter* && \
+  jupyter labextension install --no-build teradata_connection_manager* && \
+  jupyter labextension install --no-build teradata_preferences* && \
+  jupyter lab build --dev-build=False --minimize=False && \
+  rm -rf *
 
 WORKDIR $HOME
 
 # Give back ownership of /opt/conda to jovyan
-
 RUN chown -R jovyan:users /opt/conda
 
 # Jupyter will create .local directory
-
 RUN rm -rf $HOME/.local
 ----
 
