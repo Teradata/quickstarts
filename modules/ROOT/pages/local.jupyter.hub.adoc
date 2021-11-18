@@ -9,7 +9,7 @@
 == Overview
 For customers who have their own JupyterHub clusters, there are two
 options to integrate Teradata Jupyter extensions into the existing
-clusters:
+clusters :
 
 * Use Teradata Jupyter docker image
 * Customize an existing Docker image to include Teradata extensions
