@@ -70,8 +70,8 @@ Apply the changes to the cluster as described
 link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/extending-jupyterhub.html#applying-configuration-changes[here].
 
 You can use multiple profiles to allow users to select which image they
-want to use when they log in to JupyterHub. From detailed instructions
-and examples on configuring multiple profiles, Please see
+want to use when they log in to JupyterHub. For detailed instructions
+and examples on configuring multiple profiles, please see
 link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#using-multiple-profiles-to-let-users-select-their-environment[JupyterHub documentation].
 
 ==== Customize Teradata Jupyter Docker image
@@ -84,7 +84,7 @@ Here is an example Dockerfile that builds on top of Teradata image and
 adds additional packages and notebooks:
 [source, Dockerfile, role="content-editable"]
 ----
-From REGISTRY_URL/teradatajupyterlabext_VERSION:latest
+FROM REGISTRY_URL/teradatajupyterlabext_VERSION:latest
 
 # install additional packages
 RUN pip install --no-cache-dir astropy
