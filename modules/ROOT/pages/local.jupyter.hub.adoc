@@ -1,4 +1,4 @@
-= Deploy Teradata Jupyter extensions in customer JupyterHub clusters
+= Deploy Teradata Jupyter extensions to JupyterHub
 :experimental:
 :page-author: Hailing Jiang
 :page-email: Hailing.iang@teradata.com
@@ -9,51 +9,51 @@
 == Overview
 For customers who have their own JupyterHub clusters, there are two options to integrate Teradata Jupyter extensions into the existing clusters:
 
-* Use Teradata Jupyter docker image
-* Customize an existing Docker image to include Teradata extensions
+1. Use Teradata Jupyter Docker image.
+2. Customize an existing Docker image to include Teradata extensions.
 
-This page contains detailed instructions on the two options.
-Instructions are based on the assumption that the customer JupyterHub
-deployment is based
-on link:https://zero-to-jupyterhub.readthedocs.io/en/latest/index.html[Zero to JupyterHub with Kubernetes].
+This page contains detailed instructions on the two options. Instructions are based on the assumption that the customer JupyterHub deployment is based on link:https://zero-to-jupyterhub.readthedocs.io/en/latest/index.html[Zero to JupyterHub with Kubernetes].
 
-== Use Teradata Jupyter docker image
+== Use Teradata Jupyter Docker image
 
-Teradata provides a ready-to-run Docker image that builds on the link:https://hub.docker.com/r/jupyter/datascience-notebook/[jupyter/datascience-notebook] image. It bundles the Teradata SQL kernel, Teradata Python and R
-libraries and drivers and Teradata extensions for Jupyter to make you
-productive while interacting with Teradata database. The image also
-contains sample notebooks that demonstrate how to use the SQL kernel,
-extensions and Teradata libraries.
+Teradata provides a ready-to-run Docker image that builds on the link:https://hub.docker.com/r/jupyter/datascience-notebook/[jupyter/datascience-notebook] image. It bundles the Teradata SQL kernel, Teradata Python and R libraries and drivers and Teradata extensions for Jupyter to make you productive while interacting with Teradata database. The image also contains sample notebooks that demonstrate how to use the SQL kernel, extensions and Teradata libraries.
 
 You can use this image in the following ways:
 
 * Start a personal Jupyter Notebook server in a local Docker container
 * Run JupyterLab servers for a team using JupyterHub
 
-For instructions to start a personal JupyterLab server in a local Docker
-container, please
-see link:https://docs.teradata.com/r/KQLs1kPXZ02rGWaS9Ktoww/Fwvns7y_a7juDWx1NixC2A[installation guide]. This section will focus on how to use the  Teradata Jupyter
-Docker image in a customer's existing JupyterHub environment.
+For instructions to start a personal JupyterLab server in a local Docker container, please see link:https://docs.teradata.com/r/KQLs1kPXZ02rGWaS9Ktoww/Fwvns7y_a7juDWx1NixC2A[installation guide]. This section will focus on how to use the  Teradata Jupyter Docker image in a customer's existing JupyterHub environment.
 
-=== Download Teradata Jupyter Docker image
+=== Install Teradata Jupyter Docker image in your registry
 
-Follow instructions on
-link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter on Teradata Downloads] to download the Docker
-image. It is a tarball with name in this format `teradatajupyterlabext_VERSION.tar.gz`.
-
-It is assumed that you have docker installed locally and have access to
-the docker registry being used by the existing JupyterHub environment.
-
-Run `docker load -i teradatajupyterlabext_VERSION.tar.gz` to load the
-image locally and then run `docker push` to push it to a designated
-docker registry.  You may want to consider changing the name of the
-loaded image for simplicity.  Run `docker tag <old image name> <new
-image name>` to modify the name.
+1. Go to link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter] page and download the Docker image. It is a tarball with name in this format `teradatajupyterlabext_VERSION.tar.gz`.
+2. Load the image:
++
+[source, bash, role="content-editable"]
+----
+docker load -i teradatajupyterlabext_VERSION.tar.gz
+----
+3. Push the image to your Docker registry:
++
+[source, bash, role="content-editable"]
+----
+docker push
+----
++
+[TIP]
+====
+You may want to consider changing the name of the loaded image for simplicity:
+[source, bash, role="content-editable"]
+----
+docker tag OLD_IMAGE_NAME NEW_IMAGE_NAME
+----
+====
 
 === Use Teradata Jupyter Docker image in JupyterHub
 
-To use the Teradata Jupyter Docker image directly in your JupyterHub
-cluster, modify the override file as described in link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#choose-and-use-an-existing-docker-image[herein the JupyterHub documentation]
+1. To use the Teradata Jupyter Docker image directly in your JupyterHub cluster, modify the override file as described in link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#choose-and-use-an-existing-docker-image[herein the JupyterHub documentation]. Replace `REGISTRY_URL` and `VERSION` with appropriate values from the step above:
++
 [source, yaml, role="content-editable"]
 ----
 singleuser:
@@ -61,26 +61,15 @@ singleuser:
   name: REGISTRY_URL/teradatajupyterlabext_VERSION
   tag: latest
 ----
-
-Replace REGISTRY_URL and VERSION with appropriate values from the step
-above.
-
-Apply the changes to the cluster as described
-link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/extending-jupyterhub.html#applying-configuration-changes[here].
-
-You can use multiple profiles to allow users to select which image they
-want to use when they log in to JupyterHub. For detailed instructions
-and examples on configuring multiple profiles, please see
-link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#using-multiple-profiles-to-let-users-select-their-environment[JupyterHub documentation].
+2. Apply the changes to the cluster as described in link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/extending-jupyterhub.html#applying-configuration-changes[JupyterHub documentation].
++
+TIP: You can use multiple profiles to allow users to select which image they want to use when they log in to JupyterHub. For detailed instructions and examples on configuring multiple profiles, please see link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#using-multiple-profiles-to-let-users-select-their-environment[JupyterHub documentation].
 
 === Customize Teradata Jupyter Docker image
 
-If your users need some packages or notebooks that are not bundled in
-the Teradata Jupyter Docker image, we recommend that you use Teradata
-image as a base image and build a new one on top of it.
+If your users need some packages or notebooks that are not bundled in the Teradata Jupyter Docker image, we recommend that you use Teradata image as a base image and build a new one on top of it.
 
-Here is an example Dockerfile that builds on top of Teradata image and
-adds additional packages and notebooks:
+Here is an example Dockerfile that builds on top of Teradata image and adds additional packages and notebooks. Use the Dockerfile to build a new Docker image, push the image to a designated registry, modify override file as shown above to use the new image as singleuser image, apply the changes to the cluster as described above. Replace `REGISTRY_URL` and `VERSION` with appropriate values:
 [source, Dockerfile, role="content-editable"]
 ----
 FROM REGISTRY_URL/teradatajupyterlabext_VERSION:latest
@@ -92,30 +81,16 @@ RUN pip install --no-cache-dir astropy
 COPY notebooks/. /tmp/JupyterLabRoot/DemoNotebooks/
 ----
 
-Replace REGISTRY_URL and VERSION with appropriate values
-
-Use the Dockerfile to build a new Docker image, push the image to a
-designated registry, modify override file as shown above to use the new
-image as singleuser image, apply the changes to the cluster as described
-above.
-
 == Customize an existing Docker image to include Teradata extensions
 
-If you prefer, you can include the Teradata SQL kernel and extensions
-into into an existing image you are currently using.
+If you prefer, you can include the Teradata SQL kernel and extensions into into an existing image you are currently using.
 
-Go to
-link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter] page to download the zipped
-Teradata Jupyter extensions package bundle.  Assuming your existing
-docker image is Linux based you will want to use the Linux version of
-the download.  Otherwise, download for the platform you are using.  The
-.zip file contains the Teradata SQL Kernel, extensions and sample
+1. Go to link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter] page to download the zipped Teradata Jupyter extensions package bundle.  Assuming your existing
+docker image is Linux based, you will want to use the Linux version of the download.  Otherwise, download for the platform you are using.  The .zip file contains the Teradata SQL Kernel, extensions and sample
 notebooks.
-
-Unzip the bundle file to your working directory.
-
-Below is an example Dockerfile to add Teradata Jupyter extensions to
-your existing Docker image:
+2. Unzip the bundle file to your working directory.
+3. Below is an example Dockerfile to add Teradata Jupyter extensions to your existing Docker image. Use the Dockerfile to build a new Docker image, push the image to a designated registry, modify override file as shown above to use the new image as singleuser image, apply the changes to the cluster:
++
 [source, Dockerfile, role="content-editable"]
 ----
 FROM REGISTRY_URL/your-existing-image:tag
@@ -177,17 +152,9 @@ RUN chown -R jovyan:users /opt/conda
 # Jupyter will create .local directory
 RUN rm -rf $HOME/.local
 ----
-
-Use the new Dockerfile to build a new Docker image, push the image to a
-designated registry, modify override file as shown above to use the new
-image as singleuser image, apply the changes to the cluster.
-
-You can optionally install Teradata package for Python and Teradata
-package for R as well. For installation guide and sample scripts for
-Teradata package for Python, please see
-link:https://downloads.teradata.com/download/connectivity/teradata-package-for-python-teradataml[information here]. For installation guide and sample scripts for the Teradata
-package for R, please see
-link:https://downloads.teradata.com/download/connectivity/teradata-package-for-r-tdplyr[information here].  Installation steps can be added to the sample Dockerfile above.
+4. You can optionally install Teradata package for Python and Teradata package for R. See the following pages for details:
+* link:https://downloads.teradata.com/download/connectivity/teradata-package-for-python-teradataml[Teradata Package for Python - teradataml download page]
+* link:https://downloads.teradata.com/download/connectivity/teradata-package-for-r-tdplyr[Teradata Package for R - tdplyr download page]
 
 == Further reading
 * link:https://teradata.github.io/jupyterextensions[Teradata Jupyter Extensions Website]
