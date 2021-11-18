@@ -5,6 +5,7 @@
 ** xref::nos.adoc[]
 ** xref::jdbc.adoc[]
 ** xref::jupyter.adoc[]
+** xref::local.jupyter.hub.adoc[]
 ** xref::sto.adoc[]
 ** xref::ml.adoc[]
 ** xref::fastload.adoc[]
