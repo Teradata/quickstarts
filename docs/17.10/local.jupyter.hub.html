@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Connect to Vantage using JDBC :: Getting Started Guides</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/docs/17.10/jdbc.html">
-    <meta name="description" content="How to connect to Teradata Vantage using JDBC">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, JDBC, java applications, business intelligence, enterprise analytics">
+    <title>Deploy Teradata Jupyter extensions to JupyterHub :: Getting Started Guides</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/docs/17.10/local.jupyter.hub.html">
+    <meta name="description" content="Deploy Teradata Jupyter extensions in customer JupyterHub clusters">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, java applications, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
 <!-- Google Tag Manager -->
@@ -246,13 +246,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="nos.html">Query data stored in object storage</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -313,7 +313,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <ul>
     <li><a href="getting.started.vmware.html">Getting Started Guides</a></li>
     <li>Basics</li>
-    <li><a href="jdbc.html">Connect to Vantage using JDBC</a></li>
+    <li><a href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a></li>
   </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/issues"><img
@@ -321,11 +321,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     alt="GitHub icon"
     height="18"
     width="18" /></a><a href="https://github.com/Teradata/quickstarts/issues">Report an issue with this page</a></div>
-  <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/jdbc.adoc"><img
+  <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/local.jupyter.hub.adoc"><img
     src="https://camo.githubusercontent.com/b079fe922f00c4b86f1b724fbc2e8141c468794ce8adbc9b7456e5e1ad09c622/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f6769746875622e737667"
     alt="GitHub icon"
     height="18"
-    width="18" /></a><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/jdbc.adoc">Edit this page</a></div>
+    width="18" /></a><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/local.jupyter.hub.adoc">Edit this page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -338,99 +338,247 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Connect to Vantage using JDBC</h1>
-<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
-Last updated: September 8th, 2021</p>
+<h1 class="page">Deploy Teradata Jupyter extensions to JupyterHub</h1>
+<p>Author: <a href="mailto:Hailing.iang@teradata.com">Hailing Jiang</a><br/>
+Last updated: November 17th, 2021</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This quick start demonstrates how to connect to Teradata Vantage using JDBC. We will go through a sample JDBC project. The entire project is published in GitHub at <a href="https://github.com/Teradata/jdbc-sample-app" class="bare">https://github.com/Teradata/jdbc-sample-app</a>.</p>
+<p>For customers who have their own JupyterHub clusters, there are two options to integrate Teradata Jupyter extensions into the existing clusters:</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>You need access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to <a href="getting.started.vmware.html" class="page">install Vantage Express on your local machine</a>.</p>
-</li>
-<li>
-<p>JDK</p>
-</li>
-<li>
-<p>Maven</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_install_the_driver"><a class="anchor" href="#_install_the_driver"></a>Install the driver</h2>
-<div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Go to <a href="https://downloads.teradata.com/download/connectivity/jdbc-driver">the Teradata JDBC download page</a> and download the driver (you can choose zip or tar). The website will ask you to login (if you don&#8217;t have an account you will need to register first) and accept the license before you download the file.</p>
+<p>Use Teradata Jupyter Docker image.</p>
 </li>
 <li>
-<p>Unzip the driver.</p>
+<p>Customize an existing Docker image to include Teradata extensions.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This page contains detailed instructions on the two options. Instructions are based on the assumption that the customer JupyterHub deployment is based on <a href="https://zero-to-jupyterhub.readthedocs.io/en/latest/index.html">Zero to JupyterHub with Kubernetes</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use_teradata_jupyter_docker_image"><a class="anchor" href="#_use_teradata_jupyter_docker_image"></a>Use Teradata Jupyter Docker image</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Teradata provides a ready-to-run Docker image that builds on the <a href="https://hub.docker.com/r/jupyter/datascience-notebook/">jupyter/datascience-notebook</a> image. It bundles the Teradata SQL kernel, Teradata Python and R libraries and drivers and Teradata extensions for Jupyter to make you productive while interacting with Teradata database. The image also contains sample notebooks that demonstrate how to use the SQL kernel, extensions and Teradata libraries.</p>
+</div>
+<div class="paragraph">
+<p>You can use this image in the following ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Start a personal Jupyter Notebook server in a local Docker container</p>
 </li>
 <li>
-<p>Add the driver to your local Maven repository:</p>
+<p>Run JupyterLab servers for a team using JupyterHub</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For instructions to start a personal JupyterLab server in a local Docker container, please see <a href="https://docs.teradata.com/r/KQLs1kPXZ02rGWaS9Ktoww/Fwvns7y_a7juDWx1NixC2A">installation guide</a>. This section will focus on how to use the  Teradata Jupyter Docker image in a customer&#8217;s existing JupyterHub environment.</p>
+</div>
+<div class="sect2">
+<h3 id="_install_teradata_jupyter_docker_image_in_your_registry"><a class="anchor" href="#_install_teradata_jupyter_docker_image_in_your_registry"></a>Install Teradata Jupyter Docker image in your registry</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to <a href="https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter">Vantage Modules for Jupyter</a> page and download the Docker image. It is a tarball with name in this format <code>teradatajupyterlabext_VERSION.tar.gz</code>.</p>
+</li>
+<li>
+<p>Load the image:</p>
 <div class="listingblock content-editable">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mvn install:install-file \
-   -Dfile=terajdbc4.jar \
-   -DgroupId=com.teradata \
-   -DartifactId=terajdbc4 \
-   -Dversion=17.00.00.03 \
-   -Dpackaging=jar \
-   -DgeneratePom=true</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker load -i teradatajupyterlabext_VERSION.tar.gz</code></pre>
 </div>
+</div>
+</li>
+<li>
+<p>Push the image to your Docker registry:</p>
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker push</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You may want to consider changing the name of the loaded image for simplicity:</p>
+</div>
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker tag OLD_IMAGE_NAME NEW_IMAGE_NAME</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </li>
 </ol>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_use_teradata_jupyter_docker_image_in_jupyterhub"><a class="anchor" href="#_use_teradata_jupyter_docker_image_in_jupyterhub"></a>Use Teradata Jupyter Docker image in JupyterHub</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>To use the Teradata Jupyter Docker image directly in your JupyterHub cluster, modify the override file as described in <a href="https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#choose-and-use-an-existing-docker-image">herein the JupyterHub documentation</a>. Replace <code>REGISTRY_URL</code> and <code>VERSION</code> with appropriate values from the step above:</p>
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">singleuser:
+  image:
+  name: REGISTRY_URL/teradatajupyterlabext_VERSION
+  tag: latest</code></pre>
 </div>
-<div class="sect1">
-<h2 id="_add_dependency_to_your_maven_project"><a class="anchor" href="#_add_dependency_to_your_maven_project"></a>Add dependency to your maven project</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Now that we have the jar in the local repository, we can reference the jar as a dependency in our Maven pom:</p>
 </div>
-<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fjdbc-sample-app%2Fblob%2F9b4693f4324920165289f79641f158cf0293a66b%2Fpom.xml%23L22-L26&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_code_to_send_a_query"><a class="anchor" href="#_code_to_send_a_query"></a>Code to send a query</h2>
-<div class="sectionbody">
-<div class="admonitionblock note">
+</li>
+<li>
+<p>Apply the changes to the cluster as described in <a href="https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/extending-jupyterhub.html#applying-configuration-changes">JupyterHub documentation</a>.</p>
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-This step assumes that your Vantage database is available on <code>localhost</code> on port <code>1025</code>. If you are running Vantage Express on your laptop, you need to expose the port from the VM to the host machine. Refer to your virtualization software documentation how to forward ports.
+You can use multiple profiles to allow users to select which image they want to use when they log in to JupyterHub. For detailed instructions and examples on configuring multiple profiles, please see <a href="https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#using-multiple-profiles-to-let-users-select-their-environment">JupyterHub documentation</a>.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>The project is set up. All that is left, is to load the driver, pass connection and authentication parameters and run a query:</p>
+</li>
+</ol>
 </div>
-<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fjdbc-sample-app%2Fblob%2Fmain%2Fsrc%2Fmain%2Fjava%2Fcom%2Fteradata%2Fapp%2FApp.java&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+</div>
+<div class="sect2">
+<h3 id="_customize_teradata_jupyter_docker_image"><a class="anchor" href="#_customize_teradata_jupyter_docker_image"></a>Customize Teradata Jupyter Docker image</h3>
+<div class="paragraph">
+<p>If your users need some packages or notebooks that are not bundled in the Teradata Jupyter Docker image, we recommend that you use Teradata image as a base image and build a new one on top of it.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example Dockerfile that builds on top of Teradata image and adds additional packages and notebooks. Use the Dockerfile to build a new Docker image, push the image to a designated registry, modify override file as shown above to use the new image as singleuser image, apply the changes to the cluster as described above. Replace <code>REGISTRY_URL</code> and <code>VERSION</code> with appropriate values:</p>
+</div>
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-Dockerfile hljs" data-lang="Dockerfile">FROM REGISTRY_URL/teradatajupyterlabext_VERSION:latest
+
+# install additional packages
+RUN pip install --no-cache-dir astropy
+
+# copy notebooks
+COPY notebooks/. /tmp/JupyterLabRoot/DemoNotebooks/</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<h2 id="_customize_an_existing_docker_image_to_include_teradata_extensions"><a class="anchor" href="#_customize_an_existing_docker_image_to_include_teradata_extensions"></a>Customize an existing Docker image to include Teradata extensions</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this quick start we have learned how to connect to Teradata Vantage using JDBC. We went through the process of installing the latest JDBC driver and later used it in a Java application with Maven as the build tool.</p>
+<p>If you prefer, you can include the Teradata SQL kernel and extensions into into an existing image you are currently using.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to <a href="https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter">Vantage Modules for Jupyter</a> page to download the zipped Teradata Jupyter extensions package bundle.  Assuming your existing
+docker image is Linux based, you will want to use the Linux version of the download.  Otherwise, download for the platform you are using.  The .zip file contains the Teradata SQL Kernel, extensions and sample
+notebooks.</p>
+</li>
+<li>
+<p>Unzip the bundle file to your working directory.</p>
+</li>
+<li>
+<p>Below is an example Dockerfile to add Teradata Jupyter extensions to your existing Docker image. Use the Dockerfile to build a new Docker image, push the image to a designated registry, modify override file as shown above to use the new image as singleuser image, apply the changes to the cluster:</p>
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-Dockerfile hljs" data-lang="Dockerfile">FROM REGISTRY_URL/your-existing-image:tag
+ENV NB_USER=jovyan \
+  HOME=/home/jovyan \
+  EXT_DIR=/opt/teradata/jupyterext/packages
+
+USER root
+
+##############################################################
+# Install kernel and copy supporting files
+##############################################################
+
+# Copy the kernel
+COPY ./teradatakernel /usr/local/bin
+RUN chmod 755 /usr/local/bin/teradatakernel
+
+# Copy directory with kernel.json file into image
+COPY ./teradatasql teradatasql/
+
+##############################################################
+# Switch to user jovyan to copy the notebooks and license files.
+##############################################################
+
+USER $NB_USER
+
+# Copy notebooks
+COPY ./notebooks/ /tmp/JupyterLabRoot/TeradataSampleNotebooks/
+
+# Copy license files
+COPY ./ThirdPartyLicenses /tmp/JupyterLabRoot/ThirdPartyLicenses/
+
+USER root
+
+# Install the kernel file to /opt/conda jupyter lab instance
+RUN jupyter kernelspec install ./teradatasql --prefix=/opt/conda
+
+##############################################################
+# Install Teradata extensions
+##############################################################
+
+COPY ./teradata_*.tgz $EXT_DIR
+
+WORKDIR $EXT_DIR
+
+RUN jupyter labextension install --no-build teradata_database* &amp;&amp; \
+  jupyter labextension install --no-build teradata_resultset* &amp;&amp; \
+  jupyter labextension install --no-build teradata_sqlhighlighter* &amp;&amp; \
+  jupyter labextension install --no-build teradata_connection_manager* &amp;&amp; \
+  jupyter labextension install --no-build teradata_preferences* &amp;&amp; \
+  jupyter lab build --dev-build=False --minimize=False &amp;&amp; \
+  rm -rf *
+
+WORKDIR $HOME
+
+# Give back ownership of /opt/conda to jovyan
+RUN chown -R jovyan:users /opt/conda
+
+# Jupyter will create .local directory
+RUN rm -rf $HOME/.local</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>You can optionally install Teradata package for Python and Teradata package for R. See the following pages for details:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://downloads.teradata.com/download/connectivity/teradata-package-for-python-teradataml">Teradata Package for Python - teradataml download page</a></p>
+</li>
+<li>
+<p><a href="https://downloads.teradata.com/download/connectivity/teradata-package-for-r-tdplyr">Teradata Package for R - tdplyr download page</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -440,7 +588,13 @@ This step assumes that your Vantage database is available on <code>localhost</co
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://teradata-docs.s3.amazonaws.com/doc/connectivity/jdbc/reference/current/frameset.html">Teradata JDBC Driver Reference</a></p>
+<p><a href="https://teradata.github.io/jupyterextensions">Teradata Jupyter Extensions Website</a></p>
+</li>
+<li>
+<p><a href="https://docs.teradata.com/r/KQLs1kPXZ02rGWaS9Ktoww/root">Teradata Vantage™ Modules for Jupyter Installation Guide</a></p>
+</li>
+<li>
+<p><a href="https://docs.teradata.com/r/1YKutX2ODdO9ppo_fnguTA/root">Teradata® Package for Python User Guide</a></p>
 </li>
 </ul>
 </div>
@@ -461,7 +615,7 @@ This step assumes that your Vantage database is available on <code>localhost</co
 </footer>
 <script src="../../_/js/site.js"></script>
 <script src="../../_/js/vendor/lunr.js"></script>
-<script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/jdbc.html"></script>
+<script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/local.jupyter.hub.html"></script>
 <script async src="../../_/../search-index.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/powershell.min.js"></script>
