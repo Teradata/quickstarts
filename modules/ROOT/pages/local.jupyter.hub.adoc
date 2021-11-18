@@ -17,7 +17,7 @@ Instructions are based on the assumption that the customer JupyterHub
 deployment is based
 on link:https://zero-to-jupyterhub.readthedocs.io/en/latest/index.html[Zero to JupyterHub with Kubernetes].
 
-=== Use Teradata Jupyter docker image
+== Use Teradata Jupyter docker image
 
 Teradata provides a ready-to-run Docker image that builds on the link:https://hub.docker.com/r/jupyter/datascience-notebook/[jupyter/datascience-notebook] image. It bundles the Teradata SQL kernel, Teradata Python and R
 libraries and drivers and Teradata extensions for Jupyter to make you
@@ -35,23 +35,22 @@ container, please
 see link:https://docs.teradata.com/r/KQLs1kPXZ02rGWaS9Ktoww/Fwvns7y_a7juDWx1NixC2A[installation guide]. This section will focus on how to use the  Teradata Jupyter
 Docker image in a customer's existing JupyterHub environment.
 
-*Download Teradata Jupyter Docker image*
+=== Download Teradata Jupyter Docker image
 
 Follow instructions on
 link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter on Teradata Downloads] to download the Docker
-image. It is a tarball with name in this format
-"teradatajupyterlabext_VERSION.tar.gz".
+image. It is a tarball with name in this format `teradatajupyterlabext_VERSION.tar.gz`.
 
 It is assumed that you have docker installed locally and have access to
 the docker registry being used by the existing JupyterHub environment.
 
-Run "docker load -i teradatajupyterlabext_VERSION.tar.gz" to load the
+Run `docker load -i teradatajupyterlabext_VERSION.tar.gz` to load the
 image locally and then run "docker push" to push it to a designated
 docker registry.  You may want to consider changing the name of the
-loaded image for simplicity.  Run "docker tag <old image name> <new
-image name>" to modify the name.
+loaded image for simplicity.  Run `docker tag <old image name> <new
+image name>` to modify the name.
 
-*Use Teradata Jupyter Docker image in JupyterHub*
+=== Use Teradata Jupyter Docker image in JupyterHub
 
 To use the Teradata Jupyter Docker image directly in your JupyterHub
 cluster, modify the override file as described in link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#choose-and-use-an-existing-docker-image[herein the JupyterHub documentation]
@@ -74,7 +73,7 @@ want to use when they log in to JupyterHub. For detailed instructions
 and examples on configuring multiple profiles, please see
 link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#using-multiple-profiles-to-let-users-select-their-environment[JupyterHub documentation].
 
-==== Customize Teradata Jupyter Docker image
+=== Customize Teradata Jupyter Docker image
 
 If your users need some packages or notebooks that are not bundled in
 the Teradata Jupyter Docker image, we recommend that you use Teradata
@@ -100,13 +99,13 @@ designated registry, modify override file as shown above to use the new
 image as singleuser image, apply the changes to the cluster as described
 above.
 
-=== Customize an existing Docker image to include Teradata extensions
+== Customize an existing Docker image to include Teradata extensions
 
 If you prefer, you can include the Teradata SQL kernel and extensions
 into into an existing image you are currently using.
 
-Follow instructions on
-link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter on Teradata Downloads] to download the zipped
+Go to
+link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter] page to download the zipped
 Teradata Jupyter extensions package bundle.  Assuming your existing
 docker image is Linux based you will want to use the Linux version of
 the download.  Otherwise, download for the platform you are using.  The
@@ -121,8 +120,9 @@ your existing Docker image:
 ----
 FROM REGISTRY_URL/your-existing-image:tag
 ENV NB_USER=jovyan \
-HOME=/home/jovyan \
-EXT_DIR=/opt/teradata/jupyterext/packages
+  HOME=/home/jovyan \
+  EXT_DIR=/opt/teradata/jupyterext/packages
+
 USER root
 
 ##############################################################
