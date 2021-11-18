@@ -8,7 +8,6 @@
 ** xref::sto.adoc[]
 ** xref::ml.adoc[]
 ** xref::fastload.adoc[]
-** xref::local.jupyter.hub.adoc[]
 * Planned
 ** Run Teradata Developer in Public Cloud
 ** Tune performance with indices
