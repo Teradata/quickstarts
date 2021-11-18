@@ -45,7 +45,7 @@ It is assumed that you have docker installed locally and have access to
 the docker registry being used by the existing JupyterHub environment.
 
 Run `docker load -i teradatajupyterlabext_VERSION.tar.gz` to load the
-image locally and then run "docker push" to push it to a designated
+image locally and then run `docker push` to push it to a designated
 docker registry.  You may want to consider changing the name of the
 loaded image for simplicity.  Run `docker tag <old image name> <new
 image name>` to modify the name.
