@@ -1,0 +1,60 @@
+= Run Vantage Express on UTM
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: November 30th, 2021
+:description: Run Vantage Express on your Mac using UTM.
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics
+:icons: font
+
+include::partial$getting.started.intro.adoc[]
+
+== Prerequisites
+
+. A Mac computer. Both Intel and M1 chips are supported.
+. 30GB of disk space and enough CPU and RAM to be able to dedicate at least one core and 6GB RAM to the virtual machine.
+. Admin rights to be able to install and run the software.
++
+// NOTE: No admin rights on your local machine? No problem! Have a look at how to run Vantage Express in link:#[AWS], link:#[Azure], link:#[GCP].
+
+== Installation
+
+=== Download required software
+
+. The latest version of link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Express]. If you have not used the Teradata downloads website before, you will need to register.
+. The latest version of link:https://mac.getutm.app/[UTM].
+
+=== Run UTM installer
+
+. Install UTM by running the installer and accepting the default values.
+
+=== Run Vantage Express
+
+. Go to the directory where you downloaded Vantage Express and unzip the downloaded file.
+. Start UTM, click on the `+` sign and select `Start from Scratch`.
+. Go through the setup wizard. You only need to adjust the following tabs:
+* *System* - assign at least 4GB of memory and disable `UEFI Boot`:
++
+image::utm.system.png[UTM System, width=500, align="left"]
+* *Drives* - map the 3 Vantage Express drives. Make sure you map them in the right order, `-disk1`, `-disk2`, `-disk3`:
++
+image::utm.drives.png[UTM Drives, width=500]
+* *Network* - expose ssh (22) and Vantage (1025) ports on the host computer:
++
+image::utm.network.png[UTM Network, width=500]
+. Start the VM.
+
+include::partial$run.vantage.adoc[]
+
+=== Run sample queries
+
+. We will now run some queries in the VM. To avoid copy/paste issues between the host and the VM, we will open this quick start in the VM. Go to the virtual desktop, start Firefox and point it to this quick start.
+
+include::partial$running.sample.queries.adoc[]
+
+include::partial$getting.started.summary.adoc[]
+
+include::partial$next.steps.adoc[]
+
+== Further reading
+* link:https://downloads.teradata.com/download/files/7671/201588/3/B035-5948-051K-VantageExpress-17.10_SLES12.pdf?license=898/218656[Teradata® Vantage™ Express Installation and Configuration Guide (must be logged in to downloads.teradata.com)]
+* link:https://docs.teradata.com/r/KEoAHNnh~EbZLtVJNRo0Sg/root[Teradata® Studio™ and Studio™ Express Installation Guide]
