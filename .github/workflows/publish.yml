@@ -9,12 +9,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Run Antora
-        uses: kameshsampath/antora-site-action@6069ae47f8c6dfd2a7c842d2dea766c639ab0053
+      - uses: actions/setup-node@v2
         with:
-          antora_playbook: antora-playbook.yml
-          antora_generator: 'antora-site-generator-lunr'
-          antora_docsearch_enabled: 'true'
+          node-version: 16
+          cache: npm
+      - name: Run Antora
+        run: ./buildw
       - name: Turnstyle
         if: ${{ ! env.GITHUB_TOKEN == '' }}
         uses: softprops/turnstyle@v1
