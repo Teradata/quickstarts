@@ -14,5 +14,8 @@ ui:
   supplemental_files: ./supplemental_ui
 
 asciidoc:
+  attributes:
+    kroki-fetch-diagram: true
   extensions:
   - ./lib/tabs-block/extension.js
+  - asciidoctor-kroki
