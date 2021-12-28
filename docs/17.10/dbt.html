@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Run large bulkloads efficiently :: Getting Started Guides</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/docs/17.10/fastload.html">
-    <meta name="description" content="Load data into Vantage efficiently using Teradata Parallel Transporter.">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, fastload, tpt, teradata parallel transporter">
+    <title>dbt with Teradata Vantage :: Getting Started Guides</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/docs/17.10/dbt.html">
+    <meta name="description" content="Use dbt (data build tool) ith Teradata Vantage.">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, elt, dbt.">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
 <!-- Google Tag Manager -->
@@ -264,7 +264,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="ml.html">Train ML models in Vantage</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="fastload.html">Run large bulkloads efficiently</a>
   </li>
 </ul>
@@ -273,7 +273,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Tutorials</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
   </li>
 </ul>
@@ -309,8 +309,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="getting.started.vmware.html">Getting Started Guides</a></li>
-    <li>Basics</li>
-    <li><a href="fastload.html">Run large bulkloads efficiently</a></li>
+    <li>Tutorials</li>
+    <li><a href="dbt.html">dbt with Teradata Vantage</a></li>
   </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/issues"><img
@@ -318,11 +318,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     alt="GitHub icon"
     height="18"
     width="18" /></a><a href="https://github.com/Teradata/quickstarts/issues">Report an issue with this page</a></div>
-  <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/fastload.adoc"><img
+  <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/dbt.adoc"><img
     src="https://camo.githubusercontent.com/b079fe922f00c4b86f1b724fbc2e8141c468794ce8adbc9b7456e5e1ad09c622/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f6769746875622e737667"
     alt="GitHub icon"
     height="18"
-    width="18" /></a><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/fastload.adoc">Edit this page</a></div>
+    width="18" /></a><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/dbt.adoc">Edit this page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -335,14 +335,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Run large bulkloads efficiently</h1>
+<h1 class="page">dbt with Teradata Vantage</h1>
 <p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
-Last updated: October 21st, 2021</p>
+Last updated: December 28st, 2021</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We often have a need to move large volumes of data into Vantage. The quickest way to do that is using <code>Fastload</code> mode from Teradata Parallel Transporter (TPT). This how-to demonstrates how to use <code>Fastload</code>. In this scenario, we will load over 300k records, over 40MB of data, in a couple of seconds.</p>
+<p>This tutorial demonstrates how to use dbt (Data Build Tool) with Teradata Vantage. It&#8217;s based on the original <a href="https://github.com/dbt-labs/jaffle_shop-dev">dbt Jaffle Shop tutorial</a>. A couple of models have been adjusted to the SQL dialect supported by Vantage.</p>
 </div>
 </div>
 </div>
@@ -352,335 +352,179 @@ Last updated: October 21st, 2021</p>
 <div class="ulist">
 <ul>
 <li>
-<p>You need access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using <a href="getting.started.vmware.html" class="page">VMware</a> or <a href="getting.started.vbox.html" class="page">VirtualBox</a>.</p>
+<p>Access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using <a href="getting.started.vmware.html" class="page">VMware</a> or <a href="getting.started.vbox.html" class="page">VirtualBox</a>.</p>
 </li>
 <li>
-<p>Download Teradata Tools and Utilities (TTU) -  supported platforms: <a href="https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-windows-installation-package">Windows</a>, <a href="https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-macos-installation-package">MacOS</a>, <a href="https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-linux-installation-package-0">Linux</a> (requires registration).</p>
+<p>Python 3 installed.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_install_ttu"><a class="anchor" href="#_install_ttu"></a>Install TTU</h2>
+<h2 id="_install_dbt"><a class="anchor" href="#_install_dbt"></a>Install dbt</h2>
 <div class="sectionbody">
-<div class="tabset is-loading">
-<div class="ulist tabs">
-<ul>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p><a id="tabset1_windows"></a>Windows</p>
+<p>Clone the tutorial repository and cd into the project directory:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone git@github.com:Teradata/jaffle_shop-dev.git jaffle_shop
+cd jaffle_shop</code></pre>
+</div>
+</div>
 </li>
 <li>
-<p><a id="tabset1_macos"></a>MacOS</p>
+<p>Create a new python environment to manage dbt and its dependencies. Activate the environment:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python3 -m venv env
+source env/bin/activate</code></pre>
+</div>
+</div>
 </li>
 <li>
-<p><a id="tabset1_linux"></a>Linux</p>
+<p>Install <code>dbt-teradata</code> module and its dependencies. The core dbt module is included as a dependency so you don&#8217;t have to install it separately:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install dbt-teradata</code></pre>
+</div>
+</div>
 </li>
-</ul>
+</ol>
 </div>
-<div class="content">
-<div class="tab-pane" aria-labelledby="tabset1_windows">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configure_dbt"><a class="anchor" href="#_configure_dbt"></a>Configure dbt</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Unzip the downloaded file and run <code>setup.exe</code>.</p>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_macos">
-<div class="paragraph">
-<p>Unzip the downloaded file and run <code>TeradataToolsAndUtilitiesXX.XX.XX.pkg</code>.</p>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_linux">
-<div class="paragraph">
-<p>Unzip the downloaded file, go to the unzipped directory and run:</p>
+<p>We will now configure dbt to connect to your Vantage database. Create file <code>$HOME/.dbt/profiles.yml</code> with the following content. Adjust <code>&lt;host&gt;</code>, <code>&lt;user&gt;</code>, <code>&lt;password&gt;</code> to match your Teradata instance.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./setup.sh a</code></pre>
+<pre class="highlightjs highlight"><code>jaffle_shop:
+  outputs:
+    dev:
+      type: teradata
+      host: &lt;host&gt;
+      user: &lt;user&gt;
+      password: &lt;password&gt;
+      logmech: TD2
+      schema: jaffle_shop
+      tmode: ANSI
+      threads: 1
+      timeout_seconds: 300
+      priority: interactive
+      retries: 1
+  target: dev</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, that we have the profile file in place, we can validate the setup:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt debug</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the debug command returned errors, you likely have an issue with the content of <code>profiles.yml</code>.</p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_about_the_jaffle_shop_warehouse"><a class="anchor" href="#_about_the_jaffle_shop_warehouse"></a>About the Jaffle Shop warehouse</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>jaffle_shop</code> is a fictional e-commerce store. This dbt project transforms raw data from an app database into a dimensional model with customer and order data ready for analytics.</p>
+</div>
+<div class="paragraph">
+<p>The raw data from the app consists of customers, orders, and payments, with the following entity-relationship diagram:</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="_images/diag-f4281ff8ede0df7faea97f80936093e7b4a0bd21.svg" alt="Diagram" width="100%">
+</div>
+</div>
+<div class="paragraph">
+<p>dbt takes these raw data table and builds the following dimensional model, which is more suitable for analytics tools:</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="_images/diag-cfb2d5cb8c33c037d82e57adbd8d36445946ce00.svg" alt="Diagram" width="100%">
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_get_sample_data"><a class="anchor" href="#_get_sample_data"></a>Get Sample data</h2>
+<h2 id="_run_dbt"><a class="anchor" href="#_run_dbt"></a>Run dbt</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_create_raw_data_tables"><a class="anchor" href="#_create_raw_data_tables"></a>Create raw data tables</h3>
 <div class="paragraph">
-<p>We will be working with the US tax fillings for nonprofit organizations. Nonprofit tax filings are public data. The US Internal Revenue Service publishes them in S3 bucket. Let&#8217;s grab a summary of filings for 2020: <code><a href="https://s3.amazonaws.com/irs-form-990/index_2020.csv" class="bare">https://s3.amazonaws.com/irs-form-990/index_2020.csv</a></code>. You can use your browser, <code>wget</code> or <code>curl</code> to save the file locally.</p>
+<p>In real life, we will be getting raw data from platforms like Segment, Stitch, Fivetran or another ETL tool. In our case, we will use dbt&#8217;s <code>seed</code> functionality to create tables from csv files. The csv files are located in <code>./data</code> directory. Each csv file will produce one table. dbt will inspect the files and do type inference to decide what data types to use for columns.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_create_a_database"><a class="anchor" href="#_create_a_database"></a>Create a database</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Let&#8217;s create a database in Vantage. Use you favorite SQL tool to run:</p>
+<p>Let&#8217;s create the raw data tables:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE DATABASE irs
-AS PERMANENT = 120e6, -- 120MB
-    SPOOL = 120e6; -- 120MB</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt seed</code></pre>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_run_fastload"><a class="anchor" href="#_run_fastload"></a>Run Fastload</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>We will now run Fastload. Fastload is a command-line tool that is very efficient in uploading large amounts of data into Vantage. Fastload, in order to be fast, has several restrictions in place. It can only populate empty tables, no inserts to already populated tables are supported. It doesn&#8217;t support tables with secondary indices. Also, it won&#8217;t insert duplicate records, even if a table is a <code>MULTISET</code> table. For the full list of restrictions check out <a href="https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root">Teradata® FastLoad Reference</a>.</p>
 </div>
 <div class="paragraph">
-<p>Fastload has its own scripting language. The language allows you to prepare the database with arbitrary SQL commands, declare the input source and define how the data should be inserted into Vantage. The tool supports both interactive and batch mode. In this section, we are going to use the interactive mode.</p>
+<p>You should now see 3 tables in your <code>jaffle_shop</code> database: <code>raw_customers</code>, <code>raw_orders</code>, <code>raw_payments</code>. The tables should be populated with data from the csv files.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_create_the_dimensional_model"><a class="anchor" href="#_create_the_dimensional_model"></a>Create the dimensional model</h3>
 <div class="paragraph">
-<p>Let&#8217;s start Fastload in the interactive mode:</p>
+<p>Now that we have the raw tables, we can instruct dbt to create the dimensional model:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">fastload</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt run</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>First, let&#8217;s log in to a Vantage database. I&#8217;ve a Vantage Express running locally, so I&#8217;ll use <code>localhost</code> as the hostname and <code>dbc</code> for username and password:</p>
-</div>
-<div class="listingblock content-editable">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">LOGON localhost/dbc,dbc;</code></pre>
+<p>So what exactly happened here? dbt created additional tables using <code>CREATE TABLE/VIEW FROM SELECT</code> SQL. In the first transformation, dbt took raw tables and built denormalized join tables called <code>customer_orders</code>, <code>order_payments</code>, <code>customer_payments</code>. You will find the definitions of these tables in <code>./marts/core/intermediate</code>.
+In the second step, dbt created <code>dim_customers</code> and <code>fct_orders</code> tables. These are the dimensional model tables that we want to expose to our BI tool.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_test_the_data"><a class="anchor" href="#_test_the_data"></a>Test the data</h3>
 <div class="paragraph">
-<p>Now, that we are logged in, I&#8217;m going to prepare the database. I&#8217;m switching to <code>irs</code> database and making sure that the target table <code>irs_returns</code> and error tables (more about error tables later) do not exist:</p>
+<p>dbt applied multiple transformations to our data. How can we ensure that the data in the dimensional model is correct? dbt allows us to define and execute tests against the data. The tests are defined in <code>./marts/core/schema.yml</code>. The file describes each column in all relationships. Each column can have multiple tests configured under <code>tests</code> key. For example, we expect that <code>fct_orders.order_id</code> column will contain unique, non-null values. To validate that the data in the produced tables satisfies the test conditions run:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">DATABASE irs;
-DROP TABLE irs_returns;
-DROP TABLE irs_returns_err1;
-DROP TABLE irs_returns_err2;</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt test</code></pre>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_generate_documentation"><a class="anchor" href="#_generate_documentation"></a>Generate documentation</h3>
 <div class="paragraph">
-<p>I&#8217;ll now create an empty table that can hold the data elements from the csv file.</p>
+<p>Our model consists of just a few tables. Imagine a scenario where where we have many more sources of data and a much more complex dimensional model. We could also have an intermediate zone between the raw data and the dimensional model that follows the Data Vault 2.0 principles. Would it not be useful, if we had the inputs, transformations and outputs documented somehow? dbt allows us to generate documentation from its configuration files:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE MULTISET TABLE irs_returns (
-    return_id INT,
-    filing_type VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
-    ein INT,
-    tax_period INT,
-    sub_date VARCHAR(100) CHARACTER SET LATIN NOT CASESPECIFIC,
-    taxpayer_name VARCHAR(100) CHARACTER SET LATIN NOT CASESPECIFIC,
-    return_type VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
-    dln BIGINT,
-    object_id BIGINT
-)
-PRIMARY INDEX ( return_id );</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt docs generate</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Now, that the target table has been prepared, we can start loading the data. <code>ERRORFILES</code> directive defines error files. The error files are really tables that TPT creates. The first table contains information about data conversion and other issues. The second table keeps track of data uniqueness issues, e.g. primary key violations.</p>
+<p>This will produce html files in <code>./target</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>You can start your own server to browse the documentation. The following command will start a server and open up a browser tab with the docs' landing page:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">BEGIN LOADING irs_returns
-    ERRORFILES irs_returns_err1, irs_returns_err2;</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt docs serve</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>We instruct TPT to save a checkpoint every 10k rows. It&#8217;s useful in case we have to restart our job. It will be able to resume from the last checkpoint.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">    CHECKPOINT 10000;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>We also need to tell TPT to skip the first row in the CSV file as start at record 2. That&#8217;s because the first row contains column headers.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">    RECORD 2;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>TPT also needs to know that it&#8217;s a comma-separated file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">    SET RECORD VARTEXT ",";</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><code>DEFINE</code> block specifies what columns we should expect:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">    DEFINE in_return_id (VARCHAR(19)),
-    in_filing_type (VARCHAR(5)),
-    in_ein (VARCHAR(19)),
-    in_tax_period (VARCHAR(19)),
-    in_sub_date (VARCHAR(22)),
-    in_taxpayer_name (VARCHAR(100)),
-    in_return_type (VARCHAR(5)),
-    in_dln (VARCHAR(19)),
-    in_object_id (VARCHAR(19)),</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><code>DEFINE</code> block also has <code>FILE</code> attribute that points to the file with the data. Replace <code>FILE = /tmp/index_2020.csv;</code> with your location of <code>index_2020.csv</code> file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">    FILE = /tmp/index_2020.csv;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Finally, we define the INSERT statement that will put data into the database and we close off <code>LOADING</code> block:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">    INSERT INTO irs_returns (
-        return_id,
-        filing_type,
-        ein,
-        tax_period,
-        sub_date,
-        taxpayer_name,
-        return_type,
-        dln,
-        object_id
-    ) VALUES (
-        :in_return_id,
-        :in_filing_type,
-        :in_ein,
-        :in_tax_period,
-        :in_sub_date,
-        :in_taxpayer_name,
-        :in_return_type,
-        :in_dln,
-        :in_object_id
-    );
-END LOADING;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Once the job has finished, we are logging off from the database to clean things up.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">LOGOFF;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Here is what the entire script looks like:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">LOGON localhost/dbc,dbc;
-
-DATABASE irs;
-DROP TABLE irs_returns;
-DROP TABLE irs_returns_err1;
-DROP TABLE irs_returns_err2;
-
-CREATE MULTISET TABLE irs_returns (
-    return_id INT,
-    filing_type VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
-    ein INT,
-    tax_period INT,
-    sub_date VARCHAR(100) CHARACTER SET LATIN NOT CASESPECIFIC,
-    taxpayer_name VARCHAR(100) CHARACTER SET LATIN NOT CASESPECIFIC,
-    return_type VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
-    dln BIGINT,
-    object_id BIGINT
-)
-PRIMARY INDEX ( return_id );
-
-BEGIN LOADING irs_returns
-  ERRORFILES irs_returns_err1, irs_returns_err2;
-  CHECKPOINT 10000;
-  RECORD 2;
-  SET RECORD VARTEXT ",";
-
-  DEFINE in_return_id (VARCHAR(19)),
-    in_filing_type (VARCHAR(5)),
-    in_ein (VARCHAR(19)),
-    in_tax_period (VARCHAR(19)),
-    in_sub_date (VARCHAR(22)),
-    in_taxpayer_name (VARCHAR(100)),
-    in_return_type (VARCHAR(5)),
-    in_dln (VARCHAR(19)),
-    in_object_id (VARCHAR(19)),
-    FILE = /tmp/index_2020.csv;
-
-  INSERT INTO irs_returns (
-      return_id,
-      filing_type,
-      ein,
-      tax_period,
-      sub_date,
-      taxpayer_name,
-      return_type,
-      dln,
-      object_id
-  ) VALUES (
-      :in_return_id,
-      :in_filing_type,
-      :in_ein,
-      :in_tax_period,
-      :in_sub_date,
-      :in_taxpayer_name,
-      :in_return_type,
-      :in_dln,
-      :in_object_id
-  );
-END LOADING;
-
-LOGOFF;</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_batch_mode"><a class="anchor" href="#_batch_mode"></a>Batch mode</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>To run our example in batch mode, simply save all instructions in a single file and run:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">fastload &lt; file_with_instruction.fastload</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_fastload_vs_nos"><a class="anchor" href="#_fastload_vs_nos"></a>Fastload vs. NOS</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In our case, the file is in an S3 bucket. That means, that we can use Native Object Storage (NOS) to ingest the data:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- create an S3-backed foreign table
-CREATE FOREIGN TABLE irs_returns_nos
-    USING ( LOCATION('/s3/s3.amazonaws.com/irs-form-990/index_2020.csv') );
-
--- load the data into a native table
-CREATE MULTISET TABLE irs_returns_nos_native
-    (RETURN_ID, FILING_TYPE, EIN, TAX_PERIOD, SUB_DATE, TAXPAYER_NAME)
-AS (
-    SELECT RETURN_ID, FILING_TYPE, EIN, TAX_PERIOD, SUB_DATE, TAXPAYER_NAME FROM irs_returns_nos
-) WITH DATA
-NO PRIMARY INDEX;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The NOS solution is convenient as it doesn&#8217;t depend on additional tools. It can be implemented using only SQL. Fastload is still a better solution if we are after raw performance.</p>
 </div>
 </div>
 </div>
@@ -688,7 +532,7 @@ NO PRIMARY INDEX;</code></pre>
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This how-to demonstrated how to ingest large amounts of data into Vantage. We loaded hundreds of thousands or records into Vantage in a couple of seconds using Fastload mode from Teradata Parallel Transporter (TPT).</p>
+<p>This tutorial demonstrated how to use dbt with Teradata Vantage. The sample project takes raw data and produces a dimensional data mart. We used multiple dbt commands to populate tables from csv files (<code>dbt seed</code>), create models (<code>dbt run</code>), test the data (<code>dbt test</code>), and generate and serve model documentation (<code>dbt docs generate</code>, <code>dbt docs serve</code>).</p>
 </div>
 </div>
 </div>
@@ -698,7 +542,10 @@ NO PRIMARY INDEX;</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root">Teradata® FastLoad Reference</a></p>
+<p><a href="https://docs.getdbt.com/docs/">dbt documentation</a></p>
+</li>
+<li>
+<p><a href="https://github.com/dbeatty10/dbt-teradata">dbt-teradata plugin documentation</a></p>
 </li>
 </ul>
 </div>
@@ -719,7 +566,7 @@ NO PRIMARY INDEX;</code></pre>
 </footer>
 <script src="../../_/js/site.js"></script>
 <script src="../../_/js/vendor/lunr.js"></script>
-<script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/fastload.html"></script>
+<script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/dbt.html"></script>
 <script async src="../../_/../search-index.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/powershell.min.js"></script>
