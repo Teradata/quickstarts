@@ -12,7 +12,8 @@
 ** xref::fastload.adoc[]
 * Tutorials
 ** xref::dbt.adoc[]
-
+** Configure ODBC
+*** xref::odbc.ubuntu.adoc[Ubuntu]
 //* Planned
 //** Run Teradata Developer in Public Cloud
 //** Tune performance with indices
