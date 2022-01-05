@@ -2,7 +2,7 @@
 :experimental:
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
-:page-revdate: December 28st, 2021
+:page-revdate: January 5th, 2022
 :description: Use Vantage with ODBC on Ubuntu
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, odbc, ubuntu
 :tabs:
