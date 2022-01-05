@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Deploy Teradata Jupyter extensions to JupyterHub :: Getting Started Guides</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/docs/17.10/local.jupyter.hub.html">
-    <meta name="description" content="Deploy Teradata Jupyter extensions in customer JupyterHub clusters">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, java applications, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy">
+    <title>Use Vantage with ODBC on Ubuntu :: Getting Started Guides</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/docs/17.10/odbc.ubuntu.html">
+    <meta name="description" content="Use Vantage with ODBC on Ubuntu">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, odbc, ubuntu">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
 <!-- Google Tag Manager -->
@@ -255,7 +255,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -280,7 +280,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Configure ODBC</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="odbc.ubuntu.html">Ubuntu</a>
   </li>
 </ul>
@@ -318,8 +318,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="getting.started.vmware.html">Getting Started Guides</a></li>
-    <li>Basics</li>
-    <li><a href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a></li>
+    <li>Tutorials</li>
+    <li>Configure ODBC</li>
+    <li><a href="odbc.ubuntu.html">Ubuntu</a></li>
   </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/issues"><img
@@ -327,11 +328,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     alt="GitHub icon"
     height="18"
     width="18" /></a><a href="https://github.com/Teradata/quickstarts/issues">Report an issue with this page</a></div>
-  <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/local.jupyter.hub.adoc"><img
+  <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/odbc.ubuntu.adoc"><img
     src="https://camo.githubusercontent.com/b079fe922f00c4b86f1b724fbc2e8141c468794ce8adbc9b7456e5e1ad09c622/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f6769746875622e737667"
     alt="GitHub icon"
     height="18"
-    width="18" /></a><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/local.jupyter.hub.adoc">Edit this page</a></div>
+    width="18" /></a><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/odbc.ubuntu.adoc">Edit this page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -344,247 +345,118 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Deploy Teradata Jupyter extensions to JupyterHub</h1>
-<p>Author: <a href="mailto:Hailing.iang@teradata.com">Hailing Jiang</a><br/>
-Last updated: November 17th, 2021</p>
+<h1 class="page">Use Vantage with ODBC on Ubuntu</h1>
+<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
+Last updated: December 28st, 2021</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>For customers who have their own JupyterHub clusters, there are two options to integrate Teradata Jupyter extensions into the existing clusters:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Use Teradata Jupyter Docker image.</p>
-</li>
-<li>
-<p>Customize an existing Docker image to include Teradata extensions.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>This page contains detailed instructions on the two options. Instructions are based on the assumption that the customer JupyterHub deployment is based on <a href="https://zero-to-jupyterhub.readthedocs.io/en/latest/index.html">Zero to JupyterHub with Kubernetes</a>.</p>
+<p>This how-to demonstrates how to use the ODBC driver with Teradata Vantage on Ubuntu.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_use_teradata_jupyter_docker_image"><a class="anchor" href="#_use_teradata_jupyter_docker_image"></a>Use Teradata Jupyter Docker image</h2>
+<h2 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Teradata provides a ready-to-run Docker image that builds on the <a href="https://hub.docker.com/r/jupyter/datascience-notebook/">jupyter/datascience-notebook</a> image. It bundles the Teradata SQL kernel, Teradata Python and R libraries and drivers and Teradata extensions for Jupyter to make you productive while interacting with Teradata database. The image also contains sample notebooks that demonstrate how to use the SQL kernel, extensions and Teradata libraries.</p>
-</div>
-<div class="paragraph">
-<p>You can use this image in the following ways:</p>
-</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Start a personal Jupyter Notebook server in a local Docker container</p>
+<p>Access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using <a href="getting.started.vmware.html" class="page">VMware</a> or <a href="getting.started.vbox.html" class="page">VirtualBox</a>.</p>
 </li>
 <li>
-<p>Run JupyterLab servers for a team using JupyterHub</p>
+<p>Root access to a Ubuntu machine.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>For instructions to start a personal JupyterLab server in a local Docker container, please see <a href="https://docs.teradata.com/r/KQLs1kPXZ02rGWaS9Ktoww/Fwvns7y_a7juDWx1NixC2A">installation guide</a>. This section will focus on how to use the  Teradata Jupyter Docker image in a customer&#8217;s existing JupyterHub environment.</p>
 </div>
-<div class="sect2">
-<h3 id="_install_teradata_jupyter_docker_image_in_your_registry"><a class="anchor" href="#_install_teradata_jupyter_docker_image_in_your_registry"></a>Install Teradata Jupyter Docker image in your registry</h3>
+</div>
+<div class="sect1">
+<h2 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h2>
+<div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Go to <a href="https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter">Vantage Modules for Jupyter</a> page and download the Docker image. It is a tarball with name in this format <code>teradatajupyterlabext_VERSION.tar.gz</code>.</p>
-</li>
-<li>
-<p>Load the image:</p>
-<div class="listingblock content-editable">
+<p>Install dependencies:</p>
+<div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker load -i teradatajupyterlabext_VERSION.tar.gz</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apt update &amp;&amp; DEBIAN_FRONTEND=noninteractive apt install -y wget unixodbc unixodbc-dev iodbc python3-pip</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Push the image to your Docker registry:</p>
-<div class="listingblock content-editable">
+<p>Install Teradata ODBC driver for Ubuntu:</p>
+<div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker push</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">wget https://downloads.teradata.com/download/cdn/connectivity/odbc/17.10.x.x/tdodbc1710__ubuntu_x8664.17.10.00.14-1.tar.gz \
+    &amp;&amp; tar -xzf tdodbc1710__ubuntu_x8664.17.10.00.14-1.tar.gz \
+    &amp;&amp; dpkg -i tdodbc1710/tdodbc1710-17.10.00.14-1.x86_64.deb</code></pre>
 </div>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>You may want to consider changing the name of the loaded image for simplicity:</p>
-</div>
-<div class="listingblock content-editable">
+</li>
+<li>
+<p>Configure ODBC, by creating file <code>/etc/odbcinst.ini</code> with the following content:</p>
+<div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker tag OLD_IMAGE_NAME NEW_IMAGE_NAME</code></pre>
+<pre class="highlightjs highlight"><code class="language-odbc hljs" data-lang="odbc">[ODBC Drivers]
+Teradata Database ODBC Driver 17.10=Installed
+
+[Teradata Database ODBC Driver 17.10]
+Description=Teradata Database ODBC Driver 17.10
+Driver=/opt/teradata/client/17.10/odbc_64/lib/tdataodbc_sb64.so</code></pre>
 </div>
-</div>
-</td>
-</tr>
-</table>
 </div>
 </li>
 </ol>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_use_teradata_jupyter_docker_image_in_jupyterhub"><a class="anchor" href="#_use_teradata_jupyter_docker_image_in_jupyterhub"></a>Use Teradata Jupyter Docker image in JupyterHub</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>To use the Teradata Jupyter Docker image directly in your JupyterHub cluster, modify the override file as described in <a href="https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#choose-and-use-an-existing-docker-image">herein the JupyterHub documentation</a>. Replace <code>REGISTRY_URL</code> and <code>VERSION</code> with appropriate values from the step above:</p>
-<div class="listingblock content-editable">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">singleuser:
-  image:
-  name: REGISTRY_URL/teradatajupyterlabext_VERSION
-  tag: latest</code></pre>
 </div>
-</div>
-</li>
-<li>
-<p>Apply the changes to the cluster as described in <a href="https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/extending-jupyterhub.html#applying-configuration-changes">JupyterHub documentation</a>.</p>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-You can use multiple profiles to allow users to select which image they want to use when they log in to JupyterHub. For detailed instructions and examples on configuring multiple profiles, please see <a href="https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#using-multiple-profiles-to-let-users-select-their-environment">JupyterHub documentation</a>.
-</td>
-</tr>
-</table>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_customize_teradata_jupyter_docker_image"><a class="anchor" href="#_customize_teradata_jupyter_docker_image"></a>Customize Teradata Jupyter Docker image</h3>
+<div class="sect1">
+<h2 id="_use_odbc"><a class="anchor" href="#_use_odbc"></a>Use ODBC</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>If your users need some packages or notebooks that are not bundled in the Teradata Jupyter Docker image, we recommend that you use Teradata image as a base image and build a new one on top of it.</p>
+<p>We will validate the installation with a sample Python application. Create <code>test.py</code> file with the following content.
+Replace <code>DBCName=192.168.86.33;UID=dbc;PWD=dbc</code> with the IP address of your Teradata Vantage instance, username and password:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import pyodbc
+
+print(pyodbc.drivers())
+
+cnxn = pyodbc.connect('DRIVER={Teradata Database ODBC Driver 17.10};DBCName=192.168.86.33;UID=dbc;PWD=dbc;')
+cursor = cnxn.cursor()
+
+cursor.execute("SELECT CURRENT_DATE")
+for row in cursor.fetchall():
+    print(row)
+EOF</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Here is an example Dockerfile that builds on top of Teradata image and adds additional packages and notebooks. Use the Dockerfile to build a new Docker image, push the image to a designated registry, modify override file as shown above to use the new image as singleuser image, apply the changes to the cluster as described above. Replace <code>REGISTRY_URL</code> and <code>VERSION</code> with appropriate values:</p>
+<p>Run the test application:</p>
 </div>
-<div class="listingblock content-editable">
+<div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-Dockerfile hljs" data-lang="Dockerfile">FROM REGISTRY_URL/teradatajupyterlabext_VERSION:latest
-
-# install additional packages
-RUN pip install --no-cache-dir astropy
-
-# copy notebooks
-COPY notebooks/. /tmp/JupyterLabRoot/DemoNotebooks/</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python3 test.py</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>You should get output similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>['ODBC Drivers', 'Teradata Database ODBC Driver 17.10']
+(datetime.date(2022, 1, 5), )</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_customize_an_existing_docker_image_to_include_teradata_extensions"><a class="anchor" href="#_customize_an_existing_docker_image_to_include_teradata_extensions"></a>Customize an existing Docker image to include Teradata extensions</h2>
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you prefer, you can include the Teradata SQL kernel and extensions into into an existing image you are currently using.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Go to <a href="https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter">Vantage Modules for Jupyter</a> page to download the zipped Teradata Jupyter extensions package bundle.  Assuming your existing
-docker image is Linux based, you will want to use the Linux version of the download.  Otherwise, download for the platform you are using.  The .zip file contains the Teradata SQL Kernel, extensions and sample
-notebooks.</p>
-</li>
-<li>
-<p>Unzip the bundle file to your working directory.</p>
-</li>
-<li>
-<p>Below is an example Dockerfile to add Teradata Jupyter extensions to your existing Docker image. Use the Dockerfile to build a new Docker image, push the image to a designated registry, modify override file as shown above to use the new image as singleuser image, apply the changes to the cluster:</p>
-<div class="listingblock content-editable">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-Dockerfile hljs" data-lang="Dockerfile">FROM REGISTRY_URL/your-existing-image:tag
-ENV NB_USER=jovyan \
-  HOME=/home/jovyan \
-  EXT_DIR=/opt/teradata/jupyterext/packages
-
-USER root
-
-##############################################################
-# Install kernel and copy supporting files
-##############################################################
-
-# Copy the kernel
-COPY ./teradatakernel /usr/local/bin
-RUN chmod 755 /usr/local/bin/teradatakernel
-
-# Copy directory with kernel.json file into image
-COPY ./teradatasql teradatasql/
-
-##############################################################
-# Switch to user jovyan to copy the notebooks and license files.
-##############################################################
-
-USER $NB_USER
-
-# Copy notebooks
-COPY ./notebooks/ /tmp/JupyterLabRoot/TeradataSampleNotebooks/
-
-# Copy license files
-COPY ./ThirdPartyLicenses /tmp/JupyterLabRoot/ThirdPartyLicenses/
-
-USER root
-
-# Install the kernel file to /opt/conda jupyter lab instance
-RUN jupyter kernelspec install ./teradatasql --prefix=/opt/conda
-
-##############################################################
-# Install Teradata extensions
-##############################################################
-
-COPY ./teradata_*.tgz $EXT_DIR
-
-WORKDIR $EXT_DIR
-
-RUN jupyter labextension install --no-build teradata_database* &amp;&amp; \
-  jupyter labextension install --no-build teradata_resultset* &amp;&amp; \
-  jupyter labextension install --no-build teradata_sqlhighlighter* &amp;&amp; \
-  jupyter labextension install --no-build teradata_connection_manager* &amp;&amp; \
-  jupyter labextension install --no-build teradata_preferences* &amp;&amp; \
-  jupyter lab build --dev-build=False --minimize=False &amp;&amp; \
-  rm -rf *
-
-WORKDIR $HOME
-
-# Give back ownership of /opt/conda to jovyan
-RUN chown -R jovyan:users /opt/conda
-
-# Jupyter will create .local directory
-RUN rm -rf $HOME/.local</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>You can optionally install Teradata package for Python and Teradata package for R. See the following pages for details:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://downloads.teradata.com/download/connectivity/teradata-package-for-python-teradataml">Teradata Package for Python - teradataml download page</a></p>
-</li>
-<li>
-<p><a href="https://downloads.teradata.com/download/connectivity/teradata-package-for-r-tdplyr">Teradata Package for R - tdplyr download page</a></p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
+<p>This how-to demonstrated how to use ODBC with Teradata Vantage on Ubuntu. The how-to shows how to install the ODBC Teradata driver and the dependencies. It then shows how to configure ODBC and validate connectivity with a simple Python application.</p>
 </div>
 </div>
 </div>
@@ -594,13 +466,7 @@ RUN rm -rf $HOME/.local</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://teradata.github.io/jupyterextensions">Teradata Jupyter Extensions Website</a></p>
-</li>
-<li>
-<p><a href="https://docs.teradata.com/r/KQLs1kPXZ02rGWaS9Ktoww/root">Teradata Vantage™ Modules for Jupyter Installation Guide</a></p>
-</li>
-<li>
-<p><a href="https://docs.teradata.com/r/1YKutX2ODdO9ppo_fnguTA/root">Teradata® Package for Python User Guide</a></p>
+<p><a href="https://docs.teradata.com/r/<sub>i3_9dmDNJA</sub>PELp_hi0MQ/root">ODBC Driver for Teradata® User Guide</a></p>
 </li>
 </ul>
 </div>
@@ -621,7 +487,7 @@ RUN rm -rf $HOME/.local</code></pre>
 </footer>
 <script src="../../_/js/site.js"></script>
 <script src="../../_/js/vendor/lunr.js"></script>
-<script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/local.jupyter.hub.html"></script>
+<script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/odbc.ubuntu.html"></script>
 <script async src="../../_/../search-index.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/powershell.min.js"></script>
