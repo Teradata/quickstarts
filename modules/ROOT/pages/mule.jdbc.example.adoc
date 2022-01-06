@@ -1,9 +1,9 @@
-= Query a Teradata Vantage database from a Mule service
+= Query Teradata Vantage from a Mule service
 :experimental:
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
 :page-revdate: January 6th, 2022
-:description: Query a Teradata Vantage database from a Mule service.
+:description: Query Teradata Vantage from a Mule service.
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, Mule, JDBC, microservices
 
 == Overview
