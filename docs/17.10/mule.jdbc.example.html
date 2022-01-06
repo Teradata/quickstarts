@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Train ML models in Vantage :: Getting Started Guides</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/docs/17.10/ml.html">
-    <meta name="description" content="Train an ML model without leaving Teradata Vantage - use Vantage Analytics Library (VAL) to create ML models.">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, AI/ML">
+    <title>Query a Teradata Vantage database from a Mule service :: Getting Started Guides</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/docs/17.10/mule.jdbc.example.html">
+    <meta name="description" content="Query a Teradata Vantage database from a Mule service.">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, Mule, JDBC, microservices">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
 <!-- Google Tag Manager -->
@@ -261,7 +261,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="ml.html">Train ML models in Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -276,7 +276,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="mule.jdbc.example.html">Query a Teradata Vantage database from a Mule service</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -321,8 +321,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="getting.started.vmware.html">Getting Started Guides</a></li>
-    <li>Basics</li>
-    <li><a href="ml.html">Train ML models in Vantage</a></li>
+    <li>Tutorials</li>
+    <li><a href="mule.jdbc.example.html">Query a Teradata Vantage database from a Mule service</a></li>
   </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/issues"><img
@@ -330,11 +330,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     alt="GitHub icon"
     height="18"
     width="18" /></a><a href="https://github.com/Teradata/quickstarts/issues">Report an issue with this page</a></div>
-  <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/ml.adoc"><img
+  <div class="edit-this-page"><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/mule.jdbc.example.adoc"><img
     src="https://camo.githubusercontent.com/b079fe922f00c4b86f1b724fbc2e8141c468794ce8adbc9b7456e5e1ad09c622/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f6769746875622e737667"
     alt="GitHub icon"
     height="18"
-    width="18" /></a><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/ml.adoc">Edit this page</a></div>
+    width="18" /></a><a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/mule.jdbc.example.adoc">Edit this page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -347,275 +347,213 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Train ML models in Vantage</h1>
+<h1 class="page">Query a Teradata Vantage database from a Mule service</h1>
 <p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
-Last updated: September 12th, 2021</p>
+Last updated: January 6th, 2022</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are situations when you want to quickly validate a machine learning model idea. You have a model type in mind. You don&#8217;t want to operationalize with an ML pipeline just yet. You just want to test out if the relationship you had in mind exists. Also, sometimes even your production deployment doesn&#8217;t require constant relearning with MLops. In such cases, you can use Vantage Analytics Library (VAL) and multiple ML model types it supports.</p>
+<p>This example is a clone of the Mulesoft MySQL sample project.
+It demonstrates how to query a Teradata database and expose results over REST API.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>You need access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using <a href="getting.started.vmware.html" class="page">VMware</a> or <a href="getting.started.vbox.html" class="page">VirtualBox</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_install_vantage_analytics_library"><a class="anchor" href="#_install_vantage_analytics_library"></a>Install Vantage Analytics Library</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Support for ML in Vantage requires Vantage Analytics Library (VAL). In this section, we will install VAL and load some sample data.</p>
-</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>VAL is distributed as an rpm file. Go to <a href="https://downloads.teradata.com/download/database/analytics-library">Teradata Downloads</a> and download the VAL rpm to your local machine.</p>
+<p>Mulesoft Anypoint Studio.
+You can download a 30-day trial from <a href="https://www.mulesoft.com/platform/studio" class="bare">https://www.mulesoft.com/platform/studio</a>.</p>
 </li>
 <li>
-<p>Upload the file to your Vantage install. If you are running Vantage Express locally, you have many ways to do it:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>If you installed <a href="getting.started.vbox.html" class="page">Vantage Express on VirtualBox</a>, you should be able to drag &amp; drop the file to the VM&#8217;s desktop. You can also use <code>scp</code> by connecting to port <code>4422</code>, e.g.:</p>
-<div class="listingblock content-editable">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">scp -P 4422 ~/Downloads/VAL-2.0.0.3-1.x86_64.rpm root@localhost:/root/Desktop</code></pre>
-</div>
-</div>
+<p>Access to a Teradata Vantage instance.
+If you need a new instance of Vantage then the easiest way is to install Vantage Express on your local machine using <a href="https://quickstarts.teradata.com/docs/17.10/getting.started.vmware.html">VMWare</a>, <a href="https://quickstarts.teradata.com/docs/17.10/getting.started.vbox.html">VirtualBox</a> or <a href="https://quickstarts.teradata.com/docs/17.10/getting.started.utm.html">UTM</a>.</p>
 </li>
 <li>
-<p>If you use VMware and you have enabled drag &amp; drop, you should be able to drag and drop the file to the VM&#8217;s desktop.</p>
+<p>Java JDK.
+See installation instructions for OpenJDK: <a href="https://openjdk.java.net/install/" class="bare">https://openjdk.java.net/install/</a>.</p>
 </li>
 <li>
-<p>If you have SSH access to your Vantage nodes, you can use <code>scp</code> to upload the binary, e.g.:</p>
-<div class="listingblock content-editable">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">scp ~/Downloads/VAL-2.0.0.3-1.x86_64.rpm root@vantage.server.name:/tmp/</code></pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>We will now create a new database where VAL functions and procedures will be installed. You could install VAL in a global location such as <code>SYSLIB</code>, but installing VAL in a specific database will make it easier to start over if things go wrong.
-Let&#8217;s create a database called <code>val</code> and grant appropriate permissions to our user. Please edit to match your database name and user id:</p>
-<div class="listingblock content-editable">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE DATABASE val
-AS PERMANENT = 60e6, -- 60MB
-    SPOOL = 120e6; -- 120MB
-
-GRANT CREATE FUNCTION ON val to dbc;
-GRANT ALTER FUNCTION ON val to dbc;
-GRANT EXECUTE PROCEDURE on SQLJ.REMOVE_JAR to dbc;
-GRANT EXECUTE PROCEDURE on SQLJ.INSTALL_JAR to dbc;
-GRANT EXECUTE PROCEDURE on SQLJ.REPLACE_JAR to dbc;
-GRANT CREATE EXTERNAL PROCEDURE ON val to dbc;</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Open Gnome Terminal in the VM and start the installation process. Adjust the rpm path as necessary:</p>
-<div class="listingblock content-editable">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">rpm -Uvh --nodeps ~/Desktop/VAL-2.0.0.3-1.x86_64.rpm</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>The install wizard will ask you for the hostname, user id, and password. If you are running the install on your Vantage Express VM, the values are:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Hostname: <code>localhost</code></p>
-</li>
-<li>
-<p>Userid: <code>dbc</code></p>
-</li>
-<li>
-<p>Password: <code>dbc</code></p>
-</li>
-<li>
-<p>Account string: leave empty, press <kbd>ENTER</kbd></p>
-</li>
-<li>
-<p>BTEQ or FASTLOAD command: leave empty, press <kbd>ENTER</kbd></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>The wizard will ask you to choose which part of VAL you want to install.
-We want to start with installing <code>td_analyze</code> procedure, i.e. option 1. Once you select option 1, the script will ask for the database name where <code>td_analyze</code> will be installed. Enter <code>val</code> and press <kbd>ENTER</kbd>.</p>
-</li>
-<li>
-<p>While still in the wizard, install option 5, i.e. <code>Tutorial Tables</code>. These are sample tables with data that we are going to use to build a sample model.</p>
+<p>Apache Maven.
+See installation instructions: <a href="https://maven.apache.org/install.html" class="bare">https://maven.apache.org/install.html</a>.</p>
 </li>
 </ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_sample_data"><a class="anchor" href="#_sample_data"></a>Sample data</h2>
+<h2 id="_example_service"><a class="anchor" href="#_example_service"></a>Example service</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now, that we have VAL and sample tables loaded, let&#8217;s explore the data. It&#8217;s a simplistic, fictitious dataset of banking customers (1K-ish rows), Accounts (10K-ish rows) and Transactions (100K-ish rows). They are related to each other in the following ways:</p>
+<p>This example Mule service takes an HTTP request, queries the Teradata Vantage database and returns results in JSON format.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/banking.model.png" alt="Banking Model" width="100%">
+<img src="_images/flow.png" alt="service flow" width="500">
 </div>
 </div>
 <div class="paragraph">
-<p>In later parts of this quickstart we are going to explore if we can build a model that predicts average monthly balance that a banking customer has on their credit card based on all non-credit card related variables in the tables.</p>
+<p>The Mule HTTP connector listens for HTTP GET requests with the form: <code><a href="http://&lt;host&gt;:8081/?lastname=&lt;parameter&gt" class="bare">http://&lt;host&gt;:8081/?lastname=&lt;parameter&gt</a>;</code>.
+The HTTP connector passes the value of <code>&lt;parameter&gt;</code> as one of the message properties to a database connector.
+The database connector is configured to extract this value and use it in this SQL query:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM hr.employees WHERE LastName = :lastName</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see, we are using parameterized query with reference to the value of the parameter passed to the HTTP connector.
+So if the HTTP connector receives <a href="http://localhost:8081/?lastname=Smith" class="bare">http://localhost:8081/?lastname=Smith</a>, the SQL query will be:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM employees WHERE last_name = Smith</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The database connector instructs the database server to run the SQL query, retrieves the result of the query, and passes it to the Transform message processor which converts the result to JSON.
+Since the HTTP connector is configured as request-response, the result is returned to the originating HTTP client.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_create_a_linear_regression_model"><a class="anchor" href="#_create_a_linear_regression_model"></a>Create a linear regression model</h2>
+<h2 id="_setup"><a class="anchor" href="#_setup"></a>Setup</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Let&#8217;s start by creating a wide table (Analytic Data Set, or ADS) that joins the three tables above.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-You must have CREATE TABLE permissions on the Database where the Vantage Analytic Library is installed.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock content-editable">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Clone <code>Teradata/mule-jdbc-example</code> repository:</p>
+<div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- Switch to val database.
-DATABASE val;
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"> git clone git@github.com:Teradata/mule-jdbc-example.git</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Edit <code>src/main/mule/querying-a-teradata-database.xml</code>, find the Teradata connection string <code>jdbc:teradata://localhost/user=dbc,password=dbc</code> and replace Teradata connection parameters to match your environment.</p>
+</li>
+<li>
+<p>Create a sample database in your Vantage instance.
+Populate it with sample data.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql"> -- create database
+ CREATE DATABASE HR
+   AS PERMANENT = 60e6, SPOOL = 120e6;
 
--- Create the ADS.
-CREATE TABLE VAL_ADS AS (
-    SELECT
-        T1.cust_id  AS cust_id
-       ,MIN(T1.income) AS tot_income
-       ,MIN(T1.age) AS tot_age
-       ,MIN(T1.years_with_bank) AS tot_cust_years
-       ,MIN(T1.nbr_children) AS tot_children
-       ,CASE WHEN MIN(T1.marital_status) = 1 THEN 1 ELSE 0 END AS single_ind
-       ,CASE WHEN MIN(T1.gender) = 'F' THEN 1 ELSE 0 END AS female_ind
-       ,CASE WHEN MIN(T1.marital_status) = 2 THEN 1 ELSE 0 END AS married_ind
-       ,CASE WHEN MIN(T1.marital_status) = 3 THEN 1 ELSE 0 END AS separated_ind
-       ,MAX(CASE WHEN T1.state_code = 'CA' THEN 1 ELSE 0 END) AS ca_resident_ind
-       ,MAX(CASE WHEN T1.state_code = 'NY' THEN 1 ELSE 0 END) AS ny_resident_ind
-       ,MAX(CASE WHEN T1.state_code = 'TX' THEN 1 ELSE 0 END) AS tx_resident_ind
-       ,MAX(CASE WHEN T1.state_code = 'IL' THEN 1 ELSE 0 END) AS il_resident_ind
-       ,MAX(CASE WHEN T1.state_code = 'AZ' THEN 1 ELSE 0 END) AS az_resident_ind
-       ,MAX(CASE WHEN T1.state_code = 'OH' THEN 1 ELSE 0 END) AS oh_resident_ind
-       ,MAX(CASE WHEN T2.acct_type = 'CK' THEN 1 ELSE 0 END) AS ck_acct_ind
-       ,MAX(CASE WHEN T2.acct_type = 'SV' THEN 1 ELSE 0 END) AS sv_acct_ind
-       ,MAX(CASE WHEN T2.acct_type = 'CC' THEN 1 ELSE 0 END) AS cc_acct_ind
-       ,AVG(CASE WHEN T2.acct_type = 'CK' THEN T2.starting_balance+T2.ending_balance ELSE 0 END) AS ck_avg_bal
-       ,AVG(CASE WHEN T2.acct_type = 'SV' THEN T2.starting_balance+T2.ending_balance ELSE 0 END) AS sv_avg_bal
-       ,AVG(CASE WHEN T2.acct_type = 'CC' THEN T2.starting_balance+T2.ending_balance ELSE 0 END) AS cc_avg_bal
-       ,AVG(CASE WHEN T2.acct_type = 'CK' THEN T3.principal_amt+T3.interest_amt ELSE 0 END) AS ck_avg_tran_amt
-       ,AVG(CASE WHEN T2.acct_type = 'SV' THEN T3.principal_amt+T3.interest_amt ELSE 0 END) AS sv_avg_tran_amt
-       ,AVG(CASE WHEN T2.acct_type = 'CC' THEN T3.principal_amt+T3.interest_amt ELSE 0 END) AS cc_avg_tran_amt
-       ,COUNT(CASE WHEN ((EXTRACT(MONTH FROM T3.tran_date) + 2) / 3) = 1 THEN T3.tran_id ELSE NULL END) AS q1_trans_cnt
-       ,COUNT(CASE WHEN ((EXTRACT(MONTH FROM T3.tran_date) + 2) / 3) = 2 THEN T3.tran_id ELSE NULL END) AS q2_trans_cnt
-       ,COUNT(CASE WHEN ((EXTRACT(MONTH FROM T3.tran_date) + 2) / 3) = 3 THEN T3.tran_id ELSE NULL END) AS q3_trans_cnt
-       ,COUNT(CASE WHEN ((EXTRACT(MONTH FROM T3.tran_date) + 2) / 3) = 4 THEN T3.tran_id ELSE NULL END) AS q4_trans_cnt
-    FROM Customer AS T1
-        LEFT OUTER JOIN Accounts AS T2
-            ON T1.cust_id = T2.cust_id
-        LEFT OUTER JOIN Transactions AS T3
-            ON T2.acct_nbr = T3.acct_nbr
-GROUP BY T1.cust_id) WITH DATA UNIQUE PRIMARY INDEX (cust_id);</code></pre>
+ -- create table
+ CREATE SET TABLE HR.Employees (
+   GlobalID INTEGER,
+   FirstName VARCHAR(30),
+   LastName VARCHAR(30),
+   DateOfBirth DATE FORMAT 'YYYY-MM-DD',
+   JoinedDate DATE FORMAT 'YYYY-MM-DD',
+   DepartmentCode BYTEINT
+ )
+ UNIQUE PRIMARY INDEX ( GlobalID );
+
+ -- insert a record
+ INSERT INTO HR.Employees (
+   GlobalID,
+   FirstName,
+   LastName,
+   DateOfBirth,
+   JoinedDate,
+   DepartmentCode
+ ) VALUES (
+   101,
+   'Test',
+   'Testowsky',
+   '1980-01-05',
+   '2004-08-01',
+   01
+ );</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>We will now build a linear regression model that takes parameters from the dataset and tries to predict the monthly credit card balance.</p>
-</div>
-<div class="paragraph">
-<p>We call <code>td_analyze</code> and tell it we want a linear model. The input is in table <code>VAL_ADS</code> and consists of multiple columns. The dependent variable is <code>cc_avg_bal</code>. We want the model to be written to <code>val</code> database in table called <code>LINEAR_REGRESSION_DEMO</code>:</p>
-</div>
+</li>
+<li>
+<p>Download the Teradata JDBC driver and unzip it:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">call td_analyze('linear',
-  'database=val;
-  tablename=VAL_ADS;
-  columns=tot_age,tot_income,tot_cust_years,tot_children,single_ind,female_ind,married_ind,separated_ind,ck_acct_ind,sv_acct_ind,sv_avg_bal,ck_avg_bal,ca_resident_ind,ny_resident_ind,tx_resident_ind,il_resident_ind,az_resident_ind,oh_resident_ind;
-  dependent=cc_avg_bal;
-  outputdatabase=val;
-  outputtablename=linear_regression_demo');</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"> wget https://downloads.teradata.com/download/cdn/connectivity/jdbc/17.10.00.24/TeraJDBC__indep_indep.17.10.00.24.zip
+ unzip TeraJDBC__indep_indep.17.10.00.24.zip</code></pre>
 </div>
 </div>
+</li>
+<li>
+<p>Import the JDBC driver to your local Maven repository:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"> mvn install:install-file \
+ -Dfile=terajdbc4.jar \
+ -DgroupId=com.teradata \
+ -DartifactId=terajdbc4 \
+ -Dversion=17.10.00.24 \
+ -Dpackaging=jar \
+ -DgeneratePom=true</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Open the project in Anypoint Studio.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Once in Anypoint Studio, click on <code>Import projects..</code>:</p>
 <div class="paragraph">
-<p>The procedure creates several output tables. For now, we don&#8217;t have to analyze what is in the tables. Let&#8217;s see how we can use the newly created model to perform scoring.</p>
+<p><span class="image"><img src="_images/anypoint.import.projects.png" alt="Anypoint import projects menu" width="500"></span></p>
+</div>
+</li>
+<li>
+<p>Select <code>Anypoint Studio project from File System</code>:</p>
+<div class="paragraph">
+<p><span class="image"><img src="_images/select.import.option.png" alt="Anypoint import option" width="500"></span></p>
+</div>
+</li>
+<li>
+<p>Use the directory where you cloned the git repository as the <code>Project Root</code>. Leave all other settings at their default values.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_scoring"><a class="anchor" href="#_scoring"></a>Scoring</h2>
+<h2 id="_run"><a class="anchor" href="#_run"></a>Run</h2>
 <div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Run the example application in Anypoint Studio using the <code>Run</code> menu.
+The project will now build and run. It will take a minute.</p>
+</li>
+<li>
+<p>Got to your web browser and send the following request: <a href="http://localhost:8081/?lastname=Testowsky" class="bare">http://localhost:8081/?lastname=Testowsky</a>.</p>
 <div class="paragraph">
-<p>Let&#8217;s use the model to perform predictions and evaluate the scores. To do this, we call <code>td_analyze</code> with <code>linearscore</code> parameter. We point to the input table (<code>VAL_ADS</code>), the model tables (prefix <code>linear_regression_demo</code>) and define the target table (<code>linear_regression_score</code>) in <code>val</code> database:</p>
+<p>You should get the following JSON response:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">call td_analyze('linearscore',
-  'database=val;
-  tablename=VAL_ADS;
-  modeldatabase=val;
-  modeltablename=linear_regression_demo;
-  outputdatabase=val;
-  outputtablename=linear_regression_score;
-  predicted=estimate;
-  retain=cc_avg_bal;
-  scoringmethod=scoreandevaluate;');</code></pre>
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">[
+  {
+    "JoinedDate": "2004-08-01T00:00:00",
+    "DateOfBirth": "1980-01-05T00:00:00",
+    "FirstName": "Test",
+    "GlobalID": 101,
+    "DepartmentCode": 1,
+    "LastName": "Testowsky"
+  }
+]</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>As a result, we get <code>linear_regression_score</code> table that contains the real balance, the predicted balance and the difference between these two. Let&#8217;s have a look at a sample:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM linear_regression_score SAMPLE 10;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You will see results similar to:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>cust_id|cc_avg_bal        |estimate          |Residual           |
--------+------------------+------------------+-------------------+
-1362498|               0.0| 284.7057772484358| -284.7057772484358|
-1362828|           1184.35|463.74177458594215|  720.6082254140578|
-1362839| 2933.135802469136| 982.9240031182255| 1950.2117993509103|
-1362986| 500.9148148148148| 881.4116539412856| -380.4968391264708|
-1362511|235.85941489361701|294.35369563202846|-58.494280738411426|
-1363134|               0.0|430.27950420065997|-430.27950420065997|
-1363481|               0.0| 411.2359958542745| -411.2359958542745|
-1362644| 209.3304347826087|279.75770904482033| -70.42727426221163|
-1363141|               0.0| 550.1681921045503| -550.1681921045503|
-1363290|               0.0|120.35348558871233|-120.35348558871233|</pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In this quick start we have learned how to create ML models in SQL. The method used Vantage Analytics Library (VAL). We were able to build a linear regression model and run predictions using the model. We have done that using SQL without any coding.</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -625,7 +563,13 @@ GROUP BY T1.cust_id) WITH DATA UNIQUE PRIMARY INDEX (cust_id);</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://docs.teradata.com/r/DqJoLxuCtoR947URt1aH0w/root">Vantage Analytics Library User Guide</a></p>
+<p>View this <a href="http://www.mulesoft.org/documentation/display/current/Database+Connector">document</a> for more information on how to configure a database connector on your machine.</p>
+</li>
+<li>
+<p>Access plain <a href="http://www.mulesoft.org/documentation/display/current/Database+Connector+Reference">Reference material</a> for the Database Connector.</p>
+</li>
+<li>
+<p>Learn more about <a href="http://www.mulesoft.org/documentation/display/current/DataSense">DataSense</a>.</p>
 </li>
 </ul>
 </div>
@@ -646,7 +590,7 @@ GROUP BY T1.cust_id) WITH DATA UNIQUE PRIMARY INDEX (cust_id);</code></pre>
 </footer>
 <script src="../../_/js/site.js"></script>
 <script src="../../_/js/vendor/lunr.js"></script>
-<script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/ml.html"></script>
+<script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/mule.jdbc.example.html"></script>
 <script async src="../../_/../search-index.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/powershell.min.js"></script>
