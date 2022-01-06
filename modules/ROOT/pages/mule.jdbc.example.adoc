@@ -132,7 +132,7 @@ image:select.import.option.png[Anypoint import option, width=500]
 
 . Run the example application in Anypoint Studio using the `Run` menu.
 The project will now build and run. It will take a minute.
-. Got to your web browser and send the following request: http://localhost:8081/?lastname=Testowsky.
+. Go to your web browser and send the following request: http://localhost:8081/?lastname=Testowsky.
 +
 You should get the following JSON response:
 +
