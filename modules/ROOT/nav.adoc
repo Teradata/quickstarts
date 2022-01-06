@@ -12,6 +12,7 @@
 ** xref::fastload.adoc[]
 * Tutorials
 ** xref::dbt.adoc[]
+** xref::mule.jdbc.example.adoc[]
 ** Configure ODBC
 *** xref::odbc.ubuntu.adoc[Ubuntu]
 //* Planned
