@@ -2,6 +2,7 @@
 ** xref::getting.started.vmware.adoc[Vantage Express on VMware]
 ** xref::getting.started.vbox.adoc[Vantage Express on VirtualBox]
 ** xref::getting.started.utm.adoc[Vantage Express on UTM]
+** xref::vantage.express.gcp.adoc[Vantage Express on GCP]
 * Basics
 ** xref::nos.adoc[]
 ** xref::jdbc.adoc[]
