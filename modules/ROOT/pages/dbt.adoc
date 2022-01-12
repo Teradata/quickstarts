@@ -194,4 +194,4 @@ This tutorial demonstrated how to use dbt with Teradata Vantage. The sample proj
 
 == Further reading
 * link:https://docs.getdbt.com/docs/[dbt documentation]
-* link:https://github.com/dbeatty10/dbt-teradata[dbt-teradata plugin documentation]
+* link:https://github.com/Teradata/dbt-teradata[dbt-teradata plugin documentation]
