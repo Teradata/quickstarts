@@ -14,8 +14,10 @@
 * Tutorials
 ** xref::dbt.adoc[]
 ** xref::mule.jdbc.example.adoc[]
+* How-Tos
 ** Configure ODBC
 *** xref::odbc.ubuntu.adoc[Ubuntu]
+** xref::segment.adoc[]
 //* Planned
 //** Run Teradata Developer in Public Cloud
 //** Tune performance with indices
