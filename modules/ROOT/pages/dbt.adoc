@@ -3,7 +3,7 @@
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
 :page-revdate: December 28st, 2021
-:description: Use dbt (data build tool) ith Teradata Vantage.
+:description: Use dbt (data build tool) with Teradata Vantage.
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, elt, dbt.
 :tabs:
 
