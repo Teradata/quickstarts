@@ -8,26 +8,66 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" href="{{uiRootPath}}/css/search.css">
 <link rel="stylesheet" href="{{uiRootPath}}/css/styles.css">
 <link rel="stylesheet" href="{{uiRootPath}}/css/fontawesome.all.min.css">
-<link rel="stylesheet" href="{{uiRootPath}}/css/admonitions.css">
+<link rel="stylesheet" href="{{uiRootPath}}/css/webfonts.css">
 <style>
+  .doc a, .doc a:hover {
+    color: #007373;
+  }
+  .article {
+    background-color: #f5f5f5;
+  }
   .navbar {
-    height: 64px;
-    background: #616d73;
-    color: #fff;
+    height: 70px;
+    background: #fafafa;
+    color: #000;
     align-items: center;
     display: flex;
-    border-top: #f3753f solid 2px;
   }
 
   .navbar-brand {
     padding-left: 0px;
   }
 
-  .navbar-brand .navbar-item {
-    font-family: RidleyGrotesk-Medium, Arial, Helvetica, sans-serif;
-    font-size: 19px;
-    padding: 4px 0px 0px 0px;
-    color: #fff;
+  @media screen and (min-width: 1024px) {
+    .navbar-end .navbar-link, .navbar-end>.navbar-item {
+      color: #000;
+    }
+
+    .navbar-end .navbar-item.has-dropdown:hover .navbar-link, .navbar-end .navbar-link:hover, .navbar-end>a.navbar-item:hover {
+      color: #000;
+    }
+
+    .navbar-brand {
+      flex-grow: 0;
+    }
+  }
+
+  .navbar-menu {
+    height: 100%;
+    width: 100%;
+  }
+
+  .navbar-item {
+    font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: #000;
+    text-transform: uppercase;
+    padding: 0px 20px;
+  }
+
+  .toc .toc-menu a:hover, .navbar-end>a.navbar-item:hover {
+    color: #f3743f;
+  }
+
+  #menu-options {
+    padding-left: 42px;
+    flex-grow: 1;
+  }
+
+  #menu-options.navbar-end .navbar-item:first-child {
+      border-bottom: #007373 solid 3px;
+      padding-top: 3px;
+      color: #007373;
   }
 
   .navbar-end .navbar-item.has-dropdown:hover .navbar-link, .navbar-end .navbar-link:hover, .navbar-end>a.navbar-item:hover {
@@ -35,28 +75,54 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
 
   .navbar-brand .navbar-item:first-child {
-    font-family: RidleyGrotesk-Medium, Arial, Helvetica, sans-serif;
-    font-size: 19px;
-    padding-top: 4px;
+    font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: #000;
+    text-transform: uppercase;
   }
 
   .navbar-item .navbar-link {
     line-height: inherit;
-
   }
 
   .navbar-logo {
     width: 100px;
     height: 24px;
-    margin-left: 16px;
-    margin-right: 10px;
+    margin-left: 24px;
+    margin-right: 24px;
   }
 
   #search-input {
-    font-family: RidleyGrotesk-Medium, Arial, Helvetica, sans-serif;
-    font-size: 15px;
+    font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    width: 293px;
+    height: 40px;
+    border-radius: 8px;
+    padding-left: 14px;
+    padding-right: 14px;
+    background-image: url({{uiRootPath}}/img/search.svg);
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-origin: content-box;
+    border-color: #9b9b9b;
+  }
+  .nav-container {
+    background: #f5f5f5;
+    padding-top: 24px;
+    font-size: 14px;
   }
 
+  .breadcrumbs {
+    padding: 0 0 0 24px;
+  }
+  .breadcrumbs li::after {
+    content: ">";
+    padding: 0 0.5rem;
+  }
+
+  .nav {
+    background-color: initial;
+  }
   aside.toc.sidebar {
       -ms-flex-preferred-size: 15rem !important;
       flex-basis: 15rem !important;
@@ -65,6 +131,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .edit-this-page img {
     margin-right: 4px;
     vertical-align: bottom;
+  }
+
+  .toolbar {
+    background-color: #f5f5f5;
+    height: 54px;
+    margin-top: 29px;
   }
 
   .doc .source-toolbox {
@@ -100,14 +172,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     position: relative;
   }
 
-  pre.highlight code.hljs {
-    background: #fafafa;
+  .doc pre.highlight code {
+    background: #eeeeee;
     -webkit-box-shadow: inset 0 0 1.75px #e1e1e1;
     box-shadow: inset 0 0 1.75px #e1e1e1;
     display: block;
     overflow-x: auto;
-    padding: 1.25rem .75rem .75rem .75rem;
+    padding: 70px 12px 12px 16px;
+    font-size: 14px;
 }
+
+  .doc .listingblock pre:not(.highlight), .doc .literalblock pre {
+    background: #eeeeee;
+    -webkit-box-shadow: inset 0 0 1.75px #e1e1e1;
+    box-shadow: inset 0 0 1.75px #e1e1e1;
+    display: block;
+    overflow-x: auto;
+    padding: 0.75rem 0.75rem 0.75rem 1rem;
+    font-size: 14px;
+  }
+
 .doc>h1.page:first-child {
   margin-top: 1.5rem;
 }
@@ -117,10 +201,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     -ms-flex: auto;
     flex: auto;
     font-size: .94444rem;
-    margin: 0 2rem;
+    margin: 0 16px;
     max-width: 100%;
     min-width: 0;
-    padding: 0 1rem 2rem;
+    padding: 0 8px;
 }
 .toc.sidebar .toc-menu {
     margin-right: .75rem;
@@ -135,7 +219,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 .page-feedback.bottom {
   text-align: center;
-  padding-top: 1rem;
+  background-color: #ebebeb;
+  padding: 16px 0px;
+  margin-top: 32px;
 }
 
 .click-icon {
@@ -146,18 +232,173 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border-radius: 1rem;
 }
 
-i.fa[class^='icon-'],
-i.fa[class*=' icon-']::before {
-    content: "";
-    height: 1.25rem;
-    width: 1.25rem;
-    margin-right: 0.25rem;
-    margin-left: -0.5rem;
+.doc h2:not(.discrete) {
+  border-bottom: none;
 }
 
 
+.nav-panel-explore {
+  visibility: collapse;
+}
+
+.panels {
+  padding-left: 16px;
+}
+
+body ::-webkit-scrollbar-thumb {
+  background-color: initial;
+}
+
+.is-current-page>.nav-link, .is-current-page>.nav-text {
+  font-weight: initial;
+  color: #007373;
+}
+
+.is-current-page {
+  background: rgba(133, 221, 220, 0.1);
+  border-radius: 0px 16px 16px 0px;
+}
+
+.toc .toc-menu a.is-active {
+  border-left-color: #007373;
+  color: #333;
+}
+.page-controls {
+  padding-top: 12px;
+  font-size: 14px;
+}
+
+.report-an-issue {
+  padding: 10px 20px 10px 10px;
+  background-image: url({{uiRootPath}}/img/pan_tool.svg);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-origin: content-box;
+}
+
+.edit-on-github {
+  padding: 10px 20px 10px 10px;
+  background-image: url({{uiRootPath}}/img/edit.svg);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-origin: content-box;
+}
+
+.page-controls>a {
+  color: #5d5d5d;
+  text-decoration: none;
+  color: inherit;
+}
+
+.doc .imageblock {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+}
+
+
+
+.doc .admonitionblock.important {
+  background-color: #f6eee4;
+}
+
+.doc .admonitionblock.note {
+  background-color: #eaf3f2;
+}
+
+.doc .admonitionblock.tip {
+  background-color: #eaf3f2;
+}
+
+.doc .admonitionblock.important .icon {
+  background-color: initial;
+  color: #FF8F00;
+}
+
+.doc .admonitionblock.note .icon {
+  background-color: initial;
+  color: #007373;
+}
+
+.doc .admonitionblock.tip .icon {
+  background-color: initial;
+  color: #007373;
+}
+.doc .admonitionblock .icon {
+  position: absolute;
+  padding: 12px 0px 0px 72px;
+  -webkit-transform: none;
+  transform: none;
+  text-transform: capitalize;
+}
+
+.doc .admonitionblock td.content {
+  padding: 32px 8px 8px 72px;
+  background-color: initial;
+  width: 100%;
+  word-wrap: anywhere;
+}
+.doc .admonitionblock .icon i {
+  font-family: Arial;
+  font-size: 16px;
+}
+
+.doc .admonitionblock p, .doc .admonitionblock td.content {
+  font-size: 16px;
+}
+
+i.fa[class*=' icon-']::before {
+  position: absolute;
+  top: 24px;
+  left: 26px;
+}
+
+.doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
+  content: url("{{uiRootPath}}/img/warning.svg");
+}
+
+.doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
+  content: url("{{uiRootPath}}/img/note.svg");
+}
+
+.doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
+  content: url("{{uiRootPath}}/img/note.svg");
+}
+
+.doc .source-toolbox {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 55px;
+  font-size: 16px;
+  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+  color: black;
+  width: 100%;
+  border-bottom: 1px solid #d1d1d1;
+}
+
+.doc .source-toolbox .source-lang {
+  padding-top: 24px;
+  padding-left: 16px;
+  width: 100%;
+}
+
+.doc .source-toolbox img.copy-icon {
+  content: url("{{uiRootPath}}/img/copy.svg");
+}
+.doc .source-toolbox>:not(:last-child)::after {
+  content: "";
+}
+
+.doc .source-toolbox .copy-button {
+  align-content: inherit;
+  width: 24px;
+  height: 24px;
+  padding-top: 16px;
+  padding-right: 16px;
+}
+
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
-<script async src="{{uiRootPath}}/js/behavior.js"></script>
 <link rel="icon" href="{{{uiRootPath}}}/img/favicon.ico" type="image/x-icon">
-

@@ -30,12 +30,12 @@
 .tabset.is-loading .tabs li:not(:first-child),
 .tabset:not(.is-loading) .tabs li:not(.is-active) {
   background-color: #616d73;
-  color: white;
+  color: #f5f5f5;
 }
 
 .tabset.is-loading .tabs li:first-child::after,
 .tabs li.is-active::after {
-  background-color: white;
+  background-color: #f5f5f5;
   content: "";
   display: block;
   height: 3px; /* Chrome doesn't always paint the line accurately, so add a little extra */
