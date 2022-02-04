@@ -68,8 +68,7 @@ VALUES (
 +
 [source, teradata-sql]
 ----
-SELECT *
-FROM HR.Employees;
+SELECT * FROM HR.Employees;
 ----
 +
 You should get the following results:

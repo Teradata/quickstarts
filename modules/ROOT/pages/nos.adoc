@@ -25,7 +25,7 @@ Let's first have a look at sample CSV data. We take the first 10 rows that Vanta
 
 [source, teradata-sql]
 ----
-SELECT top 10 payload..* FROM (
+SELECT TOP 10 payload..* FROM (
 	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
 ) AS d;
 ----
