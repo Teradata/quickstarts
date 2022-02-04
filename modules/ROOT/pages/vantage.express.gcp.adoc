@@ -212,13 +212,13 @@ bteq
 ----
 . Login to your database using `dbc` as username and password:
 +
-[source, sql, role="content-editable emits-gtm-events", id="pw_change_bteq_logon"]
+[source, teradata-sql, role="content-editable emits-gtm-events", id="pw_change_bteq_logon"]
 ----
 .logon localhost/dbc
 ----
 . Change the password for `dbc` user:
 +
-[source, sql, role="content-editable emits-gtm-events", id="pw_change_mod_user"]
+[source, teradata-sql, role="content-editable emits-gtm-events", id="pw_change_mod_user"]
 ----
 MODIFY USER dbc AS PASSWORD = new_password;
 ----

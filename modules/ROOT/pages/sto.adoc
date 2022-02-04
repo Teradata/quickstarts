@@ -18,7 +18,7 @@ You need access to a Teradata Vantage instance. If you need a new instance of Va
 
 Let's start with something simple. What if you wanted the database to print "Hello World"?
 
-[source, sql]
+[source, teradata-sql]
 ----
 SELECT *
 FROM
@@ -37,7 +37,7 @@ Hello World!
 
 Let's analyze what just happened here. The SQL includes `echo Hello World!`. This is a Bash command. OK, so now we know how to run Bash commands. But why did we get 2 rows and not one? That's because our simple script was run once on each AMP and I happen to have 2 AMPs:
 
-[source, sql]
+[source, teradata-sql]
 ----
 -- Teradata magic that returns the number of AMPs in a system
 SELECT hashamp()+1 AS number_of_amps;
@@ -71,7 +71,7 @@ Let's assume the script is on your local machine at `/tmp/helloworld.py`.
 
 First, we need to setup permissions in Vantage. We are going to do this using a new database to keep it clean.
 
-[source, sql]
+[source, teradata-sql]
 ----
 -- Create a new database called sto
 CREATE DATABASE STO
@@ -84,7 +84,7 @@ GRANT CREATE EXTERNAL PROCEDURE ON STO to dbc;
 
 You can upload the script to Vantage using the following procedure call:
 
-[source, sql]
+[source, teradata-sql]
 ----
 call SYSUIF.install_file('helloworld',
                          'helloworld.py', 'cz!/tmp/helloworld.py');
@@ -92,7 +92,7 @@ call SYSUIF.install_file('helloworld',
 
 Now that the script has been uploaded, you can call it like this:
 
-[source, sql]
+[source, teradata-sql]
 ----
 -- We switch to STO database
 DATABASE STO
@@ -128,7 +128,7 @@ So far, we have been using `SCRIPT` operator to run standalone scripts. But the 
 
 We will start with creating a table with a few rows.
 
-[source, sql]
+[source, teradata-sql]
 ----
 -- Switch to STO database.
 DATABASE STO
@@ -162,14 +162,14 @@ for line in sys.stdin:
 Note, how the scripts assumes that urls will be fed into `stdin` one by one, line by line. Also, note how it prints results line by line, using the tab character as a delimiter between values.
 
 Let's install the script. Here, we assume that the script file is at `/tmp/urlparser.py` on our local machine:
-[source, sql]
+[source, teradata-sql]
 ----
 CALL SYSUIF.install_file('urlparser',
 	'urlparser.py', 'cz!/tmp/urlparser.py');
 ----
 
 With the script installed, we will now retrieve data from `urls` table and feed it into the script to retrieve query parameters:
-[source, sql]
+[source, teradata-sql]
 ----
 -- We inform Vantage to create a symbolic link from the UIF directory to ./sto/
 SET SESSION SEARCHUIFDBPATH = sto ;
@@ -201,7 +201,7 @@ mylist      |...testing
 
 We have learned how to take data from Vantage, pass it to a script and get output. Is there an easy way to store this output in a table? Sure, there is. We can combine the select above with `CREATE TABLE` statement:
 
-[source, sql]
+[source, teradata-sql]
 ----
 -- We inform Vantage to create a symbolic link from the UIF directory to ./sto/
 SET SESSION SEARCHUIFDBPATH = sto ;
@@ -220,7 +220,7 @@ NO PRIMARY INDEX;
 
 Now, let's inspect the contents of `url_params` table:
 
-[source, sql]
+[source, teradata-sql]
 ----
 SELECT * FROM url_params;
 ----

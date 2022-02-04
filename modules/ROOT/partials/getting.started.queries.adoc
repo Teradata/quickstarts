@@ -1,4 +1,4 @@
-[source, sql, id="first_query", role="emits-gtm-events"]
+[source, teradata-sql, id="first_query", role="emits-gtm-events"]
 ----
 CREATE DATABASE HR
 AS PERMANENT = 60e6, -- 60MB
@@ -30,7 +30,7 @@ AS PERMANENT = 60e6, -- 60MB
 ++++
 . Let's create a sample table and insert some data and query it. We will first create a table to hold employee information:
 +
-[source, sql]
+[source, teradata-sql]
 ----
 
 CREATE SET TABLE HR.Employees (
@@ -45,7 +45,7 @@ UNIQUE PRIMARY INDEX ( GlobalID );
 ----
 . Now, let's insert a record:
 +
-[source, sql]
+[source, teradata-sql]
 ----
 INSERT INTO HR.Employees (
    GlobalID,
@@ -66,7 +66,7 @@ VALUES (
 ----
 . Finally, let's see if we can retrieve the data:
 +
-[source, sql]
+[source, teradata-sql]
 ----
 SELECT *
 FROM HR.Employees;

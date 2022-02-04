@@ -49,7 +49,7 @@ We will be working with the US tax fillings for nonprofit organizations. Nonprof
 
 Let's create a database in Vantage. Use you favorite SQL tool to run:
 
-[source, sql]
+[source, teradata-sql]
 ----
 CREATE DATABASE irs
 AS PERMANENT = 120e6, -- 120MB
@@ -71,14 +71,14 @@ fastload
 
 First, let's log in to a Vantage database. I've a Vantage Express running locally, so I'll use `localhost` as the hostname and `dbc` for username and password:
 
-[source, sql, role="content-editable"]
+[source, teradata-sql, role="content-editable"]
 ----
 LOGON localhost/dbc,dbc;
 ----
 
 Now, that we are logged in, I'm going to prepare the database. I'm switching to `irs` database and making sure that the target table `irs_returns` and error tables (more about error tables later) do not exist:
 
-[source, sql]
+[source, teradata-sql]
 ----
 DATABASE irs;
 DROP TABLE irs_returns;
@@ -88,7 +88,7 @@ DROP TABLE irs_returns_err2;
 
 I'll now create an empty table that can hold the data elements from the csv file.
 
-[source, sql]
+[source, teradata-sql]
 ----
 CREATE MULTISET TABLE irs_returns (
     return_id INT,
@@ -106,7 +106,7 @@ PRIMARY INDEX ( return_id );
 
 Now, that the target table has been prepared, we can start loading the data. `ERRORFILES` directive defines error files. The error files are really tables that TPT creates. The first table contains information about data conversion and other issues. The second table keeps track of data uniqueness issues, e.g. primary key violations.
 
-[source, sql]
+[source, teradata-sql]
 ----
 BEGIN LOADING irs_returns
     ERRORFILES irs_returns_err1, irs_returns_err2;
@@ -114,28 +114,28 @@ BEGIN LOADING irs_returns
 
 We instruct TPT to save a checkpoint every 10k rows. It's useful in case we have to restart our job. It will be able to resume from the last checkpoint.
 
-[source, sql]
+[source, teradata-sql]
 ----
     CHECKPOINT 10000;
 ----
 
 We also need to tell TPT to skip the first row in the CSV file as start at record 2. That's because the first row contains column headers.
 
-[source, sql]
+[source, teradata-sql]
 ----
     RECORD 2;
 ----
 
 TPT also needs to know that it's a comma-separated file:
 
-[source, sql]
+[source, teradata-sql]
 ----
     SET RECORD VARTEXT ",";
 ----
 
 `DEFINE` block specifies what columns we should expect:
 
-[source, sql]
+[source, teradata-sql]
 ----
     DEFINE in_return_id (VARCHAR(19)),
     in_filing_type (VARCHAR(5)),
@@ -150,14 +150,14 @@ TPT also needs to know that it's a comma-separated file:
 
 `DEFINE` block also has `FILE` attribute that points to the file with the data. Replace `FILE = /tmp/index_2020.csv;` with your location of `index_2020.csv` file:
 
-[source, sql]
+[source, teradata-sql]
 ----
     FILE = /tmp/index_2020.csv;
 ----
 
 Finally, we define the INSERT statement that will put data into the database and we close off `LOADING` block:
 
-[source, sql]
+[source, teradata-sql]
 ----
     INSERT INTO irs_returns (
         return_id,
@@ -185,13 +185,13 @@ END LOADING;
 
 Once the job has finished, we are logging off from the database to clean things up.
 
-[source, sql]
+[source, teradata-sql]
 ----
 LOGOFF;
 ----
 
 Here is what the entire script looks like:
-[source, sql]
+[source, teradata-sql]
 ----
 LOGON localhost/dbc,dbc;
 
@@ -269,7 +269,7 @@ fastload < file_with_instruction.fastload
 
 In our case, the file is in an S3 bucket. That means, that we can use Native Object Storage (NOS) to ingest the data:
 
-[source, sql]
+[source, teradata-sql]
 ----
 -- create an S3-backed foreign table
 CREATE FOREIGN TABLE irs_returns_nos

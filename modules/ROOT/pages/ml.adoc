@@ -36,7 +36,7 @@ scp ~/Downloads/VAL-2.0.0.3-1.x86_64.rpm root@vantage.server.name:/tmp/
 3. We will now create a new database where VAL functions and procedures will be installed. You could install VAL in a global location such as `SYSLIB`, but installing VAL in a specific database will make it easier to start over if things go wrong.
 Let's create a database called `val` and grant appropriate permissions to our user. Please edit to match your database name and user id:
 +
-[source, sql, role="content-editable"]
+[source, teradata-sql, role="content-editable"]
 ----
 CREATE DATABASE val
 AS PERMANENT = 60e6, -- 60MB
@@ -83,7 +83,7 @@ Let's start by creating a wide table (Analytic Data Set, or ADS) that joins the 
 
 NOTE: You must have CREATE TABLE permissions on the Database where the Vantage Analytic Library is installed.
 
-[source, sql, role="content-editable"]
+[source, teradata-sql, role="content-editable"]
 ----
 -- Switch to val database.
 DATABASE val;
@@ -131,7 +131,7 @@ We will now build a linear regression model that takes parameters from the datas
 
 We call `td_analyze` and tell it we want a linear model. The input is in table `VAL_ADS` and consists of multiple columns. The dependent variable is `cc_avg_bal`. We want the model to be written to `val` database in table called `LINEAR_REGRESSION_DEMO`:
 
-[source, sql]
+[source, teradata-sql]
 ----
 call td_analyze('linear',
   'database=val;
@@ -148,7 +148,7 @@ The procedure creates several output tables. For now, we don't have to analyze w
 
 Let's use the model to perform predictions and evaluate the scores. To do this, we call `td_analyze` with `linearscore` parameter. We point to the input table (`VAL_ADS`), the model tables (prefix `linear_regression_demo`) and define the target table (`linear_regression_score`) in `val` database:
 
-[source, sql]
+[source, teradata-sql]
 ----
 call td_analyze('linearscore',
   'database=val;
@@ -164,7 +164,7 @@ call td_analyze('linearscore',
 
 As a result, we get `linear_regression_score` table that contains the real balance, the predicted balance and the difference between these two. Let's have a look at a sample:
 
-[source, sql]
+[source, teradata-sql]
 ----
 SELECT * FROM linear_regression_score SAMPLE 10;
 ----

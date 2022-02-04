@@ -23,7 +23,7 @@ U.S. Geological Survey. The bucket is at https://td-usgs-public.s3.amazonaws.com
 
 Let's first have a look at sample CSV data. We take the first 10 rows that Vantage will fetch from the bucket:
 
-[source, sql]
+[source, teradata-sql]
 ----
 SELECT top 10 payload..* FROM (
 	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
@@ -49,7 +49,7 @@ Payload..*
 
 We have got plenty of numbers, but what do they mean? To answer this question, we will ask Vantage to detect the schema of the CSV files:
 
-[source, sql]
+[source, teradata-sql]
 ----
 SELECT * FROM (
 	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
@@ -78,7 +78,7 @@ We see that the CSV files have 6 columns. For each column, we get the name, the 
 
 Now that we know the schema, we can work with the dataset as if it was a regular SQL table. To prove the point, let's try to do some data aggregation. Let's get an average temperature per site for sites that collect temperatures.
 
-[source, sql]
+[source, teradata-sql]
 ----
 SELECT Payload..site_no AS Site_no, AVG(Payload..Temp) as Avg_Temp FROM (
         LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
@@ -98,7 +98,7 @@ Site_no  Avg_Temp
 
 Note how we still have to dereference CSV columns with `Payload..`. To make our experience more similar to a table we can define a foreign table:
 
-[source, sql]
+[source, teradata-sql]
 ----
 -- If you are running this sample as dbc user you will not have permissions
 -- to create a table in dbc database. Instead, create a new database and use
@@ -136,7 +136,7 @@ Querying object storage takes time. What if you decided that the data looks inte
 
 IMPORTANT: This query assumes you created database `Riverflow` and a foreign table called `Riverflow.riverflow` in the previous step.
 
-[source, sql]
+[source, teradata-sql]
 ----
 
 -- This query assumes you created database `Riverflow`
@@ -177,7 +177,7 @@ So far, we have used a public bucket. What if you have a private bucket? How do 
 
 It is possible to inline your credentials directly into your query:
 
-[source, sql]
+[source, teradata-sql]
 ----
 SELECT top 10 payload..* FROM (
 	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
@@ -187,7 +187,7 @@ SELECT top 10 payload..* FROM (
 
 Entering these credentials all the time can be tedious and less secure. In Vantage, you can create an authorization object that will serve as a container for your credentials:
 
-[source, sql]
+[source, teradata-sql]
 ----
 CREATE AUTHORIZATION aws_authorization
     USER 'YOUR-ACCESS-KEY-ID'
@@ -196,7 +196,7 @@ CREATE AUTHORIZATION aws_authorization
 
 You can then reference your authorization object when you create a foreign table:
 
-[source, sql]
+[source, teradata-sql]
 ----
 CREATE FOREIGN TABLE Riverflow.riverflow, EXTERNAL SECURITY aws_authorization
     USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
@@ -206,7 +206,7 @@ CREATE FOREIGN TABLE Riverflow.riverflow, EXTERNAL SECURITY aws_authorization
 
 So far, we have talked about reading and importing data from object storage. Would it not be nice if we had a way to use SQL to export data from Vantage to object storage? This is exactly what `WRITE_NOS` function is for. Let's say we want to export data from `Riverflow.riverflow_native` table to object storage. You can do so with the following query:
 
-[source, sql]
+[source, teradata-sql]
 ----
 SELECT * FROM WRITE_NOS (
     ON ( SELECT * FROM Riverflow.riverflow_native )
