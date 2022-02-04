@@ -687,7 +687,7 @@ Last updated: September 12th, 2021</p>
 Let&#8217;s create a database called <code>val</code> and grant appropriate permissions to our user. Please edit to match your database name and user id:</p>
 <div class="listingblock content-editable">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE DATABASE val
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE val
 AS PERMANENT = 60e6, -- 60MB
     SPOOL = 120e6; -- 120MB
 
@@ -777,7 +777,7 @@ You must have CREATE TABLE permissions on the Database where the Vantage Analyti
 </div>
 <div class="listingblock content-editable">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- Switch to val database.
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Switch to val database.
 DATABASE val;
 
 -- Create the ADS.
@@ -827,7 +827,7 @@ GROUP BY T1.cust_id) WITH DATA UNIQUE PRIMARY INDEX (cust_id);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">call td_analyze('linear',
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">call td_analyze('linear',
   'database=val;
   tablename=VAL_ADS;
   columns=tot_age,tot_income,tot_cust_years,tot_children,single_ind,female_ind,married_ind,separated_ind,ck_acct_ind,sv_acct_ind,sv_avg_bal,ck_avg_bal,ca_resident_ind,ny_resident_ind,tx_resident_ind,il_resident_ind,az_resident_ind,oh_resident_ind;
@@ -849,7 +849,7 @@ GROUP BY T1.cust_id) WITH DATA UNIQUE PRIMARY INDEX (cust_id);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">call td_analyze('linearscore',
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">call td_analyze('linearscore',
   'database=val;
   tablename=VAL_ADS;
   modeldatabase=val;
@@ -866,7 +866,7 @@ GROUP BY T1.cust_id) WITH DATA UNIQUE PRIMARY INDEX (cust_id);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM linear_regression_score SAMPLE 10;</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM linear_regression_score SAMPLE 10;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5469,10 +5469,14 @@ GROUP BY T1.cust_id) WITH DATA UNIQUE PRIMARY INDEX (cust_id);</code></pre>
 <script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/ml.html"></script>
 <script async src="../../_/../search-index.js"></script>
 <script async src="../../_/js/behavior.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/powershell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/dockerfile.min.js"></script>
-<script>hljs.highlightAll();</script>
+<script async src="../../_/js/teradata.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>
+<script>
+  hljs.registerLanguage('teradata-sql', window.hljsDefineTeradataSql);
+  hljs.highlightAll();
+</script>
 <script>
   // this script instruments elements to emit GTM events
   for (let e of document.getElementsByClassName("emits-gtm-events")) {

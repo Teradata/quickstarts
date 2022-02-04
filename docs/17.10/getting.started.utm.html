@@ -825,7 +825,7 @@ PDE state is RUN/STARTED.</pre>
 <p>Using <code>dbc</code> user, we will create a new database called <code>HR</code>. Copy/paste this query and run it by hitting the run query button (<span class="image"><img src="_images/run.query.button.png" alt="Run Query Button" width="24" height="24"></span>) or pressing <kbd>F5</kbd> key:</p>
 <div id="first_query" class="listingblock emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE DATABASE HR
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE HR
 AS PERMANENT = 60e6, -- 60MB
     SPOOL = 120e6; -- 120MB</code></pre>
 </div>
@@ -856,7 +856,7 @@ AS PERMANENT = 60e6, -- 60MB
 <p>Let&#8217;s create a sample table and insert some data and query it. We will first create a table to hold employee information:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE SET TABLE HR.Employees (
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE SET TABLE HR.Employees (
    GlobalID INTEGER,
    FirstName VARCHAR(30),
    LastName VARCHAR(30),
@@ -872,7 +872,7 @@ UNIQUE PRIMARY INDEX ( GlobalID );</code></pre>
 <p>Now, let&#8217;s insert a record:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO HR.Employees (
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">INSERT INTO HR.Employees (
    GlobalID,
    FirstName,
    LastName,
@@ -895,7 +895,7 @@ VALUES (
 <p>Finally, let&#8217;s see if we can retrieve the data:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT *
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT *
 FROM HR.Employees;</code></pre>
 </div>
 </div>
@@ -5509,10 +5509,14 @@ FROM HR.Employees;</code></pre>
 <script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/getting.started.utm.html"></script>
 <script async src="../../_/../search-index.js"></script>
 <script async src="../../_/js/behavior.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/powershell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/dockerfile.min.js"></script>
-<script>hljs.highlightAll();</script>
+<script async src="../../_/js/teradata.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>
+<script>
+  hljs.registerLanguage('teradata-sql', window.hljsDefineTeradataSql);
+  hljs.highlightAll();
+</script>
 <script>
   // this script instruments elements to emit GTM events
   for (let e of document.getElementsByClassName("emits-gtm-events")) {

@@ -710,7 +710,7 @@ Last updated: October 21st, 2021</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE DATABASE irs
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE irs
 AS PERMANENT = 120e6, -- 120MB
     SPOOL = 120e6; -- 120MB</code></pre>
 </div>
@@ -739,7 +739,7 @@ AS PERMANENT = 120e6, -- 120MB
 </div>
 <div class="listingblock content-editable">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">LOGON localhost/dbc,dbc;</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">LOGON localhost/dbc,dbc;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -747,7 +747,7 @@ AS PERMANENT = 120e6, -- 120MB
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">DATABASE irs;
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">DATABASE irs;
 DROP TABLE irs_returns;
 DROP TABLE irs_returns_err1;
 DROP TABLE irs_returns_err2;</code></pre>
@@ -758,7 +758,7 @@ DROP TABLE irs_returns_err2;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE MULTISET TABLE irs_returns (
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE MULTISET TABLE irs_returns (
     return_id INT,
     filing_type VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
     ein INT,
@@ -777,7 +777,7 @@ PRIMARY INDEX ( return_id );</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">BEGIN LOADING irs_returns
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">BEGIN LOADING irs_returns
     ERRORFILES irs_returns_err1, irs_returns_err2;</code></pre>
 </div>
 </div>
@@ -786,7 +786,7 @@ PRIMARY INDEX ( return_id );</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">    CHECKPOINT 10000;</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">    CHECKPOINT 10000;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -794,7 +794,7 @@ PRIMARY INDEX ( return_id );</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">    RECORD 2;</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">    RECORD 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -802,7 +802,7 @@ PRIMARY INDEX ( return_id );</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">    SET RECORD VARTEXT ",";</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">    SET RECORD VARTEXT ",";</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -810,7 +810,7 @@ PRIMARY INDEX ( return_id );</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">    DEFINE in_return_id (VARCHAR(19)),
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">    DEFINE in_return_id (VARCHAR(19)),
     in_filing_type (VARCHAR(5)),
     in_ein (VARCHAR(19)),
     in_tax_period (VARCHAR(19)),
@@ -826,7 +826,7 @@ PRIMARY INDEX ( return_id );</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">    FILE = /tmp/index_2020.csv;</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">    FILE = /tmp/index_2020.csv;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -834,7 +834,7 @@ PRIMARY INDEX ( return_id );</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">    INSERT INTO irs_returns (
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">    INSERT INTO irs_returns (
         return_id,
         filing_type,
         ein,
@@ -863,7 +863,7 @@ END LOADING;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">LOGOFF;</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">LOGOFF;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -871,7 +871,7 @@ END LOADING;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">LOGON localhost/dbc,dbc;
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">LOGON localhost/dbc,dbc;
 
 DATABASE irs;
 DROP TABLE irs_returns;
@@ -957,7 +957,7 @@ LOGOFF;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- create an S3-backed foreign table
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- create an S3-backed foreign table
 CREATE FOREIGN TABLE irs_returns_nos
     USING ( LOCATION('/s3/s3.amazonaws.com/irs-form-990/index_2020.csv') );
 
@@ -5554,10 +5554,14 @@ NO PRIMARY INDEX;</code></pre>
 <script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/fastload.html"></script>
 <script async src="../../_/../search-index.js"></script>
 <script async src="../../_/js/behavior.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/powershell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/dockerfile.min.js"></script>
-<script>hljs.highlightAll();</script>
+<script async src="../../_/js/teradata.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>
+<script>
+  hljs.registerLanguage('teradata-sql', window.hljsDefineTeradataSql);
+  hljs.highlightAll();
+</script>
 <script>
   // this script instruments elements to emit GTM events
   for (let e of document.getElementsByClassName("emits-gtm-events")) {

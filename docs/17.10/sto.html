@@ -653,7 +653,7 @@ Last updated: September 7th, 2021</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT *
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT *
 FROM
   SCRIPT(
     SCRIPT_COMMAND('echo Hello World!')
@@ -676,7 +676,7 @@ Hello World!</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- Teradata magic that returns the number of AMPs in a system
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Teradata magic that returns the number of AMPs in a system
 SELECT hashamp()+1 AS number_of_amps;</code></pre>
 </div>
 </div>
@@ -725,7 +725,7 @@ SELECT hashamp()+1 AS number_of_amps;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- Create a new database called sto
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Create a new database called sto
 CREATE DATABASE STO
 AS PERMANENT = 60e6, -- 60MB
     SPOOL = 120e6; -- 120MB
@@ -739,7 +739,7 @@ GRANT CREATE EXTERNAL PROCEDURE ON STO to dbc;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">call SYSUIF.install_file('helloworld',
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">call SYSUIF.install_file('helloworld',
                          'helloworld.py', 'cz!/tmp/helloworld.py');</code></pre>
 </div>
 </div>
@@ -748,7 +748,7 @@ GRANT CREATE EXTERNAL PROCEDURE ON STO to dbc;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- We switch to STO database
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- We switch to STO database
 DATABASE STO
 
 -- We tell Vantage where to look for the script. This can be
@@ -793,7 +793,7 @@ Hello World!</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- Switch to STO database.
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Switch to STO database.
 DATABASE STO
 
 -- Create a table with a few urls
@@ -831,7 +831,7 @@ for line in sys.stdin:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CALL SYSUIF.install_file('urlparser',
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CALL SYSUIF.install_file('urlparser',
 	'urlparser.py', 'cz!/tmp/urlparser.py');</code></pre>
 </div>
 </div>
@@ -840,7 +840,7 @@ for line in sys.stdin:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- We inform Vantage to create a symbolic link from the UIF directory to ./sto/
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- We inform Vantage to create a symbolic link from the UIF directory to ./sto/
 SET SESSION SEARCHUIFDBPATH = sto ;
 
 SELECT *
@@ -879,7 +879,7 @@ mylist      |...testing</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- We inform Vantage to create a symbolic link from the UIF directory to ./sto/
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- We inform Vantage to create a symbolic link from the UIF directory to ./sto/
 SET SESSION SEARCHUIFDBPATH = sto ;
 
 CREATE MULTISET TABLE
@@ -899,7 +899,7 @@ NO PRIMARY INDEX;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM url_params;</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM url_params;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5505,10 +5505,14 @@ mylist      |...testing</pre>
 <script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/sto.html"></script>
 <script async src="../../_/../search-index.js"></script>
 <script async src="../../_/js/behavior.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/powershell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/dockerfile.min.js"></script>
-<script>hljs.highlightAll();</script>
+<script async src="../../_/js/teradata.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>
+<script>
+  hljs.registerLanguage('teradata-sql', window.hljsDefineTeradataSql);
+  hljs.highlightAll();
+</script>
 <script>
   // this script instruments elements to emit GTM events
   for (let e of document.getElementsByClassName("emits-gtm-events")) {

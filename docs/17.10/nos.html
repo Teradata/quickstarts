@@ -669,7 +669,7 @@ U.S. Geological Survey. The bucket is at <a href="https://td-usgs-public.s3.amaz
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT top 10 payload..* FROM (
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT top 10 payload..* FROM (
 	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
 ) AS d;</code></pre>
 </div>
@@ -698,7 +698,7 @@ U.S. Geological Survey. The bucket is at <a href="https://td-usgs-public.s3.amaz
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM (
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM (
 	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
 	RETURNTYPE='NOSREAD_SCHEMA'
 ) AS d;</code></pre>
@@ -732,7 +732,7 @@ GageHeight      decimal(3,2)                        csv       /S3/s3.amazonaws.c
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT Payload..site_no AS Site_no, AVG(Payload..Temp) as Avg_Temp FROM (
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT Payload..site_no AS Site_no, AVG(Payload..Temp) as Avg_Temp FROM (
         LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
 ) AS d GROUP BY Payload..site_no HAVING Avg_Temp IS NOT NULL;</code></pre>
 </div>
@@ -755,7 +755,7 @@ GageHeight      decimal(3,2)                        csv       /S3/s3.amazonaws.c
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- If you are running this sample as dbc user you will not have permissions
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- If you are running this sample as dbc user you will not have permissions
 -- to create a table in dbc database. Instead, create a new database and use
 -- the newly create database to create a foreign table.
 
@@ -809,7 +809,7 @@ This query assumes you created database <code>Riverflow</code> and a foreign tab
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- This query assumes you created database `Riverflow`
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- This query assumes you created database `Riverflow`
 -- and a foreign table called `Riverflow.riverflow` in the previous step.
 
 CREATE MULTISET TABLE
@@ -857,7 +857,7 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT top 10 payload..* FROM (
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT top 10 payload..* FROM (
 	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
     AUTHORIZATION='{"ACCESS_ID":"","ACCESS_KEY":""}'
 ) AS d;</code></pre>
@@ -868,7 +868,7 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE AUTHORIZATION aws_authorization
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE AUTHORIZATION aws_authorization
     USER 'YOUR-ACCESS-KEY-ID'
     PASSWORD 'YOUR-SECRET-ACCESS-KEY';</code></pre>
 </div>
@@ -878,7 +878,7 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE FOREIGN TABLE Riverflow.riverflow, EXTERNAL SECURITY aws_authorization
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE FOREIGN TABLE Riverflow.riverflow, EXTERNAL SECURITY aws_authorization
     USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );</code></pre>
 </div>
 </div>
@@ -892,7 +892,7 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM WRITE_NOS (
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM WRITE_NOS (
     ON ( SELECT * FROM Riverflow.riverflow_native )
     PARTITION BY site_no ORDER BY site_no
     USING
@@ -5488,10 +5488,14 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 <script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/nos.html"></script>
 <script async src="../../_/../search-index.js"></script>
 <script async src="../../_/js/behavior.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/powershell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/dockerfile.min.js"></script>
-<script>hljs.highlightAll();</script>
+<script async src="../../_/js/teradata.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>
+<script>
+  hljs.registerLanguage('teradata-sql', window.hljsDefineTeradataSql);
+  hljs.highlightAll();
+</script>
 <script>
   // this script instruments elements to emit GTM events
   for (let e of document.getElementsByClassName("emits-gtm-events")) {
