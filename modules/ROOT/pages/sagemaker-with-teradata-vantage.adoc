@@ -1,5 +1,5 @@
 
-= AWS SageMaker with Teradata Vantage
+= Use AWS SageMaker with Teradata Vantage
 :experimental:
 :page-author: Wenjie Tehan
 :page-email: wenjie.tehan@teradata.com
