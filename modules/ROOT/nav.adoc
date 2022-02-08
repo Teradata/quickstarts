@@ -18,6 +18,8 @@
 ** Configure ODBC
 *** xref::odbc.ubuntu.adoc[Ubuntu]
 ** xref::segment.adoc[]
+** AWS
+*** xref::sagemaker-with-teradata-vantage.adoc[]
 //* Planned
 //** Run Teradata Developer in Public Cloud
 //** Tune performance with indices
