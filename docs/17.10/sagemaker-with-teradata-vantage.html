@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Query data stored in object storage :: Getting Started Guides</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/docs/17.10/nos.html">
-    <meta name="description" content="Teradata Vantage Native Object Storage - read and write from/to object storage, unified SQL interface for Vantage and object storage.">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics">
+    <title>AWS SageMaker with Teradata Vantage :: Getting Started Guides</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/docs/17.10/sagemaker-with-teradata-vantage.html">
+    <meta name="description" content="Use AWS SageMaker with Teradata Vantage.">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, ai, artificial intelligence, aws sagemaker.">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
 <!-- Google Tag Manager -->
@@ -533,7 +533,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Basics</span>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="nos.html">Query data stored in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -588,7 +588,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <button class="nav-item-toggle"></button>
     <span class="nav-text">AWS</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="sagemaker-with-teradata-vantage.html">AWS SageMaker with Teradata Vantage</a>
   </li>
 </ul>
@@ -624,8 +624,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li>Basics</li>
-    <li><a href="nos.html">Query data stored in object storage</a></li>
+    <li>How-Tos</li>
+    <li>AWS</li>
+    <li><a href="sagemaker-with-teradata-vantage.html">AWS SageMaker with Teradata Vantage</a></li>
   </ul>
 </nav>
 </div>
@@ -633,292 +634,307 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/nos.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/sagemaker-with-teradata-vantage.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Query data stored in object storage</h1>
-<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
-Last updated: September 7th, 2021</p>
+<h1 class="page">AWS SageMaker with Teradata Vantage</h1>
+<p>Author: <a href="mailto:wenjie.tehan@teradata.com">Wenjie Tehan</a><br/>
+Last updated: February 8th, 2022</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Native Object Storage (NOS) is a Vantage feature that allows you to query data stored in files in object storage such as AWS S3, Google GCS, Azure Blob or on-prem implementations. It&#8217;s useful in scenarios where you want to explore data without building a data pipeline to bring it into Vantage.</p>
+<p>This how-to will help you to integrate Amazon SageMaker with Teradata Vantage. The approach this guide explains is one of many potential approaches to integrate with the service.</p>
+</div>
+<div class="paragraph">
+<p>Amazon SageMaker provides a fully managed Machine Learning Platform. There are two use cases for Amazon SageMaker and Teradata:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Data resides on Teradata Vantage and Amazon SageMaker will be used for both the Model definition and subsequent scoring. Under this use case Teradata will provide data into the Amazon S3 environment so that Amazon SageMaker can consume training and test data sets for the purpose of model development. Teradata would further make data available via Amazon S3 for subsequent scoring by Amazon SageMaker. Under this model Teradata is a data repository only.</p>
+</li>
+<li>
+<p>Data resides on Teradata Vantage and Amazon SageMaker will be used for the Model definition, and Teradata for the subsequent scoring. Under this use case Teradata will provide data into the Amazon S3 environment so that Amazon SageMaker can consume training and test data sets for the purpose of model development. Teradata will need to import the Amazon SageMaker model into a Teradata table for subsequent scoring by Teradata Vantage. Under this model Teradata is a data repository and a scoring engine.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The first use case is discussed in this document.</p>
+</div>
+<div class="paragraph">
+<p>Amazon SageMaker consumes training and test data from an Amazon S3 bucket. This article describes how you can load Teradata analytics data sets into an Amazon S3 bucket. The data can then available to Amazon SageMaker to build and train machine learning models and deploy them into a production environment.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>You need access to a Teradata Vantage instance. NOS is enabled in all Vantage editions from Vantage Express through Developer, DYI to Vantage as a Service starting from version 17.10. If you need a new instance of Vantage the easiest way is to <a href="getting.started.vmware.html" class="page">install Vantage Express on your local machine</a>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using <a href="getting.started.vmware.html" class="page">VMware</a>, <a href="getting.started.vbox.html" class="page">VirtualBox</a>, or <a href="getting.started.utm.html" class="page">UTM</a>. You can also run Vantage Express in the cloud on <a href="vantage.express.gcp.html" class="page">GCP</a>.</p>
+</li>
+<li>
+<p>IAM permission to access Amazon S3 bucket, and to use Amazon SageMaker service.</p>
+</li>
+<li>
+<p>An Amazon S3 bucket to store training data.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_explore_data_with_nos"><a class="anchor" href="#_explore_data_with_nos"></a>Explore data with NOS</h2>
+<h2 id="_load_data"><a class="anchor" href="#_load_data"></a>Load data</h2>
 <div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Currently, NOS supports CSV, JSON (as array or new-line delimited), and Parquet data formats.
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
-<p>Let&#8217;s say you have a dataset stored as CSV files in an S3 bucket. You want to explore the dataset before you decide if you want to bring it into Vantage. For this scenario, we are going to use a public dataset published by Teradata that contains river flow data collected by the
-U.S. Geological Survey. The bucket is at <a href="https://td-usgs-public.s3.amazonaws.com/" class="bare">https://td-usgs-public.s3.amazonaws.com/</a>.</p>
+<p>Amazon SageMaker trains data from an Amazon S3 bucket. Following are the steps to load training data from Vantage to an Amazon S3 bucket:</p>
 </div>
-<div class="paragraph">
-<p>Let&#8217;s first have a look at sample CSV data. We take the first 10 rows that Vantage will fetch from the bucket:</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to Amazon SageMaker console and create a notebook instance. See <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/gs-setup-working-env.html">Amazon SageMaker Developer Guide</a> for instructions on how to create a notebook instance:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/create.notebook.png" alt="Create notebook instance">
 </div>
+</div>
+</li>
+<li>
+<p>Open your notebook instance:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/open.notebook.instance.png" alt="Open notebook instance">
+</div>
+</div>
+</li>
+<li>
+<p>Start a new file by clicking on <code>New &#8594; conda_python3</code>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/start.new.file.png" alt="Start new file">
+</div>
+</div>
+</li>
+<li>
+<p>Install Teradata Python library:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT TOP 10 payload..* FROM (
-	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-) AS d;</code></pre>
+<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">!pip install teradataml</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Here is what I&#8217;ve got:</p>
-</div>
+</li>
+<li>
+<p>In a new cell and import additional libraries:</p>
 <div class="listingblock">
 <div class="content">
-<pre>Payload..*
-------------------------------------------------------------------
-["10.9","15300","09380000","2018-06-28 00:30","671","0.00","9.80"]
-["10.8","14500","09380000","2018-06-28 01:00","673","0.00","9.64"]
-["10.7","14100","09380000","2018-06-28 01:15","672","0.00","9.56"]
-["11.0","16200","09380000","2018-06-27 00:00","669","0.00","9.97"]
-["10.9","15700","09380000","2018-06-27 00:30","668","0.00","9.88"]
-["10.8","15400","09380000","2018-06-27 00:45","672","0.00","9.82"]
-["10.8","15100","09380000","2018-06-27 01:00","672","0.00","9.77"]
-["10.8","14700","09380000","2018-06-27 01:15","672","0.00","9.68"]
-["10.9","16000","09380000","2018-06-27 00:15","668","0.00","9.93"]
-["10.8","14900","09380000","2018-06-28 00:45","672","0.00","9.72"]</pre>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import teradataml as tdml
+from teradataml import create_context, get_context, remove_context
+from teradataml.dataframe.dataframe import DataFrame
+import pandas as pd
+import boto3, os</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>We have got plenty of numbers, but what do they mean? To answer this question, we will ask Vantage to detect the schema of the CSV files:</p>
-</div>
+</li>
+<li>
+<p>In a new cell, connect to Teradata Vantage. Replace <code>&lt;hostname&gt;</code>, <code>&lt;database user name&gt;</code>, <code>&lt;database password&gt;</code> to match your Vantage environment:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM (
-	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-	RETURNTYPE='NOSREAD_SCHEMA'
-) AS d;</code></pre>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">create_context(host = '&lt;hostname&gt;', username = '&lt;database user name&gt;', password = '&lt;database password&gt;')</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Vantage will now fetch a data sample to analyze the schema and return results:</p>
-</div>
+</li>
+<li>
+<p>Retrieve data rom the table where the training dataset resides using TeradataML DataFrame API:</p>
 <div class="listingblock">
 <div class="content">
-<pre>Name            Datatype                            FileType  Location
---------------- ----------------------------------- --------- -------------------------------------------------------------------
-GageHeight2     decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
-Flow            decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
-site_no         int                                 csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
-datetime        TIMESTAMP(0) FORMAT'Y4-MM-DDBHH:MI' csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
-Precipitation   decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
-GageHeight      decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv</pre>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">train_data = tdml.DataFrame('table_with_training_data')
+trainDF = train_data.to_pandas()</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>We see that the CSV files have 6 columns. For each column, we get the name, the datatype and the file coordinates that were used to infer the schema.</p>
+</li>
+<li>
+<p>Write data to a local file:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">trainFileName = 'train.csv'
+trainDF.to_csv(trainFileName, header=None, index=False)</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Upload the file to Amazon S3:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">bucket = 'sagedemo'
+prefix = 'sagemaker/train'
+
+trainFile = open(trainFileName, 'rb')
+boto3.Session().resource('s3').Bucket(bucket).Object(os.path.join(prefix, localFile)).upload_fileobj(trainFile)</code></pre>
+</div>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_query_data_with_nos"><a class="anchor" href="#_query_data_with_nos"></a>Query data with NOS</h2>
+<h2 id="_train_the_model"><a class="anchor" href="#_train_the_model"></a>Train the model</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Now that we know the schema, we can work with the dataset as if it was a regular SQL table. To prove the point, let&#8217;s try to do some data aggregation. Let&#8217;s get an average temperature per site for sites that collect temperatures.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Select <code>Training jobs</code> on the left menu under <code>Training</code>, then click on <code>Create training job</code>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/create.training.job.png" alt="Create training job">
 </div>
+</div>
+</li>
+<li>
+<p>At the <code>Create training job</code> window, fill in the <code>Job name</code> (e.g. <code>xgboost-bank</code>) and <code>Create a new role</code> for the IAM role. Choose <code>Any S3 bucket</code> for the Amazon S3 buckets and <code>Create role</code>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/create.iam.role.png" alt="Create IAM role" width="50%">
+</div>
+</div>
+</li>
+<li>
+<p>Back in the <code>Create training job</code> window, use <code>XGBoost</code> as the algorithm:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/choose.an.algorithm.png" alt="Choose an algorithm" width="50%">
+</div>
+</div>
+</li>
+<li>
+<p>Use the default <code>ml.m4.xlarge</code> instance type, and 30GB of additional storage volume per instance. This is a short training job, shouldn’t take more than 10 minutes.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/resource.configuration.png" alt="Resource configuration" width="50%">
+</div>
+</div>
+</li>
+<li>
+<p>Fill in following hyperparameters and leave everything else as default:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT Payload..site_no AS Site_no, AVG(Payload..Temp) as Avg_Temp FROM (
-        LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-) AS d GROUP BY Payload..site_no HAVING Avg_Temp IS NOT NULL;</code></pre>
+<pre>num_round=100
+silent=0
+eta=0.2
+gamma=4
+max_depth=5
+min_child_weight=6
+subsample=0.8
+objective='binary:logistic'</pre>
 </div>
 </div>
+</li>
+<li>
+<p>For <code>Input data configuration</code>, enter the Amazon S3 bucket where you stored your training data. Input mode is <code>File</code>. Content type is <code>csv</code>. <code>S3 location</code> is where the file uploaded to:</p>
 <div class="paragraph">
-<p>Result:</p>
+<p><span class="image"><img src="_images/input.data.configuration.png" alt="Input data configuration" width="50%"></span></p>
 </div>
-<div class="listingblock">
+</li>
+<li>
+<p>For <code>Output data configuration</code>, enter path where the output data will be stored:</p>
+<div class="imageblock">
 <div class="content">
-<pre>Site_no  Avg_Temp
--------- ---------
-09380000 11
-09423560 73
-09424900 93
-09429070 81</pre>
+<img src="_images/output.data.configuration.png" alt="Output data configuration" width="50%">
 </div>
 </div>
-<div class="paragraph">
-<p>Note how we still have to dereference CSV columns with <code>Payload..</code>. To make our experience more similar to a table we can define a foreign table:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- If you are running this sample as dbc user you will not have permissions
--- to create a table in dbc database. Instead, create a new database and use
--- the newly create database to create a foreign table.
-
-CREATE DATABASE Riverflow
-  AS PERMANENT = 60e6, -- 60MB
-  SPOOL = 120e6; -- 120MB
-
-CREATE FOREIGN TABLE Riverflow.riverflow
-    USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
-
-SELECT top 10 * FROM Riverflow.riverflow;</code></pre>
-</div>
+</li>
+<li>
+<p>Leave everything else as default, and click on “Create training job”. Detail instructions on how to configure the training job can be found in <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-mkt-algo-train.html#sagemaker-mkt-algo-train-console">Amazon SageMaker Developer Guide</a>.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>Result:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>Location                                                            GageHeight2 Flow site_no datetime            Precipitation GageHeight
-------------------------------------------------------------------- ----------- ---- ------- ------------------- ------------- ----------
-/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09429070/2018/07/02.csv null        null 9429070 2018-07-02 14:40:00 1.21          null
-/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:30:00 0.00          -0.01
-/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:45:00 0.00          -0.01
-/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 01:00:00 0.00          -0.01
-/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:15:00 0.00          -0.01
-/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09429070/2018/07/02.csv null        null 9429070 2018-07-02 14:38:00 1.06          null</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This time, the <code>SELECT</code> statement looks like a regular select against an in-database table. Also, the returned data uses column names from the CSV file. No need to dereference with <code>Payload..</code>. There is still an issue though. The query was slow. There is an easy way to bring the CSV data into Vantage to speed things up. Read on to find out how.</p>
+<p>Once the training job’s created, Amazon SageMaker launches the ML instances to train the model, and stores the resulting model artifacts and other output in the <code>Output data configuration</code> (<code>path/&lt;training job name&gt;/output</code> by default).</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_load_data_from_nos_into_vantage"><a class="anchor" href="#_load_data_from_nos_into_vantage"></a>Load data from NOS into Vantage</h2>
+<h2 id="_deploy_the_model"><a class="anchor" href="#_deploy_the_model"></a>Deploy the model</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Querying object storage takes time. What if you decided that the data looks interesting and you want to do some more analysis with a solution that will you quicker answers? The good news is that data returned with NOS can be used as a source for <code>CREATE TABLE</code> statements. Assuming you have <code>CREATE TABLE</code> privilege, you will be able to run:</p>
+<p>After you train your model, deploy it using a persistent endpoint</p>
 </div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-This query assumes you created database <code>Riverflow</code> and a foreign table called <code>Riverflow.riverflow</code> in the previous step.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
+<div class="sect2">
+<h3 id="_create_a_model"><a class="anchor" href="#_create_a_model"></a>Create a model</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Select <code>Models</code> under <code>Inference</code> from the left panel, then <code>Create model</code>. Fill in the model name (e.g. <code>xgboost-bank</code>), and choose the IAM role you created from the previous step.</p>
+</li>
+<li>
+<p>For <code>Container definition 1</code>, use <code>433757028032.dkr.ecr.us-west-2.amazonaws.com/xgboost:latest</code> as <code>Location of inference code image</code>. <code>Location of model artifacts</code> is the output path of your training job</p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- This query assumes you created database `Riverflow`
--- and a foreign table called `Riverflow.riverflow` in the previous step.
-
-CREATE MULTISET TABLE
-    Riverflow.riverflow_native(site_no, Flow, GageHeight, datetime)
-AS (
-    SELECT site_no, Flow, GageHeight, datetime FROM Riverflow.riverflow
-) WITH DATA
-NO PRIMARY INDEX;
-
-SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
+<img src="_images/container.definition.1.png" alt="Container definition 1" width="50%">
 </div>
 </div>
-<div class="paragraph">
-<p>Result:</p>
+</li>
+<li>
+<p>Leave everything else as default, then <code>Create model</code>.</p>
+</li>
+</ol>
 </div>
-<div class="listingblock">
+</div>
+<div class="sect2">
+<h3 id="_create_an_endpoint_configuration"><a class="anchor" href="#_create_an_endpoint_configuration"></a>Create an endpoint configuration</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Select the model you just created, then click on <code>Create endpoint configuration</code>:</p>
+<div class="imageblock">
 <div class="content">
-<pre>site_no   Flow  GageHeight  datetime
--------  -----  ----------  -------------------
-9400815    .00        -.01  2018-07-10 00:30:00
-9400815    .00        -.01  2018-07-10 01:00:00
-9400815    .00        -.01  2018-07-10 01:15:00
-9400815    .00        -.01  2018-07-10 01:30:00
-9400815    .00        -.01  2018-07-10 02:00:00
-9400815    .00        -.01  2018-07-10 02:15:00
-9400815    .00        -.01  2018-07-10 01:45:00
-9400815    .00        -.01  2018-07-10 00:45:00
-9400815    .00        -.01  2018-07-10 00:15:00
-9400815    .00        -.01  2018-07-10 00:00:00</pre>
+<img src="_images/create.endpoint.configuration.png" alt="Create endpoint configuration">
 </div>
 </div>
-<div class="paragraph">
-<p>This time, the <code>SELECT</code> query returned in less than a second. Vantage didn&#8217;t have to fetch the data from NOS. Instead, it answered using data that was already on its nodes.</p>
+</li>
+<li>
+<p>Fill in the name (e.g. <code>xgboost-bank</code>) and use default for everything else. The model name and training job should be automatically populated for you. Click on <code>Create endpoint configuration</code>.</p>
+</li>
+</ol>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_access_private_buckets"><a class="anchor" href="#_access_private_buckets"></a>Access private buckets</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>So far, we have used a public bucket. What if you have a private bucket? How do you tell Vantage what credentials it should use?</p>
-</div>
-<div class="paragraph">
-<p>It is possible to inline your credentials directly into your query:</p>
-</div>
-<div class="listingblock">
+<div class="sect2">
+<h3 id="_create_endpoint"><a class="anchor" href="#_create_endpoint"></a>Create endpoint</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Select <code>Inference</code> &#8594; <code>Models</code> from the left panel, select the model again, and click on <code>Create endpoint</code> this time:</p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT top 10 payload..* FROM (
-	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-    AUTHORIZATION='{"ACCESS_ID":"","ACCESS_KEY":""}'
-) AS d;</code></pre>
+<img src="_images/create.endpoint.png" alt="Create endpoint">
 </div>
 </div>
-<div class="paragraph">
-<p>Entering these credentials all the time can be tedious and less secure. In Vantage, you can create an authorization object that will serve as a container for your credentials:</p>
-</div>
-<div class="listingblock">
+</li>
+<li>
+<p>Fill in the name (e.g. <code>xgboost-bank</code>), and select <code>Use an existing endpoint configuration</code>:
+image::attach.endpoint.configuration.png[Attach endpoint configuration]</p>
+</li>
+<li>
+<p>Select the endpoint configuration created from last step, and click on <code>Select endpoint configuration</code>:</p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE AUTHORIZATION aws_authorization
-    USER 'YOUR-ACCESS-KEY-ID'
-    PASSWORD 'YOUR-SECRET-ACCESS-KEY';</code></pre>
+<img src="_images/select.endpoint.configuration.png" alt="Select endpoint configuration" width="50%">
 </div>
 </div>
-<div class="paragraph">
-<p>You can then reference your authorization object when you create a foreign table:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE FOREIGN TABLE Riverflow.riverflow, EXTERNAL SECURITY aws_authorization
-    USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_export_data_from_vantage_to_object_storage"><a class="anchor" href="#_export_data_from_vantage_to_object_storage"></a>Export data from Vantage to object storage</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>So far, we have talked about reading and importing data from object storage. Would it not be nice if we had a way to use SQL to export data from Vantage to object storage? This is exactly what <code>WRITE_NOS</code> function is for. Let&#8217;s say we want to export data from <code>Riverflow.riverflow_native</code> table to object storage. You can do so with the following query:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM WRITE_NOS (
-    ON ( SELECT * FROM Riverflow.riverflow_native )
-    PARTITION BY site_no ORDER BY site_no
-    USING
-        LOCATION('YOUR-OBJECT-STORE-URI')
-        STOREDAS('PARQUET')
-        COMPRESSION('SNAPPY')
-        NAMING('RANGE')
-        INCLUDE_ORDERING('TRUE')
-) AS d;</code></pre>
-</div>
+</li>
+<li>
+<p>Leave everything else as default and click on <code>Create endpoint</code>.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>Here, we instruct Vantage to take data from <code>Riverflow.riverflow_native</code> and save it in <code>YOUR-OBJECT-STORE-URI</code> bucket using <code>parquet</code> format. The data will be split into files by <code>site_no</code> attribute. The files will be compressed.</p>
+<p>Now the model is deployed to the endpoint and can be used by client applications.</p>
+</div>
 </div>
 </div>
 </div>
@@ -926,7 +942,7 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this quick start we have learned how to read data from object storage using Native Object Storage (NOS) functionality in Vantage. NOS supports reading and importing data stored in CSV, JSON and Parquet formats. NOS can also export data from Vantage to object storage.</p>
+<p>This how-to demonstrated how to extract training data from Vantage and use it to train a model in Amazon SageMaker. The solution used a Jupyter notebook to extract data from Vantage and write it to an S3 bucket. A SageMaker training job read data from the S3 bucket and produced a model. The model was deployed to AWS as a service endpoint.</p>
 </div>
 </div>
 </div>
@@ -936,7 +952,7 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://docs.teradata.com/r/2mw8ooFr~xX0EaaGFaDW8A/root">Teradata Vantage™ - Native Object Store Getting Started Guide</a></p>
+<p><a href="ml.html" class="page">Train ML models in Vantage using only SQL</a></p>
 </li>
 </ul>
 </div>
@@ -5498,7 +5514,7 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 </footer>
 <script src="../../_/js/site.js"></script>
 <script src="../../_/js/vendor/lunr.js"></script>
-<script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/nos.html"></script>
+<script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/sagemaker-with-teradata-vantage.html"></script>
 <script async src="../../_/../search-index.js"></script>
 <script async src="../../_/js/behavior.js"></script>
 <script src="../../_/js/teradata.min.js"></script>
