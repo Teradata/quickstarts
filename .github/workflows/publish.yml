@@ -16,7 +16,7 @@ jobs:
       - name: Run Antora
         run: ./buildw
       - name: Add static resources
-        run: cp -fr ./static/ ./build/site/
+        run: cp -fr ./static/. ./build/site/
       - name: Turnstyle
         if: ${{ ! env.GITHUB_TOKEN == '' }}
         uses: softprops/turnstyle@v1
