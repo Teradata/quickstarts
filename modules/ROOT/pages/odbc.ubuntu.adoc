@@ -73,7 +73,6 @@ python3 test.py
 
 You should get output similar to:
 
-[source]
 ----
 ['ODBC Drivers', 'Teradata Database ODBC Driver 17.10']
 (datetime.date(2022, 1, 5), )

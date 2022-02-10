@@ -42,7 +42,8 @@ pip install dbt-teradata
 == Configure dbt
 
 We will now configure dbt to connect to your Vantage database. Create file `$HOME/.dbt/profiles.yml` with the following content. Adjust `<host>`, `<user>`, `<password>` to match your Teradata instance.
-[source]
+
+[source, yaml]
 ----
 jaffle_shop:
   outputs:
