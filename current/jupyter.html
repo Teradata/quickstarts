@@ -3,9 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Page Not Found :: Getting Started Guides</title>
+    <title>Use Vantage from a Jupyter notebook :: Getting Started Guides</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/current/jupyter.html">
+    <meta name="description" content="Use Teradata Vantage from a Jupyter notebook">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, JDBC, java applications, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy">
     <meta name="generator" content="Antora 3.0.1">
-    <link rel="stylesheet" href="/_/css/site.css">
+    <link rel="stylesheet" href="../_/css/site.css">
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -13,10 +16,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');</script>
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="/_/css/search.css">
-<link rel="stylesheet" href="/_/css/styles.css">
-<link rel="stylesheet" href="/_/css/fontawesome.all.min.css">
-<link rel="stylesheet" href="/_/css/webfonts.css">
+<link rel="stylesheet" href="../_/css/search.css">
+<link rel="stylesheet" href="../_/css/styles.css">
+<link rel="stylesheet" href="../_/css/fontawesome.all.min.css">
+<link rel="stylesheet" href="../_/css/webfonts.css">
 <style>
   .doc a, .doc a:hover {
     color: #007373;
@@ -140,7 +143,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border-radius: 8px;
     padding-left: 14px;
     padding-right: 14px;
-    background-image: url(/_/img/search.svg);
+    background-image: url(../_/img/search.svg);
     background-repeat: no-repeat;
     background-position: right center;
     background-origin: content-box;
@@ -316,7 +319,7 @@ body ::-webkit-scrollbar-thumb {
 
 .report-an-issue {
   padding: 10px 20px 10px 10px;
-  background-image: url(/_/img/pan_tool.svg);
+  background-image: url(../_/img/pan_tool.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -324,7 +327,7 @@ body ::-webkit-scrollbar-thumb {
 
 .edit-on-github {
   padding: 10px 20px 10px 10px;
-  background-image: url(/_/img/edit.svg);
+  background-image: url(../_/img/edit.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -400,15 +403,15 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/warning.svg");
+  content: url("../_/img/warning.svg");
 }
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .source-toolbox {
@@ -431,7 +434,7 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .source-toolbox img.copy-icon {
-  content: url("/_/img/copy.svg");
+  content: url("../_/img/copy.svg");
 }
 .doc .source-toolbox>:not(:last-child)::after {
   content: "";
@@ -447,10 +450,10 @@ i.fa[class*=' icon-']::before {
 
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
-<link rel="icon" href="/_/img/favicon.ico" type="image/x-icon">
-    <script>var uiRootPath = '/_'</script>
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+    <script>var uiRootPath = '../_'</script>
   </head>
-  <body class="status-404">
+  <body class="article">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7Q6CLV"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -500,16 +503,114 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </header>
 
 <div class="body">
-<div class="nav-container">
+<div class="nav-container" data-component="ROOT" data-version="current">
   <aside class="nav">
     <div class="panels">
-<div class="nav-panel-explore is-active" data-panel="explore">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Get access to Vantage</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on GCP</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Basics</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nos.html">Query data stored in object storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ml.html">Train ML models in Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="fastload.html">Run large bulkloads efficiently</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">How-Tos</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Configure ODBC</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="odbc.ubuntu.html">Ubuntu</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="segment.html">Store events from Twilio Segment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">AWS</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context" style="visibility: hidden;">
+    <span class="title">Getting Started Guides</span>
+    <span class="version">current</span>
+  </div>
   <ul class="components">
-    <li class="component">
-      <a class="title" href="/current/getting.started.vmware.html">Getting Started Guides</a>
+    <li class="component is-current">
+      <a class="title" href="getting.started.vmware.html">Getting Started Guides</a>
       <ul class="versions">
-        <li class="version is-latest">
-          <a href="/current/getting.started.vmware.html">current</a>
+        <li class="version is-current is-latest">
+          <a href="getting.started.vmware.html">current</a>
         </li>
       </ul>
     </li>
@@ -522,17 +623,275 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li>Basics</li>
+    <li><a href="jupyter.html">Use Vantage from a Jupyter notebook</a></li>
+  </ul>
 </nav>
 </div>
   <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+      <div class="page-controls">
+      <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/jupyter.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+    </div>
+  <div class="toc-menu">
+  </div>
+</aside>
 <article class="doc">
-<h1 class="page">Page Not Found</h1>
+<h1 class="page">Use Vantage from a Jupyter notebook</h1>
+<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
+Last updated: September 8th, 2021</p>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The page you&#8217;re looking for does not exist. It may have been moved. You can return to the <a href="/current/getting.started.vmware.html">start page</a>, or follow one of the links in the navigation to the left.</p>
+<p>In this quickstart we will go through connecting to Teradata Vantage from a Jupyter notebook.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_options"><a class="anchor" href="#_options"></a>Options</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are a couple of ways to connect to Vantage from a Jupyter Notebook:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="#_teradata_libraries">Use python or R libraries in a regular Python/R kernel notebook</a> - this option works well when you are in a restricted environment that doesn&#8217;t allow you to spawn your own Docker images. Also, it&#8217;s useful in traditional datascience scenarios when you have to mix SQL and Python/R in a notebook. If you are proficient with Jupyter and have your own set of preferred libraries and extensions, start with this option.</p>
+</li>
+<li>
+<p><a href="#_teradata_jupyter_docker_image">Use the Teradata Jupyter Docker image</a> - the Teradata Jupyter Docker image bundles the Teradata SQL kernel (more on this later), <code>teradataml</code> and <code>tdplyr</code> libraries, python and R drivers. It also contains Jupyter extensions that allow you to manage Teradata connections, explore objects in Vantage database. It&#8217;s convenient when you work a lot with SQL or would find a visual Navigator helpful. If you are new to Jupyter or if you prefer to get a currated assembly of libraries and extensions, start with this option.</p>
+</li>
+</ol>
+</div>
+<div class="sect2">
+<h3 id="_teradata_libraries"><a class="anchor" href="#_teradata_libraries"></a>Teradata libraries</h3>
+<div class="paragraph">
+<p>This option uses a regular Jupyter Lab notebook. We will see how to load the Teradata Python driver and use it from Python code. We will also examine <code>ipython-sql</code> extension that adds support for SQL-only cells.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>We start with a plain Jupyter Lab notebook. Here, I&#8217;m using docker but any method of starting a notebook, including Jupyter Hub, GCP AI Platform Notebooks, AWS SageMaker Notebooks, Azure ML Notebooks will do.</p>
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run --rm -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes \
+  -v "${PWD}":/home/jovyan/work jupyter/datascience-notebook</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Docker logs will display the url that you need to go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre>Starting JupyterLab ...
+Docker Build ID = 3.0.0-ec03292021
+Using unencrypted HTTP
+
+Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
+
+* Or enter this token when prompted by Jupyter: 96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
+* If you used a different port to run your Docker, replace 8888 with your port number</pre>
+</div>
+</div>
+</li>
+<li>
+<p>We will open a new notebook and create a cell to install the required libraries:</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+I&#8217;ve published a notebook with all the cells described below on GitHub: <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/attachments/vantage-with-python-libraries.ipynb" class="bare">https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/attachments/vantage-with-python-libraries.ipynb</a>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">import sys
+!{sys.executable} -m pip install teradatasqlalchemy</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Now, we will import <code>Pandas</code> and define the connection string to connect to Teradata. Since I&#8217;m running my notebook in Docker on my local machine and I want to connect to a local Vantage Express VM, I&#8217;m using <code>host.docker.internal</code> DNS name provided by Docker to reference the IP of my machine.</p>
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">import pandas as pd
+db_connection_string = "teradatasql://dbc:dbc@host.docker.internal/dbc"</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>I can now call Pandas to query Vantage and move the result to a Pandas dataframe:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">pd.read_sql("SELECT * FROM dbc.dbcinfo", con = db_connection_string)</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>The syntax above is concise but it can get tedious if all you need is to explore data in Vantage. We will use <code>ipython-sql</code> and its <code>%%sql</code> magic to create SQL-only cells. We start with importing the required libraries.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">import sys
+!{sys.executable} -m pip install ipython-sql teradatasqlalchemy</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>We load <code>ipython-sql</code> and define the db connection string:</p>
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">%load_ext sql
+%sql teradatasql://dbc:dbc@host.docker.internal/dbc</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>We can now use <code>%sql</code> and <code>%%sql</code> magic. Let&#8217;s say we want to explore data in a table. We can create a cell that says:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">%%sql
+SELECT * FROM dbc.dbcinfo</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>If we want to move the data to a Pandas frame, we can say:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">result = %sql SELECT * FROM dbc.dbcinfo
+result.DataFrame()</code></pre>
+</div>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>If you arrived on this page by clicking on a link, please notify the owner of the site that the link is broken.
-If you typed the URL of this page manually, please double check that you entered the address correctly.</p>
+<p>There are many other features that ipython-sql provides, including variable substitution, plotting with <code>matplotlib</code>, writting results to a local csv file or back to the database. See <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/attachments/vantage-with-python-libraries.ipynb">the demo notebook</a> for examples and <a href="https://github.com/catherinedevlin/ipython-sql/">ipython-sql github repo</a> for a complete reference.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_teradata_jupyter_docker_image"><a class="anchor" href="#_teradata_jupyter_docker_image"></a>Teradata Jupyter Docker image</h3>
+<div class="paragraph">
+<p>The Teradata Jupyter Docker image builds on <code>jupyter/datascience-notebook</code> Docker image. It adds the Teradata SQL kernel, Teradata Python and R libraries, Jupyter extensions to make you productive while interacting with Teradata Vantage. The image also contains sample notebooks that demonstrate how to use the SQL kernel and Teradata libraries.</p>
+</div>
+<div class="paragraph">
+<p>The SQL kernel and Teradata Jupyter extensions are useful for people that spend a lot of time with the SQL interface. Think about it as a notebook experience that, in many cases, is more convenient than using Teradata Studio. The Teradata Jupyter Docker image doesn&#8217;t try to replace Teradata Studio. It doesn&#8217;t have all the features. It&#8217;s designed for people who need a lightweight, web-based interface and enjoy the notebook UI.</p>
+</div>
+<div class="paragraph">
+<p>The Teradata Jupyter Docker image can be used when you want to run Jupyter locally or you have a place where you can run custom Jupyter docker images, .e.g. JupyterHub or GCP AI Platform Notebooks, AWS SageMaker Notebooks. The steps below demonstrate how to use the image locally.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Download <a href="https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter">the Teradata Vantage Modules for Jupyter docker image</a>. If you don&#8217;t have an account with Teradata Downloads, you will need to register first.</p>
+</li>
+<li>
+<p>Import the image to your local registry:</p>
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker load -i teradatajupyterlabext_&lt;version&gt;.tar.gz</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Let&#8217;s verify that the image has been imported correctly and get the name of the image. Look for <code>teradatajupyterlabext_</code>. Copy the image name. We will need it in the next step.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker image ls</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Run the image:</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Replace <code>/path/to/my/directory/with/notebooks</code> with a directory on your machine where you intend to keep notebook files. Docker must be allowed to map this directory. Also, replace <code>teradatajupyterlabext</code> with the image name from the previous step.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -p 127.0.0.1:8888:8888 \
+  -v /path/to/my/directory/with/notebooks:/home/jovyan/JupyterLabRoot \
+  teradatajupyterlabext</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Docker logs will display the url that you need to go to. For example, this is what I&#8217;ve got:</p>
+<div class="listingblock">
+<div class="content">
+<pre>Starting JupyterLab ...
+Docker Build ID = 3.0.0-ec03292021
+Using unencrypted HTTP
+
+Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
+
+* Or enter this token when prompted by Jupyter: 96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
+* If you used a different port to run your Docker, replace 8888 with your port number</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Open up the URL and use the file explorer to open the following notebook: <code>jupyterextensions &#8594; notebooks &#8594; sql &#8594; GettingStartedDemo.ipynb</code>.</p>
+</li>
+<li>
+<p>Go through the demo of the Teradata SQL Kernel:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/gettingstarteddemo.ipynb.png" alt="GettingStartedDemo.ipynb screenshot" width="100%">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This quick start covered different options to connect to Teradata Vantage from a Jupyter Notebook. We learned about the Teradata Jupyter Docker image that bundles multiple Teradata Python and R libraries. It also provides an SQL kernel, database object explorer and connection management. These features are useful when you spend a lot of time with the SQL interface. For more traditional data science scenarios, we explored the standalone Teradata Python driver and integration through the ipython sql extension.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further reading</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://teradata.github.io/jupyterextensions">Teradata Jupyter Extensions Website</a></p>
+</li>
+<li>
+<p><a href="https://docs.teradata.com/r/KQLs1kPXZ02rGWaS9Ktoww/root">Teradata Vantage™ Modules for Jupyter Installation Guide</a></p>
+</li>
+<li>
+<p><a href="https://docs.teradata.com/r/1YKutX2ODdO9ppo_fnguTA/root">Teradata® Package for Python User Guide</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="page-feedback bottom">
+  <span>Did this page help?</span>
+  <i class="far fa-thumbs-up click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
+  <i class="far fa-thumbs-down click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
 </div>
 </article>
   </div>
@@ -5083,12 +5442,12 @@ If you typed the URL of this page manually, please double check that you entered
     </div>
   </article>
 </footer>
-<script src="/_/js/site.js"></script>
-<script async src="/_/js/behavior.js"></script>
-<script src="/_/js/vendor/lunr.js"></script>
-<script src="/_/js/search-ui.js" id="search-ui-script" data-site-root-path="" data-snippet-length="100" data-stylesheet="/_/css/search.css"></script>
-<script async src="/search-index.js"></script>
-<script src="/_/js/teradata.min.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/behavior.js"></script>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+<script src="../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>

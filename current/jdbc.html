@@ -3,9 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Page Not Found :: Getting Started Guides</title>
+    <title>Connect to Vantage using JDBC :: Getting Started Guides</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/current/jdbc.html">
+    <meta name="description" content="How to connect to Teradata Vantage using JDBC">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, JDBC, java applications, business intelligence, enterprise analytics">
     <meta name="generator" content="Antora 3.0.1">
-    <link rel="stylesheet" href="/_/css/site.css">
+    <link rel="stylesheet" href="../_/css/site.css">
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -13,10 +16,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');</script>
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="/_/css/search.css">
-<link rel="stylesheet" href="/_/css/styles.css">
-<link rel="stylesheet" href="/_/css/fontawesome.all.min.css">
-<link rel="stylesheet" href="/_/css/webfonts.css">
+<link rel="stylesheet" href="../_/css/search.css">
+<link rel="stylesheet" href="../_/css/styles.css">
+<link rel="stylesheet" href="../_/css/fontawesome.all.min.css">
+<link rel="stylesheet" href="../_/css/webfonts.css">
 <style>
   .doc a, .doc a:hover {
     color: #007373;
@@ -140,7 +143,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border-radius: 8px;
     padding-left: 14px;
     padding-right: 14px;
-    background-image: url(/_/img/search.svg);
+    background-image: url(../_/img/search.svg);
     background-repeat: no-repeat;
     background-position: right center;
     background-origin: content-box;
@@ -316,7 +319,7 @@ body ::-webkit-scrollbar-thumb {
 
 .report-an-issue {
   padding: 10px 20px 10px 10px;
-  background-image: url(/_/img/pan_tool.svg);
+  background-image: url(../_/img/pan_tool.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -324,7 +327,7 @@ body ::-webkit-scrollbar-thumb {
 
 .edit-on-github {
   padding: 10px 20px 10px 10px;
-  background-image: url(/_/img/edit.svg);
+  background-image: url(../_/img/edit.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -400,15 +403,15 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/warning.svg");
+  content: url("../_/img/warning.svg");
 }
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .source-toolbox {
@@ -431,7 +434,7 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .source-toolbox img.copy-icon {
-  content: url("/_/img/copy.svg");
+  content: url("../_/img/copy.svg");
 }
 .doc .source-toolbox>:not(:last-child)::after {
   content: "";
@@ -447,10 +450,10 @@ i.fa[class*=' icon-']::before {
 
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
-<link rel="icon" href="/_/img/favicon.ico" type="image/x-icon">
-    <script>var uiRootPath = '/_'</script>
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+    <script>var uiRootPath = '../_'</script>
   </head>
-  <body class="status-404">
+  <body class="article">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7Q6CLV"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -500,16 +503,114 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </header>
 
 <div class="body">
-<div class="nav-container">
+<div class="nav-container" data-component="ROOT" data-version="current">
   <aside class="nav">
     <div class="panels">
-<div class="nav-panel-explore is-active" data-panel="explore">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Get access to Vantage</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on GCP</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Basics</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nos.html">Query data stored in object storage</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ml.html">Train ML models in Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="fastload.html">Run large bulkloads efficiently</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">How-Tos</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Configure ODBC</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="odbc.ubuntu.html">Ubuntu</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="segment.html">Store events from Twilio Segment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">AWS</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context" style="visibility: hidden;">
+    <span class="title">Getting Started Guides</span>
+    <span class="version">current</span>
+  </div>
   <ul class="components">
-    <li class="component">
-      <a class="title" href="/current/getting.started.vmware.html">Getting Started Guides</a>
+    <li class="component is-current">
+      <a class="title" href="getting.started.vmware.html">Getting Started Guides</a>
       <ul class="versions">
-        <li class="version is-latest">
-          <a href="/current/getting.started.vmware.html">current</a>
+        <li class="version is-current is-latest">
+          <a href="getting.started.vmware.html">current</a>
         </li>
       </ul>
     </li>
@@ -522,17 +623,134 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li>Basics</li>
+    <li><a href="jdbc.html">Connect to Vantage using JDBC</a></li>
+  </ul>
 </nav>
 </div>
   <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+      <div class="page-controls">
+      <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/jdbc.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+    </div>
+  <div class="toc-menu">
+  </div>
+</aside>
 <article class="doc">
-<h1 class="page">Page Not Found</h1>
+<h1 class="page">Connect to Vantage using JDBC</h1>
+<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
+Last updated: September 8th, 2021</p>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The page you&#8217;re looking for does not exist. It may have been moved. You can return to the <a href="/current/getting.started.vmware.html">start page</a>, or follow one of the links in the navigation to the left.</p>
+<p>This quick start demonstrates how to connect to Teradata Vantage using JDBC. We will go through a sample JDBC project. The entire project is published in GitHub at <a href="https://github.com/Teradata/jdbc-sample-app" class="bare">https://github.com/Teradata/jdbc-sample-app</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>You need access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to <a href="getting.started.vmware.html" class="xref page">install Vantage Express on your local machine</a>.</p>
+</li>
+<li>
+<p>JDK</p>
+</li>
+<li>
+<p>Maven</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_the_driver"><a class="anchor" href="#_install_the_driver"></a>Install the driver</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to <a href="https://downloads.teradata.com/download/connectivity/jdbc-driver">the Teradata JDBC download page</a> and download the driver (you can choose zip or tar). The website will ask you to login (if you don&#8217;t have an account you will need to register first) and accept the license before you download the file.</p>
+</li>
+<li>
+<p>Unzip the driver.</p>
+</li>
+<li>
+<p>Add the driver to your local Maven repository:</p>
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mvn install:install-file \
+   -Dfile=terajdbc4.jar \
+   -DgroupId=com.teradata \
+   -DartifactId=terajdbc4 \
+   -Dversion=17.00.00.03 \
+   -Dpackaging=jar \
+   -DgeneratePom=true</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_add_dependency_to_your_maven_project"><a class="anchor" href="#_add_dependency_to_your_maven_project"></a>Add dependency to your maven project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that we have the jar in the local repository, we can reference the jar as a dependency in our Maven pom:</p>
+</div>
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fjdbc-sample-app%2Fblob%2F9b4693f4324920165289f79641f158cf0293a66b%2Fpom.xml%23L22-L26&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_code_to_send_a_query"><a class="anchor" href="#_code_to_send_a_query"></a>Code to send a query</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This step assumes that your Vantage database is available on <code>localhost</code> on port <code>1025</code>. If you are running Vantage Express on your laptop, you need to expose the port from the VM to the host machine. Refer to your virtualization software documentation how to forward ports.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>If you arrived on this page by clicking on a link, please notify the owner of the site that the link is broken.
-If you typed the URL of this page manually, please double check that you entered the address correctly.</p>
+<p>The project is set up. All that is left, is to load the driver, pass connection and authentication parameters and run a query:</p>
+</div>
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fjdbc-sample-app%2Fblob%2Fmain%2Fsrc%2Fmain%2Fjava%2Fcom%2Fteradata%2Fapp%2FApp.java&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this quick start we have learned how to connect to Teradata Vantage using JDBC. We went through the process of installing the latest JDBC driver and later used it in a Java application with Maven as the build tool.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further reading</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://teradata-docs.s3.amazonaws.com/doc/connectivity/jdbc/reference/current/frameset.html">Teradata JDBC Driver Reference</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="page-feedback bottom">
+  <span>Did this page help?</span>
+  <i class="far fa-thumbs-up click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
+  <i class="far fa-thumbs-down click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
 </div>
 </article>
   </div>
@@ -5083,12 +5301,12 @@ If you typed the URL of this page manually, please double check that you entered
     </div>
   </article>
 </footer>
-<script src="/_/js/site.js"></script>
-<script async src="/_/js/behavior.js"></script>
-<script src="/_/js/vendor/lunr.js"></script>
-<script src="/_/js/search-ui.js" id="search-ui-script" data-site-root-path="" data-snippet-length="100" data-stylesheet="/_/css/search.css"></script>
-<script async src="/search-index.js"></script>
-<script src="/_/js/teradata.min.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/behavior.js"></script>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+<script src="../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>

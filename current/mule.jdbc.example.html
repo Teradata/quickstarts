@@ -3,9 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Page Not Found :: Getting Started Guides</title>
+    <title>Query Teradata Vantage from a Mule service :: Getting Started Guides</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/current/mule.jdbc.example.html">
+    <meta name="description" content="Query Teradata Vantage from a Mule service.">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, Mule, JDBC, microservices">
     <meta name="generator" content="Antora 3.0.1">
-    <link rel="stylesheet" href="/_/css/site.css">
+    <link rel="stylesheet" href="../_/css/site.css">
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -13,10 +16,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');</script>
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="/_/css/search.css">
-<link rel="stylesheet" href="/_/css/styles.css">
-<link rel="stylesheet" href="/_/css/fontawesome.all.min.css">
-<link rel="stylesheet" href="/_/css/webfonts.css">
+<link rel="stylesheet" href="../_/css/search.css">
+<link rel="stylesheet" href="../_/css/styles.css">
+<link rel="stylesheet" href="../_/css/fontawesome.all.min.css">
+<link rel="stylesheet" href="../_/css/webfonts.css">
 <style>
   .doc a, .doc a:hover {
     color: #007373;
@@ -140,7 +143,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border-radius: 8px;
     padding-left: 14px;
     padding-right: 14px;
-    background-image: url(/_/img/search.svg);
+    background-image: url(../_/img/search.svg);
     background-repeat: no-repeat;
     background-position: right center;
     background-origin: content-box;
@@ -316,7 +319,7 @@ body ::-webkit-scrollbar-thumb {
 
 .report-an-issue {
   padding: 10px 20px 10px 10px;
-  background-image: url(/_/img/pan_tool.svg);
+  background-image: url(../_/img/pan_tool.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -324,7 +327,7 @@ body ::-webkit-scrollbar-thumb {
 
 .edit-on-github {
   padding: 10px 20px 10px 10px;
-  background-image: url(/_/img/edit.svg);
+  background-image: url(../_/img/edit.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -400,15 +403,15 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/warning.svg");
+  content: url("../_/img/warning.svg");
 }
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .source-toolbox {
@@ -431,7 +434,7 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .source-toolbox img.copy-icon {
-  content: url("/_/img/copy.svg");
+  content: url("../_/img/copy.svg");
 }
 .doc .source-toolbox>:not(:last-child)::after {
   content: "";
@@ -447,10 +450,10 @@ i.fa[class*=' icon-']::before {
 
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
-<link rel="icon" href="/_/img/favicon.ico" type="image/x-icon">
-    <script>var uiRootPath = '/_'</script>
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+    <script>var uiRootPath = '../_'</script>
   </head>
-  <body class="status-404">
+  <body class="article">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7Q6CLV"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -500,16 +503,114 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </header>
 
 <div class="body">
-<div class="nav-container">
+<div class="nav-container" data-component="ROOT" data-version="current">
   <aside class="nav">
     <div class="panels">
-<div class="nav-panel-explore is-active" data-panel="explore">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Get access to Vantage</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on GCP</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Basics</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nos.html">Query data stored in object storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ml.html">Train ML models in Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="fastload.html">Run large bulkloads efficiently</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">How-Tos</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Configure ODBC</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="odbc.ubuntu.html">Ubuntu</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="segment.html">Store events from Twilio Segment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">AWS</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context" style="visibility: hidden;">
+    <span class="title">Getting Started Guides</span>
+    <span class="version">current</span>
+  </div>
   <ul class="components">
-    <li class="component">
-      <a class="title" href="/current/getting.started.vmware.html">Getting Started Guides</a>
+    <li class="component is-current">
+      <a class="title" href="getting.started.vmware.html">Getting Started Guides</a>
       <ul class="versions">
-        <li class="version is-latest">
-          <a href="/current/getting.started.vmware.html">current</a>
+        <li class="version is-current is-latest">
+          <a href="getting.started.vmware.html">current</a>
         </li>
       </ul>
     </li>
@@ -522,17 +623,254 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li>Tutorials</li>
+    <li><a href="mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a></li>
+  </ul>
 </nav>
 </div>
   <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+      <div class="page-controls">
+      <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/mule.jdbc.example.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+    </div>
+  <div class="toc-menu">
+  </div>
+</aside>
 <article class="doc">
-<h1 class="page">Page Not Found</h1>
+<h1 class="page">Query Teradata Vantage from a Mule service</h1>
+<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
+Last updated: January 6th, 2022</p>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The page you&#8217;re looking for does not exist. It may have been moved. You can return to the <a href="/current/getting.started.vmware.html">start page</a>, or follow one of the links in the navigation to the left.</p>
+<p>This example is a clone of the Mulesoft MySQL sample project.
+It demonstrates how to query a Teradata database and expose results over REST API.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Mulesoft Anypoint Studio.
+You can download a 30-day trial from <a href="https://www.mulesoft.com/platform/studio" class="bare">https://www.mulesoft.com/platform/studio</a>.</p>
+</li>
+<li>
+<p>Access to a Teradata Vantage instance.
+If you need a new instance of Vantage then the easiest way is to install Vantage Express on your local machine using <a href="https://quickstarts.teradata.com/docs/17.10/getting.started.vmware.html">VMWare</a>, <a href="https://quickstarts.teradata.com/docs/17.10/getting.started.vbox.html">VirtualBox</a> or <a href="https://quickstarts.teradata.com/docs/17.10/getting.started.utm.html">UTM</a>.</p>
+</li>
+<li>
+<p>Java JDK.
+See installation instructions for OpenJDK: <a href="https://openjdk.java.net/install/" class="bare">https://openjdk.java.net/install/</a>.</p>
+</li>
+<li>
+<p>Apache Maven.
+See installation instructions: <a href="https://maven.apache.org/install.html" class="bare">https://maven.apache.org/install.html</a>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_example_service"><a class="anchor" href="#_example_service"></a>Example service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This example Mule service takes an HTTP request, queries the Teradata Vantage database and returns results in JSON format.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/flow.png" alt="service flow" width="500">
+</div>
 </div>
 <div class="paragraph">
-<p>If you arrived on this page by clicking on a link, please notify the owner of the site that the link is broken.
-If you typed the URL of this page manually, please double check that you entered the address correctly.</p>
+<p>The Mule HTTP connector listens for HTTP GET requests with the form: <code><a href="http://&lt;host&gt;:8081/?lastname=&lt;parameter&gt" class="bare">http://&lt;host&gt;:8081/?lastname=&lt;parameter&gt</a>;</code>.
+The HTTP connector passes the value of <code>&lt;parameter&gt;</code> as one of the message properties to a database connector.
+The database connector is configured to extract this value and use it in this SQL query:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM hr.employees WHERE LastName = :lastName</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see, we are using parameterized query with reference to the value of the parameter passed to the HTTP connector.
+So if the HTTP connector receives <a href="http://localhost:8081/?lastname=Smith" class="bare">http://localhost:8081/?lastname=Smith</a>, the SQL query will be:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM employees WHERE last_name = Smith</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The database connector instructs the database server to run the SQL query, retrieves the result of the query, and passes it to the Transform message processor which converts the result to JSON.
+Since the HTTP connector is configured as request-response, the result is returned to the originating HTTP client.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_setup"><a class="anchor" href="#_setup"></a>Setup</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Clone <code>Teradata/mule-jdbc-example</code> repository:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"> git clone git@github.com:Teradata/mule-jdbc-example.git</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Edit <code>src/main/mule/querying-a-teradata-database.xml</code>, find the Teradata connection string <code>jdbc:teradata://localhost/user=dbc,password=dbc</code> and replace Teradata connection parameters to match your environment.</p>
+</li>
+<li>
+<p>Create a sample database in your Vantage instance.
+Populate it with sample data.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql"> -- create database
+ CREATE DATABASE HR
+   AS PERMANENT = 60e6, SPOOL = 120e6;
+
+ -- create table
+ CREATE SET TABLE HR.Employees (
+   GlobalID INTEGER,
+   FirstName VARCHAR(30),
+   LastName VARCHAR(30),
+   DateOfBirth DATE FORMAT 'YYYY-MM-DD',
+   JoinedDate DATE FORMAT 'YYYY-MM-DD',
+   DepartmentCode BYTEINT
+ )
+ UNIQUE PRIMARY INDEX ( GlobalID );
+
+ -- insert a record
+ INSERT INTO HR.Employees (
+   GlobalID,
+   FirstName,
+   LastName,
+   DateOfBirth,
+   JoinedDate,
+   DepartmentCode
+ ) VALUES (
+   101,
+   'Test',
+   'Testowsky',
+   '1980-01-05',
+   '2004-08-01',
+   01
+ );</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Download the Teradata JDBC driver and unzip it:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"> wget https://downloads.teradata.com/download/cdn/connectivity/jdbc/17.10.00.24/TeraJDBC__indep_indep.17.10.00.24.zip
+ unzip TeraJDBC__indep_indep.17.10.00.24.zip</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Import the JDBC driver to your local Maven repository:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"> mvn install:install-file \
+ -Dfile=terajdbc4.jar \
+ -DgroupId=com.teradata \
+ -DartifactId=terajdbc4 \
+ -Dversion=17.10.00.24 \
+ -Dpackaging=jar \
+ -DgeneratePom=true</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Open the project in Anypoint Studio.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Once in Anypoint Studio, click on <code>Import projects..</code>:</p>
+<div class="paragraph">
+<p><span class="image"><img src="_images/anypoint.import.projects.png" alt="Anypoint import projects menu" width="500"></span></p>
+</div>
+</li>
+<li>
+<p>Select <code>Anypoint Studio project from File System</code>:</p>
+<div class="paragraph">
+<p><span class="image"><img src="_images/select.import.option.png" alt="Anypoint import option" width="500"></span></p>
+</div>
+</li>
+<li>
+<p>Use the directory where you cloned the git repository as the <code>Project Root</code>. Leave all other settings at their default values.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_run"><a class="anchor" href="#_run"></a>Run</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Run the example application in Anypoint Studio using the <code>Run</code> menu.
+The project will now build and run. It will take a minute.</p>
+</li>
+<li>
+<p>Go to your web browser and send the following request: <a href="http://localhost:8081/?lastname=Testowsky" class="bare">http://localhost:8081/?lastname=Testowsky</a>.</p>
+<div class="paragraph">
+<p>You should get the following JSON response:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">[
+  {
+    "JoinedDate": "2004-08-01T00:00:00",
+    "DateOfBirth": "1980-01-05T00:00:00",
+    "FirstName": "Test",
+    "GlobalID": 101,
+    "DepartmentCode": 1,
+    "LastName": "Testowsky"
+  }
+]</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further reading</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>View this <a href="http://www.mulesoft.org/documentation/display/current/Database+Connector">document</a> for more information on how to configure a database connector on your machine.</p>
+</li>
+<li>
+<p>Access plain <a href="http://www.mulesoft.org/documentation/display/current/Database+Connector+Reference">Reference material</a> for the Database Connector.</p>
+</li>
+<li>
+<p>Learn more about <a href="http://www.mulesoft.org/documentation/display/current/DataSense">DataSense</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="page-feedback bottom">
+  <span>Did this page help?</span>
+  <i class="far fa-thumbs-up click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
+  <i class="far fa-thumbs-down click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
 </div>
 </article>
   </div>
@@ -5083,12 +5421,12 @@ If you typed the URL of this page manually, please double check that you entered
     </div>
   </article>
 </footer>
-<script src="/_/js/site.js"></script>
-<script async src="/_/js/behavior.js"></script>
-<script src="/_/js/vendor/lunr.js"></script>
-<script src="/_/js/search-ui.js" id="search-ui-script" data-site-root-path="" data-snippet-length="100" data-stylesheet="/_/css/search.css"></script>
-<script async src="/search-index.js"></script>
-<script src="/_/js/teradata.min.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/behavior.js"></script>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+<script src="../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>

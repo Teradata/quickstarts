@@ -3,9 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Page Not Found :: Getting Started Guides</title>
+    <title>Query data stored in object storage :: Getting Started Guides</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/current/nos.html">
+    <meta name="description" content="Teradata Vantage Native Object Storage - read and write from/to object storage, unified SQL interface for Vantage and object storage.">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics">
     <meta name="generator" content="Antora 3.0.1">
-    <link rel="stylesheet" href="/_/css/site.css">
+    <link rel="stylesheet" href="../_/css/site.css">
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -13,10 +16,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');</script>
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="/_/css/search.css">
-<link rel="stylesheet" href="/_/css/styles.css">
-<link rel="stylesheet" href="/_/css/fontawesome.all.min.css">
-<link rel="stylesheet" href="/_/css/webfonts.css">
+<link rel="stylesheet" href="../_/css/search.css">
+<link rel="stylesheet" href="../_/css/styles.css">
+<link rel="stylesheet" href="../_/css/fontawesome.all.min.css">
+<link rel="stylesheet" href="../_/css/webfonts.css">
 <style>
   .doc a, .doc a:hover {
     color: #007373;
@@ -140,7 +143,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border-radius: 8px;
     padding-left: 14px;
     padding-right: 14px;
-    background-image: url(/_/img/search.svg);
+    background-image: url(../_/img/search.svg);
     background-repeat: no-repeat;
     background-position: right center;
     background-origin: content-box;
@@ -316,7 +319,7 @@ body ::-webkit-scrollbar-thumb {
 
 .report-an-issue {
   padding: 10px 20px 10px 10px;
-  background-image: url(/_/img/pan_tool.svg);
+  background-image: url(../_/img/pan_tool.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -324,7 +327,7 @@ body ::-webkit-scrollbar-thumb {
 
 .edit-on-github {
   padding: 10px 20px 10px 10px;
-  background-image: url(/_/img/edit.svg);
+  background-image: url(../_/img/edit.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -400,15 +403,15 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/warning.svg");
+  content: url("../_/img/warning.svg");
 }
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .source-toolbox {
@@ -431,7 +434,7 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .source-toolbox img.copy-icon {
-  content: url("/_/img/copy.svg");
+  content: url("../_/img/copy.svg");
 }
 .doc .source-toolbox>:not(:last-child)::after {
   content: "";
@@ -447,10 +450,10 @@ i.fa[class*=' icon-']::before {
 
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
-<link rel="icon" href="/_/img/favicon.ico" type="image/x-icon">
-    <script>var uiRootPath = '/_'</script>
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+    <script>var uiRootPath = '../_'</script>
   </head>
-  <body class="status-404">
+  <body class="article">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7Q6CLV"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -500,16 +503,114 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </header>
 
 <div class="body">
-<div class="nav-container">
+<div class="nav-container" data-component="ROOT" data-version="current">
   <aside class="nav">
     <div class="panels">
-<div class="nav-panel-explore is-active" data-panel="explore">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Get access to Vantage</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on GCP</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Basics</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="nos.html">Query data stored in object storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ml.html">Train ML models in Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="fastload.html">Run large bulkloads efficiently</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">How-Tos</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Configure ODBC</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="odbc.ubuntu.html">Ubuntu</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="segment.html">Store events from Twilio Segment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">AWS</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context" style="visibility: hidden;">
+    <span class="title">Getting Started Guides</span>
+    <span class="version">current</span>
+  </div>
   <ul class="components">
-    <li class="component">
-      <a class="title" href="/current/getting.started.vmware.html">Getting Started Guides</a>
+    <li class="component is-current">
+      <a class="title" href="getting.started.vmware.html">Getting Started Guides</a>
       <ul class="versions">
-        <li class="version is-latest">
-          <a href="/current/getting.started.vmware.html">current</a>
+        <li class="version is-current is-latest">
+          <a href="getting.started.vmware.html">current</a>
         </li>
       </ul>
     </li>
@@ -522,17 +623,329 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li>Basics</li>
+    <li><a href="nos.html">Query data stored in object storage</a></li>
+  </ul>
 </nav>
 </div>
   <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+      <div class="page-controls">
+      <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/nos.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+    </div>
+  <div class="toc-menu">
+  </div>
+</aside>
 <article class="doc">
-<h1 class="page">Page Not Found</h1>
+<h1 class="page">Query data stored in object storage</h1>
+<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
+Last updated: September 7th, 2021</p>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The page you&#8217;re looking for does not exist. It may have been moved. You can return to the <a href="/current/getting.started.vmware.html">start page</a>, or follow one of the links in the navigation to the left.</p>
+<p>Native Object Storage (NOS) is a Vantage feature that allows you to query data stored in files in object storage such as AWS S3, Google GCS, Azure Blob or on-prem implementations. It&#8217;s useful in scenarios where you want to explore data without building a data pipeline to bring it into Vantage.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You need access to a Teradata Vantage instance. NOS is enabled in all Vantage editions from Vantage Express through Developer, DYI to Vantage as a Service starting from version 17.10. If you need a new instance of Vantage the easiest way is to <a href="getting.started.vmware.html" class="xref page">install Vantage Express on your local machine</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_explore_data_with_nos"><a class="anchor" href="#_explore_data_with_nos"></a>Explore data with NOS</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Currently, NOS supports CSV, JSON (as array or new-line delimited), and Parquet data formats.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>If you arrived on this page by clicking on a link, please notify the owner of the site that the link is broken.
-If you typed the URL of this page manually, please double check that you entered the address correctly.</p>
+<p>Let&#8217;s say you have a dataset stored as CSV files in an S3 bucket. You want to explore the dataset before you decide if you want to bring it into Vantage. For this scenario, we are going to use a public dataset published by Teradata that contains river flow data collected by the
+U.S. Geological Survey. The bucket is at <a href="https://td-usgs-public.s3.amazonaws.com/" class="bare">https://td-usgs-public.s3.amazonaws.com/</a>.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s first have a look at sample CSV data. We take the first 10 rows that Vantage will fetch from the bucket:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT TOP 10 payload..* FROM (
+	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+) AS d;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is what I&#8217;ve got:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Payload..*
+------------------------------------------------------------------
+["10.9","15300","09380000","2018-06-28 00:30","671","0.00","9.80"]
+["10.8","14500","09380000","2018-06-28 01:00","673","0.00","9.64"]
+["10.7","14100","09380000","2018-06-28 01:15","672","0.00","9.56"]
+["11.0","16200","09380000","2018-06-27 00:00","669","0.00","9.97"]
+["10.9","15700","09380000","2018-06-27 00:30","668","0.00","9.88"]
+["10.8","15400","09380000","2018-06-27 00:45","672","0.00","9.82"]
+["10.8","15100","09380000","2018-06-27 01:00","672","0.00","9.77"]
+["10.8","14700","09380000","2018-06-27 01:15","672","0.00","9.68"]
+["10.9","16000","09380000","2018-06-27 00:15","668","0.00","9.93"]
+["10.8","14900","09380000","2018-06-28 00:45","672","0.00","9.72"]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We have got plenty of numbers, but what do they mean? To answer this question, we will ask Vantage to detect the schema of the CSV files:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM (
+	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+	RETURNTYPE='NOSREAD_SCHEMA'
+) AS d;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Vantage will now fetch a data sample to analyze the schema and return results:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Name            Datatype                            FileType  Location
+--------------- ----------------------------------- --------- -------------------------------------------------------------------
+GageHeight2     decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+Flow            decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+site_no         int                                 csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+datetime        TIMESTAMP(0) FORMAT'Y4-MM-DDBHH:MI' csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+Precipitation   decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+GageHeight      decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We see that the CSV files have 6 columns. For each column, we get the name, the datatype and the file coordinates that were used to infer the schema.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_query_data_with_nos"><a class="anchor" href="#_query_data_with_nos"></a>Query data with NOS</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that we know the schema, we can work with the dataset as if it was a regular SQL table. To prove the point, let&#8217;s try to do some data aggregation. Let&#8217;s get an average temperature per site for sites that collect temperatures.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT Payload..site_no AS Site_no, AVG(Payload..Temp) as Avg_Temp FROM (
+        LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+) AS d GROUP BY Payload..site_no HAVING Avg_Temp IS NOT NULL;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Result:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Site_no  Avg_Temp
+-------- ---------
+09380000 11
+09423560 73
+09424900 93
+09429070 81</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note how we still have to dereference CSV columns with <code>Payload..</code>. To make our experience more similar to a table we can define a foreign table:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- If you are running this sample as dbc user you will not have permissions
+-- to create a table in dbc database. Instead, create a new database and use
+-- the newly create database to create a foreign table.
+
+CREATE DATABASE Riverflow
+  AS PERMANENT = 60e6, -- 60MB
+  SPOOL = 120e6; -- 120MB
+
+CREATE FOREIGN TABLE Riverflow.riverflow
+    USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
+
+SELECT top 10 * FROM Riverflow.riverflow;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Result:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Location                                                            GageHeight2 Flow site_no datetime            Precipitation GageHeight
+------------------------------------------------------------------- ----------- ---- ------- ------------------- ------------- ----------
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09429070/2018/07/02.csv null        null 9429070 2018-07-02 14:40:00 1.21          null
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:30:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:45:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 01:00:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:15:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09429070/2018/07/02.csv null        null 9429070 2018-07-02 14:38:00 1.06          null</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This time, the <code>SELECT</code> statement looks like a regular select against an in-database table. Also, the returned data uses column names from the CSV file. No need to dereference with <code>Payload..</code>. There is still an issue though. The query was slow. There is an easy way to bring the CSV data into Vantage to speed things up. Read on to find out how.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_load_data_from_nos_into_vantage"><a class="anchor" href="#_load_data_from_nos_into_vantage"></a>Load data from NOS into Vantage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Querying object storage takes time. What if you decided that the data looks interesting and you want to do some more analysis with a solution that will you quicker answers? The good news is that data returned with NOS can be used as a source for <code>CREATE TABLE</code> statements. Assuming you have <code>CREATE TABLE</code> privilege, you will be able to run:</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This query assumes you created database <code>Riverflow</code> and a foreign table called <code>Riverflow.riverflow</code> in the previous step.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- This query assumes you created database `Riverflow`
+-- and a foreign table called `Riverflow.riverflow` in the previous step.
+
+CREATE MULTISET TABLE
+    Riverflow.riverflow_native(site_no, Flow, GageHeight, datetime)
+AS (
+    SELECT site_no, Flow, GageHeight, datetime FROM Riverflow.riverflow
+) WITH DATA
+NO PRIMARY INDEX;
+
+SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Result:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>site_no   Flow  GageHeight  datetime
+-------  -----  ----------  -------------------
+9400815    .00        -.01  2018-07-10 00:30:00
+9400815    .00        -.01  2018-07-10 01:00:00
+9400815    .00        -.01  2018-07-10 01:15:00
+9400815    .00        -.01  2018-07-10 01:30:00
+9400815    .00        -.01  2018-07-10 02:00:00
+9400815    .00        -.01  2018-07-10 02:15:00
+9400815    .00        -.01  2018-07-10 01:45:00
+9400815    .00        -.01  2018-07-10 00:45:00
+9400815    .00        -.01  2018-07-10 00:15:00
+9400815    .00        -.01  2018-07-10 00:00:00</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This time, the <code>SELECT</code> query returned in less than a second. Vantage didn&#8217;t have to fetch the data from NOS. Instead, it answered using data that was already on its nodes.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_access_private_buckets"><a class="anchor" href="#_access_private_buckets"></a>Access private buckets</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>So far, we have used a public bucket. What if you have a private bucket? How do you tell Vantage what credentials it should use?</p>
+</div>
+<div class="paragraph">
+<p>It is possible to inline your credentials directly into your query:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT top 10 payload..* FROM (
+	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+    AUTHORIZATION='{"ACCESS_ID":"","ACCESS_KEY":""}'
+) AS d;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Entering these credentials all the time can be tedious and less secure. In Vantage, you can create an authorization object that will serve as a container for your credentials:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE AUTHORIZATION aws_authorization
+    USER 'YOUR-ACCESS-KEY-ID'
+    PASSWORD 'YOUR-SECRET-ACCESS-KEY';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can then reference your authorization object when you create a foreign table:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE FOREIGN TABLE Riverflow.riverflow, EXTERNAL SECURITY aws_authorization
+    USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_export_data_from_vantage_to_object_storage"><a class="anchor" href="#_export_data_from_vantage_to_object_storage"></a>Export data from Vantage to object storage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>So far, we have talked about reading and importing data from object storage. Would it not be nice if we had a way to use SQL to export data from Vantage to object storage? This is exactly what <code>WRITE_NOS</code> function is for. Let&#8217;s say we want to export data from <code>Riverflow.riverflow_native</code> table to object storage. You can do so with the following query:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM WRITE_NOS (
+    ON ( SELECT * FROM Riverflow.riverflow_native )
+    PARTITION BY site_no ORDER BY site_no
+    USING
+        LOCATION('YOUR-OBJECT-STORE-URI')
+        STOREDAS('PARQUET')
+        COMPRESSION('SNAPPY')
+        NAMING('RANGE')
+        INCLUDE_ORDERING('TRUE')
+) AS d;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, we instruct Vantage to take data from <code>Riverflow.riverflow_native</code> and save it in <code>YOUR-OBJECT-STORE-URI</code> bucket using <code>parquet</code> format. The data will be split into files by <code>site_no</code> attribute. The files will be compressed.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this quick start we have learned how to read data from object storage using Native Object Storage (NOS) functionality in Vantage. NOS supports reading and importing data stored in CSV, JSON and Parquet formats. NOS can also export data from Vantage to object storage.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further reading</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.teradata.com/r/2mw8ooFr~xX0EaaGFaDW8A/root">Teradata Vantage™ - Native Object Store Getting Started Guide</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="page-feedback bottom">
+  <span>Did this page help?</span>
+  <i class="far fa-thumbs-up click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
+  <i class="far fa-thumbs-down click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
 </div>
 </article>
   </div>
@@ -5083,12 +5496,12 @@ If you typed the URL of this page manually, please double check that you entered
     </div>
   </article>
 </footer>
-<script src="/_/js/site.js"></script>
-<script async src="/_/js/behavior.js"></script>
-<script src="/_/js/vendor/lunr.js"></script>
-<script src="/_/js/search-ui.js" id="search-ui-script" data-site-root-path="" data-snippet-length="100" data-stylesheet="/_/css/search.css"></script>
-<script async src="/search-index.js"></script>
-<script src="/_/js/teradata.min.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/behavior.js"></script>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+<script src="../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>

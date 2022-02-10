@@ -3,9 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Page Not Found :: Getting Started Guides</title>
+    <title>Run scripts on Vantage :: Getting Started Guides</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/current/sto.html">
+    <meta name="description" content="Run Applications on Teradata - use Script Table Operator to run applications on your data without data movement.">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, script table operator, cloud data platform, object storage, business intelligence, enterprise analytics">
     <meta name="generator" content="Antora 3.0.1">
-    <link rel="stylesheet" href="/_/css/site.css">
+    <link rel="stylesheet" href="../_/css/site.css">
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -13,10 +16,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');</script>
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="/_/css/search.css">
-<link rel="stylesheet" href="/_/css/styles.css">
-<link rel="stylesheet" href="/_/css/fontawesome.all.min.css">
-<link rel="stylesheet" href="/_/css/webfonts.css">
+<link rel="stylesheet" href="../_/css/search.css">
+<link rel="stylesheet" href="../_/css/styles.css">
+<link rel="stylesheet" href="../_/css/fontawesome.all.min.css">
+<link rel="stylesheet" href="../_/css/webfonts.css">
 <style>
   .doc a, .doc a:hover {
     color: #007373;
@@ -140,7 +143,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border-radius: 8px;
     padding-left: 14px;
     padding-right: 14px;
-    background-image: url(/_/img/search.svg);
+    background-image: url(../_/img/search.svg);
     background-repeat: no-repeat;
     background-position: right center;
     background-origin: content-box;
@@ -316,7 +319,7 @@ body ::-webkit-scrollbar-thumb {
 
 .report-an-issue {
   padding: 10px 20px 10px 10px;
-  background-image: url(/_/img/pan_tool.svg);
+  background-image: url(../_/img/pan_tool.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -324,7 +327,7 @@ body ::-webkit-scrollbar-thumb {
 
 .edit-on-github {
   padding: 10px 20px 10px 10px;
-  background-image: url(/_/img/edit.svg);
+  background-image: url(../_/img/edit.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -400,15 +403,15 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/warning.svg");
+  content: url("../_/img/warning.svg");
 }
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .source-toolbox {
@@ -431,7 +434,7 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .source-toolbox img.copy-icon {
-  content: url("/_/img/copy.svg");
+  content: url("../_/img/copy.svg");
 }
 .doc .source-toolbox>:not(:last-child)::after {
   content: "";
@@ -447,10 +450,10 @@ i.fa[class*=' icon-']::before {
 
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
-<link rel="icon" href="/_/img/favicon.ico" type="image/x-icon">
-    <script>var uiRootPath = '/_'</script>
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+    <script>var uiRootPath = '../_'</script>
   </head>
-  <body class="status-404">
+  <body class="article">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7Q6CLV"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -500,16 +503,114 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </header>
 
 <div class="body">
-<div class="nav-container">
+<div class="nav-container" data-component="ROOT" data-version="current">
   <aside class="nav">
     <div class="panels">
-<div class="nav-panel-explore is-active" data-panel="explore">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Get access to Vantage</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on GCP</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Basics</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nos.html">Query data stored in object storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ml.html">Train ML models in Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="fastload.html">Run large bulkloads efficiently</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">How-Tos</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Configure ODBC</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="odbc.ubuntu.html">Ubuntu</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="segment.html">Store events from Twilio Segment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">AWS</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context" style="visibility: hidden;">
+    <span class="title">Getting Started Guides</span>
+    <span class="version">current</span>
+  </div>
   <ul class="components">
-    <li class="component">
-      <a class="title" href="/current/getting.started.vmware.html">Getting Started Guides</a>
+    <li class="component is-current">
+      <a class="title" href="getting.started.vmware.html">Getting Started Guides</a>
       <ul class="versions">
-        <li class="version is-latest">
-          <a href="/current/getting.started.vmware.html">current</a>
+        <li class="version is-current is-latest">
+          <a href="getting.started.vmware.html">current</a>
         </li>
       </ul>
     </li>
@@ -522,17 +623,346 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li>Basics</li>
+    <li><a href="sto.html">Run scripts on Vantage</a></li>
+  </ul>
 </nav>
 </div>
   <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+      <div class="page-controls">
+      <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/sto.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+    </div>
+  <div class="toc-menu">
+  </div>
+</aside>
 <article class="doc">
-<h1 class="page">Page Not Found</h1>
+<h1 class="page">Run scripts on Vantage</h1>
+<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
+Last updated: September 7th, 2021</p>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The page you&#8217;re looking for does not exist. It may have been moved. You can return to the <a href="/current/getting.started.vmware.html">start page</a>, or follow one of the links in the navigation to the left.</p>
+<p>Sometimes, you need to apply complex logic to your data that can&#8217;t be easily expressed in SQL. One option is to wrap your logic in a User Defined Function (UDF). What if you already have this logic coded in a language that is not supported by UDF? Script Table Operator is a Vantage feature that allows you to bring your logic to the data and run it on Vantage. The advantage of this approach is that you don&#8217;t have to retrieve data from Vantage to operate on it. Also, by running your data applications on Vantage, you leverage its parallel nature. You don&#8217;t have to think how your applications will scale. You can let Vantage take care of it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You need access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using <a href="getting.started.vmware.html" class="xref page">VMware</a> or <a href="getting.started.vbox.html" class="xref page">VirtualBox</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_hello_world"><a class="anchor" href="#_hello_world"></a>Hello World</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s start with something simple. What if you wanted the database to print "Hello World"?</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT *
+FROM
+  SCRIPT(
+    SCRIPT_COMMAND('echo Hello World!')
+    RETURNS ('Message varchar(512)'));</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>If you arrived on this page by clicking on a link, please notify the owner of the site that the link is broken.
-If you typed the URL of this page manually, please double check that you entered the address correctly.</p>
+<p>Here is what I&#8217;ve got:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Message
+------------
+Hello World!
+Hello World!</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s analyze what just happened here. The SQL includes <code>echo Hello World!</code>. This is a Bash command. OK, so now we know how to run Bash commands. But why did we get 2 rows and not one? That&#8217;s because our simple script was run once on each AMP and I happen to have 2 AMPs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Teradata magic that returns the number of AMPs in a system
+SELECT hashamp()+1 AS number_of_amps;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Returns:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>number_of_amps
+--------------
+             2</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This simple script demonstrates the idea behind the Script Table Operator (STO). You provide your script and the database runs it in parallel, once for each AMP. This is an attractive model in case you have transformation logic in a script and a lot of data to process. Normally, you would need to build concurrency into your application. By letting STO do it, you let Teradata select the right concurrency level for your data.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_supported_languages"><a class="anchor" href="#_supported_languages"></a>Supported languages</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OK, so we did <code>echo</code> in Bash but Bash is hardly a productive environment to express complex logic. What other languages are supported then? The good news is that any binary that can run on Vantage nodes can be used in STO. Remember, that the binary and all its dependencies need to be installed on all your Vantage nodes. In practice, it means that your options will be limited to what your administrator is willing and able to maintain on your servers. Python is a very popular choice.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_uploading_scripts"><a class="anchor" href="#_uploading_scripts"></a>Uploading scripts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ok, Hello World is super exciting, but what if we have existing logic in a large file. Surely, you don&#8217;t want to paste your entire script and escape quotes in an SQL query. We solve the script upload issue with the User Installed Files (UIF) feature.</p>
+</div>
+<div class="paragraph">
+<p>Say you have <code>helloworld.py</code> script with the following content:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">print("Hello World!")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s assume the script is on your local machine at <code>/tmp/helloworld.py</code>.</p>
+</div>
+<div class="paragraph">
+<p>First, we need to setup permissions in Vantage. We are going to do this using a new database to keep it clean.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Create a new database called sto
+CREATE DATABASE STO
+AS PERMANENT = 60e6, -- 60MB
+    SPOOL = 120e6; -- 120MB
+
+-- Allow dbc user to create scripts in database STO
+GRANT CREATE EXTERNAL PROCEDURE ON STO to dbc;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can upload the script to Vantage using the following procedure call:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">call SYSUIF.install_file('helloworld',
+                         'helloworld.py', 'cz!/tmp/helloworld.py');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now that the script has been uploaded, you can call it like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- We switch to STO database
+DATABASE STO
+
+-- We tell Vantage where to look for the script. This can be
+-- any string and it will create a symbolic link to the directory
+-- where our script got uploaded. By convention, we use the
+-- database name.
+SET SESSION SEARCHUIFDBPATH = sto;
+
+-- We now call the script. Note, how we use a relative path that
+-- starts with `./sto/`, which is where SEARCHUIFDBPATH
+-- is pointing.
+SELECT *
+FROM SCRIPT(
+  SCRIPT_COMMAND('python3 ./sto/helloworld.py')
+  RETURNS ('Message varchar(512)'));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The last call should return:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Message
+------------
+Hello World!
+Hello World!</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That was a lot of work and we are still at Hello World. Let&#8217;s try to pass some data into <code>SCRIPT</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_passing_data_stored_in_vantage_to_script"><a class="anchor" href="#_passing_data_stored_in_vantage_to_script"></a>Passing data stored in Vantage to SCRIPT</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>So far, we have been using <code>SCRIPT</code> operator to run standalone scripts. But the main purpose to run scripts on Vantage is to process data that is in Vantage. Let&#8217;s see how we can retrieve data from Vantage and pass it to <code>SCRIPT</code>.</p>
+</div>
+<div class="paragraph">
+<p>We will start with creating a table with a few rows.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Switch to STO database.
+DATABASE STO
+
+-- Create a table with a few urls
+CREATE TABLE urls(url varchar(10000));
+INS urls('https://www.google.com/finance?q=NYSE:TDC');
+INS urls('http://www.ebay.com/sch/i.html?_trksid=p2050601.m570.l1313.TR0.TRC0.H0.Xteradata+merchandise&amp;_nkw=teradata+merchandise&amp;_sacat=0&amp;_from=R40');
+INS urls('https://www.youtube.com/results?search_query=teradata%20commercial&amp;sm=3');
+INS urls('https://www.contrivedexample.com/example?mylist=1&amp;mylist=2&amp;mylist=...testing');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We will use the following script to parse out query parameters:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">from urllib.parse import urlparse
+from urllib.parse import parse_qsl
+import sys
+
+for line in sys.stdin:
+    # remove leading and trailing whitespace
+    url = line.strip()
+    parsed_url = urlparse(url)
+    query_params = parse_qsl(parsed_url.query)
+
+    for element in query_params:
+        print("\t".join(element))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note, how the scripts assumes that urls will be fed into <code>stdin</code> one by one, line by line. Also, note how it prints results line by line, using the tab character as a delimiter between values.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s install the script. Here, we assume that the script file is at <code>/tmp/urlparser.py</code> on our local machine:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CALL SYSUIF.install_file('urlparser',
+	'urlparser.py', 'cz!/tmp/urlparser.py');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With the script installed, we will now retrieve data from <code>urls</code> table and feed it into the script to retrieve query parameters:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- We inform Vantage to create a symbolic link from the UIF directory to ./sto/
+SET SESSION SEARCHUIFDBPATH = sto ;
+
+SELECT *
+  FROM SCRIPT(
+    ON(SELECT url FROM urls)
+    SCRIPT_COMMAND('python3 ./sto/urlparser.py')
+    RETURNS ('param_key varchar(512)', 'param_value varchar(512)'));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As a result, we get query params and their values. There are as many rows as key/value pairs. Also, since we inserted a tab between the key and the value output in the script, we get 2 columns from STO.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>param_key   |param_value
+------------+-----------------------------------------------------
+q           |NYSE:TDC
+_trksid     |p2050601.m570.l1313.TR0.TRC0.H0.Xteradata merchandise
+search_query|teradata commercial
+_nkw        |teradata merchandise
+sm          |3
+_sacat      |0
+mylist      |1
+_from       |R40
+mylist      |2
+mylist      |...testing</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_inserting_script_output_into_a_table"><a class="anchor" href="#_inserting_script_output_into_a_table"></a>Inserting SCRIPT output into a table</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We have learned how to take data from Vantage, pass it to a script and get output. Is there an easy way to store this output in a table? Sure, there is. We can combine the select above with <code>CREATE TABLE</code> statement:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- We inform Vantage to create a symbolic link from the UIF directory to ./sto/
+SET SESSION SEARCHUIFDBPATH = sto ;
+
+CREATE MULTISET TABLE
+    url_params(param_key, param_value)
+AS (
+    SELECT *
+    FROM SCRIPT(
+      ON(SELECT url FROM urls)
+      SCRIPT_COMMAND('python3 ./sto/urlparser.py')
+      RETURNS ('param_key varchar(512)', 'param_value varchar(512)'))
+) WITH DATA
+NO PRIMARY INDEX;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, let&#8217;s inspect the contents of <code>url_params</code> table:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM url_params;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>param_key   |param_value
+------------+-----------------------------------------------------
+q           |NYSE:TDC
+_trksid     |p2050601.m570.l1313.TR0.TRC0.H0.Xteradata merchandise
+search_query|teradata commercial
+_nkw        |teradata merchandise
+sm          |3
+_sacat      |0
+mylist      |1
+_from       |R40
+mylist      |2
+mylist      |...testing</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this quick start we have learned how to run scripts against data in Vantage. We ran scripts using Script Table Operator (STO). The operator allows us to bring logic to the data. It offloads concurrency considerations to the database by running our scripts in parallel, one per AMP. All you need to do is provide a script and the database will execute it in parallel.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further reading</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.teradata.com/r/9VmItX3V2Ni9Ts70HbDzVg/CBAaRxUyOdF0t1SQIuXeug">Teradata Vantage™ - SQL Operators and User-Defined Functions - SCRIPT</a></p>
+</li>
+<li>
+<p><a href="https://docs.teradata.com/v/u/Orange-Book/R-and-Python-Analytics-with-SCRIPT-Table-Operator-Orange-Book-4.3.1">R and Python Analytics with SCRIPT Table Operator</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="page-feedback bottom">
+  <span>Did this page help?</span>
+  <i class="far fa-thumbs-up click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
+  <i class="far fa-thumbs-down click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
 </div>
 </article>
   </div>
@@ -5083,12 +5513,12 @@ If you typed the URL of this page manually, please double check that you entered
     </div>
   </article>
 </footer>
-<script src="/_/js/site.js"></script>
-<script async src="/_/js/behavior.js"></script>
-<script src="/_/js/vendor/lunr.js"></script>
-<script src="/_/js/search-ui.js" id="search-ui-script" data-site-root-path="" data-snippet-length="100" data-stylesheet="/_/css/search.css"></script>
-<script async src="/search-index.js"></script>
-<script src="/_/js/teradata.min.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/behavior.js"></script>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+<script src="../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>

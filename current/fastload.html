@@ -3,9 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Page Not Found :: Getting Started Guides</title>
+    <title>Run large bulkloads efficiently :: Getting Started Guides</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/current/fastload.html">
+    <meta name="description" content="Load data into Vantage efficiently using Teradata Parallel Transporter.">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, fastload, tpt, teradata parallel transporter">
     <meta name="generator" content="Antora 3.0.1">
-    <link rel="stylesheet" href="/_/css/site.css">
+    <link rel="stylesheet" href="../_/css/site.css">
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -13,10 +16,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');</script>
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="/_/css/search.css">
-<link rel="stylesheet" href="/_/css/styles.css">
-<link rel="stylesheet" href="/_/css/fontawesome.all.min.css">
-<link rel="stylesheet" href="/_/css/webfonts.css">
+<link rel="stylesheet" href="../_/css/search.css">
+<link rel="stylesheet" href="../_/css/styles.css">
+<link rel="stylesheet" href="../_/css/fontawesome.all.min.css">
+<link rel="stylesheet" href="../_/css/webfonts.css">
 <style>
   .doc a, .doc a:hover {
     color: #007373;
@@ -140,7 +143,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border-radius: 8px;
     padding-left: 14px;
     padding-right: 14px;
-    background-image: url(/_/img/search.svg);
+    background-image: url(../_/img/search.svg);
     background-repeat: no-repeat;
     background-position: right center;
     background-origin: content-box;
@@ -316,7 +319,7 @@ body ::-webkit-scrollbar-thumb {
 
 .report-an-issue {
   padding: 10px 20px 10px 10px;
-  background-image: url(/_/img/pan_tool.svg);
+  background-image: url(../_/img/pan_tool.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -324,7 +327,7 @@ body ::-webkit-scrollbar-thumb {
 
 .edit-on-github {
   padding: 10px 20px 10px 10px;
-  background-image: url(/_/img/edit.svg);
+  background-image: url(../_/img/edit.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -400,15 +403,15 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/warning.svg");
+  content: url("../_/img/warning.svg");
 }
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .source-toolbox {
@@ -431,7 +434,7 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .source-toolbox img.copy-icon {
-  content: url("/_/img/copy.svg");
+  content: url("../_/img/copy.svg");
 }
 .doc .source-toolbox>:not(:last-child)::after {
   content: "";
@@ -447,10 +450,10 @@ i.fa[class*=' icon-']::before {
 
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
-<link rel="icon" href="/_/img/favicon.ico" type="image/x-icon">
-    <script>var uiRootPath = '/_'</script>
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+    <script>var uiRootPath = '../_'</script>
   </head>
-  <body class="status-404">
+  <body class="article">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7Q6CLV"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -500,16 +503,114 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </header>
 
 <div class="body">
-<div class="nav-container">
+<div class="nav-container" data-component="ROOT" data-version="current">
   <aside class="nav">
     <div class="panels">
-<div class="nav-panel-explore is-active" data-panel="explore">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Get access to Vantage</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on GCP</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Basics</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nos.html">Query data stored in object storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ml.html">Train ML models in Vantage</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="fastload.html">Run large bulkloads efficiently</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">How-Tos</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Configure ODBC</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="odbc.ubuntu.html">Ubuntu</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="segment.html">Store events from Twilio Segment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">AWS</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context" style="visibility: hidden;">
+    <span class="title">Getting Started Guides</span>
+    <span class="version">current</span>
+  </div>
   <ul class="components">
-    <li class="component">
-      <a class="title" href="/current/getting.started.vmware.html">Getting Started Guides</a>
+    <li class="component is-current">
+      <a class="title" href="getting.started.vmware.html">Getting Started Guides</a>
       <ul class="versions">
-        <li class="version is-latest">
-          <a href="/current/getting.started.vmware.html">current</a>
+        <li class="version is-current is-latest">
+          <a href="getting.started.vmware.html">current</a>
         </li>
       </ul>
     </li>
@@ -522,17 +623,395 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li>Basics</li>
+    <li><a href="fastload.html">Run large bulkloads efficiently</a></li>
+  </ul>
 </nav>
 </div>
   <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+      <div class="page-controls">
+      <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/fastload.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+    </div>
+  <div class="toc-menu">
+  </div>
+</aside>
 <article class="doc">
-<h1 class="page">Page Not Found</h1>
+<h1 class="page">Run large bulkloads efficiently</h1>
+<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
+Last updated: October 21st, 2021</p>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The page you&#8217;re looking for does not exist. It may have been moved. You can return to the <a href="/current/getting.started.vmware.html">start page</a>, or follow one of the links in the navigation to the left.</p>
+<p>We often have a need to move large volumes of data into Vantage. The quickest way to do that is using <code>Fastload</code> mode from Teradata Parallel Transporter (TPT). This how-to demonstrates how to use <code>Fastload</code>. In this scenario, we will load over 300k records, over 40MB of data, in a couple of seconds.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>You need access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using <a href="getting.started.vmware.html" class="xref page">VMware</a> or <a href="getting.started.vbox.html" class="xref page">VirtualBox</a>.</p>
+</li>
+<li>
+<p>Download Teradata Tools and Utilities (TTU) -  supported platforms: <a href="https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-windows-installation-package">Windows</a>, <a href="https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-macos-installation-package">MacOS</a>, <a href="https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-linux-installation-package-0">Linux</a> (requires registration).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_ttu"><a class="anchor" href="#_install_ttu"></a>Install TTU</h2>
+<div class="sectionbody">
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_windows"></a>Windows</p>
+</li>
+<li>
+<p><a id="tabset1_macos"></a>MacOS</p>
+</li>
+<li>
+<p><a id="tabset1_linux"></a>Linux</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_windows">
+<div class="paragraph">
+<p>Unzip the downloaded file and run <code>setup.exe</code>.</p>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_macos">
+<div class="paragraph">
+<p>Unzip the downloaded file and run <code>TeradataToolsAndUtilitiesXX.XX.XX.pkg</code>.</p>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_linux">
+<div class="paragraph">
+<p>Unzip the downloaded file, go to the unzipped directory and run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./setup.sh a</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_get_sample_data"><a class="anchor" href="#_get_sample_data"></a>Get Sample data</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We will be working with the US tax fillings for nonprofit organizations. Nonprofit tax filings are public data. The US Internal Revenue Service publishes them in S3 bucket. Let&#8217;s grab a summary of filings for 2020: <code><a href="https://s3.amazonaws.com/irs-form-990/index_2020.csv" class="bare">https://s3.amazonaws.com/irs-form-990/index_2020.csv</a></code>. You can use your browser, <code>wget</code> or <code>curl</code> to save the file locally.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_a_database"><a class="anchor" href="#_create_a_database"></a>Create a database</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s create a database in Vantage. Use you favorite SQL tool to run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE irs
+AS PERMANENT = 120e6, -- 120MB
+    SPOOL = 120e6; -- 120MB</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_run_fastload"><a class="anchor" href="#_run_fastload"></a>Run Fastload</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We will now run Fastload. Fastload is a command-line tool that is very efficient in uploading large amounts of data into Vantage. Fastload, in order to be fast, has several restrictions in place. It can only populate empty tables, no inserts to already populated tables are supported. It doesn&#8217;t support tables with secondary indices. Also, it won&#8217;t insert duplicate records, even if a table is a <code>MULTISET</code> table. For the full list of restrictions check out <a href="https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root">Teradata® FastLoad Reference</a>.</p>
 </div>
 <div class="paragraph">
-<p>If you arrived on this page by clicking on a link, please notify the owner of the site that the link is broken.
-If you typed the URL of this page manually, please double check that you entered the address correctly.</p>
+<p>Fastload has its own scripting language. The language allows you to prepare the database with arbitrary SQL commands, declare the input source and define how the data should be inserted into Vantage. The tool supports both interactive and batch mode. In this section, we are going to use the interactive mode.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s start Fastload in the interactive mode:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">fastload</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>First, let&#8217;s log in to a Vantage database. I&#8217;ve a Vantage Express running locally, so I&#8217;ll use <code>localhost</code> as the hostname and <code>dbc</code> for username and password:</p>
+</div>
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">LOGON localhost/dbc,dbc;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, that we are logged in, I&#8217;m going to prepare the database. I&#8217;m switching to <code>irs</code> database and making sure that the target table <code>irs_returns</code> and error tables (more about error tables later) do not exist:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">DATABASE irs;
+DROP TABLE irs_returns;
+DROP TABLE irs_returns_err1;
+DROP TABLE irs_returns_err2;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>I&#8217;ll now create an empty table that can hold the data elements from the csv file.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE MULTISET TABLE irs_returns (
+    return_id INT,
+    filing_type VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
+    ein INT,
+    tax_period INT,
+    sub_date VARCHAR(100) CHARACTER SET LATIN NOT CASESPECIFIC,
+    taxpayer_name VARCHAR(100) CHARACTER SET LATIN NOT CASESPECIFIC,
+    return_type VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
+    dln BIGINT,
+    object_id BIGINT
+)
+PRIMARY INDEX ( return_id );</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, that the target table has been prepared, we can start loading the data. <code>ERRORFILES</code> directive defines error files. The error files are really tables that TPT creates. The first table contains information about data conversion and other issues. The second table keeps track of data uniqueness issues, e.g. primary key violations.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">BEGIN LOADING irs_returns
+    ERRORFILES irs_returns_err1, irs_returns_err2;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We instruct TPT to save a checkpoint every 10k rows. It&#8217;s useful in case we have to restart our job. It will be able to resume from the last checkpoint.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">    CHECKPOINT 10000;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We also need to tell TPT to skip the first row in the CSV file as start at record 2. That&#8217;s because the first row contains column headers.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">    RECORD 2;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>TPT also needs to know that it&#8217;s a comma-separated file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">    SET RECORD VARTEXT ",";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>DEFINE</code> block specifies what columns we should expect:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">    DEFINE in_return_id (VARCHAR(19)),
+    in_filing_type (VARCHAR(5)),
+    in_ein (VARCHAR(19)),
+    in_tax_period (VARCHAR(19)),
+    in_sub_date (VARCHAR(22)),
+    in_taxpayer_name (VARCHAR(100)),
+    in_return_type (VARCHAR(5)),
+    in_dln (VARCHAR(19)),
+    in_object_id (VARCHAR(19)),</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>DEFINE</code> block also has <code>FILE</code> attribute that points to the file with the data. Replace <code>FILE = /tmp/index_2020.csv;</code> with your location of <code>index_2020.csv</code> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">    FILE = /tmp/index_2020.csv;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, we define the INSERT statement that will put data into the database and we close off <code>LOADING</code> block:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">    INSERT INTO irs_returns (
+        return_id,
+        filing_type,
+        ein,
+        tax_period,
+        sub_date,
+        taxpayer_name,
+        return_type,
+        dln,
+        object_id
+    ) VALUES (
+        :in_return_id,
+        :in_filing_type,
+        :in_ein,
+        :in_tax_period,
+        :in_sub_date,
+        :in_taxpayer_name,
+        :in_return_type,
+        :in_dln,
+        :in_object_id
+    );
+END LOADING;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the job has finished, we are logging off from the database to clean things up.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">LOGOFF;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is what the entire script looks like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">LOGON localhost/dbc,dbc;
+
+DATABASE irs;
+DROP TABLE irs_returns;
+DROP TABLE irs_returns_err1;
+DROP TABLE irs_returns_err2;
+
+CREATE MULTISET TABLE irs_returns (
+    return_id INT,
+    filing_type VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
+    ein INT,
+    tax_period INT,
+    sub_date VARCHAR(100) CHARACTER SET LATIN NOT CASESPECIFIC,
+    taxpayer_name VARCHAR(100) CHARACTER SET LATIN NOT CASESPECIFIC,
+    return_type VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
+    dln BIGINT,
+    object_id BIGINT
+)
+PRIMARY INDEX ( return_id );
+
+BEGIN LOADING irs_returns
+  ERRORFILES irs_returns_err1, irs_returns_err2;
+  CHECKPOINT 10000;
+  RECORD 2;
+  SET RECORD VARTEXT ",";
+
+  DEFINE in_return_id (VARCHAR(19)),
+    in_filing_type (VARCHAR(5)),
+    in_ein (VARCHAR(19)),
+    in_tax_period (VARCHAR(19)),
+    in_sub_date (VARCHAR(22)),
+    in_taxpayer_name (VARCHAR(100)),
+    in_return_type (VARCHAR(5)),
+    in_dln (VARCHAR(19)),
+    in_object_id (VARCHAR(19)),
+    FILE = /tmp/index_2020.csv;
+
+  INSERT INTO irs_returns (
+      return_id,
+      filing_type,
+      ein,
+      tax_period,
+      sub_date,
+      taxpayer_name,
+      return_type,
+      dln,
+      object_id
+  ) VALUES (
+      :in_return_id,
+      :in_filing_type,
+      :in_ein,
+      :in_tax_period,
+      :in_sub_date,
+      :in_taxpayer_name,
+      :in_return_type,
+      :in_dln,
+      :in_object_id
+  );
+END LOADING;
+
+LOGOFF;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_batch_mode"><a class="anchor" href="#_batch_mode"></a>Batch mode</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To run our example in batch mode, simply save all instructions in a single file and run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">fastload &lt; file_with_instruction.fastload</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_fastload_vs_nos"><a class="anchor" href="#_fastload_vs_nos"></a>Fastload vs. NOS</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In our case, the file is in an S3 bucket. That means, that we can use Native Object Storage (NOS) to ingest the data:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- create an S3-backed foreign table
+CREATE FOREIGN TABLE irs_returns_nos
+    USING ( LOCATION('/s3/s3.amazonaws.com/irs-form-990/index_2020.csv') );
+
+-- load the data into a native table
+CREATE MULTISET TABLE irs_returns_nos_native
+    (RETURN_ID, FILING_TYPE, EIN, TAX_PERIOD, SUB_DATE, TAXPAYER_NAME)
+AS (
+    SELECT RETURN_ID, FILING_TYPE, EIN, TAX_PERIOD, SUB_DATE, TAXPAYER_NAME FROM irs_returns_nos
+) WITH DATA
+NO PRIMARY INDEX;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The NOS solution is convenient as it doesn&#8217;t depend on additional tools. It can be implemented using only SQL. Fastload is still a better solution if we are after raw performance.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This how-to demonstrated how to ingest large amounts of data into Vantage. We loaded hundreds of thousands or records into Vantage in a couple of seconds using Fastload mode from Teradata Parallel Transporter (TPT).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further reading</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root">Teradata® FastLoad Reference</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="page-feedback bottom">
+  <span>Did this page help?</span>
+  <i class="far fa-thumbs-up click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
+  <i class="far fa-thumbs-down click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
 </div>
 </article>
   </div>
@@ -5083,12 +5562,12 @@ If you typed the URL of this page manually, please double check that you entered
     </div>
   </article>
 </footer>
-<script src="/_/js/site.js"></script>
-<script async src="/_/js/behavior.js"></script>
-<script src="/_/js/vendor/lunr.js"></script>
-<script src="/_/js/search-ui.js" id="search-ui-script" data-site-root-path="" data-snippet-length="100" data-stylesheet="/_/css/search.css"></script>
-<script async src="/search-index.js"></script>
-<script src="/_/js/teradata.min.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/behavior.js"></script>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+<script src="../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>

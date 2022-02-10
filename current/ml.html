@@ -3,9 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Page Not Found :: Getting Started Guides</title>
+    <title>Train ML models in Vantage :: Getting Started Guides</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/current/ml.html">
+    <meta name="description" content="Train an ML model without leaving Teradata Vantage - use Vantage Analytics Library (VAL) to create ML models.">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, AI/ML">
     <meta name="generator" content="Antora 3.0.1">
-    <link rel="stylesheet" href="/_/css/site.css">
+    <link rel="stylesheet" href="../_/css/site.css">
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -13,10 +16,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');</script>
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="/_/css/search.css">
-<link rel="stylesheet" href="/_/css/styles.css">
-<link rel="stylesheet" href="/_/css/fontawesome.all.min.css">
-<link rel="stylesheet" href="/_/css/webfonts.css">
+<link rel="stylesheet" href="../_/css/search.css">
+<link rel="stylesheet" href="../_/css/styles.css">
+<link rel="stylesheet" href="../_/css/fontawesome.all.min.css">
+<link rel="stylesheet" href="../_/css/webfonts.css">
 <style>
   .doc a, .doc a:hover {
     color: #007373;
@@ -140,7 +143,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border-radius: 8px;
     padding-left: 14px;
     padding-right: 14px;
-    background-image: url(/_/img/search.svg);
+    background-image: url(../_/img/search.svg);
     background-repeat: no-repeat;
     background-position: right center;
     background-origin: content-box;
@@ -316,7 +319,7 @@ body ::-webkit-scrollbar-thumb {
 
 .report-an-issue {
   padding: 10px 20px 10px 10px;
-  background-image: url(/_/img/pan_tool.svg);
+  background-image: url(../_/img/pan_tool.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -324,7 +327,7 @@ body ::-webkit-scrollbar-thumb {
 
 .edit-on-github {
   padding: 10px 20px 10px 10px;
-  background-image: url(/_/img/edit.svg);
+  background-image: url(../_/img/edit.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -400,15 +403,15 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/warning.svg");
+  content: url("../_/img/warning.svg");
 }
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
-  content: url("/_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .source-toolbox {
@@ -431,7 +434,7 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .source-toolbox img.copy-icon {
-  content: url("/_/img/copy.svg");
+  content: url("../_/img/copy.svg");
 }
 .doc .source-toolbox>:not(:last-child)::after {
   content: "";
@@ -447,10 +450,10 @@ i.fa[class*=' icon-']::before {
 
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
-<link rel="icon" href="/_/img/favicon.ico" type="image/x-icon">
-    <script>var uiRootPath = '/_'</script>
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+    <script>var uiRootPath = '../_'</script>
   </head>
-  <body class="status-404">
+  <body class="article">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7Q6CLV"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -500,16 +503,114 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </header>
 
 <div class="body">
-<div class="nav-container">
+<div class="nav-container" data-component="ROOT" data-version="current">
   <aside class="nav">
     <div class="panels">
-<div class="nav-panel-explore is-active" data-panel="explore">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Get access to Vantage</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on GCP</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Basics</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nos.html">Query data stored in object storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="ml.html">Train ML models in Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="fastload.html">Run large bulkloads efficiently</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">How-Tos</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Configure ODBC</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="odbc.ubuntu.html">Ubuntu</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="segment.html">Store events from Twilio Segment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">AWS</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context" style="visibility: hidden;">
+    <span class="title">Getting Started Guides</span>
+    <span class="version">current</span>
+  </div>
   <ul class="components">
-    <li class="component">
-      <a class="title" href="/current/getting.started.vmware.html">Getting Started Guides</a>
+    <li class="component is-current">
+      <a class="title" href="getting.started.vmware.html">Getting Started Guides</a>
       <ul class="versions">
-        <li class="version is-latest">
-          <a href="/current/getting.started.vmware.html">current</a>
+        <li class="version is-current is-latest">
+          <a href="getting.started.vmware.html">current</a>
         </li>
       </ul>
     </li>
@@ -522,17 +623,310 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li>Basics</li>
+    <li><a href="ml.html">Train ML models in Vantage</a></li>
+  </ul>
 </nav>
 </div>
   <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+      <div class="page-controls">
+      <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/ml.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+    </div>
+  <div class="toc-menu">
+  </div>
+</aside>
 <article class="doc">
-<h1 class="page">Page Not Found</h1>
+<h1 class="page">Train ML models in Vantage</h1>
+<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
+Last updated: September 12th, 2021</p>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The page you&#8217;re looking for does not exist. It may have been moved. You can return to the <a href="/current/getting.started.vmware.html">start page</a>, or follow one of the links in the navigation to the left.</p>
+<p>There are situations when you want to quickly validate a machine learning model idea. You have a model type in mind. You don&#8217;t want to operationalize with an ML pipeline just yet. You just want to test out if the relationship you had in mind exists. Also, sometimes even your production deployment doesn&#8217;t require constant relearning with MLops. In such cases, you can use Vantage Analytics Library (VAL) and multiple ML model types it supports.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You need access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using <a href="getting.started.vmware.html" class="xref page">VMware</a> or <a href="getting.started.vbox.html" class="xref page">VirtualBox</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_vantage_analytics_library"><a class="anchor" href="#_install_vantage_analytics_library"></a>Install Vantage Analytics Library</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Support for ML in Vantage requires Vantage Analytics Library (VAL). In this section, we will install VAL and load some sample data.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>VAL is distributed as an rpm file. Go to <a href="https://downloads.teradata.com/download/database/analytics-library">Teradata Downloads</a> and download the VAL rpm to your local machine.</p>
+</li>
+<li>
+<p>Upload the file to your Vantage install. If you are running Vantage Express locally, you have many ways to do it:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If you installed <a href="getting.started.vbox.html" class="xref page">Vantage Express on VirtualBox</a>, you should be able to drag &amp; drop the file to the VM&#8217;s desktop. You can also use <code>scp</code> by connecting to port <code>4422</code>, e.g.:</p>
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">scp -P 4422 ~/Downloads/VAL-2.0.0.3-1.x86_64.rpm root@localhost:/root/Desktop</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>If you use VMware and you have enabled drag &amp; drop, you should be able to drag and drop the file to the VM&#8217;s desktop.</p>
+</li>
+<li>
+<p>If you have SSH access to your Vantage nodes, you can use <code>scp</code> to upload the binary, e.g.:</p>
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">scp ~/Downloads/VAL-2.0.0.3-1.x86_64.rpm root@vantage.server.name:/tmp/</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>We will now create a new database where VAL functions and procedures will be installed. You could install VAL in a global location such as <code>SYSLIB</code>, but installing VAL in a specific database will make it easier to start over if things go wrong.
+Let&#8217;s create a database called <code>val</code> and grant appropriate permissions to our user. Please edit to match your database name and user id:</p>
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE val
+AS PERMANENT = 60e6, -- 60MB
+    SPOOL = 120e6; -- 120MB
+
+GRANT CREATE FUNCTION ON val to dbc;
+GRANT ALTER FUNCTION ON val to dbc;
+GRANT EXECUTE PROCEDURE on SQLJ.REMOVE_JAR to dbc;
+GRANT EXECUTE PROCEDURE on SQLJ.INSTALL_JAR to dbc;
+GRANT EXECUTE PROCEDURE on SQLJ.REPLACE_JAR to dbc;
+GRANT CREATE EXTERNAL PROCEDURE ON val to dbc;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Open Gnome Terminal in the VM and start the installation process. Adjust the rpm path as necessary:</p>
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">rpm -Uvh --nodeps ~/Desktop/VAL-2.0.0.3-1.x86_64.rpm</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>The install wizard will ask you for the hostname, user id, and password. If you are running the install on your Vantage Express VM, the values are:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Hostname: <code>localhost</code></p>
+</li>
+<li>
+<p>Userid: <code>dbc</code></p>
+</li>
+<li>
+<p>Password: <code>dbc</code></p>
+</li>
+<li>
+<p>Account string: leave empty, press <kbd>ENTER</kbd></p>
+</li>
+<li>
+<p>BTEQ or FASTLOAD command: leave empty, press <kbd>ENTER</kbd></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The wizard will ask you to choose which part of VAL you want to install.
+We want to start with installing <code>td_analyze</code> procedure, i.e. option 1. Once you select option 1, the script will ask for the database name where <code>td_analyze</code> will be installed. Enter <code>val</code> and press <kbd>ENTER</kbd>.</p>
+</li>
+<li>
+<p>While still in the wizard, install option 5, i.e. <code>Tutorial Tables</code>. These are sample tables with data that we are going to use to build a sample model.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_sample_data"><a class="anchor" href="#_sample_data"></a>Sample data</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now, that we have VAL and sample tables loaded, let&#8217;s explore the data. It&#8217;s a simplistic, fictitious dataset of banking customers (1K-ish rows), Accounts (10K-ish rows) and Transactions (100K-ish rows). They are related to each other in the following ways:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/banking.model.png" alt="Banking Model" width="100%">
+</div>
 </div>
 <div class="paragraph">
-<p>If you arrived on this page by clicking on a link, please notify the owner of the site that the link is broken.
-If you typed the URL of this page manually, please double check that you entered the address correctly.</p>
+<p>In later parts of this quickstart we are going to explore if we can build a model that predicts average monthly balance that a banking customer has on their credit card based on all non-credit card related variables in the tables.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_a_linear_regression_model"><a class="anchor" href="#_create_a_linear_regression_model"></a>Create a linear regression model</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s start by creating a wide table (Analytic Data Set, or ADS) that joins the three tables above.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You must have CREATE TABLE permissions on the Database where the Vantage Analytic Library is installed.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Switch to val database.
+DATABASE val;
+
+-- Create the ADS.
+CREATE TABLE VAL_ADS AS (
+    SELECT
+        T1.cust_id  AS cust_id
+       ,MIN(T1.income) AS tot_income
+       ,MIN(T1.age) AS tot_age
+       ,MIN(T1.years_with_bank) AS tot_cust_years
+       ,MIN(T1.nbr_children) AS tot_children
+       ,CASE WHEN MIN(T1.marital_status) = 1 THEN 1 ELSE 0 END AS single_ind
+       ,CASE WHEN MIN(T1.gender) = 'F' THEN 1 ELSE 0 END AS female_ind
+       ,CASE WHEN MIN(T1.marital_status) = 2 THEN 1 ELSE 0 END AS married_ind
+       ,CASE WHEN MIN(T1.marital_status) = 3 THEN 1 ELSE 0 END AS separated_ind
+       ,MAX(CASE WHEN T1.state_code = 'CA' THEN 1 ELSE 0 END) AS ca_resident_ind
+       ,MAX(CASE WHEN T1.state_code = 'NY' THEN 1 ELSE 0 END) AS ny_resident_ind
+       ,MAX(CASE WHEN T1.state_code = 'TX' THEN 1 ELSE 0 END) AS tx_resident_ind
+       ,MAX(CASE WHEN T1.state_code = 'IL' THEN 1 ELSE 0 END) AS il_resident_ind
+       ,MAX(CASE WHEN T1.state_code = 'AZ' THEN 1 ELSE 0 END) AS az_resident_ind
+       ,MAX(CASE WHEN T1.state_code = 'OH' THEN 1 ELSE 0 END) AS oh_resident_ind
+       ,MAX(CASE WHEN T2.acct_type = 'CK' THEN 1 ELSE 0 END) AS ck_acct_ind
+       ,MAX(CASE WHEN T2.acct_type = 'SV' THEN 1 ELSE 0 END) AS sv_acct_ind
+       ,MAX(CASE WHEN T2.acct_type = 'CC' THEN 1 ELSE 0 END) AS cc_acct_ind
+       ,AVG(CASE WHEN T2.acct_type = 'CK' THEN T2.starting_balance+T2.ending_balance ELSE 0 END) AS ck_avg_bal
+       ,AVG(CASE WHEN T2.acct_type = 'SV' THEN T2.starting_balance+T2.ending_balance ELSE 0 END) AS sv_avg_bal
+       ,AVG(CASE WHEN T2.acct_type = 'CC' THEN T2.starting_balance+T2.ending_balance ELSE 0 END) AS cc_avg_bal
+       ,AVG(CASE WHEN T2.acct_type = 'CK' THEN T3.principal_amt+T3.interest_amt ELSE 0 END) AS ck_avg_tran_amt
+       ,AVG(CASE WHEN T2.acct_type = 'SV' THEN T3.principal_amt+T3.interest_amt ELSE 0 END) AS sv_avg_tran_amt
+       ,AVG(CASE WHEN T2.acct_type = 'CC' THEN T3.principal_amt+T3.interest_amt ELSE 0 END) AS cc_avg_tran_amt
+       ,COUNT(CASE WHEN ((EXTRACT(MONTH FROM T3.tran_date) + 2) / 3) = 1 THEN T3.tran_id ELSE NULL END) AS q1_trans_cnt
+       ,COUNT(CASE WHEN ((EXTRACT(MONTH FROM T3.tran_date) + 2) / 3) = 2 THEN T3.tran_id ELSE NULL END) AS q2_trans_cnt
+       ,COUNT(CASE WHEN ((EXTRACT(MONTH FROM T3.tran_date) + 2) / 3) = 3 THEN T3.tran_id ELSE NULL END) AS q3_trans_cnt
+       ,COUNT(CASE WHEN ((EXTRACT(MONTH FROM T3.tran_date) + 2) / 3) = 4 THEN T3.tran_id ELSE NULL END) AS q4_trans_cnt
+    FROM Customer AS T1
+        LEFT OUTER JOIN Accounts AS T2
+            ON T1.cust_id = T2.cust_id
+        LEFT OUTER JOIN Transactions AS T3
+            ON T2.acct_nbr = T3.acct_nbr
+GROUP BY T1.cust_id) WITH DATA UNIQUE PRIMARY INDEX (cust_id);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We will now build a linear regression model that takes parameters from the dataset and tries to predict the monthly credit card balance.</p>
+</div>
+<div class="paragraph">
+<p>We call <code>td_analyze</code> and tell it we want a linear model. The input is in table <code>VAL_ADS</code> and consists of multiple columns. The dependent variable is <code>cc_avg_bal</code>. We want the model to be written to <code>val</code> database in table called <code>LINEAR_REGRESSION_DEMO</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">call td_analyze('linear',
+  'database=val;
+  tablename=VAL_ADS;
+  columns=tot_age,tot_income,tot_cust_years,tot_children,single_ind,female_ind,married_ind,separated_ind,ck_acct_ind,sv_acct_ind,sv_avg_bal,ck_avg_bal,ca_resident_ind,ny_resident_ind,tx_resident_ind,il_resident_ind,az_resident_ind,oh_resident_ind;
+  dependent=cc_avg_bal;
+  outputdatabase=val;
+  outputtablename=linear_regression_demo');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The procedure creates several output tables. For now, we don&#8217;t have to analyze what is in the tables. Let&#8217;s see how we can use the newly created model to perform scoring.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_scoring"><a class="anchor" href="#_scoring"></a>Scoring</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s use the model to perform predictions and evaluate the scores. To do this, we call <code>td_analyze</code> with <code>linearscore</code> parameter. We point to the input table (<code>VAL_ADS</code>), the model tables (prefix <code>linear_regression_demo</code>) and define the target table (<code>linear_regression_score</code>) in <code>val</code> database:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">call td_analyze('linearscore',
+  'database=val;
+  tablename=VAL_ADS;
+  modeldatabase=val;
+  modeltablename=linear_regression_demo;
+  outputdatabase=val;
+  outputtablename=linear_regression_score;
+  predicted=estimate;
+  retain=cc_avg_bal;
+  scoringmethod=scoreandevaluate;');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As a result, we get <code>linear_regression_score</code> table that contains the real balance, the predicted balance and the difference between these two. Let&#8217;s have a look at a sample:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM linear_regression_score SAMPLE 10;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see results similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cust_id|cc_avg_bal        |estimate          |Residual           |
+-------+------------------+------------------+-------------------+
+1362498|               0.0| 284.7057772484358| -284.7057772484358|
+1362828|           1184.35|463.74177458594215|  720.6082254140578|
+1362839| 2933.135802469136| 982.9240031182255| 1950.2117993509103|
+1362986| 500.9148148148148| 881.4116539412856| -380.4968391264708|
+1362511|235.85941489361701|294.35369563202846|-58.494280738411426|
+1363134|               0.0|430.27950420065997|-430.27950420065997|
+1363481|               0.0| 411.2359958542745| -411.2359958542745|
+1362644| 209.3304347826087|279.75770904482033| -70.42727426221163|
+1363141|               0.0| 550.1681921045503| -550.1681921045503|
+1363290|               0.0|120.35348558871233|-120.35348558871233|</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this quick start we have learned how to create ML models in SQL. The method used Vantage Analytics Library (VAL). We were able to build a linear regression model and run predictions using the model. We have done that using SQL without any coding.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further reading</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.teradata.com/r/DqJoLxuCtoR947URt1aH0w/root">Vantage Analytics Library User Guide</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="page-feedback bottom">
+  <span>Did this page help?</span>
+  <i class="far fa-thumbs-up click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
+  <i class="far fa-thumbs-down click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
 </div>
 </article>
   </div>
@@ -5083,12 +5477,12 @@ If you typed the URL of this page manually, please double check that you entered
     </div>
   </article>
 </footer>
-<script src="/_/js/site.js"></script>
-<script async src="/_/js/behavior.js"></script>
-<script src="/_/js/vendor/lunr.js"></script>
-<script src="/_/js/search-ui.js" id="search-ui-script" data-site-root-path="" data-snippet-length="100" data-stylesheet="/_/css/search.css"></script>
-<script async src="/search-index.js"></script>
-<script src="/_/js/teradata.min.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/behavior.js"></script>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+<script src="../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>
