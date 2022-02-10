@@ -7,7 +7,7 @@
     <link rel="canonical" href="https://quickstarts.teradata.com/docs/17.10/dbt.html">
     <meta name="description" content="Use dbt (data build tool) with Teradata Vantage.">
     <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, elt, dbt.">
-    <meta name="generator" content="Antora 2.3.4">
+    <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -656,7 +656,7 @@ Last updated: December 28st, 2021</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using <a href="getting.started.vmware.html" class="page">VMware</a> or <a href="getting.started.vbox.html" class="page">VirtualBox</a>.</p>
+<p>Access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using <a href="getting.started.vmware.html" class="xref page">VMware</a> or <a href="getting.started.vbox.html" class="xref page">VirtualBox</a>.</p>
 </li>
 <li>
 <p>Python 3.7, 3.8 or 3.9 installed.</p>
@@ -708,7 +708,7 @@ source env/bin/activate</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code>jaffle_shop:
+<pre class="highlightjs highlight"><code class="language-none hljs">jaffle_shop:
   outputs:
     dev:
       type: teradata
@@ -5410,10 +5410,10 @@ In the second step, dbt created <code>dim_customers</code> and <code>fct_orders<
   </article>
 </footer>
 <script src="../../_/js/site.js"></script>
-<script src="../../_/js/vendor/lunr.js"></script>
-<script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/dbt.html"></script>
-<script async src="../../_/../search-index.js"></script>
 <script async src="../../_/js/behavior.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
 <script src="../../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
@@ -5491,6 +5491,5 @@ In the second step, dbt created <code>dim_customers</code> and <code>fct_orders<
   // expand the nav menu
   document.querySelectorAll('.nav-item').forEach(function (item) { item.classList.add('is-active') })
 </script>
-
   </body>
 </html>

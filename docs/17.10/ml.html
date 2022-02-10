@@ -7,7 +7,7 @@
     <link rel="canonical" href="https://quickstarts.teradata.com/docs/17.10/ml.html">
     <meta name="description" content="Train an ML model without leaving Teradata Vantage - use Vantage Analytics Library (VAL) to create ML models.">
     <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, AI/ML">
-    <meta name="generator" content="Antora 2.3.4">
+    <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -654,7 +654,7 @@ Last updated: September 12th, 2021</p>
 <h2 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You need access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using <a href="getting.started.vmware.html" class="page">VMware</a> or <a href="getting.started.vbox.html" class="page">VirtualBox</a>.</p>
+<p>You need access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using <a href="getting.started.vmware.html" class="xref page">VMware</a> or <a href="getting.started.vbox.html" class="xref page">VirtualBox</a>.</p>
 </div>
 </div>
 </div>
@@ -674,7 +674,7 @@ Last updated: September 12th, 2021</p>
 <div class="ulist">
 <ul>
 <li>
-<p>If you installed <a href="getting.started.vbox.html" class="page">Vantage Express on VirtualBox</a>, you should be able to drag &amp; drop the file to the VM&#8217;s desktop. You can also use <code>scp</code> by connecting to port <code>4422</code>, e.g.:</p>
+<p>If you installed <a href="getting.started.vbox.html" class="xref page">Vantage Express on VirtualBox</a>, you should be able to drag &amp; drop the file to the VM&#8217;s desktop. You can also use <code>scp</code> by connecting to port <code>4422</code>, e.g.:</p>
 <div class="listingblock content-editable">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">scp -P 4422 ~/Downloads/VAL-2.0.0.3-1.x86_64.rpm root@localhost:/root/Desktop</code></pre>
@@ -5478,10 +5478,10 @@ GROUP BY T1.cust_id) WITH DATA UNIQUE PRIMARY INDEX (cust_id);</code></pre>
   </article>
 </footer>
 <script src="../../_/js/site.js"></script>
-<script src="../../_/js/vendor/lunr.js"></script>
-<script src="../../_/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/docs/17.10/ml.html"></script>
-<script async src="../../_/../search-index.js"></script>
 <script async src="../../_/js/behavior.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
 <script src="../../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
@@ -5559,6 +5559,5 @@ GROUP BY T1.cust_id) WITH DATA UNIQUE PRIMARY INDEX (cust_id);</code></pre>
   // expand the nav menu
   document.querySelectorAll('.nav-item').forEach(function (item) { item.classList.add('is-active') })
 </script>
-
   </body>
 </html>
