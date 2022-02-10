@@ -19,3 +19,7 @@ asciidoc:
   extensions:
   - ./lib/tabs-block/extension.js
   - asciidoctor-kroki
+
+antora:
+  extensions:
+  - require: '@antora/lunr-extension'

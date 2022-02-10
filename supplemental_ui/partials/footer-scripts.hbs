@@ -1,8 +1,8 @@
 <script src="{{uiRootPath}}/js/site.js"></script>
-<script src="{{uiRootPath}}/js/vendor/lunr.js"></script>
-<script src="{{uiRootPath}}/js/vendor/search.js" id="search-script" data-base-path="{{or siteRootPath (or site.url siteRootUrl)}}" data-page-path="{{@root.page.url}}"></script>
-<script async src="{{uiRootPath}}/../search-index.js"></script>
 <script async src="{{uiRootPath}}/js/behavior.js"></script>
+{{#if env.SITE_SEARCH_PROVIDER}}
+{{> search-scripts}}
+{{/if}}
 <script src="{{uiRootPath}}/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
@@ -80,4 +80,3 @@
   // expand the nav menu
   document.querySelectorAll('.nav-item').forEach(function (item) { item.classList.add('is-active') })
 </script>
-

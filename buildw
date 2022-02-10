@@ -3,4 +3,4 @@
 set -e
 npm ci
 export PATH='./node_modules/@antora/cli/bin':$PATH
-CI=true FORCE_SHOW_EDIT_PAGE_LINK=true DOCSEARCH_ENABLED=true DOCSEARCH_ENGINE=lunr NODE_PATH="$(npm -g root)" antora --generator antora-site-generator-lunr antora-playbook.yml
+CI=true FORCE_SHOW_EDIT_PAGE_LINK=true NODE_PATH="$(npm -g root)" antora antora-playbook.yml
