@@ -1,6 +1,5 @@
 name: ROOT
 title: Getting Started Guides
 version: 'current'
-start_page: getting.started.vmware.adoc
 nav:
 - modules/ROOT/nav.adoc
