@@ -355,6 +355,10 @@ body ::-webkit-scrollbar-thumb {
   background-color: #eaf3f2;
 }
 
+.doc .admonitionblock.question {
+  background-color: #eaf3f2;
+}
+
 .doc .admonitionblock.tip {
   background-color: #eaf3f2;
 }
@@ -365,6 +369,11 @@ body ::-webkit-scrollbar-thumb {
 }
 
 .doc .admonitionblock.note .icon {
+  background-color: initial;
+  color: #007373;
+}
+
+.doc .admonitionblock.question .icon {
   background-color: initial;
   color: #007373;
 }
@@ -408,6 +417,10 @@ i.fa[class*=' icon-']::before {
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
   content: url("../_/img/note.svg");
+}
+
+.doc .admonitionblock.question .icon i.fa[class*=' icon-']::before {
+  content: url("../_/img/question.mark.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
