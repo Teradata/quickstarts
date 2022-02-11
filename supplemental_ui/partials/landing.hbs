@@ -6,16 +6,15 @@
           <div class="call-to-action-text">
             <div class="header">Getting Started</div>
             <div class="short-description">Get quickly up to speed with Teradata Vantage. Learn about features. Find how-to's for common tasks. Explore sample source code.</div>
-            <div class="button-container"><a class="call-to-action-button" href="#getting-access-to-vantage">Get access to Vantage</a></div>
+            <div class="button-container"><a class="call-to-action-button" href="#getting-access-to-vantage">Get access to Vantage</a><a class="call-to-action-button-secondary" href="#browse-content">Browse content</a></div>
           </div>
         </div>
         <div class="search-input-container">
           <input id="search-input" type="text" placeholder="Search Getting Started">
         </div>
-        <div class="tile-container" id="getting-access-to-vantage">
-          <div class="title">Quick Starts</div>
+        <div class="tile-container">
           <div class="tile-section">
-            <div class="tile-section-title">Getting access to Teradata Vantage</div>
+            <div class="tile-section-title" id="getting-access-to-vantage">Getting access to Teradata Vantage</div>
             <div class="tile-section-container">
               <div class="tile">
                 <div class="tile-title"><a href="getting.started.vmware.html">Vantage Express on VMWare</a></div>
@@ -46,68 +45,65 @@
                 </div>
               </div>
             </div>
-            <div class="tile-section-title">Basics</div>
+            <div class="tile-section-title" id="browse-content">Tutorials</div>
             <div class="tile-section-container">
               <div class="tile">
                 <div class="tile-title"><a href="nos.html">Query data in object storage</a></div>
                 <div class="tile-content">Learn how to analyze data stored in object storage using SQL.</div>
                 <div class="tile-tags">
-                  <div class="tag">Basics</div>
+                  <div class="tag">Tutorial</div>
                 </div>
               </div>
               <div class="tile">
-                <div class="tile-title"><a href="jdbc.html">Connect to Vantage using JDBC</a></div>
-                <div class="tile-content">Explore sample Java application that retrieves data from Vantage using JDBC.</div>
+                <div class="tile-title"><a href="dbt.html">Use dbt with Teradata Vantage</a></div>
+                <div class="tile-content">Learn how to use dbt, a leading ELT tool, with Teradata Vantage.</div>
                 <div class="tile-tags">
-                  <div class="tag">Basics</div>
-                </div>
-              </div>
-              <div class="tile">
-                <div class="tile-title"><a href="jupyter.html">Use Vantage from a Jupyter notebook</a></div>
-                <div class="tile-content">Use Jupyter notebooks to do data science on Vantage.</div>
-                <div class="tile-tags">
-                  <div class="tag">Basics</div>
-                </div>
-              </div>
-              <div class="tile">
-                <div class="tile-title"><a href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a></div>
-                <div class="tile-content">Follow instructions to deploy Teradata Jupyter extensions in your own JupyterHub instance.</div>
-                <div class="tile-tags">
-                  <div class="tag">Basics</div>
+                  <div class="tag">Tutorial</div>
                 </div>
               </div>
               <div class="tile">
                 <div class="tile-title"><a href="sto.html">Run scripts on Vantage</a></div>
                 <div class="tile-content">Bring logic to your data. Leverage Teradata's scale to worith with data using applications and scripts.</div>
                 <div class="tile-tags">
-                  <div class="tag">Basics</div>
+                  <div class="tag">Tutorial</div>
                 </div>
               </div>
               <div class="tile">
                 <div class="tile-title"><a href="fastload.html">Run large bulkloads efficiently</a></div>
                 <div class="tile-content">Explore tools for loading massive amounts of data into Vantage.</div>
                 <div class="tile-tags">
-                  <div class="tag">Basics</div>
-                </div>
-              </div>
-            </div>
-            <div class="tile-section-title">Tutorials</div>
-            <div class="tile-section-container">
-              <div class="tile">
-                <div class="tile-title"><a href="dbt.html">Use dbt with Teradata Vantage</a></div>
-                <div class="tile-content">Learn how to use dbt, a leading ELT tool, with Teradata Vantage.</div>
-                <div class="tile-tags">
-                  <div class="tag">Tutorials</div>
+                  <div class="tag">Tutorial</div>
                 </div>
               </div>
             </div>
             <div class="tile-section-title">How-Tos</div>
             <div class="tile-section-container">
               <div class="tile">
+                <div class="tile-title"><a href="jdbc.html">Connect to Vantage using JDBC</a></div>
+                <div class="tile-content">Explore sample Java application that retrieves data from Vantage using JDBC.</div>
+                <div class="tile-tags">
+                  <div class="tag">How-To</div>
+                </div>
+              </div>
+              <div class="tile">
+                <div class="tile-title"><a href="jupyter.html">Use Vantage from a Jupyter notebook</a></div>
+                <div class="tile-content">Use Jupyter notebooks to do data science on Vantage.</div>
+                <div class="tile-tags">
+                  <div class="tag">How-To</div>
+                </div>
+              </div>
+              <div class="tile">
+                <div class="tile-title"><a href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a></div>
+                <div class="tile-content">Follow instructions to deploy Teradata Jupyter extensions in your own JupyterHub instance.</div>
+                <div class="tile-tags">
+                  <div class="tag">How-To</div>
+                </div>
+              </div>
+              <div class="tile">
                 <div class="tile-title"><a href="mule.jdbc.example.html">Query Teradata Vantage from a Mulesoft service</a></div>
                 <div class="tile-content">This how-to demonstrates how to run queries on Vantage using a REST service built on Mulesoft.</div>
                 <div class="tile-tags">
-                  <div class="tag">How-Tos</div>
+                  <div class="tag">How-To</div>
                 </div>
               </div>
               <div class="tile">
@@ -263,7 +259,7 @@
   }
 
   .tile-container {
-    padding: 46px 14px 0px 14px;
+    padding: 0px 14px 0px 14px;
     width: 100%;
     margin: auto;
   }
@@ -287,6 +283,7 @@
     letter-spacing: 0.15px;
     color: rgba(0, 0, 0, 0.87);
     padding-top: 24px;
+    scroll-margin-top: 110px;
   }
 
   .tile {
@@ -400,9 +397,35 @@
     color: rgba(255, 255, 255, 0.87);
     padding: 11px 12px;
     margin-top: 25px;
+    margin-right: 16px;
   }
 
   .call-to-action-button:hover {
+    text-decoration: none;
+  }
+
+  .call-to-action-button-secondary {
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    box-sizing: border-box;
+    border-radius: 8px;
+    text-transform: uppercase;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.87);
+    padding: 11px 12px;
+    margin-top: 25px;
+    background: #eaf2f2;
+
+  }
+
+  .call-to-action-button-secondary:hover {
     text-decoration: none;
   }
 
