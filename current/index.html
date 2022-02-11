@@ -791,6 +791,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <style>
 
+  @media screen and (max-width: 820px) {
+    .call-to-action {
+      background-image: none;
+    }
+
+    .call-to-action-text .short-description {
+      width: 100%;
+    }
+
+    .doc .admonitionblock.question.landing-page  {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 820px) {
+    .call-to-action {
+      background-image: url('../_/img/illustration.svg');
+    }
+
+    .call-to-action-text .short-description {
+      width: 50%;
+    }
+
+    .doc .admonitionblock.question.landing-page  {
+      display: inherit;
+    }
+  }
 
   .landing-container {
     margin-left: 16px;
@@ -809,13 +836,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 
   .call-to-action {
-    background: rgba(133, 221, 220, 0.1);
+    background-color: rgba(133, 221, 220, 0.1);
     border: 1px solid rgba(0, 0, 0, 0.12);
     box-sizing: border-box;
     border-radius: 8px;
     width: 100%;
     min-height: 241px;
-    background-image: url('../_/img/illustration.svg');
     background-repeat: no-repeat;
     background-position: right;
     background-origin: content-box;
@@ -841,7 +867,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     font-size: 16px;
     line-height: 20px;
     color: rgba(0, 0, 0, 0.6);
-    width: 50%;
     padding-top: 4px;
   }
 
@@ -947,6 +972,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     letter-spacing: 0.25px;
     color: rgba(0, 0, 0, 0.6);
     margin-top: 16px;
+    margin-bottom: 50px;
   }
 
   .tag {
@@ -996,6 +1022,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     padding: 11px 12px;
     margin-right: 16px;
     white-space: nowrap;
+    display: inline-block;
   }
 
   .button-container {
@@ -1022,6 +1049,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     margin-top: 25px;
     background: #eaf2f2;
     white-space: nowrap;
+    display: inline-block;
   }
 
   .call-to-action-button-secondary:hover {
