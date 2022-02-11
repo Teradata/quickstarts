@@ -1,7 +1,7 @@
 site:
   title: Getting Started Guides
   url: https://quickstarts.teradata.com/
-  start_page: ROOT::getting.started.vmware.adoc
+  start_page: ROOT::index.adoc
 content:
   sources:
   - url: ./
