@@ -133,8 +133,26 @@
               </div>
             </div>
           </div>
+          <div class="doc">
+            <div class="admonitionblock question landing-page">
+              <table>
+                <tbody><tr>
+                <td class="icon">
+                <i class="fa icon-question"></i>Didn’t find what you were looking for?
+                </td>
+                <td class="content">
+                 Contribute or request a topic
+                </td>
+                <td class="question-action">
+                  <a href="https://github.com/Teradata/quickstarts/issues">request</a>
+                  <a href="https://github.com/Teradata/quickstarts">contribute</a>
+                </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   </main>
@@ -331,6 +349,39 @@
     top: initial;
     right: initial;
     max-width: 60%;
+  }
+
+  .tile-container .doc {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .doc .admonitionblock.note.landing-page .icon {
+    text-transform: initial;
+  }
+
+  .question-action {
+    width: 25%;
+    font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+
+  }
+
+  .question-action a {
+    color: rgba(0, 0, 0, 0.87);
+    padding: 20px;
+  }
+
+  .question-action a:hover {
+    color: #f3743f;
+    text-decoration: none;
+  }
+
+  .doc .admonitionblock.landing-page td.content {
+    width: 75%;
   }
 
 </style>
