@@ -649,6 +649,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
               </div>
             </div>
+            <div class="tile-section-title">Sample source code</div>
+            <div class="tile-section-container source-code">
+              <div class="tile">
+                <div class="tile-title"><a href="https://github.com/Teradata/mule-jdbc-example">A Mulesoft service that queries Taradata Vantage</a></div>
+                <div class="tile-content">A Mulesoft-based REST API that uses the HTTP listener, DB Configuration, and DB Select components to query Teradata Vantage.</div>
+                <div class="tile-icons">
+                  <img src="../_/img/java.logo.svg" />
+                  <img src="../_/img/mulesoft.logo.svg" />
+                  <img src="../_/img/teradata.logo.svg" />
+                </div>
+                <div class="tile-action">
+                  <a href="https://github.com/Teradata/mule-jdbc-example">view</a>
+                </div>
+              </div>
+              <div class="tile">
+                <div class="tile-title"><a href="https://github.com/Teradata/segment-integration-tutorial">Store events from Twilio Segment</a></div>
+                <div class="tile-content">A Javascript application that runs on GCP Cloud Run. It listens to GCP Pub/Sub events coming from Twilio Segment and stores them in Teradata Vantage.</div>
+                <div class="tile-icons">
+                  <img src="../_/img/nodejs.logo.svg" />
+                  <img src="../_/img/twilio.logo.svg" />
+                  <img src="../_/img/gcp.logo.svg" />
+                  <img src="../_/img/teradata.logo.svg" />
+                </div>
+                <div class="tile-action">
+                  <a href="https://github.com/Teradata/segment-integration-tutorial">view</a>
+                </div>
+              </div>
+              <div class="tile">
+                <div class="tile-title"><a href="https://github.com/Teradata/jdbc-sample-app">Connect to Teradata Vantage using JDBC</a></div>
+                <div class="tile-content">A sample application that connects to Teradata Vantage using the Teradata JDBC driver.</div>
+                <div class="tile-icons">
+                  <img src="../_/img/java.logo.svg" />
+                  <img src="../_/img/teradata.logo.svg" />
+                </div>
+                <div class="tile-action">
+                  <a href="https://github.com/Teradata/jdbc-sample-app">view</a>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="doc">
             <div class="admonitionblock question landing-page">
@@ -677,21 +716,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <style>
 
-  @media screen and (min-width: 1200px) {
-    .landing-container {
-      width: 1200px;
-    }
-  }
-
-  @media screen and (max-width: 1200px) {
-    .landing-container {
-      width: 100%;
-    }
-  }
 
   .landing-container {
     margin-left: 16px;
     margin-right: 16px;
+    max-width: 1200px;
+    width: 100%;
   }
 
   .landing {
@@ -709,7 +739,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     box-sizing: border-box;
     border-radius: 8px;
     width: 100%;
-    height: 241px;
+    min-height: 241px;
     background-image: url('../_/img/illustration.svg');
     background-repeat: no-repeat;
     background-position: right;
@@ -785,6 +815,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     padding: 16px;
     position: relative;
   }
+  @media screen and (min-width: 580px) {
+    .source-code .tile {
+      width: 570px;
+    }
+  }
+
+  .tile-section-container.source-code {
+    display: grid;
+    grid-column-gap: 30px;
+    grid-row-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(570px, 1fr));
+    padding-top: 8px;
+  }
 
   .tile a:hover {
     text-decoration: none;
@@ -837,6 +880,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   .tile-tags {
     position: absolute;
     bottom: 16px;
+  }
+
+  .tile-action {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+  }
+
+  .tile-action a {
+    font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #007373;
+    border: 1px #007373 solid;
+    border-radius: 8px;
+    padding: 9px 8px;
   }
 
   .call-to-action-button {
@@ -900,6 +961,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   .doc .admonitionblock.landing-page td.content {
     width: 80%;
   }
+
+  div.tile-icons {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    display: flex;
+  }
+  .tile-icons img {
+    height: 34px;
+    width: 34px;
+    margin: 0px 4px;
+  }
+
 
 </style>
 <svg aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
