@@ -909,7 +909,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 
   .tile {
-    width: 370px;
+    max-width: 370px;
     min-height: 188px;
     background: #FFFFFF;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.14), 0px 2px 2px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2);
@@ -929,7 +929,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   @media screen and (min-width: 580px) {
     .source-code .tile {
-      width: 570px;
+      max-width: 570px;
+    }
+
+    .tile-section-container.source-code {
+      grid-template-columns: repeat(auto-fit, minmax(470px, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 580px) {
+
+    .tile-section-container.source-code {
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     }
   }
 
@@ -937,7 +948,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     display: grid;
     grid-column-gap: 30px;
     grid-row-gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(570px, 1fr));
     padding-top: 8px;
   }
 
@@ -950,7 +960,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     display: grid;
     grid-column-gap: 30px;
     grid-row-gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     padding-top: 8px;
   }
 
