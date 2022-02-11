@@ -3,23 +3,22 @@
 ** xref::getting.started.vbox.adoc[Vantage Express on VirtualBox]
 ** xref::getting.started.utm.adoc[Vantage Express on UTM]
 ** xref::vantage.express.gcp.adoc[Vantage Express on GCP]
-* Basics
+* Tutorials
 ** xref::nos.adoc[]
+** xref::ml.adoc[]
+** xref::dbt.adoc[]
+** xref::sto.adoc[]
+** xref::fastload.adoc[]
+* How-Tos
 ** xref::jdbc.adoc[]
 ** xref::jupyter.adoc[]
 ** xref::local.jupyter.hub.adoc[]
-** xref::sto.adoc[]
-** xref::ml.adoc[]
-** xref::fastload.adoc[]
-* Tutorials
-** xref::dbt.adoc[]
 ** xref::mule.jdbc.example.adoc[]
-* How-Tos
 ** Configure ODBC
 *** xref::odbc.ubuntu.adoc[Ubuntu]
 ** xref::segment.adoc[]
-** AWS
-*** xref::sagemaker-with-teradata-vantage.adoc[]
+** xref::sagemaker-with-teradata-vantage.adoc[]
+
 //* Planned
 //** Run Teradata Developer in Public Cloud
 //** Tune performance with indices
