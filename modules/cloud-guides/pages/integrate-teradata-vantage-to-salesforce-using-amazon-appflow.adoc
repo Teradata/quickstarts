@@ -36,7 +36,7 @@ Vantage enables companies to start small and elastically scale compute or storag
 
 Vantage combines descriptive, predictive, prescriptive analytics, autonomous decision-making, ML functions, and visualization tools into a unified, integrated platform that uncovers real-time business intelligence at scale, no matter where the data resides.
 
-Teradata Vantage Native Object Store (NOS) can be used to explore data in external object stores, like Amazon S3, using standard SQL. No special object storage-side compute infrastructure is required to use NOS. Users can explore data located in an Amazon S3 bucket by simply creating a NOS table definition that points to your bucket. With NOS, you can quickly import data from Amazon S3 or even join it with other tables in the Vantage database. 
+Teradata Vantage Native Object Store (NOS) can be used to explore data in external object stores, like Amazon S3, using standard SQL. No special object storage-side compute infrastructure is required to use NOS. Users can explore data located in an Amazon S3 bucket by simply creating a NOS table definition that points to your bucket. With NOS, you can quickly import data from Amazon S3 or even join it with other tables in the Vantage database.
 
 == Prerequisites
 
@@ -71,7 +71,7 @@ Once you have met the prerequisites, follow these steps:
 
 === Create a Salesforce to Amazon S3 Flow
 
-This step creates a flow using Amazon AppFlow. For this example, we’re using a https://developer.salesforce.com/signup[Salesforce developer account] to connect to Salesforce.
+This step creates a flow using Amazon AppFlow. For this example, we're using a https://developer.salesforce.com/signup[Salesforce developer account] to connect to Salesforce.
 
 Go to https://console.aws.amazon.com/appflow[AppFlow console], sign in with your AWS login credentials and click *Create flow*. Make sure you are in the right region, and the bucket is created to store Salesforce data.
 
@@ -210,11 +210,11 @@ USING
 
 At a minimum, the foreign table definition must include a table name and location clause (highlighted in yellow) which points to the object store data. The Location requires a top-level single name, referred to as a "bucket" in Amazon.
 
-If the file name doesn’t have standard extension (.json, .csv, .parquet) at the end, the Location and Payload columns definition is also required (highlighted in turquoise) to indicate the type of the data file.
+If the file name doesn't have standard extension (.json, .csv, .parquet) at the end, the Location and Payload columns definition is also required (highlighted in turquoise) to indicate the type of the data file.
 
 Foreign tables are always defined as No Primary Index (NoPI) tables.
 
-Once foreign table’s created, you can query the content of the Amazon S3 data set by doing "Select" on the foreign table.
+Once foreign table's created, you can query the content of the Amazon S3 data set by doing "Select" on the foreign table.
 
 [source, teradata-sql]
 ----
@@ -305,7 +305,7 @@ FROM READ_NOS (
 USING
 LOCATION ('/S3/s3.amazonaws.com/ptctstoutput/salesforce/1ce190bc-25a9-4493-99ad-7497b497a0d0/903790813-2020-08-21T21:02:25')
  ACCESS_ID ('A**********') /* AccessKeyId */
- ACCESS_KEY (‘***********’) /* SecretAccessKey */
+ ACCESS_KEY ('***********') /* SecretAccessKey */
  ) AS D
 GROUP BY 1;
 ----
@@ -377,7 +377,7 @@ Shipping_Address:
 
 image:{page-image-directory}/image26.png[image,width=624,height=53]
 
-By joining the salesforce foreign table to the established database table Orders, Order_Items and Shipping_Address, we can retrieve customer’s order information with customer’s shipping information.
+By joining the salesforce foreign table to the established database table Orders, Order_Items and Shipping_Address, we can retrieve customer's order information with customer's shipping information.
 
 [source, teradata-sql]
 ----
@@ -488,7 +488,7 @@ CREATE TABLE salesforceReadNOS AS (
     USING
       LOCATION ('/S3/s3.amazonaws.com/ptctstoutput/salesforce/1ce190bc-25a9-4493-99ad-7497b497a0d0/903790813-2020-08-21T21:02:25')
       ACCESS_ID ('A**********') /* AccessKeyId */
-      ACCESS_KEY (‘***********’) /* SecretAccessKey */
+      ACCESS_KEY ('***********') /* SecretAccessKey */
   ) AS D
 ) WITH DATA;
 ----
@@ -590,7 +590,7 @@ I have a `newleads` table with 1 row in it on Vantage system.
 
 image:{page-image-directory}/image41.png[image,width=624,height=24]
 
-Note there’s no address information for this lead. Let’s use the account information retrieved from Salesforce to update `newleads` table
+Note there's no address information for this lead. Let's use the account information retrieved from Salesforce to update `newleads` table
 
 [source, teradata-sql]
 ----

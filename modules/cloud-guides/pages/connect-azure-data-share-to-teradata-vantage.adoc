@@ -34,7 +34,7 @@ Vantage enables companies to start small and elastically scale compute or storag
 
 Vantage supports R, Python, Teradata Studio, and any other SQL-based tools. You can deploy Vantage across public clouds, on-premises, on optimized or commodity infrastructure, or as-a-service.
 
-Teradata Vantage Native Object Store (NOS) can be used to explore data in external object stores, like Azure Blob Storage, using standard SQL. No special object storage-side compute infrastructure is required to use NOS. You can explore data located in an Blob Storage container by simply creating a NOS table definition that points to your container. With NOS, you can quickly import data from Blob Storage or even join it other tables in the database. 
+Teradata Vantage Native Object Store (NOS) can be used to explore data in external object stores, like Azure Blob Storage, using standard SQL. No special object storage-side compute infrastructure is required to use NOS. You can explore data located in an Blob Storage container by simply creating a NOS table definition that points to your container. With NOS, you can quickly import data from Blob Storage or even join it other tables in the database.
 
 Alternatively, the Teradata Parallel Transporter (TPT) utility can be used to import data from Blob Storage to Teradata Vantage in bulk fashion. Once loaded, data can be efficiently queried within Vantage.
 
@@ -212,7 +212,7 @@ image:{page-image-directory}/image16.png[Data Share invitations,image,width=624,
 
 * Under _Target Data Share Account_, select the Subscription and Resource Group that you would like to deployed your Data Share into or you can create a new Data Share here.
 +
-NOTE: f provider required a Terms of Use acceptance, a dialog box would appear and you’ll be required to check the box to indicate you agree to the terms of use.
+NOTE: f provider required a Terms of Use acceptance, a dialog box would appear and you'll be required to check the box to indicate you agree to the terms of use.
 
 * Enter the Resource group and Data share account. We will use _myDataShareConsumer_rg_ and _mydatashareconsumer_ account this article.
 +
@@ -286,7 +286,7 @@ NOTE: At a minimum, the foreign table definition must include a table name (Weat
 +
 The _LOCATION_ requires a storage account name and container name. You will need to replace this with your own storage account and container name.
 +
-If the object doesn’t have a standard extension (e.g. “.json”, “.csv”, “.parquet”), then the _Location…Payload_ columns definition phrase is also needed, and the LOCATION phase need to include the file name. For example: LOCATION (`AZ/<storage account name>.blob.core.windows.net/<container>/<filename>`).
+If the object doesn't have a standard extension (e.g. “.json”, “.csv”, “.parquet”), then the _Location…Payload_ columns definition phrase is also needed, and the LOCATION phase need to include the file name. For example: LOCATION (`AZ/<storage account name>.blob.core.windows.net/<container>/<filename>`).
 +
 Foreign tables are always defined as No Primary Index (NoPI) tables.
 
@@ -445,10 +445,10 @@ You can also use multiple statements to first create the relational table and th
 CREATE MULTISET TABLE WeatherData_temp (
   Postal_code VARCHAR(10),
   Country CHAR(2),
-  Time_Valid_UTC TIMESTAMP(0) FORMAT ‘YYYY-MM-DDBHH:MI:SS’,
+  Time_Valid_UTC TIMESTAMP(0) FORMAT 'YYYY-MM-DDBHH:MI:SS',
   DOY_UTC INTEGER,
   Hour_UTC INTEGER,
-  Time_Valid_LCL TIMESTAMP(0) FORMAT ‘YYYY-MM-DDBHH:MI:SS’,
+  Time_Valid_LCL TIMESTAMP(0) FORMAT 'YYYY-MM-DDBHH:MI:SS',
   DST_Offset_Minutes INTEGER,
   Temperature_Air_2M_F DECIMAL(4,1),
   Temperature_Wetbulb_2M_F DECIMAL(3,1),

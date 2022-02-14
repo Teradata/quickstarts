@@ -112,7 +112,7 @@ image::{page-image-directory}/create.iam.role.png[Create IAM role,width=50%]
 +
 image::{page-image-directory}/choose.an.algorithm.png[Choose an algorithm,width=50%]
 
-4. Use the default `ml.m4.xlarge` instance type, and 30GB of additional storage volume per instance. This is a short training job, shouldn’t take more than 10 minutes.
+4. Use the default `ml.m4.xlarge` instance type, and 30GB of additional storage volume per instance. This is a short training job, shouldn't take more than 10 minutes.
 +
 image::{page-image-directory}/resource.configuration.png[Resource configuration,width=50%]
 
@@ -139,7 +139,7 @@ image::{page-image-directory}/output.data.configuration.png[Output data configur
 
 8. Leave everything else as default, and click on “Create training job”. Detail instructions on how to configure the training job can be found in link:https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-mkt-algo-train.html#sagemaker-mkt-algo-train-console[Amazon SageMaker Developer Guide].
 
-Once the training job’s created, Amazon SageMaker launches the ML instances to train the model, and stores the resulting model artifacts and other output in the `Output data configuration` (`path/<training job name>/output` by default).
+Once the training job's created, Amazon SageMaker launches the ML instances to train the model, and stores the resulting model artifacts and other output in the `Output data configuration` (`path/<training job name>/output` by default).
 
 == Deploy the model
 

@@ -76,7 +76,7 @@ gcloud auth login
 
 * Choose your Google account when the Google login page opens up and click _Allow_ on the next page.
 
-* Next, set up default project if you haven’t already done so
+* Next, set up default project if you haven't already done so
 +
 [source, bash]
 ----
@@ -254,7 +254,7 @@ INFO:root:
 +
 image:{page-image-directory}/image5.png[Graphical user interface, application Description automatically generated,width=624,height=379]
 
-* Click on the table to your interest (i.e. CITY_LEVEL_TRANS), and you’ll see the metadata about this table:
+* Click on the table to your interest (i.e. CITY_LEVEL_TRANS), and you'll see the metadata about this table:
 +
 image:{page-image-directory}/image6.png[Graphical user interface, text, application, email Description automatically generated,width=624,height=331]
 
