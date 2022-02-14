@@ -706,7 +706,7 @@ Last updated: February 8th, 2022</p>
 <p>Go to Amazon SageMaker console and create a notebook instance. See <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/gs-setup-working-env.html">Amazon SageMaker Developer Guide</a> for instructions on how to create a notebook instance:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/create.notebook.png" alt="Create notebook instance">
+<img src="_images/sagemaker-with-teradata-vantage/create.notebook.png" alt="Create notebook instance">
 </div>
 </div>
 </li>
@@ -714,7 +714,7 @@ Last updated: February 8th, 2022</p>
 <p>Open your notebook instance:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/open.notebook.instance.png" alt="Open notebook instance">
+<img src="_images/sagemaker-with-teradata-vantage/open.notebook.instance.png" alt="Open notebook instance">
 </div>
 </div>
 </li>
@@ -722,7 +722,7 @@ Last updated: February 8th, 2022</p>
 <p>Start a new file by clicking on <code>New &#8594; conda_python3</code>:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/start.new.file.png" alt="Start new file">
+<img src="_images/sagemaker-with-teradata-vantage/start.new.file.png" alt="Start new file">
 </div>
 </div>
 </li>
@@ -797,7 +797,7 @@ boto3.Session().resource('s3').Bucket(bucket).Object(os.path.join(prefix, localF
 <p>Select <code>Training jobs</code> on the left menu under <code>Training</code>, then click on <code>Create training job</code>:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/create.training.job.png" alt="Create training job">
+<img src="_images/sagemaker-with-teradata-vantage/create.training.job.png" alt="Create training job">
 </div>
 </div>
 </li>
@@ -805,7 +805,7 @@ boto3.Session().resource('s3').Bucket(bucket).Object(os.path.join(prefix, localF
 <p>At the <code>Create training job</code> window, fill in the <code>Job name</code> (e.g. <code>xgboost-bank</code>) and <code>Create a new role</code> for the IAM role. Choose <code>Any S3 bucket</code> for the Amazon S3 buckets and <code>Create role</code>:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/create.iam.role.png" alt="Create IAM role" width="50%">
+<img src="_images/sagemaker-with-teradata-vantage/create.iam.role.png" alt="Create IAM role" width="50%">
 </div>
 </div>
 </li>
@@ -813,7 +813,7 @@ boto3.Session().resource('s3').Bucket(bucket).Object(os.path.join(prefix, localF
 <p>Back in the <code>Create training job</code> window, use <code>XGBoost</code> as the algorithm:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/choose.an.algorithm.png" alt="Choose an algorithm" width="50%">
+<img src="_images/sagemaker-with-teradata-vantage/choose.an.algorithm.png" alt="Choose an algorithm" width="50%">
 </div>
 </div>
 </li>
@@ -821,7 +821,7 @@ boto3.Session().resource('s3').Bucket(bucket).Object(os.path.join(prefix, localF
 <p>Use the default <code>ml.m4.xlarge</code> instance type, and 30GB of additional storage volume per instance. This is a short training job, shouldn’t take more than 10 minutes.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/resource.configuration.png" alt="Resource configuration" width="50%">
+<img src="_images/sagemaker-with-teradata-vantage/resource.configuration.png" alt="Resource configuration" width="50%">
 </div>
 </div>
 </li>
@@ -842,15 +842,17 @@ objective='binary:logistic'</pre>
 </li>
 <li>
 <p>For <code>Input data configuration</code>, enter the Amazon S3 bucket where you stored your training data. Input mode is <code>File</code>. Content type is <code>csv</code>. <code>S3 location</code> is where the file uploaded to:</p>
-<div class="paragraph">
-<p><span class="image"><img src="_images/input.data.configuration.png" alt="Input data configuration" width="50%"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/sagemaker-with-teradata-vantage/input.data.configuration.png" alt="Input data configuration" width="50%">
+</div>
 </div>
 </li>
 <li>
 <p>For <code>Output data configuration</code>, enter path where the output data will be stored:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/output.data.configuration.png" alt="Output data configuration" width="50%">
+<img src="_images/sagemaker-with-teradata-vantage/output.data.configuration.png" alt="Output data configuration" width="50%">
 </div>
 </div>
 </li>
@@ -881,7 +883,7 @@ objective='binary:logistic'</pre>
 <p>For <code>Container definition 1</code>, use <code>433757028032.dkr.ecr.us-west-2.amazonaws.com/xgboost:latest</code> as <code>Location of inference code image</code>. <code>Location of model artifacts</code> is the output path of your training job</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/container.definition.1.png" alt="Container definition 1" width="50%">
+<img src="_images/sagemaker-with-teradata-vantage/container.definition.1.png" alt="Container definition 1" width="50%">
 </div>
 </div>
 </li>
@@ -899,7 +901,7 @@ objective='binary:logistic'</pre>
 <p>Select the model you just created, then click on <code>Create endpoint configuration</code>:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/create.endpoint.configuration.png" alt="Create endpoint configuration">
+<img src="_images/sagemaker-with-teradata-vantage/create.endpoint.configuration.png" alt="Create endpoint configuration">
 </div>
 </div>
 </li>
@@ -917,19 +919,19 @@ objective='binary:logistic'</pre>
 <p>Select <code>Inference</code> &#8594; <code>Models</code> from the left panel, select the model again, and click on <code>Create endpoint</code> this time:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/create.endpoint.png" alt="Create endpoint">
+<img src="_images/sagemaker-with-teradata-vantage/create.endpoint.png" alt="Create endpoint">
 </div>
 </div>
 </li>
 <li>
 <p>Fill in the name (e.g. <code>xgboost-bank</code>), and select <code>Use an existing endpoint configuration</code>:
-image::attach.endpoint.configuration.png[Attach endpoint configuration]</p>
+image::sagemaker-with-teradata-vantage/attach.endpoint.configuration.png[Attach endpoint configuration]</p>
 </li>
 <li>
 <p>Select the endpoint configuration created from last step, and click on <code>Select endpoint configuration</code>:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/select.endpoint.configuration.png" alt="Select endpoint configuration" width="50%">
+<img src="_images/sagemaker-with-teradata-vantage/select.endpoint.configuration.png" alt="Select endpoint configuration" width="50%">
 </div>
 </div>
 </li>
