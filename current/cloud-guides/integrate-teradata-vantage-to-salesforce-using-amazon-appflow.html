@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Run Vantage Express on VirtualBox :: Getting Started Guides</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/current/getting.started.vbox.html">
-    <meta name="description" content="Run Vantage Express on your laptop using VirtualBox.">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics">
+    <title>Connect Teradata Vantage to Salesforce using Amazon Appflow :: Getting Started Guides</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/current/cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">
+    <meta name="description" content="Connect Teradata Vantage to Salesforce using Amazon Appflow.">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, salesforce integration.">
     <meta name="generator" content="Antora 3.0.1">
-    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/site.css">
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -16,10 +16,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');</script>
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="../_/css/search.css">
-<link rel="stylesheet" href="../_/css/styles.css">
-<link rel="stylesheet" href="../_/css/fontawesome.all.min.css">
-<link rel="stylesheet" href="../_/css/webfonts.css">
+<link rel="stylesheet" href="../../_/css/search.css">
+<link rel="stylesheet" href="../../_/css/styles.css">
+<link rel="stylesheet" href="../../_/css/fontawesome.all.min.css">
+<link rel="stylesheet" href="../../_/css/webfonts.css">
 <style>
   .doc a, .doc a:hover {
     color: #007373;
@@ -143,7 +143,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border-radius: 8px;
     padding-left: 14px;
     padding-right: 14px;
-    background-image: url(../_/img/search.svg);
+    background-image: url(../../_/img/search.svg);
     background-repeat: no-repeat;
     background-position: right center;
     background-origin: content-box;
@@ -319,7 +319,7 @@ body ::-webkit-scrollbar-thumb {
 
 .report-an-issue {
   padding: 10px 20px 10px 10px;
-  background-image: url(../_/img/pan_tool.svg);
+  background-image: url(../../_/img/pan_tool.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -327,7 +327,7 @@ body ::-webkit-scrollbar-thumb {
 
 .edit-on-github {
   padding: 10px 20px 10px 10px;
-  background-image: url(../_/img/edit.svg);
+  background-image: url(../../_/img/edit.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -412,19 +412,19 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
-  content: url("../_/img/warning.svg");
+  content: url("../../_/img/warning.svg");
 }
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
-  content: url("../_/img/note.svg");
+  content: url("../../_/img/note.svg");
 }
 
 .doc .admonitionblock.question .icon i.fa[class*=' icon-']::before {
-  content: url("../_/img/question.mark.svg");
+  content: url("../../_/img/question.mark.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
-  content: url("../_/img/note.svg");
+  content: url("../../_/img/note.svg");
 }
 
 .doc .source-toolbox {
@@ -447,7 +447,7 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .source-toolbox img.copy-icon {
-  content: url("../_/img/copy.svg");
+  content: url("../../_/img/copy.svg");
 }
 .doc .source-toolbox>:not(:last-child)::after {
   content: "";
@@ -468,8 +468,8 @@ span.search-result-highlight {
 
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
-<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
-    <script>var uiRootPath = '../_'</script>
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+    <script>var uiRootPath = '../../_'</script>
   </head>
   <body class="article">
 <!-- Google Tag Manager (noscript) -->
@@ -506,7 +506,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div id="topbar-nav" class="navbar-menu">
         <div id="menu-options" class="navbar-end">
-          <a class="navbar-item" href="../index.html">Getting started</a>
+          <a class="navbar-item" href="../../index.html">Getting started</a>
           <a class="navbar-item" href="https://docs.teradata.com/">Docs</a>
           <a class="navbar-item" href="https://downloads.teradata.com/">Downloads</a>
           <a class="navbar-item" href="https://support.teradata.com/community ">Community</a>
@@ -535,16 +535,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="nav-text">Get access to Vantage</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
+    <a class="nav-link" href="../getting.started.vmware.html">Vantage Express on VMware</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
+    <a class="nav-link" href="../getting.started.vbox.html">Vantage Express on VirtualBox</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on GCP</a>
+    <a class="nav-link" href="../getting.started.utm.html">Vantage Express on UTM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../vantage.express.gcp.html">Vantage Express on GCP</a>
   </li>
 </ul>
   </li>
@@ -553,19 +553,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="nav-text">Tutorials</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nos.html">Query data stored in object storage</a>
+    <a class="nav-link" href="../nos.html">Query data stored in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ml.html">Train ML models in Vantage</a>
+    <a class="nav-link" href="../ml.html">Train ML models in Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
+    <a class="nav-link" href="../dbt.html">dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
+    <a class="nav-link" href="../sto.html">Run scripts on Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="fastload.html">Run large bulkloads efficiently</a>
+    <a class="nav-link" href="../fastload.html">Run large bulkloads efficiently</a>
   </li>
 </ul>
   </li>
@@ -574,34 +574,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="nav-text">How-Tos</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
+    <a class="nav-link" href="../jdbc.html">Connect to Vantage using JDBC</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
+    <a class="nav-link" href="../jupyter.html">Use Vantage from a Jupyter notebook</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+    <a class="nav-link" href="../local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+    <a class="nav-link" href="../mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Configure ODBC</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="odbc.ubuntu.html">Ubuntu</a>
+    <a class="nav-link" href="../odbc.ubuntu.html">Ubuntu</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="segment.html">Store events from Twilio Segment</a>
+    <a class="nav-link" href="../segment.html">Store events from Twilio Segment</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
+    <a class="nav-link" href="sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
   </li>
 </ul>
   </li>
@@ -617,10 +617,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <ul class="components">
     <li class="component is-current">
-      <a class="title" href="index.html">Getting Started Guides</a>
+      <a class="title" href="../index.html">Getting Started Guides</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">current</a>
+          <a href="../index.html">current</a>
         </li>
       </ul>
     </li>
@@ -634,8 +634,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li>Get access to Vantage</li>
-    <li><a href="getting.started.vbox.html">Vantage Express on VirtualBox</a></li>
+    <li>How-Tos</li>
+    <li><a href="integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a></li>
   </ul>
 </nav>
 </div>
@@ -643,410 +643,1006 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/getting.started.vbox.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/cloud-guides/pages/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Run Vantage Express on VirtualBox</h1>
-<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
-Last updated: September 7th, 2021</p>
+<h1 class="page">Connect Teradata Vantage to Salesforce using Amazon Appflow</h1>
+<p>Author: <a href="mailto:wenjie.tehan@teradata.com">Wenjie Tehan</a><br/>
+Last updated: February 14th, 2022</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This quick start shows the quickest way to gain access to a Teradata database by running it on your local machine. There are many ways to install Teradata. This document optimizes for the lowest time to first query without spending money on cloud resources. Once you finish the steps you will have a working Teradata Vantage Express database on your computer.</p>
+<p>This how-to describes the process to migrate data between Salesforce and Teradata Vantage. It contains two use cases:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Retrieve customer information from Salesforce, and combine it with order and shipping information from Vantage to derive analytical insights.</p>
+</li>
+<li>
+<p>Update <code>newleads</code> table on Vantage with the Salesforce data, then add the new lead(s) back to Salesforce using AppFlow.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image2.png" alt="Diagram Description automatically generated" width="584" height="262"></span></p>
+</div>
+<div class="paragraph">
+<p>Amazon AppFlow transfers the customer account data from Salesforce to Amazon S3. Vantage then uses Native Object Store (NOS) read functionality to join the data in Amazon S3 with data in Vantage with a single query.</p>
+</div>
+<div class="paragraph">
+<p>The account information is used to update the <code>newleads</code> table on Vantage. Once the table is updated, Vantage writes it back to the Amazon S3 bucket with NOS Write. A Lambda function is triggered upon arrival of the new lead data file to convert the data file from Parquet format to CSV format, and AppFlow then inserts the new lead(s) back into Salesforce.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_about_amazon_appflow"><a class="anchor" href="#_about_amazon_appflow"></a>About Amazon AppFlow</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Amazon AppFlow is a fully managed integration service that enables users to securely transfer data between Software-as-a-Service (SaaS) applications like Salesforce, Marketo, Slack, and ServiceNow, and AWS services like Amazon S3 and Amazon Redshift. AppFlow automatically encrypts data in motion, and allows users to restrict data from flowing over the public internet for SaaS applications that are integrated with AWS PrivateLink, reducing exposure to security threats.</p>
+</div>
+<div class="paragraph">
+<p>As of today, Amazon AppFlow has 16 sources to choose from, and can send the data to four destinations.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_about_teradata_vantage"><a class="anchor" href="#_about_teradata_vantage"></a>About Teradata Vantage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Teradata Vantage is the connected multi-cloud data platform for enterprise analytics, solving data challenges from start to scale.</p>
+</div>
+<div class="paragraph">
+<p>Vantage enables companies to start small and elastically scale compute or storage, paying only for what they use, harnessing low-cost object stores and integrating their analytic workloads. Vantage supports R, Python, Teradata Studio, and any other SQL-based tools.</p>
+</div>
+<div class="paragraph">
+<p>Vantage combines descriptive, predictive, prescriptive analytics, autonomous decision-making, ML functions, and visualization tools into a unified, integrated platform that uncovers real-time business intelligence at scale, no matter where the data resides.</p>
+</div>
+<div class="paragraph">
+<p>Teradata Vantage Native Object Store (NOS) can be used to explore data in external object stores, like Amazon S3, using standard SQL. No special object storage-side compute infrastructure is required to use NOS. Users can explore data located in an Amazon S3 bucket by simply creating a NOS table definition that points to your bucket. With NOS, you can quickly import data from Amazon S3 or even join it with other tables in the Vantage database.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
 <div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
+<div class="paragraph">
+<p>You are expected to be familiar with Amazon AppFlow service and Teradata Vantage.</p>
+</div>
+<div class="paragraph">
+<p>You will need the following accounts, and systems:</p>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p>A computer using one of the following operating systems: Windows 10, Linux or MacOS.</p>
+<p>A Teradata Vantage instance with SQLE 17.0+.</p>
 </li>
 <li>
-<p>30GB of disk space and enough CPU and RAM to be able to dedicate at least one core and 6GB RAM to the virtual machine.</p>
+<p>An AWS account with the role that can create and run flows.</p>
 </li>
 <li>
-<p>Admin rights to be able to install and run the software.</p>
+<p>An Amazon S3 bucket to store Salesforce data (i.e., ptctsoutput)</p>
 </li>
-</ol>
+<li>
+<p>An Amazon S3 bucket to store raw Vantage data (Parquet file) (i.e., vantageparquet). This bucket needs to have policy to allow Amazon AppFlow access</p>
+</li>
+<li>
+<p>An Amazon S3 bucket to store converted Vantage data (CSV file) (i.e., vantagecsv)</p>
+</li>
+<li>
+<p>A Salesforce account that satisfies the following requirements:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Your Salesforce account must be enabled for API access. API access is enabled by default for Enterprise, Unlimited, Developer, and Performance editions.</p>
+</li>
+<li>
+<p>Your Salesforce account must allow you to install connected apps. If this is disabled, contact your Salesforce administrator. After you create a Salesforce connection in Amazon AppFlow, verify that the connected app named "Amazon AppFlow Embedded Login App" is installed in your Salesforce account.</p>
+</li>
+<li>
+<p>The refresh token policy for the "Amazon AppFlow Embedded Login App" must be set to "Refresh token is valid until revoked". Otherwise, your flows will fail when your refresh token expires.</p>
+</li>
+<li>
+<p>You must enable Change Data Capture in Salesforce to use event-driven flow triggers. From Setup, enter "Change Data Capture" in Quick Find.</p>
+</li>
+<li>
+<p>If your Salesforce app enforces IP address restrictions, you must whitelist the addresses used by Amazon AppFlow. For more information, see https://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html[AWS IP address ranges] in the <em>Amazon Web Services General Reference</em>.</p>
+</li>
+<li>
+<p>If you are transferring over 1 million Salesforce records, you cannot choose any Salesforce compound field. Amazon AppFlow uses Salesforce Bulk APIs for the transfer, which does not allow transfer of compound fields.</p>
+</li>
+<li>
+<p>To create private connections using AWS PrivateLink, you must enable both "Manager Metadata" and "Manage External Connections" user permissions in your Salesforce account. Private connections are currently available in the us-east-1 and us-west-2 AWS Regions.</p>
+</li>
+<li>
+<p>Some Salesforce objects can&#8217;t be updated, such as history objects. For these objects, Amazon AppFlow does not support incremental export (the "Transfer new data only" option) for schedule-triggered flows. Instead, you can choose the "Transfer all data" option and then select the appropriate filter to limit the records you transfer.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h2>
+<h2 id="_procedure"><a class="anchor" href="#_procedure"></a>Procedure</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_download_required_software"><a class="anchor" href="#_download_required_software"></a>Download required software</h3>
+<div class="paragraph">
+<p>Once you have met the prerequisites, follow these steps:</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The latest version of <a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Vantage Express</a> VM image.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If you have not used the Teradata downloads website before, you will need to register first.
-</td>
-</tr>
-</table>
-</div>
+<p>Create a Salesforce to Amazon S3 Flow</p>
 </li>
 <li>
-<p><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>, version 6.1.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-You can also install VirtualBox using <code>brew</code> and other package managers.
-</td>
-</tr>
-</table>
-</div>
+<p>Exploring Data using NOS</p>
 </li>
 <li>
-<p>On Windows, you will also need <a href="https://www.7-zip.org/download.html">7zip</a> to unzip Vantage Express.</p>
+<p>Export Vantage Data to Amazon S3 using NOS</p>
+</li>
+<li>
+<p>Create an Amazon S3 to Salesforce Flow</p>
 </li>
 </ol>
 </div>
-</div>
 <div class="sect2">
-<h3 id="_run_installers"><a class="anchor" href="#_run_installers"></a>Run installers</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Install VirtualBox by running the installer and accepting the default values. VirtualBox includes functionality that requires elevated privileges. When you start VirtualBox for the first time, you will be asked to confirm these elevated access. You will also need to reboot your machine to activate a VirtualBox kernel plugin.</p>
-</li>
-<li>
-<p>If on Windows, install <code>7zip</code>.</p>
-</li>
-</ol>
+<h3 id="_create_a_salesforce_to_amazon_s3_flow"><a class="anchor" href="#_create_a_salesforce_to_amazon_s3_flow"></a>Create a Salesforce to Amazon S3 Flow</h3>
+<div class="paragraph">
+<p>This step creates a flow using Amazon AppFlow. For this example, we’re using a <a href="https://developer.salesforce.com/signup">Salesforce developer account</a> to connect to Salesforce.</p>
+</div>
+<div class="paragraph">
+<p>Go to <a href="https://console.aws.amazon.com/appflow">AppFlow console</a>, sign in with your AWS login credentials and click <strong>Create flow</strong>. Make sure you are in the right region, and the bucket is created to store Salesforce data.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image3.png" alt="A screenshot of a social media post Description automatically generated" width="624" height="418"></span></p>
+</div>
+<div class="sect3">
+<h4 id="_step_1_specify_flow_details"><a class="anchor" href="#_step_1_specify_flow_details"></a>Step 1: Specify flow details</h4>
+<div class="paragraph">
+<p>This step provides basic information for your flow.</p>
+</div>
+<div class="paragraph">
+<p>Fill in <strong>Flow name</strong> (i.e. <em>salesforce</em>) and <strong>Flow description (optional)</strong>, leave <strong>Customize encryption settings (advanced)</strong> unchecked. Click <strong>Next</strong>.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_run_vantage_express"><a class="anchor" href="#_run_vantage_express"></a>Run Vantage Express</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Go to the directory where you downloaded Teradata Vantage Express and unzip the downloaded file.</p>
-</li>
-<li>
-<p>Set env variable <code>VM_IMAGE_DIR</code> to the path of the unzipped image directory. For example:</p>
-<div class="tabset is-loading">
-<div class="ulist tabs">
+<div class="sect3">
+<h4 id="_step_2_configure_flow"><a class="anchor" href="#_step_2_configure_flow"></a>Step 2: Configure flow</h4>
+<div class="paragraph">
+<p>This step provides information about the source and destination for your flow. For this example, we will be using <strong><em>Salesforce</em></strong> as the source, and <strong><em>Amazon S3</em></strong> as the destination.</p>
+</div>
+<div class="ulist">
 <ul>
 <li>
-<p><a id="tabset1_windows"></a>Windows</p>
+<p>For <strong>Source name</strong>, choose <em>Salesforce</em>, then <strong><em>Create new connection</em></strong> for <strong>Choose Salesforce connection</strong>.</p>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image4.png" alt="A screenshot of a cell phone Description automatically generated" width="624" height="392"></span></p>
+</div>
 </li>
 <li>
-<p><a id="tabset1_macos"></a>MacOS</p>
+<p>Use default for <strong>Salesforce environment</strong> and <strong>Data encryption</strong>. Give your connection a name (i.e. <em>salesforce</em>) and click <strong>Continue</strong>.</p>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image5.png" alt="A screenshot of a cell phone Description automatically generated" width="544" height="327"></span></p>
+</div>
 </li>
 <li>
-<p><a id="tabset1_linux"></a>Linux</p>
+<p>At the salesforce login window, enter your <strong>Username</strong> and <strong>Password</strong>. Click <strong>Log In</strong></p>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image6.png" alt="A screenshot of a cell phone Description automatically generated" width="477" height="377"></span></p>
+</div>
+</li>
+<li>
+<p>Click <strong>Allow</strong> to allow AppFlow to access your salesforce data and information.</p>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image7.png" alt="A screenshot of a cell phone Description automatically generated" width="473" height="383"></span></p>
+</div>
+</li>
+<li>
+<p>Back at the AppFlow <strong>Configure flow</strong> window, use <strong>Salesforce objects</strong>, and choose <em>Account</em> to be the Salesforce object.</p>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image8.png" alt="A screenshot of a cell phone Description automatically generated" width="624" height="390"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image9.png" alt="A screenshot of a cell phone Description automatically generated" width="624" height="389"></span></p>
+</div>
+</li>
+<li>
+<p>Use <em>Amazon S3</em> as <strong>Destination name</strong>. Pick the bucket you created <a href="#prerequisites">earlier</a> where you want the data to be stored (i.e., <em>ptctsoutput</em>).</p>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image10.png" alt="A screenshot of a cell phone Description automatically generated" width="624" height="355"></span></p>
+</div>
+</li>
+<li>
+<p><strong>Flow trigger</strong> is <em>Run on demand</em>. Click <strong>Next</strong>.</p>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image11.png" alt="A screenshot of a cell phone Description automatically generated" width="624" height="344"></span></p>
+</div>
 </li>
 </ul>
 </div>
-<div class="content">
-<div class="tab-pane" aria-labelledby="tabset1_windows">
+</div>
+<div class="sect3">
+<h4 id="_step_3_map_data_fields"><a class="anchor" href="#_step_3_map_data_fields"></a>Step 3: Map data fields</h4>
 <div class="paragraph">
-<p>Run in Powershell as Administrator:</p>
+<p>This step determines how data is transferred from the source to the destination.</p>
 </div>
-<div id="vm_image_dir_win" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">$env:VM_IMAGE_DIR = "$HOME\Downloads\VantageExpress17.10_Sles12"</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_macos">
-<div id="vm_image_dir_macos" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export VM_IMAGE_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_linux">
-<div id="vm_image_dir_linux" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export VM_IMAGE_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>We will now create a VirtualBox VM that uses the downloaded image. Run the following command. The script will take several minutes to complete. During the execution, the script will ask for a password to login to the VM and perform some setup. The password is <code>root</code>.</p>
-<div class="tabset is-loading">
-<div class="ulist tabs">
+<div class="ulist">
 <ul>
 <li>
-<p><a id="tabset2_windows"></a>Windows</p>
+<p>Use <em>Manually map fields</em> as <strong>Mapping method</strong></p>
 </li>
 <li>
-<p><a id="tabset2_macos"></a>MacOS</p>
+<p>For simplicity, choose <em>Map all fields directly</em> for <strong>Source to destination filed mapping</strong>.</p>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image12.png" alt="A screenshot of a cell phone Description automatically generated" width="623" height="355"></span></p>
+</div>
+<div class="paragraph">
+<p>Once you click on "<em>Map all fields directly</em>", all the fields will show under <strong>Mapped fields</strong>. Click on the checkbox for the field(s) you want to <strong>Add formula (concatenates)</strong>, <strong>Modify values (mask or truncate field values)</strong>, or <strong>Remove selected mappings</strong>.</p>
+</div>
+<div class="paragraph">
+<p>For this example, no checkbox will be ticked.</p>
+</div>
 </li>
 <li>
-<p><a id="tabset2_linux"></a>Linux</p>
+<p>For <strong><em>Validations</em></strong>, add in a condition to ignore the record that contains no "<em>Billing Address</em>" (optional). Click <strong>Next</strong>.</p>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image13.png" alt="A screenshot of a cell phone Description automatically generated" width="624" height="132"></span></p>
+</div>
 </li>
 </ul>
 </div>
-<div class="content">
-<div class="tab-pane" aria-labelledby="tabset2_windows">
+</div>
+<div class="sect3">
+<h4 id="_step_4_add_filters"><a class="anchor" href="#_step_4_add_filters"></a>Step 4: Add filters</h4>
 <div class="paragraph">
-<p>Continue in the same Powershell as Administrator:</p>
-</div>
-<div id="install_win" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/Jz7rd'))</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset2_macos">
-<div id="install_macos" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bash -c "$(curl -fsSL https://git.io/Jz7rX)"</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset2_linux">
-<div id="install_linux" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bash -c "$(curl -fsSL https://git.io/Jz7rX)"</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>Once the VM is up, you will see its desktop environment. When prompted for username/password enter <code>root</code> for both.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/vm.login.png" alt="VM Login" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>The database is configured to autostart with the VM. To confirm that the database has started go to the virtual desktop and start <code>Gnome Terminal</code>. In the terminal execute <code>pdestate</code> command that will inform you if Vantage has already started:</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-To paste into Gnome Terminal press <span class="keyseq"><kbd>SHIFT</kbd>+<kbd>CTRL</kbd>+<kbd>V</kbd></span>.
-</td>
-</tr>
-</table>
-</div>
-<div id="pdestate" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">watch pdestate -a</code></pre>
-</div>
+<p>You can specify a filter to determine which records to transfer. For this example, add a condition to filter out the records that are deleted (optional). Click <strong>Next</strong>.</p>
 </div>
 <div class="paragraph">
-<p>You want to wait till you see the following message:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>PDE state is RUN/STARTED.
-DBS state is 5: Logons are enabled - The system is quiescent</pre>
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image14.png" alt="A screenshot of a cell phone Description automatically generated" width="624" height="179"></span></p>
 </div>
 </div>
-<details>
-<summary class="title">See examples of messages that <code>pdestate</code> returns when the database is still initializing.</summary>
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre>PDE state is DOWN/HARDSTOP.
-
-PDE state is START/NETCONFIG.
-
-PDE state is START/GDOSYNC.
-
-PDE state is START/TVSASTART.
-
-PDE state is START/READY.
-PDE state is RUN/STARTED.
-
-DBS state is 1/1: DBS Startup - Initializing DBS Vprocs
-PDE state is RUN/STARTED.
-
-DBS state is 1/5: DBS Startup - Voting for Transaction Recovery
-PDE state is RUN/STARTED.
-
-DBS state is 1/4: DBS Startup - Starting PE Partitions
-PDE state is RUN/STARTED.</pre>
+<div class="sect3">
+<h4 id="_step_5_review_and_create"><a class="anchor" href="#_step_5_review_and_create"></a>Step 5. Review and create</h4>
+<div class="paragraph">
+<p>Review all the information you just entered. Modify if necessary. Click <strong>Create flow</strong>.</p>
+</div>
+<div class="paragraph">
+<p>A message of successful flow creation will be displayed with the flow information once the flow is created,</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image15.png" alt="A screenshot of a cell phone Description automatically generated" width="624" height="226"></span></p>
 </div>
 </div>
-</details>
-</li>
-<li>
-<p>Now that the database is up, go back to the virtual desktop and launch <code>Teradata Studio Express</code>. When you first start it you will be offered a tour. Once you close the tour, you will see a wizard window to add a new connection. Select <code>Teradata</code>:</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/new.connection.profile.png" alt="New Connection Profile" width="500">
+<div class="sect3">
+<h4 id="_run_flow"><a class="anchor" href="#_run_flow"></a>Run flow</h4>
+<div class="paragraph">
+<p>Click <strong>Run flow</strong> on the upper right corner.</p>
+</div>
+<div class="paragraph">
+<p>Upon completion of the flow run, message will be displayed to indicate a successful run.</p>
+</div>
+<div class="paragraph">
+<p>Message example:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image16.png" alt="image" width="624" height="62"></span></p>
+</div>
+<div class="paragraph">
+<p>Click the link to the bucket to view data. Salesforce data will be in JSON format.</p>
 </div>
 </div>
-</li>
-<li>
-<p>On the next screen, connect to the database on your localhost using <code>dbc</code> for the username and password:</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/new.connection.png" alt="New Connection" width="500">
+<div class="sect3">
+<h4 id="_change_data_file_properties"><a class="anchor" href="#_change_data_file_properties"></a>Change data file properties</h4>
+<div class="paragraph">
+<p>By default, Salesforce data is encrypted. We need to remove the encryption for NOS to access it.</p>
 </div>
+<div class="paragraph">
+<p>Click on the data file in your Amazon S3 bucket, then click the <strong>Properties</strong> tab.</p>
 </div>
-</li>
-</ol>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image17.png" alt="A screenshot of a social media post Description automatically generated" width="551" height="366"></span></p>
+</div>
+<div class="paragraph">
+<p>Click on the <em>AWS-KMS</em> from <strong>Encryption</strong> and change it from <em>AWS-KMS</em> encryption to <em>None</em>. Click <strong>Save</strong>.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image18.png" alt="A screenshot of a social media post Description automatically generated" width="548" height="285"></span></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_run_sample_queries"><a class="anchor" href="#_run_sample_queries"></a>Run sample queries</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Once in Teradata Studio Express, go to <code>Query Development</code> perspective (go to the top menu and select <code>Window</code> &#8594; <code>Query Development</code>).</p>
-</li>
-<li>
-<p>Connect using the previously created connection profile by double-clicking on <code>Database Connections</code> &#8594; <code>New Teradata</code>.</p>
-</li>
-<li>
-<p>Using <code>dbc</code> user, we will create a new database called <code>HR</code>. Copy/paste this query and run it by hitting the run query button (<span class="image"><img src="_images/run.query.button.png" alt="Run Query Button" width="24" height="24"></span>) or pressing <kbd>F5</kbd> key:</p>
-<div id="first_query" class="listingblock emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE HR
-AS PERMANENT = 60e6, -- 60MB
-    SPOOL = 120e6; -- 120MB</code></pre>
+<h3 id="_exploring_data_using_nos"><a class="anchor" href="#_exploring_data_using_nos"></a>Exploring Data Using NOS</h3>
+<div class="paragraph">
+<p>Native Object Store has built in functionalities to explore and analyze data in Amazon S3. This section lists a few commonly used functions of NOS.</p>
 </div>
+<div class="sect3">
+<h4 id="_create_foreign_table"><a class="anchor" href="#_create_foreign_table"></a>Create Foreign Table</h4>
+<div class="paragraph">
+<p>Foreign table allows the external data to be easily referenced within the Vantage Advanced SQL Engine and makes the data available in a structured relational format.</p>
 </div>
-<div class="sidebarblock">
-    <div id="right" style="float: right">
-    <a style="cursor: pointer; color: grey" onclick="this.parentElement.parentElement.style.display = 'none'">x</a>
-  </div>
-  <div class="content">
-    <div class="paragraph">Were you able to run the query?
-      <i class="far fa-thumbs-up click-icon" style="padding: 0rem 0.2rem;" onclick="toggleThumbs(this, 'first_query')"></i>
-      <i class="far fa-thumbs-down click-icon" onclick="toggleThumbs(this 'first_query')"></i>
-    </div>
-  </div>
+<div class="paragraph">
+<p>To create a foreign table, first login to Teradata Vantage system with your credentials. Create AUTHORIZATION object with access keys for Amazon S3 bucket access. Authorization object enhances security by establishing control over who is allowed to use a foreign table to access Amazon S3 data.</p>
 </div>
-<style>
-.closebtn {
-  position: absolute;
-  top: 5px;
-  right: 15px;
-  color: white;
-  font-size: 30px;
-  cursor: pointer;
-}
-</style>
-</li>
-<li>
-<p>Let&#8217;s create a sample table and insert some data and query it. We will first create a table to hold employee information:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE SET TABLE HR.Employees (
-   GlobalID INTEGER,
-   FirstName VARCHAR(30),
-   LastName VARCHAR(30),
-   DateOfBirth DATE FORMAT 'YYYY-MM-DD',
-   JoinedDate DATE FORMAT 'YYYY-MM-DD',
-   DepartmentCode BYTEINT
-)
-UNIQUE PRIMARY INDEX ( GlobalID );</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE AUTHORIZATION DefAuth_S3
+AS DEFINER TRUSTED
+USER 'A*****************' /* AccessKeyId */
+PASSWORD '********'; /* SecretAccessKey */</code></pre>
 </div>
 </div>
-</li>
-<li>
-<p>Now, let&#8217;s insert a record:</p>
+<div class="paragraph">
+<p>"USER" is the AccessKeyId for your AWS account, and "PASSWORD" is the SecretAccessKey.</p>
+</div>
+<div class="paragraph">
+<p>Create a foreign table against the JSON file on Amazon S3 using following command.</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">INSERT INTO HR.Employees (
-   GlobalID,
-   FirstName,
-   LastName,
-   DateOfBirth,
-   JoinedDate,
-   DepartmentCode
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE MULTISET FOREIGN TABLE salesforce,
+EXTERNAL SECURITY DEFINER TRUSTED DefAuth_S3
+(
+  Location VARCHAR(2048) CHARACTER SET UNICODE CASESPECIFIC,
+  Payload JSON(8388096) INLINE LENGTH 32000 CHARACTER SET UNICODE
 )
-VALUES (
-   101,
-   'Adam',
-   'Tworkowski',
-   '1980-01-05',
-   '2004-08-01',
-   01
+USING
+(
+  LOCATION ('/S3/s3.amazonaws.com/ptctstoutput/salesforce/1ce190bc-25a9-4493-99ad-7497b497a0d0/903790813-2020-08-21T21:02:25')
 );</code></pre>
 </div>
 </div>
-</li>
-<li>
-<p>Finally, let&#8217;s see if we can retrieve the data:</p>
+<div class="paragraph">
+<p>At a minimum, the foreign table definition must include a table name and location clause (highlighted in yellow) which points to the object store data. The Location requires a top-level single name, referred to as a "bucket" in Amazon.</p>
+</div>
+<div class="paragraph">
+<p>If the file name doesn’t have standard extension (.json, .csv, .parquet) at the end, the Location and Payload columns definition is also required (highlighted in turquoise) to indicate the type of the data file.</p>
+</div>
+<div class="paragraph">
+<p>Foreign tables are always defined as No Primary Index (NoPI) tables.</p>
+</div>
+<div class="paragraph">
+<p>Once foreign table’s created, you can query the content of the Amazon S3 data set by doing "Select" on the foreign table.</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM HR.Employees;</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM salesforce;
+SELECT payload.* FROM salesforce;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You should get the following results:</p>
+<p>The foreign table only contains two columns: Location and Payload. Location is the address in the object store system. The data itself is represented in the payload column, with the payload value within each record in the foreign table representing a single JSON object and all its name-value pairs.</p>
+</div>
+<div class="paragraph">
+<p>Sample output from "SELECT * FROM salesforce;".</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image19.png" alt="A picture containing monitor Description automatically generated" width="624" height="257"></span></p>
+</div>
+<div class="paragraph">
+<p>Sample output form "SELECT payload.* FROM salesforce;".</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image20.png" alt="A screenshot of a cell phone Description automatically generated" width="624" height="257"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_json_keys_table_operator"><a class="anchor" href="#_json_keys_table_operator"></a>JSON_KEYS Table Operator</h4>
+<div class="paragraph">
+<p>JSON data may contain different attributes in different records. To determine the full list of possible attributes in a data store, use JSON_KEYS:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>GlobalID  FirstName  LastName   DateOfBirth  JoinedDate  DepartmentCode
---------  ---------  ---------- -----------  ----------  --------------
-     101  Adam       Tworkowski  1980-01-05  2004-08-01               1</pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">|SELECT DISTINCT * FROM JSON_KEYS (ON (SELECT payload FROM salesforce)) AS j;</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Partial Output:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image21.png" alt="A screenshot of a cell phone Description automatically generated" width="196" height="225"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_create_view"><a class="anchor" href="#_create_view"></a>Create View</h4>
+<div class="paragraph">
+<p>Views can simplify the names associated with the payload attributes, make it easier to code executable SQL against object store data, and hide the Location references in the foreign table to make it look like normal columns.</p>
+</div>
+<div class="paragraph">
+<p>Following is a sample create view statement with the attributes discovered from the JSON_KEYS table operator above.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">REPLACE VIEW salesforceView AS (
+  SELECT
+    CAST(payload.Id AS VARCHAR(20)) Customer_ID,
+    CAST(payload."Name" AS VARCHAR(100)) Customer_Name,
+    CAST(payload.AccountNumber AS VARCHAR(10)) Acct_Number,
+    CAST(payload.BillingStreet AS VARCHAR(20)) Billing_Street,
+    CAST(payload.BillingCity AS VARCHAR(20)) Billing_City,
+    CAST(payload.BillingState AS VARCHAR(10)) Billing_State,
+    CAST(payload.BillingPostalCode AS VARCHAR(5)) Billing_Post_Code,
+    CAST(payload.BillingCountry AS VARCHAR(20)) Billing_Country,
+    CAST(payload.Phone AS VARCHAR(15)) Phone,
+    CAST(payload.Fax AS VARCHAR(15)) Fax,
+    CAST(payload.ShippingStreet AS VARCHAR(20)) Shipping_Street,
+    CAST(payload.ShippingCity AS VARCHAR(20)) Shipping_City,
+    CAST(payload.ShippingState AS VARCHAR(10)) Shipping_State,
+    CAST(payload.ShippingPostalCode AS VARCHAR(5)) Shipping_Post_Code,
+    CAST(payload.ShippingCountry AS VARCHAR(20)) Shipping_Country,
+    CAST(payload.Industry AS VARCHAR(50)) Industry,
+    CAST(payload.Description AS VARCHAR(200)) Description,
+    CAST(payload.NumberOfEmployees AS VARCHAR(10)) Num_Of_Employee,
+    CAST(payload.CustomerPriority__c AS VARCHAR(10)) Priority,
+    CAST(payload.Rating AS VARCHAR(10)) Rating,
+    CAST(payload.SLA__c AS VARCHAR(10)) SLA,
+    CAST(payload.AnnualRevenue AS VARCHAR(10)) Annual_Revenue,
+    CAST(payload."Type" AS VARCHAR(20)) Customer_Type,
+    CAST(payload.Website AS VARCHAR(100)) Customer_Website,
+    CAST(payload.LastActivityDate AS VARCHAR(50)) Last_Activity_Date
+  FROM salesforce
+);</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM salesforceView;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Partial output:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image22.png" alt="A picture containing computer Description automatically generated" width="624" height="98"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_read_nos_table_operator"><a class="anchor" href="#_read_nos_table_operator"></a>READ_NOS Table Operator</h4>
+<div class="paragraph">
+<p>READ_NOS table operator can be used to sample and explore a percent of the data without having first defined a foreign table, or to view a list of the keys associated with all the objects specified by a Location clause.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT top 5 payload.*
+FROM READ_NOS (
+ ON (SELECT CAST(NULL AS JSON CHARACTER SET Unicode))
+USING
+LOCATION ('/S3/s3.amazonaws.com/ptctstoutput/salesforce/1ce190bc-25a9-4493-99ad-7497b497a0d0/903790813-2020-08-21T21:02:25')
+ ACCESS_ID ('A**********') /* AccessKeyId */
+ ACCESS_KEY (‘***********’) /* SecretAccessKey */
+ ) AS D
+GROUP BY 1;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Output:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image23.png" alt="A screenshot of a cell phone Description automatically generated" width="321" height="234"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_join_amazon_s3_data_to_in_database_tables"><a class="anchor" href="#_join_amazon_s3_data_to_in_database_tables"></a>Join Amazon S3 Data to In-Database Tables</h4>
+<div class="paragraph">
+<p>Foreign table can be joined with a table(s) in Vantage for further analysis. For example, ordering and shipping information are in Vantage in these three tables – Orders, Order_Items and Shipping_Address.</p>
+</div>
+<div class="paragraph">
+<p>DDL for Orders:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE TABLE Orders (
+  Order_ID INT NOT NULL,
+  Customer_ID VARCHAR(20) CHARACTER SET LATIN CASESPECIFIC,
+  Order_Status INT,
+  -- Order status: 1 = Pending; 2 = Processing; 3 = Rejected; 4 = Completed
+  Order_Date DATE NOT NULL,
+  Required_Date DATE NOT NULL,
+  Shipped_Date DATE,
+  Store_ID INT NOT NULL,
+  Staff_ID INT NOT NULL
+) Primary Index (Order_ID);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>DDL for Order_Items:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE TABLE Order_Items(
+  Order_ID INT NOT NULL,
+  Item_ID INT,
+  Product_ID INT NOT NULL,
+  Quantity INT NOT NULL,
+  List_Price DECIMAL (10, 2) NOT NULL,
+  Discount DECIMAL (4, 2) NOT NULL DEFAULT 0
+) Primary Index (Order_ID, Item_ID);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>DDL for Shipping_Address:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE TABLE Shipping_Address (
+  Customer_ID VARCHAR(20) CHARACTER SET LATIN CASESPECIFIC NOT NULL,
+  Street VARCHAR(100) CHARACTER SET LATIN CASESPECIFIC,
+  City VARCHAR(20) CHARACTER SET LATIN CASESPECIFIC,
+  State VARCHAR(15) CHARACTER SET LATIN CASESPECIFIC,
+  Postal_Code VARCHAR(10) CHARACTER SET LATIN CASESPECIFIC,
+  Country VARCHAR(20) CHARACTER SET LATIN CASESPECIFIC
+) Primary Index (Customer_ID);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And the tables have following data:</p>
+</div>
+<div class="paragraph">
+<p>Orders:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image24.png" alt="image" width="624" height="51"></span></p>
+</div>
+<div class="paragraph">
+<p>Order_Items:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image25.png" alt="image" width="624" height="64"></span></p>
+</div>
+<div class="paragraph">
+<p>Shipping_Address:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image26.png" alt="image" width="624" height="53"></span></p>
+</div>
+<div class="paragraph">
+<p>By joining the salesforce foreign table to the established database table Orders, Order_Items and Shipping_Address, we can retrieve customer’s order information with customer’s shipping information.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT
+  s.payload.Id as Customer_ID,
+  s.payload."Name" as Customer_Name,
+  s.payload.AccountNumber as Acct_Number,
+  o.Order_ID as Order_ID,
+  o.Order_Status as Order_Status,
+  o.Order_Date as Order_Date,
+  oi.Item_ID as Item_ID,
+  oi.Product_ID as Product_ID,
+  sa.Street as Shipping_Street,
+  sa.City as Shipping_City,
+  sa.State as Shipping_State,
+  sa.Postal_Code as Shipping_Postal_Code,
+  sa.Country as Shipping_Country
+FROM
+  salesforce s, Orders o, Order_Items oi, Shipping_Address sa
+WHERE
+  s.payload.Id = o.Customer_ID
+  AND o.Customer_ID = sa.Customer_ID
+  AND o.Order_ID = oi.Order_ID
+ORDER BY 1;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Results:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image27.png" alt="image" width="631" height="27"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_import_amazon_s3_data_to_vantage"><a class="anchor" href="#_import_amazon_s3_data_to_vantage"></a>Import Amazon S3 Data to Vantage</h4>
+<div class="paragraph">
+<p>Having a persistent copy of the Amazon S3 data can be useful when repetitive access of the same data is expected. NOS foreign table does not automatically make a persistent copy of the Amazon S3 data. A few approaches to capture the data in the database are described below:</p>
+</div>
+<div class="paragraph">
+<p>A "CREATE TABLE AS … WITH DATA" statement can be used with the foreign table definition acting as the source table. Use this approach you can selectively choose which attributes within the foreign table payload that you want to include in the target table, and what the relational table columns will be named.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE TABLE salesforceVantage AS (
+  SELECT
+    CAST(payload.Id AS VARCHAR(20)) Customer_ID,
+    CAST(payload."Name" AS VARCHAR(100)) Customer_Name,
+    CAST(payload.AccountNumber AS VARCHAR(10)) Acct_Number,
+    CAST(payload.BillingStreet AS VARCHAR(20)) Billing_Street,
+    CAST(payload.BillingCity AS VARCHAR(20)) Billing_City,
+    CAST(payload.BillingState AS VARCHAR(10)) Billing_State,
+    CAST(payload.BillingPostalCode AS VARCHAR(5)) Billing_Post_Code,
+    CAST(payload.BillingCountry AS VARCHAR(20)) Billing_Country,
+    CAST(payload.Phone AS VARCHAR(15)) Phone,
+    CAST(payload.Fax AS VARCHAR(15)) Fax,
+    CAST(payload.ShippingStreet AS VARCHAR(20)) Shipping_Street,
+    CAST(payload.ShippingCity AS VARCHAR(20)) Shipping_City,
+    CAST(payload.ShippingState AS VARCHAR(10)) Shipping_State,
+    CAST(payload.ShippingPostalCode AS VARCHAR(5)) Shipping_Post_Code,
+    CAST(payload.ShippingCountry AS VARCHAR(20)) Shipping_Country,
+    CAST(payload.Industry AS VARCHAR(50)) Industry,
+    CAST(payload.Description AS VARCHAR(200)) Description,
+    CAST(payload.NumberOfEmployees AS INT) Num_Of_Employee,
+    CAST(payload.CustomerPriority__c AS VARCHAR(10)) Priority,
+    CAST(payload.Rating AS VARCHAR(10)) Rating,
+    CAST(payload.SLA__c AS VARCHAR(10)) SLA,
+    CAST(payload."Type" AS VARCHAR(20)) Customer_Type,
+    CAST(payload.Website AS VARCHAR(100)) Customer_Website,
+    CAST(payload.AnnualRevenue AS VARCHAR(10)) Annual_Revenue,
+    CAST(payload.LastActivityDate AS DATE) Last_Activity_Date
+  FROM salesforce)
+WITH DATA
+NO PRIMARY INDEX;</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>SELECT* * <strong>FROM</strong> salesforceVantage;</code> partial results:</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image28.png" alt="A screenshot of a computer Description automatically generated" width="624" height="96"></span></p>
+</div>
+<div class="paragraph">
+<p>An alternative to using foreign table is to use the READ_NOS table operator. This table operator allows you to access data directly from an object store without first building a foreign table. Combining READ_NOS with a CREATE TABLE AS clause to build a persistent version of the data in the database.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE TABLE salesforceReadNOS AS (
+ SELECT
+    CAST(payload.Id AS VARCHAR(20)) Customer_ID,
+    CAST(payload."Name" AS VARCHAR(100)) Customer_Name,
+    CAST(payload.AccountNumber AS VARCHAR(10)) Acct_Number,
+    CAST(payload.BillingStreet AS VARCHAR(20)) Billing_Street,
+    CAST(payload.BillingCity AS VARCHAR(20)) Billing_City,
+    CAST(payload.BillingState AS VARCHAR(10)) Billing_State,
+    CAST(payload.BillingPostalCode AS VARCHAR(5)) Billing_Post_Code,
+    CAST(payload.BillingCountry AS VARCHAR(20)) Billing_Country,
+    CAST(payload.Phone AS VARCHAR(15)) Phone,
+    CAST(payload.Fax AS VARCHAR(15)) Fax,
+    CAST(payload.ShippingStreet AS VARCHAR(20)) Shipping_Street,
+    CAST(payload.ShippingCity AS VARCHAR(20)) Shipping_City,
+    CAST(payload.ShippingState AS VARCHAR(10)) Shipping_State,
+    CAST(payload.ShippingPostalCode AS VARCHAR(5)) Shipping_Post_Code,
+    CAST(payload.ShippingCountry AS VARCHAR(20)) Shipping_Country,
+    CAST(payload.Industry AS VARCHAR(50)) Industry,
+    CAST(payload.Description AS VARCHAR(200)) Description,
+    CAST(payload.NumberOfEmployees AS INT) Num_Of_Employee,
+    CAST(payload.CustomerPriority__c AS VARCHAR(10)) Priority,
+    CAST(payload.Rating AS VARCHAR(10)) Rating,
+    CAST(payload.SLA__c AS VARCHAR(10)) SLA,
+    CAST(payload."Type" AS VARCHAR(20)) Customer_Type,
+    CAST(payload.Website AS VARCHAR(100)) Customer_Website,
+    CAST(payload.AnnualRevenue AS VARCHAR(10)) Annual_Revenue,
+    CAST(payload.LastActivityDate AS DATE) Last_Activity_Date
+  FROM READ_NOS (
+    ON (SELECT CAST(NULL AS JSON CHARACTER SET Unicode))
+    USING
+      LOCATION ('/S3/s3.amazonaws.com/ptctstoutput/salesforce/1ce190bc-25a9-4493-99ad-7497b497a0d0/903790813-2020-08-21T21:02:25')
+      ACCESS_ID ('A**********') /* AccessKeyId */
+      ACCESS_KEY (‘***********’) /* SecretAccessKey */
+  ) AS D
+) WITH DATA;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Results from the <code>salesforceReadNOS</code> table:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM salesforceReadNOS;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image29.png" alt="A picture containing large" width="624" height="97"></span></p>
+</div>
+<div class="paragraph">
+<p>Another way of placing Amazon S3 data into a relational table is by "INSERT SELECT". Using this approach, the foreign table is the source table, while a newly created permanent table is the table to be inserted into. Contrary to the READ_NOS example above, this approach does require the permanent table be created beforehand.</p>
+</div>
+<div class="paragraph">
+<p>One advantage of the INSERT SELECT method is that you can change the target table&#8217;s attributes. For example, you can specify that the target table be <code>MULTISET</code> or not, or you can choose a different primary index.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE TABLE salesforcePerm, FALLBACK ,
+NO BEFORE JOURNAL,
+NO AFTER JOURNAL,
+CHECKSUM = DEFAULT,
+DEFAULT MERGEBLOCKRATIO,
+MAP = TD_MAP1
+(
+  Customer_Id VARCHAR(20) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Customer_Name VARCHAR(100) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Acct_Number VARCHAR(10) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Billing_Street VARCHAR(20) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Billing_City VARCHAR(20) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Billing_State VARCHAR(10) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Billing_Post_Code VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Billing_Country VARCHAR(20) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Phone VARCHAR(15) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Fax VARCHAR(15) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Shipping_Street VARCHAR(20) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Shipping_City VARCHAR(20) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Shipping_State VARCHAR(10) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Shipping_Post_Code VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Shipping_Country VARCHAR(20) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Industry VARCHAR(50) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Description VARCHAR(200) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Num_Of_Employee INT,
+  Priority VARCHAR(10) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Rating VARCHAR(10) CHARACTER SET LATIN NOT CASESPECIFIC,
+  SLA VARCHAR(10) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Customer_Type VARCHAR(20) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Customer_Website VARCHAR(100) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Annual_Revenue VARCHAR(10) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Last_Activity_Date DATE
+) PRIMARY INDEX (Customer_ID);</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">INSERT INTO salesforcePerm
+  SELECT
+    CAST(payload.Id AS VARCHAR(20)) Customer_ID,
+    CAST(payload."Name" AS VARCHAR(100)) Customer_Name,
+    CAST(payload.AccountNumber AS VARCHAR(10)) Acct_Number,
+    CAST(payload.BillingStreet AS VARCHAR(20)) Billing_Street,
+    CAST(payload.BillingCity AS VARCHAR(20)) Billing_City,
+    CAST(payload.BillingState AS VARCHAR(10)) Billing_State,
+    CAST(payload.BillingPostalCode AS VARCHAR(5)) Billing_Post_Code,
+    CAST(payload.BillingCountry AS VARCHAR(20)) Billing_Country,
+    CAST(payload.Phone AS VARCHAR(15)) Phone,
+    CAST(payload.Fax AS VARCHAR(15)) Fax,
+    CAST(payload.ShippingStreet AS VARCHAR(20)) Shipping_Street,
+    CAST(payload.ShippingCity AS VARCHAR(20)) Shipping_City,
+    CAST(payload.ShippingState AS VARCHAR(10)) Shipping_State,
+    CAST(payload.ShippingPostalCode AS VARCHAR(5)) Shipping_Post_Code,
+    CAST(payload.ShippingCountry AS VARCHAR(20)) Shipping_Country,
+    CAST(payload.Industry AS VARCHAR(50)) Industry,
+    CAST(payload.Description AS VARCHAR(200)) Description,
+    CAST(payload.NumberOfEmployees AS INT) Num_Of_Employee,
+    CAST(payload.CustomerPriority__c AS VARCHAR(10)) Priority,
+    CAST(payload.Rating AS VARCHAR(10)) Rating,
+    CAST(payload.SLA__c AS VARCHAR(10)) SLA,
+    CAST(payload."Type" AS VARCHAR(20)) Customer_Type,
+    CAST(payload.Website AS VARCHAR(100)) Customer_Website,
+    CAST(payload.AnnualRevenue AS VARCHAR(10)) Annual_Revenue,
+    CAST(payload.LastActivityDate AS DATE) Last_Activity_Date
+  FROM salesforce;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM salesforcePerm;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sample results:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image30.png" alt="A picture containing people Description automatically generated" width="624" height="95"></span></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_export_vantage_data_to_amazon_s3_using_nos"><a class="anchor" href="#_export_vantage_data_to_amazon_s3_using_nos"></a>Export Vantage Data to Amazon S3 Using NOS</h3>
+<div class="paragraph">
+<p>I have a <code>newleads</code> table with 1 row in it on Vantage system.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image41.png" alt="image" width="624" height="24"></span></p>
+</div>
+<div class="paragraph">
+<p>Note there’s no address information for this lead. Let’s use the account information retrieved from Salesforce to update <code>newleads</code> table</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">UPDATE nl
+FROM
+  newleads AS nl,
+  salesforceReadNOS AS srn
+SET
+  Street = srn.Billing_Street,
+  City = srn.Billing_City,
+  State = srn.Billing_State,
+  Post_Code = srn.Billing_Post_Code,
+  Country = srn.Billing_Country
+  WHERE Account_ID = srn.Acct_Number;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now the new lead has address information.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image42.png" alt="image" width="624" height="21"></span></p>
+</div>
+<div class="paragraph">
+<p>Write the new lead information into S3 bucket using WRITE_NOS.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM WRITE_NOS (
+ON (
+  SELECT
+    Account_ID,
+    Last_Name,
+    First_Name,
+    Company,
+    Cust_Title,
+    Email,
+    Status,
+    Owner_ID,
+    Street,
+    City,
+    State,
+    Post_Code,
+    Country
+  FROM newleads
+)
+USING
+  LOCATION ('/s3/vantageparquet.s3.amazonaws.com/')
+  AUTHORIZATION ('{"Access_ID":"A*****","Access_Key":"*****"}')
+  COMPRESSION ('SNAPPY')
+  NAMING ('DISCRETE')
+  INCLUDE_ORDERING ('FALSE')
+  STOREDAS ('CSV')
+) AS d;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where Access_ID is the AccessKeyID, and Access_Key is the SecretAccessKey to the bucket.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_an_amazon_s3_to_salesforce_flow"><a class="anchor" href="#_create_an_amazon_s3_to_salesforce_flow"></a>Create an Amazon S3 to Salesforce Flow</h3>
+<div class="paragraph">
+<p>Repeat Step 1 to create a flow using Amazon S3 as source and Salesforce as destination.</p>
+</div>
+<div class="sect3">
+<h4 id="_step_1_specify_flow_details_2"><a class="anchor" href="#_step_1_specify_flow_details_2"></a>Step 1. Specify flow details</h4>
+<div class="paragraph">
+<p>This step provides basic information for your flow.</p>
+</div>
+<div class="paragraph">
+<p>Fill in <strong>Flow name</strong> (i.e., <em>vantage2sf</em>) and <strong>Flow description (optional)</strong>, leave <strong>Customize encryption settings (advanced)</strong> unchecked. Click <strong>Next</strong>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_step_2_configure_flow_2"><a class="anchor" href="#_step_2_configure_flow_2"></a>Step 2. Configure flow</h4>
+<div class="paragraph">
+<p>This step provides information about the source and destination for your flow. For this example, we will be using <strong><em>Amazon S3</em></strong> as the source, and <strong><em>Salesforce</em></strong> as the destination.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>For <strong>Source details</strong>, choose <em>Amazon S3</em>, then choose the bucket where you wrote your CSV file to (i.e. vantagecsv)</p>
+</li>
+<li>
+<p>For <strong>Destination details</strong>, choose <em>Salesforce</em>, use the connection you created in Step 1 from the drop-down list for <strong>Choose Salesforce connection</strong>, and <em>Lead</em> as <strong>Choose Salesforce object</strong>.</p>
+</li>
+<li>
+<p>For <strong>Error handling</strong>, use the default <em>Stop the current flow run</em>.</p>
+</li>
+<li>
+<p><strong>Flow trigger</strong> is <em>Run on demand</em>. Click <strong>Next</strong>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_step_3_map_data_fields_2"><a class="anchor" href="#_step_3_map_data_fields_2"></a>Step 3. Map data fields</h4>
+<div class="paragraph">
+<p>This step determines how data is transferred from the source to the destination.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use <em>Manually map fields</em> as <strong>Mapping method</strong></p>
+</li>
+<li>
+<p>Use <em>Insert new records (default)</em> as <strong>Destination record preference</strong></p>
+</li>
+<li>
+<p>For <strong>Source to destination filed mapping</strong>, use the following mapping</p>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image43.png" alt="Graphical user interface" width="624" height="396"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image44.png" alt="image" width="624" height="40"></span></p>
+</div>
+</li>
+<li>
+<p>Click <strong>Next</strong>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_step_4_add_filters_2"><a class="anchor" href="#_step_4_add_filters_2"></a>Step 4. Add filters</h4>
+<div class="paragraph">
+<p>You can specify a filter to determine which records to transfer. For this example, no filter is added. Click <strong>Next</strong>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_step_5_review_and_create_2"><a class="anchor" href="#_step_5_review_and_create_2"></a>Step 5. Review and create</h4>
+<div class="paragraph">
+<p>Review all the information you just entered. Modify if necessary. Click <strong>Create flow</strong>.</p>
+</div>
+<div class="paragraph">
+<p>A message of successful flow creation will be displayed with the flow information once the flow is created,</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_run_flow_2"><a class="anchor" href="#_run_flow_2"></a>Run flow</h4>
+<div class="paragraph">
+<p>Click <strong>Run flow</strong> on the upper right corner.</p>
+</div>
+<div class="paragraph">
+<p>Upon completion of the flow run, message will be displayed to indicate a successful run.</p>
+</div>
+<div class="paragraph">
+<p>Message example:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image45.png" alt="image" width="624" height="51"></span></p>
+</div>
+<div class="paragraph">
+<p>Browse to the Salesforce page, new lead Tom Johnson has been added.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image46.png" alt="Graphical user interface" width="624" height="288"></span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cleanup_optional"><a class="anchor" href="#_cleanup_optional"></a>Cleanup (Optional)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Once you are done with the Salesforce data, to avoid incurring charges to your AWS account (i.e., <a href="https://aws.amazon.com/appflow/pricing/">AppFlow</a>, Amazon <a href="https://aws.amazon.com/s3/pricing/">S3</a>, <a href="https://www.teradata.com/Cloud/AWS/Do-it-Yourself/Pricing">Vantage</a> and <a href="https://aws.amazon.com/ec2/pricing/">VM</a>) for the resources used, follow these steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>AppFlow:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Delete the "Connections" you created for the flow</p>
+</li>
+<li>
+<p>Delete the flows</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Amazon S3 bucket and file:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Go to the Amazon S3 buckets where the Vantage data file is stored, and delete the file(s)</p>
+</li>
+<li>
+<p>If there are no need to keep the buckets, delete the buckets</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Teradata Vantage Instance</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Stop/Terminate the instance if no longer needed</p>
+</li>
+</ul>
 </div>
 </li>
 </ol>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In this guide we have covered how to quickly create a working Teradata environment. We used Teradata Vantage Express in a VM running on VMware. In the same VM, we ran Teradata Studio Express to issue queries. We installed all software locally and didn&#8217;t have to pay for cloud resources.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="nos.html" class="xref page">Query data stored in object storage</a></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further reading</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://downloads.teradata.com/download/files/7671/201588/3/B035-5948-051K-VantageExpress-17.10_SLES12.pdf?license=898/218656">Teradata® Vantage™ Express Installation and Configuration Guide (must be logged in to downloads.teradata.com)</a></p>
-</li>
-<li>
-<p><a href="https://docs.teradata.com/r/KEoAHNnh~EbZLtVJNRo0Sg/root">Teradata® Studio™ and Studio™ Express Installation Guide</a></p>
-</li>
-</ul>
 </div>
 </div>
 </div>
@@ -5604,12 +6200,12 @@ VALUES (
     </div>
   </article>
 </footer>
-<script src="../_/js/site.js"></script>
-<script async src="../_/js/behavior.js"></script>
-<script src="../_/js/vendor/lunr.js"></script>
-<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
-<script async src="../search-index.js"></script>
-<script src="../_/js/teradata.min.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/behavior.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+<script src="../../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>
