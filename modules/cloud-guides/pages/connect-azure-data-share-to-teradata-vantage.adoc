@@ -550,13 +550,14 @@ FROM
 ** The _LOCATION_ requires a storage account name and container name. This is highlighted above in yellow. You will need to replace this with your own storage account and container name.
 ** Replace the string for _ACCESS_ID_ with your Storage Account Name.
 ** Replace the string for _ACCES_KEY_ with your Storage Account Access Key or SAS Token
+
 +
 image:{page-image-directory}/image27.png[READ_NOS,width=624,height=86]
 
 You can also leverage the READ_NOS table operator to get the length (size) of the object.
 
 * Run the following SQL command to view the size of the object.
-
++
 [source, teradata-sql]
 ----
 SELECT
@@ -572,8 +573,8 @@ FROM
   ) AS THE_TABLE
 ORDER BY 1
 ----
-+
 ** Replace the values for _LOCATION_, _ACCESS_ID_, and _ACCESS_KEY_.
+
 +
 image:{page-image-directory}/image28.png[READ_NOS object length,image,width=623,height=30]
 
