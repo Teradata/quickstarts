@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Connect Teradata Vantage to Salesforce using Amazon Appflow :: Getting Started Guides</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/current/connect-teradata-vantage-to-salesforce-using-amazon-appflow.html">
+    <title>Use AWS SageMaker with Teradata Vantage :: Getting Started Guides</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/current/cloud-guides/sagemaker-with-teradata-vantage.html">
     <meta name="description" content="Use AWS SageMaker with Teradata Vantage.">
     <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, ai, artificial intelligence, aws sagemaker.">
     <meta name="generator" content="Antora 3.0.1">
-    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/site.css">
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -16,10 +16,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');</script>
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="../_/css/search.css">
-<link rel="stylesheet" href="../_/css/styles.css">
-<link rel="stylesheet" href="../_/css/fontawesome.all.min.css">
-<link rel="stylesheet" href="../_/css/webfonts.css">
+<link rel="stylesheet" href="../../_/css/search.css">
+<link rel="stylesheet" href="../../_/css/styles.css">
+<link rel="stylesheet" href="../../_/css/fontawesome.all.min.css">
+<link rel="stylesheet" href="../../_/css/webfonts.css">
 <style>
   .doc a, .doc a:hover {
     color: #007373;
@@ -143,7 +143,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border-radius: 8px;
     padding-left: 14px;
     padding-right: 14px;
-    background-image: url(../_/img/search.svg);
+    background-image: url(../../_/img/search.svg);
     background-repeat: no-repeat;
     background-position: right center;
     background-origin: content-box;
@@ -319,7 +319,7 @@ body ::-webkit-scrollbar-thumb {
 
 .report-an-issue {
   padding: 10px 20px 10px 10px;
-  background-image: url(../_/img/pan_tool.svg);
+  background-image: url(../../_/img/pan_tool.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -327,7 +327,7 @@ body ::-webkit-scrollbar-thumb {
 
 .edit-on-github {
   padding: 10px 20px 10px 10px;
-  background-image: url(../_/img/edit.svg);
+  background-image: url(../../_/img/edit.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -412,19 +412,19 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
-  content: url("../_/img/warning.svg");
+  content: url("../../_/img/warning.svg");
 }
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
-  content: url("../_/img/note.svg");
+  content: url("../../_/img/note.svg");
 }
 
 .doc .admonitionblock.question .icon i.fa[class*=' icon-']::before {
-  content: url("../_/img/question.mark.svg");
+  content: url("../../_/img/question.mark.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
-  content: url("../_/img/note.svg");
+  content: url("../../_/img/note.svg");
 }
 
 .doc .source-toolbox {
@@ -447,7 +447,7 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .source-toolbox img.copy-icon {
-  content: url("../_/img/copy.svg");
+  content: url("../../_/img/copy.svg");
 }
 .doc .source-toolbox>:not(:last-child)::after {
   content: "";
@@ -468,8 +468,8 @@ span.search-result-highlight {
 
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
-<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
-    <script>var uiRootPath = '../_'</script>
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+    <script>var uiRootPath = '../../_'</script>
   </head>
   <body class="article">
 <!-- Google Tag Manager (noscript) -->
@@ -535,16 +535,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="nav-text">Get access to Vantage</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
+    <a class="nav-link" href="../getting.started.vmware.html">Vantage Express on VMware</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
+    <a class="nav-link" href="../getting.started.vbox.html">Vantage Express on VirtualBox</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
+    <a class="nav-link" href="../getting.started.utm.html">Vantage Express on UTM</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on GCP</a>
+    <a class="nav-link" href="../vantage.express.gcp.html">Vantage Express on GCP</a>
   </li>
 </ul>
   </li>
@@ -553,19 +553,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="nav-text">Tutorials</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nos.html">Query data stored in object storage</a>
+    <a class="nav-link" href="../nos.html">Query data stored in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ml.html">Train ML models in Vantage</a>
+    <a class="nav-link" href="../ml.html">Train ML models in Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
+    <a class="nav-link" href="../dbt.html">dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
+    <a class="nav-link" href="../sto.html">Run scripts on Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="fastload.html">Run large bulkloads efficiently</a>
+    <a class="nav-link" href="../fastload.html">Run large bulkloads efficiently</a>
   </li>
 </ul>
   </li>
@@ -574,30 +574,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="nav-text">How-Tos</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
+    <a class="nav-link" href="../jdbc.html">Connect to Vantage using JDBC</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
+    <a class="nav-link" href="../jupyter.html">Use Vantage from a Jupyter notebook</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+    <a class="nav-link" href="../local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+    <a class="nav-link" href="../mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Configure ODBC</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="odbc.ubuntu.html">Ubuntu</a>
+    <a class="nav-link" href="../odbc.ubuntu.html">Ubuntu</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="segment.html">Store events from Twilio Segment</a>
+    <a class="nav-link" href="../segment.html">Store events from Twilio Segment</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
   </li>
 </ul>
@@ -614,10 +614,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <ul class="components">
     <li class="component is-current">
-      <a class="title" href="index.html">Getting Started Guides</a>
+      <a class="title" href="../index.html">Getting Started Guides</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">current</a>
+          <a href="../index.html">current</a>
         </li>
       </ul>
     </li>
@@ -631,7 +631,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="connect-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a></li>
+    <li>How-Tos</li>
+    <li><a href="sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a></li>
   </ul>
 </nav>
 </div>
@@ -639,13 +640,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/connect-teradata-vantage-to-salesforce-using-amazon-appflow.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/cloud-guides/pages/sagemaker-with-teradata-vantage.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Connect Teradata Vantage to Salesforce using Amazon Appflow</h1>
+<h1 class="page">Use AWS SageMaker with Teradata Vantage</h1>
 <p>Author: <a href="mailto:wenjie.tehan@teradata.com">Wenjie Tehan</a><br/>
 Last updated: February 8th, 2022</p>
 <div class="sect1">
@@ -681,7 +682,7 @@ Last updated: February 8th, 2022</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using <a href="getting.started.vmware.html" class="xref page">VMware</a>, <a href="getting.started.vbox.html" class="xref page">VirtualBox</a>, or <a href="getting.started.utm.html" class="xref page">UTM</a>. You can also run Vantage Express in the cloud on <a href="vantage.express.gcp.html" class="xref page">GCP</a>.</p>
+<p>Access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using <a href="../getting.started.vmware.html" class="xref page">VMware</a>, <a href="../getting.started.vbox.html" class="xref page">VirtualBox</a>, or <a href="../getting.started.utm.html" class="xref page">UTM</a>. You can also run Vantage Express in the cloud on <a href="../vantage.express.gcp.html" class="xref page">GCP</a>.</p>
 </li>
 <li>
 <p>IAM permission to access Amazon S3 bucket, and to use Amazon SageMaker service.</p>
@@ -957,7 +958,7 @@ image::attach.endpoint.configuration.png[Attach endpoint configuration]</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="ml.html" class="xref page">Train ML models in Vantage using only SQL</a></p>
+<p><a href="../ml.html" class="xref page">Train ML models in Vantage using only SQL</a></p>
 </li>
 </ul>
 </div>
@@ -5517,12 +5518,12 @@ image::attach.endpoint.configuration.png[Attach endpoint configuration]</p>
     </div>
   </article>
 </footer>
-<script src="../_/js/site.js"></script>
-<script async src="../_/js/behavior.js"></script>
-<script src="../_/js/vendor/lunr.js"></script>
-<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
-<script async src="../search-index.js"></script>
-<script src="../_/js/teradata.min.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/behavior.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+<script src="../../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>
