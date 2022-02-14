@@ -20,6 +20,7 @@
 ** xref:cloud-guides:sagemaker-with-teradata-vantage.adoc[]
 ** xref:cloud-guides:integrate-teradata-vantage-to-salesforce-using-amazon-appflow.adoc[]
 ** xref:cloud-guides:connect-azure-data-share-to-teradata-vantage.adoc[]
+** xref:cloud-guides:integrate-teradata-vantage-with-google-cloud-data-catalog.adoc[]
 
 //* Planned
 //** Run Teradata Developer in Public Cloud
