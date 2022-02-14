@@ -84,8 +84,8 @@ gcloud config set project <project id>
 
 ==== Install virtualenv
 
-* We recommend you install the Teradata Data Catalog Connector in an isolated Python environment. To do so, install https://virtualenv.pypa.io/en/latest/[virtualenv] first:
-+
+We recommend you install the Teradata Data Catalog Connector in an isolated Python environment. To do so, install https://virtualenv.pypa.io/en/latest/[virtualenv] first:
+
 [tabs]
 ====
 Windows::
