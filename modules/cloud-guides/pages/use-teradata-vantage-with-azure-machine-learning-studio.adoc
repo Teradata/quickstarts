@@ -1,0 +1,221 @@
+= Use Teradata Vantage with Azure Machine Learning Studio
+:experimental:
+:page-author: Rupal Shah
+:page-email: rupal.shah@teradata.com
+:page-revdate: February 14th, 2022
+:description: Use Teradata Vantage with Azure Machine Learning Studio.
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, data cloud, machine learning, azure, azure machine learning studio
+:tabs:
+:page-image-directory: use-teradata-vantage-with-azure-machine-learning-studio
+
+== Overview
+
+https://docs.microsoft.com/en-us/azure/machine-learning/studio/what-is-ml-studio[Azure Machine Learning (ML) Studio] is a collaborative, drag-and-drop tool you can use to build, test, and deploy predictive analytics solutions on your data. ML Studio can consume data from Azure Blob Storage. This getting started guide will show how you can copy Teradata Vantage data sets to a Blob Storage using ML Studio 'built-in' Jupter Notebook feature. The data can then be used by ML Studio to build and train machine learning models and deploy them into a production environment.
+
+
+image:{page-image-directory}/image2.png[image,width=534,height=118]
+
+
+== Prerequisites
+
+* Access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using xref:ROOT:getting.started.vmware.adoc[VMware], xref:ROOT:getting.started.vbox.adoc[VirtualBox], or xref:ROOT:getting.started.utm.adoc[UTM]. You can also run Vantage Express in the cloud on xref:ROOT:vantage.express.gcp.adoc[GCP].
+* Azure subscription or create https://azure.microsoft.com/free/[free account]
+* https://docs.microsoft.com/en-us/azure/machine-learning/studio/create-workspace[Azure ML Studio workspace]
+* (Optional) Download https://docs.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-2017[AdventureWorks DW 2016 database] (i.e. _'Training the Model'_ section)
+** Restore and copy _'vTargetMail'_ table from SQL Server to Teradata Vantage
+
+
+== Procedure
+
+=== Initial setup
+
+
+* During ML Studio workspace creation, you may need to create 'new' storage account unless you have one in current availability locations and choose *DEVTEST Standard* for *Web service plan* for this getting started guide. Logon to https://portal.azure.com/[Azure portal], open your storage account and create a *container* if one does not exist already.
++
+image:{page-image-directory}/image3.png[image,width=520,height=126]
+
+* Copy your *storage account name* and *key* to notepad which we will use for Python3 Notebook to access your Azure Blob Storage account.
++
+image:{page-image-directory}/image4.png[image,width=448,height=182]
+
+* Finally, open *Configuration* property and set *_'Secure transfer required'_* to *_Disabled_* to allow ML Studio Import Data module to access blob storage account.
++
+image:{page-image-directory}/image5.png[image,width=449,height=78]
+
+=== Load data
+
+To get the data to ML Studio, we first need to load data from Teradata Vantage to a Azure Blob Storage. We will create a ML Jupyter Notebook, install Python packages to connect to Teradata and save data to Azure Blob Storage,
+
+Logon to https://portal.azure.com/[Azure portal], go to to your *ML Studio workspace* and https://studio.azureml.net/[Launch Machine Learning Studio] and *Sign In.*
+
+1. You should see the following screen and click on *Notebooks,* ensure you are in the right region/ workspace and click on Notebook *New*
++
+image:{page-image-directory}/image6.png[image,width=519,height=250]
+
+2. Choose *Python3* and *name* your notebook instance
++
+image:{page-image-directory}/image7.png[image,width=524,height=187]
+
+3. In your jupyter notebook instance, install https://pypi.org/project/teradataml/[Teradata Vantage Python package for Advanced Analytics]:
++
+[source, python]
+----
+pip install teradataml
+----
++
+NOTE: There is no validation between Microsoft Azure ML Studio and Teradata Vantage Python package.
+
+4. Install https://pypi.org/project/azure-storage-blob/[Microsoft Azure Storage Blob Client Library for Python]:
++
+[source, python]
+----
+!pip install azure-storage-blob
+----
+
+5. Import the following libraries:
++
+[source, python]
+----
+import teradataml as tdml
+from teradataml import create_context, get_context, remove_context
+from teradataml.dataframe.dataframe import DataFrame
+import pandas as pd
+from azure.storage.blob import (BlockBlobService)
+----
+
+6. Connect to Teradata using command:
++
+[source, python]
+----
+create_context(host = '<hostname>', username = '<database user name>', password = '<password>')
+----
+
+7. Retrieve Data using Teradata Python DataFrame module:
++
+[source, python]
+----
+train_data = DataFrame.from_table("<table_name>")
+----
+
+8. Convert Teradata DataFrame to Panda DataFrame:
++
+[source, python]
+----
+trainDF = train_data.to_pandas()
+----
+
+9. Convert data to CSV:
++
+[source, python]
+----
+trainDF = trainDF.to_csv(head=True,index=False)
+----
+
+10. Assign variables for Azue Blob Storage account name, key and container name:
++
+[source, python]
+----
+accountName="<account_name>"
+accountKey="<account_key>"
+containerName="mldata"
+----
+
+11. Upload file to Azure Blob Storage:
++
+[source, python]
+----
+blobService = BlockBlobService(account_name=accountName, account_key=accountKey)
+blobService.create_blob_from_text(containerNAme, 'vTargetMail.csv', trainDF)
+----
+
+12. Logon to Azure portal, open blob storage account to view uploaded file:
++
+image:{page-image-directory}/image17.png[image,width=618,height=118]
+
+=== Train the model
+
+We will use the existing https://docs.microsoft.com/en-us/azure/sql-data-warehouse/sql-data-warehouse-get-started-analyze-with-azure-machine-learning[Analyze data with Azure Machine Learning] article to build a predictive machine learning model based on data from Azure Blob Storage. We will build a targeted marketing campaign for Adventure Works, the bike shop, by predicting if a customer is likely to buy a bike or not.
+
+==== Import data
+
+The data is on Azure Blob Storage file called `vTargetMail.csv` which we copied in the section above.
+
+1.. Sign into https://studio.azureml.net/[Azure Machine Learning studio] and click on *Experiments*.
+2.. Click *+NEW* on the bottom left of the screen and select *Blank Experiment*.
+3.. Enter a name for your experiment: Targeted Marketing.
+4.. Drag *Import data* module under *Data Input and output* from the modules pane into the canvas.
+5.. Specify the details of your Azure Blob Storage (account name, key and container name) in the Properties pane.
+
+Run the experiment by clicking *Run* under the experiment canvas.
+
+image:{page-image-directory}/image18.png[image,width=401,height=281]
+
+After the experiment finishes running successfully, click the output port at the bottom of the Import Data module and select *Visualize* to see the imported data.
+
+image:{page-image-directory}/image19.png[image,width=480,height=359]
+
+
+==== Clean the data
+
+To clean the data, drop some columns that are not relevant for the model. To do this:
+
+1. Drag *Select Columns in Dataset* module under *Data Transformation < Manipulation* into the canvas. Connect this module to the *Import Data* module.
+2. Click *Launch column selector* in Properties pane to specify which columns you wish to drop.
++
+image:{page-image-directory}/image20.png[image,width=456,height=301]
+3. Exclude two columns: *CustomerAlternateKey* and *GeographyKey*.
++
+image:{page-image-directory}/image21.png[image,width=443,height=372]
+
+==== Build the model
+
+We will split the data 80-20: 80% to train a machine learning model and 20% to test the model. We will make use of the "Two-Class" algorithms for this binary classification problem.
+
+1. Drag *SplitData* module into the canvas and connect with 'Select Columns in DataSet'.
+2. In the properties pane, enter 0.8 for Fraction of rows in the first output dataset.
++
+image:{page-image-directory}/image22.png[image,width=399,height=336]
+
+3. Search and drag *Two-Class Boosted Decision Tree* module into the canvas.
+4. Search and drag *Train Model* module into the canvas and specify inputs by connecting it to the *Two-Class Boosted Decision Tree* (ML algorithm) and *Split* *Data* (data to train the algorithm on) modules.
++
+image:{page-image-directory}/image23.png[image,width=396,height=333]
+
+5. Then, click *Launch column selector* in the Properties pane. Select the *BikeBuyer* column as the column to predict.
++
+image:{page-image-directory}/image24.png[image,width=396,height=330]
+
+==== Score the model
+
+Now, we will test how the model performs on test data. We will compare the algorithm of our choice with a different algorithm to see which performs better.
+
+1. Drag *Score Model* module into the canvas and connect it to *Train Model* and *Split Data* modules.
++
+
+image:{page-image-directory}/image25.png[image,width=398,height=334]
+
+2. Search and drag *Two-Class Bayes Point Machine* into the experiment canvas. We will compare how this algorithm performs in comparison to the Two-Class Boosted Decision Tree.
+3. Copy and Paste the modules Train Model and Score Model in the canvas.
+4. Search and drag *Evaluate Model* module into the canvas to compare the two algorithms.
+5. *Run* the experiment.
++
+image:{page-image-directory}/image26.png[image,width=537,height=351]
+6. Click the output port at the bottom of the Evaluate Model module and click Visualize.
++
+image:{page-image-directory}/image27.png[image,width=447,height=199]
+
+
+The metrics provided are the ROC curve, precision-recall diagram and lift curve. Looking at these metrics, we can see that the first model performed better than the second one. To look at the what the first model predicted, click on output port of the Score Model and click Visualize.
+
+image:{page-image-directory}/image28.png[image,width=464,height=204]
+
+You will see two more columns added to your test dataset.
+1. Scored Probabilities: the likelihood that a customer is a bike buyer.
+2. Scored Labels: the classification done by the model - bike buyer (1) or not (0). This probability threshold for labeling is set to 50% and can be adjusted.
+
+Comparing the column BikeBuyer (actual) with the Scored Labels (prediction), you can see how well the model has performed. As next steps, you can use this model to make predictions for new customers and publish this model as a web service or write results back to SQL Data Warehouse.
+
+== Further reading
+
+* To learn more about building predictive machine learning models, refer to https://azure.microsoft.com/documentation/articles/machine-learning-what-is-machine-learning/[+++Introduction to Machine Learning on Azure+++].
+* For large data set copies, consider using the https://docs.teradata.com/reader/p~0sSD4zl4K8YPbEGnM3Rg/TTu_WJMMIpo2TEaxFMFopQ[Teradata Access Module for Azure] that interfaces between the Teradata Parallel Transporter load/unload operators and Azure Blob Storage.

@@ -1,4 +1,3 @@
-
 = Connect Teradata Vantage to Salesforce using Amazon Appflow
 :experimental:
 :page-author: Wenjie Tehan

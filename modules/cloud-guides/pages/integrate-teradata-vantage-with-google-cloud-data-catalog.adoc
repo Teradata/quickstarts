@@ -1,4 +1,3 @@
-
 = Integrate Teradata Vantage with Google Cloud Data Catalog
 :experimental:
 :page-author: Wenjie Tehan

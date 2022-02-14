@@ -1,4 +1,3 @@
-
 = Use AWS SageMaker with Teradata Vantage
 :experimental:
 :page-author: Wenjie Tehan
