@@ -1,5 +1,5 @@
 
-= Use AWS SageMaker with Teradata Vantage
+= Connect Teradata Vantage to Salesforce using Amazon Appflow
 :experimental:
 :page-author: Wenjie Tehan
 :page-email: wenjie.tehan@teradata.com
@@ -25,7 +25,7 @@ Amazon SageMaker consumes training and test data from an Amazon S3 bucket. This 
 
 == Prerequsites
 
-* Access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using xref:getting.started.vmware.adoc[VMware], xref:getting.started.vbox.adoc[VirtualBox], or xref:getting.started.utm.adoc[UTM]. You can also run Vantage Express in the cloud on xref:vantage.express.gcp.adoc[GCP].
+* Access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using xref:ROOT:getting.started.vmware.adoc[VMware], xref:ROOT:getting.started.vbox.adoc[VirtualBox], or xref:ROOT:getting.started.utm.adoc[UTM]. You can also run Vantage Express in the cloud on xref:ROOT:vantage.express.gcp.adoc[GCP].
 *	IAM permission to access Amazon S3 bucket, and to use Amazon SageMaker service.
 *	An Amazon S3 bucket to store training data.
 
@@ -182,5 +182,5 @@ Now the model is deployed to the endpoint and can be used by client applications
 This how-to demonstrated how to extract training data from Vantage and use it to train a model in Amazon SageMaker. The solution used a Jupyter notebook to extract data from Vantage and write it to an S3 bucket. A SageMaker training job read data from the S3 bucket and produced a model. The model was deployed to AWS as a service endpoint.
 
 == Further reading
-* xref::ml.adoc[Train ML models in Vantage using only SQL]
+* xref:ROOT:ml.adoc[Train ML models in Vantage using only SQL]
 
