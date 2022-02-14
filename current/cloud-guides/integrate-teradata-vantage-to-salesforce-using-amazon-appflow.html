@@ -796,7 +796,7 @@ Last updated: February 14th, 2022</p>
 <div class="sect2">
 <h3 id="_create_a_salesforce_to_amazon_s3_flow"><a class="anchor" href="#_create_a_salesforce_to_amazon_s3_flow"></a>Create a Salesforce to Amazon S3 Flow</h3>
 <div class="paragraph">
-<p>This step creates a flow using Amazon AppFlow. For this example, we’re using a <a href="https://developer.salesforce.com/signup">Salesforce developer account</a> to connect to Salesforce.</p>
+<p>This step creates a flow using Amazon AppFlow. For this example, we&#8217;re using a <a href="https://developer.salesforce.com/signup">Salesforce developer account</a> to connect to Salesforce.</p>
 </div>
 <div class="paragraph">
 <p>Go to <a href="https://console.aws.amazon.com/appflow">AppFlow console</a>, sign in with your AWS login credentials and click <strong>Create flow</strong>. Make sure you are in the right region, and the bucket is created to store Salesforce data.</p>
@@ -1002,13 +1002,13 @@ USING
 <p>At a minimum, the foreign table definition must include a table name and location clause (highlighted in yellow) which points to the object store data. The Location requires a top-level single name, referred to as a "bucket" in Amazon.</p>
 </div>
 <div class="paragraph">
-<p>If the file name doesn’t have standard extension (.json, .csv, .parquet) at the end, the Location and Payload columns definition is also required (highlighted in turquoise) to indicate the type of the data file.</p>
+<p>If the file name doesn&#8217;t have standard extension (.json, .csv, .parquet) at the end, the Location and Payload columns definition is also required (highlighted in turquoise) to indicate the type of the data file.</p>
 </div>
 <div class="paragraph">
 <p>Foreign tables are always defined as No Primary Index (NoPI) tables.</p>
 </div>
 <div class="paragraph">
-<p>Once foreign table’s created, you can query the content of the Amazon S3 data set by doing "Select" on the foreign table.</p>
+<p>Once foreign table&#8217;s created, you can query the content of the Amazon S3 data set by doing "Select" on the foreign table.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1115,7 +1115,7 @@ FROM READ_NOS (
 USING
 LOCATION ('/S3/s3.amazonaws.com/ptctstoutput/salesforce/1ce190bc-25a9-4493-99ad-7497b497a0d0/903790813-2020-08-21T21:02:25')
  ACCESS_ID ('A**********') /* AccessKeyId */
- ACCESS_KEY (‘***********’) /* SecretAccessKey */
+ ACCESS_KEY ('***********') /* SecretAccessKey */
  ) AS D
 GROUP BY 1;</code></pre>
 </div>
@@ -1202,7 +1202,7 @@ GROUP BY 1;</code></pre>
 <p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image26.png" alt="image" width="624" height="53"></span></p>
 </div>
 <div class="paragraph">
-<p>By joining the salesforce foreign table to the established database table Orders, Order_Items and Shipping_Address, we can retrieve customer’s order information with customer’s shipping information.</p>
+<p>By joining the salesforce foreign table to the established database table Orders, Order_Items and Shipping_Address, we can retrieve customer&#8217;s order information with customer&#8217;s shipping information.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1325,7 +1325,7 @@ NO PRIMARY INDEX;</code></pre>
     USING
       LOCATION ('/S3/s3.amazonaws.com/ptctstoutput/salesforce/1ce190bc-25a9-4493-99ad-7497b497a0d0/903790813-2020-08-21T21:02:25')
       ACCESS_ID ('A**********') /* AccessKeyId */
-      ACCESS_KEY (‘***********’) /* SecretAccessKey */
+      ACCESS_KEY ('***********') /* SecretAccessKey */
   ) AS D
 ) WITH DATA;</code></pre>
 </div>
@@ -1438,7 +1438,7 @@ MAP = TD_MAP1
 <p><span class="image"><img src="_images/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image41.png" alt="image" width="624" height="24"></span></p>
 </div>
 <div class="paragraph">
-<p>Note there’s no address information for this lead. Let’s use the account information retrieved from Salesforce to update <code>newleads</code> table</p>
+<p>Note there&#8217;s no address information for this lead. Let&#8217;s use the account information retrieved from Salesforce to update <code>newleads</code> table</p>
 </div>
 <div class="listingblock">
 <div class="content">

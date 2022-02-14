@@ -1068,7 +1068,7 @@ Set Share expiration for amount of time share is valid for consumer to accept.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-f provider required a Terms of Use acceptance, a dialog box would appear and you’ll be required to check the box to indicate you agree to the terms of use.
+f provider required a Terms of Use acceptance, a dialog box would appear and you&#8217;ll be required to check the box to indicate you agree to the terms of use.
 </td>
 </tr>
 </table>
@@ -1211,7 +1211,7 @@ At a minimum, the foreign table definition must include a table name (WeatherDat
 <p>The <em>LOCATION</em> requires a storage account name and container name. You will need to replace this with your own storage account and container name.</p>
 </div>
 <div class="paragraph">
-<p>If the object doesn’t have a standard extension (e.g. “.json”, “.csv”, “.parquet”), then the <em>Location…Payload</em> columns definition phrase is also needed, and the LOCATION phase need to include the file name. For example: LOCATION (<code>AZ/&lt;storage account name&gt;.blob.core.windows.net/&lt;container&gt;/&lt;filename&gt;</code>).</p>
+<p>If the object doesn&#8217;t have a standard extension (e.g. “.json”, “.csv”, “.parquet”), then the <em>Location…Payload</em> columns definition phrase is also needed, and the LOCATION phase need to include the file name. For example: LOCATION (<code>AZ/&lt;storage account name&gt;.blob.core.windows.net/&lt;container&gt;/&lt;filename&gt;</code>).</p>
 </div>
 <div class="paragraph">
 <p>Foreign tables are always defined as No Primary Index (NoPI) tables.</p>
@@ -1417,10 +1417,10 @@ NO PRIMARY INDEX</code></pre>
 <pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE MULTISET TABLE WeatherData_temp (
   Postal_code VARCHAR(10),
   Country CHAR(2),
-  Time_Valid_UTC TIMESTAMP(0) FORMAT ‘YYYY-MM-DDBHH:MI:SS’,
+  Time_Valid_UTC TIMESTAMP(0) FORMAT 'YYYY-MM-DDBHH:MI:SS',
   DOY_UTC INTEGER,
   Hour_UTC INTEGER,
-  Time_Valid_LCL TIMESTAMP(0) FORMAT ‘YYYY-MM-DDBHH:MI:SS’,
+  Time_Valid_LCL TIMESTAMP(0) FORMAT 'YYYY-MM-DDBHH:MI:SS',
   DST_Offset_Minutes INTEGER,
   Temperature_Air_2M_F DECIMAL(4,1),
   Temperature_Wetbulb_2M_F DECIMAL(3,1),
