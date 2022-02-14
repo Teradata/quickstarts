@@ -18,6 +18,7 @@
 *** xref::odbc.ubuntu.adoc[Ubuntu]
 ** xref::segment.adoc[]
 ** xref:cloud-guides:sagemaker-with-teradata-vantage.adoc[]
+** xref:cloud-guides:integrate-teradata-vantage-to-salesforce-using-amazon-appflow.adoc[]
 
 //* Planned
 //** Run Teradata Developer in Public Cloud
