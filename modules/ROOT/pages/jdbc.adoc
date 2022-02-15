@@ -12,7 +12,7 @@ This quick start demonstrates how to connect to Teradata Vantage using JDBC. We 
 
 == Prerequsites
 
-* You need access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to xref:getting.started.vmware.adoc[install Vantage Express on your local machine].
+* Access to a Teradata Vantage instance. If you need a new instance of Vantage, the easiest way is to install Vantage Express on your local machine using xref:getting.started.vmware.adoc[VMware], xref:getting.started.vbox.adoc[VirtualBox], or xref:getting.started.utm.adoc[UTM]. You can also run xref:vantage.express.gcp.adoc[Vantage Express in the cloud on GCP].
 * JDK
 * Maven
 

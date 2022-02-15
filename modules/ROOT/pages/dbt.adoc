@@ -13,7 +13,7 @@ This tutorial demonstrates how to use dbt (Data Build Tool) with Teradata Vantag
 
 == Prerequsites
 
-* Access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using xref:getting.started.vmware.adoc[VMware] or xref:getting.started.vbox.adoc[VirtualBox].
+* Access to a Teradata Vantage instance. If you need a new instance of Vantage, the easiest way is to install Vantage Express on your local machine using xref:getting.started.vmware.adoc[VMware], xref:getting.started.vbox.adoc[VirtualBox], or xref:getting.started.utm.adoc[UTM]. You can also run xref:vantage.express.gcp.adoc[Vantage Express in the cloud on GCP].
 * Python 3.7, 3.8 or 3.9 installed.
 
 == Install dbt
