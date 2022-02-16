@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Run Vantage Express on GCP :: Getting Started Guides</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/current/vantage.express.gcp.html">
-    <meta name="description" content="Run Vantage Express on Google Cloud.">
+    <title>Run Vantage Express on Azure :: Getting Started Guides</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/current/run-vantage-express-on-microsoft-azure.html">
+    <meta name="description" content="Run Vantage Express on Microsoft Azure.">
     <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../_/css/site.css">
@@ -543,10 +543,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on GCP</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
   </li>
 </ul>
@@ -647,7 +647,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li>Get access to Vantage</li>
-    <li><a href="vantage.express.gcp.html">Vantage Express on GCP</a></li>
+    <li><a href="run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a></li>
   </ul>
 </nav>
 </div>
@@ -655,20 +655,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/vantage.express.gcp.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/run-vantage-express-on-microsoft-azure.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Run Vantage Express on GCP</h1>
+<h1 class="page">Run Vantage Express on Azure</h1>
 <p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
 Last updated: November 9th, 2021</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This quickstart demonstrates how to run Vantage Express in GCP. Running Vantage Express in the cloud is the quickest way to get access to a fully functional Teradata SQL Engine.</p>
+<p>This how-to demonstrates how to run Vantage Express in Microsoft Azure. Running Vantage Express in the cloud is the quickest way to get access to a fully functional Teradata SQL Engine.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -677,7 +677,7 @@ Last updated: November 9th, 2021</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If do not wish to pay for cloud usage you can install Vantage Express locally using <a href="getting.started.vmware.adoc">VMware</a> or <a href="getting.started.vbox">VirtualBox</a>.
+If do not wish to pay for cloud usage you can install Vantage Express locally using <a href="getting.started.vmware.adoc">VMware</a>, <a href="getting.started.vbox">VirtualBox</a>, or <a href="getting.started.utm.html" class="xref page">UTM</a>.
 </td>
 </tr>
 </table>
@@ -690,10 +690,10 @@ If do not wish to pay for cloud usage you can install Vantage Express locally us
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>A GCP account.</p>
+<p>An Azure account. You can create one here: <a href="https://azure.microsoft.com/en-us/free/" class="bare">https://azure.microsoft.com/en-us/free/</a></p>
 </li>
 <li>
-<p><code>gcloud</code> command line utility installed on your machine. You can find installation instructions here: <a href="https://cloud.google.com/sdk/docs/install" class="bare">https://cloud.google.com/sdk/docs/install</a>.</p>
+<p><code>az</code> command line utility installed on your machine. You can find installation instructions here: <a href="https://docs.microsoft.com/en-us/cli/azure/install-azure-cli" class="bare">https://docs.microsoft.com/en-us/cli/azure/install-azure-cli</a>.</p>
 </li>
 </ol>
 </div>
@@ -705,7 +705,40 @@ If do not wish to pay for cloud usage you can install Vantage Express locally us
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Create a Ubuntu VM with 4 CPU&#8217;s and 8GB of RAM, a 70GB balanced disk. The following command creates a VM in <code>us-central1</code> region. For best performance, replace the  region with one that is the closest to you. For the list of supported regions see <a href="https://cloud.google.com/compute/docs/regions-zones">GCP regions documentation</a>.</p>
+<p>Setup the default region to the closest region to you (to list locations run <code>az account list-locations -o table</code>):</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">az config set defaults.location=&lt;location&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create a new resource group called <code>tdve-resource-group</code> and add it to defaults:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">az group create -n tdve-resource-group
+az config set defaults.group=tdve-resource-group</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>To create a VM you will need an ssh key pair. If you don&#8217;t have it already, create one:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">az sshkey create --name vantage-ssh-key</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Restrict access to the private key. Replace <code>&lt;path_to_private_key_file&gt;</code> with the private key path returned by the previous command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">chmod 600 &lt;path_to_private_key_file&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create a Ubuntu VM with 4 CPU&#8217;s and 8GB of RAM, a 30GB os disk and a 60GB data disk.</p>
 <div class="tabset is-loading">
 <div class="ulist tabs">
 <ul>
@@ -722,41 +755,53 @@ If do not wish to pay for cloud usage you can install Vantage Express locally us
 </div>
 <div class="content">
 <div class="tab-pane" aria-labelledby="tabset1_windows">
-<div class="paragraph">
-<p>Run in Powershell:</p>
-</div>
-<div id="gcloud_create_vm_win" class="listingblock content-editable emits-gtm-events">
+<div id="az_create_vm_win" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">gcloud compute instances create teradata-vantage-express `
-  --zone=us-central1-a `
-  --machine-type=n2-custom-4-8192 `
-  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced `
-  --enable-nested-virtualization `
-  --tags=ve</code></pre>
+<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">az disk create -n teradata-vantage-express --size-gb 60
+az vm create `
+  --name teradata-vantage-express `
+  --image UbuntuLTS `
+  --admin-username azureuser `
+  --ssh-key-name vantage-ssh-key `
+  --size Standard_F4s_v2 `
+  --public-ip-sku Standard
+
+$diskId = (az disk show -n teradata-vantage-express --query 'id' -o tsv) | Out-String
+az vm disk attach --vm-name teradata-vantage-express --name $diskId</code></pre>
 </div>
 </div>
 </div>
 <div class="tab-pane" aria-labelledby="tabset1_macos">
-<div id="gcloud_create_vm_macos" class="listingblock content-editable emits-gtm-events">
+<div id="az_create_vm_macos" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute instances create teradata-vantage-express \
-  --zone=us-central1-a \
-  --machine-type=n2-custom-4-8192 \
-  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
-  --enable-nested-virtualization \
-  --tags=ve</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">az disk create -n teradata-vantage-express --size-gb 60
+az vm create \
+  --name teradata-vantage-express \
+  --image UbuntuLTS \
+  --admin-username azureuser \
+  --ssh-key-name vantage-ssh-key \
+  --size Standard_F4s_v2 \
+  --public-ip-sku Standard
+
+DISK_ID=$(az disk show -n teradata-vantage-express --query 'id' -o tsv)
+az vm disk attach --vm-name teradata-vantage-express --name $DISK_ID</code></pre>
 </div>
 </div>
 </div>
 <div class="tab-pane" aria-labelledby="tabset1_linux">
-<div id="gcloud_create_vm_linux" class="listingblock content-editable emits-gtm-events">
+<div id="az_create_vm_linux" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute instances create teradata-vantage-express \
-  --zone=us-central1-a \
-  --machine-type=n2-custom-4-8192 \
-  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
-  --enable-nested-virtualization \
-  --tags=ve</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">az disk create -n teradata-vantage-express --size-gb 60
+az vm create \
+  --name teradata-vantage-express \
+  --image UbuntuLTS \
+  --admin-username azureuser \
+  --ssh-key-name vantage-ssh-key \
+  --size Standard_F4s_v2 \
+  --public-ip-sku Standard
+
+DISK_ID=$(az disk show -n teradata-vantage-express --query 'id' -o tsv)
+az vm disk attach --vm-name teradata-vantage-express --name $DISK_ID</code></pre>
 </div>
 </div>
 </div>
@@ -764,15 +809,15 @@ If do not wish to pay for cloud usage you can install Vantage Express locally us
 </div>
 </li>
 <li>
-<p>ssh to your VM:</p>
-<div id="gcloud_ssh" class="listingblock content-editable emits-gtm-events">
+<p>ssh to your VM. Replace <code>&lt;path_to_private_key_file&gt;</code> and <code>&lt;vm_ip&gt;</code> with values that match your environment:</p>
+<div id="az_ssh" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute ssh teradata-vantage-express --zone=us-central1-a</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ssh -i &lt;path_to_private_key_file&gt; azureuser@&lt;vm_ip&gt;</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Switch to <code>root</code> user:</p>
+<p>Once in the VM, switch to <code>root</code> user:</p>
 <div id="sudo" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo -i</code></pre>
@@ -785,6 +830,18 @@ If do not wish to pay for cloud usage you can install Vantage Express locally us
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir /opt/downloads
 cd /opt/downloads</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Mount the data disk:</p>
+<div id="mount_data_disk" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">parted /dev/sdc --script mklabel gpt mkpart xfspart xfs 0% 100%
+mkfs.xfs /dev/sdc1
+partprobe /dev/sdc1
+export DISK_UUID=$(blkid | grep sdc1 | cut -d"\"" -f2)
+echo "UUID=$DISK_UUID  /opt/downloads   xfs   defaults,nofail   1   2" &gt;&gt; /etc/fstab</code></pre>
 </div>
 </div>
 </li>
@@ -1074,9 +1131,9 @@ systemctl start vantage-express-17.10</code></pre>
 </li>
 <li>
 <p>You can now open up port 1025 to the internet using gcloud command:</p>
-<div id="gcloud_fw_rule" class="listingblock content-editable emits-gtm-events">
+<div id="az_fw_rule" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute firewall-rules create vantage-express --allow=tcp:1025 --direction=IN --target-tags=ve</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">az vm open-port --name teradata-vantage-express --port 1025</code></pre>
 </div>
 </div>
 </li>
@@ -1091,19 +1148,11 @@ systemctl start vantage-express-17.10</code></pre>
 <h2 id="_cleanup"><a class="anchor" href="#_cleanup"></a>Cleanup</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To stop incurring charges, delete the VM:</p>
+<p>To stop incurring charges, delete all the resources associated with the resource group:</p>
 </div>
-<div id="delete_vm" class="listingblock content-editable emits-gtm-events">
+<div id="delete_resource_group" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute instances delete teradata-vantage-express --zone=us-central1-a</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Also, remember to remove any firewall rules that you have added, e.g.:</p>
-</div>
-<div id="delete_fw_rule" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute firewall-rules delete vantage-express</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">az group delete --no-wait -n tdve-resource-group</code></pre>
 </div>
 </div>
 </div>
