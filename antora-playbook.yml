@@ -1,5 +1,5 @@
 site:
-  title: Getting Started Guides
+  title: Teradata Getting Started
   url: https://quickstarts.teradata.com/
   start_page: ROOT::index.adoc
 content:

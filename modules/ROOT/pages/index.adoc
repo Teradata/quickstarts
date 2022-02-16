@@ -1,2 +1,2 @@
-= Teradata Getting Started
+= Main
 :page-layout: landing-page
