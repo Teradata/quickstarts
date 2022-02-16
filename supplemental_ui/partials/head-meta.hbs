@@ -1,3 +1,15 @@
+<meta property="og:title" content="{{{detag (or page.title defaultPageTitle)}}}{{#with site.title}} :: {{this}}{{/with}}">
+<meta property="og:type" content="article" />
+<meta property="og:description" content="{{ page.description }}" />
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:image:height" content="336"/>
+<meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
+<meta property="og:url" content="{{ page.canonicalUrl }}">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
+<meta name="twitter:site" content="@teradata" />
+
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
