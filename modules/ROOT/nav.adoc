@@ -3,13 +3,14 @@
 ** xref::getting.started.vbox.adoc[Vantage Express on VirtualBox]
 ** xref::getting.started.utm.adoc[Vantage Express on UTM]
 ** xref::vantage.express.gcp.adoc[Vantage Express on GCP]
+** xref::run-vantage-express-on-microsoft-azure.adoc[Vantage Express on Azure]
 * Tutorials
 ** xref::nos.adoc[]
 ** xref::ml.adoc[]
 ** xref::dbt.adoc[]
 ** xref::sto.adoc[]
 ** xref::fastload.adoc[]
-* How-Tos
+* How-tos
 ** xref::jdbc.adoc[]
 ** xref::jupyter.adoc[]
 ** xref::local.jupyter.hub.adoc[]

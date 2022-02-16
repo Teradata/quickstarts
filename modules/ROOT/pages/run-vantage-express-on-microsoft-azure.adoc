@@ -1,0 +1,181 @@
+= Run Vantage Express on Azure
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: November 9th, 2021
+:description: Run Vantage Express on Microsoft Azure.
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics
+:tabs:
+:experimental:
+
+== Overview
+
+This how-to demonstrates how to run Vantage Express in Microsoft Azure. Running Vantage Express in the cloud is the quickest way to get access to a fully functional Teradata SQL Engine.
+
+NOTE: If do not wish to pay for cloud usage you can install Vantage Express locally using link:getting.started.vmware.adoc[VMware], link:getting.started.vbox[VirtualBox], or xref:getting.started.utm.adoc[UTM].
+
+== Prerequisites
+
+. An Azure account. You can create one here: https://azure.microsoft.com/en-us/free/
+. `az` command line utility installed on your machine. You can find installation instructions here: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli.
+
+== Installation
+
+. Setup the default region to the closest region to you (to list locations run `az account list-locations -o table`):
++
+[source, bash]
+----
+az config set defaults.location=<location>
+----
+
+. Create a new resource group called `tdve-resource-group` and add it to defaults:
++
+[source, bash]
+----
+az group create -n tdve-resource-group
+az config set defaults.group=tdve-resource-group
+----
+
+. To create a VM you will need an ssh key pair. If you don't have it already, create one:
++
+[source, bash]
+----
+az sshkey create --name vantage-ssh-key
+----
+
+. Restrict access to the private key. Replace `<path_to_private_key_file>` with the private key path returned by the previous command:
++
+[source, bash]
+----
+chmod 600 <path_to_private_key_file>
+----
+
+. Create a Ubuntu VM with 4 CPU's and 8GB of RAM, a 30GB os disk and a 60GB data disk.
++
+[tabs]
+====
+Windows::
++
+--
+[source, powershell, role="content-editable emits-gtm-events", id="az_create_vm_win"]
+----
+az disk create -n teradata-vantage-express --size-gb 60
+az vm create `
+  --name teradata-vantage-express `
+  --image UbuntuLTS `
+  --admin-username azureuser `
+  --ssh-key-name vantage-ssh-key `
+  --size Standard_F4s_v2 `
+  --public-ip-sku Standard
+
+$diskId = (az disk show -n teradata-vantage-express --query 'id' -o tsv) | Out-String
+az vm disk attach --vm-name teradata-vantage-express --name $diskId
+----
+--
+MacOS::
++
+--
+[source, bash, role="content-editable emits-gtm-events", id="az_create_vm_macos"]
+----
+az disk create -n teradata-vantage-express --size-gb 60
+az vm create \
+  --name teradata-vantage-express \
+  --image UbuntuLTS \
+  --admin-username azureuser \
+  --ssh-key-name vantage-ssh-key \
+  --size Standard_F4s_v2 \
+  --public-ip-sku Standard
+
+DISK_ID=$(az disk show -n teradata-vantage-express --query 'id' -o tsv)
+az vm disk attach --vm-name teradata-vantage-express --name $DISK_ID
+----
+--
+Linux::
++
+--
+[source, bash, role="content-editable emits-gtm-events", id="az_create_vm_linux"]
+----
+az disk create -n teradata-vantage-express --size-gb 60
+az vm create \
+  --name teradata-vantage-express \
+  --image UbuntuLTS \
+  --admin-username azureuser \
+  --ssh-key-name vantage-ssh-key \
+  --size Standard_F4s_v2 \
+  --public-ip-sku Standard
+
+DISK_ID=$(az disk show -n teradata-vantage-express --query 'id' -o tsv)
+az vm disk attach --vm-name teradata-vantage-express --name $DISK_ID
+----
+--
+====
+. ssh to your VM. Replace `<path_to_private_key_file>` and `<vm_ip>` with values that match your environment:
++
+[source, bash, role="content-editable emits-gtm-events", id="az_ssh"]
+----
+ssh -i <path_to_private_key_file> azureuser@<vm_ip>
+----
+. Once in the VM, switch to `root` user:
++
+[source, bash, role="content-editable emits-gtm-events", id="sudo"]
+----
+sudo -i
+----
+. Prepare the download directory for Vantage Express:
++
+[source, bash, role="content-editable emits-gtm-events", id="download_dir"]
+----
+mkdir /opt/downloads
+cd /opt/downloads
+----
+. Mount the data disk:
++
+[source, bash, role="content-editable emits-gtm-events", id="mount_data_disk"]
+----
+parted /dev/sdc --script mklabel gpt mkpart xfspart xfs 0% 100%
+mkfs.xfs /dev/sdc1
+partprobe /dev/sdc1
+export DISK_UUID=$(blkid | grep sdc1 | cut -d"\"" -f2)
+echo "UUID=$DISK_UUID  /opt/downloads   xfs   defaults,nofail   1   2" >> /etc/fstab
+----
+include::partial$install.ve.in.public.cloud.adoc[]
+* If you would like to connect to Vantage Express from the Internet, you will need to open up firewall holes to your VM. You should also change the default password to `dbc` user:
+. To change the password for `dbc` user go to your VM and start bteq:
++
+[source, bash, role="content-editable emits-gtm-events", id="pw_change_bteq"]
+----
+bteq
+----
+. Login to your database using `dbc` as username and password:
++
+[source, teradata-sql, role="content-editable emits-gtm-events", id="pw_change_bteq_logon"]
+----
+.logon localhost/dbc
+----
+. Change the password for `dbc` user:
++
+[source, teradata-sql, role="content-editable emits-gtm-events", id="pw_change_mod_user"]
+----
+MODIFY USER dbc AS PASSWORD = new_password;
+----
+. You can now open up port 1025 to the internet using gcloud command:
++
+[source%prewrap, bash, role="content-editable emits-gtm-events", id="az_fw_rule"]
+----
+az vm open-port --name teradata-vantage-express --port 1025
+----
+
+== Cleanup
+
+To stop incurring charges, delete all the resources associated with the resource group:
+[source, bash, role="content-editable emits-gtm-events", id="delete_resource_group"]
+----
+az group delete --no-wait -n tdve-resource-group
+----
+
+include::partial$next.steps.adoc[]
+
+== Further reading
+* link:https://downloads.teradata.com/download/files/7671/201588/3/B035-5948-051K-VantageExpress-17.10_SLES12.pdf?license=898/218656[Teradata® Vantage™ Express Installation and Configuration Guide (must be logged in to downloads.teradata.com)]
+* link:https://docs.teradata.com/r/KEoAHNnh~EbZLtVJNRo0Sg/root[Teradata® Studio™ and Studio™ Express Installation Guide]
+* link:https://docs.teradata.com/r/jmAxXLdiDu6NiyjT6hhk7g/root[Introduction to BTEQ]
+

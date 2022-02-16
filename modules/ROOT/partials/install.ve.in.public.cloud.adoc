@@ -1,0 +1,118 @@
+. Install VirtualBox and 7zip:
++
+[source, bash, role="content-editable emits-gtm-events", id="apt"]
+----
+apt update && apt-get install p7zip-full p7zip-rar virtualbox -y
+----
+. Retrieve the curl command to download Vantage Express.
+.. Go to link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Expess download page] (registration required).
+.. Click on the latest download link, e.g. "Vantage Express 17.10". You will see a license agreement popup. Don't accept the license yet.
+.. Open the network view in your browser. For example, in Chrome press kbd:[F12] and navigate to `Network` tab:
++
+image::browser.network.png[Browser Network Tab, width=500]
+.. Accept the license by clicking on `I Agree` button and cancel the download.
+.. In the network view, find the last request that starts with `VantageExpress`. Right click on it and select `Copy -> Copy as cURL`:
++
+image::browser.copy.curl.png[Browser Copy culr, width=500]
+. Head back to the ssh session and download Vantage Express by pasting the curl command. Add `-o ve.7z` to the command to save the download to file named `ve.7z`. You can remove all the HTTP headers, e.g.:
++
+[source, bash, role="content-editable emits-gtm-events", id="download_ve"]
+----
+curl -o ve.7z 'http://d289lrf5tw1zls.cloudfront.net/database/teradata-express/VantageExpress17.10_Sles12_202108300444.7z?Expires=1638719978&Signature=GKBkNvery_long_signature__&Key-Pair-Id=********************'
+----
+. Unzip the downloaded file. It will take several minutes:
++
+[source, bash, role="content-editable emits-gtm-events", id="unzip"]
+----
+7z x ve.7z
+----
+. Start the VM in VirtualBox. The command will return immediately but the VM init process will take several minutes:
++
+[source, bash, role="content-editable emits-gtm-events", id="start_vim"]
+----
+export VM_IMAGE_DIR="/opt/downloads/VantageExpress17.10_Sles12"
+DEFAULT_VM_NAME="vantage-express-17.10"
+VM_NAME="${VM_NAME:-$DEFAULT_VM_NAME}"
+vboxmanage createvm --name "$VM_NAME" --register --ostype openSUSE_64
+vboxmanage modifyvm "$VM_NAME" --ioapic on --memory 6000 --vram 128 --nic1 nat --cpus 4
+vboxmanage storagectl "$VM_NAME" --name "SATA Controller" --add sata --controller IntelAhci
+vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk1*')"
+vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 1 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk2*')"
+vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 2 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk3*')"
+vboxmanage modifyvm "$VM_NAME" --natpf1 "tdssh,tcp,,4422,,22"
+vboxmanage modifyvm "$VM_NAME" --natpf1 "tddb,tcp,,1025,,1025"
+vboxmanage startvm "$VM_NAME" --type headless
+vboxmanage controlvm "$VM_NAME" keyboardputscancode 1c 1c
+----
+. ssh to Vantage Express VM. Use `root` as password:
++
+[source, bash, role="content-editable emits-gtm-events", id="ssh_to_ve"]
+----
+ssh -p 4422 root@localhost
+----
+. Validate that the DB is up:
++
+[source, bash, role="content-editable emits-gtm-events", id="pde"]
+----
+pdestate -a
+----
++
+If the command returns `PDE state is RUN/STARTED. DBS state is 5: Logons are enabled - The system is quiescent`, it means that Vantage Express has started.
+If the status is different, repeat `pdestate -a` till you get the correct status.
+. Once Vantage Express is up and running, start `bteq` client command line client. BTEQ (pronounced “bee-teek”) is a general-purpose, command-based client tool used to submit SQL queries to a Teradata Database.
++
+[source, bash, role="content-editable emits-gtm-events", id="bteq"]
+----
+bteq
+----
+. Once in bteq, connect to your Vantage Express instance. When asked for the password, enter `dbc`:
++
+[source, bash, role="content-editable emits-gtm-events", id="bteq_logon"]
+----
+.logon localhost/dbc
+----
+
+== Run sample queries
+
+. Using `dbc` user, we will create a new database called `HR`. Copy/paste this query and run press kbd:[Enter]:
++
+include::partial$getting.started.queries.adoc[]
+
+== Optional setup
+
+* If you intend to stop and start the VM, you may want to add Vantage Express to autostart. ssh to your GCP VM and run the following commands:
++
+[source, bash, role="content-editable emits-gtm-events", id="autostart"]
+----
+sudo -i
+
+cat <<EOF >> /etc/default/virtualbox
+VBOXAUTOSTART_DB=/etc/vbox
+VBOXAUTOSTART_CONFIG=/etc/vbox/autostart.cfg
+EOF
+
+cat <<EOF > /etc/systemd/system/vantage-express-17.10.service
+[Unit]
+Description=vm1
+After=network.target virtualbox.service
+Before=runlevel2.target shutdown.target
+[Service]
+User=root
+Group=root
+Type=forking
+Restart=no
+TimeoutSec=5min
+IgnoreSIGPIPE=no
+KillMode=process
+GuessMainPID=no
+RemainAfterExit=yes
+ExecStart=/usr/bin/VBoxManage startvm vantage-express-17.10 --type headless
+ExecStop=/usr/bin/VBoxManage controlvm vantage-express-17.10 savestate
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+systemctl enable vantage-express-17.10
+systemctl start vantage-express-17.10
+----
