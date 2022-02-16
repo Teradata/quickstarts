@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Main :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/index.html">
-    <meta name="description" content="Get quickly up to speed with Teradata Vantage. Learn about features. Find how-tos for common tasks. Explore sample source code.">
-    <meta name="keywords" content="data warehouses, cloud data warehouse, compute storage separation, teradata, vantage, cloud data platform, java applications, business intelligence, enterprise analytics, hybrid multi-cloud, business outcomes">
+    <title>Integrate Teradata Vantage with Google Cloud Data Catalog :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">
+    <meta name="description" content="Integrate Teradata Vantage with Google Cloud Data Catalog.">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, google cloud, google cloud data catalog.">
     <meta name="generator" content="Antora 3.0.1">
-    <link rel="stylesheet" href="./_/css/site.css">
-<meta property="og:title" content="Main :: Teradata Getting Started">
+    <link rel="stylesheet" href="../_/css/site.css">
+<meta property="og:title" content="Integrate Teradata Vantage with Google Cloud Data Catalog :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Get quickly up to speed with Teradata Vantage. Learn about features. Find how-tos for common tasks. Explore sample source code." />
+<meta property="og:description" content="Integrate Teradata Vantage with Google Cloud Data Catalog." />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/index.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -28,10 +28,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');</script>
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="./_/css/search.css">
-<link rel="stylesheet" href="./_/css/styles.css">
-<link rel="stylesheet" href="./_/css/fontawesome.all.min.css">
-<link rel="stylesheet" href="./_/css/webfonts.css">
+<link rel="stylesheet" href="../_/css/search.css">
+<link rel="stylesheet" href="../_/css/styles.css">
+<link rel="stylesheet" href="../_/css/fontawesome.all.min.css">
+<link rel="stylesheet" href="../_/css/webfonts.css">
 <style>
   .doc a, .doc a:hover {
     color: #007373;
@@ -155,7 +155,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border-radius: 8px;
     padding-left: 14px;
     padding-right: 14px;
-    background-image: url(./_/img/search.svg);
+    background-image: url(../_/img/search.svg);
     background-repeat: no-repeat;
     background-position: right center;
     background-origin: content-box;
@@ -331,7 +331,7 @@ body ::-webkit-scrollbar-thumb {
 
 .report-an-issue {
   padding: 10px 20px 10px 10px;
-  background-image: url(./_/img/pan_tool.svg);
+  background-image: url(../_/img/pan_tool.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -339,7 +339,7 @@ body ::-webkit-scrollbar-thumb {
 
 .edit-on-github {
   padding: 10px 20px 10px 10px;
-  background-image: url(./_/img/edit.svg);
+  background-image: url(../_/img/edit.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -424,19 +424,19 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/warning.svg");
+  content: url("../_/img/warning.svg");
 }
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .admonitionblock.question .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/question.mark.svg");
+  content: url("../_/img/question.mark.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .source-toolbox {
@@ -459,7 +459,7 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .source-toolbox img.copy-icon {
-  content: url("./_/img/copy.svg");
+  content: url("../_/img/copy.svg");
 }
 .doc .source-toolbox>:not(:last-child)::after {
   content: "";
@@ -480,10 +480,10 @@ span.search-result-highlight {
 
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
-<link rel="icon" href="./_/img/favicon.ico" type="image/x-icon">
-    <script>var uiRootPath = './_'</script>
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+    <script>var uiRootPath = '../_'</script>
   </head>
-  <body>
+  <body class="article">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7Q6CLV"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -518,12 +518,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div id="topbar-nav" class="navbar-menu">
         <div id="menu-options" class="navbar-end">
-          <a class="navbar-item" href="./index.html">Getting started</a>
+          <a class="navbar-item" href="../index.html">Getting started</a>
           <a class="navbar-item" href="https://docs.teradata.com/">Docs</a>
           <a class="navbar-item" href="https://downloads.teradata.com/">Downloads</a>
           <a class="navbar-item" href="https://support.teradata.com/community ">Community</a>
         </div>
         <div class="navbar-end">
+          <div class="navbar-item">
+            <input id="search-input" type="text" placeholder="Search Getting Started">
+          </div>
         </div>
       </div>
     </div>
@@ -531,683 +534,538 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </header>
 
 <div class="body">
-  <main class="article">
-    <div class="content landing">
-      <div class="landing-container">
-        <div class="call-to-action">
-          <div class="call-to-action-text">
-            <div class="header">Getting Started</div>
-            <div class="short-description">Get quickly up to speed with Teradata Vantage. Learn about features. Find how-tos for common tasks. Explore sample source code.</div>
-            <div class="button-container"><a class="call-to-action-button" href="#getting-access-to-vantage">Get access to Vantage</a><a class="call-to-action-button-secondary" href="#browse-content">Browse content</a></div>
-            <div class="alternate-action">Prefer structured learning? Explore courses at <a href="https://teradata.com/University/Overview">Teradata University</a>.</div>
-          </div>
-        </div>
-        <div class="search-input-container">
-          <input id="search-input" type="text" placeholder="Search Getting Started">
-        </div>
-        <div class="tile-container">
-          <div class="tile-section">
-            <div class="tile-section-title" id="getting-access-to-vantage">Getting access to Teradata Vantage</div>
-            <div class="tile-section-container">
-              <div class="tile">
-                <a href="getting.started.vmware.html">
-                  <div class="link">
-                    <div class="tile-title">Vantage Express on VMWare</div>
-                    <div class="tile-content">Learn how to install Vantage Express on your machine for development and testing.</div>
-                    <div class="tile-tags">
-                      <div class="tag">Access Vantage</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="getting.started.vbox.html">
-                  <div class="link">
-                    <div class="tile-title">Vantage Express on VirtualBox</div>
-                    <div class="tile-content">Run Vantage Express on your local machine with VirtualBox.</div>
-                    <div class="tile-tags">
-                      <div class="tag">Access Vantage</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="getting.started.utm.html">
-                  <div class="link">
-                    <div class="tile-title">Vantage Express on UTM</div>
-                    <div class="tile-content">Run Vantage Express on your Mac with UTM. Apple chipset supported.</div>
-                    <div class="tile-tags">
-                      <div class="tag">Access Vantage</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="vantage.express.gcp.html">
-                  <div class="link">
-                    <div class="tile-title">Vantage Express on GCP</div>
-                    <div class="tile-content">Run Vantage Express in the cloud on GCP.</div>
-                    <div class="tile-tags">
-                      <div class="tag">Access Vantage</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="run-vantage-express-on-microsoft-azure.html">
-                  <div class="link">
-                    <div class="tile-title">Vantage Express on Azure</div>
-                    <div class="tile-content">Run Vantage Express in the cloud on Microsoft Azure.</div>
-                    <div class="tile-tags">
-                      <div class="tag">Access Vantage</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="tile-section-title" id="browse-content">Tutorials</div>
-            <div class="tile-section-container">
-              <div class="tile">
-                <a href="nos.html">
-                  <div class="link">
-                    <div class="tile-title">Query data in object storage</div>
-                    <div class="tile-content">Learn how to analyze data stored in object storage using SQL.</div>
-                    <div class="tile-tags">
-                      <div class="tag">Tutorial</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="ml.html">
-                  <div class="link">
-                    <div class="tile-title">Train ML models using only SQL</div>
-                    <div class="tile-content">Build machine learning models using only SQL - no coding and no data movement required.</div>
-                    <div class="tile-tags">
-                      <div class="tag">Tutorial</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="dbt.html">
-                  <div class="link">
-                    <div class="tile-title">Use dbt with Teradata Vantage</div>
-                    <div class="tile-content">Learn how to use dbt, a leading ELT tool, with Teradata Vantage.</div>
-                    <div class="tile-tags">
-                      <div class="tag">Tutorial</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="sto.html">
-                  <div class="link">
-                    <div class="tile-title">Run scripts on Vantage</div>
-                    <div class="tile-content">Bring logic to your data. Leverage Teradata's scale to worith with data using applications and scripts.</div>
-                    <div class="tile-tags">
-                      <div class="tag">Tutorial</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="fastload.html">
-                  <div class="link">
-                    <div class="tile-title">Run large bulkloads efficiently</div>
-                    <div class="tile-content">Explore tools for loading massive amounts of data into Vantage.</div>
-                    <div class="tile-tags">
-                      <div class="tag">Tutorial</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="tile-section-title">How-tos</div>
-            <div class="tile-section-container">
-              <div class="tile">
-                <a href="jdbc.html">
-                  <div class="link">
-                    <div class="tile-title">Connect to Vantage using JDBC</div>
-                    <div class="tile-content">Explore sample Java application that retrieves data from Vantage using JDBC.</div>
-                    <div class="tile-tags">
-                      <div class="tag">How-to</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="jupyter.html">
-                  <div class="link">
-                    <div class="tile-title">Use Vantage from a Jupyter notebook</div>
-                    <div class="tile-content">Use Jupyter notebooks to do data science on Vantage.</div>
-                    <div class="tile-tags">
-                      <div class="tag">How-to</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="local.jupyter.hub.html">
-                  <div class="link">
-                    <div class="tile-title">Deploy Teradata Jupyter extensions to JupyterHub</div>
-                    <div class="tile-content">Follow instructions to deploy Teradata Jupyter extensions in your own JupyterHub instance.</div>
-                    <div class="tile-tags">
-                      <div class="tag">How-to</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="mule.jdbc.example.html">
-                  <div class="link">
-                    <div class="tile-title">Query Teradata Vantage from a Mulesoft service</div>
-                    <div class="tile-content">This how-to demonstrates how to run queries on Vantage using a REST service built on Mulesoft.</div>
-                    <div class="tile-tags">
-                      <div class="tag">How-to</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="odbc.ubuntu.html">
-                  <div class="link">
-                    <div class="tile-title">Configure ODBC on Ubuntu</div>
-                    <div class="tile-content">Follow step-by-step instructions to get a working Vantage ODBC configuration on Ubuntu.</div>
-                    <div class="tile-tags">
-                      <div class="tag">How-tos</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="segment.html">
-                  <div class="link">
-                    <div class="tile-title">Store events from Twilio Segment</div>
-                    <div class="tile-content">Clone and run a sample project that listens to Twilio Segment events and stores them in Vantage.</div>
-                    <div class="tile-tags">
-                      <div class="tag">How-tos</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="cloud-guides/sagemaker-with-teradata-vantage.html">
-                  <div class="link">
-                    <div class="tile-title">Use AWS SageMaker with Vantage</div>
-                    <div class="tile-content">In this detailed how-to you will learn how to export data from Vantage to train a model in AWS SageMaker.</div>
-                    <div class="tile-tags">
-                      <div class="tag">How-tos</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">
-                  <div class="link">
-                    <div class="tile-title">Integrate Vantage to Salesforce using Amazon AppFlow</div>
-                    <div class="tile-content">Replicate data between Teradata Vantage and Salesforce using Amazon AppFlow and S3.</div>
-                    <div class="tile-tags">
-                      <div class="tag">How-tos</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="cloud-guides/connect-azure-data-share-to-teradata-vantage.html">
-                  <div class="link">
-                    <div class="tile-title">Connect Azure Data Share to Vantage</div>
-                    <div class="tile-content">Share data in Vantage using Azure Data Share.</div>
-                    <div class="tile-tags">
-                      <div class="tag">How-tos</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">
-                  <div class="link">
-                    <div class="tile-title">Integrate Vantage with Google Cloud Data Catalog.</div>
-                    <div class="tile-content">Put your metadata from Vantage to Google Cloud Data Catalog and explore data about data in a single tool.</div>
-                    <div class="tile-tags">
-                      <div class="tag">How-tos</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">
-                  <div class="link">
-                    <div class="tile-title">Use Vantage with Azure Machine Learning Studio.</div>
-                    <div class="tile-content">Use data stored in Vantage to power a machine learning model developed in Azure Machine Learning Studio.</div>
-                    <div class="tile-tags">
-                      <div class="tag">How-tos</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="tile-section-title">Sample source code</div>
-            <div class="tile-section-container source-code">
-              <div class="tile">
-                <a href="https://github.com/Teradata/mule-jdbc-example">
-                  <div class="link">
-                    <div class="tile-title">Mulesoft service that queries Taradata Vantage</div>
-                    <div class="tile-content">A Mulesoft-based REST API that uses the HTTP listener, DB Configuration, and DB Select components to query Teradata Vantage.</div>
-                    <div class="tile-icons">
-                      <img src="./_/img/java.logo.svg" />
-                      <img src="./_/img/mulesoft.logo.svg" />
-                      <img src="./_/img/teradata.logo.svg" />
-                    </div>
-                    <div class="tile-action">view</div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="https://github.com/Teradata/segment-integration-tutorial">
-                  <div class="link">
-                    <div class="tile-title">App that stores events from Twilio Segment in Teradata Vantage</div>
-                    <div class="tile-content">A Javascript application that runs on GCP Cloud Run. It listens to GCP Pub/Sub events coming from Twilio Segment and stores them in Teradata Vantage.</div>
-                    <div class="tile-icons">
-                      <img src="./_/img/nodejs.logo.svg" />
-                      <img src="./_/img/twilio.logo.svg" />
-                      <img src="./_/img/gcp.logo.svg" />
-                      <img src="./_/img/teradata.logo.svg" />
-                    </div>
-                    <div class="tile-action">view</div>
-                  </div>
-                </a>
-              </div>
-              <div class="tile">
-                <a href="https://github.com/Teradata/jdbc-sample-app">
-                  <div class="link">
-                    <div class="tile-title">Java app that connects to Teradata Vantage using JDBC</div>
-                    <div class="tile-content">A sample application that connects to Teradata Vantage using the Teradata JDBC driver.</div>
-                    <div class="tile-icons">
-                      <img src="./_/img/java.logo.svg" />
-                      <img src="./_/img/teradata.logo.svg" />
-                    </div>
-                    <div class="tile-action">view</div>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="doc">
-            <div class="admonitionblock question landing-page">
-              <table>
-                <tbody><tr>
-                <td class="icon">
-                <i class="fa icon-question"></i>Didn’t find what you were looking for?
-                </td>
-                <td class="content">
-                 Contribute or request a topic
-                </td>
-                <td class="question-action">
-                  <a href="https://github.com/Teradata/quickstarts/issues">request</a>
-                  <a href="https://github.com/Teradata/quickstarts">contribute</a>
-                </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
+<div class="nav-container" data-component="ROOT" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Get access to Vantage</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../getting.started.vmware.html">Vantage Express on VMware</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../getting.started.vbox.html">Vantage Express on VirtualBox</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../getting.started.utm.html">Vantage Express on UTM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../vantage.express.gcp.html">Vantage Express on GCP</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../nos.html">Query data stored in object storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ml.html">Train ML models in Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dbt.html">dbt with Teradata Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sto.html">Run scripts on Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../fastload.html">Run large bulkloads efficiently</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">How-tos</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../jdbc.html">Connect to Vantage using JDBC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../jupyter.html">Use Vantage from a Jupyter notebook</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Configure ODBC</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../odbc.ubuntu.html">Ubuntu</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../segment.html">Store events from Twilio Segment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
 </div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context" style="visibility: hidden;">
+    <span class="title">Getting Started Guides</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Getting Started Guides</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li>How-tos</li>
+    <li><a href="integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+      <div class="page-controls">
+      <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/cloud-guides/pages/integrate-teradata-vantage-with-google-cloud-data-catalog.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+    </div>
+  <div class="toc-menu">
+  </div>
+</aside>
+<article class="doc">
+<h1 class="page">Integrate Teradata Vantage with Google Cloud Data Catalog</h1>
+<p>Author: <a href="mailto:wenjie.tehan@teradata.com">Wenjie Tehan</a><br/>
+Last updated: February 14th, 2022</p>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This article describes the process to connect Teradata Vantage with Google Cloud Data Catalog using the <a href="https://github.com/GoogleCloudPlatform/datacatalog-connectors-rdbms/tree/master/google-datacatalog-teradata-connector">Data Catalog Teradata Connector on GitHub</a>, and then explore the metadata of the Vantage tables via Data Catalog.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-with-google-cloud-data-catalog/image2.png" alt="Diagram Description automatically generated" width="525" height="242"></span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Scrape: Connect to Teradata Vantage and retrieve all the available metadata</p>
+</li>
+<li>
+<p>Prepare: Transform metadata in Data Catalog entities and create Tags</p>
+</li>
+<li>
+<p>Ingest: Send the Data Catalog entities to the Google Cloud project</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_about_google_cloud_data_catalog"><a class="anchor" href="#_about_google_cloud_data_catalog"></a>About Google Cloud Data Catalog</h3>
+<div class="paragraph">
+<p>Google Cloud Data Catalog is a fully managed data discovery and metadata management service. Data Catalog can catalog the native metadata on data assets. Data Catalog is serverless, and provides a central catalog to capture both technical metadata as well as business metadata in a structured format.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_about_teradata_vantage"><a class="anchor" href="#_about_teradata_vantage"></a>About Teradata Vantage</h3>
+<div class="paragraph">
+<p>Vantage is the modern cloud platform that unifies data warehouses, data lakes, and analytics into a single connected ecosystem.</p>
+</div>
+<div class="paragraph">
+<p>Vantage combines descriptive, predictive, prescriptive analytics, autonomous decision-making, ML functions, and visualization tools into a unified, integrated platform that uncovers real-time business intelligence at scale, no matter where the data resides.</p>
+</div>
+<div class="paragraph">
+<p>Vantage enables companies to start small and elastically scale compute or storage, paying only for what they use, harnessing low-cost object stores and integrating their analytic workloads.</p>
+</div>
+<div class="paragraph">
+<p>Vantage supports R, Python, Teradata Studio, and any other SQL-based tools. You can deploy Vantage across public clouds, on-premises, on optimized or commodity infrastructure, or as-a-service.</p>
+</div>
+<div class="paragraph">
+<p>See the <a href="https://docs.teradata.com/home">documentation</a> for more information on Teradata Vantage.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using <a href="../getting.started.vmware.html" class="xref page">VMware</a>, <a href="../getting.started.vbox.html" class="xref page">VirtualBox</a>, or <a href="../getting.started.utm.html" class="xref page">UTM</a>. You can also run Vantage Express in the cloud on <a href="../vantage.express.gcp.html" class="xref page">GCP</a>.</p>
+</li>
+<li>
+<p>A <strong><a href="https://support.google.com/accounts/answer/27441?hl=en">Google Service Account</a> </strong>with Data Catalog Admin role</p>
+</li>
+<li>
+<p>A <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects"><strong>Cloud Console Project created</strong></a> for your account (i.e. partner-integration-lab)</p>
+</li>
+<li>
+<p>Billing enabled</p>
+</li>
+<li>
+<p>Google Cloud SDK <a href="https://cloud.google.com/sdk/docs/install">installed</a> and <a href="https://cloud.google.com/sdk/docs/initializing">initialized</a></p>
+</li>
+<li>
+<p><a href="https://www.python.org/downloads/">Python</a> installed</p>
+</li>
+<li>
+<p><a href="https://pip.pypa.io/en/stable/installation/">Pip</a> installed</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_procedure"><a class="anchor" href="#_procedure"></a>Procedure</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Enable Data Catalog APIs</p>
+</li>
+<li>
+<p>Install Teradata Data Catalog Connector</p>
+</li>
+<li>
+<p>Run</p>
+</li>
+<li>
+<p>Explore Teradata Vantage metadata with Data Catalog</p>
+</li>
+</ol>
+</div>
+<div class="sect2">
+<h3 id="_enable_data_catalog_api"><a class="anchor" href="#_enable_data_catalog_api"></a>Enable Data Catalog API</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Logon to <a href="http://console.cloud.google.com/">Google</a> console, choose <strong>APIs &amp; Services</strong> from the Navigation menu, then click on <em>Library</em>. Make sure your project is selected on the top menu bar.</p>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-with-google-cloud-data-catalog/image3.png" alt="Graphical user interface" width="483" height="472"></span></p>
+</div>
+</li>
+<li>
+<p>Put <em>Data Catalog</em> in the search box and click on <strong>Google Cloud Data Catalog API</strong>, click <strong>ENABLE</strong></p>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-with-google-cloud-data-catalog/image4.png" alt="Graphical user interface" width="624" height="212"></span></p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_install_teradata_data_catalog_connector"><a class="anchor" href="#_install_teradata_data_catalog_connector"></a>Install Teradata Data Catalog Connector</h3>
+<div class="paragraph">
+<p>A Teradata Data Catalog connector is available on <a href="https://github.com/GoogleCloudPlatform/datacatalog-connectors-rdbms/tree/master/google-datacatalog-teradata-connector">GitHub</a>. This connector is written in Python.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Run following command to authorize gcloud to access the Cloud Platform with Google user credentials.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud auth login</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Choose your Google account when the Google login page opens up and click <em>Allow</em> on the next page.</p>
+</li>
+<li>
+<p>Next, set up default project if you haven&#8217;t already done so</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud config set project &lt;project id&gt;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_install_virtualenv"><a class="anchor" href="#_install_virtualenv"></a>Install virtualenv</h4>
+<div class="paragraph">
+<p>We recommend you install the Teradata Data Catalog Connector in an isolated Python environment. To do so, install <a href="https://virtualenv.pypa.io/en/latest/">virtualenv</a> first:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_windows"></a>Windows</p>
+</li>
+<li>
+<p><a id="tabset1_macos"></a>MacOS</p>
+</li>
+<li>
+<p><a id="tabset1_linux"></a>Linux</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_windows">
+<div class="paragraph">
+<p>Run in Powershell as Administrator:</p>
+</div>
+<div class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">pip install virtualenv
+virtualenv --python python3.6 &lt;your-env&gt;
+&lt;your-env&gt;\Scripts\activate</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_macos">
+<div class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install virtualenv
+virtualenv --python python3.6 &lt;your-env&gt;
+source &lt;your-env&gt;/bin/activate</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_linux">
+<div class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install virtualenv
+virtualenv --python python3.6 &lt;your-env&gt;
+source &lt;your-env&gt;/bin/activate</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_install_data_catalog_teradata_connector"><a class="anchor" href="#_install_data_catalog_teradata_connector"></a>Install Data Catalog Teradata Connector</h4>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset2_windows"></a>Windows</p>
+</li>
+<li>
+<p><a id="tabset2_macos"></a>MacOS</p>
+</li>
+<li>
+<p><a id="tabset2_linux"></a>Linux</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset2_windows">
+<div class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">pip.exe install google-datacatalog-teradata-connector</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_macos">
+<div class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install google-datacatalog-teradata-connector</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_linux">
+<div class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install google-datacatalog-teradata-connector</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_set_environment_variables"><a class="anchor" href="#_set_environment_variables"></a>Set environment variables</h4>
+<div class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export GOOGLE_APPLICATION_CREDENTIALS=&lt;google_credentials_file&gt;
+export TERADATA2DC_DATACATALOG_PROJECT_ID=&lt;google_cloud_project_id&gt;
+export TERADATA2DC_DATACATALOG_LOCATION_ID=&lt;google_cloud_location_id&gt;
+export TERADATA2DC_TERADATA_SERVER=&lt;teradata_server&gt;
+export TERADATA2DC_TERADATA_USERNAME=&lt;teradata_username&gt;
+export TERADATA2DC_TERADATA_PASSWORD=&lt;teradata_password&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where <code>&lt;google_credential_file&gt;</code> is the key for your service account (json file).</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_run"><a class="anchor" href="#_run"></a>Run</h3>
+<div class="paragraph">
+<p>Execute <code>google-datacatalog-teradata-connector</code> command to establish entry point to Vantage database.</p>
+</div>
+<div class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">google-datacatalog-teradata-connector \
+  --datacatalog-project-id=$TERADATA2DC_DATACATALOG_PROJECT_ID \
+  --datacatalog-location-id=$TERADATA2DC_DATACATALOG_LOCATION_ID \
+  --teradata-host=$TERADATA2DC_TERADATA_SERVER \
+  --teradata-user=$TERADATA2DC_TERADATA_USERNAME \
+  --teradata-pass=$TERADATA2DC_TERADATA_PASSWORD</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sample output from the google-datacatalog-teradata-connector command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>INFO:root:
+==============Starting CLI===============
+INFO:root:This SQL connector does not implement the user defined datacatalog-entry-resource-url-prefix
+INFO:root:This SQL connector uses the default entry resoure URL
 
-<style>
+============Start teradata-to-datacatalog===========
 
-  @media screen and (max-width: 820px) {
-    .call-to-action {
-      background-image: none;
-    }
+==============Scrape metadata===============
+INFO:root:Scrapping metadata from connection_args
 
-    .call-to-action-text .short-description {
-      width: 100%;
-    }
+1 table containers ready to be ingested...
 
-    .doc .admonitionblock.question.landing-page  {
-      display: none;
-    }
-    .footer {
-      display: none;
-    }
-  }
+==============Prepare metadata===============
 
-  @media screen and (min-width: 820px) {
-    .call-to-action {
-      background-image: url('./_/img/illustration.svg');
-    }
+--&gt; database: Gcpuser
+37 tables ready to be ingested...
 
-    .call-to-action-text .short-description {
-      width: 50%;
-    }
+==============Ingest metadata===============
 
-    .doc .admonitionblock.question.landing-page  {
-      display: inherit;
-    }
+DEBUG:google.auth._default:Checking /Users/Teradata/Apps/Cloud/GCP/teradata2dc-credentials.json for explicit credentials as part of auth process...
+INFO:root:Starting to clean up the catalog...
+DEBUG:google.auth.transport.requests:Making request: POST https://oauth2.googleapis.com/token
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): oauth2.googleapis.com:443
+DEBUG:urllib3.connectionpool:https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+INFO:root:0 entries that match the search query exist in Data Catalog!
+INFO:root:Looking for entries to be deleted...
+INFO:root:0 entries will be deleted.
 
-    .footer {
-      display: inherit;
-    }
-  }
+Starting to ingest custom metadata...
 
-  .landing-container {
-    margin-left: 16px;
-    margin-right: 16px;
-    max-width: 1200px;
-    width: 100%;
-  }
-
-  .landing {
-    margin-top: 61px;
-    top: 110px;
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    padding-bottom: 30px;
-  }
-
-  .call-to-action {
-    background-color: rgba(133, 221, 220, 0.1);
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    box-sizing: border-box;
-    border-radius: 8px;
-    width: 100%;
-    min-height: 241px;
-    background-repeat: no-repeat;
-    background-position: right;
-    background-origin: content-box;
-    padding: 0px 10px 10px 0;
-    margin-top: 48px;
-  }
-
-  .call-to-action-text {
-    padding: 40px 10px 10px 40px;
-  }
-  .call-to-action-text .header {
-    font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    line-height: 28px;
-    letter-spacing: 0.15px;
-    color: rgba(0, 0, 0, 0.87);
-  }
-
-  .call-to-action-text .short-description {
-    font-family: Arial;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 20px;
-    color: rgba(0, 0, 0, 0.6);
-    padding-top: 4px;
-  }
-
-  .search-input-container {
-    width: 100%;
-    margin-top: 20px;
-  }
-
-  .search-input-container #search-input {
-    width: 100%;
-  }
-
-  .tile-container {
-    padding: 0px 14px 0px 14px;
-    width: 100%;
-    margin: auto;
-  }
-
-  .tile-container .title {
-    font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
-    font-size: 48px;
-    line-height: 64px;
-    color: rgba(0, 0, 0, 0.87);
-  }
-
-  .tile-section {
-  }
-
-  .tile-section-title {
-    font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 28px;
-    letter-spacing: 0.15px;
-    color: rgba(0, 0, 0, 0.87);
-    padding-top: 24px;
-    scroll-margin-top: 110px;
-    scroll-snap-margin: 110px;
-  }
-
-  .tile {
-    max-width: 370px;
-    min-height: 188px;
-    background: #FFFFFF;
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.14), 0px 2px 2px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    position: relative;
-  }
-
-  .tile:hover {
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 4px 5px rgba(0, 0, 0, 0.12), 0px 1px 10px rgba(0, 0, 0, 0.2);
-  }
-
-  .tile .link {
-    width: 100%;
-    height: 100%;
-    padding: 16px;
-  }
-
-  @media screen and (min-width: 580px) {
-    .source-code .tile {
-      max-width: 570px;
-    }
-
-    .tile-section-container.source-code {
-      grid-template-columns: repeat(auto-fit, minmax(470px, 1fr));
-    }
-  }
-
-  @media screen and (max-width: 580px) {
-
-    .tile-section-container.source-code {
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-    }
-  }
-
-  .tile-section-container.source-code {
-    display: grid;
-    grid-column-gap: 30px;
-    grid-row-gap: 20px;
-    padding-top: 8px;
-  }
-
-  .tile a:hover {
-    text-decoration: none;
-  }
-
-
-  .tile-section-container {
-    display: grid;
-    grid-column-gap: 30px;
-    grid-row-gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    padding-top: 8px;
-  }
-
-  .tile-title, .tile-tags {
-    font-family: Arial;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 20px;
-    color: rgba(0, 0, 0, 0.87);
-  }
-
-  .tile-content {
-    font-family: Arial;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: 0.25px;
-    color: rgba(0, 0, 0, 0.6);
-    margin-top: 16px;
-    margin-bottom: 50px;
-  }
-
-  .tag {
-    background: #E0E0E0;
-    border-radius: 16px;
-    font-family: Arial;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 20px;
-    padding: 6px 12px;
-    width: fit-content;
-  }
-
-  .tile-tags {
-    position: absolute;
-    bottom: 16px;
-  }
-
-  .tile-action {
-    font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    line-height: 16px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    color: #007373;
-    border: 1px #007373 solid;
-    border-radius: 8px;
-    padding: 9px 8px;
-    position: absolute;
-    bottom: 24px;
-    right: 24px;
-  }
-
-  .call-to-action-button {
-    background: #007373;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 1px 5px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    text-transform: uppercase;
-    text-decoration: none;
-    font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    line-height: 16px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.87);
-    padding: 11px 12px;
-    margin-right: 16px;
-    white-space: nowrap;
-    display: inline-block;
-  }
-
-  .button-container {
-    margin-top: 15px;
-  }
-
-  .call-to-action-button:hover {
-    text-decoration: none;
-  }
-
-  .call-to-action-button-secondary {
-    border: 1px solid rgba(0, 0, 0, 0.6);
-    box-sizing: border-box;
-    border-radius: 8px;
-    text-transform: uppercase;
-    text-decoration: none;
-    font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    line-height: 16px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    color: rgba(0, 0, 0, 0.87);
-    padding: 11px 12px;
-    margin-top: 15px;
-    background: #eaf2f2;
-    white-space: nowrap;
-    display: inline-block;
-  }
-
-  .call-to-action-button-secondary:hover {
-    text-decoration: none;
-  }
-
-  .search-result-dropdown-menu {
-    top: initial;
-    right: initial;
-    max-width: 60%;
-  }
-
-  .tile-container .doc {
-    padding: 0px;
-    margin: 0px;
-  }
-
-  .doc .admonitionblock.question.landing-page .icon {
-    text-transform: initial;
-  }
-
-  .question-action {
-    width: 280px;
-    font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    line-height: 16px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-
-  }
-
-  .question-action a {
-    color: rgba(0, 0, 0, 0.87);
-    padding: 0px 20px;
-  }
-
-  .question-action a:hover {
-    color: #f3743f;
-    text-decoration: none;
-  }
-
-  .doc .admonitionblock.landing-page td.content {
-    width: 80%;
-  }
-
-  div.tile-icons {
-    position: absolute;
-    bottom: 24px;
-    left: 16px;
-    display: flex;
-  }
-  .tile-icons img {
-    height: 34px;
-    width: 34px;
-    margin: 0px 8px 0px 0px;
-  }
-
-  .alternate-action {
-    font-size: 14px;
-    margin-top: 20px;
-  }
-
-  .alternate-action a {
-    color: #007373;
-  }
-
-  .alternate-action a:hover {
-    text-decoration: none;
-  }
-
-
-</style>
+DEBUG:google.auth._default:Checking /Users/Teradata/Apps/Cloud/GCP/teradata2dc-credentials.json for explicit credentials as part of auth process...
+INFO:root:Starting the ingestion flow...
+DEBUG:google.auth.transport.requests:Making request: POST https://oauth2.googleapis.com/token
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): oauth2.googleapis.com:443
+DEBUG:urllib3.connectionpool:https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+INFO:root:Tag Template created: projects/partner-integration-lab/locations/us-west1/tagTemplates/teradata_database_metadata
+INFO:root:Tag Template created: projects/partner-integration-lab/locations/us-west1/tagTemplates/teradata_table_metadata
+INFO:root:Tag Template created: projects/partner-integration-lab/locations/us-west1/tagTemplates/teradata_column_metadata
+INFO:root:Entry Group created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata
+INFO:root:1/38
+INFO:root:Entry does not exist: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser
+INFO:root:Entry created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser
+INFO:root: ^ [database] 34.105.107.155/gcpuser
+INFO:root:Starting the upsert tags step
+INFO:root:Processing Tag from Template: projects/partner-integration-lab/locations/us-west1/tagTemplates/teradata_database_metadata ...
+INFO:root:Tag created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser/tags/CWHNiGQeQmPT
+INFO:root:2/38
+INFO:root:Entry does not exist: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser_Categories
+INFO:root:Entry created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser_Categories
+INFO:root: ^ [table] 34.105.107.155/gcpuser/Categories
+INFO:root:Starting the upsert tags step
+INFO:root:Processing Tag from Template: projects/partner-integration-lab/locations/us-west1/tagTemplates/teradata_table_metadata ...
+INFO:root:Tag created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser_Categories/tags/Ceij5G9t915o
+INFO:root:38/38
+INFO:root:Entry does not exist: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser_tablesv_instantiated_latest
+INFO:root:Entry created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser_tablesv_instantiated_latest
+INFO:root: ^ [table] 34.105.107.155/gcpuser/tablesv_instantiated_latest
+INFO:root:Starting the upsert tags step
+INFO:root:Processing Tag from Template: projects/partner-integration-lab/locations/us-west1/tagTemplates/teradata_table_metadata ...
+INFO:root:Tag created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser_tablesv_instantiated_latest/tags/Ceij5G9t915o
+INFO:root:
+============End teradata-to-datacatalog============</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_explore_teradata_vantage_metadata_with_data_catalog"><a class="anchor" href="#_explore_teradata_vantage_metadata_with_data_catalog"></a>Explore Teradata Vantage metadata with Data Catalog</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Go to <a href="https://console.cloud.google.com/datacatalog">Data Catalog</a> console, click on the project (i.e. partner-integration-lab) under <strong>Projects</strong>. The Teradata tables are showing on the right panel.</p>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-with-google-cloud-data-catalog/image5.png" alt="Graphical user interface" width="624" height="379"></span></p>
+</div>
+</li>
+<li>
+<p>Click on the table to your interest (i.e. CITY_LEVEL_TRANS), and you&#8217;ll see the metadata about this table:</p>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-vantage-with-google-cloud-data-catalog/image6.png" alt="Graphical user interface" width="624" height="331"></span></p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cleanup_optional"><a class="anchor" href="#_cleanup_optional"></a>Cleanup (optional)</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Clean up metadata from Data Catalog. To do that, copy <a href="https://github.com/GoogleCloudPlatform/datacatalog-connectors-rdbms/blob/master/google-datacatalog-teradata-connector/tools/cleanup_datacatalog.py" class="bare">https://github.com/GoogleCloudPlatform/datacatalog-connectors-rdbms/blob/master/google-datacatalog-teradata-connector/tools/cleanup_datacatalog.py</a> to local directory.</p>
+</li>
+<li>
+<p>Change directory to where the file is and then run following command:</p>
+<div class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python cleanup_datacatalog.py --datacatalog-project-ids=$TERADATA2DC_DATACATALOG_PROJECT_ID</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="page-feedback bottom">
+  <span>Did this page help?</span>
+  <i class="far fa-thumbs-up click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
+  <i class="far fa-thumbs-down click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
+</div>
+</article>
+  </div>
+</main>
+</div>
 <svg aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
   style="position: absolute; width: 0; height: 0; overflow: hidden;">
   <defs>
@@ -5753,12 +5611,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </article>
 </footer>
-<script src="./_/js/site.js"></script>
-<script async src="./_/js/behavior.js"></script>
-<script src="./_/js/vendor/lunr.js"></script>
-<script src="./_/js/search-ui.js" id="search-ui-script" data-site-root-path="." data-snippet-length="100" data-stylesheet="./_/css/search.css"></script>
-<script async src="./search-index.js"></script>
-<script src="./_/js/teradata.min.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/behavior.js"></script>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+<script src="../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>
