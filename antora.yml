@@ -1,5 +1,5 @@
 name: ROOT
 title: Getting Started Guides
-version: 'current'
+version: 'master'
 nav:
 - modules/ROOT/nav.adoc
