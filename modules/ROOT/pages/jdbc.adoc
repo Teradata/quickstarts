@@ -28,7 +28,7 @@ mvn install:install-file \
    -Dfile=terajdbc4.jar \
    -DgroupId=com.teradata \
    -DartifactId=terajdbc4 \
-   -Dversion=17.00.00.03 \
+   -Dversion=17.10.00.26 \
    -Dpackaging=jar \
    -DgeneratePom=true
 ----
@@ -38,7 +38,7 @@ mvn install:install-file \
 Now that we have the jar in the local repository, we can reference the jar as a dependency in our Maven pom:
 
 ++++
-<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fjdbc-sample-app%2Fblob%2F9b4693f4324920165289f79641f158cf0293a66b%2Fpom.xml%23L22-L26&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fjdbc-sample-app%2Fblob%2Fmain%2Fpom.xml%23L22-L26&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on&fetchFromJsDelivr=on"></script>
 ++++
 
 == Code to send a query
