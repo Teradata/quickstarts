@@ -25,7 +25,7 @@ Amazon SageMaker consumes training and test data from an Amazon S3 bucket. This 
 
 == Prerequsites
 
-* Access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using xref:ROOT:getting.started.vmware.adoc[VMware], xref:ROOT:getting.started.vbox.adoc[VirtualBox], or xref:ROOT:getting.started.utm.adoc[UTM]. You can also run Vantage Express in the cloud on xref:ROOT:vantage.express.gcp.adoc[GCP].
+* Access to a Teradata Vantage instance. If you need a new instance of Vantage, you can install Vantage Express on your local machine using xref:ROOT:getting.started.vmware.adoc[VMware], xref:ROOT:getting.started.vbox.adoc[VirtualBox], or xref:ROOT:getting.started.utm.adoc[UTM]. You can also run Vantage Express in the cloud on xref:ROOT:vantage.express.gcp.adoc[GCP].
 *	IAM permission to access Amazon S3 bucket, and to use Amazon SageMaker service.
 *	An Amazon S3 bucket to store training data.
 

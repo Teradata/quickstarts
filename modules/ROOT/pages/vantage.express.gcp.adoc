@@ -9,7 +9,7 @@
 
 == Overview
 
-This quickstart demonstrates how to run Vantage Express in GCP. Running Vantage Express in the cloud is the quickest way to get access to a fully functional Teradata SQL Engine.
+This how-to demonstrates how to run Vantage Express in Google Cloud Platform. Vantage Express contains a fully functional Teradata SQL Engine.
 
 NOTE: If do not wish to pay for cloud usage you can install Vantage Express locally using link:getting.started.vmware.adoc[VMware] or link:getting.started.vbox[VirtualBox].
 

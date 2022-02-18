@@ -43,7 +43,7 @@ You are expected to be familiar with Amazon AppFlow service and Teradata Vantage
 
 You will need the following accounts, and systems:
 
-* Access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using xref:ROOT:getting.started.vmware.adoc[VMware], xref:ROOT:getting.started.vbox.adoc[VirtualBox], or xref:ROOT:getting.started.utm.adoc[UTM]. You can also run Vantage Express in the cloud on xref:ROOT:vantage.express.gcp.adoc[GCP].
+* Access to a Teradata Vantage instance. If you need a new instance of Vantage, you can install Vantage Express on your local machine using xref:ROOT:getting.started.vmware.adoc[VMware], xref:ROOT:getting.started.vbox.adoc[VirtualBox], or xref:ROOT:getting.started.utm.adoc[UTM]. You can also run Vantage Express in the cloud on xref:ROOT:vantage.express.gcp.adoc[GCP].
 * An AWS account with the role that can create and run flows.
 * An Amazon S3 bucket to store Salesforce data (i.e., ptctsoutput)
 * An Amazon S3 bucket to store raw Vantage data (Parquet file) (i.e., vantageparquet). This bucket needs to have policy to allow Amazon AppFlow access

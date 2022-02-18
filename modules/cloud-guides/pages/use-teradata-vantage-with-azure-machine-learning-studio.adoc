@@ -18,7 +18,7 @@ image:{page-image-directory}/image2.png[image,width=534,height=118]
 
 == Prerequisites
 
-* Access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using xref:ROOT:getting.started.vmware.adoc[VMware], xref:ROOT:getting.started.vbox.adoc[VirtualBox], or xref:ROOT:getting.started.utm.adoc[UTM]. You can also run Vantage Express in the cloud on xref:ROOT:vantage.express.gcp.adoc[GCP].
+* Access to a Teradata Vantage instance. If you need a new instance of Vantage, you can install Vantage Express on your local machine using xref:ROOT:getting.started.vmware.adoc[VMware], xref:ROOT:getting.started.vbox.adoc[VirtualBox], or xref:ROOT:getting.started.utm.adoc[UTM]. You can also run Vantage Express in the cloud on xref:ROOT:vantage.express.gcp.adoc[GCP].
 * Azure subscription or create https://azure.microsoft.com/free/[free account]
 * https://docs.microsoft.com/en-us/azure/machine-learning/studio/create-workspace[Azure ML Studio workspace]
 * (Optional) Download https://docs.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-2017[AdventureWorks DW 2016 database] (i.e. _'Training the Model'_ section)

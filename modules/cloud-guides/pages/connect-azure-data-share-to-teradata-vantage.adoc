@@ -42,7 +42,7 @@ For more information see https://docs.teradata.com/home[*documentation*].
 == Prerequisites
 
 
-* Access to a Teradata Vantage instance. If you need a new instance of Vantage the easiest way is to install Vantage Express on your local machine using xref:ROOT:getting.started.vmware.adoc[VMware], xref:ROOT:getting.started.vbox.adoc[VirtualBox], or xref:ROOT:getting.started.utm.adoc[UTM]. You can also run Vantage Express in the cloud on xref:ROOT:vantage.express.gcp.adoc[GCP].
+* Access to a Teradata Vantage instance. If you need a new instance of Vantage, you can install Vantage Express on your local machine using xref:ROOT:getting.started.vmware.adoc[VMware], xref:ROOT:getting.started.vbox.adoc[VirtualBox], or xref:ROOT:getting.started.utm.adoc[UTM]. You can also run Vantage Express in the cloud on xref:ROOT:vantage.express.gcp.adoc[GCP] or xref:ROOT:run-vantage-express-on-microsoft-azure.adoc[Azure].
 * An Azure account. You can start with a https://azure.microsoft.com/free/[free account].
 * An https://docs.microsoft.com/en-us/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal[Azure Blob Storage] account to store the dataset
 

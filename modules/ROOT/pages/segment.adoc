@@ -21,7 +21,7 @@ image::segment.flow.diagram.png[Segment GCP Flow Diagram, width=500, align="left
 === Prerequsites
 1. A GCP account. If you don't have an account, you can create one at https://console.cloud.google.com/.
 2. `gcloud` installed. See https://cloud.google.com/sdk/docs/install.
-3. A Vantage Express instance that GCP Cloud run can talk to. The easiest way to start on your own is to run a xref:vantage.express.gcp.adoc[Vantage Express instance in GCP].
+3. A Vantage Express instance that GCP Cloud run can talk to. See xref:vantage.express.gcp.adoc[] for detailed instructions.
 
 === Build and deploy
 
