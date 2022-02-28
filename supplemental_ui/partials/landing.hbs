@@ -328,6 +328,13 @@
 
 <style>
 
+  @media screen and (max-width: 576px) {
+    .call-to-action .call-to-action-button,
+    .call-to-action .call-to-action-button-secondary {
+      width: 100%;
+    }
+  }
+
   @media screen and (max-width: 820px) {
     .call-to-action {
       background-image: none;
@@ -387,14 +394,14 @@
     width: 100%;
     min-height: 241px;
     background-repeat: no-repeat;
-    background-position: right;
+    background-position: right top;
     background-origin: content-box;
-    padding: 0px 10px 10px 0;
+    padding: 0px 10px 0px 10px;
     margin-top: 48px;
   }
 
   .call-to-action-text {
-    padding: 40px 10px 10px 40px;
+    padding: 40px 30px 40px 30px;
   }
   .call-to-action-text .header {
     font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
@@ -571,11 +578,11 @@
     font-size: 14px;
     line-height: 16px;
     letter-spacing: 0.5px;
+    text-align: center;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.87);
     padding: 11px 12px;
     margin-right: 16px;
-    white-space: nowrap;
     display: inline-block;
   }
 
@@ -597,12 +604,12 @@
     font-size: 14px;
     line-height: 16px;
     letter-spacing: 0.5px;
+    text-align: center;
     text-transform: uppercase;
     color: rgba(0, 0, 0, 0.87);
     padding: 11px 12px;
     margin-top: 15px;
     background: #eaf2f2;
-    white-space: nowrap;
     display: inline-block;
   }
 
