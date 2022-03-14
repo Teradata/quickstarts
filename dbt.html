@@ -731,7 +731,10 @@ source env/bin/activate</code></pre>
 <p>Install <code>dbt-teradata</code> module and its dependencies. The core dbt module is included as a dependency so you don&#8217;t have to install it separately:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install dbt-teradata</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># There is an issue in dbt-core 1.0.1. To work around the issue we need to pin MarkupSafe dependency to version 2.0.1
+# More info at https://github.com/dbt-labs/dbt-core/issues/4745
+pip install MarkupSafe==2.0.1
+pip install dbt-teradata</code></pre>
 </div>
 </div>
 </li>
