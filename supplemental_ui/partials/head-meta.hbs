@@ -22,7 +22,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" href="{{uiRootPath}}/css/fontawesome.all.min.css">
 <link rel="stylesheet" href="{{uiRootPath}}/css/webfonts.css">
 <style>
-.doc a, .doc a:hover {
+.doc a, 
+.doc a:hover {
   color: #007373;
 }
 
@@ -35,7 +36,7 @@ main.article {
 }
 
 .navbar {
-  height: 112px;
+  height: 96px;
   background: #fafafa;
   color: #000;
   align-items: center;
@@ -62,11 +63,13 @@ main.article {
 }
 
 .top-nav-menu {
+  border-bottom: 1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 100%;
-  height: 70px;
+  height: 54px;
 }
 
 .navbar-brand {
@@ -74,11 +77,23 @@ main.article {
 }
 
 @media screen and (min-width: 1024px) {
-  .navbar-end .navbar-link, .navbar-end>.navbar-item {
+  .navbar {
+    height: 112px;
+  }
+
+  .top-nav-menu {
+    border: none;
+    height: 70px;
+  }
+
+  .navbar-end .navbar-link, 
+  .navbar-end>.navbar-item {
     color: #000;
   }
 
-  .navbar-end .navbar-item.has-dropdown:hover .navbar-link, .navbar-end .navbar-link:hover, .navbar-end>a.navbar-item:hover {
+  .navbar-end .navbar-item.has-dropdown:hover .navbar-link, 
+  .navbar-end .navbar-link:hover, 
+  .navbar-end>a.navbar-item:hover {
     color: #000;
   }
 
@@ -93,8 +108,8 @@ main.article {
 }
 
 .navbar-menu {
+  flex-grow: 1;
   height: 100%;
-  width: 100%;
 }
 
 .navbar-item {
@@ -105,12 +120,13 @@ main.article {
   padding: 0px 20px;
 }
 
-.toc .toc-menu a:hover, .navbar-end>a.navbar-item:hover {
+.toc .toc-menu a:hover, 
+.navbar-end>a.navbar-item:hover {
   color: #f3743f;
 }
 
 #menu-options {
-  padding-left: 42px;
+  padding-left: 20px;
   flex-grow: 1;
 }
 
@@ -121,16 +137,24 @@ main.article {
   font-weight: 600;
 }
 
-.navbar-end .navbar-item.has-dropdown:hover .navbar-link, .navbar-end .navbar-link:hover, .navbar-end>a.navbar-item:hover {
+.navbar-end .navbar-item.has-dropdown:hover .navbar-link, 
+.navbar-end .navbar-link:hover, 
+.navbar-end>a.navbar-item:hover {
   background: initial;
 }
 
 .navbar-brand .navbar-item:first-child {
   font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 500;
   color: #000;
   text-transform: uppercase;
+}
+
+@media screen and (min-width: 375px) {
+  .navbar-brand .navbar-item:first-child {
+    font-size: 20px;
+  }
 }
 
 .navbar-item .navbar-link {
@@ -140,12 +164,19 @@ main.article {
 .navbar-logo {
   width: 100px;
   height: 24px;
-  margin-left: 24px;
-  margin-right: 24px;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+@media screen and (min-width: 1024px) {
+  .navbar-logo {
+    margin-left: 24px;
+    margin-right: 24px;
+  }
 }
 
 #search-input {
-  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   width: 293px;
   height: 40px;
@@ -239,11 +270,13 @@ aside.toc.sidebar {
   font-size: 14px;
 }
 
-.doc p code, .doc thead code {
+.doc p code, 
+.doc thead code {
   background: #eeeeee;
 }
 
-.doc .listingblock pre:not(.highlight), .doc .literalblock pre {
+.doc .listingblock pre:not(.highlight), 
+.doc .literalblock pre {
   background: #eeeeee;
   -webkit-box-shadow: inset 0 0 1.75px #e1e1e1;
   box-shadow: inset 0 0 1.75px #e1e1e1;
@@ -310,7 +343,8 @@ body ::-webkit-scrollbar-thumb {
   background-color: initial;
 }
 
-.is-current-page>.nav-link, .is-current-page>.nav-text {
+.is-current-page>.nav-link, 
+.is-current-page>.nav-text {
   font-weight: initial;
   color: #007373;
 }
@@ -414,7 +448,8 @@ body ::-webkit-scrollbar-thumb {
   font-size: 16px;
 }
 
-.doc .admonitionblock p, .doc .admonitionblock td.content {
+.doc .admonitionblock p, 
+.doc .admonitionblock td.content {
   font-size: 16px;
 }
 
