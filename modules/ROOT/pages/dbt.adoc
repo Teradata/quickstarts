@@ -36,6 +36,9 @@ source env/bin/activate
 +
 [source, bash]
 ----
+# There is an issue in dbt-core 1.0.1. To work around the issue we need to pin MarkupSafe dependency to version 2.0.1
+# More info at https://github.com/dbt-labs/dbt-core/issues/4745
+pip install MarkupSafe==2.0.1
 pip install dbt-teradata
 ----
 
