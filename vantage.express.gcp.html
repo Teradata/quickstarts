@@ -33,249 +33,533 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" href="./_/css/fontawesome.all.min.css">
 <link rel="stylesheet" href="./_/css/webfonts.css">
 <style>
-  .doc a, .doc a:hover {
-    color: #007373;
-  }
-  .article {
-    background-color: #f5f5f5;
-  }
+/* Begin Mobile Menu */
+body {
+  transition: all .25s ease-in-out 0s;
+  overflow-x: hidden;
+}
 
-  main.article {
-    padding-bottom: 30px;
-  }
+body.menu-open {
+  overflow: hidden;
+  position: relative;
+}
 
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.header-nav-mobile__menu-icon {
+  width: 54px;
+  height: 54px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  color: #394951;
+  border-left: 1px solid #e5e5e5;
+  justify-content: center;
+  position: relative;
+}
+
+@media screen and (min-width: 1024px) {
+  .header-nav-mobile__menu-icon {
+    display: none;
+  }
+}
+
+.header-nav-mobile__menu-icon span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 2px;
+  width: 24px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: #394951;
+  transition: all 0.25s ease;
+}
+
+.header-nav-mobile__menu-icon span:first-of-type {
+  transform: translateY(-6px);
+}
+
+.header-nav-mobile__menu-icon span:nth-of-type(4) {
+  transform: translateY(6px);
+}
+
+.header-nav-mobile__menu-icon.active span:first-of-type {
+  transform: translateY(-12px);
+  opacity: 0;
+}
+
+.header-nav-mobile__menu-icon.active span:nth-of-type(2) {
+  transform: rotate(45deg);
+}
+
+.header-nav-mobile__menu-icon.active span:nth-of-type(3) {
+  transform: rotate(-45deg);
+}
+
+.header-nav-mobile__menu-icon.active span:nth-of-type(4) {
+  transform: translateY(12px);
+  opacity: 0;
+}
+
+.header-nav-mobile__menu {
+  display: none;
+  position: fixed;
+  height: calc(100vh - 96px);
+  width: 100%;
+  top: 96px;
+  right: 0;
+  max-width: 700px;
+  background: #fff;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  will-change: transform;
+}
+
+@media (min-width: 700px) {
+  .header-nav-mobile__menu {
+    border-left: 1px solid #e5e5e5;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .header-nav-mobile__menu {
+    display: none;
+  }
+}
+
+.header-nav-mobile__menu.active {
+  display: block;
+}
+
+.header-nav-mobile__menu > ul {
+  padding: 0;
+  margin: 0;
+}
+
+.header-nav-mobile__menu-item {
+  display: block;
+  transition: all 0.25s ease;
+}
+
+.header-nav-mobile__menu-item .header-nav-mobile__menu-item__header {
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 16px;
+  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.15px;
+  line-height: 16px;
+  height: 50px;
+  position: relative;
+  margin: 0;
+  padding: 16px;
+}
+
+.header-nav-mobile__menu-item .header-nav-mobile__menu-item__header a {
+  color: #000;
+}
+
+.header-nav-mobile__menu-item .header-nav-mobile__menu-item__header a:hover,
+.header-nav-mobile__menu-item .header-nav-mobile__menu-item__header a:focus {
+  color: #007373;
+}
+
+.header-nav-mobile__menu-item .header-nav-mobile__menu-item__links ul li {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.header-nav-mobile__menu-item.has-sub-items .header-nav-mobile__menu-item__header {
+  transition: all 0.25s ease;
+}
+
+.header-nav-mobile__menu-item.has-sub-items .header-nav-mobile__menu-item__header:after,
+.header-nav-mobile__menu-item.has-sub-items .header-nav-mobile__menu-item__header:before {
+  content: "";
+  width: 12px;
+  height: 2px;
+  background: #394951;
+  border-radius: 1px;
+  position: absolute;
+  right: 19px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  transition: all 0.25s ease;
+}
+
+.header-nav-mobile__menu-item.has-sub-items .header-nav-mobile__menu-item__header:before {
+  transform: rotate(90deg);
+}
+
+.header-nav-mobile__menu-item.has-sub-items > div {
+  height: 0px;
+  overflow: hidden;
+  transition-property: height; 
+  transition-duration: 500ms;
+}
+
+.header-nav-mobile__menu-item.has-sub-items > div.dropdown-open {
+  height: auto;
+  overflow: visible;
+}
+
+.header-nav-mobile__menu-item.active {
+  background: #f5f5f5;
+}
+
+.header-nav-mobile__menu-item.active .header-nav-mobile__menu-item__header {
+  border-bottom-color: #f5f5f5;
+}
+
+.header-nav-mobile__menu-item.active .header-nav-mobile__menu-item__header:before {
+  transform: rotate(0deg);
+}
+
+.header-nav-mobile__menu-item.active .header-nav-mobile__menu-item__links ul li {
+  opacity: 1;
+}
+
+.header-nav-mobile__menu-item__links {
+  padding: 0 16px 24px;
+}
+
+.header-nav-mobile__menu-item__links > ul {
+  list-style: none;
+  padding: 0;
+}
+
+.header-nav-mobile__menu-item__links li > a {
+  padding: 12px 0;
+  display: inline-block;
+  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.15px;
+  line-height: 14px;
+  color: #394951;
+}
+
+.header-nav-mobile__menu-item__links li > a:hover,
+.header-nav-mobile__menu-item__links li > a:focus {
+  text-decoration: underline;
+}
+
+.header-nav-mobile__menu-item__links li > a:visited {
+  color: #394951;
+}
+
+.page-blackout {
+  opacity: 0;
+  transform: translateX(-100%);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 96px;
+  left: 0;
+  background: #000;
+  pointer-events: none;
+  transition: opacity .5s ease;
+  z-index: -1;
+}
+
+.page-blackout.active {
+  opacity: .4;
+  transform: translateX(0);
+  pointer-events: all;
+}
+/* End Mobile Menu */
+
+.doc a, 
+.doc a:hover {
+  color: #007373;
+}
+
+.article {
+  background-color: #f5f5f5;
+}
+
+main.article {
+  padding-bottom: 30px;
+}
+
+.navbar {
+  height: 96px;
+  background: #fafafa;
+  color: #000;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.visit {
+  width: 100%;
+  height: 42px;
+  text-align: right;
+  padding: 11px 24px;
+  background-color: #f5f5f5;
+  font-size: 14px;
+}
+
+.visit a {
+  color: #007373;
+}
+
+.visit a:hover {
+  color: #007373;
+  text-decoration: underline;
+}
+
+.top-nav-menu {
+  border-bottom: 1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 54px;
+}
+
+.navbar-brand {
+  padding-left: 0px;
+}
+
+@media screen and (min-width: 1024px) {
   .navbar {
     height: 112px;
-    background: #fafafa;
-    color: #000;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .visit {
-    width: 100%;
-    height: 42px;
-    text-align: right;
-    padding: 11px 24px;
-    background-color: #f5f5f5;
-    font-size: 14px;
-
-  }
-  .visit a {
-      color: #007373;
-  }
-
-  .visit a:hover {
-      color: #007373;
-      text-decoration: underline;
   }
 
   .top-nav-menu {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
+    border: none;
     height: 70px;
   }
 
+  .navbar-end .navbar-link, 
+  .navbar-end>.navbar-item {
+    color: #000;
+  }
+
+  .navbar-end .navbar-item.has-dropdown:hover .navbar-link, 
+  .navbar-end .navbar-link:hover, 
+  .navbar-end>a.navbar-item:hover {
+    color: #000;
+  }
+
   .navbar-brand {
-    padding-left: 0px;
-  }
-
-  @media screen and (min-width: 1024px) {
-    .navbar-end .navbar-link, .navbar-end>.navbar-item {
-      color: #000;
-    }
-
-    .navbar-end .navbar-item.has-dropdown:hover .navbar-link, .navbar-end .navbar-link:hover, .navbar-end>a.navbar-item:hover {
-      color: #000;
-    }
-
-    .navbar-brand {
-      flex-grow: 0;
-    }
-
-    .nav {
-    background-color: initial;
-    top: 110px;
-  }
-  }
-
-  .navbar-menu {
-    height: 100%;
-    width: 100%;
-  }
-
-  .navbar-item {
-    font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    color: #000;
-    text-transform: uppercase;
-    padding: 0px 20px;
-  }
-
-  .toc .toc-menu a:hover, .navbar-end>a.navbar-item:hover {
-    color: #f3743f;
-  }
-
-  #menu-options {
-    padding-left: 42px;
-    flex-grow: 1;
-  }
-
-  #menu-options.navbar-end .navbar-item:first-child {
-      border-bottom: #007373 solid 3px;
-      padding-top: 3px;
-      color: #007373;
-  }
-
-  .navbar-end .navbar-item.has-dropdown:hover .navbar-link, .navbar-end .navbar-link:hover, .navbar-end>a.navbar-item:hover {
-    background: initial;
-  }
-
-  .navbar-brand .navbar-item:first-child {
-    font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    color: #000;
-    text-transform: uppercase;
-  }
-
-  .navbar-item .navbar-link {
-    line-height: inherit;
-  }
-
-  .navbar-logo {
-    width: 100px;
-    height: 24px;
-    margin-left: 24px;
-    margin-right: 24px;
-  }
-
-  #search-input {
-    font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    width: 293px;
-    height: 40px;
-    border-radius: 8px;
-    padding-left: 14px;
-    padding-right: 14px;
-    background-image: url(./_/img/search.svg);
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-origin: content-box;
-    border-color: #9b9b9b;
-  }
-  .nav-container {
-    background: #f5f5f5;
-    padding-top: 66px;
-    font-size: 14px;
-  }
-
-  .breadcrumbs {
-    padding: 0 0 0 24px;
-  }
-  .breadcrumbs li::after {
-    content: ">";
-    padding: 0 0.5rem;
+    flex-grow: 0;
   }
 
   .nav {
     background-color: initial;
     top: 110px;
   }
-  aside.toc.sidebar {
-      -ms-flex-preferred-size: 15rem !important;
-      flex-basis: 15rem !important;
-  }
-
-  .edit-this-page img {
-    margin-right: 4px;
-    vertical-align: bottom;
-  }
-
-  .toolbar {
-    background-color: #f5f5f5;
-    height: 44px;
-    margin-top: 61px;
-    top: 110px;
-  }
-
-  .doc .source-toolbox {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    visibility: visible;
-    position: absolute;
-    top: .25rem;
-    right: .5rem;
-    color: grey;
-    font-family: Roboto,sans-serif;
-    font-size: .75rem;
-    line-height: 1;
- }
-
-  .content-editable {
-      -webkit-user-modify: read-write;
-      -moz-user-modify: read-write;
-      user-modify: read-write;
-  }
-
-  .tabs li {
-    align-items: center;
-    border: 1px solid #616d73;
-    border-bottom: 0;
-    cursor: pointer;
-    display: flex;
-    height: 2rem;
-    line-height: 1;
-    margin-right: 0.25rem;
-    padding: 0 1.25rem;
-    position: relative;
-  }
-
-  .doc pre.highlight code {
-    background: #eeeeee;
-    -webkit-box-shadow: inset 0 0 1.75px #e1e1e1;
-    box-shadow: inset 0 0 1.75px #e1e1e1;
-    display: block;
-    overflow-x: auto;
-    padding: 70px 12px 12px 16px;
-    font-size: 14px;
 }
 
-  .doc p code, .doc thead code {
-    background: #eeeeee;
-  }
+.navbar-menu {
+  flex-grow: 1;
+  height: 100%;
+}
 
-  .doc .listingblock pre:not(.highlight), .doc .literalblock pre {
-    background: #eeeeee;
-    -webkit-box-shadow: inset 0 0 1.75px #e1e1e1;
-    box-shadow: inset 0 0 1.75px #e1e1e1;
-    display: block;
-    overflow-x: auto;
-    padding: 0.75rem 0.75rem 0.75rem 1rem;
-    font-size: 14px;
+.navbar-item {
+  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #000;
+  text-transform: uppercase;
+  padding: 0px 20px;
+}
+
+.toc .toc-menu a:hover, 
+.navbar-end>a.navbar-item:hover {
+  color: #f3743f;
+}
+
+#menu-options {
+  padding-left: 20px;
+  flex-grow: 1;
+}
+
+#menu-options.navbar-end .navbar-item:first-child {
+  border-bottom: #007373 solid 3px;
+  padding-top: 3px;
+  color: #007373;
+  font-weight: 600;
+}
+
+.navbar-end .navbar-item.has-dropdown:hover .navbar-link, 
+.navbar-end .navbar-link:hover, 
+.navbar-end>a.navbar-item:hover {
+  background: initial;
+}
+
+.navbar-brand .navbar-item:first-child {
+  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 375px) {
+  .navbar-brand .navbar-item:first-child {
+    font-size: 20px;
   }
+}
+
+.navbar-item .navbar-link {
+  line-height: inherit;
+}
+
+.navbar-logo {
+  width: 100px;
+  height: 24px;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+@media screen and (min-width: 1024px) {
+  .navbar-logo {
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+}
+
+#search-input {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  width: 293px;
+  height: 40px;
+  border-radius: 8px;
+  padding-left: 14px;
+  padding-right: 14px;
+  background-image: url(./_/img/search.svg);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-origin: content-box;
+  border-color: #9b9b9b;
+}
+
+.nav-container {
+  background: #f5f5f5;
+  padding-top: 66px;
+  font-size: 14px;
+}
+
+.breadcrumbs {
+  padding: 0 0 0 24px;
+}
+
+.breadcrumbs li::after {
+  content: ">";
+  padding: 0 0.5rem;
+}
+
+.nav {
+  background-color: initial;
+  top: 110px;
+}
+
+aside.toc.sidebar {
+  -ms-flex-preferred-size: 15rem !important;
+  flex-basis: 15rem !important;
+}
+
+.edit-this-page img {
+  margin-right: 4px;
+  vertical-align: bottom;
+}
+
+.toolbar {
+  background-color: #f5f5f5;
+  height: 44px;
+  margin-top: 61px;
+  top: 110px;
+}
+
+.doc .source-toolbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  visibility: visible;
+  position: absolute;
+  top: .25rem;
+  right: .5rem;
+  color: grey;
+  font-family: Roboto,sans-serif;
+  font-size: .75rem;
+  line-height: 1;
+}
+
+.content-editable {
+  -webkit-user-modify: read-write;
+  -moz-user-modify: read-write;
+  user-modify: read-write;
+}
+
+.tabs li {
+  align-items: center;
+  border: 1px solid #616d73;
+  border-bottom: 0;
+  cursor: pointer;
+  display: flex;
+  height: 2rem;
+  line-height: 1;
+  margin-right: 0.25rem;
+  padding: 0 1.25rem;
+  position: relative;
+}
+
+.doc pre.highlight code {
+  background: #eeeeee;
+  -webkit-box-shadow: inset 0 0 1.75px #e1e1e1;
+  box-shadow: inset 0 0 1.75px #e1e1e1;
+  display: block;
+  overflow-x: auto;
+  padding: 70px 12px 12px 16px;
+  font-size: 14px;
+}
+
+.doc p code, 
+.doc thead code {
+  background: #eeeeee;
+}
+
+.doc .listingblock pre:not(.highlight), 
+.doc .literalblock pre {
+  background: #eeeeee;
+  -webkit-box-shadow: inset 0 0 1.75px #e1e1e1;
+  box-shadow: inset 0 0 1.75px #e1e1e1;
+  display: block;
+  overflow-x: auto;
+  padding: 0.75rem 0.75rem 0.75rem 1rem;
+  font-size: 14px;
+}
 
 .doc>h1.page:first-child {
   margin-top: 1.5rem;
 }
 
 .doc {
-    -webkit-box-flex: 1;
-    -ms-flex: auto;
-    flex: auto;
-    font-size: .94444rem;
-    margin: 0 16px;
-    max-width: 100%;
-    min-width: 0;
-    padding: 0 8px;
+  -webkit-box-flex: 1;
+  -ms-flex: auto;
+  flex: auto;
+  font-size: .94444rem;
+  margin: 0 16px;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0 8px;
 }
+
 .toc.sidebar .toc-menu {
-    margin-right: .75rem;
-    position: sticky;
-    top: 170px;
+  margin-right: .75rem;
+  position: sticky;
+  top: 170px;
 }
 
 .page-feedback {
@@ -295,13 +579,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 
 .doc .admonitionblock .icon {
-    border-radius: 1rem;
+  border-radius: 1rem;
 }
 
 .doc h2:not(.discrete) {
   border-bottom: none;
 }
-
 
 .nav-panel-explore {
   visibility: collapse;
@@ -315,7 +598,8 @@ body ::-webkit-scrollbar-thumb {
   background-color: initial;
 }
 
-.is-current-page>.nav-link, .is-current-page>.nav-text {
+.is-current-page>.nav-link, 
+.is-current-page>.nav-text {
   font-weight: initial;
   color: #007373;
 }
@@ -329,6 +613,7 @@ body ::-webkit-scrollbar-thumb {
   border-left-color: #007373;
   color: #333;
 }
+
 .page-controls {
   padding-top: 12px;
   font-size: 14px;
@@ -361,8 +646,6 @@ body ::-webkit-scrollbar-thumb {
   -ms-flex-align: start;
   align-items: start;
 }
-
-
 
 .doc .admonitionblock.important {
   background-color: #f6eee4;
@@ -399,6 +682,7 @@ body ::-webkit-scrollbar-thumb {
   background-color: initial;
   color: #007373;
 }
+
 .doc .admonitionblock .icon {
   position: absolute;
   padding: 12px 0px 0px 72px;
@@ -413,12 +697,14 @@ body ::-webkit-scrollbar-thumb {
   width: 100%;
   word-wrap: anywhere;
 }
+
 .doc .admonitionblock .icon i {
   font-family: Arial;
   font-size: 16px;
 }
 
-.doc .admonitionblock p, .doc .admonitionblock td.content {
+.doc .admonitionblock p, 
+.doc .admonitionblock td.content {
   font-size: 16px;
 }
 
@@ -466,6 +752,7 @@ i.fa[class*=' icon-']::before {
 .doc .source-toolbox img.copy-icon {
   content: url("./_/img/copy.svg");
 }
+
 .doc .source-toolbox>:not(:last-child)::after {
   content: "";
 }
@@ -482,7 +769,6 @@ span.search-result-highlight {
   color: #007373;
   background: rgba(133, 221, 220, 0.1);
 }
-
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
 <link rel="icon" href="./_/img/favicon.ico" type="image/x-icon">
@@ -497,25 +783,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <nav class="navbar">
     <div class="visit"><a href="https://teradata.com/">Visit Teradata.com</a></div>
     <div class="top-nav-menu">
-      <span class="navbar-logo"><a href="https://teradata.com/">
-        <svg width="97" height="18" viewBox="0 0 696 133" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-            <title>Teradata</title>
-            <desc>Copyright Teradata</desc>
-            <defs></defs>
-            <g id="teradata" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g id="text" fill="#394951">
-                    <path d="M78.882,72.796 L123.941,72.796 C120.763,60.83 111.788,55.595 101.878,55.595 C92.53,55.595 81.873,61.204 78.882,72.796 Z M149.182,90.184 L78.134,90.184 C80.564,103.646 90.099,111.873 101.504,111.873 C108.796,111.873 117.957,110.937 124.689,99.533 L146.751,104.206 C138.524,123.652 121.884,133 101.504,133 C75.142,133 53.64,112.994 53.64,83.64 C53.64,54.286 75.142,34.093 101.878,34.093 C126.745,34.093 148.246,53.351 149.182,81.771 L149.182,90.184 Z" id="Fill-1"></path>
-                    <path d="M387.843,83.64 C387.843,66.439 374.568,55.595 361.294,55.595 C346.336,55.595 335.118,66.439 335.118,83.64 C335.118,100.841 346.336,111.498 361.294,111.498 C374.568,111.498 387.843,100.841 387.843,83.64 Z M412.523,130.195 L387.843,130.195 L387.843,122.156 C380.364,129.074 370.081,133 356.993,133 C333.248,133 311.186,112.994 311.186,83.64 C311.186,54.286 333.248,34.093 356.993,34.093 C370.081,34.093 380.364,38.019 387.843,44.937 L387.843,0.937 L412.523,0.937 L412.523,130.195 Z" id="Fill-3"></path>
-                    <path d="M630.3,92.427 C630.3,104.393 618.894,113.368 605.807,113.368 C596.271,113.368 589.915,108.88 589.915,101.962 C589.915,95.606 595.149,91.306 603.003,91.306 L630.3,91.306 L630.3,92.427 Z M614.407,37.117 L614.407,37.093 L580.299,37.093 L580.299,57.658 L614.407,57.658 C623.943,57.658 630.3,61.765 630.3,71.113 L630.3,72.61 L603.377,72.61 C579.818,72.61 566.356,84.576 566.356,102.524 C566.356,120.846 580.566,133 601.881,133 C614.595,133 623.943,128.7 630.3,122.53 L630.3,130.195 L653.858,130.195 L653.858,69.244 C653.858,47.082 638.243,37.617 614.407,37.117 Z" id="Fill-4"></path>
-                    <path d="M484.378,92.427 C484.378,104.393 472.973,113.368 459.885,113.368 C450.349,113.368 443.992,108.88 443.992,101.962 C443.992,95.606 449.227,91.306 457.08,91.306 L484.378,91.306 L484.378,92.427 Z M468.485,37.117 L468.485,37.093 L434.377,37.093 L434.377,57.658 L468.485,57.658 C478.02,57.658 484.378,61.765 484.378,71.113 L484.378,72.61 L457.454,72.61 C433.895,72.61 420.434,84.576 420.434,102.524 C420.434,120.846 434.644,133 455.958,133 C468.672,133 478.02,128.7 484.378,122.53 L484.378,130.195 L507.935,130.195 L507.935,69.244 C507.935,47.082 492.321,37.617 468.485,37.117 Z" id="Fill-5"></path>
-                    <path d="M279.3,92.427 C279.3,104.393 267.894,113.368 254.807,113.368 C245.271,113.368 238.914,108.88 238.914,101.962 C238.914,95.606 244.15,91.306 252.003,91.306 L279.3,91.306 L279.3,92.427 Z M263.408,37.117 L263.408,37.093 L229.299,37.093 L229.299,57.658 L263.408,57.658 C272.943,57.658 279.3,61.765 279.3,71.113 L279.3,72.61 L252.376,72.61 C228.818,72.61 215.356,84.576 215.356,102.524 C215.356,120.846 229.566,133 250.881,133 C263.595,133 272.943,128.7 279.3,122.53 L279.3,130.195 L302.858,130.195 L302.858,69.244 C302.858,47.082 287.244,37.617 263.408,37.117 Z" id="Fill-6"></path>
-                    <path d="M216.11,37.026 C200.966,37.026 190.121,43.069 182.643,53.913 L182.643,36.899 L157.963,36.899 L157.963,130.197 L182.643,130.197 L182.643,100.095 C182.643,74.106 193.113,57.776 215.923,57.776 L217.044,57.776 L217.044,37.029 C216.741,37.027 216.431,37.026 216.11,37.026" id="Fill-7"></path>
-                    <path d="M48.982,107.707 C45.229,109.115 41.291,110.002 38.328,110.002 C30.102,110.002 24.68,105.142 24.68,93.923 L24.68,57.09 L49.982,57.09 L49.982,36.898 L24.68,36.898 L24.68,14.007 L0,14.007 L0,95.793 C0,121.408 14.584,133 36.646,133 C44.438,133 51.879,131.338 61.481,126.199 C56.364,121.123 51.667,114.8 48.982,107.707" id="Fill-8"></path>
-                    <path d="M558.509,109.788 C557.521,109.926 556.586,110.002 555.733,110.002 C547.507,110.002 542.085,105.142 542.085,93.923 L542.085,57.09 L568.068,57.09 L568.068,36.898 L542.085,36.898 L542.085,14.007 L517.404,14.007 L517.404,95.793 C517.404,121.408 531.988,133 554.051,133 C559.44,133 564.302,132.206 569.964,130.017 C562.645,124.774 559.799,116.281 558.509,109.788" id="Fill-9"></path>
-                </g>
-                <path d="M695.029,116.028 C695.029,124.853 688.257,131.624 678.817,131.624 C669.377,131.624 662.605,124.853 662.605,116.028 C662.605,107.615 669.377,100.227 678.817,100.227 C688.257,100.227 695.029,107.615 695.029,116.028" id="Fill-11" fill="#E46C42"></path>
-            </g>
-        </svg>
+      <span class="navbar-logo">
+        <a href="https://teradata.com/">
+          <svg width="97" height="18" viewBox="0 0 696 133" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
+              <title>Teradata</title>
+              <desc>Copyright Teradata</desc>
+              <defs></defs>
+              <g id="teradata" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="text" fill="#394951">
+                      <path d="M78.882,72.796 L123.941,72.796 C120.763,60.83 111.788,55.595 101.878,55.595 C92.53,55.595 81.873,61.204 78.882,72.796 Z M149.182,90.184 L78.134,90.184 C80.564,103.646 90.099,111.873 101.504,111.873 C108.796,111.873 117.957,110.937 124.689,99.533 L146.751,104.206 C138.524,123.652 121.884,133 101.504,133 C75.142,133 53.64,112.994 53.64,83.64 C53.64,54.286 75.142,34.093 101.878,34.093 C126.745,34.093 148.246,53.351 149.182,81.771 L149.182,90.184 Z" id="Fill-1"></path>
+                      <path d="M387.843,83.64 C387.843,66.439 374.568,55.595 361.294,55.595 C346.336,55.595 335.118,66.439 335.118,83.64 C335.118,100.841 346.336,111.498 361.294,111.498 C374.568,111.498 387.843,100.841 387.843,83.64 Z M412.523,130.195 L387.843,130.195 L387.843,122.156 C380.364,129.074 370.081,133 356.993,133 C333.248,133 311.186,112.994 311.186,83.64 C311.186,54.286 333.248,34.093 356.993,34.093 C370.081,34.093 380.364,38.019 387.843,44.937 L387.843,0.937 L412.523,0.937 L412.523,130.195 Z" id="Fill-3"></path>
+                      <path d="M630.3,92.427 C630.3,104.393 618.894,113.368 605.807,113.368 C596.271,113.368 589.915,108.88 589.915,101.962 C589.915,95.606 595.149,91.306 603.003,91.306 L630.3,91.306 L630.3,92.427 Z M614.407,37.117 L614.407,37.093 L580.299,37.093 L580.299,57.658 L614.407,57.658 C623.943,57.658 630.3,61.765 630.3,71.113 L630.3,72.61 L603.377,72.61 C579.818,72.61 566.356,84.576 566.356,102.524 C566.356,120.846 580.566,133 601.881,133 C614.595,133 623.943,128.7 630.3,122.53 L630.3,130.195 L653.858,130.195 L653.858,69.244 C653.858,47.082 638.243,37.617 614.407,37.117 Z" id="Fill-4"></path>
+                      <path d="M484.378,92.427 C484.378,104.393 472.973,113.368 459.885,113.368 C450.349,113.368 443.992,108.88 443.992,101.962 C443.992,95.606 449.227,91.306 457.08,91.306 L484.378,91.306 L484.378,92.427 Z M468.485,37.117 L468.485,37.093 L434.377,37.093 L434.377,57.658 L468.485,57.658 C478.02,57.658 484.378,61.765 484.378,71.113 L484.378,72.61 L457.454,72.61 C433.895,72.61 420.434,84.576 420.434,102.524 C420.434,120.846 434.644,133 455.958,133 C468.672,133 478.02,128.7 484.378,122.53 L484.378,130.195 L507.935,130.195 L507.935,69.244 C507.935,47.082 492.321,37.617 468.485,37.117 Z" id="Fill-5"></path>
+                      <path d="M279.3,92.427 C279.3,104.393 267.894,113.368 254.807,113.368 C245.271,113.368 238.914,108.88 238.914,101.962 C238.914,95.606 244.15,91.306 252.003,91.306 L279.3,91.306 L279.3,92.427 Z M263.408,37.117 L263.408,37.093 L229.299,37.093 L229.299,57.658 L263.408,57.658 C272.943,57.658 279.3,61.765 279.3,71.113 L279.3,72.61 L252.376,72.61 C228.818,72.61 215.356,84.576 215.356,102.524 C215.356,120.846 229.566,133 250.881,133 C263.595,133 272.943,128.7 279.3,122.53 L279.3,130.195 L302.858,130.195 L302.858,69.244 C302.858,47.082 287.244,37.617 263.408,37.117 Z" id="Fill-6"></path>
+                      <path d="M216.11,37.026 C200.966,37.026 190.121,43.069 182.643,53.913 L182.643,36.899 L157.963,36.899 L157.963,130.197 L182.643,130.197 L182.643,100.095 C182.643,74.106 193.113,57.776 215.923,57.776 L217.044,57.776 L217.044,37.029 C216.741,37.027 216.431,37.026 216.11,37.026" id="Fill-7"></path>
+                      <path d="M48.982,107.707 C45.229,109.115 41.291,110.002 38.328,110.002 C30.102,110.002 24.68,105.142 24.68,93.923 L24.68,57.09 L49.982,57.09 L49.982,36.898 L24.68,36.898 L24.68,14.007 L0,14.007 L0,95.793 C0,121.408 14.584,133 36.646,133 C44.438,133 51.879,131.338 61.481,126.199 C56.364,121.123 51.667,114.8 48.982,107.707" id="Fill-8"></path>
+                      <path d="M558.509,109.788 C557.521,109.926 556.586,110.002 555.733,110.002 C547.507,110.002 542.085,105.142 542.085,93.923 L542.085,57.09 L568.068,57.09 L568.068,36.898 L542.085,36.898 L542.085,14.007 L517.404,14.007 L517.404,95.793 C517.404,121.408 531.988,133 554.051,133 C559.44,133 564.302,132.206 569.964,130.017 C562.645,124.774 559.799,116.281 558.509,109.788" id="Fill-9"></path>
+                  </g>
+                  <path d="M695.029,116.028 C695.029,124.853 688.257,131.624 678.817,131.624 C669.377,131.624 662.605,124.853 662.605,116.028 C662.605,107.615 669.377,100.227 678.817,100.227 C688.257,100.227 695.029,107.615 695.029,116.028" id="Fill-11" fill="#E46C42"></path>
+              </g>
+          </svg>
         </a>
       </span>
       <div class="navbar-brand">
@@ -534,10 +821,52 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </div>
       </div>
+
+      <button role="button" aria-label="Click or Press enter to open menu" tabindex="0" class="header-nav-mobile__menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="header-nav-mobile__menu">
+        <ul>
+          <li class="header-nav-mobile__menu-item">
+            <header class="header-nav-mobile__menu-item__header">
+              <a href="./index.html">Getting started</a>
+            </header>
+          </li>
+          <li class="header-nav-mobile__menu-item">
+            <header class="header-nav-mobile__menu-item__header">
+              <a href="https://docs.teradata.com/">Docs</a>
+            </header>
+          </li>
+          <li class="header-nav-mobile__menu-item">
+            <header class="header-nav-mobile__menu-item__header">
+              <a href="https://downloads.teradata.com/">Downloads</a>
+            </header>
+          </li>
+          <li class="header-nav-mobile__menu-item has-sub-items">
+            <header class="header-nav-mobile__menu-item__header">
+              <a href="https://support.teradata.com/community ">Community</a>
+            </header>
+            <div>
+              <div class="header-nav-mobile__menu-item__links">
+                <ul>
+                  <li><a href="https://support.teradata.com/community?id=community_forum_list">Forums</a></li>
+                  <li><a href="https://support.teradata.com/community?id=community_forum&sys_id=c42a7b554f6df300903211ff0310c7d0">Technical Blogs</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div tabindex="-1" aria-hidden="true" class="page-blackout"></div>
+
     </div>
   </nav>
 </header>
-
 <div class="body">
 <div class="nav-container" data-component="ROOT" data-version="master">
   <aside class="nav">
@@ -1376,9 +1705,8 @@ ul.row.footer-nav__nav {
 
 footer.footer-nav {
   background-color: #fff;
-  font-family: RidleyGrotesk, sans-serif;
+  font-family: Arial, helvetica, sans-serif;
   padding: 60px 0 40px;
-  letter-spacing: -0.6px;
   line-height: 1;
 }
 
@@ -1414,10 +1742,11 @@ footer.footer-nav {
 
 .footer-nav__nav h2,
 .footer-nav__nav span {
+  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
   font-size: 12px;
   line-height: 130%;
   text-transform: uppercase;
-  font-weight: 900;
+  font-weight: 800;
   margin-bottom: 18px;
 }
 
@@ -1505,6 +1834,7 @@ footer.footer-nav {
 }
 
 .footer-nav__baseline {
+  align-items: baseline;
   margin-top: 24px;
   margin-bottom: 42px;
 }
@@ -1771,10 +2101,10 @@ footer.footer-nav {
       </div>
     </div>
     <div class="row footer-nav__baseline">
-      <div class="col-12 col-lg-3 col-xl-4">
+      <div class="col-12 col-lg-3">
         <span class="copyright">©2022 Teradata. All Rights Reserved</span>
       </div>
-      <div class="col-12 col-lg-9 col-xl-12 d-flex justify-content-lg-end">
+      <div class="col-12 col-lg-9 d-flex justify-content-lg-end">
         <ul>
           <li><a href="https://www.teradata.com/Privacy">Privacy</a></li>
           <li><a href="https://www.teradata.com/Legal/Terms-of-Use">Terms of Use</a></li>
