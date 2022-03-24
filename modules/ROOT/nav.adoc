@@ -1,10 +1,10 @@
 * Get access to Vantage
-** xref::getting.started.vmware.adoc[Vantage Express on VMware]
-** xref::getting.started.vbox.adoc[Vantage Express on VirtualBox]
-** xref::getting.started.utm.adoc[Vantage Express on UTM]
 ** xref::run-vantage-express-on-aws.adoc[Vantage Express on AWS]
 ** xref::vantage.express.gcp.adoc[Vantage Express on GCP]
 ** xref::run-vantage-express-on-microsoft-azure.adoc[Vantage Express on Azure]
+** xref::getting.started.vmware.adoc[Vantage Express on VMware]
+** xref::getting.started.vbox.adoc[Vantage Express on VirtualBox]
+** xref::getting.started.utm.adoc[Vantage Express on UTM]
 * Tutorials
 ** xref::nos.adoc[]
 ** xref::ml.adoc[]
