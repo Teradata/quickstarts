@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Run Vantage Express on VirtualBox :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/getting.started.vbox.html">
-    <meta name="description" content="Run Vantage Express on your laptop using VirtualBox.">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics">
+    <title>Run Vantage Express on AWS :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/run-vantage-express-on-aws.html">
+    <meta name="description" content="Run Vantage Express on AWS.">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, AWS">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="./_/css/site.css">
-<meta property="og:title" content="Run Vantage Express on VirtualBox :: Teradata Getting Started">
+<meta property="og:title" content="Run Vantage Express on AWS :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Run Vantage Express on your laptop using VirtualBox." />
+<meta property="og:description" content="Run Vantage Express on AWS." />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/getting.started.vbox.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/run-vantage-express-on-aws.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -883,13 +883,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="run-vantage-express-on-aws.html">Vantage Express on AWS</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -996,7 +996,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li>Get access to Vantage</li>
-    <li><a href="getting.started.vbox.html">Vantage Express on VirtualBox</a></li>
+    <li><a href="run-vantage-express-on-aws.html">Vantage Express on AWS</a></li>
   </ul>
 </nav>
 </div>
@@ -1004,20 +1004,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/getting.started.vbox.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/run-vantage-express-on-aws.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Run Vantage Express on VirtualBox</h1>
+<h1 class="page">Run Vantage Express on AWS</h1>
 <p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
-Last updated: September 7th, 2021</p>
+Last updated: March 23th, 2022</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This quick start shows how to gain access to a Teradata database by running it on your local machine. There are many ways to install Teradata. This document optimizes for the lowest time to first query without spending money on cloud resources. Once you finish the steps you will have a working Teradata Vantage Express database on your computer.</p>
+<p>This how-to demonstrates how to run Vantage Express on AWS. Vantage Express is a small footprint configuration that contains a fully functional Teradata SQL Engine.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="title">Cloud charges</div>
+<div class="paragraph">
+<p>Vantage Express is distributed as a virtual machine image. The how-to uses the EC2 <code>c5n.metal</code> instance type. It&#8217;s a bare metal instance that is very expensive. At the time of writing this how-to, the instance cost over $3/h. Still, it&#8217;s the cheapest instance that supports guest virtual machines.</p>
+</div>
+<div class="paragraph">
+<p>If do not wish to pay for cloud usage, you can install Vantage Express locally using <a href="getting.started.vmware.adoc">VMware</a>, <a href="getting.started.vbox">VirtualBox</a>, or <a href="getting.started.utm.html" class="xref page">UTM</a>. You can also try <a href="vantage-express.gcp.adoc">GCP</a> and <a href="run-vantage-express-on-microsoft-azure.adoc">Azure</a> which support nested virtualization and can run Vantage Express on cheap VM&#8217;s.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -1027,13 +1045,10 @@ Last updated: September 7th, 2021</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>A computer using one of the following operating systems: Windows 10, Linux or MacOS.</p>
+<p>An AWS account. If you need to create a new account follow <a href="https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/">the official AWS instructions</a>.</p>
 </li>
 <li>
-<p>30GB of disk space and enough CPU and RAM to be able to dedicate at least one core and 6GB RAM to the virtual machine.</p>
-</li>
-<li>
-<p>Admin rights to be able to install and run the software.</p>
+<p><code>awscli</code> command line utility installed and configured on your machine. You can find installation instructions here: <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html" class="bare">https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html</a>.</p>
 </li>
 </ol>
 </div>
@@ -1042,249 +1057,310 @@ Last updated: September 7th, 2021</p>
 <div class="sect1">
 <h2 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_download_required_software"><a class="anchor" href="#_download_required_software"></a>Download required software</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The latest version of <a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Vantage Express</a> VM image.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If you have not used the Teradata downloads website before, you will need to register first.
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>, version 6.1.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-You can also install VirtualBox using <code>brew</code> and other package managers.
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>On Windows, you will also need <a href="https://www.7-zip.org/download.html">7zip</a> to unzip Vantage Express.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_run_installers"><a class="anchor" href="#_run_installers"></a>Run installers</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Install VirtualBox by running the installer and accepting the default values. VirtualBox includes functionality that requires elevated privileges. When you start VirtualBox for the first time, you will be asked to confirm these elevated access. You will also need to reboot your machine to activate a VirtualBox kernel plugin.</p>
-</li>
-<li>
-<p>If on Windows, install <code>7zip</code>.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_run_vantage_express"><a class="anchor" href="#_run_vantage_express"></a>Run Vantage Express</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Go to the directory where you downloaded Teradata Vantage Express and unzip the downloaded file.</p>
-</li>
-<li>
-<p>Set env variable <code>VM_IMAGE_DIR</code> to the path of the unzipped image directory. For example:</p>
-<div class="tabset is-loading">
-<div class="ulist tabs">
-<ul>
-<li>
-<p><a id="tabset1_windows"></a>Windows</p>
-</li>
-<li>
-<p><a id="tabset1_macos"></a>MacOS</p>
-</li>
-<li>
-<p><a id="tabset1_linux"></a>Linux</p>
-</li>
-</ul>
-</div>
-<div class="content">
-<div class="tab-pane" aria-labelledby="tabset1_windows">
-<div class="paragraph">
-<p>Run in Powershell as Administrator:</p>
-</div>
-<div id="vm_image_dir_win" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">$env:VM_IMAGE_DIR = "$HOME\Downloads\VantageExpress17.10_Sles12"</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_macos">
-<div id="vm_image_dir_macos" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export VM_IMAGE_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_linux">
-<div id="vm_image_dir_linux" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export VM_IMAGE_DIR="$HOME/Downloads/VantageExpress17.10_Sles12"</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>We will now create a VirtualBox VM that uses the downloaded image. Run the following command. The script will take several minutes to complete. During the execution, the script will ask for a password to login to the VM and perform some setup. The password is <code>root</code>.</p>
-<div class="tabset is-loading">
-<div class="ulist tabs">
-<ul>
-<li>
-<p><a id="tabset2_windows"></a>Windows</p>
-</li>
-<li>
-<p><a id="tabset2_macos"></a>MacOS</p>
-</li>
-<li>
-<p><a id="tabset2_linux"></a>Linux</p>
-</li>
-</ul>
-</div>
-<div class="content">
-<div class="tab-pane" aria-labelledby="tabset2_windows">
-<div class="paragraph">
-<p>Continue in the same Powershell as Administrator:</p>
-</div>
-<div id="install_win" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/Jz7rd'))</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset2_macos">
-<div id="install_macos" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bash -c "$(curl -fsSL https://git.io/Jz7rX)"</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset2_linux">
-<div id="install_linux" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bash -c "$(curl -fsSL https://git.io/Jz7rX)"</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>Once the VM is up, you will see its desktop environment. When prompted for username/password enter <code>root</code> for both.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/vm.login.png" alt="VM Login" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>The database is configured to autostart with the VM. To confirm that the database has started go to the virtual desktop and start <code>Gnome Terminal</code>. In the terminal execute <code>pdestate</code> command that will inform you if Vantage has already started:</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-To paste into Gnome Terminal press <span class="keyseq"><kbd>SHIFT</kbd>+<kbd>CTRL</kbd>+<kbd>V</kbd></span>.
-</td>
-</tr>
-</table>
-</div>
-<div id="pdestate" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">watch pdestate -a</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You want to wait till you see the following message:</p>
-</div>
+<p>You will need a VPC with an Internet-facing subnet. If you don&#8217;t have one available, here is how you can create it:</p>
 <div class="listingblock">
 <div class="content">
-<pre>PDE state is RUN/STARTED.
-DBS state is 5: Logons are enabled - The system is quiescent</pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Copied from https://cloudaffaire.com/how-to-create-a-custom-vpc-using-aws-cli/
+
+# Create VPC
+AWS_VPC_ID=$(aws ec2 create-vpc \
+  --cidr-block 10.0.0.0/16 \
+  --query 'Vpc.{VpcId:VpcId}' \
+  --output text)
+
+# Enable DNS hostname for your VPC
+aws ec2 modify-vpc-attribute \
+  --vpc-id $AWS_VPC_ID \
+  --enable-dns-hostnames "{\"Value\":true}"
+
+# Create a public subnet
+AWS_SUBNET_PUBLIC_ID=$(aws ec2 create-subnet \
+  --vpc-id $AWS_VPC_ID --cidr-block 10.0.1.0/24 \
+  --query 'Subnet.{SubnetId:SubnetId}' \
+  --output text)
+
+# Enable Auto-assign Public IP on Public Subnet
+aws ec2 modify-subnet-attribute \
+  --subnet-id $AWS_SUBNET_PUBLIC_ID \
+  --map-public-ip-on-launch
+
+# Create an Internet Gateway
+AWS_INTERNET_GATEWAY_ID=$(aws ec2 create-internet-gateway \
+  --query 'InternetGateway.{InternetGatewayId:InternetGatewayId}' \
+  --output text)
+
+# Attach Internet gateway to your VPC
+aws ec2 attach-internet-gateway \
+  --vpc-id $AWS_VPC_ID \
+  --internet-gateway-id $AWS_INTERNET_GATEWAY_ID
+
+# Create a route table
+AWS_CUSTOM_ROUTE_TABLE_ID=$(aws ec2 create-route-table \
+  --vpc-id $AWS_VPC_ID \
+  --query 'RouteTable.{RouteTableId:RouteTableId}' \
+  --output text )
+
+# Create route to Internet Gateway
+aws ec2 create-route \
+  --route-table-id $AWS_CUSTOM_ROUTE_TABLE_ID \
+  --destination-cidr-block 0.0.0.0/0 \
+  --gateway-id $AWS_INTERNET_GATEWAY_ID \
+  --output text
+
+# Associate the public subnet with route table
+AWS_ROUTE_TABLE_ASSOID=$(aws ec2 associate-route-table  \
+  --subnet-id $AWS_SUBNET_PUBLIC_ID \
+  --route-table-id $AWS_CUSTOM_ROUTE_TABLE_ID \
+  --output text | head -1)
+
+# Create a security group
+aws ec2 create-security-group \
+  --vpc-id $AWS_VPC_ID \
+  --group-name myvpc-security-group \
+  --description 'My VPC non default security group'
+  --output text
+
+# Get security group ID's
+AWS_DEFAULT_SECURITY_GROUP_ID=$(aws ec2 describe-security-groups \
+  --filters "Name=vpc-id,Values=$AWS_VPC_ID" \
+  --query 'SecurityGroups[?GroupName == `default`].GroupId' \
+  --output text) &amp;&amp;
+  AWS_CUSTOM_SECURITY_GROUP_ID=$(aws ec2 describe-security-groups \
+  --filters "Name=vpc-id,Values=$AWS_VPC_ID" \
+  --query 'SecurityGroups[?GroupName == `myvpc-security-group`].GroupId' \
+  --output text)
+
+# Create security group ingress rules
+aws ec2 authorize-security-group-ingress \
+  --group-id $AWS_CUSTOM_SECURITY_GROUP_ID \
+  --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 22, "ToPort": 22, "IpRanges": [{"CidrIp": "0.0.0.0/0", "Description": "Allow SSH"}]}]' \
+  --output text
+
+# Add a tag to the VPC
+aws ec2 create-tags \
+  --resources $AWS_VPC_ID \
+  --tags "Key=Name,Value=vantage-express-vpc"
+
+# Add a tag to public subnet
+aws ec2 create-tags \
+  --resources $AWS_SUBNET_PUBLIC_ID \
+  --tags "Key=Name,Value=vantage-express-vpc-public-subnet"
+
+# Add a tag to the Internet-Gateway
+aws ec2 create-tags \
+  --resources $AWS_INTERNET_GATEWAY_ID \
+  --tags "Key=Name,Value=vantage-express-vpc-internet-gateway"
+
+# Add a tag to the default route table
+AWS_DEFAULT_ROUTE_TABLE_ID=$(aws ec2 describe-route-tables \
+  --filters "Name=vpc-id,Values=$AWS_VPC_ID" \
+  --query 'RouteTables[?Associations[0].Main != `false`].RouteTableId' \
+  --output text) &amp;&amp;
+  aws ec2 create-tags \
+  --resources $AWS_DEFAULT_ROUTE_TABLE_ID \
+  --tags "Key=Name,Value=vantage-express-vpc-default-route-table"
+
+# Add a tag to the public route table
+aws ec2 create-tags \
+  --resources $AWS_CUSTOM_ROUTE_TABLE_ID \
+  --tags "Key=Name,Value=vantage-express-vpc-public-route-table"
+
+# Add a tags to security groups
+aws ec2 create-tags \
+  --resources $AWS_CUSTOM_SECURITY_GROUP_ID \
+  --tags "Key=Name,Value=vantage-express-vpc-security-group" &amp;&amp;
+  aws ec2 create-tags \
+  --resources $AWS_DEFAULT_SECURITY_GROUP_ID \
+  --tags "Key=Name,Value=vantage-express-vpc-default-security-group"</code></pre>
 </div>
 </div>
-<details>
-<summary class="title">See examples of messages that <code>pdestate</code> returns when the database is still initializing.</summary>
-<div class="content">
+</li>
+<li>
+<p>To create a VM you will need an ssh key pair. If you don&#8217;t have it already, create one:</p>
 <div class="listingblock">
 <div class="content">
-<pre>PDE state is DOWN/HARDSTOP.
-
-PDE state is START/NETCONFIG.
-
-PDE state is START/GDOSYNC.
-
-PDE state is START/TVSASTART.
-
-PDE state is START/READY.
-PDE state is RUN/STARTED.
-
-DBS state is 1/1: DBS Startup - Initializing DBS Vprocs
-PDE state is RUN/STARTED.
-
-DBS state is 1/5: DBS Startup - Voting for Transaction Recovery
-PDE state is RUN/STARTED.
-
-DBS state is 1/4: DBS Startup - Starting PE Partitions
-PDE state is RUN/STARTED.</pre>
-</div>
-</div>
-</details>
-</li>
-<li>
-<p>Now that the database is up, go back to the virtual desktop and launch <code>Teradata Studio Express</code>. When you first start it you will be offered a tour. Once you close the tour, you will see a wizard window to add a new connection. Select <code>Teradata</code>:</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/new.connection.profile.png" alt="New Connection Profile" width="500">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">aws ec2 create-key-pair --key-name vantage-key --query 'KeyMaterial' --output text &gt; vantage-key.pem</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>On the next screen, connect to the database on your localhost using <code>dbc</code> for the username and password:</p>
+<p>Restrict access to the private key. Replace <code>&lt;path_to_private_key_file&gt;</code> with the private key path returned by the previous command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">chmod 600 vantage-key.pem</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create a Ubuntu VM with 4 CPU&#8217;s and 8GB of RAM, and a 70GB disk.</p>
+<div id="aws_create_vm_win" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">AWS_INSTANCE_ID=$(aws ec2 run-instances \
+  --image-id ami-0f597975071f4c4ec \
+  --count 1 \
+  --instance-type c5n.metal \
+  --key-name vantage-key \
+  --security-group-ids $AWS_CUSTOM_SECURITY_GROUP_ID \
+  --subnet-id $AWS_SUBNET_PUBLIC_ID \
+  --query 'Instances[0].InstanceId' \
+  --output text)</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>ssh to your VM:</p>
+<div id="aws_ssh" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">AWS_INSTANCE_PUBLIC_IP=$(aws ec2 describe-instances \
+  --query "Reservations[*].Instances[*].PublicIpAddress" \
+  --output=text --instance-ids $AWS_INSTANCE_ID)
+ssh -i vantage-key.pem ubuntu@$AWS_INSTANCE_PUBLIC_IP</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Once in the VM, switch to <code>root</code> user:</p>
+<div id="sudo" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo -i</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Prepare the download directory for Vantage Express:</p>
+<div id="download_dir" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir /opt/downloads
+cd /opt/downloads</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Install VirtualBox and 7zip:</p>
+<div id="apt" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apt update &amp;&amp; apt-get install p7zip-full p7zip-rar virtualbox -y</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Retrieve the curl command to download Vantage Express.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Go to <a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Vantage Expess download page</a> (registration required).</p>
+</li>
+<li>
+<p>Click on the latest download link, e.g. "Vantage Express 17.10". You will see a license agreement popup. Don&#8217;t accept the license yet.</p>
+</li>
+<li>
+<p>Open the network view in your browser. For example, in Chrome press <kbd>F12</kbd> and navigate to <code>Network</code> tab:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/new.connection.png" alt="New Connection" width="500">
+<img src="_images/browser.network.png" alt="Browser Network Tab" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>Accept the license by clicking on <code>I Agree</code> button and cancel the download.</p>
+</li>
+<li>
+<p>In the network view, find the last request that starts with <code>VantageExpress</code>. Right click on it and select <code>Copy &#8594; Copy as cURL</code>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/browser.copy.curl.png" alt="Browser Copy culr" width="500">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Head back to the ssh session and download Vantage Express by pasting the curl command. Add <code>-o ve.7z</code> to the command to save the download to file named <code>ve.7z</code>. You can remove all the HTTP headers, e.g.:</p>
+<div id="download_ve" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -o ve.7z 'http://d289lrf5tw1zls.cloudfront.net/database/teradata-express/VantageExpress17.10_Sles12_202108300444.7z?Expires=1638719978&amp;Signature=GKBkNvery_long_signature__&amp;Key-Pair-Id=********************'</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Unzip the downloaded file. It will take several minutes:</p>
+<div id="unzip" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">7z x ve.7z</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Start the VM in VirtualBox. The command will return immediately but the VM init process will take several minutes:</p>
+<div id="start_vim" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export VM_IMAGE_DIR="/opt/downloads/VantageExpress17.10_Sles12"
+DEFAULT_VM_NAME="vantage-express-17.10"
+VM_NAME="${VM_NAME:-$DEFAULT_VM_NAME}"
+vboxmanage createvm --name "$VM_NAME" --register --ostype openSUSE_64
+vboxmanage modifyvm "$VM_NAME" --ioapic on --memory 6000 --vram 128 --nic1 nat --cpus 4
+vboxmanage storagectl "$VM_NAME" --name "SATA Controller" --add sata --controller IntelAhci
+vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk1*')"
+vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 1 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk2*')"
+vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 2 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk3*')"
+vboxmanage modifyvm "$VM_NAME" --natpf1 "tdssh,tcp,,4422,,22"
+vboxmanage modifyvm "$VM_NAME" --natpf1 "tddb,tcp,,1025,,1025"
+vboxmanage startvm "$VM_NAME" --type headless
+vboxmanage controlvm "$VM_NAME" keyboardputscancode 1c 1c</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>ssh to Vantage Express VM. Use <code>root</code> as password:</p>
+<div id="ssh_to_ve" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ssh -p 4422 root@localhost</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Validate that the DB is up:</p>
+<div id="pde" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pdestate -a</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the command returns <code>PDE state is RUN/STARTED. DBS state is 5: Logons are enabled - The system is quiescent</code>, it means that Vantage Express has started.
+If the status is different, repeat <code>pdestate -a</code> till you get the correct status.</p>
+</div>
+</li>
+<li>
+<p>Once Vantage Express is up and running, start <code>bteq</code> client command line client. BTEQ (pronounced “bee-teek”) is a general-purpose, command-based client tool used to submit SQL queries to a Teradata Database.</p>
+<div id="bteq" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bteq</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Once in bteq, connect to your Vantage Express instance. When asked for the password, enter <code>dbc</code>:</p>
+<div id="bteq_logon" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">.logon localhost/dbc</code></pre>
 </div>
 </div>
 </li>
 </ol>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_run_sample_queries"><a class="anchor" href="#_run_sample_queries"></a>Run sample queries</h3>
+</div>
+<div class="sect1">
+<h2 id="_run_sample_queries"><a class="anchor" href="#_run_sample_queries"></a>Run sample queries</h2>
+<div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Once in Teradata Studio Express, go to <code>Query Development</code> perspective (go to the top menu and select <code>Window</code> &#8594; <code>Query Development</code>).</p>
-</li>
-<li>
-<p>Connect using the previously created connection profile by double-clicking on <code>Database Connections</code> &#8594; <code>New Teradata</code>.</p>
-</li>
-<li>
-<p>Using <code>dbc</code> user, we will create a new database called <code>HR</code>. Copy/paste this query and run it by hitting the run query button (<span class="image"><img src="_images/run.query.button.png" alt="Run Query Button" width="24" height="24"></span>) or pressing <kbd>F5</kbd> key:</p>
+<p>Using <code>dbc</code> user, we will create a new database called <code>HR</code>. Copy/paste this query and run press <kbd>Enter</kbd>:</p>
 <div id="first_query" class="listingblock emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE HR
@@ -1375,12 +1451,132 @@ VALUES (
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_optional_setup"><a class="anchor" href="#_optional_setup"></a>Optional setup</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>If you intend to stop and start the VM, you may want to add Vantage Express to autostart. ssh to your GCP VM and run the following commands:</p>
+<div id="autostart" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo -i
+
+cat &lt;&lt;EOF &gt;&gt; /etc/default/virtualbox
+VBOXAUTOSTART_DB=/etc/vbox
+VBOXAUTOSTART_CONFIG=/etc/vbox/autostart.cfg
+EOF
+
+cat &lt;&lt;EOF &gt; /etc/systemd/system/vantage-express-17.10.service
+[Unit]
+Description=vm1
+After=network.target virtualbox.service
+Before=runlevel2.target shutdown.target
+[Service]
+User=root
+Group=root
+Type=forking
+Restart=no
+TimeoutSec=5min
+IgnoreSIGPIPE=no
+KillMode=process
+GuessMainPID=no
+RemainAfterExit=yes
+ExecStart=/usr/bin/VBoxManage startvm vantage-express-17.10 --type headless
+ExecStop=/usr/bin/VBoxManage controlvm vantage-express-17.10 savestate
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+systemctl enable vantage-express-17.10
+systemctl start vantage-express-17.10</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>If you would like to connect to Vantage Express from the Internet, you will need to open up firewall holes to your VM. You should also change the default password to <code>dbc</code> user:</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>To change the password for <code>dbc</code> user go to your VM and start bteq:</p>
+<div id="pw_change_bteq" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bteq</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Login to your database using <code>dbc</code> as username and password:</p>
+<div id="pw_change_bteq_logon" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">.logon localhost/dbc</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Change the password for <code>dbc</code> user:</p>
+<div id="pw_change_mod_user" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">MODIFY USER dbc AS PASSWORD = new_password;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>You can now open up port 1025 to the internet:</p>
+<div id="aws_fw_rule" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">aws ec2 authorize-security-group-ingress \
+  --group-id $AWS_CUSTOM_SECURITY_GROUP_ID \
+  --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 1025, "ToPort": 1025, "IpRanges": [{"CidrIp": "0.0.0.0/0", "Description": "Allow Teradata port"}]}]'</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="sect1">
-<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<h2 id="_cleanup"><a class="anchor" href="#_cleanup"></a>Cleanup</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this guide we have covered how to quickly create a working Teradata environment. We used Teradata Vantage Express in a VM running on VMware. In the same VM, we ran Teradata Studio Express to issue queries. We installed all software locally and didn&#8217;t have to pay for cloud resources.</p>
+<p>To stop incurring charges, delete all the resources:</p>
+</div>
+<div id="aws_cleanup" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Delete the VM
+aws ec2 terminate-instances --instance-ids $AWS_INSTANCE_ID --output text
+
+# Wait for the VM to terminate
+
+# Delete custom security group
+aws ec2 delete-security-group \
+  --group-id $AWS_CUSTOM_SECURITY_GROUP_ID
+
+# Delete internet gateway
+aws ec2 detach-internet-gateway \
+  --internet-gateway-id $AWS_INTERNET_GATEWAY_ID \
+  --vpc-id $AWS_VPC_ID &amp;&amp;
+  aws ec2 delete-internet-gateway \
+  --internet-gateway-id $AWS_INTERNET_GATEWAY_ID
+
+# Delete the custom route table
+aws ec2 disassociate-route-table \
+  --association-id $AWS_ROUTE_TABLE_ASSOID &amp;&amp;
+  aws ec2 delete-route-table \
+  --route-table-id $AWS_CUSTOM_ROUTE_TABLE_ID
+
+# Delete the public subnet
+aws ec2 delete-subnet \
+  --subnet-id $AWS_SUBNET_PUBLIC_ID
+
+# Delete the vpc
+aws ec2 delete-vpc \
+  --vpc-id $AWS_VPC_ID</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -1406,6 +1602,9 @@ VALUES (
 </li>
 <li>
 <p><a href="https://docs.teradata.com/r/KEoAHNnh~EbZLtVJNRo0Sg/root">Teradata® Studio™ and Studio™ Express Installation Guide</a></p>
+</li>
+<li>
+<p><a href="https://docs.teradata.com/r/jmAxXLdiDu6NiyjT6hhk7g/root">Introduction to BTEQ</a></p>
 </li>
 </ul>
 </div>
