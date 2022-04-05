@@ -1012,7 +1012,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <article class="doc">
 <h1 class="page">Run Vantage Express on UTM</h1>
 <p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
-Last updated: November 30th, 2021</p>
+Last updated: April 5th, 2021</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
@@ -1030,7 +1030,7 @@ Last updated: November 30th, 2021</p>
 <p>A Mac computer. Both Intel and M1 chips are supported.</p>
 </li>
 <li>
-<p>30GB of disk space and enough CPU and RAM to be able to dedicate at least one core and 6GB RAM to the virtual machine.</p>
+<p>30GB of disk space and enough CPU and RAM to be able to dedicate at least one core and 4GB RAM to the virtual machine.</p>
 </li>
 <li>
 <p>Admin rights to be able to install and run the software.</p>
@@ -1073,28 +1073,35 @@ Last updated: November 30th, 2021</p>
 <p>Go to the directory where you downloaded Vantage Express and unzip the downloaded file.</p>
 </li>
 <li>
-<p>Start UTM, click on the <code>+</code> sign and select <code>Start from Scratch</code>.</p>
+<p>Start UTM, click on the <code>+</code> sign and select <code>Virtualize</code>.</p>
+</li>
+<li>
+<p>On <code>Operating System</code> screen select <code>Other</code>.</p>
+</li>
+<li>
+<p>On <code>Other</code> screen select <code>Skip ISO Boot</code>.</p>
+</li>
+<li>
+<p>On <code>Hardware</code> screen allocate at least 4GB of memory and at least 1 CPU core.</p>
+<div class="imageblock text-left">
+<div class="content">
+<img src="_images/utm.hardware.png" alt="UTM Hardware" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>On <code>Storage</code> screen accept the defaults by clicking <code>Next</code>.</p>
+</li>
+<li>
+<p>On <code>Shared Direct</code> screen click <code>Next</code>.</p>
+</li>
+<li>
+<p>On <code>Summary</code> screen check <code>Open VM Settings</code> and click <code>Save</code>.</p>
 </li>
 <li>
 <p>Go through the setup wizard. You only need to adjust the following tabs:</p>
 <div class="ulist">
 <ul>
-<li>
-<p><strong>System</strong> - assign at least 4GB of memory and disable <code>UEFI Boot</code>:</p>
-<div class="imageblock text-left">
-<div class="content">
-<img src="_images/utm.system.png" alt="UTM System" width="500">
-</div>
-</div>
-</li>
-<li>
-<p><strong>Drives</strong> - map the 3 Vantage Express drives. Make sure you map them in the right order, <code>-disk1</code>, <code>-disk2</code>, <code>-disk3</code>:</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/utm.drives.png" alt="UTM Drives" width="500">
-</div>
-</div>
-</li>
 <li>
 <p><strong>Network</strong> - expose ssh (22) and Vantage (1025) ports on the host computer:</p>
 <div class="imageblock">
@@ -1107,7 +1114,25 @@ Last updated: November 30th, 2021</p>
 </div>
 </li>
 <li>
-<p>Start the VM.</p>
+<p>Map drives:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Delete the default <code>IDE Drive</code>.</p>
+</li>
+<li>
+<p>Map the 3 Vantage Express drives by importing the disk files from the downloaded VM zip file. Make sure you map them in the right order, <code>-disk1</code>, <code>-disk2</code>, <code>-disk3</code> . The first disk is bootable and contains the database itself. Disks 2 and 3 are so called <code>pdisks</code> and contain data. As you import the files UTM will automatically convert them fro <code>vmdk</code> into <code>qcow2</code> format. Make sure that each disk is configured using the <code>IDE</code> interface:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/utm.drives.png" alt="UTM Drives" width="500">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Save the configuration and start the VM.</p>
 </li>
 <li>
 <p>Once the VM is up, you will see its desktop environment. When prompted for username/password enter <code>root</code> for both.</p>
