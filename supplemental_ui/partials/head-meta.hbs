@@ -27,6 +27,16 @@ body {
   overflow-x: hidden;
 } 
 
+body {
+  padding-top: 54px;
+}
+
+@media screen and (min-width: 1024px) {
+  body {
+    padding-top: 106px;
+  }
+}
+
 body.menu-open {
   overflow: hidden;
   position: relative;
@@ -479,6 +489,10 @@ button {
   background: initial;
 }
 
+.nav {
+  background-color: initial;
+}
+
 @media screen and (min-width: 1024px) {
   .navbar-end .navbar-link, 
   .navbar-end>.navbar-item {
@@ -492,8 +506,17 @@ button {
   }
 
   .nav {
-    background-color: initial;
     top: 110px;
+  }
+}
+
+article.doc {
+  margin-top: 60px;
+}
+
+@media screen and (min-width: 1024px) {
+  article.doc {
+    margin-top: 0;
   }
 }
 
@@ -516,7 +539,6 @@ main.article {
 
 .nav-container {
   background: #f5f5f5;
-  padding-top: 66px;
   font-size: 14px;
 }
 
@@ -527,11 +549,6 @@ main.article {
 .breadcrumbs li::after {
   content: ">";
   padding: 0 0.5rem;
-}
-
-.nav {
-  background-color: initial;
-  top: 110px;
 }
 
 aside.toc.sidebar {
@@ -547,8 +564,17 @@ aside.toc.sidebar {
 .toolbar {
   background-color: #f5f5f5;
   height: 44px;
-  margin-top: 61px;
-  top: 110px;
+  top: 54px;
+  position: fixed;
+  width: 100%;
+}
+
+@media screen and (min-width: 1024px) {
+  .toolbar {
+    top: 106px;
+    height: 60px;
+    position: sticky;
+  }
 }
 
 .doc .source-toolbox {
@@ -657,6 +683,10 @@ aside.toc.sidebar {
 
 .nav-panel-explore {
   visibility: collapse;
+}
+
+.nav .panels {
+  background-color: #f5f5f5;
 }
 
 .panels {
