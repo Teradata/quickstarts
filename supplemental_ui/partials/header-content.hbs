@@ -2,11 +2,12 @@
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7Q6CLV"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+
 <header class="header" role="banner">
   <nav class="navbar">
-    <div class="visit"><a href="https://teradata.com/">Visit Teradata.com</a></div>
-    <div class="top-nav-menu">
-      <span class="navbar-logo">
+    
+    <section class="navbar-top">
+      <div class="navbar-logo">
         <a href="https://teradata.com/">
           <svg width="97" height="18" viewBox="0 0 696 133" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
               <title>Teradata</title>
@@ -27,40 +28,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </g>
           </svg>
         </a>
-      </span>
+      </div>
+
       <div class="navbar-brand">
         <a class="navbar-item" href="https://developer.teradata.com/">Developers</a>
       </div>
-      <div id="topbar-nav" class="navbar-menu">
-        <div id="menu-options" class="navbar-end">
-          <a class="navbar-item" href="{{siteRootPath}}/index.html">Getting started</a>
-          <a class="navbar-item" href="https://docs.teradata.com/">Docs</a>
-          <a class="navbar-item" href="https://downloads.teradata.com/">Downloads</a>
-          <a class="navbar-item" href="https://support.teradata.com/community ">Community</a>
-        </div>
-        <div class="navbar-end">
-          {{#if env.SITE_SEARCH_PROVIDER}}
-          {{#if (ne page.layout "landing-page")}}
-          <div class="navbar-item">
-            <input id="search-input" type="text" placeholder="Search Getting Started">
-          </div>
-          {{/if}}
-          {{/if}}
-        </div>
-      </div>
 
-      <button role="button" aria-label="Click or Press enter to open menu" tabindex="0" class="header-nav-mobile__menu-icon">
+      <button class="header-nav-mobile__menu-icon" role="button" aria-label="Click or Press enter to open menu" tabindex="0">
         <span></span>
         <span></span>
         <span></span>
         <span></span>
       </button>
+    </section>
 
+    <section class="navbar-menu">
       <div class="header-nav-mobile__menu">
         <ul>
           <li class="header-nav-mobile__menu-item">
             <header class="header-nav-mobile__menu-item__header">
-              <a href="{{siteRootPath}}/index.html">Getting started</a>
+              <a href="{{siteRootPath}}/index.html">Getting Started</a>
             </header>
           </li>
           <li class="header-nav-mobile__menu-item">
@@ -88,9 +75,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </li>
         </ul>
       </div>
+    </section>
 
-      <div tabindex="-1" aria-hidden="true" class="page-blackout"></div>
+    <section class="navbar-search">
+      {{#if env.SITE_SEARCH_PROVIDER}}
+      {{#if (ne page.layout "landing-page")}}
+      <div class="navbar-item">
+        <input id="search-input" type="text" placeholder="Search Getting Started">
+      </div>
+      {{/if}}
+      {{/if}}
+    </section>
 
-    </div>
+    <section class="navbar-utility">
+      <ul>
+        <li><a href="https://teradata.com/">Visit Teradata.com</a></li>
+      </ul>
+    </section>
+
   </nav>
+  <div class="page-blackout" tabindex="-1" aria-hidden="true"></div>
 </header>
