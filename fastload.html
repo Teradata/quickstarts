@@ -3,15 +3,15 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Run large bulkloads efficiently :: Teradata Getting Started</title>
+    <title>Run large bulkloads efficiently with Fastload :: Teradata Getting Started</title>
     <link rel="canonical" href="https://quickstarts.teradata.com/fastload.html">
-    <meta name="description" content="Load data into Vantage efficiently using Teradata Parallel Transporter.">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, fastload, tpt, teradata parallel transporter">
+    <meta name="description" content="Load data into Vantage efficiently using Teradata Fastload.">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, `Fastload`">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="./_/css/site.css">
-<meta property="og:title" content="Run large bulkloads efficiently :: Teradata Getting Started">
+<meta property="og:title" content="Run large bulkloads efficiently with Fastload :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Load data into Vantage efficiently using Teradata Parallel Transporter." />
+<meta property="og:description" content="Load data into Vantage efficiently using Teradata Fastload." />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
@@ -917,7 +917,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="fastload.html">Run large bulkloads efficiently</a>
+    <a class="nav-link" href="fastload.html">Run large bulkloads efficiently with Fastload</a>
   </li>
 </ul>
   </li>
@@ -996,7 +996,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li>Tutorials</li>
-    <li><a href="fastload.html">Run large bulkloads efficiently</a></li>
+    <li><a href="fastload.html">Run large bulkloads efficiently with Fastload</a></li>
   </ul>
 </nav>
 </div>
@@ -1010,14 +1010,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Run large bulkloads efficiently</h1>
+<h1 class="page">Run large bulkloads efficiently with Fastload</h1>
 <p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
-Last updated: October 21st, 2021</p>
+Last updated: April 6th, 2022</p>
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="title">Deprecation notice</div>
+<div class="paragraph">
+<p>This how-to describes <code>Fastload</code> utility. The utility has been deprecated. For new implementations consider using <a href="https://docs.teradata.com/search/documents?query=Teradata+Parallel+Transporter+Quick+Start+Guide&amp;sort=last_update&amp;virtual-field=title_only&amp;content-lang=en-US">Teradata Parallel Transporter (TPT)</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We often have a need to move large volumes of data into Vantage. The quickest way to do that is using <code>Fastload</code> mode from Teradata Parallel Transporter (TPT). This how-to demonstrates how to use <code>Fastload</code>. In this scenario, we will load over 300k records, over 40MB of data, in a couple of seconds.</p>
+<p>We often have a need to move large volumes of data into Vantage. Teradata offers <code>Fastload</code> utility that can efficiently load large amounts of data into Teradata Vantage. This how-to demonstrates how to use <code>Fastload</code>. In this scenario, we will load over 300k records, over 40MB of data, in a couple of seconds.</p>
 </div>
 </div>
 </div>
@@ -1090,7 +1109,7 @@ Last updated: October 21st, 2021</p>
 <h2 id="_create_a_database"><a class="anchor" href="#_create_a_database"></a>Create a database</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Let&#8217;s create a database in Vantage. Use you favorite SQL tool to run:</p>
+<p>Let&#8217;s create a database in Vantage. Use your favorite SQL tool to run the following query:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1105,13 +1124,13 @@ AS PERMANENT = 120e6, -- 120MB
 <h2 id="_run_fastload"><a class="anchor" href="#_run_fastload"></a>Run Fastload</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We will now run Fastload. Fastload is a command-line tool that is very efficient in uploading large amounts of data into Vantage. Fastload, in order to be fast, has several restrictions in place. It can only populate empty tables, no inserts to already populated tables are supported. It doesn&#8217;t support tables with secondary indices. Also, it won&#8217;t insert duplicate records, even if a table is a <code>MULTISET</code> table. For the full list of restrictions check out <a href="https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root">Teradata® FastLoad Reference</a>.</p>
+<p>We will now run <code>Fastload</code>. <code>Fastload</code> is a command-line tool that is very efficient in uploading large amounts of data into Vantage. <code>Fastload</code>, in order to be fast, has several restrictions in place. It can only populate empty tables, no inserts to already populated tables are supported. It doesn&#8217;t support tables with secondary indices. Also, it won&#8217;t insert duplicate records, even if a table is a <code>MULTISET</code> table. For the full list of restrictions check out <a href="https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root">Teradata® <code>Fastload</code> Reference</a>.</p>
 </div>
 <div class="paragraph">
 <p>Fastload has its own scripting language. The language allows you to prepare the database with arbitrary SQL commands, declare the input source and define how the data should be inserted into Vantage. The tool supports both interactive and batch mode. In this section, we are going to use the interactive mode.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s start Fastload in the interactive mode:</p>
+<p>Let&#8217;s start <code>Fastload</code> in the interactive mode:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1157,7 +1176,7 @@ PRIMARY INDEX ( return_id );</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Now, that the target table has been prepared, we can start loading the data. <code>ERRORFILES</code> directive defines error files. The error files are really tables that TPT creates. The first table contains information about data conversion and other issues. The second table keeps track of data uniqueness issues, e.g. primary key violations.</p>
+<p>Now, that the target table has been prepared, we can start loading the data. <code>ERRORFILES</code> directive defines error files. The error files are really tables that <code>Fastload</code> creates. The first table contains information about data conversion and other issues. The second table keeps track of data uniqueness issues, e.g. primary key violations.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1166,7 +1185,7 @@ PRIMARY INDEX ( return_id );</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>We instruct TPT to save a checkpoint every 10k rows. It&#8217;s useful in case we have to restart our job. It will be able to resume from the last checkpoint.</p>
+<p>We instruct <code>Fastload</code> to save a checkpoint every 10k rows. It&#8217;s useful in case we have to restart our job. It will be able to resume from the last checkpoint.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1174,7 +1193,7 @@ PRIMARY INDEX ( return_id );</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>We also need to tell TPT to skip the first row in the CSV file as start at record 2. That&#8217;s because the first row contains column headers.</p>
+<p>We also need to tell <code>Fastload</code> to skip the first row in the CSV file as start at record 2. That&#8217;s because the first row contains column headers.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1182,7 +1201,7 @@ PRIMARY INDEX ( return_id );</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>TPT also needs to know that it&#8217;s a comma-separated file:</p>
+<p><code>Fastload</code> also needs to know that it&#8217;s a comma-separated file:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1334,7 +1353,7 @@ LOGOFF;</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_fastload_vs_nos"><a class="anchor" href="#_fastload_vs_nos"></a>Fastload vs. NOS</h2>
+<h2 id="_fastload_vs_nos"><a class="anchor" href="#_fastload_vs_nos"></a><code>Fastload</code> vs. NOS</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In our case, the file is in an S3 bucket. That means, that we can use Native Object Storage (NOS) to ingest the data:</p>
@@ -1355,7 +1374,7 @@ NO PRIMARY INDEX;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The NOS solution is convenient as it doesn&#8217;t depend on additional tools. It can be implemented using only SQL. Fastload is still a better solution if we are after raw performance.</p>
+<p>The NOS solution is convenient as it doesn&#8217;t depend on additional tools. It can be implemented using only SQL. It performs well, especially for Vantage deployments with a high number of AMPs as NOS tasks are delegated to AMPs and run in parallel. Also, splitting the data in object storage into multiple files may further improve performance.</p>
 </div>
 </div>
 </div>
@@ -1363,7 +1382,7 @@ NO PRIMARY INDEX;</code></pre>
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This how-to demonstrated how to ingest large amounts of data into Vantage. We loaded hundreds of thousands or records into Vantage in a couple of seconds using Fastload mode from Teradata Parallel Transporter (TPT).</p>
+<p>This how-to demonstrated how to ingest large amounts of data into Vantage. We loaded hundreds of thousands or records into Vantage in a couple of seconds using <code>Fastload</code>.</p>
 </div>
 </div>
 </div>
@@ -1373,7 +1392,10 @@ NO PRIMARY INDEX;</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root">Teradata® FastLoad Reference</a></p>
+<p><a href="https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root">Teradata® <code>Fastload</code> Reference</a></p>
+</li>
+<li>
+<p><a href="nos.html" class="xref page">Query data stored in object storage</a></p>
 </li>
 </ul>
 </div>
