@@ -13,7 +13,7 @@ We often have a need to move large volumes of data into Vantage. Teradata offers
 
 == Prerequsites
 
-* Access to a Teradata Vantage instance. If you need a new instance of Vantage, you can run Vantage Express it in the cloud on xref:vantage.express.gcp.adoc[GCP], xref:run-vantage-express-on-microsoft-azure.adoc[Azure], or xref:run-vantage-express-on-aws.adoc[AWS]. You can also install Vantage Express on your local machine using xref:getting.started.vmware.adoc[VMware], xref:getting.started.vbox.adoc[VirtualBox], or xref:getting.started.utm.adoc[UTM].
+* Access to a Teradata Vantage instance. If you need a new instance of Vantage, you can run Vantage Express it in the cloud on xref:ROOT:vantage.express.gcp.adoc[GCP], xref:ROOT:run-vantage-express-on-microsoft-azure.adoc[Azure], or xref:ROOT:run-vantage-express-on-aws.adoc[AWS]. You can also install Vantage Express on your local machine using xref:ROOT:getting.started.vmware.adoc[VMware], xref:ROOT:getting.started.vbox.adoc[VirtualBox], or xref:ROOT:getting.started.utm.adoc[UTM].
 * Download Teradata Tools and Utilities (TTU) -  supported platforms: link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-windows-installation-package[Windows], link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-macos-installation-package[MacOS], link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-linux-installation-package-0[Linux] (requires registration).
 
 == Install TTU
@@ -215,7 +215,6 @@ tbuild -f load.txt -v jobvars.txt -j file_load
 +
 A successful run will return logs that look like this:
 +
-[source, bash]
 ----
 Teradata Parallel Transporter Version 17.10.00.10 64-Bit
 The global configuration file '/opt/teradata/client/17.10/tbuild/twbcfg.ini' is used.
@@ -300,5 +299,6 @@ The NOS solution is convenient as it doesn't depend on additional tools. It can 
 This how-to demonstrated how to ingest large amounts of data into Vantage. We loaded hundreds of thousands or records into Vantage in a couple of seconds using `TPT`.
 
 == Further reading
-* link:https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root[Teradata® `TPT` Reference]
-* xref::nos.adoc[]
+* link:https://docs.teradata.com/r/Teradata-Parallel-Transporter-User-Guide/February-2022[Teradata® TPT User Guide]
+* link:https://docs.teradata.com/r/Teradata-Parallel-Transporter-Reference/February-2022[Teradata® TPT Reference]
+* xref:ROOT:nos.adoc[]
