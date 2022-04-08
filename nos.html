@@ -1165,7 +1165,7 @@ U.S. Geological Survey. The bucket is at <a href="https://td-usgs-public.s3.amaz
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT TOP 10 payload..* FROM (
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT TOP 10 * FROM (
 	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
 ) AS d;</code></pre>
 </div>
@@ -1175,18 +1175,18 @@ U.S. Geological Survey. The bucket is at <a href="https://td-usgs-public.s3.amaz
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>Payload..*
-------------------------------------------------------------------
-["10.9","15300","09380000","2018-06-28 00:30","671","0.00","9.80"]
-["10.8","14500","09380000","2018-06-28 01:00","673","0.00","9.64"]
-["10.7","14100","09380000","2018-06-28 01:15","672","0.00","9.56"]
-["11.0","16200","09380000","2018-06-27 00:00","669","0.00","9.97"]
-["10.9","15700","09380000","2018-06-27 00:30","668","0.00","9.88"]
-["10.8","15400","09380000","2018-06-27 00:45","672","0.00","9.82"]
-["10.8","15100","09380000","2018-06-27 01:00","672","0.00","9.77"]
-["10.8","14700","09380000","2018-06-27 01:15","672","0.00","9.68"]
-["10.9","16000","09380000","2018-06-27 00:15","668","0.00","9.93"]
-["10.8","14900","09380000","2018-06-28 00:45","672","0.00","9.72"]</pre>
+<pre>GageHeight2 Flow   site_no datetime         Precipitation GageHeight
+----------- ----- -------- ---------------- ------------- -----------
+10.9        15300 09380000 2018-06-28 00:30 671           9.80
+10.8        14500 09380000 2018-06-28 01:00 673           9.64
+10.7        14100 09380000 2018-06-28 01:15 672           9.56
+11.0        16200 09380000 2018-06-27 00:00 669           9.97
+10.9        15700 09380000 2018-06-27 00:30 668           9.88
+10.8        15400 09380000 2018-06-27 00:45 672           9.82
+10.8        15100 09380000 2018-06-27 01:00 672           9.77
+10.8        14700 09380000 2018-06-27 01:15 672           9.68
+10.9        16000 09380000 2018-06-27 00:15 668           9.93
+10.8        14900 09380000 2018-06-28 00:45 672           9.72</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1228,9 +1228,9 @@ GageHeight      decimal(3,2)                        csv       /S3/s3.amazonaws.c
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT Payload..site_no AS Site_no, AVG(Payload..Temp) as Avg_Temp FROM (
-        LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-) AS d GROUP BY Payload..site_no HAVING Avg_Temp IS NOT NULL;</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT site_no Site_no, AVG(Temp) Avg_Temp FROM (
+  LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+) AS d GROUP BY site_no HAVING Avg_Temp IS NOT NULL;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1247,7 +1247,7 @@ GageHeight      decimal(3,2)                        csv       /S3/s3.amazonaws.c
 </div>
 </div>
 <div class="paragraph">
-<p>Note how we still have to dereference CSV columns with <code>Payload..</code>. To make our experience more similar to a table we can define a foreign table:</p>
+<p>To register your ad hoc exploratory activity as a permanent source, create it as a foreign table:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1260,7 +1260,7 @@ CREATE DATABASE Riverflow
   SPOOL = 120e6; -- 120MB
 
 CREATE FOREIGN TABLE Riverflow.riverflow
-    USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
+  USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
 
 SELECT top 10 * FROM Riverflow.riverflow;</code></pre>
 </div>
@@ -1281,7 +1281,7 @@ SELECT top 10 * FROM Riverflow.riverflow;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This time, the <code>SELECT</code> statement looks like a regular select against an in-database table. Also, the returned data uses column names from the CSV file. No need to dereference with <code>Payload..</code>. There is still an issue though. The query was slow. There is an easy way to bring the CSV data into Vantage to speed things up. Read on to find out how.</p>
+<p>This time, the <code>SELECT</code> statement looks like a regular select against an in-database table. If you require subsecond response time when querying the data, there is an easy way to bring the CSV data into Vantage to speed things up. Read on to find out how.</p>
 </div>
 </div>
 </div>
@@ -1308,10 +1308,9 @@ This query assumes you created database <code>Riverflow</code> and a foreign tab
 <pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- This query assumes you created database `Riverflow`
 -- and a foreign table called `Riverflow.riverflow` in the previous step.
 
-CREATE MULTISET TABLE
-    Riverflow.riverflow_native(site_no, Flow, GageHeight, datetime)
+CREATE MULTISET TABLE   Riverflow.riverflow_native (site_no, Flow, GageHeight, datetime)
 AS (
-    SELECT site_no, Flow, GageHeight, datetime FROM Riverflow.riverflow
+  SELECT site_no, Flow, GageHeight, datetime FROM Riverflow.riverflow
 ) WITH DATA
 NO PRIMARY INDEX;
 
@@ -1353,9 +1352,9 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT top 10 payload..* FROM (
-	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-    AUTHORIZATION='{"ACCESS_ID":"","ACCESS_KEY":""}'
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT top 10 * FROM (
+  LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+  AUTHORIZATION='{"ACCESS_ID":"","ACCESS_KEY":""}'
 ) AS d;</code></pre>
 </div>
 </div>
@@ -1365,8 +1364,8 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE AUTHORIZATION aws_authorization
-    USER 'YOUR-ACCESS-KEY-ID'
-    PASSWORD 'YOUR-SECRET-ACCESS-KEY';</code></pre>
+  USER 'YOUR-ACCESS-KEY-ID'
+  PASSWORD 'YOUR-SECRET-ACCESS-KEY';</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1374,8 +1373,9 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE FOREIGN TABLE Riverflow.riverflow, EXTERNAL SECURITY aws_authorization
-    USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE FOREIGN TABLE Riverflow.riverflow
+, EXTERNAL SECURITY aws_authorization
+USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );</code></pre>
 </div>
 </div>
 </div>
@@ -1384,19 +1384,20 @@ SELECT TOP 10 * FROM Riverflow.riverflow_native;</code></pre>
 <h2 id="_export_data_from_vantage_to_object_storage"><a class="anchor" href="#_export_data_from_vantage_to_object_storage"></a>Export data from Vantage to object storage</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>So far, we have talked about reading and importing data from object storage. Would it not be nice if we had a way to use SQL to export data from Vantage to object storage? This is exactly what <code>WRITE_NOS</code> function is for. Let&#8217;s say we want to export data from <code>Riverflow.riverflow_native</code> table to object storage. You can do so with the following query:</p>
+<p>So far, we have talked about reading and importing data from object storage. Wouldn&#8217;t it be nice if we had a way to use SQL to export data from Vantage to object storage? This is exactly what <code>WRITE_NOS</code> function is for. Let&#8217;s say we want to export data from <code>Riverflow.riverflow_native</code> table to object storage. You can do so with the following query:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM WRITE_NOS (
-    ON ( SELECT * FROM Riverflow.riverflow_native )
-    PARTITION BY site_no ORDER BY site_no
-    USING
-        LOCATION('YOUR-OBJECT-STORE-URI')
-        STOREDAS('PARQUET')
-        COMPRESSION('SNAPPY')
-        NAMING('RANGE')
-        INCLUDE_ORDERING('TRUE')
+  ON ( SELECT * FROM Riverflow.riverflow_native )
+  PARTITION BY site_no ORDER BY site_no
+  USING
+    LOCATION('YOUR-OBJECT-STORE-URI')
+    AUTHORIZATION(aws_authorization)
+    STOREDAS('PARQUET')
+    COMPRESSION('SNAPPY')
+    NAMING('RANGE')
+    INCLUDE_ORDERING('TRUE')
 ) AS d;</code></pre>
 </div>
 </div>
