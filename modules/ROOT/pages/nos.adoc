@@ -25,7 +25,7 @@ Let's first have a look at sample CSV data. We take the first 10 rows that Vanta
 
 [source, teradata-sql]
 ----
-SELECT TOP 10 payload..* FROM (
+SELECT TOP 10 * FROM (
 	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
 ) AS d;
 ----
@@ -33,18 +33,18 @@ SELECT TOP 10 payload..* FROM (
 Here is what I've got:
 
 ----
-Payload..*
-------------------------------------------------------------------
-["10.9","15300","09380000","2018-06-28 00:30","671","0.00","9.80"]
-["10.8","14500","09380000","2018-06-28 01:00","673","0.00","9.64"]
-["10.7","14100","09380000","2018-06-28 01:15","672","0.00","9.56"]
-["11.0","16200","09380000","2018-06-27 00:00","669","0.00","9.97"]
-["10.9","15700","09380000","2018-06-27 00:30","668","0.00","9.88"]
-["10.8","15400","09380000","2018-06-27 00:45","672","0.00","9.82"]
-["10.8","15100","09380000","2018-06-27 01:00","672","0.00","9.77"]
-["10.8","14700","09380000","2018-06-27 01:15","672","0.00","9.68"]
-["10.9","16000","09380000","2018-06-27 00:15","668","0.00","9.93"]
-["10.8","14900","09380000","2018-06-28 00:45","672","0.00","9.72"]
+GageHeight2 Flow   site_no datetime         Precipitation GageHeight
+----------- ----- -------- ---------------- ------------- -----------
+10.9        15300 09380000 2018-06-28 00:30 671           9.80
+10.8        14500 09380000 2018-06-28 01:00 673           9.64
+10.7        14100 09380000 2018-06-28 01:15 672           9.56
+11.0        16200 09380000 2018-06-27 00:00 669           9.97
+10.9        15700 09380000 2018-06-27 00:30 668           9.88
+10.8        15400 09380000 2018-06-27 00:45 672           9.82
+10.8        15100 09380000 2018-06-27 01:00 672           9.77
+10.8        14700 09380000 2018-06-27 01:15 672           9.68
+10.9        16000 09380000 2018-06-27 00:15 668           9.93
+10.8        14900 09380000 2018-06-28 00:45 672           9.72
 ----
 
 We have got plenty of numbers, but what do they mean? To answer this question, we will ask Vantage to detect the schema of the CSV files:
@@ -80,9 +80,9 @@ Now that we know the schema, we can work with the dataset as if it was a regular
 
 [source, teradata-sql]
 ----
-SELECT Payload..site_no AS Site_no, AVG(Payload..Temp) as Avg_Temp FROM (
-        LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-) AS d GROUP BY Payload..site_no HAVING Avg_Temp IS NOT NULL;
+SELECT site_no Site_no, AVG(Temp) Avg_Temp FROM (
+  LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+) AS d GROUP BY site_no HAVING Avg_Temp IS NOT NULL;
 ----
 
 Result:
@@ -96,7 +96,7 @@ Site_no  Avg_Temp
 09429070 81
 ----
 
-Note how we still have to dereference CSV columns with `Payload..`. To make our experience more similar to a table we can define a foreign table:
+To register your ad hoc exploratory activity as a permanent source, create it as a foreign table:
 
 [source, teradata-sql]
 ----
@@ -109,7 +109,7 @@ CREATE DATABASE Riverflow
   SPOOL = 120e6; -- 120MB
 
 CREATE FOREIGN TABLE Riverflow.riverflow
-    USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
+  USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
 
 SELECT top 10 * FROM Riverflow.riverflow;
 ----
@@ -128,7 +128,7 @@ Location                                                            GageHeight2 
 ----
 
 
-This time, the `SELECT` statement looks like a regular select against an in-database table. Also, the returned data uses column names from the CSV file. No need to dereference with `Payload..`. There is still an issue though. The query was slow. There is an easy way to bring the CSV data into Vantage to speed things up. Read on to find out how.
+This time, the `SELECT` statement looks like a regular select against an in-database table. If you require subsecond response time when querying the data, there is an easy way to bring the CSV data into Vantage to speed things up. Read on to find out how.
 
 == Load data from NOS into Vantage
 
@@ -142,10 +142,9 @@ IMPORTANT: This query assumes you created database `Riverflow` and a foreign tab
 -- This query assumes you created database `Riverflow`
 -- and a foreign table called `Riverflow.riverflow` in the previous step.
 
-CREATE MULTISET TABLE
-    Riverflow.riverflow_native(site_no, Flow, GageHeight, datetime)
+CREATE MULTISET TABLE   Riverflow.riverflow_native (site_no, Flow, GageHeight, datetime)
 AS (
-    SELECT site_no, Flow, GageHeight, datetime FROM Riverflow.riverflow
+  SELECT site_no, Flow, GageHeight, datetime FROM Riverflow.riverflow
 ) WITH DATA
 NO PRIMARY INDEX;
 
@@ -179,9 +178,9 @@ It is possible to inline your credentials directly into your query:
 
 [source, teradata-sql]
 ----
-SELECT top 10 payload..* FROM (
-	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-    AUTHORIZATION='{"ACCESS_ID":"","ACCESS_KEY":""}'
+SELECT top 10 * FROM (
+  LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+  AUTHORIZATION='{"ACCESS_ID":"","ACCESS_KEY":""}'
 ) AS d;
 ----
 
@@ -190,33 +189,35 @@ Entering these credentials all the time can be tedious and less secure. In Vanta
 [source, teradata-sql]
 ----
 CREATE AUTHORIZATION aws_authorization
-    USER 'YOUR-ACCESS-KEY-ID'
-    PASSWORD 'YOUR-SECRET-ACCESS-KEY';
+  USER 'YOUR-ACCESS-KEY-ID'
+  PASSWORD 'YOUR-SECRET-ACCESS-KEY';
 ----
 
 You can then reference your authorization object when you create a foreign table:
 
 [source, teradata-sql]
 ----
-CREATE FOREIGN TABLE Riverflow.riverflow, EXTERNAL SECURITY aws_authorization
-    USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
+CREATE FOREIGN TABLE Riverflow.riverflow
+, EXTERNAL SECURITY aws_authorization
+USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
 ----
 
 == Export data from Vantage to object storage
 
-So far, we have talked about reading and importing data from object storage. Would it not be nice if we had a way to use SQL to export data from Vantage to object storage? This is exactly what `WRITE_NOS` function is for. Let's say we want to export data from `Riverflow.riverflow_native` table to object storage. You can do so with the following query:
+So far, we have talked about reading and importing data from object storage. Wouldn't it be nice if we had a way to use SQL to export data from Vantage to object storage? This is exactly what `WRITE_NOS` function is for. Let's say we want to export data from `Riverflow.riverflow_native` table to object storage. You can do so with the following query:
 
 [source, teradata-sql]
 ----
 SELECT * FROM WRITE_NOS (
-    ON ( SELECT * FROM Riverflow.riverflow_native )
-    PARTITION BY site_no ORDER BY site_no
-    USING
-        LOCATION('YOUR-OBJECT-STORE-URI')
-        STOREDAS('PARQUET')
-        COMPRESSION('SNAPPY')
-        NAMING('RANGE')
-        INCLUDE_ORDERING('TRUE')
+  ON ( SELECT * FROM Riverflow.riverflow_native )
+  PARTITION BY site_no ORDER BY site_no
+  USING
+    LOCATION('YOUR-OBJECT-STORE-URI')
+    AUTHORIZATION(aws_authorization)
+    STOREDAS('PARQUET')
+    COMPRESSION('SNAPPY')
+    NAMING('RANGE')
+    INCLUDE_ORDERING('TRUE')
 ) AS d;
 ----
 
