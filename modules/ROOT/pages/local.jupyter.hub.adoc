@@ -146,7 +146,7 @@ RUN jupyter labextension install --no-build teradata_database* && \
 
 WORKDIR $HOME
 
-# Give back ownership of /opt/conda to jovyan
+# Give back ownership of /opt/conda to  jovyan
 RUN chown -R jovyan:users /opt/conda
 
 # Jupyter will create .local directory
