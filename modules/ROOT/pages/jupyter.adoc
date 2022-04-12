@@ -2,7 +2,7 @@
 :experimental:
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
-:page-revdate: September 8th, 2021
+:page-revdate: April 12th, 2022
 :description: Use Teradata Vantage from a Jupyter notebook
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, JDBC, java applications, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy
 
