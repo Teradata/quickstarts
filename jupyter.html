@@ -1274,25 +1274,6 @@ result.DataFrame()</code></pre>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Download <a href="https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter">the Teradata Vantage Modules for Jupyter docker image</a>. If you don&#8217;t have an account with Teradata Downloads, you will need to register first.</p>
-</li>
-<li>
-<p>Import the image to your local registry:</p>
-<div class="listingblock content-editable">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker load -i teradatajupyterlabext_&lt;version&gt;.tar.gz</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Let&#8217;s verify that the image has been imported correctly and get the name of the image. Look for <code>teradatajupyterlabext_</code>. Copy the image name. We will need it in the next step.</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker image ls</code></pre>
-</div>
-</div>
-</li>
-<li>
 <p>Run the image:</p>
 <div class="admonitionblock note">
 <table>
@@ -1301,16 +1282,28 @@ result.DataFrame()</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Replace <code>/path/to/my/directory/with/notebooks</code> with a directory on your machine where you intend to keep notebook files. Docker must be allowed to map this directory. Also, replace <code>teradatajupyterlabext</code> with the image name from the previous step.
+Replace <code>/path/to/my/directory/with/notebooks</code> with a directory on your machine where you intend to keep notebook files. Docker must be allowed to map this directory.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+By passing <code>-e "accept_license=Y</code> you accept <a href="https://github.com/Teradata/jupyterextensions/blob/master/licensefiles/license.txt">the license agreement</a> for Teradata Jupyter Extensions.
 </td>
 </tr>
 </table>
 </div>
 <div class="listingblock content-editable">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -p 127.0.0.1:8888:8888 \
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -e "accept_license=Y" -p 127.0.0.1:8888:8888 \
   -v /path/to/my/directory/with/notebooks:/home/jovyan/JupyterLabRoot \
-  teradatajupyterlabext</code></pre>
+  teradata/jupyterlab-extensions</code></pre>
 </div>
 </div>
 </li>
@@ -1319,7 +1312,7 @@ Replace <code>/path/to/my/directory/with/notebooks</code> with a directory on yo
 <div class="listingblock">
 <div class="content">
 <pre>Starting JupyterLab ...
-Docker Build ID = 3.0.0-ec03292021
+Docker Build ID = 3.2.0-ec02012022
 Using unencrypted HTTP
 
 Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
