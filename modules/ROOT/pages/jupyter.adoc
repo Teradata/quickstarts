@@ -101,34 +101,23 @@ The SQL kernel and Teradata Jupyter extensions are useful for people that spend 
 
 The Teradata Jupyter Docker image can be used when you want to run Jupyter locally or you have a place where you can run custom Jupyter docker images, .e.g. JupyterHub or GCP AI Platform Notebooks, AWS SageMaker Notebooks. The steps below demonstrate how to use the image locally.
 
-1. Download link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[the Teradata Vantage Modules for Jupyter docker image]. If you don't have an account with Teradata Downloads, you will need to register first.
-2. Import the image to your local registry:
+1. Run the image:
++
+NOTE: Replace `/path/to/my/directory/with/notebooks` with a directory on your machine where you intend to keep notebook files. Docker must be allowed to map this directory.
++
+NOTE: By passing `-e "accept_license=Y` you accept https://github.com/Teradata/jupyterextensions/blob/master/licensefiles/license.txt[the license agreement] for Teradata Jupyter Extensions.
 +
 [source, bash, role="content-editable"]
 ----
-docker load -i teradatajupyterlabext_<version>.tar.gz
-----
-3. Let's verify that the image has been imported correctly and get the name of the image. Look for `teradatajupyterlabext_`. Copy the image name. We will need it in the next step.
-+
-[source, bash]
-----
-docker image ls
-----
-4. Run the image:
-+
-NOTE: Replace `/path/to/my/directory/with/notebooks` with a directory on your machine where you intend to keep notebook files. Docker must be allowed to map this directory. Also, replace `teradatajupyterlabext` with the image name from the previous step.
-+
-[source, bash, role="content-editable"]
-----
-docker run -p 127.0.0.1:8888:8888 \
+docker run -e "accept_license=Y" -p 127.0.0.1:8888:8888 \
   -v /path/to/my/directory/with/notebooks:/home/jovyan/JupyterLabRoot \
-  teradatajupyterlabext
+  teradata/jupyterlab-extensions
 ----
 5. Docker logs will display the url that you need to go to. For example, this is what I've got:
 +
 ----
 Starting JupyterLab ...
-Docker Build ID = 3.0.0-ec03292021
+Docker Build ID = 3.2.0-ec02012022
 Using unencrypted HTTP
 
 Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
