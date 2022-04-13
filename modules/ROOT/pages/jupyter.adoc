@@ -31,14 +31,14 @@ docker run --rm -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes \
 2. Docker logs will display the url that you need to go to:
 +
 ----
-Starting JupyterLab ...
-Docker Build ID = 3.0.0-ec03292021
-Using unencrypted HTTP
-
-Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
-
-* Or enter this token when prompted by Jupyter: 96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
-* If you used a different port to run your Docker, replace 8888 with your port number
+Entered start.sh with args: jupyter lab
+Executing the command: jupyter lab
+....
+To access the server, open this file in a browser:
+    file:///home/jovyan/.local/share/jupyter/runtime/jpserver-7-open.html
+Or copy and paste one of these URLs:
+    http://d5c2323ae5db:8888/lab?token=5fb43e674367c6895e8c2404188aa550b5c7bdf96f5b4a3a
+  or http://127.0.0.1:8888/lab?token=5fb43e674367c6895e8c2404188aa550b5c7bdf96f5b4a3a
 ----
 3. We will open a new notebook and create a cell to install the required libraries:
 +
@@ -99,21 +99,20 @@ The Teradata Jupyter Docker image builds on `jupyter/datascience-notebook` Docke
 
 The SQL kernel and Teradata Jupyter extensions are useful for people that spend a lot of time with the SQL interface. Think about it as a notebook experience that, in many cases, is more convenient than using Teradata Studio. The Teradata Jupyter Docker image doesn't try to replace Teradata Studio. It doesn't have all the features. It's designed for people who need a lightweight, web-based interface and enjoy the notebook UI.
 
-The Teradata Jupyter Docker image can be used when you want to run Jupyter locally or you have a place where you can run custom Jupyter docker images, .e.g. JupyterHub or GCP AI Platform Notebooks, AWS SageMaker Notebooks. The steps below demonstrate how to use the image locally.
+The Teradata Jupyter Docker image can be used when you want to run Jupyter locally or you have a place where you can run custom Jupyter docker images. The steps below demonstrate how to use the image locally.
 
 1. Run the image:
-+
-NOTE: Replace `/path/to/my/directory/with/notebooks` with a directory on your machine where you intend to keep notebook files. Docker must be allowed to map this directory.
 +
 NOTE: By passing `-e "accept_license=Y` you accept https://github.com/Teradata/jupyterextensions/blob/master/licensefiles/license.txt[the license agreement] for Teradata Jupyter Extensions.
 +
 [source, bash, role="content-editable"]
 ----
-docker run -e "accept_license=Y" -p 127.0.0.1:8888:8888 \
-  -v /path/to/my/directory/with/notebooks:/home/jovyan/JupyterLabRoot \
+docker volume create notebooks
+docker run -e "accept_license=Y" -p :8888:8888 \
+  -v notebooks:/home/jovyan/JupyterLabRoot \
   teradata/jupyterlab-extensions
 ----
-5. Docker logs will display the url that you need to go to. For example, this is what I've got:
+2. Docker logs will display the url that you need to go to. For example, this is what I've got:
 +
 ----
 Starting JupyterLab ...
@@ -125,8 +124,8 @@ Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400
 * Or enter this token when prompted by Jupyter: 96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
 * If you used a different port to run your Docker, replace 8888 with your port number
 ----
-6. Open up the URL and use the file explorer to open the following notebook: `jupyterextensions -> notebooks -> sql -> GettingStartedDemo.ipynb`.
-7. Go through the demo of the Teradata SQL Kernel:
+3. Open up the URL and use the file explorer to open the following notebook: `jupyterextensions -> notebooks -> sql -> GettingStartedDemo.ipynb`.
+4. Go through the demo of the Teradata SQL Kernel:
 +
 image::gettingstarteddemo.ipynb.png[GettingStartedDemo.ipynb screenshot, width=100%]
 
