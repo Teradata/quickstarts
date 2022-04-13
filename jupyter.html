@@ -1169,14 +1169,14 @@ Last updated: April 12th, 2022</p>
 <p>Docker logs will display the url that you need to go to:</p>
 <div class="listingblock">
 <div class="content">
-<pre>Starting JupyterLab ...
-Docker Build ID = 3.0.0-ec03292021
-Using unencrypted HTTP
-
-Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
-
-* Or enter this token when prompted by Jupyter: 96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
-* If you used a different port to run your Docker, replace 8888 with your port number</pre>
+<pre>Entered start.sh with args: jupyter lab
+Executing the command: jupyter lab
+....
+To access the server, open this file in a browser:
+    file:///home/jovyan/.local/share/jupyter/runtime/jpserver-7-open.html
+Or copy and paste one of these URLs:
+    http://d5c2323ae5db:8888/lab?token=5fb43e674367c6895e8c2404188aa550b5c7bdf96f5b4a3a
+  or http://127.0.0.1:8888/lab?token=5fb43e674367c6895e8c2404188aa550b5c7bdf96f5b4a3a</pre>
 </div>
 </div>
 </li>
@@ -1269,24 +1269,12 @@ result.DataFrame()</code></pre>
 <p>The SQL kernel and Teradata Jupyter extensions are useful for people that spend a lot of time with the SQL interface. Think about it as a notebook experience that, in many cases, is more convenient than using Teradata Studio. The Teradata Jupyter Docker image doesn&#8217;t try to replace Teradata Studio. It doesn&#8217;t have all the features. It&#8217;s designed for people who need a lightweight, web-based interface and enjoy the notebook UI.</p>
 </div>
 <div class="paragraph">
-<p>The Teradata Jupyter Docker image can be used when you want to run Jupyter locally or you have a place where you can run custom Jupyter docker images, .e.g. JupyterHub or GCP AI Platform Notebooks, AWS SageMaker Notebooks. The steps below demonstrate how to use the image locally.</p>
+<p>The Teradata Jupyter Docker image can be used when you want to run Jupyter locally or you have a place where you can run custom Jupyter docker images. The steps below demonstrate how to use the image locally.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
 <p>Run the image:</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Replace <code>/path/to/my/directory/with/notebooks</code> with a directory on your machine where you intend to keep notebook files. Docker must be allowed to map this directory.
-</td>
-</tr>
-</table>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1301,8 +1289,9 @@ By passing <code>-e "accept_license=Y</code> you accept <a href="https://github.
 </div>
 <div class="listingblock content-editable">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -e "accept_license=Y" -p 127.0.0.1:8888:8888 \
-  -v /path/to/my/directory/with/notebooks:/home/jovyan/JupyterLabRoot \
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker volume create notebooks
+docker run -e "accept_license=Y" -p :8888:8888 \
+  -v notebooks:/home/jovyan/JupyterLabRoot \
   teradata/jupyterlab-extensions</code></pre>
 </div>
 </div>
