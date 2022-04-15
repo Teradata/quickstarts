@@ -1,15 +1,21 @@
-= Run large bulkloads efficiently
+= Run large bulkloads efficiently with Fastload
 :experimental:
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
-:page-revdate: October 21st, 2021
-:description: Load data into Vantage efficiently using Teradata Parallel Transporter.
-:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, fastload, tpt, teradata parallel transporter
+:page-revdate: April 6th, 2022
+:description: Load data into Vantage efficiently using Teradata Fastload.
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, `Fastload`
 :tabs:
+
+[IMPORTANT]
+.Deprecation notice
+====
+This how-to describes `Fastload` utility. The utility has been deprecated. For new implementations consider using link:https://docs.teradata.com/search/documents?query=Teradata+Parallel+Transporter+Quick+Start+Guide&sort=last_update&virtual-field=title_only&content-lang=en-US[Teradata Parallel Transporter (TPT)].
+====
 
 == Overview
 
-We often have a need to move large volumes of data into Vantage. The quickest way to do that is using `Fastload` mode from Teradata Parallel Transporter (TPT). This how-to demonstrates how to use `Fastload`. In this scenario, we will load over 300k records, over 40MB of data, in a couple of seconds.
+We often have a need to move large volumes of data into Vantage. Teradata offers `Fastload` utility that can efficiently load large amounts of data into Teradata Vantage. This how-to demonstrates how to use `Fastload`. In this scenario, we will load over 300k records, over 40MB of data, in a couple of seconds.
 
 == Prerequsites
 
@@ -47,7 +53,7 @@ We will be working with the US tax fillings for nonprofit organizations. Nonprof
 
 == Create a database
 
-Let's create a database in Vantage. Use you favorite SQL tool to run:
+Let's create a database in Vantage. Use your favorite SQL tool to run the following query:
 
 [source, teradata-sql]
 ----
@@ -58,11 +64,11 @@ AS PERMANENT = 120e6, -- 120MB
 
 == Run Fastload
 
-We will now run Fastload. Fastload is a command-line tool that is very efficient in uploading large amounts of data into Vantage. Fastload, in order to be fast, has several restrictions in place. It can only populate empty tables, no inserts to already populated tables are supported. It doesn't support tables with secondary indices. Also, it won't insert duplicate records, even if a table is a `MULTISET` table. For the full list of restrictions check out link:https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root[Teradata® FastLoad Reference].
+We will now run `Fastload`. `Fastload` is a command-line tool that is very efficient in uploading large amounts of data into Vantage. `Fastload`, in order to be fast, has several restrictions in place. It can only populate empty tables, no inserts to already populated tables are supported. It doesn't support tables with secondary indices. Also, it won't insert duplicate records, even if a table is a `MULTISET` table. For the full list of restrictions check out link:https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root[Teradata® `Fastload` Reference].
 
 Fastload has its own scripting language. The language allows you to prepare the database with arbitrary SQL commands, declare the input source and define how the data should be inserted into Vantage. The tool supports both interactive and batch mode. In this section, we are going to use the interactive mode.
 
-Let's start Fastload in the interactive mode:
+Let's start `Fastload` in the interactive mode:
 
 [source, bash]
 ----
@@ -104,7 +110,7 @@ CREATE MULTISET TABLE irs_returns (
 PRIMARY INDEX ( return_id );
 ----
 
-Now, that the target table has been prepared, we can start loading the data. `ERRORFILES` directive defines error files. The error files are really tables that TPT creates. The first table contains information about data conversion and other issues. The second table keeps track of data uniqueness issues, e.g. primary key violations.
+Now, that the target table has been prepared, we can start loading the data. `ERRORFILES` directive defines error files. The error files are really tables that `Fastload` creates. The first table contains information about data conversion and other issues. The second table keeps track of data uniqueness issues, e.g. primary key violations.
 
 [source, teradata-sql]
 ----
@@ -112,21 +118,21 @@ BEGIN LOADING irs_returns
     ERRORFILES irs_returns_err1, irs_returns_err2;
 ----
 
-We instruct TPT to save a checkpoint every 10k rows. It's useful in case we have to restart our job. It will be able to resume from the last checkpoint.
+We instruct `Fastload` to save a checkpoint every 10k rows. It's useful in case we have to restart our job. It will be able to resume from the last checkpoint.
 
 [source, teradata-sql]
 ----
     CHECKPOINT 10000;
 ----
 
-We also need to tell TPT to skip the first row in the CSV file as start at record 2. That's because the first row contains column headers.
+We also need to tell `Fastload` to skip the first row in the CSV file as start at record 2. That's because the first row contains column headers.
 
 [source, teradata-sql]
 ----
     RECORD 2;
 ----
 
-TPT also needs to know that it's a comma-separated file:
+`Fastload` also needs to know that it's a comma-separated file:
 
 [source, teradata-sql]
 ----
@@ -265,7 +271,7 @@ To run our example in batch mode, simply save all instructions in a single file 
 fastload < file_with_instruction.fastload
 ----
 
-== Fastload vs. NOS
+== `Fastload` vs. NOS
 
 In our case, the file is in an S3 bucket. That means, that we can use Native Object Storage (NOS) to ingest the data:
 
@@ -284,11 +290,12 @@ AS (
 NO PRIMARY INDEX;
 ----
 
-The NOS solution is convenient as it doesn't depend on additional tools. It can be implemented using only SQL. Fastload is still a better solution if we are after raw performance.
+The NOS solution is convenient as it doesn't depend on additional tools. It can be implemented using only SQL. It performs well, especially for Vantage deployments with a high number of AMPs as NOS tasks are delegated to AMPs and run in parallel. Also, splitting the data in object storage into multiple files may further improve performance.
 
 == Summary
 
-This how-to demonstrated how to ingest large amounts of data into Vantage. We loaded hundreds of thousands or records into Vantage in a couple of seconds using Fastload mode from Teradata Parallel Transporter (TPT).
+This how-to demonstrated how to ingest large amounts of data into Vantage. We loaded hundreds of thousands or records into Vantage in a couple of seconds using `Fastload`.
 
 == Further reading
-* link:https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root[Teradata® FastLoad Reference]
+* link:https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root[Teradata® `Fastload` Reference]
+* xref::nos.adoc[]
