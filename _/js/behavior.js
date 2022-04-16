@@ -96,10 +96,13 @@
 
     for (i = 0; i < dropdowns.length; ++i) {
       dropdowns[i].addEventListener('click', function (e) {
-        e.preventDefault();
-
-        this.parentElement.classList.toggle('active');
-        this.nextElementSibling.classList.toggle('dropdown-open');
+        if(this == e.target) {
+          e.stopPropagation();
+          this.parentElement.classList.toggle('active');
+          this.nextElementSibling.classList.toggle('dropdown-open');
+        } else {
+          return true;
+        }
       })
     }
 
