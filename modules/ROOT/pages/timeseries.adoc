@@ -1,8 +1,8 @@
-= Time Series Analysis [WIP]
+= Time Series Analysis
 :experimental:
-:page-author: Adam Tworkiewicz
-:page-email: adam.tworkiewicz@teradata.com
-:page-revdate: September 7th, 2021
+:page-author: Remi Turpaud
+:page-email: remi.turpaud@teradata.com
+:page-revdate: April 15th, 2022
 :description: Time Series Analysis
 :keywords: data warehouses, analytics, teradata, vantage, time series, business intelligence, enterprise analytics
 
@@ -157,7 +157,7 @@ TIMECODE_RANGE	                                                    vendor_id   p
 
 ----
 
-This is the power of Vantage time series functionality. Without needing complicated, cumbersome logic we are able to find average trip duration by vendor every 15 minutes just by modifying the group by time clause. Lets now look at how simple it is to build moving averages based on this. Let us start by creating a view as below.
+This is the power of Vantage time series functionality. Without needing complicated, cumbersome logic we are able to find average trip duration by vendor every 15 minutes just by modifying the group by time clause. Let's now look at how simple it is to build moving averages based on this. First, let's start by creating a view as below.
 
 [source, teradata-sql]
 ----
