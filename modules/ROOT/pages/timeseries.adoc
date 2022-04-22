@@ -18,12 +18,12 @@ You need access to a Teradata Vantage instance. Times series functionalities and
 
 Our sample data sets are available on S3 bucket and can be accessed from Vantage directly using Vantage NOS. Data is in CSV foramt and let's ingest them into Vantage for our time series analysis. The bucket is at https://td-usgs-public.s3.amazonaws.com/.
 
-Let's have a look at the data first. Below query will fetch the first 10 rows from S3 bucket.
+Let's have a look at the data first. Below query will fetch 10 rows from S3 bucket.
 
 [source, teradata-sql]
 ----
 SELECT TOP 10 * FROM (
-	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/NYCTaxtTrip/'
+	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/NYCTaxiTrip/'
 ) AS d;
 ----
 
@@ -73,7 +73,7 @@ PRIMARY INDEX ( medallion );
 
 INSERT INTO trip 
 SELECT * FROM (
-	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/NYCTaxtTrip/'
+	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/NYCTaxiTrip/'
 ) AS d;
 
 ----
@@ -209,7 +209,7 @@ time_bucket_per	                                                      vendor_id	
 ----
 
 ==== Note: 
-In addition to above time series operations, Vantage also provides a special time series tables with Primary Time Index (PTI). These are regular Vantage tables with PTI defined rather than a Primary Index (PI). Though PTI tables are not mandatory for time series functionality/operations, PTI tables optimizes how the time series data is stored physically and hence improves performance considerably compared to regular tables. 
+In addition to above time series operations, Vantage also provides a special time series tables with Primary Time Index (PTI). These are regular Vantage tables with PTI defined rather than a Primary Index (PI). Though tables with PTI are not mandatory for time series functionality/operations, PTI optimizes how the time series data is stored physically and hence improves performance considerably compared to regular tables. 
 
 == Summary
 
