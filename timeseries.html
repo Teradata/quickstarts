@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Run Vantage Express on GCP :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/vantage.express.gcp.html">
-    <meta name="description" content="Run Vantage Express on Google Cloud.">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics">
+    <title>Time Series Analysis :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/timeseries.html">
+    <meta name="description" content="Time Series Analysis">
+    <meta name="keywords" content="data warehouses, analytics, teradata, vantage, time series, business intelligence, enterprise analytics">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="./_/css/site.css">
-<meta property="og:title" content="Run Vantage Express on GCP :: Teradata Getting Started">
+<meta property="og:title" content="Time Series Analysis :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Run Vantage Express on Google Cloud." />
+<meta property="og:description" content="Time Series Analysis" />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/vantage.express.gcp.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/timeseries.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -995,7 +995,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="run-vantage-express-on-aws.html">Vantage Express on AWS</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on GCP</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -1031,7 +1031,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="fastload.html">Run large bulkloads efficiently with Fastload</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="timeseries.html">Time Series Analysis</a>
   </li>
 </ul>
@@ -1110,8 +1110,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li>Get access to Vantage</li>
-    <li><a href="vantage.express.gcp.html">Vantage Express on GCP</a></li>
+    <li>Tutorials</li>
+    <li><a href="timeseries.html">Time Series Analysis</a></li>
   </ul>
 </nav>
 </div>
@@ -1119,20 +1119,237 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/vantage.express.gcp.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/timeseries.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Run Vantage Express on GCP</h1>
-<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
-Last updated: November 9th, 2021</p>
+<h1 class="page">Time Series Analysis</h1>
+<p>Author: <a href="mailto:remi.turpaud@teradata.com">Remi Turpaud</a><br/>
+Last updated: April 15th, 2022</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This how-to demonstrates how to run Vantage Express in Google Cloud Platform. Vantage Express contains a fully functional Teradata SQL Engine.</p>
+<p>Time series is series of data points indexed in time order. It is data continuously produced and collected by a wide range of applications and devices including but not limited to Internet of Things. Teradata Vantage offers various functionalities to simplify time series data analysis.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You need access to a Teradata Vantage instance. Times series functionalities and NOS are enabled in all Vantage editions from Vantage Express through Developer, DYI to Vantage as a Service starting from version 17.10. If you need a new instance of Vantage, you can install Vantage Express on your local machine using <a href="getting.started.vmware.html" class="xref page">VMware</a>, <a href="getting.started.vbox.html" class="xref page">VirtualBox</a>, or <a href="getting.started.utm.html" class="xref page">UTM</a>. You can also run <a href="vantage.express.gcp.html" class="xref page">Vantage Express in the cloud on GCP</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_import_data_sets_from_aws_s3_using_vantage_nos"><a class="anchor" href="#_import_data_sets_from_aws_s3_using_vantage_nos"></a>Import data sets from AWS S3 using Vantage NOS</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Our sample data sets are available on S3 bucket and can be accessed from Vantage directly using Vantage NOS. Data is in CSV foramt and let&#8217;s ingest them into Vantage for our time series analysis. The bucket is at <a href="https://td-usgs-public.s3.amazonaws.com/" class="bare">https://td-usgs-public.s3.amazonaws.com/</a>.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s have a look at the data first. Below query will fetch 10 rows from S3 bucket.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT TOP 10 * FROM (
+	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/NYCTaxiTrip/'
+) AS d;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is what we&#8217;ve got:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>medallion               		hack_license				vendor_id	rate_code	store_and_fwd_flag	pickup_datetime		        dropoff_datetime		passenger_count		trip_time_in_secs	trip_distance	pickup_longitude	pickup_latitude	  dropoff_longitude	dropoff_latitude
+---------------------------------	---------------------------------	---------	---------	------------------	-------------------------	-------------------------	---------------		-----------------	-------------	----------------	---------------	  -----------------	-----------------
+C9E0259672E6F6677BA3EAE04511A7A0	2AB5F641A6BE8445CBAA25C34C10D498	CMT		1		N			2013-11-10T00:20:50.000Z	2013-11-10T00:47:22.000Z	1			1591                    3.6             -73.959595              40.718086         -73.983337            40.730938
+C9E0259672E6F6677BA3EAE04511A7A0	2AB5F641A6BE8445CBAA25C34C10D498	CMT		1		N			2013-11-10T01:15:19.000Z	2013-11-10T01:24:07.000Z	1			528                     3.7             -73.972588              40.743603         -73.997002            40.714806
+C9E0259672E6F6677BA3EAE04511A7A0	2AB5F641A6BE8445CBAA25C34C10D498	CMT		1		N			2013-11-10T01:30:09.000Z	2013-11-10T01:37:42.000Z	1			453                     2.0             -73.998352              40.721233         -73.99115             40.74461
+C9E0259672E6F6677BA3EAE04511A7A0	2AB5F641A6BE8445CBAA25C34C10D498	CMT		1		N			2013-11-10T01:38:23.000Z	2013-11-10T01:45:09.000Z	1			406                     1.7             -73.991814              40.744537         -73.974815            40.75396
+C9E0259672E6F6677BA3EAE04511A7A0	2AB5F641A6BE8445CBAA25C34C10D498	CMT		1		N			2013-11-10T01:57:49.000Z	2013-11-10T02:10:20.000Z	1			750                     2.4             -73.977859              40.725471         -73.987297            40.749561
+C9E0259672E6F6677BA3EAE04511A7A0	2AB5F641A6BE8445CBAA25C34C10D498	CMT		1		N			2013-11-10T02:21:14.000Z	2013-11-10T02:33:51.000Z	1			757                     3.5             -74.005219              40.741226         -73.964577            40.764809
+C9E0259672E6F6677BA3EAE04511A7A0	2AB5F641A6BE8445CBAA25C34C10D498	CMT		1		N			2013-11-10T01:51:03.000Z	2013-11-10T01:53:56.000Z	1			172                     0.5             -73.985451              40.735867         -73.977806            40.734016
+C9E0259672E6F6677BA3EAE04511A7A0	2AB5F641A6BE8445CBAA25C34C10D498	CMT		1		N			2013-11-10T01:00:43.000Z	2013-11-10T01:05:10.000Z	1			266                     1.2             -73.794418              40.657249         -73.973907            40.747341
+C9E0259672E6F6677BA3EAE04511A7A0	2AB5F641A6BE8445CBAA25C34C10D498	CMT		1		N			2013-11-10T00:13:45.000Z	2013-11-10T00:17:18.000Z	1			213                     0.5             -73.953896              40.712482         -73.956383            40.717175
+C9E0259672E6F6677BA3EAE04511A7A0	2AB5F641A6BE8445CBAA25C34C10D498	CMT		1		N			2013-11-09T23:52:54.000Z	2013-11-10T00:04:44.000Z	1			710                     1.8             -73.965065              40.714432         -73.952423            40.69487</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s extract the complete data and bring it into Vantage for further analysis.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE TABLE trip
+(
+  medallion varchar(50) character set latin NOT casespecific,
+  hack_license varchar(50) character set latin NOT casespecific,
+  vendor_id varchar(10) character set latin NOT casespecific,
+  rate_code          integer,
+  store_and_fwd_flag char(1) character set latin NOT casespecific,
+  pickup_datetime timestamp(6),
+  dropoff_datetime timestamp(6),
+  passenger_count   smallint,
+  trip_time_in_secs integer,
+  trip_distance float,
+  pickup_longitude float,
+  pickup_latitude float,
+  dropoff_longitude float,
+  dropoff_latitude float
+)
+PRIMARY INDEX ( medallion );
+
+
+INSERT INTO trip
+SELECT * FROM (
+	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/NYCTaxiTrip/'
+) AS d;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Result:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>480535 rows affected.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Vantage will now fetch the data from S3 and insert into trip table we just created.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_basic_time_series_operations"><a class="anchor" href="#_basic_time_series_operations"></a>Basic time series operations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that we are familiar with the data set, we can use Vantage capabilities to quickly analyse the data set. First, let&#8217;s identify how many passengers are being picked up by hour in the month of November.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT TOP 10
+$TD_TIMECODE_RANGE
+,begin($TD_TIMECODE_RANGE) time_bucket_start --(timestamp, format 'YYYY-MM-DDBHH:MI:SS') time_bucket_start
+,sum(passenger_count) passenger_count
+FROM trip
+WHERE extract(month from pickup_datetime)=11
+GROUP BY TIME(HOURS(1))
+USING TIMECODE(pickup_datetime)
+ORDER BY 1;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Result:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>TIMECODE_RANGE	                                                          time_bucket_start                   passenger_count
+-----------------------------------------------------------------         --------------------------------    ------
+2013-11-09 22:00:00.000000-05:00,2013-11-09 23:00:00.000000-05:00	  2013-11-09 22:00:00.000000-05:00    14
+2013-11-09 23:00:00.000000-05:00,2013-11-10 00:00:00.000000-05:00	  2013-11-09 23:00:00.000000-05:00    13673
+2013-11-10 00:00:00.000000-05:00,2013-11-10 01:00:00.000000-05:00	  2013-11-10 00:00:00.000000-05:00    58635
+2013-11-10 01:00:00.000000-05:00,2013-11-10 02:00:00.000000-05:00	  2013-11-10 01:00:00.000000-05:00    51046
+2013-11-10 02:00:00.000000-05:00,2013-11-10 03:00:00.000000-05:00	  2013-11-10 02:00:00.000000-05:00    44277
+2013-11-10 03:00:00.000000-05:00,2013-11-10 04:00:00.000000-05:00	  2013-11-10 03:00:00.000000-05:00    34422
+2013-11-10 04:00:00.000000-05:00,2013-11-10 05:00:00.000000-05:00	  2013-11-10 04:00:00.000000-05:00    22054
+2013-11-10 05:00:00.000000-05:00,2013-11-10 06:00:00.000000-05:00	  2013-11-10 05:00:00.000000-05:00    9395
+2013-11-10 06:00:00.000000-05:00,2013-11-10 07:00:00.000000-05:00	  2013-11-10 06:00:00.000000-05:00    7828
+2013-11-10 07:00:00.000000-05:00,2013-11-10 08:00:00.000000-05:00	  2013-11-10 07:00:00.000000-05:00    10167</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Yes, this can also be achieved by extracting the hour from time and then aggregating - it&#8217;s additional code/work, but can be done without timeseries specific functionality.</p>
+</div>
+<div class="paragraph">
+<p>But, now let&#8217;s go a step further to identify how many passengers are being picked up and what is the average trip duration by vendor every 15 minutes in November.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT TOP 10
+$TD_TIMECODE_RANGE
+,vendor_id
+,sum(passenger_count)
+,avg(trip_time_in_secs)
+FROM TRNG_NYCTaxi.trip
+GROUP BY TIME (MINUTES(15) and vendor_id)
+USING TIMECODE(pickup_datetime)
+WHERE extract(month from pickup_datetime)=11
+ORDER BY 1,2;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Result:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>TIMECODE_RANGE	                                                    vendor_id   passenger_count	  trip_time_in_secs
+-----------------------------------------------------------------   -----       ---------------   -----------------
+2013-11-09 22:15:00.000000-05:00,2013-11-09 22:30:00.000000-05:00   CMT	        1                 1344
+2013-11-09 22:30:00.000000-05:00,2013-11-09 22:45:00.000000-05:00   CMT	        1                 5128
+2013-11-09 22:45:00.000000-05:00,2013-11-09 23:00:00.000000-05:00   VTS	        12                4560
+2013-11-09 23:00:00.000000-05:00,2013-11-09 23:15:00.000000-05:00   CMT	        15                3745.571429
+2013-11-09 23:00:00.000000-05:00,2013-11-09 23:15:00.000000-05:00   VTS	        21                3425.454545
+2013-11-09 23:15:00.000000-05:00,2013-11-09 23:30:00.000000-05:00   CMT	        91                2508.816667
+2013-11-09 23:15:00.000000-05:00,2013-11-09 23:30:00.000000-05:00   VTS	        176               2572.142857
+2013-11-09 23:30:00.000000-05:00,2013-11-09 23:45:00.000000-05:00   CMT	        931               1655.879661
+2013-11-09 23:30:00.000000-05:00,2013-11-09 23:45:00.000000-05:00   VTS	        1360              1673.446154</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is the power of Vantage time series functionality. Without needing complicated, cumbersome logic we are able to find average trip duration by vendor every 15 minutes just by modifying the group by time clause. Let&#8217;s now look at how simple it is to build moving averages based on this. First, let&#8217;s start by creating a view as below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">REPLACE VIEW NYC_taxi_trip_ts as
+SELECT
+$TD_TIMECODE_RANGE time_bucket_per
+,vendor_id
+,sum(passenger_count) passenger_cnt
+,sum(trip_time_in_secs) avg_trip_time_in_secs
+FROM TRNG_NYCTaxi.trip
+GROUP BY TIME(MINUTES(15) and vendor_id)
+USING TIMECODE(pickup_datetime)
+WHERE extract(month from pickup_datetime)=11;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s calculate a 2 hours moving average on our 15-minutes time series. 2 hour is 8 * 15 minutes periods.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT TOP 10 * FROM MovingAverage (
+  ON NYC_taxi_trip_ts PARTITION BY vendor_id ORDER BY time_bucket_per
+  USING
+  MAvgType ('S')
+  WindowSize (8)
+  TargetColumns ('passenger_cnt')
+) AS dt
+WHERE begin(time_bucket_per)(date) = '2013-11-10'
+ORDER BY vendor_id, time_bucket_per;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Result:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>time_bucket_per	                                                      vendor_id	    passenger_cnt   avg_trip_time_in_secs   passenger_cnt_smavg
+-----------------------------------------------------------------     ---------     -------------   ---------------------   -------------------
+2013-11-10 00:15:00.000000-05:00,2013-11-10 00:30:00.000000-05:00     CMT           5949            3075511                 2187.625
+2013-11-10 00:30:00.000000-05:00,2013-11-10 00:45:00.000000-05:00     CMT           5810            2918201                 2913.75
+2013-11-10 00:45:00.000000-05:00,2013-11-10 01:00:00.000000-05:00     CMT           5566            2767533                 3609.375
+2013-11-10 01:00:00.000000-05:00,2013-11-10 01:15:00.000000-05:00     CMT           5358            2676729                 4277.25
+2013-11-10 01:15:00.000000-05:00,2013-11-10 01:30:00.000000-05:00     CMT           5133            2524393                 4907.5
+2013-11-10 01:30:00.000000-05:00,2013-11-10 01:45:00.000000-05:00     CMT           4896            2411368                 5403.125
+2013-11-10 01:45:00.000000-05:00,2013-11-10 02:00:00.000000-05:00     CMT           4815            2276216                 5448.75
+2013-11-10 02:00:00.000000-05:00,2013-11-10 02:15:00.000000-05:00     CMT           4699            2267700                 5278.25
+2013-11-10 02:15:00.000000-05:00,2013-11-10 02:30:00.000000-05:00     CMT           4505            2126760                 5097.75
+2013-11-10 02:30:00.000000-05:00,2013-11-10 02:45:00.000000-05:00     CMT           4355            2031154                 4915.875</pre>
+</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1141,7 +1358,7 @@ Last updated: November 9th, 2021</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If do not wish to pay for cloud usage you can install Vantage Express locally using <a href="getting.started.vmware.adoc">VMware</a> or <a href="getting.started.vbox">VirtualBox</a>.
+In addition to above time series operations, Vantage also provides a special time series tables with Primary Time Index (PTI). These are regular Vantage tables with PTI defined rather than a Primary Index (PI). Though tables with PTI are not mandatory for time series functionality/operations, PTI optimizes how the time series data is stored physically and hence improves performance considerably compared to regular tables.
 </td>
 </tr>
 </table>
@@ -1149,438 +1366,10 @@ If do not wish to pay for cloud usage you can install Vantage Express locally us
 </div>
 </div>
 <div class="sect1">
-<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>A GCP account.</p>
-</li>
-<li>
-<p><code>gcloud</code> command line utility installed on your machine. You can find installation instructions here: <a href="https://cloud.google.com/sdk/docs/install" class="bare">https://cloud.google.com/sdk/docs/install</a>.</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Create a Ubuntu VM with 4 CPU&#8217;s and 8GB of RAM, a 70GB balanced disk. The following command creates a VM in <code>us-central1</code> region. For best performance, replace the  region with one that is the closest to you. For the list of supported regions see <a href="https://cloud.google.com/compute/docs/regions-zones">GCP regions documentation</a>.</p>
-<div class="tabset is-loading">
-<div class="ulist tabs">
-<ul>
-<li>
-<p><a id="tabset1_windows"></a>Windows</p>
-</li>
-<li>
-<p><a id="tabset1_macos"></a>MacOS</p>
-</li>
-<li>
-<p><a id="tabset1_linux"></a>Linux</p>
-</li>
-</ul>
-</div>
-<div class="content">
-<div class="tab-pane" aria-labelledby="tabset1_windows">
-<div class="paragraph">
-<p>Run in Powershell:</p>
-</div>
-<div id="gcloud_create_vm_win" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">gcloud compute instances create teradata-vantage-express `
-  --zone=us-central1-a `
-  --machine-type=n2-custom-4-8192 `
-  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced `
-  --enable-nested-virtualization `
-  --tags=ve</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_macos">
-<div id="gcloud_create_vm_macos" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute instances create teradata-vantage-express \
-  --zone=us-central1-a \
-  --machine-type=n2-custom-4-8192 \
-  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
-  --enable-nested-virtualization \
-  --tags=ve</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_linux">
-<div id="gcloud_create_vm_linux" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute instances create teradata-vantage-express \
-  --zone=us-central1-a \
-  --machine-type=n2-custom-4-8192 \
-  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
-  --enable-nested-virtualization \
-  --tags=ve</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>ssh to your VM:</p>
-<div id="gcloud_ssh" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute ssh teradata-vantage-express --zone=us-central1-a</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Switch to <code>root</code> user:</p>
-<div id="sudo" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo -i</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Prepare the download directory for Vantage Express:</p>
-<div id="download_dir" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir /opt/downloads
-cd /opt/downloads</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Install VirtualBox and 7zip:</p>
-<div id="apt" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apt update &amp;&amp; apt-get install p7zip-full p7zip-rar virtualbox -y</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Retrieve the curl command to download Vantage Express.</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Go to <a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Vantage Expess download page</a> (registration required).</p>
-</li>
-<li>
-<p>Click on the latest download link, e.g. "Vantage Express 17.10". You will see a license agreement popup. Don&#8217;t accept the license yet.</p>
-</li>
-<li>
-<p>Open the network view in your browser. For example, in Chrome press <kbd>F12</kbd> and navigate to <code>Network</code> tab:</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/browser.network.png" alt="Browser Network Tab" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>Accept the license by clicking on <code>I Agree</code> button and cancel the download.</p>
-</li>
-<li>
-<p>In the network view, find the last request that starts with <code>VantageExpress</code>. Right click on it and select <code>Copy &#8594; Copy as cURL</code>:</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/browser.copy.curl.png" alt="Browser Copy culr" width="500">
-</div>
-</div>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Head back to the ssh session and download Vantage Express by pasting the curl command. Add <code>-o ve.7z</code> to the command to save the download to file named <code>ve.7z</code>. You can remove all the HTTP headers, e.g.:</p>
-<div id="download_ve" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -o ve.7z 'http://d289lrf5tw1zls.cloudfront.net/database/teradata-express/VantageExpress17.10_Sles12_202108300444.7z?Expires=1638719978&amp;Signature=GKBkNvery_long_signature__&amp;Key-Pair-Id=********************'</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Unzip the downloaded file. It will take several minutes:</p>
-<div id="unzip" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">7z x ve.7z</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Start the VM in VirtualBox. The command will return immediately but the VM init process will take several minutes:</p>
-<div id="start_vim" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export VM_IMAGE_DIR="/opt/downloads/VantageExpress17.10_Sles12"
-DEFAULT_VM_NAME="vantage-express-17.10"
-VM_NAME="${VM_NAME:-$DEFAULT_VM_NAME}"
-vboxmanage createvm --name "$VM_NAME" --register --ostype openSUSE_64
-vboxmanage modifyvm "$VM_NAME" --ioapic on --memory 6000 --vram 128 --nic1 nat --cpus 4
-vboxmanage storagectl "$VM_NAME" --name "SATA Controller" --add sata --controller IntelAhci
-vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk1*')"
-vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 1 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk2*')"
-vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 2 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk3*')"
-vboxmanage modifyvm "$VM_NAME" --natpf1 "tdssh,tcp,,4422,,22"
-vboxmanage modifyvm "$VM_NAME" --natpf1 "tddb,tcp,,1025,,1025"
-vboxmanage startvm "$VM_NAME" --type headless
-vboxmanage controlvm "$VM_NAME" keyboardputscancode 1c 1c</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>ssh to Vantage Express VM. Use <code>root</code> as password:</p>
-<div id="ssh_to_ve" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ssh -p 4422 root@localhost</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Validate that the DB is up:</p>
-<div id="pde" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pdestate -a</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If the command returns <code>PDE state is RUN/STARTED. DBS state is 5: Logons are enabled - The system is quiescent</code>, it means that Vantage Express has started.
-If the status is different, repeat <code>pdestate -a</code> till you get the correct status.</p>
-</div>
-</li>
-<li>
-<p>Once Vantage Express is up and running, start <code>bteq</code> client command line client. BTEQ (pronounced “bee-teek”) is a general-purpose, command-based client tool used to submit SQL queries to a Teradata Database.</p>
-<div id="bteq" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bteq</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Once in bteq, connect to your Vantage Express instance. When asked for the password, enter <code>dbc</code>:</p>
-<div id="bteq_logon" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">.logon localhost/dbc</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_run_sample_queries"><a class="anchor" href="#_run_sample_queries"></a>Run sample queries</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Using <code>dbc</code> user, we will create a new database called <code>HR</code>. Copy/paste this query and run press <kbd>Enter</kbd>:</p>
-<div id="first_query" class="listingblock emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE HR
-AS PERMANENT = 60e6, -- 60MB
-    SPOOL = 120e6; -- 120MB</code></pre>
-</div>
-</div>
-<div class="sidebarblock">
-    <div id="right" style="float: right">
-    <a style="cursor: pointer; color: grey" onclick="this.parentElement.parentElement.style.display = 'none'">x</a>
-  </div>
-  <div class="content">
-    <div class="paragraph">Were you able to run the query?
-      <i class="far fa-thumbs-up click-icon" style="padding: 0rem 0.2rem;" onclick="toggleThumbs(this, 'first_query')"></i>
-      <i class="far fa-thumbs-down click-icon" onclick="toggleThumbs(this 'first_query')"></i>
-    </div>
-  </div>
-</div>
-<style>
-.closebtn {
-  position: absolute;
-  top: 5px;
-  right: 15px;
-  color: white;
-  font-size: 30px;
-  cursor: pointer;
-}
-</style>
-</li>
-<li>
-<p>Let&#8217;s create a sample table and insert some data and query it. We will first create a table to hold employee information:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE SET TABLE HR.Employees (
-   GlobalID INTEGER,
-   FirstName VARCHAR(30),
-   LastName VARCHAR(30),
-   DateOfBirth DATE FORMAT 'YYYY-MM-DD',
-   JoinedDate DATE FORMAT 'YYYY-MM-DD',
-   DepartmentCode BYTEINT
-)
-UNIQUE PRIMARY INDEX ( GlobalID );</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Now, let&#8217;s insert a record:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">INSERT INTO HR.Employees (
-   GlobalID,
-   FirstName,
-   LastName,
-   DateOfBirth,
-   JoinedDate,
-   DepartmentCode
-)
-VALUES (
-   101,
-   'Adam',
-   'Tworkowski',
-   '1980-01-05',
-   '2004-08-01',
-   01
-);</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Finally, let&#8217;s see if we can retrieve the data:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM HR.Employees;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You should get the following results:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>GlobalID  FirstName  LastName   DateOfBirth  JoinedDate  DepartmentCode
---------  ---------  ---------- -----------  ----------  --------------
-     101  Adam       Tworkowski  1980-01-05  2004-08-01               1</pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_optional_setup"><a class="anchor" href="#_optional_setup"></a>Optional setup</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>If you intend to stop and start the VM, you may want to add Vantage Express to autostart. ssh to your GCP VM and run the following commands:</p>
-<div id="autostart" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo -i
-
-cat &lt;&lt;EOF &gt;&gt; /etc/default/virtualbox
-VBOXAUTOSTART_DB=/etc/vbox
-VBOXAUTOSTART_CONFIG=/etc/vbox/autostart.cfg
-EOF
-
-cat &lt;&lt;EOF &gt; /etc/systemd/system/vantage-express-17.10.service
-[Unit]
-Description=vm1
-After=network.target virtualbox.service
-Before=runlevel2.target shutdown.target
-[Service]
-User=root
-Group=root
-Type=forking
-Restart=no
-TimeoutSec=5min
-IgnoreSIGPIPE=no
-KillMode=process
-GuessMainPID=no
-RemainAfterExit=yes
-ExecStart=/usr/bin/VBoxManage startvm vantage-express-17.10 --type headless
-ExecStop=/usr/bin/VBoxManage controlvm vantage-express-17.10 savestate
-[Install]
-WantedBy=multi-user.target
-EOF
-
-systemctl daemon-reload
-systemctl enable vantage-express-17.10
-systemctl start vantage-express-17.10</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>If you would like to connect to Vantage Express from the Internet, you will need to open up firewall holes to your VM. You should also change the default password to <code>dbc</code> user:</p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>To change the password for <code>dbc</code> user go to your VM and start bteq:</p>
-<div id="pw_change_bteq" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bteq</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Login to your database using <code>dbc</code> as username and password:</p>
-<div id="pw_change_bteq_logon" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">.logon localhost/dbc</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Change the password for <code>dbc</code> user:</p>
-<div id="pw_change_mod_user" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">MODIFY USER dbc AS PASSWORD = new_password;</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>You can now open up port 1025 to the internet using gcloud command:</p>
-<div id="gcloud_fw_rule" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute firewall-rules create vantage-express --allow=tcp:1025 --direction=IN --target-tags=ve</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_cleanup"><a class="anchor" href="#_cleanup"></a>Cleanup</h2>
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To stop incurring charges, delete the VM:</p>
-</div>
-<div id="delete_vm" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute instances delete teradata-vantage-express --zone=us-central1-a</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Also, remember to remove any firewall rules that you have added, e.g.:</p>
-</div>
-<div id="delete_fw_rule" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute firewall-rules delete vantage-express</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="nos.html" class="xref page">Query data stored in object storage</a></p>
-</li>
-</ul>
+<p>In this quick start we have learnt how easy it is to analyse time series datasets using Vantage&#8217;s time series capabilities.</p>
 </div>
 </div>
 </div>
@@ -1590,13 +1379,13 @@ systemctl start vantage-express-17.10</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://downloads.teradata.com/download/files/7671/201588/3/B035-5948-051K-VantageExpress-17.10_SLES12.pdf?license=898/218656">Teradata® Vantage™ Express Installation and Configuration Guide (must be logged in to downloads.teradata.com)</a></p>
+<p><a href="https://docs.teradata.com/r/Teradata-VantageTM-Time-Series-Tables-and-Operations/July-2021/Introduction-to-Teradata-Time-Series-Tables-and-Operations">Teradata Vantage™ - Time Series Tables and Operations</a></p>
 </li>
 <li>
-<p><a href="https://docs.teradata.com/r/KEoAHNnh~EbZLtVJNRo0Sg/root">Teradata® Studio™ and Studio™ Express Installation Guide</a></p>
+<p><a href="nos.html" class="xref page">Query data stored in object storage</a></p>
 </li>
 <li>
-<p><a href="https://docs.teradata.com/r/jmAxXLdiDu6NiyjT6hhk7g/root">Introduction to BTEQ</a></p>
+<p><a href="https://docs.teradata.com/r/2mw8ooFr~xX0EaaGFaDW8A/root">Teradata Vantage™ - Native Object Store Getting Started Guide</a></p>
 </li>
 </ul>
 </div>
