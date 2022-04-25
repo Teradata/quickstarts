@@ -208,8 +208,7 @@ time_bucket_per	                                                      vendor_id	
 
 ----
 
-==== Note: 
-In addition to above time series operations, Vantage also provides a special time series tables with Primary Time Index (PTI). These are regular Vantage tables with PTI defined rather than a Primary Index (PI). Though tables with PTI are not mandatory for time series functionality/operations, PTI optimizes how the time series data is stored physically and hence improves performance considerably compared to regular tables. 
+NOTE: In addition to above time series operations, Vantage also provides a special time series tables with Primary Time Index (PTI). These are regular Vantage tables with PTI defined rather than a Primary Index (PI). Though tables with PTI are not mandatory for time series functionality/operations, PTI optimizes how the time series data is stored physically and hence improves performance considerably compared to regular tables. 
 
 == Summary
 
