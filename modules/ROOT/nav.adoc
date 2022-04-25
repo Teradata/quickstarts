@@ -11,6 +11,7 @@
 ** xref::dbt.adoc[]
 ** xref::sto.adoc[]
 ** xref::fastload.adoc[]
+** xref::timeseries.adoc[]
 * How-tos
 ** xref::jdbc.adoc[]
 ** xref::jupyter.adoc[]
