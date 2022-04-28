@@ -68,10 +68,24 @@ To load the csv data to Vantage, we will define and run a job. The job will prep
 +
 [source, bash]
 ----
-database = 'irs',
-host = 'host',
-username = 'username',
-password = 'password'
+TargetTdpId           = 'host'
+TargetUserName        = 'username'
+TargetUserPassword    = 'password'
+TargetWorkingDatabase = 'irs'
+
+FileReaderDirectoryPath = ''
+FileReaderFileName      = 'index_2020.csv'
+FileReaderFormat        = 'Delimited'
+FileReaderOpenMode      = 'Read'
+FileReaderTextDelimiter = ','
+FileReaderSkipRows      = 1
+
+DDLErrorList = '3807'
+
+LoadLogTable    = 'irs.irs_returns_lg'
+LoadErrorTable1 = 'irs.irs_returns_et'
+LoadErrorTable2 = 'irs.irs_returns_uv'
+LoadTargetTable = 'irs.irs_returns'
 ----
 
 . Create a file with the following content and save it as `load.txt`. See comments within the job file to understand its structure.
@@ -86,78 +100,31 @@ DESCRIPTION 'Load a Teradata table from a file'
   */
   DEFINE SCHEMA SCHEMA_IRS
     (
-      in_return_id VARCHAR(19),
-      in_filing_type VARCHAR(5),
-      in_ein VARCHAR(19),
-      in_tax_period VARCHAR(19),
-      in_sub_date VARCHAR(22),
+      in_return_id     VARCHAR(19),
+      in_filing_type   VARCHAR(5),
+      in_ein           VARCHAR(19),
+      in_tax_period    VARCHAR(19),
+      in_sub_date      VARCHAR(22),
       in_taxpayer_name VARCHAR(100),
-      in_return_type VARCHAR(5),
-      in_dln VARCHAR(19),
-      in_object_id VARCHAR(19)
+      in_return_type   VARCHAR(5),
+      in_dln           VARCHAR(19),
+      in_object_id     VARCHAR(19)
     );
 
   /*
-    Define the operator that will read the csv file
-  */
-  DEFINE OPERATOR op_IRS
-  TYPE DATACONNECTOR PRODUCER
-  SCHEMA SCHEMA_IRS
-  ATTRIBUTES
-  (
-    VARCHAR DirectoryPath = '',
-    VARCHAR FileName = 'index_2020.csv',
-    VARCHAR Format = 'Delimited',
-    VARCHAR OpenMode = 'Read',
-    VARCHAR TextDelimiter = ',',
-    INTEGER SkipRows = 1
-  );
-
-  /*
-    This operator will apply DDL statements to the database. The statements
-    are defined in `st_Setup_Tables` step
-  */
-  DEFINE OPERATOR od_IRS
-  TYPE DDL
-  ATTRIBUTES
-  (
-    VARCHAR WorkingDatabase = @database,
-    VARCHAR TdpId = @host,
-    VARCHAR UserName = @username,
-    VARCHAR UserPassword = @password,
-    VARCHAR ErrorList = '3807'
-  );
-
-  /*
-    Define the operator that will load the data into the database
-  */
-  DEFINE OPERATOR ol_IRS
-  TYPE LOAD
-  SCHEMA *
-  ATTRIBUTES
-  (
-    VARCHAR TraceLevel = 'All',
-    VARCHAR TdpId = @host,
-    VARCHAR UserName = @username,
-    VARCHAR UserPassword = @password,
-    VARCHAR LogTable = 'irs.irs_returns_lg',
-    VARCHAR ErrorTable1 = 'irs.irs_returns_et',
-    VARCHAR ErrorTable2 = 'irs.irs_returns_uv',
-    VARCHAR TargetTable = 'irs.irs_returns'
-  );
-
-  /* In the first step, we are sending statements to remove old tables and create a new one.
+     In the first step, we are sending statements to remove old tables
+     and create a new one.
      This step replies on configuration stored in `od_IRS` operator
   */
   STEP st_Setup_Tables
   (
     APPLY
-      ('DATABASE irs;'),
-      ('DROP TABLE irs_returns_lg;'),
-      ('DROP TABLE irs_returns_et;'),
-      ('DROP TABLE irs_returns_uv;'),
-      ('DROP TABLE irs_returns;'),
-      ('CREATE MULTISET TABLE irs_returns (
+      ('DATABASE '   || @TargetWorkingDatabase || ';''),
+      ('DROP TABLE ' || @LoadLogTable || ';'),
+      ('DROP TABLE ' || @LoadErrorTable1 || ';'),
+      ('DROP TABLE ' || @LoadErrorTable2 || ';'),
+      ('DROP TABLE ' || @LoadTargetTable || ';'),
+      ('CREATE MULTISET TABLE ' || @LoadTargetTable || ' (
           return_id INT,
           filing_type VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
           ein INT,
@@ -169,17 +136,17 @@ DESCRIPTION 'Load a Teradata table from a file'
           object_id BIGINT
         )
         PRIMARY INDEX ( return_id );')
-    TO OPERATOR (od_IRS);
+    TO OPERATOR ($DDL);
   );
 
   /*
-    Finally, in this step we read the data from the file operator and send it
-     to the load operator.
+    Finally, in this step we read the data from the file operator
+    and send it to the load operator.
   */
   STEP st_Load_File
   (
     APPLY
-      ('INSERT INTO irs.irs_returns (
+      ('INSERT INTO ' || @LoadTargetTable || ' (
           return_id,
           filing_type,
           ein,
@@ -200,8 +167,8 @@ DESCRIPTION 'Load a Teradata table from a file'
           :in_dln,
           :in_object_id
       );')
-    TO OPERATOR (ol_IRS)
-    SELECT * FROM OPERATOR(op_IRS);
+    TO OPERATOR ($LOAD)
+    SELECT * FROM OPERATOR($FILE_READER(SCHEMA_IRS));
   );
 );
 ----
