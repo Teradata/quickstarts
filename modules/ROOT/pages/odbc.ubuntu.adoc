@@ -83,4 +83,4 @@ You should get output similar to:
 This how-to demonstrated how to use ODBC with Teradata Vantage on Ubuntu. The how-to shows how to install the ODBC Teradata driver and the dependencies. It then shows how to configure ODBC and validate connectivity with a simple Python application.
 
 == Further reading
-* link:https://docs.teradata.com/r/~i3_9dmDNJA~PELp_hi0MQ/root[ODBC Driver for Teradata® User Guide]
+* link:https://docs.teradata.com/search/all?query=ODBC+Driver+for+Teradata+User+Guide&filters=ft%3AisBook~%22true%22&sort=last_update[ODBC Driver for Teradata® User Guide]
