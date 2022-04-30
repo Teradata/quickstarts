@@ -25,7 +25,9 @@ Let's first have a look at sample CSV data. We take the first 10 rows that Vanta
 
 [source, teradata-sql]
 ----
-SELECT TOP 10 * FROM (
+SELECT
+  TOP 10 *
+FROM (
 	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
 ) AS d;
 ----
@@ -51,7 +53,9 @@ We have got plenty of numbers, but what do they mean? To answer this question, w
 
 [source, teradata-sql]
 ----
-SELECT * FROM (
+SELECT
+  *
+FROM (
 	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
 	RETURNTYPE='NOSREAD_SCHEMA'
 ) AS d;
@@ -80,15 +84,21 @@ Now that we know the schema, we can work with the dataset as if it was a regular
 
 [source, teradata-sql]
 ----
-SELECT site_no Site_no, AVG(Temp) Avg_Temp FROM (
+SELECT
+  site_no Site_no, AVG(Flow) Avg_Flow
+FROM (
   LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
-) AS d GROUP BY site_no HAVING Avg_Temp IS NOT NULL;
+) AS d
+GROUP BY
+  site_no
+HAVING
+  Avg_Flow IS NOT NULL;
 ----
 
 Result:
 
 ----
-Site_no  Avg_Temp
+Site_no  Avg_Flow
 -------- ---------
 09380000 11
 09423560 73
@@ -108,10 +118,13 @@ CREATE DATABASE Riverflow
   AS PERMANENT = 60e6, -- 60MB
   SPOOL = 120e6; -- 120MB
 
-CREATE FOREIGN TABLE Riverflow.riverflow
+-- change current database to Riverflow
+DATABASE Riverflow;
+
+CREATE FOREIGN TABLE riverflow
   USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
 
-SELECT top 10 * FROM Riverflow.riverflow;
+SELECT top 10 * FROM riverflow;
 ----
 
 Result:
@@ -134,21 +147,21 @@ This time, the `SELECT` statement looks like a regular select against an in-data
 
 Querying object storage takes time. What if you decided that the data looks interesting and you want to do some more analysis with a solution that will you quicker answers? The good news is that data returned with NOS can be used as a source for `CREATE TABLE` statements. Assuming you have `CREATE TABLE` privilege, you will be able to run:
 
-IMPORTANT: This query assumes you created database `Riverflow` and a foreign table called `Riverflow.riverflow` in the previous step.
+IMPORTANT: This query assumes you created database `Riverflow` and a foreign table called `riverflow` in the previous step.
 
 [source, teradata-sql]
 ----
 
 -- This query assumes you created database `Riverflow`
--- and a foreign table called `Riverflow.riverflow` in the previous step.
+-- and a foreign table called `riverflow` in the previous step.
 
-CREATE MULTISET TABLE   Riverflow.riverflow_native (site_no, Flow, GageHeight, datetime)
+CREATE MULTISET TABLE riverflow_native (site_no, Flow, GageHeight, datetime)
 AS (
-  SELECT site_no, Flow, GageHeight, datetime FROM Riverflow.riverflow
+  SELECT site_no, Flow, GageHeight, datetime FROM riverflow
 ) WITH DATA
 NO PRIMARY INDEX;
 
-SELECT TOP 10 * FROM Riverflow.riverflow_native;
+SELECT TOP 10 * FROM riverflow_native;
 ----
 
 Result:
@@ -178,7 +191,9 @@ It is possible to inline your credentials directly into your query:
 
 [source, teradata-sql]
 ----
-SELECT top 10 * FROM (
+SELECT
+  TOP 10 *
+FROM (
   LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
   AUTHORIZATION='{"ACCESS_ID":"","ACCESS_KEY":""}'
 ) AS d;
@@ -197,19 +212,19 @@ You can then reference your authorization object when you create a foreign table
 
 [source, teradata-sql]
 ----
-CREATE FOREIGN TABLE Riverflow.riverflow
+CREATE FOREIGN TABLE riverflow
 , EXTERNAL SECURITY aws_authorization
 USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
 ----
 
 == Export data from Vantage to object storage
 
-So far, we have talked about reading and importing data from object storage. Wouldn't it be nice if we had a way to use SQL to export data from Vantage to object storage? This is exactly what `WRITE_NOS` function is for. Let's say we want to export data from `Riverflow.riverflow_native` table to object storage. You can do so with the following query:
+So far, we have talked about reading and importing data from object storage. Wouldn't it be nice if we had a way to use SQL to export data from Vantage to object storage? This is exactly what `WRITE_NOS` function is for. Let's say we want to export data from `riverflow_native` table to object storage. You can do so with the following query:
 
 [source, teradata-sql]
 ----
 SELECT * FROM WRITE_NOS (
-  ON ( SELECT * FROM Riverflow.riverflow_native )
+  ON ( SELECT * FROM riverflow_native )
   PARTITION BY site_no ORDER BY site_no
   USING
     LOCATION('YOUR-OBJECT-STORE-URI')
@@ -221,7 +236,7 @@ SELECT * FROM WRITE_NOS (
 ) AS d;
 ----
 
-Here, we instruct Vantage to take data from `Riverflow.riverflow_native` and save it in `YOUR-OBJECT-STORE-URI` bucket using `parquet` format. The data will be split into files by `site_no` attribute. The files will be compressed.
+Here, we instruct Vantage to take data from `riverflow_native` and save it in `YOUR-OBJECT-STORE-URI` bucket using `parquet` format. The data will be split into files by `site_no` attribute. The files will be compressed.
 
 == Summary
 
