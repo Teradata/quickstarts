@@ -71,7 +71,6 @@ To load the csv data to Vantage, we will define and run a job. The job will prep
 TargetTdpId           = 'host'
 TargetUserName        = 'username'
 TargetUserPassword    = 'password'
-TargetWorkingDatabase = 'irs'
 
 FileReaderDirectoryPath = ''
 FileReaderFileName      = 'index_2020.csv'
