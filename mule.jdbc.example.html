@@ -1999,15 +1999,16 @@ footer.footer-nav {
   for (let e of document.getElementsByClassName("emits-gtm-events")) {
     e.addEventListener("click", function() {
       dataLayer.push({
-        'event': e.id,
-        ''
-        });
+        'event': e.id
+      });
     });
-    e.addEventListener("copy", function() {
+    hljsElem = e.getElementsByClassName("hljs")[0];
+    hljsElem.addEventListener("copy", function() {
+      console.log('copy event');
       dataLayer.push({
         'event': 'copy_code',
-        'element': e.id
-        });
+        'element': hljsElem.id
+      });
     });
   }
 
