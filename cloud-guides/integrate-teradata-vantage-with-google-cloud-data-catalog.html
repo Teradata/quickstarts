@@ -2158,7 +2158,16 @@ footer.footer-nav {
   // this script instruments elements to emit GTM events
   for (let e of document.getElementsByClassName("emits-gtm-events")) {
     e.addEventListener("click", function() {
-      dataLayer.push({'event': e.id});
+      dataLayer.push({
+        'event': e.id,
+        ''
+        });
+    });
+    e.addEventListener("copy", function() {
+      dataLayer.push({
+        'event': 'copy_code',
+        'element': e.id
+        });
     });
   }
 
