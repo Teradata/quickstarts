@@ -1,0 +1,162 @@
+= Integrate Teradata Jupyter extensions with Google Vertex AI
+:experimental:
+:page-author: Hailing Jiang
+:page-email: Hailing.iang@teradata.com
+:page-revdate: May 12th, 2022
+:description: Integrate Teradata Jupyter extensions with Google Vertex AI
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy
+
+== Overview
+Teradata Jupyter extensions provide Teradata SQL kernel and several UI extensions to allow users to easily access and navigate Teradata database from Jupyter envioronment. Google Vertex AI is Google Cloud's new unified ML platform. Vertex AI Workbench provides a Jupyter-base development environment for the entire data science workflow. This article describes how to integate our Jupyter extensions with Vertex AI Workbench so that Vertex AI users can take advantage of our Teradata extensions in their ML pipeline.
+
+Vertex AI workbench supports two types of notebooks: managed notebooks and user-managed notebooks. Here we will focus on user-managed notebooks. We will show two ways to integrate our Jupyter extensions with user-managed notebooks: use startup script to install our kernel and extensions or use custom container.
+
+== Prerequisites
+* Access to a Teradata Vantage instance
+* Google Cloud account with Vertex AI enabled
+* Google cloud storage to store startup scripts and Teradata Jupyter extension package
+
+== Use startup script
+
+When we create a new notebook instance, we can specify a startup script. This script runs only once after the instance is created.
+
+=== 1. Download Teradata Jupyter extensions package
+Go to link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter] page to download the Teradata Jupyter extensions package bundle Linux version.
+
+=== 2. Upload the package to a Google Cloud storage bucket.
+
+=== 3. Write a startup script and upload it to cloud storage bucket
+Below is a sample script. It fetches Teradata Jupyter extension package from cloud storage bucket and installs Teradata SQL kernel and extensions.
+
+[source, bash, role="content-editable"]
+----
+#! /bin/bash
+ 
+cd /home/jupyter
+mkdir teradata
+cd teradata
+gsutil cp gs://teradata-jupyter/* .
+unzip teradatasql*.zip
+ 
+# Install Teradata kernel
+cp teradatakernel /usr/local/bin
+ 
+jupyter kernelspec install ./teradatasql --prefix=/opt/conda
+ 
+# Install Teradata extensions
+jupyter labextension install --no-build teradata_database*
+jupyter labextension install --no-build teradata_connection_manager*
+jupyter labextension install --no-build teradata_resultset*
+jupyter labextension install --no-build teradata_sqlhighlighter*
+jupyter labextension install --no-build teradata_connection_manager*
+jupyter labextension install --no-build teradata_preferences*
+ 
+ 
+# PIP install the Teradata Python & R libraries
+pip install teradataml
+Rscript -e "install.packages('tdplyr',repos=c('https://teradata-download.s3.amazonaws.com','https://cloud.r-project.org'))"
+
+# rebuild jupyter lab 
+jupyter lab build --dev-build=False --minimize=False
+----
+
+=== 4. Create a new notebook and add the startup script from cloud storage bucket 
+
+image::vertex.create.notebook.startupscript.png[create a new notebook with startup script, width=100%]
+
+It may take a few minutes for the notebook creation process to complete. When it is done, click on 'Open notebook'.
+
+image::vertex.open.notebook.png[Open notebook, width=100%]
+
+== Use custom container
+
+Another option is to provide a custom container when creating a notebook.
+
+=== 1. Download Teradata Jupyter extensions package
+Go to link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter] page to download the Teradata Jupyter extensions package bundle Linux version.
+
+Copy this package to your work directory and unzip it.
+
+=== 2. Build custom Docker image
+The custom container must expose a service on port 8080. It is recommended to create a container derived from a Google Deep Learning Containers image, because those images are already configured to be compatible with user-managed notebooks.
+
+Below is a sample Dockerfile you can use to build a Docker image with Teradata SQL kernel and extensions installed:
+
+[source, Dockerfile, role="content-editable"]
+----
+# Use one of the deep learning images as base image
+# if you need both Python and R, use one of the R images
+FROM gcr.io/deeplearning-platform-release/r-cpu:latest
+ 
+USER root
+ 
+##############################################################
+# Install kernel and copy supporting files
+##############################################################
+ 
+# Copy the kernel
+COPY ./teradatakernel /usr/local/bin
+ 
+RUN chmod 755 /usr/local/bin/teradatakernel
+ 
+# Copy directory with kernel.json file into image
+COPY ./teradatasql teradatasql/
+ 
+# Copy notebooks
+COPY ./ShippedNotebooks/ /home/jupyter
+COPY ./StartHere.ipynb ./license.txt /home/jupyter
+ 
+# Install the kernel file to /opt/conda jupyter lab instance
+RUN jupyter kernelspec install ./teradatasql --prefix=/opt/conda 
+ 
+ 
+##############################################################
+# Install Teradata extensions
+##############################################################
+ 
+RUN jupyter labextension install --no-build teradata_database* && \
+    jupyter labextension install --no-build teradata_resultset* && \
+    jupyter labextension install --no-build teradata_sqlhighlighter* && \
+    jupyter labextension install --no-build teradata_connection_manager* && \
+    jupyter labextension install --no-build teradata_preferences* && \
+    jupyter labextension install --no-build jupyterlab-plotly && \
+    jupyter labextension install --no-build plotlywidget && \
+    jupyter lab build --dev-build=False --minimize=False && \
+ 
+# Give back ownership of /opt/conda to jovyan
+RUN chown -R jupyter:users /opt/conda
+ 
+# PIP install the Teradata Python libraries
+# Teradata R tdplyr library will be installed from S3
+ 
+RUN pip install teradataml && \
+    pip install plotly && \
+    Rscript -e "install.packages('tdplyr',repos=c('https://teradata-download.s3.amazonaws.com','https://cloud.r-project.org'))"
+----
+
+In your work directory (where you unzipped Teradata Jupyter extensions package), run 'docker build' to build the image:
+
+[source, bash, role="content-editable"]
+----
+docker build -f Dockerfile imagename:imagetag . 
+----
+
+=== 3. Push the docker image to Google container registry or artifact registry
+Please refer to the following documentations to push docker image to registry:
+* link: https://cloud.google.com/container-registry/docs/pushing-and-pulling[Container Registry: Pushing and pulling images]
+* link: https://cloud.google.com/artifact-registry/docs/docker/pushing-and-pulling?hl=en[Artifact Registry: Pushing and pulling images]
+
+=== 4. Create a new notebook
+Choose 'custom container' in 'Environment' 
+
+image::vertex.custom.container.png[Open notebook, width=100%]
+
+
+
+== Further reading
+* link:https://teradata.github.io/jupyterextensions[Teradata Jupyter Extensions Website]
+* link:https://docs.teradata.com/r/KQLs1kPXZ02rGWaS9Ktoww/root[Teradata Vantage™ Modules for Jupyter Installation Guide]
+* link:https://docs.teradata.com/r/1YKutX2ODdO9ppo_fnguTA/root[Teradata® Package for Python User Guide]
+* link:https://cloud.google.com/vertex-ai/docs/training/create-custom-container[Vertex AI documentation: Create a custom container image for training]
+* link:https://cloud.google.com/vertex-ai/docs/workbench/user-managed/custom-container[Vertex AI documentation: Create a user-managed notebooks instance by using a custom container]
+* link:https://cloud.google.com/vertex-ai/docs/workbench/user-managed/create-new[Vertex AI documentation: Create a user-managed notebooks instance]
