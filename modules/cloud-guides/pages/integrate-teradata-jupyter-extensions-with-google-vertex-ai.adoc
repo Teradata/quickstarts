@@ -52,9 +52,11 @@ jupyter labextension install --no-build teradata_connection_manager*
 jupyter labextension install --no-build teradata_preferences*
  
  
-# PIP install the Teradata Python & R libraries
+# PIP install the Teradata Python library
 pip install teradataml
-Rscript -e "install.packages('tdplyr',repos=c('https://teradata-download.s3.amazonaws.com','https://cloud.r-project.org'))"
+
+# Install Teradata R library (optional, uncomment this line only if you use an environment that supports R)
+#Rscript -e "install.packages('tdplyr',repos=c('https://r-repo.teradata.com','https://cloud.r-project.org'))"
 
 # rebuild jupyter lab 
 jupyter lab build --dev-build=False --minimize=False
@@ -102,13 +104,13 @@ RUN chmod 755 /usr/local/bin/teradatakernel
 # Copy directory with kernel.json file into image
 COPY ./teradatasql teradatasql/
  
-# Copy notebooks
-COPY ./ShippedNotebooks/ /home/jupyter
-COPY ./StartHere.ipynb ./license.txt /home/jupyter
+# Copy notebooks and licenses
+COPY ./notebooks/ /home/jupyter
+COPY ./license.txt /home/jupyter
+COPY ./ThirdPartyLicenses/ /home/jupyter
  
 # Install the kernel file to /opt/conda jupyter lab instance
 RUN jupyter kernelspec install ./teradatasql --prefix=/opt/conda 
- 
  
 ##############################################################
 # Install Teradata extensions
@@ -119,19 +121,16 @@ RUN jupyter labextension install --no-build teradata_database* && \
     jupyter labextension install --no-build teradata_sqlhighlighter* && \
     jupyter labextension install --no-build teradata_connection_manager* && \
     jupyter labextension install --no-build teradata_preferences* && \
-    jupyter labextension install --no-build jupyterlab-plotly && \
-    jupyter labextension install --no-build plotlywidget && \
     jupyter lab build --dev-build=False --minimize=False && \
  
 # Give back ownership of /opt/conda to jovyan
 RUN chown -R jupyter:users /opt/conda
  
 # PIP install the Teradata Python libraries
-# Teradata R tdplyr library will be installed from S3
- 
-RUN pip install teradataml && \
-    pip install plotly && \
-    Rscript -e "install.packages('tdplyr',repos=c('https://teradata-download.s3.amazonaws.com','https://cloud.r-project.org'))"
+RUN pip install teradataml
+
+# Install Teradata R library (optional, include it only if you use a base image that supports R)
+RUN Rscript -e "install.packages('tdplyr',repos=c('https://r-repo.teradata.com','https://cloud.r-project.org'))"
 ----
 
 In your work directory (where you unzipped Teradata Jupyter extensions package), run 'docker build' to build the image:
