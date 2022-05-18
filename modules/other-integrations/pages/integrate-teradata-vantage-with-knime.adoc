@@ -1,0 +1,67 @@
+= Integrate Teradata Vantage with KNIME Analytics Platform
+:experimental:
+:page-author: Jeremy Yu
+:page-email: Jeremy.yu@teradata.com
+:page-revdate: May 18th, 2022
+:description: Integrate Teradata Vantage with KNIME.
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics,
+:tabs:
+:page-image-directory: integrate-teradata-vantage-with-knime
+
+
+== Overview
+
+This how-to describes how to connect to Terdata Vantage from KNIME Analytics Platform.
+
+=== About KNIME Analytics Platform
+
+KNIME Analytics Platform is a data science workbench. It supports analytics on various data sources, including Teradata Vantage.
+
+== Prerequisites
+
+* Access to a Teradata Vantage instance, version 17.10 or higher. If you need a new instance of Vantage, you can install Vantage Express in the cloud on xref:ROOT:vantage.express.gcp.adoc[GCP], xref:ROOT:run-vantage-express-on-microsoft-azure.adoc[Azure], and xref:ROOT:run-vantage-express-on-aws.adoc[AWS]. You can also run Vantage Express on your local machine using xref:ROOT:getting.started.vmware.adoc[VMware], xref:ROOT:getting.started.vbox.adoc[VirtualBox], or xref:ROOT:getting.started.utm.adoc[UTM].
+* KNIME installed locally. See link:https://www.knime.com/installation[KNIME installation instructions] for details.
+
+== Integration Procedure
+
+1. Go to https://downloads.teradata.com/download/connectivity/jdbc-driver (first time users will need to register) and download the latest version of the JDBC driver.
+2. Unzip the downloaded file. You will find `terajdbc4.jar` file.
+3. In KNIME, click on `File → Preference`. Under `Databases`, click `Add`:
++
+image::{page-image-directory}/add-jar.png[Add jar, width=75%]
+4. Register a new database driver. Provide values for `ID`, `Name` and `Description` like below. Click on `Add file` and point to the .jar file you downloaded earlier. Click on the `Find driver classes` and the `Driver class:` should populate with the `jdbc.TeraDriver`:
++
+image::{page-image-directory}/register-driver.png[Register driver, width=75%]
+5. Click `Apply and Close`:
++
+image::{page-image-directory}/apply-and-close.png[Apply and close, width=75%]
+6. To test the connection, create a new KNIME workflow and add a `Database Reader (legacy)` node by dragging it to the workspace to the right:
++
+image::{page-image-directory}/test-connection-1.png[Test connection step 1, width=75%]
++
+image::{page-image-directory}/test-connection-2.png[Test connection step 2, width=75%]
+7. Right-click on the `Database Reader (legacy)` to configure settings. Select `com.teradata.jdbc.Teradriver` from the drop-down:
++
+image::{page-image-directory}/start-configuration.png[Start configuration, width=75%]
+8. Enter the name of the Vantage server and login mechanism, e.g.:
++
+image::{page-image-directory}/enter-configuration.png[Enter configuration, width=75%]
+9. To test connection, enter SQL statement in box in lower right. For example, enter `SELECT * FROM DBC.DBCInfoV` and click `Apply` to close the dialog:
++
+image::{page-image-directory}/test-connection-apply.png[Test connection apply, width=75%]
+10. Execute the node to test the connection:
++
+image::{page-image-directory}/execute-node.png[Execute node, width=75%]
+11. The node will show a green light when run successfully. Right-click and select `Data from Database` to view the results:
++
+image::{page-image-directory}/view-results.png[View results, width=75%]
++
+image::{page-image-directory}/view-results-final.png[View results, width=75%]
+
+
+== Summary
+
+This how-to demonstrats how to connect from KNIME Analytics Platform to Teradata Vantage.
+
+== Further reading
+* xref:ROOT:ml.adoc[Train ML models in Vantage using only SQL]
