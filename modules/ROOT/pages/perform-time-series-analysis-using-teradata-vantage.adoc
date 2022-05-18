@@ -1,10 +1,10 @@
-= Time Series Analysis
+= Perform time series analysis using Teradata Vantage
 :experimental:
 :page-author: Remi Turpaud
 :page-email: remi.turpaud@teradata.com
 :page-revdate: April 15th, 2022
-:description: Time Series Analysis
-:keywords: data warehouses, analytics, teradata, vantage, time series, business intelligence, enterprise analytics
+:description: Perform time series analysis using Teradata Vantage
+:keywords: data warehouses, analytics, teradata, vantage, time series, business intelligence, enterprise analytics, time series, time series analysis
 
 == Overview
 

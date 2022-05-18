@@ -11,7 +11,7 @@
 ** xref::dbt.adoc[]
 ** xref::sto.adoc[]
 ** xref:tools-and-utilities:run-bulkloads-efficiently-with-teradata-parallel-transporter.adoc[Load data with TPT]
-** xref::timeseries.adoc[]
+** xref::perform-time-series-analysis-using-teradata-vantage.adoc[Perform time series analysis]
 * How-tos
 ** xref::jdbc.adoc[]
 ** xref::jupyter.adoc[]
