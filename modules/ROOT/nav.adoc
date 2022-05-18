@@ -10,7 +10,7 @@
 ** xref::ml.adoc[]
 ** xref::dbt.adoc[]
 ** xref::sto.adoc[]
-** xref::fastload.adoc[]
+** xref:tools-and-utilities:run-bulkloads-efficiently-with-teradata-parallel-transporter.adoc[Load data with TPT]
 ** xref::timeseries.adoc[]
 * How-tos
 ** xref::jdbc.adoc[]
