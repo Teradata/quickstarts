@@ -10,6 +10,8 @@
 
 In this quickstart we will go through connecting to Teradata Vantage from a Jupyter notebook.
 
+include::ROOT:partial$vantage.express.options.adoc[]
+
 == Options
 
 There are a couple of ways to connect to Vantage from a Jupyter Notebook:

@@ -10,8 +10,8 @@
 ** xref::ml.adoc[]
 ** xref::dbt.adoc[]
 ** xref::sto.adoc[]
-** xref::fastload.adoc[]
-** xref::timeseries.adoc[]
+** xref:tools-and-utilities:run-bulkloads-efficiently-with-teradata-parallel-transporter.adoc[Load data with TPT]
+** xref::perform-time-series-analysis-using-teradata-vantage.adoc[Perform time series analysis]
 * How-tos
 ** xref::jdbc.adoc[]
 ** xref::jupyter.adoc[]
@@ -26,6 +26,7 @@
 ** xref:cloud-guides:integrate-teradata-vantage-with-google-cloud-data-catalog.adoc[]
 ** xref:cloud-guides:use-teradata-vantage-with-azure-machine-learning-studio.adoc[]
 ** xref:cloud-guides:integrate-teradata-jupyter-extensions-with-google-vertex-ai.adoc[]
+** xref:other-integrations:integrate-teradata-vantage-with-knime.adoc[]
 
 //* Planned
 //** Run Teradata Developer in Public Cloud
