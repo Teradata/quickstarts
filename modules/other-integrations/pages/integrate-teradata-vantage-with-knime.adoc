@@ -19,7 +19,9 @@ KNIME Analytics Platform is a data science workbench. It supports analytics on v
 
 == Prerequisites
 
-* Access to a Teradata Vantage instance, version 17.10 or higher. If you need a new instance of Vantage, you can install Vantage Express in the cloud on xref:ROOT:vantage.express.gcp.adoc[GCP], xref:ROOT:run-vantage-express-on-microsoft-azure.adoc[Azure], and xref:ROOT:run-vantage-express-on-aws.adoc[AWS]. You can also run Vantage Express on your local machine using xref:ROOT:getting.started.vmware.adoc[VMware], xref:ROOT:getting.started.vbox.adoc[VirtualBox], or xref:ROOT:getting.started.utm.adoc[UTM].
+* Access to a Teradata Vantage instance, version 17.10 or higher.
++
+include::ROOT:partial$vantage.express.options.adoc[]
 * KNIME installed locally. See link:https://www.knime.com/installation[KNIME installation instructions] for details.
 
 == Integration Procedure

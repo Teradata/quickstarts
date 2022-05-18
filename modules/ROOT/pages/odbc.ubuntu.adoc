@@ -13,7 +13,9 @@ This how-to demonstrates how to use the ODBC driver with Teradata Vantage on Ubu
 
 == Prerequsites
 
-* Access to a Teradata Vantage instance. If you need a new instance of Vantage, you can install Vantage Express on your local machine using xref:getting.started.vmware.adoc[VMware], xref:getting.started.vbox.adoc[VirtualBox], or xref:getting.started.utm.adoc[UTM]. You can also run xref:vantage.express.gcp.adoc[Vantage Express in the cloud on GCP].
+* Access to a Teradata Vantage instance.
++
+include::ROOT:partial$vantage.express.options.adoc[]
 * Root access to a Ubuntu machine.
 
 == Installation

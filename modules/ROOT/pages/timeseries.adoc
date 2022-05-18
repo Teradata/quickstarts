@@ -8,11 +8,13 @@
 
 == Overview
 
-Time series is series of data points indexed in time order. It is data continuously produced and collected by a wide range of applications and devices including but not limited to Internet of Things. Teradata Vantage offers various functionalities to simplify time series data analysis. 
+Time series is series of data points indexed in time order. It is data continuously produced and collected by a wide range of applications and devices including but not limited to Internet of Things. Teradata Vantage offers various functionalities to simplify time series data analysis.
 
 == Prerequisites
 
-You need access to a Teradata Vantage instance. Times series functionalities and NOS are enabled in all Vantage editions from Vantage Express through Developer, DYI to Vantage as a Service starting from version 17.10. If you need a new instance of Vantage, you can install Vantage Express on your local machine using xref:getting.started.vmware.adoc[VMware], xref:getting.started.vbox.adoc[VirtualBox], or xref:getting.started.utm.adoc[UTM]. You can also run xref:vantage.express.gcp.adoc[Vantage Express in the cloud on GCP].
+You need access to a Teradata Vantage instance. Times series functionalities and NOS are enabled in all Vantage editions from Vantage Express through Developer, DYI to Vantage as a Service starting from version 17.10.
+
+include::ROOT:partial$vantage.express.options.adoc[]
 
 == Import data sets from AWS S3 using Vantage NOS
 
@@ -51,8 +53,8 @@ Let's extract the complete data and bring it into Vantage for further analysis.
 [source, teradata-sql]
 ----
 
-CREATE TABLE trip 
-( 
+CREATE TABLE trip
+(
   medallion varchar(50) character set latin NOT casespecific,
   hack_license varchar(50) character set latin NOT casespecific,
   vendor_id varchar(10) character set latin NOT casespecific,
@@ -67,11 +69,11 @@ CREATE TABLE trip
   pickup_latitude float,
   dropoff_longitude float,
   dropoff_latitude float
-) 
+)
 PRIMARY INDEX ( medallion );
 
 
-INSERT INTO trip 
+INSERT INTO trip
 SELECT * FROM (
 	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/NYCTaxiTrip/'
 ) AS d;
@@ -84,19 +86,19 @@ Result:
 480535 rows affected.
 ----
 
-Vantage will now fetch the data from S3 and insert into trip table we just created. 
+Vantage will now fetch the data from S3 and insert into trip table we just created.
 
 == Basic time series operations
 
-Now that we are familiar with the data set, we can use Vantage capabilities to quickly analyse the data set. First, let's identify how many passengers are being picked up by hour in the month of November. 
+Now that we are familiar with the data set, we can use Vantage capabilities to quickly analyse the data set. First, let's identify how many passengers are being picked up by hour in the month of November.
 
 [source, teradata-sql]
 ----
 SELECT TOP 10
-$TD_TIMECODE_RANGE 
+$TD_TIMECODE_RANGE
 ,begin($TD_TIMECODE_RANGE) time_bucket_start --(timestamp, format 'YYYY-MM-DDBHH:MI:SS') time_bucket_start
 ,sum(passenger_count) passenger_count
-FROM trip 
+FROM trip
 WHERE extract(month from pickup_datetime)=11
 GROUP BY TIME(HOURS(1))
 USING TIMECODE(pickup_datetime)
@@ -121,14 +123,14 @@ TIMECODE_RANGE	                                                          time_bu
 
 ----
 
-Yes, this can also be achieved by extracting the hour from time and then aggregating - it's additional code/work, but can be done without timeseries specific functionality. 
+Yes, this can also be achieved by extracting the hour from time and then aggregating - it's additional code/work, but can be done without timeseries specific functionality.
 
-But, now let's go a step further to identify how many passengers are being picked up and what is the average trip duration by vendor every 15 minutes in November. 
+But, now let's go a step further to identify how many passengers are being picked up and what is the average trip duration by vendor every 15 minutes in November.
 
 [source, teradata-sql]
 ----
 SELECT TOP 10
-$TD_TIMECODE_RANGE 
+$TD_TIMECODE_RANGE
 ,vendor_id
 ,sum(passenger_count)
 ,avg(trip_time_in_secs)
@@ -167,7 +169,7 @@ $TD_TIMECODE_RANGE time_bucket_per
 ,vendor_id
 ,sum(passenger_count) passenger_cnt
 ,sum(trip_time_in_secs) avg_trip_time_in_secs
-FROM TRNG_NYCTaxi.trip 
+FROM TRNG_NYCTaxi.trip
 GROUP BY TIME(MINUTES(15) and vendor_id)
 USING TIMECODE(pickup_datetime)
 WHERE extract(month from pickup_datetime)=11;
@@ -183,7 +185,7 @@ SELECT TOP 10 * FROM MovingAverage (
   MAvgType ('S')
   WindowSize (8)
   TargetColumns ('passenger_cnt')
-) AS dt 
+) AS dt
 WHERE begin(time_bucket_per)(date) = '2013-11-10'
 ORDER BY vendor_id, time_bucket_per;
 ----
@@ -208,11 +210,11 @@ time_bucket_per	                                                      vendor_id	
 
 ----
 
-NOTE: In addition to above time series operations, Vantage also provides a special time series tables with Primary Time Index (PTI). These are regular Vantage tables with PTI defined rather than a Primary Index (PI). Though tables with PTI are not mandatory for time series functionality/operations, PTI optimizes how the time series data is stored physically and hence improves performance considerably compared to regular tables. 
+NOTE: In addition to above time series operations, Vantage also provides a special time series tables with Primary Time Index (PTI). These are regular Vantage tables with PTI defined rather than a Primary Index (PI). Though tables with PTI are not mandatory for time series functionality/operations, PTI optimizes how the time series data is stored physically and hence improves performance considerably compared to regular tables.
 
 == Summary
 
-In this quick start we have learnt how easy it is to analyse time series datasets using Vantage's time series capabilities. 
+In this quick start we have learnt how easy it is to analyse time series datasets using Vantage's time series capabilities.
 
 == Further reading
 * link:https://docs.teradata.com/r/Teradata-VantageTM-Time-Series-Tables-and-Operations/July-2021/Introduction-to-Teradata-Time-Series-Tables-and-Operations[Teradata Vantage™ - Time Series Tables and Operations]
