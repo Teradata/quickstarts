@@ -14,6 +14,8 @@ For customers who have their own JupyterHub clusters, there are two options to i
 
 This page contains detailed instructions on the two options. Instructions are based on the assumption that the customer JupyterHub deployment is based on link:https://zero-to-jupyterhub.readthedocs.io/en/latest/index.html[Zero to JupyterHub with Kubernetes].
 
+include::ROOT:partial$vantage.express.options.adoc[]
+
 == Use Teradata Jupyter Docker image
 
 Teradata provides a ready-to-run Docker image that builds on the link:https://hub.docker.com/r/jupyter/datascience-notebook/[jupyter/datascience-notebook] image. It bundles the Teradata SQL kernel, Teradata Python and R libraries and drivers and Teradata extensions for Jupyter to make you productive while interacting with Teradata database. The image also contains sample notebooks that demonstrate how to use the SQL kernel, extensions and Teradata libraries.

@@ -12,7 +12,9 @@ Sometimes, you need to apply complex logic to your data that can't be easily exp
 
 == Prerequsites
 
-You need access to a Teradata Vantage instance. If you need a new instance of Vantage, you can install Vantage Express on your local machine using xref:getting.started.vmware.adoc[VMware], xref:getting.started.vbox.adoc[VirtualBox], or xref:getting.started.utm.adoc[UTM]. You can also run xref:vantage.express.gcp.adoc[Vantage Express in the cloud on GCP].
+You need access to a Teradata Vantage instance.
+
+include::ROOT:partial$vantage.express.options.adoc[]
 
 == Hello World
 
