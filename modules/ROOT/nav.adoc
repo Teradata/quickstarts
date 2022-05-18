@@ -25,6 +25,7 @@
 ** xref:cloud-guides:connect-azure-data-share-to-teradata-vantage.adoc[]
 ** xref:cloud-guides:integrate-teradata-vantage-with-google-cloud-data-catalog.adoc[]
 ** xref:cloud-guides:use-teradata-vantage-with-azure-machine-learning-studio.adoc[]
+** xref:other-integrations:integrate-teradata-vantage-with-knime.adoc[]
 
 //* Planned
 //** Run Teradata Developer in Public Cloud
