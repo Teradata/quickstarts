@@ -5,6 +5,7 @@
 :page-revdate: May 12th, 2022
 :description: Integrate Teradata Jupyter extensions with Google Vertex AI
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy
+:page-image-directory: integrate-teradata-jupyter-extensions-with-google-vertex-ai
 
 == Overview
 Teradata Jupyter extensions provide Teradata SQL kernel and several UI extensions to allow users to easily access and navigate Teradata database from Jupyter envioronment. Google Vertex AI is Google Cloud's new unified ML platform. Vertex AI Workbench provides a Jupyter-base development environment for the entire data science workflow. This article describes how to integate our Jupyter extensions with Vertex AI Workbench so that Vertex AI users can take advantage of our Teradata extensions in their ML pipeline.
@@ -64,11 +65,11 @@ jupyter lab build --dev-build=False --minimize=False
 
 === 4. Create a new notebook and add the startup script from cloud storage bucket 
 
-image::vertex.create.notebook.startupscript.png[create a new notebook with startup script, width=100%]
+image:{page-image-directory}/vertex.create.notebook.startupscript.png[create a new notebook with startup script, width=100%]
 
 It may take a few minutes for the notebook creation process to complete. When it is done, click on 'Open notebook'.
 
-image::vertex.open.notebook.png[Open notebook, width=100%]
+image:{page-image-directory}/vertex.open.notebook.png[Open notebook, width=100%]
 
 == Use custom container
 
@@ -148,7 +149,7 @@ Please refer to the following documentations to push docker image to registry:
 === 4. Create a new notebook
 Choose 'custom container' in 'Environment' 
 
-image::vertex.custom.container.png[Open notebook, width=100%]
+image:{page-image-directory}/vertex.custom.container.png[Open notebook, width=100%]
 
 
 
