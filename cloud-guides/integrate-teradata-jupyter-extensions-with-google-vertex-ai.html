@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Integrate Teradata Vantage with Google Cloud Data Catalog :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">
-    <meta name="description" content="Integrate Teradata Vantage with Google Cloud Data Catalog.">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, google cloud, google cloud data catalog.">
+    <title>Integrate Teradata Jupyter extensions with Google Vertex AI :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">
+    <meta name="description" content="Integrate Teradata Jupyter extensions with Google Vertex AI">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../_/css/site.css">
-<meta property="og:title" content="Integrate Teradata Vantage with Google Cloud Data Catalog :: Teradata Getting Started">
+<meta property="og:title" content="Integrate Teradata Jupyter extensions with Google Vertex AI :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Integrate Teradata Vantage with Google Cloud Data Catalog." />
+<meta property="og:description" content="Integrate Teradata Jupyter extensions with Google Vertex AI" />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -1073,13 +1073,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -1117,7 +1117,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li>How-tos</li>
-    <li><a href="integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a></li>
+    <li><a href="integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a></li>
   </ul>
 </nav>
 </div>
@@ -1125,60 +1125,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/cloud-guides/pages/integrate-teradata-vantage-with-google-cloud-data-catalog.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/cloud-guides/pages/integrate-teradata-jupyter-extensions-with-google-vertex-ai.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Integrate Teradata Vantage with Google Cloud Data Catalog</h1>
-<p>Author: <a href="mailto:wenjie.tehan@teradata.com">Wenjie Tehan</a><br/>
-Last updated: February 14th, 2022</p>
+<h1 class="page">Integrate Teradata Jupyter extensions with Google Vertex AI</h1>
+<p>Author: <a href="mailto:Hailing.iang@teradata.com">Hailing Jiang</a><br/>
+Last updated: May 12th, 2022</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This article describes the process to connect Teradata Vantage with Google Cloud Data Catalog using the <a href="https://github.com/GoogleCloudPlatform/datacatalog-connectors-rdbms/tree/master/google-datacatalog-teradata-connector">Data Catalog Teradata Connector on GitHub</a>, and then explore the metadata of the Vantage tables via Data Catalog.</p>
+<p>Teradata Jupyter extensions provide Teradata SQL kernel and several UI extensions to allow users to easily access and navigate Teradata database from Jupyter envioronment. Google Vertex AI is Google Cloud&#8217;s new unified ML platform. Vertex AI Workbench provides a Jupyter-base development environment for the entire data science workflow. This article describes how to integate our Jupyter extensions with Vertex AI Workbench so that Vertex AI users can take advantage of our Teradata extensions in their ML pipeline.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="_images/integrate-teradata-vantage-with-google-cloud-data-catalog/image2.png" alt="Diagram Description automatically generated" width="525" height="242"></span></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Scrape: Connect to Teradata Vantage and retrieve all the available metadata</p>
-</li>
-<li>
-<p>Prepare: Transform metadata in Data Catalog entities and create Tags</p>
-</li>
-<li>
-<p>Ingest: Send the Data Catalog entities to the Google Cloud project</p>
-</li>
-</ul>
-</div>
-<div class="sect2">
-<h3 id="_about_google_cloud_data_catalog"><a class="anchor" href="#_about_google_cloud_data_catalog"></a>About Google Cloud Data Catalog</h3>
-<div class="paragraph">
-<p>Google Cloud Data Catalog is a fully managed data discovery and metadata management service. Data Catalog can catalog the native metadata on data assets. Data Catalog is serverless, and provides a central catalog to capture both technical metadata as well as business metadata in a structured format.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_about_teradata_vantage"><a class="anchor" href="#_about_teradata_vantage"></a>About Teradata Vantage</h3>
-<div class="paragraph">
-<p>Vantage is the modern cloud platform that unifies data warehouses, data lakes, and analytics into a single connected ecosystem.</p>
-</div>
-<div class="paragraph">
-<p>Vantage combines descriptive, predictive, prescriptive analytics, autonomous decision-making, ML functions, and visualization tools into a unified, integrated platform that uncovers real-time business intelligence at scale, no matter where the data resides.</p>
-</div>
-<div class="paragraph">
-<p>Vantage enables companies to start small and elastically scale compute or storage, paying only for what they use, harnessing low-cost object stores and integrating their analytic workloads.</p>
-</div>
-<div class="paragraph">
-<p>Vantage supports R, Python, Teradata Studio, and any other SQL-based tools. You can deploy Vantage across public clouds, on-premises, on optimized or commodity infrastructure, or as-a-service.</p>
-</div>
-<div class="paragraph">
-<p>See the <a href="https://docs.teradata.com/home">documentation</a> for more information on Teradata Vantage.</p>
-</div>
+<p>Vertex AI workbench supports two types of notebooks: managed notebooks and user-managed notebooks. Here we will focus on user-managed notebooks. We will show two ways to integrate our Jupyter extensions with user-managed notebooks: use startup script to install our kernel and extensions or use custom container.</p>
 </div>
 </div>
 </div>
@@ -1188,340 +1151,210 @@ Last updated: February 14th, 2022</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Access to a Teradata Vantage instance.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If you need a new instance of Vantage, you can install a free version called Vantage Express in the cloud on <a href="../vantage.express.gcp.html" class="xref page">GCP</a>, <a href="../run-vantage-express-on-microsoft-azure.html" class="xref page">Azure</a>, and <a href="../run-vantage-express-on-aws.html" class="xref page">AWS</a>. You can also run Vantage Express on your local machine using <a href="../getting.started.vmware.html" class="xref page">VMware</a>, <a href="../getting.started.vbox.html" class="xref page">VirtualBox</a>, or <a href="../getting.started.utm.html" class="xref page">UTM</a>.
-</td>
-</tr>
-</table>
-</div>
+<p>Access to a Teradata Vantage instance</p>
 </li>
 <li>
-<p>A <strong><a href="https://support.google.com/accounts/answer/27441?hl=en">Google Service Account</a> </strong>with Data Catalog Admin role</p>
+<p>Google Cloud account with Vertex AI enabled</p>
 </li>
 <li>
-<p>A <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects"><strong>Cloud Console Project created</strong></a> for your account (i.e. partner-integration-lab)</p>
-</li>
-<li>
-<p>Billing enabled</p>
-</li>
-<li>
-<p>Google Cloud SDK <a href="https://cloud.google.com/sdk/docs/install">installed</a> and <a href="https://cloud.google.com/sdk/docs/initializing">initialized</a></p>
-</li>
-<li>
-<p><a href="https://www.python.org/downloads/">Python</a> installed</p>
-</li>
-<li>
-<p><a href="https://pip.pypa.io/en/stable/installation/">Pip</a> installed</p>
+<p>Google cloud storage to store startup scripts and Teradata Jupyter extension package</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_procedure"><a class="anchor" href="#_procedure"></a>Procedure</h2>
+<h2 id="_use_startup_script"><a class="anchor" href="#_use_startup_script"></a>Use startup script</h2>
 <div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Enable Data Catalog APIs</p>
-</li>
-<li>
-<p>Install Teradata Data Catalog Connector</p>
-</li>
-<li>
-<p>Run</p>
-</li>
-<li>
-<p>Explore Teradata Vantage metadata with Data Catalog</p>
-</li>
-</ol>
+<div class="paragraph">
+<p>When we create a new notebook instance, we can specify a startup script. This script runs only once after the instance is created.</p>
 </div>
 <div class="sect2">
-<h3 id="_enable_data_catalog_api"><a class="anchor" href="#_enable_data_catalog_api"></a>Enable Data Catalog API</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Logon to <a href="http://console.cloud.google.com/">Google</a> console, choose <strong>APIs &amp; Services</strong> from the Navigation menu, then click on <em>Library</em>. Make sure your project is selected on the top menu bar.</p>
+<h3 id="_1_download_teradata_jupyter_extensions_package"><a class="anchor" href="#_1_download_teradata_jupyter_extensions_package"></a>1. Download Teradata Jupyter extensions package</h3>
 <div class="paragraph">
-<p><span class="image"><img src="_images/integrate-teradata-vantage-with-google-cloud-data-catalog/image3.png" alt="Graphical user interface" width="483" height="472"></span></p>
-</div>
-</li>
-<li>
-<p>Put <em>Data Catalog</em> in the search box and click on <strong>Google Cloud Data Catalog API</strong>, click <strong>ENABLE</strong></p>
-<div class="paragraph">
-<p><span class="image"><img src="_images/integrate-teradata-vantage-with-google-cloud-data-catalog/image4.png" alt="Graphical user interface" width="624" height="212"></span></p>
-</div>
-</li>
-</ul>
+<p>Go to <a href="https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter">Vantage Modules for Jupyter</a> page to download the Teradata Jupyter extensions package bundle Linux version.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_install_teradata_data_catalog_connector"><a class="anchor" href="#_install_teradata_data_catalog_connector"></a>Install Teradata Data Catalog Connector</h3>
+<h3 id="_2_upload_the_package_to_a_google_cloud_storage_bucket"><a class="anchor" href="#_2_upload_the_package_to_a_google_cloud_storage_bucket"></a>2. Upload the package to a Google Cloud storage bucket.</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_3_write_a_startup_script_and_upload_it_to_cloud_storage_bucket"><a class="anchor" href="#_3_write_a_startup_script_and_upload_it_to_cloud_storage_bucket"></a>3. Write a startup script and upload it to cloud storage bucket</h3>
 <div class="paragraph">
-<p>A Teradata Data Catalog connector is available on <a href="https://github.com/GoogleCloudPlatform/datacatalog-connectors-rdbms/tree/master/google-datacatalog-teradata-connector">GitHub</a>. This connector is written in Python.</p>
+<p>Below is a sample script. It fetches Teradata Jupyter extension package from cloud storage bucket and installs Teradata SQL kernel and extensions.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Run following command to authorize gcloud to access the Cloud Platform with Google user credentials.</p>
-<div class="listingblock">
+<div class="listingblock content-editable">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud auth login</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Choose your Google account when the Google login page opens up and click <em>Allow</em> on the next page.</p>
-</li>
-<li>
-<p>Next, set up default project if you haven&#8217;t already done so</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud config set project &lt;project id&gt;</code></pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-<div class="sect3">
-<h4 id="_install_virtualenv"><a class="anchor" href="#_install_virtualenv"></a>Install virtualenv</h4>
-<div class="paragraph">
-<p>We recommend you install the Teradata Data Catalog Connector in an isolated Python environment. To do so, install <a href="https://virtualenv.pypa.io/en/latest/">virtualenv</a> first:</p>
-</div>
-<div class="tabset is-loading">
-<div class="ulist tabs">
-<ul>
-<li>
-<p><a id="tabset1_windows"></a>Windows</p>
-</li>
-<li>
-<p><a id="tabset1_macos"></a>MacOS</p>
-</li>
-<li>
-<p><a id="tabset1_linux"></a>Linux</p>
-</li>
-</ul>
-</div>
-<div class="content">
-<div class="tab-pane" aria-labelledby="tabset1_windows">
-<div class="paragraph">
-<p>Run in Powershell as Administrator:</p>
-</div>
-<div class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">pip install virtualenv
-virtualenv --python python3.6 &lt;your-env&gt;
-&lt;your-env&gt;\Scripts\activate</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_macos">
-<div class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install virtualenv
-virtualenv --python python3.6 &lt;your-env&gt;
-source &lt;your-env&gt;/bin/activate</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_linux">
-<div class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install virtualenv
-virtualenv --python python3.6 &lt;your-env&gt;
-source &lt;your-env&gt;/bin/activate</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_install_data_catalog_teradata_connector"><a class="anchor" href="#_install_data_catalog_teradata_connector"></a>Install Data Catalog Teradata Connector</h4>
-<div class="tabset is-loading">
-<div class="ulist tabs">
-<ul>
-<li>
-<p><a id="tabset2_windows"></a>Windows</p>
-</li>
-<li>
-<p><a id="tabset2_macos"></a>MacOS</p>
-</li>
-<li>
-<p><a id="tabset2_linux"></a>Linux</p>
-</li>
-</ul>
-</div>
-<div class="content">
-<div class="tab-pane" aria-labelledby="tabset2_windows">
-<div class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">pip.exe install google-datacatalog-teradata-connector</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset2_macos">
-<div class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install google-datacatalog-teradata-connector</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset2_linux">
-<div class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install google-datacatalog-teradata-connector</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_set_environment_variables"><a class="anchor" href="#_set_environment_variables"></a>Set environment variables</h4>
-<div class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export GOOGLE_APPLICATION_CREDENTIALS=&lt;google_credentials_file&gt;
-export TERADATA2DC_DATACATALOG_PROJECT_ID=&lt;google_cloud_project_id&gt;
-export TERADATA2DC_DATACATALOG_LOCATION_ID=&lt;google_cloud_location_id&gt;
-export TERADATA2DC_TERADATA_SERVER=&lt;teradata_server&gt;
-export TERADATA2DC_TERADATA_USERNAME=&lt;teradata_username&gt;
-export TERADATA2DC_TERADATA_PASSWORD=&lt;teradata_password&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Where <code>&lt;google_credential_file&gt;</code> is the key for your service account (json file).</p>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">#! /bin/bash
+
+cd /home/jupyter
+mkdir teradata
+cd teradata
+gsutil cp gs://teradata-jupyter/* .
+unzip teradatasql*.zip
+
+# Install Teradata kernel
+cp teradatakernel /usr/local/bin
+
+jupyter kernelspec install ./teradatasql --prefix=/opt/conda
+
+# Install Teradata extensions
+jupyter labextension install --no-build teradata_database*
+jupyter labextension install --no-build teradata_connection_manager*
+jupyter labextension install --no-build teradata_resultset*
+jupyter labextension install --no-build teradata_sqlhighlighter*
+jupyter labextension install --no-build teradata_connection_manager*
+jupyter labextension install --no-build teradata_preferences*
+
+
+# PIP install the Teradata Python library
+pip install teradataml
+
+# Install Teradata R library (optional, uncomment this line only if you use an environment that supports R)
+#Rscript -e "install.packages('tdplyr',repos=c('https://r-repo.teradata.com','https://cloud.r-project.org'))"
+
+# rebuild jupyter lab
+jupyter lab build --dev-build=False --minimize=False</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_run"><a class="anchor" href="#_run"></a>Run</h3>
+<h3 id="_4_create_a_new_notebook_and_add_the_startup_script_from_cloud_storage_bucket"><a class="anchor" href="#_4_create_a_new_notebook_and_add_the_startup_script_from_cloud_storage_bucket"></a>4. Create a new notebook and add the startup script from cloud storage bucket</h3>
 <div class="paragraph">
-<p>Execute <code>google-datacatalog-teradata-connector</code> command to establish entry point to Vantage database.</p>
-</div>
-<div class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">google-datacatalog-teradata-connector \
-  --datacatalog-project-id=$TERADATA2DC_DATACATALOG_PROJECT_ID \
-  --datacatalog-location-id=$TERADATA2DC_DATACATALOG_LOCATION_ID \
-  --teradata-host=$TERADATA2DC_TERADATA_SERVER \
-  --teradata-user=$TERADATA2DC_TERADATA_USERNAME \
-  --teradata-pass=$TERADATA2DC_TERADATA_PASSWORD</code></pre>
-</div>
+<p><span class="image"><img src="_images/integrate-teradata-jupyter-extensions-with-google-vertex-ai/vertex.create.notebook.startupscript.png" alt="create a new notebook with startup script" width="100%"></span></p>
 </div>
 <div class="paragraph">
-<p>Sample output from the google-datacatalog-teradata-connector command:</p>
+<p>It may take a few minutes for the notebook creation process to complete. When it is done, click on 'Open notebook'.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>INFO:root:
-==============Starting CLI===============
-INFO:root:This SQL connector does not implement the user defined datacatalog-entry-resource-url-prefix
-INFO:root:This SQL connector uses the default entry resoure URL
-
-============Start teradata-to-datacatalog===========
-
-==============Scrape metadata===============
-INFO:root:Scrapping metadata from connection_args
-
-1 table containers ready to be ingested...
-
-==============Prepare metadata===============
-
---&gt; database: Gcpuser
-37 tables ready to be ingested...
-
-==============Ingest metadata===============
-
-DEBUG:google.auth._default:Checking /Users/Teradata/Apps/Cloud/GCP/teradata2dc-credentials.json for explicit credentials as part of auth process...
-INFO:root:Starting to clean up the catalog...
-DEBUG:google.auth.transport.requests:Making request: POST https://oauth2.googleapis.com/token
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): oauth2.googleapis.com:443
-DEBUG:urllib3.connectionpool:https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
-INFO:root:0 entries that match the search query exist in Data Catalog!
-INFO:root:Looking for entries to be deleted...
-INFO:root:0 entries will be deleted.
-
-Starting to ingest custom metadata...
-
-DEBUG:google.auth._default:Checking /Users/Teradata/Apps/Cloud/GCP/teradata2dc-credentials.json for explicit credentials as part of auth process...
-INFO:root:Starting the ingestion flow...
-DEBUG:google.auth.transport.requests:Making request: POST https://oauth2.googleapis.com/token
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): oauth2.googleapis.com:443
-DEBUG:urllib3.connectionpool:https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
-INFO:root:Tag Template created: projects/partner-integration-lab/locations/us-west1/tagTemplates/teradata_database_metadata
-INFO:root:Tag Template created: projects/partner-integration-lab/locations/us-west1/tagTemplates/teradata_table_metadata
-INFO:root:Tag Template created: projects/partner-integration-lab/locations/us-west1/tagTemplates/teradata_column_metadata
-INFO:root:Entry Group created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata
-INFO:root:1/38
-INFO:root:Entry does not exist: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser
-INFO:root:Entry created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser
-INFO:root: ^ [database] 34.105.107.155/gcpuser
-INFO:root:Starting the upsert tags step
-INFO:root:Processing Tag from Template: projects/partner-integration-lab/locations/us-west1/tagTemplates/teradata_database_metadata ...
-INFO:root:Tag created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser/tags/CWHNiGQeQmPT
-INFO:root:2/38
-INFO:root:Entry does not exist: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser_Categories
-INFO:root:Entry created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser_Categories
-INFO:root: ^ [table] 34.105.107.155/gcpuser/Categories
-INFO:root:Starting the upsert tags step
-INFO:root:Processing Tag from Template: projects/partner-integration-lab/locations/us-west1/tagTemplates/teradata_table_metadata ...
-INFO:root:Tag created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser_Categories/tags/Ceij5G9t915o
-INFO:root:38/38
-INFO:root:Entry does not exist: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser_tablesv_instantiated_latest
-INFO:root:Entry created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser_tablesv_instantiated_latest
-INFO:root: ^ [table] 34.105.107.155/gcpuser/tablesv_instantiated_latest
-INFO:root:Starting the upsert tags step
-INFO:root:Processing Tag from Template: projects/partner-integration-lab/locations/us-west1/tagTemplates/teradata_table_metadata ...
-INFO:root:Tag created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser_tablesv_instantiated_latest/tags/Ceij5G9t915o
-INFO:root:
-============End teradata-to-datacatalog============</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_explore_teradata_vantage_metadata_with_data_catalog"><a class="anchor" href="#_explore_teradata_vantage_metadata_with_data_catalog"></a>Explore Teradata Vantage metadata with Data Catalog</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Go to <a href="https://console.cloud.google.com/datacatalog">Data Catalog</a> console, click on the project (i.e. partner-integration-lab) under <strong>Projects</strong>. The Teradata tables are showing on the right panel.</p>
 <div class="paragraph">
-<p><span class="image"><img src="_images/integrate-teradata-vantage-with-google-cloud-data-catalog/image5.png" alt="Graphical user interface" width="624" height="379"></span></p>
-</div>
-</li>
-<li>
-<p>Click on the table to your interest (i.e. CITY_LEVEL_TRANS), and you&#8217;ll see the metadata about this table:</p>
-<div class="paragraph">
-<p><span class="image"><img src="_images/integrate-teradata-vantage-with-google-cloud-data-catalog/image6.png" alt="Graphical user interface" width="624" height="331"></span></p>
-</div>
-</li>
-</ul>
+<p><span class="image"><img src="_images/integrate-teradata-jupyter-extensions-with-google-vertex-ai/vertex.open.notebook.png" alt="Open notebook" width="100%"></span></p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_cleanup_optional"><a class="anchor" href="#_cleanup_optional"></a>Cleanup (optional)</h2>
+<h2 id="_use_custom_container"><a class="anchor" href="#_use_custom_container"></a>Use custom container</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Another option is to provide a custom container when creating a notebook.</p>
+</div>
+<div class="sect2">
+<h3 id="_1_download_teradata_jupyter_extensions_package_2"><a class="anchor" href="#_1_download_teradata_jupyter_extensions_package_2"></a>1. Download Teradata Jupyter extensions package</h3>
+<div class="paragraph">
+<p>Go to <a href="https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter">Vantage Modules for Jupyter</a> page to download the Teradata Jupyter extensions package bundle Linux version.</p>
+</div>
+<div class="paragraph">
+<p>Copy this package to your work directory and unzip it.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_build_custom_docker_image"><a class="anchor" href="#_2_build_custom_docker_image"></a>2. Build custom Docker image</h3>
+<div class="paragraph">
+<p>The custom container must expose a service on port 8080. It is recommended to create a container derived from a Google Deep Learning Containers image, because those images are already configured to be compatible with user-managed notebooks.</p>
+</div>
+<div class="paragraph">
+<p>Below is a sample Dockerfile you can use to build a Docker image with Teradata SQL kernel and extensions installed:</p>
+</div>
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-Dockerfile hljs" data-lang="Dockerfile"># Use one of the deep learning images as base image
+# if you need both Python and R, use one of the R images
+FROM gcr.io/deeplearning-platform-release/r-cpu:latest
+
+USER root
+
+##############################################################
+# Install kernel and copy supporting files
+##############################################################
+
+# Copy the kernel
+COPY ./teradatakernel /usr/local/bin
+
+RUN chmod 755 /usr/local/bin/teradatakernel
+
+# Copy directory with kernel.json file into image
+COPY ./teradatasql teradatasql/
+
+# Copy notebooks and licenses
+COPY ./notebooks/ /home/jupyter
+COPY ./license.txt /home/jupyter
+COPY ./ThirdPartyLicenses/ /home/jupyter
+
+# Install the kernel file to /opt/conda jupyter lab instance
+RUN jupyter kernelspec install ./teradatasql --prefix=/opt/conda
+
+##############################################################
+# Install Teradata extensions
+##############################################################
+
+RUN jupyter labextension install --no-build teradata_database* &amp;&amp; \
+    jupyter labextension install --no-build teradata_resultset* &amp;&amp; \
+    jupyter labextension install --no-build teradata_sqlhighlighter* &amp;&amp; \
+    jupyter labextension install --no-build teradata_connection_manager* &amp;&amp; \
+    jupyter labextension install --no-build teradata_preferences* &amp;&amp; \
+    jupyter lab build --dev-build=False --minimize=False &amp;&amp; \
+
+# Give back ownership of /opt/conda to jovyan
+RUN chown -R jupyter:users /opt/conda
+
+# PIP install the Teradata Python libraries
+RUN pip install teradataml
+
+# Install Teradata R library (optional, include it only if you use a base image that supports R)
+RUN Rscript -e "install.packages('tdplyr',repos=c('https://r-repo.teradata.com','https://cloud.r-project.org'))"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In your work directory (where you unzipped Teradata Jupyter extensions package), run 'docker build' to build the image:</p>
+</div>
+<div class="listingblock content-editable">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker build -f Dockerfile imagename:imagetag .</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_push_the_docker_image_to_google_container_registry_or_artifact_registry"><a class="anchor" href="#_3_push_the_docker_image_to_google_container_registry_or_artifact_registry"></a>3. Push the docker image to Google container registry or artifact registry</h3>
+<div class="paragraph">
+<p>Please refer to the following documentations to push docker image to registry:
+* link: <a href="https://cloud.google.com/container-registry/docs/pushing-and-pulling">Container Registry: Pushing and pulling images</a>
+* link: <a href="https://cloud.google.com/artifact-registry/docs/docker/pushing-and-pulling?hl=en">Artifact Registry: Pushing and pulling images</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_create_a_new_notebook"><a class="anchor" href="#_4_create_a_new_notebook"></a>4. Create a new notebook</h3>
+<div class="paragraph">
+<p>Choose 'custom container' in 'Environment'</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/integrate-teradata-jupyter-extensions-with-google-vertex-ai/vertex.custom.container.png" alt="Open notebook" width="100%"></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further reading</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Clean up metadata from Data Catalog. To do that, copy <a href="https://github.com/GoogleCloudPlatform/datacatalog-connectors-rdbms/blob/master/google-datacatalog-teradata-connector/tools/cleanup_datacatalog.py" class="bare">https://github.com/GoogleCloudPlatform/datacatalog-connectors-rdbms/blob/master/google-datacatalog-teradata-connector/tools/cleanup_datacatalog.py</a> to local directory.</p>
+<p><a href="https://teradata.github.io/jupyterextensions">Teradata Jupyter Extensions Website</a></p>
 </li>
 <li>
-<p>Change directory to where the file is and then run following command:</p>
-<div class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python cleanup_datacatalog.py --datacatalog-project-ids=$TERADATA2DC_DATACATALOG_PROJECT_ID</code></pre>
-</div>
-</div>
+<p><a href="https://docs.teradata.com/r/KQLs1kPXZ02rGWaS9Ktoww/root">Teradata Vantage™ Modules for Jupyter Installation Guide</a></p>
+</li>
+<li>
+<p><a href="https://docs.teradata.com/r/1YKutX2ODdO9ppo_fnguTA/root">Teradata® Package for Python User Guide</a></p>
+</li>
+<li>
+<p><a href="https://cloud.google.com/vertex-ai/docs/training/create-custom-container">Vertex AI documentation: Create a custom container image for training</a></p>
+</li>
+<li>
+<p><a href="https://cloud.google.com/vertex-ai/docs/workbench/user-managed/custom-container">Vertex AI documentation: Create a user-managed notebooks instance by using a custom container</a></p>
+</li>
+<li>
+<p><a href="https://cloud.google.com/vertex-ai/docs/workbench/user-managed/create-new">Vertex AI documentation: Create a user-managed notebooks instance</a></p>
 </li>
 </ul>
 </div>
