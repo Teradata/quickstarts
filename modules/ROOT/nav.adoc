@@ -5,6 +5,8 @@
 ** xref::getting.started.vmware.adoc[Vantage Express on VMware]
 ** xref::getting.started.vbox.adoc[Vantage Express on VirtualBox]
 ** xref::getting.started.utm.adoc[Vantage Express on UTM]
+* xref:jupyter-demos:index.adoc[Demos]
+** xref:jupyter-demos:austin-bike-share.adoc[]
 * Tutorials
 ** xref::nos.adoc[]
 ** xref::ml.adoc[]
