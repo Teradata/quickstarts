@@ -6,7 +6,34 @@
 ** xref::getting.started.vbox.adoc[Vantage Express on VirtualBox]
 ** xref::getting.started.utm.adoc[Vantage Express on UTM]
 * xref:jupyter-demos:index.adoc[Demos]
-** xref:jupyter-demos:austin-bike-share.adoc[]
+** Telco
+*** xref:jupyter-demos:austin-bike-share.adoc[]
+*** xref:jupyter-demos:placeholder.adoc[Smart network optimization]
+*** xref:jupyter-demos:placeholder.adoc[Personalization]
+*** xref:jupyter-demos:placeholder.adoc[Relevant price & promotions]
+*** xref:jupyter-demos:placeholder.adoc[Connected supply chain]
+*** xref:jupyter-demos:placeholder.adoc[Smart network rollout]
+** Automotive
+*** xref:jupyter-demos:placeholder.adoc[Connected vehicle innovation]
+*** xref:jupyter-demos:placeholder.adoc[Smart, connected factories]
+*** xref:jupyter-demos:placeholder.adoc[Granular financial management]
+*** xref:jupyter-demos:placeholder.adoc[Resilient supply chains]
+*** xref:jupyter-demos:placeholder.adoc[Personalized customer experiences]
+** Healthcare
+*** xref:jupyter-demos:placeholder.adoc[Case delivery innovation]
+*** xref:jupyter-demos:placeholder.adoc[Performance management]
+*** xref:jupyter-demos:placeholder.adoc[Emerging payment models]
+*** xref:jupyter-demos:placeholder.adoc[Adaptive supply chains]
+** Government
+*** xref:jupyter-demos:placeholder.adoc[Citizen services]
+*** xref:jupyter-demos:placeholder.adoc[Public health management]
+*** xref:jupyter-demos:placeholder.adoc[Policymaking]
+*** xref:jupyter-demos:placeholder.adoc[Fraud prevention]
+** Retail
+*** xref:jupyter-demos:placeholder.adoc[Workforce management]
+*** xref:jupyter-demos:placeholder.adoc[Marketing & customer experience]
+*** xref:jupyter-demos:placeholder.adoc[Digital & bricks-and-mortar stores]
+*** xref:jupyter-demos:placeholder.adoc[Category management]
 * Tutorials
 ** xref::nos.adoc[]
 ** xref::ml.adoc[]
