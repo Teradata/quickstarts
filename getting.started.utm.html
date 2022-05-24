@@ -1194,7 +1194,7 @@ Last updated: April 5th, 2021</p>
 <p>Go to the directory where you downloaded Vantage Express and unzip the downloaded file.</p>
 </li>
 <li>
-<p>Start UTM, click on the <code>+</code> sign and select <code>Virtualize</code>.</p>
+<p>Start UTM, click on the <code>+</code> sign and select <code>Virtualize</code> (for Intel Macs) or <code>Emulate</code> (for M1 Macs).</p>
 </li>
 <li>
 <p>On <code>Operating System</code> screen select <code>Other</code>.</p>
@@ -1203,7 +1203,7 @@ Last updated: April 5th, 2021</p>
 <p>On <code>Other</code> screen select <code>Skip ISO Boot</code>.</p>
 </li>
 <li>
-<p>On <code>Hardware</code> screen allocate at least 4GB of memory and at least 1 CPU core.</p>
+<p>On <code>Hardware</code> screen allocate at least 4GB of memory and at least 1 CPU core. We recommend 10GB RAM and 2 CPUs.</p>
 <div class="imageblock text-left">
 <div class="content">
 <img src="_images/utm.hardware.png" alt="UTM Hardware" width="500">
@@ -1223,6 +1223,9 @@ Last updated: April 5th, 2021</p>
 <p>Go through the setup wizard. You only need to adjust the following tabs:</p>
 <div class="ulist">
 <ul>
+<li>
+<p><strong>QEMU</strong> - disable <code>UEFI Boot</code> option</p>
+</li>
 <li>
 <p><strong>Network</strong> - expose ssh (22) and Vantage (1025) ports on the host computer:</p>
 <div class="imageblock">
@@ -1246,6 +1249,14 @@ Last updated: April 5th, 2021</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/utm.drives.png" alt="UTM Drives" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Once you are done mapping all 3 drives, your configuration should look like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/utm.final.png" alt="UTM Drives Final" width="500">
 </div>
 </div>
 </li>
