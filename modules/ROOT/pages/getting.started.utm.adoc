@@ -30,16 +30,17 @@ include::partial$getting.started.intro.adoc[]
 === Run Vantage Express
 
 . Go to the directory where you downloaded Vantage Express and unzip the downloaded file.
-. Start UTM, click on the `+` sign and select `Virtualize`.
+. Start UTM, click on the `+` sign and select `Virtualize` (for Intel Macs) or `Emulate` (for M1 Macs).
 . On `Operating System` screen select `Other`.
 . On `Other` screen select `Skip ISO Boot`.
-. On `Hardware` screen allocate at least 4GB of memory and at least 1 CPU core.
+. On `Hardware` screen allocate at least 4GB of memory and at least 1 CPU core. We recommend 10GB RAM and 2 CPUs.
 +
 image::utm.hardware.png[UTM Hardware, width=500, align="left"]
 . On `Storage` screen accept the defaults by clicking `Next`.
 . On `Shared Direct` screen click `Next`.
 . On `Summary` screen check `Open VM Settings` and click `Save`.
 . Go through the setup wizard. You only need to adjust the following tabs:
+* *QEMU* - disable `UEFI Boot` option
 * *Network* - expose ssh (22) and Vantage (1025) ports on the host computer:
 +
 image::utm.network.png[UTM Network, width=500]
@@ -48,6 +49,10 @@ image::utm.network.png[UTM Network, width=500]
 * Map the 3 Vantage Express drives by importing the disk files from the downloaded VM zip file. Make sure you map them in the right order, `-disk1`, `-disk2`, `-disk3` . The first disk is bootable and contains the database itself. Disks 2 and 3 are so called `pdisks` and contain data. As you import the files UTM will automatically convert them fro `vmdk` into `qcow2` format. Make sure that each disk is configured using the `IDE` interface:
 +
 image::utm.drives.png[UTM Drives, width=500]
++
+Once you are done mapping all 3 drives, your configuration should look like this:
++
+image::utm.final.png[UTM Drives Final, width=500]
 . Save the configuration and start the VM.
 
 include::partial$run.vantage.adoc[]
