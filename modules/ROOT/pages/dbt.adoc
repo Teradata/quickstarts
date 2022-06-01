@@ -24,7 +24,7 @@ include::ROOT:partial$vantage.express.options.adoc[]
 +
 [source, bash]
 ----
-git clone git@github.com:Teradata/jaffle_shop-dev.git jaffle_shop
+git clone https://github.com/Teradata/jaffle_shop-dev.git jaffle_shop
 cd jaffle_shop
 ----
 2. Create a new python environment to manage dbt and its dependencies. Activate the environment:
