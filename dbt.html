@@ -1196,10 +1196,7 @@ source env/bin/activate</code></pre>
 <p>Install <code>dbt-teradata</code> module and its dependencies. The core dbt module is included as a dependency so you don&#8217;t have to install it separately:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># There is an issue in dbt-core 1.0.1. To work around the issue we need to pin MarkupSafe dependency to version 2.0.1
-# More info at https://github.com/dbt-labs/dbt-core/issues/4745
-pip install MarkupSafe==2.0.1
-pip install dbt-teradata</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install dbt-teradata</code></pre>
 </div>
 </div>
 </li>
@@ -1212,6 +1209,28 @@ pip install dbt-teradata</code></pre>
 <div class="sectionbody">
 <div class="paragraph">
 <p>We will now configure dbt to connect to your Vantage database. Create file <code>$HOME/.dbt/profiles.yml</code> with the following content. Adjust <code>&lt;host&gt;</code>, <code>&lt;user&gt;</code>, <code>&lt;password&gt;</code> to match your Teradata instance.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Database setup</div>
+<div class="paragraph">
+<p>The following dbt profile points to a database called <code>jaffle_shop</code>. You can change <code>schema</code> value to point to an existing database in your Teradata Vantage instance or you can create <code>jaffle_shop</code> database:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE jaffle_shop
+AS PERMANENT = 110e6,
+    SPOOL = 220e6;</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="listingblock">
 <div class="content">
