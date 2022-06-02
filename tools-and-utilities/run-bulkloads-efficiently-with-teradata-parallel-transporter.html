@@ -1303,12 +1303,11 @@ DESCRIPTION 'Load a Teradata table from a file'
   STEP st_Setup_Tables
   (
     APPLY
-      ('DATABASE '   || @TargetWorkingDatabase || ';''),
       ('DROP TABLE ' || @LoadLogTable || ';'),
       ('DROP TABLE ' || @LoadErrorTable1 || ';'),
       ('DROP TABLE ' || @LoadErrorTable2 || ';'),
       ('DROP TABLE ' || @LoadTargetTable || ';'),
-      ('CREATE MULTISET TABLE ' || @LoadTargetTable || ' (
+      ('CREATE TABLE ' || @LoadTargetTable || ' (
           return_id INT,
           filing_type VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
           ein INT,
