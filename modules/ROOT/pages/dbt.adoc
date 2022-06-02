@@ -38,15 +38,26 @@ source env/bin/activate
 +
 [source, bash]
 ----
-# There is an issue in dbt-core 1.0.1. To work around the issue we need to pin MarkupSafe dependency to version 2.0.1
-# More info at https://github.com/dbt-labs/dbt-core/issues/4745
-pip install MarkupSafe==2.0.1
 pip install dbt-teradata
 ----
 
 == Configure dbt
 
 We will now configure dbt to connect to your Vantage database. Create file `$HOME/.dbt/profiles.yml` with the following content. Adjust `<host>`, `<user>`, `<password>` to match your Teradata instance.
+
+[NOTE]
+.Database setup
+====
+The following dbt profile points to a database called `jaffle_shop`. You can change `schema` value to point to an existing database in your Teradata Vantage instance or you can create `jaffle_shop` database:
+
+[source, teradata-sql]
+----
+CREATE DATABASE jaffle_shop
+AS PERMANENT = 110e6,
+    SPOOL = 220e6;
+----
+
+====
 
 [source, yaml]
 ----
