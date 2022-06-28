@@ -68,6 +68,7 @@ pip install teradataml
 
 # Install Teradata R library (optional, uncomment this line only if you use an environment that supports R)
 #Rscript -e "install.packages('tdplyr',repos=c('https://r-repo.teradata.com','https://cloud.r-project.org'))"
+----
 
 
 4. Create a new notebook and add the startup script from cloud storage bucket
