@@ -1,8 +1,8 @@
 = Integrate Teradata Jupyter extensions with Google Vertex AI
 :experimental:
 :page-author: Hailing Jiang
-:page-email: Hailing.iang@teradata.com
-:page-revdate: May 12th, 2022
+:page-email: Hailing.Jiang@teradata.com
+:page-revdate: June 28th, 2022
 :description: Integrate Teradata Jupyter extensions with Google Vertex AI
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy
 :page-image-directory: integrate-teradata-jupyter-extensions-with-google-vertex-ai
@@ -14,6 +14,8 @@ Vertex AI workbench supports two types of notebooks: managed notebooks and user-
 
 == Prerequisites
 * Access to a Teradata Vantage instance
++
+include::ROOT:partial$vantage.express.options.adoc[]
 * Google Cloud account with Vertex AI enabled
 * Google cloud storage to store startup scripts and Teradata Jupyter extension package
 
@@ -55,12 +57,11 @@ cp teradatakernel /usr/local/bin
 jupyter kernelspec install ./teradatasql --prefix=/opt/conda
 
 # Install Teradata extensions
-jupyter labextension install --no-build teradata_database*
-jupyter labextension install --no-build teradata_connection_manager*
-jupyter labextension install --no-build teradata_resultset*
-jupyter labextension install --no-build teradata_sqlhighlighter*
-jupyter labextension install --no-build teradata_connection_manager*
-jupyter labextension install --no-build teradata_preferences*
+pip install --find-links . teradata_preferences_prebuilt
+pip install --find-links . teradata_connection_manager_prebuilt
+pip install --find-links . teradata_sqlhighlighter_prebuilt
+pip install --find-links . teradata_resultset_renderer_prebuilt
+pip install --find-links . teradata_database_explorer_prebuilt
 
 # PIP install the Teradata Python library
 pip install teradataml
@@ -125,12 +126,11 @@ RUN jupyter kernelspec install ./teradatasql --prefix=/opt/conda
 # Install Teradata extensions
 ##############################################################
 
-RUN jupyter labextension install --no-build teradata_database* && \
-    jupyter labextension install --no-build teradata_resultset* && \
-    jupyter labextension install --no-build teradata_sqlhighlighter* && \
-    jupyter labextension install --no-build teradata_connection_manager* && \
-    jupyter labextension install --no-build teradata_preferences* && \
-    jupyter lab build --dev-build=False --minimize=False && \
+RUN pip install --find-links . teradata_preferences_prebuilt && \
+    pip install --find-links . teradata_connection_manager_prebuilt && \
+    pip install --find-links . teradata_sqlhighlighter_prebuilt && \
+    pip install --find-links . teradata_resultset_renderer_prebuilt && \
+    pip install --find-links . teradata_database_explorer_prebuilt
 
 # Give back ownership of /opt/conda to jovyan
 RUN chown -R jupyter:users /opt/conda
