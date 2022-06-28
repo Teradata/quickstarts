@@ -36,7 +36,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 body {
   transition: all .25s ease-in-out 0s;
   overflow-x: hidden;
-} 
+}
 
 body {
   padding-top: 54px;
@@ -131,7 +131,7 @@ button {
     scrollbar-width: none;
   }
 
-  .navbar::-webkit-scrollbar { 
+  .navbar::-webkit-scrollbar {
     display: none;
   }
 
@@ -259,7 +259,7 @@ button {
   .header-nav-mobile__menu-item.has-sub-items > div {
     height: 0px;
     overflow: hidden;
-    transition-property: height; 
+    transition-property: height;
     transition-duration: 500ms;
   }
 
@@ -393,7 +393,7 @@ button {
     font-weight: 600;
   }
 
-  .header-nav-mobile__menu-item:first-child a, 
+  .header-nav-mobile__menu-item:first-child a,
   .header-nav-mobile__menu-item:first-child a:hover {
     color: #007373;
   }
@@ -494,8 +494,8 @@ button {
   line-height: inherit;
 }
 
-.navbar-end .navbar-item.has-dropdown:hover .navbar-link, 
-.navbar-end .navbar-link:hover, 
+.navbar-end .navbar-item.has-dropdown:hover .navbar-link,
+.navbar-end .navbar-link:hover,
 .navbar-end>a.navbar-item:hover {
   background: initial;
 }
@@ -505,13 +505,13 @@ button {
 }
 
 @media screen and (min-width: 1024px) {
-  .navbar-end .navbar-link, 
+  .navbar-end .navbar-link,
   .navbar-end>.navbar-item {
     color: #000;
   }
 
-  .navbar-end .navbar-item.has-dropdown:hover .navbar-link, 
-  .navbar-end .navbar-link:hover, 
+  .navbar-end .navbar-item.has-dropdown:hover .navbar-link,
+  .navbar-end .navbar-link:hover,
   .navbar-end>a.navbar-item:hover {
     color: #000;
   }
@@ -531,7 +531,7 @@ article.doc {
   }
 }
 
-.doc a, 
+.doc a,
 .doc a:hover {
   color: #007373;
 }
@@ -594,12 +594,14 @@ aside.toc.sidebar {
   display: flex;
   visibility: visible;
   position: absolute;
-  top: .25rem;
-  right: .5rem;
-  color: grey;
-  font-family: Roboto,sans-serif;
-  font-size: .75rem;
   line-height: 1;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 55px;
+  font-size: 16px;
+  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+  color: black;
 }
 
 .content-editable {
@@ -627,16 +629,15 @@ aside.toc.sidebar {
   box-shadow: inset 0 0 1.75px #e1e1e1;
   display: block;
   overflow-x: auto;
-  padding: 70px 12px 12px 16px;
   font-size: 14px;
 }
 
-.doc p code, 
+.doc p code,
 .doc thead code {
   background: #eeeeee;
 }
 
-.doc .listingblock pre:not(.highlight), 
+.doc .listingblock pre:not(.highlight),
 .doc .literalblock pre {
   background: #eeeeee;
   -webkit-box-shadow: inset 0 0 1.75px #e1e1e1;
@@ -708,7 +709,7 @@ body ::-webkit-scrollbar-thumb {
   background-color: initial;
 }
 
-.is-current-page>.nav-link, 
+.is-current-page>.nav-link,
 .is-current-page>.nav-text {
   font-weight: initial;
   color: #007373;
@@ -813,7 +814,7 @@ body ::-webkit-scrollbar-thumb {
   font-size: 16px;
 }
 
-.doc .admonitionblock p, 
+.doc .admonitionblock p,
 .doc .admonitionblock td.content {
   font-size: 16px;
 }
@@ -840,23 +841,11 @@ i.fa[class*=' icon-']::before {
   content: url("./_/img/note.svg");
 }
 
-.doc .source-toolbox {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 55px;
-  font-size: 16px;
-  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
-  color: black;
-  width: 100%;
-  border-bottom: 1px solid #d1d1d1;
-}
-
 .doc .source-toolbox .source-lang {
   padding-top: 24px;
   padding-left: 16px;
   width: 100%;
+  visibility: collapse;
 }
 
 .doc .source-toolbox img.copy-icon {
