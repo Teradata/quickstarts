@@ -22,7 +22,7 @@ Our sample data sets are available on S3 bucket and can be accessed from Vantage
 
 Let's have a look at the data first. Below query will fetch 10 rows from S3 bucket.
 
-[source, teradata-sql]
+[source, teradata-sql, id="time_series_first_query", role="emits-gtm-events"]
 ----
 SELECT TOP 10 * FROM (
 	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/NYCTaxiTrip/'

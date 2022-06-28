@@ -24,7 +24,7 @@ include::ROOT:partial$vantage.express.options.adoc[]
 2. Unzip the driver.
 3. Add the driver to your local Maven repository:
 +
-[source, bash, role="content-editable"]
+[source, bash, id="jdbc_first_config", role="content-editable emits-gtm-events"]
 ----
 mvn install:install-file \
    -Dfile=terajdbc4.jar \

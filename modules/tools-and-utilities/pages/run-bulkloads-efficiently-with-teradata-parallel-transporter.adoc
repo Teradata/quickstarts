@@ -68,7 +68,7 @@ To load the csv data to Vantage, we will define and run a job. The job will prep
 
 . Create a job variable file that will tell TPT how to connect to our Vantage database. Create file `jobvars.txt` and insert the following content. Replace `host` with the host name of your database. For example, if you are using a local Vantage Express instance, use `127.0.0.1`. `username` with the database user name, and `password` with the database password. Note that the preparation step (DDL) and the load step have their own configuration values and that the config values need to be entered twice to configure both the DDL and the load step.
 +
-[source, bash]
+[source, bash, id="tpt_first_config", role="emits-gtm-events"]
 ----
 TargetTdpId           = 'host'
 TargetUserName        = 'username'

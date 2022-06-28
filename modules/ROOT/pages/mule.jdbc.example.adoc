@@ -104,7 +104,7 @@ Populate it with sample data.
 
 . Import the JDBC driver to your local Maven repository:
 +
-[source,bash]
+[source,bash, id="mule_first_config", role="content-editable emits-gtm-events"]]
 ----
  mvn install:install-file \
  -Dfile=terajdbc4.jar \

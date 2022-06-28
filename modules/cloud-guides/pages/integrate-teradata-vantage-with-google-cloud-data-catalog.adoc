@@ -172,7 +172,7 @@ Where `<google_credential_file>` is the key for your service account (json file)
 
 Execute `google-datacatalog-teradata-connector` command to establish entry point to Vantage database.
 
-[source, bash, role="content-editable emits-gtm-events"]
+[source, bash, id="gcp_data_catalog_first_run" role="content-editable emits-gtm-events"]
 ----
 google-datacatalog-teradata-connector \
   --datacatalog-project-id=$TERADATA2DC_DATACATALOG_PROJECT_ID \

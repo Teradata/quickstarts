@@ -20,7 +20,7 @@ include::ROOT:partial$vantage.express.options.adoc[]
 
 Let's start with something simple. What if you wanted the database to print "Hello World"?
 
-[source, teradata-sql]
+[source, teradata-sql, id="sto_first_query", role="emits-gtm-events"]
 ----
 SELECT *
 FROM

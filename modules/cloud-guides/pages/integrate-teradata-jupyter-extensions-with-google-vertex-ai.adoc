@@ -150,7 +150,7 @@ RUN Rscript -e "install.packages('tdplyr',repos=c('https://r-repo.teradata.com',
 
 4. In your work directory (where you unzipped Teradata Jupyter extensions package), run `docker build` to build the image:
 +
-[source, bash, role="content-editable"]
+[source, bash, id="jupyterlab_ext_on_vertex_first_run", role="content-editable emits-gtm-events"]
 ----
 docker build -f Dockerfile imagename:imagetag .
 ----

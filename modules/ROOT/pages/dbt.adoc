@@ -59,7 +59,7 @@ AS PERMANENT = 110e6,
 
 ====
 
-[source, yaml]
+[source, yaml, id="dbt_first_config", role="emits-gtm-events"]
 ----
 jaffle_shop:
   outputs:

@@ -534,7 +534,7 @@ You can use the `READ_NOS` table operator to explore the data in an object.
 
 * Run the following command to explore the data in an object.
 +
-[source, teradata-sql]
+[source, teradata-sql, id="azure_data_share_first_run", role="content-editable emits-gtm-events"]]
 ----
 SELECT
   TOP 5 payload..*
