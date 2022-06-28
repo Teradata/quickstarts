@@ -90,7 +90,7 @@ trainDF.to_csv(trainFileName, header=None, index=False)
 
 9. Upload the file to Amazon S3:
 +
-[source, python]
+[source, python, id="sagemaker_first_usage", role="content-editable emits-gtm-events"]]
 ----
 bucket = 'sagedemo'
 prefix = 'sagemaker/train'

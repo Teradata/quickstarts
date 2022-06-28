@@ -25,7 +25,7 @@ U.S. Geological Survey. The bucket is at https://td-usgs-public.s3.amazonaws.com
 
 Let's first have a look at sample CSV data. We take the first 10 rows that Vantage will fetch from the bucket:
 
-[source, teradata-sql]
+[source, teradata-sql, id="nos_first_query" role="emits-gtm-events"]
 ----
 SELECT
   TOP 10 *
