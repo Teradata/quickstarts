@@ -1317,7 +1317,7 @@ export SERVICE_URL=$(gcloud run services describe segment-listener --platform ma
 </li>
 <li>
 <p>Create a Pub/Sub subscription with the service account:</p>
-<div class="listingblock">
+<div id="segment_first_run" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud pubsub subscriptions create segment-events-cloudrun-subscription --topic projects/$PROJECT_ID/topics/segment-events \
    --push-endpoint=$SERVICE_URL \

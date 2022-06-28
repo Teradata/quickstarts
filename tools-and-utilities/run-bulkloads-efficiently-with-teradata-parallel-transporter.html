@@ -1250,7 +1250,7 @@ AS PERMANENT = 120e6, -- 120MB
 <ol class="arabic">
 <li>
 <p>Create a job variable file that will tell TPT how to connect to our Vantage database. Create file <code>jobvars.txt</code> and insert the following content. Replace <code>host</code> with the host name of your database. For example, if you are using a local Vantage Express instance, use <code>127.0.0.1</code>. <code>username</code> with the database user name, and <code>password</code> with the database password. Note that the preparation step (DDL) and the load step have their own configuration values and that the config values need to be entered twice to configure both the DDL and the load step.</p>
-<div class="listingblock">
+<div id="tpt_first_config" class="listingblock emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">TargetTdpId           = 'host'
 TargetUserName        = 'username'

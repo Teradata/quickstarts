@@ -1307,7 +1307,7 @@ notebooks.</p>
 </li>
 <li>
 <p>Below is an example Dockerfile to add Teradata Jupyter extensions to your existing Docker image. Use the Dockerfile to build a new Docker image, push the image to a designated registry, modify override file as shown above to use the new image as singleuser image, apply the changes to the cluster:</p>
-<div class="listingblock content-editable">
+<div id="jupyterhub_first_run" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-Dockerfile hljs" data-lang="Dockerfile">FROM REGISTRY_URL/your-existing-image:tag
 ENV NB_USER=jovyan \

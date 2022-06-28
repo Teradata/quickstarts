@@ -1171,7 +1171,7 @@ If you need a new instance of Vantage, you can install a free version called Van
 <div class="paragraph">
 <p>Let&#8217;s have a look at the data first. Below query will fetch 10 rows from S3 bucket.</p>
 </div>
-<div class="listingblock">
+<div id="time_series_first_query" class="listingblock emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT TOP 10 * FROM (
 	LOCATION='/s3/s3.amazonaws.com/nyc-tlc/csv_backup/yellow_tripdata_2013-11.csv'

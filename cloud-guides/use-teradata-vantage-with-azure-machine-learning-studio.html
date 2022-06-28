@@ -1319,7 +1319,7 @@ containerName="mldata"</code></pre>
 </li>
 <li>
 <p>Upload file to Azure Blob Storage:</p>
-<div class="listingblock">
+<div id="azure_ml_studio_first_config" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">blobService = BlockBlobService(account_name=accountName, account_key=accountKey)
 blobService.create_blob_from_text(containerNAme, 'vTargetMail.csv', trainDF)</code></pre>

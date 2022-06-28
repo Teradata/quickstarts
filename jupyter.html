@@ -1179,7 +1179,7 @@ If you need a new instance of Vantage, you can install a free version called Van
 <ol class="arabic">
 <li>
 <p>We start with a plain Jupyter Lab notebook. Here, I&#8217;m using docker but any method of starting a notebook, including Jupyter Hub, GCP AI Platform Notebooks, AWS SageMaker Notebooks, Azure ML Notebooks will do.</p>
-<div class="listingblock content-editable">
+<div id="jupyter_first_run" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run --rm -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes \
   -v "${PWD}":/home/jovyan/work jupyter/datascience-notebook</code></pre>
@@ -1308,7 +1308,7 @@ By passing <code>-e "accept_license=Y</code> you accept <a href="https://github.
 </tr>
 </table>
 </div>
-<div class="listingblock content-editable">
+<div id="jupyter_td_image_first_run" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker volume create notebooks
 docker run -e "accept_license=Y" -p :8888:8888 \
