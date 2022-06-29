@@ -1121,8 +1121,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </aside>
 <article class="doc">
 <h1 class="page">Integrate Teradata Jupyter extensions with Google Vertex AI</h1>
-<p>Author: <a href="mailto:Hailing.iang@teradata.com">Hailing Jiang</a><br/>
-Last updated: May 12th, 2022</p>
+<p>Author: <a href="mailto:Hailing.Jiang@teradata.com">Hailing Jiang</a><br/>
+Last updated: June 28th, 2022</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
@@ -1212,22 +1212,17 @@ cp teradatakernel /usr/local/bin
 jupyter kernelspec install ./teradatasql --prefix=/opt/conda
 
 # Install Teradata extensions
-jupyter labextension install --no-build teradata_database*
-jupyter labextension install --no-build teradata_connection_manager*
-jupyter labextension install --no-build teradata_resultset*
-jupyter labextension install --no-build teradata_sqlhighlighter*
-jupyter labextension install --no-build teradata_connection_manager*
-jupyter labextension install --no-build teradata_preferences*
-
+pip install --find-links . teradata_preferences_prebuilt
+pip install --find-links . teradata_connection_manager_prebuilt
+pip install --find-links . teradata_sqlhighlighter_prebuilt
+pip install --find-links . teradata_resultset_renderer_prebuilt
+pip install --find-links . teradata_database_explorer_prebuilt
 
 # PIP install the Teradata Python library
 pip install teradataml
 
 # Install Teradata R library (optional, uncomment this line only if you use an environment that supports R)
-#Rscript -e "install.packages('tdplyr',repos=c('https://r-repo.teradata.com','https://cloud.r-project.org'))"
-
-# rebuild jupyter lab
-jupyter lab build --dev-build=False --minimize=False</code></pre>
+#Rscript -e "install.packages('tdplyr',repos=c('https://r-repo.teradata.com','https://cloud.r-project.org'))"</code></pre>
 </div>
 </div>
 </li>
@@ -1302,12 +1297,11 @@ RUN jupyter kernelspec install ./teradatasql --prefix=/opt/conda
 # Install Teradata extensions
 ##############################################################
 
-RUN jupyter labextension install --no-build teradata_database* &amp;&amp; \
-    jupyter labextension install --no-build teradata_resultset* &amp;&amp; \
-    jupyter labextension install --no-build teradata_sqlhighlighter* &amp;&amp; \
-    jupyter labextension install --no-build teradata_connection_manager* &amp;&amp; \
-    jupyter labextension install --no-build teradata_preferences* &amp;&amp; \
-    jupyter lab build --dev-build=False --minimize=False &amp;&amp; \
+RUN pip install --find-links . teradata_preferences_prebuilt &amp;&amp; \
+    pip install --find-links . teradata_connection_manager_prebuilt &amp;&amp; \
+    pip install --find-links . teradata_sqlhighlighter_prebuilt &amp;&amp; \
+    pip install --find-links . teradata_resultset_renderer_prebuilt &amp;&amp; \
+    pip install --find-links . teradata_database_explorer_prebuilt
 
 # Give back ownership of /opt/conda to jovyan
 RUN chown -R jupyter:users /opt/conda
