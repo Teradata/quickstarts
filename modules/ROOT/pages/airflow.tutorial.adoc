@@ -1,0 +1,61 @@
+1. In AWS create a EC2 - Red hat 8 CPU, 32 GB Memory, 60 GB storage space. Remember to open the port for traffic coming from your computer.
+
+2. In the EC2, create the airflow files. Run each line individually
+mkdir airflow
+cd airflow
+mkdir -p ./dags ./logs ./plugins ./data ./config ./data
+echo -e "AIRFLOW_UID=$(id -u)" > .env
+	
+*Reword 3. Copy the airflow.cfg file into the config file you created.
+
+Make sure you are in the airflow directory
+
+4. Now install docker. If you have an RHEL linux system, podman may be installed. Before docker can be dowloaded, podman must be uninstalled.     
+
+sudo yum remove docker \
+docker-client \
+docker-client-latest \
+docker-common \
+docker-latest \
+docker-latest-logrotate \
+docker-logrotate \
+docker-engine \
+podman \
+runc
+
+5. Install yum utilities.
+sudo yum install -y yum-utils
+
+6. Add docker to yum repository (this is changed from original instructions)
+
+sudo yum-config-manager \
+--add-repo \
+https://download.docker.com/linux/centos/docker-ce.repo
+
+7. Install docker.
+sudo yum install docker-ce docker-ce-cli containerd.io
+
+8. Start docker as a service.
+
+sudo systemctl enable docker
+This sets the system up so that docker will automatically run when the system starts up. 
+
+sudo systemctl start docker
+This starts docker now.
+
+9. Copy the docker compose yaml file  (obtained by Igor Machin) to the airflow directory by dragging it into the file. The file contains the configuration with all the airflow concurrent docker components
+
+10. Install docker-compose (to run the yaml file):
+
+sudo curl -L https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+Something about docker-compose --version
+
+11. Run docker-compose against the docker-compose.yaml in the airflow directory (where the docker-compose.yaml is located)
+
+sudo docker-compose up airflow-init
+
+12. Run docker configuration:
+sudo docker-compose up
