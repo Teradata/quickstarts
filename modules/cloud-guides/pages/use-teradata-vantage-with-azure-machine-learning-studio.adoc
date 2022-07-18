@@ -124,7 +124,7 @@ containerName="mldata"
 
 11. Upload file to Azure Blob Storage:
 +
-[source, python]
+[source, python, id="azure_ml_studio_first_config", role="content-editable emits-gtm-events"]]
 ----
 blobService = BlockBlobService(account_name=accountName, account_key=accountKey)
 blobService.create_blob_from_text(containerNAme, 'vTargetMail.csv', trainDF)

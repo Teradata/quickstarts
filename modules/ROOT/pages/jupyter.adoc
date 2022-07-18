@@ -25,7 +25,7 @@ This option uses a regular Jupyter Lab notebook. We will see how to load the Ter
 
 1. We start with a plain Jupyter Lab notebook. Here, I'm using docker but any method of starting a notebook, including Jupyter Hub, GCP AI Platform Notebooks, AWS SageMaker Notebooks, Azure ML Notebooks will do.
 +
-[source, bash, role="content-editable"]
+[source, bash, id="jupyter_first_run", role="content-editable emits-gtm-events"]
 ----
 docker run --rm -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes \
   -v "${PWD}":/home/jovyan/work jupyter/datascience-notebook
@@ -107,7 +107,7 @@ The Teradata Jupyter Docker image can be used when you want to run Jupyter local
 +
 NOTE: By passing `-e "accept_license=Y` you accept https://github.com/Teradata/jupyterextensions/blob/master/licensefiles/license.txt[the license agreement] for Teradata Jupyter Extensions.
 +
-[source, bash, role="content-editable"]
+[source, bash, id="jupyter_td_image_first_run", role="content-editable emits-gtm-events"]
 ----
 docker volume create notebooks
 docker run -e "accept_license=Y" -p :8888:8888 \

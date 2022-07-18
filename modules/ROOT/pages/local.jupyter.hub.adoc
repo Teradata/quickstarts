@@ -93,7 +93,7 @@ notebooks.
 2. Unzip the bundle file to your working directory.
 3. Below is an example Dockerfile to add Teradata Jupyter extensions to your existing Docker image. Use the Dockerfile to build a new Docker image, push the image to a designated registry, modify override file as shown above to use the new image as singleuser image, apply the changes to the cluster:
 +
-[source, Dockerfile, role="content-editable"]
+[source, Dockerfile, id="jupyterhub_first_run", role="content-editable emits-gtm-events"]
 ----
 FROM REGISTRY_URL/your-existing-image:tag
 ENV NB_USER=jovyan \

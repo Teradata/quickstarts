@@ -614,7 +614,7 @@ image:{page-image-directory}/image42.png[image,width=624,height=21]
 
 Write the new lead information into S3 bucket using WRITE_NOS.
 
-[source, teradata-sql]
+[source, teradata-sql, id="salesforce_first_run", role="content-editable emits-gtm-events"]]
 ----
 SELECT * FROM WRITE_NOS (
 ON (

@@ -1,8 +1,8 @@
 = Integrate Teradata Jupyter extensions with Google Vertex AI
 :experimental:
 :page-author: Hailing Jiang
-:page-email: Hailing.iang@teradata.com
-:page-revdate: May 12th, 2022
+:page-email: Hailing.Jiang@teradata.com
+:page-revdate: June 28th, 2022
 :description: Integrate Teradata Jupyter extensions with Google Vertex AI
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy
 :page-image-directory: integrate-teradata-jupyter-extensions-with-google-vertex-ai
@@ -57,23 +57,19 @@ cp teradatakernel /usr/local/bin
 jupyter kernelspec install ./teradatasql --prefix=/opt/conda
 
 # Install Teradata extensions
-jupyter labextension install --no-build teradata_database*
-jupyter labextension install --no-build teradata_connection_manager*
-jupyter labextension install --no-build teradata_resultset*
-jupyter labextension install --no-build teradata_sqlhighlighter*
-jupyter labextension install --no-build teradata_connection_manager*
-jupyter labextension install --no-build teradata_preferences*
-
+pip install --find-links . teradata_preferences_prebuilt
+pip install --find-links . teradata_connection_manager_prebuilt
+pip install --find-links . teradata_sqlhighlighter_prebuilt
+pip install --find-links . teradata_resultset_renderer_prebuilt
+pip install --find-links . teradata_database_explorer_prebuilt
 
 # PIP install the Teradata Python library
 pip install teradataml
 
 # Install Teradata R library (optional, uncomment this line only if you use an environment that supports R)
 #Rscript -e "install.packages('tdplyr',repos=c('https://r-repo.teradata.com','https://cloud.r-project.org'))"
-
-# rebuild jupyter lab
-jupyter lab build --dev-build=False --minimize=False
 ----
+
 
 4. Create a new notebook and add the startup script from cloud storage bucket
 +
@@ -131,12 +127,11 @@ RUN jupyter kernelspec install ./teradatasql --prefix=/opt/conda
 # Install Teradata extensions
 ##############################################################
 
-RUN jupyter labextension install --no-build teradata_database* && \
-    jupyter labextension install --no-build teradata_resultset* && \
-    jupyter labextension install --no-build teradata_sqlhighlighter* && \
-    jupyter labextension install --no-build teradata_connection_manager* && \
-    jupyter labextension install --no-build teradata_preferences* && \
-    jupyter lab build --dev-build=False --minimize=False && \
+RUN pip install --find-links . teradata_preferences_prebuilt && \
+    pip install --find-links . teradata_connection_manager_prebuilt && \
+    pip install --find-links . teradata_sqlhighlighter_prebuilt && \
+    pip install --find-links . teradata_resultset_renderer_prebuilt && \
+    pip install --find-links . teradata_database_explorer_prebuilt
 
 # Give back ownership of /opt/conda to jovyan
 RUN chown -R jupyter:users /opt/conda
@@ -150,7 +145,7 @@ RUN Rscript -e "install.packages('tdplyr',repos=c('https://r-repo.teradata.com',
 
 4. In your work directory (where you unzipped Teradata Jupyter extensions package), run `docker build` to build the image:
 +
-[source, bash, role="content-editable"]
+[source, bash, id="jupyterlab_ext_on_vertex_first_run", role="content-editable emits-gtm-events"]
 ----
 docker build -f Dockerfile imagename:imagetag .
 ----

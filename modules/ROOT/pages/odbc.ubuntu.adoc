@@ -51,7 +51,7 @@ Driver=/opt/teradata/client/17.10/odbc_64/lib/tdataodbc_sb64.so
 We will validate the installation with a sample Python application. Create `test.py` file with the following content.
 Replace `DBCName=192.168.86.33;UID=dbc;PWD=dbc` with the IP address of your Teradata Vantage instance, username and password:
 
-[source, python]
+[source, python, id="odbc_first_run", role="content-editable emits-gtm-events"]]
 ----
 import pyodbc
 

@@ -85,7 +85,7 @@ Let's start by creating a wide table (Analytic Data Set, or ADS) that joins the 
 
 NOTE: You must have CREATE TABLE permissions on the Database where the Vantage Analytic Library is installed.
 
-[source, teradata-sql, role="content-editable"]
+[source, teradata-sql, id="ml_first_query", role="content-editable emits-gtm-events"]
 ----
 -- Switch to val database.
 DATABASE val;

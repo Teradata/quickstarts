@@ -140,7 +140,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 
 14. Create a Pub/Sub subscription with the service account:
 +
-[source, bash]
+[source, bash, id="segment_first_run", role="content-editable emits-gtm-events"]]
 ----
 gcloud pubsub subscriptions create segment-events-cloudrun-subscription --topic projects/$PROJECT_ID/topics/segment-events \
    --push-endpoint=$SERVICE_URL \
