@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>dbt with Teradata Vantage :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/dbt.html">
-    <meta name="description" content="Use dbt (data build tool) with Teradata Vantage.">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, elt, dbt.">
+    <title>Jupyter Notebook Demos :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/jupyter-demos/index.html">
+    <meta name="description" content="Get quickly up to speed with Teradata Vantage. Learn about features. Find how-tos for common tasks. Explore sample source code.">
+    <meta name="keywords" content="data warehouses, cloud data warehouse, compute storage separation, teradata, vantage, cloud data platform, java applications, business intelligence, enterprise analytics, hybrid multi-cloud, business outcomes">
     <meta name="generator" content="Antora 3.0.1">
-    <link rel="stylesheet" href="./_/css/site.css">
-<meta property="og:title" content="dbt with Teradata Vantage :: Teradata Getting Started">
+    <link rel="stylesheet" href="../_/css/site.css">
+<meta property="og:title" content="Jupyter Notebook Demos :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Use dbt (data build tool) with Teradata Vantage." />
+<meta property="og:description" content="Get quickly up to speed with Teradata Vantage. Learn about features. Find how-tos for common tasks. Explore sample source code." />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/dbt.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/jupyter-demos/index.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -28,10 +28,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');</script>
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="./_/css/search.css">
-<link rel="stylesheet" href="./_/css/styles.css">
-<link rel="stylesheet" href="./_/css/fontawesome.all.min.css">
-<link rel="stylesheet" href="./_/css/webfonts.css">
+<link rel="stylesheet" href="../_/css/search.css">
+<link rel="stylesheet" href="../_/css/styles.css">
+<link rel="stylesheet" href="../_/css/fontawesome.all.min.css">
+<link rel="stylesheet" href="../_/css/webfonts.css">
 <style>
 body {
   transition: all .25s ease-in-out 0s;
@@ -320,7 +320,7 @@ button {
   border-radius: 8px;
   padding-left: 14px;
   padding-right: 14px;
-  background-image: url(./_/img/search.svg);
+  background-image: url(../_/img/search.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -736,7 +736,7 @@ body ::-webkit-scrollbar-thumb {
 
 .report-an-issue {
   padding: 10px 20px 10px 10px;
-  background-image: url(./_/img/pan_tool.svg);
+  background-image: url(../_/img/pan_tool.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -744,7 +744,7 @@ body ::-webkit-scrollbar-thumb {
 
 .edit-on-github {
   padding: 10px 20px 10px 10px;
-  background-image: url(./_/img/edit.svg);
+  background-image: url(../_/img/edit.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -830,19 +830,19 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/warning.svg");
+  content: url("../_/img/warning.svg");
 }
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .admonitionblock.question .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/question.mark.svg");
+  content: url("../_/img/question.mark.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .source-toolbox .source-lang {
@@ -853,7 +853,7 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .source-toolbox img.copy-icon {
-  content: url("./_/img/copy.svg");
+  content: url("../_/img/copy.svg");
 }
 
 .doc .source-toolbox>:not(:last-child)::after {
@@ -874,8 +874,8 @@ span.search-result-highlight {
 }
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
-<link rel="icon" href="./_/img/favicon.ico" type="image/x-icon">
-    <script>var uiRootPath = './_'</script>
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+    <script>var uiRootPath = '../_'</script>
   </head>
   <body class="article">
 <!-- Google Tag Manager (noscript) -->
@@ -927,7 +927,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <ul>
           <li class="header-nav-mobile__menu-item">
             <header class="header-nav-mobile__menu-item__header">
-              <a href="./index.html">Getting Started</a>
+              <a href="../index.html">Getting Started</a>
             </header>
           </li>
           <li class="header-nav-mobile__menu-item">
@@ -986,22 +986,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="nav-text">Get access to Vantage</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="run-vantage-express-on-aws.html">Vantage Express on AWS</a>
+    <a class="nav-link" href="../run-vantage-express-on-aws.html">Vantage Express on AWS</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on GCP</a>
+    <a class="nav-link" href="../vantage.express.gcp.html">Vantage Express on GCP</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
+    <a class="nav-link" href="../run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
+    <a class="nav-link" href="../getting.started.vmware.html">Vantage Express on VMware</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
+    <a class="nav-link" href="../getting.started.vbox.html">Vantage Express on VirtualBox</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
+    <a class="nav-link" href="../getting.started.utm.html">Vantage Express on UTM</a>
   </li>
 </ul>
   </li>
@@ -1010,22 +1010,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="nav-text">Tutorials</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nos.html">Query data stored in object storage</a>
+    <a class="nav-link" href="../nos.html">Query data stored in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ml.html">Train ML models in Vantage</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
+    <a class="nav-link" href="../ml.html">Train ML models in Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
+    <a class="nav-link" href="../dbt.html">dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">Load data with TPT</a>
+    <a class="nav-link" href="../sto.html">Run scripts on Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="perform-time-series-analysis-using-teradata-vantage.html">Perform time series analysis</a>
+    <a class="nav-link" href="../tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">Load data with TPT</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../perform-time-series-analysis-using-teradata-vantage.html">Perform time series analysis</a>
   </li>
 </ul>
   </li>
@@ -1034,49 +1034,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="nav-text">How-tos</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
+    <a class="nav-link" href="../jdbc.html">Connect to Vantage using JDBC</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
+    <a class="nav-link" href="../jupyter.html">Use Vantage from a Jupyter notebook</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+    <a class="nav-link" href="../local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+    <a class="nav-link" href="../mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Configure ODBC</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="odbc.ubuntu.html">Ubuntu</a>
+    <a class="nav-link" href="../odbc.ubuntu.html">Ubuntu</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="segment.html">Store events from Twilio Segment</a>
+    <a class="nav-link" href="../segment.html">Store events from Twilio Segment</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
+    <a class="nav-link" href="../cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
+    <a class="nav-link" href="../cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
+    <a class="nav-link" href="../cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
+    <a class="nav-link" href="../other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
   </li>
 </ul>
   </li>
@@ -1089,7 +1089,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="nav-text">Financial</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="jupyter-demos/gcp-vertex-ai-pipelines-vantage-byom-housing-example.html">GCP Vertex AI Pipelines Vantage BYOM Housing Example</a>
+    <a class="nav-link" href="gcp-vertex-ai-pipelines-vantage-byom-housing-example.html">GCP Vertex AI Pipelines Vantage BYOM Housing Example</a>
   </li>
 </ul>
   </li>
@@ -1107,10 +1107,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <ul class="components">
     <li class="component is-current">
-      <a class="title" href="index.html">Getting Started Guides</a>
+      <a class="title" href="../index.html">Getting Started Guides</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">master</a>
+          <a href="../index.html">master</a>
         </li>
       </ul>
     </li>
@@ -1124,8 +1124,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li>Tutorials</li>
-    <li><a href="dbt.html">dbt with Teradata Vantage</a></li>
+    <li><a href="index.html">Jupyter Notebook Demos</a></li>
   </ul>
 </nav>
 </div>
@@ -1133,262 +1132,664 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/dbt.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/jupyter-demos/pages/index.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">dbt with Teradata Vantage</h1>
-<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
-Last updated: December 28st, 2021</p>
-<div class="sect1">
-<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>This tutorial demonstrates how to use dbt (Data Build Tool) with Teradata Vantage. It&#8217;s based on the original <a href="https://github.com/dbt-labs/jaffle_shop-dev">dbt Jaffle Shop tutorial</a>. A couple of models have been adjusted to the SQL dialect supported by Vantage.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Access to a Teradata Vantage instance.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If you need a new instance of Vantage, you can install a free version called Vantage Express in the cloud on <a href="vantage.express.gcp.html" class="xref page">GCP</a>, <a href="run-vantage-express-on-microsoft-azure.html" class="xref page">Azure</a>, and <a href="run-vantage-express-on-aws.html" class="xref page">AWS</a>. You can also run Vantage Express on your local machine using <a href="getting.started.vmware.html" class="xref page">VMware</a>, <a href="getting.started.vbox.html" class="xref page">VirtualBox</a>, or <a href="getting.started.utm.html" class="xref page">UTM</a>.
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>Python 3.7, 3.8 or 3.9 installed.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_install_dbt"><a class="anchor" href="#_install_dbt"></a>Install dbt</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Clone the tutorial repository and cd into the project directory:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://github.com/Teradata/jaffle_shop-dev.git jaffle_shop
-cd jaffle_shop</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Create a new python environment to manage dbt and its dependencies. Activate the environment:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python3 -m venv env
-source env/bin/activate</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Install <code>dbt-teradata</code> module and its dependencies. The core dbt module is included as a dependency so you don&#8217;t have to install it separately:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install dbt-teradata</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_configure_dbt"><a class="anchor" href="#_configure_dbt"></a>Configure dbt</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>We will now configure dbt to connect to your Vantage database. Create file <code>$HOME/.dbt/profiles.yml</code> with the following content. Adjust <code>&lt;host&gt;</code>, <code>&lt;user&gt;</code>, <code>&lt;password&gt;</code> to match your Teradata instance.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="title">Database setup</div>
-<div class="paragraph">
-<p>The following dbt profile points to a database called <code>jaffle_shop</code>. You can change <code>schema</code> value to point to an existing database in your Teradata Vantage instance or you can create <code>jaffle_shop</code> database:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE jaffle_shop
-AS PERMANENT = 110e6,
-    SPOOL = 220e6;</code></pre>
-</div>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div id="dbt_first_config" class="listingblock emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">jaffle_shop:
-  outputs:
-    dev:
-      type: teradata
-      host: &lt;host&gt;
-      user: &lt;user&gt;
-      password: &lt;password&gt;
-      logmech: TD2
-      schema: jaffle_shop
-      tmode: ANSI
-      threads: 1
-      timeout_seconds: 300
-      priority: interactive
-      retries: 1
-  target: dev</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Now, that we have the profile file in place, we can validate the setup:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt debug</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If the debug command returned errors, you likely have an issue with the content of <code>profiles.yml</code>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_about_the_jaffle_shop_warehouse"><a class="anchor" href="#_about_the_jaffle_shop_warehouse"></a>About the Jaffle Shop warehouse</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><code>jaffle_shop</code> is a fictional e-commerce store. This dbt project transforms raw data from an app database into a dimensional model with customer and order data ready for analytics.</p>
-</div>
-<div class="paragraph">
-<p>The raw data from the app consists of customers, orders, and payments, with the following entity-relationship diagram:</p>
-</div>
-<div class="imageblock kroki">
-<div class="content">
-<img src="_images/diag-f4281ff8ede0df7faea97f80936093e7b4a0bd21.svg" alt="Diagram" width="100%">
-</div>
-</div>
-<div class="paragraph">
-<p>dbt takes these raw data table and builds the following dimensional model, which is more suitable for analytics tools:</p>
-</div>
-<div class="imageblock kroki">
-<div class="content">
-<img src="_images/diag-cfb2d5cb8c33c037d82e57adbd8d36445946ce00.svg" alt="Diagram" width="100%">
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_run_dbt"><a class="anchor" href="#_run_dbt"></a>Run dbt</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_create_raw_data_tables"><a class="anchor" href="#_create_raw_data_tables"></a>Create raw data tables</h3>
-<div class="paragraph">
-<p>In real life, we will be getting raw data from platforms like Segment, Stitch, Fivetran or another ETL tool. In our case, we will use dbt&#8217;s <code>seed</code> functionality to create tables from csv files. The csv files are located in <code>./data</code> directory. Each csv file will produce one table. dbt will inspect the files and do type inference to decide what data types to use for columns.</p>
-</div>
-<div class="paragraph">
-<p>Let&#8217;s create the raw data tables:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt seed</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You should now see 3 tables in your <code>jaffle_shop</code> database: <code>raw_customers</code>, <code>raw_orders</code>, <code>raw_payments</code>. The tables should be populated with data from the csv files.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_create_the_dimensional_model"><a class="anchor" href="#_create_the_dimensional_model"></a>Create the dimensional model</h3>
-<div class="paragraph">
-<p>Now that we have the raw tables, we can instruct dbt to create the dimensional model:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt run</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>So what exactly happened here? dbt created additional tables using <code>CREATE TABLE/VIEW FROM SELECT</code> SQL. In the first transformation, dbt took raw tables and built denormalized join tables called <code>customer_orders</code>, <code>order_payments</code>, <code>customer_payments</code>. You will find the definitions of these tables in <code>./marts/core/intermediate</code>.
-In the second step, dbt created <code>dim_customers</code> and <code>fct_orders</code> tables. These are the dimensional model tables that we want to expose to our BI tool.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_test_the_data"><a class="anchor" href="#_test_the_data"></a>Test the data</h3>
-<div class="paragraph">
-<p>dbt applied multiple transformations to our data. How can we ensure that the data in the dimensional model is correct? dbt allows us to define and execute tests against the data. The tests are defined in <code>./marts/core/schema.yml</code>. The file describes each column in all relationships. Each column can have multiple tests configured under <code>tests</code> key. For example, we expect that <code>fct_orders.order_id</code> column will contain unique, non-null values. To validate that the data in the produced tables satisfies the test conditions run:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt test</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_generate_documentation"><a class="anchor" href="#_generate_documentation"></a>Generate documentation</h3>
-<div class="paragraph">
-<p>Our model consists of just a few tables. Imagine a scenario where where we have many more sources of data and a much more complex dimensional model. We could also have an intermediate zone between the raw data and the dimensional model that follows the Data Vault 2.0 principles. Would it not be useful, if we had the inputs, transformations and outputs documented somehow? dbt allows us to generate documentation from its configuration files:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt docs generate</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This will produce html files in <code>./target</code> directory.</p>
-</div>
-<div class="paragraph">
-<p>You can start your own server to browse the documentation. The following command will start a server and open up a browser tab with the docs' landing page:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt docs serve</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>This tutorial demonstrated how to use dbt with Teradata Vantage. The sample project takes raw data and produces a dimensional data mart. We used multiple dbt commands to populate tables from csv files (<code>dbt seed</code>), create models (<code>dbt run</code>), test the data (<code>dbt test</code>), and generate and serve model documentation (<code>dbt docs generate</code>, <code>dbt docs serve</code>).</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further reading</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://docs.getdbt.com/docs/">dbt documentation</a></p>
-</li>
-<li>
-<p><a href="https://github.com/Teradata/dbt-teradata">dbt-teradata plugin documentation</a></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
+<h1 class="page">Jupyter Notebook Demos</h1>
+    <div class="content landing">
+      <div class="landing-container">
+        <div class="tile-container">
+          <div class="tile-section">
+            <div class="tile-section-title" id="telco">Telco</div>
+            <div class="tile-section-container">
+              <div class="tile">
+                <a href="austin-bike-share.html">
+                  <div class="link">
+                    <div class="tile-title">Smart decommissioning</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on AWS.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Telco</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="tile">
+                <a href="vantage.express.gcp.html">
+                  <div class="link">
+                    <div class="tile-title">Smart network optimization</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on GCP.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Telco</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="tile">
+                <a href="run-vantage-express-on-microsoft-azure.html">
+                  <div class="link">
+                    <div class="tile-title">Personalization</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on Microsoft Azure.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Telco</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="tile">
+                <a href="getting.started.vmware.html">
+                  <div class="link">
+                    <div class="tile-title">Relevant price & promotions</div>
+                    <div class="tile-content">Learn how to install Teradata Vantage Express on your machine for development and testing.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Telco</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="tile">
+                <a href="getting.started.vbox.html">
+                  <div class="link">
+                    <div class="tile-title">Connected supply chain</div>
+                    <div class="tile-content">Run Teradata Vantage Express on your local machine with VirtualBox.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Telco</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="tile">
+                <a href="getting.started.utm.html">
+                  <div class="link">
+                    <div class="tile-title">Smart network rollout</div>
+                    <div class="tile-content">Run Teradata Vantage Express on your Mac with UTM. Apple chipset supported.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Telco</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="tile-section-title" id="automotive">Automotive</div>
+            <div class="tile-section-container">
+              <div class="tile">
+                <a href="run-vantage-express-on-aws.html">
+                  <div class="link">
+                    <div class="tile-title">Connected vehicle innovation</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on AWS.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Automotive</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="tile">
+                <a href="vantage.express.gcp.html">
+                  <div class="link">
+                    <div class="tile-title">Smart, connected factories</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on GCP.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Automotive</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="tile">
+                <a href="run-vantage-express-on-microsoft-azure.html">
+                  <div class="link">
+                    <div class="tile-title">Granular financial management</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on Microsoft Azure.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Automotive</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="tile">
+                <a href="getting.started.vmware.html">
+                  <div class="link">
+                    <div class="tile-title">Resilient supply chains</div>
+                    <div class="tile-content">Learn how to install Teradata Vantage Express on your machine for development and testing.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Automotive</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="tile">
+                <a href="getting.started.vbox.html">
+                  <div class="link">
+                    <div class="tile-title">Personalized customer experiences</div>
+                    <div class="tile-content">Run Teradata Vantage Express on your local machine with VirtualBox.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Automotive</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="tile-section-title" id="healthcare">Healthcare</div>
+            <div class="tile-section-container">
+              <div class="tile">
+                <a href="run-vantage-express-on-aws.html">
+                  <div class="link">
+                    <div class="tile-title">Care delivery innovation</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on AWS.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Healthcare</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="tile">
+                <a href="vantage.express.gcp.html">
+                  <div class="link">
+                    <div class="tile-title">Performance management</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on GCP.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Healthcare</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="tile">
+                <a href="run-vantage-express-on-microsoft-azure.html">
+                  <div class="link">
+                    <div class="tile-title">Emerging payment models</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on Microsoft Azure.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Healthcare</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="tile">
+                <a href="getting.started.vmware.html">
+                  <div class="link">
+                    <div class="tile-title">Adaptive supply chains</div>
+                    <div class="tile-content">Learn how to install Teradata Vantage Express on your machine for development and testing.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Healthcare</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="tile-section-title" id="government">Government</div>
+            <div class="tile-section-container">
+              <div class="tile">
+                <a href="run-vantage-express-on-aws.html">
+                  <div class="link">
+                    <div class="tile-title">Citizen services</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on AWS.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Government</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="tile">
+                <a href="vantage.express.gcp.html">
+                  <div class="link">
+                    <div class="tile-title">Public health management</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on GCP.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Government</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="tile">
+                <a href="run-vantage-express-on-microsoft-azure.html">
+                  <div class="link">
+                    <div class="tile-title">Policymaking</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on Microsoft Azure.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Government</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="tile">
+                <a href="getting.started.vmware.html">
+                  <div class="link">
+                    <div class="tile-title">Fraud prevention</div>
+                    <div class="tile-content">Learn how to install Teradata Vantage Express on your machine for development and testing.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Government</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="tile-section-title" id="retail">Retail</div>
+            <div class="tile-section-container">
+              <div class="tile">
+                <a href="run-vantage-express-on-aws.html">
+                  <div class="link">
+                    <div class="tile-title">Workforce management</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on AWS.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Retail</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="tile">
+                <a href="vantage.express.gcp.html">
+                  <div class="link">
+                    <div class="tile-title">Marketing & customer experience</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on GCP.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Retail</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="tile">
+                <a href="run-vantage-express-on-microsoft-azure.html">
+                  <div class="link">
+                    <div class="tile-title">Digital & bricks-and-mortar stores</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on Microsoft Azure.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Retail</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="tile">
+                <a href="getting.started.vmware.html">
+                  <div class="link">
+                    <div class="tile-title">Category management</div>
+                    <div class="tile-content">Learn how to install Teradata Vantage Express on your machine for development and testing.</div>
+                    <div class="tile-tags">
+                      <div class="tag">Retail</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="doc">
+            <div class="admonitionblock question landing-page">
+              <table>
+                <tbody><tr>
+                <td class="icon">
+                <i class="fa icon-question"></i>Didn’t find a demo you were looking for?
+                </td>
+                <td class="content">
+                 Contribute or request a demo
+                </td>
+                <td class="question-action">
+                  <a href="https://github.com/Teradata/jupyter-demos/issues">request</a>
+                  <a href="https://github.com/Teradata/jupyter-demos">contribute</a>
+                </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<style>
+.call-to-action {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 576px) {
+  .call-to-action .call-to-action-button,
+  .call-to-action .call-to-action-button-secondary {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .call-to-action {
+    background-image: none;
+  }
+
+  .call-to-action-text .short-description {
+    width: 100%;
+  }
+
+  .doc .admonitionblock.question.landing-page  {
+    display: none;
+  }
+
+  .footer {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 820px) {
+  .call-to-action {
+    background-image: url('{{uiRootPath}}/img/illustration.svg');
+  }
+
+  .call-to-action-text .short-description {
+    width: 50%;
+  }
+
+  .doc .admonitionblock.question.landing-page  {
+    display: inherit;
+  }
+
+  .footer {
+    display: inherit;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .call-to-action {
+    margin-top: 48px;
+  }
+}
+
+.landing-container {
+  margin-left: 16px;
+  margin-right: 16px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.landing {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.call-to-action {
+  background-color: rgba(133, 221, 220, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  border-radius: 8px;
+  width: 100%;
+  min-height: 241px;
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-origin: content-box;
+  padding: 0px 10px 0px 10px;
+}
+
+.call-to-action-text {
+  padding: 40px 30px 40px 30px;
+}
+
+.call-to-action-text .header {
+  font-family: Arial, helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0.15px;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.call-to-action-text .short-description {
+  font-family: Arial, helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.6);
+  padding-top: 4px;
+}
+
+.search-input-container {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.search-input-container #search-input {
+  font-family: Arial, helvetica, sans-serif;
+  width: 100%;
+}
+
+.tile-container {
+  padding: 0px;
+  width: 100%;
+  margin: auto;
+}
+
+.tile-container .title {
+  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+  font-size: 48px;
+  line-height: 64px;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.tile-section-title {
+  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0.15px;
+  color: rgba(0, 0, 0, 0.87);
+  padding-top: 24px;
+  scroll-margin-top: 110px;
+  scroll-snap-margin: 110px;
+}
+
+.tile {
+  min-height: 188px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.14), 0px 2px 2px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  position: relative;
+}
+
+.tile:hover {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 4px 5px rgba(0, 0, 0, 0.12), 0px 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.tile .link {
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+}
+
+@media screen and (min-width: 580px) {
+  .tile-section-container.source-code {
+    grid-template-columns: repeat(auto-fit, minmax(470px, 1fr));
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .tile-section-container.source-code {
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  }
+}
+
+.tile-section-container.source-code {
+  display: grid;
+  grid-column-gap: 30px;
+  grid-row-gap: 20px;
+  padding-top: 8px;
+}
+
+.tile a:hover {
+  text-decoration: none;
+}
+
+.tile-section-container {
+  display: grid;
+  grid-column-gap: 30px;
+  grid-row-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  padding-top: 8px;
+}
+
+.tile-title,
+.tile-tags {
+  font-family: Arial, helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.tile-content {
+  font-family: Arial, helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  color: rgba(0, 0, 0, 0.6);
+  margin-top: 16px;
+  margin-bottom: 50px;
+}
+
+.tag {
+  background: #E0E0E0;
+  border-radius: 16px;
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 6px 12px;
+  width: fit-content;
+}
+
+.tile-tags {
+  position: absolute;
+  bottom: 16px;
+}
+
+.tile-action {
+  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #007373;
+  border: 1px #007373 solid;
+  border-radius: 8px;
+  padding: 9px 8px;
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+}
+
+.call-to-action-button {
+  background: #007373;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 1px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.87);
+  padding: 11px 12px;
+  margin-right: 16px;
+  display: inline-block;
+}
+
+.button-container {
+  margin-top: 15px;
+}
+
+.call-to-action-button:hover {
+  text-decoration: none;
+}
+
+.call-to-action-button-secondary {
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  box-sizing: border-box;
+  border-radius: 8px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.87);
+  padding: 11px 12px;
+  margin-top: 15px;
+  background: #eaf2f2;
+  display: inline-block;
+}
+
+.call-to-action-button-secondary:hover {
+  text-decoration: none;
+}
+
+.search-result-dropdown-menu {
+  top: initial;
+  right: initial;
+  max-width: 60%;
+}
+
+.tile-container .doc {
+  padding: 0px;
+  margin: 0px;
+}
+
+.doc .admonitionblock.question.landing-page .icon {
+  text-transform: initial;
+}
+
+.question-action {
+  width: 280px;
+  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.question-action a {
+  color: rgba(0, 0, 0, 0.87);
+  padding: 0px 20px;
+}
+
+.question-action a:hover {
+  color: #f3743f;
+  text-decoration: none;
+}
+
+.doc .admonitionblock.landing-page td.content {
+  width: 80%;
+}
+
+div.tile-icons {
+  position: absolute;
+  bottom: 24px;
+  left: 16px;
+  display: flex;
+}
+
+.tile-icons img {
+  height: 34px;
+  width: 34px;
+  margin: 0px 8px 0px 0px;
+}
+
+.alternate-action {
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.alternate-action a {
+  color: #007373;
+}
+
+.alternate-action a:hover {
+  text-decoration: none;
+}
+</style>
 <div class="page-feedback bottom">
   <span>Did this page help?</span>
   <i class="far fa-thumbs-up click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
@@ -2021,12 +2422,12 @@ footer.footer-nav {
     </div>
   </section>
 </footer>
-<script src="./_/js/site.js"></script>
-<script async src="./_/js/behavior.js"></script>
-<script src="./_/js/vendor/lunr.js"></script>
-<script src="./_/js/search-ui.js" id="search-ui-script" data-site-root-path="." data-snippet-length="100" data-stylesheet="./_/css/search.css"></script>
-<script async src="./search-index.js"></script>
-<script src="./_/js/teradata.min.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/behavior.js"></script>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+<script src="../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>
