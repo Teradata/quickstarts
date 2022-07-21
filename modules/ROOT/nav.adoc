@@ -5,6 +5,7 @@
 ** xref::getting.started.vmware.adoc[Vantage Express on VMware]
 ** xref::getting.started.vbox.adoc[Vantage Express on VirtualBox]
 ** xref::getting.started.utm.adoc[Vantage Express on UTM]
+
 * Tutorials
 ** xref::nos.adoc[]
 ** xref::ml.adoc[]
@@ -12,6 +13,7 @@
 ** xref::sto.adoc[]
 ** xref:tools-and-utilities:run-bulkloads-efficiently-with-teradata-parallel-transporter.adoc[Load data with TPT]
 ** xref::perform-time-series-analysis-using-teradata-vantage.adoc[Perform time series analysis]
+
 * How-tos
 ** xref::jdbc.adoc[]
 ** xref::jupyter.adoc[]
@@ -28,8 +30,11 @@
 ** xref:cloud-guides:integrate-teradata-jupyter-extensions-with-google-vertex-ai.adoc[]
 ** xref:other-integrations:integrate-teradata-vantage-with-knime.adoc[]
 
+* Demos
+** Financial
+*** xref:jupyter-demos:gcp-vertex-ai-pipelines-vantage-byom-housing-example.adoc[]
+
 //* Planned
 //** Run Teradata Developer in Public Cloud
 //** Tune performance with indices
 //** Extend Teradata with user defined functions
-
