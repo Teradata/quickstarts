@@ -81,25 +81,25 @@ sudo yum install docker-ce docker-ce-cli containerd.io
 
 5. Start docker as a service.
 
-*This sets the system up so that docker will automatically run when the system starts up.
+This sets the system up so that docker will automatically run when the system starts up.
 
 [source, bash]
 ----
 sudo systemctl enable docker
 ----
 
-*This starts docker now.
-+
+This starts docker now.
+
 [source, bash]
 ----
 sudo systemctl start docker
 ----
 
+== Run the Docker
 
+1. Download the docker compose yaml file  (obtained by Igor Machin) to the airflow directory. The file contains the configuration with all the airflow concurrent docker components:
 
-6. Download the docker compose yaml file  (obtained by Igor Machin) to the airflow directory. The file contains the configuration with all the airflow concurrent docker components:
-
-7. Install docker-compose (to run the yaml file):
+2. Install docker-compose (to run the yaml file):
 +
 [source, bash]
 ----
@@ -114,15 +114,34 @@ Try it.
 docker-compose --version
 ----
 
-7. 
+3. Run docker-compose against the docker-compose.yaml in the airflow directory (where the docker-compose.yaml is located):
 +
 [source, bash]
 ----
-sudo curl -L https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+sudo docker-compose up airflow-init
 ----
 
+4. Now airflow should be up. The terminal that we were using will not be able to be used so open another terminal of the same instance and check that it is up.
++
+[source, bash]
+----
+sudo docker ps
+----
++
+You should get something that looks like this.
+
+***Insert image.
+
+9.Run Airflow UI webserver on browser to monitor the airflow:
+
+DAG UI: <instead of 00.00.000.000 put your public IP address>
+
+http://00.00.000.000:8080/home (airflow/airflow) - user name: airflow / password: airflow
+
+Flower Airflow UI (worker control):
+http://00.00.000.000:5555/
+
+== Python addition
 
 
 
