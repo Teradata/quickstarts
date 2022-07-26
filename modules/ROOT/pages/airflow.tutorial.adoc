@@ -9,12 +9,11 @@
 
 == Overview
 
-This tutorial demonstrates how to install airflow on an EC2
+This tutorial demonstrates how to install airflow on an EC2. Airflow is an autoschema tool that allows us to triage files of unkown data. This produces foreign table references that can be queried.
 
 == Prerequsites
 
-* Access to a AWS.
-* Python 3.7, 3.8 or 3.9 installed.
+* Access to AWS.
 
 == Create EC2
 
@@ -29,18 +28,13 @@ cd airflow
 mkdir -p ./dags ./logs ./plugins ./data ./config ./data
 echo -e "AIRFLOW_UID=$(id -u)" > .env
 ----
-3. Install `dbt-teradata` module and its dependencies. The core dbt module is included as a dependency so you don't have to install it separately:
-+
-[source, bash]
-----
-pip install dbt-teradata
-----
+3. Copy the airflow.cfg (to be obtained from Igor Machin) in the config directory
 
 == Install Docker
 
 We will now install docker onto our instance. Make sure you are in the airflow directory.
 
-1. If you have an RHEL linux system, podman may be installed. Before docker can be dowloaded, podman must be uninstalled.
+1. If you have an RHEL linux system, podman may be installed. Before docker can be installed, podman must be uninstalled.
 +
 [source, bash]
 ----
