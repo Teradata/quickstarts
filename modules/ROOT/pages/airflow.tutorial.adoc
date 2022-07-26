@@ -14,6 +14,7 @@ This tutorial demonstrates how to install airflow on an EC2. Airflow is an autos
 == Prerequsites
 
 * Access to AWS.
+* Installation
 
 == Create EC2
 
