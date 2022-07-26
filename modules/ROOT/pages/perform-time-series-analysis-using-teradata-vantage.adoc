@@ -25,7 +25,7 @@ Let's have a look at the data first. Below query will fetch 10 rows from S3 buck
 [source, teradata-sql, id="time_series_first_query", role="emits-gtm-events"]
 ----
 SELECT TOP 10 * FROM (
-	LOCATION='/s3/s3.amazonaws.com/nyc-tlc/csv_backup/yellow_tripdata_2013-11.csv'
+	LOCATION='/s3/nos-demo-apj.s3.amazonaws.com/taxi/2014/11/data_2014-11-25.csv'
 ) AS d;
 ----
 
@@ -81,7 +81,7 @@ SELECT TOP 200000 vendor_id ,
   pickup_latitude ,
   dropoff_longitude ,
   dropoff_latitude FROM (
-	LOCATION='/s3/s3.amazonaws.com/nyc-tlc/csv_backup/yellow_tripdata_2013-11.csv'
+	LOCATION='/s3/nos-demo-apj.s3.amazonaws.com/taxi/2014/11/data_2014-11-25.csv'
 ) AS d;
 
 ----
@@ -103,7 +103,7 @@ Now that we are familiar with the data set, we can use Vantage capabilities to q
 
 SELECT TOP 10
 	$TD_TIMECODE_RANGE
-	,begin($TD_TIMECODE_RANGE) time_bucket_start 
+	,begin($TD_TIMECODE_RANGE) time_bucket_start
 	,sum(passenger_count) passenger_count
 FROM trip
 WHERE extract(month from pickup_datetime)=11
@@ -177,7 +177,7 @@ This is the power of Vantage time series functionality. Without needing complica
 [source, teradata-sql]
 ----
 REPLACE VIEW NYC_taxi_trip_ts as
-SELECT 
+SELECT
 	$TD_TIMECODE_RANGE time_bucket_per
 	,vendor_id
 	,sum(passenger_count) passenger_cnt
@@ -200,7 +200,7 @@ SELECT * FROM MovingAverage (
   WindowSize (8)
   TargetColumns ('passenger_cnt')
 ) AS dt
-WHERE begin(time_bucket_per)(date) = '2013-11-25'
+WHERE begin(time_bucket_per)(date) = '2014-11-25'
 ORDER BY vendor_id, time_bucket_per;
 ----
 
