@@ -80,24 +80,68 @@ sudo yum install docker-ce docker-ce-cli containerd.io
 ----
 
 5. Start docker as a service.
-+
-This sets the system up so that docker will automatically run when the system starts up.
+
+*This sets the system up so that docker will automatically run when the system starts up.
 
 [source, bash]
 ----
 sudo systemctl enable docker
 ----
-This starts docker now.
+
+*This starts docker now.
++
 [source, bash]
 ----
 sudo systemctl start docker
 ----
-Install docker.
 
+
+
+6. Download the docker compose yaml file  (obtained by Igor Machin) to the airflow directory. The file contains the configuration with all the airflow concurrent docker components:
+
+7. Install docker-compose (to run the yaml file):
++
 [source, bash]
 ----
-sudo yum install docker-ce docker-ce-cli containerd.io
+sudo curl -L https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ----
++
+Try it.
+[source, bash]
+----
+docker-compose --version
+----
+
+7. 
++
+[source, bash]
+----
+sudo curl -L https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 == Summary
