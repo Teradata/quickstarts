@@ -28,7 +28,11 @@ cd airflow
 mkdir -p ./dags ./logs ./plugins ./data ./config ./data
 echo -e "AIRFLOW_UID=$(id -u)" > .env
 ----
-3. Copy the airflow.cfg (to be obtained from Igor Machin) in the config directory
+3. Copy the airflow.cfg (to be obtained from Igor Machin) in the config directory.
+
+***Insert image
+
+Go into the config directory shown above and drag the airflow.cfg file to the terminal.
 
 == Install Docker
 
@@ -92,6 +96,8 @@ sudo systemctl start docker
 == Run the Docker
 
 1. Download the docker compose yaml file  (obtained by Igor Machin) to the airflow directory. The file contains the configuration with all the airflow concurrent docker components:
+
+***Insert image
 
 2. Install docker-compose (to run the yaml file):
 +
