@@ -29,7 +29,9 @@ cd airflow
 mkdir -p ./dags ./logs ./plugins ./data ./config ./data
 echo -e "AIRFLOW_UID=$(id -u)" > .env
 ----
-3. Copy the airflow.cfg (to be obtained from Igor Machin) in the config directory.
+3. Download the airflow.cfg file onto your computer.
+
+add file
 
 ***Insert image
 
