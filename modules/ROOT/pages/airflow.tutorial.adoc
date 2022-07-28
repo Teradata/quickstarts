@@ -35,7 +35,7 @@ add file
 
 ***Insert image
 
-Go into the config directory shown above and drag the airflow.cfg file to the terminal.
+Go into the airflow file in the directory and then go into the config file shown above and drag the airflow.cfg file to the terminal.
 
 == Install Docker
 
