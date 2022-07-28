@@ -31,7 +31,7 @@ echo -e "AIRFLOW_UID=$(id -u)" > .env
 ----
 3. Download the airflow.cfg file onto your computer.
 
-link:attachments/airflow.cfg
+link::attachments/airflow.cfg
 
 image::img/airflow.png
 
