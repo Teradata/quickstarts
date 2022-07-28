@@ -33,6 +33,8 @@ echo -e "AIRFLOW_UID=$(id -u)" > .env
 
 link:attachments/airflow.cfg
 
+image::img/airflow.png
+
 ***Insert image
 
 Go into the airflow file in the directory and then go into the config file shown above and drag the airflow.cfg file to the terminal.
