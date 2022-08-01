@@ -80,7 +80,7 @@ include::partial$getting.started.queries.adoc[]
 
 == Optional setup
 
-* If you intend to stop and start the VM, you may want to add Vantage Express to autostart. ssh to your GCP VM and run the following commands:
+* If you intend to stop and start the VM, you may want to add Vantage Express to autostart. ssh to your VM and run the following commands:
 +
 [source, bash, role="content-editable emits-gtm-events", id="autostart"]
 ----
