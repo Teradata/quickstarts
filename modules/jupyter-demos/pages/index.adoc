@@ -25,7 +25,7 @@
                 <a href="vantage.express.gcp.html">
                   <div class="link">
                     <div class="tile-title">Smart network optimization</div>
-                    <div class="tile-content">Run Teradata Vantage Express in the cloud on GCP.</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on Google Cloud.</div>
                     <div class="tile-tags">
                       <div class="tag">Telco</div>
                     </div>
@@ -94,7 +94,7 @@
                 <a href="vantage.express.gcp.html">
                   <div class="link">
                     <div class="tile-title">Smart, connected factories</div>
-                    <div class="tile-content">Run Teradata Vantage Express in the cloud on GCP.</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on Google Cloud.</div>
                     <div class="tile-tags">
                       <div class="tag">Automotive</div>
                     </div>
@@ -152,7 +152,7 @@
                 <a href="vantage.express.gcp.html">
                   <div class="link">
                     <div class="tile-title">Performance management</div>
-                    <div class="tile-content">Run Teradata Vantage Express in the cloud on GCP.</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on Google Cloud.</div>
                     <div class="tile-tags">
                       <div class="tag">Healthcare</div>
                     </div>
@@ -199,7 +199,7 @@
                 <a href="vantage.express.gcp.html">
                   <div class="link">
                     <div class="tile-title">Public health management</div>
-                    <div class="tile-content">Run Teradata Vantage Express in the cloud on GCP.</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on Google Cloud.</div>
                     <div class="tile-tags">
                       <div class="tag">Government</div>
                     </div>
@@ -246,7 +246,7 @@
                 <a href="vantage.express.gcp.html">
                   <div class="link">
                     <div class="tile-title">Marketing & customer experience</div>
-                    <div class="tile-content">Run Teradata Vantage Express in the cloud on GCP.</div>
+                    <div class="tile-content">Run Teradata Vantage Express in the cloud on Google Cloud.</div>
                     <div class="tile-tags">
                       <div class="tag">Retail</div>
                     </div>

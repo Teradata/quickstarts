@@ -16,7 +16,7 @@ This how-to demonstrates how to run Vantage Express on AWS. Vantage Express is a
 ====
 Vantage Express is distributed as a virtual machine image. This how-to uses the EC2 `c5n.metal` instance type. It's a bare metal instance that costs over $3/h.
 
-If you want a cheaper option, try link:vantage-express.gcp.adoc[GCP] and link:run-vantage-express-on-microsoft-azure.adoc[Azure] which support nested virtualization and can run Vantage Express on cheap VM's.
+If you want a cheaper option, try link:vantage-express.gcp.adoc[Google Cloud] and link:run-vantage-express-on-microsoft-azure.adoc[Azure] which support nested virtualization and can run Vantage Express on cheap VM's.
 
 If you do not wish to pay for cloud usage at all, install Vantage Express locally using link:getting.started.vmware.adoc[VMware], link:getting.started.vbox[VirtualBox], or xref:getting.started.utm.adoc[UTM].
 ====

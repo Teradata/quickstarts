@@ -1,6 +1,6 @@
 * Get access to Vantage
 ** xref::run-vantage-express-on-aws.adoc[Vantage Express on AWS]
-** xref::vantage.express.gcp.adoc[Vantage Express on GCP]
+** xref::vantage.express.gcp.adoc[Vantage Express on Google Cloud]
 ** xref::run-vantage-express-on-microsoft-azure.adoc[Vantage Express on Azure]
 ** xref::getting.started.vmware.adoc[Vantage Express on VMware]
 ** xref::getting.started.vbox.adoc[Vantage Express on VirtualBox]
