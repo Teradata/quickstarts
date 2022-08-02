@@ -989,7 +989,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a class="nav-link" href="run-vantage-express-on-aws.html">Vantage Express on AWS</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on GCP</a>
+    <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on Google Cloud</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
@@ -1089,7 +1089,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="nav-text">Financial</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="jupyter-demos/gcp-vertex-ai-pipelines-vantage-byom-housing-example.html">GCP Vertex AI Pipelines Vantage BYOM Housing Example</a>
+    <a class="nav-link" href="jupyter-demos/gcp-vertex-ai-pipelines-vantage-byom-housing-example.html">Google Cloud Vertex AI Pipelines Vantage BYOM Housing Example</a>
   </li>
 </ul>
   </li>
@@ -1146,7 +1146,7 @@ Last updated: January 18th, 2022</p>
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This solution listens to events from Twilio Segment and writes data to a Teradata Vantage instance. The example uses GCP but it can be translated into any cloud platform.</p>
+<p>This solution listens to events from Twilio Segment and writes data to a Teradata Vantage instance. The example uses Google Cloud but it can be translated into any cloud platform.</p>
 </div>
 </div>
 </div>
@@ -1154,11 +1154,11 @@ Last updated: January 18th, 2022</p>
 <h2 id="_architecture"><a class="anchor" href="#_architecture"></a>Architecture</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this solution, Twilio Segment writes raw event data to GCP Pub/Sub. Pub/Sub forwards events to a Cloud Run application. The Cloud Run app writes data to a Teradata Vantage database. It&#8217;s a serverless solution that doesn&#8217;t require allocation or management of any VM&#8217;s.</p>
+<p>In this solution, Twilio Segment writes raw event data to Google Cloud Pub/Sub. Pub/Sub forwards events to a Cloud Run application. The Cloud Run app writes data to a Teradata Vantage database. It&#8217;s a serverless solution that doesn&#8217;t require allocation or management of any VM&#8217;s.</p>
 </div>
 <div class="imageblock text-left">
 <div class="content">
-<img src="_images/segment.flow.diagram.png" alt="Segment GCP Flow Diagram" width="500">
+<img src="_images/segment.flow.diagram.png" alt="Segment Google Cloud Flow Diagram" width="500">
 </div>
 </div>
 </div>
@@ -1171,13 +1171,13 @@ Last updated: January 18th, 2022</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>A GCP account. If you don&#8217;t have an account, you can create one at <a href="https://console.cloud.google.com/" class="bare">https://console.cloud.google.com/</a>.</p>
+<p>A Google Cloud account. If you don&#8217;t have an account, you can create one at <a href="https://console.cloud.google.com/" class="bare">https://console.cloud.google.com/</a>.</p>
 </li>
 <li>
 <p><code>gcloud</code> installed. See <a href="https://cloud.google.com/sdk/docs/install" class="bare">https://cloud.google.com/sdk/docs/install</a>.</p>
 </li>
 <li>
-<p>A Teradata Vantage instance that GCP Cloud run can talk to.</p>
+<p>A Teradata Vantage instance that Google Cloud Run can talk to.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1185,7 +1185,7 @@ Last updated: January 18th, 2022</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you need a new instance of Vantage, you can install a free version called Vantage Express in the cloud on <a href="vantage.express.gcp.html" class="xref page">GCP</a>, <a href="run-vantage-express-on-microsoft-azure.html" class="xref page">Azure</a>, and <a href="run-vantage-express-on-aws.html" class="xref page">AWS</a>. You can also run Vantage Express on your local machine using <a href="getting.started.vmware.html" class="xref page">VMware</a>, <a href="getting.started.vbox.html" class="xref page">VirtualBox</a>, or <a href="getting.started.utm.html" class="xref page">UTM</a>.
+If you need a new instance of Vantage, you can install a free version called Vantage Express in the cloud on <a href="vantage.express.gcp.html" class="xref page">Google Cloud</a>, <a href="run-vantage-express-on-microsoft-azure.html" class="xref page">Azure</a>, and <a href="run-vantage-express-on-aws.html" class="xref page">AWS</a>. You can also run Vantage Express on your local machine using <a href="getting.started.vmware.html" class="xref page">VMware</a>, <a href="getting.started.vbox.html" class="xref page">VirtualBox</a>, or <a href="getting.started.utm.html" class="xref page">UTM</a>.
 </td>
 </tr>
 </table>
@@ -1232,7 +1232,7 @@ export PROJECT_NUMBER=$(gcloud projects list \
 </div>
 </li>
 <li>
-<p>Enable required GCP services:</p>
+<p>Enable required Google Cloud services:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud services enable cloudbuild.googleapis.com containerregistry.googleapis.com run.googleapis.com secretmanager.googleapis.com pubsub.googleapis.com</code></pre>
@@ -1248,7 +1248,7 @@ export PROJECT_NUMBER=$(gcloud projects list \
 </div>
 </li>
 <li>
-<p>Define an API key that you will share with Segment. Store the API key in GCP Secret Manager:</p>
+<p>Define an API key that you will share with Segment. Store the API key in Google Cloud Secret Manager:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud secrets create VANTAGE_USER_SECRET
@@ -1339,7 +1339,7 @@ export SERVICE_URL=$(gcloud run services describe segment-listener --platform ma
 <p>Allow Segment to publish to your topic. To do that, assign <code>pubsub@segment-integrations.iam.gserviceaccount.com</code> role <code>Pub/Sub Publisher</code> in your project at <a href="https://console.cloud.google.com/cloudpubsub/topic/list" class="bare">https://console.cloud.google.com/cloudpubsub/topic/list</a>. See <a href="https://segment.com/docs/connections/destinations/catalog/google-cloud-pubsub/#authentication">Segment manual</a> for details.</p>
 </li>
 <li>
-<p>Configure your GCP Pub/Sub a destination in Segment. Use the full topic <code>projects/&lt;PROJECT_ID&gt;/topics/segment-events</code> and map all Segment event types (using <code>*</code> character) to the topic.</p>
+<p>Configure your Google Cloud Pub/Sub a destination in Segment. Use the full topic <code>projects/&lt;PROJECT_ID&gt;/topics/segment-events</code> and map all Segment event types (using <code>*</code> character) to the topic.</p>
 </li>
 </ol>
 </div>
@@ -1374,7 +1374,7 @@ export SERVICE_URL=$(gcloud run services describe segment-listener --platform ma
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This how-to demonstrates how to send Segment events to Teradata Vantage. The configuration forwards events from Segment to GCP Pub/Sub and then on to a Cloud Run application. The application writes data to Teradata Vantage.</p>
+<p>This how-to demonstrates how to send Segment events to Teradata Vantage. The configuration forwards events from Segment to Google Cloud Pub/Sub and then on to a Cloud Run application. The application writes data to Teradata Vantage.</p>
 </div>
 </div>
 </div>
