@@ -13,6 +13,7 @@
 ** xref::sto.adoc[]
 ** xref:tools-and-utilities:run-bulkloads-efficiently-with-teradata-parallel-transporter.adoc[Load data with TPT]
 ** xref::perform-time-series-analysis-using-teradata-vantage.adoc[Perform time series analysis]
+** xref::parquet_file.adoc[Create Parquet File in NOS]
 
 * How-tos
 ** xref::jdbc.adoc[]
