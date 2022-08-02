@@ -133,7 +133,6 @@ Your data on the parquet file should look something like this:
      3  22/01/03          3.30
 ----
 
-
 == Summary
 
 In this quick start we have learned how to create a parquet file with data on object storage using Native Object Storage (NOS) functionality in Vantage. NOS supports reading and importing data stored in CSV, JSON and Parquet formats. NOS can also export data from Vantage to object storage.
