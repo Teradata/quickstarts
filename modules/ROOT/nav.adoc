@@ -1,6 +1,6 @@
 * Get access to Vantage
 ** xref::run-vantage-express-on-aws.adoc[Vantage Express on AWS]
-** xref::vantage.express.gcp.adoc[Vantage Express on GCP]
+** xref::vantage.express.gcp.adoc[Vantage Express on Google Cloud]
 ** xref::run-vantage-express-on-microsoft-azure.adoc[Vantage Express on Azure]
 ** xref::getting.started.vmware.adoc[Vantage Express on VMware]
 ** xref::getting.started.vbox.adoc[Vantage Express on VirtualBox]
@@ -13,6 +13,7 @@
 ** xref::sto.adoc[]
 ** xref:tools-and-utilities:run-bulkloads-efficiently-with-teradata-parallel-transporter.adoc[Load data with TPT]
 ** xref::perform-time-series-analysis-using-teradata-vantage.adoc[Perform time series analysis]
+** xref::parquet_file.adoc[Create Parquet File in NOS]
 
 * How-tos
 ** xref::jdbc.adoc[]

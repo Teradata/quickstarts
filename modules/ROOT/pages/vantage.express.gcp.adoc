@@ -1,4 +1,4 @@
-= Run Vantage Express on GCP
+= Run Vantage Express on Google Cloud
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
 :page-revdate: November 9th, 2021
@@ -15,13 +15,13 @@ NOTE: If do not wish to pay for cloud usage you can install Vantage Express loca
 
 == Prerequisites
 
-. A GCP account.
+. A Google Cloud account.
 . `gcloud` command line utility installed on your machine. You can find installation instructions here: https://cloud.google.com/sdk/docs/install.
 
 
 == Installation
 
-. Create a Ubuntu VM with 4 CPU's and 8GB of RAM, a 70GB balanced disk. The following command creates a VM in `us-central1` region. For best performance, replace the  region with one that is the closest to you. For the list of supported regions see link:https://cloud.google.com/compute/docs/regions-zones[GCP regions documentation].
+. Create a Ubuntu VM with 4 CPU's and 8GB of RAM, a 70GB balanced disk. The following command creates a VM in `us-central1` region. For best performance, replace the  region with one that is the closest to you. For the list of supported regions see link:https://cloud.google.com/compute/docs/regions-zones[Google Cloud regions documentation].
 +
 [tabs]
 ====
