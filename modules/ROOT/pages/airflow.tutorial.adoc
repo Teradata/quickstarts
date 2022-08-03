@@ -101,10 +101,11 @@ sudo systemctl start docker
 
 == Run Airflow on the Docker
 
-1. Download the docker compose yaml file  (obtained by Igor Machin) to the airflow directory. The file contains the configuration with all the airflow concurrent docker components:
+1. Download the docker-compose.yaml file and the dockerfile to your computer. Then drag and drop both files into the airflow directory. These files are necessary to build the environment during the installation.
 +
-***Insert image
-
+*Insert image
++
+*Insert docker-compose file and dockerfile
 2. Install docker-compose (to run the yaml file):
 +
 [source, bash]
@@ -114,18 +115,25 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ----
 +
-Try it.
+Make sure you downloaded the correct docker
 +
 [source, bash]
 ----
 docker-compose --version
 ----
-
-3. Run docker-compose against the docker-compose.yaml in the airflow directory (where the docker-compose.yaml is located):
++
+You should get this in return.
 +
 [source, bash]
 ----
-sudo docker-compose up airflow-init
+docker-compose version 1.29.2, build 5becea4c
+----
+
+3. Run docker-compose against the docker-compose.yaml. Make sure you are in the airflow directory.
++
+[source, bash]
+----
+sudo docker-compose up –build
 ----
 
 4. Now airflow should be up. The terminal that we were using will not be able to be used so open another terminal of the same instance and check that it is up.
@@ -149,17 +157,6 @@ Flower Airflow UI (worker control):
 http://00.00.000.000:5555/
 
 == Python addition
-
-
-
-
-
-
-
-
-
-
-
 
 
 
