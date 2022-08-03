@@ -2,7 +2,7 @@
 :experimental:
 :page-author: Obed Vega
 :page-email: obed.vega@teradata.com
-:page-revdate: August 1th, 2021
+:page-revdate: August 2nd, 2021
 :description: Teradata Vantage Native Object Storage - read and write from/to object storage, unified SQL interface for Vantage and object storage.
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics
 
