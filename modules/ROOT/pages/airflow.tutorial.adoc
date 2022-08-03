@@ -133,7 +133,8 @@ docker-compose version 1.29.2, build 5becea4c
 +
 [source, bash]
 ----
-sudo docker-compose up –build
+sudo docker-compose up airflow-init
+sudo docker-compose up 
 ----
 
 4. Now airflow should be up. The terminal that we were using will not be able to be used so open another terminal of the same instance and check that it is up.
@@ -149,7 +150,7 @@ You should get something that looks like this.
 
 5. Run Airflow UI webserver on browser to monitor the airflow:
 +
-DAG UI: <instead of 00.00.000.000 put your public IP address>
+DAG UI: <instead of 00.00.000.000 put the IP address of you EC2 Instance>
 +
 http://00.00.000.000:8080/home (airflow/airflow) - user name: airflow / password: airflow
 +
