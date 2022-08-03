@@ -4,17 +4,18 @@
 :page-email: obed.vega@teradata.com
 :page-revdate: August 2nd, 2021
 :description: Teradata Vantage Native Object Storage - read and write from/to object storage, unified SQL interface for Vantage and object storage.
-:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics
+:keywords: data warehouses, compute storage separation, Teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics
 
 == Overview
 Native Object Storage (NOS) is a Vantage feature that allows you to query data stored in files such as CSV, JSON, and Parquet format datasets. 
 These datasets are located on external S3-compatible object storage such as AWS S3, Google GCS, Azure Blob or on-prem implementations. 
 It's useful in scenarios where you want to explore data without building a data pipeline to bring it into Vantage.
 
-== Prerequsites
+== Prerequisites
 
 You need access to a Teradata Vantage instance. NOS is enabled in all Vantage editions from Vantage Express through Developer, DYI to Vantage as a Service starting from version 17.10.
-This tutorial is based on a s3 aws object storage.
+
+IMPORTANT: This tutorial is based on a s3 aws object storage. The bucket is at https://td-usgs-public.s3.amazonaws.com/. This bucket contains river flow data collected by the U.S. Geological Survey. Don't forget to use your own s3 storage and bucket.
 
 include::ROOT:partial$vantage.express.options.adoc[]
 
@@ -25,11 +26,16 @@ You can find more documentation about WRITE_NOS functionality in the following l
 
 NOTE: https://docs.teradata.com/r/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide/January-2021/Writing-Data-to-External-Object-Store.
 
-NOTE: assuming you already have a database created. 
-If you havent you can create a database with the following sintaxis: create user db as perm=10e7, password=db; 
-
+Assuming you already have a database created. 
+If you haven't you can create a database with the following sintaxis: 
+[source, teradata-sql]
 ----
+CREATE USER db AS PERM=10e7, PASSWORD=db; 
+----
+
 Don't forget to give the proper access rights:
+[source, teradata-sql]
+----
 GRANT EXECUTE FUNCTION on TD_SYSFNLIB.READ_NOS to db;
 GRANT EXECUTE FUNCTION on TD_SYSFNLIB.WRITE_NOS to db;
 ----
@@ -37,6 +43,8 @@ GRANT EXECUTE FUNCTION on TD_SYSFNLIB.WRITE_NOS to db;
 You can also check the following link: https://docs.teradata.com/r/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide/January-2021/Writing-Data-to-External-Object-Store/Setting-Up-WRITE_NOS/Setting-Up-a-User-and-Privileges
 
 1.- Let's first create a table on your Teradata Vantage instance: 
+
+[source, teradata-sql]
 ----
 CREATE SET TABLE db.parquet_table ,FALLBACK ,
      NO BEFORE JOURNAL,
@@ -52,13 +60,15 @@ PRIMARY INDEX ( column1 );
 ----
 
 2.- Populate your table with some data: 
+
+[source, teradata-sql]
 ----
-insert into db.parquet_table (1,'2022/01/01',1.1);    
-insert into db.parquet_table (2,'2022/01/02',2.2);
-insert into db.parquet_table (3,'2022/01/03',3.3);
+INSERT INTO db.parquet_table (1,'2022/01/01',1.1);    
+INSERT INTO db.parquet_table (2,'2022/01/02',2.2);
+INSERT INTO db.parquet_table (3,'2022/01/03',3.3);
 ----
 
-Your table should llok something like this: 
+Your table should look something like this: 
 ----
 column1   column2       column3
 -------  --------  ------------
@@ -70,8 +80,9 @@ column1   column2       column3
 
 3.- Create the parquet file with WRITE_NOS, don't forget to change the name of your s3 bucket:
 
-NOTE: add the proper Access_ID and Access_Key:
+NOTE: Add the proper Access_ID and Access_Key:
 
+[source, teradata-sql]
 ----
 SELECT * FROM WRITE_NOS (
 ON ( SELECT * FROM db.parquet_table)
@@ -87,12 +98,13 @@ INCLUDE_HASHBY('TRUE')
 ) as d;
 ----
 
-NOTE: Now you have created the parquet file on your NOS s3 bucket. Now to easyly query your file you need to follow step number 4.
+NOTE: Now you have created the parquet file on your NOS s3 bucket. Now to easily query your file you need to follow step number 4.
 
 4.- Create nos table:
 
-NOTE: assuming we have an authorization object for READ_NOS to access the external storage you are reading from, if not already done. For example, create an authorization object to the public object store, which does not require an id or key, so USER and PASSWORD are empty strings:
+NOTE: Assuming we have an authorization object for READ_NOS to access the external storage you are reading from, if not already done. For example, create an authorization object to the public object store, which does not require an id or key, so USER and PASSWORD are empty strings:
 
+[source, teradata-sql]
 ----
 CREATE AUTHORIZATION CEPH_AUTH
 AS DEFINER TRUSTED
@@ -102,6 +114,7 @@ PASSWORD '';
 
 Don't forget to change the name of your bucket.
 
+[source, teradata-sql]
 ----
 CREATE MULTISET FOREIGN TABLE db.parquet_table_to_read_file_on_NOS
 , EXTERNAL SECURITY DEFINER TRUSTED CEPH_AUTH,
@@ -120,8 +133,9 @@ USING (
 ----
 
 5.- Now you are ready to Query your parquet file on NOS, let's try the following query:
+[source, teradata-sql]
 ----
-select col1, col2, col3 from db.parquet_table_to_read_file_on_NOS;
+SELECT col1, col2, col3 FROM db.parquet_table_to_read_file_on_NOS;
 ----
 
 Your data on the parquet file should look something like this:
