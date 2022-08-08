@@ -133,8 +133,8 @@ docker-compose version 1.29.2, build 5becea4c
 +
 [source, bash]
 ----
-sudo docker-compose up airflow-init
-sudo docker-compose up 
+
+sudo docker-compose up --build
 ----
 
 4. Now airflow should be up. The terminal that we were using will not be able to be used so open another terminal of the same instance and check that it is up.
