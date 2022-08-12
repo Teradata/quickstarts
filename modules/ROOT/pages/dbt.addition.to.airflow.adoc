@@ -1,1 +1,178 @@
+=  dbt Addition to Airflow
+:experimental:
+:page-author: Igor Machin, Ambrose Inman
+:page-email: igor.machin@teradata.com, ambrose.inman@teradata.com
+:page-revdate: July 20, 2022
+:description: Install airflow on EC2
+:keywords: airflow, queries
+:tabs:
+
+== Overview
+
+This tutorial demonstrates how to install airflow on an EC2. Airflow is an autoschema tool that allows us to triage files of unkown data. This produces foreign table references that can be queried.
+
+== Prerequsites
+
+* Access to AWS.
+* Installation
+
+== Create EC2
+
+1. In AWS create a EC2 - Red hat 8 CPU, 32 GB Memory, 60 GB storage space. Remember to open the port for traffic coming from your computer.
+
+2. In the EC2, create the airflow files.
++
+[source, bash]
+----
+mkdir airflow
+cd airflow
+mkdir -p ./dags ./logs ./plugins ./data ./config ./data
+echo -e "AIRFLOW_UID=$(id -u)" > .env
+----
+3. Download the airflow.cfg file onto your computer.
++
+link::attachments/airflow.cfg
+*Fix link
++
+image::img/airflow.png
+*Insert image
++
+Go into the airflow file in the directory and then go into the config file shown above and drag the airflow.cfg file to the terminal.
+
+== Install Docker
+
+We will now install docker onto our instance. Make sure you are in the airflow directory.
+
+1. If you have an RHEL linux system, podman may be installed. Before docker can be installed, podman must be uninstalled.
++
+[source, bash]
+----
+sudo yum remove docker \
+docker-client \
+docker-client-latest \
+docker-common \
+docker-latest \
+docker-latest-logrotate \
+docker-logrotate \
+docker-engine \
+podman \
+runc
+----
+
+2. Now that podman is uninstalled, we can install docker. Install yum utilities
++
+[source, bash]
+----
+sudo yum install -y yum-utils
+----
+
+3. Add docker to yum repository.
++
+[source, bash]
+----
+sudo yum-config-manager \
+--add-repo \
+https://download.docker.com/linux/centos/docker-ce.repo
+----
+
+4. Install docker.
++
+[source, bash]
+----
+sudo yum install docker-ce docker-ce-cli containerd.io
+----
+Give permission to prompts presented.
+
+5. Start docker as a service.
++
+This sets the system up so that docker will automatically run when the system starts up.
++
+[source, bash]
+----
+sudo systemctl enable docker
+----
++
+This starts docker now.
++
+[source, bash]
+----
+sudo systemctl start docker
+----
+
+== Run Airflow on the Docker
+
+1. Download the docker-compose.yaml file and the dockerfile to your computer. Then drag and drop both files into the airflow directory. These files are necessary to build the environment during the installation.
++
+*Insert image
++
+*Insert docker-compose file and dockerfile
+2. Install docker-compose (to run the yaml file):
++
+[source, bash]
+----
+sudo curl -L https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+----
++
+Make sure you downloaded the correct docker
++
+[source, bash]
+----
+docker-compose --version
+----
++
+You should get this in return.
++
+[source, bash]
+----
+docker-compose version 1.29.2, build 5becea4c
+----
+
+3. Run docker-compose against the docker-compose.yaml. Make sure you are in the airflow directory.
++
+[source, bash]
+----
+
+sudo docker-compose up --build
+----
+
+4. Now airflow should be up. The terminal that we were using will not be able to be used so open another terminal of the same instance and check that it is up.
++
+[source, bash]
+----
+sudo docker ps
+----
++
+You should get something that looks like this.
++
+***Insert image.
+
+5. Run Airflow UI webserver on browser to monitor the airflow:
++
+DAG UI: <instead of 00.00.000.000 put the IP address of you EC2 Instance>
++
+http://00.00.000.000:8080/home (airflow/airflow) - user name: airflow / password: airflow
++
+Flower Airflow UI (worker control):
+http://00.00.000.000:5555/
+
+== Python addition
+
+
+
+
+
+
+
+
+
+
+== Summary
+
+This tutorial demonstrated how to use dbt with Teradata Vantage. The sample project takes raw data and produces a dimensional data mart. We used multiple dbt commands to populate tables from csv files (`dbt seed`), create models (`dbt run`), test the data (`dbt test`), and generate and serve model documentation (`dbt docs generate`, `dbt docs serve`).
+
+== Further reading
+* link:https://docs.getdbt.com/docs/[dbt documentation]
+* link:https://github.com/Teradata/dbt-teradata[dbt-teradat
 
