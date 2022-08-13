@@ -3,42 +3,41 @@
 :page-author: Igor Machin, Ambrose Inman
 :page-email: igor.machin@teradata.com, ambrose.inman@teradata.com
 :page-revdate: July 20, 2022
-:description: Install airflow on EC2
+:description: dbt addition to airflow
 :keywords: airflow, queries
 :tabs:
 
 == Overview
 
-This tutorial demonstrates how to install airflow on an EC2. Airflow is an autoschema tool that allows us to triage files of unkown data. This produces foreign table references that can be queried.
+This tutorial demonstrates how to install a dbt addition to the previously installed airflow. 
 
 == Prerequsites
 
 * Access to AWS.
-* Installation
+* Installation of airflow. Insert link to other airflow tutorial.
 
-== Create EC2
+== Install dbt
 
-1. In AWS create a EC2 - Red hat 8 CPU, 32 GB Memory, 60 GB storage space. Remember to open the port for traffic coming from your computer.
-
-2. In the EC2, create the airflow files.
+1. Search the python versions available. We need python to be installed to be able to run the program.
 +
 [source, bash]
 ----
-mkdir airflow
-cd airflow
-mkdir -p ./dags ./logs ./plugins ./data ./config ./data
-echo -e "AIRFLOW_UID=$(id -u)" > .env
+sudo yum search python3
 ----
-3. Download the airflow.cfg file onto your computer.
-+
-link::attachments/airflow.cfg
-*Fix link
-+
-image::img/airflow.png
-*Insert image
-+
-Go into the airflow file in the directory and then go into the config file shown above and drag the airflow.cfg file to the terminal.
 
+2.  Pick up the latest for development (contains .h files).
++
+[source, bash]
+----
+sudo yum install python39-devel.x86_64
+----
+
+3.  Pick up the latest for development (contains .h files).
++
+[source, bash]
+----
+sudo yum install python39-devel.x86_64
+----
 == Install Docker
 
 We will now install docker onto our instance. Make sure you are in the airflow directory.
