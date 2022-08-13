@@ -14,7 +14,15 @@ This tutorial demonstrates how to install airflow on an EC2. Airflow is an autos
 == Prerequsites
 
 * Access to AWS.
-* Installation
+* Installation of python.
+If python is not installed run the following code to install it.
+
+[source, bash]
+----
+sudo yum install python3
+sudo yum install python3-pip
+sudo pip3 install virtualenv
+----
 
 == Create EC2
 
@@ -137,7 +145,7 @@ docker-compose version 1.29.2, build 5becea4c
 sudo docker-compose up --build
 ----
 
-4. Now airflow should be up. The terminal that we were using will not be able to be used so open another terminal of the same instance and check that it is up.
+4. Now airflow should be up. Wait for a few minutes until the program is installed. The terminal that we were using will not be able to be used so open another terminal of the same instance and check that it is up.
 +
 [source, bash]
 ----
