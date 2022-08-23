@@ -1,7 +1,7 @@
 = Run Vantage Express on Google Cloud
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
-:page-revdate: November 9th, 2021
+:page-revdate: August 23rd, 2022
 :description: Run Vantage Express on Google Cloud.
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics
 :tabs:
@@ -129,7 +129,6 @@ gcloud compute firewall-rules delete vantage-express
 include::partial$next.steps.adoc[]
 
 == Further reading
-* link:https://downloads.teradata.com/download/files/7671/201588/3/B035-5948-051K-VantageExpress-17.10_SLES12.pdf?license=898/218656[Teradata® Vantage™ Express Installation and Configuration Guide (must be logged in to downloads.teradata.com)]
 * link:https://docs.teradata.com/r/KEoAHNnh~EbZLtVJNRo0Sg/root[Teradata® Studio™ and Studio™ Express Installation Guide]
 * link:https://docs.teradata.com/r/jmAxXLdiDu6NiyjT6hhk7g/root[Introduction to BTEQ]
 
