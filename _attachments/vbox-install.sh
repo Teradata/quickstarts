@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DEFAULT_VM_NAME="Vantage Express 17.10"
+DEFAULT_VM_NAME="Vantage Express"
 VM_NAME="${VM_NAME:-$DEFAULT_VM_NAME}"
 vboxmanage createvm --name "$VM_NAME" --register --ostype openSUSE_64
 vboxmanage modifyvm "$VM_NAME" --ioapic on --memory 6000 --vram 128 --nic1 nat --graphicscontroller vmsvga --usb on --mouse usbtablet --clipboard-mode bidirectional --draganddrop bidirectional
