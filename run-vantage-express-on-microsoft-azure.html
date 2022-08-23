@@ -1143,7 +1143,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <article class="doc">
 <h1 class="page">Run Vantage Express on Azure</h1>
 <p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
-Last updated: February 16th, 2022</p>
+Last updated: August 23rd, 2022</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
@@ -1341,7 +1341,7 @@ echo "UUID=$DISK_UUID  /opt/downloads   xfs   defaults,nofail   1   2" &gt;&gt; 
 <p>Go to <a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Vantage Expess download page</a> (registration required).</p>
 </li>
 <li>
-<p>Click on the latest download link, e.g. "Vantage Express 17.10". You will see a license agreement popup. Don&#8217;t accept the license yet.</p>
+<p>Click on the latest download link, e.g. "Vantage Express 17.20". You will see a license agreement popup. Don&#8217;t accept the license yet.</p>
 </li>
 <li>
 <p>Open the network view in your browser. For example, in Chrome press <kbd>F12</kbd> and navigate to <code>Network</code> tab:</p>
@@ -1369,7 +1369,7 @@ echo "UUID=$DISK_UUID  /opt/downloads   xfs   defaults,nofail   1   2" &gt;&gt; 
 <p>Head back to the ssh session and download Vantage Express by pasting the curl command. Add <code>-o ve.7z</code> to the command to save the download to file named <code>ve.7z</code>. You can remove all the HTTP headers, e.g.:</p>
 <div id="download_ve" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -o ve.7z 'http://d289lrf5tw1zls.cloudfront.net/database/teradata-express/VantageExpress17.10_Sles12_202108300444.7z?Expires=1638719978&amp;Signature=GKBkNvery_long_signature__&amp;Key-Pair-Id=********************'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -o ve.7z 'http://d289lrf5tw1zls.cloudfront.net/database/teradata-express/VantageExpress17.20_Sles12_202108300444.7z?Expires=1638719978&amp;Signature=GKBkNvery_long_signature__&amp;Key-Pair-Id=********************'</code></pre>
 </div>
 </div>
 </li>
@@ -1385,8 +1385,8 @@ echo "UUID=$DISK_UUID  /opt/downloads   xfs   defaults,nofail   1   2" &gt;&gt; 
 <p>Start the VM in VirtualBox. The command will return immediately but the VM init process will take several minutes:</p>
 <div id="start_vim" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export VM_IMAGE_DIR="/opt/downloads/VantageExpress17.10_Sles12"
-DEFAULT_VM_NAME="vantage-express-17.10"
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export VM_IMAGE_DIR="/opt/downloads/VantageExpress17.20_Sles12"
+DEFAULT_VM_NAME="vantage-express"
 VM_NAME="${VM_NAME:-$DEFAULT_VM_NAME}"
 vboxmanage createvm --name "$VM_NAME" --register --ostype openSUSE_64
 vboxmanage modifyvm "$VM_NAME" --ioapic on --memory 6000 --vram 128 --nic1 nat --cpus 4
@@ -1554,7 +1554,7 @@ VBOXAUTOSTART_DB=/etc/vbox
 VBOXAUTOSTART_CONFIG=/etc/vbox/autostart.cfg
 EOF
 
-cat &lt;&lt;EOF &gt; /etc/systemd/system/vantage-express-17.10.service
+cat &lt;&lt;EOF &gt; /etc/systemd/system/vantage-express.service
 [Unit]
 Description=vm1
 After=network.target virtualbox.service
@@ -1569,15 +1569,15 @@ IgnoreSIGPIPE=no
 KillMode=process
 GuessMainPID=no
 RemainAfterExit=yes
-ExecStart=/usr/bin/VBoxManage startvm vantage-express-17.10 --type headless
-ExecStop=/usr/bin/VBoxManage controlvm vantage-express-17.10 savestate
+ExecStart=/usr/bin/VBoxManage startvm vantage-express --type headless
+ExecStop=/usr/bin/VBoxManage controlvm vantage-express savestate
 [Install]
 WantedBy=multi-user.target
 EOF
 
 systemctl daemon-reload
-systemctl enable vantage-express-17.10
-systemctl start vantage-express-17.10</code></pre>
+systemctl enable vantage-express
+systemctl start vantage-express</code></pre>
 </div>
 </div>
 </li>
@@ -1654,9 +1654,6 @@ systemctl start vantage-express-17.10</code></pre>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
-<li>
-<p><a href="https://downloads.teradata.com/download/files/7671/201588/3/B035-5948-051K-VantageExpress-17.10_SLES12.pdf?license=898/218656">Teradata® Vantage™ Express Installation and Configuration Guide (must be logged in to downloads.teradata.com)</a></p>
-</li>
 <li>
 <p><a href="https://docs.teradata.com/r/KEoAHNnh~EbZLtVJNRo0Sg/root">Teradata® Studio™ and Studio™ Express Installation Guide</a></p>
 </li>
