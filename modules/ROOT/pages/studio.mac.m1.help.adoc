@@ -9,17 +9,17 @@
 
 == Overview
 
-This tutorial demonstrates how to configure and run Teradata Studio and Express on Apple Mac M1 machines.
+This tutorial demonstrates how to use Teradata Studio and Express on Apple Mac M1 machines.
 
 == Steps to follow
 
 1. Install and enable Rosetta binary translator.Follow the below page for more details: 
-* link:https://support.apple.com/en-us/HT211861 [Install and Enable Rosetta on Apple Mac M1]
+* link:https://support.apple.com/en-us/HT211861[Install and Enable Rosetta on Apple Mac M1].
 2. Download and Install any vendor Intel x64 based JDK 11. Follow the below page to download and install Azul intel 64 architecture JDK:  
-* link:https://www.azul.com/downloads/?version=java-11-lts&os=macos&architecture=x86-64-bit&package=jdkGet [Download Azul Intel x86-64 architecture JDK 11]
+* link:https://www.azul.com/downloads/?version=java-11-lts&os=macos&architecture=x86-64-bit&package=jdkGet[Download Azul Intel x86-64 architecture JDK 11]
 3. Download Latest Studio/Express version from teradata downloads page:
-* link:https://downloads.teradata.com/download/tools/teradata-studio [Teradata Studio | Teradata Downloads]
-* link:https://downloads.teradata.com/download/tools/teradata-studio-express [Teradata Studio Express | Teradata Downloads]
+* link:https://downloads.teradata.com/download/tools/teradata-studio[Teradata Studio | Teradata Downloads]
+* link:https://downloads.teradata.com/download/tools/teradata-studio-express[Teradata Studio Express | Teradata Downloads]
 4. Install the Studio/Express. Refer below page for details:
 * link:{attachmentsdir}/Studio-Express-InstallGuide.pdf[Download Studio and Express Installation Guide]
 
