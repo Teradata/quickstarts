@@ -30,7 +30,7 @@
 ** xref:cloud-guides:use-teradata-vantage-with-azure-machine-learning-studio.adoc[]
 ** xref:cloud-guides:integrate-teradata-jupyter-extensions-with-google-vertex-ai.adoc[]
 ** xref:other-integrations:integrate-teradata-vantage-with-knime.adoc[]
-** xref:studio.mac.m1.help.adoc[]
+** xref:install-teradata-studio-on-mac-m1-m2.adoc[]
 
 * Demos
 ** Financial
