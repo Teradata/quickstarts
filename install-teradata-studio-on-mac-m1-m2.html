@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Store events from Twilio Segment :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/segment.html">
-    <meta name="description" content="Store events from Twilio Segment in Teradata Vantage.">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, customer data platform, cdp, segment">
+    <title>Use Teradata Studio/Express on Apple Mac M1 :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/install-teradata-studio-on-mac-m1-m2.html">
+    <meta name="description" content="Run Teradata Studio on Apple Mac M1/M2.">
+    <meta name="keywords" content="Teradata Studio, Teradata Studio Express, teradata, vantage, Mac, Apple Mac, Apple Mac M1, Arm based Processor.">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="./_/css/site.css">
-<meta property="og:title" content="Store events from Twilio Segment :: Teradata Getting Started">
+<meta property="og:title" content="Use Teradata Studio/Express on Apple Mac M1 :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Store events from Twilio Segment in Teradata Vantage." />
+<meta property="og:description" content="Run Teradata Studio on Apple Mac M1/M2." />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/segment.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/install-teradata-studio-on-mac-m1-m2.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -1056,7 +1056,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </li>
 </ul>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="segment.html">Store events from Twilio Segment</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -1080,7 +1080,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1</a>
   </li>
 </ul>
@@ -1130,7 +1130,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li>How-tos</li>
-    <li><a href="segment.html">Store events from Twilio Segment</a></li>
+    <li><a href="install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1</a></li>
   </ul>
 </nav>
 </div>
@@ -1138,240 +1138,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/segment.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/install-teradata-studio-on-mac-m1-m2.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Store events from Twilio Segment</h1>
-<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
-Last updated: January 18th, 2022</p>
+<h1 class="page">Use Teradata Studio/Express on Apple Mac M1</h1>
+<p>Author: <a href="mailto:satish.chinthanippu@teradata.com">Satish Chinthanippu</a><br/>
+Last updated: September 01st, 2022</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This solution listens to events from Twilio Segment and writes data to a Teradata Vantage instance. The example uses Google Cloud but it can be translated into any cloud platform.</p>
+<p>This how-to goes through the installation of Teradata Studio and Express on Apple Mac M1/M2 machines.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_architecture"><a class="anchor" href="#_architecture"></a>Architecture</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In this solution, Twilio Segment writes raw event data to Google Cloud Pub/Sub. Pub/Sub forwards events to a Cloud Run application. The Cloud Run app writes data to a Teradata Vantage database. It&#8217;s a serverless solution that doesn&#8217;t require allocation or management of any VM&#8217;s.</p>
-</div>
-<div class="imageblock text-left">
-<div class="content">
-<img src="_images/segment.flow.diagram.png" alt="Segment Google Cloud Flow Diagram" width="500">
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_deployment"><a class="anchor" href="#_deployment"></a>Deployment</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>A Google Cloud account. If you don&#8217;t have an account, you can create one at <a href="https://console.cloud.google.com/" class="bare">https://console.cloud.google.com/</a>.</p>
-</li>
-<li>
-<p><code>gcloud</code> installed. See <a href="https://cloud.google.com/sdk/docs/install" class="bare">https://cloud.google.com/sdk/docs/install</a>.</p>
-</li>
-<li>
-<p>A Teradata Vantage instance that Google Cloud Run can talk to.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If you need a new instance of Vantage, you can install a free version called Vantage Express in the cloud on <a href="vantage.express.gcp.html" class="xref page">Google Cloud</a>, <a href="run-vantage-express-on-microsoft-azure.html" class="xref page">Azure</a>, and <a href="run-vantage-express-on-aws.html" class="xref page">AWS</a>. You can also run Vantage Express on your local machine using <a href="getting.started.vmware.html" class="xref page">VMware</a>, <a href="getting.started.vbox.html" class="xref page">VirtualBox</a>, or <a href="getting.started.utm.html" class="xref page">UTM</a>.
-</td>
-</tr>
-</table>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_build_and_deploy"><a class="anchor" href="#_build_and_deploy"></a>Build and deploy</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Clone the sample repository:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone git@github.com:Teradata/segment-integration-tutorial.git</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>The repo contains <code>segment.sql</code> file that sets up the database. the script on your Vantage db using your favorite SQL IDE, [Teradata Studio](<a href="https://downloads.teradata.com/download/tools/teradata-studio" class="bare">https://downloads.teradata.com/download/tools/teradata-studio</a>) or command line tool called <code>bteq</code> (download for <a href="https://downloads.teradata.com/node/7314">Windows</a>, <a href="https://downloads.teradata.com/node/200442">Linux</a>, <a href="https://downloads.teradata.com/node/201214">macOS</a>).
-The SQL script will create a new database called <code>Segment</code> and a set of tables to store Segment events.</p>
-</li>
-<li>
-<p>Set the default project and region:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud config set project &lt;PROJECT_ID&gt;
-gcloud config set compute/region &lt;REGION&gt;</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Retrieve the project id and the number. We will need it in subsequent steps:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export PROJECT_ID=$(gcloud config get-value project)
-
-export PROJECT_NUMBER=$(gcloud projects list \
-  --filter="$(gcloud config get-value project)" \
-  --format="value(PROJECT_NUMBER)")</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Enable required Google Cloud services:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud services enable cloudbuild.googleapis.com containerregistry.googleapis.com run.googleapis.com secretmanager.googleapis.com pubsub.googleapis.com</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Build the application:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud builds submit --tag gcr.io/$PROJECT_ID/segment-listener</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Define an API key that you will share with Segment. Store the API key in Google Cloud Secret Manager:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud secrets create VANTAGE_USER_SECRET
-echo -n 'dbc' &gt; /tmp/vantage_user.txt
-gcloud secrets versions add VANTAGE_USER_SECRET --data-file=/tmp/vantage_user.txt
-
-gcloud secrets create VANTAGE_PASSWORD_SECRET
-echo -n 'dbc' &gt; /tmp/vantage_password.txt
-gcloud secrets versions add VANTAGE_PASSWORD_SECRET --data-file=/tmp/vantage_password.txt</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>The application that write Segment data to Vantage will use Cloud Run. We first need to allow Cloud Run to access secrets:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud projects add-iam-policy-binding $PROJECT_ID \
-     --member=serviceAccount:$PROJECT_NUMBER-compute@developer.gserviceaccount.com \
-     --role=roles/secretmanager.secretAccessor</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Deploy the app to Cloud Run (replace <code>&lt;VANTAGE_HOST&gt;</code> with the hostname or IP of your Teradata Vantage database). The second export statement saves the service url as we need it for subsequent commands:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud run deploy --image gcr.io/$PROJECT_ID/segment-listener segment-listener \
-  --region $(gcloud config get-value compute/region) \
-  --update-env-vars VANTAGE_HOST=35.239.251.1 \
-  --update-secrets 'VANTAGE_USER=VANTAGE_USER_SECRET:1, VANTAGE_PASSWORD=VANTAGE_PASSWORD_SECRET:1' \
-  --no-allow-unauthenticated
-
-export SERVICE_URL=$(gcloud run services describe segment-listener --platform managed --region $(gcloud config get-value compute/region) --format 'value(status.url)')</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Create a Pub/Sub topic that will receive events from Segment:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud pubsub topics create segment-events</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Create a service account that will be used by Pub/Sub to invoke the Cloud Run app:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud iam service-accounts create cloud-run-pubsub-invoker \
-     --display-name "Cloud Run Pub/Sub Invoker"</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Give the service account permission to invoke Cloud Run:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud run services add-iam-policy-binding segment-listener \
-  --region $(gcloud config get-value compute/region) \
-  --member=serviceAccount:cloud-run-pubsub-invoker@$PROJECT_ID.iam.gserviceaccount.com \
-  --role=roles/run.invoker</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Allow Pub/Sub to create authentication tokens in your project:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud projects add-iam-policy-binding $PROJECT_ID \
-  --member=serviceAccount:service-$PROJECT_NUMBER@gcp-sa-pubsub.iam.gserviceaccount.com \
-  --role=roles/iam.serviceAccountTokenCreator</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Create a Pub/Sub subscription with the service account:</p>
-<div id="segment_first_run" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud pubsub subscriptions create segment-events-cloudrun-subscription --topic projects/$PROJECT_ID/topics/segment-events \
-   --push-endpoint=$SERVICE_URL \
-   --push-auth-service-account=cloud-run-pubsub-invoker@$PROJECT_ID.iam.gserviceaccount.com \
-   --max-retry-delay 600 \
-   --min-retry-delay 30</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Allow Segment to publish to your topic. To do that, assign <code>pubsub@segment-integrations.iam.gserviceaccount.com</code> role <code>Pub/Sub Publisher</code> in your project at <a href="https://console.cloud.google.com/cloudpubsub/topic/list" class="bare">https://console.cloud.google.com/cloudpubsub/topic/list</a>. See <a href="https://segment.com/docs/connections/destinations/catalog/google-cloud-pubsub/#authentication">Segment manual</a> for details.</p>
-</li>
-<li>
-<p>Configure your Google Cloud Pub/Sub a destination in Segment. Use the full topic <code>projects/&lt;PROJECT_ID&gt;/topics/segment-events</code> and map all Segment event types (using <code>*</code> character) to the topic.</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_try_it_out"><a class="anchor" href="#_try_it_out"></a>Try it out</h2>
+<h2 id="_steps_to_follow"><a class="anchor" href="#_steps_to_follow"></a>Steps to follow</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Use Segment&#8217;s Event Tester functionality to send a sample payload to the topic. Verify that the sample data has been stored in Vantage.</p>
+<p>Install and enable Rosetta binary translator.Follow <a href="https://support.apple.com/en-us/HT211861">the Apple Mac M1 Rosetta Installation Guide</a>.</p>
 </li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_limitations"><a class="anchor" href="#_limitations"></a>Limitations</h2>
-<div class="sectionbody">
+<li>
+<p>Download and Install a x64-based JDK 11 from your preferred vendor. For example, you can download x64 JDK 11 from <a href="https://www.azul.com/downloads/?version=java-11-lts&amp;os=macos&amp;architecture=x86-64-bit&amp;package=jdkGet">Azul</a></p>
+</li>
+<li>
+<p>Download the latest Teradata Studio or Teradata Studio Express release from the Teradata Downloads page:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>The example shows how to deploy the app in a single region. In many cases, this setup doesn&#8217;t guarantee enough uptime. The Cloud Run app should be deployed in more than one region behind a Global Load Balancer.</p>
+<p><a href="https://downloads.teradata.com/download/tools/teradata-studio">Teradata Studio</a></p>
+</li>
+<li>
+<p><a href="https://downloads.teradata.com/download/tools/teradata-studio-express">Teradata Studio Express</a></p>
 </li>
 </ul>
+</div>
+</li>
+<li>
+<p>Install the Teradata Studio/Teradata Studio Express. Refer to <a href="_attachments/Studio-Express-InstallGuide.pdf">Teradata Studio and Teradata Studio Express Installation Guide</a> for details.</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -1379,19 +1190,7 @@ export SERVICE_URL=$(gcloud run services describe segment-listener --platform ma
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This how-to demonstrates how to send Segment events to Teradata Vantage. The configuration forwards events from Segment to Google Cloud Pub/Sub and then on to a Cloud Run application. The application writes data to Teradata Vantage.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further reading</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://segment.com/docs/connections/destinations/catalog/google-cloud-pubsub/">Segment Pub/Sub destination documentation</a></p>
-</li>
-</ul>
+<p>Apple has introduced ARM-based processors in Apple MAC M1 machines. Intel x64-based applications won&#8217;t work by default on ARM-based processors. Teradata Studio or Teradata Studio Express also doesn&#8217;t work by default as the current Studio macOS build is an intel x64-based application. This how-to demonstrates how to install Intel x64-based JDK and Teradata Studio or Teradata Studio Express on Apple Mac M1.</p>
 </div>
 </div>
 </div>
