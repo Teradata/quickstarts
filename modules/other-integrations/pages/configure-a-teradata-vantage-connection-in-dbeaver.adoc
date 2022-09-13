@@ -11,7 +11,7 @@
 
 This how-to demonstrates how to create a connection to Teradata Vantage with DBeaver.
 
-== Prerequsites
+== Prerequisites
 
 * Access to a Teradata Vantage instance.
 +
