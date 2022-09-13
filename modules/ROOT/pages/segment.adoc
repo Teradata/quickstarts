@@ -18,7 +18,7 @@ image::segment.flow.diagram.png[Segment Google Cloud Flow Diagram, width=500, al
 
 == Deployment
 
-=== Prerequsites
+=== Prerequisites
 1. A Google Cloud account. If you don't have an account, you can create one at https://console.cloud.google.com/.
 2. `gcloud` installed. See https://cloud.google.com/sdk/docs/install.
 3. A Teradata Vantage instance that Google Cloud Run can talk to.

@@ -11,7 +11,7 @@
 
 This tutorial demonstrates how to use dbt (Data Build Tool) with Teradata Vantage. It's based on the original link:https://github.com/dbt-labs/jaffle_shop-dev[dbt Jaffle Shop tutorial]. A couple of models have been adjusted to the SQL dialect supported by Vantage.
 
-== Prerequsites
+== Prerequisites
 
 * Access to a Teradata Vantage instance.
 +
