@@ -11,7 +11,7 @@
 This example is a clone of the Mulesoft MySQL sample project.
 It demonstrates how to query a Teradata database and expose results over REST API.
 
-== Prerequsites
+== Prerequisites
 
 * Mulesoft Anypoint Studio. You can download a 30-day trial from https://www.mulesoft.com/platform/studio.
 * Access to a Teradata Vantage instance.

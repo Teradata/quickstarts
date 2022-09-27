@@ -1,0 +1,44 @@
+= Configure a Teradata Vantage connection in DBeaver
+:experimental:
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: Septeber 12th, 2022
+:description: Configure a Teradata Vantage connection in DBeaver.
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, dbeaver, dbeaver prod, sql ide
+:page-image-directory: configure-a-teradata-connection-in-dbeaver
+
+== Overview
+
+This how-to demonstrates how to create a connection to Teradata Vantage with DBeaver.
+
+== Prerequisites
+
+* Access to a Teradata Vantage instance.
++
+include::ROOT:partial$vantage.express.options.adoc[]
+* DBeaver installed. See link:https://dbeaver.io/download/[DBeaver Community] or link:https://dbeaver.com/download/[DBeaver PRO] for installation options.
+
+== Add a Teradata connection to DBeaver
+
+1. Start the new connection wizard by clicking on the plug icon (image:{page-image-directory}/plug-icon.png[title="Add Connection Plug Icon", width="16px"]) in the upper left corner of the application window or go to `Database -> New Database Connection`.
+2. On `Select your database` screen, start typing `teradata` and select the Teradata icon.
++
+image::{page-image-directory}/select-your-database.png[Select your database, width=75%]
+3. On the main tab, you need to set all primary connection settings. The required ones include `Host`, `Port`, `Database`, `Username`, and `Password`.
++
+TIP: With DBeaver PRO, you can not only use the standard ordering of tables but also hierarchically link tables to a specific database or user. Expanding and collapsing the databases or users will help you navigate from one area to another without swamping the Database Navigator window. Check the `Show databases and users hierarchically` box to enable this setting.
++
+TIP: In many environments Teradata Vantage can only be accessed using the TLS protocol. When in DBeaver PRO, check `Use TLS protocol` option to enable TLS.
++
+image::{page-image-directory}/teradata-connection-settings.png[Teradata connection settings, width=75%]
+4. Click on `Finish`.
+
+== Optional: SSH tunneling
+
+If your database cannot be accessed directly, you can use an SSH tunnel. All settings are available on the `SSH` tab. DBeaver supports the following authentication methods: user/password, public key, SSH agent authentication.
+
+image::{page-image-directory}/teradata-connection-settings-ssh.png[Teradata connection settings SSH, width=75%]
+
+== Summary
+
+This how-to demonstrated how to create a connection to Teradata Vantage with DBeaver.

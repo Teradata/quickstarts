@@ -22,6 +22,7 @@ include::ROOT:partial$vantage.express.options.adoc[]
 == Integration
 
 There are two ways to run Teradata Jupyter Extensions in Vertex AI:
+
 1. link:#_use_startup_script[Use startup script]
 2. link:#_use_custom_container[Use custom container]
 

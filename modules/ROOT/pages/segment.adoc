@@ -8,20 +8,20 @@
 :tabs:
 
 == Overview
-This solution listens to events from Twilio Segment and writes data to a Teradata Vantage instance. The example uses GCP but it can be translated into any cloud platform.
+This solution listens to events from Twilio Segment and writes data to a Teradata Vantage instance. The example uses Google Cloud but it can be translated into any cloud platform.
 
 == Architecture
 
-In this solution, Twilio Segment writes raw event data to GCP Pub/Sub. Pub/Sub forwards events to a Cloud Run application. The Cloud Run app writes data to a Teradata Vantage database. It's a serverless solution that doesn't require allocation or management of any VM's.
+In this solution, Twilio Segment writes raw event data to Google Cloud Pub/Sub. Pub/Sub forwards events to a Cloud Run application. The Cloud Run app writes data to a Teradata Vantage database. It's a serverless solution that doesn't require allocation or management of any VM's.
 
-image::segment.flow.diagram.png[Segment GCP Flow Diagram, width=500, align="left"]
+image::segment.flow.diagram.png[Segment Google Cloud Flow Diagram, width=500, align="left"]
 
 == Deployment
 
-=== Prerequsites
-1. A GCP account. If you don't have an account, you can create one at https://console.cloud.google.com/.
+=== Prerequisites
+1. A Google Cloud account. If you don't have an account, you can create one at https://console.cloud.google.com/.
 2. `gcloud` installed. See https://cloud.google.com/sdk/docs/install.
-3. A Teradata Vantage instance that GCP Cloud run can talk to.
+3. A Teradata Vantage instance that Google Cloud Run can talk to.
 +
 include::ROOT:partial$vantage.express.options.adoc[]
 
@@ -56,7 +56,7 @@ export PROJECT_NUMBER=$(gcloud projects list \
   --format="value(PROJECT_NUMBER)")
 ----
 
-5. Enable required GCP services:
+5. Enable required Google Cloud services:
 +
 [source, bash]
 ----
@@ -70,7 +70,7 @@ gcloud services enable cloudbuild.googleapis.com containerregistry.googleapis.co
 gcloud builds submit --tag gcr.io/$PROJECT_ID/segment-listener
 ----
 
-7. Define an API key that you will share with Segment. Store the API key in GCP Secret Manager:
+7. Define an API key that you will share with Segment. Store the API key in Google Cloud Secret Manager:
 +
 [source, bash]
 ----
@@ -151,7 +151,7 @@ gcloud pubsub subscriptions create segment-events-cloudrun-subscription --topic 
 
 15. Allow Segment to publish to your topic. To do that, assign `pubsub@segment-integrations.iam.gserviceaccount.com` role `Pub/Sub Publisher` in your project at https://console.cloud.google.com/cloudpubsub/topic/list. See https://segment.com/docs/connections/destinations/catalog/google-cloud-pubsub/#authentication[Segment manual] for details.
 
-16. Configure your GCP Pub/Sub a destination in Segment. Use the full topic `projects/<PROJECT_ID>/topics/segment-events` and map all Segment event types (using `*` character) to the topic.
+16. Configure your Google Cloud Pub/Sub a destination in Segment. Use the full topic `projects/<PROJECT_ID>/topics/segment-events` and map all Segment event types (using `*` character) to the topic.
 
 == Try it out
 
@@ -163,7 +163,7 @@ gcloud pubsub subscriptions create segment-events-cloudrun-subscription --topic 
 
 == Summary
 
-This how-to demonstrates how to send Segment events to Teradata Vantage. The configuration forwards events from Segment to GCP Pub/Sub and then on to a Cloud Run application. The application writes data to Teradata Vantage.
+This how-to demonstrates how to send Segment events to Teradata Vantage. The configuration forwards events from Segment to Google Cloud Pub/Sub and then on to a Cloud Run application. The application writes data to Teradata Vantage.
 
 == Further reading
 * link:https://segment.com/docs/connections/destinations/catalog/google-cloud-pubsub/[Segment Pub/Sub destination documentation]

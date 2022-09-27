@@ -23,7 +23,7 @@ There are a couple of ways to connect to Vantage from a Jupyter Notebook:
 
 This option uses a regular Jupyter Lab notebook. We will see how to load the Teradata Python driver and use it from Python code. We will also examine `ipython-sql` extension that adds support for SQL-only cells.
 
-1. We start with a plain Jupyter Lab notebook. Here, I'm using docker but any method of starting a notebook, including Jupyter Hub, GCP AI Platform Notebooks, AWS SageMaker Notebooks, Azure ML Notebooks will do.
+1. We start with a plain Jupyter Lab notebook. Here, I'm using docker but any method of starting a notebook, including Jupyter Hub, Google Cloud AI Platform Notebooks, AWS SageMaker Notebooks, Azure ML Notebooks will do.
 +
 [source, bash, id="jupyter_first_run", role="content-editable emits-gtm-events"]
 ----

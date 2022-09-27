@@ -17,7 +17,7 @@ This how-to describes `Fastload` utility. The utility has been deprecated. For n
 
 We often have a need to move large volumes of data into Vantage. Teradata offers `Fastload` utility that can efficiently load large amounts of data into Teradata Vantage. This how-to demonstrates how to use `Fastload`. In this scenario, we will load over 300k records, over 40MB of data, in a couple of seconds.
 
-== Prerequsites
+== Prerequisites
 
 * Access to a Teradata Vantage instance.
 +

@@ -11,7 +11,7 @@
 
 This how-to demonstrates how to use the ODBC driver with Teradata Vantage on Ubuntu.
 
-== Prerequsites
+== Prerequisites
 
 * Access to a Teradata Vantage instance.
 +

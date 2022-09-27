@@ -10,7 +10,7 @@
 
 Native Object Storage (NOS) is a Vantage feature that allows you to query data stored in files in object storage such as AWS S3, Google GCS, Azure Blob or on-prem implementations. It's useful in scenarios where you want to explore data without building a data pipeline to bring it into Vantage.
 
-== Prerequsites
+== Prerequisites
 
 You need access to a Teradata Vantage instance. NOS is enabled in all Vantage editions from Vantage Express through Developer, DYI to Vantage as a Service starting from version 17.10.
 

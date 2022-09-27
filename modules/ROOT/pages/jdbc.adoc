@@ -10,7 +10,7 @@
 
 This quick start demonstrates how to connect to Teradata Vantage using JDBC. We will go through a sample JDBC project. The entire project is published in GitHub at link:https://github.com/Teradata/jdbc-sample-app[].
 
-== Prerequsites
+== Prerequisites
 
 * Access to a Teradata Vantage instance.
 +

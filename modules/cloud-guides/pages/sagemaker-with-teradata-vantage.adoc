@@ -23,7 +23,7 @@ The first use case is discussed in this document.
 Amazon SageMaker consumes training and test data from an Amazon S3 bucket. This article describes how you can load Teradata analytics data sets into an Amazon S3 bucket. The data can then available to Amazon SageMaker to build and train machine learning models and deploy them into a production environment.
 
 
-== Prerequsites
+== Prerequisites
 
 * Access to a Teradata Vantage instance.
 +

@@ -1,7 +1,7 @@
 = Run Vantage Express on VMware
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
-:page-revdate: September 7th, 2021
+:page-revdate: August 23rd, 2022
 :description: Run Vantage Express on your laptop using VMware.
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics
 :icons: font
@@ -14,7 +14,7 @@ include::partial$getting.started.intro.adoc[]
 . 30GB of disk space and enough CPU and RAM to be able to dedicate at least one core and 6GB RAM to the virtual machine.
 . Admin rights to be able to install and run the software.
 +
-// NOTE: No admin rights on your local machine? No problem! Have a look at how to run Vantage Express in link:#[AWS], link:#[Azure], link:#[GCP].
+// NOTE: No admin rights on your local machine? No problem! Have a look at how to run Vantage Express in link:#[AWS], link:#[Azure], link:#[Google Cloud].
 
 == Installation
 
@@ -50,5 +50,4 @@ include::partial$getting.started.summary.adoc[]
 include::partial$next.steps.adoc[]
 
 == Further reading
-* link:https://downloads.teradata.com/download/files/7671/201588/3/B035-5948-051K-VantageExpress-17.10_SLES12.pdf?license=898/218656[Teradata® Vantage™ Express Installation and Configuration Guide (must be logged in to downloads.teradata.com)]
 * link:https://docs.teradata.com/r/KEoAHNnh~EbZLtVJNRo0Sg/root[Teradata® Studio™ and Studio™ Express Installation Guide]

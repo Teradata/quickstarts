@@ -1,10 +1,11 @@
 * Get access to Vantage
 ** xref::run-vantage-express-on-aws.adoc[Vantage Express on AWS]
-** xref::vantage.express.gcp.adoc[Vantage Express on GCP]
+** xref::vantage.express.gcp.adoc[Vantage Express on Google Cloud]
 ** xref::run-vantage-express-on-microsoft-azure.adoc[Vantage Express on Azure]
 ** xref::getting.started.vmware.adoc[Vantage Express on VMware]
 ** xref::getting.started.vbox.adoc[Vantage Express on VirtualBox]
 ** xref::getting.started.utm.adoc[Vantage Express on UTM]
+
 * Tutorials
 ** xref::nos.adoc[]
 ** xref::ml.adoc[]
@@ -12,6 +13,8 @@
 ** xref::sto.adoc[]
 ** xref:tools-and-utilities:run-bulkloads-efficiently-with-teradata-parallel-transporter.adoc[Load data with TPT]
 ** xref::perform-time-series-analysis-using-teradata-vantage.adoc[Perform time series analysis]
+** xref::create-parquet-files-in-object-storage.adoc[]
+
 * How-tos
 ** xref::jdbc.adoc[]
 ** xref::jupyter.adoc[]
@@ -27,9 +30,14 @@
 ** xref:cloud-guides:use-teradata-vantage-with-azure-machine-learning-studio.adoc[]
 ** xref:cloud-guides:integrate-teradata-jupyter-extensions-with-google-vertex-ai.adoc[]
 ** xref:other-integrations:integrate-teradata-vantage-with-knime.adoc[]
+** xref:install-teradata-studio-on-mac-m1-m2.adoc[]
+** xref:other-integrations:configure-a-teradata-vantage-connection-in-dbeaver.adoc[]
+
+* Demos
+** Financial
+*** xref:jupyter-demos:gcp-vertex-ai-pipelines-vantage-byom-housing-example.adoc[]
 
 //* Planned
 //** Run Teradata Developer in Public Cloud
 //** Tune performance with indices
 //** Extend Teradata with user defined functions
-

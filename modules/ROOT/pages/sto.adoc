@@ -10,7 +10,7 @@
 
 Sometimes, you need to apply complex logic to your data that can't be easily expressed in SQL. One option is to wrap your logic in a User Defined Function (UDF). What if you already have this logic coded in a language that is not supported by UDF? Script Table Operator is a Vantage feature that allows you to bring your logic to the data and run it on Vantage. The advantage of this approach is that you don't have to retrieve data from Vantage to operate on it. Also, by running your data applications on Vantage, you leverage its parallel nature. You don't have to think how your applications will scale. You can let Vantage take care of it.
 
-== Prerequsites
+== Prerequisites
 
 You need access to a Teradata Vantage instance.
 

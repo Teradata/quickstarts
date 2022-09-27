@@ -2,8 +2,10 @@
 {{#with page.title}}
 <h1 class="page">{{{this}}}</h1>
 {{/with}}
+{{#unless page.attributes.jupyterbook}}
 <p>Author: <a href="mailto:{{page.attributes.email}}">{{page.attributes.author}}</a><br/>
 Last updated: {{page.attributes.revdate}}</p>
+{{/unless}}
 {{{page.contents}}}
 {{> pagination}}
 <div class="page-feedback bottom">

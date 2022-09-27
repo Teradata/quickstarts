@@ -10,7 +10,7 @@
 
 There are situations when you want to quickly validate a machine learning model idea. You have a model type in mind. You don't want to operationalize with an ML pipeline just yet. You just want to test out if the relationship you had in mind exists. Also, sometimes even your production deployment doesn't require constant relearning with MLops. In such cases, you can use Vantage Analytics Library (VAL) and multiple ML model types it supports.
 
-== Prerequsites
+== Prerequisites
 
 You need access to a Teradata Vantage instance.
 

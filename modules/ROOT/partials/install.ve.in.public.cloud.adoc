@@ -6,7 +6,7 @@ apt update && apt-get install p7zip-full p7zip-rar virtualbox -y
 ----
 . Retrieve the curl command to download Vantage Express.
 .. Go to link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Expess download page] (registration required).
-.. Click on the latest download link, e.g. "Vantage Express 17.10". You will see a license agreement popup. Don't accept the license yet.
+.. Click on the latest download link, e.g. "Vantage Express 17.20". You will see a license agreement popup. Don't accept the license yet.
 .. Open the network view in your browser. For example, in Chrome press kbd:[F12] and navigate to `Network` tab:
 +
 image::browser.network.png[Browser Network Tab, width=500]
@@ -18,7 +18,7 @@ image::browser.copy.curl.png[Browser Copy culr, width=500]
 +
 [source, bash, role="content-editable emits-gtm-events", id="download_ve"]
 ----
-curl -o ve.7z 'http://d289lrf5tw1zls.cloudfront.net/database/teradata-express/VantageExpress17.10_Sles12_202108300444.7z?Expires=1638719978&Signature=GKBkNvery_long_signature__&Key-Pair-Id=********************'
+curl -o ve.7z 'http://d289lrf5tw1zls.cloudfront.net/database/teradata-express/VantageExpress17.20_Sles12_202108300444.7z?Expires=1638719978&Signature=GKBkNvery_long_signature__&Key-Pair-Id=********************'
 ----
 . Unzip the downloaded file. It will take several minutes:
 +
@@ -30,8 +30,8 @@ curl -o ve.7z 'http://d289lrf5tw1zls.cloudfront.net/database/teradata-express/Va
 +
 [source, bash, role="content-editable emits-gtm-events", id="start_vim"]
 ----
-export VM_IMAGE_DIR="/opt/downloads/VantageExpress17.10_Sles12"
-DEFAULT_VM_NAME="vantage-express-17.10"
+export VM_IMAGE_DIR="/opt/downloads/VantageExpress17.20_Sles12"
+DEFAULT_VM_NAME="vantage-express"
 VM_NAME="${VM_NAME:-$DEFAULT_VM_NAME}"
 vboxmanage createvm --name "$VM_NAME" --register --ostype openSUSE_64
 vboxmanage modifyvm "$VM_NAME" --ioapic on --memory 6000 --vram 128 --nic1 nat --cpus 4
@@ -80,7 +80,7 @@ include::partial$getting.started.queries.adoc[]
 
 == Optional setup
 
-* If you intend to stop and start the VM, you may want to add Vantage Express to autostart. ssh to your GCP VM and run the following commands:
+* If you intend to stop and start the VM, you may want to add Vantage Express to autostart. ssh to your VM and run the following commands:
 +
 [source, bash, role="content-editable emits-gtm-events", id="autostart"]
 ----
@@ -91,7 +91,7 @@ VBOXAUTOSTART_DB=/etc/vbox
 VBOXAUTOSTART_CONFIG=/etc/vbox/autostart.cfg
 EOF
 
-cat <<EOF > /etc/systemd/system/vantage-express-17.10.service
+cat <<EOF > /etc/systemd/system/vantage-express.service
 [Unit]
 Description=vm1
 After=network.target virtualbox.service
@@ -106,13 +106,13 @@ IgnoreSIGPIPE=no
 KillMode=process
 GuessMainPID=no
 RemainAfterExit=yes
-ExecStart=/usr/bin/VBoxManage startvm vantage-express-17.10 --type headless
-ExecStop=/usr/bin/VBoxManage controlvm vantage-express-17.10 savestate
+ExecStart=/usr/bin/VBoxManage startvm vantage-express --type headless
+ExecStop=/usr/bin/VBoxManage controlvm vantage-express savestate
 [Install]
 WantedBy=multi-user.target
 EOF
 
 systemctl daemon-reload
-systemctl enable vantage-express-17.10
-systemctl start vantage-express-17.10
+systemctl enable vantage-express
+systemctl start vantage-express
 ----
