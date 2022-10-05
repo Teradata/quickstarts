@@ -85,6 +85,12 @@ Personal Connection
 
 * Username/Password
 
+== Validate Permissions in SQL database for VAL and BYOM
+
+You can check the permissions with the new Healthcheck panel in the connections panel
+
+image::ModelOps_Healthcheck.png[ModelOps Healtcheck screenshot, width=500]
+
 == Add Dataset to identify Vantage Tables for BYOM evaluation and scoring
 
 Let's create a new Dataset Template, then 1 Dataset for Training and 2 Datasets for Evaluation so we can monitor model quality metrics with 2 different datasets
@@ -192,29 +198,6 @@ Query:
 ----
 SELECT * FROM {your-db}.pima_patient_diagnoses WHERE patientid MOD 5 = 3
 ----
-
-
-== Validate Permissions in SQL database for VAL and BYOM
-
-VAL
-[source, teradata-sql]
-----
-GRANT EXECUTE PROCEDURE ON { val-db }.td_analyze TO { username | rolename };
-GRANT EXECUTE FUNCTION ON { val-db }.tda_dt_calc TO { username | rolename };
-GRANT EXECUTE FUNCTION ON { val-db }.tda_kmeans TO { username | rolename };
-----
-
-BYOM
-[source, teradata-sql]
-----
-GRANT EXECUTE FUNCTION on { mldb } to { username | rolename };
-GRANT EXECUTE FUNCTION ON { mldb } TO { database } WITH GRANT OPTION;
-----
-
-Alternatively you can check the permissions with the new Healthcheck panel in the connections panel
-
-image::ModelOps_Healthcheck.png[ModelOps Healtcheck screenshot, width=500]
-
 
 == Model Lifecycle for a new BYOM
 
