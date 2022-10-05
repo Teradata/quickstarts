@@ -77,9 +77,13 @@ Personal Connection
 
 * Description: Vantage Demo Env
 
-* Host: 3.238.151.85 (internal for teradata transcend)
+* Host: tdprd.td.teradata.com (internal for teradata transcend only)
 
 * Database: your-db
+
+* VAL Database: TRNG_XSP (internal for teradata transcend only)
+
+* BYOM Database: TRNG_BYOM (internal for teradata transcend only)
 
 * Login Mech: TDNEGO
 
