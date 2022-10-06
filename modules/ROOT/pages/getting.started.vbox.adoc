@@ -1,7 +1,7 @@
 = Run Vantage Express on VirtualBox
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
-:page-revdate: August 23rd, 2022
+:page-revdate: September 16th, 2022
 :description: Run Vantage Express on your laptop using VirtualBox.
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics
 :tabs:
@@ -20,89 +20,51 @@ include::partial$getting.started.intro.adoc[]
 
 === Download required software
 
-. The latest version of link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Express] VM image.
+. The latest version of link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Express VirtualBox Open Virtual Appliance (OVA)].
 +
-NOTE: If you have not used the Teradata downloads website before, you will need to register first.
+NOTE: If you have not used the Teradata Downloads website before, you will need to register first.
 . link:https://www.virtualbox.org/wiki/Downloads[VirtualBox], version 6.1.
 +
 NOTE: You can also install VirtualBox using `brew` and other package managers.
-. On Windows, you will also need link:https://www.7-zip.org/download.html[7zip] to unzip Vantage Express.
 
 === Run installers
 
-. Install VirtualBox by running the installer and accepting the default values. VirtualBox includes functionality that requires elevated privileges. When you start VirtualBox for the first time, you will be asked to confirm these elevated access. You will also need to reboot your machine to activate a VirtualBox kernel plugin.
-. If on Windows, install `7zip`.
+. Install VirtualBox by running the installer and accepting the default values.
+
+NOTE: VirtualBox includes functionality that requires elevated privileges. When you start VirtualBox for the first time, you will be asked to confirm this elevated access. You may also need to reboot your machine to activate the VirtualBox kernel plugin.
 
 === Run Vantage Express
 
-. Go to the directory where you downloaded Teradata Vantage Express and unzip the downloaded file.
-. Set env variable `VM_IMAGE_DIR` to the path of the unzipped image directory. For example:
+. Start VirtualBox.
+. Go to `File -> Import Appliance...` menu.
+. In `File` field, select the downloaded OVA file.
+. On the next screen, accept the defaults and click on `Import`.
+. Back in the main VirtualBox panel, start the Vantage Express appliance double clicking on VM `Vantage 17.20`.
 +
-[tabs]
-====
-Windows::
-+
---
-Run in Powershell as Administrator:
-[source, powershell, role="content-editable emits-gtm-events", id="vm_image_dir_win"]
-----
-$env:VM_IMAGE_DIR = "$HOME\Downloads\VantageExpress17.20_Sles12"
-----
---
-MacOS::
-+
---
-[source, bash, role="content-editable emits-gtm-events", id="vm_image_dir_macos"]
-----
-export VM_IMAGE_DIR="$HOME/Downloads/VantageExpress17.20_Sles12"
-----
---
-Linux::
-+
---
-[source, bash, role="content-editable emits-gtm-events", id="vm_image_dir_linux"]
-----
-export VM_IMAGE_DIR="$HOME/Downloads/VantageExpress17.20_Sles12"
-----
---
-====
-. We will now create a VirtualBox VM that uses the downloaded image. Run the following command. The script will take several minutes to complete. During the execution, the script will ask for a password to login to the VM and perform some setup. The password is `root`.
-+
-[tabs]
-====
-Windows::
-+
---
-Continue in the same Powershell as Administrator:
-[source, powershell, role="content-editable emits-gtm-events", id="install_win"]
-----
-$installScriptLocation = "https://raw.githubusercontent.com/Teradata/quickstarts/main/modules/ROOT/attachments/vbox-install.ps1"
-iex ((New-Object System.Net.WebClient).DownloadString($installScriptLocation))
-----
---
-MacOS::
-+
---
-[source, bash, role="content-editable emits-gtm-events", id="install_macos"]
-----
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/Teradata/quickstarts/main/modules/ROOT/attachments/vbox-install.sh)"
-----
---
-Linux::
-+
---
-[source, bash, role="content-editable emits-gtm-events", id="install_linux"]
-----
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/Teradata/quickstarts/main/modules/ROOT/attachments/vbox-install.sh)"
-----
---
-====
+image::getting-started-vbox/start-vm.png[Start VM, width=75%]
 
 include::partial$run.vantage.adoc[]
 
 === Run sample queries
 
 include::partial$running.sample.queries.adoc[]
+
+== Updating VirtualBox Guest Extensions
+
+VirtualBox Guest Extensions is a piece of software that runs in a VM. It makes the VM run faster on VirtualBox. It also improves the resolution of the VM screen and its responsiveness to resizing. It implements two-way clipboard, and drag and drop between the host and the guest. VirtualBox Guest Extensions in the VM needs to match the version of your VirtualBox install. You will likely have to update VirtualBox Guest Extensions for optimal performance.
+
+To update VirtualBox Guest Extensions:
+
+. Insert the VirtualBox Guest Extensions DVD by clicking on `SATA Port 3: [Optical Drive]` in `Storage` section:
++
+image::insert-guest-additions-dvd.png[Insert Guest Additions DVD, width=50%]
+. Back in the VM window, start the `Gnome Terminal` application.
+. Run the following command in the terminal:
++
+[source, bash, id="update_guest_additions", role="content-editable emits-gtm-events"]
+----
+mount /dev/cdrom /media/dvd; /media/dvd/VBoxLinuxAdditions.run
+----
 
 include::partial$getting.started.summary.adoc[]
 
