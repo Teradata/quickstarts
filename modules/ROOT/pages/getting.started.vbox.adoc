@@ -1,7 +1,7 @@
 = Run Vantage Express on VirtualBox
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
-:page-revdate: September 16th, 2022
+:page-revdate: October 6th, 2022
 :description: Run Vantage Express on your laptop using VirtualBox.
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics
 :tabs:
