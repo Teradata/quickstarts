@@ -40,6 +40,8 @@ NOTE: VirtualBox includes functionality that requires elevated privileges. When 
 . In `File` field, select the downloaded OVA file.
 . On the next screen, accept the defaults and click on `Import`.
 . Back in the main VirtualBox panel, start the Vantage Express appliance double clicking on VM `Vantage 17.20`.
++
+image::getting-started-vbox/start-vm.png[Start VM, width=75%]
 
 include::partial$run.vantage.adoc[]
 
