@@ -1,0 +1,157 @@
+== Create a new Project or use an existing one
+
+Add a new Project
+
+* create project
+
+* Details
+
+* Name: Demo: your-name
+
+* Description: ModelOps Demo
+
+* Group: your-name
+
+* Path: https://github.com/Teradata/modelops-demo-models
+
+* Credentials: No Credentials
+
+* Branch: master
+
+Here you can test the git connection. If is green then save and continue. Skip the service connection settings for now.
+
+When creating a new project, ModelOps will ask you for a new connection. 
+
+== Create a Personal Connection
+
+Personal connection
+
+* Name: Vantage personal your-name
+
+* Description: Vantage demo env
+
+* Host: tdprd.td.teradata.com (internal for teradata transcend only)
+
+* Database: your-db
+
+* VAL Database: TRNG_XSP (internal for teradata transcend only)
+
+* BYOM Database: TRNG_BYOM (internal for teradata transcend only)
+
+* Login Mech: TDNEGO
+
+* Username/Password
+
+== Validate permissions in SQL database for VAL and BYOM
+
+You can check the permissions with the new healthcheck panel in the connections panel
+
+image::ModelOps_Healthcheck.png[ModelOps Healtcheck screenshot, width=500]
+
+== Add dataset to identify Vantage tables for BYOM evaluation and scoring
+
+Let's create a new dataset template, then 1 dataset for training and 2 datasets for evaluation so we can monitor model quality metrics with 2 different datasets
+
+Add datasets
+
+* create dataset template
+
+* Catalog
+
+* Name: PIMA
+
+* Description: PIMA Diabetes
+
+* Feature Catalog: Vantage
+
+* Database: your-db
+
+* Table: aoa_feature_metadata
+
+Features
+Query:
+[source, teradata-sql]
+----
+SELECT * FROM {your-db}.pima_patient_features
+----
+Entity Key: PatientId
+Features: NumTimesPrg, PlGlcConc, BloodP, SkinThick, TwoHourSerIns, BMI, DiPedFunc, Age
+
+Entity & Target
+Query: 
+[source, teradata-sql]
+----
+SELECT * FROM {your-db}.pima_patient_diagnoses
+----
+Entity Key: PatientId
+Target: HasDiabetes
+
+Predictions
+
+* Database: your-db
+
+* Table: pima_patient_predictions
+
+Entity selection: 
+
+Query: 
+[source, teradata-sql]
+----
+SELECT * FROM pima_patient_features WHERE patientid MOD 5 = 0
+----
+BYOM Target Column: CAST(CAST(json_report AS JSON).JSONExtractValue('$.predicted_HasDiabetes') AS INT)
+
+== Create training dataset
+
+Basic
+
+* Name: Train
+
+* Description: Training dataset
+
+* Scope: Training
+
+* Entity & Target
+
+Query: 
+[source, teradata-sql]
+----
+SELECT * FROM {your-db}.pima_patient_diagnoses WHERE patientid MOD 5 = 1
+----
+
+== Create evaluation dataset 1
+
+Basic
+
+* Name: Evaluate
+
+* Description: Evaluation dataset
+
+* Scope: Evaluation
+
+* Entity & Target
+
+Query: 
+[source, teradata-sql]
+----
+SELECT * FROM {your-db}.pima_patient_diagnoses WHERE patientid MOD 5 = 2
+----
+
+
+== Create evaluation dataset 2
+
+Basic
+
+* Name: Evaluate
+
+* Description: Evaluation dataset
+
+* Scope: Evaluation
+
+* Entity & Target
+
+Query: 
+[source, teradata-sql]
+----
+SELECT * FROM {your-db}.pima_patient_diagnoses WHERE patientid MOD 5 = 3
+----

@@ -1,0 +1,182 @@
+= ModelOps - Import and Deploy your first GIT Model
+:experimental:
+:page-author: Pablo Escobar de la Oliva
+:page-email: pablo.escobardelaoliva@teradata.com
+:page-revdate: October 5th, 2022
+:description: Tutorial for deploying and monitoring a Python model into Vantage using ModelOps and Git repository
+:keywords: modelops, python, git, clearscape analytics, teradata, data warehouses, teradata, vantage, cloud data platform, machine learning, artificial intelligence, business intelligence, enterprise analytics
+
+== Overview
+
+This is a quickstart tutorial for people who are new to Vantage ModelOps. In the tutorial, you will be able to create a new project in ModelOps, upload the required data to Vantage, and track the full lifecycle of a demo model using code templates and following the methodology for GIT models in ModelOps.
+
+== Prerequisites
+
+* Access to a Teradata Vantage instance with ClearScape Analytics (includes ModelOps)
+
+* Ability to run Jupyter notebooks
+
+include::ROOT:partial$vantage.express.options.adoc[]
+
+Files needed
+
+Let's start by downloading the required files for this tutorial. Download these 4 attachments and upload them in your Notebook filesystem. 
+
+link:{attachmentsdir}/ModelOps_Training.ipynb[Download the ModelOps training Notebook]
+
+link:{attachmentsdir}/ModelOps_Operationalize.ipynb[Download the ModelOps Operationalization Notebook for GIT models]
+
+link:{attachmentsdir}/ModelOps_Data_files.zip[Download data files for demo use case]
+
+
+
+Alternatively you can git clone following repos
+[source, cli]
+----
+git clone https://github.com/willfleury/modelops-getting-started
+git clone https://github.com/Teradata/modelops-demo-models/
+----
+
+Setting up the database and Jupyter environment 
+
+Follow the ModelOps_Training Jupyter Notebook to setup the database, tables and libraries needed for the demo.
+
+== Understand where we are in the Methodology
+
+image::modelops-git.png[ModelOps Methodology GIT screenshot, width=100%]
+
+include::partial$modelops-basic.adoc[]
+
+== Prepare code templates
+
+For Git Models we need to fill the code templates available when adding a new model. 
+
+These code scripts will be stored in the git repository under: model_definitions/your-model/model_modules/
+
+* __init__.py : this an empty file required for python modules
+
+* training.py: this script contains train function
+
+[source, python]
+----
+def train(context: ModelContext, **kwargs):
+    aoa_create_context()
+
+    # your training code
+
+    # save your model
+    joblib.dump(model, f"{context.artifact_output_path}/model.joblib")
+
+    record_training_stats(...)
+----
+
+Review the Operationalize notebook to see how you can execute this from CLI or from notebook as an alternative to ModelOps UI.	
+
+* evaluation.py: this script contains evaluate function
+
+[source, python]
+----
+def evaluate(context: ModelContext, **kwargs):
+    aoa_create_context()
+
+    # read your model
+    model = joblib.load(f"{context.artifact_input_path}/model.joblib")
+
+    # your evaluation logic
+
+    record_evaluation_stats(...)
+----
+
+Review the Operationalize notebook to see how you can execute this from CLI or from notebook as an alternative to ModelOps UI.	
+
+* scoring.py: this script contains score function
+
+[source, python]
+----
+def score(context: ModelContext, **kwargs):
+    aoa_create_context()
+
+    # read your model
+    model = joblib.load(f"{context.artifact_input_path}/model.joblib")
+
+    # your evaluation logic
+
+    record_scoring_stats(...)
+----
+
+Review the Operationalize notebook to see how you can execute this from CLI or from notebook as an alternative to ModelOps UI.	
+
+* requirements.txt: this file contains the library names and versions required for your code scripts. Example:
+
+[source, python]
+----
+%%writefile ../model_modules/requirements.txt
+xgboost==0.90
+scikit-learn==0.24.2
+shap==0.36.0
+matplotlib==3.3.1
+teradataml==17.0.0.4
+nyoka==4.3.0
+aoa==6.0.0
+----
+
+* config.json: this file located in the parent folder (your-model folder) contains default hyper-parameters
+
+[source, python]
+----
+%%writefile ../config.json
+{
+   "hyperParameters": {
+      "eta": 0.2,
+      "max_depth": 6
+   }
+}
+----
+
+Go and review the code scripts for the demo model in the repository: https://github.com/Teradata/modelops-demo-models/
+
+Go into model_definitions->python-diabetes->model_modules
+
+== Model Lifecycle for a new GIT
+
+* Open Project to see models available from GIT
+
+* Train a new model version
+
+* see how CommitID from code repository is tracked
+
+* Evaluate
+
+* Review evaluation report, including dataset statistics and model metrics
+
+* Compare with other model versions
+
+* Approve
+
+* Deploy in Vantage - Engine, Publish, Schedule. Scoring dataset is required
+Use your connection and select a database. e.g "aoa_byom_models"
+
+* Deploy in Docker Batch  - Engine, Publish, Schedule. Scoring dataset is required
+Use your connection and select a database. e.g "aoa_byom_models"
+
+* Deploy in Restful Batch  - Engine, Publish, Schedule. Scoring dataset is required
+Use your connection and select a database. e.g "aoa_byom_models"
+
+* Deployments/executions
+
+* Evaluate again with dataset2 - to monitor model metrics behavior
+
+* Monitor Model Drift - data and metrics
+
+* Open BYOM notebook to execute the PMML predict from SQL code when deployed in Vantage
+
+* Test Restful from ModelOps UI or from curl command
+
+* Retire deployments
+
+== Summary
+
+In this quick start we have learned how to follow a full lifecycle of GIT models into ModelOps and how to deploy it into Vantage or into Docker containers for Edge deployments. Then how we can schedule a batch scoring or test restful or on-demand scorings and start monitoring on Data Drift and Model Quality metrics.
+
+== Further reading
+* link:https://docs.teradata.com/r/Teradata-VantageTM-ModelOps-User-Guide[Teradata Vantage™ - ModelOps User Guide - Login required at this moment]

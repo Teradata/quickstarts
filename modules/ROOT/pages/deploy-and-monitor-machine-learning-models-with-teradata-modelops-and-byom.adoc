@@ -1,0 +1,95 @@
+= ModelOps - Import and Deploy your first BYOM Model
+:experimental:
+:page-author: Pablo Escobar de la Oliva
+:page-email: pablo.escobardelaoliva@teradata.com
+:page-revdate: October 5th, 2022
+:description: Tutorial for deploying and monitoring a PMML model into Vantage using ModelOps
+:keywords: modelops, byom, python, clearscape analytics, teradata, data warehouses, teradata, vantage, cloud data platform, machine learning, artificial intelligence, business intelligence, enterprise analytics
+
+== Overview
+
+This is a quickstart tutorial for people who are new to Vantage ModelOps. In the tutorial, you will be able to create a new project in ModelOps, upload the required data to Vantage, and track the full lifecycle of an imported Diabetes demo model using BYOM mechanisms.
+
+== Prerequisites
+
+* Access to a Teradata Vantage instance with ClearScape Analytics (includes ModelOps)
+
+* Ability to run Jupyter notebooks
+
+include::ROOT:partial$vantage.express.options.adoc[]
+
+Files needed
+
+Let's start by downloading the needed files for this tutorial. Download these 4 attachments and upload them in your Notebook filesystem. 
+
+link:{attachmentsdir}/ModelOps_Training.ipynb[Download the ModelOps training Notebook]
+
+link:{attachmentsdir}/BYOM.ipynb[Download BYOM Notebook file for demo use case]
+
+link:{attachmentsdir}/ModelOps_Data_files.zip[Download data files for demo use case]
+
+link:{attachmentsdir}/ModelOps_BYOM_files.zip[Download BYOM code files for demo use case]
+
+Alternatively you can git clone following repos
+[source, cli]
+----
+git clone https://github.com/willfleury/modelops-getting-started
+git clone https://github.com/Teradata/modelops-demo-models/
+----
+
+Setting up the Database and Jupyter environment 
+
+Follow the ModelOps_Training Jupyter Notebook to setup the database, tables and libraries needed for the demo.
+
+== Understand where we are in the Methodology
+
+image::BYOM.png[ModelOps Methodology BYOM screenshot, width=100%]
+
+include::partial$modelops-basic.adoc[]
+
+== Model Lifecycle for a new BYOM
+
+Download and unzip the files needed, links are at the top of the tutorial. For PMML file you can also download a PMML generated in the training of a GIT model.
+
+* BYOM.ipynb
+
+* model.pmml 
+
+* requirements.txt
+
+* evaluation.py 
+
+* data_stats.json
+
+* __init__.py
+
+Define BYOM Model with Evaluation and Monitoring
+
+* Import Version
+
+* Evaluate
+
+* Review evaluation report, including dataset statistics
+
+* Approve
+
+* Deploy in Vantage - Engine, Publish, Schedule. Scoring dataset is required
+Use your connection and select a database. e.g "aoa_byom_models"
+
+* Deployments/executions
+
+* Evaluate again with dataset2 - to monitor model metrics behavior
+
+* Monitor Model Drift - Data and Metrics
+
+* Open BYOM notebook to execute the PMML predict from SQL code 
+
+* Retire
+
+
+== Summary
+
+In this quick start we have learned how to follow a full lifecycle of BYOM models into ModelOps and how to deploy it into Vantage. Then how we can schedule a batch scoring or test restful or on-demand scorings and start monitoring on Data Drift and Model Quality metrics.
+
+== Further reading
+* link:https://docs.teradata.com/r/Teradata-VantageTM-ModelOps-User-Guide[Teradata Vantage™ - ModelOps User Guide - Login required at this moment]
