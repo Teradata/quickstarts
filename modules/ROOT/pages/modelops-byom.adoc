@@ -48,7 +48,7 @@ image::BYOM.png[ModelOps Methodlogy BYOM screenshot, width=100%]
 
 == Create a new project or use an existing one
 
-Add Project
+Add  a ne project
 
 * create project
 
