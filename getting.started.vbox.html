@@ -1158,7 +1158,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <article class="doc">
 <h1 class="page">Run Vantage Express on VirtualBox</h1>
 <p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
-Last updated: August 23rd, 2022</p>
+Last updated: September 16th, 2022</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
@@ -1205,7 +1205,7 @@ Starting with version 17.20, Vantage Express includes the following analytics pa
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The latest version of <a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Vantage Express</a> VM image.</p>
+<p>The latest version of <a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Vantage Express VirtualBox Open Virtual Appliance (OVA)</a>.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1213,7 +1213,7 @@ Starting with version 17.20, Vantage Express includes the following analytics pa
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you have not used the Teradata downloads website before, you will need to register first.
+If you have not used the Teradata Downloads website before, you will need to register first.
 </td>
 </tr>
 </table>
@@ -1234,9 +1234,6 @@ You can also install VirtualBox using <code>brew</code> and other package manage
 </table>
 </div>
 </li>
-<li>
-<p>On Windows, you will also need <a href="https://www.7-zip.org/download.html">7zip</a> to unzip Vantage Express.</p>
-</li>
 </ol>
 </div>
 </div>
@@ -1245,12 +1242,21 @@ You can also install VirtualBox using <code>brew</code> and other package manage
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Install VirtualBox by running the installer and accepting the default values. VirtualBox includes functionality that requires elevated privileges. When you start VirtualBox for the first time, you will be asked to confirm these elevated access. You will also need to reboot your machine to activate a VirtualBox kernel plugin.</p>
-</li>
-<li>
-<p>If on Windows, install <code>7zip</code>.</p>
+<p>Install VirtualBox by running the installer and accepting the default values.</p>
 </li>
 </ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+VirtualBox includes functionality that requires elevated privileges. When you start VirtualBox for the first time, you will be asked to confirm this elevated access. You may also need to reboot your machine to activate the VirtualBox kernel plugin.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -1258,94 +1264,54 @@ You can also install VirtualBox using <code>brew</code> and other package manage
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Go to the directory where you downloaded Teradata Vantage Express and unzip the downloaded file.</p>
+<p>Start VirtualBox.</p>
 </li>
 <li>
-<p>Set env variable <code>VM_IMAGE_DIR</code> to the path of the unzipped image directory. For example:</p>
-<div class="tabset is-loading">
-<div class="ulist tabs">
-<ul>
-<li>
-<p><a id="tabset1_windows"></a>Windows</p>
+<p>Go to <code>File &#8594; Import Appliance&#8230;&#8203;</code> menu.</p>
 </li>
 <li>
-<p><a id="tabset1_macos"></a>MacOS</p>
+<p>In <code>File</code> field, select the downloaded OVA file.</p>
 </li>
 <li>
-<p><a id="tabset1_linux"></a>Linux</p>
+<p>On the next screen, accept the defaults and click on <code>Import</code>.</p>
 </li>
-</ul>
-</div>
+<li>
+<p>Back in the main VirtualBox panel, start the Vantage Express appliance double clicking on VM <code>Vantage 17.20</code>.</p>
+<div class="imageblock">
 <div class="content">
-<div class="tab-pane" aria-labelledby="tabset1_windows">
-<div class="paragraph">
-<p>Run in Powershell as Administrator:</p>
-</div>
-<div id="vm_image_dir_win" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">$env:VM_IMAGE_DIR = "$HOME\Downloads\VantageExpress17.20_Sles12"</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_macos">
-<div id="vm_image_dir_macos" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export VM_IMAGE_DIR="$HOME/Downloads/VantageExpress17.20_Sles12"</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_linux">
-<div id="vm_image_dir_linux" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export VM_IMAGE_DIR="$HOME/Downloads/VantageExpress17.20_Sles12"</code></pre>
-</div>
-</div>
-</div>
+<img src="_images/getting-started-vbox/start-vm.png" alt="Start VM" width="75%">
 </div>
 </div>
 </li>
 <li>
-<p>We will now create a VirtualBox VM that uses the downloaded image. Run the following command. The script will take several minutes to complete. During the execution, the script will ask for a password to login to the VM and perform some setup. The password is <code>root</code>.</p>
-<div class="tabset is-loading">
-<div class="ulist tabs">
-<ul>
-<li>
-<p><a id="tabset2_windows"></a>Windows</p>
+<p>Press <kbd>ENTER</kbd> to select the highlighted <code>LINUX</code> boot partition.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/run-vantage/boot-manager-menu.png" alt="Boot Manager Menu" width="500">
+</div>
+</div>
 </li>
 <li>
-<p><a id="tabset2_macos"></a>MacOS</p>
+<p>On the next screen, press <kbd>ENTER</kbd> again to select the default SUSE Linux kernel.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/run-vantage/grub-menu.png" alt="Grub Menu" width="500">
+</div>
+</div>
 </li>
 <li>
-<p><a id="tabset2_linux"></a>Linux</p>
+<p>After completing the bootup sequence a terminal login prompt as shown in the screenshot below will appear. Don&#8217;t enter anything in the terminal. Wait till the system starts the GUI.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/run-vantage/wait-for-gui.png" alt="Wait for GUI" width="500">
+</div>
+</div>
 </li>
-</ul>
-</div>
+<li>
+<p>After a while the following prompt will appear - assuming that you did not enter anything after the command login prompt above. Press <code>okay</code> button in the screen below.</p>
+<div class="imageblock">
 <div class="content">
-<div class="tab-pane" aria-labelledby="tabset2_windows">
-<div class="paragraph">
-<p>Continue in the same Powershell as Administrator:</p>
-</div>
-<div id="install_win" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">$installScriptLocation = "https://raw.githubusercontent.com/Teradata/quickstarts/main/modules/ROOT/attachments/vbox-install.ps1"
-iex ((New-Object System.Net.WebClient).DownloadString($installScriptLocation))</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset2_macos">
-<div id="install_macos" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bash -c "$(curl -fsSL https://raw.githubusercontent.com/Teradata/quickstarts/main/modules/ROOT/attachments/vbox-install.sh)"</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset2_linux">
-<div id="install_linux" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bash -c "$(curl -fsSL https://raw.githubusercontent.com/Teradata/quickstarts/main/modules/ROOT/attachments/vbox-install.sh)"</code></pre>
-</div>
-</div>
-</div>
+<img src="_images/run-vantage/okay-the-security-popup.png" alt="OK Security Popup" width="500">
 </div>
 </div>
 </li>
@@ -1353,12 +1319,20 @@ iex ((New-Object System.Net.WebClient).DownloadString($installScriptLocation))</
 <p>Once the VM is up, you will see its desktop environment. When prompted for username/password enter <code>root</code> for both.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/vm.login.png" alt="VM Login" width="500">
+<img src="_images/run-vantage/vm.login.png" alt="VM Login" width="500">
 </div>
 </div>
 </li>
 <li>
-<p>The database is configured to autostart with the VM. To confirm that the database has started go to the virtual desktop and start <code>Gnome Terminal</code>. In the terminal execute <code>pdestate</code> command that will inform you if Vantage has already started:</p>
+<p>The database is configured to autostart with the VM. To confirm that the database has started go to the virtual desktop and start <code>Gnome Terminal</code>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/run-vantage/start-gnome-terminal.png" alt="Start Gnome Terminal" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>In the terminal execute <code>pdestate</code> command that will inform you if Vantage has already started:</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1414,10 +1388,18 @@ PDE state is RUN/STARTED.</pre>
 </details>
 </li>
 <li>
-<p>Now that the database is up, go back to the virtual desktop and launch <code>Teradata Studio Express</code>. When you first start it you will be offered a tour. Once you close the tour, you will see a wizard window to add a new connection. Select <code>Teradata</code>:</p>
+<p>Now that the database is up, go back to the virtual desktop and launch <code>Teradata Studio Express</code>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/new.connection.profile.png" alt="New Connection Profile" width="500">
+<img src="_images/run-vantage/start-teradata-studio-express.png" alt="Start Teradata Studio Express" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>When you first start it you will be offered a tour. Once you close the tour, you will see a wizard window to add a new connection. Select <code>Teradata</code>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/run-vantage/new.connection.profile.png" alt="New Connection Profile" width="500">
 </div>
 </div>
 </li>
@@ -1425,7 +1407,7 @@ PDE state is RUN/STARTED.</pre>
 <p>On the next screen, connect to the database on your localhost using <code>dbc</code> for the username and password:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/new.connection.png" alt="New Connection" width="500">
+<img src="_images/run-vantage/new.connection.png" alt="New Connection" width="500">
 </div>
 </div>
 </li>
@@ -1532,6 +1514,40 @@ VALUES (
 </li>
 </ol>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_updating_virtualbox_guest_extensions"><a class="anchor" href="#_updating_virtualbox_guest_extensions"></a>Updating VirtualBox Guest Extensions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>VirtualBox Guest Extensions is a piece of software that runs in a VM. It makes the VM run faster on VirtualBox. It also improves the resolution of the VM screen and its responsiveness to resizing. It implements two-way clipboard, and drag and drop between the host and the guest. VirtualBox Guest Extensions in the VM needs to match the version of your VirtualBox install. You will likely have to update VirtualBox Guest Extensions for optimal performance.</p>
+</div>
+<div class="paragraph">
+<p>To update VirtualBox Guest Extensions:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Insert the VirtualBox Guest Extensions DVD by clicking on <code>SATA Port 3: [Optical Drive]</code> in <code>Storage</code> section:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/insert-guest-additions-dvd.png" alt="Insert Guest Additions DVD" width="50%">
+</div>
+</div>
+</li>
+<li>
+<p>Back in the VM window, start the <code>Gnome Terminal</code> application.</p>
+</li>
+<li>
+<p>Run the following command in the terminal:</p>
+<div id="update_guest_additions" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mount /dev/cdrom /media/dvd; /media/dvd/VBoxLinuxAdditions.run</code></pre>
+</div>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>

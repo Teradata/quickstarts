@@ -1264,15 +1264,55 @@ VMware doesn&#8217;t offer VMware Workstation Player for MacOS. If you are on a 
 <p>Double-click on the <code>.vmx</code> file. This will start the VM image in VMware Player/Fusion.</p>
 </li>
 <li>
-<p>Once the VM is up, you will see its desktop environment. When prompted for username/password enter <code>root</code> for both.</p>
+<p>Press <kbd>ENTER</kbd> to select the highlighted <code>LINUX</code> boot partition.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/vm.login.png" alt="VM Login" width="500">
+<img src="_images/run-vantage/boot-manager-menu.png" alt="Boot Manager Menu" width="500">
 </div>
 </div>
 </li>
 <li>
-<p>The database is configured to autostart with the VM. To confirm that the database has started go to the virtual desktop and start <code>Gnome Terminal</code>. In the terminal execute <code>pdestate</code> command that will inform you if Vantage has already started:</p>
+<p>On the next screen, press <kbd>ENTER</kbd> again to select the default SUSE Linux kernel.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/run-vantage/grub-menu.png" alt="Grub Menu" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>After completing the bootup sequence a terminal login prompt as shown in the screenshot below will appear. Don&#8217;t enter anything in the terminal. Wait till the system starts the GUI.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/run-vantage/wait-for-gui.png" alt="Wait for GUI" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>After a while the following prompt will appear - assuming that you did not enter anything after the command login prompt above. Press <code>okay</code> button in the screen below.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/run-vantage/okay-the-security-popup.png" alt="OK Security Popup" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>Once the VM is up, you will see its desktop environment. When prompted for username/password enter <code>root</code> for both.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/run-vantage/vm.login.png" alt="VM Login" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>The database is configured to autostart with the VM. To confirm that the database has started go to the virtual desktop and start <code>Gnome Terminal</code>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/run-vantage/start-gnome-terminal.png" alt="Start Gnome Terminal" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>In the terminal execute <code>pdestate</code> command that will inform you if Vantage has already started:</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1328,10 +1368,18 @@ PDE state is RUN/STARTED.</pre>
 </details>
 </li>
 <li>
-<p>Now that the database is up, go back to the virtual desktop and launch <code>Teradata Studio Express</code>. When you first start it you will be offered a tour. Once you close the tour, you will see a wizard window to add a new connection. Select <code>Teradata</code>:</p>
+<p>Now that the database is up, go back to the virtual desktop and launch <code>Teradata Studio Express</code>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/new.connection.profile.png" alt="New Connection Profile" width="500">
+<img src="_images/run-vantage/start-teradata-studio-express.png" alt="Start Teradata Studio Express" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>When you first start it you will be offered a tour. Once you close the tour, you will see a wizard window to add a new connection. Select <code>Teradata</code>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/run-vantage/new.connection.profile.png" alt="New Connection Profile" width="500">
 </div>
 </div>
 </li>
@@ -1339,7 +1387,7 @@ PDE state is RUN/STARTED.</pre>
 <p>On the next screen, connect to the database on your localhost using <code>dbc</code> for the username and password:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/new.connection.png" alt="New Connection" width="500">
+<img src="_images/run-vantage/new.connection.png" alt="New Connection" width="500">
 </div>
 </div>
 </li>
