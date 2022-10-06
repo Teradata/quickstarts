@@ -66,7 +66,7 @@ Add  a ne project
 
 * Branch: master
 
-Here you can test the git connection, If is green then save and continue. For the Service connection you can skip for now. 
+Here you can test the git connection. If is green then save and continue. Skip the service connection settings for now. 
 
 When Creating a new Project, ModelOps will ask you for a new connection. 
 
