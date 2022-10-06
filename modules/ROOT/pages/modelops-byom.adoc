@@ -12,7 +12,8 @@ This tutorial is for people who are new to Vantage ModelOps. In the tutorial, yo
 
 == Prerequisites
 
-You need access to a Teradata Vantage instance with ClearScape Analytics (ModelOps), and a Jupyter notebook tool
+* Access to a Teradata Vantage instance with ClearScape Analytics (includes ModelOps)
+* Ability to run Jupyter notebooks
 
 include::ROOT:partial$vantage.express.options.adoc[]
 
