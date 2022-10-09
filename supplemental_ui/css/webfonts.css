@@ -69,7 +69,18 @@
  *
  * © 2018 MyFonts Inc
 */
-@font-face{font-family:'RidleyGrotesk';src:url('374B48_3_0.eot');src:url('374B48_3_0.eot?#iefix') format('embedded-opentype'),url('374B48_3_0.woff2') format('woff2'),url('374B48_3_0.woff') format('woff'),url('374B48_3_0.ttf') format('truetype');font-weight:700;font-style:normal;}
-@font-face{font-family:'RidleyGrotesk';src:url('374B48_9_0.eot');src:url('374B48_9_0.eot?#iefix') format('embedded-opentype'),url('374B48_9_0.woff2') format('woff2'),url('374B48_9_0.woff') format('woff'),url('374B48_9_0.ttf') format('truetype');font-weight:500;font-style:normal;}
-@font-face{font-family:'RidleyGrotesk';src:url('374B48_B_0.eot');src:url('374B48_B_0.eot?#iefix') format('embedded-opentype'),url('374B48_B_0.woff2') format('woff2'),url('374B48_B_0.woff') format('woff'),url('374B48_B_0.ttf') format('truetype');font-weight:400;font-style:normal;}
-@font-face{font-family:'RidleyGrotesk';src:url('374B48_C_0.eot');src:url('374B48_C_0.eot?#iefix') format('embedded-opentype'),url('374B48_C_0.woff2') format('woff2'),url('374B48_C_0.woff') format('woff'),url('374B48_C_0.ttf') format('truetype');font-weight:600;font-style:normal;}
+
+@font-face{
+  font-family: 'Poppins-Regular';
+  src: url('Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face{
+  font-family: 'Poppins-SemiBold';
+  src: url('Poppins-SemiBold.ttf') format('truetype');
+}
+
+@font-face{
+  font-family: 'Poppins-Bold';
+  src: url('Poppins-Bold.ttf') format('truetype');
+}

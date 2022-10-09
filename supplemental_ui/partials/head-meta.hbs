@@ -33,7 +33,7 @@ body {
 
 @media screen and (min-width: 1024px) {
   body {
-    padding-top: 106px;
+    padding-top: 64px;
   }
 }
 
@@ -59,6 +59,7 @@ body.menu-open {
 
 .navbar-brand {
   padding-left: 0px;
+  flex-grow: 1;
 }
 
 .navbar-menu {
@@ -67,11 +68,11 @@ body.menu-open {
 }
 
 .navbar-brand .navbar-item:first-child {
-  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
+  font-family: Poppins-SemiBold;
+  font-size: 20px;
   color: #000;
   text-transform: uppercase;
+  letter-spacing: 0.15px;
 }
 
 @media screen and (min-width: 375px) {
@@ -91,7 +92,7 @@ button {
 
 .header-nav-mobile__menu,
 .navbar-utility {
-  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+  font-family: Poppins-Bold;
 }
 
 .header-nav-mobile__menu ul,
@@ -118,6 +119,7 @@ button {
     will-change: transform;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    font-size: 14px;
   }
 
   .navbar::-webkit-scrollbar {
@@ -319,13 +321,14 @@ button {
 /* Begin DESKTOP ONLY Styles */
 @media screen and (min-width: 1024px) {
   .navbar {
-    height: 106px;
+    height: 70px;
     background: #fafafa;
     color: #000;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: flex-end;
+    font-size: 14px;
   }
 
   .navbar-top {
@@ -335,15 +338,11 @@ button {
 
   .navbar-top,
   .navbar-menu {
-    height: 64px;
+    height: 70px;
   }
 
   .navbar-logo {
-    margin: 0 24px;
-  }
-
-  .navbar-brand {
-    flex-grow: 0;
+    margin: 0px 27px 0px 36px;
   }
 
   .header-nav-mobile__menu-icon {
@@ -353,18 +352,21 @@ button {
   .header-nav-mobile__menu {
     padding-left: 20px;
     flex-grow: 1;
+    height: 100%;
   }
 
   .header-nav-mobile__menu > ul {
     display: flex;
     flex-direction: row;
     align-items: center;
+    height: 100%;
   }
 
   .header-nav-mobile__menu-item .header-nav-mobile__menu-item__header {
     text-transform: uppercase;
     padding: 22px 20px;
     line-height: 16px;
+    height: 100%;
   }
 
   .header-nav-mobile__menu-item .header-nav-mobile__menu-item__header > a {
@@ -380,6 +382,15 @@ button {
     border-bottom: #007373 solid 3px;
     color: #007373;
     font-weight: 600;
+    height: 100%;
+  }
+
+  .header-nav-mobile__menu-item {
+    height: 100%;
+    letter-spacing: 0.5px;
+    padding-top: 7px;
+    padding-left: 5px;
+    padding-right: 3px;
   }
 
   .header-nav-mobile__menu-item:first-child a,
@@ -472,7 +483,7 @@ button {
 }
 
 .navbar-item {
-  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+  font-family: Poppins-Bold;
   font-size: 16px;
   color: #000;
   text-transform: uppercase;
@@ -506,7 +517,14 @@ button {
   }
 
   .nav {
-    top: 110px;
+    top: 68px;
+  }
+}
+
+
+@media screen and (min-width: 769px) {
+  .nav {
+    top: 38px;
   }
 }
 
@@ -571,7 +589,7 @@ aside.toc.sidebar {
 
 @media screen and (min-width: 1024px) {
   .toolbar {
-    top: 106px;
+    top: 70px;
     height: 60px;
     position: sticky;
   }
@@ -588,7 +606,7 @@ aside.toc.sidebar {
   right: 0px;
   height: 55px;
   font-size: 16px;
-  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+  font-family: Poppins-Bold;
   color: black;
 }
 
