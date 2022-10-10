@@ -44,7 +44,7 @@ body {
 
 @media screen and (min-width: 1024px) {
   body {
-    padding-top: 106px;
+    padding-top: 64px;
   }
 }
 
@@ -70,6 +70,7 @@ body.menu-open {
 
 .navbar-brand {
   padding-left: 0px;
+  flex-grow: 1;
 }
 
 .navbar-menu {
@@ -78,11 +79,11 @@ body.menu-open {
 }
 
 .navbar-brand .navbar-item:first-child {
-  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
+  font-family: Poppins-SemiBold;
+  font-size: 20px;
   color: #000;
   text-transform: uppercase;
+  letter-spacing: 0.15px;
 }
 
 @media screen and (min-width: 375px) {
@@ -102,7 +103,7 @@ button {
 
 .header-nav-mobile__menu,
 .navbar-utility {
-  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+  font-family: Poppins-Bold;
 }
 
 .header-nav-mobile__menu ul,
@@ -129,6 +130,7 @@ button {
     will-change: transform;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    font-size: 14px;
   }
 
   .navbar::-webkit-scrollbar {
@@ -330,13 +332,14 @@ button {
 /* Begin DESKTOP ONLY Styles */
 @media screen and (min-width: 1024px) {
   .navbar {
-    height: 106px;
+    height: 70px;
     background: #fafafa;
     color: #000;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: flex-end;
+    font-size: 14px;
   }
 
   .navbar-top {
@@ -346,15 +349,11 @@ button {
 
   .navbar-top,
   .navbar-menu {
-    height: 64px;
+    height: 70px;
   }
 
   .navbar-logo {
-    margin: 0 24px;
-  }
-
-  .navbar-brand {
-    flex-grow: 0;
+    margin: 0px 27px 0px 36px;
   }
 
   .header-nav-mobile__menu-icon {
@@ -364,18 +363,21 @@ button {
   .header-nav-mobile__menu {
     padding-left: 20px;
     flex-grow: 1;
+    height: 100%;
   }
 
   .header-nav-mobile__menu > ul {
     display: flex;
     flex-direction: row;
     align-items: center;
+    height: 100%;
   }
 
   .header-nav-mobile__menu-item .header-nav-mobile__menu-item__header {
     text-transform: uppercase;
     padding: 22px 20px;
     line-height: 16px;
+    height: 100%;
   }
 
   .header-nav-mobile__menu-item .header-nav-mobile__menu-item__header > a {
@@ -391,6 +393,15 @@ button {
     border-bottom: #007373 solid 3px;
     color: #007373;
     font-weight: 600;
+    height: 100%;
+  }
+
+  .header-nav-mobile__menu-item {
+    height: 100%;
+    letter-spacing: 0.5px;
+    padding-top: 7px;
+    padding-left: 5px;
+    padding-right: 3px;
   }
 
   .header-nav-mobile__menu-item:first-child a,
@@ -483,7 +494,7 @@ button {
 }
 
 .navbar-item {
-  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+  font-family: Poppins-Bold;
   font-size: 16px;
   color: #000;
   text-transform: uppercase;
@@ -517,7 +528,14 @@ button {
   }
 
   .nav {
-    top: 110px;
+    top: 68px;
+  }
+}
+
+
+@media screen and (min-width: 769px) {
+  .nav {
+    top: 38px;
   }
 }
 
@@ -582,7 +600,7 @@ aside.toc.sidebar {
 
 @media screen and (min-width: 1024px) {
   .toolbar {
-    top: 106px;
+    top: 70px;
     height: 60px;
     position: sticky;
   }
@@ -599,7 +617,7 @@ aside.toc.sidebar {
   right: 0px;
   height: 55px;
   font-size: 16px;
-  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
+  font-family: Poppins-Bold;
   color: black;
 }
 
@@ -884,11 +902,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <header class="header" role="banner">
   <nav class="navbar">
-    
+
     <section class="navbar-top">
       <div class="navbar-logo">
-        <a href="https://teradata.com/">
-          <svg width="97" height="18" viewBox="0 0 696 133" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
+        <a href="https://www.teradata.com/">
+          <svg width="103" height="20" viewBox="0 0 696 133" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
               <title>Teradata</title>
               <desc>Copyright Teradata</desc>
               <defs></defs>
@@ -961,13 +979,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <input id="search-input" type="text" placeholder="Search Getting Started">
       </div>
     </section>
-
-    <section class="navbar-utility">
-      <ul>
-        <li><a href="https://teradata.com/">Visit Teradata.com</a></li>
-      </ul>
-    </section>
-
   </nav>
   <div class="page-blackout" tabindex="-1" aria-hidden="true"></div>
 </header>
