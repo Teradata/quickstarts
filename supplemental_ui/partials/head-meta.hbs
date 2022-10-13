@@ -42,6 +42,19 @@ body.menu-open {
   position: relative;
 }
 
+article a.external[href^="http"]::after,
+article a.external[href^="https://"]::after {
+  content: "";
+  width: 14px;
+  height: 14px;
+  margin-left: 4px;
+  background-image: url("{{uiRootPath}}/img/open_in_new.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+}
+
 .navbar-top {
   border-bottom: 1px solid #e5e5e5;
   display: flex;
