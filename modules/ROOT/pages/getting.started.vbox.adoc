@@ -20,10 +20,10 @@ include::partial$getting.started.intro.adoc[]
 
 === Download required software
 
-. The latest version of link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Express VirtualBox Open Virtual Appliance (OVA),role=external,window=_blank].
+. The latest version of link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Express VirtualBox Open Virtual Appliance (OVA),window=_blank].
 +
 NOTE: If you have not used the Teradata Downloads website before, you will need to register first.
-. link:https://www.virtualbox.org/wiki/Downloads[VirtualBox,role=external,window=_blank], version 6.1.
+. link:https://www.virtualbox.org/wiki/Downloads[VirtualBox,window=_blank], version 6.1.
 +
 NOTE: You can also install VirtualBox using `brew` and other package managers.
 
