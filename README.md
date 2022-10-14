@@ -66,7 +66,7 @@ TODO: add content
 
 There are two ways to build documentation locally:
 1. Build using Docker - this method is quick to setup but the build process takes longer. It's best for occasional contributors.
-2. Build directly on your machine - this method takes longer to setup but builds are much faster. Use it if you intend to contribute on ongoing basis.
+2. Build directly on your machine - this method takes longer to setup but builds are much faster. Use it if you intend to contribute on an ongoing basis.
 
 #### Build using Docker
 
