@@ -53,6 +53,19 @@ body.menu-open {
   position: relative;
 }
 
+article a[href^="http"][target="_blank"]::after,
+article a[href^="https://"][target="_blank"]::after {
+  content: "";
+  width: 14px;
+  height: 14px;
+  margin-left: 4px;
+  background-image: url("../_/img/open_in_new.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+}
+
 .navbar-top {
   border-bottom: 1px solid #e5e5e5;
   display: flex;

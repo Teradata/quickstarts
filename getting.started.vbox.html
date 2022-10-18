@@ -53,6 +53,19 @@ body.menu-open {
   position: relative;
 }
 
+article a[href^="http"][target="_blank"]::after,
+article a[href^="https://"][target="_blank"]::after {
+  content: "";
+  width: 14px;
+  height: 14px;
+  margin-left: 4px;
+  background-image: url("./_/img/open_in_new.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+}
+
 .navbar-top {
   border-bottom: 1px solid #e5e5e5;
   display: flex;
@@ -1216,7 +1229,7 @@ Starting with version 17.20, Vantage Express includes the following analytics pa
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The latest version of <a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Vantage Express VirtualBox Open Virtual Appliance (OVA)</a>.</p>
+<p>The latest version of <a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player" target="_blank" rel="noopener">Vantage Express VirtualBox Open Virtual Appliance (OVA)</a>.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1231,7 +1244,7 @@ If you have not used the Teradata Downloads website before, you will need to reg
 </div>
 </li>
 <li>
-<p><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>, version 6.1.</p>
+<p><a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="noopener">VirtualBox</a>, version 6.1.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
