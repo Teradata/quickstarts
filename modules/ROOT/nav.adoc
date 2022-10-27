@@ -22,6 +22,7 @@
 ** xref::jupyter.adoc[]
 ** xref::local.jupyter.hub.adoc[]
 ** xref::mule.jdbc.example.adoc[]
+** xref::query.service.adoc[]
 ** Configure ODBC
 *** xref::odbc.ubuntu.adoc[Ubuntu]
 ** xref::segment.adoc[]
