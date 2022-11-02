@@ -45,7 +45,7 @@ Unzip the downloaded file, go to the unzipped directory and run:
 
 == Get Sample data
 
-We will be working with the US tax fillings for nonprofit organizations. Nonprofit tax filings are public data. The US Internal Revenue Service publishes them in S3 bucket. Let's grab a summary of filings for 2020: `https://s3.amazonaws.com/irs-form-990/index_2020.csv`. You can use your browser, `wget` or `curl` to save the file locally.
+We will be working with the US tax fillings for nonprofit organizations. Nonprofit tax filings are public data. The US Internal Revenue Service publishes them in S3 bucket. Let's grab a summary of filings for 2020: `https://downloads.teradata.com/sites/default/files/2022-11/index_2020.csv`. You can use your browser, `wget` or `curl` to save the file locally.
 
 == Create a database
 
