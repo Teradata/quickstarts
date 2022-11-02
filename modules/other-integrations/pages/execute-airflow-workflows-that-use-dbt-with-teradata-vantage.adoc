@@ -183,10 +183,10 @@ chmod o+w target/index.html
 
 3. Create the `airflowtest` and `jaffle_shop` users/databases on your Teradata database by using your preferred database tool (Teradata Studio Express, `bteq` or similar). Log into the database as `dbc`, then execute the commands (change the passwords if needed):
 +
-[source, teradatasql, id="create_databases", role="content-editable emits-gtm-events"]
+[source, teradata-sql, id="create_databases", role="content-editable emits-gtm-events"]
 ----
-create user "airflowtest" from "dbc" as perm=5000000000 password="abcd";
-create user "jaffle_shop" from "dbc" as perm=5000000000 password="abcd";
+CREATE USER "airflowtest" FROM "dbc" AS PERM=5000000000 PASSWORD="abcd";
+CREATE USER "jaffle_shop" FROM "dbc" AS PERM=5000000000 PASSWORD="abcd";
 ----
 
 4. Create the dbt configuration directory:
