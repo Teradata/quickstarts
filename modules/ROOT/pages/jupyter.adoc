@@ -76,6 +76,9 @@ import sys
 [source, ipython, role="content-editable"]
 ----
 %load_ext sql
+# Define the db connection string. The sql magic uses SQLAlchemy connection strings.
+# For teradata, it's teradatasql://username:password@host/database_name .
+# See https://pypi.org/project/teradatasqlalchemy/ for details.
 %sql teradatasql://dbc:dbc@host.docker.internal/dbc
 ----
 8. We can now use `%sql` and `%%sql` magic. Let's say we want to explore data in a table. We can create a cell that says:
