@@ -1293,6 +1293,9 @@ db_connection_string = "teradatasql://dbc:dbc@host.docker.internal/dbc"</code></
 <div class="listingblock content-editable">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">%load_ext sql
+# Define the db connection string. The sql magic uses SQLAlchemy connection strings.
+# For teradata, it's teradatasql://username:password@host/database_name .
+# See https://pypi.org/project/teradatasqlalchemy/ for details.
 %sql teradatasql://dbc:dbc@host.docker.internal/dbc</code></pre>
 </div>
 </div>

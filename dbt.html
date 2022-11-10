@@ -1313,17 +1313,64 @@ AS PERMANENT = 110e6,
 <div class="paragraph">
 <p>The raw data from the app consists of customers, orders, and payments, with the following entity-relationship diagram:</p>
 </div>
-<div class="imageblock kroki">
+<div class="literalblock kroki-error">
 <div class="content">
-<img src="_images/diag-f4281ff8ede0df7faea97f80936093e7b4a0bd21.svg" alt="Diagram" width="100%">
+<pre># Entities
+
+[customers] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+  *`id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "int", border: "1", border-color: "#ffffff"}
+  `first_name  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+  `last_name  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+  `email  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+
+[orders] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+  *`id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "int", border: "1", border-color: "#ffffff"}
+  +`user_id  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+  `order_date  ` {bgcolor: "#fcece8", color: "#868686", label: "date", border: "1", border-color: "#ffffff"}
+  `status  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+
+[payments] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+  *`id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "int", border: "1", border-color: "#ffffff"}
+  +`order_id  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+  `payment_method  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+  `amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+
+# Relationships
+
+customers   1--* orders
+orders      1--* payments</pre>
 </div>
 </div>
 <div class="paragraph">
 <p>dbt takes these raw data table and builds the following dimensional model, which is more suitable for analytics tools:</p>
 </div>
-<div class="imageblock kroki">
+<div class="literalblock kroki-error">
 <div class="content">
-<img src="_images/diag-cfb2d5cb8c33c037d82e57adbd8d36445946ce00.svg" alt="Diagram" width="100%">
+<pre># Entities
+
+[`dimension: customers`] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+  *`customer_id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "int", border: "1", border-color: "#ffffff"}
+  `first_name  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+  `last_name  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+  `email  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+  `first_order  ` {bgcolor: "#fcece8", color: "#868686", label: "date", border: "1", border-color: "#ffffff"}
+  `most_recent_order  ` {bgcolor: "#fcece8", color: "#868686", label: "date", border: "1", border-color: "#ffffff"}
+  `number_of_orders  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+  `total_order_amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+
+[`fact: orders`] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+  *`order_id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "int", border: "1", border-color: "#ffffff"}
+  +`customer_id  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+  `order_date  ` {bgcolor: "#fcece8", color: "#868686", label: "date", border: "1", border-color: "#ffffff"}
+  `status  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+  `amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+  `credit_card_amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+  `coupon_amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+  `bank_transfer_amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+  `gift_card_amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+
+# Relationships
+`dimension: customers`   1--* `fact: orders`</pre>
 </div>
 </div>
 </div>
