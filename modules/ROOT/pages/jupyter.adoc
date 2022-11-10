@@ -56,6 +56,9 @@ import sys
 [source, ipython, role="content-editable"]
 ----
 import pandas as pd
+# Define the db connection string. Pandas uses SQLAlchemy connection strings.
+# For Teradata Vantage, it's teradatasql://username:password@host/database_name .
+# See https://pypi.org/project/teradatasqlalchemy/ for details.
 db_connection_string = "teradatasql://dbc:dbc@host.docker.internal/dbc"
 ----
 5. I can now call Pandas to query Vantage and move the result to a Pandas dataframe:
@@ -77,7 +80,7 @@ import sys
 ----
 %load_ext sql
 # Define the db connection string. The sql magic uses SQLAlchemy connection strings.
-# For teradata, it's teradatasql://username:password@host/database_name .
+# For Teradata Vantage, it's teradatasql://username:password@host/database_name .
 # See https://pypi.org/project/teradatasqlalchemy/ for details.
 %sql teradatasql://dbc:dbc@host.docker.internal/dbc
 ----
