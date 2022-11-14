@@ -36,6 +36,15 @@ The project is set up. All that is left, is to load the driver, pass connection 
 <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fjdbc-sample-app%2Fblob%2Fmain%2Fsrc%2Fmain%2Fjava%2Fcom%2Fteradata%2Fapp%2FApp.java%23L1-L51&style=github&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on&fetchFromJsDelivr=on"></script>
 ++++
 
+== Run the tests
+
+Run the tests:
+
+[source, bash, id="run_mvn", role="content-editable emits-gtm-events"]
+----
+mvn test
+----
+
 == Summary
 
 This how-to demonstrated how to connect to Teradata Vantage using JDBC. It described a sample Java application with Maven as the build tool that uses the Teradata JDBC driver to send SQL queries to Teradata Vantage.
