@@ -2,13 +2,13 @@
 :experimental:
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
-:page-revdate: September 8th, 2021
+:page-revdate: November 14th, 2022
 :description: How to connect to Teradata Vantage using JDBC
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, JDBC, java applications, business intelligence, enterprise analytics
 
 == Overview
 
-This quick start demonstrates how to connect to Teradata Vantage using JDBC. We will go through a sample JDBC project. The entire project is published in GitHub at link:https://github.com/Teradata/jdbc-sample-app[].
+This how-to demonstrates how to connect to Teradata Vantage using JDBC using a sample Java application: link:https://github.com/Teradata/jdbc-sample-app[].
 
 == Prerequisites
 
@@ -18,29 +18,12 @@ include::ROOT:partial$vantage.express.options.adoc[]
 * JDK
 * Maven
 
-== Install the driver
-
-1. Go to link:https://downloads.teradata.com/download/connectivity/jdbc-driver[the Teradata JDBC download page] and download the driver (you can choose zip or tar). The website will ask you to login (if you don't have an account you will need to register first) and accept the license before you download the file.
-2. Unzip the driver.
-3. Add the driver to your local Maven repository:
-+
-[source, bash, id="jdbc_first_config", role="content-editable emits-gtm-events"]
-----
-mvn install:install-file \
-   -Dfile=terajdbc4.jar \
-   -DgroupId=com.teradata \
-   -DartifactId=terajdbc4 \
-   -Dversion=17.10.00.26 \
-   -Dpackaging=jar \
-   -DgeneratePom=true
-----
-
 == Add dependency to your maven project
 
-Now that we have the jar in the local repository, we can reference the jar as a dependency in our Maven pom:
+Add the Teradata JDBC driver as a dependency to your Maven POM XML file:
 
 ++++
-<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fjdbc-sample-app%2Fblob%2Fmain%2Fpom.xml%23L22-L26&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on&fetchFromJsDelivr=on"></script>
+<script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fjdbc-sample-app%2Fblob%2Fmain%2Fpom.xml%23L22-L26&style=github&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on&fetchFromJsDelivr=on"></script>
 ++++
 
 == Code to send a query
@@ -50,12 +33,12 @@ NOTE: This step assumes that your Vantage database is available on `localhost` o
 The project is set up. All that is left, is to load the driver, pass connection and authentication parameters and run a query:
 
 ++++
-<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fjdbc-sample-app%2Fblob%2Fmain%2Fsrc%2Fmain%2Fjava%2Fcom%2Fteradata%2Fapp%2FApp.java&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+<script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fjdbc-sample-app%2Fblob%2Fmain%2Fsrc%2Fmain%2Fjava%2Fcom%2Fteradata%2Fapp%2FApp.java%23L1-L51&style=github&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on&fetchFromJsDelivr=on"></script>
 ++++
 
 == Summary
 
-In this quick start we have learned how to connect to Teradata Vantage using JDBC. We went through the process of installing the latest JDBC driver and later used it in a Java application with Maven as the build tool.
+This how-to demonstrated how to connect to Teradata Vantage using JDBC. It described a sample Java application with Maven as the build tool that uses the Teradata JDBC driver to send SQL queries to Teradata Vantage.
 
 == Further reading
 * link:https://teradata-docs.s3.amazonaws.com/doc/connectivity/jdbc/reference/current/frameset.html[Teradata JDBC Driver Reference]
