@@ -1613,19 +1613,42 @@ e2b46ec98274   apache/airflow:2.2.4   "/usr/bin/dumb-init …"   18 minutes ago 
 <p><code>airflow_dbt_integration.py</code> - a simple Teradata sql example that creates a few tables and runs queries.</p>
 </li>
 <li>
-<p><code>db_test_example_dag.py</code> - runs a dbt example (i.e. integration of dbt and airflow with a Teradata database). In this example a fictitious jaffle_shop data model is created, loaded and the documentation for this project is produced (you can view it by pointing your browser to <code><a href="http://&lt;VM_IP_ADDRESS&gt;:4000/" class="bare">http://&lt;VM_IP_ADDRESS&gt;:4000/</a></code>)
-+
-IMPORTANT: <code>db_test_example_dag.py</code> needs to be updated so that the Teradata database IP address points to your database.</p>
+<p><code>db_test_example_dag.py</code> - runs a dbt example (i.e. integration of dbt and airflow with a Teradata database). In this example a fictitious jaffle_shop data model is created, loaded and the documentation for this project is produced (you can view it by pointing your browser to <code><a href="http://&lt;VM_IP_ADDRESS&gt;:4000/" class="bare">http://&lt;VM_IP_ADDRESS&gt;:4000/</a></code>)</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="title">Adjust <code>db_test_example_dag.py</code></div>
+<div class="paragraph">
+<p><code>db_test_example_dag.py</code> needs to be updated so that the Teradata database IP address points to your database.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </li>
 <li>
-<p><code>discover_dag.py</code> - an example on how to load various types of data files (CSV, Parquet, JSON). The source code file contains comments that explain what the program does and how to use it. This example relies on <code>variables.json</code> file. TODO: Does <code>variables.json</code> need to be adjusted?</p>
+<p><code>discover_dag.py</code> - an example on how to load various types of data files (CSV, Parquet, JSON). The source code file contains comments that explain what the program does and how to use it. This example relies on <code>variables.json</code> file. The file needs to be imported into Airflow.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Wait for a few minutes until these dag files are picked up by the airflow tool. Once they are picked up they will appear on the list of dags on the Airflow home page.
-Run the dags from the UI and check the logs.</p>
+<p>Wait for a few minutes until these dag files are picked up by the airflow tool. Once they are picked up they will appear on the list of dags on the Airflow home page.</p>
+</li>
+<li>
+<p>Import <code>variables.json</code> file as a variable file into Airflow by navigating to <code>Admin &#8594; Variables</code> menu and adjust the variables for your environment:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/execute-airflow-workflows-that-use-dbt-with-teradata-vantage/admin-dropdown.png" alt="Airflow admin dropdown" width="75%">
+</div>
+</div>
+</li>
+<li>
+<p>Run the dags from the UI and check the logs.</p>
 </li>
 </ol>
 </div>
