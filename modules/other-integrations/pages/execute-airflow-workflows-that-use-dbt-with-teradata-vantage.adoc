@@ -272,7 +272,7 @@ Once the stack is down, update the configuration files and restart by running th
 `db_test_example_dag.py` needs to be updated so that the Teradata database IP address points to your database.
 ====
 
-* `discover_dag.py` - an example on how to load various types of data files (CSV, Parquet, JSON). The source code file contains comments that explain what the program does and how to use it. This example relies on `variables.json` file. The file needs to be imported into Airflow.
+* `discover_dag.py` - an example on how to load various types of data files (CSV, Parquet, JSON). The source code file contains comments that explain what the program does and how to use it. This example relies on `variables.json` file. The file needs to be imported into Airflow. It will happen in subsequent steps.
 
 3. Wait for a few minutes until these dag files are picked up by the airflow tool. Once they are picked up they will appear on the list of dags on the Airflow home page.
 
