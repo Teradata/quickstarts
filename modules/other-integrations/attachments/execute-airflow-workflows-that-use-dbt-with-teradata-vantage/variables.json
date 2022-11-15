@@ -1,6 +1,6 @@
 {
-"aws_access_key_id" : "AKIAXXXRXXOP",
-"aws_secret_access_key" : "HOTBicqClt7XXXXXB+uscYYYYYYNhbf+PSt1",
+"aws_access_key_id" : "*******",
+"aws_secret_access_key" : "**************",
 "s3_location_parq_ls" : "s3://tc-001-teracloud-nos-us-west-2-374222bfg/soc/nosexports/",
 "s3_location_parq_ft" : "/s3/s3.amazonaws.com/tc-001-teracloud-nos-us-west-2-374222bfg/soc/nosexports/",
 "s3_location_csv_ls" : "s3://tc-001-teracloud-nos-us-west-2-374222bfg/csvdata/",
@@ -23,7 +23,7 @@
 "jsondb" : "jsondb",
 "DB_username" : "dbc",
 "DB_password" : "dbc",
-"DB_ip_address" : "192.323.563.33",
+"DB_ip_address" : "***.***.***.***",
 "auth_name" : "soc_Auth_NOS",
 "region_name" : "us-west-2",
 "output_file" : "/tmp/outfile.txt",
