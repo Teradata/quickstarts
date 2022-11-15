@@ -263,14 +263,25 @@ Once the stack is down, update the configuration files and restart by running th
 
 1. Copy link:{attachmentsdir}/{dir}/airflow_dbt_integration.py[airflow_dbt_integration.py], link:{attachmentsdir}/{dir}/db_test_example_dag.py[db_test_example_dag.py], link:{attachmentsdir}/{dir}/discover_dag.txt[discover_dag.txt], link:{attachmentsdir}/{dir}/variables.json[variables.json] files to `/home/ec2-user/airflow/dags`.
 2. Examine the files:
-  * `airflow_dbt_integration.py` - a simple Teradata sql example that creates a few tables and runs queries.
-  * `db_test_example_dag.py` - runs a dbt example (i.e. integration of dbt and airflow with a Teradata database). In this example a fictitious jaffle_shop data model is created, loaded and the documentation for this project is produced (you can view it by pointing your browser to `http://<VM_IP_ADDRESS>:4000/`)
-  +
-  IMPORTANT: `db_test_example_dag.py` needs to be updated so that the Teradata database IP address points to your database.
-  * `discover_dag.py` - an example on how to load various types of data files (CSV, Parquet, JSON). The source code file contains comments that explain what the program does and how to use it. This example relies on `variables.json` file. TODO: Does `variables.json` need to be adjusted?
+* `airflow_dbt_integration.py` - a simple Teradata sql example that creates a few tables and runs queries.
+* `db_test_example_dag.py` - runs a dbt example (i.e. integration of dbt and airflow with a Teradata database). In this example a fictitious jaffle_shop data model is created, loaded and the documentation for this project is produced (you can view it by pointing your browser to `http://<VM_IP_ADDRESS>:4000/`)
++
+[IMPORTANT]
+.Adjust `db_test_example_dag.py`
+====
+`db_test_example_dag.py` needs to be updated so that the Teradata database IP address points to your database.
+====
+
+* `discover_dag.py` - an example on how to load various types of data files (CSV, Parquet, JSON). The source code file contains comments that explain what the program does and how to use it. This example relies on `variables.json` file. The file needs to be imported into Airflow.
 
 3. Wait for a few minutes until these dag files are picked up by the airflow tool. Once they are picked up they will appear on the list of dags on the Airflow home page.
-Run the dags from the UI and check the logs.
+
+4. Import `variables.json` file as a variable file into Airflow by navigating to `Admin -> Variables` menu and adjust the variables for your environment:
++
+image::{dir}/admin-dropdown.png[Airflow admin dropdown, width=75%]
+
+5. Run the dags from the UI and check the logs.
+
 
 
 == Summary
