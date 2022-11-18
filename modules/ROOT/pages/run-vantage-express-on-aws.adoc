@@ -1,7 +1,7 @@
 = Run Vantage Express on AWS
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
-:page-revdate: August 23rd, 2022
+:page-revdate: November 18th, 2022
 :description: Run Vantage Express on AWS.
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, AWS
 :tabs:
