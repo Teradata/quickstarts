@@ -1640,11 +1640,29 @@ e2b46ec98274   apache/airflow:2.2.4   "/usr/bin/dumb-init …"   18 minutes ago 
 <p>Wait for a few minutes until these dag files are picked up by the airflow tool. Once they are picked up they will appear on the list of dags on the Airflow home page.</p>
 </li>
 <li>
-<p>Import <code>variables.json</code> file as a variable file into Airflow by navigating to <code>Admin &#8594; Variables</code> menu and adjust the variables for your environment:</p>
+<p>Import <code>variables.json</code> file as a variable file into Airflow:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Click on <code>Admin &#8594; Variables</code> menu item to go to the Variables page</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/execute-airflow-workflows-that-use-dbt-with-teradata-vantage/admin-dropdown.png" alt="Airflow admin dropdown" width="75%">
 </div>
+</div>
+</li>
+<li>
+<p>Click on <code>Choose File</code>, then select <code>variable.json</code> in your file explorer and click on <code>Import Variables</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/execute-airflow-workflows-that-use-dbt-with-teradata-vantage/import-variables.png" alt="Airflow admin dropdown" width="75%">
+</div>
+</div>
+</li>
+<li>
+<p>Edit the variables to match your environment</p>
+</li>
+</ul>
 </div>
 </li>
 <li>
