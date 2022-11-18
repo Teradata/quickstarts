@@ -90,7 +90,7 @@ AWS_ROUTE_TABLE_ASSOID=$(aws ec2 associate-route-table  \
 aws ec2 create-security-group \
   --vpc-id $AWS_VPC_ID \
   --group-name myvpc-security-group \
-  --description 'My VPC non default security group'
+  --description 'My VPC non default security group' \
   --output text
 
 # Get security group ID's
@@ -162,14 +162,25 @@ aws ec2 create-key-pair --key-name vantage-key --query 'KeyMaterial' --output te
 chmod 600 vantage-key.pem
 ----
 
+. Get the AMI id of the latest Ubuntu image in your region:
++
+[source, bash]
+----
+AWS_AMI_ID=$(aws ec2 describe-images \
+  --filters 'Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-*amd64*' \
+  --query 'Images[*].[Name,ImageId,CreationDate]' --output text \
+  | sort -k3 -r | head -n1 | cut -f 2)
+----
+
 . Create a Ubuntu VM with 4 CPU's and 8GB of RAM, and a 70GB disk.
 +
 [source, bash, role="content-editable emits-gtm-events", id="aws_create_vm_win"]
 ----
 AWS_INSTANCE_ID=$(aws ec2 run-instances \
-  --image-id ami-0f597975071f4c4ec \
+  --image-id $AWS_AMI_ID \
   --count 1 \
   --instance-type c5n.metal \
+  --block-device-mapping DeviceName=/dev/sda1,Ebs={VolumeSize=70} \
   --key-name vantage-key \
   --security-group-ids $AWS_CUSTOM_SECURITY_GROUP_ID \
   --subnet-id $AWS_SUBNET_PUBLIC_ID \
