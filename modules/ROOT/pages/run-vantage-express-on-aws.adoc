@@ -1,7 +1,7 @@
 = Run Vantage Express on AWS
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
-:page-revdate: November 18th, 2022
+:page-revdate: December 12th, 2022
 :description: Run Vantage Express on AWS.
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, AWS
 :tabs:
@@ -16,9 +16,9 @@ This how-to demonstrates how to run Vantage Express on AWS. Vantage Express is a
 ====
 Vantage Express is distributed as a virtual machine image. This how-to uses the EC2 `c5n.metal` instance type. It's a bare metal instance that costs over $3/h.
 
-If you want a cheaper option, try link:vantage-express.gcp.adoc[Google Cloud] and link:run-vantage-express-on-microsoft-azure.adoc[Azure] which support nested virtualization and can run Vantage Express on cheap VM's.
+If you want a cheaper option, try xref:vantage.express.gcp.adoc[Google Cloud] and xref:run-vantage-express-on-microsoft-azure.adoc[Azure] which support nested virtualization and can run Vantage Express on cheap VM's.
 
-If you do not wish to pay for cloud usage at all, install Vantage Express locally using link:getting.started.vmware.adoc[VMware], link:getting.started.vbox[VirtualBox], or xref:getting.started.utm.adoc[UTM].
+If you do not wish to pay for cloud usage at all, install Vantage Express locally using xref:getting.started.vmware.adoc[VMware], xref:getting.started.vbox.adoc[VirtualBox], or xref:getting.started.utm.adoc[UTM].
 ====
 
 == Prerequisites
