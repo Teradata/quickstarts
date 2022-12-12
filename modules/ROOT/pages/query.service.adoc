@@ -1,32 +1,53 @@
-= Query Service Quick Start Guide
+= Query Service How-To Guide
 :experimental:
 :page-author: Sudha vedula
 :page-email: sudha.vedula@teradata.com
 :page-revdate: October 27th, 2022
-:description: Teradata® Query Service is a middleware that provides REST APIs for relational Databases, including Teradata Database, Aster, and Hive.
+:description: Teradata® Query Service is a middleware that provides REST APIs for Vantage.
 :keywords: query service, teradata, vantage, query,
 
 == Overview
 
-Query Service provides APIs to:
+Teradata Query Service is a REST API for Vantage that you can use to run standard SQL statements without managing client-side drivers. Use Query Service if you are looking to query and access the Analytics Database through a REST API.
 
-.   Configure Teradata-supported systems
-.	Submit SQL queries and access responses
-.	Create database sessions
-.	Access database and object metadata
-
-This quickstart guide provides you examples for invoking REST API's using cURL.
+This How-To guide provides examples of common use cases to help you get started with Query Service API.
 
 == Prerequisites
 
-Before you start, make sure:
+Before starting, make sure you have:
 
-.	Query Service is installed and configured . See link:https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022[Query Service ICU Guide]
-.	The required authorization to connect to Database.
+*	VantageCloud user: Access to VantageCloud where Query Service is provisioned  
++
+or 
++
+* VantageCore user: Installed and configured Query Service
++
+See link:https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022[Query Service Installation, Configuration, and Usage Guide].
++
+*	Access to Query Service hostname and system name
+* Authorization credentials to connect to the database
+
+Having trouble with the prerequisites? Contact Teradata for setup information.
 
 == Query Service API Examples
 
-==== Connecting to your query service instance
+=== Using the examples
+
+* The examples in this document use Python, and you can use these to create examples in your language of choice.
+* The examples provided here are complete and ready for you to use, although most require a little customization. 
+** The examples in this document use the URL __https:// ``<QS_HOSTNAME>``:1443/__.
+** Replace the following variables with your own value:
+*** ``<QS_HOSTNAME>``: Server where Query Service is installed
+*** ``<systemName>``: Preconfigured alias of the system
+
+
+=== Connecting to your  Query Service instance
+
+Provide valid credentials to access the target Analytics Database using HTTP Basic or JWT authentication. 
+
+The database username and password are combined into a string (``"username : password"``) which is then encoded using Base64. The API response contains the authorization method and encoded credentials.
+
+==== Request
 
 ----
 import requests
@@ -52,77 +73,75 @@ headers = {
 print(headers)
 ----
 
-Response
+==== Response
 ----
 Basic ZGJjOmRiYw==
 {'Content-Type': 'application/json', 'Authorization': 'Basic ZGJjOmRiYw=='}
 ----
 
-==== Running query - Getting a JSON response with minimal set of options
+=== Submitting a query
+
+Send a POST request to the `/system/``<systemName>``/queries` endpoint.
+
+==== Use Case 1: Making a simple API request with basic options
+
+In the following example, the request includes:
+
+* SELECT * FROM DBC.DBCInfo: The query to the system with the alias ``<systemName>``.
+* (``"format": "OBJECT"``): The format for response. The formats supported are: JSON object, JSON array, and CSV. 
++
+The JSON object format creates one JSON object per row where the column name is the field name, and the column value is the field value.
++
+* (``"includeColumns": true``): The request to include column metadata, such as column names and types, in the response.
+* (``“rowLimit” : 4``): The number of rows to be returned from a query.
+
+===== Request
 
 ----
-url = "https://sdl57120:1443/systems/testsystem/queries"
+url = "https://<QS_HOSTNAME>:1443/systems/<systemName>/queries"
 
 payload = {
-
-"query":"SELECT * FROM DBC.DBCInfo;",
-"format":"OBJECT"
+"query":example_query, # "SELECT * FROM DBC.DBCInfo;",
+"format":"OBJECT",
+"includeColumns":True,
+"rowLimit":4,
 
 }
 
 payload_json = json.dumps(payload)
+
 response = requests.request("POST", url, headers=headers, data=payload_json, verify=False)
 
-print(response.text)
+num_rows = response.json().get('results')[0].get('rowCount')
+print("NUMBER of ROWS", num_rows)
+print("==========================================================")
+
+print(response.json())
 
 ----
-Response
-----
-{"queueDuration":260,"queryDuration":29,"results":[{"resultSet":true,"data":[{"InfoKey":"LANGUAGE SUPPORT MODE","InfoData":"Standard"},{"InfoKey":"RELEASE","InfoData":"15.10.07.02"},{"InfoKey":"VERSION","InfoData":"15.10.07.02"}],"rowCount":3,"rowLimitExceeded":false}]}
-----
-
-==== Running a query - Adding column names and types to response
+===== Response
 
 ----
-url = "https://sdl57120:1443/systems/testsystem/queries"
-
-payload = {
-
-"query":"SELECT * FROM DBC.DBCInfo;",
-"format":"OBJECT" ,
-"includeColumns":True, # false by default
-
-}
-
-payload_json = json.dumps(payload)
-response = requests.request("POST", url, headers=headers, data=payload_json, verify=False)
-
-print(response.text)
+NUMBER of ROWS 4
+==========================================================
+{'queueDuration': 7, 'queryDuration': 227, 'results': [{'resultSet': True, 'columns': [{'name': 'DatabaseName', 'type': 'CHAR'}, {'name': 'USEDSPACE_IN_GB', 'type': 'FLOAT'}, {'name': 'MAXSPACE_IN_GB', 'type': 'FLOAT'}, {'name': 'Percentage_Used', 'type': 'FLOAT'}, {'name': 'REMAININGSPACE_IN_GB', 'type': 'FLOAT'}], 'data': [{'DatabaseName': 'DBC', 'USEDSPACE_IN_GB': 317.76382541656494, 'MAXSPACE_IN_GB': 1510.521079641879, 'Percentage_Used': 21.03670247964377, 'REMAININGSPACE_IN_GB': 1192.757254225314}, {'DatabaseName': 'EM', 'USEDSPACE_IN_GB': 0.0007491111755371094, 'MAXSPACE_IN_GB': 11.546071618795395, 'Percentage_Used': 0.006488017745513208, 'REMAININGSPACE_IN_GB': 11.545322507619858}, {'DatabaseName': 'user10', 'USEDSPACE_IN_GB': 0.019153594970703125, 'MAXSPACE_IN_GB': 9.313225746154785, 'Percentage_Used': 0.20566016, 'REMAININGSPACE_IN_GB': 9.294072151184082}, {'DatabaseName': 'EMEM', 'USEDSPACE_IN_GB': 0.006140708923339844, 'MAXSPACE_IN_GB': 4.656612873077393, 'Percentage_Used': 0.13187072, 'REMAININGSPACE_IN_GB': 4.650472164154053}, {'DatabaseName': 'EMWork', 'USEDSPACE_IN_GB': 0.0, 'MAXSPACE_IN_GB': 4.656612873077393, 'Percentage_Used': 0.0, 'REMAININGSPACE_IN_GB': 4.656612873077393}], 'rowCount': 4, 'rowLimitExceeded': True}]}
 ----
-Response
-----
-{"queueDuration":4,"queryDuration":27,"results":[{"resultSet":true,"columns":[{"name":"InfoKey","type":"VARCHAR"},{"name":"InfoData","type":"VARCHAR"}],"data":[{"InfoKey":"LANGUAGE SUPPORT MODE","InfoData":"Standard"},{"InfoKey":"RELEASE","InfoData":"15.10.07.02"},{"InfoKey":"VERSION","InfoData":"15.10.07.02"}],"rowCount":3,"rowLimitExceeded":false}]}
-----
-==== Run a query - Get CSV response
 
-----
-## get CSV response
-example_query = """SELECT
-DatabaseName
-,SUM(CurrentPerm)/1024/1024/1024 AS USEDSPACE_IN_GB
-,SUM(MaxPerm)/1024/1024/1024 AS MAXSPACE_IN_GB
-,SUM(CurrentPerm)/ NULLIFZERO (SUM(MaxPerm)) *100 (FORMAT 'zz9.99%') AS Percentage_Used
-,MAXSPACE_IN_GB- USEDSPACE_IN_GB AS REMAININGSPACE_IN_GB
-FROM DBC.DiskSpace
---WHERE DatabaseName = 'PUBLIC'
-order by 3 desc
-GROUP BY DatabaseName;
-"""
-----
+For response parameters, see link:https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022/Using-the-Query-Service-APIs/Submitting-SQL-Statement/Request-Body[Query Service Installation, Configuration, and Usage Guide].
+
+
+==== Use Case 2: Requesting a response in CSV format 
+
+To return an API response in CSV format, set the ``*format*`` field in the request with the value ``*CSV*``.
+
+The CSV format contains only the query results and not response metadata. The response contains a line for each row, where each line contains the row columns separated by a comma. The following example returns the data as comma-separated values.
+
+===== Request
+
 ----
 # CSV with all rows included
 
-url = "https://sdl57120:1443/systems/testsystem/queries"
+url = "https://<QS_HOSTNAME>:1443/systems/<systemName>/queries"
 
 payload = {
 "query":example_query, # "SELECT * FROM DBC.DBCInfo;",
@@ -138,7 +157,9 @@ response = requests.request("POST", url, headers=headers, data=payload_json, ver
 print(response.text)
 
 ----
-Response
+
+===== Response
+
 ----
 DatabaseName,USEDSPACE_IN_GB,MAXSPACE_IN_GB,Percentage_Used,REMAININGSPACE_IN_GB
 DBC                           ,317.7634754180908,1510.521079641879,21.036679308932754,1192.7576042237881
@@ -165,70 +186,30 @@ s476QJ6O                      ,0.0,0.009313225746154785,0.0,0.009313225746154785
 hTzz03i7                      ,0.0,0.009313225746154785,0.0,0.009313225746154785
 Y5WYUUXj                      ,0.0,0.009313225746154785,0.0,0.009313225746154785
 ----
-==== Run query - Limit the number of rows in the response
-----
-# Get Json response with row limits
 
-url = "https://sdl57120:1443/systems/testsystem/queries"
+=== Advanced Query Service features
 
-payload = {
-"query":example_query, # "SELECT * FROM DBC.DBCInfo;",
-"format":"OBJECT",
-"includeColumns":True,
-"rowLimit":20,
+Whether you are new to Query Service or a seasoned user, we recommend you check out the advanced features, such as handling explicit sessions and asynchronous queries.
 
-}
+==== Use Case 3: Using explicit session to submit a query
 
-payload_json = json.dumps(payload)
+Use explicit sessions when a transaction needs to span multiple requests or when using volatile tables. These sessions are only reused if you reference the sessions in a query request. The request is queued if a request references an explicit session already in use. 
 
-response = requests.request("POST", url, headers=headers, data=payload_json, verify=False)
+===== Step 1: Creating a session
 
-num_rows = response.json().get('results')[0].get('rowCount')
-print("NUMBER of ROWS", num_rows)
-print("==========================================================")
+Send a POST request to the `/system/``<systemName>``/sessions` endpoint. 
 
-print(response.json())
-----
-Response
-----
-NUMBER of ROWS 20
-==========================================================
-{'queueDuration': 7, 'queryDuration': 227, 'results': [{'resultSet': True, 'columns': [{'name': 'DatabaseName', 'type': 'CHAR'}, {'name': 'USEDSPACE_IN_GB', 'type': 'FLOAT'}, {'name': 'MAXSPACE_IN_GB', 'type': 'FLOAT'}, {'name': 'Percentage_Used', 'type': 'FLOAT'}, {'name': 'REMAININGSPACE_IN_GB', 'type': 'FLOAT'}], 'data': [{'DatabaseName': 'DBC', 'USEDSPACE_IN_GB': 317.76382541656494, 'MAXSPACE_IN_GB': 1510.521079641879, 'Percentage_Used': 21.03670247964377, 'REMAININGSPACE_IN_GB': 1192.757254225314}, {'DatabaseName': 'EM', 'USEDSPACE_IN_GB': 0.0007491111755371094, 'MAXSPACE_IN_GB': 11.546071618795395, 'Percentage_Used': 0.006488017745513208, 'REMAININGSPACE_IN_GB': 11.545322507619858}, {'DatabaseName': 'user10', 'USEDSPACE_IN_GB': 0.019153594970703125, 'MAXSPACE_IN_GB': 9.313225746154785, 'Percentage_Used': 0.20566016, 'REMAININGSPACE_IN_GB': 9.294072151184082}, {'DatabaseName': 'EMEM', 'USEDSPACE_IN_GB': 0.006140708923339844, 'MAXSPACE_IN_GB': 4.656612873077393, 'Percentage_Used': 0.13187072, 'REMAININGSPACE_IN_GB': 4.650472164154053}, {'DatabaseName': 'EMWork', 'USEDSPACE_IN_GB': 0.0, 'MAXSPACE_IN_GB': 4.656612873077393, 'Percentage_Used': 0.0, 'REMAININGSPACE_IN_GB': 4.656612873077393}, {'DatabaseName': 'EMJI', 'USEDSPACE_IN_GB': 0.0, 'MAXSPACE_IN_GB': 2.3283064365386963, 'Percentage_Used': 0.0, 'REMAININGSPACE_IN_GB': 2.3283064365386963}, {'DatabaseName': 'USER_NAME', 'USEDSPACE_IN_GB': 0.0, 'MAXSPACE_IN_GB': 2.0, 'Percentage_Used': 0.0, 'REMAININGSPACE_IN_GB': 2.0}, {'DatabaseName': 'readonly', 'USEDSPACE_IN_GB': 0.0, 'MAXSPACE_IN_GB': 0.9313225746154785, 'Percentage_Used': 0.0, 'REMAININGSPACE_IN_GB': 0.9313225746154785}, {'DatabaseName': 'aug12_db', 'USEDSPACE_IN_GB': 7.200241088867188e-05, 'MAXSPACE_IN_GB': 0.9313225746154785, 'Percentage_Used': 0.0077312, 'REMAININGSPACE_IN_GB': 0.9312505722045898}, {'DatabaseName': 'SystemFe', 'USEDSPACE_IN_GB': 0.00018024444580078125, 'MAXSPACE_IN_GB': 0.7450580596923828, 'Percentage_Used': 0.024192, 'REMAININGSPACE_IN_GB': 0.744877815246582}, {'DatabaseName': 'dbcmngr', 'USEDSPACE_IN_GB': 3.814697265625e-06, 'MAXSPACE_IN_GB': 0.09313225746154785, 'Percentage_Used': 0.004096, 'REMAININGSPACE_IN_GB': 0.09312844276428223}, {'DatabaseName': 'EMViews', 'USEDSPACE_IN_GB': 0.027594566345214844, 'MAXSPACE_IN_GB': 0.09313225746154785, 'Percentage_Used': 29.62944, 'REMAININGSPACE_IN_GB': 0.06553769111633301}, {'DatabaseName': 'tdwm', 'USEDSPACE_IN_GB': 0.0006732940673828125, 'MAXSPACE_IN_GB': 0.09313225746154785, 'Percentage_Used': 0.722944, 'REMAININGSPACE_IN_GB': 0.09245896339416504}, {'DatabaseName': 'Crashdumps', 'USEDSPACE_IN_GB': 0.0, 'MAXSPACE_IN_GB': 0.06984921544790268, 'Percentage_Used': 0.0, 'REMAININGSPACE_IN_GB': 0.06984921544790268}, {'DatabaseName': 'SYSLIB', 'USEDSPACE_IN_GB': 0.006252288818359375, 'MAXSPACE_IN_GB': 0.03725290298461914, 'Percentage_Used': 16.78336, 'REMAININGSPACE_IN_GB': 0.031000614166259766}, {'DatabaseName': 'SYSBAR', 'USEDSPACE_IN_GB': 4.76837158203125e-06, 'MAXSPACE_IN_GB': 0.03725290298461914, 'Percentage_Used': 0.0128, 'REMAININGSPACE_IN_GB': 0.03724813461303711}, {'DatabaseName': 'SYSUDTLIB', 'USEDSPACE_IN_GB': 0.00035381317138671875, 'MAXSPACE_IN_GB': 0.029802322387695312, 'Percentage_Used': 1.1872, 'REMAININGSPACE_IN_GB': 0.029448509216308594}, {'DatabaseName': 'External_AP', 'USEDSPACE_IN_GB': 0.0, 'MAXSPACE_IN_GB': 0.01862645149230957, 'Percentage_Used': 0.0, 'REMAININGSPACE_IN_GB': 0.01862645149230957}, {'DatabaseName': 'SysAdmin', 'USEDSPACE_IN_GB': 0.002307891845703125, 'MAXSPACE_IN_GB': 0.01862645149230957, 'Percentage_Used': 12.3904, 'REMAININGSPACE_IN_GB': 0.016318559646606445}, {'DatabaseName': 'KZXaDtQp', 'USEDSPACE_IN_GB': 0.0, 'MAXSPACE_IN_GB': 0.009313225746154785, 'Percentage_Used': 0.0, 'REMAININGSPACE_IN_GB': 0.009313225746154785}], 'rowCount': 20, 'rowLimitExceeded': True}]}
-----
-==== Run Query - Using parametrized statements
-----
-# parameterize a query
+The request creates a new database session and returns the session details as the response.
 
-url = "https://sdl57120:1443/systems/testsystem/queries"
+In the following example, the request includes:
 
-payload = {
-"query":"insert into metas_001.test values (?, ?, ?);", # get an insert query.
-"format":"OBJECT",
-"params":[['emp05', '01abc03', 'technology'], ['emp06', '01abc04', 'technology']] # array of array representing rows to be entered
+* (``“auto_commit” : True``): The request to commit the query upon completion.
 
-}
+====== Request
 
-payload_json = json.dumps(payload)
-
-response = requests.request("POST", url, headers=headers, data=payload_json, verify=False)
-
-print(response.text)
-print(response.status_code)
-----
-Response
-----
-{"queueDuration":4,"queryDuration":21,"results":[{"resultSet":false,"count":1},{"resultSet":false,"count":1}]}
-200
-----
-==== Advaned Features : Using Explicit Sessions and Async Queries
-Do not confuse 'sessions' with Database sessions. Explicit sessions are meant to serialize queries (i.e, in transcations). An internal queue recieves the query in order and submits to the database.
-Serialization is not guaranteed. Network conditions may cause queries to be recieved 'out' of order.
-Explilcit sessions can be deleted by the client
-
-==== Create a Session
 ----
 # first create a session
-url = "https://sdl57120:1443/systems/testsystem/sessions"
+url = "https://<QS_HOSTNAME>:1443/systems/<systemName>/sessions"
 
 payload = {
   "auto_commit": True
@@ -240,7 +221,8 @@ response = requests.request("POST", url, headers=headers, data=payload_json, ver
 
 print(response.text)
 ----
-Response
+====== Response
+
 ----
 {
   "sessionId" : 1366010,
@@ -253,12 +235,23 @@ Response
 }
 ----
 
-==== Use the session created above to submit queries
+===== Step 2: Using the session created in Step 1 to submit queries
 
+Send a POST request to the `/system/``<systemName>``/queries` endpoint.
+
+The request submits queries to the target system and returns the release and version number of the target system.
+
+In the following example, the request includes:
+
+* SELECT * FROM DBC.DBCInfo: The query to the system with the alias ``<systemName>``.
+* (``"format": "OBJECT"``): The format for response.  
+* (``“Session” : <Session ID>``): The session ID returned in Step 1 to create an explicit session.
+
+====== Request
 ----
 # use this session to submit queries afterwards
 
-url = "https://sdl57120:1443/systems/testsystem/queries"
+url = "https://<QS_HOSTNAME>:1443/systems/<systemName>/queries"
 
 payload = {
 
@@ -273,16 +266,30 @@ response = requests.request("POST", url, headers=headers, data=payload_json, ver
 
 print(response.text)
 ----
-Response
+====== Response
 ----
 {"queueDuration":6,"queryDuration":41,"results":[{"resultSet":true,"data":[{"InfoKey":"LANGUAGE SUPPORT MODE","InfoData":"Standard"},{"InfoKey":"RELEASE","InfoData":"15.10.07.02"},{"InfoKey":"VERSION","InfoData":"15.10.07.02"}],"rowCount":3,"rowLimitExceeded":false}]}
 ----
 
-==== Using Async Queries
+==== Use Case 4: Using asynchronous queries
+
+Use asynchronous queries when a system or network performance is affected by querying a large group of data or long tIm processing queries.
+
+===== Step 1: Submit asynchronous queries to the target system and retrieve a Query ID
+
+Send a POST request to the `/system/``<systemName>``/queries` endpoint. 
+
+In the following example, the request includes:
+
+* SELECT * FROM DBC.DBCInfo: The query to the system with the alias ``<systemName>``.
+* (``"format": "OBJECT"``): The format for response.  
+* (``“spooled_result_set” : True``): The indication that the request is asynchronous.
+
+====== Request
 ----
 ## Run async query .
 
-url = "https://sdl57120:1443/systems/testsystem/queries"
+url = "https://<QS_HOSTNAME>:1443/systems/<systemName>/queries"
 
 payload = {
 
@@ -297,16 +304,22 @@ response = requests.request("POST", url, headers=headers, data=payload_json, ver
 
 print(response.text)
 ----
-Response
+====== Response
 ----
 {"id":1366025}
 ----
 
-==== Response for async query
+===== Step 2: Getting query details using the ID retrieved from Step 1
+
+Send a GET request to the `/system/``<systemName>``/queries/``<queryID>``` endpoint, replacing ``<queryID>`` with the ID retrieved from Step 1.
+
+The request returns the details of the specific query, including ``*queryState*``, ``*queueOrder*``, ``*queueDuration*``, and so on. For a complete list of the response fields and their descriptions, see link:https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022/Using-the-Query-Service-APIs/Submitting-SQL-Statement/Request-Body[Query Service Installation, Configuration, and Usage Guide].
+
+====== Request
 ----
 ## response for async query .
 
-url = "https://sdl57120:1443/systems/testsystem/queries/1366025"
+url = "https://<QS_HOSTNAME>:1443/systems/<systemName>/queries/1366025"
 
 
 payload_json = json.dumps(payload)
@@ -314,106 +327,48 @@ response = requests.request("GET", url, headers=headers, verify=False)
 
 print(response.text)
 ----
-Response
+====== Response
 ----
 {"queryId":1366025,"query":"SELECT * FROM DBC.DBCInfo;","batch":false,"system":"testsystem","user":"dbc","session":1366015,"queryState":"RESULT_SET_READY","queueOrder":0,"queueDuration":6,"queryDuration":9,"statusCode":200,"resultSets":{},"counts":{},"exceptions":{},"outParams":{}}
 ----
-==== Resultset for async query
+===== Step 3: Viewing resultset for asynchronous query
+
+Send a GET request to the `/system/``<systemName>``/queries/``<queryID>``/results` endpoint, replacing ``<queryID>`` with the ID retrieved from Step 1. 
+The request returns an array of the result sets and update counts produced by the submitted query.
+
+====== Request
 ----
-url = "https://sdl57120:1443/systems/testsystem/queries/1366025/results"
+url = "https://<QS_HOSTNAME>:1443/systems/<systemName>/queries/1366025/results"
 
 payload_json = json.dumps(payload)
 response = requests.request("GET", url, headers=headers, verify=False)
 
 print(response.text)
 ----
-Response
+====== Response
 ----
 {"queueDuration":6,"queryDuration":9,"results":[{"resultSet":true,"data":[{"InfoKey":"LANGUAGE SUPPORT MODE","InfoData":"Standard"},{"InfoKey":"RELEASE","InfoData":"15.10.07.02"},{"InfoKey":"VERSION","InfoData":"15.10.07.02"}],"rowCount":3,"rowLimitExceeded":false}]}
 ----
-==== User management
-===== User that is not set up in the database or incorrect logins
+
+==== Use Case 5: Get a list of active or queued queries 
+
+Send a GET request to the `/system/``<systemName>``/queries` endpoint. 
+The request returns the IDs of active queries.
+
+===== Request
 ----
-url = "https://sdl61071:1443/systems/BasicTestSys/queries"
-
-payload = {
-"query":"SELECT * FROM DBC.DBCInfo;",
-"format":"OBJECT", "includeColumns":True,
-
-}
-
-payload_json = json.dumps(payload)
-
-headers_non_existing_user = {
-'Authorization': 'Basic YWJjOmFiYw==', ## abc:dbc
-'Content-Type': 'application/json'
-}
-
-response = requests.request("POST", url, headers=headers_non_existing_user, data=payload_json, verify=False)
-
-print(response)
-print(response.text)
-----
-Response
-----
-<Response [420]>
-{
-  "message" : "Invalid Credentials"
-}
-----
-===== User that is not set up in the database or incorrect logins. lets use an existing user 'readonly' with password =dbc
-----
-url = "https://sdl57120:1443/systems/testsystem/queries"
-
-"""
-payload = {
-"query":"SELECT * FROM DBC.DBCInfo;",
-"format":"OBJECT", "includeColumns":True,
-
-}
-"""
-payload = {
-"query":"insert into metas_001.test values (?, ?, ?);", # get an insert query.
-"format":"OBJECT",
-"params":[['emp05', '01abc05', 'technology'], ['emp05', '01abc05', 'technology']] # array of array representing rows to be entered
-
-}
-
-payload_json = json.dumps(payload)
-
-# change the header to reflect this user. User does not have INSERT access to object metas_001.test
-
-headers_readonly_user = {
-  'Authorization': 'Basic cmVhZG9ubHk6ZGJj', ## readonly:dbc
-  'Content-Type': 'application/json'
-}
-
-response = requests.request("POST", url, headers=headers_readonly_user, data=payload_json, verify=False)
-
-print(response)
-print(response.text)
-----
-Response
-----
-<Response [420]>
-{
-  "error" : "3523",
-  "message" : "The user does not have INSERT access to metas_001.test."
-}
-----
-==== Get a list of queries
-----
-## get queries (shows queries that are running )
-
-url = "https://sdl61071:1443/systems/BasicTestSys/queries"
+url = "https://<QS_HOSTNAME>:1443/systems/<systemName>/queries"
 
 payload={}
 
 response = requests.request("GET", url, headers=headers, data=payload, verify=False)
 
 print(response.json())
+
 ----
-Response
+
+===== Response
+
 ----
 [
 {
@@ -454,9 +409,13 @@ Response
 ----
 
 == Next Steps
-You have now successfully completed the basic tasks required to use Query Service.
-You can now do
+You have successfully completed learning how to make API calls using Query Service. You can refer to the link:https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022/Overview[Query Service Installation, Configuration, and Usage Guide] to explore the full potential of Query Service and experiment with examples.
 
 == Resources
-Refer to the link:https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022[Query Service Installation, Configuration, and Usage Guide]
- to explore the full potential of Query Service, and experiment with examples.
+Interested in learning more about Query Service? Here are some resources you can use:
+
+* For features, examples, and references: link:https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022[Query Service Installation, Configuration, and Usage Guide]
+* For API reference: link:https://downloads.teradata.com/api/teradata_query_service[API Reference Guide]
+
+
+
