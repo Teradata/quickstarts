@@ -1,10 +1,10 @@
-= Query Service How-To Guide
+= Querying Data Using REST API
 :experimental:
 :page-author: Sudha vedula
 :page-email: sudha.vedula@teradata.com
 :page-revdate: October 27th, 2022
 :description: Teradata® Query Service is a middleware that provides REST APIs for Vantage.
-:keywords: query service, teradata, vantage, query,
+:keywords: query service, teradata, vantage, query, REST API
 
 == Overview
 
@@ -273,7 +273,7 @@ print(response.text)
 
 ==== Use Case 4: Using asynchronous queries
 
-Use asynchronous queries when a system or network performance is affected by querying a large group of data or long tIm processing queries.
+Use asynchronous queries when a system or network performance is affected by querying a large group of data or long running queries.
 
 ===== Step 1: Submit asynchronous queries to the target system and retrieve a Query ID
 
