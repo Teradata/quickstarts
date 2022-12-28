@@ -1,7 +1,7 @@
 = Feast Enterprise Feature Store Connector with Teradata
 :experimental:
-:page-author: Mohammmad Taha Wahab & Mohammad Harris Mansur
-:page-email: mohammadtaha.wahab@teradata.com & mohammadharris.mansur@teradata.com
+:page-author: Mohammmad Taha Wahab and Mohammad Harris Mansur
+:page-email: mohammadtaha.wahab@teradata.com and mohammadharris.mansur@teradata.com
 :page-revdate: December 23rd, 2022
 :description: Feast Enterprise Feature Store Connector with Teradata
 :keywords: data warehouses, analytics, teradata, vantage, time series, business intelligence, enterprise analytics, feature store, Feast, connector
@@ -16,7 +16,7 @@ We will now walk you through how to quickly set this up on your local machine to
 
 Once the structure is created, running the `feast-teradata/<your-repo-name>/test_workflow.py` file, will create a feature store, fetch historical features (using entity dataframes as well as sql), materialize these features, fetch online features using different sources (push as well as feature service) and finally teardown the entire structure.
 
-You can also add your own data and make your own features which can then be tested using the tet_workflow.py file as mentioned above.
+You can also add your own data and make your own features which can then be tested using the test_workflow.py file as mentioned above.
 
 == Overview
 
