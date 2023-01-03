@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Execute Airflow workflows that use dbt with Teradata Vantage :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">
-    <meta name="description" content="Execute Airflow workflows that use dbt with Teradata Vantage">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, airflow, queries, dbt">
+    <title>Send queries using REST API :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/query-service/send-queries-using-rest-api.html">
+    <meta name="description" content="Send queries using REST API. Teradata® Query Service is a middleware that provides REST APIs for Vantage.">
+    <meta name="keywords" content="query service, teradata, vantage, query, REST API">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../_/css/site.css">
-<meta property="og:title" content="Execute Airflow workflows that use dbt with Teradata Vantage :: Teradata Getting Started">
+<meta property="og:title" content="Send queries using REST API :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Execute Airflow workflows that use dbt with Teradata Vantage" />
+<meta property="og:description" content="Send queries using REST API. Teradata® Query Service is a middleware that provides REST APIs for Vantage." />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/query-service/send-queries-using-rest-api.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -1051,8 +1051,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - Import and Deploy your first BYOM Model</a>
@@ -1078,8 +1078,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../query-service/send-queries-using-rest-api.html">Send queries using REST API</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="send-queries-using-rest-api.html">Send queries using REST API</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -1115,13 +1115,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Integrate Teradata Jupyter extensions with SageMaker notebook instance</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
+    <a class="nav-link" href="../other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
+    <a class="nav-link" href="../other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
   </li>
 </ul>
   </li>
@@ -1169,8 +1169,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li>Tutorials</li>
-    <li><a href="execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a></li>
+    <li>How-tos</li>
+    <li><a href="send-queries-using-rest-api.html">Send queries using REST API</a></li>
   </ul>
 </nav>
 </div>
@@ -1178,526 +1178,737 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/other-integrations/pages/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/query-service/pages/send-queries-using-rest-api.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Execute Airflow workflows that use dbt with Teradata Vantage</h1>
-<p>Author: <a href="mailto:igor.machin@teradata.com">Igor Machin, Ambrose Inman</a><br/>
-Last updated: November 18th, 2022</p>
+<h1 class="page">Send queries using REST API</h1>
+<p>Author: <a href="mailto:sudha.vedula@teradata.com">Sudha Vedula</a><br/>
+Last updated: October 27th, 2022</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This tutorial demonstrates how to install Airflow on an AWS EC2 VM, configure the workflow to use dbt, and run it against a Teradata Vantage database. Airflow is a task scheduling tool that is typically used to build data pipelines to process and load data. In this example, we go through the Airflow installation process, which creates a Docker-based Airflow environment. Once Airflow is installed, we run several Airflow DAG (Direct Acyclic Graph, or simply workflow) examples that load data into a Teradata Vantage database.</p>
+<p>Teradata Query Service is a REST API for Vantage that you can use to run standard SQL statements without managing client-side drivers. Use Query Service if you are looking to query and access the Analytics Database through a REST API.</p>
+</div>
+<div class="paragraph">
+<p>This how-to provides examples of common use cases to help you get started with Query Service API.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_prerequsites"><a class="anchor" href="#_prerequsites"></a>Prerequsites</h2>
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
 <div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Access to AWS (Amazon Web Services) with permissions to create a VM.</p>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-This tutorial can be adjusted to other compute platforms or even on a bare metal machine as long as it has a computing and storage capacity comparable to the machine mentioned in this document (t2.2xlarge EC2 on AWS with approximately 100GB of storage) and is connected to the internet. If you decide to use a different compute platform, some steps in the tutorial will have to be altered.
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>An SSH client.</p>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-If you are on a Mac or a Linux machine, these tools are already included. If you are on Windows, consider <a href="https://www.putty.org/">PuTTY</a> or <a href="https://mobaxterm.mobatek.net/download.html">MobaXterm</a>.
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>Access to a Teradata Vantage database. If you don&#8217;t have access to Teradata Vantage, explore <a href="https://quickstarts.teradata.com/#getting-access-to-vantage">Vantage Express</a> - a free edition for developers.</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_install_and_execute_airflow"><a class="anchor" href="#_install_and_execute_airflow"></a>Install and execute Airflow</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_create_a_vm"><a class="anchor" href="#_create_a_vm"></a>Create a VM</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Go to the AWS EC2 console and click on <code>Launch instance</code>.</p>
-</li>
-<li>
-<p>Select <code>Red Hat</code> for OS image.</p>
-</li>
-<li>
-<p>Select <code>t2.2xlarge</code> for instance type.</p>
-</li>
-<li>
-<p>Create a new key pair or use an existing one.</p>
-</li>
-<li>
-<p>Apply network settings that will allow you ssh to the server and the server will have outbound connectivity to the Internet. Usually, applying the default settings will do.</p>
-</li>
-<li>
-<p>Assign 100GB of storage.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_install_python"><a class="anchor" href="#_install_python"></a>Install Python</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>ssh to the machine using <code>ec2-user</code> user.</p>
-</li>
-<li>
-<p>Check if python is installed (should be Python 3.7 or higher). Type <code>python</code> or <code>python3</code> on the command line.</p>
-</li>
-<li>
-<p>If python is not installed (you are getting <code>command not found</code> message) run the commands below to install it. The commands may require you to confirm the installation by typing <code>y</code> and enter.</p>
-<div id="install_python" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo yum install python3
-# create a virtual environment for the project
-sudo yum install python3-pip
-sudo pip3 install virtualenv</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_create_an_airflow_environment"><a class="anchor" href="#_create_an_airflow_environment"></a>Create an Airflow environment</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Create the Airflow directory structure (from the ec2-user home directory /home/ec2-user)</p>
-<div id="install_airflow" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir airflow
-cd airflow
-mkdir -p ./dags ./logs ./plugins ./data ./config ./data
-echo -e "AIRFLOW_UID=$(id -u)" &gt; .env</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Use your preferred file transfer tool (<code>scp</code>, <code>PuTTY</code>, <code>MobaXterm</code>, or similar) to upload <a href="_attachments/execute-airflow-workflows-that-use-dbt-with-teradata-vantage/airflow.cfg">airflow.cfg</a> file to <code>airflow/config</code> directory.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_install_docker"><a class="anchor" href="#_install_docker"></a>Install Docker</h3>
 <div class="paragraph">
-<p>Docker is a containerization tool that allows us to install Airflow in a containerized environment.</p>
+<p>Before starting, make sure you have:</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The steps must be executed in <code>airflow</code> directory.
-</td>
-</tr>
-</table>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Uninstall podman (RHEL containerization tool)</p>
-<div id="uninstall_podman" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo yum remove docker \
-docker-client \
-docker-client-latest \
-docker-common \
-docker-latest \
-docker-latest-logrotate \
-docker-logrotate \
-docker-engine \
-podman \
-runc</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Install yum utilities</p>
-<div id="install_yum" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo yum install -y yum-utils</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Add docker to yum repository.</p>
-<div id="add_docker_to_yum" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo yum-config-manager \
---add-repo \
-https://download.docker.com/linux/centos/docker-ce.repo</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Install docker.</p>
-<div id="install_docker" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo yum install docker-ce docker-ce-cli containerd.io</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Start docker as a service. The first command runs the docker service automatically when the system starts up next time. The second command starts Docker now.</p>
-<div id="start_docker" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo systemctl enable docker
-sudo systemctl start docker</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Check if Docker is installed correctly. This command should return an empty list of containers (since we have not started any container yet):</p>
-<div id="check_docker" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo docker ps</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_install_docker_compose_and_docker_environment_configuration_files"><a class="anchor" href="#_install_docker_compose_and_docker_environment_configuration_files"></a>Install <code>docker-compose</code> and docker environment configuration files</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Upload <a href="_attachments/execute-airflow-workflows-that-use-dbt-with-teradata-vantage/docker-compose.yaml">docker-compose.yaml</a> and <a href="_attachments/execute-airflow-workflows-that-use-dbt-with-teradata-vantage/Dockerfile">Dockerfile</a> files to the VM and save them in <code>airflow</code> directory.</p>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<div class="title">What <code>docker-compose.yaml</code> and <code>Dockerfile</code> do</div>
-<div class="paragraph">
-<p><code>docker-compose.yaml</code> and <code>Dockerfile</code> files are necessary to build the environment during the installation. The <code>docker-compose.yaml</code> file downloads and installs the Airflow docker container. The container includes the web ui, a Postgres database for metadata, the scheduler, 3 workers (so 3 tasks can be run in parallel), the trigger and the nginx web server to show the docs produced by <code>dbt</code>. In addition host directories are mounted on containers and various other install processes are performed. <code>Dockerfile</code> will additionally install needed packages in each container.</p>
-</div>
-<div class="paragraph">
-<p>If you would like to learn more what <code>docker-compose.yaml</code> and <code>Dockerfile</code> files do, examine these files. There are comments which clarify what is installed and why.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>Install docker-compose (necessary to run the yaml file).</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The instructions are based on version 1.29.2. Check out <a href="https://github.com/docker/compose/releases" class="bare">https://github.com/docker/compose/releases</a> site for the latest release and update the command below as needed.
-</td>
-</tr>
-</table>
-</div>
-<div id="install_docker_compose" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo curl -L https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Test your docker-compose installation. The command should return the docker-compose version, for example <code>docker-compose version 1.29.2, build 5becea4c</code>:</p>
-<div id="check_docker_compose" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker-compose --version</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_install_a_test_dbt_project"><a class="anchor" href="#_install_a_test_dbt_project"></a>Install a test dbt project</h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-These steps set up a sample dbt project. <code>dbt</code> tool itself will be installed on the containers later by <code>docker-compose</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Install git:</p>
-<div id="install_git" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo yum install git</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Get the sample jaffle shop dbt project:</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The dbt directories will be created under the home directory (not under <code>airflow</code>). The home directory in our example is <code>/home/ec2-user</code>.
-</td>
-</tr>
-</table>
-</div>
-<div id="download_sample_dbt_project" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># move to home dir
-cd
-mkdir dbt
-cd dbt
-git clone https://github.com/Teradata/jaffle_shop-dev.git jaffle_shop
-cd jaffle_shop
-mkdir target
-chmod 777 target
-echo '' &gt; target/index.html
-chmod o+w target/index.html</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Create the <code>airflowtest</code> and <code>jaffle_shop</code> users/databases on your Teradata database by using your preferred database tool (Teradata Studio Express, <code>bteq</code> or similar). Log into the database as <code>dbc</code>, then execute the commands (change the passwords if needed):</p>
-<div id="create_databases" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE USER "airflowtest" FROM "dbc" AS PERM=5000000000 PASSWORD="abcd";
-CREATE USER "jaffle_shop" FROM "dbc" AS PERM=5000000000 PASSWORD="abcd";</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Create the dbt configuration directory:</p>
-<div id="create_dbt_config_dir" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd
-mkdir .dbt</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Copy <a href="_attachments/execute-airflow-workflows-that-use-dbt-with-teradata-vantage/profiles.yml">profiles.yml</a> into the <code>.dbt</code> directory.</p>
-</li>
-<li>
-<p>Edit the file so it corresponds to your Teradata database setup. At a minium, you will need to change the host, user and password. Use <code>jaffle_shop</code> user credentials you set up in step 3.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_create_the_airflow_environment_in_docker"><a class="anchor" href="#_create_the_airflow_environment_in_docker"></a>Create the Airflow environment in Docker</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Run the docker environment creation script in the <code>airflow</code> directory where <code>Dockerfile</code> and <code>docker-compose.yaml</code>:</p>
-<div id="run_docker_compose" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd ~/airflow
-sudo docker-compose up --build</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This can take 5-10 minutes, when the installation is complete you should see on the screen a message similar to this:</p>
-</div>
-<div id="run_docker_compose_response" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">airflow-webserver_1  | 127.0.0.1 - - [13/Sep/2022:00:20:48 +0000] "GET /health HTTP/1.1" 200 187 "-" "curl/7.74.0"</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This means the Airflow webserver is ready to accept calls.</p>
-</div>
-</li>
-<li>
-<p>Now Airflow should be up. The terminal session that we were using during the installation will be used to display log messages, so it is recommended
-to open another terminal session for subsequent steps. To check the Airflow installation type:</p>
-<div id="check_airflow_in_docker" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo docker ps</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The result should be something like:</p>
-</div>
-<div id="check_airflow_in_docker_output" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">CONTAINER ID   IMAGE                  COMMAND                  CREATED          STATUS                    PORTS                                                 NAMES
-60d50d9f43f5   apache/airflow:2.2.4   "/usr/bin/dumb-init …"   18 minutes ago   Up 18 minutes (healthy)   8080/tcp                                              airflow_airflow-scheduler_1
-e2b46ec98274   apache/airflow:2.2.4   "/usr/bin/dumb-init …"   18 minutes ago   Up 18 minutes (healthy)   8080/tcp                                              airflow_airflow-worker_3_1
-7b44004c7277   apache/airflow:2.2.4   "/usr/bin/dumb-init …"   18 minutes ago   Up 18 minutes (healthy)   8080/tcp                                              airflow_airflow-worker_1_1
-4017b8ce9235   apache/airflow:2.2.4   "/usr/bin/dumb-init …"   18 minutes ago   Up 18 minutes (healthy)   0.0.0.0:8080-&gt;8080/tcp, :::8080-&gt;8080/tcp             airflow_airflow-webserver_1
-3cc407e2d565   apache/airflow:2.2.4   "/usr/bin/dumb-init …"   18 minutes ago   Up 18 minutes (healthy)   0.0.0.0:5555-&gt;5555/tcp, :::5555-&gt;5555/tcp, 8080/tcp   airflow_flower_1
-340a83b202e3   apache/airflow:2.2.4   "/usr/bin/dumb-init …"   18 minutes ago   Up 18 minutes (healthy)   8080/tcp                                              airflow_airflow-triggerer_1
-82198f0d8b84   apache/airflow:2.2.4   "/usr/bin/dumb-init …"   18 minutes ago   Up 18 minutes (healthy)   8080/tcp                                              airflow_airflow-worker_2_1
-382c3077c1e5   redis:latest           "docker-entrypoint.s…"   18 minutes ago   Up 18 minutes (healthy)   6379/tcp                                              airflow_redis_1
-8a3be8d8a7f4   nginx                  "/docker-entrypoint.…"   18 minutes ago   Up 18 minutes (healthy)   0.0.0.0:4000-&gt;80/tcp, :::4000-&gt;80/tcp                 airflow_nginx_1
-9ca888e9e8df   postgres:13            "docker-entrypoint.s…"   18 minutes ago   Up 18 minutes (healthy)   5432/tcp                                              airflow_postgres_1</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>OPTIONAL: If you want to delete the docker installation (for example to update the docker-compose.yaml and the Dockerfile files and recreate a different environment), the command is (from the airflow directory where these files are located):</p>
-<div id="docker_compose_down" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo docker-compose down --volumes --rmi all</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Once the stack is down, update the configuration files and restart by running the command in step 1.</p>
-</div>
-</li>
-<li>
-<p>To test if the Airflow web UI works, type the following urls on your browser. Replace <code>&lt;VM_IP_ADDRESS&gt;</code> with the external IP address of the VM:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>DAG UI: <code><a href="http://&lt;YOUR_IP_ADDRESS&gt;:8080/home" class="bare">http://&lt;YOUR_IP_ADDRESS&gt;:8080/home</a></code> - username: airflow / password: airflow</p>
+<p>Access to VantageCloud where Query Service is provisioned. If you are an admin and need to install Query Service, see <a href="https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022">Query Service Installation, Configuration, and Usage Guide</a>.</p>
 </li>
 <li>
-<p>Flower Airflow UI (worker control): <code><a href="http://&lt;YOUR_IP_ADDRESS&gt;:5555/" class="bare">http://&lt;YOUR_IP_ADDRESS&gt;:5555/</a></code></p>
+<p>Query Service hostname and system name</p>
+</li>
+<li>
+<p>Authorization credentials to connect to the database</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Having trouble with the prerequisites? Contact Teradata for setup information.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_query_service_api_examples"><a class="anchor" href="#_query_service_api_examples"></a>Query Service API examples</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When using the examples, please keep in mind that:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The examples in this document use Python, and you can use these to create examples in your language of choice.</p>
+</li>
+<li>
+<p>The examples provided here are complete and ready for you to use, although most require a little customization.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The examples in this document use the URL <code><a href="https://&lt;QS_HOSTNAME&gt;:1443/" class="bare">https://&lt;QS_HOSTNAME&gt;:1443/</a></code>.</p>
+</li>
+<li>
+<p>Replace the following variables with your own value:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>&lt;QS_HOSTNAME&gt;</code>: Server where Query Service is installed</p>
+</li>
+<li>
+<p><code>&lt;SYSTEM_NAME&gt;</code>: Preconfigured alias of the system</p>
 </li>
 </ul>
 </div>
 </li>
-</ol>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_connect_to_your_query_service_instance"><a class="anchor" href="#_connect_to_your_query_service_instance"></a>Connect to your Query Service instance</h3>
+<div class="paragraph">
+<p>Provide valid credentials to access the target Analytics Database using HTTP Basic or JWT authentication.</p>
+</div>
+<div class="paragraph">
+<p>The database username and password are combined into a string (<code>"username : password"</code>) which is then encoded using Base64. The API response contains the authorization method and encoded credentials.</p>
+</div>
+<div class="paragraph">
+<p>Request</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import requests
+import json
+import base64
+requests.packages.urllib3.disable_warnings()
+
+# run it from local.
+
+db_user, db_password = 'dbc','dbc'
+auth_encoded = db_user + ':' + db_password
+auth_encoded = base64.b64encode(bytes(auth_encoded, 'utf-8'))
+auth_str = 'Basic ' + auth_encoded.decode('utf-8')
+
+print(auth_str)
+
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': auth_str # base 64 encoded username:password
+}
+
+print(headers)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Response</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Basic ZGJjOmRiYw==
+{
+  'Content-Type': 'application/json',
+  'Authorization': 'Basic ZGJjOmRiYw=='
+}</pre>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_run_an_airflow_dag"><a class="anchor" href="#_run_an_airflow_dag"></a>Run an Airflow DAG</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Copy <a href="_attachments/execute-airflow-workflows-that-use-dbt-with-teradata-vantage/airflow_dbt_integration.py">airflow_dbt_integration.py</a>, <a href="_attachments/execute-airflow-workflows-that-use-dbt-with-teradata-vantage/db_test_example_dag.py">db_test_example_dag.py</a>, <a href="_attachments/execute-airflow-workflows-that-use-dbt-with-teradata-vantage/discover_dag.txt">discover_dag.txt</a>, <a href="_attachments/execute-airflow-workflows-that-use-dbt-with-teradata-vantage/variables.json">variables.json</a> files to <code>/home/ec2-user/airflow/dags</code>.</p>
-</li>
-<li>
-<p>Examine the files:</p>
+<h3 id="_make_a_simple_api_request_with_basic_options"><a class="anchor" href="#_make_a_simple_api_request_with_basic_options"></a>Make a simple API request with basic options</h3>
+<div class="paragraph">
+<p>In the following example, the request includes:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>airflow_dbt_integration.py</code> - a simple Teradata sql example that creates a few tables and runs queries.</p>
+<p><code>SELECT * FROM DBC.DBCInfo</code>: The query to the system with the alias <code>&lt;SYSTEM_NAME&gt;</code>.</p>
 </li>
 <li>
-<p><code>db_test_example_dag.py</code> - runs a dbt example (i.e. integration of dbt and airflow with a Teradata database). In this example a fictitious jaffle_shop data model is created, loaded and the documentation for this project is produced (you can view it by pointing your browser to <code><a href="http://&lt;VM_IP_ADDRESS&gt;:4000/" class="bare">http://&lt;VM_IP_ADDRESS&gt;:4000/</a></code>)</p>
-<div class="admonitionblock important">
+<p><code>'format': 'OBJECT'</code>: The format for response. The formats supported are: JSON object, JSON array, and CSV.</p>
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-important" title="Important"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="title">Adjust <code>db_test_example_dag.py</code></div>
-<div class="paragraph">
-<p><code>db_test_example_dag.py</code> needs to be updated so that the Teradata database IP address points to your database.</p>
-</div>
+The JSON object format creates one JSON object per row where the column name is the field name, and the column value is the field value.
 </td>
 </tr>
 </table>
 </div>
 </li>
 <li>
-<p><code>discover_dag.py</code> - an example on how to load various types of data files (CSV, Parquet, JSON). The source code file contains comments that explain what the program does and how to use it. This example relies on <code>variables.json</code> file. The file needs to be imported into Airflow. It will happen in subsequent steps.</p>
+<p><code>'includeColumns': true</code>: The request to include column metadata, such as column names and types, in the response.</p>
+</li>
+<li>
+<p><code>'rowLimit': 4</code>: The number of rows to be returned from a query.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Request</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">url = 'https://&lt;QS_HOSTNAME&gt;:1443/systems/&lt;SYSTEM_NAME&gt;/queries'
+
+payload = {
+  'query': example_query, # 'SELECT * FROM DBC.DBCInfo;',
+  'format': 'OBJECT',
+  'includeColumns': True,
+  'rowLimit': 4
+}
+
+payload_json = json.dumps(payload)
+
+response = requests.request('POST', url, headers=headers, data=payload_json, verify=False)
+
+num_rows = response.json().get('results')[0].get('rowCount')
+print('NUMBER of ROWS', num_rows)
+print('==========================================================')
+
+print(response.json())</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Response</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NUMBER of ROWS 4
+==========================================================
+{
+  "queueDuration":7,
+  "queryDuration":227,
+  "results":[
+    {
+      "resultSet":True,
+      "columns":[
+        {
+          "name":"DatabaseName",
+          "type":"CHAR"
+        },
+        {
+          "name":"USEDSPACE_IN_GB",
+          "type":"FLOAT"
+        },
+        {
+          "name":"MAXSPACE_IN_GB",
+          "type":"FLOAT"
+        },
+        {
+          "name":"Percentage_Used",
+          "type":"FLOAT"
+        },
+        {
+          "name":"REMAININGSPACE_IN_GB",
+          "type":"FLOAT"
+        }
+      ],
+      "data":[
+        {
+          "DatabaseName":"DBC",
+          "USEDSPACE_IN_GB":317.76382541656494,
+          "MAXSPACE_IN_GB":1510.521079641879,
+          "Percentage_Used":21.03670247964377,
+          "REMAININGSPACE_IN_GB":1192.757254225314
+        },
+        {
+          "DatabaseName":"EM",
+          "USEDSPACE_IN_GB":0.0007491111755371094,
+          "MAXSPACE_IN_GB":11.546071618795395,
+          "Percentage_Used":0.006488017745513208,
+          "REMAININGSPACE_IN_GB":11.545322507619858
+        },
+        {
+          "DatabaseName":"user10",
+          "USEDSPACE_IN_GB":0.019153594970703125,
+          "MAXSPACE_IN_GB":9.313225746154785,
+          "Percentage_Used":0.20566016,
+          "REMAININGSPACE_IN_GB":9.294072151184082
+        },
+        {
+          "DatabaseName":"EMEM",
+          "USEDSPACE_IN_GB":0.006140708923339844,
+          "MAXSPACE_IN_GB":4.656612873077393,
+          "Percentage_Used":0.13187072,
+          "REMAININGSPACE_IN_GB":4.650472164154053
+        },
+        {
+          "DatabaseName":"EMWork",
+          "USEDSPACE_IN_GB":0.0,
+          "MAXSPACE_IN_GB":4.656612873077393,
+          "Percentage_Used":0.0,
+          "REMAININGSPACE_IN_GB":4.656612873077393
+        }
+      ],
+      "rowCount":4,
+      "rowLimitExceeded":True
+    }
+  ]
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For response parameters, see <a href="https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022/Using-the-Query-Service-APIs/Submitting-SQL-Statement/Request-Body">Query Service Installation, Configuration, and Usage Guide</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_request_a_response_in_csv_format"><a class="anchor" href="#_request_a_response_in_csv_format"></a>Request a response in CSV format</h3>
+<div class="paragraph">
+<p>To return an API response in CSV format, set the <code><strong>format</strong></code> field in the request with the value <code><strong>CSV</strong></code>.</p>
+</div>
+<div class="paragraph">
+<p>The CSV format contains only the query results and not response metadata. The response contains a line for each row, where each line contains the row columns separated by a comma. The following example returns the data as comma-separated values.</p>
+</div>
+<div class="paragraph">
+<p>Request</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python"># CSV with all rows included
+
+url = 'https://&lt;QS_HOSTNAME&gt;:1443/systems/&lt;SYSTEM_NAME&gt;/queries'
+
+payload = {
+  'query': example_query, # 'SELECT * FROM DBC.DBCInfo;',
+  'format': 'CSV',
+  'includeColumns': True
+}
+
+payload_json = json.dumps(payload)
+
+response = requests.request('POST', url, headers=headers, data=payload_json, verify=False)
+
+print(response.text)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Response</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>DatabaseName,USEDSPACE_IN_GB,MAXSPACE_IN_GB,Percentage_Used,REMAININGSPACE_IN_GB
+DBC                           ,317.7634754180908,1510.521079641879,21.036679308932754,1192.7576042237881
+EM                            ,7.491111755371094E-4,11.546071618795395,0.006488017745513208,11.545322507619858
+user10                        ,0.019153594970703125,9.313225746154785,0.20566016,9.294072151184082
+EMEM                          ,0.006140708923339844,4.656612873077393,0.13187072,4.650472164154053
+EMWork                        ,0.0,4.656612873077393,0.0,4.656612873077393
+EMJI                          ,0.0,2.3283064365386963,0.0,2.3283064365386963
+USER_NAME                     ,0.0,2.0,0.0,2.0
+readonly                      ,0.0,0.9313225746154785,0.0,0.9313225746154785
+aug12_db                      ,7.200241088867188E-5,0.9313225746154785,0.0077312,0.9312505722045898
+SystemFe                      ,1.8024444580078125E-4,0.7450580596923828,0.024192,0.744877815246582
+dbcmngr                       ,3.814697265625E-6,0.09313225746154785,0.004096,0.09312844276428223
+EMViews                       ,0.027594566345214844,0.09313225746154785,29.62944,0.06553769111633301
+tdwm                          ,6.732940673828125E-4,0.09313225746154785,0.722944,0.09245896339416504
+Crashdumps                    ,0.0,0.06984921544790268,0.0,0.06984921544790268
+SYSLIB                        ,0.006252288818359375,0.03725290298461914,16.78336,0.031000614166259766
+SYSBAR                        ,4.76837158203125E-6,0.03725290298461914,0.0128,0.03724813461303711
+SYSUDTLIB                     ,3.5381317138671875E-4,0.029802322387695312,1.1872,0.029448509216308594
+External_AP                   ,0.0,0.01862645149230957,0.0,0.01862645149230957
+SysAdmin                      ,0.002307891845703125,0.01862645149230957,12.3904,0.016318559646606445
+KZXaDtQp                      ,0.0,0.009313225746154785,0.0,0.009313225746154785
+s476QJ6O                      ,0.0,0.009313225746154785,0.0,0.009313225746154785
+hTzz03i7                      ,0.0,0.009313225746154785,0.0,0.009313225746154785
+Y5WYUUXj                      ,0.0,0.009313225746154785,0.0,0.009313225746154785</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_use_explicit_session_to_submit_a_query"><a class="anchor" href="#_use_explicit_session_to_submit_a_query"></a>Use explicit session to submit a query</h3>
+<div class="paragraph">
+<p>Use explicit sessions when a transaction needs to span multiple requests or when using volatile tables. These sessions are only reused if you reference the sessions in a query request. The request is queued if a request references an explicit session already in use.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a session</p>
+<div class="paragraph">
+<p>Send a POST request to the <code>/system/&lt;SYSTEM_NAME&gt;/sessions</code> endpoint. The request creates a new database session and returns the session details as the response.</p>
+</div>
+<div class="paragraph">
+<p>In the following example, the request includes <code>'auto_commit': True</code> - the request to commit the query upon completion.</p>
+</div>
+<div class="paragraph">
+<p>Request</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python"># first create a session
+url = 'https://&lt;QS_HOSTNAME&gt;:1443/systems/&lt;SYSTEM_NAME&gt;/sessions'
+
+payload = {
+  'auto_commit': True
+}
+
+payload_json = json.dumps(payload)
+
+response = requests.request('POST', url, headers=headers, data=payload_json, verify=False)
+
+print(response.text)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Response</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{
+  'sessionId': 1366010,
+  'system': 'testsystem',
+  'user': 'dbc',
+  'tdSessionNo': 1626922,
+  'createMode': 'EXPLICIT',
+  'state': 'LOGGINGON',
+  'autoCommit': true
+}</pre>
+</div>
+</div>
 </li>
 <li>
-<p>Wait for a few minutes until these dag files are picked up by the airflow tool. Once they are picked up they will appear on the list of dags on the Airflow home page.</p>
-</li>
-<li>
-<p>Import <code>variables.json</code> file as a variable file into Airflow:</p>
+<p>Use the session created in Step 1 to submit queries</p>
+<div class="paragraph">
+<p>Send a POST request to the <code>/system/&lt;SYSTEM_NAME&gt;/queries</code> endpoint.</p>
+</div>
+<div class="paragraph">
+<p>The request submits queries to the target system and returns the release and version number of the target system.</p>
+</div>
+<div class="paragraph">
+<p>In the following example, the request includes:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Click on <code>Admin &#8594; Variables</code> menu item to go to the Variables page</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/execute-airflow-workflows-that-use-dbt-with-teradata-vantage/admin-dropdown.png" alt="Airflow admin dropdown" width="75%">
-</div>
-</div>
+<p><code>SELECT * FROM DBC.DBCInfo</code>: The query to the system with the alias <code>&lt;SYSTEM_NAME&gt;</code>.</p>
 </li>
 <li>
-<p>Click on <code>Choose File</code>, then select <code>variable.json</code> in your file explorer and click on <code>Import Variables</code></p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/execute-airflow-workflows-that-use-dbt-with-teradata-vantage/import-variables.png" alt="Airflow admin dropdown" width="75%">
-</div>
-</div>
+<p><code>'format': 'OBJECT'</code>: The format for response.</p>
 </li>
 <li>
-<p>Edit the variables to match your environment</p>
+<p><code>'Session' : &lt;Session ID&gt;</code>: The session ID returned in Step 1 to create an explicit session.</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>Run the dags from the UI and check the logs.</p>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Request</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python"># use this session to submit queries afterwards
+
+url = 'https://&lt;QS_HOSTNAME&gt;:1443/systems/&lt;SYSTEM_NAME&gt;/queries'
+
+payload = {
+  'query': 'SELECT * FROM DBC.DBCInfo;',
+  'format': 'OBJECT',
+  'session': 1366010 # &lt;-- sessionId
+}
+payload_json = json.dumps(payload)
+
+response = requests.request('POST', url, headers=headers, data=payload_json, verify=False)
+
+print(response.text)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Response</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{
+  "queueDuration":6,
+  "queryDuration":41,
+  "results":[
+    {
+      "resultSet":true,
+      "data":[
+        {
+          "InfoKey":"LANGUAGE SUPPORT MODE",
+          "InfoData":"Standard"
+        },
+        {
+          "InfoKey":"RELEASE",
+          "InfoData":"15.10.07.02"
+        },
+        {
+          "InfoKey":"VERSION",
+          "InfoData":"15.10.07.02"
+        }
+      ],
+      "rowCount":3,
+      "rowLimitExceeded":false
+    }
+  ]
+}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </li>
 </ol>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_use_asynchronous_queries"><a class="anchor" href="#_use_asynchronous_queries"></a>Use asynchronous queries</h3>
 <div class="paragraph">
-<p>This tutorial aimed at providing a hands on exercise on how to install an Airflow environment on a Linux server and how to use Airflow to interact with a Teradata Vantage database. An additional example is provided on how to integrate Airflow and the data modelling and maintenance tool dbt to create and load a Teradata Vantage database.</p>
+<p>Use asynchronous queries when a system or network performance is affected by querying a large group of data or long running queries.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Submit asynchronous queries to the target system and retrieve a Query ID</p>
+<div class="paragraph">
+<p>Send a POST request to the <code>/system/&lt;SYSTEM_NAME&gt;/queries</code> endpoint.</p>
+</div>
+<div class="paragraph">
+<p>In the following example, the request includes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>SELECT * FROM DBC.DBCInfo</code>: The query to the system with the alias <code>&lt;SYSTEM_NAME&gt;</code>.</p>
+</li>
+<li>
+<p><code>'format': 'OBJECT'</code>: The format for response.</p>
+</li>
+<li>
+<p><code>'spooled_result_set': True</code>: The indication that the request is asynchronous.</p>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Request</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">## Run async query .
+
+url = 'https://&lt;QS_HOSTNAME&gt;:1443/systems/&lt;SYSTEM_NAME&gt;/queries'
+
+payload = {
+  'query': 'SELECT * FROM DBC.DBCInfo;',
+  'format': 'OBJECT',
+  'spooled_result_set': True
+}
+
+payload_json = json.dumps(payload)
+response = requests.request('POST', url, headers=headers, data=payload_json, verify=False)
+
+print(response.text)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Response</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{"id":1366025}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Get query details using the ID retrieved from Step 1</p>
+<div class="paragraph">
+<p>Send a GET request to the <code>/system/&lt;SYSTEM_NAME&gt;/queries/&lt;queryID&gt;</code> endpoint, replacing <code>&lt;queryID&gt;</code> with the ID retrieved from Step 1.</p>
+</div>
+<div class="paragraph">
+<p>The request returns the details of the specific query, including <code><strong>queryState</strong></code>, <code><strong>queueOrder</strong></code>, <code><strong>queueDuration</strong></code>, and so on. For a complete list of the response fields and their descriptions, see <a href="https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022/Using-the-Query-Service-APIs/Submitting-SQL-Statement/Request-Body">Query Service Installation, Configuration, and Usage Guide</a>.</p>
+</div>
+<div class="paragraph">
+<p>Request</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">## response for async query .
+
+url = 'https://&lt;QS_HOSTNAME&gt;:1443/systems/&lt;SYSTEM_NAME&gt;/queries/1366025'
+
+payload_json = json.dumps(payload)
+response = requests.request('GET', url, headers=headers, verify=False)
+
+print(response.text)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Response</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{
+  "queryId":1366025,
+  "query":"SELECT * FROM DBC.DBCInfo;",
+  "batch":false,
+  "system":"testsystem",
+  "user":"dbc",
+  "session":1366015,
+  "queryState":"RESULT_SET_READY",
+  "queueOrder":0,
+  "queueDuration":6,
+  "queryDuration":9,
+  "statusCode":200,
+  "resultSets":{
+
+  },
+  "counts":{
+
+  },
+  "exceptions":{
+
+  },
+  "outParams":{
+
+  }
+}</pre>
+</div>
+</div>
+</li>
+<li>
+<p>View resultset for asynchronous query</p>
+<div class="paragraph">
+<p>Send a GET request to the <code>/system/&lt;SYSTEM_NAME&gt;/queries/&lt;queryID&gt;/results</code> endpoint, replacing <code>&lt;queryID&gt;</code> with the ID retrieved from Step 1.
+The request returns an array of the result sets and update counts produced by the submitted query.</p>
+</div>
+<div class="paragraph">
+<p>Request</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">url = 'https://&lt;QS_HOSTNAME&gt;:1443/systems/&lt;SYSTEM_NAME&gt;/queries/1366025/results'
+
+payload_json = json.dumps(payload)
+response = requests.request('GET', url, headers=headers, verify=False)
+
+print(response.text)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Response</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{
+  "queueDuration":6,
+  "queryDuration":9,
+  "results":[
+    {
+      "resultSet":true,
+      "data":[
+        {
+          "InfoKey":"LANGUAGE SUPPORT MODE",
+          "InfoData":"Standard"
+        },
+        {
+          "InfoKey":"RELEASE",
+          "InfoData":"15.10.07.02"
+        },
+        {
+          "InfoKey":"VERSION",
+          "InfoData":"15.10.07.02"
+        }
+      ],
+      "rowCount":3,
+      "rowLimitExceeded":false
+    }
+  ]
+}</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get_a_list_of_active_or_queued_queries"><a class="anchor" href="#_get_a_list_of_active_or_queued_queries"></a>Get a list of active or queued queries</h3>
+<div class="paragraph">
+<p>Send a GET request to the <code>/system/&lt;SYSTEM_NAME&gt;/queries</code> endpoint. The request returns the IDs of active queries.</p>
+</div>
+<div class="paragraph">
+<p>Request</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">url = 'https://&lt;QS_HOSTNAME&gt;:1443/systems/&lt;SYSTEM_NAME&gt;/queries'
+
+payload={}
+
+response = requests.request('GET', url, headers=headers, data=payload, verify=False)
+
+print(response.json())</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Response</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[
+  {
+    "queryId": 12516087,
+    "query": "SELECt * from dbcmgr.AlertRequest;",
+    "batch": false,
+    "system": "BasicTestSys",
+    "user": "dbc",
+    "session": 12516011,
+    "queryState": "REST_SET_READY",
+    "queueOrder": 0,
+    "queueDurayion": 3,
+    "queryDuration": 3,
+    "statusCode": 200,
+    "resultSets": {},
+    "counts": {},
+    "exceptions": {},
+    "outparams": {}
+  },
+  {
+    "queryId": 12516088,
+    "query": "SELECt * from dbc.DBQLAmpDataTbl;",
+    "batch": false,
+    "system": "BasicTestSys",
+    "user": "dbc",
+    "session": 12516011,
+    "queryState": "REST_SET_READY",
+    "queueOrder": 0,
+    "queueDurayion": 3,
+    "queryDuration": 3,
+    "statusCode": 200,
+    "resultSets": {},
+    "counts": {},
+    "exceptions": {},
+    "outparams": {}
+  }
+]</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further reading</h2>
+<h2 id="_resources"><a class="anchor" href="#_resources"></a>Resources</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://quickstarts.teradata.com/dbt.html#_install_dbt">Use dbt (data build tool) with Teradata Vantage</a></p>
+<p>Features, examples, and references: <a href="https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022">Query Service Installation, Configuration, and Usage Guide</a></p>
+</li>
+<li>
+<p><a href="https://downloads.teradata.com/api/teradata_query_service">Query Service API OpenAPI Specification</a></p>
 </li>
 </ul>
 </div>
