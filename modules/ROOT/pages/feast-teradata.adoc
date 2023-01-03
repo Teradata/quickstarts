@@ -10,27 +10,60 @@
 
 Feast's connector for Teradata is a complete implementation with support for all features and uses teradata as an online and offline store.
 
-== Getting Started
-
-We will now walk you through how to quickly set this up on your local machine to get started. Once the repository has been cloned in your local machine, you need to run the file `create_repo.py` which can be found in the root (feast-teradata) directory. If environment variables have not been set prior to running this, the terminal will prompt you to enter the project name, Teradata host URL, username, password, database name and the connection mechanism. After running successfully, the script will create an entire folder structure required to run the example. It also has a toy dataset included on driver data.
-
-Once the structure is created, running the `feast-teradata/<your-repo-name>/test_workflow.py` file, will create a feature store, fetch historical features (using entity dataframes as well as sql), materialize these features, fetch online features using different sources (push as well as feature service) and finally teardown the entire structure.
-
-You can also add your own data and make your own features which can then be tested using the test_workflow.py file as mentioned above.
-
 == Overview
+We recommend you familiarize yourself with the terminology and concepts of feast by reading the official https://docs.feast.dev/[FEAST documentation]
 
 This document demonstrates how developers can integrate `Teradata's offline store` for Feast. Teradata's offline stores allow users to use any underlying data store as their offline feature store. Features can be retrieved from the offline store for model training, and can be materialized into the online feature store for use during model inference.
 
-== Why create an offline store?
 
-Feast uses an offline store as the source of truth for features. These features can be retrieved from the offline store for model training. Typically, scalable data warehouses are used for this purpose.
+The `feast-teradata` library adds support for Teradata as
 
-Feast also materializes features from offline stores to an online store for low-latency lookup at model inference time.
+* `OfflineStore`
+* `OnlineStore`
 
-Feast comes with some offline stores built in, e.g, Parquet file, Redshift and Bigquery. However, users can develop their own offline stores by creating a class that implements the contract in the https://github.com/feast-dev/feast/blob/5e61a6f17c3b52f20b449214a4bb56bafa5cfcbc/sdk/python/feast/infra/offline_stores/offline_store.py#L41[OfflineStore class.]
+Additional, using Teradata as the registry (catalog) is already supported via the `registry_type: sql` and included in our examples. This means that everything is located in Teradata. However, depending on the requirements, installation, etc, this can be mixed and matched with other systems as appropriate.
 
-You need access to a Teradata Vantage instance. Times series functionalities and NOS are enabled in all Vantage editions from Vantage Express through Developer, DYI to Vantage as a Service starting from version 17.10.
+== Getting Started
+
+To get started, install the `feast-teradata` library
+[source, cli]
+----
+pip install feast-teradata
+----
+
+Let's create a simple feast setup with Teradata using the standard drivers dataset. Note that you cannot use `feast init` as this command only works for templates which are part of the core feast library. We intend on getting this library merged into feast core eventually but for now, you will need to use the following cli command for this specific task. All other `feast` cli commands work as expected.
+
+[source, cli]
+----
+feast-td init-repo
+----
+
+This will then prompt you for the required information for the Teradata system and upload the example dataset. Let's assume you used the repo name `demo` when running the above command. You can find the repository files along with a file called `test_workflow.py`. Running this `test_workflow.py` will execute a complete workflow for feast with Teradata as the Registry, OfflineStore and OnlineStore.
+
+[source, cli]
+----
+demo/
+    feature_repo/
+        driver_repo.py
+        feature_store.yml
+    test_workflow.py
+----
+
+From within the `demo/feature_repo` directory, execute the following feast command to apply (import/update) the repo definition into the registry. You will be able to see the registry metadata tables in the teradata database after running this command.
+
+[source, cli]
+----
+feast apply
+----
+
+To see the registry information in the feast ui, run the following command. Note the --registry_ttl_sec is important as by default it polls every 5 seconds.
+
+[source, cli]
+----
+feast ui --registry_ttl_sec=120
+----
+
+== Offline Store
 
 == How to configure feature_store.yaml?
 [source, yaml]
@@ -49,7 +82,8 @@ offline_store:
 
 ----
 
-== Example Feature Definitions
+== Example Usage
+
 
 [source, python]
 ----
@@ -119,25 +153,35 @@ Applying the feature view and entity on the feature store
 fs.apply([<name_of_entity>, <name_of_feature_view>])
 ----
 
+Now, lets batch read some features for training, using only entities (population) for which we have seen an event for in the last `60` days. The predicates (filter) used can be on anything that is relevant for the entity (population) selection for the given training dataset. The `event_timestamp` is only for example purposes.
+
+
+
 [source, python]
 ----
-entity_sql = f"""
-            SELECT
-                "driver_id",
-                "event_timestamp"
-            FROM {fs.get_data_source(table_name).get_table_query_string()}
-            WHERE "event_timestamp" BETWEEN '{start_date}' AND '{end_date}'
-        """
+from feast import FeatureStore
 
-    training_df = fs.get_historical_features(
-        entity_df=entity_sql,
-        features=[
-            "driver_hourly_stats:conv_rate",
-            "driver_hourly_stats:acc_rate",
-            "driver_hourly_stats:avg_daily_trips",
-        ],
-    ).to_df()
+
+store = FeatureStore(repo_path="feature_repo")
+
+training_df = store.get_historical_features(
+    entity_df=f"""
+            SELECT
+                driver_id,
+                event_timestamp
+            FROM demo_feast_driver_hourly_stats
+            WHERE event_timestamp BETWEEN (CURRENT_TIMESTAMP - INTERVAL '60' DAY) AND CURRENT_TIMESTAMP
+        """,
+    features=[
+        "driver_hourly_stats:conv_rate",
+        "driver_hourly_stats:acc_rate",
+        "driver_hourly_stats:avg_daily_trips"
+    ],
+).to_df()
+print(training_df.head())
 ----
+
+The `feast-teradata` library allows you to use the complete set of feast APIs and functionality. Please refer to the official feast https://docs.feast.dev/getting-started/quickstart[quickstart] for more details on the various things you can do. Additionally, if you want to see a complete (but not real-world), end-to-end example workflow example, see the `demo/test_workflow.py` script. This is used for testing the complete feast functionality.
 
 == How to set SQL Registry
 
@@ -172,11 +216,6 @@ It will create the following table in your database:
 Further reading on the benefits of scalable registry https://docs.feast.dev/tutorials/using-scalable-registry[Feast Scalable Registry]
 
 == Online Store
-== Overview
-
-This repository demonstrates how developers can create their own custom online stores for Feast. Custom online stores allow users to use any underlying data store to store features for low-latency retrieval, typically needed during model inference.
-
-== Why create an online store?
 
 Feast materializes data to online stores for low-latency lookup at model inference time. Typically, key-value stores are used for the online stores, however relational databases can be used for this purpose as well.
 
