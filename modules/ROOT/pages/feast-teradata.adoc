@@ -138,18 +138,14 @@ Now, lets batch read some features for training, using only entities (population
 [source, python]
 ----
 
-from <path_to_repository.py> import <name_of_entity>, <name_of_feature_view>
-fs = FeatureStore("<path_to_feature_repository>/")
-fs.apply([<name_of_entity>, <name_of_feature_view>])
-
+from feast import FeatureStore
 store = FeatureStore(repo_path="feature_repo")
-
 training_df = store.get_historical_features(
     entity_df=f"""
             SELECT
                 driver_id,
                 event_timestamp
-            FROM demo_feast_driver_hourly_stats
+            FROM teradata_store_feast_driver_hourly_stats
             WHERE event_timestamp BETWEEN (CURRENT_TIMESTAMP - INTERVAL '60' DAY) AND CURRENT_TIMESTAMP
         """,
     features=[
@@ -188,42 +184,31 @@ offline_store:
 There are a few mandatory steps to follow before we can test the online store:
 [source, cli]
 ----
-Feast apply
+CURRENT_TIME=$(date +'%Y-%m-%dT%H:%M:%S')
+feast materialize-incremental $CURRENT_TIME
 ----
 
 [source, python]
 ----
-from <path_to_repository.py> import <name_of_entity>, <name_of_feature_view>
-fs = FeatureStore("<path_to_feature_repository>/")
-
-def fetch_online_features(store, source: str = ""):
-    entity_rows = [
-    # {join_key: entity_value}
-    {
-        "driver_id": 1001,
-        "val_to_add": 1000,
-        "val_to_add_2": 2000,
-    },
-    {
-        "driver_id": 1002,
-        "val_to_add": 1001,
-        "val_to_add_2": 2002,
-    },
+entity_rows = [
+        {
+            "driver_id": 1001,
+        },
+        {
+            "driver_id": 1002,
+        },
     ]
-
-    returned_features = store.get_online_features(
-        features=[
+features_to_fetch = [
             "driver_hourly_stats:acc_rate",
-            "transformed_conv_rate:conv_rate_plus_val1",
-            "transformed_conv_rate:conv_rate_plus_val2",
-        ],
-        entity_rows=entity_rows,
-    ).to_dict()
-
-    for key, value in sorted(returned_features.items()):
-        print(key, " : ", value)
-
-fs.materialize_incremental(end_date=datetime.now())
+            "driver_hourly_stats:conv_rate",
+            "driver_hourly_stats:avg_daily_trips"
+        ]
+returned_features = store.get_online_features(
+    features=features_to_fetch,
+    entity_rows=entity_rows,
+).to_dict()
+for key, value in sorted(returned_features.items()):
+    print(key, " : ", value)
 ----
 
 The command `materialize_incremental` is used to incrementally materialize features in the online store. If there are no new features to be added, this command will essentially not be doing anything. With feast `materialize_incremental`, the start time is either now — ttl (the ttl that we defined in our feature views) or the time of the most recent materialization. If you’ve materialized features at least once, then subsequent materializations will only fetch features that weren’t present in the store at the time of the previous materializations.
