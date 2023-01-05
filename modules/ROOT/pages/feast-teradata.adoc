@@ -71,9 +71,7 @@ To see the registry information in the feast ui, run the following command. Note
 feast ui --registry_ttl_sec=120
 ----
 
-== Offline Store
-
-== How to configure feature_store.yaml?
+== Offline Store Config
 [source, yaml]
 ----
 
@@ -90,7 +88,18 @@ offline_store:
 
 ----
 
-== Example Usage
+== Repo Definition
+
+Below is an example of definition.py which elaborates how
+to set the entity, source connector and feature view.
+
+Now to explain the different components:
+
+* `TeradataSource:` Data Source for features stored in Teradata (Enterprise or Lake) or accessible via a Foreign Table from Teradata (NOS, QueryGrid)
+
+* `Entity:` A collection of semantically related features
+
+* `Feature View:` A feature view is a group of feature data from a specific data source. Feature views allow you to consistently define features and their data sources, enabling the reuse of feature groups across a project
 
 
 [source, python]
@@ -121,15 +130,7 @@ driver_stats_fv = FeatureView(
 
 ----
 
-Now to explain the different components:
-
-* `TeradataSource:` Data Source for features stored in Teradata (Enterprise or Lake) or accessible via a Foreign Table from Teradata (NOS, QueryGrid)
-
-* `Entity:` A collection of semantically related features
-
-* `Feature View:` A feature view is a group of feature data from a specific data source. Feature views allow you to consistently define features and their data sources, enabling the reuse of feature groups across a project
-
-== Example OfflineStore usage
+== Offline Store Usage
 
 There are two different ways to test your offline store as explained below. But first there are a few mandatory steps to follow:
 
@@ -145,7 +146,7 @@ training_df = store.get_historical_features(
             SELECT
                 driver_id,
                 event_timestamp
-            FROM teradata_store_feast_driver_hourly_stats
+            FROM demo_feast_driver_hourly_stats
             WHERE event_timestamp BETWEEN (CURRENT_TIMESTAMP - INTERVAL '60' DAY) AND CURRENT_TIMESTAMP
         """,
     features=[
@@ -157,7 +158,7 @@ training_df = store.get_historical_features(
 print(training_df.head())
 ----
 
-The `feast-teradata` library allows you to use the complete set of feast APIs and functionality. Please refer to the official feast https://docs.feast.dev/getting-started/quickstart[quickstart] for more details on the various things you can do. Additionally, if you want to see a complete (but not real-world), end-to-end example workflow example, see the `demo/test_workflow.py` script. This is used for testing the complete feast functionality.
+The `feast-teradata` library allows you to use the complete set of feast APIs and functionality. Please refer to the official feast https://docs.feast.dev/getting-started/quickstart[quickstart] for more details on the various things you can do.
 
 == Online Store
 
@@ -165,7 +166,7 @@ Feast materializes data to online stores for low-latency lookup at model inferen
 
 Users can develop their own online stores by creating a class that implements the contract in the OnlineStore class.
 
-== How to configure feature_store.yaml?
+== Online Store Config
 [source, yaml]
 ----
 project: <name of project>
@@ -180,13 +181,19 @@ offline_store:
    log_mech: <connection mechanism>
 ----
 
-== Example OnlineStore Usage
+== Online Store Usage
 There are a few mandatory steps to follow before we can test the online store:
+
+The command `materialize_incremental` is used to incrementally materialize features in the online store. If there are no new features to be added, this command will essentially not be doing anything. With feast `materialize_incremental`, the start time is either now — ttl (the ttl that we defined in our feature views) or the time of the most recent materialization. If you’ve materialized features at least once, then subsequent materializations will only fetch features that weren’t present in the store at the time of the previous materializations.
+
 [source, cli]
 ----
 CURRENT_TIME=$(date +'%Y-%m-%dT%H:%M:%S')
 feast materialize-incremental $CURRENT_TIME
 ----
+
+Next, while fetching the online features, we have two parameters `features` and `entity_rows`. The `features` parameter is a list and can take any number of features that are present in the `df_feature_view`. The example above shows all 4 features present but these can be less than 4 as well. Secondly, the `entity_rows` parameter is also a list and takes a dictionary of the form `{feature_identifier_column: value_to_be_fetched}`. In our case, the column driver_id is used to uniquely identify the different rows of the entity driver. We are currently fetching values of the features where driver_id is equal to 5. We can also fetch multiple such rows using the format: `[{driver_id: val_1}, {driver_id: val_2}, .., {driver_id: val_n}] [{driver_id: val_1}, {driver_id: val_2}, .., {driver_id: val_n}]`
+
 
 [source, python]
 ----
@@ -210,12 +217,6 @@ returned_features = store.get_online_features(
 for key, value in sorted(returned_features.items()):
     print(key, " : ", value)
 ----
-
-The command `materialize_incremental` is used to incrementally materialize features in the online store. If there are no new features to be added, this command will essentially not be doing anything. With feast `materialize_incremental`, the start time is either now — ttl (the ttl that we defined in our feature views) or the time of the most recent materialization. If you’ve materialized features at least once, then subsequent materializations will only fetch features that weren’t present in the store at the time of the previous materializations.
-
-
-Next, while fetching the online features, we have two parameters `features` and `entity_rows`. The `features` parameter is a list and can take any number of features that are present in the `df_feature_view`. The example above shows all 4 features present but these can be less than 4 as well. Secondly, the `entity_rows` parameter is also a list and takes a dictionary of the form `{feature_identifier_column: value_to_be_fetched}`. In our case, the column driver_id is used to uniquely identify the different rows of the entity driver. We are currently fetching values of the features where driver_id is equal to 5. We can also fetch multiple such rows using the format: `[{driver_id: val_1}, {driver_id: val_2}, .., {driver_id: val_n}] [{driver_id: val_1}, {driver_id: val_2}, .., {driver_id: val_n}]`
-
 
 == How to set SQL Registry
 
@@ -246,5 +247,7 @@ It will create the following table in your database:
 * feature_services (feature_service_name, project_id, last_updated_timestamp, feature_service_proto)
 
 * on_demand_feature_views (feature_view_name, project_id, last_updated_timestamp, feature_view_proto, user_metadata)
+
+Additionally, if you want to see a complete (but not real-world), end-to-end example workflow example, see the `demo/test_workflow.py` script. This is used for testing the complete feast functionality.
 
 Further reading on the benefits of scalable registry https://docs.feast.dev/tutorials/using-scalable-registry[Feast Scalable Registry]
