@@ -18,8 +18,6 @@
 ** xref:modelops:deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.adoc[]
 ** xref:modelops:deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.adoc[]
 ** xref:EFS:feast-teradata.adoc[]
-** xref:modelops:deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.adoc[]
-
 
 * How-tos
 ** xref::jdbc.adoc[]
