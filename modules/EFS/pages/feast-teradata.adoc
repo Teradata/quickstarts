@@ -1,7 +1,7 @@
 = Using Teradata with FEAST
 :experimental:
-:page-author: Mohammmad Taha Wahab and Mohammad Harris Mansur
-:page-email: mohammadtaha.wahab@teradata.com and mohammadharris.mansur@teradata.com
+:page-author: Mohammmad Taha Wahab , Mohammad Harris Mansur and Will Fleury
+:page-email: mohammadtaha.wahab@teradata.com , mohammadharris.mansur@teradata.com and will.fleury@teradata.com
 :page-revdate: January 5th, 2023
 :description: Feast Enterprise Feature Store Connector with Teradata
 :keywords: data warehouses, analytics, teradata, vantage, time series, business intelligence, enterprise analytics, feature store, Feast, connector
