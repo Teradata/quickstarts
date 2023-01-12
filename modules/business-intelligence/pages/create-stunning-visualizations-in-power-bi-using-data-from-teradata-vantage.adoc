@@ -39,7 +39,11 @@ You are expected to be familiar with Azure services, Teradata Vantage, and Power
 You will need the following accounts and system.
 
 * The Power BI Desktop is a free application for Windows. (Power BI Desktop is not available for Macs. You could run it in a virtual machine, such as https://www.parallels.com/[Parallels] or https://www.vmware.com/products/fusion.html[VMware Fusion], or in Apple’s https://support.apple.com/en-vn/boot-camp[Boot Camp], but that is beyond the scope of this article.)
+
 * A Teradata Vantage instance with a user and password. The user must have permission to data that can be used by Power BI Desktop. Vantage must be accessible from Power BI Desktop.
++
+include::ROOT:partial$vantage.express.options.adoc[]
+
 * The https://downloads.teradata.com/download/connectivity/net-data-provider-for-teradata[.NET Data Provider for Teradata].
 
 == Getting Started
@@ -58,11 +62,11 @@ image::{page-image-directory}/power.bi.icon.png[Power BI icon, width=500]
 
 * If the opening (splash) screen is showing, click on Get data.
 
-image::{page-image-directory}/power.bi.splash.screen.png[Power BI splash screen, width=900]
+image::{page-image-directory}/power.bi.splash.screen.png[Power BI splash screen, width=500]
 
 Otherwise, if you are in the main form of Power BI, ensure that you are on the _Home_ ribbon and click on _Get data_. Click on _More…_.
 
-image::{page-image-directory}/power.bi.get.data.menu.png[Power BI Get Data menu, width=900]
+image::{page-image-directory}/power.bi.get.data.menu.png[Power BI Get Data menu, width=500]
 
 * Click on _Database_ on the left.
 * Scroll the list on the right until you see _Teradata database_. Click on _Teradata database_, and then click on the _Connect_ button.
