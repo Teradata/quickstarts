@@ -34,6 +34,7 @@
 ** xref:cloud-guides:use-teradata-vantage-with-azure-machine-learning-studio.adoc[]
 ** xref:cloud-guides:integrate-teradata-jupyter-extensions-with-google-vertex-ai.adoc[]
 ** xref:cloud-guides:integrate-teradata-jupyter-extensions-with-sagemaker.adoc[]
+** xref:business-intelligence:create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.adoc[]
 ** xref:other-integrations:integrate-teradata-vantage-with-knime.adoc[]
 ** xref:install-teradata-studio-on-mac-m1-m2.adoc[]
 ** xref:other-integrations:configure-a-teradata-vantage-connection-in-dbeaver.adoc[]
