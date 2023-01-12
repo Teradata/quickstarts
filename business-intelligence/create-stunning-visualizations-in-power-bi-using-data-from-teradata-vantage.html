@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Configure a Teradata Vantage connection in DBeaver :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">
-    <meta name="description" content="Configure a Teradata Vantage connection in DBeaver.">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, dbeaver, dbeaver prod, sql ide">
+    <title>Connect Teradata Vantage to Power BI Desktop :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">
+    <meta name="description" content="Connect Teradata Vantage to Power BI Desktop.">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, microsoft power bi, power bi">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../_/css/site.css">
-<meta property="og:title" content="Configure a Teradata Vantage connection in DBeaver :: Teradata Getting Started">
+<meta property="og:title" content="Connect Teradata Vantage to Power BI Desktop :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Configure a Teradata Vantage connection in DBeaver." />
+<meta property="og:description" content="Connect Teradata Vantage to Power BI Desktop." />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -1052,7 +1052,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a class="nav-link" href="../create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
+    <a class="nav-link" href="../other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - Import and Deploy your first BYOM Model</a>
@@ -1114,17 +1114,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Integrate Teradata Jupyter extensions with SageMaker notebook instance</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Connect Teradata Vantage to Power BI Desktop</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Connect Teradata Vantage to Power BI Desktop</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
+    <a class="nav-link" href="../other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
   </li>
 </ul>
   </li>
@@ -1173,7 +1173,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li>How-tos</li>
-    <li><a href="configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a></li>
+    <li><a href="create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Connect Teradata Vantage to Power BI Desktop</a></li>
   </ul>
 </nav>
 </div>
@@ -1181,30 +1181,81 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/other-integrations/pages/configure-a-teradata-vantage-connection-in-dbeaver.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/business-intelligence/pages/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Configure a Teradata Vantage connection in DBeaver</h1>
-<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
-Last updated: Septeber 12th, 2022</p>
+<h1 class="page">Connect Teradata Vantage to Power BI Desktop</h1>
+<p>Author: <a href="mailto:paul.ibberson2@teradata.com">Kevin Bogusch, Paul Ibberson</a><br/>
+Last updated: December 16th, 2022</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This how-to demonstrates how to create a connection to Teradata Vantage with DBeaver.</p>
+<p><em>Disclaimer: This guide includes content from both Microsoft and Teradata product documentation.</em></p>
+</div>
+<div class="paragraph">
+<p>This article describes the process to connect your Power BI Desktop to Teradata Vantage for creating reports and dramatic visualizations of your data.  Power BI supports Teradata Vantage as a data source and can use the underlying data just like any other data source in Power BI Desktop.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://docs.microsoft.com/en-us/power-bi/power-bi-overview">Power BI</a> is a collection of software services, applications, and connectors that work together to turn your unrelated sources of data into coherent, visually immersive, and interactive insights.</p>
+</div>
+<div class="ulist">
+<div class="title">Power BI consists of:</div>
+<ul>
+<li>
+<p>A Windows desktop application, called <a href="https://docs.microsoft.com/en-us/power-bi/fundamentals/desktop-what-is-desktop">Power BI Desktop</a></p>
+</li>
+<li>
+<p>An online SaaS (Software as a Service) service, called the <a href="https://docs.microsoft.com/en-us/power-bi/fundamentals/power-bi-service-overview">Power BI service</a></p>
+</li>
+<li>
+<p><a href="https://docs.microsoft.com/en-us/power-bi/consumer/mobile/mobile-apps-for-mobile-devices">Power BI mobile</a> apps for Windows, iOS, and Android devices</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/connect-power-bi/power.bi.elements.png" alt="Power BI elements" width="100%">
+</div>
+</div>
+<div class="paragraph">
+<p>These three elements—Power BI Desktop, the Power BI service, and the mobile apps—are designed to let people create, share, and consume business insights in the way that serves them, or their role, most effectively.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/connect-power-bi/power.bi.overview.blocks.png" alt="Power BI overview blocks" width="100%">
+</div>
+</div>
+<div class="paragraph">
+<p>A fourth element, <a href="https://docs.microsoft.com/en-us/power-bi/report-server/get-started">Power BI Report Server</a>, allows you to publish Power BI reports to an on-premises report server, after creating them in Power BI Desktop.</p>
+</div>
+<div class="paragraph">
+<p>Power BI Desktop supports Vantage as a 3rd party data source not as a ‘native’ data source.  Instead, published reports on Power BI service will need to use the <a href="https://docs.microsoft.com/en-us/power-bi/connect-data/service-gateway-onprem">on-premises data gateway</a> component to access Vantage.</p>
+</div>
+<div class="paragraph">
+<p>This getting started guide will show you how to connect to a Teradata Vantage. Power BI Desktop Teradata connector uses the <a href="https://downloads.teradata.com/download/connectivity/net-data-provider-for-teradata">.NET Data Provider for Teradata</a>. You need to install the driver on computers that use the Power BI Desktop. The .NET Data Provider for Teradata single installation supports both 32-bit or 64-bit Power BI Desktop application.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>You are expected to be familiar with Azure services, Teradata Vantage, and Power BI Desktop.</p>
+</div>
+<div class="paragraph">
+<p>You will need the following accounts and system.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Access to a Teradata Vantage instance.</p>
+<p>The Power BI Desktop is a free application for Windows. (Power BI Desktop is not available for Macs. You could run it in a virtual machine, such as <a href="https://www.parallels.com/">Parallels</a> or <a href="https://www.vmware.com/products/fusion.html">VMware Fusion</a>, or in Apple’s <a href="https://support.apple.com/en-vn/boot-camp">Boot Camp</a>, but that is beyond the scope of this article.)</p>
+</li>
+<li>
+<p>A Teradata Vantage instance with a user and password. The user must have permission to data that can be used by Power BI Desktop. Vantage must be accessible from Power BI Desktop.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1219,85 +1270,199 @@ If you need a new instance of Vantage, you can install a free version called Van
 </div>
 </li>
 <li>
-<p>DBeaver installed. See <a href="https://dbeaver.io/download/">DBeaver Community</a> or <a href="https://dbeaver.com/download/">DBeaver PRO</a> for installation options.</p>
+<p>The <a href="https://downloads.teradata.com/download/connectivity/net-data-provider-for-teradata">.NET Data Provider for Teradata</a>.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_add_a_teradata_connection_to_dbeaver"><a class="anchor" href="#_add_a_teradata_connection_to_dbeaver"></a>Add a Teradata connection to DBeaver</h2>
+<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting Started</h2>
 <div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
+<div class="sect2">
+<h3 id="_install_power_bi_desktop"><a class="anchor" href="#_install_power_bi_desktop"></a>Install Power BI Desktop</h3>
+<div class="paragraph">
+<p>You can install Power BI Desktop from the <a href="https://aka.ms/pbidesktopstore">Microsoft Store</a> or <a href="https://aka.ms/pbiSingleInstaller">download the installer</a> and run it directly.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_install_the_net_data_provider_for_teradata"><a class="anchor" href="#_install_the_net_data_provider_for_teradata"></a>Install the .NET Data Provider for Teradata</h3>
+<div class="paragraph">
+<p>Download and install the latest version of the <a href="https://downloads.teradata.com/download/connectivity/net-data-provider-for-teradata">.NET Data Provider for Teradata.</a></p>
+</div>
+<div class="paragraph">
+<p>Note that there are multiple files available for download. You want the file that starts with “tdnetdp”.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_connect_to_teradata_vantage"><a class="anchor" href="#_connect_to_teradata_vantage"></a>Connect to Teradata Vantage</h3>
+<div class="ulist">
+<ul>
 <li>
-<p>Start the new connection wizard by clicking on the plug icon (<span class="image"><img src="_images/configure-a-teradata-connection-in-dbeaver/plug-icon.png" alt="plug icon" width="16px" title="Add Connection Plug Icon"></span>) in the upper left corner of the application window or go to <code>Database &#8594; New Database Connection</code>.</p>
+<p>Run Power BI Desktop, which has a yellow icon.</p>
 </li>
-<li>
-<p>On <code>Select your database</code> screen, start typing <code>teradata</code> and select the Teradata icon.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/configure-a-teradata-connection-in-dbeaver/select-your-database.png" alt="Select your database" width="75%">
-</div>
-</div>
-</li>
-<li>
-<p>On the main tab, you need to set all primary connection settings. The required ones include <code>Host</code>, <code>Port</code>, <code>Database</code>, <code>Username</code>, and <code>Password</code>.</p>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-With DBeaver PRO, you can not only use the standard ordering of tables but also hierarchically link tables to a specific database or user. Expanding and collapsing the databases or users will help you navigate from one area to another without swamping the Database Navigator window. Check the <code>Show databases and users hierarchically</code> box to enable this setting.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-In many environments Teradata Vantage can only be accessed using the TLS protocol. When in DBeaver PRO, check <code>Use TLS protocol</code> option to enable TLS.
-</td>
-</tr>
-</table>
+</ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/configure-a-teradata-connection-in-dbeaver/teradata-connection-settings.png" alt="Teradata connection settings" width="75%">
+<img src="_images/connect-power-bi/power.bi.icon.png" alt="Power BI icon" width="500">
 </div>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>If the opening (splash) screen is showing, click on Get data.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/connect-power-bi/power.bi.splash.screen.png" alt="Power BI splash screen" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Otherwise, if you are in the main form of Power BI, ensure that you are on the <em>Home</em> ribbon and click on <em>Get data</em>. Click on <em>More…</em>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/connect-power-bi/power.bi.get.data.menu.png" alt="Power BI Get Data menu" width="500">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click on <em>Database</em> on the left.</p>
 </li>
 <li>
-<p>Click on <code>Finish</code>.</p>
+<p>Scroll the list on the right until you see <em>Teradata database</em>. Click on <em>Teradata database</em>, and then click on the <em>Connect</em> button.</p>
 </li>
-</ol>
+</ul>
+</div>
+<div class="paragraph">
+<p>(“Teradata database” and “Teradata Vantage” are synonymous in this article.)</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/connect-power-bi/power.bi.database.picker.png" alt="Power BI Database picker" width="700">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In the window that appears, enter the name or IP address of your Vantage system into the text box. You can choose to <em>Import</em> data directly into Power BI data model, or connect directly to the data source using <a href="https://docs.microsoft.com/en-us/power-bi/desktop-use-directquery">DirectQuery</a> and click <em>OK</em>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/connect-power-bi/power.bi.server.connect.png" alt="Power BI server connection" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>(Click <em>Advanced</em> options to submit hand-crafted SQL statement.)</p>
+</div>
+<div class="paragraph">
+<p>For credentials, you have the option of connecting with your <em>Windows</em> login or <em>Database</em> username defined in Vantage, which is more common. Select the appropriate    authentication method and enter in your username and password. Click <em>Connect</em>.</p>
+</div>
+<div class="paragraph">
+<p>You also have the option of authenticating with an LDAP server. This option is hidden by default.</p>
+</div>
+<div class="paragraph">
+<p>If you set the environment variable, <em>PBI_EnableTeradataLdap</em>, to <em>true</em>, then the LDAP authentication method will become available.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/connect-power-bi/power.bi.ldap.png" alt="Power BI LDAP connection" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>Do note that LDAP is not supported with the on-premises data gateway, which is used for reports that are published to the Power BI service. If you need LDAP authentication and are using the on-premises data gateway, you will need to submit an incident to Microsoft and request support.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can <a href="https://docs.microsoft.com/en-us/power-bi/connect-data/service-gateway-sso-kerberos">configure Kerberos-based SSO from Power BI service to on-premise data sources</a> like Teradata.</p>
+</div>
+<div class="paragraph">
+<p>Once you have connected to the Vantage system, Power BI Desktop remembers the credentials for future connections to the system. You can modify these credentials by going to <em>File &gt; Options and settings &gt; Data source settings</em>.</p>
+</div>
+<div class="paragraph">
+<p>The Navigator window appears after a successful connection. It displays the data available on the Vantage system. You can select one or more elements to use in Power BI Desktop.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/connect-power-bi/power.bi.navigator.png" alt="Power BI Navigator" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>You preview a table by clicking on its name. If you want to load it into Power BI Desktop, ensure that you click the checkbox next to the table name.</p>
+</div>
+<div class="paragraph">
+<p>You can <em>Load</em> the selected table, which brings it into Power BI Desktop. You can also <em>Edit</em> the query, which opens a query editor so you can filter and refine the set of data you want to load.</p>
+</div>
+<div class="paragraph">
+<p><em>Edit</em> may be called <em>Transform data</em>, depending upon the version of Power BI Desktop that you have.</p>
+</div>
+<div class="paragraph">
+<p>For information on joining tables, see <a href="https://docs.microsoft.com/en-us/power-bi/desktop-create-and-manage-relationships">Create and Manage Relationships in Power BI Desktop</a> feature.</p>
+</div>
+<div class="paragraph">
+<p>To publish your report, click <em>Publish</em> on <em>Home</em> ribbon in Power BI Desktop.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/connect-power-bi/power.bi.publish.png" alt="Power BI Publish" width="100%">
+</div>
+</div>
+<div class="paragraph">
+<p>Power BI Desktop will prompt you to save your report. Choose <em>My workspace</em> and click <em>Select</em>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/connect-power-bi/power.bi.workspace.png" alt="Power BI publish to my workspace" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Once report has been published, click <em>Got it</em> to close. You may also click the link, which has the report name in the link.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/connect-power-bi/power.bi.success.png" alt="Power BI successfully published" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>This is an example of a report created in Power BI Desktop.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/connect-power-bi/power.bi.report.png" alt="Power BI Report" width="150%">
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_optional_ssh_tunneling"><a class="anchor" href="#_optional_ssh_tunneling"></a>Optional: SSH tunneling</h2>
+<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If your database cannot be accessed directly, you can use an SSH tunnel. All settings are available on the <code>SSH</code> tab. DBeaver supports the following authentication methods: user/password, public key, SSH agent authentication.</p>
+<p>You can combine data from many sources with Power BI Desktop. Look at the following links for more information.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/configure-a-teradata-connection-in-dbeaver/teradata-connection-settings-ssh.png" alt="Teradata connection settings SSH" width="75%">
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>This how-to demonstrated how to create a connection to Teradata Vantage with DBeaver.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.microsoft.com/en-us/power-bi/desktop-what-is-desktop">What is Power BI Desktop?</a></p>
+</li>
+<li>
+<p><a href="https://docs.microsoft.com/en-us/power-bi/desktop-data-sources">Data Sources in Power BI Desktop</a></p>
+</li>
+<li>
+<p><a href="https://docs.microsoft.com/en-us/power-bi/desktop-shape-and-combine-data">Shape and Combine Data with Power BI Desktop</a></p>
+</li>
+<li>
+<p><a href="https://docs.microsoft.com/en-us/power-bi/desktop-connect-excel">Connect to Excel workbooks in Power BI Desktop</a></p>
+</li>
+<li>
+<p><a href="https://docs.microsoft.com/en-us/power-bi/desktop-enter-data-directly-into-desktop">Enter data directly into Power BI Desktop</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
