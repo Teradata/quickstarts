@@ -1,8 +1,8 @@
-= Connect Teradata Vantage to Power BI Desktop
+= Create Vizualizations in Power BI using Vantage
 :experimental:
 :page-author: Kevin Bogusch, Paul Ibberson
 :page-email: paul.ibberson2@teradata.com
-:page-revdate: December 16th, 2022
+:page-revdate: January 14th, 2022
 :description: Connect Teradata Vantage to Power BI Desktop.
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, microsoft power bi, power bi
 :tabs:
@@ -58,26 +58,26 @@ Note that there are multiple files available for download. You want the file tha
 === Connect to Teradata Vantage
 * Run Power BI Desktop, which has a yellow icon. 
 
-image::{page-image-directory}/power.bi.icon.png[Power BI icon, width=500]
+image::{page-image-directory}/power.bi.icon.png[Power BI icon, width=30%]
 
 * If the opening (splash) screen is showing, click on Get data.
 
-image::{page-image-directory}/power.bi.splash.screen.png[Power BI splash screen, width=500]
+image::{page-image-directory}/power.bi.splash.screen.png[Power BI splash screen, width=70%]
 
 Otherwise, if you are in the main form of Power BI, ensure that you are on the _Home_ ribbon and click on _Get data_. Click on _More…_.
 
-image::{page-image-directory}/power.bi.get.data.menu.png[Power BI Get Data menu, width=500]
+image::{page-image-directory}/power.bi.get.data.menu.png[Power BI Get Data menu, width=70%]
 
 * Click on _Database_ on the left.
 * Scroll the list on the right until you see _Teradata database_. Click on _Teradata database_, and then click on the _Connect_ button.
 
 (“Teradata database” and “Teradata Vantage” are synonymous in this article.)
 
-image::{page-image-directory}/power.bi.database.picker.png[Power BI Database picker, width=700]
+image::{page-image-directory}/power.bi.database.picker.png[Power BI Database picker, width=70%]
 
 * In the window that appears, enter the name or IP address of your Vantage system into the text box. You can choose to _Import_ data directly into Power BI data model, or connect directly to the data source using https://docs.microsoft.com/en-us/power-bi/desktop-use-directquery[DirectQuery] and click _OK_.
 
-image::{page-image-directory}/power.bi.server.connect.png[Power BI server connection, width=700]
+image::{page-image-directory}/power.bi.server.connect.png[Power BI server connection, width=70%]
 
 (Click _Advanced_ options to submit hand-crafted SQL statement.)
 
@@ -87,7 +87,7 @@ You also have the option of authenticating with an LDAP server. This option is h
 
 If you set the environment variable, _PBI_EnableTeradataLdap_, to _true_, then the LDAP authentication method will become available.
 
-image::{page-image-directory}/power.bi.ldap.png[Power BI LDAP connection, width=700]
+image::{page-image-directory}/power.bi.ldap.png[Power BI LDAP connection, width=70%]
 
 Do note that LDAP is not supported with the on-premises data gateway, which is used for reports that are published to the Power BI service. If you need LDAP authentication and are using the on-premises data gateway, you will need to submit an incident to Microsoft and request support.
 
@@ -97,7 +97,7 @@ Once you have connected to the Vantage system, Power BI Desktop remembers the cr
 
 The Navigator window appears after a successful connection. It displays the data available on the Vantage system. You can select one or more elements to use in Power BI Desktop.
 
-image::{page-image-directory}/power.bi.navigator.png[Power BI Navigator, width=900]
+image::{page-image-directory}/power.bi.navigator.png[Power BI Navigator, width=90%]
 
 You preview a table by clicking on its name. If you want to load it into Power BI Desktop, ensure that you click the checkbox next to the table name.
 
@@ -113,15 +113,15 @@ image::{page-image-directory}/power.bi.publish.png[Power BI Publish, width=100%]
 
 Power BI Desktop will prompt you to save your report. Choose _My workspace_ and click _Select_. 
 
-image::{page-image-directory}/power.bi.workspace.png[Power BI publish to my workspace, width=900]
+image::{page-image-directory}/power.bi.workspace.png[Power BI publish to my workspace, width=90%]
 
 Once report has been published, click _Got it_ to close. You may also click the link, which has the report name in the link.
 
-image::{page-image-directory}/power.bi.success.png[Power BI successfully published, width=900]
+image::{page-image-directory}/power.bi.success.png[Power BI successfully published, width=90%]
 
 This is an example of a report created in Power BI Desktop.
 
-image::{page-image-directory}/power.bi.report.png[Power BI Report, width=150%]
+image::{page-image-directory}/power.bi.report.png[Power BI Report, width=100%]
 
 == Next steps
 You can combine data from many sources with Power BI Desktop. Look at the following links for more information.
