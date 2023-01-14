@@ -10,7 +10,8 @@
 
 
 == Overview
-_Disclaimer: This guide includes content from both Microsoft and Teradata product documentation._
+
+NOTE: This guide includes content from both Microsoft and Teradata product documentation.
 
 This article describes the process to connect your Power BI Desktop to Teradata Vantage for creating reports and dramatic visualizations of your data.  Power BI supports Teradata Vantage as a data source and can use the underlying data just like any other data source in Power BI Desktop.
 
