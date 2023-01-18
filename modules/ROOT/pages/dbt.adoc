@@ -2,7 +2,7 @@
 :experimental:
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
-:page-revdate: December 28st, 2021
+:page-revdate: January 17th, 2023
 :description: Use dbt (data build tool) with Teradata Vantage.
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, elt, dbt.
 :tabs:
@@ -16,7 +16,7 @@ This tutorial demonstrates how to use dbt (Data Build Tool) with Teradata Vantag
 * Access to a Teradata Vantage instance.
 +
 include::ROOT:partial$vantage.express.options.adoc[]
-* Python 3.7, 3.8 or 3.9 installed.
+* Python 3.7, 3.8, 3.9 or 3.10 installed.
 
 == Install dbt
 
