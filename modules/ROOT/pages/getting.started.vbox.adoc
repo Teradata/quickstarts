@@ -1,7 +1,7 @@
 = Run Vantage Express on VirtualBox
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
-:page-revdate: October 6th, 2022
+:page-revdate: January 9th, 2023
 :description: Run Vantage Express on your laptop using VirtualBox.
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics
 :tabs:
@@ -10,7 +10,9 @@ include::partial$getting.started.intro.adoc[]
 
 == Prerequisites
 
-. A computer using one of the following operating systems: Windows 10, Linux or MacOS.
+. A computer using one of the following operating systems: Windows 10, Linux or Intel-based MacOS.
++
+NOTE: For M1/M2 MacOS systems, see xref:getting.started.utm.adoc[].
 . 30GB of disk space and enough CPU and RAM to be able to dedicate at least one core and 6GB RAM to the virtual machine.
 . Admin rights to be able to install and run the software.
 +

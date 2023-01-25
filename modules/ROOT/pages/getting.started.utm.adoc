@@ -1,7 +1,7 @@
 = Run Vantage Express on UTM
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
-:page-revdate: August 23rd, 2022
+:page-revdate: January 9th, 2023
 :description: Run Vantage Express on your Mac using UTM.
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics
 :icons: font
@@ -10,11 +10,13 @@ include::partial$getting.started.intro.adoc[]
 
 == Prerequisites
 
-. A Mac computer. Both Intel and M1 chips are supported.
+. A Mac computer. Both Intel and M1/2 chips are supported.
++
+NOTE: Vantage Express runs on x86 architecture. When you run the VM on M1/2 chips, UTM has to emulate x86. This is significantly slower then virtualization. If you determine that Vantage Express on M1/M2 is too slow for your needs, consider running Vantage Express in the cloud: xref:run-vantage-express-on-aws.adoc[AWS], xref:run-vantage-express-on-microsoft-azure.adoc[Azure], xref:vantage.express.gcp.adoc[Google Cloud].
 . 30GB of disk space and enough CPU and RAM to be able to dedicate at least one core and 4GB RAM to the virtual machine.
 . Admin rights to be able to install and run the software.
 +
-// NOTE: No admin rights on your local machine? No problem! Have a look at how to run Vantage Express in link:#[AWS], link:#[Azure], link:#[Google Cloud].
+NOTE: No admin rights on your local machine? Have a look at how to run Vantage Express in xref:run-vantage-express-on-aws.adoc[AWS], xref:run-vantage-express-on-microsoft-azure.adoc[Azure], xref:vantage.express.gcp.adoc[Google Cloud].
 
 == Installation
 
