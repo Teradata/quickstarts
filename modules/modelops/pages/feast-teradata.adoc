@@ -18,9 +18,9 @@ include::ROOT:partial$vantage.express.options.adoc[]
 
 
 == Overview
-We recommend you familiarize yourself with the terminology and concepts of feast by reading the official https://docs.feast.dev/[FEAST documentation]
+This how-to assumes you know Feast terminology. If you need a refresher check out the official https://docs.feast.dev/[FEAST documentation]
 
-This document demonstrates how developers can integrate `Teradata's offline and online store` for Feast. Teradata's offline stores allow users to use any underlying data store as their offline feature store. Features can be retrieved from the offline store for model training, and can be materialized into the online feature store for use during model inference.
+This document demonstrates how developers can integrate `Teradata's offline and online store` with Feast. Teradata's offline stores allow users to use any underlying data store as their offline feature store. Features can be retrieved from the offline store for model training and can be materialized into the online feature store for use during model inference.
 
 On the other hand, online stores are used to serve features at low latency. The `materialize` command can be used to load feature values from the data sources (or offline stores) into the online store
 
@@ -29,7 +29,7 @@ The `feast-teradata` library adds support for Teradata as
 * `OfflineStore`
 * `OnlineStore`
 
-Additional, using Teradata as the registry (catalog) is already supported via the `registry_type: sql` and included in our examples. This means that everything is located in Teradata. However, depending on the requirements, installation, etc, this can be mixed and matched with other systems as appropriate.
+Additionally, using Teradata as the registry (catalog) is already supported via the `registry_type: sql` and included in our examples. This means that everything is located in Teradata. However, depending on the requirements, installation, etc, this can be mixed and matched with other systems as appropriate.
 
 == Getting Started
 
@@ -39,14 +39,14 @@ To get started, install the `feast-teradata` library
 pip install feast-teradata
 ----
 
-Let's create a simple feast setup with Teradata using the standard drivers dataset. Note that you cannot use `feast init` as this command only works for templates which are part of the core feast library. We intend on getting this library merged into feast core eventually but for now, you will need to use the following cli command for this specific task. All other `feast` cli commands work as expected.
+Let's create a simple feast setup with Teradata using the standard drivers' dataset. Note that you cannot use `feast init` as this command only works for templates that are part of the core feast library. We intend on getting this library merged into feast core eventually but for now, you will need to use the following cli command for this specific task. All other `feast` cli commands work as expected.
 
 [source, cli]
 ----
 feast-td init-repo
 ----
 
-This will then prompt you for the required information for the Teradata system and upload the example dataset. Let's assume you used the repo name `demo` when running the above command. You can find the repository files along with a file called `test_workflow.py`. Running this `test_workflow.py` will execute a complete workflow for feast with Teradata as the Registry, OfflineStore and OnlineStore.
+This will then prompt you for the required information for the Teradata system and upload the example dataset. Let's assume you used the repo name `demo` when running the above command. You can find the repository files along with a file called `test_workflow.py`. Running this `test_workflow.py` will execute a complete workflow for the feast with Teradata as the Registry, OfflineStore, and OnlineStore.
 
 [source, cli]
 ----
@@ -64,7 +64,7 @@ From within the `demo/feature_repo` directory, execute the following feast comma
 feast apply
 ----
 
-To see the registry information in the feast ui, run the following command. Note the --registry_ttl_sec is important as by default it polls every 5 seconds.
+To see the registry information in the feast UI, run the following command. Note the --registry_ttl_sec is important as by default it polls every 5 seconds.
 
 [source, cli]
 ----
@@ -91,7 +91,7 @@ offline_store:
 == Repo Definition
 
 Below is an example of definition.py which elaborates how
-to set the entity, source connector and feature view.
+to set the entity, source connector, and feature view.
 
 Now to explain the different components:
 
@@ -132,9 +132,9 @@ driver_stats_fv = FeatureView(
 
 == Offline Store Usage
 
-There are two different ways to test your offline store as explained below. But first there are a few mandatory steps to follow:
+There are two different ways to test your offline store as explained below. But first, there are a few mandatory steps to follow:
 
-Now, lets batch read some features for training, using only entities (population) for which we have seen an event for in the last `60` days. The predicates (filter) used can be on anything that is relevant for the entity (population) selection for the given training dataset. The `event_timestamp` is only for example purposes.
+Now, let's batch-read some features for training, using only entities (population) for which we have seen an event in the last `60` days. The predicates (filter) used can be on anything relevant for the entity (population) selection for the given training dataset. The `event_timestamp` is only for example purposes.
 
 [source, python]
 ----
@@ -162,7 +162,7 @@ The `feast-teradata` library allows you to use the complete set of feast APIs an
 
 == Online Store
 
-Feast materializes data to online stores for low-latency lookup at model inference time. Typically, key-value stores are used for the online stores, however relational databases can be used for this purpose as well.
+Feast materializes data to online stores for low-latency lookup at model inference time. Typically, key-value stores are used for online stores, however, relational databases can be used for this purpose as well.
 
 Users can develop their own online stores by creating a class that implements the contract in the OnlineStore class.
 
@@ -220,7 +220,7 @@ for key, value in sorted(returned_features.items()):
 
 == How to set SQL Registry
 
-Another important thing is the SQL Registry. We first make a path variable which uses the username, password, database name etc. to make a connection string which it then uses to establish a connection to Teradata's Database.
+Another important thing is the SQL Registry. We first make a path variable that uses the username, password, database name, etc. to make a connection string which it then uses to establish a connection to Teradata's Database.
 [source, python]
 ----
 path = 'teradatasql://'+ teradata_user +':' + teradata_password + '@'+host + '/?database=' + teradata_database + '&LOGMECH=' + teradata_log_mech
@@ -250,4 +250,9 @@ It will create the following table in your database:
 
 Additionally, if you want to see a complete (but not real-world), end-to-end example workflow example, see the `demo/test_workflow.py` script. This is used for testing the complete feast functionality.
 
-Further reading on the benefits of scalable registry https://docs.feast.dev/tutorials/using-scalable-registry[Feast Scalable Registry]
+An Enterprise Feature Store accelerates the value-gaining process in crucial stages of data analysis. It enhances productivity and reduces the time taken to introduce products in the market. By integrating Teradata with Feast, it enables the use of Teradata's highly efficient parallel processing within a Feature Store, thereby enhancing performance.
+
+== Further reading
+
+* link:https://docs.feast.dev/tutorials/using-scalable-registry[Feast Scalable Registry]
+* link:https://medium.com/teradata/enabling-highly-scalable-feature-store-with-teradata-vantage-and-feast-e01008fa8fdb[Enabling highly scalable feature store with Teradata Vantage and FEAST]
