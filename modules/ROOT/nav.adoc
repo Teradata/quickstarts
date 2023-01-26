@@ -17,7 +17,7 @@
 ** xref:other-integrations:execute-airflow-workflows-that-use-dbt-with-teradata-vantage.adoc[]
 ** xref:modelops:deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.adoc[]
 ** xref:modelops:deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.adoc[]
-** xref:modelops:feast-teradata.adoc[]
+** xref:modelops:using-feast-with-teradata-vantage.adoc[]
 
 * How-tos
 ** xref::jdbc.adoc[]
