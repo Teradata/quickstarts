@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Store events from Twilio Segment :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/segment.html">
-    <meta name="description" content="Store events from Twilio Segment in Teradata Vantage.">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, customer data platform, cdp, segment">
+    <title>Using Teradata with FEAST :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/modelops/using-feast-with-teradata-vantage.html">
+    <meta name="description" content="Feast Enterprise Feature Store Connector with Teradata">
+    <meta name="keywords" content="data warehouses, analytics, teradata, vantage, time series, business intelligence, enterprise analytics, feature store, Feast, connector">
     <meta name="generator" content="Antora 3.0.1">
-    <link rel="stylesheet" href="./_/css/site.css">
-<meta property="og:title" content="Store events from Twilio Segment :: Teradata Getting Started">
+    <link rel="stylesheet" href="../_/css/site.css">
+<meta property="og:title" content="Using Teradata with FEAST :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Store events from Twilio Segment in Teradata Vantage." />
+<meta property="og:description" content="Feast Enterprise Feature Store Connector with Teradata" />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/segment.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/modelops/using-feast-with-teradata-vantage.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -28,10 +28,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');</script>
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="./_/css/search.css">
-<link rel="stylesheet" href="./_/css/styles.css">
-<link rel="stylesheet" href="./_/css/fontawesome.all.min.css">
-<link rel="stylesheet" href="./_/css/webfonts.css">
+<link rel="stylesheet" href="../_/css/search.css">
+<link rel="stylesheet" href="../_/css/styles.css">
+<link rel="stylesheet" href="../_/css/fontawesome.all.min.css">
+<link rel="stylesheet" href="../_/css/webfonts.css">
 <style>
 body {
   transition: all .25s ease-in-out 0s;
@@ -59,7 +59,7 @@ article a[href^="https://"][target="_blank"]::after {
   width: 14px;
   height: 14px;
   margin-left: 4px;
-  background-image: url("./_/img/open_in_new.svg");
+  background-image: url("../_/img/open_in_new.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -343,7 +343,7 @@ button {
   border-radius: 8px;
   padding-left: 14px;
   padding-right: 14px;
-  background-image: url(./_/img/search.svg);
+  background-image: url(../_/img/search.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -805,7 +805,7 @@ aside.toc.sidebar {
 
 .report-an-issue {
   padding: 10px 20px 10px 10px;
-  background-image: url(./_/img/pan_tool.svg);
+  background-image: url(../_/img/pan_tool.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -813,7 +813,7 @@ aside.toc.sidebar {
 
 .edit-on-github {
   padding: 10px 20px 10px 10px;
-  background-image: url(./_/img/edit.svg);
+  background-image: url(../_/img/edit.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -899,19 +899,19 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/warning.svg");
+  content: url("../_/img/warning.svg");
 }
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .admonitionblock.question .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/question.mark.svg");
+  content: url("../_/img/question.mark.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .source-toolbox .source-lang {
@@ -922,7 +922,7 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .source-toolbox img.copy-icon {
-  content: url("./_/img/copy.svg");
+  content: url("../_/img/copy.svg");
 }
 
 .doc .source-toolbox>:not(:last-child)::after {
@@ -950,8 +950,8 @@ span.search-result-highlight {
 
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
-<link rel="icon" href="./_/img/favicon.ico" type="image/x-icon">
-    <script>var uiRootPath = './_'</script>
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+    <script>var uiRootPath = '../_'</script>
   </head>
   <body class="article">
 <!-- Google Tag Manager (noscript) -->
@@ -1004,13 +1004,13 @@ span.search-result-highlight {
         <ul>
           <li class="header-nav-mobile__menu-item">
             <header class="header-nav-mobile__menu-item__header">
-              <a href="./index.html">Getting Started</a>
+              <a href="../index.html">Getting Started</a>
             </header>
           </li>
           <li class="header-nav-mobile__menu-item has-sub-items">
             <header class="header-nav-mobile__menu-item__header i-alignment">
               <a href="https://docs.teradata.com/">Docs</a>
-              <img class="navbar-arrow" src='./_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Docs">
+              <img class="navbar-arrow" src='../_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Docs">
             </header>
             <div>
               <div class="header-nav-mobile__menu-item__links">
@@ -1029,7 +1029,7 @@ span.search-result-highlight {
           <li class="header-nav-mobile__menu-item has-sub-items">
             <header class="header-nav-mobile__menu-item__header i-alignment">
               <a href="https://support.teradata.com/community ">Community</a>
-              <img class="navbar-arrow" src='./_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Community">
+              <img class="navbar-arrow" src='../_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Community">
             </header>
             <div>
               <div class="header-nav-mobile__menu-item__links">
@@ -1039,17 +1039,17 @@ span.search-result-highlight {
                   </li>
                   <li>
                     <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item">Technical Medium Blogs
-                      <img src='./_/img/icons/external-symbol.svg' class="ext-symbol">
+                      <img src='../_/img/icons/external-symbol.svg' class="ext-symbol">
                     </a>
                   </li>
                   <li>
                     <a href="https://github.com/Teradata" title="Teradata on GitHub" target="_blank" class="dropdown-item">GitHub
-                      <img src='./_/img/icons/external-symbol.svg' class="ext-symbol">
+                      <img src='../_/img/icons/external-symbol.svg' class="ext-symbol">
                     </a>
                   </li>
                   <li>
                     <a href="https://stackoverflow.com/questions/tagged/teradata" title="Stack Overflow Teradata questions" target="_blank" class="dropdown-item">Stack Overflow
-                      <img src='./_/img/icons/external-symbol.svg' class="ext-symbol">
+                      <img src='../_/img/icons/external-symbol.svg' class="ext-symbol">
                     </a>
                   </li>               
                 </ul>
@@ -1082,22 +1082,22 @@ span.search-result-highlight {
     <span class="nav-text">Get access to Vantage</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="run-vantage-express-on-aws.html">Vantage Express on AWS</a>
+    <a class="nav-link" href="../run-vantage-express-on-aws.html">Vantage Express on AWS</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on Google Cloud</a>
+    <a class="nav-link" href="../vantage.express.gcp.html">Vantage Express on Google Cloud</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
+    <a class="nav-link" href="../run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
+    <a class="nav-link" href="../getting.started.vmware.html">Vantage Express on VMware</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
+    <a class="nav-link" href="../getting.started.vbox.html">Vantage Express on VirtualBox</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
+    <a class="nav-link" href="../getting.started.utm.html">Vantage Express on UTM</a>
   </li>
 </ul>
   </li>
@@ -1106,37 +1106,37 @@ span.search-result-highlight {
     <span class="nav-text">Tutorials</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nos.html">Query data stored in object storage</a>
+    <a class="nav-link" href="../nos.html">Query data stored in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ml.html">Train ML models in Vantage</a>
+    <a class="nav-link" href="../ml.html">Train ML models in Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
+    <a class="nav-link" href="../dbt.html">dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
+    <a class="nav-link" href="../sto.html">Run scripts on Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">Load data with TPT</a>
+    <a class="nav-link" href="../tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">Load data with TPT</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="perform-time-series-analysis-using-teradata-vantage.html">Perform time series analysis</a>
+    <a class="nav-link" href="../perform-time-series-analysis-using-teradata-vantage.html">Perform time series analysis</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
+    <a class="nav-link" href="../create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
+    <a class="nav-link" href="../other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - Import and Deploy your first BYOM Model</a>
+    <a class="nav-link" href="deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - Import and Deploy your first BYOM Model</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.html">ModelOps - Import and Deploy your first GIT Model</a>
+    <a class="nav-link" href="deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.html">ModelOps - Import and Deploy your first GIT Model</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="modelops/using-feast-with-teradata-vantage.html">Using Teradata with FEAST</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="using-feast-with-teradata-vantage.html">Using Teradata with FEAST</a>
   </li>
 </ul>
   </li>
@@ -1145,64 +1145,64 @@ span.search-result-highlight {
     <span class="nav-text">How-tos</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
+    <a class="nav-link" href="../jdbc.html">Connect to Vantage using JDBC</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
+    <a class="nav-link" href="../jupyter.html">Use Vantage from a Jupyter notebook</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+    <a class="nav-link" href="../local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+    <a class="nav-link" href="../mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="query-service/send-queries-using-rest-api.html">Send queries using REST API</a>
+    <a class="nav-link" href="../query-service/send-queries-using-rest-api.html">Send queries using REST API</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Configure ODBC</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="odbc.ubuntu.html">Ubuntu</a>
+    <a class="nav-link" href="../odbc.ubuntu.html">Ubuntu</a>
   </li>
 </ul>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="segment.html">Store events from Twilio Segment</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../segment.html">Store events from Twilio Segment</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
+    <a class="nav-link" href="../cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
+    <a class="nav-link" href="../cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
+    <a class="nav-link" href="../cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Integrate Teradata Jupyter extensions with SageMaker notebook instance</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Integrate Teradata Jupyter extensions with SageMaker notebook instance</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Create Vizualizations in Power BI using Vantage</a>
+    <a class="nav-link" href="../business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Create Vizualizations in Power BI using Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
+    <a class="nav-link" href="../other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
+    <a class="nav-link" href="../install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
+    <a class="nav-link" href="../other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
   </li>
 </ul>
   </li>
@@ -1215,7 +1215,7 @@ span.search-result-highlight {
     <span class="nav-text">Financial</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="jupyter-demos/gcp-vertex-ai-pipelines-vantage-byom-housing-example.html">Google Cloud Vertex AI Pipelines Vantage BYOM Housing Example</a>
+    <a class="nav-link" href="../jupyter-demos/gcp-vertex-ai-pipelines-vantage-byom-housing-example.html">Google Cloud Vertex AI Pipelines Vantage BYOM Housing Example</a>
   </li>
 </ul>
   </li>
@@ -1233,10 +1233,10 @@ span.search-result-highlight {
   </div>
   <ul class="components">
     <li class="component is-current">
-      <a class="title" href="index.html">Getting Started Guides</a>
+      <a class="title" href="../index.html">Getting Started Guides</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">master</a>
+          <a href="../index.html">master</a>
         </li>
       </ul>
     </li>
@@ -1250,8 +1250,8 @@ span.search-result-highlight {
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li>How-tos</li>
-    <li><a href="segment.html">Store events from Twilio Segment</a></li>
+    <li>Tutorials</li>
+    <li><a href="using-feast-with-teradata-vantage.html">Using Teradata with FEAST</a></li>
   </ul>
 </nav>
 </div>
@@ -1259,51 +1259,29 @@ span.search-result-highlight {
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/segment.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/modelops/pages/using-feast-with-teradata-vantage.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Store events from Twilio Segment</h1>
-<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
-Last updated: January 18th, 2022</p>
+<h1 class="page">Using Teradata with FEAST</h1>
+<p>Author: <a href="mailto:mohammadtaha.wahab@teradata.com , mohammadharris.mansur@teradata.com and will.fleury@teradata.com">Mohammmad Taha Wahab , Mohammad Harris Mansur and Dr. Will Fleury</a><br/>
+Last updated: January 5th, 2023</p>
 <div class="sect1">
-<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This solution listens to events from Twilio Segment and writes data to a Teradata Vantage instance. The example uses Google Cloud but it can be translated into any cloud platform.</p>
+<p>Feast&#8217;s connector for Teradata is a complete implementation with support for all features and uses teradata as an online and offline store.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_architecture"><a class="anchor" href="#_architecture"></a>Architecture</h2>
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this solution, Twilio Segment writes raw event data to Google Cloud Pub/Sub. Pub/Sub forwards events to a Cloud Run application. The Cloud Run app writes data to a Teradata Vantage database. It&#8217;s a serverless solution that doesn&#8217;t require allocation or management of any VM&#8217;s.</p>
+<p>You need access to a Teradata Vantage instance.</p>
 </div>
-<div class="imageblock text-left">
-<div class="content">
-<img src="_images/segment.flow.diagram.png" alt="Segment Google Cloud Flow Diagram" width="500">
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_deployment"><a class="anchor" href="#_deployment"></a>Deployment</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>A Google Cloud account. If you don&#8217;t have an account, you can create one at <a href="https://console.cloud.google.com/" class="bare">https://console.cloud.google.com/</a>.</p>
-</li>
-<li>
-<p><code>gcloud</code> installed. See <a href="https://cloud.google.com/sdk/docs/install" class="bare">https://cloud.google.com/sdk/docs/install</a>.</p>
-</li>
-<li>
-<p>A Teradata Vantage instance that Google Cloud Run can talk to.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1311,196 +1289,324 @@ Last updated: January 18th, 2022</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you need a new instance of Vantage, you can install a free version called Vantage Express in the cloud on <a href="vantage.express.gcp.html" class="xref page">Google Cloud</a>, <a href="run-vantage-express-on-microsoft-azure.html" class="xref page">Azure</a>, and <a href="run-vantage-express-on-aws.html" class="xref page">AWS</a>. You can also run Vantage Express on your local machine using <a href="getting.started.vmware.html" class="xref page">VMware</a>, <a href="getting.started.vbox.html" class="xref page">VirtualBox</a>, or <a href="getting.started.utm.html" class="xref page">UTM</a>.
+If you need a new instance of Vantage, you can install a free version called Vantage Express in the cloud on <a href="../vantage.express.gcp.html" class="xref page">Google Cloud</a>, <a href="../run-vantage-express-on-microsoft-azure.html" class="xref page">Azure</a>, and <a href="../run-vantage-express-on-aws.html" class="xref page">AWS</a>. You can also run Vantage Express on your local machine using <a href="../getting.started.vmware.html" class="xref page">VMware</a>, <a href="../getting.started.vbox.html" class="xref page">VirtualBox</a>, or <a href="../getting.started.utm.html" class="xref page">UTM</a>.
 </td>
 </tr>
 </table>
 </div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_build_and_deploy"><a class="anchor" href="#_build_and_deploy"></a>Build and deploy</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Clone the sample repository:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone git@github.com:Teradata/segment-integration-tutorial.git</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>The repo contains <code>segment.sql</code> file that sets up the database. the script on your Vantage db using your favorite SQL IDE, [Teradata Studio](<a href="https://downloads.teradata.com/download/tools/teradata-studio" class="bare">https://downloads.teradata.com/download/tools/teradata-studio</a>) or command line tool called <code>bteq</code> (download for <a href="https://downloads.teradata.com/node/7314">Windows</a>, <a href="https://downloads.teradata.com/node/200442">Linux</a>, <a href="https://downloads.teradata.com/node/201214">macOS</a>).
-The SQL script will create a new database called <code>Segment</code> and a set of tables to store Segment events.</p>
-</li>
-<li>
-<p>Set the default project and region:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud config set project &lt;PROJECT_ID&gt;
-gcloud config set compute/region &lt;REGION&gt;</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Retrieve the project id and the number. We will need it in subsequent steps:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export PROJECT_ID=$(gcloud config get-value project)
-
-export PROJECT_NUMBER=$(gcloud projects list \
-  --filter="$(gcloud config get-value project)" \
-  --format="value(PROJECT_NUMBER)")</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Enable required Google Cloud services:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud services enable cloudbuild.googleapis.com containerregistry.googleapis.com run.googleapis.com secretmanager.googleapis.com pubsub.googleapis.com</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Build the application:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud builds submit --tag gcr.io/$PROJECT_ID/segment-listener</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Define an API key that you will share with Segment. Store the API key in Google Cloud Secret Manager:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud secrets create VANTAGE_USER_SECRET
-echo -n 'dbc' &gt; /tmp/vantage_user.txt
-gcloud secrets versions add VANTAGE_USER_SECRET --data-file=/tmp/vantage_user.txt
-
-gcloud secrets create VANTAGE_PASSWORD_SECRET
-echo -n 'dbc' &gt; /tmp/vantage_password.txt
-gcloud secrets versions add VANTAGE_PASSWORD_SECRET --data-file=/tmp/vantage_password.txt</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>The application that write Segment data to Vantage will use Cloud Run. We first need to allow Cloud Run to access secrets:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud projects add-iam-policy-binding $PROJECT_ID \
-     --member=serviceAccount:$PROJECT_NUMBER-compute@developer.gserviceaccount.com \
-     --role=roles/secretmanager.secretAccessor</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Deploy the app to Cloud Run (replace <code>&lt;VANTAGE_HOST&gt;</code> with the hostname or IP of your Teradata Vantage database). The second export statement saves the service url as we need it for subsequent commands:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud run deploy --image gcr.io/$PROJECT_ID/segment-listener segment-listener \
-  --region $(gcloud config get-value compute/region) \
-  --update-env-vars VANTAGE_HOST=35.239.251.1 \
-  --update-secrets 'VANTAGE_USER=VANTAGE_USER_SECRET:1, VANTAGE_PASSWORD=VANTAGE_PASSWORD_SECRET:1' \
-  --no-allow-unauthenticated
-
-export SERVICE_URL=$(gcloud run services describe segment-listener --platform managed --region $(gcloud config get-value compute/region) --format 'value(status.url)')</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Create a Pub/Sub topic that will receive events from Segment:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud pubsub topics create segment-events</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Create a service account that will be used by Pub/Sub to invoke the Cloud Run app:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud iam service-accounts create cloud-run-pubsub-invoker \
-     --display-name "Cloud Run Pub/Sub Invoker"</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Give the service account permission to invoke Cloud Run:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud run services add-iam-policy-binding segment-listener \
-  --region $(gcloud config get-value compute/region) \
-  --member=serviceAccount:cloud-run-pubsub-invoker@$PROJECT_ID.iam.gserviceaccount.com \
-  --role=roles/run.invoker</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Allow Pub/Sub to create authentication tokens in your project:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud projects add-iam-policy-binding $PROJECT_ID \
-  --member=serviceAccount:service-$PROJECT_NUMBER@gcp-sa-pubsub.iam.gserviceaccount.com \
-  --role=roles/iam.serviceAccountTokenCreator</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Create a Pub/Sub subscription with the service account:</p>
-<div id="segment_first_run" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud pubsub subscriptions create segment-events-cloudrun-subscription --topic projects/$PROJECT_ID/topics/segment-events \
-   --push-endpoint=$SERVICE_URL \
-   --push-auth-service-account=cloud-run-pubsub-invoker@$PROJECT_ID.iam.gserviceaccount.com \
-   --max-retry-delay 600 \
-   --min-retry-delay 30</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Allow Segment to publish to your topic. To do that, assign <code>pubsub@segment-integrations.iam.gserviceaccount.com</code> role <code>Pub/Sub Publisher</code> in your project at <a href="https://console.cloud.google.com/cloudpubsub/topic/list" class="bare">https://console.cloud.google.com/cloudpubsub/topic/list</a>. See <a href="https://segment.com/docs/connections/destinations/catalog/google-cloud-pubsub/#authentication">Segment manual</a> for details.</p>
-</li>
-<li>
-<p>Configure your Google Cloud Pub/Sub a destination in Segment. Use the full topic <code>projects/&lt;PROJECT_ID&gt;/topics/segment-events</code> and map all Segment event types (using <code>*</code> character) to the topic.</p>
-</li>
-</ol>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_try_it_out"><a class="anchor" href="#_try_it_out"></a>Try it out</h2>
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Use Segment&#8217;s Event Tester functionality to send a sample payload to the topic. Verify that the sample data has been stored in Vantage.</p>
-</li>
-</ol>
+<div class="paragraph">
+<p>This how-to assumes you know Feast terminology. If you need a refresher check out the official <a href="https://docs.feast.dev/">FEAST documentation</a></p>
 </div>
+<div class="paragraph">
+<p>This document demonstrates how developers can integrate <code>Teradata&#8217;s offline and online store</code> with Feast. Teradata&#8217;s offline stores allow users to use any underlying data store as their offline feature store. Features can be retrieved from the offline store for model training and can be materialized into the online feature store for use during model inference.</p>
 </div>
+<div class="paragraph">
+<p>On the other hand, online stores are used to serve features at low latency. The <code>materialize</code> command can be used to load feature values from the data sources (or offline stores) into the online store</p>
 </div>
-<div class="sect1">
-<h2 id="_limitations"><a class="anchor" href="#_limitations"></a>Limitations</h2>
-<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>feast-teradata</code> library adds support for Teradata as</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>The example shows how to deploy the app in a single region. In many cases, this setup doesn&#8217;t guarantee enough uptime. The Cloud Run app should be deployed in more than one region behind a Global Load Balancer.</p>
+<p><code>OfflineStore</code></p>
+</li>
+<li>
+<p><code>OnlineStore</code></p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>Additionally, using Teradata as the registry (catalog) is already supported via the <code>registry_type: sql</code> and included in our examples. This means that everything is located in Teradata. However, depending on the requirements, installation, etc, this can be mixed and matched with other systems as appropriate.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting Started</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This how-to demonstrates how to send Segment events to Teradata Vantage. The configuration forwards events from Segment to Google Cloud Pub/Sub and then on to a Cloud Run application. The application writes data to Teradata Vantage.</p>
+<p>To get started, install the <code>feast-teradata</code> library</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cli hljs" data-lang="cli">pip install feast-teradata</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s create a simple feast setup with Teradata using the standard drivers' dataset. Note that you cannot use <code>feast init</code> as this command only works for templates that are part of the core feast library. We intend on getting this library merged into feast core eventually but for now, you will need to use the following cli command for this specific task. All other <code>feast</code> cli commands work as expected.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cli hljs" data-lang="cli">feast-td init-repo</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will then prompt you for the required information for the Teradata system and upload the example dataset. Let&#8217;s assume you used the repo name <code>demo</code> when running the above command. You can find the repository files along with a file called <code>test_workflow.py</code>. Running this <code>test_workflow.py</code> will execute a complete workflow for the feast with Teradata as the Registry, OfflineStore, and OnlineStore.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cli hljs" data-lang="cli">demo/
+    feature_repo/
+        driver_repo.py
+        feature_store.yml
+    test_workflow.py</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>From within the <code>demo/feature_repo</code> directory, execute the following feast command to apply (import/update) the repo definition into the registry. You will be able to see the registry metadata tables in the teradata database after running this command.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cli hljs" data-lang="cli">feast apply</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To see the registry information in the feast UI, run the following command. Note the --registry_ttl_sec is important as by default it polls every 5 seconds.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cli hljs" data-lang="cli">feast ui --registry_ttl_sec=120</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_offline_store_config"><a class="anchor" href="#_offline_store_config"></a>Offline Store Config</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">project: &lt;name of project&gt;
+registry: &lt;registry&gt;
+provider: local
+offline_store:
+   type: feast_teradata.offline.teradata.TeradataOfflineStore
+   host: &lt;db host&gt;
+   database: &lt;db name&gt;
+   user: &lt;username&gt;
+   password: &lt;password&gt;
+   log_mech: &lt;connection mechanism&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_repo_definition"><a class="anchor" href="#_repo_definition"></a>Repo Definition</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Below is an example of definition.py which elaborates how
+to set the entity, source connector, and feature view.</p>
+</div>
+<div class="paragraph">
+<p>Now to explain the different components:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>TeradataSource:</code> Data Source for features stored in Teradata (Enterprise or Lake) or accessible via a Foreign Table from Teradata (NOS, QueryGrid)</p>
+</li>
+<li>
+<p><code>Entity:</code> A collection of semantically related features</p>
+</li>
+<li>
+<p><code>Feature View:</code> A feature view is a group of feature data from a specific data source. Feature views allow you to consistently define features and their data sources, enabling the reuse of feature groups across a project</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">driver = Entity(name="driver", join_keys=["driver_id"])
+project_name = yaml.safe_load(open("feature_store.yaml"))["project"]
+
+driver_stats_source = TeradataSource(
+    database=yaml.safe_load(open("feature_store.yaml"))["offline_store"]["database"],
+    table=f"{project_name}_feast_driver_hourly_stats",
+    timestamp_field="event_timestamp",
+    created_timestamp_column="created",
+)
+
+driver_stats_fv = FeatureView(
+    name="driver_hourly_stats",
+    entities=[driver],
+    ttl=timedelta(weeks=52 * 10),
+    schema=[
+        Field(name="driver_id", dtype=Int64),
+        Field(name="conv_rate", dtype=Float32),
+        Field(name="acc_rate", dtype=Float32),
+        Field(name="avg_daily_trips", dtype=Int64),
+    ],
+    source=driver_stats_source,
+    tags={"team": "driver_performance"},
+)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_offline_store_usage"><a class="anchor" href="#_offline_store_usage"></a>Offline Store Usage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are two different ways to test your offline store as explained below. But first, there are a few mandatory steps to follow:</p>
+</div>
+<div class="paragraph">
+<p>Now, let&#8217;s batch-read some features for training, using only entities (population) for which we have seen an event in the last <code>60</code> days. The predicates (filter) used can be on anything relevant for the entity (population) selection for the given training dataset. The <code>event_timestamp</code> is only for example purposes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">from feast import FeatureStore
+store = FeatureStore(repo_path="feature_repo")
+training_df = store.get_historical_features(
+    entity_df=f"""
+            SELECT
+                driver_id,
+                event_timestamp
+            FROM demo_feast_driver_hourly_stats
+            WHERE event_timestamp BETWEEN (CURRENT_TIMESTAMP - INTERVAL '60' DAY) AND CURRENT_TIMESTAMP
+        """,
+    features=[
+        "driver_hourly_stats:conv_rate",
+        "driver_hourly_stats:acc_rate",
+        "driver_hourly_stats:avg_daily_trips"
+    ],
+).to_df()
+print(training_df.head())</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>feast-teradata</code> library allows you to use the complete set of feast APIs and functionality. Please refer to the official feast <a href="https://docs.feast.dev/getting-started/quickstart">quickstart</a> for more details on the various things you can do.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_online_store"><a class="anchor" href="#_online_store"></a>Online Store</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Feast materializes data to online stores for low-latency lookup at model inference time. Typically, key-value stores are used for online stores, however, relational databases can be used for this purpose as well.</p>
+</div>
+<div class="paragraph">
+<p>Users can develop their own online stores by creating a class that implements the contract in the OnlineStore class.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_online_store_config"><a class="anchor" href="#_online_store_config"></a>Online Store Config</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">project: &lt;name of project&gt;
+registry: &lt;registry&gt;
+provider: local
+offline_store:
+   type: feast_teradata.offline.teradata.TeradataOfflineStore
+   host: &lt;db host&gt;
+   database: &lt;db name&gt;
+   user: &lt;username&gt;
+   password: &lt;password&gt;
+   log_mech: &lt;connection mechanism&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_online_store_usage"><a class="anchor" href="#_online_store_usage"></a>Online Store Usage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are a few mandatory steps to follow before we can test the online store:</p>
+</div>
+<div class="paragraph">
+<p>The command <code>materialize_incremental</code> is used to incrementally materialize features in the online store. If there are no new features to be added, this command will essentially not be doing anything. With feast <code>materialize_incremental</code>, the start time is either now — ttl (the ttl that we defined in our feature views) or the time of the most recent materialization. If you’ve materialized features at least once, then subsequent materializations will only fetch features that weren’t present in the store at the time of the previous materializations.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cli hljs" data-lang="cli">CURRENT_TIME=$(date +'%Y-%m-%dT%H:%M:%S')
+feast materialize-incremental $CURRENT_TIME</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Next, while fetching the online features, we have two parameters <code>features</code> and <code>entity_rows</code>. The <code>features</code> parameter is a list and can take any number of features that are present in the <code>df_feature_view</code>. The example above shows all 4 features present but these can be less than 4 as well. Secondly, the <code>entity_rows</code> parameter is also a list and takes a dictionary of the form <code>{feature_identifier_column: value_to_be_fetched}</code>. In our case, the column driver_id is used to uniquely identify the different rows of the entity driver. We are currently fetching values of the features where driver_id is equal to 5. We can also fetch multiple such rows using the format: <code>[{driver_id: val_1}, {driver_id: val_2}, .., {driver_id: val_n}] [{driver_id: val_1}, {driver_id: val_2}, .., {driver_id: val_n}]</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">entity_rows = [
+        {
+            "driver_id": 1001,
+        },
+        {
+            "driver_id": 1002,
+        },
+    ]
+features_to_fetch = [
+            "driver_hourly_stats:acc_rate",
+            "driver_hourly_stats:conv_rate",
+            "driver_hourly_stats:avg_daily_trips"
+        ]
+returned_features = store.get_online_features(
+    features=features_to_fetch,
+    entity_rows=entity_rows,
+).to_dict()
+for key, value in sorted(returned_features.items()):
+    print(key, " : ", value)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how_to_set_sql_registry"><a class="anchor" href="#_how_to_set_sql_registry"></a>How to set SQL Registry</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Another important thing is the SQL Registry. We first make a path variable that uses the username, password, database name, etc. to make a connection string which it then uses to establish a connection to Teradata&#8217;s Database.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">path = 'teradatasql://'+ teradata_user +':' + teradata_password + '@'+host + '/?database=' + teradata_database + '&amp;LOGMECH=' + teradata_log_mech</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It will create the following table in your database:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Entities (entity_name,project_id,last_updated_timestamp,entity_proto)</p>
+</li>
+<li>
+<p>Data_sources (data_source_name,project_id,last_updated_timestamp,data_source_proto)</p>
+</li>
+<li>
+<p>Feature_views (feature_view_name,project_id,last_updated_timestamp,materialized_intervals,feature_view_proto,user_metadata)</p>
+</li>
+<li>
+<p>Request_feature_views (feature_view_name,project_id,last_updated_timestamp,feature_view_proto,user_metadata)</p>
+</li>
+<li>
+<p>Stream_feature_views (feature_view_name,project_id,last_updated_timestamp,feature_view_proto,user_metadata)</p>
+</li>
+<li>
+<p>managed_infra (infra_name, project_id, last_updated_timestamp, infra_proto)</p>
+</li>
+<li>
+<p>validation_references (validation_reference_name, project_id, last_updated_timestamp, validation_reference_proto)</p>
+</li>
+<li>
+<p>saved_datasets (saved_dataset_name, project_id, last_updated_timestamp, saved_dataset_proto)</p>
+</li>
+<li>
+<p>feature_services (feature_service_name, project_id, last_updated_timestamp, feature_service_proto)</p>
+</li>
+<li>
+<p>on_demand_feature_views (feature_view_name, project_id, last_updated_timestamp, feature_view_proto, user_metadata)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Additionally, if you want to see a complete (but not real-world), end-to-end example workflow example, see the <code>demo/test_workflow.py</code> script. This is used for testing the complete feast functionality.</p>
+</div>
+<div class="paragraph">
+<p>An Enterprise Feature Store accelerates the value-gaining process in crucial stages of data analysis. It enhances productivity and reduces the time taken to introduce products in the market. By integrating Teradata with Feast, it enables the use of Teradata&#8217;s highly efficient parallel processing within a Feature Store, thereby enhancing performance.</p>
 </div>
 </div>
 </div>
@@ -1510,7 +1616,10 @@ export SERVICE_URL=$(gcloud run services describe segment-listener --platform ma
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://segment.com/docs/connections/destinations/catalog/google-cloud-pubsub/">Segment Pub/Sub destination documentation</a></p>
+<p><a href="https://docs.feast.dev/tutorials/using-scalable-registry">Feast Scalable Registry</a></p>
+</li>
+<li>
+<p><a href="https://medium.com/teradata/enabling-highly-scalable-feature-store-with-teradata-vantage-and-feast-e01008fa8fdb">Enabling highly scalable feature store with Teradata Vantage and FEAST</a></p>
 </li>
 </ul>
 </div>
@@ -2148,12 +2257,12 @@ footer.footer-nav {
     </div>
   </section>
 </footer>
-<script src="./_/js/site.js"></script>
-<script async src="./_/js/behavior.js"></script>
-<script src="./_/js/vendor/lunr.js"></script>
-<script src="./_/js/search-ui.js" id="search-ui-script" data-site-root-path="." data-snippet-length="100" data-stylesheet="./_/css/search.css"></script>
-<script async src="./search-index.js"></script>
-<script src="./_/js/teradata.min.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/behavior.js"></script>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+<script src="../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>
