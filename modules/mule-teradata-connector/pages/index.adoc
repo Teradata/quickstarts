@@ -35,17 +35,17 @@ Database Connector enables you to:
 * Make Data Definition Language (DDL) requests that alter the data structure rather than the data itself.
 * Execute stored procedures and SQL scripts.
 
-For examples, see xref:database-connector-examples.adoc[Examples].
+// For examples, see xref:database-connector-examples.adoc[Examples].
 
 
 == Audience
 
 * New users, read:
-** xref:database-connector-studio.adoc[Using Anypoint Studio to Configure the Connector] to create your Mule app
-** xref:database-connector-examples.adoc[Examples], which provide one or more use cases for the connector
-* Advanced users, read:
-** xref:database-connector-xml-maven.adoc[XML and Maven Support]
-** xref:database-connector-examples.adoc[Examples], which provide one or more use cases for the connector
+// ** xref:database-connector-studio.adoc[Using Anypoint Studio to Configure the Connector] to create your Mule app
+// ** xref:database-connector-examples.adoc[Examples], which provide one or more use cases for the connector
+// * Advanced users, read:
+// ** xref:database-connector-xml-maven.adoc[XML and Maven Support]
+// ** xref:database-connector-examples.adoc[Examples], which provide one or more use cases for the connector
 
 
 == Using Exchange Templates and Examples
@@ -58,10 +58,10 @@ that you can use as starting points for your apps and examples that illustrate a
 
 == Next Step
 
-After you complete the prerequisites and try the templates and examples, you are ready to create your own app and configure the connector using xref:database-connector-studio.adoc[Anypoint Studio].
+// After you complete the prerequisites and try the templates and examples, you are ready to create your own app and configure the connector using xref:database-connector-studio.adoc[Anypoint Studio].
 
 == See Also
 
-* xref:connectors::introduction/introduction-to-anypoint-connectors.adoc[Introduction to Anypoint Connectors]
-* xref:connectors::introduction/intro-use-exchange.adoc[Use Exchange to Discover Connectors, Templates, and Examples]
+// * xref:connectors::introduction/introduction-to-anypoint-connectors.adoc[Introduction to Anypoint Connectors]
+// * xref:connectors::introduction/intro-use-exchange.adoc[Use Exchange to Discover Connectors, Templates, and Examples]
 * https://help.mulesoft.com[MuleSoft Help Center]
