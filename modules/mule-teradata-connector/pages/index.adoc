@@ -36,7 +36,7 @@ Teradata Connector enables you to:
 
 == Next Step
 
-// After you complete the prerequisites and try the templates and examples, you are ready to create your own app and configure the connector using Anypoint Studio.
+After you complete the prerequisites and try the templates and examples, you are ready to create your own app and configure the connector using Anypoint Studio.
 
 == See Also
 https://help.mulesoft.com[MuleSoft Help Center]
