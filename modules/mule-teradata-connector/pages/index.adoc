@@ -3,6 +3,10 @@
 
 Anypoint Connector for Teradata (Teradata Connector) establishes communication between your Mule app and a Teradata Vantage database, enabling you to connect with your Teradata Vantage instance to load data and run SQL queries in Teradata Vantage tables.
 
+Reference: xref:reference.adoc[Teradata Connector Reference]
+
+Release Notes: xref:release-notes.adoc[Teradata Connector Release Notes]
+
 == Before You Begin
 
 To use this connector, you must be familiar with:
