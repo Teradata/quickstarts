@@ -1,0 +1,20 @@
+= Teradata Connector Release Notes - Mule 4
+:page-aliases: connectors::database/release-notes.adoc, connectors::db/release-notes.adoc
+
+Anypoint Connector for Teradata (Teradata Connector) establishes communication between your Mule app and a Teradata Vantage database, enabling you to connect with your Teradata Vantage instance to load data and run SQL queries in Teradata Vantage tables.
+
+== 1.0.0
+Date: February 8, 2023
+
+=== Compatibility
+[%header,cols="20s,20a"]
+|===
+| Software | Version 
+| Mule | 4.1.1 and later
+| Anypoint Studio | 7.3 and later
+| OpenJDK | 8 and 11
+|===
+
+== See Also
+
+https://help.mulesoft.com[MuleSoft Help Center]
