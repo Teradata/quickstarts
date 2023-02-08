@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Teradata Connector - Mule 4 :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/mule-teradata-connector/index.html">
+    <title>Teradata Connector Release Notes - Mule 4 :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/mule-teradata-connector/release-notes.html">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../_/css/site.css">
-<meta property="og:title" content="Teradata Connector - Mule 4 :: Teradata Getting Started">
+<meta property="og:title" content="Teradata Connector Release Notes - Mule 4 :: Teradata Getting Started">
 <meta property="og:type" content="article" />
 <meta property="og:description" content="" />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/mule-teradata-connector/index.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/mule-teradata-connector/release-notes.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -1249,7 +1249,7 @@ span.search-result-highlight {
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">Teradata Connector - Mule 4</a></li>
+    <li><a href="release-notes.html">Teradata Connector Release Notes - Mule 4</a></li>
   </ul>
 </nav>
 </div>
@@ -1257,13 +1257,13 @@ span.search-result-highlight {
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/mule-teradata-connector/pages/index.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/mule-teradata-connector/pages/release-notes.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Teradata Connector - Mule 4</h1>
+<h1 class="page">Teradata Connector Release Notes - Mule 4</h1>
 <p>Author: <a href="mailto:"></a><br/>
 Last updated: </p>
 <div id="preamble">
@@ -1271,89 +1271,48 @@ Last updated: </p>
 <div class="paragraph">
 <p>Anypoint Connector for Teradata (Teradata Connector) establishes communication between your Mule app and a Teradata Vantage database, enabling you to connect with your Teradata Vantage instance to load data and run SQL queries in Teradata Vantage tables.</p>
 </div>
-<div class="paragraph">
-<p>Reference: <a href="reference.html" class="xref page">Teradata Connector Reference</a></p>
-</div>
-<div class="paragraph">
-<p>Release Notes: <a href="release-notes.html" class="xref page">Teradata Connector Release Notes</a></p>
-</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_before_you_begin"><a class="anchor" href="#_before_you_begin"></a>Before You Begin</h2>
+<h2 id="_1_0_0"><a class="anchor" href="#_1_0_0"></a>1.0.0</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To use this connector, you must be familiar with:</p>
+<p>Date: February 8, 2023</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Teradata Vantage SQL</p>
-</li>
-<li>
-<p>Anypoint Connectors</p>
-</li>
-<li>
-<p>Mule runtime engine (Mule)</p>
-</li>
-<li>
-<p>Elements and global elements in a Mule flow</p>
-</li>
-<li>
-<p>Creating a Mule app using Anypoint Studio (Studio)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Before creating an app, you must have:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Credentials to access the Teradata Vantage target resource</p>
-</li>
-<li>
-<p>Anypoint Studio version 7.5 or later</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_common_use_cases_for_the_connector"><a class="anchor" href="#_common_use_cases_for_the_connector"></a>Common Use Cases for the Connector</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Teradata Connector enables you to:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Perform predefined queries, dynamically constructed queries, and template queries that are self-sufficient and customizable.</p>
-</li>
-<li>
-<p>Use a source listener operation to read from a database in the data source section of a flow.</p>
-</li>
-<li>
-<p>Execute other operations to read and write to a database anywhere in the process section.</p>
-</li>
-<li>
-<p>Run a single bulk update to perform multiple SQL requests.</p>
-</li>
-<li>
-<p>Make Data Definition Language (DDL) requests.</p>
-</li>
-<li>
-<p>Execute stored procedures and SQL scripts.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_next_step"><a class="anchor" href="#_next_step"></a>Next Step</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>After you complete the prerequisites and try the templates and examples, you are ready to create your own app and configure the connector using Anypoint Studio.</p>
+<div class="sect2">
+<h3 id="_compatibility"><a class="anchor" href="#_compatibility"></a>Compatibility</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Software</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Mule</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>4.1.1 and later</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Anypoint Studio</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>7.3 and later</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>OpenJDK</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>8 and 11</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
