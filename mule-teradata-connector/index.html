@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Teradata Connector - Mule 4 :: Teradata Getting Started</title>
     <link rel="canonical" href="https://quickstarts.teradata.com/mule-teradata-connector/index.html">
+    <meta name="description" content="Use Teradata Connector for MuleSoft's Anypoint Studio.">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, mule, mulesoft, teradata connector, anypoint studio.">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../_/css/site.css">
 <meta property="og:title" content="Teradata Connector - Mule 4 :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="Use Teradata Connector for MuleSoft&#x27;s Anypoint Studio." />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
@@ -1264,8 +1266,8 @@ span.search-result-highlight {
 </aside>
 <article class="doc">
 <h1 class="page">Teradata Connector - Mule 4</h1>
-<p>Author: <a href="mailto:"></a><br/>
-Last updated: </p>
+<p>Author: <a href="mailto:tan.nguyen@teradata.com">Tan Nguyen</a><br/>
+Last updated: February 10th, 2023</p>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
@@ -1300,7 +1302,7 @@ Last updated: </p>
 <p>Elements and global elements in a Mule flow</p>
 </li>
 <li>
-<p>Creating a Mule app using Anypoint Studio (Studio)</p>
+<p>Anypoint Studio (Studio)</p>
 </li>
 </ul>
 </div>
@@ -1310,12 +1312,24 @@ Last updated: </p>
 <div class="ulist">
 <ul>
 <li>
-<p>Credentials to access the Teradata Vantage target resource</p>
-</li>
-<li>
 <p>Anypoint Studio version 7.5 or later</p>
 </li>
+<li>
+<p>Credentials to access the Teradata Vantage target resource</p>
+</li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you need a new instance of Vantage, you can install a free version called Vantage Express in the cloud on <a href="../vantage.express.gcp.html" class="xref page">Google Cloud</a>, <a href="../run-vantage-express-on-microsoft-azure.html" class="xref page">Azure</a>, and <a href="../run-vantage-express-on-aws.html" class="xref page">AWS</a>. You can also run Vantage Express on your local machine using <a href="../getting.started.vmware.html" class="xref page">VMware</a>, <a href="../getting.started.vbox.html" class="xref page">VirtualBox</a>, or <a href="../getting.started.utm.html" class="xref page">UTM</a>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -1347,13 +1361,33 @@ Last updated: </p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>The Teradata Connector supports:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Connection pooling</p>
+</li>
+<li>
+<p>Auto reconnects after timeouts</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_next_step"><a class="anchor" href="#_next_step"></a>Next Step</h2>
+<h2 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>After you complete the prerequisites and try the templates and examples, you are ready to create your own app and configure the connector using Anypoint Studio.</p>
+<p>After you complete the prerequisites, you can try the examples and configure the connector using Anypoint Studio.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://quickstarts.teradata.com/mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
