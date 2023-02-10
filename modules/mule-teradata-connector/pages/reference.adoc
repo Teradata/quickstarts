@@ -1,5 +1,11 @@
 = Teradata Connector Reference - Mule 4
 :page-aliases: connectors::database/reference.adoc, connectors::db/reference.adoc
+:page-author: Tan Nguyen
+:page-email: tan.nguyen@teradata.com
+:page-revdate: February 10th, 2023
+:description: Technical Reference for Teradata Connector for MuleSoft's Anypoint Studio.
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, mule, mulesoft, teradata connector, anypoint studio.
+:icons: font
 
 Anypoint Connector for Teradata (Teradata Connector) establishes communication between your Mule app and a Teradata Vantage database, enabling you to connect with your Teradata Vantage instance to load data and run SQL queries in Teradata Vantage tables.
 

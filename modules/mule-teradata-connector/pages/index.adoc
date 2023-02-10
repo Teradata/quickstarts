@@ -1,5 +1,10 @@
-
 = Teradata Connector - Mule 4
+:page-author: Tan Nguyen
+:page-email: tan.nguyen@teradata.com
+:page-revdate: February 10th, 2023
+:description: Use Teradata Connector for MuleSoft's Anypoint Studio.
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, mule, mulesoft, teradata connector, anypoint studio.
+:icons: font
 
 Anypoint Connector for Teradata (Teradata Connector) establishes communication between your Mule app and a Teradata Vantage database, enabling you to connect with your Teradata Vantage instance to load data and run SQL queries in Teradata Vantage tables.
 
@@ -15,12 +20,14 @@ To use this connector, you must be familiar with:
 * Anypoint Connectors
 * Mule runtime engine (Mule)
 * Elements and global elements in a Mule flow
-* Creating a Mule app using Anypoint Studio (Studio)
+* Anypoint Studio (Studio)
 
 Before creating an app, you must have:
 
-* Credentials to access the Teradata Vantage target resource
 * Anypoint Studio version 7.5 or later
+* Credentials to access the Teradata Vantage target resource
+
+include::ROOT:partial$vantage.express.options.adoc[]
 
 == Common Use Cases for the Connector
 
@@ -32,11 +39,14 @@ Teradata Connector enables you to:
 * Run a single bulk update to perform multiple SQL requests.
 * Make Data Definition Language (DDL) requests.
 * Execute stored procedures and SQL scripts.
+* Support pooling profile configuration for database connection
+* Support auto reconnect to database
 
+== Examples
 
-== Next Step
+After you complete the prerequisites, you can try the examples and configure the connector using Anypoint Studio.
 
-After you complete the prerequisites and try the templates and examples, you are ready to create your own app and configure the connector using Anypoint Studio.
+* https://quickstarts.teradata.com/mule.jdbc.example.html[Query Teradata Vantage from a Mule service]
 
 == See Also
 https://help.mulesoft.com[MuleSoft Help Center]
