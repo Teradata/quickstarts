@@ -39,8 +39,11 @@ Teradata Connector enables you to:
 * Run a single bulk update to perform multiple SQL requests.
 * Make Data Definition Language (DDL) requests.
 * Execute stored procedures and SQL scripts.
-* Support pooling profile configuration for database connection
-* Support auto reconnect to database
+
+The Teradata Connector supports:
+
+* Connection pooling
+* Auto reconnects after timeouts
 
 == Examples
 
