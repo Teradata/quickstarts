@@ -50,6 +50,8 @@ The Teradata Connector supports:
 After you complete the prerequisites, you can try the examples and configure the connector using Anypoint Studio.
 
 * https://quickstarts.teradata.com/mule.jdbc.example.html[Query Teradata Vantage from a Mule service]
+* xref:examples-configuration.adoc[Using Anypoint Studio to Configure Teradata Connector]
+
 
 == See Also
 https://help.mulesoft.com[MuleSoft Help Center]
