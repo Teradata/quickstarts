@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Teradata Connector Release Notes - Mule 4 :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/mule-teradata-connector/release-notes.html">
-    <meta name="description" content="Release Notes for Teradata Connector for MuleSoft's Anypoint Studio.">
+    <title>Using Anypoint Studio to Configure Teradata Connector - Mule 4 :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/mule-teradata-connector/examples-configuration.html">
+    <meta name="description" content="Use Teradata Connector for MuleSoft's Anypoint Studio.">
     <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, mule, mulesoft, teradata connector, anypoint studio.">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../_/css/site.css">
-<meta property="og:title" content="Teradata Connector Release Notes - Mule 4 :: Teradata Getting Started">
+<meta property="og:title" content="Using Anypoint Studio to Configure Teradata Connector - Mule 4 :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Release Notes for Teradata Connector for MuleSoft&#x27;s Anypoint Studio." />
+<meta property="og:description" content="Use Teradata Connector for MuleSoft&#x27;s Anypoint Studio." />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/mule-teradata-connector/release-notes.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/mule-teradata-connector/examples-configuration.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -1251,7 +1251,7 @@ span.search-result-highlight {
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="release-notes.html">Teradata Connector Release Notes - Mule 4</a></li>
+    <li><a href="examples-configuration.html">Using Anypoint Studio to Configure Teradata Connector - Mule 4</a></li>
   </ul>
 </nav>
 </div>
@@ -1259,104 +1259,268 @@ span.search-result-highlight {
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/mule-teradata-connector/pages/release-notes.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/mule-teradata-connector/pages/examples-configuration.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Teradata Connector Release Notes - Mule 4</h1>
+<h1 class="page">Using Anypoint Studio to Configure Teradata Connector - Mule 4</h1>
 <p>Author: <a href="mailto:tan.nguyen@teradata.com">Tan Nguyen</a><br/>
 Last updated: February 13th, 2023</p>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Anypoint Connector for Teradata (Teradata Connector) establishes communication between your Mule app and a Teradata Vantage database, enabling you to connect with your Teradata Vantage instance to load data and run SQL queries in Teradata Vantage tables.</p>
+<p>Anypoint Studio (Studio) editors help you design and update your Mule applications, properties, and configuration files.</p>
+</div>
+<div class="paragraph">
+<p>To add and configure a connector in Studio:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="#create-mule-project">Create a Mule Project</a>.</p>
+</li>
+<li>
+<p><a href="#add-connector-to-project">Add the connector to your Mule project</a>.</p>
+</li>
+<li>
+<p><a href="#configure-input-source">Configure a source for the connector&#8217;s flow</a>.</p>
+</li>
+<li>
+<p><a href="#add-connector-operation">Add a connector operation to the flow</a>.</p>
+</li>
+<li>
+<p><a href="#configure-global-element">Configure a global element for the connector</a>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>When you run the connector, you can view the app log to check for problems, as described in <a href="#view-app-log">View the App Log</a>.</p>
+</div>
+<div class="paragraph">
+<p>If you are new to configuring connectors in Studio, see <a href="https://docs.mulesoft.com/connectors/introduction/intro-config-use-studio">Using Anypoint Studio to Configure a Connector</a>. If, after reading this topic, you need additional information about the connector fields, see the <a href="reference.html" class="xref page">Teradata Connector Reference</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_1_0_0"><a class="anchor" href="#_1_0_0"></a>1.0.0</h2>
+<h2 id="create-mule-project"><a class="anchor" href="#create-mule-project"></a>Create a Mule Project</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Date: February 8, 2023</p>
+<p>In Studio, create a new Mule project in which to add and configure the connector:</p>
 </div>
-<div class="sect2">
-<h3 id="_features"><a class="anchor" href="#_features"></a>Features</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In Studio, select <strong>File &gt; New &gt; Mule Project</strong>.</p>
+</li>
+<li>
+<p>Enter a name for your Mule project and click <strong>Finish</strong>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="add-connector-to-project"><a class="anchor" href="#add-connector-to-project"></a>Add the Connector to Your Mule Project</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The initial version is based and extended on MuleSoft&#8217;s <a href="https://docs.mulesoft.com/db-connector/1.14/">Database Connector - Mule 4</a>. This version supports the list of features:</p>
+<p>Add Teradata Connector to your Mule project to automatically populate the XML code with the connector&#8217;s namespace and schema location and to add the required dependencies to the project&#8217;s <code>pom.xml</code> file:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the <strong>Mule Palette</strong> view, click <strong>(X) Search in Exchange</strong>.</p>
+</li>
+<li>
+<p>In the <strong>Add Dependencies to Project</strong> window, type <code>teradata</code> in the search field.</p>
+</li>
+<li>
+<p>Click <strong>Teradata Connector</strong> in <strong>Available modules</strong>.</p>
+</li>
+<li>
+<p>Click <strong>Add</strong>.</p>
+</li>
+<li>
+<p>Click <strong>Finish</strong>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Adding a connector to a Mule project in Studio does not make that connector available to other projects in your Studio workspace.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configure-input-source"><a class="anchor" href="#configure-input-source"></a>Configure a Source</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A source initiates a flow when a specified condition is met.
+You can configure one of these input sources to use with Teradata Connector:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Perform predefined queries, dynamically constructed queries, and template queries that are self-sufficient and customizable.</p>
+<p><strong>Teradata &gt; On Table Row</strong><br>
+Initiates a flow by selecting from a table at a regular interval and generates one message per obtained row</p>
 </li>
 <li>
-<p>Use a source listener operation to read from a database in the data source section of a flow.</p>
+<p><strong>HTTP &gt; Listener</strong><br>
+Initiates a flow each time it receives a request on the configured host and port</p>
 </li>
 <li>
-<p>Execute other operations to read and write to a database anywhere in the process section.</p>
-</li>
-<li>
-<p>Run a single bulk update to perform multiple SQL requests.</p>
-</li>
-<li>
-<p>Make Data Definition Language (DDL) requests.</p>
-</li>
-<li>
-<p>Execute stored procedures and SQL scripts.</p>
-</li>
-<li>
-<p>Support pooling profile configuration for database connection</p>
-</li>
-<li>
-<p>Support auto reconnect to database</p>
+<p><strong>Scheduler</strong><br>
+Initiates a flow when a time-based condition is met</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>For example, to configure an <strong>On Table Row</strong> source, follow these steps:</p>
 </div>
-<div class="sect2">
-<h3 id="_compatibility"><a class="anchor" href="#_compatibility"></a>Compatibility</h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Software</th>
-<th class="tableblock halign-left valign-top">Version</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Mule</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>4.3.0 and later</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Anypoint Studio</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>7.3 and later</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>OpenJDK</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>8 and 11</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the <strong>Mule Palette</strong> view, select <strong>Teradata &gt; On Table Row</strong>.</p>
+</li>
+<li>
+<p>Drag <strong>On Table Row</strong> to the Studio canvas.</p>
+</li>
+<li>
+<p>In the <strong>On Table Row</strong> configuration screen, optionally change the value of the <strong>Display Name</strong> field.</p>
+</li>
+<li>
+<p>Click the plus sign (<strong>+</strong>) next to the <strong>Connector configuration</strong> field to configure a global element that can be used by all instances of the source in the app.</p>
+</li>
+<li>
+<p>In the <strong>Teradata Config</strong> window, on the <strong>General</strong> tab, specify the database connection information for the connector.</p>
+</li>
+<li>
+<p>On the <strong>Transactions</strong> tab, optionally specify the transaction isolation, or XA transactions, when connecting to the database.</p>
+</li>
+<li>
+<p>On the <strong>Advanced</strong> tab, optionally specify connection pooling and reconnection information, including a reconnection strategy.</p>
+</li>
+<li>
+<p>Click <strong>Test Connection</strong> to confirm that Mule can connect with the specified database.</p>
+</li>
+<li>
+<p>Click <strong>OK</strong> to close the window.</p>
+</li>
+<li>
+<p>In the <strong>On Table Row</strong> configuration screen, in <strong>Table</strong>, specify the name of the table to select from.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="add-connector-operation"><a class="anchor" href="#add-connector-operation"></a>Add a Connector Operation to the Flow</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you add a connector operation to your flow, you immediately define a specific operation for that connector to perform.</p>
+</div>
+<div class="paragraph">
+<p>To add an operation for Teradata Connector, follow these steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the <strong>Mule Palette</strong> view, select <strong>Teradata Connector</strong> and then select the desired operation.</p>
+</li>
+<li>
+<p>Drag the operation onto the Studio canvas and to the right of the input source.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The following screenshot shows the Teradata Connector operations in the Mule Palette view of Anypoint Studio:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/teradata-operations.png" alt="Teradata Connector Operations">
+</div>
+<div class="title">Figure 1. Teradata Connector Operations</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configure_a_global_element_for_the_connector"><a class="anchor" href="#_configure_a_global_element_for_the_connector"></a>Configure a Global Element for the Connector</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you configure a connector, it’s best to configure a global element that all instances of that connector in the app can use.</p>
+</div>
+<div class="paragraph">
+<p>To configure the global element for Teradata Connector, follow these steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Select the operation in the Studio canvas.</p>
+</li>
+<li>
+<p>In the configuration screen for the operation, click the plus sign (<strong>+</strong>) next to the <strong>Connector configuration</strong> field to access the global element configuration fields.</p>
+</li>
+<li>
+<p>In the <strong>Teradata Config</strong> window, on the <strong>General</strong> tab, specify the database connection information for the connector.</p>
+</li>
+<li>
+<p>On the <strong>Transactions</strong> tab, optionally specify the transaction isolation, or XA transactions, when connecting to the database.</p>
+</li>
+<li>
+<p>On the <strong>Advanced</strong> tab, optionally specify connection pooling and reconnection information, including a reconnection strategy.</p>
+</li>
+<li>
+<p>Click <strong>Test Connection</strong> to confirm that Mule can connect with the specified database.</p>
+</li>
+<li>
+<p>Click <strong>OK</strong>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The following screenshot shows the Teradata Connector <strong>Global Element Configuration</strong> window in Anypoint Studio:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/teradata-global-configuration.png" alt="Teradata Connector Global Element Configuration">
+</div>
+<div class="title">Figure 2. Teradata Connector Global Element Configuration</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="view-app-log"><a class="anchor" href="#view-app-log"></a>View the App Log</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To check for problems, you can view the app log as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If you’re running the app from Anypoint Platform, the output is visible in the Anypoint Studio console window.</p>
+</li>
+<li>
+<p>If you’re running the app using Mule from the command line, the app log is visible in your OS console.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Unless the log file path is customized in the app’s log file (<code>log4j2.xml</code>), you can also view the app log in the default location <code>MULE_HOME/logs/&lt;app-name&gt;.log</code>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_see_also"><a class="anchor" href="#_see_also"></a>See Also</h2>
 <div class="sectionbody">
-<div class="paragraph">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="reference.html" class="xref page">Teradata Connector Reference</a></p>
+</li>
+<li>
 <p><a href="https://help.mulesoft.com">MuleSoft Help Center</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
