@@ -73,4 +73,4 @@ include::partial$getting.started.summary.adoc[]
 include::partial$next.steps.adoc[]
 
 == Further reading
-* link:https://docs.teradata.com/r/KEoAHNnh~EbZLtVJNRo0Sg/root[Teradata® Studio™ and Studio™ Express Installation Guide]
+* link:https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20[Teradata® Studio™ and Studio™ Express Installation Guide]
