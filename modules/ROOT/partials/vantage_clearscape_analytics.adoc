@@ -1,1 +1,1 @@
-NOTE: If you need a new instance of Vantage, you can obtain a free version through https://clearscape.teradata.com[Clear Scape Analytics Experience].
+NOTE: If you need a new instance of Vantage, you can get one for free at https://clearscape.teradata.com.
