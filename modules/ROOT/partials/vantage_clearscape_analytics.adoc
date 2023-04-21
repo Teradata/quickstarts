@@ -1,1 +1,1 @@
-NOTE: If you need a new instance of Vantage, you can get one for free at https://clearscape.teradata.com.
+NOTE: If you need a test instance of Vantage, you can provision one for free at https://clearscape.teradata.com.
