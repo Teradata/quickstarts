@@ -14,7 +14,7 @@ Sometimes, you need to apply complex logic to your data that can't be easily exp
 
 You need access to a Teradata Vantage instance.
 
-include::ROOT:partial$vantage.express.options.adoc[]
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
 == Hello World
 

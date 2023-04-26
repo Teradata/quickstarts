@@ -27,7 +27,7 @@ Before creating an app, you must have:
 * Anypoint Studio version 7.5 or later
 * Credentials to access the Teradata Vantage target resource
 
-include::ROOT:partial$vantage.express.options.adoc[]
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
 == Common Use Cases for the Connector
 

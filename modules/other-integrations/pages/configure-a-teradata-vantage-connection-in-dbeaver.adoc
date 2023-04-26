@@ -15,7 +15,7 @@ This how-to demonstrates how to create a connection to Teradata Vantage with DBe
 
 * Access to a Teradata Vantage instance.
 +
-include::ROOT:partial$vantage.express.options.adoc[]
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 * DBeaver installed. See link:https://dbeaver.io/download/[DBeaver Community] or link:https://dbeaver.com/download/[DBeaver PRO] for installation options.
 
 == Add a Teradata connection to DBeaver
