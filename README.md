@@ -129,7 +129,7 @@ There are two ways to build documentation locally:
     ```
 1. Build the website:
     ```
-    npx antora antora-playbook.yml
+    $env:CI="true"; $env:FORCE_SHOW_EDIT_PAGE_LINK="true"; npx antora antora-playbook.yml
     ```
 1. The resulting website files will be saved in `./build/site` directory. Open the directory in your browser to view your local copy of the website.
 
