@@ -14,7 +14,7 @@ For customers who have their own JupyterHub clusters, there are two options to i
 
 This page contains detailed instructions on the two options. Instructions are based on the assumption that the customer JupyterHub deployment is based on link:https://zero-to-jupyterhub.readthedocs.io/en/latest/index.html[Zero to JupyterHub with Kubernetes].
 
-include::ROOT:partial$vantage.express.options.adoc[]
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
 == Use Teradata Jupyter Docker image
 
