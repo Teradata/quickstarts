@@ -1,2 +1,1 @@
-NOTE: A very robust integration of Teradata with Jupyter Notebooks and best-in-class analytics tools is available for functional testing at https://clearscape.teradata.com[ClearScape Analytics Experience]. +
-If you prefer to run your Jupyter Notebooks in a local or cloud environment of your choice and need an instance of Vantage, you can use the instance provisioned through a ClearScape Analytics Experience environment.
+NOTE: This how-to shows you how to add Teradata Extensions to a Jupyter Notebooks environment. A hosted version of Jupyter Notebooks integrated with Teradata Extensions and analytics tools is available for functional testing for free at https://clearscape.teradata.com.

@@ -6,11 +6,12 @@
 :description: Use Teradata Vantage from a Jupyter notebook
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, JDBC, java applications, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy
 
-== Overview
+include::ROOT:partial$jupyter_notebook_clearscape_analytics_note.adoc[]
 
+== Overview
 In this quickstart we will go through connecting to Teradata Vantage from a Jupyter notebook.
 
-include::ROOT:partial$jupyter_notebook_clearscape_analytics_note.adoc[]
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
 == Options
 
