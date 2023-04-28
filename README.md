@@ -86,7 +86,7 @@ There are two ways to build documentation locally:
 
 #### Build directly on your machine
 
-> :information_source: These instructions are for MacOS. Adjust the instructions for your operating system. 
+> :information_source: Instructions for MacOS. 
 
 1. Install Node.js:
     ```
@@ -109,3 +109,39 @@ There are two ways to build documentation locally:
     ./buildw
     ```
 1. The resulting website files will be saved in `./build/site` directory. Open the directory in your browser to view your local copy of the website.
+
+> :information_source: Instructions for Windows. 
+
+1. Install Node.js:
+    ```
+    brew install nodejs
+    ```
+1. Clone the repo:
+    ```
+    git clone git@github.com:Teradata/quickstarts.git
+    ```
+1. Change dir to quickstarts:
+    ```
+    cd quickstarts
+    ```
+1. Install dependencies:
+    ```
+    npm i
+    ```
+1. Build the website:
+    ```
+    npx antora antora-playbook.yml
+    ```
+1. The resulting website files will be saved in `./build/site` directory. Open the directory in your browser to view your local copy of the website.
+
+> :information_source: Serving website locally. 
+
+1. You can install npm's http server for serving the website locally: 
+    ```
+    npm i -g http-server
+    ```
+
+1. After installing npm http-server you can serve locally with:
+    ```
+    http-server build/site -c-1
+    ```
