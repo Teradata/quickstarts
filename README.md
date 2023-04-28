@@ -86,7 +86,7 @@ There are two ways to build documentation locally:
 
 #### Build directly on your machine
 
-> :information_source: Instructions for MacOS. 
+##### Instructions for MacOS. 
 
 1. Install Node.js:
     ```
@@ -110,7 +110,7 @@ There are two ways to build documentation locally:
     ```
 1. The resulting website files will be saved in `./build/site` directory. Open the directory in your browser to view your local copy of the website.
 
-> :information_source: Instructions for Windows. 
+##### Instructions for Windows. 
 
 1. Install Node.js:
     ```
