@@ -133,7 +133,7 @@ There are two ways to build documentation locally:
     ```
 1. The resulting website files will be saved in `./build/site` directory. Open the directory in your browser to view your local copy of the website.
 
-> :information_source: Serving website locally. 
+##### Serving Website Locally. 
 
 1. You can install npm's http server for serving the website locally: 
     ```
