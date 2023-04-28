@@ -14,7 +14,7 @@ There are situations when you want to quickly validate a machine learning model 
 
 You need access to a Teradata Vantage instance.
 
-include::ROOT:partial$vantage.express.options.adoc[]
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
 == Install Vantage Analytics Library
 
