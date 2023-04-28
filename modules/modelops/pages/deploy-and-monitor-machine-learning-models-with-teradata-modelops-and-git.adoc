@@ -16,7 +16,7 @@ This is a quickstart tutorial for people who are new to Vantage ModelOps. In the
 
 * Ability to run Jupyter notebooks
 
-include::ROOT:partial$vantage.express.options.adoc[]
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
 Files needed
 

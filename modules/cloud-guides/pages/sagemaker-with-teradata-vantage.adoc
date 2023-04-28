@@ -27,7 +27,7 @@ Amazon SageMaker consumes training and test data from an Amazon S3 bucket. This 
 
 * Access to a Teradata Vantage instance.
 +
-include::ROOT:partial$vantage.express.options.adoc[]
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 *	IAM permission to access Amazon S3 bucket, and to use Amazon SageMaker service.
 *	An Amazon S3 bucket to store training data.
 

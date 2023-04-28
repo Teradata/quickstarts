@@ -14,7 +14,7 @@ Feast's connector for Teradata is a complete implementation with support for all
 
 You need access to a Teradata Vantage instance.
 
-include::ROOT:partial$vantage.express.options.adoc[]
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
 
 == Overview

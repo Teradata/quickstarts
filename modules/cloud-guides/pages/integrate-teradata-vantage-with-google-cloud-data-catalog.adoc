@@ -39,7 +39,7 @@ See the https://docs.teradata.com/home[documentation] for more information on Te
 
 * Access to a Teradata Vantage instance.
 +
-include::ROOT:partial$vantage.express.options.adoc[]
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 * A **https://support.google.com/accounts/answer/27441?hl=en[Google Service Account] **with Data Catalog Admin role
 * A https://cloud.google.com/resource-manager/docs/creating-managing-projects[*Cloud Console Project created*] for your account (i.e. partner-integration-lab)
 * Billing enabled
