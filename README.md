@@ -113,8 +113,8 @@ There are two ways to build documentation locally:
 ##### Instructions for Windows. 
 
 1. Install Node.js:
-    * For installing node js in windows follow the instruction on https://nodejs.org/en/download.
-    
+    * Follow the instructions on https://nodejs.org/en/download.
+
 1. Clone the repo:
     ```
     git clone git@github.com:Teradata/quickstarts.git
