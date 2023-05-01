@@ -1,6 +1,6 @@
 # Teradata Vantage Getting Started Guides
 
-Quickstarts for learning the Teradata Vantage database. The documents use the AsciiDoc format. The website is built with Antora. 
+Tutorials for learning the Teradata Vantage database. The documents use the AsciiDoc format. The website is built with Antora. 
 
 Contributions are welcome :). See below how to build the documentation website locally.
 
