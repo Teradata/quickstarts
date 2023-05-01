@@ -77,7 +77,7 @@ Now, that we have VAL and sample tables loaded, let's explore the data. It's a s
 
 image::banking.model.png[Banking Model, width=100%]
 
-In later parts of this quickstart we are going to explore if we can build a model that predicts average monthly balance that a banking customer has on their credit card based on all non-credit card related variables in the tables.
+In later parts of this how-to we are going to explore if we can build a model that predicts average monthly balance that a banking customer has on their credit card based on all non-credit card related variables in the tables.
 
 == Create a linear regression model
 

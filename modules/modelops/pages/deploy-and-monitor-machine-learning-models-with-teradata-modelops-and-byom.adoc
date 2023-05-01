@@ -8,7 +8,7 @@
 
 == Overview
 
-This is a quickstart tutorial for people who are new to Vantage ModelOps. In the tutorial, you will be able to create a new project in ModelOps, upload the required data to Vantage, and track the full lifecycle of an imported Diabetes demo model using BYOM mechanisms.
+This is a how-to for people who are new to Vantage ModelOps. In the tutorial, you will be able to create a new project in ModelOps, upload the required data to Vantage, and track the full lifecycle of an imported Diabetes demo model using BYOM mechanisms.
 
 == Prerequisites
 
