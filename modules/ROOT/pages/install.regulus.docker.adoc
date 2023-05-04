@@ -1,0 +1,315 @@
+= Install and Configure Regulus Using Docker
+:experimental:
+:page-author: Thripti Aravind
+:page-email: thripti.aravind@teradata.com
+:page-revdate: April 10th, 2023
+:description: Learn how to install and configure Regulus Workspaces using Docker Engine and Docker Compose.
+:keywords: Regulus, Workspaces, Query Engine
+
+IMPORTANT: This product is in preview and is subject to change. To get early access to Regulus, contact Support.
+
+== Overview
+
+include::ROOT:partial$understanding.regulus.adoc[]
+
+This document outlines the steps for installing and configuring Regulus using Docker. To use Regulus with Workspaces CLI, see xref::using.regulus.workspacecli.adoc[].
+
+== Before You Begin
+
+Make sure you have the following:
+
+* GitHub account: If you don't already have a GitHub account, create one at link:https://github.com/[https://github.com/].
+* AWS account: If you don't have an AWS account, sign up for an AWS Free Tier account at link:https://aws.amazon.com/free/[https://aws.amazon.com/free/]. 
++
+NOTE: For the developer preview, you can host the query engine only on AWS.
+* Docker: To download and install Docker, See link:https://docs.docker.com/docker-for-windows/install/[https://docs.docker.com/docker-for-windows/install/].
+
+== Install Workspaces
+
+The Workspaces Docker images are monolithic images of Workspaces running the necessary services in a single container. 
+
+Pull the docker image from link:https://hub.docker.com/r/teradata/regulus-workspaces[Docker Hub].
+
+[source, bash, id="docker_pull", role="content-editable emits-gtm-events"]
+----
+docker pull teradata/regulus-workspaces
+----
+
+Before proceeding, make sure to:
+
+* Copy and retain the environment variables, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_SESSION_TOKEN`, from your AWS Console. See link:https://docs.aws.amazon.com/sdkref/latest/guide/environment-variables.html[Environment Variables].
+* Set the environment variable, `WORKSPACES_HOME`, to the directory where the configuration and data files are located. Make sure that the directory exists and appropriate permission is granted.
++
+[cols="1,1,1"]
+|===
+|Local Location |Container Location |Usage
+
+|$WORKSPACES_HOME
+|/etc/td
+|Stores data and configuration
+
+|$WORKSPACES_HOME/tls
+|/etc/td/tls
+|Stores cert files
+|===
+
+You can install Workspaces using one of the following methods:
+
+* <<_install_workspaces_using_docker_engine,Docker Engine>>
+* <<_install_workspaces_using_docker_compose, Docker Compose>>
+
+=== Install Workspaces Using Docker Engine
+
+Run the Docker image once you've set the `WORKSPACES_HOME` variable.
+
+NOTE: Modify the directories based on your requirements.
+
+[source, bash, id="docker_engine_run", role="content-editable emits-gtm-events"]
+----
+docker run -detach \
+--env AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
+--env AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \
+--env AWS_SESSION_TOKEN="${AWS_SESSION_TOKEN}" \
+--publish 3000:3000 \ 
+--publish 3282:3282 \ 
+--volume ${WORKSPACES_HOME}:/etc/td \
+teradata/regulus-workspaces:latest
+----
+
+The command downloads and starts a Workspaces container and publishes the ports needed to access it. Once the Workspaces server is initialized and started, you can access Workspaces using the URL: http://<ip_or_hostname>:3000/.
+
+=== Install Workspaces Using Docker Compose
+
+With Docker Compose, you can easily configure, install, and upgrade your Docker-based Workspaces installation.
+
+1. Install Docker Compose. See link:https://docs.docker.com/compose/install/[https://docs.docker.com/compose/install/].
+
+2.	Create a docker-compose.yml file.
++
+[source, bash, id="docker_compose", role="content-editable emits-gtm-events"]
+----
+version: "3.9"
+
+services:
+  workspaces:
+    deploy:
+      replicas: 1
+    container_name: workspaces
+    image: ${WORKSPACES_IMAGE_NAME:-teradata/regulus-workspaces}:${WORKSPACES_IMAGE_TAG:-latest}
+    command: serve -v
+    restart: unless-stopped
+    ports:
+      - "443:443/tcp"
+      - "3000:3000/tcp"
+      - "3282:3282/tcp"
+    environment:
+      TZ: ${WS_TZ:-UTC}
+      AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+      AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+      AWS_SESSION_TOKEN: "${AWS_SESSION_TOKEN}"
+    volumes:
+      - ${WORKSPACES_HOME:-./volumes/workspaces}:/etc/td
+      - ${WORKSPACES_AWS_CONFIG:-~/.aws}:/root/.aws
+
+----
+
+3.	Go to the directory where the docker-compose.yml file is located and start Workspaces.
++
+[source, bash, id="docker_compose_run", role="content-editable emits-gtm-events"]
+----
+Docker compose up -d
+----
++
+Once the Workspaces server is initialized and started, you can access Workspaces using the URL: http://<ip_or_hostname>:3000/.
+
+== Configure and Set Up Workspaces 
+
+Workspaces uses the GitHub OAuth App to authorize users and manage the project state. To authorize Workspaces to save your project instance configuration, use the Client ID and Client secret key generated during the GitHub OAuth App registration. The project instance configuration values are maintained in your GitHub repositories. 
+
+First-time users must perform the following steps before proceeding: 
+
+1.	Log on to your GitHub account and create an OAuth App. See link:https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app[GitHub Documentation].
++
+While registering the OAuth App, type the following Workspaces URLs in the URL fields:
++
+* **Homepage URL**: http://<ip_or_hostname>:3000/
+* **Authorization callback URL**: http://<ip_or_hostname>:3000/auth/github/callback
+
+2.	Copy and retain the **Client ID** and **Client secret key**. 
+
+To set up Workspaces, do the following:
+
+1. Access Workspaces using the URL: http://<ip_or_hostname>:3000/.
++
+image::regulus/regulus.workspaces.setting.png[]
+
+2. Apply the following general service configuration under **Setup**.
++
+[cols="1,1,1"]
+|===
+|Setting |Description |Required?
+
+|Service Base URL 
+|[Non-Editable] The root URL of the service.
+|Yes
+
+|Git Provider
+|The provider for Git integration. Currently, Regulus supports only GitHub.
+|Yes
+
+|Service Log Lev
+|The level of logging.
+|Yes
+
+|Use TLS
+|Indicates if TLS support is enabled. Teradata recommends enabling this option.
+|Yes
+
+|Service TLS Certification 
+|The server certificate to authenticate the server identity.
+|No
+
+|Service TLS Certificate Key
+|The server certificate key.
+|No
+|===
+
+3. To use a self-signed certificate for **Service Base URL**, select **GENERATE TLS**. A certificate and private key are generated and displayed in the respective fields.
+
+4. Select **Next**.
+
+5. Apply the following settings under **Cloud Integrations: AWS**.
++
+[cols="1,1,1"]
+|===
+|Setting |Description |Required?
+
+|Default Region 
+|The AWS region you want to deploy the workload in. Teradata recommends choosing the region closest to your primary work location.
+|Yes
+
+|Default Subnet
+|The default location to launch the query engine.
+|Yes
+|===
+
+6. Select **Next**. 
+7. Apply the following settings under **Configure GitHub**.
++
+[cols="1,1,1"]
+|===
+|Setting |Description |Required?
+
+|GitHub Application URL
+|[Non-Editable] The URL where the Workspaces server is hosted.
+|Yes
+
+|GitHub Callback URL	
+|[Non-Editable] The URL you are redirected to after you authorize.
+|Yes
+
+|GitHub Client ID
+|The Client ID you received from GitHub on creating your OAuth App.
+|Yes
+
+|Use TLS
+|Enable TLS support
+|Yes
+
+|GitHub Client Secret 
+|The Client secret ID you received from GitHub on creating your OAuth App.
+|Yes
+
+|GitHub Organization
+|[Optional]
+|No
+
+|GitHub Base URL
+|[Optional]
+|No
+|===
+
+8.	Select **Save** and then select **Login**. You are redirected to GitHub.
+
+9.	Log on with your GitHub credentials to authorize Workspaces. 
++
+After authentication, you are redirected to the Workspaces **Profile** page, and an API Key is generated. You can use the API Key to make requests to the Workspaces service.
++
+NOTE: A new API Key is generated each time you connect to Workspaces.
+
+== Install a Regulus Interface
+
+You can use either JupyterLab or Workspaces CLI as your Regulus interface.
+
+* JupyterLab: Install using one of the following methods:
+
+** <<_install_jupyterLab_using_docker_engine, Docker Engine>>
+** <<_install_jupyterLab_using_docker_compose, Docker Compose>>
+
+* Workspaces CLI: See xref::using.regulus.workspacecli.adoc[].
+
+=== Install JupyterLab Using Docker Engine
+
+Run the Docker image once you've set the `JUPYTER_HOME` variable.
+
+NOTE: Modify the directories based on your requirements.
+
+[source, bash, id="docker_engine_jupyter", role="content-editable emits-gtm-events"]
+----
+docker run -detach \
+--env “accept_license=Y” \
+--publish 8888:8888 \ 
+--volume ${JUPYTER_HOME}: /home/jovyan/JupyterLabRoot \
+teradata/regulus-jupyter:latest
+----
+
+The command downloads and starts a JupyterLab container and publishes the ports needed to access it.
+Connect to JupyterLab using the URL: http://localhost:8888 and enter the token when prompted. For detailed instructions, see link:https://docs.teradata.com/r/Teradata-VantageTM-Modules-for-Jupyter-Installation-Guide/Teradata-Vantage-Modules-for-Jupyter/Teradata-Vantage-Modules-for-Jupyter[Teradata Vantage™ Modules for Jupyter Installation Guide] or link:https://quickstarts.teradata.com/jupyter.html[Use Vantage from a Jupyter Notebook].
+
+=== Install JupyterLab Using Docker Compose
+
+With Docker Compose, you can easily configure, install, and upgrade your Docker-based JupyterLab installation.
+
+
+1. Install Docker Compose. See link:https://docs.docker.com/compose/install/[https://docs.docker.com/compose/install/].
+
+2.	Create a docker-compose.yml file.
++
+[source, bash, id="docker_compose_jupyter", role="content-editable emits-gtm-events"]
+----
+
+version: "3.9"
+
+services:
+  jupyter:
+    deploy:
+      replicas: 1
+    image: teradata/regulus-jupyter:latest
+    environment:
+      - "accept_license=Y"
+    ports:
+      - 8888:8888
+    volumes:
+      - ${JUPYTER_HOME:-./volumes/jupyter}:/home/jovyan/JupyterLabRoot/userdata
+      - ${WORKSPACES_AWS_CONFIG:-~/.aws}:/root/.aws
+
+----
+
+3.	Go to the directory where the docker-compose.yml file is located and start JupyterLab.
++
+[source, bash, id="docker_compose_jupyter_up", role="content-editable emits-gtm-events"]
+----
+Docker compose up -d
+----
++
+Once the JupyterLab server is initialized and started, you can connect to JupyterLab using the URL: http://localhost:8888 and enter the token when prompted. For detailed instructions, see link:https://docs.teradata.com/r/Teradata-VantageTM-Modules-for-Jupyter-Installation-Guide/Teradata-Vantage-Modules-for-Jupyter/Teradata-Vantage-Modules-for-Jupyter[Teradata Vantage™ Modules for Jupyter Installation Guide] or link:https://quickstarts.teradata.com/jupyter.html[Use Vantage from a Jupyter Notebook].
+
+Congrats! You're all set up to use Regulus.
+
+== Next Steps
+
+* Get started with Regulus by running a simple workflow. See xref::getting.started.regulus.adoc[].
+
+* Interested in learning how Regulus can help you with real-life use cases? See <GitHub Sample link>.
+
+

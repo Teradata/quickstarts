@@ -47,3 +47,9 @@
 * Demos
 ** Financial
 *** xref:jupyter-demos:gcp-vertex-ai-pipelines-vantage-byom-housing-example.adoc[]
+
+* Regulus-Developer Preview
+** xref::install.regulus.docker.adoc[]
+** xref::getting.started.regulus.adoc[]
+** xref::regulus.magic.reference.adoc[]
+** xref::using.regulus.workspacecli.adoc[]

@@ -1,0 +1,198 @@
+= Run a Sample Workload in JupyterLab
+:experimental:
+:page-author: Thripti Aravind
+:page-email: thripti.aravind@teradata.com
+:page-revdate: April 10th, 2023
+:description: Run a simple workflow and learn how to use Regulus.
+:keywords: Regulus, Workspaces, Query Engine
+
+IMPORTANT: This product is in preview and is subject to change. To get early access to Regulus, contact Support.
+
+== Overview
+
+This document walks you through a simple workflow where you can use JupyterLab to:
+
+* Deploy on-demand, scalable compute 
+* Connect to your external data source
+* Run the workload
+* Suspend the compute 
+
+== Before You Begin
+
+* Install and configure Regulus. See xref::install.regulus.docker.adoc[].
+
+* Copy and retain the following:
+
+** AWS environment variables, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_SESSION_TOKEN` from your AWS Console. See link:https://docs.aws.amazon.com/sdkref/latest/guide/environment-variables.html[Environment Variables].
+** API Key from Workspaces.
+
+== Run Your First Workload
+
+Run `%help` or `%help <command>` for details on any magic command. See xref::regulus.magic.reference.adoc[] for more details.
+
+1. Connect to JupyterLab using the URL: http://localhost:8888 and enter the token when prompted. 
+2. Connect to Workspaces using the API Key.
++
+[source, bash, id="connect_workspaces", role="content-editable emits-gtm-events"]
+----
+%workspaces_config host=<ip_or_hostname>, apikey=<API_Key>, withtls=F
+----
+3. Create a new project.
++
+NOTE: Currently, Regulus supports only AWS.
++
+
+[source, bash, id="create_project", role="content-editable emits-gtm-events"]
+----
+%project_create project=<Project_Name>, env=aws
+----
+
+4. [Optional] Create an authorization object to store the CSP credentials.
++
+Replace `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_REGION` with your values. 
++
+
+[source, bash, id="create_auth", role="content-editable emits-gtm-events"]
+----
+%project_auth_create name=<Auth_Name>, project=<Project_Name>, key=<AWS_ACCESS_KEY_ID>, secret=<AWS_SECRET_ACCESS_KEy>, region=<AWS_REGION>
+----
+
+5. Deploy a query engine for the project.
++
+Replace the <Project_Name> for your system. The size parameter value can be small, medium, large, or extralarge. The default size is small.
++
+
+[source, bash, id="deploy_query_engine", role="content-editable emits-gtm-events"]
+----
+%project_engine_deploy name=<Project_Name>, size=<Size_of_Engine>
+----
+
++
+The deployment process will take a few minutes to complete. On successful deployment, a password is generated.
+
+6. Establish a connection to your project.
++
+
+[source, bash, id="connect_project", role="content-editable emits-gtm-events"]
+----
+%connect <Project_Name>
+----
++
+When a connection is established, the interface prompts you for a password. Enter the password generated in the previous step.
+
+7. Run the sample workload.
++
+NOTE: Make sure that you do not have tables named SalesCenter or SalesDemo in the selected database.
++
+a. Create a table to store the sales center data. 
++
+First, drop the table if it already exists. The command fails if the table does not exist.
++
+
+[source, teradata-sql, id="create_table", role="content-editable emits-gtm-events"]
+----
+DROP TABLE SalesCenter;
+CREATE MULTISET TABLE SalesCenter ,NO FALLBACK ,
+     NO BEFORE JOURNAL,
+     NO AFTER JOURNAL,
+     CHECKSUM = DEFAULT,
+     DEFAULT MERGEBLOCKRATIO
+     (
+      Sales_Center_id INTEGER NOT NULL,
+      Sales_Center_Name VARCHAR(255) CHARACTER SET LATIN NOT CASESPECIFIC)
+NO PRIMARY INDEX ;
+----
+
+b. Load data into the SalesCenter table using the `%dataload` magic command.
++
+
+[source, bash, id="data_load", role="content-editable emits-gtm-events"]
+----
+%dataload DATABASE=<Project_Name>, TABLE=SalesCenter, FILEPATH=notebooks/sql/data/salescenter.csv
+----
++
+Verify that the data was inserted.
++
+
+[source, teradata-sql, id="verify_data_load", role="content-editable emits-gtm-events"]
+----
+SELECT * FROM SalesCenter ORDER BY 1
+----
+
+c. Create a table with the sales demo data.
++
+
+[source, teradata-sql, id="create_table_data", role="content-editable emits-gtm-events"]
+----
+DROP TABLE SalesDemo;
+CREATE MULTISET TABLE SalesDemo ,NO FALLBACK ,
+     NO BEFORE JOURNAL,
+     NO AFTER JOURNAL,
+     CHECKSUM = DEFAULT,
+     DEFAULT MERGEBLOCKRATIO
+     (
+      Sales_Center_ID INTEGER NOT NULL,
+      UNITS DECIMAL(15,4),
+      SALES DECIMAL(15,2),
+      COST DECIMAL(15,2))
+NO PRIMARY INDEX ;
+----
+
+d. Load data into the SalesDemo table using the `%dataload` magic command.
++
+
+[source, bash, id="load_data_table", role="content-editable emits-gtm-events"]
+----
+%dataload DATABASE=<Project_Name>, TABLE=SalesDemo, FILEPATH=notebooks/sql/data/salesdemo.csv
+----
++
+Verify that the sales demo data was inserted successfully.
++
+[source, teradata-sql, id="verify_sales_data", role="content-editable emits-gtm-events"]
+----
+SELECT * FROM SalesDemo ORDER BY sales
+----
++
+Open the Navigator for your connection and verify that the tables were created. Run a row count on the tables to verify that the data was loaded.
+
+e. Use charting magic to visualize the result.
++
+Provide X and Y axes for your chart.
++
+
+[source, bash, id="plot_chart", role="content-editable emits-gtm-events"]
+----
+%chart sales_center_name, sales, title=Sales Data
+----
+
+f.	Drop the tables.
++
+
+[source, teradata-sql, id="drop_tables", role="content-editable emits-gtm-events"]
+----
+DROP TABLE SalesCenter;
+DROP TABLE SalesDemo;
+----
+
+8. Back up your project metadata and object definitions in your GitHub repository.
++
+
+[source, bash, id="backup_project", role="content-editable emits-gtm-events"]
+----
+%project_backup project=<Project_Name>
+----
+9. Suspend the query engine.
++
+
+[source, bash, id="suspend_query_engine", role="content-editable emits-gtm-events"]
+----
+%project_engine_suspend project=<Project_Name>
+----
+
+Congrats! You've successfully run your first use case in JupyterLab.
+
+== Next Steps
+
+* Interested in exploring advanced use cases? See <GitHub Sample link>.
+
+* Learn about the magic commands available in JupyterLab. See xref::regulus.magic.reference.adoc[].
