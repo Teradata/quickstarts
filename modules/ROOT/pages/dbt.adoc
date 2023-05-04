@@ -15,7 +15,7 @@ This tutorial demonstrates how to use dbt (Data Build Tool) with Teradata Vantag
 
 * Access to a Teradata Vantage instance.
 +
-include::ROOT:partial$vantage.express.options.adoc[]
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 * Python 3.7, 3.8, 3.9 or 3.10 installed.
 
 == Install dbt

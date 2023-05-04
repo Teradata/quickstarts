@@ -21,7 +21,7 @@ KNIME Analytics Platform is a data science workbench. It supports analytics on v
 
 * Access to a Teradata Vantage instance, version 17.10 or higher.
 +
-include::ROOT:partial$vantage.express.options.adoc[]
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 * KNIME installed locally. See link:https://www.knime.com/installation[KNIME installation instructions] for details.
 
 == Integration Procedure

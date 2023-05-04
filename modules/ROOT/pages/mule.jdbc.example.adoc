@@ -16,7 +16,7 @@ It demonstrates how to query a Teradata database and expose results over REST AP
 * Mulesoft Anypoint Studio. You can download a 30-day trial from https://www.mulesoft.com/platform/studio.
 * Access to a Teradata Vantage instance.
 +
-include::ROOT:partial$vantage.express.options.adoc[]
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 * Java JDK. See installation instructions for OpenJDK: https://openjdk.java.net/install/.
 * Apache Maven. See installation instructions: https://maven.apache.org/install.html.
 

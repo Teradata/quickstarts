@@ -1,0 +1,1 @@
+NOTE: If you need a test instance of Vantage, you can provision one for free at https://clearscape.teradata.com.

@@ -45,7 +45,7 @@ You will need the following accounts, and systems:
 
 * Access to a Teradata Vantage instance.
 +
-include::ROOT:partial$vantage.express.options.adoc[]
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 * An AWS account with the role that can create and run flows.
 * An Amazon S3 bucket to store Salesforce data (i.e., ptctsoutput)
 * An Amazon S3 bucket to store raw Vantage data (Parquet file) (i.e., vantageparquet). This bucket needs to have policy to allow Amazon AppFlow access

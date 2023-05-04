@@ -43,7 +43,7 @@ You will need the following accounts and system.
 
 * A Teradata Vantage instance with a user and password. The user must have permission to data that can be used by Power BI Desktop. Vantage must be accessible from Power BI Desktop.
 +
-include::ROOT:partial$vantage.express.options.adoc[]
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
 * The https://downloads.teradata.com/download/connectivity/net-data-provider-for-teradata[.NET Data Provider for Teradata].
 

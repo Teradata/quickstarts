@@ -8,7 +8,7 @@
 
 == Overview
 
-This is a quickstart tutorial for people who are new to Vantage ModelOps. In the tutorial, you will be able to create a new project in ModelOps, upload the required data to Vantage, and track the full lifecycle of a demo model using code templates and following the methodology for GIT models in ModelOps.
+This is a how-to for people who are new to Vantage ModelOps. In the tutorial, you will be able to create a new project in ModelOps, upload the required data to Vantage, and track the full lifecycle of a demo model using code templates and following the methodology for GIT models in ModelOps.
 
 == Prerequisites
 
@@ -16,7 +16,7 @@ This is a quickstart tutorial for people who are new to Vantage ModelOps. In the
 
 * Ability to run Jupyter notebooks
 
-include::ROOT:partial$vantage.express.options.adoc[]
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
 Files needed
 
