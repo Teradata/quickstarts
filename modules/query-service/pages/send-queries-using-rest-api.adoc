@@ -560,6 +560,74 @@ Response
 ]
 ----
 
+=== Calling Query Service APIs using JWT
+
+Prerequisites for JWT authentication:
+
+1. The user for whom the JWT is created, needs to be present in the database
+
+2. The database needs to be JWT enabled.
+
+[source, python]
+----
+import requests
+import json
+requests.packages.urllib3.disable_warnings()
+
+# run it from local. 
+
+auth_encoded_jwt = "<YOUR_JWT_HERE>"
+auth_str = "Bearer " + auth_encoded_jwt
+
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': auth_str
+}
+
+print(headers)
+----
+
+Response
+
+----
+{'Content-Type': 'application/json', 'Authorization': 'Bearer <YOUR_JWT_HERE>'}
+----
+
+=== Make a simple API request with basic options
+
+In the following example, the request includes:
+
+* `SELECT * FROM DBC.DBCInfo`: The query to the system with the alias `<SYSTEM_NAME>`.
+* `'format': 'OBJECT'`: The format for response. The formats supported are: JSON object, JSON array, and CSV.
++
+NOTE: The JSON object format creates one JSON object per row where the column name is the field name, and the column value is the field value.
++
+
+Request
+
+[source, python]
+----
+url = 'https://<QS_HOSTNAME>:1443/systems/<SYSTEM_NAME>/queries'
+
+payload = {
+  'query': 'SELECT * FROM DBC.DBCInfo;',
+  'format': 'OBJECT'
+}
+
+payload_json = json.dumps(payload)
+
+response = requests.request('POST', url, headers=headers, data=payload_json, verify=False)
+
+print(response.json())
+----
+
+Response
+
+----
+{"queueDuration":3,"queryDuration":36,"results":[{"resultSet":true,"data":[{"InfoKey":"LANGUAGE SUPPORT MODE","InfoData":"Standard"},{"InfoKey":"RELEASE","InfoData":"15.10.07.02"},{"InfoKey":"VERSION","InfoData":"15.10.07.02"}],"rowCount":3,"rowLimitExceeded":false}]}
+----
+
+
 == Resources
 
 * Features, examples, and references: link:https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022[Query Service Installation, Configuration, and Usage Guide]
