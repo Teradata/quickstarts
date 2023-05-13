@@ -2,7 +2,7 @@
 :experimental:
 :page-author: Thripti Aravind
 :page-email: thripti.aravind@teradata.com
-:page-revdate: April 10th, 2023
+:page-revdate: May 5th, 2023
 :description: Use Workspaces CLI to use Regulus 
 :keywords: Regulus, Workspaces, Query Engine
 
@@ -54,10 +54,47 @@ $ workspacesctl
 +
 image::regulus/reguluscli.workspaces.png[Regulus CLI, width=500]
 
+2. Configure Workspaces using the API Key.
++
+[source, bash, id="workspaces_use_config", role="content-editable emits-gtm-events"]
+----
+workspacesctl workspaces config
+----
+
+3. Create a new project.
++
+[source, bash, id="workspaces_use_project_create", role="content-editable emits-gtm-events"]
+----
+workspacesctl project create <Project_Name> -e <CSP> --no-tls
+----
+
+4. Deploy a query engine for the project.
++
+[source, bash, id="workspaces_use_project_engine_deploy", role="content-editable emits-gtm-events"]
+----
+workspacesctl project engine deploy <Project_Name> -t <Size_of_Engine> --no-tls
+----
+
+5. Run a sample workload.
+
+6. Manage your project and query engine.
+
+7. Backup your project.
++
+[source, bash, id="workspaces_use_project_backup", role="content-editable emits-gtm-events"]
+----
+workspacesctl project backup <Project_Name> --no-tls
+----
+
+8. Suspend the query engine.
++
+[source, bash, id="workspaces_use_project_engine_suspend", role="content-editable emits-gtm-events"]
+----
+workspacesctl project engine suspend <Project_Name> --no-tls
+----
+
 For a supported list of commands, see <<_workspaces_cli_reference, Workspaces CLI Reference>>.
 
-Example data exploration steps:
-<Put example here>
 
 == Workspaces CLI Reference
 
@@ -184,7 +221,10 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 **Output**:
 
-<Insert Image>
+NOTE: The output is in YAML format.
+
+image::regulus/reguluscli.project.delete.png[Regulus CLI Project Delete, width=500]
+
 
 === project user list
 
@@ -222,7 +262,9 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 **Output**:
 
-<Insert Output screenshot>
+NOTE: The output is in YAML format.
+
+image::regulus/reguluscli.project.backup.png[Regulus CLI Project Backup, width=500]
 
 === project restore
 
@@ -260,7 +302,9 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 **Output**:
 
-<Insert Output screenshot>
+NOTE: The output is in YAML format.
+
+image::regulus/reguluscli.project.restore.png[Regulus CLI Project Restore, width=500]
 
 === project engine deploy
 
@@ -331,7 +375,9 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 **Output**:
 
-<Insert Output screenshot>
+NOTE: The output is in YAML format.
+
+image::regulus/reguluscli.engine.suspend.png[Regulus CLI Engine Suspend, width=500]
 
 === project engine list
 
@@ -350,7 +396,9 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 **Output**:
 
-<Insert Output screenshot>
+NOTE: The output is in YAML format.
+
+image::regulus/reguluscli.engine.list.png[Regulus CLI Engine List, width=500]
 
 === project auth create
 
@@ -402,7 +450,9 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 **Output**:
 
-<Insert Output screenshot>
+NOTE: The output is in YAML format.
+
+image::regulus/reguluscli.auth.create.png[Regulus CLI Auth Create, width=500]
 
 === project auth list
 
@@ -421,7 +471,9 @@ NOTE: If your setup includes TLS configuration,  you need not add the `-no-tls` 
 
 **Output**:
 
-<Insert Output screenshot>
+NOTE: The output is in YAML format.
+
+image::regulus/reguluscli.auth.list.png[Regulus CLI Auth List, width=500]
 
 === project auth delete
 
@@ -453,4 +505,6 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 **Output**:
 
-<Insert Output screenshot>
+NOTE: The output is in YAML format.
+
+image::regulus/reguluscli.auth.delete.png[Regulus CLI Auth Delete, width=500]

@@ -175,7 +175,7 @@ image::regulus/regulus.auth.list.png[List Auth, width=500]
 **Usage**:
 [source, bash, id="magic_engine_deploy", role="content-editable emits-gtm-events"]
 ----
-%project_engine_deploy project=<Project_Name>, size=<Size_of_Engine>, node=<Number_of_Nodes>, vpc=<vpc_id>, subnet=<Subnet_id>, region=<Region>, azs=<Avalability_Zone>
+%project_engine_deploy project=<Project_Name>, size=<Size_of_Engine>, node=<Number_of_Nodes>, subnet=<Subnet_id>, region=<Region>, secgroups=<Security_Group>, cidrs=<CIDR>
 ----
 Where:
 
@@ -188,7 +188,9 @@ Where:
 * [Optional] node: Number of query engine nodes to be deployed. The default value is 1.
 * [Optional] subnet: Subnet used for the query engine if there are no default values from the service.	
 * [Optional] region: Region used for the query engine if there are no default values from service.
-* [Optional] azs:	Availability zone for the query engine.	
+* [Optional] secgroups: List of security groups for the VPC in each region. If you don't specify a security group, the query engine is automatically associated with the default security group for the VPC. 
+* [Optional] cidr: List of CIDR addresses used for the query engine.
+
          
 **Output**:
 ----

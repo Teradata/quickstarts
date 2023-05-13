@@ -59,7 +59,7 @@ Replace `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_REGION` with your
 
 5. Deploy a query engine for the project.
 +
-Replace the <Project_Name> for your system. The size parameter value can be small, medium, large, or extralarge. The default size is small.
+Replace the <Project_Name> to a name of your choice. The size parameter value can be small, medium, large, or extralarge. The default size is small.
 +
 
 [source, bash, id="deploy_query_engine", role="content-editable emits-gtm-events"]
@@ -193,6 +193,6 @@ Congrats! You've successfully run your first use case in JupyterLab.
 
 == Next Steps
 
-* Interested in exploring advanced use cases? See <GitHub Sample link>.
+* Interested in exploring advanced use cases? Coming soon! Keep watching this space for the GitHub link.
 
 * Learn about the magic commands available in JupyterLab. See xref::regulus.magic.reference.adoc[].

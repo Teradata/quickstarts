@@ -161,6 +161,10 @@ image::regulus/regulus.workspaces.setting.png[]
 |The level of logging.
 |Yes
 
+|Engine IP Network Type
+|The type of network assigned to a query engine instance, which can be either public or private. 
+|Yes
+
 |Use TLS
 |Indicates if TLS support is enabled. Teradata recommends enabling this option.
 |Yes
@@ -191,6 +195,14 @@ image::regulus/regulus.workspaces.setting.png[]
 |Default Subnet
 |The default location to launch the query engine.
 |Yes
+
+|Default CIDRs
+|The list of Classless Inter-Domain Routing (CIDR) addresses used for the query engine. Use CIDR to allocate IP addresses flexibly and efficiently in your network. If you don't specify a CIDR, the query engine is automatically associated with the default CIDR. 
+|No
+
+|Default Security Groups
+|The list of security groups for the VPC in each region. If you don't specify a security group, the query engine is automatically associated with the default security group for the VPC. 
+|No
 |===
 
 6. Select **Next**. 
@@ -221,11 +233,11 @@ image::regulus/regulus.workspaces.setting.png[]
 |Yes
 
 |GitHub Organization
-|[Optional]
+|The name of the GitHub organization account that you use to collaborate with your team.
 |No
 
 |GitHub Base URL
-|[Optional]
+|The base URL of your GitHub account. The URL may vary based on your account type. For example, https://github.company.com/ for GitHub Enterprise account.
 |No
 |===
 
@@ -250,9 +262,12 @@ You can use either JupyterLab or Workspaces CLI as your Regulus interface.
 
 === Install JupyterLab Using Docker Engine
 
-Run the Docker image once you've set the `JUPYTER_HOME` variable.
+1. Pull the Docker image from the DockerHub at link:https://hub.docker.com/r/teradata/regulus-jupyter[https://hub.docker.com/r/teradata/regulus-jupyter].
 
+2. Run the Docker image once you've set the `JUPYTER_HOME` variable.
++
 NOTE: Modify the directories based on your requirements.
++
 
 [source, bash, id="docker_engine_jupyter", role="content-editable emits-gtm-events"]
 ----
@@ -310,6 +325,4 @@ Congrats! You're all set up to use Regulus.
 
 * Get started with Regulus by running a simple workflow. See xref::getting.started.regulus.adoc[].
 
-* Interested in learning how Regulus can help you with real-life use cases? See <GitHub Sample link>.
-
-
+* Interested in learning how Regulus can help you with real-life use cases? Coming soon! Keep watching this space for the GitHub link.
