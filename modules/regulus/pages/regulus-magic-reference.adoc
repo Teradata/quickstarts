@@ -1,0 +1,313 @@
+= Regulus JupyterLab Magic Command Reference
+:experimental:
+:page-author: Thripti Aravind
+:page-email: thripti.aravind@teradata.com
+:page-revdate: April 10th, 2023
+:description: Learn about Regulus JupyterLab magic commands.
+:keywords: Regulus, Workspaces, Query Engine
+:page-image-directory: regulus-magic-reference
+
+IMPORTANT: This product is in preview and is subject to change. To get early access to Regulus, contact Support.
+
+== Overview
+
+Regulus JupyterLab supports the following magic commands in addition to the existing Teradata SQL Kernel magic commands. See link:https://github.com/Teradata/jupyterextensions/blob/master/notebooks/sql/GettingStarted.ipynb[Teradata JupyterLab Getting Started Guide].
+
+== %workspaces_config
+
+**Description**: One-time configuration to bind with the Workspaces service.
+
+**Usage**:
+
+[source, bash, id="magic_workspaces_config", role="content-editable emits-gtm-events"]
+----
+%workspaces_config host=<RPC_Service_URL>, apikey=<Workspace_API_Key>, withtls=F
+----
+Where:
+
+* host:  Name or IP address of the query engine service.
+
+* apikey: API Key value from the Workspaces Profile page.
+
+* [Optional] withTLS: If False (F), the default client-server communication does not use TLS.
+
+Output:
+
+----
+Workspace configured for host=<RPC_Service_URL>
+----
+
+== %project_create
+
+**Description**: Create a new project. This command also creates a new repository with the project name in your GitHub account. The configurations are stored in the engine.yml file.
+
+**Usage**:
+
+[source, bash, id="magic_project_create", role="content-editable emits-gtm-events"]
+----
+%project_create project=<Project_Name>, env=<CSP>, team=<Project_Team>
+----
+Where:
+
+* project: Name of the project to be created.
+
+* env: Cloud environment where the project is hosted. The value can be aws, azure, gcp, or vsphere. For the current release, only AWS is supported.
+
+* [Optional] team: Name of the team collaborating on the project.
+
+**Output**:
+----
+Project <Project_Name> created
+----
+
+== %project_delete
+
+**Description**: Delete a project.
+
+WARNING: Running this command removes the GitHub repository containing the objects created using Regulus.
+
+**Usage**:
+[source, bash, id="magic_project_delete", role="content-editable emits-gtm-events"]
+----
+%project_delete project=<Project_Name>, team=<Project_Team>
+----
+Where:
+
+* project: Name of the project to be deleted.
+
+* [Optional] team: Name of the team collaborating on the project.
+
+**Output**:
+----
+Project <Project_Name> deleted
+----
+
+
+== %project_list
+
+**Description**: List the details of the projects.
+
+Use the project parameter to get the details of a specific project. All the projects are listed if you run the command without any parameters.
+
+**Usage**:
+[source, bash, id="magic_project_list", role="content-editable emits-gtm-events"]
+----
+%project_list project=<Project_Name>
+----
+Where:
+
+* project: Name of the project to be listed.
+
+**Output**:
+
+image::{page-image-directory}/regulus.project.list.png[List Project, width=500]
+
+
+== %project_auth_create
+
+**Description**: Create an authorization object to store object store credentials.
+
+You must create the authorization object before deploying the query engine. The authorization details are retained and are included while redeploying the project. Optionally, you can create authorizations manually using the `CREATE AUTHORIZATION` SQL command after deploying the query engine. In this case, the authorization details are not retained.
+
+
+**Usage**:
+[source, bash, id="magic_auth_create", role="content-editable emits-gtm-events"]
+----
+%project_auth_create project=<Project_Name>, name=<Auth_Name>, key=<Auth_Key>, secret=<Auth_Secret>, region=<ObjectStore_Region>
+----
+Where:
+
+* project: Name of the project.
+
+* name:	Authorization name for the object store.
+
+* key: Authorization key of the object store.
+
+* secret: Authorization secret access ID of the object store.
+
+* region: Region of the object store; local for the local object store.
+
+**Output**:
+
+----
+Authorization 'name' created
+----
+
+== %project_auth_delete
+
+**Description**: Remove an object store authorization.
+
+**Usage**:
+[source, bash, id="magic_auth_delete", role="content-editable emits-gtm-events"]
+----
+%project_auth_delete project=<Project_Name>, name=<Auth_Name>
+----
+Where:
+
+* project: Name of the project.
+* name:	Authorization name for the object store.
+
+**Output**:
+----
+Authorization 'name' deleted
+----
+
+== %project_auth_list
+
+**Description**: List object store authorizations that are created for a project.
+
+**Usage**:
+[source, bash, id="magic_auth_list", role="content-editable emits-gtm-events"]
+----
+%project_auth_list project=<Project_Name>
+----
+Where:
+
+* project: Name of the project.
+
+**Output**:
+
+image::{page-image-directory}/regulus.auth.list.png[List Auth, width=500]
+
+== %project_engine_deploy
+
+**Description**: Deploy a query engine for the project. The deployment process will take a few minutes to complete. On successful deployment, a password is generated.
+
+**Usage**:
+[source, bash, id="magic_engine_deploy", role="content-editable emits-gtm-events"]
+----
+%project_engine_deploy project=<Project_Name>, size=<Size_of_Engine>, node=<Number_of_Nodes>, subnet=<Subnet_id>, region=<Region>, secgroups=<Security_Group>, cidrs=<CIDR>
+----
+Where:
+
+* project:	Name of the project.
+* size: Size of the query engine. The value can be:
+** small
+** medium
+** large
+** extralarge
+* [Optional] node: Number of query engine nodes to be deployed. The default value is 1.
+* [Optional] subnet: Subnet used for the query engine if there are no default values from the service.
+* [Optional] region: Region used for the query engine if there are no default values from service.
+* [Optional] secgroups: List of security groups for the VPC in each region. If you don't specify a security group, the query engine is automatically associated with the default security group for the VPC.
+* [Optional] cidr: List of CIDR addresses used for the query engine.
+
+
+**Output**:
+----
+Started deploying.
+Success: Compute Engine setup, look at the connection manager
+----
+
+image::{page-image-directory}/regulus.engine.deploy.png[Deploy Engine, width=500]
+
+== %project_engine_suspend
+
+**Description**: Stop the query engine after you're done with your work.
+
+**Usage**:
+[source, bash, id="magic_engine_suspend", role="content-editable emits-gtm-events"]
+----
+%project_engine_suspend <Project_Name>
+----
+Where:
+
+* project: Name of the project.
+
+**Output**:
+
+----
+Started suspend. Success: connection removed
+Success: Suspending Compute Engine
+----
+
+== %project_engine_list
+
+**Description**: View the list of query engines deployed for your project.
+
+**Usage**:
+[source, bash, id="magic_engine_list", role="content-editable emits-gtm-events"]
+----
+%project_engine_list project=<Project_Name>
+----
+Where:
+
+* project: Name of the project.
+
+**Output**:
+
+image::{page-image-directory}/regulus.engine.list.png[Engine List, width=500]
+
+== %project_user_list
+
+**Description**: View the list of collaborators assigned to the project.
+
+**Usage**:
+[source, bash, id="magic_project_user_list", role="content-editable emits-gtm-events"]
+----
+%project_user_list project=<Project_Name>
+----
+
+Where:
+
+* [Optional] project: Name of the project.
+
+**Output**:
+
+image::{page-image-directory}/regulus.user.list.png[User List, width=500]
+
+== %project_backup
+
+**Description**: Back up your project metadata and object definition inside the query engine.
+
+**Usage**:
+[source, bash, id="magic_project_backup", role="content-editable emits-gtm-events"]
+----
+%project_backup project=<Project_Name>
+----
+Where:
+
+* project:	Name of the project.
+
+**Output**:
+----
+Backup of the object definitions created
+----
+
+== %project_restore
+
+**Description**: Restore your project metadata and object definition from your GitHub repository.
+
+**Usage**:
+[source, bash, id="magic_project_restore", role="content-editable emits-gtm-events"]
+----
+%project_restore project=<Project_Name>, gitref=<Git_Reference>
+----
+Where:
+
+* project:	Name of the project.
+* [Optional] gitref: Git reference.
+
+**Output**:
+----
+Restore of the object definitions done
+----
+
+== %help
+
+**Description**: View the list of magics provided with Regulus-Teradata SQL CE Kernel.
+
+**Usage**:
+[source, bash, id="magic_help", role="content-editable emits-gtm-events"]
+----
+%help
+----
+Additionally, you can see detailed help messages per command.
+
+**Usage**:
+[source, bash, id="magic_command_help", role="content-editable emits-gtm-events"]
+----
+%help <command>
+----
+
+
