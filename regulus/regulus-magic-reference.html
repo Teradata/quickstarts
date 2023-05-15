@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Install and Configure Regulus Using Docker :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/install.regulus.docker.html">
-    <meta name="description" content="Learn how to install and configure Regulus Workspaces using Docker Engine and Docker Compose.">
+    <title>Regulus JupyterLab Magic Command Reference :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/regulus/regulus-magic-reference.html">
+    <meta name="description" content="Learn about Regulus JupyterLab magic commands.">
     <meta name="keywords" content="Regulus, Workspaces, Query Engine">
     <meta name="generator" content="Antora 3.0.1">
-    <link rel="stylesheet" href="./_/css/site.css">
-<meta property="og:title" content="Install and Configure Regulus Using Docker :: Teradata Getting Started">
+    <link rel="stylesheet" href="../_/css/site.css">
+<meta property="og:title" content="Regulus JupyterLab Magic Command Reference :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Learn how to install and configure Regulus Workspaces using Docker Engine and Docker Compose." />
+<meta property="og:description" content="Learn about Regulus JupyterLab magic commands." />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/install.regulus.docker.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/regulus/regulus-magic-reference.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -28,10 +28,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');</script>
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="./_/css/search.css">
-<link rel="stylesheet" href="./_/css/styles.css">
-<link rel="stylesheet" href="./_/css/fontawesome.all.min.css">
-<link rel="stylesheet" href="./_/css/webfonts.css">
+<link rel="stylesheet" href="../_/css/search.css">
+<link rel="stylesheet" href="../_/css/styles.css">
+<link rel="stylesheet" href="../_/css/fontawesome.all.min.css">
+<link rel="stylesheet" href="../_/css/webfonts.css">
 <style>
 body {
   transition: all .25s ease-in-out 0s;
@@ -59,7 +59,7 @@ article a[href^="https://"][target="_blank"]::after {
   width: 14px;
   height: 14px;
   margin-left: 4px;
-  background-image: url("./_/img/open_in_new.svg");
+  background-image: url("../_/img/open_in_new.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -342,7 +342,7 @@ button {
   border-radius: 8px;
   padding-left: 14px;
   padding-right: 14px;
-  background-image: url(./_/img/search.svg);
+  background-image: url(../_/img/search.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -806,7 +806,7 @@ aside.toc.sidebar {
 
 .report-an-issue {
   padding: 10px 20px 10px 10px;
-  background-image: url(./_/img/pan_tool.svg);
+  background-image: url(../_/img/pan_tool.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -814,7 +814,7 @@ aside.toc.sidebar {
 
 .edit-on-github {
   padding: 10px 20px 10px 10px;
-  background-image: url(./_/img/edit.svg);
+  background-image: url(../_/img/edit.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -900,19 +900,19 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/warning.svg");
+  content: url("../_/img/warning.svg");
 }
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .admonitionblock.question .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/question.mark.svg");
+  content: url("../_/img/question.mark.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .source-toolbox .source-lang {
@@ -923,7 +923,7 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .source-toolbox img.copy-icon {
-  content: url("./_/img/copy.svg");
+  content: url("../_/img/copy.svg");
 }
 
 .doc .source-toolbox>:not(:last-child)::after {
@@ -951,8 +951,8 @@ span.search-result-highlight {
 
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
-<link rel="icon" href="./_/img/favicon.ico" type="image/x-icon">
-    <script>var uiRootPath = './_'</script>
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+    <script>var uiRootPath = '../_'</script>
   </head>
   <body class="article">
 <!-- Google Tag Manager (noscript) -->
@@ -1005,13 +1005,13 @@ span.search-result-highlight {
         <ul>
           <li class="header-nav-mobile__menu-item">
             <header class="header-nav-mobile__menu-item__header">
-              <a href="./index.html">Getting Started</a>
+              <a href="../index.html">Getting Started</a>
             </header>
           </li>
           <li class="header-nav-mobile__menu-item has-sub-items">
             <header class="header-nav-mobile__menu-item__header i-alignment">
               <a href="https://docs.teradata.com/">Docs</a>
-              <img class="navbar-arrow" src='./_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Docs">
+              <img class="navbar-arrow" src='../_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Docs">
             </header>
             <div>
               <div class="header-nav-mobile__menu-item__links">
@@ -1030,7 +1030,7 @@ span.search-result-highlight {
           <li class="header-nav-mobile__menu-item has-sub-items">
             <header class="header-nav-mobile__menu-item__header i-alignment">
               <a href="https://support.teradata.com/community ">Community</a>
-              <img class="navbar-arrow" src='./_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Community">
+              <img class="navbar-arrow" src='../_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Community">
             </header>
             <div>
               <div class="header-nav-mobile__menu-item__links">
@@ -1040,17 +1040,17 @@ span.search-result-highlight {
                   </li>
                   <li>
                     <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item">Technical Medium Blogs
-                      <img src='./_/img/icons/external-symbol.svg' class="ext-symbol">
+                      <img src='../_/img/icons/external-symbol.svg' class="ext-symbol">
                     </a>
                   </li>
                   <li>
                     <a href="https://github.com/Teradata" title="Teradata on GitHub" target="_blank" class="dropdown-item">GitHub
-                      <img src='./_/img/icons/external-symbol.svg' class="ext-symbol">
+                      <img src='../_/img/icons/external-symbol.svg' class="ext-symbol">
                     </a>
                   </li>
                   <li>
                     <a href="https://stackoverflow.com/questions/tagged/teradata" title="Stack Overflow Teradata questions" target="_blank" class="dropdown-item">Stack Overflow
-                      <img src='./_/img/icons/external-symbol.svg' class="ext-symbol">
+                      <img src='../_/img/icons/external-symbol.svg' class="ext-symbol">
                     </a>
                   </li>               
                 </ul>
@@ -1083,22 +1083,22 @@ span.search-result-highlight {
     <span class="nav-text">Get access to Vantage</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="run-vantage-express-on-aws.html">Vantage Express on AWS</a>
+    <a class="nav-link" href="../run-vantage-express-on-aws.html">Vantage Express on AWS</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on Google Cloud</a>
+    <a class="nav-link" href="../vantage.express.gcp.html">Vantage Express on Google Cloud</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
+    <a class="nav-link" href="../run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
+    <a class="nav-link" href="../getting.started.vmware.html">Vantage Express on VMware</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
+    <a class="nav-link" href="../getting.started.vbox.html">Vantage Express on VirtualBox</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
+    <a class="nav-link" href="../getting.started.utm.html">Vantage Express on UTM</a>
   </li>
 </ul>
   </li>
@@ -1107,17 +1107,17 @@ span.search-result-highlight {
     <span class="nav-text">Connect to Vantage</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
+    <a class="nav-link" href="../install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
+    <a class="nav-link" href="../other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Configure ODBC</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="odbc.ubuntu.html">Ubuntu</a>
+    <a class="nav-link" href="../odbc.ubuntu.html">Ubuntu</a>
   </li>
 </ul>
   </li>
@@ -1128,31 +1128,31 @@ span.search-result-highlight {
     <span class="nav-text">Manage data</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nos.html">Query data stored in object storage</a>
+    <a class="nav-link" href="../nos.html">Query data stored in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
+    <a class="nav-link" href="../dbt.html">dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">Load data with TPT</a>
+    <a class="nav-link" href="../tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">Load data with TPT</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
+    <a class="nav-link" href="../create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
+    <a class="nav-link" href="../other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="segment.html">Store events from Twilio Segment</a>
+    <a class="nav-link" href="../segment.html">Store events from Twilio Segment</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
+    <a class="nav-link" href="../cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
   </li>
 </ul>
   </li>
@@ -1161,13 +1161,13 @@ span.search-result-highlight {
     <span class="nav-text">Create applications</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
+    <a class="nav-link" href="../jdbc.html">Connect to Vantage using JDBC</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+    <a class="nav-link" href="../mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="query-service/send-queries-using-rest-api.html">Send queries using REST API</a>
+    <a class="nav-link" href="../query-service/send-queries-using-rest-api.html">Send queries using REST API</a>
   </li>
 </ul>
   </li>
@@ -1176,46 +1176,46 @@ span.search-result-highlight {
     <span class="nav-text">Analyze data</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
+    <a class="nav-link" href="../jupyter.html">Use Vantage from a Jupyter notebook</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+    <a class="nav-link" href="../local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ml.html">Train ML models in Vantage</a>
+    <a class="nav-link" href="../ml.html">Train ML models in Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
+    <a class="nav-link" href="../sto.html">Run scripts on Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="perform-time-series-analysis-using-teradata-vantage.html">Perform time series analysis</a>
+    <a class="nav-link" href="../perform-time-series-analysis-using-teradata-vantage.html">Perform time series analysis</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - Import and Deploy your first BYOM Model</a>
+    <a class="nav-link" href="../modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - Import and Deploy your first BYOM Model</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.html">ModelOps - Import and Deploy your first GIT Model</a>
+    <a class="nav-link" href="../modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.html">ModelOps - Import and Deploy your first GIT Model</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="modelops/using-feast-feature-store-with-teradata-vantage.html">Using Teradata with FEAST</a>
+    <a class="nav-link" href="../modelops/using-feast-feature-store-with-teradata-vantage.html">Using Teradata with FEAST</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
+    <a class="nav-link" href="../cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
+    <a class="nav-link" href="../cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Integrate Teradata Jupyter extensions with SageMaker notebook instance</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Integrate Teradata Jupyter extensions with SageMaker notebook instance</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Create Vizualizations in Power BI using Vantage</a>
+    <a class="nav-link" href="../business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Create Vizualizations in Power BI using Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
+    <a class="nav-link" href="../other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
   </li>
 </ul>
   </li>
@@ -1228,7 +1228,7 @@ span.search-result-highlight {
     <span class="nav-text">Financial</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="jupyter-demos/gcp-vertex-ai-pipelines-vantage-byom-housing-example.html">Google Cloud Vertex AI Pipelines Vantage BYOM Housing Example</a>
+    <a class="nav-link" href="../jupyter-demos/gcp-vertex-ai-pipelines-vantage-byom-housing-example.html">Google Cloud Vertex AI Pipelines Vantage BYOM Housing Example</a>
   </li>
 </ul>
   </li>
@@ -1236,19 +1236,19 @@ span.search-result-highlight {
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Regulus-Developer Preview</span>
+    <span class="nav-text">Regulus (preview)</span>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="install-regulus-docker-image.html">Install and Configure Regulus Using Docker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="getting-started-with-regulus.html">Run a Sample Workload in JupyterLab</a>
+  </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="install.regulus.docker.html">Install and Configure Regulus Using Docker</a>
+    <a class="nav-link" href="regulus-magic-reference.html">Regulus JupyterLab Magic Command Reference</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting.started.regulus.html">Run a Sample Workload in JupyterLab</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="regulus.magic.reference.html">Regulus JupyterLab Magic Command Reference</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="using.regulus.workspacecli.html">Use Regulus With Workspaces CLI</a>
+    <a class="nav-link" href="using-regulus-workspace-cli.html">Use Regulus With Workspaces CLI</a>
   </li>
 </ul>
   </li>
@@ -1264,10 +1264,10 @@ span.search-result-highlight {
   </div>
   <ul class="components">
     <li class="component is-current">
-      <a class="title" href="index.html">Getting Started Guides</a>
+      <a class="title" href="../index.html">Getting Started Guides</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">master</a>
+          <a href="../index.html">master</a>
         </li>
       </ul>
     </li>
@@ -1281,8 +1281,8 @@ span.search-result-highlight {
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li>Regulus-Developer Preview</li>
-    <li><a href="install.regulus.docker.html">Install and Configure Regulus Using Docker</a></li>
+    <li>Regulus (preview)</li>
+    <li><a href="regulus-magic-reference.html">Regulus JupyterLab Magic Command Reference</a></li>
   </ul>
 </nav>
 </div>
@@ -1290,13 +1290,13 @@ span.search-result-highlight {
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/install.regulus.docker.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/regulus/pages/regulus-magic-reference.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Install and Configure Regulus Using Docker</h1>
+<h1 class="page">Regulus JupyterLab Magic Command Reference</h1>
 <p>Author: <a href="mailto:thripti.aravind@teradata.com">Thripti Aravind</a><br/>
 Last updated: April 10th, 2023</p>
 <div id="preamble">
@@ -1319,568 +1319,568 @@ This product is in preview and is subject to change. To get early access to Regu
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Regulus is a self-service platform that enables you to deploy and connect an SQL query engine to your data lake. You can then run your workloads on the on-demand, scalable query engine deployed on your preferred Cloud Service Provider (CSP). Using the query engine, you can leverage the capabilities of a highly parallel database while eliminating the need for data management.</p>
-</div>
-<div class="paragraph">
-<p>Regulus contains the following components:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Workspaces</strong>: An orchestration service that controls and manages Regulus automation and deployments. It also controls the integration elements that provide a seamless user experience when running data-related projects. Workspaces includes a web-based UI that you can use to authorize the user and define your choice of CSP integrations.</p>
-</li>
-<li>
-<p><strong>Interface</strong>:  An environment to write and run data projects, connect to the Teradata system, and visualize data. You can use either JupyterLab or Workspaces CLI.</p>
-</li>
-<li>
-<p><strong>Query Engine</strong>: A fully managed computational resource that you can use to run your data science and analytical workloads.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>This document outlines the steps for installing and configuring Regulus using Docker. To use Regulus with Workspaces CLI, see <a href="using.regulus.workspacecli.html" class="xref page">Use Regulus With Workspaces CLI</a>.</p>
+<p>Regulus JupyterLab supports the following magic commands in addition to the existing Teradata SQL Kernel magic commands. See <a href="https://github.com/Teradata/jupyterextensions/blob/master/notebooks/sql/GettingStarted.ipynb">Teradata JupyterLab Getting Started Guide</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_before_you_begin"><a class="anchor" href="#_before_you_begin"></a>Before You Begin</h2>
+<h2 id="_workspaces_config"><a class="anchor" href="#_workspaces_config"></a>%workspaces_config</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Make sure you have the following:</p>
+<p><strong>Description</strong>: One-time configuration to bind with the Workspaces service.</p>
+</div>
+<div class="paragraph">
+<p><strong>Usage</strong>:</p>
+</div>
+<div id="magic_workspaces_config" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%workspaces_config host=&lt;RPC_Service_URL&gt;, apikey=&lt;Workspace_API_Key&gt;, withtls=F</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>GitHub account: If you don&#8217;t already have a GitHub account, create one at <a href="https://github.com/">https://github.com/</a>.</p>
+<p>host:  Name or IP address of the query engine service.</p>
 </li>
 <li>
-<p>AWS account: If you don&#8217;t have an AWS account, sign up for an AWS Free Tier account at <a href="https://aws.amazon.com/free/">https://aws.amazon.com/free/</a>.</p>
-<div class="admonitionblock note">
+<p>apikey: API Key value from the Workspaces Profile page.</p>
+</li>
+<li>
+<p>[Optional] withTLS: If False (F), the default client-server communication does not use TLS.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Workspace configured for host=&lt;RPC_Service_URL&gt;</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_project_create"><a class="anchor" href="#_project_create"></a>%project_create</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Description</strong>: Create a new project. This command also creates a new repository with the project name in your GitHub account. The configurations are stored in the engine.yml file.</p>
+</div>
+<div class="paragraph">
+<p><strong>Usage</strong>:</p>
+</div>
+<div id="magic_project_create" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%project_create project=&lt;Project_Name&gt;, env=&lt;CSP&gt;, team=&lt;Project_Team&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>project: Name of the project to be created.</p>
+</li>
+<li>
+<p>env: Cloud environment where the project is hosted. The value can be aws, azure, gcp, or vsphere. For the current release, only AWS is supported.</p>
+</li>
+<li>
+<p>[Optional] team: Name of the team collaborating on the project.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Output</strong>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Project &lt;Project_Name&gt; created</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_project_delete"><a class="anchor" href="#_project_delete"></a>%project_delete</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Description</strong>: Delete a project.</p>
+</div>
+<div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-For the developer preview, you can host the query engine only on AWS.
+Running this command removes the GitHub repository containing the objects created using Regulus.
 </td>
 </tr>
 </table>
 </div>
-</li>
-<li>
-<p>Docker: To download and install Docker, See <a href="https://docs.docker.com/docker-for-windows/install/">https://docs.docker.com/docker-for-windows/install/</a>.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_install_workspaces"><a class="anchor" href="#_install_workspaces"></a>Install Workspaces</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>The Workspaces Docker images are monolithic images of Workspaces running the necessary services in a single container.</p>
+<p><strong>Usage</strong>:</p>
 </div>
-<div class="paragraph">
-<p>Pull the docker image from <a href="https://hub.docker.com/r/teradata/regulus-workspaces">Docker Hub</a>.</p>
-</div>
-<div id="docker_pull" class="listingblock content-editable emits-gtm-events">
+<div id="magic_project_delete" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker pull teradata/regulus-workspaces</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%project_delete project=&lt;Project_Name&gt;, team=&lt;Project_Team&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Before proceeding, make sure to:</p>
+<p>Where:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Copy and retain the environment variables, <code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code>, and <code>AWS_SESSION_TOKEN</code>, from your AWS Console. See <a href="https://docs.aws.amazon.com/sdkref/latest/guide/environment-variables.html">Environment Variables</a>.</p>
+<p>project: Name of the project to be deleted.</p>
 </li>
 <li>
-<p>Set the environment variable, <code>WORKSPACES_HOME</code>, to the directory where the configuration and data files are located. Make sure that the directory exists and appropriate permission is granted.</p>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Local Location</th>
-<th class="tableblock halign-left valign-top">Container Location</th>
-<th class="tableblock halign-left valign-top">Usage</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">$WORKSPACES_HOME</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">/etc/td</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Stores data and configuration</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">$WORKSPACES_HOME/tls</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">/etc/td/tls</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Stores cert files</p></td>
-</tr>
-</tbody>
-</table>
+<p>[Optional] team: Name of the team collaborating on the project.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>You can install Workspaces using one of the following methods:</p>
+<p><strong>Output</strong>:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#_install_workspaces_using_docker_engine">Docker Engine</a></p>
-</li>
-<li>
-<p><a href="#_install_workspaces_using_docker_compose">Docker Compose</a></p>
-</li>
-</ul>
-</div>
-<div class="sect2">
-<h3 id="_install_workspaces_using_docker_engine"><a class="anchor" href="#_install_workspaces_using_docker_engine"></a>Install Workspaces Using Docker Engine</h3>
-<div class="paragraph">
-<p>Run the Docker image once you&#8217;ve set the <code>WORKSPACES_HOME</code> variable.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Modify the directories based on your requirements.
-</td>
-</tr>
-</table>
-</div>
-<div id="docker_engine_run" class="listingblock content-editable emits-gtm-events">
+<div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -detach \
---env AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
---env AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \
---env AWS_SESSION_TOKEN="${AWS_SESSION_TOKEN}" \
---publish 3000:3000 \
---publish 3282:3282 \
---volume ${WORKSPACES_HOME}:/etc/td \
-teradata/regulus-workspaces:latest</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The command downloads and starts a Workspaces container and publishes the ports needed to access it. Once the Workspaces server is initialized and started, you can access Workspaces using the URL: <a href="http://&lt;ip_or_hostname&gt;:3000/" class="bare">http://&lt;ip_or_hostname&gt;:3000/</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_install_workspaces_using_docker_compose"><a class="anchor" href="#_install_workspaces_using_docker_compose"></a>Install Workspaces Using Docker Compose</h3>
-<div class="paragraph">
-<p>With Docker Compose, you can easily configure, install, and upgrade your Docker-based Workspaces installation.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Install Docker Compose. See <a href="https://docs.docker.com/compose/install/">https://docs.docker.com/compose/install/</a>.</p>
-</li>
-<li>
-<p>Create a docker-compose.yml file.</p>
-<div id="docker_compose" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">version: "3.9"
-
-services:
-  workspaces:
-    deploy:
-      replicas: 1
-    container_name: workspaces
-    image: ${WORKSPACES_IMAGE_NAME:-teradata/regulus-workspaces}:${WORKSPACES_IMAGE_TAG:-latest}
-    command: serve -v
-    restart: unless-stopped
-    ports:
-      - "443:443/tcp"
-      - "3000:3000/tcp"
-      - "3282:3282/tcp"
-    environment:
-      TZ: ${WS_TZ:-UTC}
-      AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
-      AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
-      AWS_SESSION_TOKEN: "${AWS_SESSION_TOKEN}"
-    volumes:
-      - ${WORKSPACES_HOME:-./volumes/workspaces}:/etc/td
-      - ${WORKSPACES_AWS_CONFIG:-~/.aws}:/root/.aws</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Go to the directory where the docker-compose.yml file is located and start Workspaces.</p>
-<div id="docker_compose_run" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Docker compose up -d</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Once the Workspaces server is initialized and started, you can access Workspaces using the URL: <a href="http://&lt;ip_or_hostname&gt;:3000/" class="bare">http://&lt;ip_or_hostname&gt;:3000/</a>.</p>
-</div>
-</li>
-</ol>
+<pre>Project &lt;Project_Name&gt; deleted</pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_configure_and_set_up_workspaces"><a class="anchor" href="#_configure_and_set_up_workspaces"></a>Configure and Set Up Workspaces</h2>
+<h2 id="_project_list"><a class="anchor" href="#_project_list"></a>%project_list</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Workspaces uses the GitHub OAuth App to authorize users and manage the project state. To authorize Workspaces to save your project instance configuration, use the Client ID and Client secret key generated during the GitHub OAuth App registration. The project instance configuration values are maintained in your GitHub repositories.</p>
+<p><strong>Description</strong>: List the details of the projects.</p>
 </div>
 <div class="paragraph">
-<p>First-time users must perform the following steps before proceeding:</p>
+<p>Use the project parameter to get the details of a specific project. All the projects are listed if you run the command without any parameters.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Log on to your GitHub account and create an OAuth App. See <a href="https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app">GitHub Documentation</a>.</p>
 <div class="paragraph">
-<p>While registering the OAuth App, type the following Workspaces URLs in the URL fields:</p>
+<p><strong>Usage</strong>:</p>
+</div>
+<div id="magic_project_list" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%project_list project=&lt;Project_Name&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Homepage URL</strong>: <a href="http://&lt;ip_or_hostname&gt;:3000/" class="bare">http://&lt;ip_or_hostname&gt;:3000/</a></p>
-</li>
-<li>
-<p><strong>Authorization callback URL</strong>: <a href="http://&lt;ip_or_hostname&gt;:3000/auth/github/callback" class="bare">http://&lt;ip_or_hostname&gt;:3000/auth/github/callback</a></p>
+<p>project: Name of the project to be listed.</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>Copy and retain the <strong>Client ID</strong> and <strong>Client secret key</strong>.</p>
-</li>
-</ol>
-</div>
 <div class="paragraph">
-<p>To set up Workspaces, do the following:</p>
+<p><strong>Output</strong>:</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Access Workspaces using the URL: <a href="http://&lt;ip_or_hostname&gt;:3000/" class="bare">http://&lt;ip_or_hostname&gt;:3000/</a>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/regulus/regulus.workspaces.setting.png" alt="regulus.workspaces.setting">
-</div>
-</div>
-</li>
-<li>
-<p>Apply the following general service configuration under <strong>Setup</strong>.</p>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Setting</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Required?</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Service Base URL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">[Non-Editable] The root URL of the service.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Git Provider</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The provider for Git integration. Currently, Regulus supports only GitHub.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Service Log Lev</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The level of logging.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Engine IP Network Type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The type of network assigned to a query engine instance, which can be either public or private.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Use TLS</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates if TLS support is enabled. Teradata recommends enabling this option.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Service TLS Certification</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The server certificate to authenticate the server identity.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Service TLS Certificate Key</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The server certificate key.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>To use a self-signed certificate for <strong>Service Base URL</strong>, select <strong>GENERATE TLS</strong>. A certificate and private key are generated and displayed in the respective fields.</p>
-</li>
-<li>
-<p>Select <strong>Next</strong>.</p>
-</li>
-<li>
-<p>Apply the following settings under <strong>Cloud Integrations: AWS</strong>.</p>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Setting</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Required?</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Default Region</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The AWS region you want to deploy the workload in. Teradata recommends choosing the region closest to your primary work location.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Default Subnet</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The default location to launch the query engine.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Default CIDRs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The list of Classless Inter-Domain Routing (CIDR) addresses used for the query engine. Use CIDR to allocate IP addresses flexibly and efficiently in your network. If you don&#8217;t specify a CIDR, the query engine is automatically associated with the default CIDR.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Default Security Groups</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The list of security groups for the VPC in each region. If you don&#8217;t specify a security group, the query engine is automatically associated with the default security group for the VPC.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>Select <strong>Next</strong>.</p>
-</li>
-<li>
-<p>Apply the following settings under <strong>Configure GitHub</strong>.</p>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Setting</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Required?</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">GitHub Application URL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">[Non-Editable] The URL where the Workspaces server is hosted.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">GitHub Callback URL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">[Non-Editable] The URL you are redirected to after you authorize.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">GitHub Client ID</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The Client ID you received from GitHub on creating your OAuth App.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Use TLS</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enable TLS support</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">GitHub Client Secret</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The Client secret ID you received from GitHub on creating your OAuth App.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">GitHub Organization</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the GitHub organization account that you use to collaborate with your team.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">GitHub Base URL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The base URL of your GitHub account. The URL may vary based on your account type. For example, <a href="https://github.company.com/" class="bare">https://github.company.com/</a> for GitHub Enterprise account.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>Select <strong>Save</strong> and then select <strong>Login</strong>. You are redirected to GitHub.</p>
-</li>
-<li>
-<p>Log on with your GitHub credentials to authorize Workspaces.</p>
-<div class="paragraph">
-<p>After authentication, you are redirected to the Workspaces <strong>Profile</strong> page, and an API Key is generated. You can use the API Key to make requests to the Workspaces service.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-A new API Key is generated each time you connect to Workspaces.
-</td>
-</tr>
-</table>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_install_a_regulus_interface"><a class="anchor" href="#_install_a_regulus_interface"></a>Install a Regulus Interface</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>You can use either JupyterLab or Workspaces CLI as your Regulus interface.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>JupyterLab: Install using one of the following methods:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#_install_jupyterLab_using_docker_engine">Docker Engine</a></p>
-</li>
-<li>
-<p><a href="#_install_jupyterLab_using_docker_compose">Docker Compose</a></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Workspaces CLI: See <a href="using.regulus.workspacecli.html" class="xref page">Use Regulus With Workspaces CLI</a>.</p>
-</li>
-</ul>
-</div>
-<div class="sect2">
-<h3 id="_install_jupyterlab_using_docker_engine"><a class="anchor" href="#_install_jupyterlab_using_docker_engine"></a>Install JupyterLab Using Docker Engine</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Pull the Docker image from the DockerHub at <a href="https://hub.docker.com/r/teradata/regulus-jupyter">https://hub.docker.com/r/teradata/regulus-jupyter</a>.</p>
-</li>
-<li>
-<p>Run the Docker image once you&#8217;ve set the <code>JUPYTER_HOME</code> variable.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Modify the directories based on your requirements.
-</td>
-</tr>
-</table>
-</div>
-<div id="docker_engine_jupyter" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -detach \
---env “accept_license=Y” \
---publish 8888:8888 \
---volume ${JUPYTER_HOME}: /home/jovyan/JupyterLabRoot \
-teradata/regulus-jupyter:latest</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The command downloads and starts a JupyterLab container and publishes the ports needed to access it.
-Connect to JupyterLab using the URL: <a href="http://localhost:8888" class="bare">http://localhost:8888</a> and enter the token when prompted. For detailed instructions, see <a href="https://docs.teradata.com/r/Teradata-VantageTM-Modules-for-Jupyter-Installation-Guide/Teradata-Vantage-Modules-for-Jupyter/Teradata-Vantage-Modules-for-Jupyter">Teradata Vantage™ Modules for Jupyter Installation Guide</a> or <a href="https://quickstarts.teradata.com/jupyter.html">Use Vantage from a Jupyter Notebook</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_install_jupyterlab_using_docker_compose"><a class="anchor" href="#_install_jupyterlab_using_docker_compose"></a>Install JupyterLab Using Docker Compose</h3>
-<div class="paragraph">
-<p>With Docker Compose, you can easily configure, install, and upgrade your Docker-based JupyterLab installation.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Install Docker Compose. See <a href="https://docs.docker.com/compose/install/">https://docs.docker.com/compose/install/</a>.</p>
-</li>
-<li>
-<p>Create a docker-compose.yml file.</p>
-<div id="docker_compose_jupyter" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">version: "3.9"
-
-services:
-  jupyter:
-    deploy:
-      replicas: 1
-    image: teradata/regulus-jupyter:latest
-    environment:
-      - "accept_license=Y"
-    ports:
-      - 8888:8888
-    volumes:
-      - ${JUPYTER_HOME:-./volumes/jupyter}:/home/jovyan/JupyterLabRoot/userdata
-      - ${WORKSPACES_AWS_CONFIG:-~/.aws}:/root/.aws</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Go to the directory where the docker-compose.yml file is located and start JupyterLab.</p>
-<div id="docker_compose_jupyter_up" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Docker compose up -d</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Once the JupyterLab server is initialized and started, you can connect to JupyterLab using the URL: <a href="http://localhost:8888" class="bare">http://localhost:8888</a> and enter the token when prompted. For detailed instructions, see <a href="https://docs.teradata.com/r/Teradata-VantageTM-Modules-for-Jupyter-Installation-Guide/Teradata-Vantage-Modules-for-Jupyter/Teradata-Vantage-Modules-for-Jupyter">Teradata Vantage™ Modules for Jupyter Installation Guide</a> or <a href="https://quickstarts.teradata.com/jupyter.html">Use Vantage from a Jupyter Notebook</a>.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Congrats! You&#8217;re all set up to use Regulus.</p>
+<img src="_images/regulus-magic-reference/regulus.project.list.png" alt="List Project" width="500">
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next Steps</h2>
+<h2 id="_project_auth_create"><a class="anchor" href="#_project_auth_create"></a>%project_auth_create</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p><strong>Description</strong>: Create an authorization object to store object store credentials.</p>
+</div>
+<div class="paragraph">
+<p>You must create the authorization object before deploying the query engine. The authorization details are retained and are included while redeploying the project. Optionally, you can create authorizations manually using the <code>CREATE AUTHORIZATION</code> SQL command after deploying the query engine. In this case, the authorization details are not retained.</p>
+</div>
+<div class="paragraph">
+<p><strong>Usage</strong>:</p>
+</div>
+<div id="magic_auth_create" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%project_auth_create project=&lt;Project_Name&gt;, name=&lt;Auth_Name&gt;, key=&lt;Auth_Key&gt;, secret=&lt;Auth_Secret&gt;, region=&lt;ObjectStore_Region&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Get started with Regulus by running a simple workflow. See <a href="getting.started.regulus.html" class="xref page">Run a Sample Workload in JupyterLab</a>.</p>
+<p>project: Name of the project.</p>
 </li>
 <li>
-<p>Interested in learning how Regulus can help you with real-life use cases? Coming soon! Keep watching this space for the GitHub link.</p>
+<p>name:	Authorization name for the object store.</p>
+</li>
+<li>
+<p>key: Authorization key of the object store.</p>
+</li>
+<li>
+<p>secret: Authorization secret access ID of the object store.</p>
+</li>
+<li>
+<p>region: Region of the object store; local for the local object store.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p><strong>Output</strong>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Authorization 'name' created</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_project_auth_delete"><a class="anchor" href="#_project_auth_delete"></a>%project_auth_delete</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Description</strong>: Remove an object store authorization.</p>
+</div>
+<div class="paragraph">
+<p><strong>Usage</strong>:</p>
+</div>
+<div id="magic_auth_delete" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%project_auth_delete project=&lt;Project_Name&gt;, name=&lt;Auth_Name&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>project: Name of the project.</p>
+</li>
+<li>
+<p>name:	Authorization name for the object store.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Output</strong>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Authorization 'name' deleted</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_project_auth_list"><a class="anchor" href="#_project_auth_list"></a>%project_auth_list</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Description</strong>: List object store authorizations that are created for a project.</p>
+</div>
+<div class="paragraph">
+<p><strong>Usage</strong>:</p>
+</div>
+<div id="magic_auth_list" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%project_auth_list project=&lt;Project_Name&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>project: Name of the project.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Output</strong>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/regulus-magic-reference/regulus.auth.list.png" alt="List Auth" width="500">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_project_engine_deploy"><a class="anchor" href="#_project_engine_deploy"></a>%project_engine_deploy</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Description</strong>: Deploy a query engine for the project. The deployment process will take a few minutes to complete. On successful deployment, a password is generated.</p>
+</div>
+<div class="paragraph">
+<p><strong>Usage</strong>:</p>
+</div>
+<div id="magic_engine_deploy" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%project_engine_deploy project=&lt;Project_Name&gt;, size=&lt;Size_of_Engine&gt;, node=&lt;Number_of_Nodes&gt;, subnet=&lt;Subnet_id&gt;, region=&lt;Region&gt;, secgroups=&lt;Security_Group&gt;, cidrs=&lt;CIDR&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>project:	Name of the project.</p>
+</li>
+<li>
+<p>size: Size of the query engine. The value can be:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>small</p>
+</li>
+<li>
+<p>medium</p>
+</li>
+<li>
+<p>large</p>
+</li>
+<li>
+<p>extralarge</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>[Optional] node: Number of query engine nodes to be deployed. The default value is 1.</p>
+</li>
+<li>
+<p>[Optional] subnet: Subnet used for the query engine if there are no default values from the service.</p>
+</li>
+<li>
+<p>[Optional] region: Region used for the query engine if there are no default values from service.</p>
+</li>
+<li>
+<p>[Optional] secgroups: List of security groups for the VPC in each region. If you don&#8217;t specify a security group, the query engine is automatically associated with the default security group for the VPC.</p>
+</li>
+<li>
+<p>[Optional] cidr: List of CIDR addresses used for the query engine.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Output</strong>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Started deploying.
+Success: Compute Engine setup, look at the connection manager</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/regulus-magic-reference/regulus.engine.deploy.png" alt="Deploy Engine" width="500">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_project_engine_suspend"><a class="anchor" href="#_project_engine_suspend"></a>%project_engine_suspend</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Description</strong>: Stop the query engine after you&#8217;re done with your work.</p>
+</div>
+<div class="paragraph">
+<p><strong>Usage</strong>:</p>
+</div>
+<div id="magic_engine_suspend" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%project_engine_suspend &lt;Project_Name&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>project: Name of the project.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Output</strong>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Started suspend. Success: connection removed
+Success: Suspending Compute Engine</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_project_engine_list"><a class="anchor" href="#_project_engine_list"></a>%project_engine_list</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Description</strong>: View the list of query engines deployed for your project.</p>
+</div>
+<div class="paragraph">
+<p><strong>Usage</strong>:</p>
+</div>
+<div id="magic_engine_list" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%project_engine_list project=&lt;Project_Name&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>project: Name of the project.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Output</strong>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/regulus-magic-reference/regulus.engine.list.png" alt="Engine List" width="500">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_project_user_list"><a class="anchor" href="#_project_user_list"></a>%project_user_list</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Description</strong>: View the list of collaborators assigned to the project.</p>
+</div>
+<div class="paragraph">
+<p><strong>Usage</strong>:</p>
+</div>
+<div id="magic_project_user_list" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%project_user_list project=&lt;Project_Name&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>[Optional] project: Name of the project.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Output</strong>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/regulus-magic-reference/regulus.user.list.png" alt="User List" width="500">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_project_backup"><a class="anchor" href="#_project_backup"></a>%project_backup</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Description</strong>: Back up your project metadata and object definition inside the query engine.</p>
+</div>
+<div class="paragraph">
+<p><strong>Usage</strong>:</p>
+</div>
+<div id="magic_project_backup" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%project_backup project=&lt;Project_Name&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>project:	Name of the project.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Output</strong>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Backup of the object definitions created</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_project_restore"><a class="anchor" href="#_project_restore"></a>%project_restore</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Description</strong>: Restore your project metadata and object definition from your GitHub repository.</p>
+</div>
+<div class="paragraph">
+<p><strong>Usage</strong>:</p>
+</div>
+<div id="magic_project_restore" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%project_restore project=&lt;Project_Name&gt;, gitref=&lt;Git_Reference&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>project:	Name of the project.</p>
+</li>
+<li>
+<p>[Optional] gitref: Git reference.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Output</strong>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Restore of the object definitions done</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_help"><a class="anchor" href="#_help"></a>%help</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Description</strong>: View the list of magics provided with Regulus-Teradata SQL CE Kernel.</p>
+</div>
+<div class="paragraph">
+<p><strong>Usage</strong>:</p>
+</div>
+<div id="magic_help" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%help</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Additionally, you can see detailed help messages per command.</p>
+</div>
+<div class="paragraph">
+<p><strong>Usage</strong>:</p>
+</div>
+<div id="magic_command_help" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%help &lt;command&gt;</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -2522,12 +2522,12 @@ footer.footer-nav {
     </div>
   </section>
 </footer>
-<script src="./_/js/site.js"></script>
-<script async src="./_/js/behavior.js"></script>
-<script src="./_/js/vendor/lunr.js"></script>
-<script src="./_/js/search-ui.js" id="search-ui-script" data-site-root-path="." data-snippet-length="100" data-stylesheet="./_/css/search.css"></script>
-<script async src="./search-index.js"></script>
-<script src="./_/js/teradata.min.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/behavior.js"></script>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+<script src="../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>
