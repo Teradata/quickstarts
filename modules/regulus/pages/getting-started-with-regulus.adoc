@@ -12,14 +12,14 @@ IMPORTANT: This product is in preview and is subject to change. To get early acc
 
 This document walks you through a simple workflow where you can use JupyterLab to:
 
-* Deploy on-demand, scalable compute 
+* Deploy on-demand, scalable compute
 * Connect to your external data source
 * Run the workload
-* Suspend the compute 
+* Suspend the compute
 
 == Before You Begin
 
-* Install and configure Regulus. See xref::install.regulus.docker.adoc[].
+* Install and configure Regulus. See xref::install-regulus-docker-image.adoc[].
 
 * Copy and retain the following:
 
@@ -28,9 +28,9 @@ This document walks you through a simple workflow where you can use JupyterLab t
 
 == Run Your First Workload
 
-Run `%help` or `%help <command>` for details on any magic command. See xref::regulus.magic.reference.adoc[] for more details.
+Run `%help` or `%help <command>` for details on any magic command. See xref::regulus-magic-reference.adoc[] for more details.
 
-1. Connect to JupyterLab using the URL: http://localhost:8888 and enter the token when prompted. 
+1. Connect to JupyterLab using the URL: http://localhost:8888 and enter the token when prompted.
 2. Connect to Workspaces using the API Key.
 +
 [source, bash, id="connect_workspaces", role="content-editable emits-gtm-events"]
@@ -49,7 +49,7 @@ NOTE: Currently, Regulus supports only AWS.
 
 4. [Optional] Create an authorization object to store the CSP credentials.
 +
-Replace `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_REGION` with your values. 
+Replace `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_REGION` with your values.
 +
 
 [source, bash, id="create_auth", role="content-editable emits-gtm-events"]
@@ -84,7 +84,7 @@ When a connection is established, the interface prompts you for a password. Ente
 +
 NOTE: Make sure that you do not have tables named SalesCenter or SalesDemo in the selected database.
 +
-a. Create a table to store the sales center data. 
+a. Create a table to store the sales center data.
 +
 First, drop the table if it already exists. The command fails if the table does not exist.
 +
@@ -195,4 +195,4 @@ Congrats! You've successfully run your first use case in JupyterLab.
 
 * Interested in exploring advanced use cases? Coming soon! Keep watching this space for the GitHub link.
 
-* Learn about the magic commands available in JupyterLab. See xref::regulus.magic.reference.adoc[].
+* Learn about the magic commands available in JupyterLab. See xref::regulus-magic-reference.adoc[].
