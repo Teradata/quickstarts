@@ -2,7 +2,7 @@
 :experimental:
 :page-author: Thripti Aravind
 :page-email: thripti.aravind@teradata.com
-:page-revdate: May 5th, 2023
+:page-revdate: May 16th, 2023
 :description: Use Workspaces CLI to use Regulus
 :keywords: Regulus, Workspaces, Query Engine
 :page-image-directory: using-regulus-workspace-cli
@@ -15,7 +15,7 @@ Workspaces CLI is a command line interface (CLI) for Regulus. This document prov
 
 You can also use JupyterLab as your Regulus interface. See xref::getting-started-with-regulus.adoc[].
 
-== Before You Begin
+== Before you begin
 
 Make sure you have:
 
@@ -25,7 +25,7 @@ Make sure you have:
 
 == Install Workspaces CLI
 
-Download the Workspaces CLI executable file from <location>.
+Download the Workspaces CLI executable file from link:https://downloads.teradata.com/download/tools/regulus-jupyter-kernel[https://downloads.teradata.com/download/tools/regulus-jupyter-kernel].
 
 NOTE: Workspaces CLI supports all major operating systems.
 
@@ -48,12 +48,12 @@ MacOS::
 --
 [source, bash, role="content-editable emits-gtm-events", id="run_workspaces_macos"]
 ----
-$ workspacesctl
+workspacesctl
 ----
 --
 ====
 +
-image::{page-image-directory}/reguluscli.workspaces.png[Regulus CLI, width=500]
+image::{page-image-directory}/reguluscli.workspaces.png[Regulus CLI]
 
 2. Configure Workspaces using the API Key.
 +
@@ -97,7 +97,7 @@ workspacesctl project engine suspend <Project_Name> --no-tls
 For a supported list of commands, see <<_workspaces_cli_reference, Workspaces CLI Reference>>.
 
 
-== Workspaces CLI Reference
+== Workspaces CLI reference
 
 === workspaces config
 
@@ -116,7 +116,7 @@ workspacesctl workspaces config
 
 **Output**:
 
-image::{page-image-directory}/reguluscli.workspaces.config.png[Regulus CLI Config, width=500]
+image::{page-image-directory}/reguluscli.workspaces.config.png[Regulus CLI Config]
 
 Follow the prompts to choose the Workspaces endpoint and API Key.
 
@@ -137,7 +137,7 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 **Output**:
 
-image::{page-image-directory}/reguluscli.user.list.png[Regulus CLI User List, width=500]
+image::{page-image-directory}/reguluscli.user.list.png[Regulus CLI User List]
 
 === project create
 
@@ -179,7 +179,7 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 **Output**:
 
-image::{page-image-directory}/reguluscli.project.create.png[Regulus CLI Project Create, width=500]
+image::{page-image-directory}/reguluscli.project.create.png[Regulus CLI Project Create]
 
 === project list
 
@@ -203,7 +203,7 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 **Output**:
 
-image::{page-image-directory}/reguluscli.project.list.png[Regulus CLI Project List, width=500]
+image::{page-image-directory}/reguluscli.project.list.png[Regulus CLI Project List]
 
 === project delete
 
@@ -224,7 +224,7 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 NOTE: The output is in YAML format.
 
-image::{page-image-directory}/reguluscli.project.delete.png[Regulus CLI Project Delete, width=500]
+image::{page-image-directory}/reguluscli.project.delete.png[Regulus CLI Project Delete]
 
 
 === project user list
@@ -244,7 +244,7 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 **Output**:
 
-image::{page-image-directory}/reguluscli.project.user.list.png[Regulus CLI Project User List, width=500]
+image::{page-image-directory}/reguluscli.project.user.list.png[Regulus CLI Project User List]
 
 === project backup
 
@@ -265,7 +265,7 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 NOTE: The output is in YAML format.
 
-image::{page-image-directory}/reguluscli.project.backup.png[Regulus CLI Project Backup, width=500]
+image::{page-image-directory}/reguluscli.project.backup.png[Regulus CLI Project Backup]
 
 === project restore
 
@@ -291,7 +291,7 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 |`-g`, `--gitref`
 |String
-|Tag, SHA, or branch name
+|Tag, SHA, or branch name.
 |No
 
 |`-h`, `--help`
@@ -305,7 +305,7 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 NOTE: The output is in YAML format.
 
-image::{page-image-directory}/reguluscli.project.restore.png[Regulus CLI Project Restore, width=500]
+image::{page-image-directory}/reguluscli.project.restore.png[Regulus CLI Project Restore]
 
 === project engine deploy
 
@@ -378,7 +378,7 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 NOTE: The output is in YAML format.
 
-image::{page-image-directory}/reguluscli.engine.suspend.png[Regulus CLI Engine Suspend, width=500]
+image::{page-image-directory}/reguluscli.engine.suspend.png[Regulus CLI Engine Suspend]
 
 === project engine list
 
@@ -399,7 +399,7 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 NOTE: The output is in YAML format.
 
-image::{page-image-directory}/reguluscli.engine.list.png[Regulus CLI Engine List, width=500]
+image::{page-image-directory}/reguluscli.engine.list.png[Regulus CLI Engine List]
 
 === project auth create
 
@@ -453,7 +453,7 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 NOTE: The output is in YAML format.
 
-image::{page-image-directory}/reguluscli.auth.create.png[Regulus CLI Auth Create, width=500]
+image::{page-image-directory}/reguluscli.auth.create.png[Regulus CLI Auth Create]
 
 === project auth list
 
@@ -474,7 +474,7 @@ NOTE: If your setup includes TLS configuration,  you need not add the `-no-tls` 
 
 NOTE: The output is in YAML format.
 
-image::{page-image-directory}/reguluscli.auth.list.png[Regulus CLI Auth List, width=500]
+image::{page-image-directory}/reguluscli.auth.list.png[Regulus CLI Auth List]
 
 === project auth delete
 
@@ -508,4 +508,4 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 NOTE: The output is in YAML format.
 
-image::{page-image-directory}/reguluscli.auth.delete.png[Regulus CLI Auth Delete, width=500]
+image::{page-image-directory}/reguluscli.auth.delete.png[Regulus CLI Auth Delete]

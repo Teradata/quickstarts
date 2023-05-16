@@ -2,7 +2,7 @@
 :experimental:
 :page-author: Thripti Aravind
 :page-email: thripti.aravind@teradata.com
-:page-revdate: April 10th, 2023
+:page-revdate: May 16th, 2023
 :description: Run a simple workflow and learn how to use Regulus.
 :keywords: Regulus, Workspaces, Query Engine
 
@@ -17,7 +17,7 @@ This document walks you through a simple workflow where you can use JupyterLab t
 * Run the workload
 * Suspend the compute
 
-== Before You Begin
+== Before you begin
 
 * Install and configure Regulus. See xref::install-regulus-docker-image.adoc[].
 
@@ -26,7 +26,7 @@ This document walks you through a simple workflow where you can use JupyterLab t
 ** AWS environment variables, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_SESSION_TOKEN` from your AWS Console. See link:https://docs.aws.amazon.com/sdkref/latest/guide/environment-variables.html[Environment Variables].
 ** API Key from Workspaces.
 
-== Run Your First Workload
+== Run your first workload
 
 Run `%help` or `%help <command>` for details on any magic command. See xref::regulus-magic-reference.adoc[] for more details.
 
@@ -191,7 +191,7 @@ DROP TABLE SalesDemo;
 
 Congrats! You've successfully run your first use case in JupyterLab.
 
-== Next Steps
+== Next steps
 
 * Interested in exploring advanced use cases? Coming soon! Keep watching this space for the GitHub link.
 

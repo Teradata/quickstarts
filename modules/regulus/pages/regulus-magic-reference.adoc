@@ -2,7 +2,7 @@
 :experimental:
 :page-author: Thripti Aravind
 :page-email: thripti.aravind@teradata.com
-:page-revdate: April 10th, 2023
+:page-revdate: May 16th, 2023
 :description: Learn about Regulus JupyterLab magic commands.
 :keywords: Regulus, Workspaces, Query Engine
 :page-image-directory: regulus-magic-reference
