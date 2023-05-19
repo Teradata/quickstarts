@@ -355,9 +355,6 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 |===
 
-**Output**:
-
-<Insert Output screenshot>
 
 === project engine suspend
 

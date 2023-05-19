@@ -6,7 +6,7 @@
 :description: Run a simple workflow and learn how to use Regulus.
 :keywords: Regulus, Workspaces, Query Engine
 
-IMPORTANT: This product is in preview and is subject to change. To get early access to Regulus, contact Support.
+IMPORTANT: This product is in preview and is subject to change. To get early access to Regulus, sign up on the Regulus Home page.
 
 == Overview
 
@@ -111,6 +111,8 @@ b. Load data into the SalesCenter table using the `%dataload` magic command.
 %dataload DATABASE=<Project_Name>, TABLE=SalesCenter, FILEPATH=notebooks/sql/data/salescenter.csv
 ----
 +
+NOTE: Unable to locate the salescenter.csv file? Download the file from link:https://github.com/Teradata/jupyter-demos/tree/main/Getting_Started/Charting_and_Visualization/data[GitHub Demo: Charting and Visualization Data]
++
 Verify that the data was inserted.
 +
 
@@ -145,6 +147,8 @@ d. Load data into the SalesDemo table using the `%dataload` magic command.
 ----
 %dataload DATABASE=<Project_Name>, TABLE=SalesDemo, FILEPATH=notebooks/sql/data/salesdemo.csv
 ----
++
+NOTE: Unable to locate the salesdemo.csv file? Download the file from link:https://github.com/Teradata/jupyter-demos/tree/main/Getting_Started/Charting_and_Visualization/data[GitHub Demo: Charting and Visualization Data]
 +
 Verify that the sales demo data was inserted successfully.
 +

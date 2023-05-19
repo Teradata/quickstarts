@@ -7,7 +7,7 @@
 :keywords: Regulus, Workspaces, Query Engine
 :page-image-directory: regulus-magic-reference
 
-IMPORTANT: This product is in preview and is subject to change. To get early access to Regulus, contact Support.
+IMPORTANT: This product is in preview and is subject to change. To get early access to Regulus, sign up on the Regulus Home page.
 
 == Overview
 
