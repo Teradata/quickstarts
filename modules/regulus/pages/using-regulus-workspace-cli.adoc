@@ -25,7 +25,7 @@ Make sure you have:
 
 == Install Workspaces CLI
 
-Download the Workspaces CLI executable file from link:https://downloads.teradata.com/download/tools/regulus-jupyter-kernel[https://downloads.teradata.com/download/tools/regulus-jupyter-kernel].
+Download the Workspaces CLI executable file from link:https://downloads.teradata.com/download/tools/regulus-ctl[https://downloads.teradata.com/download/tools/regulus-ctl].
 
 NOTE: Workspaces CLI supports all major operating systems.
 
