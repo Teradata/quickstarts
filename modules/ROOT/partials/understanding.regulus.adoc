@@ -1,9 +1,0 @@
-Regulus is a self-service platform that enables you to deploy and connect an SQL query engine to your data lake. You can then run your workloads on the on-demand, scalable query engine deployed on your preferred Cloud Service Provider (CSP). Using the query engine, you can leverage the capabilities of a highly parallel database while eliminating the need for data management.
-
-Regulus contains the following components:
-
-* **Workspaces**: An orchestration service that controls and manages Regulus automation and deployments. It also controls the integration elements that provide a seamless user experience when running data-related projects. Workspaces includes a web-based UI that you can use to authorize the user and define your choice of CSP integrations.
-
-* **Interface**:  An environment to write and run data projects, connect to the Teradata system, and visualize data. You can use either JupyterLab or Workspaces CLI.
-
-* **Query Engine**: A fully managed computational resource that you can use to run your data science and analytical workloads.
