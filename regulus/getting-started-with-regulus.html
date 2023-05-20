@@ -1298,7 +1298,7 @@ span.search-result-highlight {
 <article class="doc">
 <h1 class="page">Run a Sample Workload in JupyterLab</h1>
 <p>Author: <a href="mailto:thripti.aravind@teradata.com">Thripti Aravind</a><br/>
-Last updated: April 10th, 2023</p>
+Last updated: May 16th, 2023</p>
 <div id="preamble">
 <div class="sectionbody">
 <div class="admonitionblock important">
@@ -1308,7 +1308,7 @@ Last updated: April 10th, 2023</p>
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-This product is in preview and is subject to change. To get early access to Regulus, contact Support.
+This product is in preview and is subject to change. To get early access to Regulus, sign up on the Regulus Home page.
 </td>
 </tr>
 </table>
@@ -1340,7 +1340,7 @@ This product is in preview and is subject to change. To get early access to Regu
 </div>
 </div>
 <div class="sect1">
-<h2 id="_before_you_begin"><a class="anchor" href="#_before_you_begin"></a>Before You Begin</h2>
+<h2 id="_before_you_begin"><a class="anchor" href="#_before_you_begin"></a>Before you begin</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -1365,7 +1365,7 @@ This product is in preview and is subject to change. To get early access to Regu
 </div>
 </div>
 <div class="sect1">
-<h2 id="_run_your_first_workload"><a class="anchor" href="#_run_your_first_workload"></a>Run Your First Workload</h2>
+<h2 id="_run_your_first_workload"><a class="anchor" href="#_run_your_first_workload"></a>Run your first workload</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Run <code>%help</code> or <code>%help &lt;command&gt;</code> for details on any magic command. See <a href="regulus-magic-reference.html" class="xref page">Regulus JupyterLab Magic Command Reference</a> for more details.</p>
@@ -1482,6 +1482,18 @@ NO PRIMARY INDEX ;</code></pre>
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%dataload DATABASE=&lt;Project_Name&gt;, TABLE=SalesCenter, FILEPATH=notebooks/sql/data/salescenter.csv</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Unable to locate the salescenter.csv file? Download the file from <a href="https://github.com/Teradata/jupyter-demos/tree/main/Getting_Started/Charting_and_Visualization/data">GitHub Demo: Charting and Visualization Data</a>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Verify that the data was inserted.</p>
 </div>
@@ -1516,6 +1528,18 @@ NO PRIMARY INDEX ;</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%dataload DATABASE=&lt;Project_Name&gt;, TABLE=SalesDemo, FILEPATH=notebooks/sql/data/salesdemo.csv</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Unable to locate the salesdemo.csv file? Download the file from <a href="https://github.com/Teradata/jupyter-demos/tree/main/Getting_Started/Charting_and_Visualization/data">GitHub Demo: Charting and Visualization Data</a>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Verify that the sales demo data was inserted successfully.</p>
@@ -1576,7 +1600,7 @@ DROP TABLE SalesDemo;</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next Steps</h2>
+<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
