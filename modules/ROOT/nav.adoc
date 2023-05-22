@@ -15,6 +15,7 @@
 * Manage data
 ** xref::nos.adoc[]
 ** xref::dbt.adoc[]
+** xref::advanced-dbt.adoc[]
 ** xref:tools-and-utilities:run-bulkloads-efficiently-with-teradata-parallel-transporter.adoc[Load data with TPT]
 ** xref::create-parquet-files-in-object-storage.adoc[]
 ** xref:other-integrations:execute-airflow-workflows-that-use-dbt-with-teradata-vantage.adoc[]
