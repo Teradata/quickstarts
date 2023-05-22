@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Install and Configure Regulus Using Docker :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/regulus/install-regulus-docker-image.html">
-    <meta name="description" content="Learn how to install and configure Regulus Workspaces using Docker Engine and Docker Compose.">
-    <meta name="keywords" content="Regulus, Workspaces, Query Engine">
+    <title>Advanced dbt use cases with Teradata Vantage :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/advanced-dbt.html">
+    <meta name="description" content="Advanced dbt (data build tool) use cases with Teradata Vantage.">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, elt, dbt.">
     <meta name="generator" content="Antora 3.0.1">
-    <link rel="stylesheet" href="../_/css/site.css">
-<meta property="og:title" content="Install and Configure Regulus Using Docker :: Teradata Getting Started">
+    <link rel="stylesheet" href="./_/css/site.css">
+<meta property="og:title" content="Advanced dbt use cases with Teradata Vantage :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Learn how to install and configure Regulus Workspaces using Docker Engine and Docker Compose." />
+<meta property="og:description" content="Advanced dbt (data build tool) use cases with Teradata Vantage." />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/regulus/install-regulus-docker-image.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/advanced-dbt.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -28,10 +28,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');</script>
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="../_/css/search.css">
-<link rel="stylesheet" href="../_/css/styles.css">
-<link rel="stylesheet" href="../_/css/fontawesome.all.min.css">
-<link rel="stylesheet" href="../_/css/webfonts.css">
+<link rel="stylesheet" href="./_/css/search.css">
+<link rel="stylesheet" href="./_/css/styles.css">
+<link rel="stylesheet" href="./_/css/fontawesome.all.min.css">
+<link rel="stylesheet" href="./_/css/webfonts.css">
 <style>
 body {
   transition: all .25s ease-in-out 0s;
@@ -59,7 +59,7 @@ article a[href^="https://"][target="_blank"]::after {
   width: 14px;
   height: 14px;
   margin-left: 4px;
-  background-image: url("../_/img/open_in_new.svg");
+  background-image: url("./_/img/open_in_new.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -342,7 +342,7 @@ button {
   border-radius: 8px;
   padding-left: 14px;
   padding-right: 14px;
-  background-image: url(../_/img/search.svg);
+  background-image: url(./_/img/search.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -806,7 +806,7 @@ aside.toc.sidebar {
 
 .report-an-issue {
   padding: 10px 20px 10px 10px;
-  background-image: url(../_/img/pan_tool.svg);
+  background-image: url(./_/img/pan_tool.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -814,7 +814,7 @@ aside.toc.sidebar {
 
 .edit-on-github {
   padding: 10px 20px 10px 10px;
-  background-image: url(../_/img/edit.svg);
+  background-image: url(./_/img/edit.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -900,19 +900,19 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
-  content: url("../_/img/warning.svg");
+  content: url("./_/img/warning.svg");
 }
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
-  content: url("../_/img/note.svg");
+  content: url("./_/img/note.svg");
 }
 
 .doc .admonitionblock.question .icon i.fa[class*=' icon-']::before {
-  content: url("../_/img/question.mark.svg");
+  content: url("./_/img/question.mark.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
-  content: url("../_/img/note.svg");
+  content: url("./_/img/note.svg");
 }
 
 .doc .source-toolbox .source-lang {
@@ -923,7 +923,7 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .source-toolbox img.copy-icon {
-  content: url("../_/img/copy.svg");
+  content: url("./_/img/copy.svg");
 }
 
 .doc .source-toolbox>:not(:last-child)::after {
@@ -951,8 +951,8 @@ span.search-result-highlight {
 
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
-<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
-    <script>var uiRootPath = '../_'</script>
+<link rel="icon" href="./_/img/favicon.ico" type="image/x-icon">
+    <script>var uiRootPath = './_'</script>
   </head>
   <body class="article">
 <!-- Google Tag Manager (noscript) -->
@@ -1005,13 +1005,13 @@ span.search-result-highlight {
         <ul>
           <li class="header-nav-mobile__menu-item">
             <header class="header-nav-mobile__menu-item__header">
-              <a href="../index.html">Getting Started</a>
+              <a href="./index.html">Getting Started</a>
             </header>
           </li>
           <li class="header-nav-mobile__menu-item has-sub-items">
             <header class="header-nav-mobile__menu-item__header i-alignment">
               <a href="https://docs.teradata.com/">Docs</a>
-              <img class="navbar-arrow" src='../_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Docs">
+              <img class="navbar-arrow" src='./_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Docs">
             </header>
             <div>
               <div class="header-nav-mobile__menu-item__links">
@@ -1030,7 +1030,7 @@ span.search-result-highlight {
           <li class="header-nav-mobile__menu-item has-sub-items">
             <header class="header-nav-mobile__menu-item__header i-alignment">
               <a href="https://support.teradata.com/community ">Community</a>
-              <img class="navbar-arrow" src='../_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Community">
+              <img class="navbar-arrow" src='./_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Community">
             </header>
             <div>
               <div class="header-nav-mobile__menu-item__links">
@@ -1040,17 +1040,17 @@ span.search-result-highlight {
                   </li>
                   <li>
                     <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item">Technical Medium Blogs
-                      <img src='../_/img/icons/external-symbol.svg' class="ext-symbol">
+                      <img src='./_/img/icons/external-symbol.svg' class="ext-symbol">
                     </a>
                   </li>
                   <li>
                     <a href="https://github.com/Teradata" title="Teradata on GitHub" target="_blank" class="dropdown-item">GitHub
-                      <img src='../_/img/icons/external-symbol.svg' class="ext-symbol">
+                      <img src='./_/img/icons/external-symbol.svg' class="ext-symbol">
                     </a>
                   </li>
                   <li>
                     <a href="https://stackoverflow.com/questions/tagged/teradata" title="Stack Overflow Teradata questions" target="_blank" class="dropdown-item">Stack Overflow
-                      <img src='../_/img/icons/external-symbol.svg' class="ext-symbol">
+                      <img src='./_/img/icons/external-symbol.svg' class="ext-symbol">
                     </a>
                   </li>               
                 </ul>
@@ -1083,22 +1083,22 @@ span.search-result-highlight {
     <span class="nav-text">Get access to Vantage</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../run-vantage-express-on-aws.html">Vantage Express on AWS</a>
+    <a class="nav-link" href="run-vantage-express-on-aws.html">Vantage Express on AWS</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../vantage.express.gcp.html">Vantage Express on Google Cloud</a>
+    <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on Google Cloud</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
+    <a class="nav-link" href="run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../getting.started.vmware.html">Vantage Express on VMware</a>
+    <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../getting.started.vbox.html">Vantage Express on VirtualBox</a>
+    <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../getting.started.utm.html">Vantage Express on UTM</a>
+    <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
   </li>
 </ul>
   </li>
@@ -1107,17 +1107,17 @@ span.search-result-highlight {
     <span class="nav-text">Connect to Vantage</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
+    <a class="nav-link" href="install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
+    <a class="nav-link" href="other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Configure ODBC</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../odbc.ubuntu.html">Ubuntu</a>
+    <a class="nav-link" href="odbc.ubuntu.html">Ubuntu</a>
   </li>
 </ul>
   </li>
@@ -1128,34 +1128,34 @@ span.search-result-highlight {
     <span class="nav-text">Manage data</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../nos.html">Query data stored in object storage</a>
+    <a class="nav-link" href="nos.html">Query data stored in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dbt.html">dbt with Teradata Vantage</a>
+    <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="advanced-dbt.html">Advanced dbt use cases with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../advanced-dbt.html">Advanced dbt use cases with Teradata Vantage</a>
+    <a class="nav-link" href="tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">Load data with TPT</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">Load data with TPT</a>
+    <a class="nav-link" href="create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
+    <a class="nav-link" href="other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
+    <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
+    <a class="nav-link" href="segment.html">Store events from Twilio Segment</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../segment.html">Store events from Twilio Segment</a>
+    <a class="nav-link" href="cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
+    <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
   </li>
 </ul>
   </li>
@@ -1164,13 +1164,13 @@ span.search-result-highlight {
     <span class="nav-text">Create applications</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../jdbc.html">Connect to Vantage using JDBC</a>
+    <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+    <a class="nav-link" href="mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../query-service/send-queries-using-rest-api.html">Send queries using REST API</a>
+    <a class="nav-link" href="query-service/send-queries-using-rest-api.html">Send queries using REST API</a>
   </li>
 </ul>
   </li>
@@ -1179,46 +1179,46 @@ span.search-result-highlight {
     <span class="nav-text">Analyze data</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../jupyter.html">Use Vantage from a Jupyter notebook</a>
+    <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+    <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../ml.html">Train ML models in Vantage</a>
+    <a class="nav-link" href="ml.html">Train ML models in Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../sto.html">Run scripts on Vantage</a>
+    <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../perform-time-series-analysis-using-teradata-vantage.html">Perform time series analysis</a>
+    <a class="nav-link" href="perform-time-series-analysis-using-teradata-vantage.html">Perform time series analysis</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - Import and Deploy your first BYOM Model</a>
+    <a class="nav-link" href="modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - Import and Deploy your first BYOM Model</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.html">ModelOps - Import and Deploy your first GIT Model</a>
+    <a class="nav-link" href="modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.html">ModelOps - Import and Deploy your first GIT Model</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../modelops/using-feast-feature-store-with-teradata-vantage.html">Using Teradata with FEAST</a>
+    <a class="nav-link" href="modelops/using-feast-feature-store-with-teradata-vantage.html">Using Teradata with FEAST</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
+    <a class="nav-link" href="cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
+    <a class="nav-link" href="cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
+    <a class="nav-link" href="cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Integrate Teradata Jupyter extensions with SageMaker notebook instance</a>
+    <a class="nav-link" href="cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Integrate Teradata Jupyter extensions with SageMaker notebook instance</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Create Vizualizations in Power BI using Vantage</a>
+    <a class="nav-link" href="business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Create Vizualizations in Power BI using Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
+    <a class="nav-link" href="other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
   </li>
 </ul>
   </li>
@@ -1231,7 +1231,7 @@ span.search-result-highlight {
     <span class="nav-text">Financial</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../jupyter-demos/gcp-vertex-ai-pipelines-vantage-byom-housing-example.html">Google Cloud Vertex AI Pipelines Vantage BYOM Housing Example</a>
+    <a class="nav-link" href="jupyter-demos/gcp-vertex-ai-pipelines-vantage-byom-housing-example.html">Google Cloud Vertex AI Pipelines Vantage BYOM Housing Example</a>
   </li>
 </ul>
   </li>
@@ -1241,17 +1241,17 @@ span.search-result-highlight {
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Regulus (preview)</span>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="install-regulus-docker-image.html">Install and Configure Regulus Using Docker</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="regulus/install-regulus-docker-image.html">Install and Configure Regulus Using Docker</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting-started-with-regulus.html">Run a Sample Workload in JupyterLab</a>
+    <a class="nav-link" href="regulus/getting-started-with-regulus.html">Run a Sample Workload in JupyterLab</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="regulus-magic-reference.html">Regulus JupyterLab Magic Command Reference</a>
+    <a class="nav-link" href="regulus/regulus-magic-reference.html">Regulus JupyterLab Magic Command Reference</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="using-regulus-workspace-cli.html">Use Regulus With Workspaces CLI</a>
+    <a class="nav-link" href="regulus/using-regulus-workspace-cli.html">Use Regulus With Workspaces CLI</a>
   </li>
 </ul>
   </li>
@@ -1267,10 +1267,10 @@ span.search-result-highlight {
   </div>
   <ul class="components">
     <li class="component is-current">
-      <a class="title" href="../index.html">Getting Started Guides</a>
+      <a class="title" href="index.html">Getting Started Guides</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">master</a>
+          <a href="index.html">master</a>
         </li>
       </ul>
     </li>
@@ -1284,8 +1284,8 @@ span.search-result-highlight {
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li>Regulus (preview)</li>
-    <li><a href="install-regulus-docker-image.html">Install and Configure Regulus Using Docker</a></li>
+    <li>Manage data</li>
+    <li><a href="advanced-dbt.html">Advanced dbt use cases with Teradata Vantage</a></li>
   </ul>
 </nav>
 </div>
@@ -1293,71 +1293,50 @@ span.search-result-highlight {
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/regulus/pages/install-regulus-docker-image.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/advanced-dbt.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Install and Configure Regulus Using Docker</h1>
-<p>Author: <a href="mailto:thripti.aravind@teradata.com">Thripti Aravind</a><br/>
-Last updated: May 16th, 2023</p>
-<div id="preamble">
-<div class="sectionbody">
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-This product is in preview and is subject to change. To get early access to Regulus, sign up on the Regulus Home page.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
+<h1 class="page">Advanced dbt use cases with Teradata Vantage</h1>
+<p>Author: <a href="mailto:daniel.herrera2@teradata.com">Daniel Herrera</a><br/>
+Last updated: May 22th, 2023</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Regulus is a self-service platform that enables you to deploy and connect an SQL query engine to your data lake. You can then run your workloads on the on-demand, scalable query engine deployed on your preferred Cloud Service Provider (CSP). Using the query engine, you can leverage the capabilities of a highly parallel database while eliminating the need for data management.</p>
+<p>This project showcases the integration of dbt with Teradata Vantage from an advanced user perspective.
+If you are new to data engineering with dbt we recommend that you start with our <a href="https://quickstarts.teradata.com/dbt.html" target="_blank" rel="noopener">introductory project.</a></p>
 </div>
 <div class="paragraph">
-<p>Regulus contains the following components:</p>
+<p>The advanced use cases showcased in the demo are the following:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Workspaces</strong>: An orchestration service that controls and manages Regulus automation and deployments. It also controls the integration elements that provide a seamless user experience when running data-related projects. Workspaces includes a web-based UI that you can use to authorize the user and define your choice of CSP integrations.</p>
+<p>Incremental materializations</p>
 </li>
 <li>
-<p><strong>Interface</strong>:  An environment to write and run data projects, connect to the Teradata system, and visualize data. You can use either JupyterLab or Workspaces CLI.</p>
+<p>Utility macros</p>
 </li>
 <li>
-<p><strong>Query Engine</strong>: A fully managed computational resource that you can use to run your data science and analytical workloads.</p>
+<p>Optimizing table/view creations with Teradata-specific modifiers</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>This document outlines the steps for installing and configuring Regulus using Docker. To use Regulus with Workspaces CLI, see <a href="using-regulus-workspace-cli.html" class="xref page">Use Regulus With Workspaces CLI</a>.</p>
+<p>The application of these concepts is illustrated through the ELT process of <code>teddy_retailers</code>, a fictional store.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_before_you_begin"><a class="anchor" href="#_before_you_begin"></a>Before you begin</h2>
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Make sure you have the following:</p>
-</div>
 <div class="ulist">
 <ul>
 <li>
-<p>GitHub account: If you don&#8217;t already have a GitHub account, create one at <a href="https://github.com/">https://github.com/</a>.</p>
-</li>
-<li>
-<p>AWS account: If you don&#8217;t have an AWS account, sign up for an AWS Free Tier account at <a href="https://aws.amazon.com/free/">https://aws.amazon.com/free/</a>.</p>
+<p>Access to a Teradata Vantage instance.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1365,393 +1344,59 @@ This product is in preview and is subject to change. To get early access to Regu
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-For the developer preview, you can host the query engine only on AWS.
+If you need a test instance of Vantage, you can provision one for free at <a href="https://clearscape.teradata.com" class="bare">https://clearscape.teradata.com</a>.
 </td>
 </tr>
 </table>
 </div>
 </li>
 <li>
-<p>Docker: To download and install Docker, See <a href="https://docs.docker.com/docker-for-windows/install/">https://docs.docker.com/docker-for-windows/install/</a>.</p>
+<p>Python 3.7, 3.8, 3.9 or 3.10 installed.</p>
+</li>
+<li>
+<p>A database client for running database commands, an example of the configuration of one such client is presented in <a href="https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html" target="_blank" rel="noopener">this tutorial.</a>.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_install_workspaces"><a class="anchor" href="#_install_workspaces"></a>Install Workspaces</h2>
+<h2 id="_demo_project_setup"><a class="anchor" href="#_demo_project_setup"></a>Demo project setup</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>The Workspaces Docker images are monolithic images of Workspaces running the necessary services in a single container.</p>
-</div>
-<div class="paragraph">
-<p>Pull the docker image from <a href="https://hub.docker.com/r/teradata/regulus-workspaces">Docker Hub</a>.</p>
-</div>
-<div id="docker_pull" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker pull teradata/regulus-workspaces</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Before proceeding, make sure to:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Copy and retain the environment variables, <code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code>, and <code>AWS_SESSION_TOKEN</code>, from your AWS Console. See <a href="https://docs.aws.amazon.com/sdkref/latest/guide/environment-variables.html">Environment Variables</a>.</p>
-</li>
-<li>
-<p>Set the environment variable, <code>WORKSPACES_HOME</code>, to the directory where the configuration and data files are located. Make sure that the directory exists and appropriate permission is granted.</p>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Local Location</th>
-<th class="tableblock halign-left valign-top">Container Location</th>
-<th class="tableblock halign-left valign-top">Usage</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">$WORKSPACES_HOME</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">/etc/td</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Stores data and configuration</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">$WORKSPACES_HOME/tls</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">/etc/td/tls</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Stores cert files</p></td>
-</tr>
-</tbody>
-</table>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>You can install Workspaces using one of the following methods:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#_install_workspaces_using_docker_engine">Docker Engine</a></p>
-</li>
-<li>
-<p><a href="#_install_workspaces_using_docker_compose">Docker Compose</a></p>
-</li>
-</ul>
-</div>
-<div class="sect2">
-<h3 id="_install_workspaces_using_docker_engine"><a class="anchor" href="#_install_workspaces_using_docker_engine"></a>Install Workspaces using Docker Engine</h3>
-<div class="paragraph">
-<p>Run the Docker image once you&#8217;ve set the <code>WORKSPACES_HOME</code> variable.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Modify the directories based on your requirements.
-</td>
-</tr>
-</table>
-</div>
-<div id="docker_engine_run" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -detach \
-  --env AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
-  --env AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \
-  --env AWS_SESSION_TOKEN="${AWS_SESSION_TOKEN}" \
-  --publish 3000:3000 \
-  --publish 3282:3282 \
-  --volume ${WORKSPACES_HOME}:/etc/td \
-  teradata/regulus-workspaces:latest</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The command downloads and starts a Workspaces container and publishes the ports needed to access it. Once the Workspaces server is initialized and started, you can access Workspaces using the URL: <a href="http://&lt;ip_or_hostname&gt;:3000/" class="bare">http://&lt;ip_or_hostname&gt;:3000/</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_install_workspaces_using_docker_compose"><a class="anchor" href="#_install_workspaces_using_docker_compose"></a>Install Workspaces using Docker Compose</h3>
-<div class="paragraph">
-<p>With Docker Compose, you can easily configure, install, and upgrade your Docker-based Workspaces installation.</p>
-</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Install Docker Compose. See <a href="https://docs.docker.com/compose/install/">https://docs.docker.com/compose/install/</a>.</p>
-</li>
-<li>
-<p>Create a docker-compose.yml file.</p>
-<div id="docker_compose" class="listingblock content-editable emits-gtm-events">
+<p>Clone the tutorial repository and cd into the project directory:</p>
+<div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">version: "3.9"
-
-services:
-  workspaces:
-    deploy:
-      replicas: 1
-    container_name: workspaces
-    image: ${WORKSPACES_IMAGE_NAME:-teradata/regulus-workspaces}:${WORKSPACES_IMAGE_TAG:-latest}
-    command: serve -v
-    restart: unless-stopped
-    ports:
-      - "443:443/tcp"
-      - "3000:3000/tcp"
-      - "3282:3282/tcp"
-    environment:
-      TZ: ${WS_TZ:-UTC}
-      AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
-      AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
-      AWS_SESSION_TOKEN: "${AWS_SESSION_TOKEN}"
-    volumes:
-      - ${WORKSPACES_HOME:-./volumes/workspaces}:/etc/td
-      - ${WORKSPACES_AWS_CONFIG:-~/.aws}:/root/.aws</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://github.com/Teradata/teddy_retailers_dbt-dev teddy_retailers
+cd teddy_retailers</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Go to the directory where the docker-compose.yml file is located and start Workspaces.</p>
-<div id="docker_compose_run" class="listingblock content-editable emits-gtm-events">
+<p>Create a new python environment to manage dbt and its dependencies. Activate the environment:</p>
+<div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Docker compose up -d</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python3 -m venv env
+source env/bin/activate</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Once the Workspaces server is initialized and started, you can access Workspaces using the URL: <a href="http://&lt;ip_or_hostname&gt;:3000/" class="bare">http://&lt;ip_or_hostname&gt;:3000/</a>.</p>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_configure_and_set_up_workspaces"><a class="anchor" href="#_configure_and_set_up_workspaces"></a>Configure and set up Workspaces</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Workspaces uses the GitHub OAuth App to authorize users and manage the project state. To authorize Workspaces to save your project instance configuration, use the Client ID and Client secret key generated during the GitHub OAuth App registration. The project instance configuration values are maintained in your GitHub repositories.</p>
-</div>
-<div class="paragraph">
-<p>First-time users must perform the following steps before proceeding:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Log on to your GitHub account and create an OAuth App. See <a href="https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app">GitHub Documentation</a>.</p>
-<div class="paragraph">
-<p>While registering the OAuth App, type the following Workspaces URLs in the URL fields:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Homepage URL</strong>: <a href="http://&lt;ip_or_hostname&gt;:3000/" class="bare">http://&lt;ip_or_hostname&gt;:3000/</a></p>
-</li>
-<li>
-<p><strong>Authorization callback URL</strong>: <a href="http://&lt;ip_or_hostname&gt;:3000/auth/github/callback" class="bare">http://&lt;ip_or_hostname&gt;:3000/auth/github/callback</a></p>
-</li>
-</ul>
 </div>
 </li>
 <li>
-<p>Copy and retain the <strong>Client ID</strong> and <strong>Client secret key</strong>.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>To set up Workspaces, do the following:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Access Workspaces using the URL: <a href="http://&lt;ip_or_hostname&gt;:3000/" class="bare">http://&lt;ip_or_hostname&gt;:3000/</a>.</p>
-<div class="imageblock">
+<p>Install the <code>dbt-teradata</code> module. The core dbt module is included as a dependency so you don&#8217;t have to install it separately:</p>
+<div class="listingblock">
 <div class="content">
-<img src="_images/install-regulus-docker-image/regulus.workspaces.setting.png" alt="regulus.workspaces.setting">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install dbt-teradata</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Apply the following general service configuration under <strong>Setup</strong>.</p>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Setting</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Required?</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Service Base URL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">[Non-Editable] The root URL of the service.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Git Provider</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The provider for Git integration. Currently, Regulus supports only GitHub.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Service Log Lev</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The level of logging.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Engine IP Network Type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The type of network assigned to a query engine instance, which can be either public or private.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Use TLS</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates if TLS support is enabled. Teradata recommends enabling this option.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Service TLS Certification</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The server certificate to authenticate the server identity.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Service TLS Certificate Key</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The server certificate key.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>To use a self-signed certificate for <strong>Service Base URL</strong>, select <strong>GENERATE TLS</strong>. A certificate and private key are generated and displayed in the respective fields.</p>
-</li>
-<li>
-<p>Select <strong>Next</strong>.</p>
-</li>
-<li>
-<p>Apply the following settings under <strong>Cloud Integrations: AWS</strong>.</p>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Setting</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Required?</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Default Region</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The AWS region you want to deploy the workload in. Teradata recommends choosing the region closest to your primary work location.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Default Subnet</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The default location to launch the query engine.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Default CIDRs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The list of Classless Inter-Domain Routing (CIDR) addresses used for the query engine. Use CIDR to allocate IP addresses flexibly and efficiently in your network. If you don&#8217;t specify a CIDR, the query engine is automatically associated with the default CIDR.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Default Security Groups</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The list of security groups for the VPC in each region. If you don&#8217;t specify a security group, the query engine is automatically associated with the default security group for the VPC.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>Select <strong>Next</strong>.</p>
-</li>
-<li>
-<p>Apply the following settings under <strong>Configure GitHub</strong>.</p>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Setting</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Required?</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">GitHub Application URL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">[Non-Editable] The URL where the Workspaces server is hosted.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">GitHub Callback URL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">[Non-Editable] The URL you are redirected to after you authorize.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">GitHub Client ID</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The Client ID you received from GitHub on creating your OAuth App.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Use TLS</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enable TLS support.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">GitHub Client Secret</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The Client secret ID you received from GitHub on creating your OAuth App.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">GitHub Organization</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the GitHub organization account that you use to collaborate with your team.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">GitHub Base URL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The base URL of your GitHub account. The URL may vary based on your account type. For example, <a href="https://github.company.com/" class="bare">https://github.company.com/</a> for GitHub Enterprise account.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>Select <strong>Save</strong> and then select <strong>Login</strong>. You are redirected to GitHub.</p>
-</li>
-<li>
-<p>Log on with your GitHub credentials to authorize Workspaces.</p>
-<div class="paragraph">
-<p>After authentication, you are redirected to the Workspaces <strong>Profile</strong> page, and an API Key is generated. You can use the API Key to make requests to the Workspaces service.</p>
+<p>Install the project&#8217;s dependencies <code>dbt-utils</code> and <code>teradata-utils</code>. This can be done through the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt deps</code></pre>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-A new API Key is generated each time you connect to Workspaces.
-</td>
-</tr>
-</table>
 </div>
 </li>
 </ol>
@@ -1759,131 +1404,229 @@ A new API Key is generated each time you connect to Workspaces.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_install_a_regulus_interface"><a class="anchor" href="#_install_a_regulus_interface"></a>Install a Regulus interface</h2>
+<h2 id="_data_warehouse_setup"><a class="anchor" href="#_data_warehouse_setup"></a>Data warehouse setup</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You can use either JupyterLab or Workspaces CLI as your Regulus interface.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>JupyterLab: Install using one of the following methods:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#_install_jupyterLab_using_docker_engine">Docker Engine</a></p>
-</li>
-<li>
-<p><a href="#_install_jupyterLab_using_docker_compose">Docker Compose</a></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Workspaces CLI: See <a href="using-regulus-workspace-cli.html" class="xref page">Use Regulus With Workspaces CLI</a>.</p>
-</li>
-</ul>
-</div>
-<div class="sect2">
-<h3 id="_install_jupyterlab_using_docker_engine"><a class="anchor" href="#_install_jupyterlab_using_docker_engine"></a>Install JupyterLab using Docker Engine</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Pull the Docker image from the DockerHub at <a href="https://hub.docker.com/r/teradata/regulus-jupyter">https://hub.docker.com/r/teradata/regulus-jupyter</a>.</p>
-</li>
-<li>
-<p>Run the Docker image once you&#8217;ve set the <code>JUPYTER_HOME</code> variable.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Modify the directories based on your requirements.
-</td>
-</tr>
-</table>
-</div>
-<div id="docker_engine_jupyter" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -detach \
-  --env “accept_license=Y” \
-  --publish 8888:8888 \
-  --volume ${JUPYTER_HOME}: /home/jovyan/JupyterLabRoot \
-  teradata/regulus-jupyter:latest</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The command downloads and starts a JupyterLab container and publishes the ports needed to access it.
-Connect to JupyterLab using the URL: <a href="http://localhost:8888" class="bare">http://localhost:8888</a> and enter the token when prompted. For detailed instructions, see <a href="https://docs.teradata.com/r/Teradata-VantageTM-Modules-for-Jupyter-Installation-Guide/Teradata-Vantage-Modules-for-Jupyter/Teradata-Vantage-Modules-for-Jupyter">Teradata Vantage™ Modules for Jupyter Installation Guide</a> or <a href="https://quickstarts.teradata.com/jupyter.html">Use Vantage from a Jupyter Notebook</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_install_jupyterlab_using_docker_compose"><a class="anchor" href="#_install_jupyterlab_using_docker_compose"></a>Install JupyterLab using Docker Compose</h3>
-<div class="paragraph">
-<p>With Docker Compose, you can easily configure, install, and upgrade your Docker-based JupyterLab installation.</p>
+<p>The demo project assumes that the source data is already loaded into your data warehouse, this mimics the way that dbt is used in a production environment.
+To achieve this objective we provide public datasets available in Google Cload Platform (GCP), and scripts to load those datasets into your mock data warehouse.<br></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Install Docker Compose. See <a href="https://docs.docker.com/compose/install/">https://docs.docker.com/compose/install/</a>.</p>
-</li>
-<li>
-<p>Create a docker-compose.yml file.</p>
-<div id="docker_compose_jupyter" class="listingblock content-editable emits-gtm-events">
+<p>Create or select a working database. The dbt profile in the project points to a database called <code>teddy_retailers</code>. You can change the <code>schema</code> value to point to an existing database in your Teradata Vantage instance or you can create the <code>teddy_retailers</code> database running the following script in your database client:</p>
+<div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">version: "3.9"
-
-services:
-  jupyter:
-    deploy:
-      replicas: 1
-    image: teradata/regulus-jupyter:latest
-    environment:
-      - "accept_license=Y"
-    ports:
-      - 8888:8888
-    volumes:
-      - ${JUPYTER_HOME:-./volumes/jupyter}:/home/jovyan/JupyterLabRoot/userdata
-      - ${WORKSPACES_AWS_CONFIG:-~/.aws}:/root/.aws</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE teddy_retailers
+AS PERMANENT = 110e6,
+    SPOOL = 220e6;</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Go to the directory where the docker-compose.yml file is located and start JupyterLab.</p>
-<div id="docker_compose_jupyter_up" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Docker compose up -d</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Once the JupyterLab server is initialized and started, you can connect to JupyterLab using the URL: <a href="http://localhost:8888" class="bare">http://localhost:8888</a> and enter the token when prompted. For detailed instructions, see <a href="https://docs.teradata.com/r/Teradata-VantageTM-Modules-for-Jupyter-Installation-Guide/Teradata-Vantage-Modules-for-Jupyter/Teradata-Vantage-Modules-for-Jupyter">Teradata Vantage™ Modules for Jupyter Installation Guide</a> or <a href="https://quickstarts.teradata.com/jupyter.html">Use Vantage from a Jupyter Notebook</a>.</p>
-</div>
+<p>Load Initial data set.
+To load the initial data set into the data warehouse, the required scripts are available in the <code>references/inserts/create_data.sql</code> path of the project.
+You can execute these scripts by copying and pasting them into your database client. For guidance on running these scripts in your specific case please consult your database client&#8217;s documentation.</p>
 </li>
 </ol>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configure_dbt"><a class="anchor" href="#_configure_dbt"></a>Configure dbt</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Congrats! You&#8217;re all set up to use Regulus.</p>
+<p>We will now configure dbt to connect to your Vantage database.
+Create the file <code>$HOME/.dbt/profiles.yml</code> with the following content. Adjust <code>&lt;host&gt;</code>, <code>&lt;user&gt;</code>, <code>&lt;password&gt;</code> to match your Teradata Vantage instance.
+If you have already used dbt before in your environment you only need to add a profile for the project in your <code>profiles.yml</code> file.</p>
+</div>
+<div id="dbt_first_config" class="listingblock emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">teddy_retailers:
+  outputs:
+    dev:
+      type: teradata
+      host: &lt;host&gt;
+      user: &lt;user&gt;
+      password: &lt;password&gt;
+      logmech: TD2
+      schema: teddy_retailers
+      tmode: ANSI
+      threads: 1
+      timeout_seconds: 300
+      priority: interactive
+      retries: 1
+  target: dev</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, that we have the profile file in place, we can validate the setup:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt debug</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the debug command returned errors, you likely have an issue with the content of <code>profiles.yml</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_about_the_teddy_retailers_warehouse"><a class="anchor" href="#_about_the_teddy_retailers_warehouse"></a>About the Teddy Retailers warehouse</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As mentioned, <code>teddy_retailers</code> is a fictional store.
+Through dbt driven transformations we transform source data ingested from the`teddy_retailers` transactional database into a star schema ready for analytics.</p>
+</div>
+<div class="sect2">
+<h3 id="_the_data_models"><a class="anchor" href="#_the_data_models"></a>The data models</h3>
+<div class="paragraph">
+<p>The source data consists of the following tables customers, orders, products, and order_products, according to the following Entity Relations Diagram:</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="_images/diag-280ab8290137be73ca03012b0274cfa35160a364.svg" alt="Diagram" width="100%">
+</div>
+</div>
+<div class="paragraph">
+<p>Using dbt, we leverage the source data tables to construct the following dimensional model, which is optimized for analytics tools.</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="_images/diag-b0140f114a499a0a6a1334b4db839c8893062ed7.svg" alt="Diagram" width="100%">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_sources"><a class="anchor" href="#_the_sources"></a>The sources</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>For Teddy Retailers, the <code>orders</code> and <code>order_products</code> sources are periodically updated by the organization&#8217;s ELT (Extract, Load, Transform) process.</p>
+</li>
+<li>
+<p>The updated data only includes the latest changes rather than the entire dataset due to its large volume.</p>
+</li>
+<li>
+<p>To address this challenge, it is necessary to capture these incremental updates while preserving the previously available data.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h2>
+<h2 id="_the_dbt_models"><a class="anchor" href="#_the_dbt_models"></a>The dbt models</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>The <code>schema.yml</code> file in the project&#8217;s models directory specifies the sources for our models. These sources align with the data we loaded from GCP using our SQL scripts.</p>
+</div>
+<div class="sect2">
+<h3 id="_staging_area"><a class="anchor" href="#_staging_area"></a>Staging area</h3>
+<div class="paragraph">
+<p>The staging area models are merely ingesting the data from each of the sources and renaming each field, if appropiate.
+In the schema.yml of this directory we define basic integrity checks for the primary keys.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_core_area"><a class="anchor" href="#_core_area"></a>Core area</h3>
+<div class="paragraph">
+<p>The following advanced dbt concepts are applied in the models at this stage:</p>
+</div>
+<div class="sect3">
+<h4 id="_incremental_materializations"><a class="anchor" href="#_incremental_materializations"></a>Incremental materializations</h4>
+<div class="paragraph">
+<p>The <code>schema.yml</code> file in this directory specifies that the materializations of the two models we are building are incremental.
+We employ different strategies for these models:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Get started with Regulus by running a simple workflow. See <a href="getting-started-with-regulus.html" class="xref page">Run a Sample Workload in JupyterLab</a>.</p>
+<p>For the <code>all_orders model</code>, we utilize the delete+insert strategy. This strategy is implemented because there may be changes in the status of an order that are included in the data updates.</p>
 </li>
 <li>
-<p>Interested in learning how Regulus can help you with real-life use cases? Coming soon! Keep watching this space for the GitHub link.</p>
+<p>For the <code>all_order_products</code> model, we employ the default append strategy. This approach is chosen because the same combination of <code>order_id</code> and <code>product_id</code> may appear multiple times in the sources.
+This indicates that a new quantity of the same product has been added or removed from a specific order.</p>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_macro_assisted_assertions"><a class="anchor" href="#_macro_assisted_assertions"></a>Macro assisted assertions</h4>
+<div class="paragraph">
+<p>Within the <code>all_order_products</code> model, we have included an assertion with the help of a macro to test and guarantee that the resulting model encompasses a unique combination of <code>order_id</code> and <code>product_id</code>. This combination denotes the latest quantity of products of a specific type per order.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_teradata_modifiers"><a class="anchor" href="#_teradata_modifiers"></a>Teradata modifiers</h4>
+<div class="paragraph">
+<p>For both the <code>all_order</code> and <code>all_order_products</code> models, we have incorporated Teradata Modifiers to enhance tracking of these two core models.
+To facilitate collecting statistics, we have added a <code>post_hook</code> that instructs the database connector accordingly. Additionally, we have created an index on the <code>order_id</code> column within the <code>all_orders</code> table.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_running_transformations"><a class="anchor" href="#_running_transformations"></a>Running transformations</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_create_dimensional_model_with_baseline_data"><a class="anchor" href="#_create_dimensional_model_with_baseline_data"></a>Create dimensional model with baseline data</h3>
+<div class="paragraph">
+<p>By executing dbt, we generate the dimensional model using the baseline data.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt run</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will create both our core and dimensional models using the baseline data.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_test_the_data"><a class="anchor" href="#_test_the_data"></a>Test the data</h3>
+<div class="paragraph">
+<p>We can run our defined test by executing:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt test</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_running_sample_queries"><a class="anchor" href="#_running_sample_queries"></a>Running sample queries</h3>
+<div class="paragraph">
+<p>You can find sample business intelligence queries in the <code>references/query</code> path of the project. These queries allow you to analyze the factual data based on dimensions such as customers, orders, and products.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_mocking_the_elt_process"><a class="anchor" href="#_mocking_the_elt_process"></a>Mocking the ELT process</h3>
+<div class="paragraph">
+<p>The scripts for loading updates into the source data set can be found in the <code>references/inserts/update_data.sql</code> path of the project.</p>
+</div>
+<div class="paragraph">
+<p>After updating the data sources, you can proceed with the aforementioned steps: running dbt, testing the data, and executing sample queries. This will allow you to visualize the variations and incremental updates in the data.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this tutorial, we explored the utilization of advanced dbt concepts with Teradata Vantage.
+The sample project showcased the transformation of source data into a dimensional data mart.
+Throughout the project, we implemented several advanced dbt concepts, including incremental materializations, utility macros, and Teradata modifiers.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_for_any_questions"><a class="anchor" href="#_for_any_questions"></a>For any questions.</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://support.teradata.com/community?id=community_forum&amp;sys_id=353d17d44fed7f00dcf7a6118110c7b5&amp;utm_source=teradata_university&amp;utm_medium=TVUG&amp;utm_campaign=advanced_dbt" target="_blank" rel="noopener">Contact us in our community.</a></p>
 </div>
 </div>
 </div>
@@ -2525,12 +2268,12 @@ footer.footer-nav {
     </div>
   </section>
 </footer>
-<script src="../_/js/site.js"></script>
-<script async src="../_/js/behavior.js"></script>
-<script src="../_/js/vendor/lunr.js"></script>
-<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
-<script async src="../search-index.js"></script>
-<script src="../_/js/teradata.min.js"></script>
+<script src="./_/js/site.js"></script>
+<script async src="./_/js/behavior.js"></script>
+<script src="./_/js/vendor/lunr.js"></script>
+<script src="./_/js/search-ui.js" id="search-ui-script" data-site-root-path="." data-snippet-length="100" data-stylesheet="./_/css/search.css"></script>
+<script async src="./search-index.js"></script>
+<script src="./_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>
