@@ -99,7 +99,7 @@ Query:
 ----
 SELECT * FROM pima_patient_features WHERE patientid MOD 5 = 0
 ----
-BYOM Target Column: CAST(CAST(json_report AS JSON).JSONExtractValue('$.predicted_HasDiabetes') AS INT)
+Only for v6 (in v7 you will define this in the BYOM no code screen): BYOM Target Column: CAST(CAST(json_report AS JSON).JSONExtractValue('$.predicted_HasDiabetes') AS INT)
 
 == Create training dataset
 
