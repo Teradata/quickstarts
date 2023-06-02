@@ -1301,7 +1301,7 @@ span.search-result-highlight {
 <article class="doc">
 <h1 class="page">Send queries using REST API</h1>
 <p>Author: <a href="mailto:sudha.vedula@teradata.com">Sudha Vedula</a><br/>
-Last updated: October 27th, 2022</p>
+Last updated: May 29th, 2023</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
@@ -1373,11 +1373,16 @@ Last updated: October 27th, 2022</p>
 </li>
 </ul>
 </div>
-<div class="sect2">
-<h3 id="_connect_to_your_query_service_instance"><a class="anchor" href="#_connect_to_your_query_service_instance"></a>Connect to your Query Service instance</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connect_to_your_query_service_instance"><a class="anchor" href="#_connect_to_your_query_service_instance"></a>Connect to your Query Service instance</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Provide valid credentials to access the target Analytics Database using HTTP Basic or JWT authentication.</p>
 </div>
+<div class="sect2">
+<h3 id="_http_basic_authentication"><a class="anchor" href="#_http_basic_authentication"></a>HTTP Basic authentication</h3>
 <div class="paragraph">
 <p>The database username and password are combined into a string (<code>"username : password"</code>) which is then encoded using Base64. The API response contains the authorization method and encoded credentials.</p>
 </div>
@@ -1422,7 +1427,56 @@ print(headers)</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_make_a_simple_api_request_with_basic_options"><a class="anchor" href="#_make_a_simple_api_request_with_basic_options"></a>Make a simple API request with basic options</h3>
+<h3 id="_jwt_authentication"><a class="anchor" href="#_jwt_authentication"></a>JWT authentication</h3>
+<div class="paragraph">
+<p>Prerequisites:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The user must already exist in the database.</p>
+</li>
+<li>
+<p>The database must be JWT enabled.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Request</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import requests
+import json
+requests.packages.urllib3.disable_warnings()
+
+# run it from local.
+
+auth_encoded_jwt = "&lt;YOUR_JWT_HERE&gt;"
+auth_str = "Bearer " + auth_encoded_jwt
+
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': auth_str
+}
+
+print(headers)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Response</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{'Content-Type': 'application/json', 'Authorization': 'Bearer &lt;YOUR_JWT_HERE&gt;'}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_make_a_simple_api_request_with_basic_options"><a class="anchor" href="#_make_a_simple_api_request_with_basic_options"></a>Make a simple API request with basic options</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>In the following example, the request includes:</p>
 </div>
@@ -1561,7 +1615,6 @@ print(response.json())</code></pre>
 <div class="paragraph">
 <p>For response parameters, see <a href="https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022/Using-the-Query-Service-APIs/Submitting-SQL-Statement/Request-Body">Query Service Installation, Configuration, and Usage Guide</a>.</p>
 </div>
-</div>
 <div class="sect2">
 <h3 id="_request_a_response_in_csv_format"><a class="anchor" href="#_request_a_response_in_csv_format"></a>Request a response in CSV format</h3>
 <div class="paragraph">
@@ -1624,8 +1677,11 @@ Y5WYUUXj                      ,0.0,0.009313225746154785,0.0,0.009313225746154785
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_use_explicit_session_to_submit_a_query"><a class="anchor" href="#_use_explicit_session_to_submit_a_query"></a>Use explicit session to submit a query</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use_explicit_session_to_submit_a_query"><a class="anchor" href="#_use_explicit_session_to_submit_a_query"></a>Use explicit session to submit a query</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Use explicit sessions when a transaction needs to span multiple requests or when using volatile tables. These sessions are only reused if you reference the sessions in a query request. The request is queued if a request references an explicit session already in use.</p>
 </div>
@@ -1768,8 +1824,10 @@ print(response.text)</code></pre>
 </ol>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_use_asynchronous_queries"><a class="anchor" href="#_use_asynchronous_queries"></a>Use asynchronous queries</h3>
+</div>
+<div class="sect1">
+<h2 id="_use_asynchronous_queries"><a class="anchor" href="#_use_asynchronous_queries"></a>Use asynchronous queries</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Use asynchronous queries when a system or network performance is affected by querying a large group of data or long running queries.</p>
 </div>
@@ -1949,8 +2007,10 @@ print(response.text)</code></pre>
 </ol>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_get_a_list_of_active_or_queued_queries"><a class="anchor" href="#_get_a_list_of_active_or_queued_queries"></a>Get a list of active or queued queries</h3>
+</div>
+<div class="sect1">
+<h2 id="_get_a_list_of_active_or_queued_queries"><a class="anchor" href="#_get_a_list_of_active_or_queued_queries"></a>Get a list of active or queued queries</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Send a GET request to the <code>/system/&lt;SYSTEM_NAME&gt;/queries</code> endpoint. The request returns the IDs of active queries.</p>
 </div>
@@ -2009,105 +2069,6 @@ print(response.json())</code></pre>
     "outparams": {}
   }
 ]</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_calling_query_service_apis_using_jwt"><a class="anchor" href="#_calling_query_service_apis_using_jwt"></a>Calling Query Service APIs using JWT</h3>
-<div class="paragraph">
-<p>Prerequisites for JWT authentication:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The user for whom the JWT is created, needs to be present in the database</p>
-</li>
-<li>
-<p>The database needs to be JWT enabled.</p>
-</li>
-</ol>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import requests
-import json
-requests.packages.urllib3.disable_warnings()
-
-# run it from local.
-
-auth_encoded_jwt = "&lt;YOUR_JWT_HERE&gt;"
-auth_str = "Bearer " + auth_encoded_jwt
-
-headers = {
-  'Content-Type': 'application/json',
-  'Authorization': auth_str
-}
-
-print(headers)</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Response</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>{'Content-Type': 'application/json', 'Authorization': 'Bearer &lt;YOUR_JWT_HERE&gt;'}</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_make_a_simple_api_request_with_basic_options_2"><a class="anchor" href="#_make_a_simple_api_request_with_basic_options_2"></a>Make a simple API request with basic options</h3>
-<div class="paragraph">
-<p>In the following example, the request includes:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>SELECT * FROM DBC.DBCInfo</code>: The query to the system with the alias <code>&lt;SYSTEM_NAME&gt;</code>.</p>
-</li>
-<li>
-<p><code>'format': 'OBJECT'</code>: The format for response. The formats supported are: JSON object, JSON array, and CSV.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The JSON object format creates one JSON object per row where the column name is the field name, and the column value is the field value.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Request</p>
-</div>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">url = 'https://&lt;QS_HOSTNAME&gt;:1443/systems/&lt;SYSTEM_NAME&gt;/queries'
-
-payload = {
-  'query': 'SELECT * FROM DBC.DBCInfo;',
-  'format': 'OBJECT'
-}
-
-payload_json = json.dumps(payload)
-
-response = requests.request('POST', url, headers=headers, data=payload_json, verify=False)
-
-print(response.json())</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Response</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>{"queueDuration":3,"queryDuration":36,"results":[{"resultSet":true,"data":[{"InfoKey":"LANGUAGE SUPPORT MODE","InfoData":"Standard"},{"InfoKey":"RELEASE","InfoData":"15.10.07.02"},{"InfoKey":"VERSION","InfoData":"15.10.07.02"}],"rowCount":3,"rowLimitExceeded":false}]}</pre>
-</div>
 </div>
 </div>
 </div>
