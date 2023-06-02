@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>ModelOps - Import and Deploy your first BYOM Model :: Teradata Getting Started</title>
     <link rel="canonical" href="https://quickstarts.teradata.com/modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">
-    <meta name="description" content="Tutorial for deploying and monitoring a PMML model into Vantage using ModelOps">
+    <meta name="description" content="Tutorial for deploying and monitoring a PMML model into Vantage using ClearScape Analytics ModelOps">
     <meta name="keywords" content="modelops, byom, python, clearscape analytics, teradata, data warehouses, teradata, vantage, cloud data platform, machine learning, artificial intelligence, business intelligence, enterprise analytics">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../_/css/site.css">
 <meta property="og:title" content="ModelOps - Import and Deploy your first BYOM Model :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Tutorial for deploying and monitoring a PMML model into Vantage using ModelOps" />
+<meta property="og:description" content="Tutorial for deploying and monitoring a PMML model into Vantage using ClearScape Analytics ModelOps" />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
@@ -1301,12 +1301,12 @@ span.search-result-highlight {
 <article class="doc">
 <h1 class="page">ModelOps - Import and Deploy your first BYOM Model</h1>
 <p>Author: <a href="mailto:pablo.escobardelaoliva@teradata.com">Pablo Escobar de la Oliva</a><br/>
-Last updated: October 5th, 2022</p>
+Last updated: May 29th, 2023</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This is a how-to for people who are new to Vantage ModelOps. In the tutorial, you will be able to create a new project in ModelOps, upload the required data to Vantage, and track the full lifecycle of an imported Diabetes demo model using BYOM mechanisms.</p>
+<p>This is a how-to for people who are new to ClearScape Analytics ModelOps. In the tutorial, you will be able to create a new project in ModelOps, upload the required data to Vantage, and track the full lifecycle of an imported Diabetes demo model using BYOM mechanisms.</p>
 </div>
 </div>
 </div>
@@ -1339,19 +1339,22 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 <p>Files needed</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s start by downloading the needed files for this tutorial. Download these 4 attachments and upload them in your Notebook filesystem.</p>
+<p>Let&#8217;s start by downloading the needed files for this tutorial. Download these 4 attachments and upload them in your Notebook filesystem. Select the files depending on your version of ModelOps:</p>
 </div>
 <div class="paragraph">
-<p><a href="_attachments/ModelOps_Training.ipynb">Download the ModelOps training Notebook</a></p>
+<p>ModelOps version 6 (October 2022):</p>
 </div>
 <div class="paragraph">
-<p><a href="_attachments/BYOM.ipynb">Download BYOM Notebook file for demo use case</a></p>
+<p><a href="_attachments/ModelOps_Training_v6.ipynb">Download the ModelOps training Notebook</a></p>
 </div>
 <div class="paragraph">
-<p><a href="_attachments/ModelOps_Data_files.zip">Download data files for demo use case</a></p>
+<p><a href="_attachments/BYOM_v6.ipynb">Download BYOM Notebook file for demo use case</a></p>
 </div>
 <div class="paragraph">
-<p><a href="_attachments/ModelOps_BYOM_files.zip">Download BYOM code files for demo use case</a></p>
+<p><a href="_attachments/ModelOps_Data_files_v6.zip">Download data files for demo use case</a></p>
+</div>
+<div class="paragraph">
+<p><a href="_attachments/ModelOps_BYOM_files_v6.zip">Download BYOM code files for demo use case</a></p>
 </div>
 <div class="paragraph">
 <p>Alternatively you can git clone following repos</p>
@@ -1360,6 +1363,27 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-cli hljs" data-lang="cli">git clone https://github.com/willfleury/modelops-getting-started
 git clone https://github.com/Teradata/modelops-demo-models/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>ModelOps version 7 (April 2023):</p>
+</div>
+<div class="paragraph">
+<p><a href="_attachments/ModelOps_Training_v7.ipynb">Download the ModelOps training Notebook</a></p>
+</div>
+<div class="paragraph">
+<p><a href="_attachments/BYOM_v7.ipynb">Download BYOM Notebook file for demo use case</a></p>
+</div>
+<div class="paragraph">
+<p><a href="_attachments/ModelOps_Data_files_v7.zip">Download data files for demo use case</a></p>
+</div>
+<div class="paragraph">
+<p><a href="_attachments/ModelOps_BYOM_files_v7.zip">Download BYOM code files for demo use case</a></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>git clone -b v7 https://github.com/willfleury/modelops-getting-started.git
+git clone https://github.com/Teradata/modelops-demo-models/</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1556,7 +1580,7 @@ Target: HasDiabetes</p>
 </div>
 </div>
 <div class="paragraph">
-<p>BYOM Target Column: CAST(CAST(json_report AS JSON).JSONExtractValue('$.predicted_HasDiabetes') AS INT)</p>
+<p>Only for v6 (in v7 you will define this in the BYOM no code screen): BYOM Target Column: CAST(CAST(json_report AS JSON).JSONExtractValue('$.predicted_HasDiabetes') AS INT)</p>
 </div>
 </div>
 </div>
@@ -1693,6 +1717,10 @@ Target: HasDiabetes</p>
 <p>Import Version</p>
 </li>
 <li>
+<p>for v7 - BYOM no code is available - You can enable automated evaluation and data drift monitoring.
+In Monitoring page use BYOM Target Column: CAST(CAST(json_report AS JSON).JSONExtractValue('$.predicted_HasDiabetes') AS INT)</p>
+</li>
+<li>
 <p>Evaluate</p>
 </li>
 <li>
@@ -1713,6 +1741,9 @@ Use your connection and select a database. e.g "aoa_byom_models"</p>
 </li>
 <li>
 <p>Monitor Model Drift - Data and Metrics</p>
+</li>
+<li>
+<p>for v7 - Review your predictions directly from Deployments &#8594; Job page</p>
 </li>
 <li>
 <p>Open BYOM notebook to execute the PMML predict from SQL code</p>
@@ -1738,7 +1769,7 @@ Use your connection and select a database. e.g "aoa_byom_models"</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://docs.teradata.com/r/Teradata-VantageTM-ModelOps-User-Guide">Teradata Vantage™ - ModelOps User Guide - Login required at this moment</a></p>
+<p>link:https://docs.teradata.com/search/documents?query=ModelOps&amp;sort=last_update&amp;virtual-field=title_only&amp;content-lang=</p>
 </li>
 </ul>
 </div>
