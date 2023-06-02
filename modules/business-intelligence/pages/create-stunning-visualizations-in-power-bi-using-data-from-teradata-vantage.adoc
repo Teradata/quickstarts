@@ -133,5 +133,5 @@ You can combine data from many sources with Power BI Desktop. Look at the follow
 * https://docs.microsoft.com/en-us/power-bi/desktop-connect-excel[Connect to Excel workbooks in Power BI Desktop]
 * https://docs.microsoft.com/en-us/power-bi/desktop-enter-data-directly-into-desktop[Enter data directly into Power BI Desktop]
 
-== For any questions:
+== Getting help
 If you have any questions or need further assistance, please visit our https://support.teradata.com/community?id=community_forum&sys_id=9ebf975e1bf7f304682ca8233a4bcb8a[community forum] where you can get support and interact with other community members.
