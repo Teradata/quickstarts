@@ -627,3 +627,6 @@ CREATE MULTISET TABLE WeatherData_temp AS (
 )
 WITH DATA
 ----
+
+== Getting help
+If you have any questions or need further assistance, please visit our https://support.teradata.com/community[community forum] where you can get support and interact with other community members.

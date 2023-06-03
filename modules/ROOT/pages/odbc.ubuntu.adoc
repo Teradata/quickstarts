@@ -86,3 +86,6 @@ This how-to demonstrated how to use ODBC with Teradata Vantage on Ubuntu. The ho
 
 == Further reading
 * link:https://docs.teradata.com/search/all?query=ODBC+Driver+for+Teradata+User+Guide&filters=ft%3AisBook~%22true%22&sort=last_update[ODBC Driver for Teradata® User Guide]
+
++
+include::ROOT:partial$community_link.adoc[]

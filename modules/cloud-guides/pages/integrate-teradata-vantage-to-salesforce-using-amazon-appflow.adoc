@@ -720,3 +720,6 @@ Once you are done with the Salesforce data, to avoid incurring charges to your A
 3. Teradata Vantage Instance
 +
 * Stop/Terminate the instance if no longer needed
+
++
+include::ROOT:partial$community_link.adoc[]

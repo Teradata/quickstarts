@@ -327,3 +327,6 @@ Congrats! You're all set up to use Regulus.
 * Get started with Regulus by running a simple workflow. See xref::getting-started-with-regulus.adoc[].
 
 * Interested in learning how Regulus can help you with real-life use cases? Coming soon! Keep watching this space for the GitHub link.
+
++
+include::ROOT:partial$community_link.adoc[]

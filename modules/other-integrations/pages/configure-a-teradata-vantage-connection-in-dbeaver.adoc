@@ -41,4 +41,7 @@ image::{page-image-directory}/teradata-connection-settings-ssh.png[Teradata conn
 
 == Summary
 
-This how-to demonstrated how to create a connection to Teradata Vantage with DBeaver.
+* This how-to demonstrated how to create a connection to Teradata Vantage with DBeaver.
+
++
+include::ROOT:partial$community_link.adoc[]

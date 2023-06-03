@@ -27,3 +27,5 @@ This how-to goes through the installation of Teradata Studio and Teradata Studio
 Apple has introduced ARM-based processors in Apple MAC M1 machines. Intel x64-based applications won't work by default on ARM-based processors. Teradata Studio or Teradata Studio Express also doesn't work by default as the current Studio macOS build is an intel x64-based application. This how-to demonstrates how to install Intel x64-based JDK and Teradata Studio or Teradata Studio Express on Apple Mac M1.
 
 
+== Getting Help
+If you have any questions or need further assistance, please visit our https://support.teradata.com/community[community forum] where you can get support and interact with other community members.

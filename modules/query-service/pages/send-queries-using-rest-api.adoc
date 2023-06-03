@@ -632,3 +632,6 @@ Response
 
 * Features, examples, and references: link:https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022[Query Service Installation, Configuration, and Usage Guide]
 * link:https://downloads.teradata.com/api/teradata_query_service[Query Service API OpenAPI Specification]
+
++
+include::ROOT:partial$community_link.adoc[]

@@ -200,3 +200,6 @@ Congrats! You've successfully run your first use case in JupyterLab.
 * Interested in exploring advanced use cases? Coming soon! Keep watching this space for the GitHub link.
 
 * Learn about the magic commands available in JupyterLab. See xref::regulus-magic-reference.adoc[].
+
++
+include::ROOT:partial$community_link.adoc[]

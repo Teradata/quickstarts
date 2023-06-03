@@ -141,3 +141,6 @@ In this tutorial we have learned how to export data from Vantage to a parquet fi
 
 == Further reading
 * link:https://docs.teradata.com/r/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide/June-2022/Writing-Data-to-External-Object-Store[Teradata Vantage™ - Writing Data to External Object Store]
+
++
+include::ROOT:partial$community_link.adoc[]

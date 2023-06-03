@@ -162,3 +162,6 @@ RUN rm -rf $HOME/.local
 * link:https://teradata.github.io/jupyterextensions[Teradata Jupyter Extensions Website]
 * link:https://docs.teradata.com/r/KQLs1kPXZ02rGWaS9Ktoww/root[Teradata Vantage™ Modules for Jupyter Installation Guide]
 * link:https://docs.teradata.com/r/1YKutX2ODdO9ppo_fnguTA/root[Teradata® Package for Python User Guide]
+
++
+include::ROOT:partial$community_link.adoc[]

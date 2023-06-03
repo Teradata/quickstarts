@@ -173,3 +173,6 @@ image:{page-image-directory}/vertex.custom.container.png[Open notebook, width=75
 * link:https://cloud.google.com/vertex-ai/docs/training/create-custom-container[Vertex AI documentation: Create a custom container image for training]
 * link:https://cloud.google.com/vertex-ai/docs/workbench/user-managed/custom-container[Vertex AI documentation: Create a user-managed notebooks instance by using a custom container]
 * link:https://cloud.google.com/vertex-ai/docs/workbench/user-managed/create-new[Vertex AI documentation: Create a user-managed notebooks instance]
+
++
+include::ROOT:partial$community_link.adoc[]

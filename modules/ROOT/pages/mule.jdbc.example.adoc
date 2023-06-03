@@ -153,3 +153,6 @@ You should get the following JSON response:
 * View this http://www.mulesoft.org/documentation/display/current/Database+Connector[document] for more information on how to configure a database connector on your machine.
 * Access plain http://www.mulesoft.org/documentation/display/current/Database+Connector+Reference[Reference material] for the Database Connector.
 * Learn more about http://www.mulesoft.org/documentation/display/current/DataSense[DataSense].
+
++
+include::ROOT:partial$community_link.adoc[]

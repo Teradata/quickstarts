@@ -51,3 +51,6 @@ This how-to demonstrated how to connect to Teradata Vantage using JDBC. It descr
 
 == Further reading
 * link:https://teradata-docs.s3.amazonaws.com/doc/connectivity/jdbc/reference/current/frameset.html[Teradata JDBC Driver Reference]
+
++
+include::ROOT:partial$community_link.adoc[]

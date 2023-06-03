@@ -93,3 +93,6 @@ In this quick start we have learned how to follow a full lifecycle of BYOM model
 
 == Further reading
 * link:https://docs.teradata.com/r/Teradata-VantageTM-ModelOps-User-Guide[Teradata Vantage™ - ModelOps User Guide - Login required at this moment]
+
++
+include::ROOT:partial$community_link.adoc[]
