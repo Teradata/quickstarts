@@ -2,13 +2,13 @@
 :experimental:
 :page-author: Pablo Escobar de la Oliva
 :page-email: pablo.escobardelaoliva@teradata.com
-:page-revdate: October 5th, 2022
-:description: Tutorial for deploying and monitoring a PMML model into Vantage using ModelOps
+:page-revdate: May 29th, 2023
+:description: Tutorial for deploying and monitoring a PMML model into Vantage using ClearScape Analytics ModelOps
 :keywords: modelops, byom, python, clearscape analytics, teradata, data warehouses, teradata, vantage, cloud data platform, machine learning, artificial intelligence, business intelligence, enterprise analytics
 
 == Overview
 
-This is a how-to for people who are new to Vantage ModelOps. In the tutorial, you will be able to create a new project in ModelOps, upload the required data to Vantage, and track the full lifecycle of an imported Diabetes demo model using BYOM mechanisms.
+This is a how-to for people who are new to ClearScape Analytics ModelOps. In the tutorial, you will be able to create a new project in ModelOps, upload the required data to Vantage, and track the full lifecycle of an imported Diabetes demo model using BYOM mechanisms.
 
 == Prerequisites
 
@@ -20,20 +20,38 @@ include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
 Files needed
 
-Let's start by downloading the needed files for this tutorial. Download these 4 attachments and upload them in your Notebook filesystem. 
 
-link:{attachmentsdir}/ModelOps_Training.ipynb[Download the ModelOps training Notebook]
+Let's start by downloading the needed files for this tutorial. Download these 4 attachments and upload them in your Notebook filesystem. Select the files depending on your version of ModelOps:
 
-link:{attachmentsdir}/BYOM.ipynb[Download BYOM Notebook file for demo use case]
+ModelOps version 6 (October 2022):
 
-link:{attachmentsdir}/ModelOps_Data_files.zip[Download data files for demo use case]
+link:{attachmentsdir}/ModelOps_Training_v6.ipynb[Download the ModelOps training Notebook]
 
-link:{attachmentsdir}/ModelOps_BYOM_files.zip[Download BYOM code files for demo use case]
+link:{attachmentsdir}/BYOM_v6.ipynb[Download BYOM Notebook file for demo use case]
+
+link:{attachmentsdir}/ModelOps_Data_files_v6.zip[Download data files for demo use case]
+
+link:{attachmentsdir}/ModelOps_BYOM_files_v6.zip[Download BYOM code files for demo use case]
 
 Alternatively you can git clone following repos
 [source, cli]
 ----
 git clone https://github.com/willfleury/modelops-getting-started
+git clone https://github.com/Teradata/modelops-demo-models/
+----
+
+ModelOps version 7 (April 2023):
+
+link:{attachmentsdir}/ModelOps_Training_v7.ipynb[Download the ModelOps training Notebook]
+
+link:{attachmentsdir}/BYOM_v7.ipynb[Download BYOM Notebook file for demo use case]
+
+link:{attachmentsdir}/ModelOps_Data_files_v7.zip[Download data files for demo use case]
+
+link:{attachmentsdir}/ModelOps_BYOM_files_v7.zip[Download BYOM code files for demo use case]
+
+----
+git clone -b v7 https://github.com/willfleury/modelops-getting-started.git
 git clone https://github.com/Teradata/modelops-demo-models/
 ----
 
@@ -67,6 +85,9 @@ Define BYOM Model with Evaluation and Monitoring
 
 * Import Version
 
+* for v7 - BYOM no code is available - You can enable automated evaluation and data drift monitoring. 
+In Monitoring page use BYOM Target Column: CAST(CAST(json_report AS JSON).JSONExtractValue('$.predicted_HasDiabetes') AS INT)
+
 * Evaluate
 
 * Review evaluation report, including dataset statistics
@@ -82,6 +103,8 @@ Use your connection and select a database. e.g "aoa_byom_models"
 
 * Monitor Model Drift - Data and Metrics
 
+* for v7 - Review your predictions directly from Deployments -> Job page
+
 * Open BYOM notebook to execute the PMML predict from SQL code 
 
 * Retire
@@ -92,7 +115,6 @@ Use your connection and select a database. e.g "aoa_byom_models"
 In this quick start we have learned how to follow a full lifecycle of BYOM models into ModelOps and how to deploy it into Vantage. Then how we can schedule a batch scoring or test restful or on-demand scorings and start monitoring on Data Drift and Model Quality metrics.
 
 == Further reading
-* link:https://docs.teradata.com/r/Teradata-VantageTM-ModelOps-User-Guide[Teradata Vantage™ - ModelOps User Guide - Login required at this moment]
-
+* link:https://docs.teradata.com/search/documents?query=ModelOps&sort=last_update&virtual-field=title_only&content-lang=
 +
 include::ROOT:partial$community_link.adoc[]

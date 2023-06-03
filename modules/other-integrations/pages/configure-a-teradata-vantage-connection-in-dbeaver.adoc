@@ -2,7 +2,7 @@
 :experimental:
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
-:page-revdate: Septeber 12th, 2022
+:page-revdate: September 12th, 2022
 :description: Configure a Teradata Vantage connection in DBeaver.
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, dbeaver, dbeaver prod, sql ide
 :page-image-directory: configure-a-teradata-connection-in-dbeaver

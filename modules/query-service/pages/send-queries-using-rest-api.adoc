@@ -2,7 +2,7 @@
 :experimental:
 :page-author: Sudha Vedula
 :page-email: sudha.vedula@teradata.com
-:page-revdate: October 27th, 2022
+:page-revdate: May 29th, 2023
 :description: Send queries using REST API. Teradata® Query Service is a middleware that provides REST APIs for Vantage.
 :keywords: query service, teradata, vantage, query, REST API
 
@@ -34,9 +34,11 @@ When using the examples, please keep in mind that:
 *** `<SYSTEM_NAME>`: Preconfigured alias of the system
 
 
-=== Connect to your Query Service instance
+== Connect to your Query Service instance
 
 Provide valid credentials to access the target Analytics Database using HTTP Basic or JWT authentication.
+
+=== HTTP Basic authentication
 
 The database username and password are combined into a string (`"username : password"`) which is then encoded using Base64. The API response contains the authorization method and encoded credentials.
 
@@ -76,7 +78,42 @@ Basic ZGJjOmRiYw==
 }
 ----
 
-=== Make a simple API request with basic options
+=== JWT authentication
+
+Prerequisites:
+
+* The user must already exist in the database.
+
+* The database must be JWT enabled.
+
+Request
+
+[source, python]
+----
+import requests
+import json
+requests.packages.urllib3.disable_warnings()
+
+# run it from local. 
+
+auth_encoded_jwt = "<YOUR_JWT_HERE>"
+auth_str = "Bearer " + auth_encoded_jwt
+
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': auth_str
+}
+
+print(headers)
+----
+
+Response
+
+----
+{'Content-Type': 'application/json', 'Authorization': 'Bearer <YOUR_JWT_HERE>'}
+----
+
+== Make a simple API request with basic options
 
 In the following example, the request includes:
 
@@ -248,7 +285,7 @@ hTzz03i7                      ,0.0,0.009313225746154785,0.0,0.009313225746154785
 Y5WYUUXj                      ,0.0,0.009313225746154785,0.0,0.009313225746154785
 ----
 
-=== Use explicit session to submit a query
+== Use explicit session to submit a query
 
 Use explicit sessions when a transaction needs to span multiple requests or when using volatile tables. These sessions are only reused if you reference the sessions in a query request. The request is queued if a request references an explicit session already in use.
 
@@ -359,7 +396,7 @@ Response
 ======
 =====
 
-=== Use asynchronous queries
+== Use asynchronous queries
 
 Use asynchronous queries when a system or network performance is affected by querying a large group of data or long running queries.
 
@@ -502,7 +539,7 @@ Response
 }
 ----
 
-=== Get a list of active or queued queries
+== Get a list of active or queued queries
 
 Send a GET request to the `/system/<SYSTEM_NAME>/queries` endpoint. The request returns the IDs of active queries.
 
@@ -558,73 +595,6 @@ Response
     "outparams": {}
   }
 ]
-----
-
-=== Calling Query Service APIs using JWT
-
-Prerequisites for JWT authentication:
-
-1. The user for whom the JWT is created, needs to be present in the database
-
-2. The database needs to be JWT enabled.
-
-[source, python]
-----
-import requests
-import json
-requests.packages.urllib3.disable_warnings()
-
-# run it from local. 
-
-auth_encoded_jwt = "<YOUR_JWT_HERE>"
-auth_str = "Bearer " + auth_encoded_jwt
-
-headers = {
-  'Content-Type': 'application/json',
-  'Authorization': auth_str
-}
-
-print(headers)
-----
-
-Response
-
-----
-{'Content-Type': 'application/json', 'Authorization': 'Bearer <YOUR_JWT_HERE>'}
-----
-
-=== Make a simple API request with basic options
-
-In the following example, the request includes:
-
-* `SELECT * FROM DBC.DBCInfo`: The query to the system with the alias `<SYSTEM_NAME>`.
-* `'format': 'OBJECT'`: The format for response. The formats supported are: JSON object, JSON array, and CSV.
-+
-NOTE: The JSON object format creates one JSON object per row where the column name is the field name, and the column value is the field value.
-+
-
-Request
-
-[source, python]
-----
-url = 'https://<QS_HOSTNAME>:1443/systems/<SYSTEM_NAME>/queries'
-
-payload = {
-  'query': 'SELECT * FROM DBC.DBCInfo;',
-  'format': 'OBJECT'
-}
-
-payload_json = json.dumps(payload)
-
-response = requests.request('POST', url, headers=headers, data=payload_json, verify=False)
-
-print(response.json())
-----
-
-Response
-
-----
-{"queueDuration":3,"queryDuration":36,"results":[{"resultSet":true,"data":[{"InfoKey":"LANGUAGE SUPPORT MODE","InfoData":"Standard"},{"InfoKey":"RELEASE","InfoData":"15.10.07.02"},{"InfoKey":"VERSION","InfoData":"15.10.07.02"}],"rowCount":3,"rowLimitExceeded":false}]}
 ----
 
 

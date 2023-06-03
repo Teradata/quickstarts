@@ -135,3 +135,4 @@ You can combine data from many sources with Power BI Desktop. Look at the follow
 
 +
 include::ROOT:partial$community_link.adoc[]
+
