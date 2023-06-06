@@ -266,7 +266,7 @@ ads_fv = FeatureView(name="ads_fv",entities=[customer],source=DBT_source, schema
         Field(name="q4_trans_cnt", dtype=Int64),
     ],)
 ----
-=== Generate Training Data
+=== Generate training data
 The approach to generate training data can vary. Depending upon the requirements, 'entitydf' can be considered,
 that would join with the source data tables using the feature views mapping. Here is a sample function that
 generates certain training dataset.
