@@ -1345,7 +1345,7 @@ Last updated: Feb ember 14th, 2022</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you need a new instance of Vantage, you can install a free version called Vantage Express in the cloud on <a href="vantage.express.gcp.html" class="xref page">Google Cloud</a>, <a href="run-vantage-express-on-microsoft-azure.html" class="xref page">Azure</a>, and <a href="run-vantage-express-on-aws.html" class="xref page">AWS</a>. You can also run Vantage Express on your local machine using <a href="getting.started.vmware.html" class="xref page">VMware</a>, <a href="getting.started.vbox.html" class="xref page">VirtualBox</a>, or <a href="getting.started.utm.html" class="xref page">UTM</a>.
+If you need a test instance of Vantage, you can provision one for free at <a href="https://clearscape.teradata.com/sign-in?utm_source=dev_portal&amp;utm_medium=quickstart_tutorial&amp;utm_campaign=quickstarts" target="_blank" rel="noopener">https://clearscape.teradata.com.</a>
 </td>
 </tr>
 </table>
@@ -1393,10 +1393,10 @@ If you need a new instance of Vantage, you can install a free version called Van
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>import wget
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import wget
 world_cities=wget.download('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places.geojson')
 with open(world_cities) as geo_json:
-    jmap = jmap = geo_json.read()</pre>
+    jmap = jmap = geo_json.read()</code></pre>
 </div>
 </div>
 </div>
@@ -1411,7 +1411,7 @@ All the connection parameters are documented on the teradatasql PyPi page there:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>import teradatasql
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import teradatasql
 import getpass
 tdhost='&lt;Your-Vantage-System-HostName-Here&gt;'
 tdUser='&lt;Your-Vantage-User-Name-Here&gt;'
@@ -1422,7 +1422,7 @@ con = teradatasql.connect(None, host=tdhost, user=tdUser, password=getpass.getpa
 # Create a table named geojson_src and load the JSON map into it as a single CLOB
 with con.cursor () as cur:
     cur.execute ("create table geojson_src (geojson_nm VARCHAR(32), geojson_clob CLOB CHARACTER SET UNICODE);")
-    r=cur.execute ("insert into geojson_src (?, ?)", ['cities',jmap])</pre>
+    r=cur.execute ("insert into geojson_src (?, ?)", ['cities',jmap])</code></pre>
 </div>
 </div>
 </div>
@@ -1440,14 +1440,14 @@ We then use the GeomFromGeoJSON function to cast our geometry as a native Vantag
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>replace view cities_geo as
-sel city_name, country_name, region_name, code_country_isoa3, GeomFromGeoJSON(geom, 4326) city_coord
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">REPLACE VIEW cities_geo AS
+SEL city_name, country_name, region_name, code_country_isoa3, GeomFromGeoJSON(geom, 4326) city_coord
 FROM JSON_Table
 (ON (
-    sel
+    SEL
      geojson_nm id
     ,cast(geojson_clob as JSON) jsonCol
-    from geojson_src where geojson_nm='cities'
+    FROM geojson_src where geojson_nm='cities'
 )
 USING rowexpr('$.features[*]')
                colexpr('[ {"jsonpath" : "$.geometry",
@@ -1460,7 +1460,7 @@ USING rowexpr('$.features[*]')
                            "type" : "VARCHAR(50)"},
                           {"jsonpath" : "$.properties.SOV_A3",
                            "type" : "VARCHAR(50)"}]')
-) AS JT(id, geom, city_name, country_name, region_name, code_country_isoa3);</pre>
+) AS JT(id, geom, city_name, country_name, region_name, code_country_isoa3);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1468,7 +1468,7 @@ USING rowexpr('$.features[*]')
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>sel top 5 * from cities_geo;</pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SEL TOP 5 * FROM cities_geo;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1534,10 +1534,10 @@ USING rowexpr('$.features[*]')
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>sel b.city_coord.ST_SphericalDistance(l.city_coord)
-from
-(sel city_coord from cities_geo where city_name='Bordeaux') b
-cross join (sel city_coord from cities_geo where city_name='Lvov') l</pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SEL b.city_coord.ST_SphericalDistance(l.city_coord)
+FROM
+(SEL city_coord FROM cities_geo WHERE city_name='Bordeaux') b
+CROSS JOIN (SEL city_coord FROM cities_geo WHERE city_name='Lvov') l</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1600,8 +1600,8 @@ cross join (sel city_coord from cities_geo where city_name='Lvov') l</pre>
 <h3 id="_get_and_load_the_geojson_document_2"><a class="anchor" href="#_get_and_load_the_geojson_document_2"></a>Get and load the GeoJson document</h3>
 <div class="listingblock">
 <div class="content">
-<pre>import wget
-countries_geojson=wget.download('https://datahub.io/core/geo-countries/r/countries.geojson')</pre>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import wget
+countries_geojson=wget.download('https://datahub.io/core/geo-countries/r/countries.geojson')</code></pre>
 </div>
 </div>
 </div>
@@ -1620,10 +1620,10 @@ with open(countries_geojson) as geo_json:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>print(countries_json.keys())
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">print(countries_json.keys())
 print(countries_json['type'])
 print(countries_json['features'][0]['properties'].keys())
-print(countries_json['features'][0]['geometry']['coordinates'])</pre>
+print(countries_json['features'][0]['geometry']['coordinates'])</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1654,7 +1654,7 @@ This is fairly easy to do as a list comprehension</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>[(f['properties']['ADMIN'], f['properties']['ISO_A3'], f['geometry']) for f in countries_json['features'][:1]]</pre>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">[(f['properties']['ADMIN'], f['properties']['ISO_A3'], f['geometry']) for f in countries_json['features'][:1]]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1672,7 +1672,7 @@ All the connection parameters are documented on the teradatasql PyPi page there:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>import teradatasql
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import teradatasql
 import getpass
 tdhost='&lt;Your-Vantage-System-HostName-Here&gt;'
 tdUser='&lt;Your-Vantage-User-Name-Here&gt;'
@@ -1683,7 +1683,7 @@ con = teradatasql.connect(None, host=tdhost, user=tdUser, password=tdPassword)
 # Create a table and load our country names, codes, and geometries.
 with con.cursor () as cur:
     cur.execute ("create table stg_countries_map (country_nm VARCHAR(32), ISO_A3_cd VARCHAR(32), boundaries_geo CLOB CHARACTER SET UNICODE);")
-    r=cur.execute ("insert into stg_countries_map (?, ?, ?)", [(f['properties']['ADMIN'], f['properties']['ISO_A3'], str(f['geometry'])) for f in countries_json['features']])</pre>
+    r=cur.execute ("insert into stg_countries_map (?, ?, ?)", [(f['properties']['ADMIN'], f['properties']['ISO_A3'], str(f['geometry'])) for f in countries_json['features']])</code></pre>
 </div>
 </div>
 </div>
@@ -1697,20 +1697,20 @@ with con.cursor () as cur:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre># Now create our final reference table, casting the geometry CLOB as a ST_GEOMETRY object
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python"># Now create our final reference table, casting the geometry CLOB as a ST_GEOMETRY object
 sql='''
-create table ref_countries_map as
+CREATE TABLE ref_countries_map AS
 (
-sel
+SEL
 ISO_A3_cd
 ,country_nm
 ,GeomFromGeoJSON(boundaries_geo, 4326) boundaries_geo
-from stg_countries_map
-) with data
+FROM stg_countries_map
+) WITH DATA
 '''
 
-with con.cursor () as cur:
-    cur.execute (sql)</pre>
+WITH con.cursor () AS cur:
+    cur.execute (sql)</code></pre>
 </div>
 </div>
 </div>
@@ -1724,11 +1724,11 @@ with con.cursor () as cur:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>sel cty.city_name, cty.city_coord, ctry.country_nm
-from cities_geo cty
-left join ref_countries_map ctry
-	on ctry.boundaries_geo.ST_Contains(cty.city_coord)=1
-where cty.city_name like 'a%'</pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SEL cty.city_name, cty.city_coord, ctry.country_nm
+FROM cities_geo cty
+LEFT JOIN ref_countries_map ctry
+	ON ctry.boundaries_geo.ST_Contains(cty.city_coord)=1
+WHERE cty.city_name LIKE 'a%'</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -1773,9 +1773,7 @@ Albany</p></td>
 <p>Note that none of the above code does not implement any control procedure or checks to, for example, manage the state of the target tables, manage locking, control error codes, etc&#8230;&#8203; This is meant to be a demonstrations of the available features to acquire and use geospatial reference data.</p>
 </div>
 <div class="paragraph">
-<p>Consider using <a href="https://pypi.org/project/teradatasqlalchemy/">SQLAlchemy ORM</a> if you are defining your pipeline in Python,
-Unresolved include directive in modules/ROOT/pages/geojson-to-vantage.adoc - include::partial$dbt.adoc[]
-, or your favourite ELT and orchestration toolset to create your products you can operationalize.</p>
+<p>Consider using <a href="https://pypi.org/project/teradatasqlalchemy/">SQLAlchemy ORM</a> if you are defining your pipeline in Python, <a href="dbt.html" class="xref page">dbt</a>, or your favorite ELT and orchestration toolset to create your products you can operationalize.</p>
 </div>
 <div class="paragraph">
 <p>You now can know how to get any open geographic dataset and use it to augment your analytics with Teradata Vantage!</p>
