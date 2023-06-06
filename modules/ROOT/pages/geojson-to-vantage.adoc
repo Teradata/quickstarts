@@ -10,14 +10,14 @@
 
 This post demonstrates how you can leverage any geographic dataset in GeoJson format and use it for geospatial analytics in Teradata Vantage, with just a few lines of code.
 
-Today we be gathering reference geographical data (official maps, points of interest, etc...) form public sources and use it to support our day to day analytics. 
+Today we be gathering reference geographical data (official maps, points of interest, etc...) form public sources and use it to support our day to day analytics.
 
 You will learn two methods to get your GeoJson data into Teradata Vantage:
 
 1. Load it as a single document and use native ClearScape analytics functions to parse it into a table usable for analytics.
 2. Lightly transform it in native Python as we load it into Vantage to produce an analytics ready dataset.
 
-The first method is a straig forward ELT pattern for semi-structured format processing in Vantage with a single SQL statement, the second one involves some lightweight preparation in (pure) Python and may allow more flexibility (for example to add early quality checks or optimize the load of large documents). 
+The first method is a straig forward ELT pattern for semi-structured format processing in Vantage with a single SQL statement, the second one involves some lightweight preparation in (pure) Python and may allow more flexibility (for example to add early quality checks or optimize the load of large documents).
 
 == Prerequisites
 
@@ -25,7 +25,7 @@ You will need:
 
 * Access to a Teradata Vantage instance.
 +
-include::ROOT:partial$vantage.express.options.adoc[]
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 * A Python 3 interpreter
 * A SQL Client
 
@@ -42,6 +42,7 @@ Open you favourite *Python 3 interpreter* and make sure you have the following p
 * getpass
 
 Download and read the cities dataset:
+[source, python]
 ----
 import wget
 world_cities=wget.download('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places.geojson')
@@ -51,11 +52,12 @@ with open(world_cities) as geo_json:
 
 === Load the GeoJson document in Vantage
 
-Modify this code as needed with your Vantage host name, user name and specify an advanced login mechanism if any (eg. LDAP, Kerberos...) with the _logmech_ parameter if you need to. 
+Modify this code as needed with your Vantage host name, user name and specify an advanced login mechanism if any (eg. LDAP, Kerberos...) with the _logmech_ parameter if you need to.
 All the connection parameters are documented on the teradatasql PyPi page there: https://pypi.org/project/teradatasql/
 
 The code below simply creates a Vantage connection, and opens a cursor creating a table and loading it with our file.
 
+[source, python]
 ----
 import teradatasql
 import getpass
@@ -73,22 +75,23 @@ with con.cursor () as cur:
 
 === Use the map from Vantage
 
-Now open your favourite *SQL client* and connect to your Vantage system. 
+Now open your favourite *SQL client* and connect to your Vantage system.
 
 We will use ClearScape analytics JSON functions to parse our GeoJson document and extract the most relevant properties and the geometry itself (the coordinates of the city) for each feature (each feature representing a city in this example).
 We then use the GeomFromGeoJSON function to cast our geometry as a native Vantage geometry data type (ST_GEOMETRY).
 
 For user convenience, will wrap all this SQL code in a view:
 
+[source, python]
 ----
-replace view cities_geo as
-sel city_name, country_name, region_name, code_country_isoa3, GeomFromGeoJSON(geom, 4326) city_coord
-FROM JSON_Table 
+REPLACE VIEW cities_geo AS
+SEL city_name, country_name, region_name, code_country_isoa3, GeomFromGeoJSON(geom, 4326) city_coord
+FROM JSON_Table
 (ON (
-    sel 
+    SEL
      geojson_nm id
     ,cast(geojson_clob as JSON) jsonCol
-    from geojson_src where geojson_nm='cities'
+    FROM geojson_src where geojson_nm='cities'
 )
 USING rowexpr('$.features[*]')
                colexpr('[ {"jsonpath" : "$.geometry",
@@ -106,8 +109,9 @@ USING rowexpr('$.features[*]')
 
 That's all, you can now view the prepared geometry data as a table, ready to enrich your analytics:
 
+[source, teradata-sql]
 ----
-sel top 5 * from cities_geo;
+SEL TOP 5 * FROM cities_geo;
 ----
 
 Result:
@@ -125,11 +129,12 @@ Result:
 
 Calculate the distance between two cities:
 
+[source, teradata-sql]
 ----
-sel b.city_coord.ST_SphericalDistance(l.city_coord) 
-from
-(sel city_coord from cities_geo where city_name='Bordeaux') b
-cross join (sel city_coord from cities_geo where city_name='Lvov') l
+SEL b.city_coord.ST_SphericalDistance(l.city_coord)
+FROM
+(SEL city_coord FROM cities_geo WHERE city_name='Bordeaux') b
+CROSS JOIN (SEL city_coord FROM cities_geo WHERE city_name='Lvov') l
 ----
 
 Result:
@@ -163,6 +168,7 @@ Open you favourite *Python 3 interpreter* and make sure you have the following p
 
 === Get and load the GeoJson document
 
+[source, python]
 ----
 import wget
 countries_geojson=wget.download('https://datahub.io/core/geo-countries/r/countries.geojson')
@@ -177,6 +183,7 @@ with open(countries_geojson) as geo_json:
 
 The good thing about loading this JSON in memory, if you are using an interactive Python terminal, is that you can now explore the document to understand its structure. For example
 
+[source, python]
 ----
 print(countries_json.keys())
 print(countries_json['type'])
@@ -197,6 +204,7 @@ This is fairly easy to do as a list comprehension
 
 For example:
 
+[source, python]
 ----
 [(f['properties']['ADMIN'], f['properties']['ISO_A3'], f['geometry']) for f in countries_json['features'][:1]]
 ----
@@ -205,11 +213,12 @@ NB: Not featured here, but recommended for richer datasets, consider loading the
 
 === Create a Vantage connection and load our file in a staging table
 
-Modify this code as needed with your Vantage host name, user name and specify an advanced login mechanism if any (eg. LDAP, Kerberos...) with the _logmech_ parameter if you need to. 
+Modify this code as needed with your Vantage host name, user name and specify an advanced login mechanism if any (eg. LDAP, Kerberos...) with the _logmech_ parameter if you need to.
 All the connection parameters are documented on the teradatasql PyPi page there: https://pypi.org/project/teradatasql/
 
 The code below simply creates a Vantage connection, and opens a cursor creating a table and loading it with our list.
 
+[source, python]
 ----
 import teradatasql
 import getpass
@@ -231,20 +240,21 @@ The code below performs the table creation from the Python interpreter, you can 
 
 We will use ClearScape analytics the GeomFromGeoJSON function to cast our geometry as a native Vantage geometry data type (ST_GEOMETRY).
 
+[source, python]
 ----
-# Now create our final reference table, casting the geometry CLOB as a ST_GEOMETRY object 
+# Now create our final reference table, casting the geometry CLOB as a ST_GEOMETRY object
 sql='''
-create table ref_countries_map as 
+CREATE TABLE ref_countries_map AS
 (
-sel
+SEL
 ISO_A3_cd
 ,country_nm
 ,GeomFromGeoJSON(boundaries_geo, 4326) boundaries_geo
-from stg_countries_map
-) with data
+FROM stg_countries_map
+) WITH DATA
 '''
 
-with con.cursor () as cur:
+WITH con.cursor () AS cur:
     cur.execute (sql)
 ----
 
@@ -252,14 +262,15 @@ with con.cursor () as cur:
 
 That's all, you may now query your tables using your favourite *SQL client* and Teradata's excellent https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Geospatial-Data-Types-17.20[Geospatial data types and analytic functions].
 
-For example, using the two datasets we have loaded during this tutorial, check in what countries are 
+For example, using the two datasets we have loaded during this tutorial, check in what countries are
 
+[source, teradata-sql]
 ----
-sel cty.city_name, cty.city_coord, ctry.country_nm
-from cities_geo cty
-left join ref_countries_map ctry
-	on ctry.boundaries_geo.ST_Contains(cty.city_coord)=1
-where cty.city_name like 'a%'
+SEL cty.city_name, cty.city_coord, ctry.country_nm
+FROM cities_geo cty
+LEFT JOIN ref_countries_map ctry
+	ON ctry.boundaries_geo.ST_Contains(cty.city_coord)=1
+WHERE cty.city_name LIKE 'a%'
 ----
 
 [cols="1,1,1"]
@@ -273,10 +284,8 @@ Albany|POINT (117.891604776075155 -35.016946595501224)|Australia
 
 == Summary
 
-Note that none of the above code does not implement any control procedure or checks to, for example, manage the state of the target tables, manage locking, control error codes, etc... This is meant to be a demonstrations of the available features to acquire and use geospatial reference data. 
+Note that none of the above code does not implement any control procedure or checks to, for example, manage the state of the target tables, manage locking, control error codes, etc... This is meant to be a demonstrations of the available features to acquire and use geospatial reference data.
 
-Consider using https://pypi.org/project/teradatasqlalchemy/[SQLAlchemy ORM] if you are defining your pipeline in Python, 
-include::partial$dbt.adoc[dbt]
-, or your favourite ELT and orchestration toolset to create your products you can operationalize.
+Consider using https://pypi.org/project/teradatasqlalchemy/[SQLAlchemy ORM] if you are defining your pipeline in Python, xref:dbt.adoc[dbt], or your favorite ELT and orchestration toolset to create your products you can operationalize.
 
 You now can know how to get any open geographic dataset and use it to augment your analytics with Teradata Vantage!
