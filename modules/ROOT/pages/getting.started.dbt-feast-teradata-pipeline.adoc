@@ -235,7 +235,7 @@ path = 'teradatasql://'+ teradata_user +':' + teradata_password + '@'+host + '/?
 Teradata Vantage has long been recognized as a database that provides superior ELT(Extract Load Transform) capabilities. DBT enhances this capabilities by making use of its efficient Analytic functions to transform data.
 So, in this case, we will use data tables, customers, accounts and transactions, that are made available on Vantage.
 
-=== Create the Dimension model
+=== Create the dimensional model
 Now that we have the raw data tables, we can instruct dbt to create the dimensional model:
 [source, bash]
 ----
