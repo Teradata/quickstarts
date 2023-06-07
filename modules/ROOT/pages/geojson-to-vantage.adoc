@@ -289,3 +289,5 @@ Note that none of the above code does not implement any control procedure or che
 Consider using https://pypi.org/project/teradatasqlalchemy/[SQLAlchemy ORM] if you are defining your pipeline in Python, xref:dbt.adoc[dbt], or your favorite ELT and orchestration toolset to create your products you can operationalize.
 
 You now can know how to get any open geographic dataset and use it to augment your analytics with Teradata Vantage!
+
+include::ROOT:partial$community_link.adoc[]

@@ -193,3 +193,5 @@ In this quick start we have learned how to create ML models in SQL. The method u
 
 == Further reading
 * link:https://docs.teradata.com/r/DqJoLxuCtoR947URt1aH0w/root[Vantage Analytics Library User Guide]
+
+include::ROOT:partial$community_link.adoc[]

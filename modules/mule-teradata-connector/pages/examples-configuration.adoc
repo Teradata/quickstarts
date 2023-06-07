@@ -117,3 +117,5 @@ Unless the log file path is customized in the app’s log file (`log4j2.xml`), y
 
 * xref:reference.adoc[Teradata Connector Reference]
 * https://help.mulesoft.com[MuleSoft Help Center]
+
+include::ROOT:partial$community_link.adoc[]

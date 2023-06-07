@@ -167,3 +167,5 @@ This how-to demonstrates how to send Segment events to Teradata Vantage. The con
 
 == Further reading
 * link:https://segment.com/docs/connections/destinations/catalog/google-cloud-pubsub/[Segment Pub/Sub destination documentation]
+
+include::ROOT:partial$community_link.adoc[]

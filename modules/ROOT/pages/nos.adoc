@@ -246,3 +246,5 @@ In this quick start we have learned how to read data from object storage using N
 
 == Further reading
 * link:https://docs.teradata.com/r/2mw8ooFr~xX0EaaGFaDW8A/root[Teradata Vantage™ - Native Object Store Getting Started Guide]
+
+include::ROOT:partial$community_link.adoc[]

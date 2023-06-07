@@ -250,3 +250,5 @@ In this quick start we have learned how to run scripts against data in Vantage. 
 == Further reading
 * link:https://docs.teradata.com/r/9VmItX3V2Ni9Ts70HbDzVg/CBAaRxUyOdF0t1SQIuXeug[Teradata Vantage™ - SQL Operators and User-Defined Functions - SCRIPT]
 * link:https://docs.teradata.com/v/u/Orange-Book/R-and-Python-Analytics-with-SCRIPT-Table-Operator-Orange-Book-4.3.1[R and Python Analytics with SCRIPT Table Operator]
+
+include::ROOT:partial$community_link.adoc[]
