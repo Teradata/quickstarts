@@ -246,3 +246,5 @@ In this quick start we have learnt how easy it is to analyse time series dataset
 * link:https://docs.teradata.com/r/Teradata-VantageTM-Time-Series-Tables-and-Operations/July-2021/Introduction-to-Teradata-Time-Series-Tables-and-Operations[Teradata Vantage™ - Time Series Tables and Operations]
 * xref:nos.adoc[]
 * link:https://docs.teradata.com/r/2mw8ooFr~xX0EaaGFaDW8A/root[Teradata Vantage™ - Native Object Store Getting Started Guide]
+
+include::ROOT:partial$community_link.adoc[]

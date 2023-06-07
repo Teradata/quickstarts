@@ -186,3 +186,5 @@ This how-to demonstrated how to extract training data from Vantage and use it to
 == Further reading
 * xref:ROOT:ml.adoc[Train ML models in Vantage using only SQL]
 
+include::ROOT:partial$community_link.adoc[]
+

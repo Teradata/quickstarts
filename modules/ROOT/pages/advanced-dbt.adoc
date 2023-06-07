@@ -267,6 +267,4 @@ In this tutorial, we explored the utilization of advanced dbt concepts with Tera
 The sample project showcased the transformation of source data into a dimensional data mart. 
 Throughout the project, we implemented several advanced dbt concepts, including incremental materializations, utility macros, and Teradata modifiers.
 
-== For any questions.
-link:https://support.teradata.com/community?id=community_forum&sys_id=353d17d44fed7f00dcf7a6118110c7b5[Contact us in our community., window="_blank"]
-
+include::ROOT:partial$community_link.adoc[]

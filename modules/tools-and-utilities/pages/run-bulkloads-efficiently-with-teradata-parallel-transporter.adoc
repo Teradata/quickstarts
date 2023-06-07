@@ -269,3 +269,5 @@ This how-to demonstrated how to ingest large amounts of data into Vantage. We lo
 * link:https://docs.teradata.com/r/Teradata-Parallel-Transporter-User-Guide/February-2022[Teradata® TPT User Guide]
 * link:https://docs.teradata.com/r/Teradata-Parallel-Transporter-Reference/February-2022[Teradata® TPT Reference]
 * xref:ROOT:nos.adoc[]
+
+include::ROOT:partial$community_link.adoc[]

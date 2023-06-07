@@ -296,3 +296,5 @@ This tutorial aimed at providing a hands on exercise on how to install an Airflo
 
 == Further reading
 * https://quickstarts.teradata.com/dbt.html#_install_dbt[Use dbt (data build tool) with Teradata Vantage]
+
+include::ROOT:partial$community_link.adoc[]

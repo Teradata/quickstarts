@@ -198,3 +198,4 @@ In this quick start we have learned how to follow a full lifecycle of GIT models
 == Further reading
 * link:https://docs.teradata.com/search/documents?query=ModelOps&sort=last_update&virtual-field=title_only&content-lang=
 
+include::ROOT:partial$community_link.adoc[]

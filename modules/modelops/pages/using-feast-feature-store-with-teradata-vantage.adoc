@@ -256,3 +256,5 @@ An Enterprise Feature Store accelerates the value-gaining process in crucial sta
 
 * link:https://docs.feast.dev/tutorials/using-scalable-registry[Feast Scalable Registry]
 * link:https://medium.com/teradata/enabling-highly-scalable-feature-store-with-teradata-vantage-and-feast-e01008fa8fdb[Enabling highly scalable feature store with Teradata Vantage and FEAST]
+
+include::ROOT:partial$community_link.adoc[]
