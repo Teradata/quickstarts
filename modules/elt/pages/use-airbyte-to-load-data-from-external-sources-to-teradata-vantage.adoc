@@ -175,7 +175,7 @@ The stream (table) name in destination is prefixed with `\_airbyte_raw_` because
 
 3. `_airbyte_data`: a json blob representing with the event data. The column type in Teradata is JSON.
 
-Here in the `_airbyte_data` column, we see 9 rows, the same as we have in the source Google sheet, and the data is in JSON format which can be transformed further as per the requirement.
+Here in the `_airbyte_data` column, we see 9 rows, the same as we have in the source Google sheet, and the data is in JSON format which can be transformed further as needed.
 
 === Close and delete the connection
 
