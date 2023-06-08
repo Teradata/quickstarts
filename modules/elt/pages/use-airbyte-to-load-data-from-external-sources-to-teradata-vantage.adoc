@@ -120,7 +120,8 @@ For more details please refer link:https://docs.airbyte.com/understanding-airbyt
 image::{dir}/namespaces_in_destination.png[Namespaces in the destination]
 
 
-In this use case the destination is a database, so the namespace is the default schema `gsheet_airbyte_td` we defined when we configured the destination, and the stream name is a table that is mirroring the name of the spreadsheet in the source, which is `sample_employee_payrate` in this case. Other type of sources and destinations might have a different layout, in this example, Google sheets as source does not support a namespace, and since it is the single spreadsheet connector, it only supports one stream (the active spreadsheet).
+In our example the destination is a database, so the namespace is the default schema `gsheet_airbyte_td` we defined when we configured the destination. The stream name is a table that is mirroring the name of the spreadsheet in the source, which is `sample_employee_payrate` in this case. + 
+Other type of sources and destinations might have a different layout. In this example, Google sheets as source does not support a namespace. Since we are using the single spreadsheet connector, it only supports one stream (the active spreadsheet).
 Here in this use case, we have used Namespace for the destination as `<destination_schema>` which is a destination default namespace. So, we will be getting `gsheet_airbyte_td` database in our Vantage Instance.
 
 
