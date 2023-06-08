@@ -198,5 +198,5 @@ link:https://docs.airbyte.com/cloud/core-concepts/#connection-sync-modes[Core Co
 
 link:https://airbyte.com/community[Airbyte Community Slack]
 
-link:https://discuss.airbyte.io/[Airbyte Community]
+link:https://discuss.airbyte.io/[Airbyte Community, window="_blank"]
 
