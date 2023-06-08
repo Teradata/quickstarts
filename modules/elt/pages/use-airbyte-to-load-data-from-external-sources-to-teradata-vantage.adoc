@@ -140,7 +140,7 @@ Airbyte tracks synchronization attempts in the "Sync History" section of the `St
 
 image::{dir}/data_sync_summary.png[Data Sync Summary]
 
-Next, you can go to the link:https://clearscape.teradata.com/dashboard[ClearScape Analytics Experience] and run a Jupyter notebook for Teradata SQL, to see if the database `gsheet_airbyte_td`, streams (tables) and complete data is present.
+Next, you can go to the link:https://clearscape.teradata.com/dashboard[ClearScape Analytics Experience, window="_blank"] and run a Jupyter notebook for Teradata SQL, to verify if the database `gsheet_airbyte_td`, streams (tables) and complete data is present.
 
 image::{dir}/data_sync_validation_in_teradata.png[Data Sync Validation in Teradata]
 
