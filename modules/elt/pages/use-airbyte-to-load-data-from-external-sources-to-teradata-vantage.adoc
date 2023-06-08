@@ -192,7 +192,7 @@ image::{dir}/delete_airbyte_connection.png[Delete Airbyte Connection]
 This tutorial demonstrated how to extract data from a source system like Google sheets and use the Airbyte ELT tool to load the data into the Teradata Vantage Instance. We saw the end-to-end data flow and complete configuration steps for running Airbyte Open Source locally, and configuring the source and destination connections. We also discussed about the available data sync configurations based on replication frequency. We validated the results in the destination using Cloudscape Analytics Experience and finally we saw the methods to pause and delete the Airbyte connection. 
 
 === Further reading
-link:https://docs.airbyte.com/integrations/destinations/teradata/?_ga=2.156631291.1502936448.1684794236-1752661382.1684794236[Teradata Destination | Airbyte Documentation]
+link:https://docs.airbyte.com/integrations/destinations/teradata/?_ga=2.156631291.1502936448.1684794236-1752661382.1684794236[Teradata Destination | Airbyte Documentation, window="_blank"]
 
 link:https://docs.airbyte.com/cloud/core-concepts/#connection-sync-modes[Core Concepts | Airbyte Documentation]
 
