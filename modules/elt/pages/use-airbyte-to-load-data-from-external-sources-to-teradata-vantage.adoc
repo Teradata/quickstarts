@@ -136,7 +136,7 @@ image::{dir}/replication_frequency_cron_expression.png[Replication Frequency Cro
 
 === Data Sync Validation
 
-Once the data sync is completed, you will be able to see the successful sync in Sync History in the Airbyte. 
+Airbyte tracks synchronization attempts in the "Sync History" section of the `Status` tab. 
 
 image::{dir}/data_sync_summary.png[Data Sync Summary]
 
