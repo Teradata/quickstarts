@@ -10,7 +10,7 @@
 
 == Overview
 
-This tutorial showcases how to use Airbyte (an Open Source Extract Load Transform tool) with Teradata Vantage. We work with a very simple end-to-end setup to load the employees’ data from Google Sheets to Teradata Vantage using Airbyte.
+This tutorial showcases how to use Airbyte (an open-source Extract Load Transform tool) with Teradata Vantage. We work with a very simple end-to-end setup to load the employees’ data from Google Sheets to Teradata Vantage using Airbyte.
 
 
 image::{dir}/sample_employees_payrate_google_sheets.png[Sample Employees Payrate Google Sheets, width=75%]
