@@ -27,7 +27,7 @@ include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
 * Data from the source system. In this case, we use a link:https://docs.google.com/spreadsheets/d/1XNBYUw3p7xG6ptfwjChqZ-dNXbTuVwPi7ToQfYKgJIE/edit#gid=0[sample spreadsheet from google sheets,  window="_blank"]. The sample data is a breakdown of payrate by employee type.
 
-* link:https://support.google.com/googleapi/answer/6158841?hl=en[Google Cloud Platform API enabled for your personal or organizational account]. You’ll need to authenticate your Google account via OAuth or via Service Account Key Authenticator.
+* link:https://support.google.com/googleapi/answer/6158841?hl=en[Google Cloud Platform API enabled for your personal or organizational account,  window="_blank"]. You’ll need to authenticate your Google account via OAuth or via Service Account Key Authenticator.
 
 
 == Launch Airbyte Open Source
