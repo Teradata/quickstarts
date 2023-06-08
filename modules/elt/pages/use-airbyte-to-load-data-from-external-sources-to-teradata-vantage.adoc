@@ -93,7 +93,7 @@ image::{dir}/configuring_source_gsheet_airbyte.png[Configuring the source in Air
 For more details, please refer link:https://docs.airbyte.com/integrations/sources/google-sheets/#:~:text=For%20Airbyte%20Open%20Source%3A[Setting Google Sheets as Source Connector in Airbyte Open Source, window="_blank"] 
 ====
 
-* Click Set up source, if configuration is correct, you will get the message `All connection tests passed!`
+* Click Set up source, if the configuration is correct, you will get the message `All connection tests passed!`
 
 
 === Setting the Destination Connection
