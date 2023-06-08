@@ -194,7 +194,7 @@ This tutorial demonstrated how to extract data from a source system like Google 
 === Further reading
 link:https://docs.airbyte.com/integrations/destinations/teradata/?_ga=2.156631291.1502936448.1684794236-1752661382.1684794236[Teradata Destination | Airbyte Documentation, window="_blank"]
 
-link:https://docs.airbyte.com/cloud/core-concepts/#connection-sync-modes[Core Concepts | Airbyte Documentation]
+link:https://docs.airbyte.com/cloud/core-concepts/#connection-sync-modes[Core Concepts | Airbyte Documentation, window="_blank"]
 
 link:https://airbyte.com/community[Airbyte Community Slack, window="_blank"]
 
