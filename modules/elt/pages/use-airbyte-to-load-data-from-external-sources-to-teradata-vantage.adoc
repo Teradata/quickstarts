@@ -69,7 +69,7 @@ If you login for the first time, it will ask you for your email and specify your
 
 image::{dir}/specify_preferences.png[Specify Preferences, width=75%]
 
-Once the Airbyte Open Source is launched you will see a connections dashboard. If you launched Airbyte Open Source for the first time, it would not show any connections.
+Once Airbyte Open Source is launched you will see a connections dashboard. If you launched Airbyte Open Source for the first time, it would not show any connections.
 
 == Airbyte Configuration
 
