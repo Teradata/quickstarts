@@ -196,7 +196,7 @@ link:https://docs.airbyte.com/integrations/destinations/teradata/?_ga=2.15663129
 
 link:https://docs.airbyte.com/cloud/core-concepts/#connection-sync-modes[Core Concepts | Airbyte Documentation]
 
-link:https://airbyte.com/community[Airbyte Community Slack]
+link:https://airbyte.com/community[Airbyte Community Slack, window="_blank"]
 
 link:https://discuss.airbyte.io/[Airbyte Community, window="_blank"]
 
