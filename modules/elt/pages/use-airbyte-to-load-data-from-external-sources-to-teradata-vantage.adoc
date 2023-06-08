@@ -171,7 +171,7 @@ The stream (table) name in destination is prefixed with `\_airbyte_raw_` because
 
 1. `_airbyte_ab_id`: a uuid assigned by Airbyte to each event that is processed. The column type in Teradata is VARCHAR(256).
 
-2. `_airbyte_emitted_at`: a uuid assigned by Airbyte to each event that is processed. The column type in Teradata is VARCHAR(256)
+2. `_airbyte_emitted_at`: a timestamp representing when the event was pulled from the data source. The column type in Teradata is `TIMESTAMP(6)`.
 
 3. `_airbyte_data`: a json blob representing with the event data. The column type in Teradata is JSON.
 
