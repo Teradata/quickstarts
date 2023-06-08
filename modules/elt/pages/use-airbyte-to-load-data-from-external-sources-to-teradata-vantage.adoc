@@ -65,7 +65,7 @@ BASIC_AUTH_PASSWORD=password
 ----
 
 
-If you login for the first time, it will ask you for your email and specify your preferences for product improvements. Add your preferences and click `Get started`.
+When logging in for the first time, Airbyte will prompt you to provide your email address and specify your preferences for product improvements. Enter your preferences and click on "Get started."
 
 image::{dir}/specify_preferences.png[Specify Preferences, width=75%]
 
