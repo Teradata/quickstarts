@@ -18,7 +18,7 @@ image::{dir}/sample_employees_payrate_google_sheets.png[Sample Employees Payrate
 * Source: Google Sheets
 * Destination: Teradata Vantage
 
-== Prerequsites
+== Prerequisites
 * Access to Teradata Vantage Instance, as this will be the destination. You will need a database `Host`, `Username`, and `Password` for Airbyte’s configuration.
 +
 include::ROOT:partial$vantage_clearscape_analytics.adoc[]
