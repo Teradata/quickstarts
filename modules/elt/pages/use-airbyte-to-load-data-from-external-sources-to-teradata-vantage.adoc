@@ -128,7 +128,7 @@ It shows how often data should sync to destination. You can select every hour, 2
 
 image::{dir}/replication_frequency_24hr.png[Replication Frequency 24 hours]
 
-You can also use a Cron expression to specify the time when the sync should run. Here in this case, we set the Cron expression to run the sync on every Wednesday at 12:43 PM (US/Pacific) time.
+You can also use a Cron expression to specify the time when the sync should run. In the example below, we set the Cron expression to run the sync on every Wednesday at 12:43 PM (US/Pacific) time.
 
 image::{dir}/replication_frequency_cron_expression.png[Replication Frequency Cron Expression]
 
