@@ -97,7 +97,7 @@ For more details, please refer link:https://docs.airbyte.com/integrations/source
 
 
 === Setting the Destination Connection
-* Assuming you want to create a fresh new connection with `Teradata Vantage`, Select `Teradata Vantage` as destination type under Set up the destination section.
+* Assuming you want to create a fresh new connection with `Teradata Vantage`, Select `Teradata Vantage` as the destination type under the "Set up the destination" section.
 * Add the `Host`, `User`, and `Password`. This is the same as `Host`, `Username`, and `Password` respectively that are used to create the Teradata Vantage instance in the Clearscape Analytics Environment.
 * Default schema name is optional, it provides a default name, however, you can provide a name that makes more sense. Here we have provided `gsheet_airbyte_td`.
 
