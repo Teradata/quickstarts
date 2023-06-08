@@ -74,7 +74,7 @@ Once the Airbyte Open Source is launched you will see a connections dashboard. I
 == Airbyte Configuration
 
 === Setting the Source Connection
-* Select `Create your first connection` or click on the top right corner for new connection in the Connections dashboard in Airbyte.
+* You can either click "Create your first connection" or click on the top right corner to initiate the new connection workflow on Airbyte's Connections dashboard.
 
 image::{dir}/create_first_connection.png[Dashboard to create first connection, width=75%]
 
