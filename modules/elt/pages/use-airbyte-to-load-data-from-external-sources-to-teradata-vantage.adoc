@@ -52,7 +52,7 @@ Make Sure to have Docker Desktop running before running the shell script `run-ab
 +
 [NOTE]
 ====
-You can run the above commands with `git bash` in Windows. Please refer to the link:https://docs.airbyte.com/deploying-airbyte/local-deployment/[Airbyte Local Deployment] for more details. 
+You can run the above commands with `git bash` in Windows. Please refer to the link:https://docs.airbyte.com/deploying-airbyte/local-deployment/[Airbyte Local Deployment,  window="_blank"] for more details. 
 ====
 
 * Log in to the web app http://localhost:8000/ by entering the default credentials found in the `.env` file included in the repository.
