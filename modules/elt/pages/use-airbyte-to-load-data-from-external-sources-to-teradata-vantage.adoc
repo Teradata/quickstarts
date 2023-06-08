@@ -2,7 +2,7 @@
 :experimental:
 :page-author: Krutik Pathak
 :page-email: krutik.pathak@teradata.com
-:page-revdate: June 6th, 2023
+:page-revdate: June 9th, 2023
 :description: Use Airbyte with Teradata Vantage.
 :keywords: airbyte, data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, data transfer, data extraction, enterprise analytics, elt.
 :tabs:
@@ -23,11 +23,11 @@ image::{dir}/sample_employees_payrate_google_sheets.png[Sample Employees Payrate
 +
 include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
-* Docker Compose to run the link:https://github.com/airbytehq/airbyte[Airbyte Open Source] locally. Docker Compose comes with Docker Desktop. Please refer to link:https://docs.docker.com/compose/install/[docker docs,  window="_blank"] for more details. 
+* Docker Compose to run the link:https://github.com/airbytehq/airbyte[Airbyte Open Source,  window="_blank"] locally. Docker Compose comes with Docker Desktop. Please refer to link:https://docs.docker.com/compose/install/[docker docs,  window="_blank"] for more details. 
 
 * Data from the source system. In this case, we use a link:https://docs.google.com/spreadsheets/d/1XNBYUw3p7xG6ptfwjChqZ-dNXbTuVwPi7ToQfYKgJIE/edit#gid=0[sample spreadsheet from google sheets,  window="_blank"]. The sample data is a breakdown of payrate by employee type.
 
-* link:https://support.google.com/googleapi/answer/6158841?hl=en[Google Cloud Platform API enabled for your personal or organizational account,  window="_blank"]. You’ll need to authenticate your Google account via OAuth or via Service Account Key Authenticator.
+* link:https://support.google.com/googleapi/answer/6158841?hl=en[Google Cloud Platform API enabled for your personal or organizational account,  window="_blank"]. You’ll need to authenticate your Google account via OAuth or via Service Account Key Authenticator. Here we use Service Account Key Authenticator.
 
 
 == Launch Airbyte Open Source
@@ -35,7 +35,7 @@ include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 +
 [source, bash]
 ----
-git clone --depth 1 https://github.com/airbytehq/airbyte.git
+git clone https://github.com/airbytehq/airbyte.git
 cd airbyte
 ----
 
@@ -99,7 +99,13 @@ For more details, please refer link:https://docs.airbyte.com/integrations/source
 === Setting the Destination Connection
 * Assuming you want to create a fresh new connection with `Teradata Vantage`, Select `Teradata Vantage` as the destination type under the "Set up the destination" section.
 * Add the `Host`, `User`, and `Password`. These are the same as the `Host`, `Username`, and `Password` respectively, used by your Clearscape Analytics Environment.
-* The default schema name is optional, however, you can provide a more appropriate name to your specific context. Here we have provided `gsheet_airbyte_td`.
+* The `Default Schema` name is optional, however, you can provide a more appropriate name to your specific context. Here we have provided `gsheet_airbyte_td`.
+
+[NOTE]
+====
+If you do not provide a `Default Schema`, you will get an error stating "Connector failed while creating schema". Make sure you provide appropriate name in the `Default Schema`.
+====
+
 
 image::{dir}/configuring_destination_teradata_airbyte.png[Configuring the destination Teradata in Airbyte]
 
@@ -120,8 +126,9 @@ For more details please refer link:https://docs.airbyte.com/understanding-airbyt
 image::{dir}/namespaces_in_destination.png[Namespaces in the destination]
 
 
-In our example the destination is a database, so the namespace is the default schema `gsheet_airbyte_td` we defined when we configured the destination. The stream name is a table that is mirroring the name of the spreadsheet in the source, which is `sample_employee_payrate` in this case. + 
-Other type of sources and destinations might have a different layout. In this example, Google sheets as source does not support a namespace. Since we are using the single spreadsheet connector, it only supports one stream (the active spreadsheet).
+In our example the destination is a database, so the namespace is the default schema `gsheet_airbyte_td` we defined when we configured the destination. The stream name is a table that is mirroring the name of the spreadsheet in the source, which is `sample_employee_payrate` in this case. Since we are using the single spreadsheet connector, it only supports one stream (the active spreadsheet). 
+
+Other type of sources and destinations might have a different layout. In this example, Google sheets as source does not support a namespace. 
 In our example, we have used `<destination schema>` as the Namespace of the destination, this is the default namespace assigned by Airbyte based on the `Default Schema` we declared in the destination settings. The database `gsheet_airbyte_td` will be created in our Teradata Vantage Instance.
 
 
@@ -167,9 +174,9 @@ DATABASE gsheet_airbyte_td;
 SELECT * FROM _airbyte_raw_sample_employee_payrate;  
 ----
 
-The stream (table) name in destination is prefixed with `\_airbyte_raw_` because Normalization and Transformation are not supported for this connection, and link:https://docs.airbyte.com/understanding-airbyte/namespaces/#:~:text=If%20you%20don%27t%20enable%20basic%20normalization%2C%20you%20will%20only%20receive%20the%20raw%20tables.[we only have the raw table]. Each stream (table) contains 3 columns: 
+The stream (table) name in destination is prefixed with `\_airbyte_raw_` because Normalization and Transformation are not supported for this connection, and link:https://docs.airbyte.com/understanding-airbyte/namespaces/#:~:text=If%20you%20don%27t%20enable%20basic%20normalization%2C%20you%20will%20only%20receive%20the%20raw%20tables.[we only have the raw table, window="_blank"]. Each stream (table) contains 3 columns: 
 
-1. `_airbyte_ab_id`: a uuid assigned by Airbyte to each event that is processed. The column type in Teradata is VARCHAR(256).
+1. `_airbyte_ab_id`: a uuid assigned by Airbyte to each event that is processed. The column type in Teradata is `VARCHAR(256)`.
 
 2. `_airbyte_emitted_at`: a timestamp representing when the event was pulled from the data source. The column type in Teradata is `TIMESTAMP(6)`.
 
