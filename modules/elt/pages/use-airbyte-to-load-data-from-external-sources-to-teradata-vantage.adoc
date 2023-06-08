@@ -83,7 +83,7 @@ image::{dir}/create_first_connection.png[Dashboard to create first connection, w
 * For authentication we are using `Service Account Key Authentication` which uses a service account key in JSON format. Toggle from the default `OAuth` to `Service Account Key Authentication`. To authenticate your Google account via Service Account Key Authentication, enter your link:https://cloud.google.com/iam/docs/keys-create-delete#creating_service_account_keys[Google Cloud service account key, window="_blank"] in JSON format. +
 Make sure the Service Account has the Project Viewer permission. If your spreadsheet is viewable by anyone with its link, no further action is needed. If not, link:https://www.youtube.com/watch?v=GyomEw5a2NQ[give your Service account access to your spreadsheet., window="_blank"]
 
-* The link to the spreadsheet to pull the data from is to be added in `Spreadsheet Link`.
+* Add the link to the source spreadsheet as `Spreadsheet Link`.
 
 
 image::{dir}/configuring_source_gsheet_airbyte.png[Configuring the source in Airbyte]
