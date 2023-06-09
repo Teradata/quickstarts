@@ -23,7 +23,7 @@ image::{dir}/sample_employees_payrate_google_sheets.png[Sample Employees Payrate
 +
 include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
-* Docker Compose to run the link:https://github.com/airbytehq/airbyte[Airbyte Open Source,  window="_blank"] locally. Docker Compose comes with Docker Desktop. Please refer to link:https://docs.docker.com/compose/install/[docker docs,  window="_blank"] for more details. 
+* Docker Compose to run link:https://github.com/airbytehq/airbyte[Airbyte Open Source,  window="_blank"] locally. Docker Compose comes with Docker Desktop. Please refer to link:https://docs.docker.com/compose/install/[docker docs,  window="_blank"] for more details. 
 
 * Data from the source system. In this case, we use a link:https://docs.google.com/spreadsheets/d/1XNBYUw3p7xG6ptfwjChqZ-dNXbTuVwPi7ToQfYKgJIE/edit#gid=0[sample spreadsheet from google sheets,  window="_blank"]. The sample data is a breakdown of payrate by employee type.
 
