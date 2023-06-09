@@ -130,7 +130,10 @@ In our example the destination is a database, so the namespace is the default sc
 
 Other type of sources and destinations might have a different layout. In this example, Google sheets as source does not support a namespace. 
 In our example, we have used `<destination schema>` as the Namespace of the destination, this is the default namespace assigned by Airbyte based on the `Default Schema` we declared in the destination settings. The database `gsheet_airbyte_td` will be created in our Teradata Vantage Instance.
-
+[NOTE]
+====
+We use the term "schema", as it is the term used by Airbyte. In a Teradata context the term "database" is the equivalent.
+====
 
 ==== Replication Frequency
 It shows how often data should sync to destination. You can select every hour, 2 hours, 3 hours etc. In our case we used every 24 hours. 
