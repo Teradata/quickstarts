@@ -120,7 +120,7 @@ You might get a configuration check failed error. Make sure your Teradata Vantag
 
 === Configuring Data Sync
 A namespace is a group of streams (tables) in a source or destination. A schema in a relational database system is an example of a namespace. In a source, the namespace is the location from where the data is replicated to the destination. In a destination, the namespace is the location where the replicated data is stored in the destination.
-For more details please refer link:https://docs.airbyte.com/understanding-airbyte/namespaces/[Airbyte Namespace., window="_blank"]
+For more details please refer to link:https://docs.airbyte.com/understanding-airbyte/namespaces/[Airbyte Namespace., window="_blank"]
 
 
 image::{dir}/namespaces_in_destination.png[Namespaces in the destination]
