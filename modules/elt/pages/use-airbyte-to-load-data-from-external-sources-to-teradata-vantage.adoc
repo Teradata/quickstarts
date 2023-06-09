@@ -1,0 +1,212 @@
+= Use Airbyte to load data from external sources to Teradata Vantage
+:experimental:
+:page-author: Krutik Pathak
+:page-email: krutik.pathak@teradata.com
+:page-revdate: June 9th, 2023
+:description: Use Airbyte with Teradata Vantage.
+:keywords: airbyte, data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, data transfer, data extraction, enterprise analytics, elt.
+:tabs:
+:dir: getting-started-with-airbyte
+
+== Overview
+
+This tutorial showcases how to use Airbyte (an open-source Extract Load Transform tool) with Teradata Vantage. We work with a very simple end-to-end setup to load data from Google Sheets to Teradata Vantage using Airbyte.
+
+
+image::{dir}/sample_employees_payrate_google_sheets.png[Sample Employees Payrate Google Sheets, width=75%]
+
+* Source: Google Sheets
+* Destination: Teradata Vantage
+
+== Prerequisites
+* Access to a Teradata Vantage Instance. This will be defined as the destination of the Airbyte connection. You will need a database `Host`, `Username`, and `Password` for Airbyte’s configuration.
++
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
+
+* Docker Compose to run link:https://github.com/airbytehq/airbyte[Airbyte Open Source,  window="_blank"] locally. Docker Compose comes with Docker Desktop. Please refer to link:https://docs.docker.com/compose/install/[docker docs,  window="_blank"] for more details. 
+
+* Data from the source system. In this case, we use a link:https://docs.google.com/spreadsheets/d/1XNBYUw3p7xG6ptfwjChqZ-dNXbTuVwPi7ToQfYKgJIE/edit#gid=0[sample spreadsheet from google sheets,  window="_blank"]. The sample data is a breakdown of payrate by employee type.
+
+* link:https://support.google.com/googleapi/answer/6158841?hl=en[Google Cloud Platform API enabled for your personal or organizational account,  window="_blank"]. You’ll need to authenticate your Google account via OAuth or via Service Account Key Authenticator. In this example, we use Service Account Key Authenticator.
+
+
+== Launch Airbyte Open Source
+* Clone the Airbyte Open Source repository and go to the airbyte directory.
++
+[source, bash]
+----
+git clone https://github.com/airbytehq/airbyte.git
+cd airbyte
+----
+
+Make Sure to have Docker Desktop running before running the shell script `run-ab-platform`.
+
+* Run the shell script `run-ab-platform` as
+
++
+[source, bash]
+----
+./run-ab-platform.sh
+----
+
++
+[NOTE]
+====
+You can run the above commands with `git bash` in Windows. Please refer to the link:https://docs.airbyte.com/deploying-airbyte/local-deployment/[Airbyte Local Deployment,  window="_blank"] for more details. 
+====
+
+* Log in to the web app http://localhost:8000/ by entering the default credentials found in the `.env` file included in the repository.
+
++
+[source, bash]
+----
+BASIC_AUTH_USERNAME=airbyte
+BASIC_AUTH_PASSWORD=password
+----
+
+
+When logging in for the first time, Airbyte will prompt you to provide your email address and specify your preferences for product improvements. Enter your preferences and click on "Get started."
+
+image::{dir}/specify_preferences.png[Specify Preferences, width=75%]
+
+Once Airbyte Open Source is launched you will see a connections dashboard. If you launched Airbyte Open Source for the first time, it would not show any connections.
+
+== Airbyte Configuration
+
+=== Setting the Source Connection
+* You can either click "Create your first connection" or click on the top right corner to initiate the new connection workflow on Airbyte's Connections dashboard.
+
+image::{dir}/create_first_connection.png[Dashboard to create first connection, width=75%]
+
+* Airbyte will ask you for the Source, you can select from an existing source (if you have set it up already) or you can set up a new source, in this case we select `Google Sheets`.
+
+* For authentication we are using `Service Account Key Authentication` which uses a service account key in JSON format. Toggle from the default `OAuth` to `Service Account Key Authentication`. To authenticate your Google account via Service Account Key Authentication, enter your link:https://cloud.google.com/iam/docs/keys-create-delete#creating_service_account_keys[Google Cloud service account key, window="_blank"] in JSON format. +
+Make sure the Service Account has the Project Viewer permission. If your spreadsheet is viewable by anyone with its link, no further action is needed. If not, link:https://www.youtube.com/watch?v=GyomEw5a2NQ[give your Service account access to your spreadsheet., window="_blank"]
+
+* Add the link to the source spreadsheet as `Spreadsheet Link`.
+
+
+image::{dir}/configuring_source_gsheet_airbyte.png[Configuring the source in Airbyte]
+
+[NOTE]
+====
+For more details, please refer link:https://docs.airbyte.com/integrations/sources/google-sheets/#:~:text=For%20Airbyte%20Open%20Source%3A[Setting Google Sheets as Source Connector in Airbyte Open Source, window="_blank"] 
+====
+
+* Click Set up source, if the configuration is correct, you will get the message `All connection tests passed!`
+
+
+=== Setting the Destination Connection
+* Assuming you want to create a fresh new connection with `Teradata Vantage`, Select `Teradata Vantage` as the destination type under the "Set up the destination" section.
+* Add the `Host`, `User`, and `Password`. These are the same as the `Host`, `Username`, and `Password` respectively, used by your Clearscape Analytics Environment.
+* Provide a default schema name appropriate to your specific context. Here we have provided `gsheet_airbyte_td`.
+
+[NOTE]
+====
+If you do not provide a `Default Schema`, you will get an error stating "Connector failed while creating schema". Make sure you provide appropriate name in the `Default Schema`.
+====
+
+
+image::{dir}/configuring_destination_teradata_airbyte.png[Configuring the destination Teradata in Airbyte]
+
+
+* Click Set up destination, if the configuration is correct, you will get the message `All connection tests passed!`
+
+
+[NOTE]
+====
+You might get a configuration check failed error. Make sure your Teradata Vantage instance is running properly before making a connection through Airbyte. 
+====
+
+=== Configuring Data Sync
+A namespace is a group of streams (tables) in a source or destination. A schema in a relational database system is an example of a namespace. In a source, the namespace is the location from where the data is replicated to the destination. In a destination, the namespace is the location where the replicated data is stored in the destination.
+For more details please refer to link:https://docs.airbyte.com/understanding-airbyte/namespaces/[Airbyte Namespace., window="_blank"]
+
+
+image::{dir}/namespaces_in_destination.png[Namespaces in the destination]
+
+
+In our example the destination is a database, so the namespace is the default schema `gsheet_airbyte_td` we defined when we configured the destination. The stream name is a table that is mirroring the name of the spreadsheet in the source, which is `sample_employee_payrate` in this case. Since we are using the single spreadsheet connector, it only supports one stream (the active spreadsheet). 
+
+Other type of sources and destinations might have a different layout. In this example, Google sheets, as source, does not support a namespace. 
+In our example, we have used `<destination schema>` as the Namespace of the destination, this is the default namespace assigned by Airbyte based on the `Default Schema` we declared in the destination settings. The database `gsheet_airbyte_td` will be created in our Teradata Vantage Instance.
+[NOTE]
+====
+We use the term "schema", as it is the term used by Airbyte. In a Teradata context the term "database" is the equivalent.
+====
+
+==== Replication Frequency
+It shows how often data should sync to destination. You can select every hour, 2 hours, 3 hours etc. In our case we used every 24 hours. 
+
+image::{dir}/replication_frequency_24hr.png[Replication Frequency 24 hours]
+
+You can also use a Cron expression to specify the time when the sync should run. In the example below, we set the Cron expression to run the sync on every Wednesday at 12:43 PM (US/Pacific) time.
+
+image::{dir}/replication_frequency_cron_expression.png[Replication Frequency Cron Expression]
+
+=== Data Sync Validation
+
+Airbyte tracks synchronization attempts in the "Sync History" section of the `Status` tab. 
+
+image::{dir}/data_sync_summary.png[Data Sync Summary]
+
+Next, you can go to the link:https://clearscape.teradata.com/dashboard[ClearScape Analytics Experience, window="_blank"] and run a Jupyter notebook, notebooks in ClearScape Analytics Experience are configured to run Teradata SQL queries, to verify if the database `gsheet_airbyte_td`, streams (tables) and complete data is present.
+
+image::{dir}/data_sync_validation_in_teradata.png[Data Sync Validation in Teradata]
+
+[source, bash]
+----
+%connect local 
+----
+
+[source, bash]
+----
+SELECT  DatabaseName, TableName, CreateTimeStamp, LastAlterTimeStamp
+FROM    DBC.TablesV
+WHERE   DatabaseName = 'gsheet_airbyte_td'
+ORDER BY    TableName;
+----
+
+[source, bash]
+----
+DATABASE gsheet_airbyte_td; 
+----
+
+[source, bash]
+----
+SELECT * FROM _airbyte_raw_sample_employee_payrate;  
+----
+
+The stream (table) name in destination is prefixed with `\_airbyte_raw_` because Normalization and Transformation are not supported for this connection, and link:https://docs.airbyte.com/understanding-airbyte/namespaces/#:~:text=If%20you%20don%27t%20enable%20basic%20normalization%2C%20you%20will%20only%20receive%20the%20raw%20tables.[we only have the raw table, window="_blank"]. Each stream (table) contains 3 columns: 
+
+1. `_airbyte_ab_id`: a uuid assigned by Airbyte to each event that is processed. The column type in Teradata is `VARCHAR(256)`.
+
+2. `_airbyte_emitted_at`: a timestamp representing when the event was pulled from the data source. The column type in Teradata is `TIMESTAMP(6)`.
+
+3. `_airbyte_data`: a json blob representing the event data. The column type in Teradata is `JSON`.
+
+Here in the `_airbyte_data` column, we see 9 rows, the same as we have in the source Google sheet, and the data is in JSON format which can be transformed further as needed.
+
+=== Close and delete the connection
+
+* You can close the connection in Airbyte by disabling the connection. This will stop the data sync process.
+
+image::{dir}/close_airbyte_connection.png[Close Airbyte Connection]
+
+* You can also delete the connection.
+
+image::{dir}/delete_airbyte_connection.png[Delete Airbyte Connection]
+
+
+=== Summary
+This tutorial demonstrated how to extract data from a source system like Google sheets and use the Airbyte ELT tool to load the data into the Teradata Vantage Instance. We saw the end-to-end data flow and complete configuration steps for running Airbyte Open Source locally, and configuring the source and destination connections. We also discussed about the available data sync configurations based on replication frequency. We validated the results in the destination using Cloudscape Analytics Experience and finally we saw the methods to pause and delete the Airbyte connection. 
+
+=== Further reading
+link:https://docs.airbyte.com/integrations/destinations/teradata/?_ga=2.156631291.1502936448.1684794236-1752661382.1684794236[Teradata Destination | Airbyte Documentation, window="_blank"]
+
+link:https://docs.airbyte.com/cloud/core-concepts/#connection-sync-modes[Core Concepts | Airbyte Documentation, window="_blank"]
+
+link:https://airbyte.com/community[Airbyte Community Slack, window="_blank"]
+
+link:https://discuss.airbyte.io/[Airbyte Community, window="_blank"]
+
