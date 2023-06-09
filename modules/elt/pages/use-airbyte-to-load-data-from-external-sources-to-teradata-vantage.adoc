@@ -128,7 +128,7 @@ image::{dir}/namespaces_in_destination.png[Namespaces in the destination]
 
 In our example the destination is a database, so the namespace is the default schema `gsheet_airbyte_td` we defined when we configured the destination. The stream name is a table that is mirroring the name of the spreadsheet in the source, which is `sample_employee_payrate` in this case. Since we are using the single spreadsheet connector, it only supports one stream (the active spreadsheet). 
 
-Other type of sources and destinations might have a different layout. In this example, Google sheets as source does not support a namespace. 
+Other type of sources and destinations might have a different layout. In this example, Google sheets, as source, does not support a namespace. 
 In our example, we have used `<destination schema>` as the Namespace of the destination, this is the default namespace assigned by Airbyte based on the `Default Schema` we declared in the destination settings. The database `gsheet_airbyte_td` will be created in our Teradata Vantage Instance.
 [NOTE]
 ====
