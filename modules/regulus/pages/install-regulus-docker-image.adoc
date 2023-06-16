@@ -68,6 +68,7 @@ NOTE: Modify the directories based on your requirements.
 [source, bash, id="docker_engine_run", role="content-editable emits-gtm-events"]
 ----
 docker run -detach \
+  --env accept_license="Y" \
   --env AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
   --env AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \
   --env AWS_SESSION_TOKEN="${AWS_SESSION_TOKEN}" \
@@ -97,13 +98,14 @@ services:
       replicas: 1
     container_name: workspaces
     image: ${WORKSPACES_IMAGE_NAME:-teradata/regulus-workspaces}:${WORKSPACES_IMAGE_TAG:-latest}
-    command: serve -v
+    command: workspaces serve -v
     restart: unless-stopped
     ports:
       - "443:443/tcp"
       - "3000:3000/tcp"
       - "3282:3282/tcp"
     environment:
+      accept_license: "Y"
       TZ: ${WS_TZ:-UTC}
       AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
       AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
