@@ -17,6 +17,8 @@ This how-to provides examples of common use cases to help you get started with Q
 Before starting, make sure you have:
 
 *	Access to a VantageCloud system where Query Service is provisioned, or a VantageCore with Query Service enabled connectivity. If you are an admin and need to install Query Service, see link:https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022[Query Service Installation, Configuration, and Usage Guide].
++
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 *	Query Service hostname and system name
 * Authorization credentials to connect to the database
 
@@ -32,6 +34,11 @@ When using the examples, please keep in mind that:
 ** Replace the following variables with your own value:
 *** `<QS_HOSTNAME>`: Server where Query Service is installed
 *** `<SYSTEM_NAME>`: Preconfigured alias of the system
++
+[NOTE]
+====
+If your Vantage instance is provided through ClearScape Analytics Experience,<QS_HOSTNAME>, is the host URL of your ClearScape Analytics Experience environment, <SYSTEM_NAME> is 'local'.
+====
 
 
 == Connect to your Query Service instance
