@@ -1354,7 +1354,7 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 </div>
 </li>
 <li>
-<p>Python 3.7, 3.8, 3.9 or 3.10 installed.</p>
+<p>Python <strong>3.7</strong>, <strong>3.8</strong>, <strong>3.9</strong> or <strong>3.10</strong> installed.</p>
 </li>
 <li>
 <p>A database client for running database commands, an example of the configuration of one such client is presented in <a href="https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html" target="_blank" rel="noopener">this tutorial.</a>.</p>
@@ -1378,12 +1378,30 @@ cd teddy_retailers</code></pre>
 </div>
 </li>
 <li>
-<p>Create a new python environment to manage dbt and its dependencies. Activate the environment:</p>
+<p>Create a new python environment to manage dbt and its dependencies. Confirm that the Python Version you are using to create the environment is within the supported versions listed above.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python3 -m venv env
-source env/bin/activate</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python -m venv env</code></pre>
 </div>
+</div>
+</li>
+<li>
+<p>Activate the python environment according to your operating system.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">source env/bin/activate</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>for Mac, Linux, or</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">env\Scripts\activate</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>for Windows</p>
 </div>
 </li>
 <li>
@@ -1440,7 +1458,8 @@ You can execute these scripts by copying and pasting them into your database cli
 <div class="paragraph">
 <p>We will now configure dbt to connect to your Vantage database.
 Create the file <code>$HOME/.dbt/profiles.yml</code> with the following content. Adjust <code>&lt;host&gt;</code>, <code>&lt;user&gt;</code>, <code>&lt;password&gt;</code> to match your Teradata Vantage instance.
-If you have already used dbt before in your environment you only need to add a profile for the project in your <code>profiles.yml</code> file.</p>
+If you have already used dbt before in your environment you only need to add a profile for the project in your home&#8217;s directory <code>.dbt/profiles.yml</code> file.
+If the directory .dbt doesn&#8217;t exist in your system yet you will need to create it and add the profiles.yml to manage your dbt profiles.</p>
 </div>
 <div id="dbt_first_config" class="listingblock emits-gtm-events">
 <div class="content">
