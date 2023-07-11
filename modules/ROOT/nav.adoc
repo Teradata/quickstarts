@@ -1,4 +1,5 @@
 * Get access to Vantage
+** xref::teradata-vantage-architecture-and-concepts.adoc[Teradata Vantage Architecture and Concepts]
 ** xref::run-vantage-express-on-aws.adoc[Vantage Express on AWS]
 ** xref::vantage.express.gcp.adoc[Vantage Express on Google Cloud]
 ** xref::run-vantage-express-on-microsoft-azure.adoc[Vantage Express on Azure]
