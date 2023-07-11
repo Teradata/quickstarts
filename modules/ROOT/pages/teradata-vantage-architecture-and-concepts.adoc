@@ -34,7 +34,7 @@ When a SQL query is run in Teradata, it first reaches the Parsing Engine. The fu
 The Message Passing Layer is a combination of the Parallel Database Extension (PDE) and BYNET Software. It enables communication between the Parsing Engine (PE) and the Access Module Processors (AMPs).  The primary function of MPL is to carry messages between the PE and the AMPs. 
 
 === BYNET 
-BYNET is a system interconnect that enables component communication. The BYNET possesses high-speed logic that provides bi-directional broadcast, multicast, and point-to-point communication and merge functions. It performs three key functions: coordinating multi-AMP queries, reading data from multiple AMPs while maintaining sorting, and regulating message flow to prevent congestion and protect platform throughput.
+BYNET is a system that enables component communication. The BYNET system provides high-speed bi-directional broadcast, multicast, and point-to-point communication and merge functions. It performs three key functions: coordinating multi-AMP queries, reading data from multiple AMPs, regulate message flow to prevent congestion and process platform throughput.
 
 === Parallel Database Extension (PDE)
 Parallel Database Extension (PDE) acts as an intermediary software layer positioned between the operating system and Teradata Database. It facilitates the parallelism that is responsible for the speed and linear scalability of the Teradata Database.  
