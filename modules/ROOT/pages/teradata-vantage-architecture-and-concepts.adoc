@@ -62,7 +62,7 @@ A node, in the context of Teradata systems, represents an individual server that
 A clique is a set of Teradata nodes that share a common set of disk arrays. 
 
 == Teradata Vantage Architecture Concepts
-The given below concepts are applicable to Teradata Vantage Architecture.
+The concepts below are applicable to Teradata Vantage Architecture.
 
 === Linear Growth and Expandability 
 Teradata is a linearly expandable RDBMS. As the workload and data volume increase, adding more hardware resources such as servers or nodes results in a proportional increase in performance and capacity. Linear Scalability allows for increased workload without decreased throughput. 
