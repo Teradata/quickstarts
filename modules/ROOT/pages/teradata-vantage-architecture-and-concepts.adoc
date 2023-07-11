@@ -27,7 +27,7 @@ When a SQL query is run in Teradata, it first reaches the Parsing Engine. The fu
 * Parse and optimize the SQL queries. 
 * Check if the user has required privileges against the objects used in the SQL query. 
 * Check if the objects used in the SQL query exist. 
-* Prepare the execution plan to execute the SQL query and pass it to AMP. 
+* Prepare the execution plan to execute the SQL query and pass it to the corresponding AMPs. 
 * Receives the response from the AMPs and sends it back to the requesting client. 
 
 === Message Passing Layer (MPL)
