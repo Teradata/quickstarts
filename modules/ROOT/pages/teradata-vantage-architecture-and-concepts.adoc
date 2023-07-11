@@ -106,7 +106,7 @@ Teradata's MPP architecture requires an efficient means of distributing and retr
 image::{dir}/teradata_data_distribution.png[Teradata Data Distribution, width=75%]
 
 == Conclusion 
-In this QuickStart post, we covered the major architectural components such as the Parsing Engine (PE), Message Passing Layer (MPL), Access Module Processor (AMP), Virtual Disk (Vdisk), other architectural components such as BYNET, Parallel Database Extension (PDE), Node, Clique, and the essential concepts of Teradata Vantage such as Linear Growth and Expandability, Parallelism, Data Retrieval and Data Distribution. 
+In this QuickStart post, we covered the major architectural components of Teradata Vantage, such as the Parsing Engine (PE), Message Passing Layer (MPL), Access Module Processor (AMP), Virtual Disk (Vdisk), other architectural components such as BYNET, Parallel Database Extension (PDE), Node, Clique, and the essential concepts of Teradata Vantage such as Linear Growth and Expandability, Parallelism, Data Retrieval and Data Distribution. 
 
 == Further Reading 
 link:https://docs.teradata.com/r/xrmOxQlXa0ETFi5lPxHJaQ/IJCs6AQqeoQ35UimUkNRbA[Parsing Engine, window="_blank"]
