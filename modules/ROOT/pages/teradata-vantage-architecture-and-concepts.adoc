@@ -18,7 +18,7 @@ Teradata Vantage is designed around a Massively Parallel Processing (MPP) archit
 image::{dir}/teradata_architecture_major_components.png[Teradata Vantage Major Architectural Components, width=75%]
 
 == Teradata Vantage Architecture Components
-The Teradata Vantage architecture consists of below components.
+The Teradata Vantage architecture consists of the components below:
 
 === Parsing Engines (PE)
 When a SQL query is run in Teradata, it first reaches the Parsing Engine. The functions of the PE are:
