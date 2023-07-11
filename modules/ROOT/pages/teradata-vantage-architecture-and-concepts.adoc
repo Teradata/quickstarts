@@ -40,7 +40,7 @@ BYNET is a system interconnect that enables component communication. The BYNET p
 Parallel Database Extension (PDE) acts as an intermediary software layer positioned between the operating system and Teradata Database. It facilitates the parallelism that is responsible for the speed and linear scalability of the Teradata Database.  
 
 === Access Module Processor (AMP)
-AMPs are responsible for data storage and retrieval. Each AMP is associated with a set of Virtual Disks (Vdisk) where the data is stored. Only AMP can read/write data from the disks. The functions of AMP are:
+AMPs are responsible for data storage and retrieval. Each AMP is associated with a set of Virtual Disks (Vdisk) where the data is stored. Only the corresponding AMP can read/write data from the disks. The functions of AMP are:
 
 * Access storage using Vantage’s file system Software 
 * Lock management 
