@@ -53,7 +53,7 @@ AMPs are responsible for data storage and retrieval. Each AMP is associated with
 * Recovering processing 
 
 === Virtual Disks (Vdisks)
-This is the space owned by the AMP and is used to hold the user data (rows within tables). It maps to the physical space on the disk.
+These are units of storage space owned by an AMP. Virtual Disks are used to hold user data (rows within tables). Virtual Disks map to physical space on a disk.
 
 === Node
 A node, in the context of Teradata systems, represents an individual server that functions as a hardware platform for the database software. It serves as a processing unit where database operations are executed under the control of a single operating system.
