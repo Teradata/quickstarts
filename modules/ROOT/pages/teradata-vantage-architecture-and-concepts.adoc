@@ -37,7 +37,7 @@ The Message Passing Layer is a combination of the Parallel Database Extension (P
 BYNET is a system that enables component communication. The BYNET system provides high-speed bi-directional broadcast, multicast, and point-to-point communication and merge functions. It performs three key functions: coordinating multi-AMP queries, reading data from multiple AMPs, regulate message flow to prevent congestion and process platform throughput.
 
 === Parallel Database Extension (PDE)
-Parallel Database Extension (PDE) acts as an intermediary software layer positioned between the operating system and Teradata Database. It facilitates the parallelism that is responsible for the speed and linear scalability of the Teradata Database.  
+Parallel Database Extension (PDE) is an intermediary software layer positioned between the operating system and the Teradata Vantage database. It facilitates the parallelism that is responsible for the speed and linear scalability of the Teradata Vantage database.  
 
 === Access Module Processor (AMP)
 AMPs are responsible for data storage and retrieval. Each AMP is associated with a set of Virtual Disks (Vdisk) where the data is stored. Only the corresponding AMP can read/write data from the disks. The functions of AMP are:
