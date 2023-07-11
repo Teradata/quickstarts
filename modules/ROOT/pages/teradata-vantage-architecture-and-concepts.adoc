@@ -21,7 +21,7 @@ image::{dir}/teradata_architecture_major_components.png[Teradata Vantage Major A
 The Teradata Vantage architecture consists of the components below:
 
 === Parsing Engines (PE)
-When a SQL query is run in Teradata, it first reaches the Parsing Engine. The functions of the PE are:
+When a SQL query is run in Teradata, it first reaches the Parsing Engine. The functions of the Parsing Engine are:
 
 * Manage individual user sessions (up to 120). 
 * Parse and optimize the SQL queries. 
