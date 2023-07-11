@@ -12,7 +12,7 @@
 
 This tutorial explains the underlying concepts of Teradata Vantage database architecture. 
 
-Teradata's architecture is designed around the Massively Parallel Processing (MPP) architecture, which enables high-performance data processing and analytics. The major architectural components of Teradata include the Parsing Engine, Message Passing Layer (MPL), Access Module Processors (AMPs), and Virtual Disks (Vdisks).
+Teradata Vantage is designed around a Massively Parallel Processing (MPP) architecture, which enables high-performance data processing and analytics. The major architectural components of Teradata Vantage include the Parsing Engine (PE), Message Passing Layer (MPL), Access Module Processors (AMPs), and Virtual Disks (Vdisks).
 
 
 image::{dir}/teradata_architecture_major_components.png[Teradata Vantage Major Architectural Components, width=75%]
