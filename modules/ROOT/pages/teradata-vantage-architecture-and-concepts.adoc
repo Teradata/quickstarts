@@ -93,7 +93,7 @@ The key steps involved in Teradata Retrieval Architecture are:
 image::{dir}/teradata_retrieval_architecture.png[Teradata Retrieval Architecture, width=75%]
 
 === Teradata Data Distribution
-Teradata's MPP architecture requires an efficient means of distributing and retrieving data and does so using hash partitioning. This approach ensures scalable performance and efficient data access.
+Teradata's MPP architecture requires an efficient means of distributing and retrieving data. A hash partitioning process is used for this purpose. This approach ensures scalable performance and efficient data access.
 
 * Rows in the tables are automatically distributed evenly by hash partitioning. 
 * The system achieves scalable performance through data distribution. 
