@@ -1510,7 +1510,7 @@ In this configuration, <code>schema</code> stands for the database that contains
 <div class="ulist">
 <ul>
 <li>
-<p>First, it transforms the raw data which is in JSON format loaded in Teradata Vantage with Airbyte from Google Sheets into staging views (staging models) that are normalized.</p>
+<p>First, it transforms the raw data (in JSON format), loaded from Google Sheets via Airbyte, into staging models materialized through views. At this stage the data is normalized.</p>
 </li>
 <li>
 <p>Next, it transforms the normalized views into a dimensional model with customer and order data ready for analytics.</p>
@@ -1526,7 +1526,10 @@ In this configuration, <code>schema</code> stands for the database that contains
 </div>
 </div>
 <div class="paragraph">
-<p>In the original <a href="https://github.com/dbt-labs/jaffle_shop-dev" target="_blank" rel="noopener">dbt Jaffle Shop tutorial</a> we get the data from raw csv files in the <code>./data</code> into staging views in <code>./models/staging</code> using <code>dbt seed</code>. Here, in our example we transform the raw JSON data in Teradata Vantage into Normalized views in these staging models. <code>stg_customers</code> model creates the normalized view for <code>customers</code> from <code>_airbyte_raw_customers</code> table. Similarly <code>stg_orders</code> model creates for normalized view for <code>orders</code> from <code>_airbyte_raw_orders</code> and <code>stg_payments</code> model creates normalized view for <code>payments</code> from <code>_airbyte_raw_payments</code>.</p>
+<p>In the original <a href="https://github.com/dbt-labs/jaffle_shop-dev" target="_blank" rel="noopener">dbt Jaffle Shop tutorial</a> the project&#8217;s data is loaded from csv files located in the <code>./data</code> folder through dbt&#8217;s <code>seed</code> command. The <code>seed</code> command is used to load master data from tables, but this command is not designed to perform data loading.
+In this demo we are assuming a more typical setup in which a tool designed for data loading, Airbyte, was used to load data into the datawarehouse/lake.
+Data loaded through Airbyte though is represented as raw JSON strings. From these raw data we are creating normalized views. We perform this task through the following staging models.
+The <code>stg_customers</code> model creates the normalized view for <code>customers</code> from <code>_airbyte_raw_customers</code> table. Similarly the <code>stg_orders</code> model creates the normalized view for <code>orders</code> from <code>_airbyte_raw_orders</code>,  and, finally the <code>stg_payments</code> model creates the normalized view for <code>payments</code> from <code>_airbyte_raw_payments</code>.</p>
 </div>
 <div class="paragraph">
 <p>The given below is an example of JSON transformation in <code>stg_orders.sql</code> model:</p>
