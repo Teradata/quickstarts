@@ -1,4 +1,4 @@
-= Use dbt to transform the external data loaded through Airbyte in Teradata Vantage
+= Use dbt to transform external data loaded through Airbyte in Teradata Vantage
 :experimental:
 :page-author: Krutik Pathak
 :page-email: krutik.pathak@teradata.com
