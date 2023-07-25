@@ -68,7 +68,7 @@ image::{dir}/dbt_init_database_name.png[Database name prompt, width=75%]
  
 * Configure `profiles.yml` file located in the `$HOME/.dbt` directory. If the `profiles.yml` file is not present, you can create a new one. 
 Adjust `server`, `username`, `password` to match your Teradata instance's `HOST`, `Username`, `Password` respectively. 
-Here `schema` is the database that contains the Airbyte raw Jaffle Shop dataset in JSON format. In this use case we have used the `schema` as `airbyte_jaffle_shop`.
+In this configuration, `schema` stands for the database that contains the Airbyte raw Jaffle Shop dataset in JSON format. In this case we define the `schema` with the same default `schema` that we defined in Airbyte `airbyte_jaffle_shop`.
 
 [source, yaml, id="dbt_first_config", role="emits-gtm-events"]
 ----
