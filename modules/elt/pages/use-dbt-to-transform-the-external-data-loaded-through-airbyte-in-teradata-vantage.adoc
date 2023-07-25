@@ -3,7 +3,7 @@
 :page-author: Krutik Pathak
 :page-email: krutik.pathak@teradata.com
 :page-revdate: TBD
-:description: Use dbt to transform the external data loaded through Airbyte within Teradata Vantage.
+:description: Use dbt to transform external data loaded through Airbyte in Teradata Vantage.
 :keywords: dbt, airbyte, data transformation, data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, data transfer, data extraction, enterprise analytics, elt.
 :tabs:
 :dir: getting-started-with-airbyte-dbt
