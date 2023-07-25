@@ -60,7 +60,7 @@ pip install dbt-teradata
 dbt init
 ----
 
-It will ask you for the project name and database. Here in this demonstration our project name is `dbt_airbyte_demo`.
+It will ask you for the project name and database management system. In this demo we define the project name as `dbt_airbyte_demo`. Since we are using the dbt-teradata connector, the only database management system available is Teradata.
 
 image::{dir}/dbt_init_project_name.png[Project name prompt, width=75%]
 
