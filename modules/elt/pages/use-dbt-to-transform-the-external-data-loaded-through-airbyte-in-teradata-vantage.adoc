@@ -160,7 +160,7 @@ The data in the source system is normalized. A dimensional model based on the sa
 == Understanding Transformations
 This dbt project performs two types of transformations.
 
-* First, it transforms the raw data which is in JSON format loaded in Teradata Vantage with Airbyte from Google Sheets into staging views (staging models) that are normalized. 
+* First, it transforms the raw data (in JSON format), loaded from Google Sheets via Airbyte, into staging models materialized through views. At this stage the data is normalized. 
 * Next, it transforms the normalized views into a dimensional model with customer and order data ready for analytics.
 
 The following diagram shows the transformation steps in Teradata Vantage using dbt:
