@@ -127,7 +127,7 @@ customers   1--* orders
 orders      1--* payments
 ....
 
-The data in the source system is normalized. The following is the dimensional model of same data which is more suitable for analytics tools:
+The data in the source system is normalized. A dimensional model based on the same data, more suitable for analytics tools, is presented below:
 [erd, format=svg, width=100%]
 ....
 # Entities
