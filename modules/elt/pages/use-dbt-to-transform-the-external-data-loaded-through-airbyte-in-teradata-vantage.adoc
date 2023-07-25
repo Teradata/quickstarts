@@ -25,7 +25,7 @@ include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
 [NOTE]
 ====
-When you configure Teradata destination in Airbyte, it will ask for `Default Schema`. For this demonstration we have provided `Default Schema` as `airbyte_jaffle_shop`. 
+When you configure a Teradata destination in Airbyte, it will ask for a `Default Schema`. For this demonstration we have set the `Default Schema` as `airbyte_jaffle_shop`. 
 ====
 
 * Python 3.7, 3.8, 3.9, 3.10 or 3.11 installed.
