@@ -204,7 +204,7 @@ SELECT * FROM flattened_json_data
 Dimension Modeling is a two step process: 
 
 * First, dbt takes the normalized views in `stg_orders`, `stg_customers`, `stg_payments` and builds denormalized intermediate join tables `customer_orders`, `order_payments`, `customer_payments`. You will find the definitions of these tables in `./models/marts/core/intermediate`.  
-* In the second step, dbt creates `dim_customers` and `fct_orders` tables. These are the dimensional model tables that we want to expose to our BI tool. You will find the definitions of these tables in `./models/marts/core`.
+* In the second step, dbt creates `dim_customers` and `fct_orders` tables. These constitute the dimensional model tables that we want to expose to our BI tool. You will find the definitions of these tables in `./models/marts/core`.
 
 The code for intermediate and final dimension models is already available in the original link:https://github.com/dbt-labs/jaffle_shop-dev[dbt Jaffle Shop tutorial, window="_blank"].
 
