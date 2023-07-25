@@ -21,7 +21,7 @@ image::{dir}/raw_data_vantage_dbeaver.png[Raw data in Teradata Vantage, width=75
 +
 include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
-* External data link:https://docs.google.com/spreadsheets/d/1-R4F3q8J9KDnFRWpiT3Ysp1RlOoUu3PeQR7xDeLxFts/edit#gid=42273685[Jaffle Shop Dataset, window="_blank"] in Google Sheets loaded into Teradata Vantage using Airbyte.  Please refer to link:https://quickstarts.teradata.com/elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html[Use Airbyte to load data from external sources to Teradata Vantage, window="_blank"] for more details. 
+* The external data link:https://docs.google.com/spreadsheets/d/1-R4F3q8J9KDnFRWpiT3Ysp1RlOoUu3PeQR7xDeLxFts/edit#gid=42273685[Jaffle Shop Dataset, window="_blank"] is loaded from Google Sheets into Teradata Vantage using Airbyte.  Please refer to link:https://quickstarts.teradata.com/elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html[Use Airbyte to load data from external sources to Teradata Vantage, window="_blank"] for more details. 
 
 [NOTE]
 ====
