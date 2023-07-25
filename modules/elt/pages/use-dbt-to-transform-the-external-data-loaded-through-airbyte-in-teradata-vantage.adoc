@@ -11,7 +11,7 @@
 
 == Overview
 
-This tutorial demonstrates how to use link:https://docs.getdbt.com/docs/introduction[dbt (Data Build Tool),window="_blank"] to transform the external data load through link:https://github.com/airbytehq/airbyte[Airbyte,  window="_blank"] (an Open-Source Extract Load tool) within Teradata Vantage. This tutorial is based on the original link:https://github.com/dbt-labs/jaffle_shop-dev[dbt Jaffle Shop tutorial, window="_blank"] with a small change, instead of using `dbt seed`, the Jaffle Shop dataset is loaded from Google Sheets into Teradata Vantage using Airbyte. The data once loaded into Teradata Vantage will be in JSON format as can be seen in the picture below:
+This tutorial demonstrates how to use link:https://docs.getdbt.com/docs/introduction[dbt (Data Build Tool),window="_blank"] to transform external data load through link:https://github.com/airbytehq/airbyte[Airbyte,  window="_blank"] (an Open-Source Extract Load tool) in Teradata Vantage. This tutorial is based on the original link:https://github.com/dbt-labs/jaffle_shop-dev[dbt Jaffle Shop tutorial, window="_blank"] with a small change, instead of using `dbt seed`, the Jaffle Shop dataset is loaded from Google Sheets into Teradata Vantage using Airbyte. The data thus loaded into Teradata Vantage is in JSON format as can be seen in the picture below:
 
 image::{dir}/raw_data_vantage_dbeaver.png[Raw data in Teradata Vantage, width=75%]
 
