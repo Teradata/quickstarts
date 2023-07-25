@@ -179,7 +179,10 @@ The following diagram shows the transformation steps in Teradata Vantage using d
                                                \-------------/     
 ----
 
-In the original link:https://github.com/dbt-labs/jaffle_shop-dev[dbt Jaffle Shop tutorial, window="_blank"] we get the data from raw csv files in the `./data` into staging views in `./models/staging` using `dbt seed`. Here, in our example we transform the raw JSON data in Teradata Vantage into Normalized views in these staging models. `stg_customers` model creates the normalized view for `customers` from `_airbyte_raw_customers` table. Similarly `stg_orders` model creates for normalized view for `orders` from `_airbyte_raw_orders` and `stg_payments` model creates normalized view for `payments` from `_airbyte_raw_payments`. 
+In the original link:https://github.com/dbt-labs/jaffle_shop-dev[dbt Jaffle Shop tutorial, window="_blank"] the project's data is loaded from csv files located in the `./data` folder through dbt's `seed` command. The `seed` command is used to load master data from tables, but this command is not designed to perform data loading. 
+In this demo we are assuming a more typical setup in which a tool designed for data loading, Airbyte, was used to load data into the datawarehouse/lake.
+Data loaded through Airbyte though is represented as raw JSON strings. From these raw data we are creating normalized views. We perform this task through the following staging models. 
+The `stg_customers` model creates the normalized view for `customers` from `_airbyte_raw_customers` table. Similarly the `stg_orders` model creates the normalized view for `orders` from `_airbyte_raw_orders`,  and, finally the `stg_payments` model creates the normalized view for `payments` from `_airbyte_raw_payments`. 
 
 The given below is an example of JSON transformation in `stg_orders.sql` model: 
 [source, sql]
