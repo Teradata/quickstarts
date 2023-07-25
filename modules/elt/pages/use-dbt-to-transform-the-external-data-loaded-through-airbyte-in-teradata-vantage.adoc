@@ -184,7 +184,7 @@ In this demo we are assuming a more typical setup in which a tool designed for d
 Data loaded through Airbyte though is represented as raw JSON strings. From these raw data we are creating normalized views. We perform this task through the following staging models. 
 The `stg_customers` model creates the normalized view for `customers` from `_airbyte_raw_customers` table. Similarly the `stg_orders` model creates the normalized view for `orders` from `_airbyte_raw_orders`,  and, finally the `stg_payments` model creates the normalized view for `payments` from `_airbyte_raw_payments`. 
 
-The given below is an example of JSON transformation in `stg_orders.sql` model: 
+Below an example of transforming raw JSON data into a view through the `stg_orders.sql` model : 
 [source, sql]
 ----
 WITH flattened_json_data AS (
