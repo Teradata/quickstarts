@@ -1560,7 +1560,7 @@ SELECT * FROM flattened_json_data</code></pre>
 <p>First, dbt takes the normalized views in <code>stg_orders</code>, <code>stg_customers</code>, <code>stg_payments</code> and builds denormalized intermediate join tables <code>customer_orders</code>, <code>order_payments</code>, <code>customer_payments</code>. You will find the definitions of these tables in <code>./models/marts/core/intermediate</code>.</p>
 </li>
 <li>
-<p>In the second step, dbt creates <code>dim_customers</code> and <code>fct_orders</code> tables. These are the dimensional model tables that we want to expose to our BI tool. You will find the definitions of these tables in <code>./models/marts/core</code>.</p>
+<p>In the second step, dbt creates <code>dim_customers</code> and <code>fct_orders</code> tables. These constitute the dimensional model tables that we want to expose to our BI tool. You will find the definitions of these tables in <code>./models/marts/core</code>.</p>
 </li>
 </ul>
 </div>
