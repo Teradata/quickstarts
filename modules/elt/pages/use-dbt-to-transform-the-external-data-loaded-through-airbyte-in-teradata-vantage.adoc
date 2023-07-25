@@ -220,7 +220,7 @@ You will get the status of each model as given below:
 image::{dir}/dbt_run.png[dbt run output, width=75%]
 
 === Test the data
-dbt applied multiple transformations to our data. To ensure that the data in the dimensional model is correct, dbt allows us to define and execute tests against the data. The tests are defined in `./models/marts/core/schema.yml` and `./models/staging/schema.yml`. The files describe each column in all relationships. Each column can have multiple tests configured under `tests` key. For example, we expect that `fct_orders.order_id` column will contain unique, non-null values. To validate that the data in the produced tables satisfies the test conditions run:
+dbt applied multiple transformations to our data. To ensure that the data in the dimensional model is correct, dbt allows us to define and execute tests against the data. The tests are defined in `./models/marts/core/schema.yml` and `./models/staging/schema.yml`.  Each column can have multiple tests configured under `tests` key. For example, we expect that `fct_orders.order_id` column will contain unique, non-null values. To validate that the data in the produced tables satisfies the test conditions run:
 
 [source, bash]
 ----
