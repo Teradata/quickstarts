@@ -1590,7 +1590,7 @@ SELECT * FROM flattened_json_data</code></pre>
 <div class="sect2">
 <h3 id="_test_the_data"><a class="anchor" href="#_test_the_data"></a>Test the data</h3>
 <div class="paragraph">
-<p>dbt applied multiple transformations to our data. To ensure that the data in the dimensional model is correct, dbt allows us to define and execute tests against the data. The tests are defined in <code>./models/marts/core/schema.yml</code> and <code>./models/staging/schema.yml</code>. The files describe each column in all relationships. Each column can have multiple tests configured under <code>tests</code> key. For example, we expect that <code>fct_orders.order_id</code> column will contain unique, non-null values. To validate that the data in the produced tables satisfies the test conditions run:</p>
+<p>dbt applied multiple transformations to our data. To ensure that the data in the dimensional model is correct, dbt allows us to define and execute tests against the data. The tests are defined in <code>./models/marts/core/schema.yml</code> and <code>./models/staging/schema.yml</code>.  Each column can have multiple tests configured under <code>tests</code> key. For example, we expect that <code>fct_orders.order_id</code> column will contain unique, non-null values. To validate that the data in the produced tables satisfies the test conditions run:</p>
 </div>
 <div class="listingblock">
 <div class="content">
