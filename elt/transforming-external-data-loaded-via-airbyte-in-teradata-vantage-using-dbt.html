@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Run scripts on Vantage :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/sto.html">
-    <meta name="description" content="Run Applications on Teradata - use Script Table Operator to run applications on your data without data movement.">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, script table operator, cloud data platform, object storage, business intelligence, enterprise analytics">
+    <title>Transforming External Data Loaded via Airbyte in Teradata Vantage Using dbt :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/elt/transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.html">
+    <meta name="description" content="This tutorial describes the type of transformations that are needed to transform external data loaded through Airbyte with dbt.">
+    <meta name="keywords" content="dbt, airbyte, data transformation, data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, data transfer, data extraction, enterprise analytics, elt.">
     <meta name="generator" content="Antora 3.0.1">
-    <link rel="stylesheet" href="./_/css/site.css">
-<meta property="og:title" content="Run scripts on Vantage :: Teradata Getting Started">
+    <link rel="stylesheet" href="../_/css/site.css">
+<meta property="og:title" content="Transforming External Data Loaded via Airbyte in Teradata Vantage Using dbt :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Run Applications on Teradata - use Script Table Operator to run applications on your data without data movement." />
+<meta property="og:description" content="This tutorial describes the type of transformations that are needed to transform external data loaded through Airbyte with dbt." />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/sto.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/elt/transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -28,10 +28,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');</script>
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="./_/css/search.css">
-<link rel="stylesheet" href="./_/css/styles.css">
-<link rel="stylesheet" href="./_/css/fontawesome.all.min.css">
-<link rel="stylesheet" href="./_/css/webfonts.css">
+<link rel="stylesheet" href="../_/css/search.css">
+<link rel="stylesheet" href="../_/css/styles.css">
+<link rel="stylesheet" href="../_/css/fontawesome.all.min.css">
+<link rel="stylesheet" href="../_/css/webfonts.css">
 <style>
 body {
   transition: all .25s ease-in-out 0s;
@@ -59,7 +59,7 @@ article a[href^="https://"][target="_blank"]::after {
   width: 14px;
   height: 14px;
   margin-left: 4px;
-  background-image: url("./_/img/open_in_new.svg");
+  background-image: url("../_/img/open_in_new.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -342,7 +342,7 @@ button {
   border-radius: 8px;
   padding-left: 14px;
   padding-right: 14px;
-  background-image: url(./_/img/search.svg);
+  background-image: url(../_/img/search.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -806,7 +806,7 @@ aside.toc.sidebar {
 
 .report-an-issue {
   padding: 10px 20px 10px 10px;
-  background-image: url(./_/img/pan_tool.svg);
+  background-image: url(../_/img/pan_tool.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -814,7 +814,7 @@ aside.toc.sidebar {
 
 .edit-on-github {
   padding: 10px 20px 10px 10px;
-  background-image: url(./_/img/edit.svg);
+  background-image: url(../_/img/edit.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -900,19 +900,19 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/warning.svg");
+  content: url("../_/img/warning.svg");
 }
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .admonitionblock.question .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/question.mark.svg");
+  content: url("../_/img/question.mark.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .source-toolbox .source-lang {
@@ -923,7 +923,7 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .source-toolbox img.copy-icon {
-  content: url("./_/img/copy.svg");
+  content: url("../_/img/copy.svg");
 }
 
 .doc .source-toolbox>:not(:last-child)::after {
@@ -951,7 +951,7 @@ span.search-result-highlight {
 
 </style>
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
-<link rel="icon" href="./_/img/favicon.ico" type="image/x-icon">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
   </head>
   <body class="article">
 <!-- Google Tag Manager (noscript) -->
@@ -1004,13 +1004,13 @@ span.search-result-highlight {
         <ul>
           <li class="header-nav-mobile__menu-item">
             <header class="header-nav-mobile__menu-item__header">
-              <a href="./index.html">Getting Started</a>
+              <a href="../index.html">Getting Started</a>
             </header>
           </li>
           <li class="header-nav-mobile__menu-item has-sub-items">
             <header class="header-nav-mobile__menu-item__header i-alignment">
               <a href="https://docs.teradata.com/">Docs</a>
-              <img class="navbar-arrow" src='./_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Docs">
+              <img class="navbar-arrow" src='../_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Docs">
             </header>
             <div>
               <div class="header-nav-mobile__menu-item__links">
@@ -1029,7 +1029,7 @@ span.search-result-highlight {
           <li class="header-nav-mobile__menu-item has-sub-items">
             <header class="header-nav-mobile__menu-item__header i-alignment">
               <a href="https://support.teradata.com/community ">Community</a>
-              <img class="navbar-arrow" src='./_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Community">
+              <img class="navbar-arrow" src='../_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Community">
             </header>
             <div>
               <div class="header-nav-mobile__menu-item__links">
@@ -1039,17 +1039,17 @@ span.search-result-highlight {
                   </li>
                   <li>
                     <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item">Technical Medium Blogs
-                      <img src='./_/img/icons/external-symbol.svg' class="ext-symbol">
+                      <img src='../_/img/icons/external-symbol.svg' class="ext-symbol">
                     </a>
                   </li>
                   <li>
                     <a href="https://github.com/Teradata" title="Teradata on GitHub" target="_blank" class="dropdown-item">GitHub
-                      <img src='./_/img/icons/external-symbol.svg' class="ext-symbol">
+                      <img src='../_/img/icons/external-symbol.svg' class="ext-symbol">
                     </a>
                   </li>
                   <li>
                     <a href="https://stackoverflow.com/questions/tagged/teradata" title="Stack Overflow Teradata questions" target="_blank" class="dropdown-item">Stack Overflow
-                      <img src='./_/img/icons/external-symbol.svg' class="ext-symbol">
+                      <img src='../_/img/icons/external-symbol.svg' class="ext-symbol">
                     </a>
                   </li>               
                 </ul>
@@ -1082,22 +1082,22 @@ span.search-result-highlight {
     <span class="nav-text">Get access to Vantage</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="run-vantage-express-on-aws.html">Vantage Express on AWS</a>
+    <a class="nav-link" href="../run-vantage-express-on-aws.html">Vantage Express on AWS</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on Google Cloud</a>
+    <a class="nav-link" href="../vantage.express.gcp.html">Vantage Express on Google Cloud</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
+    <a class="nav-link" href="../run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
+    <a class="nav-link" href="../getting.started.vmware.html">Vantage Express on VMware</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
+    <a class="nav-link" href="../getting.started.vbox.html">Vantage Express on VirtualBox</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
+    <a class="nav-link" href="../getting.started.utm.html">Vantage Express on UTM</a>
   </li>
 </ul>
   </li>
@@ -1106,17 +1106,17 @@ span.search-result-highlight {
     <span class="nav-text">Connect to Vantage</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
+    <a class="nav-link" href="../install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
+    <a class="nav-link" href="../other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Configure ODBC</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="odbc.ubuntu.html">Ubuntu</a>
+    <a class="nav-link" href="../odbc.ubuntu.html">Ubuntu</a>
   </li>
 </ul>
   </li>
@@ -1127,40 +1127,40 @@ span.search-result-highlight {
     <span class="nav-text">Manage data</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nos.html">Query data stored in object storage</a>
+    <a class="nav-link" href="../nos.html">Query data stored in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html">Use Airbyte to load data from external sources to Teradata Vantage</a>
+    <a class="nav-link" href="use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html">Use Airbyte to load data from external sources to Teradata Vantage</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.html">Transforming External Data Loaded via Airbyte in Teradata Vantage Using dbt</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="elt/transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.html">Transforming External Data Loaded via Airbyte in Teradata Vantage Using dbt</a>
+    <a class="nav-link" href="../dbt.html">dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
+    <a class="nav-link" href="../advanced-dbt.html">Advanced dbt use cases with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="advanced-dbt.html">Advanced dbt use cases with Teradata Vantage</a>
+    <a class="nav-link" href="../tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">Load data with TPT</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">Load data with TPT</a>
+    <a class="nav-link" href="../create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
+    <a class="nav-link" href="../other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
+    <a class="nav-link" href="../segment.html">Store events from Twilio Segment</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="segment.html">Store events from Twilio Segment</a>
+    <a class="nav-link" href="../cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
   </li>
 </ul>
   </li>
@@ -1169,13 +1169,13 @@ span.search-result-highlight {
     <span class="nav-text">Create applications</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
+    <a class="nav-link" href="../jdbc.html">Connect to Vantage using JDBC</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+    <a class="nav-link" href="../mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="query-service/send-queries-using-rest-api.html">Send queries using REST API</a>
+    <a class="nav-link" href="../query-service/send-queries-using-rest-api.html">Send queries using REST API</a>
   </li>
 </ul>
   </li>
@@ -1184,46 +1184,46 @@ span.search-result-highlight {
     <span class="nav-text">Analyze data</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
+    <a class="nav-link" href="../jupyter.html">Use Vantage from a Jupyter notebook</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+    <a class="nav-link" href="../local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ml.html">Train ML models in Vantage</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
+    <a class="nav-link" href="../ml.html">Train ML models in Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="perform-time-series-analysis-using-teradata-vantage.html">Perform time series analysis</a>
+    <a class="nav-link" href="../sto.html">Run scripts on Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - Import and Deploy your first BYOM Model</a>
+    <a class="nav-link" href="../perform-time-series-analysis-using-teradata-vantage.html">Perform time series analysis</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.html">ModelOps - Import and Deploy your first GIT Model</a>
+    <a class="nav-link" href="../modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - Import and Deploy your first BYOM Model</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="modelops/using-feast-feature-store-with-teradata-vantage.html">Using Teradata with FEAST</a>
+    <a class="nav-link" href="../modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.html">ModelOps - Import and Deploy your first GIT Model</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
+    <a class="nav-link" href="../modelops/using-feast-feature-store-with-teradata-vantage.html">Using Teradata with FEAST</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
+    <a class="nav-link" href="../cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
+    <a class="nav-link" href="../cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Integrate Teradata Jupyter extensions with SageMaker notebook instance</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Create Vizualizations in Power BI using Vantage</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Integrate Teradata Jupyter extensions with SageMaker notebook instance</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
+    <a class="nav-link" href="../business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Create Vizualizations in Power BI using Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
   </li>
 </ul>
   </li>
@@ -1236,7 +1236,7 @@ span.search-result-highlight {
     <span class="nav-text">Financial</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="jupyter-demos/gcp-vertex-ai-pipelines-vantage-byom-housing-example.html">Google Cloud Vertex AI Pipelines Vantage BYOM Housing Example</a>
+    <a class="nav-link" href="../jupyter-demos/gcp-vertex-ai-pipelines-vantage-byom-housing-example.html">Google Cloud Vertex AI Pipelines Vantage BYOM Housing Example</a>
   </li>
 </ul>
   </li>
@@ -1247,16 +1247,16 @@ span.search-result-highlight {
     <span class="nav-text">Regulus (preview)</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="regulus/install-regulus-docker-image.html">Install and Configure Regulus Using Docker</a>
+    <a class="nav-link" href="../regulus/install-regulus-docker-image.html">Install and Configure Regulus Using Docker</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="regulus/getting-started-with-regulus.html">Run a Sample Workload in JupyterLab</a>
+    <a class="nav-link" href="../regulus/getting-started-with-regulus.html">Run a Sample Workload in JupyterLab</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="regulus/regulus-magic-reference.html">Regulus JupyterLab Magic Command Reference</a>
+    <a class="nav-link" href="../regulus/regulus-magic-reference.html">Regulus JupyterLab Magic Command Reference</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="regulus/using-regulus-workspace-cli.html">Use Regulus With Workspaces CLI</a>
+    <a class="nav-link" href="../regulus/using-regulus-workspace-cli.html">Use Regulus With Workspaces CLI</a>
   </li>
 </ul>
   </li>
@@ -1272,10 +1272,10 @@ span.search-result-highlight {
   </div>
   <ul class="components">
     <li class="component is-current">
-      <a class="title" href="index.html">Getting Started Guides</a>
+      <a class="title" href="../index.html">Getting Started Guides</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">master</a>
+          <a href="../index.html">master</a>
         </li>
       </ul>
     </li>
@@ -1289,8 +1289,8 @@ span.search-result-highlight {
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li>Analyze data</li>
-    <li><a href="sto.html">Run scripts on Vantage</a></li>
+    <li>Manage data</li>
+    <li><a href="transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.html">Transforming External Data Loaded via Airbyte in Teradata Vantage Using dbt</a></li>
   </ul>
 </nav>
 </div>
@@ -1298,29 +1298,38 @@ span.search-result-highlight {
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/HEAD/modules/ROOT/pages/sto.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/elt/pages/transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Run scripts on Vantage</h1>
-<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
-Last updated: September 7th, 2021</p>
+<h1 class="page">Transforming External Data Loaded via Airbyte in Teradata Vantage Using dbt</h1>
+<p>Author: <a href="mailto:krutik.pathak@teradata.com">Krutik Pathak</a><br/>
+Last updated: TBD</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Sometimes, you need to apply complex logic to your data that can&#8217;t be easily expressed in SQL. One option is to wrap your logic in a User Defined Function (UDF). What if you already have this logic coded in a language that is not supported by UDF? Script Table Operator is a Vantage feature that allows you to bring your logic to the data and run it on Vantage. The advantage of this approach is that you don&#8217;t have to retrieve data from Vantage to operate on it. Also, by running your data applications on Vantage, you leverage its parallel nature. You don&#8217;t have to think how your applications will scale. You can let Vantage take care of it.</p>
+<p>This tutorial demonstrates how to use <a href="https://docs.getdbt.com/docs/introduction" target="_blank" rel="noopener">dbt (Data Build Tool)</a> to transform external data load through <a href="https://github.com/airbytehq/airbyte" target="_blank" rel="noopener">Airbyte</a> (an Open-Source Extract Load tool) in Teradata Vantage.</p>
+</div>
+<div class="paragraph">
+<p>This tutorial is based on the original <a href="https://github.com/dbt-labs/jaffle_shop-dev" target="_blank" rel="noopener">dbt Jaffle Shop tutorial</a> with a small change, instead of using the <code>dbt seed</code> command, the Jaffle Shop dataset is loaded from Google Sheets into Teradata Vantage using Airbyte. Data loaded through airbyte is contained in JSON columns as can be seen in the picture below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/getting-started-with-airbyte-dbt/raw_data_vantage_dbeaver.png" alt="Raw data in Teradata Vantage" width="75%">
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>You need access to a Teradata Vantage instance.</p>
-</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Access to a Teradata Vantage Instance.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1333,282 +1342,393 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 </tr>
 </table>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_hello_world"><a class="anchor" href="#_hello_world"></a>Hello World</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Let&#8217;s start with something simple. What if you wanted the database to print "Hello World"?</p>
-</div>
-<div id="sto_first_query" class="listingblock emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT *
-FROM
-  SCRIPT(
-    SCRIPT_COMMAND('echo Hello World!')
-    RETURNS ('Message varchar(512)'));</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Here is what I&#8217;ve got:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>Message
-------------
-Hello World!
-Hello World!</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Let&#8217;s analyze what just happened here. The SQL includes <code>echo Hello World!</code>. This is a Bash command. OK, so now we know how to run Bash commands. But why did we get 2 rows and not one? That&#8217;s because our simple script was run once on each AMP and I happen to have 2 AMPs:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Teradata magic that returns the number of AMPs in a system
-SELECT hashamp()+1 AS number_of_amps;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Returns:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>number_of_amps
---------------
-             2</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This simple script demonstrates the idea behind the Script Table Operator (STO). You provide your script and the database runs it in parallel, once for each AMP. This is an attractive model in case you have transformation logic in a script and a lot of data to process. Normally, you would need to build concurrency into your application. By letting STO do it, you let Teradata select the right concurrency level for your data.</p>
+</li>
+<li>
+<p>Sample data: The sample data <a href="https://docs.google.com/spreadsheets/d/1-R4F3q8J9KDnFRWpiT3Ysp1RlOoUu3PeQR7xDeLxFts/edit#gid=42273685" target="_blank" rel="noopener">Jaffle Shop Dataset</a> can be found in Google Sheets.</p>
+</li>
+<li>
+<p>Reference dbt project repository: <a href="https://github.com/Teradata/airbyte-dbt-jaffle" target="_blank" rel="noopener">Jaffle Project with Airbyte.</a></p>
+</li>
+<li>
+<p>Python 3.7, 3.8, 3.9, 3.10 or 3.11 installed.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_supported_languages"><a class="anchor" href="#_supported_languages"></a>Supported languages</h2>
+<h2 id="_sample_data_loading"><a class="anchor" href="#_sample_data_loading"></a>Sample Data Loading</h2>
 <div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>The sample data should be loaded into Teradata Vantage using Airbyte.  Please refer to <a href="https://quickstarts.teradata.com/elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html" target="_blank" rel="noopener">Use Airbyte to load data from external sources to Teradata Vantage</a> for more details on completing this step.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>OK, so we did <code>echo</code> in Bash but Bash is hardly a productive environment to express complex logic. What other languages are supported then? The good news is that any binary that can run on Vantage nodes can be used in STO. Remember, that the binary and all its dependencies need to be installed on all your Vantage nodes. In practice, it means that your options will be limited to what your administrator is willing and able to maintain on your servers. Python is a very popular choice.</p>
+<p>When you configure a Teradata destination in Airbyte, it will ask for a <code>Default Schema</code>. For this demonstration we have set the <code>Default Schema</code> as <code>airbyte_jaffle_shop</code>.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_uploading_scripts"><a class="anchor" href="#_uploading_scripts"></a>Uploading scripts</h2>
+<h2 id="_install_dbt"><a class="anchor" href="#_install_dbt"></a>Install dbt</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Ok, Hello World is super exciting, but what if we have existing logic in a large file. Surely, you don&#8217;t want to paste your entire script and escape quotes in an SQL query. We solve the script upload issue with the User Installed Files (UIF) feature.</p>
-</div>
-<div class="paragraph">
-<p>Say you have <code>helloworld.py</code> script with the following content:</p>
-</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create a new python environment to manage dbt and its dependencies. Activate the environment:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">print("Hello World!")</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python3 -m venv env
+source env/bin/activate</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>Let&#8217;s assume the script is on your local machine at <code>/tmp/helloworld.py</code>.</p>
+<p>You can activate the virtual environment in Windows executing the corresponding batch file <code>./myenv/Scripts/activate</code>.</p>
 </div>
-<div class="paragraph">
-<p>First, we need to setup permissions in Vantage. We are going to do this using a new database to keep it clean.</p>
+</td>
+</tr>
+</table>
 </div>
+</li>
+<li>
+<p>Install <code>dbt-teradata</code> module and its dependencies. The core dbt module is included as a dependency so you don&#8217;t have to install it separately:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Create a new database called sto
-CREATE DATABASE STO
-AS PERMANENT = 60e6, -- 60MB
-    SPOOL = 120e6; -- 120MB
-
--- Allow dbc user to create scripts in database STO
-GRANT CREATE EXTERNAL PROCEDURE ON STO to dbc;</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install dbt-teradata</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>You can upload the script to Vantage using the following procedure call:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">call SYSUIF.install_file('helloworld',
-                         'helloworld.py', 'cz!/tmp/helloworld.py');</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Now that the script has been uploaded, you can call it like this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- We switch to STO database
-DATABASE STO
-
--- We tell Vantage where to look for the script. This can be
--- any string and it will create a symbolic link to the directory
--- where our script got uploaded. By convention, we use the
--- database name.
-SET SESSION SEARCHUIFDBPATH = sto;
-
--- We now call the script. Note, how we use a relative path that
--- starts with `./sto/`, which is where SEARCHUIFDBPATH
--- is pointing.
-SELECT *
-FROM SCRIPT(
-  SCRIPT_COMMAND('python3 ./sto/helloworld.py')
-  RETURNS ('Message varchar(512)'));</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The last call should return:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>Message
-------------
-Hello World!
-Hello World!</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>That was a lot of work and we are still at Hello World. Let&#8217;s try to pass some data into <code>SCRIPT</code>.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_passing_data_stored_in_vantage_to_script"><a class="anchor" href="#_passing_data_stored_in_vantage_to_script"></a>Passing data stored in Vantage to SCRIPT</h2>
+<h2 id="_configure_dbt"><a class="anchor" href="#_configure_dbt"></a>Configure dbt</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Initialize a dbt project.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt init</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The dbt project wizard will ask you for a project name and database management system to use in the project. In this demo we define the project name as <code>dbt_airbyte_demo</code>. Since we are using the dbt-teradata connector, the only database management system available is Teradata.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/getting-started-with-airbyte-dbt/dbt_init_project_name.png" alt="Project name prompt" width="75%">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/getting-started-with-airbyte-dbt/dbt_init_database_name.png" alt="Database name prompt" width="75%">
+</div>
+</div>
+</li>
+<li>
+<p>Configure the <code>profiles.yml</code> file located in the <code>$HOME/.dbt</code> directory. If the <code>profiles.yml</code> file is not present, you can create a new one.</p>
+</li>
+<li>
+<p>Adjust <code>server</code>, <code>username</code>, <code>password</code> to match your Teradata instance&#8217;s <code>HOST</code>, <code>Username</code>, <code>Password</code> respectively.</p>
+</li>
+<li>
+<p>In this configuration, <code>schema</code> stands for the database that contains the sample data, in our case that is the default schema that we defined in Airbyte <code>airbyte_jaffle_shop</code>.</p>
+<div id="dbt_first_config" class="listingblock emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">dbt_airbyte_demo:
+  target: dev
+  outputs:
+    dev:
+      type: teradata
+      server: &lt;host&gt;
+      schema: airbyte_jaffle_shop
+      username: &lt;user&gt;
+      password: &lt;password&gt;
+      tmode: ANSI</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Once the <code>profiles.yml</code> file is ready, we can validate the setup. Go to the dbt project folder and run the command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt debug</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the debug command returned errors, you likely have an issue with the content of <code>profiles.yml</code>. If the setup is correct, you will get message <code>All checks passed!</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/getting-started-with-airbyte-dbt/dbt_debug.png" alt="dbt debug output" width="75%">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_jaffle_shop_dbt_project"><a class="anchor" href="#_the_jaffle_shop_dbt_project"></a>The Jaffle Shop dbt Project</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>So far, we have been using <code>SCRIPT</code> operator to run standalone scripts. But the main purpose to run scripts on Vantage is to process data that is in Vantage. Let&#8217;s see how we can retrieve data from Vantage and pass it to <code>SCRIPT</code>.</p>
+<p><code>jaffle_shop</code> is a fictional restaurant that takes orders online. The data of this business consists of tables for <code>customers</code>, <code>orders</code> and `payments`that follow the entity relations diagram below:</p>
 </div>
-<div class="paragraph">
-<p>We will start with creating a table with a few rows.</p>
-</div>
-<div class="listingblock">
+<div class="imageblock kroki">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Switch to STO database.
-DATABASE STO
-
--- Create a table with a few urls
-CREATE TABLE urls(url varchar(10000));
-INS urls('https://www.google.com/finance?q=NYSE:TDC');
-INS urls('http://www.ebay.com/sch/i.html?_trksid=p2050601.m570.l1313.TR0.TRC0.H0.Xteradata+merchandise&amp;_nkw=teradata+merchandise&amp;_sacat=0&amp;_from=R40');
-INS urls('https://www.youtube.com/results?search_query=teradata%20commercial&amp;sm=3');
-INS urls('https://www.contrivedexample.com/example?mylist=1&amp;mylist=2&amp;mylist=...testing');</code></pre>
+<img src="_images/diag-f4281ff8ede0df7faea97f80936093e7b4a0bd21.svg" alt="Diagram" width="100%">
 </div>
 </div>
 <div class="paragraph">
-<p>We will use the following script to parse out query parameters:</p>
+<p>The data in the source system is normalized. A dimensional model based on the same data, more suitable for analytics tools, is presented below:</p>
 </div>
-<div class="listingblock">
+<div class="imageblock kroki">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">from urllib.parse import urlparse
-from urllib.parse import parse_qsl
-import sys
-
-for line in sys.stdin:
-    # remove leading and trailing whitespace
-    url = line.strip()
-    parsed_url = urlparse(url)
-    query_params = parse_qsl(parsed_url.query)
-
-    for element in query_params:
-        print("\t".join(element))</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Note, how the scripts assumes that urls will be fed into <code>stdin</code> one by one, line by line. Also, note how it prints results line by line, using the tab character as a delimiter between values.</p>
-</div>
-<div class="paragraph">
-<p>Let&#8217;s install the script. Here, we assume that the script file is at <code>/tmp/urlparser.py</code> on our local machine:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CALL SYSUIF.install_file('urlparser',
-	'urlparser.py', 'cz!/tmp/urlparser.py');</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>With the script installed, we will now retrieve data from <code>urls</code> table and feed it into the script to retrieve query parameters:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- We inform Vantage to create a symbolic link from the UIF directory to ./sto/
-SET SESSION SEARCHUIFDBPATH = sto ;
-
-SELECT *
-  FROM SCRIPT(
-    ON(SELECT url FROM urls)
-    SCRIPT_COMMAND('python3 ./sto/urlparser.py')
-    RETURNS ('param_key varchar(512)', 'param_value varchar(512)'));</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>As a result, we get query params and their values. There are as many rows as key/value pairs. Also, since we inserted a tab between the key and the value output in the script, we get 2 columns from STO.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>param_key   |param_value
-------------+-----------------------------------------------------
-q           |NYSE:TDC
-_trksid     |p2050601.m570.l1313.TR0.TRC0.H0.Xteradata merchandise
-search_query|teradata commercial
-_nkw        |teradata merchandise
-sm          |3
-_sacat      |0
-mylist      |1
-_from       |R40
-mylist      |2
-mylist      |...testing</pre>
+<img src="_images/diag-cfb2d5cb8c33c037d82e57adbd8d36445946ce00.svg" alt="Diagram" width="100%">
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_inserting_script_output_into_a_table"><a class="anchor" href="#_inserting_script_output_into_a_table"></a>Inserting SCRIPT output into a table</h2>
+<h2 id="_dbt_transformations"><a class="anchor" href="#_dbt_transformations"></a>dbt Transformations</h2>
 <div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>We have learned how to take data from Vantage, pass it to a script and get output. Is there an easy way to store this output in a table? Sure, there is. We can combine the select above with <code>CREATE TABLE</code> statement:</p>
+<p>The complete dbt project encompassing the transformations detailed below is located at <a href="https://github.com/Teradata/airbyte-dbt-jaffle" target="_blank" rel="noopener">Jaffle Project with Airbyte.</a></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The reference dbt project performs two types of transformations.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>First, it transforms the raw data (in JSON format), loaded from Google Sheets via Airbyte, into staging views. At this stage the data is normalized.</p>
+</li>
+<li>
+<p>Next, it transforms the normalized views into a dimensional model ready for analytics.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following diagram shows the transformation steps in Teradata Vantage using dbt:</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="_images/diag-c365fead725d8cbab9e27dd9a9ac27395ace0f2b.svg" alt="Diagram">
+</div>
+</div>
+<div class="paragraph">
+<p>As in all dbt projects, the folder <code>models</code> contains the data models that the project materializes as tables, or views, according to the corresponding configurations at the project, or individual model level.</p>
+</div>
+<div class="paragraph">
+<p>The models can be organized into different folders according to their purpose in the organization of the data warehouse/lake. Common folder layouts include a folder for <code>staging</code>, a folder for <code>core</code>, and a folder for <code>marts</code>. This structure can be simplified without affecting the workings of dbt.</p>
+</div>
+<div class="sect2">
+<h3 id="_staging_models"><a class="anchor" href="#_staging_models"></a>Staging Models</h3>
+<div class="paragraph">
+<p>In the original <a href="https://github.com/dbt-labs/jaffle_shop-dev" target="_blank" rel="noopener">dbt Jaffle Shop tutorial</a> the project&#8217;s data is loaded from csv files located in the <code>./data</code> folder through dbt&#8217;s <code>seed</code> command. The <code>seed</code> command is commonly used to load data from tables, however, this command is not designed to perform data loading.</p>
+</div>
+<div class="paragraph">
+<p>In this demo we are assuming a more typical setup in which a tool designed for data loading, Airbyte, was used to load data into the datawarehouse/lake.
+Data loaded through Airbyte though is represented as raw JSON strings. From these raw data we are creating normalized staging views. We perform this task through the following staging models.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>stg_customers</code> model creates the normalized staging view for <code>customers</code> from the <code>_airbyte_raw_customers</code> table.</p>
+</li>
+<li>
+<p>The <code>stg_orders</code> model creates the normalized view for <code>orders</code> from the <code>_airbyte_raw_orders</code> table</p>
+</li>
+<li>
+<p>The <code>stg_payments</code> model creates the normalized view for <code>payments</code> from the <code>_airbyte_raw_payments</code> table.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>As the method of extracting JSON strings remains consistent across all staging models, we will provide a detailed explanation for the transformations using just one of these models as an example.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Below an example of transforming raw JSON data into a view through the <code>stg_orders.sql</code> model :</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- We inform Vantage to create a symbolic link from the UIF directory to ./sto/
-SET SESSION SEARCHUIFDBPATH = sto ;
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">WITH source AS (
+    SELECT * FROM {{ source('airbyte_jaffle_shop', '_airbyte_raw_orders')}}
+),
 
-CREATE MULTISET TABLE
-    url_params(param_key, param_value)
-AS (
-    SELECT *
-    FROM SCRIPT(
-      ON(SELECT url FROM urls)
-      SCRIPT_COMMAND('python3 ./sto/urlparser.py')
-      RETURNS ('param_key varchar(512)', 'param_value varchar(512)'))
-) WITH DATA
-NO PRIMARY INDEX;</code></pre>
+flattened_json_data AS (
+  SELECT
+    _airbyte_data.JSONExtractValue('$.id') AS order_id,
+    _airbyte_data.JSONExtractValue('$.user_id') AS customer_id,
+    _airbyte_data.JSONExtractValue('$.order_date') AS order_date,
+    _airbyte_data.JSONExtractValue('$.status') AS status
+  FROM source
+)
+
+
+SELECT * FROM flattened_json_data</code></pre>
 </div>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>In this model the source is defined as the raw table <code>_airbyte_raw_orders</code>.</p>
+</li>
+<li>
+<p>This raw table columns contains both metadata, and the actual ingested data. The data column is called <code>_airbyte_data</code>.</p>
+</li>
+<li>
+<p>This column is of Teradata JSON type. This type supports the method JSONExtractValue for retrieving scalar values from the JSON object.</p>
+</li>
+<li>
+<p>In this model we are retrieving each of the attributes of interest and adding meaningful aliases in order to materialize a view.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dimensional_models_marts"><a class="anchor" href="#_dimensional_models_marts"></a>Dimensional Models (Marts)</h3>
 <div class="paragraph">
-<p>Now, let&#8217;s inspect the contents of <code>url_params</code> table:</p>
+<p>Building a Dimensional Model is a two step process:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>First, we take the normalized views in <code>stg_orders</code>, <code>stg_customers</code>, <code>stg_payments</code> and build denormalized intermediate join tables <code>customer_orders</code>, <code>order_payments</code>, <code>customer_payments</code>. You will find the definitions of these tables in <code>./models/marts/core/intermediate</code>.</p>
+</li>
+<li>
+<p>In the second step, we create the <code>dim_customers</code> and <code>fct_orders</code> models. These constitute the dimensional model tables that we want to expose to our BI tool. You will find the definitions of these tables in <code>./models/marts/core</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_executing_transformations"><a class="anchor" href="#_executing_transformations"></a>Executing Transformations</h3>
+<div class="paragraph">
+<p>For executing the transformations defined in the dbt project we run:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM url_params;</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt run</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You should see the following output:</p>
+<p>You will get the status of each model as given below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/getting-started-with-airbyte-dbt/dbt_run.png" alt="dbt run output" width="75%">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_model_testing"><a class="anchor" href="#_model_testing"></a>Model Testing</h3>
+<div class="paragraph">
+<p>To ensure that the data in the dimensional model is correct, dbt allows us to define and execute tests against the data.</p>
+</div>
+<div class="paragraph">
+<p>The tests are defined in <code>./models/marts/core/schema.yml</code> and <code>./models/staging/schema.yml</code>.  Each column can have multiple tests configured under the <code>tests</code> key.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>For example, we expect that <code>fct_orders.order_id</code> column will contain unique, non-null values.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To validate that the data in the produced tables satisfies the test conditions run:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>param_key   |param_value
-------------+-----------------------------------------------------
-q           |NYSE:TDC
-_trksid     |p2050601.m570.l1313.TR0.TRC0.H0.Xteradata merchandise
-search_query|teradata commercial
-_nkw        |teradata merchandise
-sm          |3
-_sacat      |0
-mylist      |1
-_from       |R40
-mylist      |2
-mylist      |...testing</pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt test</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the data in the models satisfies all the test cases, the result of this command will be as below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/getting-started-with-airbyte-dbt/dbt_test.png" alt="dbt test output" width="75%">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_generate_documentation"><a class="anchor" href="#_generate_documentation"></a>Generate Documentation</h3>
+<div class="paragraph">
+<p>Our model consists of just a few tables. In a scenario with more sources of data, and a more complex dimensional model, documenting the data lineage and what is the purpose of each of the intermediate models is very important.</p>
+</div>
+<div class="paragraph">
+<p>Generating this type of documentation with dbt is very straight forward.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt docs generate</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will produce html files in the <code>./target</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>You can start your own server to browse the documentation. The following command will start a server and open up a browser tab with the docs' landing page:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt docs serve</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_lineage_graph"><a class="anchor" href="#_lineage_graph"></a>Lineage Graph</h4>
+<div class="imageblock">
+<div class="content">
+<img src="_images/getting-started-with-airbyte-dbt/dbt_docs_serve.png" alt="dbt lineage graph" width="75%">
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1617,7 +1737,7 @@ mylist      |...testing</pre>
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this quick start we have learned how to run scripts against data in Vantage. We ran scripts using Script Table Operator (STO). The operator allows us to bring logic to the data. It offloads concurrency considerations to the database by running our scripts in parallel, one per AMP. All you need to do is provide a script and the database will execute it in parallel.</p>
+<p>This tutorial demonstrated how to use dbt to transform raw JSON data loaded through Airbyte into dimensional model in Teradata Vantage. The sample project takes raw JSON data loaded in Teradata Vantage, creates normalized views and finally produces a dimensional data mart. We used dbt to transform JSON into Normalized views and multiple dbt commands to create models (<code>dbt run</code>), test the data (<code>dbt test</code>), and generate and serve model documentation (<code>dbt docs generate</code>, <code>dbt docs serve</code>).</p>
 </div>
 </div>
 </div>
@@ -1627,10 +1747,10 @@ mylist      |...testing</pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://docs.teradata.com/r/9VmItX3V2Ni9Ts70HbDzVg/CBAaRxUyOdF0t1SQIuXeug">Teradata Vantage™ - SQL Operators and User-Defined Functions - SCRIPT</a></p>
+<p><a href="https://docs.getdbt.com/docs/">dbt documentation</a></p>
 </li>
 <li>
-<p><a href="https://docs.teradata.com/v/u/Orange-Book/R-and-Python-Analytics-with-SCRIPT-Table-Operator-Orange-Book-4.3.1">R and Python Analytics with SCRIPT Table Operator</a></p>
+<p><a href="https://github.com/Teradata/dbt-teradata">dbt-teradata plugin documentation</a></p>
 </li>
 </ul>
 </div>
@@ -2286,12 +2406,12 @@ footer.footer-nav {
     </div>
   </section>
 </footer>
-<script src="./_/js/site.js"></script>
-<script async src="./_/js/behavior.js"></script>
-<script src="./_/js/vendor/lunr.js"></script>
-<script src="./_/js/search-ui.js" id="search-ui-script" data-site-root-path="." data-snippet-length="100" data-stylesheet="./_/css/search.css"></script>
-<script async src="./search-index.js"></script>
-<script src="./_/js/teradata.min.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/behavior.js"></script>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+<script src="../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>
