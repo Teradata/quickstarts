@@ -15,6 +15,7 @@
 * Manage data
 ** xref::nos.adoc[]
 ** xref:elt:use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.adoc[]
+** xref:elt:transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.adoc[]
 ** xref::dbt.adoc[]
 ** xref::advanced-dbt.adoc[]
 ** xref:tools-and-utilities:run-bulkloads-efficiently-with-teradata-parallel-transporter.adoc[Load data with TPT]
