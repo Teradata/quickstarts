@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
 <meta name="twitter:site" content="@teradata" />
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -22,6 +22,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" href="{{uiRootPath}}/css/fontawesome.all.min.css">
 <link rel="stylesheet" href="{{uiRootPath}}/css/webfonts.css">
 <style>
+@font-face {
+  font-family: 'Inter-Regular';
+  src: url("{{uiRootPath}}/webfonts/Inter/Inter-Regular.ttf") format('truetype');
+}  
+@font-face {
+  font-family: 'Inter-SemiBold';
+  src: url("{{uiRootPath}}/webfonts/Inter/Inter-SemiBold.ttf") format('truetype');
+}  
 body {
   transition: all .25s ease-in-out 0s;
   overflow-x: hidden;
@@ -71,7 +79,7 @@ article a[href^="https://"][target="_blank"]::after {
 }
 
 .navbar-brand {
-  padding-left: 0px;
+  padding-left: 0px; 
   flex-grow: 1;
 }
 
@@ -81,23 +89,28 @@ article a[href^="https://"][target="_blank"]::after {
 }
 
 .navbar-brand .navbar-item:first-child {
-  font-family: Poppins-SemiBold;
+  font-family:Inter,sans-serif;
   font-size: 20px;
-  color: #000;
-  text-transform: uppercase;
+  color: #00233C;
+/*  text-transform: uppercase; */
   letter-spacing: 0.15px;
+/*  padding: 0px 0px 0px 16px; */
 }
 
 @media screen and (min-width: 375px) {
   .navbar-brand .navbar-item:first-child {
     font-size: 20px;
-  }
+    font-family: Inter,sans-serif;
+  /*  padding: 0px 0px 0px 16px; */
+    color: #00233C;
+    letter-spacing: 0.15px;
+  }  
 }
 
 button {
   background: none;
   border: none;
-  padding: 0;
+/*  padding: 0;*/
   font: inherit;
   cursor: pointer;
   outline: inherit;
@@ -105,7 +118,7 @@ button {
 
 .header-nav-mobile__menu,
 .navbar-utility {
-  font-family: Poppins-Bold;
+  font-family: Inter,sans-serif;
 }
 
 .header-nav-mobile__menu ul,
@@ -116,7 +129,7 @@ button {
 }
 
 .header-nav-mobile__menu a {
-  color: #000;
+  color: #00233C;
 }
 
 /* Begin MOBILE ONLY Styles */
@@ -229,7 +242,7 @@ button {
 
   .header-nav-mobile__menu-item .header-nav-mobile__menu-item__header a:hover,
   .header-nav-mobile__menu-item .header-nav-mobile__menu-item__header a:focus {
-    color: #007373;
+    color: #FF5F02;
   }
 
   .header-nav-mobile__menu-item .header-nav-mobile__menu-item__links ul li {
@@ -343,12 +356,12 @@ button {
   .navbar {
     height: 70px;
     background: #fafafa;
-    color: #000;
+    color: #00233C;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: flex-end;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .navbar-top {
@@ -362,7 +375,7 @@ button {
   }
 
   .navbar-logo {
-    margin: 0px 27px 0px 36px;
+    margin: 0px 16px 0px 100px;
   }
 
   .header-nav-mobile__menu-icon {
@@ -370,7 +383,7 @@ button {
   }
 
   .header-nav-mobile__menu {
-    padding-left: 20px;
+    padding-left: 210px;
     flex-grow: 1;
     height: 100%;
   }
@@ -383,7 +396,7 @@ button {
   }
 
   .header-nav-mobile__menu-item .header-nav-mobile__menu-item__header {
-    text-transform: uppercase;
+  /*  text-transform: uppercase; */
     padding: 22px 20px;
     line-height: 16px;
     height: 100%;
@@ -395,11 +408,12 @@ button {
 
   .header-nav-mobile__menu-item .header-nav-mobile__menu-item__header a:hover,
   .header-nav-mobile__menu-item .header-nav-mobile__menu-item__header a:focus {
-    color: #f3743f;
+   /* color: #f3743f; */
+    color: #FF5F02;
   }
 
   .header-nav-mobile__menu-item:first-child {
-    border-bottom: #007373 solid 3px;
+    border-bottom: #FF5F02 solid 3px;
     color: #007373;
     font-weight: 600;
     height: 100%;
@@ -415,7 +429,8 @@ button {
 
   .header-nav-mobile__menu-item:first-child a,
   .header-nav-mobile__menu-item:first-child a:hover {
-    color: #007373;
+  /*  color: #007373; */
+    color: #FF5F02;
   }
 
   .header-nav-mobile__menu-item__links > ul {
@@ -548,7 +563,7 @@ button {
   font-family: Poppins-Bold;
   font-size: 16px;
   color: #000;
-  text-transform: uppercase;
+/*  text-transform: uppercase; */
   padding: 0px 20px;
 }
 
@@ -593,11 +608,15 @@ article.doc {
   article.doc {
     margin-top: 0;
   }
+  .navbar-logo {
+    margin: 0px 16px 0px 100px;
+  }
+
 }
 
 .doc a,
 .doc a:hover {
-  color: #007373;
+  color: #FF5F02;
 }
 
 .article {
@@ -609,7 +628,8 @@ main.article {
 }
 
 .toc .toc-menu a:hover {
-  color: #f3743f;
+/*  color: #f3743f; */
+  color: #FF5F02;
 }
 
 .nav-container {
