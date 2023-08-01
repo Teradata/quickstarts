@@ -28,6 +28,7 @@
 
 * Create applications
 ** xref::jdbc.adoc[]
+** xref::teradatasql.adoc[]
 ** xref::mule.jdbc.example.adoc[]
 ** xref:query-service:send-queries-using-rest-api.adoc[]
 
