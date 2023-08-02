@@ -87,7 +87,7 @@ article a[href^="https://"][target="_blank"]::after {
 }
 
 .navbar-brand {
-  padding-left: 0px; 
+  padding-left: 16px; 
   flex-grow: 1;
 }
 
@@ -98,7 +98,7 @@ article a[href^="https://"][target="_blank"]::after {
 
 .navbar-brand .navbar-item:first-child {
   font-family: Inter-Regular;
-  font-size: 20px;
+  font-size: 22px;
   color: #00233C;
 /*  text-transform: uppercase; */
   letter-spacing: 0.15px;
@@ -107,9 +107,9 @@ article a[href^="https://"][target="_blank"]::after {
 
 @media screen and (min-width: 375px) {
   .navbar-brand .navbar-item:first-child {
-    font-size: 20px;
+    font-size: 22px;
     font-family: Inter-Regular;
-  /*  padding: 0px 0px 0px 16px; */
+    padding: 14px 0px 0px 45px;
     color: #00233C;
     letter-spacing: 0.15px;
   }  
@@ -361,9 +361,12 @@ button {
 
 /* Begin DESKTOP ONLY Styles */
 @media screen and (min-width: 1024px) {
+  body{
+    margin-top: 30px;
+  }
   .navbar {
-    height: 70px;
-    background: #fafafa;
+    height: 88px;
+    background: #fff;
     color: #00233C;
     display: flex;
     flex-wrap: wrap;
@@ -405,7 +408,7 @@ button {
 
   .header-nav-mobile__menu-item .header-nav-mobile__menu-item__header {
   /*  text-transform: uppercase; */
-    padding: 22px 20px;
+    padding: 27px 24px 0px 0px;
     line-height: 16px;
     height: 100%;
   }
@@ -419,26 +422,33 @@ button {
    /* color: #f3743f; */
     color: #FF5F02;
   }
-
+/*
   .header-nav-mobile__menu-item:first-child {
     border-bottom: #FF5F02 solid 3px;
     color: #007373;
     font-weight: 600;
     height: 100%;
+  }*/
+  .line{
+    width: 40px;
+    height: 2px;
+    flex-shrink: 0;
+    border-radius: 30px;
+    background: var(--primary-orange, #FF5F02);
+    margin: 0px 0px 0px 41px;
   }
-
   .header-nav-mobile__menu-item {
     height: 100%;
     letter-spacing: 0.5px;
     padding-top: 7px;
-    padding-left: 5px;
-    padding-right: 3px;
+  /*  padding-left: 5px;
+    padding-right: 3px; */
   }
 
   .header-nav-mobile__menu-item:first-child a,
   .header-nav-mobile__menu-item:first-child a:hover {
-  /*  color: #007373; */
-    color: #FF5F02;
+  /*  color: #007373;
+    color: #FF5F02; */
   }
 
   .header-nav-mobile__menu-item__links > ul {
@@ -617,14 +627,14 @@ article.doc {
     margin-top: 0;
   }
   .navbar-logo {
-    margin: 0px 16px 0px 100px;
+    margin: 0px 16px 0px 106px;
   }
 
 }
 
 .doc a,
 .doc a:hover {
-  color: #FF5F02;
+  color: #007373;
 }
 
 .article {
@@ -983,7 +993,7 @@ span.search-result-highlight {
     <section class="navbar-top">
       <div class="navbar-logo">
         <a href="https://www.teradata.com/">
-          <img class="" width="103" height="20" src='/_/img/TD-Logo.svg' alt="down arrow" title="Teradata Getting Started">
+          <img class="" width="148" height="28" src='/_/img/TD-Logo.svg' alt="down arrow" title="Teradata Getting Started">
         </a>
       </div>
 
@@ -1005,12 +1015,13 @@ span.search-result-highlight {
           <li class="header-nav-mobile__menu-item">
             <header class="header-nav-mobile__menu-item__header">
               <a href="/index.html">Getting Started</a>
+              <img class="line">
             </header>
           </li>
           <li class="header-nav-mobile__menu-item has-sub-items">
             <header class="header-nav-mobile__menu-item__header i-alignment">
               <a href="https://docs.teradata.com/">Docs</a>
-              <img class="navbar-arrow" src='/_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Docs">
+        <!--      <img class="navbar-arrow" src='/_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Docs"> -->
             </header>
             <div>
               <div class="header-nav-mobile__menu-item__links">
@@ -1029,7 +1040,7 @@ span.search-result-highlight {
           <li class="header-nav-mobile__menu-item has-sub-items">
             <header class="header-nav-mobile__menu-item__header i-alignment">
               <a href="https://support.teradata.com/community ">Community</a>
-              <img class="navbar-arrow" src='/_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Community">
+       <!--       <img class="navbar-arrow" src='/_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Community"> -->
             </header>
             <div>
               <div class="header-nav-mobile__menu-item__links">
