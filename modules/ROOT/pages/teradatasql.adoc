@@ -1,4 +1,4 @@
-= Connect to Vantage using teradatasql Python database driver
+= Connect to Vantage using Python
 :experimental:
 :page-author: Krutik Pathak
 :page-email: krutik.pathak@teradata.com
@@ -21,7 +21,7 @@ This how-to demonstrates how to connect to Vantage using link:https://github.com
 pip install teradatasql
 ----
 
-* Access to a Teradata Vantage instance.
+* Access to a Teradata Vantage instance. Currently driver is supported for use with Teradata Database 16.10 and later releases.
 +
 include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
