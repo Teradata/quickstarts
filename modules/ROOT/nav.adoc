@@ -47,6 +47,7 @@
 ** xref:cloud-guides:integrate-teradata-jupyter-extensions-with-sagemaker.adoc[]
 ** xref:business-intelligence:create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.adoc[]
 ** xref:other-integrations:integrate-teradata-vantage-with-knime.adoc[]
+** xref:other-integrations:getting.started.dbt-feast-teradata-pipeline.adoc[]
 
 * Demos
 ** Financial
