@@ -34,7 +34,7 @@ When a SQL query is run in Teradata, it first reaches the Parsing Engine. The fu
 
 
 === BYNET 
-BYNET is a system that enables component communication. The BYNET system provides high-speed bi-directional broadcast, multicast, and point-to-point communication and merge functions. It performs three key functions: coordinating multi-AMP queries, reading data from multiple AMPs, regulating message flow to prevent congestion, and processing platform throughput. These functions of BYNET make Vantage highly scalable and achieve Massively Parallel Processing (MPP) capability.  
+BYNET is a system that enables component communication. The BYNET system provides high-speed bi-directional broadcast, multicast, and point-to-point communication and merge functions. It performs three key functions: coordinating multi-AMP queries, reading data from multiple AMPs, regulating message flow to prevent congestion, and processing platform throughput. These functions of BYNET make Vantage highly scalable and enable Massively Parallel Processing (MPP) capabilities.  
 
 === Parallel Database Extension (PDE)
 Parallel Database Extension (PDE) is an intermediary software layer positioned between the operating system and the Teradata Vantage database. PDE enables MPP systems to use features such as BYNET and shared disks. It facilitates the parallelism that is responsible for the speed and linear scalability of the Teradata Vantage database.  
