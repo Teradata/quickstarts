@@ -12,7 +12,7 @@
 
 This article explains the underlying concepts of Teradata Vantage engine architecture. All editions of Vantage, including the Primary Cluster in VantageCloud Lake utilize the same engine.  
 
-Teradata's architecture is designed around the Massively Parallel Processing (MPP), shared-nothing architecture, which enables high-performance data processing and analytics. The MPP architecture distributes the workload into multiple vprocs or virtual processors that are a set of software processes running on a node under Teradata Parallel Database Extensions (PDE) within the multitasking environment of the operating system. vproc where query processing takes place is commonly referred to as an Access Module Processor (AMP). Each AMP is isolated from other AMPs and processes the queries in parallel allowing Teradata to process large volumes of data rapidly. 
+Teradata's architecture is designed around a Massively Parallel Processing (MPP), shared-nothing architecture, which enables high-performance data processing and analytics. The MPP architecture distributes the workload into multiple vprocs or virtual processors. The virtual processor where query processing takes place is commonly referred to as an Access Module Processor (AMP). Each AMP is isolated from other AMPs, and processes the queries in parallel allowing Teradata to process large volumes of data rapidly. 
 
 The major architectural components of the Teradata Vantage engine include the Parsing Engines (PEs), BYNET, Access Module Processors (AMPs), and Virtual Disks (Vdisks). Vdisks are applicable to the AMPs in enterprise platforms or the Primary Cluster of a VantageCloud Lake environment. 
 
