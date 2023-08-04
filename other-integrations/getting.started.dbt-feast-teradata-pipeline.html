@@ -3,19 +3,17 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Configure a Teradata Vantage connection in DBeaver :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">
-    <meta name="description" content="Configure a Teradata Vantage connection in DBeaver.">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, dbeaver, dbeaver prod, sql ide">
+    <title>A Data pipeline with dbt+FEAST on Teradata :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/other-integrations/getting.started.dbt-feast-teradata-pipeline.html">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../_/css/site.css">
-<meta property="og:title" content="Configure a Teradata Vantage connection in DBeaver :: Teradata Getting Started">
+<meta property="og:title" content="A Data pipeline with dbt+FEAST on Teradata :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Configure a Teradata Vantage connection in DBeaver." />
+<meta property="og:description" content="" />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/other-integrations/getting.started.dbt-feast-teradata-pipeline.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -1108,7 +1106,7 @@ span.search-result-highlight {
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -1228,7 +1226,7 @@ span.search-result-highlight {
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="getting.started.dbt-feast-teradata-pipeline.html">A Data pipeline with dbt+FEAST on Teradata</a>
   </li>
 </ul>
@@ -1295,8 +1293,8 @@ span.search-result-highlight {
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li>Connect to Vantage</li>
-    <li><a href="configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a></li>
+    <li>Analyze data</li>
+    <li><a href="getting.started.dbt-feast-teradata-pipeline.html">A Data pipeline with dbt+FEAST on Teradata</a></li>
   </ul>
 </nav>
 </div>
@@ -1304,20 +1302,38 @@ span.search-result-highlight {
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/other-integrations/pages/configure-a-teradata-vantage-connection-in-dbeaver.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/other-integrations/pages/getting.started.dbt-feast-teradata-pipeline.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Configure a Teradata Vantage connection in DBeaver</h1>
-<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
-Last updated: September 12th, 2022</p>
+<h1 class="page">A Data pipeline with dbt+FEAST on Teradata</h1>
+<p>Author: <a href="mailto:"></a><br/>
+Last updated: </p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This how-to demonstrates how to create a connection to Teradata Vantage with DBeaver.</p>
+<p>This how-to shows an approach to create a data pipeline with Teradata database. While there are several ways a data pipeline can be designed, this document helps to understand how components of two of the popular tools in the software industry, namely <a href="https://docs.getdbt.com/docs/introduction">dbt</a> and <a href="https://docs.feast.dev/">FEAST</a>,
+can be integrated with Teradata Vantage. Teradata&#8217;s robust '<a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Analytics-Database-Analytic-Functions-17.20">Analytics Database Analytic functions</a>' are used on the Teradata data source within dbt, for data transformation. The output of which is loaded into FEAST to materialize features that can be used in ML models.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_dbt"><a class="anchor" href="#_dbt"></a>dbt</h3>
+<div class="paragraph">
+<p><a href="https://www.getdbt.com/product/what-is-dbt/">dbt</a> (Data Build Tool) is a data transformation tool that is the cornerstone of the Modern Data Stack. It takes care of the T in ELT (Extract Load Transform). The assumption is that some other process brings raw data into your data warehouse or lake. This data then needs to be transformed.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_feast"><a class="anchor" href="#_feast"></a>Feast</h3>
+<div class="paragraph">
+<p><a href="https://docs.feast.dev/">Feast</a> (Feature Store) is a flexible data system that utilizes existing technology to manage and provide machine learning features to real-time models. It allows for customization to meet specific needs. It also allows us to make features consistently available for training and serving, avoid data leakage and decouple ML from data infrastructure.</p>
+</div>
 </div>
 </div>
 </div>
@@ -1327,7 +1343,100 @@ Last updated: September 12th, 2022</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Access to a Teradata Vantage instance.</p>
+<p>Access to a Teradata Vantage database instance.
+NOTE: If you need a test instance of Vantage, you can provision one for free at <a href="https://clearscape.teradata.com/sign-in?utm_source=dev_portal&amp;utm_medium=quickstart_tutorial&amp;utm_campaign=quickstarts" target="_blank" rel="noopener">https://clearscape.teradata.com.</a></p>
+</li>
+<li>
+<p>Feast-Teradata library installed locally. See <a href="https://quickstarts.teradata.com/modelops/using-feast-feature-store-with-teradata-vantage.html#_overview">Feast-Teradata Installation instructions</a></p>
+</li>
+<li>
+<p>dbt library installed locally. See <a href="https://quickstarts.teradata.com/dbt.html">dbt Installation instructions</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_objective"><a class="anchor" href="#_objective"></a>Objective</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To create a data pipeline with Teradata Vantage as source, perform data transformation on some variables in dbt. The principle transformation of data that we do in dbt is onehotencoding of several columns like gender, marital status, state code etc. On top of that the account type column data will be transformed by performing aggregation operations on the couple of columns. All together generates our desired Analytic_dataset with transformed data. Then we use the transformed dataset output as input in FEAST to store features that can be used to generate training dataset for models.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting started</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a new python environment to manage dbt, feast and their dependencies. Activate the environment:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python3 -m venv env
+source env/bin/activate</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Clone the tutorial repository and cd into the project directory:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://github.td.teradata.com/rc255085/Tdatapipeline.git</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The directory structure of the project cloned looks like :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Tdatapipeline/
+    feature_repo/
+        feature_views.py
+        feature_store.yml
+    dbt_transformation/
+        ...
+        macros
+        models
+        ...
+    generate_training_data.py
+    CreateDB.sql
+    dbt_project.yml</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_about_the_banking_warehouse"><a class="anchor" href="#_about_the_banking_warehouse"></a>About the Banking warehouse</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>teddy_bank is a fictitious dataset of banking customers, consists of mainly 3 tables customers, accounts, and
+transactions, with the following entity-relationship diagram:</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="_images/diag-2e3bc6beb3ead8209775ef6464a9f726fd0101b3.svg" alt="Diagram" width="100%">
+</div>
+</div>
+<div class="paragraph">
+<p>dbt takes these tables' raw data and builds the following model, which is more suitable for ML modelling and analytics tools:</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="_images/diag-a06cfc37fb213394532cc236ff7225b3dfdbc64b.svg" alt="Diagram" width="100%">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configure_dbt"><a class="anchor" href="#_configure_dbt"></a>Configure dbt</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We will now configure dbt to connect to your Vantage database. Create file <code>$HOME/.dbt/profiles.yml</code> with the following content. Adjust <code>&lt;host&gt;</code>, <code>&lt;user&gt;</code>, <code>&lt;password&gt;</code> to match your Teradata instance.</p>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1335,83 +1444,188 @@ Last updated: September 12th, 2022</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you need a test instance of Vantage, you can provision one for free at <a href="https://clearscape.teradata.com/sign-in?utm_source=dev_portal&amp;utm_medium=quickstart_tutorial&amp;utm_campaign=quickstarts" target="_blank" rel="noopener">https://clearscape.teradata.com.</a>
+<div class="title">Database setup</div>
+<div class="paragraph">
+<p>The following dbt profile points to a database called <code>teddy_bank</code>. You can change <code>schema</code> value to point to an existing database in your Teradata Vantage instance</p>
+</div>
 </td>
 </tr>
 </table>
 </div>
+<div id="dbt_first_config" class="listingblock emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">dbt_transformation:
+  target: dev
+  outputs:
+    dev:
+      type: teradata
+      host: &lt;host&gt;
+      user: &lt;user&gt;
+      password: &lt;password&gt;
+      schema: teddy_bank
+      tmode: ANSI</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, that we have the profile file in place, we can validate the setup:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt debug</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the debug command returned errors, you likely have an issue with the content of <code>profiles.yml</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configure_feast"><a class="anchor" href="#_configure_feast"></a>Configure FEAST</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Feast configuration addresses connection to your Vantage database. The yml file create while initializing the feast
+project, <code>$HOME/.feast/feature_repo/feature_store.yml</code> can hold the details of offline storage, online storage, provider
+and registry. Adjust <code>&lt;host&gt;</code>, <code>&lt;user&gt;</code>, <code>&lt;password&gt;</code> to match your Teradata instance.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Database setup</div>
+<div class="paragraph">
+<p>The following dbt profile points to a database called <code>teddy_bank</code>. You can change <code>schema</code> value to point to an
+existing database in your Teradata Vantage instance</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_offline_store_config"><a class="anchor" href="#_offline_store_config"></a>Offline Store Config</h3>
+<div id="feast_first_config" class="listingblock emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">project: td_pipeline
+registry:
+    registry_type: sql
+    path: teradatasql://&lt;user&gt;:&lt;password&gt;@&lt;hostIP&gt;/?database=teddy_bank&amp;LOGMECH=TDNEGO
+provider: local
+offline_store:
+    type: feast_teradata.offline.teradata.TeradataOfflineStore
+    host: &lt;host&gt;
+    database: teddy_bank
+    user: &lt;user&gt;
+    password: &lt;password&gt;
+    log_mech: TDNEGO
+entity_key_serialization_version: 2</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_syntax_for_teradata_sql_registry"><a class="anchor" href="#_syntax_for_teradata_sql_registry"></a>syntax for Teradata SQL Registry</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">path = 'teradatasql://'+ teradata_user +':' + teradata_password + '@'+host + '/?database=' +
+        teradata_database + '&amp;LOGMECH=' + teradata_log_mech</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_run_dbt"><a class="anchor" href="#_run_dbt"></a>Run dbt</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Teradata Vantage has long been recognized as a database that provides superior ELT(Extract Load Transform) capabilities. dbt enhances this capabilities by making use of its efficient Analytic functions to transform data.
+So, in this case, we will use data tables, customers, accounts and transactions, that are made available on Vantage.</p>
+</div>
+<div class="sect2">
+<h3 id="_create_the_dimensional_model"><a class="anchor" href="#_create_the_dimensional_model"></a>Create the dimensional model</h3>
+<div class="paragraph">
+<p>Now that we have the raw data tables, we can instruct dbt to create the dimensional model:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt run --select Analytic_Dataset</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_test_the_data"><a class="anchor" href="#_test_the_data"></a>Test the data</h3>
+
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_run_feast"><a class="anchor" href="#_run_feast"></a>Run FEAST</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_feature_repository_definition"><a class="anchor" href="#_feature_repository_definition"></a>Feature Repository definition</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>TeradataSource:</code> Data Source for features stored in Teradata (Enterprise or Lake) or accessible via a Foreign Table from Teradata (NOS, QueryGrid)</p>
 </li>
 <li>
-<p>DBeaver installed. See <a href="https://dbeaver.io/download/">DBeaver Community</a> or <a href="https://dbeaver.com/download/">DBeaver PRO</a> for installation options.</p>
+<p><code>Entity:</code> A collection of semantically related features</p>
+</li>
+<li>
+<p><code>Feature View:</code> A feature view is a group of feature data from a specific data source. Feature views allow you to consistently define features and their data sources, enabling the reuse of feature groups across a project</p>
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_add_a_teradata_connection_to_dbeaver"><a class="anchor" href="#_add_a_teradata_connection_to_dbeaver"></a>Add a Teradata connection to DBeaver</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Start the new connection wizard by clicking on the plug icon (<span class="image"><img src="_images/configure-a-teradata-connection-in-dbeaver/plug-icon.png" alt="plug icon" width="16px" title="Add Connection Plug Icon"></span>) in the upper left corner of the application window or go to <code>Database &#8594; New Database Connection</code>.</p>
-</li>
-<li>
-<p>On <code>Select your database</code> screen, start typing <code>teradata</code> and select the Teradata icon.</p>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="_images/configure-a-teradata-connection-in-dbeaver/select-your-database.png" alt="Select your database" width="75%">
-</div>
-</div>
-</li>
-<li>
-<p>On the main tab, you need to set all primary connection settings. The required ones include <code>Host</code>, <code>Port</code>, <code>Database</code>, <code>Username</code>, and <code>Password</code>.</p>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-With DBeaver PRO, you can not only use the standard ordering of tables but also hierarchically link tables to a specific database or user. Expanding and collapsing the databases or users will help you navigate from one area to another without swamping the Database Navigator window. Check the <code>Show databases and users hierarchically</code> box to enable this setting.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-In many environments Teradata Vantage can only be accessed using the TLS protocol. When in DBeaver PRO, check <code>Use TLS protocol</code> option to enable TLS.
-</td>
-</tr>
-</table>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/configure-a-teradata-connection-in-dbeaver/teradata-connection-settings.png" alt="Teradata connection settings" width="75%">
-</div>
-</div>
-</li>
-<li>
-<p>Click on <code>Finish</code>.</p>
-</li>
-</ol>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">DBT_source = TeradataSource( database=dbload, table=f"Analytic_Dataset", timestamp_field="event_timestamp")
+
+customer = Entity(name = "customer", join_keys = ['cust_id'])
+
+ads_fv = FeatureView(name="ads_fv",entities=[customer],source=DBT_source, schema=[
+        Field(name="age", dtype=Float32),
+        Field(name="income", dtype=Float32),
+        Field(name="q1_trans_cnt", dtype=Int64),
+        Field(name="q2_trans_cnt", dtype=Int64),
+        Field(name="q3_trans_cnt", dtype=Int64),
+        Field(name="q4_trans_cnt", dtype=Int64),
+    ],)</code></pre>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_optional_ssh_tunneling"><a class="anchor" href="#_optional_ssh_tunneling"></a>Optional: SSH tunneling</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_generate_training_data"><a class="anchor" href="#_generate_training_data"></a>Generate training data</h3>
 <div class="paragraph">
-<p>If your database cannot be accessed directly, you can use an SSH tunnel. All settings are available on the <code>SSH</code> tab. DBeaver supports the following authentication methods: user/password, public key, SSH agent authentication.</p>
+<p>The approach to generate training data can vary. Depending upon the requirements, 'entitydf' can be considered,
+that would join with the source data tables using the feature views mapping. Here is a sample function that
+generates certain training dataset.</p>
 </div>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="_images/configure-a-teradata-connection-in-dbeaver/teradata-connection-settings-ssh.png" alt="Teradata connection settings SSH" width="75%">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def get_Training_Data():
+    # Initialize a FeatureStore with our current repository's configurations
+    store = FeatureStore(repo_path="feature_repo")
+    con = create_context(host = os.environ["latest_vm"], username = os.environ["dbc_pwd"],
+            password = os.environ["dbc_pwd"], database = "EFS")
+    entitydf = DataFrame('Analytic_Dataset').to_pandas()
+    entitydf.reset_index(inplace=True)
+    print(entitydf)
+    entitydf = entitydf[['cust_id','event_timestamp']]
+    training_data = store.get_historical_features(
+        entity_df=entitydf,
+        features=[
+        "ads_fv:age"
+        ,"ads_fv:income"
+        ,"ads_fv:q1_trans_cnt"
+        ,"ads_fv:q2_trans_cnt"
+        ,"ads_fv:q3_trans_cnt"
+        ,"ads_fv:q4_trans_cnt"
+        ],
+        full_feature_names=True
+    ).to_df()
+
+    return training_data</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -1420,19 +1634,31 @@ In many environments Teradata Vantage can only be accessed using the TLS protoco
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This how-to demonstrated how to create a connection to Teradata Vantage with DBeaver.</p>
+<p>This tutorial demonstrated how to use dbt and FEAST with Teradata Vantage. The sample project takes raw data in Teradata Vantage and produces a features with dbt, which is again saved as a model in the database itself. Metadata of features that form the base to generate training dataset for a model was then created with FEAST; all its corresponding tables that create the feature store, are also generated at runtime within the same database. This sample project gives us an idea how to integrate these three robust platforms.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If you have any questions or need further assistance, please visit our <a href="https://support.teradata.com/community">community forum</a> where you can get support and interact with other community members.
-</td>
-</tr>
-</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further Reading</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.getdbt.com/docs/">dbt documentation</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Teradata/dbt-teradata">dbt-teradata plugin documentation</a></p>
+</li>
+<li>
+<p><a href="https://docs.feast.dev/tutorials/using-scalable-registry">Feast Scalable Registry</a></p>
+</li>
+<li>
+<p><a href="https://medium.com/teradata/enabling-highly-scalable-feature-store-with-teradata-vantage-and-feast-e01008fa8fdb">Enabling highly scalable feature store with Teradata Vantage and FEAST</a></p>
+</li>
+<li>
+<p><a href="https://github.td.teradata.com/rc255085/Tdatapipeline">Git Repository</a> for this project.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
