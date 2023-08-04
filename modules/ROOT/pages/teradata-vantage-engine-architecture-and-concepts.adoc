@@ -54,7 +54,7 @@ AMPs are responsible for data storage and retrieval. Each AMP is associated with
 
 [NOTE]
 ====
-AMPs in Vantage Enterprise or Primary Cluster of VantageCloud Lake have data in Block File System (BFS) and thus have Vdisks. AMPs in Compute Cluster and Compute Worker Nodes on Lake do not have BFS, they can only access data in object storage using the Object File System (OFS). 
+AMPs in Vantage Enterprise, and the Primary Cluster in the case of VantageCloud Lake, store data in a Block File System (BFS) format on Vdisks. AMPs in Compute Clusters and Compute Worker Nodes on Lake do not have BFS, they can only access data in object storage using the Object File System (OFS). 
 ====
 
 === Virtual Disks (Vdisks)
