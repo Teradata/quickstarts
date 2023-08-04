@@ -20,6 +20,11 @@ This how-to demonstrates how to connect to Vantage using link:https://github.com
 ----
 pip install teradatasql
 ----
++
+[NOTE]
+====
+`teradatasql` package runs on Windows, macOS (10.14 Mojave or later) and Linux. For Linux, currently only Linux x84 architecture is supported.  
+====
 
 * Access to a Teradata Vantage instance. Currently driver is supported for use with Teradata Database 16.10 and later releases.
 +
