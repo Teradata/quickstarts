@@ -14,3 +14,11 @@ jobs:
           cache: npm
       - name: Run Antora
         run: ./buildw
+      - name: Deploy PR Preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          preview-branch: gh-pages
+          source-dir: build/site
+          umbrella-dir: pr-preview
+          action: auto

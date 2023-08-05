@@ -16,6 +16,7 @@
 * Manage data
 ** xref::nos.adoc[]
 ** xref:elt:use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.adoc[]
+** xref:elt:transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.adoc[]
 ** xref::dbt.adoc[]
 ** xref::advanced-dbt.adoc[]
 ** xref:tools-and-utilities:run-bulkloads-efficiently-with-teradata-parallel-transporter.adoc[Load data with TPT]
@@ -28,6 +29,7 @@
 
 * Create applications
 ** xref::jdbc.adoc[]
+** xref::teradatasql.adoc[]
 ** xref::mule.jdbc.example.adoc[]
 ** xref:query-service:send-queries-using-rest-api.adoc[]
 
@@ -46,6 +48,7 @@
 ** xref:cloud-guides:integrate-teradata-jupyter-extensions-with-sagemaker.adoc[]
 ** xref:business-intelligence:create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.adoc[]
 ** xref:other-integrations:integrate-teradata-vantage-with-knime.adoc[]
+** xref:other-integrations:getting.started.dbt-feast-teradata-pipeline.adoc[]
 
 * Demos
 ** Financial
