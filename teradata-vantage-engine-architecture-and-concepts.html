@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Run Vantage Express on VirtualBox :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/getting.started.vbox.html">
-    <meta name="description" content="Run Vantage Express on your laptop using VirtualBox.">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics">
+    <title>Teradata Vantage Engine Architecture and Concepts :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/teradata-vantage-engine-architecture-and-concepts.html">
+    <meta name="description" content="Teradata Vantage Architecture and Concepts.">
+    <meta name="keywords" content="data warehouses, teradata vantage engine architecture, teradata, vantage, Access Module Processors (AMP), Parsing Engines (PE), Massively Parallel Processing (MPP), Virtual Disk (Vdisks), BYNET">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="./_/css/site.css">
-<meta property="og:title" content="Run Vantage Express on VirtualBox :: Teradata Getting Started">
+<meta property="og:title" content="Teradata Vantage Engine Architecture and Concepts :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Run Vantage Express on your laptop using VirtualBox." />
+<meta property="og:description" content="Teradata Vantage Architecture and Concepts." />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/getting.started.vbox.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/teradata-vantage-engine-architecture-and-concepts.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -1081,7 +1081,7 @@ span.search-result-highlight {
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Get access to Vantage</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="teradata-vantage-engine-architecture-and-concepts.html">Teradata Vantage Engine Architecture and Concepts</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -1096,7 +1096,7 @@ span.search-result-highlight {
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -1299,7 +1299,7 @@ span.search-result-highlight {
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li>Get access to Vantage</li>
-    <li><a href="getting.started.vbox.html">Vantage Express on VirtualBox</a></li>
+    <li><a href="teradata-vantage-engine-architecture-and-concepts.html">Teradata Vantage Engine Architecture and Concepts</a></li>
   </ul>
 </nav>
 </div>
@@ -1307,446 +1307,113 @@ span.search-result-highlight {
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/getting.started.vbox.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/teradata-vantage-engine-architecture-and-concepts.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Run Vantage Express on VirtualBox</h1>
-<p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
-Last updated: January 9th, 2023</p>
+<h1 class="page">Teradata Vantage Engine Architecture and Concepts</h1>
+<p>Author: <a href="mailto:krutik.pathak@teradata.com">Krutik Pathak</a><br/>
+Last updated: August 7th, 2023</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This how-to shows how to gain access to a Teradata database by running it on your local machine. There are many ways to install Teradata. This document optimizes for the lowest time to first query without spending money on cloud resources. Once you finish the steps you will have a working Teradata Vantage Express database on your computer.</p>
+<p>This article explains the underlying concepts of Teradata Vantage engine architecture. All editions of Vantage, including the Primary Cluster in VantageCloud Lake utilize the same engine.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Starting with version 17.20, Vantage Express includes the following analytics packages: <a href="https://docs.teradata.com/r/Vantage-Analytics-Library-User-Guide/January-2022">Vantage Analytics Library</a>, <a href="https://docs.teradata.com/r/Teradata-VantageTM-Bring-Your-Own-Model-User-Guide/May-2022">Bring Your Own Model (BYOM)</a>, <a href="https://docs.teradata.com/r/Teradata-VantageTM-API-Integration-Guide-for-Cloud-Machine-Learning/April-2022">API Integration with AWS SageMaker</a>.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Teradata&#8217;s architecture is designed around a Massively Parallel Processing (MPP), shared-nothing architecture, which enables high-performance data processing and analytics. The MPP architecture distributes the workload into multiple vprocs or virtual processors. The virtual processor where query processing takes place is commonly referred to as an Access Module Processor (AMP). Each AMP is isolated from other AMPs, and processes the queries in parallel allowing Teradata to process large volumes of data rapidly.</p>
 </div>
+<div class="paragraph">
+<p>The major architectural components of the Teradata Vantage engine include the Parsing Engines (PEs), BYNET, Access Module Processors (AMPs), and Virtual Disks (Vdisks). Vdisks are assigned to AMPs in enterprise platforms, and to the Primary Cluster in the case of VantageCloud Lake environments.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/teradata-vantage-architecture-concepts/teradata_architecture_major_components.png" alt="Teradata Vantage Major Architectural Components" width="75%">
 </div>
-<div class="sect1">
-<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>A computer using one of the following operating systems: Windows 10, Linux or Intel-based MacOS.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-For M1/M2 MacOS systems, see <a href="getting.started.utm.html" class="xref page">Run Vantage Express on UTM</a>.
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>30GB of disk space and enough CPU and RAM to be able to dedicate at least one core and 6GB RAM to the virtual machine.</p>
-</li>
-<li>
-<p>Admin rights to be able to install and run the software.</p>
-</li>
-</ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h2>
+<h2 id="_teradata_vantage_engine_architecture_components"><a class="anchor" href="#_teradata_vantage_engine_architecture_components"></a>Teradata Vantage Engine Architecture Components</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_download_required_software"><a class="anchor" href="#_download_required_software"></a>Download required software</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The latest version of <a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player" target="_blank" rel="noopener">Vantage Express VirtualBox Open Virtual Appliance (OVA)</a>.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If you have not used the Teradata Downloads website before, you will need to register first.
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p><a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="noopener">VirtualBox</a>, version 6.1.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-You can also install VirtualBox using <code>brew</code> and other package managers.
-</td>
-</tr>
-</table>
-</div>
-</li>
-</ol>
-</div>
+<div class="paragraph">
+<p>The Teradata Vantage engine consists of the components below:</p>
 </div>
 <div class="sect2">
-<h3 id="_run_installers"><a class="anchor" href="#_run_installers"></a>Run installers</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Install VirtualBox by running the installer and accepting the default values.</p>
-</li>
-</ol>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-VirtualBox includes functionality that requires elevated privileges. When you start VirtualBox for the first time, you will be asked to confirm this elevated access. You may also need to reboot your machine to activate the VirtualBox kernel plugin.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_run_vantage_express"><a class="anchor" href="#_run_vantage_express"></a>Run Vantage Express</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Start VirtualBox.</p>
-</li>
-<li>
-<p>Go to <code>File &#8594; Import Appliance&#8230;&#8203;</code> menu.</p>
-</li>
-<li>
-<p>In <code>File</code> field, select the downloaded OVA file.</p>
-</li>
-<li>
-<p>On the next screen, accept the defaults and click on <code>Import</code>.</p>
-</li>
-<li>
-<p>Back in the main VirtualBox panel, start the Vantage Express appliance double clicking on VM <code>Vantage 17.20</code>.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/getting-started-vbox/start-vm.png" alt="Start VM" width="75%">
-</div>
-</div>
-</li>
-<li>
-<p>Press <kbd>ENTER</kbd> to select the highlighted <code>LINUX</code> boot partition.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/run-vantage/boot-manager-menu.png" alt="Boot Manager Menu" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>On the next screen, press <kbd>ENTER</kbd> again to select the default SUSE Linux kernel.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/run-vantage/grub-menu.png" alt="Grub Menu" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>After completing the bootup sequence a terminal login prompt as shown in the screenshot below will appear. Don&#8217;t enter anything in the terminal. Wait till the system starts the GUI.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/run-vantage/wait-for-gui.png" alt="Wait for GUI" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>After a while the following prompt will appear - assuming that you did not enter anything after the command login prompt above. Press <code>okay</code> button in the screen below.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/run-vantage/okay-the-security-popup.png" alt="OK Security Popup" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>Once the VM is up, you will see its desktop environment. When prompted for username/password enter <code>root</code> for both.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/run-vantage/vm.login.png" alt="VM Login" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>The database is configured to autostart with the VM. To confirm that the database has started go to the virtual desktop and start <code>Gnome Terminal</code>.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/run-vantage/start-gnome-terminal.png" alt="Start Gnome Terminal" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>In the terminal execute <code>pdestate</code> command that will inform you if Vantage has already started:</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-To paste into Gnome Terminal press <span class="keyseq"><kbd>SHIFT</kbd>+<kbd>CTRL</kbd>+<kbd>V</kbd></span>.
-</td>
-</tr>
-</table>
-</div>
-<div id="pdestate" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">watch pdestate -a</code></pre>
-</div>
-</div>
+<h3 id="_parsing_engines_pe"><a class="anchor" href="#_parsing_engines_pe"></a>Parsing Engines (PE)</h3>
 <div class="paragraph">
-<p>You want to wait till you see the following message:</p>
+<p>When a SQL query is run in Teradata, it first reaches the Parsing Engine. The functions of the Parsing Engine are:</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>PDE state is RUN/STARTED.
-DBS state is 5: Logons are enabled - The system is quiescent</pre>
-</div>
-</div>
-<details>
-<summary class="title">See examples of messages that <code>pdestate</code> returns when the database is still initializing.</summary>
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre>PDE state is DOWN/HARDSTOP.
-
-PDE state is START/NETCONFIG.
-
-PDE state is START/GDOSYNC.
-
-PDE state is START/TVSASTART.
-
-PDE state is START/READY.
-PDE state is RUN/STARTED.
-
-DBS state is 1/1: DBS Startup - Initializing DBS Vprocs
-PDE state is RUN/STARTED.
-
-DBS state is 1/5: DBS Startup - Voting for Transaction Recovery
-PDE state is RUN/STARTED.
-
-DBS state is 1/4: DBS Startup - Starting PE Partitions
-PDE state is RUN/STARTED.</pre>
-</div>
-</div>
-</details>
-</li>
-<li>
-<p>Now that the database is up, go back to the virtual desktop and launch <code>Teradata Studio Express</code>.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/run-vantage/start-teradata-studio-express.png" alt="Start Teradata Studio Express" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>When you first start it you will be offered a tour. Once you close the tour, you will see a wizard window to add a new connection. Select <code>Teradata</code>:</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/run-vantage/new.connection.profile.png" alt="New Connection Profile" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>On the next screen, connect to the database on your localhost using <code>dbc</code> for the username and password:</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/run-vantage/new.connection.png" alt="New Connection" width="500">
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_run_sample_queries"><a class="anchor" href="#_run_sample_queries"></a>Run sample queries</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Once in Teradata Studio Express, go to <code>Query Development</code> perspective (go to the top menu and select <code>Window</code> &#8594; <code>Query Development</code>).</p>
-</li>
-<li>
-<p>Connect using the previously created connection profile by double-clicking on <code>Database Connections</code> &#8594; <code>New Teradata</code>.</p>
-</li>
-<li>
-<p>Using <code>dbc</code> user, we will create a new database called <code>HR</code>. Copy/paste this query and run it by hitting the run query button (<span class="image"><img src="_images/run.query.button.png" alt="Run Query Button" width="24" height="24"></span>) or pressing <kbd>F5</kbd> key:</p>
-<div id="first_query" class="listingblock emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE HR
-AS PERMANENT = 60e6, -- 60MB
-    SPOOL = 120e6; -- 120MB</code></pre>
-</div>
-</div>
-<div class="sidebarblock">
-    <div id="right" style="float: right">
-    <a style="cursor: pointer; color: grey" onclick="this.parentElement.parentElement.style.display = 'none'">x</a>
-  </div>
-  <div class="content">
-    <div class="paragraph">Were you able to run the query?
-      <i class="far fa-thumbs-up click-icon" style="padding: 0rem 0.2rem;" onclick="toggleThumbs(this, 'first_query')"></i>
-      <i class="far fa-thumbs-down click-icon" onclick="toggleThumbs(this 'first_query')"></i>
-    </div>
-  </div>
-</div>
-<style>
-.closebtn {
-  position: absolute;
-  top: 5px;
-  right: 15px;
-  color: white;
-  font-size: 30px;
-  cursor: pointer;
-}
-</style>
-</li>
-<li>
-<p>Let&#8217;s create a sample table and insert some data and query it. We will first create a table to hold employee information:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE SET TABLE HR.Employees (
-   GlobalID INTEGER,
-   FirstName VARCHAR(30),
-   LastName VARCHAR(30),
-   DateOfBirth DATE FORMAT 'YYYY-MM-DD',
-   JoinedDate DATE FORMAT 'YYYY-MM-DD',
-   DepartmentCode BYTEINT
-)
-UNIQUE PRIMARY INDEX ( GlobalID );</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Now, let&#8217;s insert a record:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">INSERT INTO HR.Employees (
-   GlobalID,
-   FirstName,
-   LastName,
-   DateOfBirth,
-   JoinedDate,
-   DepartmentCode
-)
-VALUES (
-   101,
-   'Adam',
-   'Tworkowski',
-   '1980-01-05',
-   '2004-08-01',
-   01
-);</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Finally, let&#8217;s see if we can retrieve the data:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM HR.Employees;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You should get the following results:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>GlobalID  FirstName  LastName   DateOfBirth  JoinedDate  DepartmentCode
---------  ---------  ---------- -----------  ----------  --------------
-     101  Adam       Tworkowski  1980-01-05  2004-08-01               1</pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_updating_virtualbox_guest_extensions"><a class="anchor" href="#_updating_virtualbox_guest_extensions"></a>Updating VirtualBox Guest Extensions</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>VirtualBox Guest Extensions is a piece of software that runs in a VM. It makes the VM run faster on VirtualBox. It also improves the resolution of the VM screen and its responsiveness to resizing. It implements two-way clipboard, and drag and drop between the host and the guest. VirtualBox Guest Extensions in the VM needs to match the version of your VirtualBox install. You will likely have to update VirtualBox Guest Extensions for optimal performance.</p>
-</div>
-<div class="paragraph">
-<p>To update VirtualBox Guest Extensions:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Insert the VirtualBox Guest Extensions DVD by clicking on <code>SATA Port 3: [Optical Drive]</code> in <code>Storage</code> section:</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/insert-guest-additions-dvd.png" alt="Insert Guest Additions DVD" width="50%">
-</div>
-</div>
-</li>
-<li>
-<p>Back in the VM window, start the <code>Gnome Terminal</code> application.</p>
-</li>
-<li>
-<p>Run the following command in the terminal:</p>
-<div id="update_guest_additions" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mount /dev/cdrom /media/dvd; /media/dvd/VBoxLinuxAdditions.run</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In this guide we have covered how to quickly create a working Teradata environment. We used Teradata Vantage Express in a VM running on VMware. In the same VM, we ran Teradata Studio Express to issue queries. We installed all software locally and didn&#8217;t have to pay for cloud resources.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h2>
-<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><a href="nos.html" class="xref page">Query data stored in object storage</a></p>
+<p>Manage individual user sessions (up to 120).</p>
+</li>
+<li>
+<p>Check if the objects used in the SQL query exist.</p>
+</li>
+<li>
+<p>Check if the user has required privileges against the objects used in the SQL query.</p>
+</li>
+<li>
+<p>Parse and optimize the SQL queries.</p>
+</li>
+<li>
+<p>Prepare the execution plan to execute the SQL query and passes it to the corresponding AMPs.</p>
+</li>
+<li>
+<p>Receive the response from the AMPs and send it back to the requesting client.</p>
 </li>
 </ul>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_bynet"><a class="anchor" href="#_bynet"></a>BYNET</h3>
+<div class="paragraph">
+<p>BYNET is a system that enables component communication. The BYNET system provides high-speed bi-directional broadcast, multicast, and point-to-point communication and merge functions. It performs three key functions: coordinating multi-AMP queries, reading data from multiple AMPs, regulating message flow to prevent congestion, and processing platform throughput. These functions of BYNET make Vantage highly scalable and enable Massively Parallel Processing (MPP) capabilities.</p>
 </div>
-<div class="sect1">
-<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further reading</h2>
-<div class="sectionbody">
+</div>
+<div class="sect2">
+<h3 id="_parallel_database_extension_pde"><a class="anchor" href="#_parallel_database_extension_pde"></a>Parallel Database Extension (PDE)</h3>
+<div class="paragraph">
+<p>Parallel Database Extension (PDE) is an intermediary software layer positioned between the operating system and the Teradata Vantage database. PDE enables MPP systems to use features such as BYNET and shared disks. It facilitates the parallelism that is responsible for the speed and linear scalability of the Teradata Vantage database.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_access_module_processor_amp"><a class="anchor" href="#_access_module_processor_amp"></a>Access Module Processor (AMP)</h3>
+<div class="paragraph">
+<p>AMPs are responsible for data storage and retrieval. Each AMP is associated with its own set of Virtual Disks (Vdisks) where the data is stored, and no other AMP can access that content in line with the shared-nothing architecture. The functions of AMP are:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20">Teradata® Studio™ and Studio™ Express Installation Guide</a></p>
+<p>Access storage using Vantage’s Block File System Software</p>
+</li>
+<li>
+<p>Lock management</p>
+</li>
+<li>
+<p>Sorting rows</p>
+</li>
+<li>
+<p>Aggregating columns</p>
+</li>
+<li>
+<p>Join processing</p>
+</li>
+<li>
+<p>Output conversion</p>
+</li>
+<li>
+<p>Disk space management</p>
+</li>
+<li>
+<p>Accounting</p>
+</li>
+<li>
+<p>Recovery processing</p>
 </li>
 </ul>
 </div>
@@ -1757,10 +1424,151 @@ VALUES (
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you have any questions or need further assistance, please visit our <a href="https://support.teradata.com/community">community forum</a> where you can get support and interact with other community members.
+<div class="paragraph">
+<p>AMPs in VantageCore IntelliFlex, VantageCore VMware, VantageCloud Enterprise, and the Primary Cluster in the case of VantageCloud Lake, store data in a Block File System (BFS) format on Vdisks. AMPs in Compute Clusters and Compute Worker Nodes on VantageCloud Lake do not have BFS, they can only access data in object storage using the Object File System (OFS).</p>
+</div>
 </td>
 </tr>
 </table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_virtual_disks_vdisks"><a class="anchor" href="#_virtual_disks_vdisks"></a>Virtual Disks (Vdisks)</h3>
+<div class="paragraph">
+<p>These are units of storage space owned by an AMP. Virtual Disks are used to hold user data (rows within tables). Virtual Disks map to physical space on a disk.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_node"><a class="anchor" href="#_node"></a>Node</h3>
+<div class="paragraph">
+<p>A node, in the context of Teradata systems, represents an individual server that functions as a hardware platform for the database software. It serves as a processing unit where database operations are executed under the control of a single operating system. When Teradata is deployed in a cloud, it follows the same MPP, shared-nothing architecture but the physical nodes are replaced with virtual machines (VMs).</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_teradata_vantage_architecture_concepts"><a class="anchor" href="#_teradata_vantage_architecture_concepts"></a>Teradata Vantage Architecture Concepts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The concepts below are applicable to Teradata Vantage.</p>
+</div>
+<div class="sect2">
+<h3 id="_linear_growth_and_expandability"><a class="anchor" href="#_linear_growth_and_expandability"></a>Linear Growth and Expandability</h3>
+<div class="paragraph">
+<p>Teradata is a linearly expandable RDBMS. As the workload and data volume increase, adding more hardware resources such as servers or nodes results in a proportional increase in performance and capacity. Linear Scalability allows for increased workload without decreased throughput.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_teradata_parallelism"><a class="anchor" href="#_teradata_parallelism"></a>Teradata Parallelism</h3>
+<div class="paragraph">
+<p>Teradata parallelism refers to the inherent ability of the Teradata Database to perform parallel processing of data and queries across multiple nodes or components simultaneously.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Each Parsing Engine (PE) in Teradata has the capability to handle up to 120 sessions concurrently.</p>
+</li>
+<li>
+<p>The BYNET in Teradata enables parallel handling of all message activity, including data redistribution for subsequent tasks.</p>
+</li>
+<li>
+<p>All Access Module Processors (AMPs) in Teradata can collaborate in parallel to serve any incoming request.</p>
+</li>
+<li>
+<p>Each AMP can work on multiple requests concurrently, allowing for efficient parallel processing.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/teradata-vantage-architecture-concepts/teradata_parallelism.png" alt="Teradata Parallelism" width="75%">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_teradata_retrieval_architecture"><a class="anchor" href="#_teradata_retrieval_architecture"></a>Teradata Retrieval Architecture</h3>
+<div class="paragraph">
+<p>The key steps involved in Teradata Retrieval Architecture are:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The Parsing Engine sends a request to retrieve one or more rows.</p>
+</li>
+<li>
+<p>The BYNET activates the relevant AMP(s) for processing.</p>
+</li>
+<li>
+<p>The AMP(s) concurrently locate and retrieve the desired row(s) through parallel access.</p>
+</li>
+<li>
+<p>The BYNET returns the retrieved row(s) to the Parsing Engine.</p>
+</li>
+<li>
+<p>The Parsing Engine then delivers the row(s) back to the requesting client application.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/teradata-vantage-architecture-concepts/teradata_retrieval_architecture.png" alt="Teradata Retrieval Architecture" width="75%">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_teradata_data_distribution"><a class="anchor" href="#_teradata_data_distribution"></a>Teradata Data Distribution</h3>
+<div class="paragraph">
+<p>Teradata&#8217;s MPP architecture requires an efficient means of distributing and retrieving data and does so using hash partitioning. Most tables in Vantage use hashing to distribute data for the tables based on the value of the row’s Primary Index (PI) to disk storage in Block File System (BFS) and may scan the entire table or use indexes to access the data. This approach ensures scalable performance and efficient data access.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If the Primary Index is unique then the rows in the tables are automatically distributed evenly by hash partitioning.</p>
+</li>
+<li>
+<p>The designated Primary Index column(s) are hashed to generate consistent hash codes for the same values.</p>
+</li>
+<li>
+<p>No reorganization, repartitioning, or space management is required.</p>
+</li>
+<li>
+<p>Each AMP typically contains rows from all tables, ensuring efficient data access and processing.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/teradata-vantage-architecture-concepts/teradata_data_distribution.png" alt="Teradata Data Distribution" width="75%">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion"><a class="anchor" href="#_conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this article, we covered the major architectural components of Teradata Vantage, such as the Parsing Engines (PEs), BYNET, Access Module Processors (AMPs), Virtual Disk (Vdisk), other architectural components such as Parallel Database Extension (PDE), Node and the essential concepts of Teradata Vantage such as Linear Growth and Expandability, Parallelism, Data Retrieval, and Data Distribution.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further Reading</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Introduction/Vantage-Hardware-and-Software-Architecture/Virtual-Processors/Parsing-Engine" target="_blank" rel="noopener">Parsing Engine</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://www.teradata.com/Blogs/What-Is-the-BYNET-and-Why-Is-It-Important-to-Vantage" target="_blank" rel="noopener">BYNET</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Introduction/Vantage-Hardware-and-Software-Architecture/Virtual-Processors/Access-Module-Processor" target="_blank" rel="noopener">Access Module Processor</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Introduction/Vantage-Hardware-and-Software-Architecture/Parallel-Database-Extensions" target="_blank" rel="noopener">Parallel Database Extensions</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Introduction/Data-Distribution-and-Data-Access-Methods" target="_blank" rel="noopener">Teradata Data Distribution and Data Access Methods</a></p>
 </div>
 </div>
 </div>
