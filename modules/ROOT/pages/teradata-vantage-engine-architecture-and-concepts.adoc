@@ -2,7 +2,7 @@
 :experimental:
 :page-author: Krutik Pathak
 :page-email: krutik.pathak@teradata.com
-:page-revdate: August 5th, 2023
+:page-revdate: August 7th, 2023
 :description: Teradata Vantage Architecture and Concepts.
 :keywords: data warehouses, teradata vantage engine architecture, teradata, vantage, Access Module Processors (AMP), Parsing Engines (PE), Massively Parallel Processing (MPP), Virtual Disk (Vdisks), BYNET
 :tabs:
@@ -30,7 +30,7 @@ When a SQL query is run in Teradata, it first reaches the Parsing Engine. The fu
 * Check if the user has required privileges against the objects used in the SQL query.  
 * Parse and optimize the SQL queries.  
 * Prepare the execution plan to execute the SQL query and passes it to the corresponding AMPs. 
-* Receives the response from the AMPs and sends it back to the requesting client. 
+* Receive the response from the AMPs and send it back to the requesting client. 
 
 
 === BYNET 
@@ -54,7 +54,7 @@ AMPs are responsible for data storage and retrieval. Each AMP is associated with
 
 [NOTE]
 ====
-AMPs in Vantage Enterprise, and the Primary Cluster in the case of VantageCloud Lake, store data in a Block File System (BFS) format on Vdisks. AMPs in Compute Clusters and Compute Worker Nodes on Lake do not have BFS, they can only access data in object storage using the Object File System (OFS). 
+AMPs in VantageCore IntelliFlex, VantageCore VMware, VantageCloud Enterprise, and the Primary Cluster in the case of VantageCloud Lake, store data in a Block File System (BFS) format on Vdisks. AMPs in Compute Clusters and Compute Worker Nodes on VantageCloud Lake do not have BFS, they can only access data in object storage using the Object File System (OFS). 
 ====
 
 === Virtual Disks (Vdisks)
@@ -68,8 +68,6 @@ The concepts below are applicable to Teradata Vantage.
 
 === Linear Growth and Expandability 
 Teradata is a linearly expandable RDBMS. As the workload and data volume increase, adding more hardware resources such as servers or nodes results in a proportional increase in performance and capacity. Linear Scalability allows for increased workload without decreased throughput.  
-
-image::{dir}/performance_impact_of_adding_components.png[Performance Impact of Adding Components, width=75%]
 
 === Teradata Parallelism 
 Teradata parallelism refers to the inherent ability of the Teradata Database to perform parallel processing of data and queries across multiple nodes or components simultaneously. 
@@ -85,11 +83,11 @@ image::{dir}/teradata_parallelism.png[Teradata Parallelism, width=75%]
 === Teradata Retrieval Architecture
 The key steps involved in Teradata Retrieval Architecture are:
 
-* The Parsing Engine sends a request to retrieve one or more rows. 
-* The BYNET activates the relevant AMP(s) for processing. 
-* The AMP(s) concurrently locate and retrieve the desired row(s) through parallel access. 
-* The BYNET returns the retrieved row(s) to the Parsing Engine. 
-* The Parsing Engine then delivers the row(s) back to the requesting client application. 
+1. The Parsing Engine sends a request to retrieve one or more rows. 
+2. The BYNET activates the relevant AMP(s) for processing. 
+3. The AMP(s) concurrently locate and retrieve the desired row(s) through parallel access. 
+4. The BYNET returns the retrieved row(s) to the Parsing Engine. 
+5. The Parsing Engine then delivers the row(s) back to the requesting client application. 
 
 image::{dir}/teradata_retrieval_architecture.png[Teradata Retrieval Architecture, width=75%]
 
