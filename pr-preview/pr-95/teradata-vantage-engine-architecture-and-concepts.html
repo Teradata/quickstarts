@@ -1315,7 +1315,7 @@ span.search-result-highlight {
 <article class="doc">
 <h1 class="page">Teradata Vantage Engine Architecture and Concepts</h1>
 <p>Author: <a href="mailto:krutik.pathak@teradata.com">Krutik Pathak</a><br/>
-Last updated: August 5th, 2023</p>
+Last updated: August 7th, 2023</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
@@ -1364,7 +1364,7 @@ Last updated: August 5th, 2023</p>
 <p>Prepare the execution plan to execute the SQL query and passes it to the corresponding AMPs.</p>
 </li>
 <li>
-<p>Receives the response from the AMPs and sends it back to the requesting client.</p>
+<p>Receive the response from the AMPs and send it back to the requesting client.</p>
 </li>
 </ul>
 </div>
@@ -1425,7 +1425,7 @@ Last updated: August 5th, 2023</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>AMPs in Vantage Enterprise, and the Primary Cluster in the case of VantageCloud Lake, store data in a Block File System (BFS) format on Vdisks. AMPs in Compute Clusters and Compute Worker Nodes on Lake do not have BFS, they can only access data in object storage using the Object File System (OFS).</p>
+<p>AMPs in VantageCore IntelliFlex, VantageCore VMware, VantageCloud Enterprise, and the Primary Cluster in the case of VantageCloud Lake, store data in a Block File System (BFS) format on Vdisks. AMPs in Compute Clusters and Compute Worker Nodes on VantageCloud Lake do not have BFS, they can only access data in object storage using the Object File System (OFS).</p>
 </div>
 </td>
 </tr>
@@ -1456,11 +1456,6 @@ Last updated: August 5th, 2023</p>
 <h3 id="_linear_growth_and_expandability"><a class="anchor" href="#_linear_growth_and_expandability"></a>Linear Growth and Expandability</h3>
 <div class="paragraph">
 <p>Teradata is a linearly expandable RDBMS. As the workload and data volume increase, adding more hardware resources such as servers or nodes results in a proportional increase in performance and capacity. Linear Scalability allows for increased workload without decreased throughput.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/teradata-vantage-architecture-concepts/performance_impact_of_adding_components.png" alt="Performance Impact of Adding Components" width="75%">
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -1495,8 +1490,8 @@ Last updated: August 5th, 2023</p>
 <div class="paragraph">
 <p>The key steps involved in Teradata Retrieval Architecture are:</p>
 </div>
-<div class="ulist">
-<ul>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>The Parsing Engine sends a request to retrieve one or more rows.</p>
 </li>
@@ -1512,7 +1507,7 @@ Last updated: August 5th, 2023</p>
 <li>
 <p>The Parsing Engine then delivers the row(s) back to the requesting client application.</p>
 </li>
-</ul>
+</ol>
 </div>
 <div class="imageblock">
 <div class="content">
