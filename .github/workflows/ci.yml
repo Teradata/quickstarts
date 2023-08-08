@@ -2,6 +2,7 @@ name: CI
 on:
   workflow_dispatch:
   pull_request:
+    types: [opened, edited, reopened, closed]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,4 +22,3 @@ jobs:
           preview-branch: gh-pages
           source-dir: build/site
           umbrella-dir: pr-preview
-          action: auto
