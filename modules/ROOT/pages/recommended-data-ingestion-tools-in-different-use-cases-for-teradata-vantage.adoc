@@ -20,7 +20,7 @@ This article outlines different use cases involving data ingestion, lists availa
 +
 [NOTE]
 ====
-Teradata Parallel Transporter (TPT) could be used to load data from external object storage into Teradata Vantage, however the recommeded tool is Teradata NOS. 
+Teradata Parallel Transporter (TPT) could be used to load data from external object storage into Teradata Vantage, however the recommended tool is Teradata NOS. 
 ====
 
 === Ingesting data from local files
