@@ -34,7 +34,7 @@ Teradata Parallel Transporter (TPT) could be used to load data from external obj
 === Move data from different systems for unified query processing
 ==== Available Tools: link:https://docs.teradata.com/r/Teradata-QueryGridTM-Installation-and-User-Guide/October-2020/Teradata-QueryGrid-Overview[Teradata QueryGrid,window="_blank"]
 
-*Teradata QueryGrid*: It is a recommended option to move limited quantities of data between different systems/platforms and that includes movement within Vantage instances, Apache Spark, Oracle, Presto etc when what needs to be synced is described by complex conditions that can be expressed in SQL. 
+*Teradata QueryGrid*: QueryGrid is the recommended option to move limited quantities of data between different systems/platforms. This includes movement within Vantage instances, Apache Spark, Oracle, Presto, etc. It is especially suited to situations when what needs to be synced is described by complex conditions that can be expressed in SQL. 
 
 === Ingesting data from SaaS applications (Third Party Tools)
 ==== Available Tools: link:https://airbyte.com/[Airbyte,window="_blank"]
