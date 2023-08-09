@@ -29,7 +29,7 @@ Teradata Parallel Transporter (TPT) could be used to load data from external obj
 
 * *Teradata Parallel Transporter (TPT)*: It is recommended option to load data from local files when high throughput is needed using scalability and parallelism.  
 
-* *BTEQ*: BTEQ has full scripting capabilities and can read files. It is a good option if it is already a dominant ingestion tool with a customer.
+* *BTEQ*: BTEQ has full scripting capabilities and the ability to read files. It is a good option if it is already the primary ingestion tool used by a customer.
 
 === Move the data from different systems for unified query processing
 ==== Available Tools: link:https://docs.teradata.com/r/Teradata-QueryGridTM-Installation-and-User-Guide/October-2020/Teradata-QueryGrid-Overview[Teradata QueryGrid,window="_blank"]
