@@ -39,7 +39,7 @@ Teradata Parallel Transporter (TPT) could be used to load data from external obj
 === Ingesting data from SaaS applications (Third Party Tools)
 ==== Available Tools: link:https://airbyte.com/[Airbyte,window="_blank"]
 
-*Airbyte*: Airbyte is an ELT tool that has more than 350 connectors and is Open Source. It is a preferred choice to use if you want to perform lightweight ingestions from SaaS applications into Teradata Vantage.
+*Airbyte*: Airbyte is an ELT tool that has more than 350 connectors and is Open Source. It's a favored option for conducting lightweight ingestions from SaaS applications into Teradata Vantage.
 
 == Summary
 In this article we covered different use cases of data ingestion, list of available tools and the recommended tools to be used in different use cases. 
