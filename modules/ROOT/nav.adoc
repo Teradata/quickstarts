@@ -14,7 +14,7 @@
 
 * Manage data
 ** xref::nos.adoc[]
-** xref::recommended-data-ingestion-tools-in-different-use-cases-for-teradata-vantage.adoc[]
+** xref::select-the-right-data-ingestion-tools-for-teradata-vantage.adoc[]
 ** xref:elt:use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.adoc[]
 ** xref:elt:transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.adoc[]
 ** xref::dbt.adoc[]
