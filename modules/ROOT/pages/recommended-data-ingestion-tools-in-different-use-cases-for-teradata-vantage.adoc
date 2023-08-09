@@ -31,7 +31,7 @@ Teradata Parallel Transporter (TPT) could be used to load data from external obj
 
 * *BTEQ*: BTEQ has full scripting capabilities and the ability to read files. It is a good option if it is already the primary ingestion tool used by a customer.
 
-=== Move the data from different systems for unified query processing
+=== Move data from different systems for unified query processing
 ==== Available Tools: link:https://docs.teradata.com/r/Teradata-QueryGridTM-Installation-and-User-Guide/October-2020/Teradata-QueryGrid-Overview[Teradata QueryGrid,window="_blank"]
 
 *Teradata QueryGrid*: It is a recommended option to move limited quantities of data between different systems/platforms and that includes movement within Vantage instances, Apache Spark, Oracle, Presto etc when what needs to be synced is described by complex conditions that can be expressed in SQL. 
