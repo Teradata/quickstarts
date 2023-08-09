@@ -2,7 +2,7 @@
 :experimental:
 :page-author: Krutik Pathak
 :page-email: krutik.pathak@teradata.com
-:page-revdate: August 8th, 2023
+:page-revdate: August 9th, 2023
 :description: Recommendation of data ingestions tools to be used in different use cases for Teradata Vantage
 :keywords: data ingestion, teradata, nos, tpt, bteq, querygrid, airbyte, object store, saas, vantage, apache, spark, presto, oracle
 :tabs:
