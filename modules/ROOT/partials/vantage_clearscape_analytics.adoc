@@ -1,1 +1,1 @@
-NOTE: If you need a test instance of Vantage, you can provision one for free at https://clearscape.teradata.com.
+NOTE: If you need a test instance of Vantage, you can provision one for free at link:https://clearscape.teradata.com/sign-in?utm_source=dev_portal&utm_medium=quickstart_tutorial&utm_campaign=quickstarts[https://clearscape.teradata.com., window="_blank"]
