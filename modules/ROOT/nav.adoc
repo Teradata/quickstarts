@@ -1,4 +1,5 @@
 * Get access to Vantage
+** xref::teradata-vantage-engine-architecture-and-concepts.adoc[Teradata Vantage Engine Architecture and Concepts]
 ** xref::run-vantage-express-on-aws.adoc[Vantage Express on AWS]
 ** xref::vantage.express.gcp.adoc[Vantage Express on Google Cloud]
 ** xref::run-vantage-express-on-microsoft-azure.adoc[Vantage Express on Azure]
@@ -14,6 +15,7 @@
 
 * Manage data
 ** xref::nos.adoc[]
+** xref::select-the-right-data-ingestion-tools-for-teradata-vantage.adoc[]
 ** xref:elt:use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.adoc[]
 ** xref:elt:transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.adoc[]
 ** xref::dbt.adoc[]
@@ -28,6 +30,7 @@
 
 * Create applications
 ** xref::jdbc.adoc[]
+** xref::teradatasql.adoc[]
 ** xref::mule.jdbc.example.adoc[]
 ** xref:query-service:send-queries-using-rest-api.adoc[]
 
@@ -46,6 +49,7 @@
 ** xref:cloud-guides:integrate-teradata-jupyter-extensions-with-sagemaker.adoc[]
 ** xref:business-intelligence:create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.adoc[]
 ** xref:other-integrations:integrate-teradata-vantage-with-knime.adoc[]
+** xref:other-integrations:getting.started.dbt-feast-teradata-pipeline.adoc[]
 
 * Demos
 ** Financial
