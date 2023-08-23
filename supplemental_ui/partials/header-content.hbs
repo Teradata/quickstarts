@@ -175,6 +175,15 @@
              <div class="page-blackout"></div>
           </section>
         </div>
+        <section class="navbar-search">
+          {{#if env.SITE_SEARCH_PROVIDER}}
+          {{#if (ne page.layout "landing-page")}}
+          <div class="navbar-item">
+            <input id="search-input" type="text" placeholder="Search Getting Started">
+          </div>
+          {{/if}}
+          {{/if}}
+        </section>
       </nav>
     </div>
 <!-- New Navbar -->
@@ -304,15 +313,7 @@
       </div>
     </section>
  -->
-    <section class="navbar-search">
-      {{#if env.SITE_SEARCH_PROVIDER}}
-      {{#if (ne page.layout "landing-page")}}
-      <div class="navbar-item">
-        <input id="search-input" type="text" placeholder="Search Getting Started">
-      </div>
-      {{/if}}
-      {{/if}}
-    </section>
+
   </nav>
   <!-- 
   <div class="page-blackout" tabindex="-1" aria-hidden="true"></div>
