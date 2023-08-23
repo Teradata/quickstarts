@@ -16,14 +16,16 @@
   }
   .dev {
     font-size: 22px;
-    margin-top: 36px;
+  /*  margin-top: 36px;*/
     color: #00233c;
     letter-spacing: 0.15px;
     margin-right: 100px;
     font-style: normal;
     font-weight: 400;
   }
-  
+  .dev:hover {
+    text-decoration: none;
+  }
   .line {
     width: 40px;
     height: 2px;
@@ -35,8 +37,8 @@
   
   .logo {
     height: auto;
-    margin-top: 30px;
-    margin-left: -8px;
+  /*  margin-top: 30px;
+    margin-left: -8px;*/
     margin-right: 16px;
   }
   
@@ -108,4 +110,20 @@
   .sidenav {
     transition: 0.5s;
   }
+  @media (pointer: fine){
+    ::-webkit-scrollbar-thumb {
+      border: 0px; 
+      border-radius: 0px;
+    }
+    html::-webkit-scrollbar {
+      width: 17px;
+    }
+  }
+  .header-nav__element.d-flex {
+    display: flex;
+    align-items: center;
+  }
   
+  .header-nav__element.d-flex a.dev {
+    margin-top: 8px;  
+  }

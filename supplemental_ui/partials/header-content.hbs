@@ -5,7 +5,7 @@
 </noscript>
 <!-- End Google Tag Manager (noscript) -->
 <!-- New Navbar -->
-    <div>
+ <!--    <div> -->
       <nav>
         <div class="header-nav-wrapper">
           <section class="header-utility nav-3 background-grayLight color-navy d-none d-xl-flex">
@@ -35,10 +35,10 @@
                       <a href="https://developers.teradata.com" class="dev">
                         <div>Developers</div>
                       </a>
-                    <div>
+                    </div>
                     <ul class="header-nav__main-menu header-nav__element nav-1">
                       <li>
-                        <a href="" class="header-nav__main-menu__link active">Getting started</a>
+                        <a href="{{siteRootPath}}/index.html" class="header-nav__main-menu__link active">Getting started</a>
                       </li>
                       <li>
                         <button href="" onclick="docs()" class="header-nav__main-menu__link dropbtn">Docs</button>
@@ -48,7 +48,7 @@
                         </div>  
                       </li>
                       <li>
-                        <a href="" class="header-nav__main-menu__link">Downloads</a>
+                        <a href="https://downloads.teradata.com/" class="header-nav__main-menu__link">Downloads</a>
                       </li>
                       <li>
                         <button href="" onclick="community()" class="header-nav__main-menu__link dropbtn">Community</button>
@@ -66,6 +66,21 @@
                         </div>
                       </li>
                     </ul>  
+                    <div class="head-nav__alt-menu-wrapper header-nav__element">
+                      <ul class="header-nav__alt-menu d-flex align-items-center justify-content-end">
+                        <li>
+                          <section class="navbar-search" id="searchtextbox"> 
+                            {{#if env.SITE_SEARCH_PROVIDER}}
+                            {{#if (ne page.layout "landing-page")}}
+                            <div class="navbar-item">
+                              <input id="search-input" type="text" placeholder="Search Getting Started">
+                            </div>
+                            {{/if}}
+                            {{/if}}
+                          </section>
+                        </li>
+                      </ul>
+                    </div>
                   </nav>
                 </div>
               </div>
@@ -175,17 +190,9 @@
              <div class="page-blackout"></div>
           </section>
         </div>
-        <section class="navbar-search">
-          {{#if env.SITE_SEARCH_PROVIDER}}
-          {{#if (ne page.layout "landing-page")}}
-          <div class="navbar-item">
-            <input id="search-input" type="text" placeholder="Search Getting Started">
-          </div>
-          {{/if}}
-          {{/if}}
-        </section>
+
       </nav>
-    </div>
+<!--    </div> -->
 <!-- New Navbar -->
 <!-- 
 <header class="header" role="banner">
@@ -319,8 +326,14 @@
   <div class="page-blackout" tabindex="-1" aria-hidden="true"></div>
 </header>-->
   <script>
+    var sectionElement = document.querySelector(".navbar-search");
+    var devElement = document.querySelector(".dev");
+    if (sectionElement.innerHTML.trim() === "") {
+      devElement.style.marginRight = "-225px"; 
+    }
+
     /* Script for desktop dropdowns */
-        function community() {
+    function community() {
 
       var blackoutElement = document.querySelector('.page-blackout');
 

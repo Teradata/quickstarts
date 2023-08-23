@@ -68,22 +68,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   font-family: 'Inter-SemiBold';
   src: url("{{uiRootPath}}/webfonts/Inter/Inter-SemiBold.ttf") format('truetype');
 }  
-
+*/
 body {
   transition: all .25s ease-in-out 0s;
   overflow-x: hidden;
 }
-*/
+
 body {
   padding-top: 54px;
 }
-/*
+
 @media screen and (min-width: 1024px) {
   body {
     padding-top: 64px;
   }
 }
-*/
+
 
 /*
 body.menu-open {
@@ -91,6 +91,7 @@ body.menu-open {
   position: relative;
 }
 */
+
 article a[href^="http"][target="_blank"]::after,
 article a[href^="https://"][target="_blank"]::after {
   content: "";
@@ -185,7 +186,7 @@ button {
     -webkit-overflow-scrolling: touch;
     will-change: transform;
     -ms-overflow-style: none;
-    scrollbar-width: none;
+  /*  scrollbar-width: none;*/
     font-size: 14px;
   }
 
@@ -397,8 +398,9 @@ button {
 @media screen and (min-width: 1024px) {
   /*
   body{
-    margin-top: 30px;
-  }
+    margin-top: 80px;
+  }*/
+  /*
   .navbar {
     height: 88px;
     background: #fff;
@@ -493,7 +495,7 @@ button {
 
   .navbar-search {
     display: block;
-    padding: 10px 0;
+    padding: 1px 0;
   }
   /*Style for drop down menu*/
   /*
@@ -657,11 +659,11 @@ button {
 .nav-panel-menu {
   height: auto;
 }
-/*
+
 article.doc {
   margin-top: 60px;
 }
-*/
+
 @media screen and (min-width: 1024px) {
   article.doc {
     margin-top: 0;
@@ -679,6 +681,7 @@ article.doc {
 
 .article {
   background-color: #f5f5f5;
+  margin-top: 0px;
 }
 /*
 main.article {
