@@ -28,3 +28,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build/site
           cname: quickstarts.teradata.com
+          keep_files: true

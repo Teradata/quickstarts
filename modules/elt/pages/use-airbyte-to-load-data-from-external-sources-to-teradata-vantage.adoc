@@ -35,7 +35,7 @@ include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 +
 [source, bash]
 ----
-git clone https://github.com/airbytehq/airbyte.git
+git clone --depth 1 https://github.com/airbytehq/airbyte.git
 cd airbyte
 ----
 
