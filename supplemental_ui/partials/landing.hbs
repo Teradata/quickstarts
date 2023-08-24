@@ -1,4 +1,4 @@
-<div class="body">
+<!--<div class="body">-->
   <main class="article">
     <div class="content landing">
       <div class="landing-container">
@@ -412,13 +412,25 @@
       </div>
     </div>
   </main>
-</div>
+<!--</div>-->
 
 <style>
+  /*
+  main.article {
+    padding-bottom: 30px;
+  }
 .call-to-action {
   margin-top: 20px;
 }
-
+*/
+@media (min-width: 1025px){
+  main {
+      margin-top: 0px;
+  }
+}
+main {
+    margin-top: 0px;
+}
 @media screen and (max-width: 576px) {
   .call-to-action .call-to-action-button,
   .call-to-action .call-to-action-button-secondary {
@@ -473,6 +485,7 @@
   margin-right: 16px;
   max-width: 1200px;
   width: 100%;
+  margin-top: 50px;
 }
 
 .landing {
