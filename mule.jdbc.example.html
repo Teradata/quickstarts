@@ -1724,7 +1724,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <article class="doc">
 <h1 class="page">Query Teradata Vantage from a Mule service</h1>
 <p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
-Last updated: January 6th, 2022</p>
+Last updated: August 30, 2023</p>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
@@ -1756,12 +1756,6 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 </tr>
 </table>
 </div>
-</li>
-<li>
-<p>Java JDK. See installation instructions for OpenJDK: <a href="https://openjdk.java.net/install/" class="bare">https://openjdk.java.net/install/</a>.</p>
-</li>
-<li>
-<p>Apache Maven. See installation instructions: <a href="https://maven.apache.org/install.html" class="bare">https://maven.apache.org/install.html</a>.</p>
 </li>
 </ul>
 </div>
@@ -1812,13 +1806,31 @@ Since the HTTP connector is configured as request-response, the result is return
 <p>Clone <code>Teradata/mule-jdbc-example</code> repository:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"> git clone git@github.com:Teradata/mule-jdbc-example.git</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">  git clone https://github.com/Teradata/mule-jdbc-example</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Edit <code>src/main/mule/querying-a-teradata-database.xml</code>, find the Teradata connection string <code>jdbc:teradata://localhost/user=dbc,password=dbc</code> and replace Teradata connection parameters to match your environment.</p>
+<p>Edit <code>src/main/mule/querying-a-teradata-database.xml</code>, find the Teradata connection string <code>jdbc:teradata://&lt;HOST&gt;/user=&lt;username&gt;,password=&lt;password&gt;</code> and replace Teradata connection parameters to match your environment.</p>
 </li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Should your Vantage instance be accessible via ClearScape Analytics Experience, you must replace &lt;HOST&gt; with the host URL of your ClearScape Analytics Experience environment. Additionally, the 'user' and 'password' should be updated to reflect your ClearScape Analytics Environment&#8217;s username and password.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Create a sample database in your Vantage instance.
 Populate it with sample data.</p>
@@ -1855,29 +1867,6 @@ Populate it with sample data.</p>
    '2004-08-01',
    01
  );</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Download the Teradata JDBC driver and unzip it:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"> wget https://downloads.teradata.com/download/cdn/connectivity/jdbc/17.10.00.24/TeraJDBC__indep_indep.17.10.00.24.zip
- unzip TeraJDBC__indep_indep.17.10.00.24.zip</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Import the JDBC driver to your local Maven repository:</p>
-<div id="mule_first_config" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"> mvn install:install-file \
- -Dfile=terajdbc4.jar \
- -DgroupId=com.teradata \
- -DartifactId=terajdbc4 \
- -Dversion=17.10.00.24 \
- -Dpackaging=jar \
- -DgeneratePom=true</code></pre>
 </div>
 </div>
 </li>
