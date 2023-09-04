@@ -87,7 +87,9 @@
     padding: 12px 24px;
     border-radius: 8px;
   }
-  
+  .dropdown-item:hover{
+    text-decoration: none;
+  }
   .test {
     padding-bottom: 30px;
     background-color: white;

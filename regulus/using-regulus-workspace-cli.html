@@ -34,9 +34,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" href="../_/css/styles.css">
 <link rel="stylesheet" href="../_/css/fontawesome.all.min.css">
 <link rel="stylesheet" href="../_/css/webfonts.css">
-<link rel="stylesheet" href="https://www.teradata.com/Content/Styles/compiled/main.css">
 <link rel="stylesheet" href="../_/css/navbar.css">
 <style>
+
   /*New Style*/
   .header-utility {
     height: 28px;
@@ -692,8 +692,8 @@ article.doc {
 
 .article {
   background-color: #f5f5f5;
-  margin-top: 0px;
 }
+
 /*
 main.article {
   padding-bottom: 30px;
@@ -932,6 +932,7 @@ aside.toc.sidebar {
 .doc .admonitionblock.important .icon {
   background-color: initial;
   color: #FF8F00;
+  border: none;
 }
 
 .doc .admonitionblock.note .icon {
@@ -1005,6 +1006,7 @@ i.fa[class*=' icon-']::before {
 
 .doc .source-toolbox img.copy-icon {
   content: url("../_/img/copy.svg");
+  max-width: 24px;
 }
 
 .doc .source-toolbox>:not(:last-child)::after {
@@ -1031,6 +1033,7 @@ span.search-result-highlight {
 }
 
 </style>
+<link rel="stylesheet" href="https://www.teradata.com/Content/Styles/compiled/main.css">
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
   </head>
@@ -1042,7 +1045,6 @@ span.search-result-highlight {
 </noscript>
 <!-- End Google Tag Manager (noscript) -->
 <!-- New Navbar -->
- <!--    <div> -->
       <nav>
         <div class="header-nav-wrapper">
           <section class="header-utility nav-3 background-grayLight color-navy d-none d-xl-flex">
@@ -1091,24 +1093,26 @@ span.search-result-highlight {
                         <button href="" onclick="community()" class="header-nav__main-menu__link dropbtn">Community</button>
                         <div id="myCommunityDropdown" class="dropdown-content dc2">
                           <a href="https://support.teradata.com" title="Technical Medium Blogs" class="dropdown-item mt">Teradata Community</a>
-                          <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item mb">Technical Medium Blogs
-                            <img src='../_/img/external-symbol.svg' class="ext-symbol">
+                          <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item mb">Technical Medium Blogs&nbsp; &nbsp; 
+                            <img src='../_/img/small-external.svg'>
                           </a>
-                          <a href="https://github.com/Teradata" title="Teradata on GitHub" target="_blank" class="dropdown-item mb">GitHub
-                            <img src='../_/img/external-symbol.svg' class="ext-symbol">
+                          <a href="https://github.com/Teradata" title="Teradata on GitHub" target="_blank" class="dropdown-item mb">GitHub&nbsp; &nbsp; 
+                            <img src='../_/img/small-external.svg'>
                           </a>
-                          <a href="https://stackoverflow.com/questions/tagged/teradata" title="Stack Overflow Teradata questions" target="_blank" class="dropdown-item">Stack Overflow
-                            <img src='../_/img/external-symbol.svg' class="ext-symbol">
+                          <a href="https://stackoverflow.com/questions/tagged/teradata" title="Stack Overflow Teradata questions" target="_blank" class="dropdown-item">Stack Overflow&nbsp; &nbsp; 
+                            <img src='../_/img/small-external.svg'>
                           </a>  
                         </div>
                       </li>
                     </ul>  
                     <div class="head-nav__alt-menu-wrapper header-nav__element">
-                      <ul class="header-nav__alt-menu d-flex align-items-center justify-content-end">
+                      <ul class="header-nav__alt-menu d-flex justify-content-end">
                         <li>
                           <section class="navbar-search" id="searchtextbox"> 
                             <div class="navbar-item">
-                              <input id="search-input" type="text" placeholder="Search Getting Started">
+                              <div class="search-container">
+                                <input id="search-input" type="text" placeholder="Search Getting Started">
+                              </div>
                             </div>
                           </section>
                         </li>
@@ -1229,139 +1233,8 @@ span.search-result-highlight {
         </div>
 
       </nav>
-<!--    </div> -->
-<!-- New Navbar -->
-<!-- 
-<header class="header" role="banner">
-  <nav class="navbar">
-    -->
-<!-- 
-    <section class="navbar-top">
-      <div class="navbar-logo">
-        <a href="https://www.teradata.com/">
-          <img class="" width="148" height="28" src='../_/img/TD-Logo.svg' alt="down arrow" title="Teradata Getting Started">
-        </a>
-      </div>
-
-      <div class="navbar-brand">
-        <a class="navbar-item" href="https://developer.teradata.com/">Developers</a>
-      </div>
-
-      <button class="header-nav-mobile__menu-icon" role="button" aria-label="Click or Press enter to open menu" tabindex="0">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </section>
-    -->
-<!-- 
-    <section class="navbar-menu">
-      <div class="header-nav-mobile__menu">
-        <ul>
-          <li class="header-nav-mobile__menu-item">
-            <header class="header-nav-mobile__menu-item__header">
-              <a href="../index.html">Getting Started</a>
-              <img class="line">
-            </header>
-          </li>
-          <li class="header-nav-mobile__menu-item">
-            <header class="header-nav-mobile__menu-item__header">
-              <button href="" onclick="myFunction()" class="dropbtn">Docs</button>
-                <div id="myDropdown" class="dropdown-content ul-color">
-                  <a href="https://docs.teradata.com/p/VantageCloud/Lake" class="dropdown-item">VantageCloud Lake Documentation</a>
-                  <a href="https://docs.teradata.com/" class="dropdown-item">All Documentation</a> 
-                </div>
-            </header>
-          </li>
-          <li class="header-nav-mobile__menu-item has-sub-items">
-            <header class="header-nav-mobile__menu-item__header">
-              <button href="" onclick="myFunction()" class="dropbtn">Docs</button>
-              <div id="myDropdown" class="dropdown-content ul-color">
-                <a href="https://docs.teradata.com/p/VantageCloud/Lake" class="dropdown-item">VantageCloud Lake Documentation</a>
-                <a href="https://docs.teradata.com/" class="dropdown-item">All Documentation</a>
-              </div>
-              -->
-            <!--  <a href="https://docs.teradata.com/">Docs</a> -->
-        <!--      <img class="navbar-arrow" src='../_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Docs"> -->
-      <!--      </header> -->
-            <!--
-            <div>
-              <div class="header-nav-mobile__menu-item__links">
-                <div class="ul-color">
-                  <li><a href="https://docs.teradata.com/p/VantageCloud/Lake" class="dropdown-item">VantageCloud Lake Documentation</a></li>
-                  <li><a href="https://docs.teradata.com/" class="dropdown-item">All Documentation</a></li>
-                </div>
-              </div>
-            </div>
-            -->
-            <!--
-          </li>
-          <li class="header-nav-mobile__menu-item">
-            <header class="header-nav-mobile__menu-item__header">
-              <a href="https://downloads.teradata.com/">Downloads</a>
-            </header>
-          </li>
-          <li class="header-nav-mobile__menu-item has-sub-items">
-            <header class="header-nav-mobile__menu-item__header i-alignment">
-              <a href="https://support.teradata.com/community ">Community</a>
-              -->
-       <!--       <img class="navbar-arrow" src='../_/img/icons/arrow_drop_down.svg' alt="down arrow" title="Community"> -->
-       <!--
-            </header>
-            <div>
-              <div class="header-nav-mobile__menu-item__links">
-                <ul class="ul-color">
-                  <li>
-                    <a href="https://support.teradata.com/community?_gl=1*1uhhzsp*_ga*MTU2NjYwMTU5OC4xNjYxNDc0NDcz*_ga_7PE2TMW3FE*MTY3NDI0NDY1Mi4zNS4wLjE2NzQyNDQ2NTUuMC4wLjA." class="dropdown-item">Teradata Community</a>
-                  </li>
-                  <li>
-                    <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item">Technical Medium Blogs
-                      <img src='../_/img/icons/external-symbol.svg' class="ext-symbol">
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://github.com/Teradata" title="Teradata on GitHub" target="_blank" class="dropdown-item">GitHub
-                      <img src='../_/img/icons/external-symbol.svg' class="ext-symbol">
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://stackoverflow.com/questions/tagged/teradata" title="Stack Overflow Teradata questions" target="_blank" class="dropdown-item">Stack Overflow
-                      <img src='../_/img/icons/external-symbol.svg' class="ext-symbol">
-                    </a>
-                  </li>               
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li class="header-nav-mobile__menu-item">
-            <header class="header-nav-mobile__menu-item__header">
-              <button href="" onclick="myFunction()" class="dropbtn">Test</button>
-                <div id="myDropdown" class="dropdown-content ul-color">
-                  <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item">Technical Medium Blogs
-                    <img src='../_/img/icons/external-symbol.svg' class="ext-symbol">
-                  </a>
-                  <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item">Technical Medium Blogs
-                    <img src='../_/img/icons/external-symbol.svg' class="ext-symbol">
-                  </a>
-                  <a href="https://github.com/Teradata" title="Teradata on GitHub" target="_blank" class="dropdown-item">GitHub
-                    <img src='../_/img/icons/external-symbol.svg' class="ext-symbol">
-                  </a>
-                  <a href="https://stackoverflow.com/questions/tagged/teradata" title="Stack Overflow Teradata questions" target="_blank" class="dropdown-item">Stack Overflow
-                    <img src='../_/img/icons/external-symbol.svg' class="ext-symbol">
-                  </a>  
-                </div>
-            </header>
-          </li>
-        </ul>
-      </div>
-    </section>
- -->
-
   </nav>
-  <!-- 
-  <div class="page-blackout" tabindex="-1" aria-hidden="true"></div>
-</header>-->
+
   <script>
     var sectionElement = document.querySelector(".navbar-search");
     var devElement = document.querySelector(".dev");
@@ -2760,8 +2633,13 @@ If you have any questions or need further assistance, please visit our <a href="
 <style>
 @media screen and (min-width: 1024px){
   .body {
-    margin-top: 60px;
+    margin-top: 116px;
   }
+}
+
+.article {
+/*  background-color: #f5f5f5;*/
+  margin-top: 0px;
 }
 .search-container {
   display: flex;
@@ -3202,9 +3080,10 @@ footer.footer-nav {
   }
 }
 */
+/*
 main.article {
     padding-bottom: 30px;
-}
+}*/
 </style>
 
 <!--Old Footer markup -->
