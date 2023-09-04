@@ -23,9 +23,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" href="{{uiRootPath}}/css/styles.css">
 <link rel="stylesheet" href="{{uiRootPath}}/css/fontawesome.all.min.css">
 <link rel="stylesheet" href="{{uiRootPath}}/css/webfonts.css">
-<link rel="stylesheet" href="https://www.teradata.com/Content/Styles/compiled/main.css">
 <link rel="stylesheet" href="{{uiRootPath}}/css/navbar.css">
 <style>
+
   /*New Style*/
   .header-utility {
     height: 28px;
@@ -681,8 +681,8 @@ article.doc {
 
 .article {
   background-color: #f5f5f5;
-  margin-top: 0px;
 }
+
 /*
 main.article {
   padding-bottom: 30px;
@@ -921,6 +921,7 @@ aside.toc.sidebar {
 .doc .admonitionblock.important .icon {
   background-color: initial;
   color: #FF8F00;
+  border: none;
 }
 
 .doc .admonitionblock.note .icon {
@@ -994,6 +995,7 @@ i.fa[class*=' icon-']::before {
 
 .doc .source-toolbox img.copy-icon {
   content: url("{{uiRootPath}}/img/copy.svg");
+  max-width: 24px;
 }
 
 .doc .source-toolbox>:not(:last-child)::after {
@@ -1020,5 +1022,6 @@ span.search-result-highlight {
 }
 
 </style>
+<link rel="stylesheet" href="https://www.teradata.com/Content/Styles/compiled/main.css">
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
 <link rel="icon" href="{{{uiRootPath}}}/img/favicon.ico" type="image/x-icon">
