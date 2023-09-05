@@ -2,6 +2,7 @@
 :experimental:
 :page-author: Ravi Chillanki
 :page-email: ravi.chillanki@teradata.com
+:page-revdate: August 4th, 2023
 :description: dbt Feast integration with Teradata
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, AI/ML, AI, ML, feature engineering, feature store, FEAST
 :tabs:
