@@ -1,13 +1,14 @@
 = A Data pipeline with dbt+FEAST on Teradata
-
 :experimental:
 :page-author: Ravi Chillanki
 :page-email: ravi.chillanki@teradata.com
 :description: dbt Feast integration with Teradata
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, AI/ML, AI, ML, feature engineering, feature store, FEAST
+:tabs:
 
 == Overview
 
-This how-to shows an approach to create a data pipeline with Teradata database. While there are several ways a data pipeline can be designed, this document helps to understand how components of two of the popular tools in the software industry, namely link:https://docs.getdbt.com/docs/introduction[dbt] and link:https://docs.feast.dev/[FEAST],
+This how-to shows an approach to creating a data pipeline with Teradata database. While there are several ways a data pipeline can be designed, this document helps to understand how components of two of the popular tools in the software industry, namely link:https://docs.getdbt.com/docs/introduction[dbt] and link:https://docs.feast.dev/[FEAST],
 can be integrated with Teradata Vantage. Teradata's robust 'link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Analytics-Database-Analytic-Functions-17.20[Analytics Database Analytic functions]' are used on the Teradata data source within dbt, for data transformation. The output of which is loaded into FEAST to materialize features that can be used in ML models.
 
 == Introduction
