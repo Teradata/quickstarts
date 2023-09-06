@@ -34,6 +34,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" href="./_/css/styles.css">
 <link rel="stylesheet" href="./_/css/fontawesome.all.min.css">
 <link rel="stylesheet" href="./_/css/webfonts.css">
+<link rel="stylesheet" href="./_/css/newnavbar.css">
 <link rel="stylesheet" href="./_/css/navbar.css">
 <style>
 
@@ -692,7 +693,6 @@ article.doc {
 
 .article {
   background-color: #f5f5f5;
-  margin-top: 0px;
 }
 
 /*
@@ -731,17 +731,17 @@ aside.toc.sidebar {
 
 .toolbar {
   background-color: #f5f5f5;
-  height: 44px;
+/*  height: 44px;
   top: 54px;
-  position: fixed;
+  position: fixed; */
   width: 100%;
 }
 
 @media screen and (min-width: 1024px) {
   .toolbar {
-    top: 70px;
+    top: 115px;
     height: 60px;
-    position: sticky;
+ /*   position: sticky;*/
   }
 }
 
@@ -1007,7 +1007,6 @@ i.fa[class*=' icon-']::before {
 
 .doc .source-toolbox img.copy-icon {
   content: url("./_/img/copy.svg");
-  max-width: 24px;
 }
 
 .doc .source-toolbox>:not(:last-child)::after {
@@ -1034,7 +1033,7 @@ span.search-result-highlight {
 }
 
 </style>
-<link rel="stylesheet" href="https://www.teradata.com/Content/Styles/compiled/main.css">
+
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
 <link rel="icon" href="./_/img/favicon.ico" type="image/x-icon">
   </head>
@@ -1736,7 +1735,7 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>
           <div class="doc">
             <div class="admonitionblock question landing-page">
-              <table class="bc">
+              <table>
                 <tbody><tr>
                 <td class="icon">
                 <i class="fa icon-question"></i>Didn’t find what you were looking for?
@@ -1764,15 +1763,19 @@ document.addEventListener("DOMContentLoaded", function () {
     color: #00233c;
     font-family: Inter,sans-serif;
   }
+  /*
   .bc{
     background-color: #eaf3f2;
-  }
+  }*/
+  /*
   .bc a, .bc th {
     font-weight: 100;
-  }
+  }*/
+  /*
   .doc .admonitionblock .icon {
     border: none;
-  }
+  }*/
+  /*
   table td, table th {
     padding: 12px;
     border: none;
@@ -1780,10 +1783,11 @@ document.addEventListener("DOMContentLoaded", function () {
     text-align: left;
   }
 
-  /*
+  */
   main.article {
     padding-bottom: 30px;
   }
+/*
 .call-to-action {
   margin-top: 20px;
 }
@@ -1840,19 +1844,19 @@ main {
     display: inherit;
   }
 }
-/*
+
 @media screen and (min-width: 1024px) {
   .call-to-action {
     margin-top: 48px;
   }
 }
-*/
+
 .landing-container {
   margin-left: 16px;
   margin-right: 16px;
   max-width: 1200px;
   width: 100%;
-  margin-top: 50px;
+/*  margin-top: 50px; */
 }
 
 .landing {
@@ -2093,6 +2097,7 @@ main {
 .tile-container .doc {
   padding: 0px;
   margin: 0px;
+  margin-bottom: 30px;
 }
 
 .doc .admonitionblock.question.landing-page .icon {
