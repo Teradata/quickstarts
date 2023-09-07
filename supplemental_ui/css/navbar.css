@@ -130,3 +130,12 @@
   .header-nav__element.d-flex a.dev {
     margin-top: 8px;  
   }
+  @media screen and (min-width: 1024px){
+    .nav {
+      top: 7.5rem;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      position: sticky;
+      height: calc(100vh - 7.5rem);
+    }
+  }
