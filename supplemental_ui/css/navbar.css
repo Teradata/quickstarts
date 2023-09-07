@@ -132,10 +132,10 @@
   }
   @media screen and (min-width: 1024px){
     .nav {
-      top: 7.5rem;
+      top: 7.3rem;
       -webkit-box-shadow: none;
       box-shadow: none;
       position: sticky;
-      height: calc(100vh - 7.5rem);
+      height: calc(100vh - 7.3rem);
     }
   }
