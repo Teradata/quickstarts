@@ -310,4 +310,4 @@ Additionally, you can see detailed help messages per command.
 %help <command>
 ----
 
-
+include::ROOT:partial$community_link.adoc[]

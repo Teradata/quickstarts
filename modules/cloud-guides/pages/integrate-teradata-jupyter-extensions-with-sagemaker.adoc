@@ -137,3 +137,5 @@ image:{page-image-directory}/sagemaker.notebook.start.png[access demo notebooks,
 * link:https://docs.teradata.com/r/1YKutX2ODdO9ppo_fnguTA/root[Teradata® Package for Python User Guide]
 * link:https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html[Customize a Notebook Instance Using a Lifecycle Configuration Script]
 * link:https://github.com/aws-samples/amazon-sagemaker-notebook-instance-lifecycle-config-samples/blob/master/scripts/persistent-conda-ebs/on-create.sh[amazon sagemaker notebook instance lifecycle config samples]
+
+include::ROOT:partial$community_link.adoc[]

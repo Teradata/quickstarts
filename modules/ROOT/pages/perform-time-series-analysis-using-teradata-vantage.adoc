@@ -18,7 +18,7 @@ include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
 == Import data sets from AWS S3 using Vantage NOS
 
-Our sample data sets are available on S3 bucket and can be accessed from Vantage directly using Vantage NOS. Data is in CSV foramt and let's ingest them into Vantage for our time series analysis.
+Our sample data sets are available on S3 bucket and can be accessed from Vantage directly using Vantage NOS. Data is in CSV format and let's ingest them into Vantage for our time series analysis.
 
 Let's have a look at the data first. Below query will fetch 10 rows from S3 bucket.
 
@@ -246,3 +246,5 @@ In this quick start we have learnt how easy it is to analyse time series dataset
 * link:https://docs.teradata.com/r/Teradata-VantageTM-Time-Series-Tables-and-Operations/July-2021/Introduction-to-Teradata-Time-Series-Tables-and-Operations[Teradata Vantage™ - Time Series Tables and Operations]
 * xref:nos.adoc[]
 * link:https://docs.teradata.com/r/2mw8ooFr~xX0EaaGFaDW8A/root[Teradata Vantage™ - Native Object Store Getting Started Guide]
+
+include::ROOT:partial$community_link.adoc[]

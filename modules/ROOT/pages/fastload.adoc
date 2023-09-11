@@ -301,3 +301,5 @@ This how-to demonstrated how to ingest large amounts of data into Vantage. We lo
 == Further reading
 * link:https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root[Teradata® `Fastload` Reference]
 * xref::nos.adoc[]
+
+include::ROOT:partial$community_link.adoc[]

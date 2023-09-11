@@ -25,7 +25,7 @@ The application of these concepts is illustrated through the ELT process of `ted
 * Access to a Teradata Vantage instance.
 +
 include::ROOT:partial$vantage_clearscape_analytics.adoc[]
-* Python 3.7, 3.8, 3.9 or 3.10 installed.
+* Python *3.7*, *3.8*, *3.9* or *3.10* installed.
 
 * A database client for running database commands, an example of the configuration of one such client is presented in link:https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html[this tutorial.,  window="_blank"].
 
@@ -38,20 +38,34 @@ include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 git clone https://github.com/Teradata/teddy_retailers_dbt-dev teddy_retailers
 cd teddy_retailers
 ----
-2. Create a new python environment to manage dbt and its dependencies. Activate the environment:
+2. Create a new python environment to manage dbt and its dependencies. Confirm that the Python Version you are using to create the environment is within the supported versions listed above.
 +
 [source, bash]
 ----
-python3 -m venv env
+python -m venv env
+----
+
+3. Activate the python environment according to your operating system.
++
+[source, bash]
+----
 source env/bin/activate
 ----
-3. Install the `dbt-teradata` module. The core dbt module is included as a dependency so you don't have to install it separately:
+for Mac, Linux, or
++
+[source, bash]
+----
+env\Scripts\activate
+----
+for Windows
+4. Install the `dbt-teradata` module. The core dbt module is included as a dependency so you don't have to install it separately:
 +
 [source, bash]
 ----
 pip install dbt-teradata
 ----
-4. Install the project's dependencies `dbt-utils` and `teradata-utils`. This can be done through the following command:
+
+5. Install the project's dependencies `dbt-utils` and `teradata-utils`. This can be done through the following command:
 +
 [source, bash]
 ----
@@ -79,8 +93,8 @@ You can execute these scripts by copying and pasting them into your database cli
 
 We will now configure dbt to connect to your Vantage database. 
 Create the file `$HOME/.dbt/profiles.yml` with the following content. Adjust `<host>`, `<user>`, `<password>` to match your Teradata Vantage instance.
-If you have already used dbt before in your environment you only need to add a profile for the project in your `profiles.yml` file.
-
+If you have already used dbt before in your environment you only need to add a profile for the project in your home's directory `.dbt/profiles.yml` file.
+If the directory .dbt doesn't exist in your system yet you will need to create it and add the profiles.yml to manage your dbt profiles.
 
 [source, yaml, id="dbt_first_config", role="emits-gtm-events"]
 ----
@@ -267,6 +281,4 @@ In this tutorial, we explored the utilization of advanced dbt concepts with Tera
 The sample project showcased the transformation of source data into a dimensional data mart. 
 Throughout the project, we implemented several advanced dbt concepts, including incremental materializations, utility macros, and Teradata modifiers.
 
-== For any questions.
-link:https://support.teradata.com/community?id=community_forum&sys_id=353d17d44fed7f00dcf7a6118110c7b5[Contact us in our community., window="_blank"]
-
+include::ROOT:partial$community_link.adoc[]

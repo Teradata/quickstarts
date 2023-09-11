@@ -1,0 +1,48 @@
+= Connect to Vantage using Python
+:experimental:
+:page-author: Krutik Pathak
+:page-email: krutik.pathak@teradata.com
+:page-revdate: August 2nd, 2023
+:description: How to connect to Teradata Vantage using teradatasql Python database driver
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, teradatasql, python applications, business intelligence, enterprise analytics
+
+== Overview
+
+This how-to demonstrates how to connect to Vantage using link:https://github.com/Teradata/python-driver[teradatasql, window="_blank"] Python database driver for Teradata Vantage.
+
+== Prerequisites
+
+* 64-bit Python 3.4 or later.
+
+* `teradatasql` driver installed in your system:
++
+[source, bash]
+----
+pip install teradatasql
+----
++
+[NOTE]
+====
+`teradatasql` package runs on Windows, macOS (10.14 Mojave or later) and Linux. For Linux, currently only Linux x86-64 architecture is supported.  
+====
+
+* Access to a Teradata Vantage instance. Currently driver is supported for use with Teradata Database 16.10 and later releases.
++
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
+
+== Code to send a query
+
+This is a simple Python code to connect to Teradata Vantage using `teradatasql`. All that is left, is to pass connection and authentication parameters and run a query:
+
+++++
+<script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fdev-rel-python-driver-demo%2Fblob%2Fmain%2Fsrc%2Fteradata_python_connection.py&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></script>
+++++
+
+== Summary
+
+This how-to demonstrated how to connect to Teradata Vantage using `teradatasql` Python database driver. It described a sample Python code to send SQL queries to Teradata Vantage using `teradatasql`.
+
+== Further reading
+* link:https://github.com/Teradata/python-driver[teradatasql Python driver reference, window="_blank"]
+
+include::ROOT:partial$community_link.adoc[]
