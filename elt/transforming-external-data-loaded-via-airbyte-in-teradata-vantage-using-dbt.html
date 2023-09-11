@@ -1671,7 +1671,7 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 <div class="ulist">
 <ul>
 <li>
-<p>The sample data should be loaded into Teradata Vantage using Airbyte.  Please refer to <a href="https://quickstarts.teradata.com/elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html" target="_blank" rel="noopener">Use Airbyte to load data from external sources to Teradata Vantage</a> for more details on completing this step.</p>
+<p>Follow the steps in <a href="https://quickstarts.teradata.com/elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html" target="_blank" rel="noopener">the Airbyte tutorial</a>. Make sure you load data from <a href="https://docs.google.com/spreadsheets/d/1-R4F3q8J9KDnFRWpiT3Ysp1RlOoUu3PeQR7xDeLxFts/edit#gid=42273685">the Jaffle Shop spreadsheet</a> and not the default dataset referenced by the Airbyte tutorial. Also, set the <code>Default Schema</code> in the Teradata destination to <code>airbyte_jaffle_shop</code>.</p>
 </li>
 </ul>
 </div>
@@ -1683,11 +1683,28 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 </td>
 <td class="content">
 <div class="paragraph">
-<p>When you configure a Teradata destination in Airbyte, it will ask for a <code>Default Schema</code>. For this demonstration we have set the <code>Default Schema</code> as <code>airbyte_jaffle_shop</code>.</p>
+<p>When you configure a Teradata destination in Airbyte, it will ask for a <code>Default Schema</code>. Set the <code>Default Schema</code> to <code>airbyte_jaffle_shop</code>.</p>
 </div>
 </td>
 </tr>
 </table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_clone_the_project"><a class="anchor" href="#_clone_the_project"></a>Clone the project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Clone the tutorial repository and change the directory to the project directory:</p>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://github.com/Teradata/airbyte-dbt-jaffle
+cd airbyte-dbt-jaffle</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -1712,7 +1729,7 @@ source env/bin/activate</code></pre>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>You can activate the virtual environment in Windows executing the corresponding batch file <code>./myenv/Scripts/activate</code>.</p>
+<p>You can activate the virtual environment in Windows by executing the corresponding batch file <code>./myenv/Scripts/activate</code>.</p>
 </div>
 </td>
 </tr>
@@ -1744,7 +1761,7 @@ source env/bin/activate</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The dbt project wizard will ask you for a project name and database management system to use in the project. In this demo we define the project name as <code>dbt_airbyte_demo</code>. Since we are using the dbt-teradata connector, the only database management system available is Teradata.</p>
+<p>The dbt project wizard will ask you for a project name and database management system to use in the project. In this demo, we define the project name as <code>dbt_airbyte_demo</code>. Since we are using the dbt-teradata connector, the only database management system available is Teradata.</p>
 </div>
 <div class="imageblock">
 <div class="content">
