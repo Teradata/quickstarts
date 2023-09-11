@@ -1,4 +1,4 @@
-= Transforming External Data Loaded via Airbyte in Teradata Vantage Using dbt
+= Transform data Loaded with Airbyte using dbt
 :experimental:
 :page-author: Krutik Pathak
 :page-email: krutik.pathak@teradata.com
