@@ -155,8 +155,8 @@ RUN chown -R jovyan:users /opt/conda
 RUN rm -rf $HOME/.local
 ----
 4. You can optionally install Teradata package for Python and Teradata package for R. See the following pages for details:
-* link:https://downloads.teradata.com/download/connectivity/teradata-package-for-python-teradataml[Teradata Package for Python - teradataml download page]
-* link:https://downloads.teradata.com/download/connectivity/teradata-package-for-r-tdplyr[Teradata Package for R - tdplyr download page]
+* link:https://downloads.teradata.com/download/aster/teradata-python-package-teradataml[Teradata Package for Python - teradataml download page]
+* link:https://downloads.teradata.com/download/aster/tdplyr-download-page[Teradata Package for R - tdplyr download page]
 
 == Further reading
 * link:https://teradata.github.io/jupyterextensions[Teradata Jupyter Extensions Website]
