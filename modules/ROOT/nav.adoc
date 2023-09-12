@@ -51,10 +51,6 @@
 ** xref:other-integrations:integrate-teradata-vantage-with-knime.adoc[]
 ** xref:other-integrations:getting.started.dbt-feast-teradata-pipeline.adoc[]
 
-* Demos
-** Financial
-*** xref:jupyter-demos:gcp-vertex-ai-pipelines-vantage-byom-housing-example.adoc[]
-
 * Regulus (preview)
 ** xref:regulus:install-regulus-docker-image.adoc[]
 ** xref:regulus:getting-started-with-regulus.adoc[]
