@@ -9,8 +9,7 @@
 
 == Overview
 
-This how-to shows an approach to creating a data pipeline with the Teradata database. While there are several ways a data pipeline can be designed, this document helps to understand how components of two of the popular tools in the software industry, namely link:https://docs.getdbt.com/docs/introduction[dbt] and link:https://docs.feast.dev/[FEAST],
-can be integrated with Teradata Vantage. Teradata's robust 'link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Analytics-Database-Analytic-Functions-17.20[Analytics Database Analytic functions]' are used on the Teradata data source within dbt, for data transformation. The output of which is loaded into FEAST to materialize features that can be used in ML models.
+This tutorial shows an approach to creating a dbt pipeline that takes raw data and turns it FEAST features. The pipeline leverages  'link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Analytics-Database-Analytic-Functions-17.20[ClearScape Analytics functions]' for data transformations. The output of the transformations is loaded into FEAST to materialize features that can be used in ML models.
 
 == Introduction
 === dbt
@@ -24,12 +23,12 @@ link:https://docs.feast.dev/[Feast] (Feature Store) is a flexible data system th
 
 * Access to a Teradata Vantage database instance.
 include::ROOT:partial$vantage_clearscape_analytics.adoc[]
-* Feast-Teradata library installed locally. See link:https://quickstarts.teradata.com/modelops/using-feast-feature-store-with-teradata-vantage.html#_overview[Feast-Teradata Installation instructions]
+* Feast-Teradata  installed locally. See link:https://quickstarts.teradata.com/modelops/using-feast-feature-store-with-teradata-vantage.html#_overview[Feast-Teradata installation instructions]
 
-* dbt library installed locally. See link:https://quickstarts.teradata.com/dbt.html[dbt Installation instructions]
+* dbt installed locally. See link:https://quickstarts.teradata.com/dbt.html[dbt installation instructions]
 
 == Objective
-To create a data pipeline with Teradata Vantage as a source, perform data transformation on some variables in dbt. The principle transformation of data we do in dbt is the one-hot encoding of several columns like gender, marital status, state code, etc. On top of that, the account type column data will be transformed by performing aggregation operations on a couple of columns. All of this together generates our desired Analytic_dataset with transformed data. Then we use the transformed dataset output as input in FEAST to store features that can be used to generate a training dataset for models.
+The goal is to create a data pipeline with Teradata Vantage as a source, and perform data transformation on some variables in dbt. The principle transformation of data we do in dbt is the one-hot encoding of several columns like gender, marital status, state code, etc. On top of that, the account type column data will be transformed by performing aggregation operations on a couple of columns. All of this together generates the desired dataset with transformed data. The transformed dataset is used as an input into FEAST to store features. Features are then used to generate a training dataset for models.
 
 
 == Getting started
@@ -121,7 +120,7 @@ raw_customers   1--* raw_accounts
 raw_accounts      1--* raw_transactions
 ....
 
-dbt takes these tables' raw data and builds the following model, which is more suitable for ML modelling and analytics tools:
+dbt takes this raw data and builds the following model, which is more suitable for ML modeling and analytics tools:
 
 [erd, format=svg, width=100%]
 ....
@@ -167,12 +166,12 @@ dbt takes these tables' raw data and builds the following model, which is more s
 
 
 == Configure dbt
-We will now configure dbt to connect to your Vantage database. Create file `$HOME/.dbt/profiles.yml` with the following content. Adjust `<host>`, `<user>`, `<password>` to match your Teradata instance.
+Create file `$HOME/.dbt/profiles.yml` with the following content. Adjust `<host>`, `<user>`, `<password>` to match your Teradata instance.
 
 [NOTE]
 .Database setup
 ====
-The following dbt profile points to a database called `teddy_bank`. You can change `schema` value to point to an existing database in your Teradata Vantage instance
+The following dbt profile points to a database called `teddy_bank`. You can change `schema` value to point to an existing database in your Teradata Vantage instance:
 ====
 
 [source, yaml, id="dbt_first_config", role="emits-gtm-events"]
@@ -188,7 +187,7 @@ dbt_transformation:
       schema: teddy_bank
       tmode: ANSI
 ----
-Now, that we have the profile file in place, we can validate the setup:
+Validate the setup:
 
 [source, bash]
 ----
@@ -227,23 +226,28 @@ offline_store:
     log_mech: TDNEGO
 entity_key_serialization_version: 2
 ----
-=== syntax for Teradata SQL Registry
+=== Syntax for Teradata SQL Registry
 [source, python]
 ----
 path = 'teradatasql://'+ teradata_user +':' + teradata_password + '@'+host + '/?database=' +
         teradata_database + '&LOGMECH=' + teradata_log_mech
 ----
 == Run dbt
-Teradata Vantage has long been recognized as a database that provides superior ELT(Extract Load Transform) capabilities. dbt enhances these capabilities by making use of its efficient Analytic functions to transform data.
-So, in this case, we will use data tables, customers, accounts, and transactions, that are made available on Vantage.
+In this step, we will populate the following data tables: `customers`, `accounts`, and `transactions`.
+
+[source, bash]
+----
+dbt seed
+----
 
 === Create the dimensional model
 Now that we have the raw data tables, we can instruct dbt to create the dimensional model:
+
 [source, bash]
 ----
 dbt run --select Analytic_Dataset
 ----
-=== Test the data
+
 == Run FEAST
 === Feature Repository definition
 * `TeradataSource:` Data Source for features stored in Teradata (Enterprise or Lake) or accessible via a Foreign Table from Teradata (NOS, QueryGrid)
@@ -269,9 +273,7 @@ ads_fv = FeatureView(name="ads_fv",entities=[customer],source=DBT_source, schema
     ],)
 ----
 === Generate training data
-The approach to generate training data can vary. Depending upon the requirements, 'entitydf' can be considered,
-that would join with the source data tables using the feature views mapping. Here is a sample function that
-generates certain training dataset.
+The approach to generating training data can vary. Depending upon the requirements, 'entitydf' may be joined with the source data tables using the feature views mapping. Here is a sample function that generates a training dataset.
 [source, python]
 ----
 def get_Training_Data():
@@ -302,11 +304,11 @@ def get_Training_Data():
 ----
 
 == Summary
-This tutorial demonstrated how to use dbt and FEAST with Teradata Vantage. The sample project takes raw data in Teradata Vantage and produces features with dbt, which is again saved as a model in the database itself. Metadata of features that form the base to generate a training dataset for a model was then created with FEAST; all its corresponding tables that create the feature store, are also generated at runtime within the same database. This sample project gives us an idea of how to integrate these three robust platforms.
+This tutorial demonstrated how to use dbt and FEAST with Teradata Vantage. The sample project takes raw data from Teradata Vantage and produces features with dbt. Metadata of features that form the base to generate a training dataset for a model was then created with FEAST; all its corresponding tables that create the feature store, are also generated at runtime within the same database.
 
 == Further Reading
 * link:https://docs.getdbt.com/docs/[dbt documentation]
 * link:https://github.com/Teradata/dbt-teradata[dbt-teradata plugin documentation]
 * link:https://docs.feast.dev/tutorials/using-scalable-registry[Feast Scalable Registry]
 * link:https://medium.com/teradata/enabling-highly-scalable-feature-store-with-teradata-vantage-and-feast-e01008fa8fdb[Enabling highly scalable feature store with Teradata Vantage and FEAST]
-* link:https://github.td.teradata.com/rc255085/Tdatapipeline[Git Repository] for this project.
+* link:https://github.com/Teradata/tdata-pipeline[Git repository] for this project.
