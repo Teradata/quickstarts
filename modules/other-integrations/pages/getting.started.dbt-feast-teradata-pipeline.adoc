@@ -1,4 +1,4 @@
-= A Data pipeline with dbt+FEAST on Teradata
+= Use dbt and FEAST to build a feature store in Teradata Vantage
 :experimental:
 :page-author: Ravi Chillanki
 :page-email: ravi.chillanki@teradata.com
