@@ -1803,7 +1803,7 @@ source env/bin/activate</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_the_jaffle_shop_dbt_project"><a class="anchor" href="#_the_jaffle_shop_dbt_project"></a>The Jaffle Shop dbt Project</h2>
+<h2 id="_the_jaffle_shop_dbt_project"><a class="anchor" href="#_the_jaffle_shop_dbt_project"></a>The Jaffle Shop dbt project</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><code>jaffle_shop</code> is a fictional restaurant that takes orders online. The data of this business consists of tables for <code>customers</code>, <code>orders</code> and `payments`that follow the entity relations diagram below:</p>
@@ -1824,7 +1824,7 @@ source env/bin/activate</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_dbt_transformations"><a class="anchor" href="#_dbt_transformations"></a>dbt Transformations</h2>
+<h2 id="_dbt_transformations"><a class="anchor" href="#_dbt_transformations"></a>dbt transformations</h2>
 <div class="sectionbody">
 <div class="admonitionblock note">
 <table>
@@ -1868,7 +1868,7 @@ source env/bin/activate</code></pre>
 <p>The models can be organized into different folders according to their purpose in the organization of the data warehouse/lake. Common folder layouts include a folder for <code>staging</code>, a folder for <code>core</code>, and a folder for <code>marts</code>. This structure can be simplified without affecting the workings of dbt.</p>
 </div>
 <div class="sect2">
-<h3 id="_staging_models"><a class="anchor" href="#_staging_models"></a>Staging Models</h3>
+<h3 id="_staging_models"><a class="anchor" href="#_staging_models"></a>Staging models</h3>
 <div class="paragraph">
 <p>In the original <a href="https://github.com/dbt-labs/jaffle_shop-dev" target="_blank" rel="noopener">dbt Jaffle Shop tutorial</a> the project&#8217;s data is loaded from csv files located in the <code>./data</code> folder through dbt&#8217;s <code>seed</code> command. The <code>seed</code> command is commonly used to load data from tables, however, this command is not designed to perform data loading.</p>
 </div>
@@ -1943,9 +1943,9 @@ SELECT * FROM flattened_json_data</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_dimensional_models_marts"><a class="anchor" href="#_dimensional_models_marts"></a>Dimensional Models (Marts)</h3>
+<h3 id="_dimensional_models_marts"><a class="anchor" href="#_dimensional_models_marts"></a>Dimensional models (marts)</h3>
 <div class="paragraph">
-<p>Building a Dimensional Model is a two step process:</p>
+<p>Building a Dimensional Model is a two-step process:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1959,7 +1959,7 @@ SELECT * FROM flattened_json_data</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_executing_transformations"><a class="anchor" href="#_executing_transformations"></a>Executing Transformations</h3>
+<h3 id="_executing_transformations"><a class="anchor" href="#_executing_transformations"></a>Executing transformations</h3>
 <div class="paragraph">
 <p>For executing the transformations defined in the dbt project we run:</p>
 </div>
@@ -1978,7 +1978,7 @@ SELECT * FROM flattened_json_data</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_model_testing"><a class="anchor" href="#_model_testing"></a>Model Testing</h3>
+<h3 id="_test_data"><a class="anchor" href="#_test_data"></a>Test data</h3>
 <div class="paragraph">
 <p>To ensure that the data in the dimensional model is correct, dbt allows us to define and execute tests against the data.</p>
 </div>
@@ -2010,7 +2010,7 @@ SELECT * FROM flattened_json_data</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_generate_documentation"><a class="anchor" href="#_generate_documentation"></a>Generate Documentation</h3>
+<h3 id="_generate_documentation"><a class="anchor" href="#_generate_documentation"></a>Generate documentation</h3>
 <div class="paragraph">
 <p>Our model consists of just a few tables. In a scenario with more sources of data, and a more complex dimensional model, documenting the data lineage and what is the purpose of each of the intermediate models is very important.</p>
 </div>
@@ -2034,7 +2034,7 @@ SELECT * FROM flattened_json_data</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_lineage_graph"><a class="anchor" href="#_lineage_graph"></a>Lineage Graph</h4>
+<h4 id="_lineage_graph"><a class="anchor" href="#_lineage_graph"></a>Lineage graph</h4>
 <div class="imageblock">
 <div class="content">
 <img src="_images/getting-started-with-airbyte-dbt/dbt_docs_serve.png" alt="dbt lineage graph" width="75%">
