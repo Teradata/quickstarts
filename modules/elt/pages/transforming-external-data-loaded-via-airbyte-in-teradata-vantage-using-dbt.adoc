@@ -110,7 +110,7 @@ If the debug command returned errors, you likely have an issue with the content 
 +
 image::{dir}/dbt_debug.png[dbt debug output, width=75%]
 
-== The Jaffle Shop dbt Project
+== The Jaffle Shop dbt project
 
 `jaffle_shop` is a fictional restaurant that takes orders online. The data of this business consists of tables for `customers`, `orders` and `payments`that follow the entity relations diagram below:
 
@@ -172,7 +172,7 @@ The data in the source system is normalized. A dimensional model based on the sa
 `dimension: customers`   1--* `fact: orders`
 ....
 
-== dbt Transformations
+== dbt transformations
 [NOTE]
 ====
 The complete dbt project encompassing the transformations detailed below is located at link:https://github.com/Teradata/airbyte-dbt-jaffle[Jaffle Project with Airbyte., window="_blank"]
@@ -203,7 +203,7 @@ As in all dbt projects, the folder `models` contains the data models that the pr
 
 The models can be organized into different folders according to their purpose in the organization of the data warehouse/lake. Common folder layouts include a folder for `staging`, a folder for `core`, and a folder for `marts`. This structure can be simplified without affecting the workings of dbt.
 
-=== Staging Models
+=== Staging models
 In the original link:https://github.com/dbt-labs/jaffle_shop-dev[dbt Jaffle Shop tutorial, window="_blank"] the project's data is loaded from csv files located in the `./data` folder through dbt's `seed` command. The `seed` command is commonly used to load data from tables, however, this command is not designed to perform data loading. 
 
 In this demo we are assuming a more typical setup in which a tool designed for data loading, Airbyte, was used to load data into the datawarehouse/lake.
@@ -243,13 +243,13 @@ SELECT * FROM flattened_json_data
 * This column is of Teradata JSON type. This type supports the method JSONExtractValue for retrieving scalar values from the JSON object.
 * In this model we are retrieving each of the attributes of interest and adding meaningful aliases in order to materialize a view.
 
-=== Dimensional Models (Marts)
-Building a Dimensional Model is a two step process: 
+=== Dimensional models (marts)
+Building a Dimensional Model is a two-step process: 
 
 * First, we take the normalized views in `stg_orders`, `stg_customers`, `stg_payments` and build denormalized intermediate join tables `customer_orders`, `order_payments`, `customer_payments`. You will find the definitions of these tables in `./models/marts/core/intermediate`.  
 * In the second step, we create the `dim_customers` and `fct_orders` models. These constitute the dimensional model tables that we want to expose to our BI tool. You will find the definitions of these tables in `./models/marts/core`.
 
-=== Executing Transformations
+=== Executing transformations
 For executing the transformations defined in the dbt project we run:
 
 [source, bash]
@@ -260,7 +260,7 @@ You will get the status of each model as given below:
 
 image::{dir}/dbt_run.png[dbt run output, width=75%]
 
-=== Model Testing
+=== Test data
 To ensure that the data in the dimensional model is correct, dbt allows us to define and execute tests against the data. 
 
 The tests are defined in `./models/marts/core/schema.yml` and `./models/staging/schema.yml`.  Each column can have multiple tests configured under the `tests` key. 
@@ -278,7 +278,7 @@ If the data in the models satisfies all the test cases, the result of this comma
 
 image::{dir}/dbt_test.png[dbt test output, width=75%]
 
-=== Generate Documentation
+=== Generate documentation
 
 Our model consists of just a few tables. In a scenario with more sources of data, and a more complex dimensional model, documenting the data lineage and what is the purpose of each of the intermediate models is very important. 
 
@@ -298,7 +298,7 @@ You can start your own server to browse the documentation. The following command
 dbt docs serve
 ----
 
-==== Lineage Graph
+==== Lineage graph
 
 image::{dir}/dbt_docs_serve.png[dbt lineage graph, width=75%]
 
