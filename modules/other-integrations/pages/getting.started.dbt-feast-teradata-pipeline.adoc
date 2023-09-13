@@ -9,7 +9,7 @@
 
 == Overview
 
-This how-to shows an approach to creating a data pipeline with Teradata database. While there are several ways a data pipeline can be designed, this document helps to understand how components of two of the popular tools in the software industry, namely link:https://docs.getdbt.com/docs/introduction[dbt] and link:https://docs.feast.dev/[FEAST],
+This how-to shows an approach to creating a data pipeline with the Teradata database. While there are several ways a data pipeline can be designed, this document helps to understand how components of two of the popular tools in the software industry, namely link:https://docs.getdbt.com/docs/introduction[dbt] and link:https://docs.feast.dev/[FEAST],
 can be integrated with Teradata Vantage. Teradata's robust 'link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Analytics-Database-Analytic-Functions-17.20[Analytics Database Analytic functions]' are used on the Teradata data source within dbt, for data transformation. The output of which is loaded into FEAST to materialize features that can be used in ML models.
 
 == Introduction
@@ -29,7 +29,7 @@ include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 * dbt library installed locally. See link:https://quickstarts.teradata.com/dbt.html[dbt Installation instructions]
 
 == Objective
-To create a data pipeline with Teradata Vantage as source, perform data transformation on some variables in dbt. The principle transformation of data that we do in dbt is onehotencoding of several columns like gender, marital status, state code etc. On top of that the account type column data will be transformed by performing aggregation operations on the couple of columns. All together generates our desired Analytic_dataset with transformed data. Then we use the transformed dataset output as input in FEAST to store features that can be used to generate training dataset for models.
+To create a data pipeline with Teradata Vantage as a source, perform data transformation on some variables in dbt. The principle transformation of data we do in dbt is the one-hot encoding of several columns like gender, marital status, state code, etc. On top of that, the account type column data will be transformed by performing aggregation operations on a couple of columns. All of this together generates our desired Analytic_dataset with transformed data. Then we use the transformed dataset output as input in FEAST to store features that can be used to generate a training dataset for models.
 
 
 == Getting started
@@ -41,16 +41,16 @@ python3 -m venv env
 source env/bin/activate
 ----
 
-2. Clone the tutorial repository and cd into the project directory:
+2. Clone the tutorial repository and change the directory to the project directory:
 +
 [source, bash]
 ----
-git clone https://github.td.teradata.com/rc255085/Tdatapipeline.git
+git clone https://github.com/Teradata/tdata-pipeline.git
 ----
-The directory structure of the project cloned looks like :
+The directory structure of the project cloned looks like this:
 +
 ----
-Tdatapipeline/
+tdata-pipeline/
     feature_repo/
         feature_views.py
         feature_store.yml
@@ -66,7 +66,7 @@ Tdatapipeline/
 
 
 == About the Banking warehouse
-teddy_bank is a fictitious dataset of banking customers, consists of mainly 3 tables customers, accounts, and
+teddy_bank is a fictitious dataset of banking customers, consisting of mainly 3 tables customers, accounts, and
 transactions, with the following entity-relationship diagram:
 
 
@@ -198,7 +198,7 @@ dbt debug
 If the debug command returned errors, you likely have an issue with the content of `profiles.yml`.
 
 == Configure FEAST
-Feast configuration addresses connection to your Vantage database. The yml file create while initializing the feast
+Feast configuration addresses connection to your Vantage database. The yaml file created while initializing the feast
 project, `$HOME/.feast/feature_repo/feature_store.yml` can hold the details of offline storage, online storage, provider
 and registry. Adjust `<host>`, `<user>`, `<password>` to match your Teradata instance.
 
@@ -234,8 +234,8 @@ path = 'teradatasql://'+ teradata_user +':' + teradata_password + '@'+host + '/?
         teradata_database + '&LOGMECH=' + teradata_log_mech
 ----
 == Run dbt
-Teradata Vantage has long been recognized as a database that provides superior ELT(Extract Load Transform) capabilities. dbt enhances this capabilities by making use of its efficient Analytic functions to transform data.
-So, in this case, we will use data tables, customers, accounts and transactions, that are made available on Vantage.
+Teradata Vantage has long been recognized as a database that provides superior ELT(Extract Load Transform) capabilities. dbt enhances these capabilities by making use of its efficient Analytic functions to transform data.
+So, in this case, we will use data tables, customers, accounts, and transactions, that are made available on Vantage.
 
 === Create the dimensional model
 Now that we have the raw data tables, we can instruct dbt to create the dimensional model:
@@ -302,7 +302,7 @@ def get_Training_Data():
 ----
 
 == Summary
-This tutorial demonstrated how to use dbt and FEAST with Teradata Vantage. The sample project takes raw data in Teradata Vantage and produces a features with dbt, which is again saved as a model in the database itself. Metadata of features that form the base to generate training dataset for a model was then created with FEAST; all its corresponding tables that create the feature store, are also generated at runtime within the same database. This sample project gives us an idea how to integrate these three robust platforms.
+This tutorial demonstrated how to use dbt and FEAST with Teradata Vantage. The sample project takes raw data in Teradata Vantage and produces features with dbt, which is again saved as a model in the database itself. Metadata of features that form the base to generate a training dataset for a model was then created with FEAST; all its corresponding tables that create the feature store, are also generated at runtime within the same database. This sample project gives us an idea of how to integrate these three robust platforms.
 
 == Further Reading
 * link:https://docs.getdbt.com/docs/[dbt documentation]
