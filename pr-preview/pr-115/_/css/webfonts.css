@@ -1,0 +1,86 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 3623752, 2018-08-17T17:27:24-0400
+ *
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are
+ * explicitly restricted from using the Licensed Webfonts(s).
+ *
+ * You may obtain a valid license at the URLs below.
+ *
+ * Webfont: RidleyGrotesk-Black by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/ridley-grotesk/black/
+ *
+ * Webfont: RidleyGrotesk-ExtraBoldItalic by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/ridley-grotesk/extra-bold-italic/
+ *
+ * Webfont: RidleyGrotesk-ExtraBold by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/ridley-grotesk/extra-bold/
+ *
+ * Webfont: RidleyGrotesk-Bold by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/ridley-grotesk/bold/
+ *
+ * Webfont: RidleyGrotesk-BoldItalic by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/ridley-grotesk/bold-italic/
+ *
+ * Webfont: RidleyGrotesk-BlackItalic by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/ridley-grotesk/black-italic/
+ *
+ * Webfont: RidleyGrotesk-Italic by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/ridley-grotesk/italic/
+ *
+ * Webfont: RidleyGrotesk-Light by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/ridley-grotesk/light/
+ *
+ * Webfont: RidleyGrotesk-LightItalic by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/ridley-grotesk/light-italic/
+ *
+ * Webfont: RidleyGrotesk-Medium by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/ridley-grotesk/medium/
+ *
+ * Webfont: RidleyGrotesk-MediumItalic by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/ridley-grotesk/medium-italic/
+ *
+ * Webfont: RidleyGrotesk-Regular by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/ridley-grotesk/regular/
+ *
+ * Webfont: RidleyGrotesk-SemiBold by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/ridley-grotesk/semi-bold/
+ *
+ * Webfont: RidleyGrotesk-SemiBoldItalic by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/ridley-grotesk/semi-bold-italic/
+ *
+ * Webfont: RidleyGrotesk-Thin by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/ridley-grotesk/thin/
+ *
+ * Webfont: RidleyGrotesk-ThinItalic by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/ridley-grotesk/thin-italic/
+ *
+ * Webfont: RidleyGrotesk-UltraLight by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/ridley-grotesk/ultra-light/
+ *
+ * Webfont: RidleyGrotesk-UltraLightItalic by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/ridley-grotesk/ultra-light-italic/
+ *
+ *
+ * License: https://www.myfonts.com/viewlicense?type=web&buildid=3623752
+ * Licensed pageviews: 2,000,000
+ * Webfonts copyright: Copyright &#x00A9; 2016 by Radomir Tinkov. All rights reserved.
+ *
+ * © 2018 MyFonts Inc
+*/
+
+@font-face{
+  font-family: 'Poppins-Regular';
+  src: url('Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face{
+  font-family: 'Poppins-SemiBold';
+  src: url('Poppins-SemiBold.ttf') format('truetype');
+}
+
+@font-face{
+  font-family: 'Poppins-Bold';
+  src: url('Poppins-Bold.ttf') format('truetype');
+}
