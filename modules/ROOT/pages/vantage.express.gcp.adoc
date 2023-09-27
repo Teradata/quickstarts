@@ -7,6 +7,8 @@
 :tabs:
 :experimental:
 
+include::partial$use.csae.adoc[]
+
 == Overview
 
 This how-to demonstrates how to run Vantage Express in Google Cloud Platform. Vantage Express contains a fully functional Teradata SQL Engine.

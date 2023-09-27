@@ -1,11 +1,15 @@
-* Get access to Vantage
+* Introduction
 ** xref::teradata-vantage-engine-architecture-and-concepts.adoc[Teradata Vantage Engine Architecture and Concepts]
-** xref::run-vantage-express-on-aws.adoc[Vantage Express on AWS]
-** xref::vantage.express.gcp.adoc[Vantage Express on Google Cloud]
-** xref::run-vantage-express-on-microsoft-azure.adoc[Vantage Express on Azure]
-** xref::getting.started.vmware.adoc[Vantage Express on VMware]
-** xref::getting.started.vbox.adoc[Vantage Express on VirtualBox]
-** xref::getting.started.utm.adoc[Vantage Express on UTM]
+
+* Get access to Vantage
+** On your local
+*** xref::getting.started.vmware.adoc[Vantage Express on VMware]
+*** xref::getting.started.vbox.adoc[Vantage Express on VirtualBox]
+*** xref::getting.started.utm.adoc[Vantage Express on UTM]
+** On your cloud infrastructure
+*** xref::run-vantage-express-on-aws.adoc[Vantage Express on AWS]
+*** xref::vantage.express.gcp.adoc[Vantage Express on Google Cloud]
+*** xref::run-vantage-express-on-microsoft-azure.adoc[Vantage Express on Azure]
 
 * Connect to Vantage
 ** xref:install-teradata-studio-on-mac-m1-m2.adoc[]
@@ -16,10 +20,12 @@
 * Manage data
 ** xref::nos.adoc[]
 ** xref::select-the-right-data-ingestion-tools-for-teradata-vantage.adoc[]
-** xref:elt:use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.adoc[]
-** xref:elt:transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.adoc[]
 ** xref::dbt.adoc[]
 ** xref::advanced-dbt.adoc[]
+** xref:modelops:using-feast-feature-store-with-teradata-vantage.adoc[]
+** xref:other-integrations:getting.started.dbt-feast-teradata-pipeline.adoc[]
+** xref:elt:use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.adoc[]
+** xref:elt:transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.adoc[]
 ** xref:tools-and-utilities:run-bulkloads-efficiently-with-teradata-parallel-transporter.adoc[Load data with TPT]
 ** xref::create-parquet-files-in-object-storage.adoc[]
 ** xref:other-integrations:execute-airflow-workflows-that-use-dbt-with-teradata-vantage.adoc[]
@@ -42,18 +48,12 @@
 ** xref::perform-time-series-analysis-using-teradata-vantage.adoc[Perform time series analysis]
 ** xref:modelops:deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.adoc[]
 ** xref:modelops:deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.adoc[]
-** xref:modelops:using-feast-feature-store-with-teradata-vantage.adoc[]
 ** xref:cloud-guides:sagemaker-with-teradata-vantage.adoc[]
 ** xref:cloud-guides:use-teradata-vantage-with-azure-machine-learning-studio.adoc[]
 ** xref:cloud-guides:integrate-teradata-jupyter-extensions-with-google-vertex-ai.adoc[]
 ** xref:cloud-guides:integrate-teradata-jupyter-extensions-with-sagemaker.adoc[]
 ** xref:business-intelligence:create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.adoc[]
 ** xref:other-integrations:integrate-teradata-vantage-with-knime.adoc[]
-** xref:other-integrations:getting.started.dbt-feast-teradata-pipeline.adoc[]
-
-* Demos
-** Financial
-*** xref:jupyter-demos:gcp-vertex-ai-pipelines-vantage-byom-housing-example.adoc[]
 
 * Regulus (preview)
 ** xref:regulus:install-regulus-docker-image.adoc[]
