@@ -139,3 +139,6 @@
       height: calc(100vh - 7.3rem);
     }
   }
+  .list {
+    list-style-type: none;
+}

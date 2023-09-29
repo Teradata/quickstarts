@@ -60,7 +60,7 @@
       return it.getAttribute('aria-labelledby') === id
     })
   }
-
+/*
   var pageReady = function(callback) {
     document.readyState !== 'loading' ? callback() : document.addEventListener('DOMContentLoaded', callback);
   }
@@ -68,7 +68,8 @@
   pageReady(function() {
     enableMobileMenu();
   });
-
+  */
+/*
   function enableMobileMenu() {
     var navbar = document.querySelector('.navbar');
     var mobileMenuButton = document.querySelector('.header-nav-mobile__menu-icon');
@@ -116,4 +117,5 @@
     }
     window.addEventListener('resize', checkWidth);
   }
+  */
 })()
