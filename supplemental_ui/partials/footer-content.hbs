@@ -52,373 +52,6 @@
   </defs>
 </svg>
 
-<!-- Footer styles -->
-<style>
-/*
-footer.footer-nav ol,
-footer.footer-nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.container {
-  width: 100%;
-  padding-right: var(--bs-gutter-x, 12px);
-  padding-left: var(--bs-gutter-x, 12px);
-  margin-right: auto;
-  margin-left: auto;
-}
-
-@media (min-width: 576px) {
-  .container {
-    max-width: 540px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 720px;
-  }
-}
-
-@media (min-width: 992px) {
-  .container {
-    max-width: 960px;
-  }
-}
-
-@media (min-width: 1025px) {
-  .container {
-    max-width: 1140px;
-  }
-}
-
-@media (min-width: 1501px) {
-  .container {
-    max-width: 1320px;
-  }
-}
-
-.row,
-ul.row.footer-nav__nav {
-  --bs-gutter-x: 24px;
-  --bs-gutter-y: 0;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: calc(var(--bs-gutter-y) * -1);
-  margin-right: calc(var(--bs-gutter-x) * -0.5);
-  margin-left: calc(var(--bs-gutter-x) * -0.5);
-}
-
-.row > * {
-  box-sizing: border-box;
-  flex-shrink: 0;
-  width: 100%;
-  max-width: 100%;
-  padding-right: calc(var(--bs-gutter-x) * 0.5);
-  padding-left: calc(var(--bs-gutter-x) * 0.5);
-  margin-top: var(--bs-gutter-y);
-}
-
-.col {
-  flex: 1 0 0%;
-}
-
-.col-12 {
-  flex: 0 0 auto;
-  width: 100%;
-}
-
-@media (min-width: 768px) {
-  .col-md {
-    flex: 1 0 0%;
-  }
-
-  .col-md-4 {
-    flex: 0 0 auto;
-    width: 33.33333333%;
-  }
-
-  .col-md-8 {
-    flex: 0 0 auto;
-    width: 66.66666667%;
-  }
-}
-
-@media (min-width: 992px) {
-  .col-lg-3 {
-    flex: 0 0 auto;
-    width: 25%;
-  }
-
-  .col-lg-9 {
-    flex: 0 0 auto;
-    width: 75%;
-  }
-
-  .justify-content-lg-end {
-    justify-content: flex-end !important;
-  }
-}
-
-@media (min-width: 1025px) {
-  .col-xl-4 {
-    flex: 0 0 auto;
-    width: 33.33333333%;
-  }
-
-  .col-xl-12 {
-    flex: 0 0 auto;
-    width: 100%;
-  }
-}
-
-.d-flex {
-  display: flex !important;
-}
-
-.icon-social {
-  width: 30px;
-  height: 30px;
-  padding: 6px;
-  background: transparent;
-  color: #101010;
-}
-
-.icon-social svg {
-  width: 18px;
-  height: 18px;
-}
-
-footer.footer-nav {
-  background-color: #fff;
-  font-family: Arial, helvetica, sans-serif;
-  padding: 60px 0 40px;
-  line-height: 1;
-}
-
-@media (max-width: 767px) {
-  footer.footer-nav {
-    padding-top: 20px;
-  }
-}
-
-.footer-nav__top {
-  padding-bottom: 60px;
-}
-
-@media (max-width: 767px) {
-  .footer-nav__top {
-    padding-bottom: 20px;
-  }
-}
-
-.footer-nav__top svg {
-  display: block;
-}
-
-.footer-nav__top .footer-nav__logo {
-  display: inline-block;
-}
-
-.footer-nav__top .footer-nav__logo .teradata-logo {
-  display: block;
-  width: 107px;
-  height: 21px;
-}
-
-.footer-nav__nav h2,
-.footer-nav__nav span {
-  font-family: RidleyGrotesk, Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  line-height: 130%;
-  text-transform: uppercase;
-  font-weight: 800;
-  margin-bottom: 18px;
-}
-
-.footer-nav__nav ul a {
-  font-size: 12px;
-  line-height: 137%;
-  color: #394951 !important;
-  text-decoration: none;
-}
-
-.footer-nav__nav ul a:focus,
-.footer-nav__nav ul a:hover {
-  text-decoration: underline;
-}
-
-.footer-nav__nav ul li {
-  margin: 16px 0;
-  line-height: 1;
-}
-
-@media (max-width: 767px) {
-  .footer-nav__nav {
-    display: none !important;
-  }
-}
-
-.footer-nav__bottom {
-  margin-top: 90px;
-  margin-bottom: 20px;
-}
-
-@media (max-width: 767px) {
-  .footer-nav__bottom {
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-}
-
-.footer-nav__bottom .footer_social {
-  margin: 0;
-}
-
-.footer-nav__bottom .footer_social a {
-  background: #394951;
-  width: 32px;
-  height: 32px;
-  border-radius: 100%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.footer-nav__bottom .footer_social a:focus svg,
-.footer-nav__bottom .footer_social a:hover svg {
-  color: #f37440;
-}
-
-.footer-nav__bottom .footer_social svg {
-  max-width: 13px;
-  transition: all 0.5s ease;
-}
-
-@media (max-width: 767px) {
-  .footer-nav__bottom .footer_social {
-    justify-content: flex-start;
-    margin-top: 20px;
-  }
-}
-
-.footer-nav__bottom .footer_social .icon-social {
-  color: #fff;
-  margin-left: 8px !important;
-}
-
-@media (max-width: 767px) {
-  .footer-nav__bottom .footer_social .icon-social {
-    margin-left: 0 !important;
-    margin-right: 8px !important;
-  }
-}
-
-.footer-nav__spacer {
-  width: 100%;
-  border-bottom: 1px solid #d7d7d7;
-}
-
-.footer-nav__baseline {
-  align-items: baseline;
-  margin-top: 24px;
-  margin-bottom: 42px;
-}
-
-.footer-nav__baseline .copyright {
-  font-size: 12px;
-  display: block;
-}
-
-@media (max-width: 992px) {
-  .footer-nav__baseline .copyright {
-    margin-bottom: 20px;
-  }
-}
-
-.footer-nav__baseline ul {
-  display: flex;
-}
-
-.footer-nav__baseline ul li + li {
-  margin-left: 16px;
-}
-
-@media (max-width: 767px) {
-  .footer-nav__baseline ul li + li {
-    margin-left: 0;
-  }
-}
-
-.footer-nav__baseline ul a {
-  font-size: 12px;
-  color: #394951 !important;
-  text-decoration: none;
-}
-
-.footer-nav__baseline ul a:focus,
-.footer-nav__baseline ul a:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 767px) {
-  .footer-nav__baseline ul {
-    display: block;
-  }
-}
-
-.footer_social {
-  display: flex;
-  margin: 20px 0 32px;
-  color: #f37440;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.footer_social .icon-social {
-  width: 18px;
-  height: 18px;
-  margin-left: 20px;
-  color: #f37440;
-}
-
-@media (max-width: 1024px) {
-  .footer_social {
-    margin: 0;
-  }
-
-  .footer_social .icon-social {
-    padding: 0;
-    line-height: 1;
-  }
-
-  .footer_social .icon-social:first-child {
-    margin-left: 0;
-  }
-}
-
-@media (max-width: 767px) {
-  .footer_social {
-    margin: 0;
-  }
-
-  .footer_social .icon-social {
-    padding: 0;
-    line-height: 1;
-  }
-
-  .footer_social .icon-social:first-child {
-    margin-left: 0;
-  }
-}
-*/
-/*
-main.article {
-    padding-bottom: 30px;
-}*/
-</style>
 
 <!--Old Footer markup -->
 
@@ -426,11 +59,11 @@ main.article {
  <!--footer-->
     <footer class="footer-nav background-grayLight">
       <section class="container-wide active">
-          <ul class="row footer-nav__desktop d-none d-xl-flex">
+          <ul class="row footer-nav__desktop d-none d-xl-flex list">
             <li class="col-12 col-md">
               <div>
                 <span class="h4 fontWeight-semiBold">Who we help</span>
-                  <ul>
+                  <ul class="list">
                     <li>
                       <a href="https://www.teradata.com/Who-We-Help" data-celebrus="Footer Menu - Roles" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Roles | /Who-We-Help">Roles</a>
                     </li>
@@ -440,14 +73,14 @@ main.article {
                     <li>
                       <a href="https://teradata.my.site.com/teradataPRM/s/self-registration" data-celebrus="Footer Menu - Partner registration" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Partner registration | https://teradata.my.site.com/teradataPRM/s/self-registration" target="_blank" rel="noopener">Partner registration
                         <span class="material-symbols-outlined md-16 ms-2">
-                          <img src="{{uiRootPath}}/img/small-external.svg">
+                          <img src="{{uiRootPath}}/img/small-external.svg" alt="External Icon" width="" height="">
                         </span>
                       </a>
                     </li>
                     <li>
                       <a href="https://teradata.my.site.com/teradataPRM/s/login/" data-celebrus="Footer Menu - Partner portal login" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Partner portal login | https://teradata.my.site.com/teradataPRM/s/login/" target="_blank" rel="noopener">Partner portal login
                         <span class="material-symbols-outlined md-16 ms-2">
-                          <img src="{{uiRootPath}}/img/small-external.svg">
+                          <img src="{{uiRootPath}}/img/small-external.svg" alt="External Icon" width="" height="">
                         </span>
                       </a>
                     </li>
@@ -463,7 +96,7 @@ main.article {
               <li class="col-12 col-md">
                 <div>
                   <span class="h4 fontWeight-semiBold">Our platform</span>
-                    <ul>
+                    <ul class="list">
                       <li>
                         <a href="https://www.teradata.com/Platform" data-celebrus="Footer Menu - Platform" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Platform | /Platform">Platform</a>
                       </li>
@@ -486,7 +119,7 @@ main.article {
                 <li class="col-12 col-md">
                   <div>
                     <span class="h4 fontWeight-semiBold">Getting started</span>
-                      <ul>
+                      <ul class="list">
                         <li>
                           <a href="https://www.teradata.com/Getting-Started/Pricing" data-celebrus="Footer Menu - Pricing" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Pricing | /Getting-Started/Pricing">Pricing
                           </a>
@@ -517,7 +150,7 @@ main.article {
                   <li class="col-12 col-md">
                     <div>
                       <span class="h4 fontWeight-semiBold">Insights</span>
-                        <ul>
+                        <ul class="list">
                           <li>
                             <a href="https://www.teradata.com/Insights?Topics=AI-and-Machine-Learning" data-celebrus="Footer Menu - AI &amp; ML" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="AI &amp; ML | /Insights?Topics=AI-and-Machine-Learning">AI &amp; ML
                             </a>
@@ -552,7 +185,7 @@ main.article {
                     <li class="col-12 col-md">
                       <div>
                         <span class="h4 fontWeight-semiBold">About us</span>
-                          <ul>
+                          <ul class="list">
                             <li>
                               <a href="https://www.teradata.com/About-Us" data-celebrus="Footer Menu - Who we are" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Who we are | /About-Us">Who we are
                               </a>
@@ -568,14 +201,14 @@ main.article {
                             <li>
                               <a href="https://careers.teradata.com" data-celebrus="Footer Menu - Careers" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Careers | https://careers.teradata.com" target="_blank" rel="noopener">Careers
                                 <span class="material-symbols-outlined md-16 ms-2">
-                                  <img src="{{uiRootPath}}/img/small-external.svg">
+                                  <img src="{{uiRootPath}}/img/small-external.svg" alt="External Icon" width="" height="">
                                 </span>
                               </a>
                             </li>
                             <li>
                               <a href="https://investor.teradata.com" data-celebrus="Footer Menu - Investors" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Investors | https://investor.teradata.com" target="_blank" rel="noopener">Investors
                                 <span class="material-symbols-outlined md-16 ms-2">
-                                  <img src="{{uiRootPath}}/img/small-external.svg">
+                                  <img src="{{uiRootPath}}/img/small-external.svg" alt="External Icon" width="" height="">
                                 </span>
                               </a>
                             </li>
@@ -584,7 +217,7 @@ main.article {
                       </li>
                       <li class="col-12 col-md">
                         <span class="h4">Social media</span>
-                  <ul class="footer_social">
+                  <ul class="footer_social list">
                       <li>
                           <a data-gtm-category="Footer" data-gtm-action="social click" data-gtm-label="https://www.linkedin.com/company/teradata" href="https://www.linkedin.com/company/teradata" data-celebrus="Social Link - LinkedIn" class="icon-social" target="_blank" rel="noopener" aria-label="Social Link - LinkedIn">
                             <svg>
@@ -636,7 +269,7 @@ main.article {
                               <span class="h4 fontWeight-semiBold p-0">Who we help</span>
                               <span class="icon caret"></span>
                           </summary>
-                          <ul class="pb-4">
+                          <ul class="pb-4 list">
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Who-We-Help" data-celebrus="">Roles</a></li>
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Partners" data-celebrus="">Partners</a></li>
                               <li class="my-3"><a class="nav-2" href="https://teradata.my.site.com/teradataPRM/s/self-registration" data-celebrus="" target="_blank" rel="noopener">Partner registration</a></li>
@@ -650,7 +283,7 @@ main.article {
                               <span class="h4 fontWeight-semiBold p-0">Our platform</span>
                               <span class="icon caret"></span>
                           </summary>
-                          <ul class="pb-4">
+                          <ul class="pb-4 list">
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Platform" data-celebrus="">Platform</a></li>
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Platform/Use-Cases" data-celebrus="">Use cases</a></li>
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Platform/VantageCloud" data-celebrus="">VantageCloud</a></li>
@@ -663,7 +296,7 @@ main.article {
                               <span class="h4 fontWeight-semiBold p-0">Getting started</span>
                               <span class="icon caret"></span>
                           </summary>
-                          <ul class="pb-4">
+                          <ul class="pb-4 list">
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Getting-Started/Pricing" data-celebrus="">Pricing</a></li>
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Getting-Started/Demos" data-celebrus="">Demos</a></li>
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Getting-Started/Modernization-Workshop" data-celebrus="">Modernization workshop</a></li>
@@ -677,7 +310,7 @@ main.article {
                               <span class="h4 fontWeight-semiBold p-0">Insights</span>
                               <span class="icon caret"></span>
                           </summary>
-                          <ul class="pb-4">
+                          <ul class="pb-4 list">
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Insights?Topics=AI-and-Machine-Learning" data-celebrus="">AI &amp; ML</a></li>
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Insights?Topics=Big-Data" data-celebrus="">Big Data</a></li>
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Insights?Topics=Cloud" data-celebrus="">Cloud</a></li>
@@ -692,7 +325,7 @@ main.article {
                               <span class="h4 fontWeight-semiBold p-0">About us</span>
                               <span class="icon caret"></span>
                           </summary>
-                          <ul class="pb-4">
+                          <ul class="pb-4 list">
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/About-Us" data-celebrus="">Who we are</a></li>
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/About-Us/Leadership" data-celebrus="">Our leadership</a></li>
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Newsroom" data-celebrus="">Newsroom</a></li>
@@ -702,7 +335,7 @@ main.article {
                       </details>
               <nav class="my-7">
                   <span class="h4">Social media</span>
-                  <ul class="footer_social">
+                  <ul class="footer_social list">
                       <li>
                         <a href="https://www.linkedin.com/company/teradata" class="icon-social" target="_blank" rel="noopener" aria-label="Social Link - LinkedIn">
                           <svg>
@@ -755,7 +388,7 @@ main.article {
                   <span class="copyright">©2023 Teradata. All Rights Reserved</span>
               </div>
               <div class="col-12 col-lg-9 col-xl-8 d-flex justify-content-lg-end px-lg-0">
-                  <ul class="d-flex flex-wrap justify-content-between nav-2">
+                  <ul class="d-flex flex-wrap justify-content-between nav-2 list">
                       <li><a href="https://www.teradata.com/Privacy" data-celebrus="">Privacy</a></li>   
                       <li><a href="https://www.teradata.com/Privacy#do-not-sell-share" data-celebrus="">Don’t Sell/Share My Info</a></li>   
                       <li><a href="https://www.teradata.com/Legal/Terms-of-Use" data-celebrus="">Terms of use</a></li>   
