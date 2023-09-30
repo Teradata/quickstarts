@@ -7,6 +7,8 @@
 :tabs:
 :experimental:
 
+include::partial$use.csae.adoc[]
+
 == Overview
 
 This how-to demonstrates how to run Vantage Express on AWS. Vantage Express is a small footprint configuration that contains a fully functional Teradata SQL Engine.
@@ -18,7 +20,7 @@ Vantage Express is distributed as a virtual machine image. This how-to uses the 
 
 If you want a cheaper option, try xref:vantage.express.gcp.adoc[Google Cloud] and xref:run-vantage-express-on-microsoft-azure.adoc[Azure] which support nested virtualization and can run Vantage Express on cheap VM's.
 
-If you do not wish to pay for cloud usage at all, install Vantage Express locally using xref:getting.started.vmware.adoc[VMware], xref:getting.started.vbox.adoc[VirtualBox], or xref:getting.started.utm.adoc[UTM].
+If you do not wish to pay for cloud usage, you can get a free hosted instance of Vantage at link:https://clearscape.teradata.com/[]. Alternatively, you install Vantage Express locally using xref:getting.started.vmware.adoc[VMware], xref:getting.started.vbox.adoc[VirtualBox], or xref:getting.started.utm.adoc[UTM].
 ====
 
 == Prerequisites

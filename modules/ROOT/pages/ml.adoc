@@ -20,7 +20,7 @@ include::ROOT:partial$vantage.express.options.adoc[]
 
 Support for ML in Vantage requires Vantage Analytics Library (VAL). In this section, we will install VAL and load some sample data.
 
-1. VAL is distributed as an rpm file. Go to link:https://downloads.teradata.com/download/database/analytics-library[Teradata Downloads] and download the VAL rpm to your local machine.
+1. VAL is distributed as an rpm file. Go to link:https://downloads.teradata.com/download/database/val-download-page[Teradata Downloads] and download the VAL rpm to your local machine.
 2. Upload the file to your Vantage install. If you are running Vantage Express locally, you have many ways to do it:
 * If you installed xref:getting.started.vbox.adoc[Vantage Express on VirtualBox], you should be able to drag & drop the file to the VM's desktop. You can also use `scp` by connecting to port `4422`, e.g.:
 +

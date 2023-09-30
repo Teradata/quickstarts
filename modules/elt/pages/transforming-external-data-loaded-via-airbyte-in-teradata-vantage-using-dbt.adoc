@@ -1,4 +1,4 @@
-= Transforming External Data Loaded via Airbyte in Teradata Vantage Using dbt
+= Transform data Loaded with Airbyte using dbt
 :experimental:
 :page-author: Krutik Pathak
 :page-email: krutik.pathak@teradata.com
@@ -27,12 +27,21 @@ include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 * Python 3.7, 3.8, 3.9, 3.10 or 3.11 installed.
 
 == Sample Data Loading
-* The sample data should be loaded into Teradata Vantage using Airbyte.  Please refer to link:https://quickstarts.teradata.com/elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html[Use Airbyte to load data from external sources to Teradata Vantage, window="_blank"] for more details on completing this step.
+* Follow the steps in link:https://quickstarts.teradata.com/elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html[the Airbyte tutorial, window="_blank"]. Make sure you load data from link:https://docs.google.com/spreadsheets/d/1-R4F3q8J9KDnFRWpiT3Ysp1RlOoUu3PeQR7xDeLxFts/edit#gid=42273685[the Jaffle Shop spreadsheet] and not the default dataset referenced by the Airbyte tutorial. Also, set the `Default Schema` in the Teradata destination to `airbyte_jaffle_shop`.
 
 [NOTE]
 ====
-When you configure a Teradata destination in Airbyte, it will ask for a `Default Schema`. For this demonstration we have set the `Default Schema` as `airbyte_jaffle_shop`. 
+When you configure a Teradata destination in Airbyte, it will ask for a `Default Schema`. Set the `Default Schema` to `airbyte_jaffle_shop`. 
 ====
+
+== Clone the project
+Clone the tutorial repository and change the directory to the project directory:
++
+[source, bash]
+----
+git clone https://github.com/Teradata/airbyte-dbt-jaffle
+cd airbyte-dbt-jaffle
+----
 
 == Install dbt
 * Create a new python environment to manage dbt and its dependencies. Activate the environment:
@@ -46,7 +55,7 @@ source env/bin/activate
 +
 [NOTE]
 ====
-You can activate the virtual environment in Windows executing the corresponding batch file `./myenv/Scripts/activate`.
+You can activate the virtual environment in Windows by executing the corresponding batch file `./myenv/Scripts/activate`.
 ====
 
 * Install `dbt-teradata` module and its dependencies. The core dbt module is included as a dependency so you don't have to install it separately:
@@ -65,7 +74,7 @@ dbt init
 ----
 
 +
-The dbt project wizard will ask you for a project name and database management system to use in the project. In this demo we define the project name as `dbt_airbyte_demo`. Since we are using the dbt-teradata connector, the only database management system available is Teradata.
+The dbt project wizard will ask you for a project name and database management system to use in the project. In this demo, we define the project name as `dbt_airbyte_demo`. Since we are using the dbt-teradata connector, the only database management system available is Teradata.
 +
 image::{dir}/dbt_init_project_name.png[Project name prompt, width=75%]
 +
@@ -101,7 +110,7 @@ If the debug command returned errors, you likely have an issue with the content 
 +
 image::{dir}/dbt_debug.png[dbt debug output, width=75%]
 
-== The Jaffle Shop dbt Project
+== The Jaffle Shop dbt project
 
 `jaffle_shop` is a fictional restaurant that takes orders online. The data of this business consists of tables for `customers`, `orders` and `payments`that follow the entity relations diagram below:
 
@@ -163,7 +172,7 @@ The data in the source system is normalized. A dimensional model based on the sa
 `dimension: customers`   1--* `fact: orders`
 ....
 
-== dbt Transformations
+== dbt transformations
 [NOTE]
 ====
 The complete dbt project encompassing the transformations detailed below is located at link:https://github.com/Teradata/airbyte-dbt-jaffle[Jaffle Project with Airbyte., window="_blank"]
@@ -194,7 +203,7 @@ As in all dbt projects, the folder `models` contains the data models that the pr
 
 The models can be organized into different folders according to their purpose in the organization of the data warehouse/lake. Common folder layouts include a folder for `staging`, a folder for `core`, and a folder for `marts`. This structure can be simplified without affecting the workings of dbt.
 
-=== Staging Models
+=== Staging models
 In the original link:https://github.com/dbt-labs/jaffle_shop-dev[dbt Jaffle Shop tutorial, window="_blank"] the project's data is loaded from csv files located in the `./data` folder through dbt's `seed` command. The `seed` command is commonly used to load data from tables, however, this command is not designed to perform data loading. 
 
 In this demo we are assuming a more typical setup in which a tool designed for data loading, Airbyte, was used to load data into the datawarehouse/lake.
@@ -234,13 +243,13 @@ SELECT * FROM flattened_json_data
 * This column is of Teradata JSON type. This type supports the method JSONExtractValue for retrieving scalar values from the JSON object.
 * In this model we are retrieving each of the attributes of interest and adding meaningful aliases in order to materialize a view.
 
-=== Dimensional Models (Marts)
-Building a Dimensional Model is a two step process: 
+=== Dimensional models (marts)
+Building a Dimensional Model is a two-step process: 
 
 * First, we take the normalized views in `stg_orders`, `stg_customers`, `stg_payments` and build denormalized intermediate join tables `customer_orders`, `order_payments`, `customer_payments`. You will find the definitions of these tables in `./models/marts/core/intermediate`.  
 * In the second step, we create the `dim_customers` and `fct_orders` models. These constitute the dimensional model tables that we want to expose to our BI tool. You will find the definitions of these tables in `./models/marts/core`.
 
-=== Executing Transformations
+=== Executing transformations
 For executing the transformations defined in the dbt project we run:
 
 [source, bash]
@@ -251,7 +260,7 @@ You will get the status of each model as given below:
 
 image::{dir}/dbt_run.png[dbt run output, width=75%]
 
-=== Model Testing
+=== Test data
 To ensure that the data in the dimensional model is correct, dbt allows us to define and execute tests against the data. 
 
 The tests are defined in `./models/marts/core/schema.yml` and `./models/staging/schema.yml`.  Each column can have multiple tests configured under the `tests` key. 
@@ -269,7 +278,7 @@ If the data in the models satisfies all the test cases, the result of this comma
 
 image::{dir}/dbt_test.png[dbt test output, width=75%]
 
-=== Generate Documentation
+=== Generate documentation
 
 Our model consists of just a few tables. In a scenario with more sources of data, and a more complex dimensional model, documenting the data lineage and what is the purpose of each of the intermediate models is very important. 
 
@@ -289,7 +298,7 @@ You can start your own server to browse the documentation. The following command
 dbt docs serve
 ----
 
-==== Lineage Graph
+==== Lineage graph
 
 image::{dir}/dbt_docs_serve.png[dbt lineage graph, width=75%]
 

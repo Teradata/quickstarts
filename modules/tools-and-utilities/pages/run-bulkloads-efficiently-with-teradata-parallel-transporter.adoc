@@ -16,7 +16,7 @@ We often have a need to move large volumes of data into Vantage. Teradata offers
 * Access to a Teradata Vantage instance.
 +
 include::ROOT:partial$vantage_clearscape_analytics.adoc[]
-* Download Teradata Tools and Utilities (TTU) -  supported platforms: link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-windows-installation-package[Windows], link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-macos-installation-package[MacOS], link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-linux-installation-package-0[Linux] (requires registration).
+* Download Teradata Tools and Utilities (TTU) -  supported platforms: link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-windows-installation-package[Windows], link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-mac-osx-installation-package[MacOS], link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-linux-installation-package-0[Linux] (requires registration).
 
 == Install TTU
 
