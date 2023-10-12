@@ -1,4 +1,24 @@
- <script src="{{uiRootPath}}/js/site.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  const mainElement = document.getElementById('home'); 
+  
+  if (mainElement && mainElement.id === 'home') {
+    const scriptElement = document.querySelector('script[src="{{uiRootPath}}/js/site.js"]');
+    if (scriptElement) {
+      scriptElement.remove(); 
+    }
+  } else {
+    const scriptElement = document.querySelector('script[src="{{uiRootPath}}/js/site.js"]');
+    if (!scriptElement) {
+      const newScriptElement = document.createElement('script');
+      newScriptElement.src = '{{uiRootPath}}/js/site.js';
+      document.body.appendChild(newScriptElement);
+    }
+  }
+});
+</script>    
+
 <script async src="{{uiRootPath}}/js/behavior.js"></script>
 {{#if env.SITE_SEARCH_PROVIDER}}
 {{> search-scripts}}
