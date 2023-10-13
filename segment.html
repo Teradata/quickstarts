@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
 <meta name="twitter:site" content="@teradata" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
 <!-- Google Tag Manager -->
 <script>
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -31,11 +31,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');
 </script>
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="./_/css/fontawesome.all.min.css">
-<link rel="stylesheet" href="./_/css/webfonts.css">
 <link rel="stylesheet" href="./_/css/search.css">
 <link rel="stylesheet" href="./_/css/styles.css">
-<link rel="stylesheet" href="./_/css/newnavbar.css">
+<link rel="stylesheet" href="./_/css/newnavbar.css" >
 <link rel="stylesheet" href="./_/css/navbar.css">
 <style>
 
@@ -71,17 +69,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .show {
     display: block;
   }
-  /**/
-  /*
-@font-face {
-  font-family: 'Inter-Regular';
-  src: url("./_/webfonts/Inter/Inter-Regular.ttf") format('truetype');
-}
-@font-face {
-  font-family: 'Inter-SemiBold';
-  src: url("./_/webfonts/Inter/Inter-SemiBold.ttf") format('truetype');
-}
-*/
+
 body {
   transition: all .25s ease-in-out 0s;
   overflow-x: hidden;
@@ -1057,6 +1045,7 @@ span.search-result-highlight {
 
 </style>
 
+
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
 <link rel="icon" href="./_/img/favicon.ico" type="image/x-icon">
   </head>
@@ -1147,7 +1136,7 @@ span.search-result-highlight {
             </header>
             <header class="header-nav-mobile">
               <nav class="d-flex custom-justify-content-between align-items-center px-6 shadow--s">
-                  <a class="header-nav__logo d-flex align-items-center" href="/">
+                  <a class="header-nav__logo d-flex align-items-center" href="/" aria-label="Teradata">
                       <div>
                           <img class="teradata-logo" src='./_/img/TD-Logo.svg' alt="" title="" >
                       </div>
@@ -1241,7 +1230,7 @@ span.search-result-highlight {
                   </ul>
                   <footer>
                     <div class="header-nav-mobile__sub-menu background-grayLight mt-6 py-6 container-wide">
-                      <ul class="row">
+                      <ul class="row list">
                         <li class="col-6">
                           <a class="nav-1" href="https://teradata.com" target="_blank" rel="noopener">Teradata.com</a>
                         </li>
@@ -1596,7 +1585,6 @@ document.addEventListener("DOMContentLoaded", function () {
   <div class="toc-menu">
   </div>
 </aside>
-
 <article class="doc">
 <h1 class="page">Store events from Twilio Segment</h1>
 <p>Author: <a href="mailto:adam.tworkiewicz@teradata.com">Adam Tworkiewicz</a><br/>
@@ -1871,6 +1859,7 @@ If you have any questions or need further assistance, please visit our <a href="
 @media screen and (min-width: 1024px){
   .body {
     margin-top: 55px;
+    margin-bottom: 20px;
   }
 }
 /*
@@ -2316,7 +2305,25 @@ pre {
   </footer>
 <!-- New Footer -->
 
-<script src="./_/js/site.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  const mainElement = document.getElementById('home'); 
+  
+  if (mainElement && mainElement.id === 'home') {
+    const scriptElement = document.querySelector('script[src="./_/js/site.js"]');
+    if (scriptElement) {
+      scriptElement.remove(); 
+    }
+  } else {
+    const scriptElement = document.querySelector('script[src="./_/js/site.js"]');
+    if (!scriptElement) {
+      const newScriptElement = document.createElement('script');
+      newScriptElement.src = './_/js/site.js';
+      document.body.appendChild(newScriptElement);
+    }
+  }
+});
+</script>    
 <script async src="./_/js/behavior.js"></script>
 <script src="./_/js/vendor/lunr.js"></script>
 <script src="./_/js/search-ui.js" id="search-ui-script" data-site-root-path="." data-snippet-length="100" data-stylesheet="./_/css/search.css"></script>
