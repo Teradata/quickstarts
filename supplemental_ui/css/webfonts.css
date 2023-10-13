@@ -73,14 +73,17 @@
 @font-face{
   font-family: 'Poppins-Regular';
   src: url('Poppins-Regular.ttf') format('truetype');
+  font-display: swap;
 }
 
 @font-face{
   font-family: 'Poppins-SemiBold';
   src: url('Poppins-SemiBold.ttf') format('truetype');
+  font-display: swap;
 }
 
 @font-face{
   font-family: 'Poppins-Bold';
   src: url('Poppins-Bold.ttf') format('truetype');
+  font-display: swap;
 }
