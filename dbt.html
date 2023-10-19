@@ -734,7 +734,7 @@ aside.toc.sidebar {
   .toolbar {
     top: 115px;
     height: 60px;
- /*   position: sticky;*/
+    position: sticky;
   }
 }
 
@@ -1736,33 +1736,9 @@ AS PERMANENT = 110e6,
 <div class="paragraph">
 <p>dbt takes these raw data table and builds the following dimensional model, which is more suitable for analytics tools:</p>
 </div>
-<div class="literalblock kroki-error">
+<div class="imageblock kroki">
 <div class="content">
-<pre># Entities
-
-[`dimension: customers`] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
-  *`customer_id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "int", border: "1", border-color: "#ffffff"}
-  `first_name  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
-  `last_name  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
-  `email  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
-  `first_order  ` {bgcolor: "#fcece8", color: "#868686", label: "date", border: "1", border-color: "#ffffff"}
-  `most_recent_order  ` {bgcolor: "#fcece8", color: "#868686", label: "date", border: "1", border-color: "#ffffff"}
-  `number_of_orders  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
-  `total_order_amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
-
-[`fact: orders`] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
-  *`order_id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "int", border: "1", border-color: "#ffffff"}
-  +`customer_id  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
-  `order_date  ` {bgcolor: "#fcece8", color: "#868686", label: "date", border: "1", border-color: "#ffffff"}
-  `status  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
-  `amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
-  `credit_card_amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
-  `coupon_amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
-  `bank_transfer_amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
-  `gift_card_amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
-
-# Relationships
-`dimension: customers`   1--* `fact: orders`</pre>
+<img src="_images/diag-cfb2d5cb8c33c037d82e57adbd8d36445946ce00.svg" alt="Diagram" width="100%">
 </div>
 </div>
 </div>
