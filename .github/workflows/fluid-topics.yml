@@ -26,7 +26,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Archive and Send it
         env:
-          FT_URL: https://my.fluidtopics.net/testascii/api/admin/khub/sources/test/upload?publisher=github
+          FT_URL: https://docs-dev.teradata.com/api/admin/khub/sources/GIT_UD/upload?publisher=github
           FT_KEY: ${{ secrets.FT_API_KEY }}
         run: |
           zip -r archive.zip antora.yml modules
