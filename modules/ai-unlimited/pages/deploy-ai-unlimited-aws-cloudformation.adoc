@@ -36,7 +36,7 @@ git clone https://github.com/Teradata/ai-unlimited
 === Step 1: Prepare your AWS account
 
 1. If you don't already have an AWS account, create one at link:https://aws.amazon.com[https://aws.amazon.com] by following the on-screen instructions.  
-2. Make sure the account deploying workspace service has sufficient IAM permissions to create IAM roles or IAM policies. Contact your organization administrator if your account doesn't have the required permission. See Control AWS Access and Permissions using Permissions and Policies.
+2. Make sure the account deploying workspace service has sufficient IAM permissions to create IAM roles or IAM policies. Contact your organization administrator if your account doesn't have the required permission. See xref::ai-unlimited-aws-permissions-policies.adoc[].
 3. Use the region selector in the navigation bar to choose the AWS region where you want to deploy the Teradata AI Unlimited workspace service. 
 4. Generate a key pair to connect securely to your workspace service instance using SSH after it launches. See link:https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html[Amazon EC2 key pairs and Linux instances].
 +
