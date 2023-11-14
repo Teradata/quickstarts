@@ -1,12 +1,13 @@
-= Run a Sample Workload in JupyterLab
+= Run a Sample Workload in JupyterLab Using Teradata AI Unlimited
 :experimental:
 :page-author: Thripti Aravind
 :page-email: thripti.aravind@teradata.com
-:page-revdate: May 16th, 2023
-:description: Run a simple workflow and learn how to use Regulus.
-:keywords: Regulus, Workspaces, Query Engine
+:page-revdate: November 14th, 2023
+:description: Run a simple workflow and learn how to use Teradata AI Unlimited.
+:keywords: Teradata AI Unlimited, Teradata AI Unlimited Workspace service, Teradata AI Unlimited Compute Engine
+:page-image-directory: running-sample-ai-unlimited-workload
 
-IMPORTANT: This product is in preview and is subject to change. To get early access to Regulus, sign up on the Regulus Home page.
+IMPORTANT: This product is in preview and is subject to change. If you're interested in learning more about this offering, contact Teradata Support.
 
 == Overview
 
@@ -19,19 +20,19 @@ This document walks you through a simple workflow where you can use JupyterLab t
 
 == Before you begin
 
-* Install and configure Regulus. See xref::install-regulus-docker-image.adoc[].
+* Deploy and configure Teradata AI Unlimited Workspaces and JupyterLab. See xref::install-ai-unlimited-workspaces-docker.adoc[] and xref::install-ai-unlimited-interface-docker.adoc[].
 
 * Copy and retain the following:
 
-** AWS environment variables, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_SESSION_TOKEN` from your AWS Console. See link:https://docs.aws.amazon.com/sdkref/latest/guide/environment-variables.html[Environment Variables].
-** API Key from Workspaces.
+** CSP environment variables from your Console. See link:https://docs.aws.amazon.com/sdkref/latest/guide/environment-variables.html[Environment Variables].
+** API Key from workspace service.
 
 == Run your first workload
 
-Run `%help` or `%help <command>` for details on any magic command. See xref::regulus-magic-reference.adoc[] for more details.
+Run `%help` or `%help <command>` for details on any magic command. See xref::ai-unlimited-magic-reference.adoc[] for more details.
 
 1. Connect to JupyterLab using the URL: http://localhost:8888 and enter the token when prompted.
-2. Connect to Workspaces using the API Key.
+2. Connect to the workspace service using the API Key.
 +
 [source, bash, id="connect_workspaces", role="content-editable emits-gtm-events"]
 ----
@@ -39,25 +40,25 @@ Run `%help` or `%help <command>` for details on any magic command. See xref::reg
 ----
 3. Create a new project.
 +
-NOTE: Currently, Regulus supports only AWS.
+NOTE: Currently, Teradata AI Unlimited supports AWS and Azure.
 +
 
 [source, bash, id="create_project", role="content-editable emits-gtm-events"]
 ----
-%project_create project=<Project_Name>, env=aws
+%project_create project=<Project_Name>, env=<CSP>, team=<Project_Team>
 ----
 
 4. [Optional] Create an authorization object to store the CSP credentials.
 +
-Replace `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_REGION` with your values.
+Replace `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, and `REGION` with your values.
 +
 
 [source, bash, id="create_auth", role="content-editable emits-gtm-events"]
 ----
-%project_auth_create name=<Auth_Name>, project=<Project_Name>, key=<AWS_ACCESS_KEY_ID>, secret=<AWS_SECRET_ACCESS_KEy>, region=<AWS_REGION>
+%project_auth_create name=<Auth_Name>, project=<Project_Name>, key=<ACCESS_KEY_ID>, secret=<SECRET_ACCESS_KEy>, region=<REGION>
 ----
 
-5. Deploy a query engine for the project.
+5. Deploy an engine for the project.
 +
 Replace the <Project_Name> to a name of your choice. The size parameter value can be small, medium, large, or extralarge. The default size is small.
 +
@@ -68,7 +69,7 @@ Replace the <Project_Name> to a name of your choice. The size parameter value ca
 ----
 
 +
-The deployment process will take a few minutes to complete. On successful deployment, a password is generated.
+The deployment process takes a few minutes to complete. On successful deployment, a password is generated.
 
 6. Establish a connection to your project.
 +
@@ -111,7 +112,7 @@ b. Load data into the SalesCenter table using the `%dataload` magic command.
 %dataload DATABASE=<Project_Name>, TABLE=SalesCenter, FILEPATH=notebooks/sql/data/salescenter.csv
 ----
 +
-NOTE: Unable to locate the salescenter.csv file? Download the file from link:https://github.com/Teradata/jupyter-demos/tree/main/Getting_Started/Charting_and_Visualization/data[GitHub Demo: Charting and Visualization Data]
+NOTE: Unable to locate the salescenter.csv file? Download the file from link:https://github.com/Teradata/jupyter-demos/tree/main/Getting_Started/Charting_and_Visualization/data[GitHub Demo: Charting and Visualization Data].
 +
 Verify that the data was inserted.
 +
@@ -148,7 +149,7 @@ d. Load data into the SalesDemo table using the `%dataload` magic command.
 %dataload DATABASE=<Project_Name>, TABLE=SalesDemo, FILEPATH=notebooks/sql/data/salesdemo.csv
 ----
 +
-NOTE: Unable to locate the salesdemo.csv file? Download the file from link:https://github.com/Teradata/jupyter-demos/tree/main/Getting_Started/Charting_and_Visualization/data[GitHub Demo: Charting and Visualization Data]
+NOTE: Unable to locate the salesdemo.csv file? Download the file from link:https://github.com/Teradata/jupyter-demos/tree/main/Getting_Started/Charting_and_Visualization/data[GitHub Demo: Charting and Visualization Data].
 +
 Verify that the sales demo data was inserted successfully.
 +
@@ -185,7 +186,7 @@ DROP TABLE SalesDemo;
 ----
 %project_backup project=<Project_Name>
 ----
-9. Suspend the query engine.
+9. Suspend the engine.
 +
 
 [source, bash, id="suspend_query_engine", role="content-editable emits-gtm-events"]
@@ -199,6 +200,6 @@ Congrats! You've successfully run your first use case in JupyterLab.
 
 * Interested in exploring advanced use cases? Coming soon! Keep watching this space for the GitHub link.
 
-* Learn about the magic commands available in JupyterLab. See xref::regulus-magic-reference.adoc[].
+* Learn about the magic commands available in JupyterLab. See xref::ai-unlimited-magic-reference.adoc[].
 
 include::ROOT:partial$community_link.adoc[]
