@@ -1,37 +1,37 @@
-= Use Regulus With Workspaces CLI
+= Use Teradata AI Unlimited With Workspace Client
 :experimental:
 :page-author: Thripti Aravind
 :page-email: thripti.aravind@teradata.com
-:page-revdate: May 16th, 2023
-:description: Use Workspaces CLI to use Regulus
-:keywords: Regulus, Workspaces, Query Engine
-:page-image-directory: using-regulus-workspace-cli
+:page-revdate: November 14th, 2023
+:description: Learn how manage Teradata AI Unlimited using workspacectl.
+:keywords: Teradata AI Unlimited, Teradata AI Unlimited Workspace service, Teradata AI Unlimited Compute Engine
+:page-image-directory: using-ai-unlimited-workspace-cli
 
-IMPORTANT: This product is in preview and is subject to change. To get early access to Regulus, contact Support.
+IMPORTANT: This product is in preview and is subject to change. If you're interested in learning more about this offering, contact Teradata Support.
 
 == Overview
 
-Workspaces CLI is a command line interface (CLI) for Regulus. This document provides step-by-step instructions to install Workspaces CLI. In this document, you can find all the necessary information and guidance on the CLI commands, allowing you to navigate the command line quickly and efficiently.
+Workspace Client (workspacectl) is a command line interface (CLI) for Teradata AI Unlimited. This document provides step-by-step instructions to install workspacectl. In this document, you can find all the necessary information and guidance on the CLI commands, allowing you to navigate the command line quickly and efficiently. For the current release, you can only connect to the workspace service and manage the engine using workspacectl. Teradata recommends using JupyterLab as the Teradata AI Unlimited interface for data exploration. 
 
-You can also use JupyterLab as your Regulus interface. See xref::getting-started-with-regulus.adoc[].
+See xref::install-ai-unlimited-interface-docker.adoc[].
 
 == Before you begin
 
 Make sure you have:
 
-* Installed, configured, and set up Workspaces using the steps outlined in xref::install-regulus-docker-image.adoc[].
+* Installed, configured, and set up workspace service using the steps outlined in xref::install-ai-unlimited-workspaces-docker.adoc[].
 * Copied and retained the AWS environment variables and API Key.
 
 
-== Install Workspaces CLI
+== Install workspacectl
 
-Download the Workspaces CLI executable file from link:https://downloads.teradata.com/download/tools/regulus-ctl[https://downloads.teradata.com/download/tools/regulus-ctl].
+Download the workspacectl executable file from link:https://downloads.teradata.com/download/tools/ai-unlimited-ctl[https://downloads.teradata.com/download/tools/ai-unlimited-ctl].
 
-NOTE: Workspaces CLI supports all major operating systems.
+NOTE: Workspacectl supports all major operating systems.
 
-== Use Workspaces CLI
+== Use workspacectl
 
-1. Open the terminal window and run the workspacesctl file.
+1. Open the terminal window and run the workspacectl file.
 +
 [tabs]
 ====
@@ -53,9 +53,9 @@ workspacesctl
 --
 ====
 +
-image::{page-image-directory}/reguluscli.workspaces.png[Regulus CLI]
+image::{page-image-directory}/ai.unlimited.cli.workspaces.png[AI Unlimited CLI]
 
-2. Configure Workspaces using the API Key.
+2. Configure workspace service using the API Key.
 +
 [source, bash, id="workspaces_use_config", role="content-editable emits-gtm-events"]
 ----
@@ -69,7 +69,7 @@ workspacesctl workspaces config
 workspacesctl project create <Project_Name> -e <CSP> --no-tls
 ----
 
-4. Deploy a query engine for the project.
+4. Deploy an engine for the project.
 +
 [source, bash, id="workspaces_use_project_engine_deploy", role="content-editable emits-gtm-events"]
 ----
@@ -78,7 +78,7 @@ workspacesctl project engine deploy <Project_Name> -t <Size_of_Engine> --no-tls
 
 5. Run a sample workload.
 
-6. Manage your project and query engine.
+6. Manage your project and engine.
 
 7. Backup your project.
 +
@@ -87,7 +87,7 @@ workspacesctl project engine deploy <Project_Name> -t <Size_of_Engine> --no-tls
 workspacesctl project backup <Project_Name> --no-tls
 ----
 
-8. Suspend the query engine.
+8. Suspend the engine.
 +
 [source, bash, id="workspaces_use_project_engine_suspend", role="content-editable emits-gtm-events"]
 ----
@@ -97,11 +97,11 @@ workspacesctl project engine suspend <Project_Name> --no-tls
 For a supported list of commands, see <<_workspaces_cli_reference, Workspaces CLI Reference>>.
 
 
-== Workspaces CLI reference
+== Workspace Client reference
 
 === workspaces config
 
-**Description**: One-time configuration to bind CLI with the Workspaces service. Go to the Workspaces Profile page and copy the API Key.
+**Description**: One-time configuration to bind CLI with the workspace service. Go to the Workspace service Profile page and copy the API Key.
 
 **Usage**:
 
@@ -116,13 +116,13 @@ workspacesctl workspaces config
 
 **Output**:
 
-image::{page-image-directory}/reguluscli.workspaces.config.png[Regulus CLI Config]
+image::{page-image-directory}/ai.unlimited.cli.workspaces.config.png[AI Unlimited CLI Config]
 
-Follow the prompts to choose the Workspaces endpoint and API Key.
+Follow the prompts to choose the workspace service endpoint and API Key.
 
 === workspaces user list
 
-**Description**: View the list of users set up for Regulus on GitHub.
+**Description**: View the list of users set up for Teradata AI Unlimited on GitHub.
 
 **Usage**:
 [source, bash, id="workspaces_user_list", role="content-editable emits-gtm-events"]
@@ -137,11 +137,11 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 **Output**:
 
-image::{page-image-directory}/reguluscli.user.list.png[Regulus CLI User List]
+image::{page-image-directory}/ai.unlimited.cli.user.list.png[AI Unlimited CLI User List]
 
 === project create
 
-**Description**: Create a project in Regulus. The command also creates a corresponding GitHub repository for the project.
+**Description**: Create a project in Teradata AI Unlimited. The command also creates a corresponding GitHub repository for the project.
 
 **Usage**:
 [source, bash, id="workspaces_project_create", role="content-editable emits-gtm-events"]
@@ -157,17 +157,17 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 |`-e`, `--environment`
 |String
-|Environment where the project query engine is hosted. Values: aws, azure, or gcloud. Currently, Regulus supports only aws.
+|The environment where the project engine is hosted. Values: aws, azure, or gcloud. Currently, Teradata AI Unlimited supports aws and azure.
 |Yes
 
 |`-f`, `--manifest`
 |String
-|Path to manifest the yaml file to be used for the input.
+|The path to manifest the yaml file to be used for the input.
 |No
 
 |`-t`, `--team`
 |String
-|Team assigned to the project.
+|The team assigned to the project.
 |No
 
 |`-h`, `--help`
@@ -179,11 +179,11 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 **Output**:
 
-image::{page-image-directory}/reguluscli.project.create.png[Regulus CLI Project Create]
+image::{page-image-directory}/ai.unlimited.cli.project.create.png[AI Unlimited CLI Project Create]
 
 === project list
 
-**Description**: View the list of all projects set up in Regulus.
+**Description**: View the list of all projects set up in Teradata AI Unlimited.
 
 **Usage**:
 [source, bash, id="workspaces_project_list", role="content-editable emits-gtm-events"]
@@ -203,11 +203,11 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 **Output**:
 
-image::{page-image-directory}/reguluscli.project.list.png[Regulus CLI Project List]
+image::{page-image-directory}/ai.unlimited.cli.project.list.png[AI Unlimited CLI Project List]
 
 === project delete
 
-**Description**: Delete a project in Regulus.
+**Description**: Delete a project in Teradata AI Unlimited.
 
 **Usage**:
 [source, bash, id="workspaces_project_delete", role="content-editable emits-gtm-events"]
@@ -224,7 +224,7 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 NOTE: The output is in YAML format.
 
-image::{page-image-directory}/reguluscli.project.delete.png[Regulus CLI Project Delete]
+image::{page-image-directory}/ai.unlimited.cli.project.delete.png[AI Unlimited CLI Project Delete]
 
 
 === project user list
@@ -244,11 +244,11 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 **Output**:
 
-image::{page-image-directory}/reguluscli.project.user.list.png[Regulus CLI Project User List]
+image::{page-image-directory}/ai.unlimited.cli.project.user.list.png[AI Unlimited CLI Project User List]
 
 === project backup
 
-**Description**:  Back up the query engine object definitions to the GitHub repository assigned for the project.
+**Description**:  Back up the engine object definitions to the GitHub repository assigned for the project.
 
 **Usage**:
 [source, bash, id="workspaces_project_backup", role="content-editable emits-gtm-events"]
@@ -265,11 +265,11 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 NOTE: The output is in YAML format.
 
-image::{page-image-directory}/reguluscli.project.backup.png[Regulus CLI Project Backup]
+image::{page-image-directory}/ai.unlimited.cli.project.backup.png[AI Unlimited CLI Project Backup]
 
 === project restore
 
-**Description**: Restore all query engine object definitions from the project GitHub repository.
+**Description**: Restore all engine object definitions from the project GitHub repository.
 
 **Usage**:
 [source, bash, id="workspaces_project_restore", role="content-editable emits-gtm-events"]
@@ -305,11 +305,11 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 NOTE: The output is in YAML format.
 
-image::{page-image-directory}/reguluscli.project.restore.png[Regulus CLI Project Restore]
+image::{page-image-directory}/ai.unlimited.cli.project.restore.png[AI Unlimited CLI Project Restore]
 
 === project engine deploy
 
-**Description**: Deploy a query engine for the project.
+**Description**: Deploy an engine for the project.
 
 **Usage**:
 [source, bash, id="workspaces_project_engine_deploy", role="content-editable emits-gtm-events"]
@@ -325,12 +325,12 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 |`-c`, `--instance-count`
 |Int
-|Number of query engine nodes. The default value is 1.
+|Number of engine nodes. The default value is 1.
 |No
 
 |`-t`, `--instance-size`
 |String
-|Instance size of the query engine.
+|Instance size of the engine.
 |No
 
 |`-f`, `--manifest`
@@ -358,7 +358,7 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 === project engine suspend
 
-**Description**: Destroy the deployed query engine and back up the object definitions created during the session.
+**Description**: Destroy the deployed engine and back up the object definitions created during the session.
 
 **Usage**:
 [source, bash, id="workspaces_project_engine_suspend", role="content-editable emits-gtm-events"]
@@ -375,11 +375,11 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 NOTE: The output is in YAML format.
 
-image::{page-image-directory}/reguluscli.engine.suspend.png[Regulus CLI Engine Suspend]
+image::{page-image-directory}/ai.unlimited.cli.engine.suspend.png[AI Unlimited CLI Engine Suspend]
 
 === project engine list
 
-**Description**: View the detailed information about the query engine for a project. The command displays the last state of the query engine.
+**Description**: View the detailed information about the engine for a project. The command displays the last state of the engine.
 
 **Usage**:
 [source, bash, id="workspaces_project_engine_list", role="content-editable emits-gtm-events"]
@@ -396,7 +396,7 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 NOTE: The output is in YAML format.
 
-image::{page-image-directory}/reguluscli.engine.list.png[Regulus CLI Engine List]
+image::{page-image-directory}/ai.unlimited.cli.engine.list.png[AI Unlimited CLI Engine List]
 
 === project auth create
 
@@ -450,7 +450,7 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 NOTE: The output is in YAML format.
 
-image::{page-image-directory}/reguluscli.auth.create.png[Regulus CLI Auth Create]
+image::{page-image-directory}/ai.unlimited.cli.auth.create.png[AI Unlimited CLI Auth Create]
 
 === project auth list
 
@@ -471,7 +471,7 @@ NOTE: If your setup includes TLS configuration,  you need not add the `-no-tls` 
 
 NOTE: The output is in YAML format.
 
-image::{page-image-directory}/reguluscli.auth.list.png[Regulus CLI Auth List]
+image::{page-image-directory}/ai.unlimited.cli.auth.list.png[AI Unlimited CLI Auth List]
 
 === project auth delete
 
@@ -505,6 +505,6 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 NOTE: The output is in YAML format.
 
-image::{page-image-directory}/reguluscli.auth.delete.png[Regulus CLI Auth Delete]
+image::{page-image-directory}/ai.unlimited.cli.auth.delete.png[AI Unlimited CLI Auth Delete]
 
 include::ROOT:partial$community_link.adoc[]

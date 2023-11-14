@@ -1,0 +1,42 @@
+= Getting Started with Teradata AI Unlimited
+:page-author: Thripti Aravind
+:page-email: thripti.aravind@teradata.com
+:page-revdate: November 14th, 2023
+:description: Learn about Teradata AI Unlimited components and available deployment options.
+:keywords: Teradata AI Unlimited, Teradata AI Unlimited Workspace service, Teradata AI Unlimited Compute Engine
+:page-image-directory: getting-started-with-ai-unlimited
+
+IMPORTANT: This product is in preview and is subject to change. If you're interested in learning more about this offering, contact Teradata Support.
+
+== Overview
+
+Teradata AI Unlimited is a self-service, on-demand platform that enables you to deploy and connect an SQL engine to your data lake. You can then run your workloads on a scalable AI Unlimited compute engine deployed on your preferred Cloud Service Provider (CSP). Using the engine, you can leverage the capabilities of a highly parallel database while eliminating the need for data management.
+
+Teradata AI Unlimited consists of the following components:
+
+* **Workspace service**: An orchestration service that controls and manages Teradata AI Unlimited automation and deployments. It also controls the integration elements that provide a seamless user experience when running data-related projects. Workspace service includes a web-based UI that you can use to authorize the user and define your choice of CSP integrations.
+
+* **Interface**:  An environment to write and run data projects, connect to the Teradata system, and visualize data. You can use either JupyterLab or Workspace Client (workspacectl).
+
+* **Engine**: A fully managed computational resource that you can use to run your data science and analytical workloads.
+
+== Deployment options
+
+You can deploy Teradata AI Unlimited components using one of the following options: 
+
+* Workspace service and JupyterLab running locally on Docker
+* Workspace service on your Virtual Private Cloud (VPC) and JupyterLab running locally on Docker
+* Workspace service and JupyterLab on the same instance on your VPC
+* Workspace service and JupyterLab behind a Network Load Balancer
+
+For development or testing environments, you can deploy workspace service and JupyterLab using Docker. See xref::install-ai-unlimited-workspaces-docker.adoc[]. If you're an enterprise user with access to cloud infrastructure, you can deploy workspace service and JupyterLab on your VPC. See xref::deploy-ai-unlimited-aws-cloudformation.adoc[] and Deploy Teradata AI Unlimited using Azure (Coming Soon).
+
+== Next steps
+
+* Looking to deploy Teradata AI Unlimited locally using Docker? See xref::install-ai-unlimited-workspaces-docker.adoc[].
+
+* Looking to deploy Teradata AI Unlimited on AWS using CloudFormation Template? See xref::deploy-ai-unlimited-aws-cloudformation.adoc[].
+
+* Interested in learning how Teradata AI Unlimited can help you with real-life use cases? Coming soon! Keep watching this space for the GitHub link.
+
+include::ROOT:partial$community_link.adoc[]

@@ -1,0 +1,306 @@
+= Deploy Teradata AI Unlimited Workspace Service and Interface using AWS CloudFormation Template
+:experimental:
+:page-author: Thripti Aravind
+:page-email: thripti.aravind@teradata.com
+:page-revdate: November 14th, 2023
+:description: Learn how to deploy Teradata AI Unlimited workspace service and JupyterLab using AWS CloudFormation Template.
+:keywords: Teradata AI Unlimited, Teradata AI Unlimited Workspace service, Teradata AI Unlimited Compute Engine
+:page-image-directory: deploy-ai-unlimited-aws-cloudformation
+
+IMPORTANT: This product is in preview and is subject to change. If you're interested in learning more about this offering, contact Teradata Support.
+
+== Overview
+
+The AWS CloudFormation template launches, configures, and runs the AWS compute, network, storage, and other services required to deploy workspace service and JupyterLab on AWS. 
+You can deploy the CloudFormation template using one of the following ways:
+
+* <<_deploy_cloudformation_template_from_aws_console, AWS Console>>
+* xref::deploy-ai-unlimited-awscli-cloudformation.adoc[]
+
+== Deploy CloudFormation Template from AWS Console
+
+=== Cost and billing
+
+There is no additional cost for downloading the workspace service; however, you are responsible for the cost of the AWS services or resources used while deploying the workspace service and engine.
+The AWS CloudFormation template includes configuration parameters that you can customize. Some of these settings, such as instance type, affect the cost of deployment. For cost estimates, review the Marketplace agreement page.
+
+=== Before you start
+
+Open a terminal window and clone the link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws[Teradata AI Unlimited GitHub repository]. This repository includes sample CloudFormation templates to deploy workspace service and JupyterLab.
+
+[source, bash, id="clone_ai_unlimited_repo", role="content-editable emits-gtm-events"]
+----
+git clone https://github.com/Teradata/ai-unlimited
+----
+
+=== Step 1: Prepare your AWS account
+
+1. If you don't already have an AWS account, create one at link:https://aws.amazon.com[https://aws.amazon.com] by following the on-screen instructions.  
+2. Make sure the account deploying workspace service has sufficient IAM permissions to create IAM roles or IAM policies. Contact your organization administrator if your account doesn't have the required permission. See Control AWS Access and Permissions using Permissions and Policies.
+3. Use the region selector in the navigation bar to choose the AWS region where you want to deploy the Teradata AI Unlimited workspace service. 
+4. Generate a key pair to connect securely to your workspace service instance using SSH after it launches. See link:https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html[Amazon EC2 key pairs and Linux instances].
++
+NOTE: Alternatively, you can use AWS Session Manager to connect to the workspace service instances, in which case, you must attach the session-manager.json policy to the IAM Role. See xref::ai-unlimited-aws-permissions-policies.adoc[]. If you don't require host OS access, you can choose not to use either of these connection methods.
+
+
+=== Step 2: Subscribe to the Teradata AI Unlimited workspace service AMI
+
+This article requires an Amazon Machine Image (AMI) subscription for Teradata AI Unlimited running on AWS. Contact Teradata Support to obtain a license for Teradata AI Unlimited workspace service.
+
+To subscribe: 
+
+1. Log on to your AWS account. 
+2. Open the AWS Marketplace page for Teradata AI Unlimited and choose **Continue**. 
+3. Review and accept the terms and conditions for the workspace service and JupyterLab images. 
+
++
+
+* Leader: link:https://aws.amazon.com/marketplace/pp/prodview-6vip7ar4pi6ey?ref_=aws-mp-console-subscription-detail[https://aws.amazon.com/marketplace/pp/prodview-6vip7ar4pi6ey?ref_=aws-mp-console-subscription-detail]
+
+* Follower: link:https://aws.amazon.com/marketplace/pp/prodview-xcwypvttluuiw?ref_=aws-mp-console-subscription-detail[https://aws.amazon.com/marketplace/pp/prodview-xcwypvttluuiw?ref_=aws-mp-console-subscription-detail]
+
+
+=== Step 3: Deploy workspace service and JupyterLab from the AWS Console
+
+1. Sign on to your AWS account on the AWS Console.
+2. Check the **AWS Region** displayed in the upper-right corner of the navigation bar and change it if necessary. Teradata recommends selecting a region closest to your primary work location.
+3.	Go to **CloudFormation** > **Create Stack**. Select **Create Stack** and select **With new resources (standard)**.
+4.	Select **Template is ready**, and then upload one of the downloaded template files from the Teradata AI Unlimited GitHub repository:
++
+
+* link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#workspaces-template[Workspaces Template]: Deploys a single instance with Workspaces running in a container controlled by systemd.
+** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/workspaces.yaml[workspaces.yaml] CloudFormation template
+** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/workspaces.json[parameters/workspaces.json] parameter file
+* link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#jupyter-template[Jupyter Template]: Deploys a single instance with JupyterLab running in a container controlled by systemd.
+** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/jupyter.yaml[jupyter.yaml] CloudFormation template
+** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/jupyter.json[parameters/jupyter.json] parameter file
+* link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#all-in-one-template[All-In-One Template]: Deploys a single instance with Workspaces and JupyterLab running on the same instance. 
+** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/all-in-one.yaml[all-in-one.yaml] CloudFormation template
+** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/all-in-one.json[parameters/all-in-one.json] parameter file
++
+If you're using this template, you can use the embedded JupyterLab service or connect to an external JupyterLab instance. When connecting to the embedded JupyterLab service, you must set the appropriate connection address in the JupyterLab notebook (for example, 127.0.0.1), and for external clients, you must set the appropriate public-private IP or DNS name.
+5.	Review the parameters for the template. Provide values for the parameters that require input. For all other parameters, review the default settings and customize them as necessary. When you finish reviewing and customizing the parameters, choose **Next**.  
++
+In the following tables, parameters are listed by category:
++
+**AWS Instance and Network Settings**
++
+[cols="1,1,1,1,1"]
+|===
+|Parameter |Description |Required? |Default |Notes
+
+|InstanceType
+|The EC2 instance type that you want to use for the service.			
+|Required with default
+|t3.small
+|Teradata recommends using the default instance type to save costs. 
+
+|RootVolumeSize	
+|The size of the root disk you want to attach to the instance, in GB.			
+|Required with default
+|8
+|Supports values between 8 and 1000.
+
+|TerminationProtection			
+|Enable instance termination protection.
+|Required with default
+|false
+|
+
+|IamRole			
+|Specifies whether CloudFormation should create a new IAM role or use an existing one.
+|Required with default
+|New
+|Supported options are: New or Existing
+
+See xref::ai-unlimited-aws-permissions-policies.adoc[].
+
+|IamRoleName	
+|The name of the IAM role to assign to the instance, either an existing IAM role or a  newly created IAM role. 	
+|Optional with default	
+|workspaces-iam-role
+|If naming a new IAM role, CloudFormation requires the CAPABILITY_NAMED_IAM capability.
+
+Leave this blank to use an autogenerated name.
+
+|IamPermissionsBoundary	
+|The ARN of the IAM permissions boundary to associate with the IAM role assigned to the instance.
+|Optional
+|
+|
+
+|AvailabilityZone
+|The availability zone to which you want to deploy the instance.
+|Required
+|
+|The value must match the subnet, the zone of any pre-existing volumes, and the instance type must be available in the selected zone.
+
+|LoadBalancing			
+|Specifies whether the instance is accessed via an NLB.
+|Required with default
+|NetworkLoadBalancer
+|Supported options are: NetworkLoadBalancer or None
+
+|LoadBalancerScheme	
+|If a load balancer is used, this field specifies whether the instance is accessible from the Internet or only from within the VPC.	
+|Optional with default	
+|Internet-facing	
+|The DNS name of an Internet-facing load balancer is publicly resolvable to the public IP addresses of the nodes. Therefore, Internet-facing load balancers can route requests from clients over the Internet. The nodes of an internal load balancer have only private IP addresses. The DNS name of an internal load balancer is publicly resolvable to the personal IP addresses of the nodes. Therefore, internal load balancers can route requests from clients with access to the VPC for the load balancer.
+
+|Private			
+|Specifies whether the service is deployed in a private network without public IPs.
+|Required
+|false
+|
+
+|Session			
+|Specifies whether you can use the AWS Session Manager to access the instance.
+|Required
+|false
+|
+
+|Vpc		
+|The network to which you want to deploy the instance.
+|Required
+|
+|
+
+|Subnet				
+|The subnetwork to which you want to deploy the instance.
+|Required
+|
+|The subnet must reside in the selected availability zone.
+
+|KeyName				
+|The public/private key pair which allows you to connect securely to your instance after it launches. When you create an AWS account, this is the key pair you create in your preferred region.
+|Optional
+|
+|Leave this field blank if you do not want to include the SSH keys.
+
+|AccessCIDR	
+|The CIDR IP address range that is permitted to access the instance. 
+|Optional
+|
+|Teradata recommends setting this value to a trusted IP range. 
+Define at least one of AccessCIDR, PrefixList, or SecurityGroup to allow inbound traffic unless you create custom security group ingress rules.
+
+|PrefixList			
+|The prefix list that you can use to communicate with the instance.
+|Optional
+|
+|Define at least one of AccessCIDR, PrefixList, or SecurityGroup to allow inbound traffic unless you create custom security group ingress rules.
+
+|SecurityGroup			
+|The virtual firewall that controls inbound and outbound traffic to the instance.	
+|Optional
+|
+|SecurityGroup is implemented as a set of rules that specify which protocols, ports, and IP addresses or CIDR blocks are allowed to access the instance.
+Define at least one of AccessCIDR, PrefixList, or SecurityGroup to allow inbound traffic unless you create custom security group ingress rules.
+
+|UsePersistentVolume	 			
+|Specifies whether you want to use persistent volume to store data.
+|Optional with default
+|None
+|Supported options are: new persistent volume, an existing one, or none, depending on your use case.
+
+|PersistentVolumeSize				
+|The size of the persistent volume that you can attach to the instance, in GB.
+|Required with default
+|8
+|Supports values between 8 and 1000
+
+|ExistingPersistentVolumeId			
+|The ID of the existing persistent volume that you can attach to the instance. 
+|Required if UsePersistentVolume is set to Existing	
+|
+|The persistent volume must be in the same availability zone as the workspace service instance.
+
+|PersistentVolumeDeletionPolicy				
+|The persistent volume behavior when you delete the CloudFormations deployment.
+|Required with default
+|Delete
+|Supported options are: Delete, Retain, RetainExceptOnCreate, and Snapshot.
+
+|LatestAmiId	 
+|The ID of the image that points to the latest version of AMI. This value is used for the SSM lookup.
+|Required with defaults	
+|
+|This deployment uses the latest ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2 image available.
+IMPORTANT: Changing this value may break the stack.
+|===
+
++
+**Workspace service parameters**
++
+[cols="1,1,1,1,1"]
+|===
+|Parameter |Description |Required? |Default |Notes
+
+|WorkspacesHttpPort		
+|The port to access the workspace service UI.
+|Required with default	
+|3000
+|
+
+|WorkspacesGrpcPort			
+|The port to access the workspace service API.
+|Required with default
+|3282
+|
+
+|WorkspacesVersion				
+|The version of the workspace service you want to deploy.
+|Required with default
+|latest
+|The value is a container version tag, for example, latest.
+|===
+
++
+**JupyterLab parameters**
++
+[cols="1,1,1,1,1"]
+|===
+|Parameter |Description |Required? |Default |Notes
+
+|JupyterHttpPort	
+|The port to access the JupyterLab service UI
+|Required with default	
+|8888
+|
+
+|JupyterToken		
+|The token or password used to access JupyterLab from the UI	
+|Required
+|
+|The token must begin with a letter and contain only alphanumeric characters. The allowed pattern is ^[a-zA-Z][a-zA-Z0-9-]*.
+
+|JupyterVersion
+|The version of JupyterLab you want to deploy.
+|Required with default
+|latest
+|The value is a container version tag, for example, latest.
+|===
+
+
++
+NOTE: If the account deploying workspace service does not have sufficient IAM permissions to create IAM roles or IAM policies, contact your cloud administrator.
+
+6. On the **Options** page, you can specify tags (key-value pairs) for resources in your stack, set permissions, set stack failure options, and set advanced options. When you're done, choose **Next**. 
+7. On the **Review** page, review and confirm the template settings. Under Capabilities, select the check box to acknowledge that the template will create IAM resources. 
+8. Choose **Create** to deploy the stack.
+9.  Monitor the status of the stack. When the status is `CREATE_COMPLETE`, the Teradata AI Unlimited workspace service is ready. 
+10. Use the URLs displayed in the **Outputs** tab for the stack to view the created resources.
+
+NOTE: If you have only deployed the workspace service, you must deploy an interface before running your workload. To deploy the interface locally on Docker, see xref::install-ai-unlimited-interface-docker.adoc[]. You can also use the link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#jupyter-template[Jupyter Template] to deploy a single instance with JupyterLab running in a container controlled by systemd.
+
+Teradata AI Unlimited is ready!
+
+== Next Steps
+
+* Get started with Teradata AI Unlimited by running a simple workflow. See xref::running-sample-ai-unlimited-workload.adoc[].
+
+* Want to learn more about Teradata AI Unlimited-AWS IAM Roles and Policies? See xref::ai-unlimited-aws-permissions-policies.adoc[].
+
+* Interested in learning how Teradata AI Unlimited can help you with real-life use cases? Coming soon! Keep watching this space for the GitHub link.
+
+include::ROOT:partial$community_link.adoc[]
