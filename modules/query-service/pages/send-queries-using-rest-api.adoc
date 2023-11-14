@@ -51,7 +51,7 @@ The database username and password are combined into a string (`"username : pass
 
 Request
 
-[source, python]
+[source, python, id="queryservice_first_query", role="emits-gtm-events"]
 ----
 import requests
 import json
