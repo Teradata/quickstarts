@@ -33,9 +33,9 @@ For development or testing environments, you can deploy workspace service and Ju
 
 == Next steps
 
-* Looking to deploy Teradata AI Unlimited locally using Docker? See xref::install-ai-unlimited-workspaces-docker.adoc[].
+* Want to deploy Teradata AI Unlimited locally using Docker? See xref::install-ai-unlimited-workspaces-docker.adoc[].
 
-* Looking to deploy Teradata AI Unlimited on AWS using CloudFormation Template? See xref::deploy-ai-unlimited-aws-cloudformation.adoc[].
+* Want to deploy Teradata AI Unlimited on AWS using CloudFormation Template? See xref::deploy-ai-unlimited-aws-cloudformation.adoc[].
 
 * Interested in learning how Teradata AI Unlimited can help you with real-life use cases? Coming soon! Keep watching this space for the GitHub link.
 

@@ -40,7 +40,7 @@ git clone https://github.com/Teradata/ai-unlimited
 3. Use the region selector in the navigation bar to choose the AWS region where you want to deploy the Teradata AI Unlimited workspace service. 
 4. Generate a key pair to connect securely to your workspace service instance using SSH after it launches. See link:https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html[Amazon EC2 key pairs and Linux instances].
 +
-NOTE: Alternatively, you can use AWS Session Manager to connect to the workspace service instances, in which case, you must attach the session-manager.json policy to the IAM Role. See xref::ai-unlimited-aws-permissions-policies.adoc[]. If you don't require host OS access, you can choose not to use either of these connection methods.
+NOTE: Alternatively, you can use AWS Session Manager to connect to the workspace service instances, in which case, you must attach the session-manager.json policy to the IAM role. See xref::ai-unlimited-aws-permissions-policies.adoc[]. If you don't require host OS access, you can choose not to use either of these connection methods.
 
 
 === Step 2: Subscribe to the Teradata AI Unlimited workspace service AMI
@@ -299,7 +299,7 @@ Teradata AI Unlimited is ready!
 
 * Get started with Teradata AI Unlimited by running a simple workflow. See xref::running-sample-ai-unlimited-workload.adoc[].
 
-* Want to learn more about Teradata AI Unlimited-AWS IAM Roles and Policies? See xref::ai-unlimited-aws-permissions-policies.adoc[].
+* Want to learn more about Teradata AI Unlimited-AWS IAM roles and policies? See xref::ai-unlimited-aws-permissions-policies.adoc[].
 
 * Interested in learning how Teradata AI Unlimited can help you with real-life use cases? Coming soon! Keep watching this space for the GitHub link.
 

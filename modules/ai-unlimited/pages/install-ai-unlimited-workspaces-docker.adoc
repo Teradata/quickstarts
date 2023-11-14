@@ -290,7 +290,7 @@ image::{page-image-directory}/ai.unlimited.workspaces.setting.png[]
 |No
 
 |Permission Boundary
-|The maximum permissions an IAM entity can have regardless of the permissions defined in the identity-based policy. You can define and manage the permissions of the users and roles and enforce compliance requirements.
+|The maximum permissions an IAM entity can have regardless of the permissions defined in the identity-based policy. You can define and manage the user permissions and roles and enforce compliance requirements.
 |No
 |===
 

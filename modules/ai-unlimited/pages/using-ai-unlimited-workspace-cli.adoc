@@ -325,27 +325,27 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 |`-c`, `--instance-count`
 |Int
-|Number of engine nodes. The default value is 1.
+|The number of engine nodes. The default value is 1.
 |No
 
 |`-t`, `--instance-size`
 |String
-|Instance size of the engine.
+|The instance size of the engine.
 |No
 
 |`-f`, `--manifest`
 |String
-|Path to manifest the yaml file to use for the input.
+|The path to manifest the yaml file to use for the input.
 |No
 
 |`-r`, `--region`
 |String
-|Region for the deployment.
+|The region for the deployment.
 |No
 
 |`-s`, `--subnet-id`
 |String
-|Subnet ID for the deployment.
+|The subnet ID for the deployment.
 |No
 
 |`-h`, `--help`
@@ -416,27 +416,27 @@ NOTE: If your setup includes TLS configuration, you need not add the `-no-tls` p
 
 |`-a`, `--accesskey`
 |String
-|Authorization access key or ID.
+|The authorization access key or ID.
 |Yes, if you're not using the `-f` flag.
 
 |`-n`, `--name string`
 |String
-|Authorization name for the object store.
+|The authorization name for the object store.
 |Yes, if you're not using the `-f` flag.
 
 |`-f`, `--manifest`
 |String
-|Path to manifest the yaml file to use for the input.
+|The path to manifest the yaml file to use for the input.
 |No
 
 |`-r`, `--region`
 |String
-|Region of the object store.
+|The region of the object store.
 |Yes
 
 |-s, --secret string
 |String
-|Authorization secret access key of the object store.
+|The authorization secret access key of the object store.
 |Yes, if you're not using the `-f` flag.
 
 |`-h`, `--help`

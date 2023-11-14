@@ -11,7 +11,7 @@ IMPORTANT: This product is in preview and is subject to change. If you're intere
 
 == Overview
 
-You can deploy a stack using the aws cloudformation create-stack or aws cloudformation deploy commands from the AWS CLI. The example in this section uses the create-stack command. See link:https://docs.aws.amazon.com/cli/latest/reference/cloudformation/#cli-aws-cloudformation[AWS CLI Command Reference] documentation for the syntax differences between the create-stack and deploy commands.
+You can deploy a stack using the `aws cloudformation create-stack` or `aws cloudformation deploy` commands from the AWS CLI. The example in this section uses the create-stack command. See link:https://docs.aws.amazon.com/cli/latest/reference/cloudformation/#cli-aws-cloudformation[AWS CLI Command Reference] documentation for the syntax differences between the `create-stack` and `deploy` commands.
 
 == Before you start
 
