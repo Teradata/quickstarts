@@ -63,7 +63,7 @@ Should your Vantage instance be accessible via ClearScape Analytics Experience, 
 . Create a sample database in your Vantage instance.
 Populate it with sample data.
 +
-[source,sql]
+[source, sql, id="mulesoft_load_data", role="emits-gtm-events"]
 ----
  -- create database
  CREATE DATABASE HR

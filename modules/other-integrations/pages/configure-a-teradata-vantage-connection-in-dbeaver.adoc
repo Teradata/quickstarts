@@ -26,6 +26,8 @@ include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 image::{page-image-directory}/select-your-database.png[Select your database, width=75%]
 3. On the main tab, you need to set all primary connection settings. The required ones include `Host`, `Port`, `Database`, `Username`, and `Password`.
 +
+TIP: In Teradata Vantage, when a user is created a corresponding database with the same is created as well. DBeaver requires that you enter the database. If you don't know what database you want to connect to, use your username in the `database` field.
++
 TIP: With DBeaver PRO, you can not only use the standard ordering of tables but also hierarchically link tables to a specific database or user. Expanding and collapsing the databases or users will help you navigate from one area to another without swamping the Database Navigator window. Check the `Show databases and users hierarchically` box to enable this setting.
 +
 TIP: In many environments Teradata Vantage can only be accessed using the TLS protocol. When in DBeaver PRO, check `Use TLS protocol` option to enable TLS.
