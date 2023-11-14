@@ -221,7 +221,7 @@ The following JSON sample includes the permissions needed to interact with the A
 
 ----
 
-=== regulus.json	
+=== unlimited-engine.json	
 If you pass the Teradata AI Unlimited IAM role to a new engine instead of allowing the workspace service to create the cluster-specific role, you can use the following JSON sample as a starting point to create your policy.
 
 [source, bash, id="ai_unlimited", role="content-editable emits-gtm-events"]
