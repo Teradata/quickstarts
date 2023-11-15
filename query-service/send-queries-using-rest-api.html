@@ -1334,19 +1334,52 @@ document.addEventListener("DOMContentLoaded", function () {
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Regulus (preview)</span>
+    <span class="nav-text">Teradata AI Unlimited</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../regulus/install-regulus-docker-image.html">Install and Configure Regulus Using Docker</a>
+    <a class="nav-link" href="../ai-unlimited/getting-started-with-ai-unlimited.html">Getting Started with Teradata AI Unlimited</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../regulus/getting-started-with-regulus.html">Run a Sample Workload in JupyterLab</a>
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Deploy locally using Docker</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ai-unlimited/install-ai-unlimited-workspaces-docker.html">Deploy and Setup Teradata AI Unlimited Workspace Service Using Docker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ai-unlimited/install-ai-unlimited-interface-docker.html">Deploy a Teradata AI Unlimited Interface Using Docker</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../regulus/regulus-magic-reference.html">Regulus JupyterLab Magic Command Reference</a>
+    <a class="nav-link" href="../ai-unlimited/using-ai-unlimited-workspace-cli.html">Use Teradata AI Unlimited With Workspace Client</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../regulus/using-regulus-workspace-cli.html">Use Regulus With Workspaces CLI</a>
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Deploy on AWS</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ai-unlimited/deploy-ai-unlimited-aws-cloudformation.html">Deploy Teradata AI Unlimited Workspace Service and Interface using AWS CloudFormation Template</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ai-unlimited/ai-unlimited-aws-permissions-policies.html">Control AWS Access and Permissions using Custom Permissions and Policies</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ai-unlimited/deploy-ai-unlimited-awscli-cloudformation.html">Deploy CloudFormation Template from AWS CLI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ai-unlimited/running-sample-ai-unlimited-workload.html">Run a Sample Workload in JupyterLab Using Teradata AI Unlimited</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Reference</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ai-unlimited/ai-unlimited-magic-reference.html">Teradata AI Unlimited JupyterLab Magic Command Reference</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -1508,7 +1541,7 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 <div class="paragraph">
 <p>Request</p>
 </div>
-<div id="queryservice-first-query" class="listingblock emits-gtm-events">
+<div id="queryservice_first_query" class="listingblock emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import requests
 import json
