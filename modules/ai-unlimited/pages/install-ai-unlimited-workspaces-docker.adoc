@@ -15,8 +15,8 @@ This document outlines the steps for deploying and setting up Teradata AI Unlimi
 
 You can install the workspace service using:
 
-* <<_deploy_workspaces_using_docker_engine,Docker Engine>>
-* <<_deploy_workspaces_using_docker_compose, Docker Compose>>
+* <<_deploy_workspace_service_using_docker_engine,Docker Engine>>
+* <<_deploy_workspace_service_using_docker_compose, Docker Compose>>
 
 To use Teradata AI Unlimited with the workspace client, see xref::using-ai-unlimited-workspace-cli.adoc[].
 
@@ -127,28 +127,28 @@ AWS::
 ----
 version: "3.9"
 	
-	services:
-	  workspaces:
-	    deploy:
-	      replicas: 1
-	    platform: linux/amd64
-	    container_name: workspaces
-	    image: ${WORKSPACES_IMAGE_NAME:-teradata/ai-unlimited-workspaces}:${WORKSPACES_IMAGE_TAG:-latest}
-	    command: workspaces serve -v
-	    restart: unless-stopped
-	    ports:
-	      - "443:443/tcp"
-	      - "3000:3000/tcp"
-	      - "3282:3282/tcp"
-	    environment:
-	      accept_license: "Y"
-	      TZ: ${WS_TZ:-UTC}
-	    volumes:
-      - ${WORKSPACES_HOME:-./volumes/workspaces}:/etc/td
-      - ${WORKSPACES_AWS_CONFIG:-~/.aws}:/root/.aws
-  	
-	    networks:
-	      - td-ai-unlimited
+services:
+  workspaces:
+    deploy:
+      replicas: 1
+    platform: linux/amd64
+    container_name: workspaces
+    image: ${WORKSPACES_IMAGE_NAME:-teradata/ai-unlimited-workspaces}:${WORKSPACES_IMAGE_TAG:-latest}
+    command: workspaces serve -v
+    restart: unless-stopped
+    ports:
+      - "443:443/tcp"
+      - "3000:3000/tcp"
+      - "3282:3282/tcp"
+    environment:
+      accept_license: "Y"
+      TZ: ${WS_TZ:-UTC}
+    volumes:
+    - ${WORKSPACES_HOME:-./volumes/workspaces}:/etc/td
+    - ${WORKSPACES_AWS_CONFIG:-~/.aws}:/root/.aws
+  
+    networks:
+      - td-ai-unlimited
 ----
 --
 Azure::
