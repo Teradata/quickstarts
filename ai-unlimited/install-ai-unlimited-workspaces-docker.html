@@ -1457,10 +1457,10 @@ This product is in preview and is subject to change. If you&#8217;re interested 
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#_deploy_workspaces_using_docker_engine">Docker Engine</a></p>
+<p><a href="#_deploy_workspace_service_using_docker_engine">Docker Engine</a></p>
 </li>
 <li>
-<p><a href="#_deploy_workspaces_using_docker_compose">Docker Compose</a></p>
+<p><a href="#_deploy_workspace_service_using_docker_compose">Docker Compose</a></p>
 </li>
 </ul>
 </div>
@@ -1675,28 +1675,28 @@ The following example uses a local volume to store your CSP credentials. You can
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">version: "3.9"
 
-	services:
-	  workspaces:
-	    deploy:
-	      replicas: 1
-	    platform: linux/amd64
-	    container_name: workspaces
-	    image: ${WORKSPACES_IMAGE_NAME:-teradata/ai-unlimited-workspaces}:${WORKSPACES_IMAGE_TAG:-latest}
-	    command: workspaces serve -v
-	    restart: unless-stopped
-	    ports:
-	      - "443:443/tcp"
-	      - "3000:3000/tcp"
-	      - "3282:3282/tcp"
-	    environment:
-	      accept_license: "Y"
-	      TZ: ${WS_TZ:-UTC}
-	    volumes:
-      - ${WORKSPACES_HOME:-./volumes/workspaces}:/etc/td
-      - ${WORKSPACES_AWS_CONFIG:-~/.aws}:/root/.aws
+services:
+  workspaces:
+    deploy:
+      replicas: 1
+    platform: linux/amd64
+    container_name: workspaces
+    image: ${WORKSPACES_IMAGE_NAME:-teradata/ai-unlimited-workspaces}:${WORKSPACES_IMAGE_TAG:-latest}
+    command: workspaces serve -v
+    restart: unless-stopped
+    ports:
+      - "443:443/tcp"
+      - "3000:3000/tcp"
+      - "3282:3282/tcp"
+    environment:
+      accept_license: "Y"
+      TZ: ${WS_TZ:-UTC}
+    volumes:
+    - ${WORKSPACES_HOME:-./volumes/workspaces}:/etc/td
+    - ${WORKSPACES_AWS_CONFIG:-~/.aws}:/root/.aws
 
-	    networks:
-	      - td-ai-unlimited</code></pre>
+    networks:
+      - td-ai-unlimited</code></pre>
 </div>
 </div>
 </div>
