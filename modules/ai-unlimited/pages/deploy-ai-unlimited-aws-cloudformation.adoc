@@ -70,13 +70,13 @@ To subscribe:
 
 * link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#workspaces-template[Workspaces Template]: Deploys a single instance with Workspaces running in a container controlled by systemd.
 ** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/workspaces.yaml[workspaces.yaml] CloudFormation template
-** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/workspaces.json[parameters/workspaces.json] parameter file
+** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/parameters/workspaces.json[parameters/workspaces.json] parameter file
 * link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#jupyter-template[Jupyter Template]: Deploys a single instance with JupyterLab running in a container controlled by systemd.
 ** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/jupyter.yaml[jupyter.yaml] CloudFormation template
-** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/jupyter.json[parameters/jupyter.json] parameter file
+** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/parameters/jupyter.json[parameters/jupyter.json] parameter file
 * link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#all-in-one-template[All-In-One Template]: Deploys a single instance with Workspaces and JupyterLab running on the same instance. 
 ** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/all-in-one.yaml[all-in-one.yaml] CloudFormation template
-** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/all-in-one.json[parameters/all-in-one.json] parameter file
+** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/parameters/all-in-one.json[parameters/all-in-one.json] parameter file
 +
 If you're using this template, you can use the embedded JupyterLab service or connect to an external JupyterLab instance. When connecting to the embedded JupyterLab service, you must set the appropriate connection address in the JupyterLab notebook (for example, 127.0.0.1), and for external clients, you must set the appropriate public-private IP or DNS name.
 5.	Review the parameters for the template. Provide values for the parameters that require input. For all other parameters, review the default settings and customize them as necessary. When you finish reviewing and customizing the parameters, choose **Next**.  
