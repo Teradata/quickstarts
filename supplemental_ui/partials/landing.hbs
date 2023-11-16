@@ -9,8 +9,16 @@
               Get up to speed with Teradata Vantage. Learn about its features. Find solutions for common tasks. Explore sample source code.
             </div>
             <div class="button-container">
-              <a class="call-to-action-button" href="https://www.teradata.com/experience">Get access to Teradata Vantage</a>
-              <a class="call-to-action-button-secondary" href="#browse-content">Browse content</a>
+              <a class="call-to-action-button-secondary" href="https://www.teradata.com/experience" style="width: 154px;">Contribute
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M9.35008 11.9669L8.63341 11.2669L11.4334 8.46686H2.66675V7.46686H11.4334L8.61675 4.6502L9.33341 3.9502L13.3501 7.96686L9.35008 11.9669Z" fill="#00233C"/>
+                </svg>
+              </a>
+              <a class="call-to-action-button-secondary" href="#browse-content" style="width: 132px;">Request
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M9.35008 11.9669L8.63341 11.2669L11.4334 8.46686H2.66675V7.46686H11.4334L8.61675 4.6502L9.33341 3.9502L13.3501 7.96686L9.35008 11.9669Z" fill="#00233C"/>
+                </svg>
+              </a>
             </div>
             <div class="alternate-action">
               Existing customer or partner? Explore courses at <a href="https://teradata.com/University/Overview">Teradata University</a>.
@@ -361,14 +369,14 @@
   main.article {
     padding-bottom: 30px;
   }
-
+/*
 @media screen and (max-width: 576px) {
   .call-to-action .call-to-action-button,
   .call-to-action .call-to-action-button-secondary {
     width: 100%;
   }
 }
-
+*/
 @media screen and (max-width: 820px) {
   .call-to-action {
     background-image: none;
@@ -446,6 +454,7 @@
   font-family: Inter,sans-serif;
   font-size: 20px;
   line-height: 28px;
+  font-weight: 600;
   letter-spacing: 0.15px;
   color: rgba(0, 0, 0, 0.87);
 }
@@ -599,10 +608,11 @@
   right: 24px;
 }
 
-.call-to-action-button {
+.call-to-action-button{
   background: #007373;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 1px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+  border-radius: 12px;
+  border: 1px solid #00233C;
   text-transform: uppercase;
   text-decoration: none;
   font-family: Inter,sans-serif;
@@ -619,6 +629,8 @@
 
 .button-container {
   margin-top: 15px;
+  display: inline-flex;
+  gap: 5px;
 }
 
 .call-to-action-button:hover {
@@ -626,28 +638,26 @@
 }
 
 .call-to-action-button-secondary {
-  border: 1px solid rgba(0, 0, 0, 0.6);
-  box-sizing: border-box;
-  border-radius: 8px;
-  text-transform: uppercase;
-  text-decoration: none;
-  font-family: Inter,sans-serif;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: 0.5px;
-  text-align: center;
-  text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.87);
-  padding: 11px 12px;
-  margin-top: 15px;
-  background: #eaf2f2;
-  display: inline-block;
+  color: #00233C;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  border-radius: 12px;
+  border: 1px solid #00233C;
+  padding: 16px; 
+  height: 58px;
 }
 
 .call-to-action-button-secondary:hover {
   text-decoration: none;
+  background-color: #dfdddd;
 }
 
+.call-to-action-button-secondary svg {
+  margin-left: 5px;
+}
 .search-result-dropdown-menu {
   top: initial;
   right: initial;
