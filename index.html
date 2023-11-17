@@ -692,8 +692,8 @@ aside.toc.sidebar {
 }
 
 .toc .toc-menu a.is-active {
-  border-left-color: #007373;
-  color: #333;
+  border-left-color: #FF5F02;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .page-controls {
@@ -738,7 +738,7 @@ aside.toc.sidebar {
 }
 
 .doc .admonitionblock.question {
-  background-color: #eaf3f2;
+  background-color: #0000000A;
 }
 
 .doc .admonitionblock.tip {
@@ -758,7 +758,7 @@ aside.toc.sidebar {
 
 .doc .admonitionblock.question .icon {
   background-color: initial;
-  color: #007373;
+  color: rgba(0, 0, 0, 0.87);;
 }
 
 .doc .admonitionblock.tip .icon {
@@ -768,10 +768,15 @@ aside.toc.sidebar {
 
 .doc .admonitionblock .icon {
   position: absolute;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0.25px;
   padding: 12px 0px 0px 72px;
   -webkit-transform: none;
   transform: none;
-  text-transform: capitalize;
+
 }
 
 .doc .admonitionblock td.content {
@@ -788,7 +793,11 @@ aside.toc.sidebar {
 
 .doc .admonitionblock p,
 .doc .admonitionblock td.content {
-  font-size: 16px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.25px;
 }
 
 i.fa[class*=' icon-']::before {
@@ -984,10 +993,10 @@ span.search-result-highlight {
                         <div class="slide-up-down__container hidden" style="--content-height: 94; transition: height 500ms ease-in-out 0s;">  
                           <ul class="ps-3 list">
                             <li>
-                              <a class="nav-2 py-4 d-block color-slate" href="/Getting-Started/Pricing">VantageCloud Lake Documentation</a>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/p/VantageCloud/Lake">VantageCloud Lake Documentation</a>
                             </li>
                             <li>
-                              <a class="nav-2 py-4 d-block color-slate" href="/Getting-Started/Pricing/Calculator">All Documentation</a>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/">All Documentation</a>
                             </li>
                           </ul>
                         </div>
@@ -1009,20 +1018,20 @@ span.search-result-highlight {
                         <div class="slide-up-down__container hidden" aria-hidden="false" style="--content-height: 235; transition: height 500ms ease-in-out 0s;">
                           <ul class="ps-3 list">
                             <li>
-                              <a class="nav-2 py-4 d-block color-slate" href="/University/Overview">Teradata Community</a>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://support.teradata.com">Teradata Community</a>
                             </li>
                             <li>
-                              <a class="nav-2 py-4 d-flex align-items-center color-slate" href="/University/Certification">
+                              <a class="nav-2 py-4 d-flex align-items-center color-slate" href="https://medium.com/teradata">
                                 Technical Medium Blogs&nbsp;&nbsp;<img src='./_/img/small-external.svg' class="mtop">
                               </a>
                             </li>
                             <li>
-                              <a class="nav-2 py-4 d-flex color-slate" href="https://docs.teradata.com" target="_blank" rel="noopener">
+                              <a class="nav-2 py-4 d-flex color-slate" href="https://github.com/Teradata" target="_blank" rel="noopener">
                                 GitHub&nbsp;&nbsp;<img src='./_/img/small-external.svg' class="e">
                               </a>
                             </li>
                             <li>
-                              <a class="nav-2 py-4 d-flex color-slate" href="https://downloads.teradata.com" target="_blank" rel="noopener">
+                              <a class="nav-2 py-4 d-flex color-slate" href="https://stackoverflow.com/questions/tagged/teradata" target="_blank" rel="noopener">
                                 Stack Overflow&nbsp;&nbsp;<img src='./_/img/small-external.svg' class="">
                               </a>
                             </li>
@@ -1149,8 +1158,16 @@ document.addEventListener("DOMContentLoaded", function () {
               Get up to speed with Teradata Vantage. Learn about its features. Find solutions for common tasks. Explore sample source code.
             </div>
             <div class="button-container">
-              <a class="call-to-action-button" href="https://www.teradata.com/experience">Get access to Teradata Vantage</a>
-              <a class="call-to-action-button-secondary" href="#browse-content">Browse content</a>
+              <a class="call-to-action-button-secondary" href="https://www.teradata.com/experience" style="width: 154px;">Contribute
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M9.35008 11.9669L8.63341 11.2669L11.4334 8.46686H2.66675V7.46686H11.4334L8.61675 4.6502L9.33341 3.9502L13.3501 7.96686L9.35008 11.9669Z" fill="#00233C"/>
+                </svg>
+              </a>
+              <a class="call-to-action-button-secondary" href="#browse-content" style="width: 132px;">Request
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M9.35008 11.9669L8.63341 11.2669L11.4334 8.46686H2.66675V7.46686H11.4334L8.61675 4.6502L9.33341 3.9502L13.3501 7.96686L9.35008 11.9669Z" fill="#00233C"/>
+                </svg>
+              </a>
             </div>
             <div class="alternate-action">
               Existing customer or partner? Explore courses at <a href="https://teradata.com/University/Overview">Teradata University</a>.
@@ -1433,7 +1450,12 @@ document.addEventListener("DOMContentLoaded", function () {
                       <img src="./_/img/mulesoft.logo.svg" alt="Mulesoft Logo" title="Mulesoft" width="" height=""/>
                       <img src="./_/img/teradata-logo.png" alt="Teradata Logo" title="Teradata" width="" height=""/>
                     </div>
-                    <div class="tile-action">view</div>
+                    <div class="tile-action">
+                      View
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M9.35008 11.9669L8.63341 11.2669L11.4334 8.46686H2.66675V7.46686H11.4334L8.61675 4.6502L9.33341 3.9502L13.3501 7.96686L9.35008 11.9669Z" fill="#00233C"></path>
+                      </svg>
+                    </div>
                   </div>
                 </a>
               </div>
@@ -1448,7 +1470,12 @@ document.addEventListener("DOMContentLoaded", function () {
                       <img src="./_/img/gcp.logo.svg" alt="Google Cloud Logo" title="Google Cloud" width="" height=""/>
                       <img src="./_/img/teradata-logo.png" alt="Teradata Logo" title="Teradata" width="" height=""/>
                     </div>
-                    <div class="tile-action">view</div>
+                    <div class="tile-action">
+                      View
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M9.35008 11.9669L8.63341 11.2669L11.4334 8.46686H2.66675V7.46686H11.4334L8.61675 4.6502L9.33341 3.9502L13.3501 7.96686L9.35008 11.9669Z" fill="#00233C"></path>
+                      </svg>
+                    </div>
                   </div>
                 </a>
               </div>
@@ -1461,7 +1488,12 @@ document.addEventListener("DOMContentLoaded", function () {
                       <img src="./_/img/java.logo.svg" alt="Java Logo" title="Java" width="" height=""/>
                       <img src="./_/img/teradata-logo.png" alt="Teradata Logo" title="Teradata" width="" height=""/>
                     </div>
-                    <div class="tile-action">view</div>
+                    <div class="tile-action">
+                      View
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M9.35008 11.9669L8.63341 11.2669L11.4334 8.46686H2.66675V7.46686H11.4334L8.61675 4.6502L9.33341 3.9502L13.3501 7.96686L9.35008 11.9669Z" fill="#00233C"></path>
+                      </svg>
+                    </div>
                   </div>
                 </a>
               </div>
@@ -1470,18 +1502,20 @@ document.addEventListener("DOMContentLoaded", function () {
           <div class="doc">
             <div class="admonitionblock question landing-page">
               <table>
-                <tbody><tr>
-                <td class="icon">
-                <i class="fa icon-question"></i>Didn’t find what you were looking for?
-                </td>
-                <td class="content">
-                 Contribute or request a topic
-                </td>
-                <td class="question-action">
-                  <a href="https://github.com/Teradata/quickstarts/issues">request</a>
-                  <a href="https://github.com/Teradata/quickstarts">contribute</a>
-                </td>
-                </tr>
+                <tbody>
+                  <tr>
+                    <td class="icon">
+                      <img src="./_/img/icons/contribute-icon.svg" class="icon-color">
+                      Didn’t find what you were looking for?
+                    </td>
+                    <td class="content">
+                      Contribute or request a topic
+                    </td>
+                    <td class="question-action">
+                      <a href="https://github.com/Teradata/quickstarts/issues">Request</a>
+                      <a href="https://github.com/Teradata/quickstarts">Contribute</a>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -1501,14 +1535,14 @@ document.addEventListener("DOMContentLoaded", function () {
   main.article {
     padding-bottom: 30px;
   }
-
+/*
 @media screen and (max-width: 576px) {
   .call-to-action .call-to-action-button,
   .call-to-action .call-to-action-button-secondary {
     width: 100%;
   }
 }
-
+*/
 @media screen and (max-width: 820px) {
   .call-to-action {
     background-image: none;
@@ -1586,6 +1620,7 @@ document.addEventListener("DOMContentLoaded", function () {
   font-family: Inter,sans-serif;
   font-size: 20px;
   line-height: 28px;
+  font-weight: 600;
   letter-spacing: 0.15px;
   color: rgba(0, 0, 0, 0.87);
 }
@@ -1725,24 +1760,24 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 .tile-action {
-  font-family: Inter,sans-serif;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  color: #007373;
-  border: 1px #007373 solid;
-  border-radius: 8px;
-  padding: 9px 8px;
+  font-family: Inter;
+  font-size: 16px;
+  line-height: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  color: #00233C;
+/*  padding: 9px 8px;*/
   position: absolute;
   bottom: 24px;
   right: 24px;
 }
 
-.call-to-action-button {
+.call-to-action-button{
   background: #007373;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 1px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+  border-radius: 12px;
+  border: 1px solid #00233C;
   text-transform: uppercase;
   text-decoration: none;
   font-family: Inter,sans-serif;
@@ -1759,6 +1794,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .button-container {
   margin-top: 15px;
+  display: inline-flex;
+  gap: 5px;
 }
 
 .call-to-action-button:hover {
@@ -1766,28 +1803,26 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 .call-to-action-button-secondary {
-  border: 1px solid rgba(0, 0, 0, 0.6);
-  box-sizing: border-box;
-  border-radius: 8px;
-  text-transform: uppercase;
-  text-decoration: none;
-  font-family: Inter,sans-serif;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: 0.5px;
-  text-align: center;
-  text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.87);
-  padding: 11px 12px;
-  margin-top: 15px;
-  background: #eaf2f2;
-  display: inline-block;
+  color: #00233C;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  border-radius: 12px;
+  border: 1px solid #00233C;
+  padding: 16px; 
+  height: 58px;
 }
 
 .call-to-action-button-secondary:hover {
   text-decoration: none;
+  background-color: #dfdddd;
 }
 
+.call-to-action-button-secondary svg {
+  margin-left: 5px;
+}
 .search-result-dropdown-menu {
   top: initial;
   right: initial;
@@ -1806,15 +1841,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .question-action {
   width: 280px;
-  font-family: Inter,sans-serif;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
 }
-
+.icon-color{
+  position: absolute;
+  top: 24px;
+  left: 26px;
+}
 .question-action a {
-  color: rgba(0, 0, 0, 0.87);
+  color: #00233C;
   padding: 0px 20px;
 }
 
