@@ -681,8 +681,8 @@ aside.toc.sidebar {
 }
 
 .toc .toc-menu a.is-active {
-  border-left-color: #007373;
-  color: #333;
+  border-left-color: #FF5F02;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .page-controls {
@@ -727,7 +727,7 @@ aside.toc.sidebar {
 }
 
 .doc .admonitionblock.question {
-  background-color: #eaf3f2;
+  background-color: #0000000A;
 }
 
 .doc .admonitionblock.tip {
@@ -747,7 +747,7 @@ aside.toc.sidebar {
 
 .doc .admonitionblock.question .icon {
   background-color: initial;
-  color: #007373;
+  color: rgba(0, 0, 0, 0.87);;
 }
 
 .doc .admonitionblock.tip .icon {
@@ -757,10 +757,15 @@ aside.toc.sidebar {
 
 .doc .admonitionblock .icon {
   position: absolute;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0.25px;
   padding: 12px 0px 0px 72px;
   -webkit-transform: none;
   transform: none;
-  text-transform: capitalize;
+
 }
 
 .doc .admonitionblock td.content {
@@ -777,7 +782,11 @@ aside.toc.sidebar {
 
 .doc .admonitionblock p,
 .doc .admonitionblock td.content {
-  font-size: 16px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.25px;
 }
 
 i.fa[class*=' icon-']::before {
