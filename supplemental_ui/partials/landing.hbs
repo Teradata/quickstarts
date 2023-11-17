@@ -301,7 +301,12 @@
                       <img src="{{uiRootPath}}/img/mulesoft.logo.svg" alt="Mulesoft Logo" title="Mulesoft" width="" height=""/>
                       <img src="{{uiRootPath}}/img/teradata-logo.png" alt="Teradata Logo" title="Teradata" width="" height=""/>
                     </div>
-                    <div class="tile-action">view</div>
+                    <div class="tile-action">
+                      View
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M9.35008 11.9669L8.63341 11.2669L11.4334 8.46686H2.66675V7.46686H11.4334L8.61675 4.6502L9.33341 3.9502L13.3501 7.96686L9.35008 11.9669Z" fill="#00233C"></path>
+                      </svg>
+                    </div>
                   </div>
                 </a>
               </div>
@@ -316,7 +321,12 @@
                       <img src="{{uiRootPath}}/img/gcp.logo.svg" alt="Google Cloud Logo" title="Google Cloud" width="" height=""/>
                       <img src="{{uiRootPath}}/img/teradata-logo.png" alt="Teradata Logo" title="Teradata" width="" height=""/>
                     </div>
-                    <div class="tile-action">view</div>
+                    <div class="tile-action">
+                      View
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M9.35008 11.9669L8.63341 11.2669L11.4334 8.46686H2.66675V7.46686H11.4334L8.61675 4.6502L9.33341 3.9502L13.3501 7.96686L9.35008 11.9669Z" fill="#00233C"></path>
+                      </svg>
+                    </div>
                   </div>
                 </a>
               </div>
@@ -329,7 +339,12 @@
                       <img src="{{uiRootPath}}/img/java.logo.svg" alt="Java Logo" title="Java" width="" height=""/>
                       <img src="{{uiRootPath}}/img/teradata-logo.png" alt="Teradata Logo" title="Teradata" width="" height=""/>
                     </div>
-                    <div class="tile-action">view</div>
+                    <div class="tile-action">
+                      View
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M9.35008 11.9669L8.63341 11.2669L11.4334 8.46686H2.66675V7.46686H11.4334L8.61675 4.6502L9.33341 3.9502L13.3501 7.96686L9.35008 11.9669Z" fill="#00233C"></path>
+                      </svg>
+                    </div>
                   </div>
                 </a>
               </div>
@@ -338,18 +353,20 @@
           <div class="doc">
             <div class="admonitionblock question landing-page">
               <table>
-                <tbody><tr>
-                <td class="icon">
-                <i class="fa icon-question"></i>Didn’t find what you were looking for?
-                </td>
-                <td class="content">
-                 Contribute or request a topic
-                </td>
-                <td class="question-action">
-                  <a href="https://github.com/Teradata/quickstarts/issues">request</a>
-                  <a href="https://github.com/Teradata/quickstarts">contribute</a>
-                </td>
-                </tr>
+                <tbody>
+                  <tr>
+                    <td class="icon">
+                      <img src="{{uiRootPath}}/img/icons/contribute-icon.svg" class="icon-color">
+                      Didn’t find what you were looking for?
+                    </td>
+                    <td class="content">
+                      Contribute or request a topic
+                    </td>
+                    <td class="question-action">
+                      <a href="https://github.com/Teradata/quickstarts/issues">Request</a>
+                      <a href="https://github.com/Teradata/quickstarts">Contribute</a>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -594,14 +611,13 @@
 }
 
 .tile-action {
-  font-family: Inter,sans-serif;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  color: #007373;
-  border: 1px #007373 solid;
-  border-radius: 8px;
+  font-family: Inter;
+  font-size: 16px;
+  line-height: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  color: #00233C;
   padding: 9px 8px;
   position: absolute;
   bottom: 24px;
@@ -676,15 +692,19 @@
 
 .question-action {
   width: 280px;
-  font-family: Inter,sans-serif;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
 }
-
+.icon-color{
+  position: absolute;
+  top: 24px;
+  left: 26px;
+}
 .question-action a {
-  color: rgba(0, 0, 0, 0.87);
+  color: #00233C;
   padding: 0px 20px;
 }
 
