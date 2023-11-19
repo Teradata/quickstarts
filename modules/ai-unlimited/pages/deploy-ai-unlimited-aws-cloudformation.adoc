@@ -291,6 +291,10 @@ NOTE: If the account deploying workspace service does not have sufficient IAM pe
 9.  Monitor the status of the stack. When the status is `CREATE_COMPLETE`, the Teradata AI Unlimited workspace service is ready. 
 10. Use the URLs displayed in the **Outputs** tab for the stack to view the created resources.
 
+=== Step 4: Configure and set up workspace service
+
+See link:https://quickstarts.teradata.com/ai-unlimited/install-ai-unlimited-workspaces-docker.html#_configure_and_set_up_workspace_service[Configure and set up workspace service].
+
 NOTE: If you have only deployed the workspace service, you must deploy an interface before running your workload. To deploy the interface locally on Docker, see xref::install-ai-unlimited-interface-docker.adoc[]. You can also use the link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#jupyter-template[Jupyter Template] to deploy a single instance with JupyterLab running in a container controlled by systemd.
 
 Teradata AI Unlimited is ready!
