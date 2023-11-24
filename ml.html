@@ -3,16 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Train ML models in Vantage :: Teradata Getting Started</title>
+    <title>Train ML models in Vantage using Database Analytic Functions :: Teradata Getting Started</title>
     <link rel="canonical" href="https://quickstarts.teradata.com/ml.html">
-    <meta name="description" content="Train an ML model without leaving Teradata Vantage - use Vantage Analytics Library (VAL) to create ML models.">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, AI/ML">
+    <meta name="description" content="Train an ML model without leaving Teradata Vantage - use Vantage Database Analytic Functions to create ML models.">
+    <meta name="keywords" content="data warehouses, database analytic functions, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, AI/ML">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="./_/css/site.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta property="og:title" content="Train ML models in Vantage :: Teradata Getting Started">
+<meta property="og:title" content="Train ML models in Vantage using Database Analytic Functions :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Train an ML model without leaving Teradata Vantage - use Vantage Analytics Library (VAL) to create ML models." />
+<meta property="og:description" content="Train an ML model without leaving Teradata Vantage - use Vantage Database Analytic Functions to create ML models." />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
@@ -1307,7 +1307,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="ml.html">Train ML models in Vantage</a>
+    <a class="nav-link" href="ml.html">Train ML models in Vantage using Database Analytic Functions</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
@@ -1422,7 +1422,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li>Analyze data</li>
-    <li><a href="ml.html">Train ML models in Vantage</a></li>
+    <li><a href="ml.html">Train ML models in Vantage using Database Analytic Functions</a></li>
   </ul>
 </nav>
 </div>
@@ -1436,12 +1436,12 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Train ML models in Vantage</h1>
+<h1 class="page">Train ML models in Vantage using Database Analytic Functions</h1>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are situations when you want to quickly validate a machine learning model idea. You have a model type in mind. You don&#8217;t want to operationalize with an ML pipeline just yet. You just want to test out if the relationship you had in mind exists. Also, sometimes even your production deployment doesn&#8217;t require constant relearning with MLops. In such cases, you can use Vantage Analytics Library (VAL) and multiple ML model types it supports.</p>
+<p>There are situations when you want to quickly validate a machine learning model idea. You have a model type in mind. You don&#8217;t want to operationalize with an ML pipeline just yet. You just want to test out if the relationship you had in mind exists. Also, sometimes even your production deployment doesn&#8217;t require constant relearning with MLops. In such cases, you can use Database Analytic Functions for feature engineering, train different ML models, score your models, and evaluate your model on different model evaluation functions.</p>
 </div>
 </div>
 </div>
@@ -1458,7 +1458,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you need a new instance of Vantage, you can install a free version called Vantage Express in the cloud on <a href="vantage.express.gcp.html" class="xref page">Google Cloud</a>, <a href="run-vantage-express-on-microsoft-azure.html" class="xref page">Azure</a>, and <a href="run-vantage-express-on-aws.html" class="xref page">AWS</a>. You can also run Vantage Express on your local machine using <a href="getting.started.vmware.html" class="xref page">VMware</a>, <a href="getting.started.vbox.html" class="xref page">VirtualBox</a>, or <a href="getting.started.utm.html" class="xref page">UTM</a>.
+If you need a test instance of Vantage, you can provision one for free at <a href="https://clearscape.teradata.com/sign-in?utm_source=dev_portal&amp;utm_medium=quickstart_tutorial&amp;utm_campaign=quickstarts" target="_blank" rel="noopener">https://clearscape.teradata.com.</a>
 </td>
 </tr>
 </table>
@@ -1466,106 +1466,56 @@ If you need a new instance of Vantage, you can install a free version called Van
 </div>
 </div>
 <div class="sect1">
-<h2 id="_install_vantage_analytics_library"><a class="anchor" href="#_install_vantage_analytics_library"></a>Install Vantage Analytics Library</h2>
+<h2 id="_load_the_sample_data"><a class="anchor" href="#_load_the_sample_data"></a>Load the sample data</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Support for ML in Vantage requires Vantage Analytics Library (VAL). In this section, we will install VAL and load some sample data.</p>
+<p>Here in this example we will be using the sample data from <code>val</code> database. We will use the <code>accounts</code>, <code>customer</code>, and <code>transactions</code> tables. We will be creating some tables in the process and you might face some issues while creating tables in <code>val</code> database, so let&#8217;s create our own database <code>td_analytics_functions_demo</code>.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>VAL is distributed as an rpm file. Go to <a href="https://downloads.teradata.com/download/database/val-download-page">Teradata Downloads</a> and download the VAL rpm to your local machine.</p>
-</li>
-<li>
-<p>Upload the file to your Vantage install. If you are running Vantage Express locally, you have many ways to do it:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>If you installed <a href="getting.started.vbox.html" class="xref page">Vantage Express on VirtualBox</a>, you should be able to drag &amp; drop the file to the VM&#8217;s desktop. You can also use <code>scp</code> by connecting to port <code>4422</code>, e.g.:</p>
-<div class="listingblock content-editable">
+<div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">scp -P 4422 ~/Downloads/VAL-2.0.0.3-1.x86_64.rpm root@localhost:/root/Desktop</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE td_analytics_functions_demo
+AS PERMANENT = 110e6;</code></pre>
 </div>
 </div>
-</li>
-<li>
-<p>If you use VMware and you have enabled drag &amp; drop, you should be able to drag and drop the file to the VM&#8217;s desktop.</p>
-</li>
-<li>
-<p>If you have SSH access to your Vantage nodes, you can use <code>scp</code> to upload the binary, e.g.:</p>
-<div class="listingblock content-editable">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You must have CREATE TABLE permissions on the Database where you want to use Database Analytics Functions.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s now create <code>accounts</code>, <code>customer</code> and <code>transactions</code> tables in our database <code>td_analytics_functions_demo</code> from the corresponding tables in <code>val</code> database.</p>
+</div>
+<div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">scp ~/Downloads/VAL-2.0.0.3-1.x86_64.rpm root@vantage.server.name:/tmp/</code></pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>We will now create a new database where VAL functions and procedures will be installed. You could install VAL in a global location such as <code>SYSLIB</code>, but installing VAL in a specific database will make it easier to start over if things go wrong.
-Let&#8217;s create a database called <code>val</code> and grant appropriate permissions to our user. Please edit to match your database name and user id:</p>
-<div class="listingblock content-editable">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE val
-AS PERMANENT = 60e6, -- 60MB
-    SPOOL = 120e6; -- 120MB
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">DATABASE td_analytics_functions_demo;
 
-GRANT CREATE FUNCTION ON val to dbc;
-GRANT ALTER FUNCTION ON val to dbc;
-GRANT EXECUTE PROCEDURE on SQLJ.REMOVE_JAR to dbc;
-GRANT EXECUTE PROCEDURE on SQLJ.INSTALL_JAR to dbc;
-GRANT EXECUTE PROCEDURE on SQLJ.REPLACE_JAR to dbc;
-GRANT CREATE EXTERNAL PROCEDURE ON val to dbc;</code></pre>
+CREATE TABLE customer AS (
+SELECT * FROM val.customer
+) WITH DATA;
+
+CREATE TABLE accounts AS (
+SELECT * FROM val.accounts
+) WITH DATA;
+
+CREATE TABLE transactions AS (
+SELECT * FROM val.transactions
+) WITH DATA;</code></pre>
 </div>
-</div>
-</li>
-<li>
-<p>Open Gnome Terminal in the VM and start the installation process. Adjust the rpm path as necessary:</p>
-<div class="listingblock content-editable">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">rpm -Uvh --nodeps ~/Desktop/VAL-2.0.0.3-1.x86_64.rpm</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>The install wizard will ask you for the hostname, user id, and password. If you are running the install on your Vantage Express VM, the values are:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Hostname: <code>localhost</code></p>
-</li>
-<li>
-<p>Userid: <code>dbc</code></p>
-</li>
-<li>
-<p>Password: <code>dbc</code></p>
-</li>
-<li>
-<p>Account string: leave empty, press <kbd>ENTER</kbd></p>
-</li>
-<li>
-<p>BTEQ or FASTLOAD command: leave empty, press <kbd>ENTER</kbd></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>The wizard will ask you to choose which part of VAL you want to install.
-We want to start with installing <code>td_analyze</code> procedure, i.e. option 1. Once you select option 1, the script will ask for the database name where <code>td_analyze</code> will be installed. Enter <code>val</code> and press <kbd>ENTER</kbd>.</p>
-</li>
-<li>
-<p>While still in the wizard, install option 5, i.e. <code>Tutorial Tables</code>. These are sample tables with data that we are going to use to build a sample model.</p>
-</li>
-</ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_sample_data"><a class="anchor" href="#_sample_data"></a>Sample data</h2>
+<h2 id="_understand_the_sample_data"><a class="anchor" href="#_understand_the_sample_data"></a>Understand the sample data</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now, that we have VAL and sample tables loaded, let&#8217;s explore the data. It&#8217;s a simplistic, fictitious dataset of banking customers (1K-ish rows), Accounts (10K-ish rows) and Transactions (100K-ish rows). They are related to each other in the following ways:</p>
+<p>Now, that we have our sample tables loaded into <code>td_analytics_functions_demo</code>, let&#8217;s explore the data. It&#8217;s a simplistic, fictitious dataset of banking customers (700-ish rows), Accounts (1400-ish rows) and Transactions (77K-ish rows). They are related to each other in the following ways:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1578,49 +1528,24 @@ We want to start with installing <code>td_analyze</code> procedure, i.e. option 
 </div>
 </div>
 <div class="sect1">
-<h2 id="_create_a_linear_regression_model"><a class="anchor" href="#_create_a_linear_regression_model"></a>Create a linear regression model</h2>
+<h2 id="_preparing_the_dataset"><a class="anchor" href="#_preparing_the_dataset"></a>Preparing the Dataset</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Let&#8217;s start by creating a wide table (Analytic Data Set, or ADS) that joins the three tables above.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-You must have CREATE TABLE permissions on the Database where the Vantage Analytic Library is installed.
-</td>
-</tr>
-</table>
+<p>We have data in three different tables that we want to join and create features. Let&#8217;s start by creating a joined table.</p>
 </div>
 <div id="ml_first_query" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Switch to val database.
-DATABASE val;
-
--- Create the ADS.
-CREATE TABLE VAL_ADS AS (
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Create a consolidated joined_table from customer, accounts and transactions table
+CREATE TABLE td_analytics_functions_demo.joined_table AS (
     SELECT
         T1.cust_id  AS cust_id
        ,MIN(T1.income) AS tot_income
        ,MIN(T1.age) AS tot_age
        ,MIN(T1.years_with_bank) AS tot_cust_years
        ,MIN(T1.nbr_children) AS tot_children
-       ,CASE WHEN MIN(T1.marital_status) = 1 THEN 1 ELSE 0 END AS single_ind
-       ,CASE WHEN MIN(T1.gender) = 'F' THEN 1 ELSE 0 END AS female_ind
-       ,CASE WHEN MIN(T1.marital_status) = 2 THEN 1 ELSE 0 END AS married_ind
-       ,CASE WHEN MIN(T1.marital_status) = 3 THEN 1 ELSE 0 END AS separated_ind
-       ,MAX(CASE WHEN T1.state_code = 'CA' THEN 1 ELSE 0 END) AS ca_resident_ind
-       ,MAX(CASE WHEN T1.state_code = 'NY' THEN 1 ELSE 0 END) AS ny_resident_ind
-       ,MAX(CASE WHEN T1.state_code = 'TX' THEN 1 ELSE 0 END) AS tx_resident_ind
-       ,MAX(CASE WHEN T1.state_code = 'IL' THEN 1 ELSE 0 END) AS il_resident_ind
-       ,MAX(CASE WHEN T1.state_code = 'AZ' THEN 1 ELSE 0 END) AS az_resident_ind
-       ,MAX(CASE WHEN T1.state_code = 'OH' THEN 1 ELSE 0 END) AS oh_resident_ind
-       ,MAX(CASE WHEN T2.acct_type = 'CK' THEN 1 ELSE 0 END) AS ck_acct_ind
-       ,MAX(CASE WHEN T2.acct_type = 'SV' THEN 1 ELSE 0 END) AS sv_acct_ind
-       ,MAX(CASE WHEN T2.acct_type = 'CC' THEN 1 ELSE 0 END) AS cc_acct_ind
+       ,MIN(T1.marital_status)AS marital_status
+       ,MIN(T1.gender) AS gender
+       ,MAX(T1.state_code) AS state_code
        ,AVG(CASE WHEN T2.acct_type = 'CK' THEN T2.starting_balance+T2.ending_balance ELSE 0 END) AS ck_avg_bal
        ,AVG(CASE WHEN T2.acct_type = 'SV' THEN T2.starting_balance+T2.ending_balance ELSE 0 END) AS sv_avg_bal
        ,AVG(CASE WHEN T2.acct_type = 'CC' THEN T2.starting_balance+T2.ending_balance ELSE 0 END) AS cc_avg_bal
@@ -1640,73 +1565,237 @@ GROUP BY T1.cust_id) WITH DATA UNIQUE PRIMARY INDEX (cust_id);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>We will now build a linear regression model that takes parameters from the dataset and tries to predict the monthly credit card balance.</p>
+<p>Let&#8217;s now see how our data looks. The dataset has both categorical and continuous features or independent variables. In our case, the dependent variable is <code>cc_avg_bal</code> which is customer&#8217;s average credit card balance.</p>
 </div>
-<div class="paragraph">
-<p>We call <code>td_analyze</code> and tell it we want a linear model. The input is in table <code>VAL_ADS</code> and consists of multiple columns. The dependent variable is <code>cc_avg_bal</code>. We want the model to be written to <code>val</code> database in table called <code>LINEAR_REGRESSION_DEMO</code>:</p>
-</div>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">call td_analyze('linear',
-  'database=val;
-  tablename=VAL_ADS;
-  columns=tot_age,tot_income,tot_cust_years,tot_children,single_ind,female_ind,married_ind,separated_ind,ck_acct_ind,sv_acct_ind,sv_avg_bal,ck_avg_bal,ca_resident_ind,ny_resident_ind,tx_resident_ind,il_resident_ind,az_resident_ind,oh_resident_ind;
-  dependent=cc_avg_bal;
-  outputdatabase=val;
-  outputtablename=linear_regression_demo');</code></pre>
+<img src="_images/joined_table_ml.png" alt="Joined Table" width="100%">
 </div>
-</div>
-<div class="paragraph">
-<p>The procedure creates several output tables. For now, we don&#8217;t have to analyze what is in the tables. Let&#8217;s see how we can use the newly created model to perform scoring.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_scoring"><a class="anchor" href="#_scoring"></a>Scoring</h2>
+<h2 id="_feature_engineering"><a class="anchor" href="#_feature_engineering"></a>Feature Engineering</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Let&#8217;s use the model to perform predictions and evaluate the scores. To do this, we call <code>td_analyze</code> with <code>linearscore</code> parameter. We point to the input table (<code>VAL_ADS</code>), the model tables (prefix <code>linear_regression_demo</code>) and define the target table (<code>linear_regression_score</code>) in <code>val</code> database:</p>
+<p>On looking at the data we see that there are several features that we can take into consideration for predicting the <code>cc_avg_bal</code>.</p>
+</div>
+<div class="sect2">
+<h3 id="_td_onehotencodingfit"><a class="anchor" href="#_td_onehotencodingfit"></a>TD_OneHotEncodingFit</h3>
+<div class="paragraph">
+<p>As we have some categorical features in our dataset such as <code>gender</code>, <code>marital status</code> and <code>state code</code>. We will leverage the Database Analytics function <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Feature-Engineering-Transform-Functions/TD_OneHotEncodingFit" target="_blank" rel="noopener">TD_OneHotEncodingFit</a> to encode categories to one-hot numeric vectors.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">call td_analyze('linearscore',
-  'database=val;
-  tablename=VAL_ADS;
-  modeldatabase=val;
-  modeltablename=linear_regression_demo;
-  outputdatabase=val;
-  outputtablename=linear_regression_score;
-  predicted=estimate;
-  retain=cc_avg_bal;
-  scoringmethod=scoreandevaluate;');</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE VIEW td_analytics_functions_demo.one_hot_encoding_joined_table_input AS (
+  SELECT * FROM TD_OneHotEncodingFit(
+    ON td_analytics_functions_demo.joined_table AS InputTable
+    USING
+    IsInputDense ('true')
+    TargetColumn ('gender','marital_status','state_code')
+    CategoryCounts(2,4,33)
+Approach('Auto')
+  ) AS dt
+  );</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_td_scalefit"><a class="anchor" href="#_td_scalefit"></a>TD_ScaleFit</h3>
+<div class="paragraph">
+<p>If we look at the data, some columns like <code>tot_income</code>, <code>tot_age</code>, <code>ck_avg_bal</code> have values in different ranges. For the optimization algorithms like gradient descent it is important to normalize the values to the same scale for faster convergence, scale consistency and enhanced model performance. We will leverage <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Feature-Engineering-Transform-Functions/TD_ScaleFit" target="_blank" rel="noopener">TD_ScaleFit</a> function to normalize values in different scales.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql"> CREATE VIEW td_analytics_functions_demo.scale_fit_joined_table_input AS (
+  SELECT * FROM TD_ScaleFit(
+    ON td_analytics_functions_demo.joined_table AS InputTable
+    USING
+    TargetColumns('tot_income','q1_trans_cnt','q2_trans_cnt','q3_trans_cnt','q4_trans_cnt','ck_avg_bal','sv_avg_bal','ck_avg_tran_amt', 'sv_avg_tran_amt', 'cc_avg_tran_amt')
+    ScaleMethod('RANGE')
+  ) AS dt
+  );</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_td_columntransformer"><a class="anchor" href="#_td_columntransformer"></a>TD_ColumnTransformer</h3>
+<div class="paragraph">
+<p>Teradata&#8217;s Database Analytic Functions typically operate in pairs for data transformations. The first step is dedicated to "fitting" the data. Subsequently, the second function utilizes the parameters derived from the fitting process to execute the actual transformation on the data. The <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Feature-Engineering-Transform-Functions/TD_ColumnTransformer" target="_blank" rel="noopener">TD_ColumnTransformer</a> takes the FIT tables to the function and transforms the input table columns in single operation.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Using a consolidated transform function
+
+CREATE TABLE td_analytics_functions_demo.feature_enriched_accounts_consolidated AS (
+SELECT * FROM TD_ColumnTransformer(
+ON joined_table AS InputTable
+ON one_hot_encoding_joined_table_input AS OneHotEncodingFitTable DIMENSION
+ON scale_fit_joined_table_input AS ScaleFitTable DIMENSION
+) as dt
+)WITH DATA;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>As a result, we get <code>linear_regression_score</code> table that contains the real balance, the predicted balance and the difference between these two. Let&#8217;s have a look at a sample:</p>
+<p>Once we perform the transformation we can see our categorical columns one-hot encoded and numeric values scaled as can be seen in the image below. For ex: <code>tot_income</code> is in the range [0,1], <code>gender</code> is one-hot encoded to <code>gender_0</code>, <code>gender_1</code>, <code>gender_other</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ml_tot_income_scaled.png" alt="Total Income Scaled" width="50%">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ml_gender_hot_encoded.png" alt="Gender One Hot Encoded" width="50%">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_train_test_split"><a class="anchor" href="#_train_test_split"></a>Train Test Split</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As we have our datatset ready with features scaled and encoded, now let&#8217;s split our dataset into training (75%) and testing (25%) parts. Teradata&#8217;s Database Analytic Functions provide <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Evaluation-Functions/TD_TrainTestSplit" target="_blank" rel="noopener">TD_TrainTestSplit</a> function that we&#8217;ll leverage to split our dataset.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM linear_regression_score SAMPLE 10;</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Train Test Split on Input table
+CREATE VIEW td_analytics_functions_demo.train_test_split AS (
+SELECT * FROM TD_TrainTestSplit(
+ON td_analytics_functions_demo.feature_enriched_accounts_consolidated AS InputTable
+USING
+IDColumn('cust_id')
+trainSize(0.75)
+testSize(0.25)
+Seed (42)
+)AS dt
+);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You will see results similar to:</p>
+<p>As can be seen in the image below, the function adds a new column <code>TD_IsTrainRow</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ml_train_col.png" alt="Train Row Column" width="100%">
+</div>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll use <code>TD_IsTrainRow</code> to create two tables, one for training and other for testing.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>cust_id|cc_avg_bal        |estimate          |Residual           |
--------+------------------+------------------+-------------------+
-1362498|               0.0| 284.7057772484358| -284.7057772484358|
-1362828|           1184.35|463.74177458594215|  720.6082254140578|
-1362839| 2933.135802469136| 982.9240031182255| 1950.2117993509103|
-1362986| 500.9148148148148| 881.4116539412856| -380.4968391264708|
-1362511|235.85941489361701|294.35369563202846|-58.494280738411426|
-1363134|               0.0|430.27950420065997|-430.27950420065997|
-1363481|               0.0| 411.2359958542745| -411.2359958542745|
-1362644| 209.3304347826087|279.75770904482033| -70.42727426221163|
-1363141|               0.0| 550.1681921045503| -550.1681921045503|
-1363290|               0.0|120.35348558871233|-120.35348558871233|</pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Creating Training Table
+CREATE TABLE td_analytics_functions_demo.training_table AS (
+  SELECT * FROM td_analytics_functions_demo.train_test_split
+  WHERE TD_IsTrainRow = 1
+) WITH DATA;
+
+-- Creating Testing Table
+CREATE TABLE td_analytics_functions_demo.testing_table AS (
+  SELECT * FROM td_analytics_functions_demo.train_test_split
+  WHERE TD_IsTrainRow = 0
+) WITH DATA;</code></pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_training_with_generalized_linear_model"><a class="anchor" href="#_training_with_generalized_linear_model"></a>Training with Generalized Linear Model</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We will now use <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Training-Functions/TD_GLM" target="_blank" rel="noopener">TD_GLM</a> Database Analytic Function to train on our training dataset. The <code>TD_GLM</code> function is a generalized linear model (GLM) that performs regression and classification analysis on data sets. Here we have used a bunch of input columns such as <code>tot_income</code>, <code>ck_avg_bal</code>,<code>cc_avg_tran_amt</code>, one-hot encoded values for marital status, gender and states. <code>cc_avg_bal</code> is our dependent or response column which is continous and hence is a regression problem. We use <code>Family</code> as <code>Gaussian</code> for regression and <code>Binomial</code> for classification.</p>
+</div>
+<div class="paragraph">
+<p>The parameter <code>Tolerance</code> signifies minimum improvement required in prediction accuracy for model to stop the iterations and <code>MaxIterNum</code> signifies the maximum number of iterations allowed. The model concludes training upon whichever condition is met first. For example in the example below the model is <code>CONVERGED</code> after 58 iterations.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Training the GLM_Model with Training Dataset
+CREATE TABLE td_analytics_functions_demo.GLM_model_training AS (
+SELECT * FROM TD_GLM (
+  ON td_analytics_functions_demo.training_table AS InputTable
+  USING
+  InputColumns('tot_income','ck_avg_bal','cc_avg_tran_amt','[19:26]')
+  ResponseColumn('cc_avg_bal')
+  Family ('Gaussian')
+  MaxIterNum (300)
+  Tolerance (0.001)
+  Intercept ('true')
+) AS dt
+)WITH DATA;</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ml_model_trained.png" alt="Trained GLM" width="100%">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_scoring_on_testing_dataset"><a class="anchor" href="#_scoring_on_testing_dataset"></a>Scoring on Testing Dataset</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We will now use our model <code>GLM_model_training</code> to score our testing dataset <code>testing_table</code> using <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Scoring-Functions/TD_GLMPredict" target="_blank" rel="noopener">TD_GLMPredict</a> Database Analytic Function.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Scoring the GLM_Model with Testing Dataset
+CREATE TABLE td_analytics_functions_demo.GLM_model_test_prediction AS (
+SELECT * from TD_GLMPredict (
+ON td_analytics_functions_demo.testing_table AS InputTable
+ON td_analytics_functions_demo.GLM_model_training AS ModelTable DIMENSION
+USING
+IDColumn ('cust_id')
+Accumulate('cc_avg_bal')
+) AS dt
+) WITH DATA
+;</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ml_model_scored.png" alt="Scored GLM" width="100%">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_model_evaluation"><a class="anchor" href="#_model_evaluation"></a>Model Evaluation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Finally, we evaluate our model on the scored results. Here we are using <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Evaluation-Functions/TD_RegressionEvaluator" target="_blank" rel="noopener">TD_RegressionEvaluator</a> function. The model can be evaluated based on parameters such as <code>R2</code>, <code>RMSE</code>, <code>F_score</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Evaluating the model
+SELECT * FROM TD_RegressionEvaluator(
+ON td_analytics_functions_demo.GLM_model_test_prediction AS InputTable
+USING
+ObservationColumn('cc_avg_bal')
+PredictionColumn('prediction')
+Metrics('RMSE','MAE','R2')
+) AS dt;</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ml_model_evaluated.png" alt="Evaluated GLM" width="100%">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The purpose of this how-to is not to describe feature engineering but to demonstrate how we can leverage different Database Analytic Functions in Vantage. The model results might not be optimal and the process to make the best model is beyond the scope of this article.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -1714,7 +1803,7 @@ GROUP BY T1.cust_id) WITH DATA UNIQUE PRIMARY INDEX (cust_id);</code></pre>
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this quick start we have learned how to create ML models in SQL. The method used Vantage Analytics Library (VAL). We were able to build a linear regression model and run predictions using the model. We have done that using SQL without any coding.</p>
+<p>In this quick start we have learned how to create ML models using Teradata Database Analytic Functions. We built our own database <code>td_analytics_functions_demo</code> with <code>customer</code>,<code>accounts</code>, <code>transactions</code> data from <code>val</code> database. We performed feature engineering by transforming the columns using <code>TD_OneHotEncodingFit</code>, <code>TD_ScaleFit</code> and <code>TD_ColumnTransformer</code>. We then used <code>TD_TrainTestSplit</code> for train test split. We trained our training dataset with <code>TD_GLM</code> model and scored our testing dataset. Finally we evaluated our scored results using <code>TD_RegressionEvaluator</code> function.</p>
 </div>
 </div>
 </div>
@@ -1724,7 +1813,7 @@ GROUP BY T1.cust_id) WITH DATA UNIQUE PRIMARY INDEX (cust_id);</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://docs.teradata.com/r/DqJoLxuCtoR947URt1aH0w/root">Vantage Analytics Library User Guide</a></p>
+<p><a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Introduction-to-Analytics-Database-Analytic-Functions" target="_blank" rel="noopener">Vantage Database Analytic Functions User Guide</a></p>
 </li>
 </ul>
 </div>
