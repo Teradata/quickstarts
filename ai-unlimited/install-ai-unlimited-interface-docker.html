@@ -1500,7 +1500,7 @@ Modify the directories based on your requirements.
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -detach \
   --env “accept_license=Y” \
   --publish 8888:8888 \
-  --volume ${JUPYTER_HOME}: /home/jovyan/JupyterLabRoot \
+  --volume ${JUPYTER_HOME}:/home/jovyan/JupyterLabRoot \
   teradata/ai-unlimited-jupyter:latest</code></pre>
 </div>
 </div>
