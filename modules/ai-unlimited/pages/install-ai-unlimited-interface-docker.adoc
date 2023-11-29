@@ -33,7 +33,7 @@ NOTE: Modify the directories based on your requirements.
 docker run -detach \
   --env “accept_license=Y” \
   --publish 8888:8888 \
-  --volume ${JUPYTER_HOME}: /home/jovyan/JupyterLabRoot \
+  --volume ${JUPYTER_HOME}:/home/jovyan/JupyterLabRoot \
   teradata/ai-unlimited-jupyter:latest
 ----
 
