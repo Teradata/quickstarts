@@ -45,7 +45,6 @@ SELECT * FROM val.accounts
 CREATE TABLE transactions AS (
 SELECT * FROM val.transactions
 ) WITH DATA;
-
 ----
 
 == Understand the sample data
@@ -113,8 +112,8 @@ CREATE VIEW td_analytics_functions_demo.one_hot_encoding_joined_table_input AS (
     TargetColumn ('gender','marital_status','state_code')
     CategoryCounts(2,4,33)
 Approach('Auto')
-  ) AS dt
-  );
+) AS dt
+);
 ----
 
 === TD_ScaleFit
@@ -129,8 +128,8 @@ If we look at the data, some columns like `tot_income`, `tot_age`, `ck_avg_bal` 
     USING
     TargetColumns('tot_income','q1_trans_cnt','q2_trans_cnt','q3_trans_cnt','q4_trans_cnt','ck_avg_bal','sv_avg_bal','ck_avg_tran_amt', 'sv_avg_tran_amt', 'cc_avg_tran_amt')
     ScaleMethod('RANGE')
-  ) AS dt
-  );
+) AS dt
+);
 ----
 
 === TD_ColumnTransformer
@@ -140,15 +139,13 @@ Teradata's Database Analytic Functions typically operate in pairs for data trans
 [source, teradata-sql]
 ----
 -- Using a consolidated transform function
-
 CREATE TABLE td_analytics_functions_demo.feature_enriched_accounts_consolidated AS (
 SELECT * FROM TD_ColumnTransformer(
 ON joined_table AS InputTable
 ON one_hot_encoding_joined_table_input AS OneHotEncodingFitTable DIMENSION
 ON scale_fit_joined_table_input AS ScaleFitTable DIMENSION
 ) as dt 
-)WITH DATA;
-
+) WITH DATA;
 ----
 
 Once we perform the transformation we can see our categorical columns one-hot encoded and numeric values scaled as can be seen in the image below. For ex: `tot_income` is in the range [0,1], `gender` is one-hot encoded to `gender_0`, `gender_1`, `gender_other`.
@@ -172,7 +169,7 @@ IDColumn('cust_id')
 trainSize(0.75)
 testSize(0.25)
 Seed (42)
-)AS dt
+) AS dt
 );
 ----
 
@@ -217,7 +214,7 @@ SELECT * FROM TD_GLM (
   Tolerance (0.001)
   Intercept ('true')
 ) AS dt
-)WITH DATA;
+) WITH DATA;
 ----
 
 image::ml_model_trained.png[Trained GLM, width=100%]
@@ -237,8 +234,7 @@ USING
 IDColumn ('cust_id')
 Accumulate('cc_avg_bal')
 ) AS dt
-) WITH DATA
-;
+) WITH DATA;
 ----
 
 image::ml_model_scored.png[Scored GLM, width=100%]
