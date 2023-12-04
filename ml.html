@@ -1595,8 +1595,8 @@ GROUP BY T1.cust_id) WITH DATA UNIQUE PRIMARY INDEX (cust_id);</code></pre>
     TargetColumn ('gender','marital_status','state_code')
     CategoryCounts(2,4,33)
 Approach('Auto')
-  ) AS dt
-  );</code></pre>
+) AS dt
+);</code></pre>
 </div>
 </div>
 </div>
@@ -1613,8 +1613,8 @@ Approach('Auto')
     USING
     TargetColumns('tot_income','q1_trans_cnt','q2_trans_cnt','q3_trans_cnt','q4_trans_cnt','ck_avg_bal','sv_avg_bal','ck_avg_tran_amt', 'sv_avg_tran_amt', 'cc_avg_tran_amt')
     ScaleMethod('RANGE')
-  ) AS dt
-  );</code></pre>
+) AS dt
+);</code></pre>
 </div>
 </div>
 </div>
@@ -1626,14 +1626,13 @@ Approach('Auto')
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- Using a consolidated transform function
-
 CREATE TABLE td_analytics_functions_demo.feature_enriched_accounts_consolidated AS (
 SELECT * FROM TD_ColumnTransformer(
 ON joined_table AS InputTable
 ON one_hot_encoding_joined_table_input AS OneHotEncodingFitTable DIMENSION
 ON scale_fit_joined_table_input AS ScaleFitTable DIMENSION
 ) as dt
-)WITH DATA;</code></pre>
+) WITH DATA;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1669,7 +1668,7 @@ IDColumn('cust_id')
 trainSize(0.75)
 testSize(0.25)
 Seed (42)
-)AS dt
+) AS dt
 );</code></pre>
 </div>
 </div>
@@ -1724,7 +1723,7 @@ SELECT * FROM TD_GLM (
   Tolerance (0.001)
   Intercept ('true')
 ) AS dt
-)WITH DATA;</code></pre>
+) WITH DATA;</code></pre>
 </div>
 </div>
 <div class="imageblock">
@@ -1751,8 +1750,7 @@ USING
 IDColumn ('cust_id')
 Accumulate('cc_avg_bal')
 ) AS dt
-) WITH DATA
-;</code></pre>
+) WITH DATA;</code></pre>
 </div>
 </div>
 <div class="imageblock">
