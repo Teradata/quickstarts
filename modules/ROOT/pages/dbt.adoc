@@ -29,11 +29,37 @@ cd jaffle_shop
 ----
 2. Create a new python environment to manage dbt and its dependencies. Activate the environment:
 +
+[tabs]
+====
+Windows::
++
+--
+[source, bash]
+----
+python3 -m venv env
+source env/Scripts/activate
+----
+--
+MacOS::
++
+--
 [source, bash]
 ----
 python3 -m venv env
 source env/bin/activate
 ----
+--
+Linux::
++
+--
+[source, bash]
+----
+python3 -m venv env
+source env/bin/activate
+----
+--
+====
+
 3. Install `dbt-teradata` module and its dependencies. The core dbt module is included as a dependency so you don't have to install it separately:
 +
 [source, bash]
