@@ -291,8 +291,8 @@ sqlCodeElements.forEach(sqlCodeElement => {
       // Format SQL code with custom options
       const formattedSql = sqlFormatter.format(sqlCode, sqlFormatterOptions)
 
-      sqlCodeElement.innerHTML = `<pre class="highlightjs highlight">${formattedSql}</pre>`;
-      
+      sqlCodeElement.innerHTML = formattedSql;
+
       // Mark the element as formatted to avoid duplication
       sqlCodeElement.classList.add('formatted');
   } else {
