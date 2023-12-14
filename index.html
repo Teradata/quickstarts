@@ -867,6 +867,8 @@ span.search-result-highlight {
 <link rel="icon" href="./_/img/favicon.ico" type="image/x-icon">
   </head>
   <body>
+<!-- Adding CDN to use sql-formatter for unpkg -->
+<script src="https://unpkg.com/sql-formatter/dist/sql-formatter.min.js"></script>
 
 <!-- Google Tag Manager (noscript) -->
 <noscript>
@@ -1124,6 +1126,40 @@ span.search-result-highlight {
     showMenuButton.classList.toggle("active"); 
     blackoutElement.classList.toggle("active");
   });
+
+
+// sqlFormattingOptions based on sql-formatting configuration
+// https://github.com/sql-formatter-org/sql-formatter
+
+
+const sqlFormatterOptions = {
+    tabWidth: 2,
+    keywordCase: 'upper',
+    functionCase: 'upper',
+    linesBetweenQueries: 1,
+};
+
+
+// Select all elements with the class "language-teradata-sql"
+const sqlCodeElements = document.querySelectorAll('.language-teradata-sql');
+
+// Iterate through each SQL code element. 
+sqlCodeElements.forEach(sqlCodeElement => {
+  // Check if the element has already been formatted
+  if (!sqlCodeElement.classList.contains('formatted')) {
+      const sqlCode = sqlCodeElement.innerText;
+      // Format SQL code with custom options
+      const formattedSql = sqlFormatter.format(sqlCode, sqlFormatterOptions)
+
+      sqlCodeElement.innerHTML = formattedSql;
+
+      // Mark the element as formatted to avoid duplication
+      sqlCodeElement.classList.add('formatted');
+  } else {
+      console.log('Element with class "language-teradata-sql" already formatted.');
+  }
+});
+
 });
 
 
