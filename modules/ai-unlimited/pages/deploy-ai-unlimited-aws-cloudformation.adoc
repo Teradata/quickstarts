@@ -43,15 +43,15 @@ git clone https://github.com/Teradata/ai-unlimited
 NOTE: Alternatively, you can use AWS Session Manager to connect to the workspace service instances, in which case, you must attach the session-manager.json policy to the IAM role. See xref::ai-unlimited-aws-permissions-policies.adoc[]. If you don't require host OS access, you can choose not to use either of these connection methods.
 
 
-=== Step 2: Subscribe to the Teradata AI Unlimited workspace service AMI
+=== Step 2: Subscribe to the Teradata AI Unlimited AMI
 
-This article requires an Amazon Machine Image (AMI) subscription for Teradata AI Unlimited running on AWS. Contact Teradata Support to obtain a license for Teradata AI Unlimited workspace service.
+This article requires an Amazon Machine Image (AMI) subscription for Teradata AI Unlimited running on AWS. Contact Teradata Support to obtain a license for Teradata AI Unlimited.
 
 To subscribe: 
 
 1. Log on to your AWS account. 
 2. Open the AWS Marketplace page for Teradata AI Unlimited and choose **Continue**. 
-3. Review and accept the terms and conditions for the workspace service and JupyterLab images. 
+3. Review and accept the terms and conditions for the engine images. 
 
 +
 
