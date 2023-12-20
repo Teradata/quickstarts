@@ -3,3 +3,4 @@ node_modules
 build
 buildw-local
 .vscode
+.vscode/settings.json
