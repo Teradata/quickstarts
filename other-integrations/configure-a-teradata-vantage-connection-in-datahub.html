@@ -1507,26 +1507,28 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 <li>
 <p>DataHub installed. See <a href="https://datahubproject.io/docs/quickstart/">DataHub Quickstart Guide</a></p>
 </li>
-<li>
-<p>Install the Teradata plugin for DataHub in the environment where you have DataHub installed</p>
-</li>
 </ul>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_setup_datahub"><a class="anchor" href="#_setup_datahub"></a>Setup DataHub</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Install the Teradata plugin for DataHub in the environment where you have DataHub installed</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install 'acryl-datahub[teradata]'</code></pre>
 </div>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>Setup a Teradata user and set privileges to allow that user to read the dictionary tables</p>
-</li>
-</ul>
-</div>
 <div class="listingblock">
 <div class="content">
-<pre>CREATE USER datahub FROM &lt;database&gt; AS PASSWORD = &lt;password&gt; PERM = 20000000;
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE USER datahub FROM &lt;database&gt; AS PASSWORD = &lt;password&gt; PERM = 20000000;
 
 GRANT SELECT ON dbc.columns TO datahub;
 GRANT SELECT ON dbc.databases TO datahub;
@@ -1536,25 +1538,24 @@ GRANT SELECT ON DBC.ColumnsV TO datahub;
 GRANT SELECT ON DBC.IndicesV TO datahub;
 GRANT SELECT ON dbc.TableTextV TO datahub;
 GRANT SELECT ON dbc.TablesV TO datahub;
-GRANT SELECT ON dbc.dbqlogtbl TO datahub; -- if lineage or usage extraction is enabled</pre>
+GRANT SELECT ON dbc.dbqlogtbl TO datahub; -- if lineage or usage extraction is enabled</code></pre>
 </div>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>If you want to run profiling, you need to grant select permission on all the tables you want to profile.</p>
 </li>
 <li>
 <p>If you want to extract lineage or usage metadata, query logging must be enabled and it is set to size which will fit for your queries (the default query text size Teradata captures is max 200 chars) An example how you can set it for all users:</p>
-</li>
-</ul>
-</div>
 <div class="listingblock">
 <div class="content">
-<pre>-- set up query logging on all
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- set up query logging on all
 
-REPLACE QUERY LOGGING LIMIT SQLTEXT=2000 ON ALL;</pre>
+REPLACE QUERY LOGGING LIMIT SQLTEXT=2000 ON ALL;</code></pre>
 </div>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1573,9 +1574,6 @@ REPLACE QUERY LOGGING LIMIT SQLTEXT=2000 ON ALL;</pre>
 <img src="_images/configure-a-teradata-connection-in-datahub/ingestion-icon.png" alt="Ingestion Label" width="75%">
 </div>
 </div>
-</li>
-</ol>
-</div>
 <div class="paragraph">
 <p>and then selecting "Create new source"</p>
 </div>
@@ -1584,8 +1582,7 @@ REPLACE QUERY LOGGING LIMIT SQLTEXT=2000 ON ALL;</pre>
 <img src="_images/configure-a-teradata-connection-in-datahub/create-new-source.png" alt="Create New Source" width="50%">
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic" start="2">
+</li>
 <li>
 <p>Scroll the list of available sources and select Other</p>
 <div class="imageblock">
@@ -1594,15 +1591,8 @@ REPLACE QUERY LOGGING LIMIT SQLTEXT=2000 ON ALL;</pre>
 </div>
 </div>
 </li>
-</ol>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="3">
 <li>
 <p>A recipe is needed to configure the connection to Teradata and define the options required such as whether to capture table and column lineage, profile the data or retrieve usage statistics.  Below is a simple recipe to get you started. The host, username and password should be changed to match your environment.</p>
-</li>
-</ol>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">pipeline_name: my-teradata-ingestion-pipeline
@@ -1630,8 +1620,7 @@ source:
 <img src="_images/configure-a-teradata-connection-in-datahub/new-ingestion-source.png" alt="New Ingestion Source" width="75%">
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic" start="4">
+</li>
 <li>
 <p>Click Next and then setup the required schedule.</p>
 <div class="imageblock">
@@ -1640,10 +1629,6 @@ source:
 </div>
 </div>
 </li>
-</ol>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="5">
 <li>
 <p>Click Next to Finish Up and give the connection a name. Click Advanced so that the correct CLI version can be set. DataHub support for Teradata became available in CLI 0.12.x.  Suggest selecting the most current version to ensure the best compatibility.</p>
 <div class="imageblock">
@@ -1652,19 +1637,12 @@ source:
 </div>
 </div>
 </li>
-</ol>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="6">
 <li>
 <p>Once the new source has been saved, it can be executed manually by clicking Run.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/configure-a-teradata-connection-in-datahub/execute.png" alt="Execute" width="75%">
 </div>
-</div>
-</li>
-</ol>
 </div>
 <div class="paragraph">
 <p>Clicking on "Succeeded" after a sucessful execution will bring up a dialogue similar to this one where you can see the Databases, Tables and Views that have been ingested into DataHub.</p>
@@ -1674,14 +1652,13 @@ source:
 <img src="_images/configure-a-teradata-connection-in-datahub/ingestion-result.png" alt="Ingestion Result" width="75%">
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic" start="7">
+</li>
 <li>
 <p>The metadata can now be explored in the GUI by browsing:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>DataSets providing a list of the datasets (tables and views) loaded</p>
+<p>DataSets provides a list of the datasets (tables and views) loaded</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/configure-a-teradata-connection-in-datahub/datasets.png" alt="datasets" width="75%">
