@@ -20,14 +20,17 @@ include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
 * DataHub installed. See link:https://datahubproject.io/docs/quickstart/[DataHub Quickstart Guide]
 
-* Install the Teradata plugin for DataHub in the environment where you have DataHub installed
+== Setup DataHub
 
+* Install the Teradata plugin for DataHub in the environment where you have DataHub installed
++
 [source, bash]
 ----
 pip install 'acryl-datahub[teradata]'
 ----
 
 * Setup a Teradata user and set privileges to allow that user to read the dictionary tables
++
 [source, sql ]
 ----
 CREATE USER datahub FROM <database> AS PASSWORD = <password> PERM = 20000000;
@@ -45,6 +48,7 @@ GRANT SELECT ON dbc.dbqlogtbl TO datahub; -- if lineage or usage extraction is e
 * If you want to run profiling, you need to grant select permission on all the tables you want to profile.
 
 * If you want to extract lineage or usage metadata, query logging must be enabled and it is set to size which will fit for your queries (the default query text size Teradata captures is max 200 chars) An example how you can set it for all users:
++
 [source, sql ]
 ----
 -- set up query logging on all
@@ -58,20 +62,17 @@ With DataHub running, open the DataHub GUI and login.  In this example this is r
 . Start the new connection wizard by clicking on the ingestion plug icon 
 +
 image::{page-image-directory}/ingestion-icon.png[Ingestion Label, width=75%]
-
++
 and then selecting "Create new source" 
-
++
 image::{page-image-directory}/create-new-source.png[Create New Source, width=50%]
 
-[start=2]
 . Scroll the list of available sources and select Other 
 +
 image::{page-image-directory}/select-other-source.png[Select Source, width=50%]
 
-[start=3]
-
 . A recipe is needed to configure the connection to Teradata and define the options required such as whether to capture table and column lineage, profile the data or retrieve usage statistics.  Below is a simple recipe to get you started. The host, username and password should be changed to match your environment.
-
++
 [source, yaml]
 ----
 pipeline_name: my-teradata-ingestion-pipeline
@@ -90,35 +91,29 @@ source:
     stateful_ingestion:
       enabled: true
 ----
-
++
 Pasting the recipe into the window should look like this: 
-
++
 image::{page-image-directory}/new-ingestion-source.png[New Ingestion Source, width=75%]
 
-[start=4]
 . Click Next and then setup the required schedule. 
 +
 image::{page-image-directory}/set-schedule.png[Set Schedule, width=75%]
 
-
-[start=5]
 . Click Next to Finish Up and give the connection a name. Click Advanced so that the correct CLI version can be set. DataHub support for Teradata became available in CLI 0.12.x.  Suggest selecting the most current version to ensure the best compatibility.
 +
 image::{page-image-directory}/finish-up.png[Finish up, width=75%]
 
-
-[start=6]
 . Once the new source has been saved, it can be executed manually by clicking Run. 
 +
 image::{page-image-directory}/execute.png[Execute, width=75%]
-
++
 Clicking on "Succeeded" after a sucessful execution will bring up a dialogue similar to this one where you can see the Databases, Tables and Views that have been ingested into DataHub.  
-
++
 image::{page-image-directory}/ingestion-result.png[Ingestion Result, width=75%]
 
-[start=7]
 . The metadata can now be explored in the GUI by browsing:
-.. DataSets providing a list of the datasets (tables and views) loaded
+.. DataSets provides a list of the datasets (tables and views) loaded
 +
 image::{page-image-directory}/datasets.png[datasets, width=75%]
 .. Entities captured from the database
