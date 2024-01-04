@@ -778,8 +778,13 @@ aside.toc.sidebar {
 .doc .admonitionblock .icon i {
   font-family: Inter;
   font-size: 16px;
-  text-transform: none;
+}
+.doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
+  color: #007373;
+}
+.doc .admonitionblock td.icon i::after{
+  text-transform: none;
 }
 
 .doc .admonitionblock p,
