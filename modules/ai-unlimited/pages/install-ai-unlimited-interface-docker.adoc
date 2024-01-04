@@ -79,7 +79,7 @@ networks:
 +
 [source, bash, id="docker_compose_jupyter_up", role="content-editable emits-gtm-events"]
 ----
-docker compose -f jupyter.yaml up
+docker compose -f jupyter.yml up
 ----
 +
 Once the JupyterLab server is initialized and started, you can connect to JupyterLab using the URL: http://localhost:8888 and enter the token when prompted. For detailed instructions, see link:https://docs.teradata.com/r/Teradata-VantageTM-Modules-for-Jupyter-Installation-Guide/Teradata-Vantage-Modules-for-Jupyter/Teradata-Vantage-Modules-for-Jupyter[Teradata Vantage™ Modules for Jupyter Installation Guide] or link:https://quickstarts.teradata.com/jupyter.html[Use Vantage from a Jupyter Notebook].
