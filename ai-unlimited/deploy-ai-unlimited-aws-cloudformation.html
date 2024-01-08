@@ -498,7 +498,7 @@ article.doc {
 
 .doc a,
 .doc a:hover {
-  color: #007373;
+  color: #3053F4;
 }
 
 .article {
@@ -683,11 +683,11 @@ aside.toc.sidebar {
 .is-current-page>.nav-link,
 .is-current-page>.nav-text {
   font-weight: initial;
-  color: #007373;
+  color: #00233C;
 }
 
 .is-current-page {
-  background: rgba(133, 221, 220, 0.1);
+  background: rgba(255, 125, 2, 0.08);
   border-radius: 0px 16px 16px 0px;
 }
 
@@ -734,7 +734,7 @@ aside.toc.sidebar {
 }
 
 .doc .admonitionblock.note {
-  background-color: #eaf3f2;
+  background-color: #DEE0FF;
 }
 
 .doc .admonitionblock.question {
@@ -753,7 +753,7 @@ aside.toc.sidebar {
 
 .doc .admonitionblock.note .icon {
   background-color: initial;
-  color: #007373;
+  color: #DEE0FF;
 }
 
 .doc .admonitionblock.question .icon {
@@ -787,8 +787,23 @@ aside.toc.sidebar {
 }
 
 .doc .admonitionblock .icon i {
-  font-family: Arial;
+  font-family: Inter;
   font-size: 16px;
+}
+.doc .admonitionblock td.icon i.icon-note {
+  background-color: transparent;
+  color: #00233C;
+}
+.doc .admonitionblock td.icon i.icon-important {
+    background-color: transparent;
+    color: #FF8F00; 
+}
+.doc .admonitionblock td.icon i {
+  padding: 0;
+}
+
+.doc .admonitionblock td.icon i::after{
+  text-transform: none;
 }
 
 .doc .admonitionblock p,
@@ -1565,9 +1580,9 @@ Alternatively, you can use AWS Session Manager to connect to the workspace servi
 </div>
 </div>
 <div class="sect2">
-<h3 id="_step_2_subscribe_to_the_teradata_ai_unlimited_workspace_service_ami"><a class="anchor" href="#_step_2_subscribe_to_the_teradata_ai_unlimited_workspace_service_ami"></a>Step 2: Subscribe to the Teradata AI Unlimited workspace service AMI</h3>
+<h3 id="_step_2_subscribe_to_the_teradata_ai_unlimited_ami"><a class="anchor" href="#_step_2_subscribe_to_the_teradata_ai_unlimited_ami"></a>Step 2: Subscribe to the Teradata AI Unlimited AMI</h3>
 <div class="paragraph">
-<p>This article requires an Amazon Machine Image (AMI) subscription for Teradata AI Unlimited running on AWS. Contact Teradata Support to obtain a license for Teradata AI Unlimited workspace service.</p>
+<p>This article requires an Amazon Machine Image (AMI) subscription for Teradata AI Unlimited running on AWS. Contact Teradata Support to obtain a license for Teradata AI Unlimited.</p>
 </div>
 <div class="paragraph">
 <p>To subscribe:</p>
@@ -1581,7 +1596,7 @@ Alternatively, you can use AWS Session Manager to connect to the workspace servi
 <p>Open the AWS Marketplace page for Teradata AI Unlimited and choose <strong>Continue</strong>.</p>
 </li>
 <li>
-<p>Review and accept the terms and conditions for the workspace service and JupyterLab images.</p>
+<p>Review and accept the terms and conditions for the engine images.</p>
 <div class="ulist">
 <ul>
 <li>
