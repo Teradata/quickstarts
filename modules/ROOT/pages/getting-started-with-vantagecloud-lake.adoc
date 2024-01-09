@@ -18,7 +18,7 @@ VantageCloud Lake provides all the benefits you’d expect in a cloud solution p
 
 == Sign-on to VantageCloud Lake
 
-IMPORTANT: To get the VantageCloud Lake sign-on link and credentials, fill the https://www.teradata.com/about-us/contact[contact form] to reach out to Teradata team.   
+IMPORTANT: To get a VantageCloud Lake sign-on link and credentials, fill the https://www.teradata.com/about-us/contact[contact form] to reach out to Teradata team.   
 
 Go to the URL provided by Teradata, for example, *_ourcompany.innovationlabs.teradata.com_* and sign on:
 
