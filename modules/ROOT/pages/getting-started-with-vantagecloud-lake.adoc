@@ -160,7 +160,8 @@ Fill out the Database credential fields:
 | *Item* | *Description*
 
 | DBC password 
-| The DBA account for the database is called "dbc". Set the password for dbc: +
+The primary administrative account in a Teradata Vantage environment is known as "dbc". Similar to the root user in Linux, the dbc account holds comprehensive administrative privileges. It is recommended to establish additional administrative users for routine tasks, after the environment is created, and to refrain from sharing or utilizing the dbc credentials.
+Set the password for dbc: +
 * Between 8 and 64 characters +
 * Allows both alphanumeric and special characters +
 * No dictionary words 
