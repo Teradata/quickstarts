@@ -74,7 +74,7 @@ Lake+: Premier 24x7 Priority cloud support + industry data models
 
 image::lake_environment_configuration.png[Environment configuration,align="center",width=50%]
 
-IMPORTANT: The *Consumption estimates* to your right provide guidance for configuring the environment. See https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Using-VantageCloud-Lake-Console-to-Manage-VantageCloud-Lake/Using-the-Consumption-Estimates[Using the Consumption Estimates] for more detail.   
+IMPORTANT: The *Consumption estimates*, to your right, provide guidance for configuring the environment. See https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Using-VantageCloud-Lake-Console-to-Manage-VantageCloud-Lake/Using-the-Consumption-Estimates[Using the Consumption Estimates] for more detail.   
 
 === Primary cluster configuration
 
