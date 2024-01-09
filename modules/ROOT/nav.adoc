@@ -71,4 +71,4 @@
 *** xref:ai-unlimited:ai-unlimited-magic-reference.adoc[]
 
 * VantageCloud Lake
-** xref:getting.started.lake.adoc[]
+** xref:getting-started-with-vantagecloud-lake.adoc[]

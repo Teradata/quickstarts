@@ -8,7 +8,7 @@
 
 == Overview
 
-Teradata VantageCloud Lake is Teradata's next-generation, cloud-native analytics and data platform. It provides lakehouse deployment patterns along with the ability to run independent elastic workloads using an object store-centric design. +
+Teradata VantageCloud Lake is Teradata's next-generation, cloud-native analytics and data platform. It provides lakehouse deployment patterns along with the ability to run independent elastic workloads using an object storage-centric design. +
 It empowers organizations to unlock their data, activate analytics, and accelerate value. Customers can optimize their analytics environment using specially configured compute cluster resources that best accommodate their workload requirements. +
 
 image::VantageCloud.png[VantageCloud,align="center",width=50%]
@@ -20,7 +20,7 @@ VantageCloud Lake provides all the benefits you’d expect in a cloud solution p
 
 IMPORTANT: To get the VantageCloud Lake sign-on link and credentials, fill the https://www.teradata.com/about-us/contact[contact form] to reach out to Teradata team.   
 
-Go to the URL provided by Teradata, for example, *_ourcompany.innovationlabs.teradata.com_* and Sign on:
+Go to the URL provided by Teradata, for example, *_ourcompany.innovationlabs.teradata.com_* and sign on:
 
 * Existing customers can use their organization admin username(email address) and password to sign on.
 * New customer can sign on with their organization admin username (from welcome letter: email address) and the password you created. 
@@ -207,7 +207,7 @@ The created environment is accessible through console only. To change that, clic
 
 image::lake_settings_menu.png[Settings menu of created environment,align="center",width=75%]
 
-In the *SETTINGS*, select the *Internet connection* checkbox and provide the IP addresses(in CIDR format) with which you would want to access your environment. 
+In the *SETTINGS*, select the *Internet connection* checkbox and provide the IP addresses in CIDR format (for example, 192.168.2.0/24 specifies all IP addresses in the range: 192.168.2.0 to 192.168.2.255) with which you would want to access your environment. 
 
 NOTE: Find more information on setting up an internet connection https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin/Step-2-Setting-the-Environment-Connection-Type/Setting-Up-an-Internet-Connection[here].
 
