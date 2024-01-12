@@ -20,14 +20,14 @@
                 </ul>
                 <div class="td-language-selector dropdown1">
                   <button onclick="langOptions()" class="td-language-selector__toggle selected">
-                    Global <i class="fas fa-chevron-down fa-xs m" id="dropdownIcon"></i>
+                    日本 <i class="fas fa-chevron-down fa-xs m" id="dropdownIcon"></i>
                   </button>
                   <div id="myDropdown" class="nav-2 td-language-selector__dropdown dropdown-content1">
                     <li lang="en-US" class="td-language-selector__menu-item" onclick="switchLanguage('en')">
-                      <a href="#" class="td-language-selector__location no-underline active-lan">Global</a>
+                      <a href="#" class="td-language-selector__location no-underline">Global</a>
                     </li>
                     <li lang="ja-JP" class="td-language-selector__menu-item" onclick="switchLanguage('ja')">
-                      <a href="#" class="td-language-selector__location no-underline">日本</a>
+                      <a href="#" class="td-language-selector__location no-underline active-lan">日本</a>
                     </li>
                   </div>
                 </div>
@@ -48,28 +48,28 @@
                         </div>
                       </a>
                       <a href="https://developers.teradata.com" class="dev">
-                        <div>Developers</div>
+                        <div>開発者</div>
                       </a>
                     </div>
                     <ul class="header-nav__main-menu header-nav__element nav-1 list">
                       <li>
-                        <a href="{{siteRootPath}}/index.html" class="header-nav__main-menu__link active">Getting started</a>
+                        <a href="{{siteRootPath}}/index.html" class="header-nav__main-menu__link active">スタートガイド</a>
                       </li>
                       <li>
-                        <button href="" onclick="docs()" class="header-nav__main-menu__link dropbtn">Docs</button>
+                        <button href="" onclick="docs()" class="header-nav__main-menu__link dropbtn">ドキュメント</button>
                         <div id="myDocsDropdown" class="dropdown-content">
-                          <a href="https://docs.teradata.com/p/VantageCloud/Lake" class="dropdown-item mt">VantageCloud Lake Documentation</a>
-                          <a href="https://docs.teradata.com/" class="dropdown-item">All Documentation</a> 
+                          <a href="https://docs.teradata.com/p/VantageCloud/Lake" class="dropdown-item mt">VantageCloud Lake ドキュメント</a>
+                          <a href="https://docs.teradata.com/" class="dropdown-item">すべてのドキュメント</a> 
                         </div>  
                       </li>
                       <li>
-                        <a href="https://downloads.teradata.com/" class="header-nav__main-menu__link">Downloads</a>
+                        <a href="https://downloads.teradata.com/" class="header-nav__main-menu__link">ダウンロード</a>
                       </li>
                       <li>
-                        <button href="" onclick="community()" class="header-nav__main-menu__link dropbtn">Community</button>
+                        <button href="" onclick="community()" class="header-nav__main-menu__link dropbtn">コミュニティ</button>
                         <div id="myCommunityDropdown" class="dropdown-content dc2">
-                          <a href="https://support.teradata.com" title="Technical Medium Blogs" class="dropdown-item mt">Teradata Community</a>
-                          <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item mb">Technical Medium Blogs&nbsp; &nbsp; 
+                          <a href="https://support.teradata.com" title="Technical Medium Blogs" class="dropdown-item mt">Teradataコミュニティ</a>
+                          <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item mb">Medium技術ブログ&nbsp; &nbsp; 
                             <img src='{{uiRootPath}}/img/small-external.svg' alt="External Icon">
                           </a>
                           <a href="https://github.com/Teradata" title="Teradata on GitHub" target="_blank" class="dropdown-item mb">GitHub&nbsp; &nbsp; 
@@ -88,9 +88,11 @@
                             {{#if env.SITE_SEARCH_PROVIDER}}
                             {{#if (ne page.layout "landing-page")}}
                             <div class="navbar-item">
+                              <!--
                               <div class="search-container">
-                                <input id="search-input" type="text" placeholder="Search Getting Started">
+                                <input id="search-input" type="text" placeholder="検索 スタートガイド">
                               </div>
+                              -->
                             </div>
                             {{/if}}
                             {{/if}}
@@ -109,7 +111,7 @@
                           <img class="teradata-logo" src='{{uiRootPath}}/img/TD-Logo.svg' alt="" title="" >
                       </div>
                   </a>
-                  <a href="http://developers.teradata.com/" class="developers">Developers</a>
+                  <a href="http://developers.teradata.com/" class="developers">開発者</a>
                   <ul class="header-nav-mobile__top-links list">
                       <li>
                           <button id="showMenu" role="button" aria-label="Click or Press enter to open menu" tabindex="0" class="header-nav-mobile__menu-icon">
@@ -136,23 +138,23 @@
                     <li class="header-nav-mobile__menu-listing__item has-sub-items">
                       <header data-celebrus="Mobile Main Menu - Who we help" data-gtm-category="Header" data-gtm-action="main nav click" data-gtm-label="Who we help" class="d-flex justify-content-between align-items-center border-bottom-light">
                         <div class="header-nav-mobile__menu-listing__header nav-1">
-                          <a class="nav-1 d-flex justify-content-between align-items-center" href="https://quickstarts.teradata.com/">Getting started</a>
+                          <a class="nav-1 d-flex justify-content-between align-items-center" href="https://quickstarts.teradata.com/">スタートガイド</a>
                         </div>
                       </header>
                     </li>
 
                     <li class="border-bottom-light">
                       <div>
-                        <button id="toggleButtonDocs" class="py-4 nav-1 d-flex justify-content-between align-items-center w-100">Docs
+                        <button id="toggleButtonDocs" class="py-4 nav-1 d-flex justify-content-between align-items-center w-100">ドキュメント
                           <span class="caret caret--slate"></span>
                         </button>
                         <div class="slide-up-down__container hidden" style="--content-height: 94; transition: height 500ms ease-in-out 0s;">  
                           <ul class="ps-3 list">
                             <li>
-                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/p/VantageCloud/Lake">VantageCloud Lake Documentation</a>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/p/VantageCloud/Lake">VantageCloud Lake ドキュメント</a>
                             </li>
                             <li>
-                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/">All Documentation</a>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/">すべてのドキュメント</a>
                             </li>
                           </ul>
                         </div>
@@ -162,23 +164,23 @@
                     <li class="header-nav-mobile__menu-listing__item has-sub-items">
                       <header class="d-flex justify-content-between align-items-center border-bottom-light">
                         <div class="header-nav-mobile__menu-listing__header nav-1">
-                          <a class="nav-1 d-flex justify-content-between align-items-center" href="https://downloads.teradata.com/">Downloads</a>
+                          <a class="nav-1 d-flex justify-content-between align-items-center" href="https://downloads.teradata.com/">ダウンロード</a>
                         </div>
                       </header>
                     </li>
                     <li class="border-bottom-light">
                       <div>
-                        <button id="toggleButtonComm" class="py-4 nav-1 d-flex justify-content-between align-items-center w-100">Community
+                        <button id="toggleButtonComm" class="py-4 nav-1 d-flex justify-content-between align-items-center w-100">コミュニティ
                           <span class="caret caret--slate"></span>
                         </button>
                         <div class="slide-up-down__container hidden" aria-hidden="false" style="--content-height: 235; transition: height 500ms ease-in-out 0s;">
                           <ul class="ps-3 list">
                             <li>
-                              <a class="nav-2 py-4 d-block color-slate" href="https://support.teradata.com">Teradata Community</a>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://support.teradata.com">Teradataコミュニティ</a>
                             </li>
                             <li>
                               <a class="nav-2 py-4 d-flex align-items-center color-slate" href="https://medium.com/teradata">
-                                Technical Medium Blogs&nbsp;&nbsp;<img src='{{uiRootPath}}/img/small-external.svg' class="mtop">
+                                Medium技術ブログ&nbsp;&nbsp;<img src='{{uiRootPath}}/img/small-external.svg' class="mtop">
                               </a>
                             </li>
                             <li>
@@ -219,7 +221,7 @@
     var sectionElement = document.querySelector(".navbar-search");
     var devElement = document.querySelector(".dev");
     if (sectionElement.innerHTML.trim() === "") {
-      devElement.style.marginRight = "-65px"; 
+      devElement.style.marginRight = "-225px"; 
     }
 
     /* Script for desktop dropdowns */
