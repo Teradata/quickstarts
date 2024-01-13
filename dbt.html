@@ -1620,14 +1620,7 @@ source env/bin/activate</code></pre>
 <td class="content">
 <div class="title">Database setup</div>
 <div class="paragraph">
-<p>The following dbt profile points to a database called <code>jaffle_shop</code>. You can change <code>schema</code> value to point to an existing database in your Teradata Vantage instance or you can create <code>jaffle_shop</code> database:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE jaffle_shop
-AS PERMANENT = 110e6,
-    SPOOL = 220e6;</code></pre>
-</div>
+<p>The following dbt profile points to a database called <code>jaffle_shop</code>. If the database doesn&#8217;t exist on your Teradata Vantage instance, it will be created. You can also change <code>schema</code> value to point to an existing database in your instance.</p>
 </div>
 </td>
 </tr>
