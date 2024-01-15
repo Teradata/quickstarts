@@ -387,11 +387,21 @@ main.article {
 .call-to-action {
   margin-top: 20px;
 }
-
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 460px) { 
+  .button-container {
+    display: grid !important;
+  }
+}
+@media screen and (max-width: 576px) {  
+  /*
   .call-to-action .call-to-action-button,
   .call-to-action .call-to-action-button-secondary {
     width: 100%;
+    height: auto;
+  }*/
+  .call-to-action {
+    width: 100%;
+    height: auto;
   }
 }
 
@@ -456,8 +466,8 @@ main.article {
   border: 1px solid rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
   border-radius: 8px;
-  width: 100%;
-  height: 245px;
+/*  width: 100%;
+  height: 245px; */
   background-repeat: no-repeat;
   background-position: right top;
   background-origin: content-box;

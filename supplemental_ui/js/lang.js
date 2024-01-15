@@ -1,10 +1,11 @@
 function switchLanguage(lan) {
     let path, page, indexFile, file, newUrl, salida;
     path = document.location.href;
+    alert(path);
     //path = document.location.pathname;
-    page = path.split("/");
-    //page = path.split('/').filter(Boolean);
-
+    //page = path.split("/");
+    page = path.split('/').filter(Boolean);
+    alert(page);
     let regulus = "regulus";
     let devops = "devops";
 
@@ -24,9 +25,9 @@ function switchLanguage(lan) {
         } else {
           file = page[page.length-2] +"/"+ page[page.length-1];
         }
-        //if (indexFile !== -1) {
+        if (indexFile !== -1) {
           page.splice(indexFile, indexFile+1, file);
-        //}
+        }
       } else {
         if(page[page.length-3] === "es" || page[page.length-3] === "ja" ){
           page[page.length-3] = lan;  
@@ -47,8 +48,8 @@ function switchLanguage(lan) {
         }
       }     
     }     
-    //salida = page.join('/');
-    salida = '/' + page.join('/');
+    salida = page.join('/');
+    //salida = '/' + page.join('/');
     window.location.href=salida; 
   }
   /* 

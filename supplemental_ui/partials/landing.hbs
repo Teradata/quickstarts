@@ -15,7 +15,7 @@
                   <path d="M9.35002 11.9669L8.63335 11.2669L11.4334 8.46686H2.66669V7.46686H11.4334L8.61669 4.6502L9.33335 3.9502L13.35 7.96686L9.35002 11.9669Z" fill="white"/>
                 </svg>
               </a>
-              <a class="call-to-action-button-secondary" href="#browse-content" style="width: 132px;" title="Browse Content" rel="nofollow">
+              <a class="call-to-action-button-secondary" href="#browse-content" title="Browse Content" rel="nofollow">
                 Browse
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M9.35008 11.9669L8.63341 11.2669L11.4334 8.46686H2.66675V7.46686H11.4334L8.61675 4.6502L9.33341 3.9502L13.3501 7.96686L9.35008 11.9669Z" fill="#00233C"/>
@@ -388,11 +388,21 @@
   main.article {
     padding-bottom: 30px;
   }
-/*
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 460px) { 
+  .button-container {
+    display: grid !important;
+  }
+}
+@media screen and (max-width: 576px) {  
+  /*
   .call-to-action .call-to-action-button,
   .call-to-action .call-to-action-button-secondary {
     width: 100%;
+    height: auto;
+  }*/
+  .call-to-action {
+    width: 100%;
+    height: auto;
   }
 }
 */
@@ -457,8 +467,8 @@
   border: 1px solid rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
   border-radius: 8px;
-  width: 100%;
-  height: 245px;
+/*  width: 100%;
+  height: 245px;*/
   background-repeat: no-repeat;
   background-position: right top;
   background-origin: content-box;
