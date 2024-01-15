@@ -50,6 +50,7 @@ function switchLanguage(lan) {
     }     
     salida = page.join('/');
     //salida = '/' + page.join('/');
+    alert(salida);
     window.location.href=salida; 
   }
   /* 
