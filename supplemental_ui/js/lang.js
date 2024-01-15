@@ -1,11 +1,11 @@
 function switchLanguage(lan) {
     let path, page, indexFile, file, newUrl, salida;
     path = document.location.href;
-    alert(path);
+    //alert(path);
     //path = document.location.pathname;
     //page = path.split("/");
     page = path.split('/').filter(Boolean);
-    alert(page);
+    //alert(page);
     let regulus = "regulus";
     let devops = "devops";
 
