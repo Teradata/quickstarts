@@ -1,0 +1,7 @@
+:experimental:
+
+== 概要
+
+このハウツーでは、Teradata データベースをローカル マシン上で実行してアクセスする方法を示します。Teradata をインストールするにはさまざまな方法があります。このドキュメントでは、クラウド リソースにコストを費やすことなく、最初のクエリーまでの時間を最短にするように最適化します。手順を完了すると、コンピュータ上で動作する Teradata Vantage Express データベースが作成されます。
+
+NOTE: バージョン 17.20 以降、Vantage Express には次の分析パッケージが含まれています: https://docs.teradata.com/r/Vantage-Analytics-Library-User-Guide/January-2022[Vantage Analytics Library]、 https://docs.teradata.com/r/Teradata-VantageTM-Bring-Your-Own-Model-User-Guide/May-2022[Bring Your Own Model (BYOM)]、 https://docs.teradata.com/r/Teradata-VantageTM-API-Integration-Guide-for-Cloud-Machine-Learning/April-2022[API Integration with AWS SageMaker]。

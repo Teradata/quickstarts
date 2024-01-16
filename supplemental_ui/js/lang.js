@@ -1,14 +1,16 @@
 function switchLanguage(lan) {
+//    alert(lan);
     let path, page, indexFile, file, newUrl, salida;
     path = document.location.href;
-    alert(path);
+//    alert(path);
     //path = document.location.pathname;
     //page = path.split("/");
     page = path.split('/').filter(Boolean);
-    alert(page);
+//    alert(page);
     let regulus = "regulus";
     let devops = "devops";
 
+//    alert(page[page.length-1]);
     if(page[page.length-1]==="" || page[page.length-1]==="index.html" || page[page.length-1]==="#" || page[page.length-1]==="index.html#") {
       if(page[page.length-2] !== "ja") {
         indexFile = page.lastIndexOf(page[page.length-1]);
@@ -25,9 +27,7 @@ function switchLanguage(lan) {
         } else {
           file = page[page.length-2] +"/"+ page[page.length-1];
         }
-        if (indexFile !== -1) {
-          page.splice(indexFile, indexFile+1, file);
-        }
+        page.splice(indexFile, indexFile+1, file);
       } else {
         if(page[page.length-3] === "es" || page[page.length-3] === "ja" ){
           page[page.length-3] = lan;  
@@ -42,6 +42,7 @@ function switchLanguage(lan) {
               file = page[page.length-1]
               indexFile = page.lastIndexOf(file);
               newUrl = lan + "/general/" + page[page.length-1]; 
+            //  newUrl = lan +"/" + page[page.length-1]; 
               page.splice(indexFile, 1, newUrl)
             }
           }
@@ -50,7 +51,7 @@ function switchLanguage(lan) {
     }     
     salida = page.join('/');
     //salida = '/' + page.join('/');
-    alert(salida);
+//    alert(salida);
     window.location.href=salida; 
   }
   /* 

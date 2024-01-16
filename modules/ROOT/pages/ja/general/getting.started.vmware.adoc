@@ -1,0 +1,53 @@
+= VMware 上で Vantage Express を実行する
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: 2023 年 1 月 9 日
+:description: VMware を使用してラップトップで Vantage Express を実行します。
+:keywords: データ ウェアハウス、コンピューティング ストレージの分離、teradata、vantage、クラウド データ プラットフォーム、オブジェクト ストレージ、ビジネス インテリジェンス、エンタープライズ分析
+:icons: font
+
+include::../partials/getting.started.intro.adoc[]
+
+== 前提条件
+
+. 次のオペレーティング システムのいずれかを使用するコンピュータ: Windows、Linux、または Intel ベースの MacOS。
++
+NOTE: M1/M2 MacOS システムについては、  を参照してください。
+. 少なくとも 1 つのコアと 6 GB RAM を仮想マシン専用にできる 30 GB のディスク領域と十分な CPU および RAM。
+. ソフトウェアをインストールして実行できる管理者権限。
++
+// NOTE: No admin rights on your local machine? No problem! Have a look at how to run Vantage Express in link:#[AWS], link:#[Azure], link:#[Google Cloud].
+
+== インストール
+
+=== 必要なソフトウェアをダウンロードする
+
+.  link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Express]の最新バージョン。これまでに Teradata ダウンロード Web サイトを使用したことがない場合は、登録する必要があります。
+. link:https://www.vmware.com/products/workstation-player.html[VMware Workstation Player]。
++
+IMPORTANT:  
++
+IMPORTANT: VMware は、MacOS 用の VMware Workstation Player を提供していません。Mac を使用している場合は、代わりに link:https://www.vmware.com/products/fusion/fusion-evaluation.html[VMware Fusion] をインストールする必要があります。これは有料製品ですが、VMware では 30 日間の無料試用版を提供しています。あるいは、Vantage Express を  
+. Windows では、Vantage Express を解凍するために link:https://www.7-zip.org/download.html[7zip] も必要です。
+
+=== インストーラーを実行する
+
+. インストーラを実行し、デフォルト値を受け入れて、VMware Player または VMware Fusion をインストールします。
+. Windows の場合は、 `7zip`をインストールします。
+
+=== ヴァンテージ エクスプレスを実行する
+
+. Vantage Express をダウンロードしたディレクトリに移動し、ダウンロードしたファイルを解凍します。
+.  `.vmx` ファイルをダブルクリックします。これにより、VMware Player/Fusion で VM イメージが起動します。
+ 
+
+=== サンプルクエリーを実行する
+
+. 次に、VM でいくつかのクエリーを実行します。ホストと VM の間のコピー/ペーストの問題を回避するために、VM でこのクイック スタートを開きます。仮想デスクトップに移動し、Firefox を起動して、このクイック スタートを指定します。
+
+ 
+
+include::../partials/next.steps.adoc[]
+
+== 参考文献
+* link:https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20[Teradata® Studio™ および Studio™ Express インストール ガイド]
