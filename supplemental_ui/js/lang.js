@@ -51,7 +51,9 @@ function switchLanguage(lan) {
     }     
     salida = page.join('/');
     //salida = '/' + page.join('/');
-    alert(salida);
+    alert('Original Path: ' + path);
+    alert('Components: ' + JSON.stringify(page));
+    alert('Final URL: ' + salida);
     window.location.href=salida; 
   }
   /* 
