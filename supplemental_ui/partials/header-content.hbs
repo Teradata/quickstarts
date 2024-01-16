@@ -1,3 +1,5 @@
+<!-- Adding CDN to use sql-formatter for unpkg -->
+<script src="https://unpkg.com/sql-formatter/dist/sql-formatter.min.js"></script>
 
 <!-- Google Tag Manager (noscript) -->
 <noscript>
@@ -133,10 +135,10 @@
                         <div class="slide-up-down__container hidden" style="--content-height: 94; transition: height 500ms ease-in-out 0s;">  
                           <ul class="ps-3 list">
                             <li>
-                              <a class="nav-2 py-4 d-block color-slate" href="/Getting-Started/Pricing">VantageCloud Lake Documentation</a>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/p/VantageCloud/Lake">VantageCloud Lake Documentation</a>
                             </li>
                             <li>
-                              <a class="nav-2 py-4 d-block color-slate" href="/Getting-Started/Pricing/Calculator">All Documentation</a>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/">All Documentation</a>
                             </li>
                           </ul>
                         </div>
@@ -158,20 +160,20 @@
                         <div class="slide-up-down__container hidden" aria-hidden="false" style="--content-height: 235; transition: height 500ms ease-in-out 0s;">
                           <ul class="ps-3 list">
                             <li>
-                              <a class="nav-2 py-4 d-block color-slate" href="/University/Overview">Teradata Community</a>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://support.teradata.com">Teradata Community</a>
                             </li>
                             <li>
-                              <a class="nav-2 py-4 d-flex align-items-center color-slate" href="/University/Certification">
+                              <a class="nav-2 py-4 d-flex align-items-center color-slate" href="https://medium.com/teradata">
                                 Technical Medium Blogs&nbsp;&nbsp;<img src='{{uiRootPath}}/img/small-external.svg' class="mtop">
                               </a>
                             </li>
                             <li>
-                              <a class="nav-2 py-4 d-flex color-slate" href="https://docs.teradata.com" target="_blank" rel="noopener">
+                              <a class="nav-2 py-4 d-flex color-slate" href="https://github.com/Teradata" target="_blank" rel="noopener">
                                 GitHub&nbsp;&nbsp;<img src='{{uiRootPath}}/img/small-external.svg' class="e">
                               </a>
                             </li>
                             <li>
-                              <a class="nav-2 py-4 d-flex color-slate" href="https://downloads.teradata.com" target="_blank" rel="noopener">
+                              <a class="nav-2 py-4 d-flex color-slate" href="https://stackoverflow.com/questions/tagged/teradata" target="_blank" rel="noopener">
                                 Stack Overflow&nbsp;&nbsp;<img src='{{uiRootPath}}/img/small-external.svg' class="">
                               </a>
                             </li>
@@ -264,6 +266,40 @@
     showMenuButton.classList.toggle("active"); 
     blackoutElement.classList.toggle("active");
   });
+
+
+// sqlFormattingOptions based on sql-formatting configuration
+// https://github.com/sql-formatter-org/sql-formatter
+
+
+const sqlFormatterOptions = {
+    tabWidth: 2,
+    keywordCase: 'upper',
+    functionCase: 'upper',
+    linesBetweenQueries: 1,
+};
+
+
+// Select all elements with the class "language-teradata-sql"
+const sqlCodeElements = document.querySelectorAll('.language-teradata-sql');
+
+// Iterate through each SQL code element. 
+sqlCodeElements.forEach(sqlCodeElement => {
+  // Check if the element has already been formatted
+  if (!sqlCodeElement.classList.contains('formatted')) {
+      const sqlCode = sqlCodeElement.innerText;
+      // Format SQL code with custom options
+      const formattedSql = sqlFormatter.format(sqlCode, sqlFormatterOptions)
+
+      sqlCodeElement.innerHTML = formattedSql;
+
+      // Mark the element as formatted to avoid duplication
+      sqlCodeElement.classList.add('formatted');
+  } else {
+      console.log('Element with class "language-teradata-sql" already formatted.');
+  }
+});
+
 });
 
 

@@ -1,116 +1,77 @@
-= Train ML models in Vantage
+= Train ML models in Vantage using Database Analytic Functions
 :experimental:
-:page-author: Adam Tworkiewicz
-:page-email: adam.tworkiewicz@teradata.com
-:page-revdate: September 12th, 2021
-:description: Train an ML model without leaving Teradata Vantage - use Vantage Analytics Library (VAL) to create ML models.
-:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, AI/ML
+:page-author: Krutik Pathak
+:page-email: krutik.pathak@teradata.com
+:page-revdate: November 21st, 2023
+:description: Train an ML model without leaving Teradata Vantage - use Vantage Database Analytic Functions to create ML models.
+:keywords: data warehouses, database analytic functions, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, AI/ML
 
 == Overview
 
-There are situations when you want to quickly validate a machine learning model idea. You have a model type in mind. You don't want to operationalize with an ML pipeline just yet. You just want to test out if the relationship you had in mind exists. Also, sometimes even your production deployment doesn't require constant relearning with MLops. In such cases, you can use Vantage Analytics Library (VAL) and multiple ML model types it supports.
+There are situations when you want to quickly validate a machine learning model idea. You have a model type in mind. You don't want to operationalize with an ML pipeline just yet. You just want to test out if the relationship you had in mind exists. Also, sometimes even your production deployment doesn't require constant relearning with MLops. In such cases, you can use Database Analytic Functions for feature engineering, train different ML models, score your models, and evaluate your model on different model evaluation functions.
 
 == Prerequisites
 
 You need access to a Teradata Vantage instance.
 
-include::ROOT:partial$vantage.express.options.adoc[]
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
-== Install Vantage Analytics Library
+== Load the sample data
 
-Support for ML in Vantage requires Vantage Analytics Library (VAL). In this section, we will install VAL and load some sample data.
+Here in this example we will be using the sample data from `val` database. We will use the `accounts`, `customer`, and `transactions` tables. We will be creating some tables in the process and you might face some issues while creating tables in `val` database, so let's create our own database `td_analytics_functions_demo`.
 
-1. VAL is distributed as an rpm file. Go to link:https://downloads.teradata.com/download/database/val-download-page[Teradata Downloads] and download the VAL rpm to your local machine.
-2. Upload the file to your Vantage install. If you are running Vantage Express locally, you have many ways to do it:
-* If you installed xref:getting.started.vbox.adoc[Vantage Express on VirtualBox], you should be able to drag & drop the file to the VM's desktop. You can also use `scp` by connecting to port `4422`, e.g.:
-+
-[source, bash, role="content-editable"]
+[source, teradata-sql]
 ----
-scp -P 4422 ~/Downloads/VAL-2.0.0.3-1.x86_64.rpm root@localhost:/root/Desktop
+CREATE DATABASE td_analytics_functions_demo
+AS PERMANENT = 110e6;
 ----
-* If you use VMware and you have enabled drag & drop, you should be able to drag and drop the file to the VM's desktop.
-* If you have SSH access to your Vantage nodes, you can use `scp` to upload the binary, e.g.:
-+
-[source, bash, role="content-editable"]
-----
-scp ~/Downloads/VAL-2.0.0.3-1.x86_64.rpm root@vantage.server.name:/tmp/
-----
-3. We will now create a new database where VAL functions and procedures will be installed. You could install VAL in a global location such as `SYSLIB`, but installing VAL in a specific database will make it easier to start over if things go wrong.
-Let's create a database called `val` and grant appropriate permissions to our user. Please edit to match your database name and user id:
-+
-[source, teradata-sql, role="content-editable"]
-----
-CREATE DATABASE val
-AS PERMANENT = 60e6, -- 60MB
-    SPOOL = 120e6; -- 120MB
 
-GRANT CREATE FUNCTION ON val to dbc;
-GRANT ALTER FUNCTION ON val to dbc;
-GRANT EXECUTE PROCEDURE on SQLJ.REMOVE_JAR to dbc;
-GRANT EXECUTE PROCEDURE on SQLJ.INSTALL_JAR to dbc;
-GRANT EXECUTE PROCEDURE on SQLJ.REPLACE_JAR to dbc;
-GRANT CREATE EXTERNAL PROCEDURE ON val to dbc;
+NOTE: You must have CREATE TABLE permissions on the Database where you want to use Database Analytics Functions.
 
+Let's now create `accounts`, `customer` and `transactions` tables in our database `td_analytics_functions_demo` from the corresponding tables in `val` database.
+
+[source, teradata-sql]
 ----
-4. Open Gnome Terminal in the VM and start the installation process. Adjust the rpm path as necessary:
-+
-[source, bash, role="content-editable"]
+DATABASE td_analytics_functions_demo;
+
+CREATE TABLE customer AS (
+SELECT * FROM val.customer
+) WITH DATA;
+
+CREATE TABLE accounts AS (
+SELECT * FROM val.accounts
+) WITH DATA;
+
+CREATE TABLE transactions AS (
+SELECT * FROM val.transactions
+) WITH DATA;
 ----
-rpm -Uvh --nodeps ~/Desktop/VAL-2.0.0.3-1.x86_64.rpm
-----
-+
-5. The install wizard will ask you for the hostname, user id, and password. If you are running the install on your Vantage Express VM, the values are:
-+
-* Hostname: `localhost`
-* Userid: `dbc`
-* Password: `dbc`
-* Account string: leave empty, press kbd:[ENTER]
-* BTEQ or FASTLOAD command: leave empty, press kbd:[ENTER]
 
-6. The wizard will ask you to choose which part of VAL you want to install.
-We want to start with installing `td_analyze` procedure, i.e. option 1. Once you select option 1, the script will ask for the database name where `td_analyze` will be installed. Enter `val` and press kbd:[ENTER].
-7. While still in the wizard, install option 5, i.e. `Tutorial Tables`. These are sample tables with data that we are going to use to build a sample model.
+== Understand the sample data
 
-== Sample data
-
-Now, that we have VAL and sample tables loaded, let's explore the data. It's a simplistic, fictitious dataset of banking customers (1K-ish rows), Accounts (10K-ish rows) and Transactions (100K-ish rows). They are related to each other in the following ways:
+Now, that we have our sample tables loaded into `td_analytics_functions_demo`, let's explore the data. It's a simplistic, fictitious dataset of banking customers (700-ish rows), Accounts (1400-ish rows) and Transactions (77K-ish rows). They are related to each other in the following ways:
 
 image::banking.model.png[Banking Model, width=100%]
 
 In later parts of this how-to we are going to explore if we can build a model that predicts average monthly balance that a banking customer has on their credit card based on all non-credit card related variables in the tables.
 
-== Create a linear regression model
-
-Let's start by creating a wide table (Analytic Data Set, or ADS) that joins the three tables above.
-
-NOTE: You must have CREATE TABLE permissions on the Database where the Vantage Analytic Library is installed.
+== Preparing the Dataset
+ 
+We have data in three different tables that we want to join and create features. Let's start by creating a joined table. 
 
 [source, teradata-sql, id="ml_first_query", role="content-editable emits-gtm-events"]
 ----
--- Switch to val database.
-DATABASE val;
-
--- Create the ADS.
-CREATE TABLE VAL_ADS AS (
+-- Create a consolidated joined_table from customer, accounts and transactions table
+CREATE TABLE td_analytics_functions_demo.joined_table AS (
     SELECT
         T1.cust_id  AS cust_id
        ,MIN(T1.income) AS tot_income
        ,MIN(T1.age) AS tot_age
        ,MIN(T1.years_with_bank) AS tot_cust_years
        ,MIN(T1.nbr_children) AS tot_children
-       ,CASE WHEN MIN(T1.marital_status) = 1 THEN 1 ELSE 0 END AS single_ind
-       ,CASE WHEN MIN(T1.gender) = 'F' THEN 1 ELSE 0 END AS female_ind
-       ,CASE WHEN MIN(T1.marital_status) = 2 THEN 1 ELSE 0 END AS married_ind
-       ,CASE WHEN MIN(T1.marital_status) = 3 THEN 1 ELSE 0 END AS separated_ind
-       ,MAX(CASE WHEN T1.state_code = 'CA' THEN 1 ELSE 0 END) AS ca_resident_ind
-       ,MAX(CASE WHEN T1.state_code = 'NY' THEN 1 ELSE 0 END) AS ny_resident_ind
-       ,MAX(CASE WHEN T1.state_code = 'TX' THEN 1 ELSE 0 END) AS tx_resident_ind
-       ,MAX(CASE WHEN T1.state_code = 'IL' THEN 1 ELSE 0 END) AS il_resident_ind
-       ,MAX(CASE WHEN T1.state_code = 'AZ' THEN 1 ELSE 0 END) AS az_resident_ind
-       ,MAX(CASE WHEN T1.state_code = 'OH' THEN 1 ELSE 0 END) AS oh_resident_ind
-       ,MAX(CASE WHEN T2.acct_type = 'CK' THEN 1 ELSE 0 END) AS ck_acct_ind
-       ,MAX(CASE WHEN T2.acct_type = 'SV' THEN 1 ELSE 0 END) AS sv_acct_ind
-       ,MAX(CASE WHEN T2.acct_type = 'CC' THEN 1 ELSE 0 END) AS cc_acct_ind
+       ,MIN(T1.marital_status)AS marital_status
+       ,MIN(T1.gender) AS gender
+       ,MAX(T1.state_code) AS state_code
        ,AVG(CASE WHEN T2.acct_type = 'CK' THEN T2.starting_balance+T2.ending_balance ELSE 0 END) AS ck_avg_bal
        ,AVG(CASE WHEN T2.acct_type = 'SV' THEN T2.starting_balance+T2.ending_balance ELSE 0 END) AS sv_avg_bal
        ,AVG(CASE WHEN T2.acct_type = 'CC' THEN T2.starting_balance+T2.ending_balance ELSE 0 END) AS cc_avg_bal
@@ -129,69 +90,180 @@ CREATE TABLE VAL_ADS AS (
 GROUP BY T1.cust_id) WITH DATA UNIQUE PRIMARY INDEX (cust_id);
 ----
 
-We will now build a linear regression model that takes parameters from the dataset and tries to predict the monthly credit card balance.
+Let's now see how our data looks. The dataset has both categorical and continuous features or independent variables. In our case, the dependent variable is `cc_avg_bal` which is customer's average credit card balance.
 
-We call `td_analyze` and tell it we want a linear model. The input is in table `VAL_ADS` and consists of multiple columns. The dependent variable is `cc_avg_bal`. We want the model to be written to `val` database in table called `LINEAR_REGRESSION_DEMO`:
+image::joined_table_ml.png[Joined Table, width=100%]
 
-[source, teradata-sql]
-----
-call td_analyze('linear',
-  'database=val;
-  tablename=VAL_ADS;
-  columns=tot_age,tot_income,tot_cust_years,tot_children,single_ind,female_ind,married_ind,separated_ind,ck_acct_ind,sv_acct_ind,sv_avg_bal,ck_avg_bal,ca_resident_ind,ny_resident_ind,tx_resident_ind,il_resident_ind,az_resident_ind,oh_resident_ind;
-  dependent=cc_avg_bal;
-  outputdatabase=val;
-  outputtablename=linear_regression_demo');
-----
+== Feature Engineering
 
-The procedure creates several output tables. For now, we don't have to analyze what is in the tables. Let's see how we can use the newly created model to perform scoring.
+On looking at the data we see that there are several features that we can take into consideration for predicting the `cc_avg_bal`.
 
-== Scoring
+=== TD_OneHotEncodingFit
 
-Let's use the model to perform predictions and evaluate the scores. To do this, we call `td_analyze` with `linearscore` parameter. We point to the input table (`VAL_ADS`), the model tables (prefix `linear_regression_demo`) and define the target table (`linear_regression_score`) in `val` database:
+As we have some categorical features in our dataset such as `gender`, `marital status` and `state code`. We will leverage the Database Analytics function link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Feature-Engineering-Transform-Functions/TD_OneHotEncodingFit[TD_OneHotEncodingFit, window="_blank"] to encode categories to one-hot numeric vectors. 
 
 [source, teradata-sql]
 ----
-call td_analyze('linearscore',
-  'database=val;
-  tablename=VAL_ADS;
-  modeldatabase=val;
-  modeltablename=linear_regression_demo;
-  outputdatabase=val;
-  outputtablename=linear_regression_score;
-  predicted=estimate;
-  retain=cc_avg_bal;
-  scoringmethod=scoreandevaluate;');
+CREATE VIEW td_analytics_functions_demo.one_hot_encoding_joined_table_input AS (
+  SELECT * FROM TD_OneHotEncodingFit(
+    ON td_analytics_functions_demo.joined_table AS InputTable
+    USING
+    IsInputDense ('true')
+    TargetColumn ('gender','marital_status','state_code')
+    CategoryCounts(2,4,33)
+Approach('Auto')
+) AS dt
+);
 ----
 
-As a result, we get `linear_regression_score` table that contains the real balance, the predicted balance and the difference between these two. Let's have a look at a sample:
+=== TD_ScaleFit
+
+If we look at the data, some columns like `tot_income`, `tot_age`, `ck_avg_bal` have values in different ranges. For the optimization algorithms like gradient descent it is important to normalize the values to the same scale for faster convergence, scale consistency and enhanced model performance. We will leverage link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Feature-Engineering-Transform-Functions/TD_ScaleFit[TD_ScaleFit, window="_blank"] function to normalize values in different scales.
 
 [source, teradata-sql]
 ----
-SELECT * FROM linear_regression_score SAMPLE 10;
+ CREATE VIEW td_analytics_functions_demo.scale_fit_joined_table_input AS (
+  SELECT * FROM TD_ScaleFit(
+    ON td_analytics_functions_demo.joined_table AS InputTable
+    USING
+    TargetColumns('tot_income','q1_trans_cnt','q2_trans_cnt','q3_trans_cnt','q4_trans_cnt','ck_avg_bal','sv_avg_bal','ck_avg_tran_amt', 'sv_avg_tran_amt', 'cc_avg_tran_amt')
+    ScaleMethod('RANGE')
+) AS dt
+);
 ----
 
-You will see results similar to:
+=== TD_ColumnTransformer
+
+Teradata's Database Analytic Functions typically operate in pairs for data transformations. The first step is dedicated to "fitting" the data. Subsequently, the second function utilizes the parameters derived from the fitting process to execute the actual transformation on the data. The link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Feature-Engineering-Transform-Functions/TD_ColumnTransformer[TD_ColumnTransformer, window="_blank"] takes the FIT tables to the function and transforms the input table columns in single operation.
+
+[source, teradata-sql]
 ----
-cust_id|cc_avg_bal        |estimate          |Residual           |
--------+------------------+------------------+-------------------+
-1362498|               0.0| 284.7057772484358| -284.7057772484358|
-1362828|           1184.35|463.74177458594215|  720.6082254140578|
-1362839| 2933.135802469136| 982.9240031182255| 1950.2117993509103|
-1362986| 500.9148148148148| 881.4116539412856| -380.4968391264708|
-1362511|235.85941489361701|294.35369563202846|-58.494280738411426|
-1363134|               0.0|430.27950420065997|-430.27950420065997|
-1363481|               0.0| 411.2359958542745| -411.2359958542745|
-1362644| 209.3304347826087|279.75770904482033| -70.42727426221163|
-1363141|               0.0| 550.1681921045503| -550.1681921045503|
-1363290|               0.0|120.35348558871233|-120.35348558871233|
+-- Using a consolidated transform function
+CREATE TABLE td_analytics_functions_demo.feature_enriched_accounts_consolidated AS (
+SELECT * FROM TD_ColumnTransformer(
+ON joined_table AS InputTable
+ON one_hot_encoding_joined_table_input AS OneHotEncodingFitTable DIMENSION
+ON scale_fit_joined_table_input AS ScaleFitTable DIMENSION
+) as dt 
+) WITH DATA;
 ----
+
+Once we perform the transformation we can see our categorical columns one-hot encoded and numeric values scaled as can be seen in the image below. For ex: `tot_income` is in the range [0,1], `gender` is one-hot encoded to `gender_0`, `gender_1`, `gender_other`.
+
+image::ml_tot_income_scaled.png[Total Income Scaled, width=50%]
+
+image::ml_gender_hot_encoded.png[Gender One Hot Encoded, width=50%]
+
+== Train Test Split
+
+As we have our datatset ready with features scaled and encoded, now let's split our dataset into training (75%) and testing (25%) parts. Teradata's Database Analytic Functions provide link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Evaluation-Functions/TD_TrainTestSplit[TD_TrainTestSplit, window="_blank"] function that we'll leverage to split our dataset.
+
+[source, teradata-sql]
+----
+-- Train Test Split on Input table 
+CREATE VIEW td_analytics_functions_demo.train_test_split AS (
+SELECT * FROM TD_TrainTestSplit(
+ON td_analytics_functions_demo.feature_enriched_accounts_consolidated AS InputTable
+USING
+IDColumn('cust_id')
+trainSize(0.75)
+testSize(0.25)
+Seed (42)
+) AS dt
+);
+----
+
+As can be seen in the image below, the function adds a new column `TD_IsTrainRow`. 
+
+image::ml_train_col.png[Train Row Column, width=100%]
+
+We'll use `TD_IsTrainRow` to create two tables, one for training and other for testing.
+
+[source, teradata-sql]
+----
+-- Creating Training Table
+CREATE TABLE td_analytics_functions_demo.training_table AS (
+  SELECT * FROM td_analytics_functions_demo.train_test_split
+  WHERE TD_IsTrainRow = 1
+) WITH DATA;
+
+-- Creating Testing Table
+CREATE TABLE td_analytics_functions_demo.testing_table AS (
+  SELECT * FROM td_analytics_functions_demo.train_test_split
+  WHERE TD_IsTrainRow = 0
+) WITH DATA;
+----
+
+== Training with Generalized Linear Model 
+
+We will now use link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Training-Functions/TD_GLM[TD_GLM, window="_blank"] Database Analytic Function to train on our training dataset. The `TD_GLM` function is a generalized linear model (GLM) that performs regression and classification analysis on data sets. Here we have used a bunch of input columns such as `tot_income`, `ck_avg_bal`,`cc_avg_tran_amt`, one-hot encoded values for marital status, gender and states. `cc_avg_bal` is our dependent or response column which is continous and hence is a regression problem. We use `Family` as `Gaussian` for regression and `Binomial` for classification. 
+
+The parameter `Tolerance` signifies minimum improvement required in prediction accuracy for model to stop the iterations and `MaxIterNum` signifies the maximum number of iterations allowed. The model concludes training upon whichever condition is met first. For example in the example below the model is `CONVERGED` after 58 iterations.
+
+[source, teradata-sql]
+----
+-- Training the GLM_Model with Training Dataset
+CREATE TABLE td_analytics_functions_demo.GLM_model_training AS (
+SELECT * FROM TD_GLM (
+  ON td_analytics_functions_demo.training_table AS InputTable
+  USING
+  InputColumns('tot_income','ck_avg_bal','cc_avg_tran_amt','[19:26]')
+  ResponseColumn('cc_avg_bal')
+  Family ('Gaussian')
+  MaxIterNum (300)
+  Tolerance (0.001)
+  Intercept ('true')
+) AS dt
+) WITH DATA;
+----
+
+image::ml_model_trained.png[Trained GLM, width=100%]
+
+== Scoring on Testing Dataset
+
+We will now use our model `GLM_model_training` to score our testing dataset `testing_table` using link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Scoring-Functions/TD_GLMPredict[TD_GLMPredict, window="_blank"] Database Analytic Function.
+
+[source, teradata-sql]
+----
+-- Scoring the GLM_Model with Testing Dataset
+CREATE TABLE td_analytics_functions_demo.GLM_model_test_prediction AS (
+SELECT * from TD_GLMPredict (
+ON td_analytics_functions_demo.testing_table AS InputTable
+ON td_analytics_functions_demo.GLM_model_training AS ModelTable DIMENSION
+USING
+IDColumn ('cust_id')
+Accumulate('cc_avg_bal')
+) AS dt
+) WITH DATA;
+----
+
+image::ml_model_scored.png[Scored GLM, width=100%]
+
+== Model Evaluation
+
+Finally, we evaluate our model on the scored results. Here we are using link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Evaluation-Functions/TD_RegressionEvaluator[TD_RegressionEvaluator, window="_blank"] function. The model can be evaluated based on parameters such as `R2`, `RMSE`, `F_score`. 
+
+[source, teradata-sql]
+----
+-- Evaluating the model
+SELECT * FROM TD_RegressionEvaluator(
+ON td_analytics_functions_demo.GLM_model_test_prediction AS InputTable
+USING
+ObservationColumn('cc_avg_bal')
+PredictionColumn('prediction')
+Metrics('RMSE','MAE','R2')
+) AS dt;
+----
+
+image::ml_model_evaluated.png[Evaluated GLM, width=100%]
+
+NOTE: The purpose of this how-to is not to describe feature engineering but to demonstrate how we can leverage different Database Analytic Functions in Vantage. The model results might not be optimal and the process to make the best model is beyond the scope of this article.
 
 == Summary
 
-In this quick start we have learned how to create ML models in SQL. The method used Vantage Analytics Library (VAL). We were able to build a linear regression model and run predictions using the model. We have done that using SQL without any coding.
+In this quick start we have learned how to create ML models using Teradata Database Analytic Functions. We built our own database `td_analytics_functions_demo` with `customer`,`accounts`, `transactions` data from `val` database. We performed feature engineering by transforming the columns using `TD_OneHotEncodingFit`, `TD_ScaleFit` and `TD_ColumnTransformer`. We then used `TD_TrainTestSplit` for train test split. We trained our training dataset with `TD_GLM` model and scored our testing dataset. Finally we evaluated our scored results using `TD_RegressionEvaluator` function. 
 
 == Further reading
-* link:https://docs.teradata.com/r/DqJoLxuCtoR947URt1aH0w/root[Vantage Analytics Library User Guide]
+* link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Introduction-to-Analytics-Database-Analytic-Functions[Vantage Database Analytic Functions User Guide, window="_blank"]
 
 include::ROOT:partial$community_link.adoc[]

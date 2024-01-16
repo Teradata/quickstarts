@@ -29,11 +29,37 @@ cd jaffle_shop
 ----
 2. Create a new python environment to manage dbt and its dependencies. Activate the environment:
 +
+[tabs]
+====
+Windows::
++
+--
+[source, bash]
+----
+python -m venv env
+source env/Scripts/activate
+----
+--
+MacOS::
++
+--
 [source, bash]
 ----
 python3 -m venv env
 source env/bin/activate
 ----
+--
+Linux::
++
+--
+[source, bash]
+----
+python3 -m venv env
+source env/bin/activate
+----
+--
+====
+
 3. Install `dbt-teradata` module and its dependencies. The core dbt module is included as a dependency so you don't have to install it separately:
 +
 [source, bash]
@@ -48,15 +74,7 @@ We will now configure dbt to connect to your Vantage database. Create file `$HOM
 [NOTE]
 .Database setup
 ====
-The following dbt profile points to a database called `jaffle_shop`. You can change `schema` value to point to an existing database in your Teradata Vantage instance or you can create `jaffle_shop` database:
-
-[source, teradata-sql]
-----
-CREATE DATABASE jaffle_shop
-AS PERMANENT = 110e6,
-    SPOOL = 220e6;
-----
-
+The following dbt profile points to a database called `jaffle_shop`. If the database doesn't exist on your Teradata Vantage instance, it will be created. You can also change `schema` value to point to an existing database in your instance.
 ====
 
 [source, yaml, id="dbt_first_config", role="emits-gtm-events"]

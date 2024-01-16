@@ -1,0 +1,338 @@
+= Deploy and Setup Teradata AI Unlimited Workspace Service Using Docker
+:experimental:
+:page-author: Thripti Aravind
+:page-email: thripti.aravind@teradata.com
+:page-revdate: November 14th, 2023
+:description: Learn how to install and configure Teradata AI Unlimited Workspace service using Docker Engine and Docker Compose.
+:keywords: Teradata AI Unlimited, Teradata AI Unlimited Workspace service, Teradata AI Unlimited Compute Engine
+:page-image-directory: install-ai-unlimited-workspaces-docker
+
+IMPORTANT: This product is in preview and is subject to change. If you're interested in learning more about this offering, contact Teradata Support.
+
+== Overview
+
+This document outlines the steps for deploying and setting up Teradata AI Unlimited workspace service using Docker. 
+
+You can install the workspace service using:
+
+* <<_deploy_workspace_service_using_docker_engine,Docker Engine>>
+* <<_deploy_workspace_service_using_docker_compose, Docker Compose>>
+
+To use Teradata AI Unlimited with the workspace client, see xref::using-ai-unlimited-workspace-cli.adoc[].
+
+== Before you begin
+
+Make sure you have the following:
+
+* GitHub account: If you don't already have a GitHub account, create one at link:https://github.com/[https://github.com/].
+* CSP account: You can host the engine on AWS or Azure. 
++
+
+[tabs]
+====
+AWS::
++
+--
+Sign up for an AWS Free Tier account at link:https://aws.amazon.com/free/[https://aws.amazon.com/free/]. To set up AWS CLI, see link:https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html[https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html].
+
+--
+Azure::
++
+--
+Sign up for an Azure free account at link:https://azure.microsoft.com/en-us/free[https://azure.microsoft.com/en-us/free]. Install Azure CLI and configure the credentials on the machine running workspace service. See link:https://learn.microsoft.com/en-us/cli/azure/get-started-with-azure-cli[https://learn.microsoft.com/en-us/cli/azure/get-started-with-azure-cli].
+--
+====
+
+* Docker: To download and install Docker, see link:https://docs.docker.com/docker-for-windows/install/[https://docs.docker.com/docker-for-windows/install/].
+
+== Load Docker image and prepare environment
+
+The Docker image is a monolithic image of the workspace service running the necessary services in a single container.
+
+Pull the docker image from link:https://hub.docker.com/r/teradata/ai-unlimited-workspaces[Docker Hub].
+
+[source, bash, id="docker_pull", role="content-editable emits-gtm-events"]
+----
+docker pull teradata/ai-unlimited-workspaces
+----
+
+Before proceeding, make sure to:
+
+* Copy and retain the CSP environment variables from your AWS Console. 
+
+** AWS: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_SESSION_TOKEN`
++
+See link:https://docs.aws.amazon.com/sdkref/latest/guide/environment-variables.html[Environment Variables].
+
+** Azure: `ARM_SUBSCRIPTION_ID`, `ARM_CLIENT_ID`, and `ARM_CLIENT_SECRET`
++
+For information on obtaining environment variables using Azure CLI, see link:https://github.com/paulbouwer/terraform-azure-quickstarts-samples/blob/master/README.md#azure-authentication[Azure Authentication].
+
+* Set the environment variable, `WORKSPACES_HOME`, to the directory where the configuration and data files are located. Make sure that the directory exists, and that appropriate permission is granted. If you don't set `WORKSPACES_HOME`, the default location is **./volumes/workspaces**.
++
+[cols="1,1,1"]
+|===
+|Local Location |Container Location |Usage
+
+|$WORKSPACES_HOME
+|/etc/td
+|Stores data and configuration
+
+|$WORKSPACES_HOME/tls
+|/etc/td/tls
+|Stores cert files
+|===
+
+
+== Deploy workspace service using Docker Engine
+
+Run the Docker image once you've set the `WORKSPACES_HOME` variable.
+
+NOTE: Modify the directories based on your requirements.
+
+[source, bash, id="docker_engine_run", role="content-editable emits-gtm-events"]
+----
+docker run -detach \
+  --env accept_license="Y" \
+  --env AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
+  --env AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \
+  --env AWS_SESSION_TOKEN="${AWS_SESSION_TOKEN}" \
+  --publish 3000:3000 \
+  --publish 3282:3282 \
+  --volume ${WORKSPACES_HOME}:/etc/td \
+  teradata/ai-unlimited-workspaces:latest
+----
+
+NOTE: For Azure, Teradata recommends deploying workspace service using Docker Compose.
+
+The command downloads and starts a workspace service container and publishes the ports needed to access it. Once the workspace service server is initialized and started, you can access it using the URL: http://<ip_or_hostname>:3000/.
+
+== Deploy workspace service using Docker Compose
+
+With Docker Compose, you can easily configure, install, and upgrade your Docker-based workspace service installation.
+
+1. Install Docker Compose. See link:https://docs.docker.com/compose/install/[https://docs.docker.com/compose/install/].
+
+2.	Create a **workspaces.yml** file.
++
+NOTE: The following example uses a local volume to store your CSP credentials. You can create a separate YAML file containing CSP environment variables and run the Docker Compose file. For other options, see link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/docker/README.md[AI Unlimited GitHub: Install AI Unlimited Using Docker Compose].
++
+
+[tabs]
+====
+AWS::
++
+--
+[source, bash, id="aws_docker_compose", role="content-editable emits-gtm-events"]
+----
+version: "3.9"
+	
+services:
+  workspaces:
+    deploy:
+      replicas: 1
+    platform: linux/amd64
+    container_name: workspaces
+    image: ${WORKSPACES_IMAGE_NAME:-teradata/ai-unlimited-workspaces}:${WORKSPACES_IMAGE_TAG:-latest}
+    command: workspaces serve -v
+    restart: unless-stopped
+    ports:
+      - "443:443/tcp"
+      - "3000:3000/tcp"
+      - "3282:3282/tcp"
+    environment:
+      accept_license: "Y"
+      TZ: ${WS_TZ:-UTC}
+    volumes:
+    - ${WORKSPACES_HOME:-./volumes/workspaces}:/etc/td
+    - ${WORKSPACES_AWS_CONFIG:-~/.aws}:/root/.aws
+  
+    networks:
+      - td-ai-unlimited
+----
+--
+Azure::
++
+--
+[source, bash, id="azure_docker_compose", role="content-editable emits-gtm-events"]
+----
+version: "3.9"
+
+services:
+  workspaces:
+    deploy:
+      replicas: 1
+    platform: linux/amd64
+    container_name: workspaces
+    image: ${WORKSPACES_IMAGE_NAME:-teradata/ai-unlimited-workspaces}:${WORKSPACES_IMAGE_TAG:-latest}
+    command: workspaces serve -v
+    restart: unless-stopped
+    ports:
+      - "443:443/tcp"
+      - "3000:3000/tcp"
+      - "3282:3282/tcp"
+    environment:
+      accept_license: "Y"
+      TZ: ${WS_TZ:-UTC}
+    volumes:
+      - ${WORKSPACES_HOME:-./volumes/workspaces}:/etc/td
+      - ${WS_HOME:-~/.azure}:/root/.azure
+
+    networks:
+      - td-ai-unlimited
+
+----
+--
+====
+
+3.	Go to the directory where the **workspaces.yml** file is located and start the workspace service.
++
+[source, bash, id="docker_compose_run", role="content-editable emits-gtm-events"]
+----
+docker compose -f workspaces.yaml
+----
++
+Once the workspace service server is initialized and started, you can access it using the URL: http://<ip_or_hostname>:3000/.
+
+== Configure and set up workspace service
+
+Workspace service uses the GitHub OAuth App to authorize users and manage the project state. To authorize the workspace service to save your project instance configuration, use the Client ID and Client secret key generated during the GitHub OAuth App registration. The project instance configuration values are maintained in your GitHub repositories and you can view them on the Workspace service **Profile** page.
+
+First-time users must complete the following steps before proceeding. If you are unsure about your VPC configuration or permissions, contact your organization administrator.
+
+1.	Log on to your GitHub account and create an OAuth App. See link:https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app[GitHub Documentation].
++
+While registering the OAuth App, type the following workspace service URLs in the URL fields:
++
+* **Homepage URL**: http://<ip_or_hostname>:3000/
+* **Authorization callback URL**: http://<ip_or_hostname>:3000/auth/github/callback
+
+2.	Copy and retain the **Client ID** and **Client secret key**.
+
+
+To set up the workspace service, do the following:
+
+1. Access workspace service using the URL: http://<ip_or_hostname>:3000/.
++
+image::{page-image-directory}/ai.unlimited.workspaces.setting.png[]
+
+2. Apply the following general service configuration under **Setup**.
++
+[cols="1,1,1"]
+|===
+|Setting |Description |Required?
+
+|Service Base URL
+|[Non-Editable] The root URL of the service.
+|Yes
+
+|Git Provider
+|The provider for Git integration. Currently, Teradata AI Unlimited supports GitHub and GitLab.
+|Yes
+
+|Service Log Lev
+|The level of logging.
+|Yes
+
+|Engine IP Network Type
+|The type of network assigned to an engine instance, which can be either public or private. Select the **Private** option if you're deploying the engine in the same VPC as the workspace service.
+|Yes
+
+|Use TLS
+|Indicates if TLS support is enabled. If your instance is only accessible from within a private network and to trusted users, you can ignore the default value. Teradata recommends enabling the TLS option for sensitive data, public networks, and compliance requirements.
+|Yes
+
+|Service TLS Certification
+|The server certificate to authenticate the server identity.
+|No
+
+|Service TLS Certificate Key
+|The server certificate key.
+|No
+|===
+
+3. To use a self-signed certificate for **Service Base URL**, select **GENERATE TLS**. A certificate and private key are generated and displayed in the respective fields.
+
+4. Select **Save Changes**.
+
+5. Apply the following settings under your choice of **Cloud Integrations: CSP**.
++
+[cols="1,1,1"]
+|===
+|Setting |Description |Required?
+
+|Default Region
+|The region where you want to deploy the engine. Teradata recommends choosing the region closest to your primary work location.
+|Yes
+
+|Default Subnet
+|The subnet that provides the engine instance with a route to an internet gateway. If you don't specify a subnet, the engine is automatically associated with the default subnet.
+|Yes
+
+|Default IAM Role
+|The default IAM identity that determines what a user can and cannot do in AWS. When a default IAM role is assigned to a user or resource, the user or resource automatically assumes the role and gains the permissions granted to the role.
+|No
+
+|Resource Tag
+|The key-value pair applied to a resource to hold metadata about that resource. With a resource tag, you can quickly identify, organize, and manage the resources you use in your environment.
+|No
+
+|Default CIDRs
+|The list of Classless Inter-Domain Routing (CIDR) addresses used for the engine. Use CIDR to allocate IP addresses flexibly and efficiently in your network. If you don't specify a CIDR, the engine is automatically associated with the default CIDR.
+|No
+
+|Default Security Groups
+|The list of security groups for the VPC in each region. If you don't specify a security group, the engine is automatically associated with the default security group for the VPC.
+|No
+
+|Role Prefix
+|The string of characters prepended to the name of a role. You can use a role prefix to organize and manage roles and to enforce naming conventions.
+|No
+
+|Permission Boundary
+|The maximum permissions an IAM entity can have regardless of the permissions defined in the identity-based policy. You can define and manage the user permissions and roles and enforce compliance requirements.
+|No
+|===
+
+6. Select **Save Changes**.
+7. Apply the following settings under **Git Integrations**.
++
+[cols="1,1,1"]
+|===
+|Setting |Description |Required?
+
+|GitHub Client ID
+|The Client ID you received from GitHub on creating your OAuth App.
+|Yes
+
+|GitHub Client Secret
+|The Client secret ID you received from GitHub on creating your OAuth App.
+|Yes
+
+|Auth Organization
+|The name of the GitHub organization account that you use to collaborate with your team.
+|No
+
+|GitHub Base URL
+|The base URL of your GitHub account. The URL may vary based on your account type. For example, https://github.company.com/ for GitHub Enterprise account.
+|No
+|===
+
+8.	Select **Authenticate**. You are redirected to GitHub.
+
+9.	Log on with your GitHub credentials to authorize workspace service.
++
+After authentication, you are redirected to the Workspace service **Profile** page, and an API Key is generated. You can use the API Key to make requests to the workspace service.
++
+NOTE: A new API Key is generated each time you connect to workspace service.
+
+Teradata AI Unlimited workspace service is ready!
+
+
+== Next steps
+
+* Connect workspace service to a Teradata AI Unlimited Interface and deploy an engine. See xref::install-ai-unlimited-interface-docker.adoc[].
+
+* Interested in learning how Teradata AI Unlimited can help you with real-life use cases? Coming soon! Keep watching this space for the GitHub link.
+
+include::ROOT:partial$community_link.adoc[]

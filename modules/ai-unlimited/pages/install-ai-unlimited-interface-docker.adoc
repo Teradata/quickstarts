@@ -1,0 +1,95 @@
+= Deploy a Teradata AI Unlimited Interface Using Docker
+:experimental:
+:page-author: Thripti Aravind
+:page-email: thripti.aravind@teradata.com
+:page-revdate: November 14th, 2023
+:description: Learn how to install Teradata AI Unlimited interface using Docker Engine and Docker Compose.
+:keywords: Teradata AI Unlimited, Teradata AI Unlimited Workspace service, Teradata AI Unlimited Compute Engine
+:page-image-directory: install-ai-unlimited-interface-docker
+
+IMPORTANT: This product is in preview and is subject to change. If you're interested in learning more about this offering, contact Teradata Support.
+
+This document outlines the steps for deploying and setting up a Teradata AI Unlimited interface using Docker. You can use JupyterLab or workspace client as your Teradata AI Unlimited interface. 
+
+You can deploy JupyterLab using:
+
+** <<_deploy_jupyterLab_using_docker_engine, Docker Engine>>
+
+** <<_deploy_jupyterLab_using_docker_compose, Docker Compose>>
+ 
+For information about workspace client, see xref::using-ai-unlimited-workspace-cli.adoc[].
+
+== Deploy JupyterLab using Docker Engine
+
+1. Pull the Docker image from the DockerHub at link:https://hub.docker.com/r/teradata/ai-unlimited-jupyter[https://hub.docker.com/r/teradata/ai-unlimited-jupyter].
+
+2. Run the Docker image once you've set the `JUPYTER_HOME` variable.
++
+NOTE: Modify the directories based on your requirements.
++
+
+[source, bash, id="docker_engine_jupyter", role="content-editable emits-gtm-events"]
+----
+docker run -detach \
+  --env “accept_license=Y” \
+  --publish 8888:8888 \
+  --volume ${JUPYTER_HOME}:/home/jovyan/JupyterLabRoot \
+  teradata/ai-unlimited-jupyter:latest
+----
+
+The command downloads and starts a JupyterLab container and publishes the ports needed to access it.
+Connect to JupyterLab using the URL: http://localhost:8888 and enter the token when prompted. For detailed instructions, see link:https://docs.teradata.com/r/Teradata-VantageTM-Modules-for-Jupyter-Installation-Guide/Teradata-Vantage-Modules-for-Jupyter/Teradata-Vantage-Modules-for-Jupyter[Teradata Vantage™ Modules for Jupyter Installation Guide] or link:https://quickstarts.teradata.com/jupyter.html[Use Vantage from a Jupyter Notebook].
+
+== Deploy JupyterLab using Docker Compose
+
+With Docker Compose, you can easily configure, install, and upgrade your Docker-based JupyterLab installation.
+
+
+1. Install Docker Compose. See link:https://docs.docker.com/compose/install/[https://docs.docker.com/compose/install/].
+
+2.	Create a **jupyter.yml** file.
++
+[source, bash, id="docker_compose_jupyter", role="content-editable emits-gtm-events"]
+----
+
+version: "3.9"
+
+services:
+  jupyter:
+    deploy:
+      replicas: 1
+    platform: linux/amd64
+    container_name: jupyter
+    image: ${JUPYTER_IMAGE_NAME:-teradata/ai-unlimited-jupyter}:${JUPYTER_IMAGE_TAG:-latest}
+    environment:
+      accept_license: "Y"
+    ports:
+      - 8888:8888
+    volumes:
+      - ${JUPYTER_HOME:-./volumes/jupyter}:/home/jovyan/JupyterLabRoot/userdata
+    networks:
+      - td-ai-unlimited
+
+networks:
+  td-ai-unlimited:
+
+----
+
+3.	Go to the directory where the **jupyter.yml** file is located and start JupyterLab.
++
+[source, bash, id="docker_compose_jupyter_up", role="content-editable emits-gtm-events"]
+----
+docker compose -f jupyter.yaml up
+----
++
+Once the JupyterLab server is initialized and started, you can connect to JupyterLab using the URL: http://localhost:8888 and enter the token when prompted. For detailed instructions, see link:https://docs.teradata.com/r/Teradata-VantageTM-Modules-for-Jupyter-Installation-Guide/Teradata-Vantage-Modules-for-Jupyter/Teradata-Vantage-Modules-for-Jupyter[Teradata Vantage™ Modules for Jupyter Installation Guide] or link:https://quickstarts.teradata.com/jupyter.html[Use Vantage from a Jupyter Notebook].
+
+Congrats! You're all set up to use Teradata AI Unlimited.
+
+== Next steps
+
+* Get started with Teradata AI Unlimited by running a simple workflow. See xref::running-sample-ai-unlimited-workload.adoc[].
+
+* Interested in learning how Teradata AI Unlimited can help you with real-life use cases? Coming soon! Keep watching this space for the GitHub link.
+
+include::ROOT:partial$community_link.adoc[]

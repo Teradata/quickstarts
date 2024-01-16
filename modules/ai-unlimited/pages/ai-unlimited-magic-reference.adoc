@@ -1,33 +1,33 @@
-= Regulus JupyterLab Magic Command Reference
+= Teradata AI Unlimited JupyterLab Magic Command Reference
 :experimental:
 :page-author: Thripti Aravind
 :page-email: thripti.aravind@teradata.com
-:page-revdate: May 16th, 2023
-:description: Learn about Regulus JupyterLab magic commands.
-:keywords: Regulus, Workspaces, Query Engine
-:page-image-directory: regulus-magic-reference
+:page-revdate: October 19th, 2023
+:description: Learn about Teradata AI Unlimited JupyterLab magic commands.
+:keywords: Teradata AI Unlimited, Teradata AI Unlimited Workspace service, Teradata AI Unlimited Compute Engine
+:page-image-directory: ai-unlimited-magic-reference
 
-IMPORTANT: This product is in preview and is subject to change. To get early access to Regulus, sign up on the Regulus Home page.
+IMPORTANT: This product is in preview and is subject to change. If you're interested in learning more about this offering, contact Teradata Support.
 
 == Overview
 
-Regulus JupyterLab supports the following magic commands in addition to the existing Teradata SQL Kernel magic commands. See link:https://github.com/Teradata/jupyterextensions/blob/master/notebooks/sql/GettingStarted.ipynb[Teradata JupyterLab Getting Started Guide].
+AI Unlimited JupyterLab supports the following magic commands in addition to the existing Teradata SQL Kernel magic commands. See link:https://github.com/Teradata/jupyterextensions/blob/master/notebooks/sql/GettingStarted.ipynb[Teradata JupyterLab Getting Started Guide].
 
 == %workspaces_config
 
-**Description**: One-time configuration to bind with the Workspaces service.
+**Description**: One-time configuration to bind with the workspace service.
 
 **Usage**:
 
 [source, bash, id="magic_workspaces_config", role="content-editable emits-gtm-events"]
 ----
-%workspaces_config host=<RPC_Service_URL>, apikey=<Workspace_API_Key>, withtls=F
+%workspaces_config host=<RPC_Service_URL>, apikey=<Workspace_API_Key>, withtls=<T|F>
 ----
 Where:
 
-* host:  Name or IP address of the query engine service.
+* host:  Name or IP address of the engine service.
 
-* apikey: API Key value from the Workspaces Profile page.
+* apikey: API Key value from the workspace service **Profile** page.
 
 * [Optional] withTLS: If False (F), the default client-server communication does not use TLS.
 
@@ -39,7 +39,7 @@ Workspace configured for host=<RPC_Service_URL>
 
 == %project_create
 
-**Description**: Create a new project. This command also creates a new repository with the project name in your GitHub account. The configurations are stored in the engine.yml file.
+**Description**: Create a new project. This command also creates a new repository with the project name in your GitHub account. The configurations are stored in the **engine.yml** file.
 
 **Usage**:
 
@@ -51,7 +51,7 @@ Where:
 
 * project: Name of the project to be created.
 
-* env: Cloud environment where the project is hosted. The value can be aws, azure, gcp, or vsphere. For the current release, only AWS is supported.
+* env: Cloud environment where the project is hosted. The value can be aws, azure, gcp, or vsphere. For the current release, AWS and Azure are supported.
 
 * [Optional] team: Name of the team collaborating on the project.
 
@@ -64,7 +64,7 @@ Project <Project_Name> created
 
 **Description**: Delete a project.
 
-WARNING: Running this command removes the GitHub repository containing the objects created using Regulus.
+WARNING: Running this command removes the GitHub repository containing the objects created using Teradata AI Unlimited.
 
 **Usage**:
 [source, bash, id="magic_project_delete", role="content-editable emits-gtm-events"]
@@ -100,20 +100,20 @@ Where:
 
 **Output**:
 
-image::{page-image-directory}/regulus.project.list.png[List Project, width=500]
+image::{page-image-directory}/ai.unlimited.project.list.png[List Project, width=500]
 
 
 == %project_auth_create
 
 **Description**: Create an authorization object to store object store credentials.
 
-You must create the authorization object before deploying the query engine. The authorization details are retained and are included while redeploying the project. Optionally, you can create authorizations manually using the `CREATE AUTHORIZATION` SQL command after deploying the query engine. In this case, the authorization details are not retained.
+You must create the authorization object before deploying the engine. The authorization details are retained and are included while redeploying the project. Optionally, you can create authorizations manually using the `CREATE AUTHORIZATION` SQL command after deploying the engine. In this case, the authorization details are not retained.
 
 
 **Usage**:
 [source, bash, id="magic_auth_create", role="content-editable emits-gtm-events"]
 ----
-%project_auth_create project=<Project_Name>, name=<Auth_Name>, key=<Auth_Key>, secret=<Auth_Secret>, region=<ObjectStore_Region>
+%project_auth_create project=<Project_Name>, name=<Auth_Name>, key=<Auth_Key>, secret=<Auth_Secret>, region=<ObjectStore_Region>, token= <Session_Token>, role=<Role>, ExternalID=<External_ID>
 ----
 Where:
 
@@ -127,10 +127,43 @@ Where:
 
 * region: Region of the object store; local for the local object store.
 
+* [Optional] token: Session token for the object store access.
+
+* [Optional] role: IAM users or service account to access AWS resources from an AWS account by assuming a role and its entitlements. The owner of the AWS resource defines the role. For example: arn:aws:iam::00000:role/STSAssumeRole.
+
+* ExternalID: External ID used to access object store.
+
+
 **Output**:
 
 ----
 Authorization 'name' created
+----
+
+== %project_auth_update
+
+**Description**: Update an object store authorization.
+
+**Usage**:
+[source, bash, id="magic_auth_update", role="content-editable emits-gtm-events"]
+----
+%project_auth_update project=<Project_Name>, name=<Auth_Name>, key=<Auth_Key>, secret=<Auth_Secret>, region=<ObjectStore_Region>, token= <Session_Token>, role=<Role>, ExternalID=<External_ID>
+----
+Where:
+
+* project: Name of the project.
+* name: Authorization name for the object store.
+* key: Authorization key of the object store.
+* [Optional] secret: Authorization secret access ID of the object store.
+* [Optional] region: Region of the object store; local for the local object store.
+* [Optional] token: Session token for the object store access.
+* [Optional] role: IAM users or service account to access AWS resources from an AWS account by assuming a role and its entitlements. The owner of the AWS resource defines the role. For example: arn:aws:iam::00000:role/STSAssumeRole.
+* ExternalID: External ID used to access object store.
+
+**Output**:
+
+----
+Authorization 'name' updated
 ----
 
 == %project_auth_delete
@@ -167,11 +200,11 @@ Where:
 
 **Output**:
 
-image::{page-image-directory}/regulus.auth.list.png[List Auth, width=500]
+image::{page-image-directory}/ai.unlimited.auth.list.png[List Auth, width=500]
 
 == %project_engine_deploy
 
-**Description**: Deploy a query engine for the project. The deployment process will take a few minutes to complete. On successful deployment, a password is generated.
+**Description**: Deploy an engine for the project. The deployment process takes a few minutes to complete. On successful deployment, a password is generated.
 
 **Usage**:
 [source, bash, id="magic_engine_deploy", role="content-editable emits-gtm-events"]
@@ -181,16 +214,16 @@ image::{page-image-directory}/regulus.auth.list.png[List Auth, width=500]
 Where:
 
 * project:	Name of the project.
-* size: Size of the query engine. The value can be:
+* size: Size of the engine. The value can be:
 ** small
 ** medium
 ** large
 ** extralarge
-* [Optional] node: Number of query engine nodes to be deployed. The default value is 1.
-* [Optional] subnet: Subnet used for the query engine if there are no default values from the service.
-* [Optional] region: Region used for the query engine if there are no default values from service.
-* [Optional] secgroups: List of security groups for the VPC in each region. If you don't specify a security group, the query engine is automatically associated with the default security group for the VPC.
-* [Optional] cidr: List of CIDR addresses used for the query engine.
+* [Optional] node: Number of engine nodes to be deployed. The default value is 1.
+* [Optional] subnet: Subnet used for the engine if there are no default values from the service.
+* [Optional] region: Region used for the engine if there are no default values from service.
+* [Optional] secgroups: List of security groups for the VPC in each region. If you don't specify a security group, the engine is automatically associated with the default security group for the VPC.
+* [Optional] cidr: List of CIDR addresses used for the engine.
 
 
 **Output**:
@@ -199,11 +232,11 @@ Started deploying.
 Success: Compute Engine setup, look at the connection manager
 ----
 
-image::{page-image-directory}/regulus.engine.deploy.png[Deploy Engine, width=500]
+image::{page-image-directory}/ai.unlimited.engine.deploy.png[Deploy Engine, width=500]
 
 == %project_engine_suspend
 
-**Description**: Stop the query engine after you're done with your work.
+**Description**: Stop the engine after you're done with your work.
 
 **Usage**:
 [source, bash, id="magic_engine_suspend", role="content-editable emits-gtm-events"]
@@ -223,7 +256,7 @@ Success: Suspending Compute Engine
 
 == %project_engine_list
 
-**Description**: View the list of query engines deployed for your project.
+**Description**: View the list of engines deployed for your project.
 
 **Usage**:
 [source, bash, id="magic_engine_list", role="content-editable emits-gtm-events"]
@@ -236,7 +269,7 @@ Where:
 
 **Output**:
 
-image::{page-image-directory}/regulus.engine.list.png[Engine List, width=500]
+image::{page-image-directory}/ai.unlimited.engine.list.png[Engine List, width=500]
 
 == %project_user_list
 
@@ -254,11 +287,11 @@ Where:
 
 **Output**:
 
-image::{page-image-directory}/regulus.user.list.png[User List, width=500]
+image::{page-image-directory}/ai.unlimited.user.list.png[User List, width=500]
 
 == %project_backup
 
-**Description**: Back up your project metadata and object definition inside the query engine.
+**Description**: Back up your project metadata and object definition inside the engine.
 
 **Usage**:
 [source, bash, id="magic_project_backup", role="content-editable emits-gtm-events"]
@@ -295,7 +328,7 @@ Restore of the object definitions done
 
 == %help
 
-**Description**: View the list of magics provided with Regulus-Teradata SQL CE Kernel.
+**Description**: View the list of magics provided with AI-Unlimited-Teradata SQL CE Kernel.
 
 **Usage**:
 [source, bash, id="magic_help", role="content-editable emits-gtm-events"]
