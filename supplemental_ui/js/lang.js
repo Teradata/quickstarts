@@ -54,7 +54,7 @@ function switchLanguage(lan) {
     alert('Original Path: ' + path);
     alert('Components: ' + JSON.stringify(page));
     alert('Final URL: ' + salida);
-    window.location.href=salida; 
+    window.location.pathname = salida; 
   }
   /* 
   When the user clicks on the button, 
