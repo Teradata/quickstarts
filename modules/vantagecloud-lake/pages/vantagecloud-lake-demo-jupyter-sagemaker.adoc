@@ -1,0 +1,207 @@
+= Run Teradata Jupyter Notebook Demos for VantageCloud Lake in SageMaker
+:experimental:
+:page-author: Daniel Herrera
+:page-email: daniel.herrera2@teradata.com
+:page-revdate: January 16th, 2024
+:description: Run Teradata Jupyter Notebook Demos for VantageCloud Lake in SageMaker
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, cloud computing, machine learning, sagemaker, vantagecloud, vantagecloud lake, lake
+:dir: sagemaker-guide
+
+== Overview
+Due to their flexibility, scalability, and user-friendly configuration, cloud-based artificial intelligence and machine learning platforms are a staple in the toolkit of many data science teams. This guide details the process for running the https://github.com/Teradata/lake-demos[Teradata Jupyter Notebook Demos for Vantage Cloud Lake], on SageMaker, the AI/ML platform from Amazon AWS.
+
+== Prerequisites
+* https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Teradata modules for Jupyter]
+* AWS account with access to S3 and SageMaker.
+* https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html[Access to a VantageCloud Lake environment]
+
+== AWS environment set-up
+* Upload the Teradata modules for Jupyter to an S3 bucket
+* Create an IAM role for your Jupyter notebook instance
+* Create a lifecycle configuration for your Jupyter notebook instance
+* Create Jupyter notebook instance
+* Find the IP CIDR of your Jupyter notebook instance
+
+=== Upload the Teradata modules for Jupyter to an S3 bucket
+* On AWS S3 create a bucket and keep note of the assigned name
+* Default options are appropiate for this bucket
+* In the created bucket upload the Teradata modules for Jupyter +
+
+image::{dir}/sagemaker-bucket-upload.png[Load modules in S3 bucket,align="center" width=100%]
+
+=== Create an IAM role for your Jupyter Notebooks instance
+* On SageMaker navigate to the role manager +
+
+image::{dir}/sagemaker-iam-role-0.PNG[New role creation,align="center" width=75%]
+* Create a new role (if not already defined)
+* For purposes of this guide the role created is assigned the data scientist persona +
+
+image::{dir}/sagemaker-iam-role-1.PNG[Role name and persona,align="center" width=75%]
+* On the settings, it is appropiate to keep the defaults
+* In the corresponding screen define the bucket where you uploaded the Teradata Jupyter module
+
+image::{dir}/sagemaker-iam-role-2.PNG[S3 bucket,align="center" width=75%]
+* In the next configuration we add the corresponding policies for access to the S3 bucket + 
+
+image::{dir}/sagemaker-iam-role-3.PNG[S3 bucket permissions,align="center" width=75%]
+
+=== Create lifecycle configuration for your Jupyter Notebooks instance
+* On SageMaker navigate lifecycle configurations and click on create +
+
+image::{dir}/sagemaker-config-1.PNG[Create lifecycle configuration,align="center" width=75%]
+* Define the lifecycle configuration with the following scripts +
+
+image::{dir}/sagemaker-config-2.PNG[Create lifecycle configuration,align="center" width=75%]
+
+** On create script:
+[source, bash, id="sagemaker-first-config", role="content-editable emits-gtm-events"]
+----
+#!/bin/bash
+ 
+set -e
+ 
+# This script installs a custom, persistent installation of conda on the Notebook Instance's EBS volume, and ensures
+# that these custom environments are available as kernels in Jupyter.
+ 
+ 
+sudo -u ec2-user -i <<'EOF'
+unset SUDO_UID
+# Install a separate conda installation via Miniconda
+WORKING_DIR=/home/ec2-user/SageMaker/custom-miniconda
+mkdir -p "$WORKING_DIR"
+wget https://repo.anaconda.com/miniconda/Miniconda3-4.6.14-Linux-x86_64.sh -O "$WORKING_DIR/miniconda.sh"
+bash "$WORKING_DIR/miniconda.sh" -b -u -p "$WORKING_DIR/miniconda"
+rm -rf "$WORKING_DIR/miniconda.sh"
+# Create a custom conda environment
+source "$WORKING_DIR/miniconda/bin/activate"
+KERNEL_NAME="teradatasql"
+ 
+PYTHON="3.8"
+conda create --yes --name "$KERNEL_NAME" python="$PYTHON"
+conda activate "$KERNEL_NAME"
+pip install --quiet ipykernel
+ 
+EOF
+----
+
+** On start script (In this script substitute name of your bucket and confirm version of Jupyter modules)
+[source, bash, id="sagemaker-first-config", role="content-editable emits-gtm-events"]
+----
+#!/bin/bash
+ 
+set -e
+ 
+# This script installs Teradata Jupyter kernel and extensions.
+ 
+ 
+sudo -u ec2-user -i <<'EOF'
+unset SUDO_UID
+ 
+WORKING_DIR=/home/ec2-user/SageMaker/custom-miniconda
+ 
+source "$WORKING_DIR/miniconda/bin/activate" teradatasql
+
+# Install teradatasql, teradataml, and pandas in the teradatasql environment
+pip install teradatasql
+pip install teradataml
+pip install pandas
+
+# fetch Teradata Jupyter extensions package from S3 and unzip it
+mkdir -p "$WORKING_DIR/teradata"
+aws s3 cp s3://resources-jp-extensions/teradatasqllinux_3.4.1-d05242023.zip "$WORKING_DIR/teradata"
+cd "$WORKING_DIR/teradata"
+unzip -o teradatasqllinux_3.4.1-d05242023
+cp teradatakernel /home/ec2-user/anaconda3/condabin
+jupyter kernelspec install --user ./teradatasql
+source /home/ec2-user/anaconda3/bin/activate JupyterSystemEnv
+
+# Install other Teradata-related packages
+pip install teradata_connection_manager_prebuilt-3.4.1.tar.gz
+pip install teradata_database_explorer_prebuilt-3.4.1.tar.gz
+pip install teradata_preferences_prebuilt-3.4.1.tar.gz
+pip install teradata_resultset_renderer_prebuilt-3.4.1.tar.gz
+pip install teradata_sqlhighlighter_prebuilt-3.4.1.tar.gz
+
+conda deactivate
+EOF
+----
+
+=== Create Jupyter Notebooks instance
+* On SageMaker navigate Notebooks, Notebook instances, create notebook instance
+* Choose a name for your notebook instance, define size (for demos the smaller available instance is enough)
+* Click in additional configurations and assign the recently created lifecycle configuration +
+
+image::{dir}/sagemaker-create-notebook-1.PNG[Create notebook instance,align="center" width=75%]
+* Click in additional configurations and assign the recently created lifecycle configuration
+* Assign the recently created IAM role to the notebook instance +
+
+image::{dir}/sagemaker-create-notebook-2.PNG[Assign IAM role to notebook instance,align="center" width=75%]
+
+* Paste the following link https://github.com/Teradata/lake-demos as the default github repository for the notebook instance +
+
+image::{dir}/sagemaker-create-notebook-3.PNG[Assign default repository for the notebook instance,align="center" width=75%]
+
+== Find the IP CIDR of your Jupyter Notebooks instance
+* Once the instance is running click on open JupyterLab + 
+
+image::{dir}/sagemaker-create-notebook-4.PNG[Initiate JupyterLab,align="center" width=75%]
+
+image::{dir}/sagemaker-create-loaded-env.PNG[Loaded JupyterLab,align="center" width=75%]
+
+* On JupyterLab open a notebook with Teradata Python kernel and run the following command for finding your notebook instance IP address.
+** We will whitelist this IP in your VantageCloud Lake environment in order to allow the connection.
+** This is for purposes of this guide and the notebooks demos. For production environments, a configuration of VPCs, Subnets and Security Groups might need to be configured and whitelisted.
+
+[source, python, role="content-editable"]
+---
+import requests
+def get_public_ip():
+    try:
+        response = requests.get('https://api.ipify.org')
+        return response.text
+    except requests.RequestException as e:
+        return "Error: " + str(e)
+my_public_ip = get_public_ip()
+print("My Public IP is:", my_public_ip)
+---
+
+== VantageCloud Lake Configuration
+* In the VantageCloud Lake environment, under settings, add the IP of your notebook instance +
+
+image::{dir}/sagemaker-lake.PNG[Initiate JupyterLab,align="center" width=75%]
+
+== Jupyter Notebook Demos for VantageCloud Lake
+
+=== Configurations
+* The file https://github.com/Teradata/lake-demos/blob/main/vars.json[vars.json file] should be edited to add the required credentials to run the demos +
+
+image::{dir}/sagemaker-vars.PNG[Initiate JupyterLab,align="center" width=75%]
+
+[cols="1,1"]
+|====
+| *Variable* | *Value*
+
+| *"host"* 
+| Public IP value from your VantageCloud Lake environment
+
+| *"UES_URI"* 
+| Open Analytics from your VantageCloud Lake environment
+
+| *"bucket"* 
+| vantagecloud-lake-demo-data
+|====
+* Leave rest of the variable values untouched in JSON file.
+
+== Run demos
+Open and execute all the cells in *0_Demo_Environment_Setup.ipynb* to setup your environment. Followed by *1_Demo_Setup_Base_Data.ipynb* to load the base data required for demo.
+
+To learn more about the demo notebooks, go to https://github.com/Teradata/lake-demos[Teradata Lake demos] page on GitHub.
+
+== Summary
+
+In this quick start we learned how to run Jupyter notebook demos for VantageCloud Lake in SageMaker.
+
+== Further reading
+
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin[Teradata VantageCloud Lake documentation]
+* https://quickstarts.teradata.com/jupyter.html[Use Vantage from a Jupyter notebook]
