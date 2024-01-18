@@ -16,6 +16,7 @@ Due to their flexibility, scalability, and user-friendly configuration, cloud-ba
 * https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html[Access to a VantageCloud Lake environment]
 
 == AWS environment set-up
+In this section we will cover in detail each of the steps below:
 * Upload the Teradata modules for Jupyter to an S3 bucket
 * Create an IAM role for your Jupyter notebook instance
 * Create a lifecycle configuration for your Jupyter notebook instance
