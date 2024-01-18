@@ -189,7 +189,7 @@ image::{dir}/sagemaker-vars.PNG[Initiate JupyterLab,align="center" width=75%]
 | Open Analytics from your VantageCloud Lake environment
 
 | dbc user
-| vantagecloud-lake-demo-data
+| The master password of your VantageCloud Lake environment.
 |====
 * Leave rest of the variable values untouched in JSON file.
 
