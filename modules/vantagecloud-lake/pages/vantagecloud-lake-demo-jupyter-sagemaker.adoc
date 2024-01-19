@@ -92,7 +92,7 @@ EOF
 
 ** On start script (In this script substitute name of your bucket and confirm version of Jupyter modules)
 +
-[source, bash, id="sagemaker-first-config", role="content-editable emits-gtm-events"]
+[source, bash, role="content-editable emits-gtm-events"]
 ----
 #!/bin/bash
  
