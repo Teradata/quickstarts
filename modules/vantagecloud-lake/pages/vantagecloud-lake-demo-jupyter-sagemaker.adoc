@@ -157,7 +157,7 @@ image::{dir}/sagemaker-create-loaded-env.PNG[Loaded JupyterLab,align="center" wi
 ** This is for purposes of this guide and the notebooks demos. For production environments, a configuration of VPCs, Subnets and Security Groups might need to be configured and whitelisted.
 
 [source, python, role="content-editable"]
----
+----
 import requests
 def get_public_ip():
     try:
@@ -167,7 +167,7 @@ def get_public_ip():
         return "Error: " + str(e)
 my_public_ip = get_public_ip()
 print("My Public IP is:", my_public_ip)
----
+----
 
 == VantageCloud Lake Configuration
 * In the VantageCloud Lake environment, under settings, add the IP of your notebook instance
