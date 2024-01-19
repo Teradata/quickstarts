@@ -1,14 +1,13 @@
 function switchLanguage(lan) {
     let path, page, indexFile, file, newUrl, salida;
     path = document.location.href;
-    page = path.split('/').filter(Boolean);
+  //  page = path.split('/').filter(Boolean);
+    page = path.split("/");
 
     let aiUnlimited = "ai-unlimited";
     let bi = "business-intelligence";
     alert(page[page.length-1]);
-    //if(page[page.length-1]==="" || page[page.length-1]==="index.html" || page[page.length-1]==="#" || page[page.length-1]==="index.html#") {
-    if (page[page.length - 1] === "" || page[page.length - 1] === "index.html" || page[page.length - 1] === "#" || (page[page.length - 1] !== "index.html" && page[page.length - 1] !== "#" && page[page.length - 1].indexOf("index") === -1)){
-    
+    if(page[page.length-1]==="" || page[page.length-1]==="index.html" || page[page.length-1]==="#" || page[page.length-1]==="index.html#") {
       if(page[page.length-2] !== "ja") {
         indexFile = page.lastIndexOf(page[page.length-1]);
         page.splice(indexFile, 1, lan);
