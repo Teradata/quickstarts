@@ -109,7 +109,6 @@ WORKING_DIR=/home/ec2-user/SageMaker/custom-miniconda
 source "$WORKING_DIR/miniconda/bin/activate" teradatasql
 
 # Install teradatasql, teradataml, and pandas in the teradatasql environment
-pip install teradatasql
 pip install teradataml
 pip install pandas
 
