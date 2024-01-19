@@ -17,6 +17,7 @@ function switchLanguage(lan) {
         indexFile = page.lastIndexOf(page[page.length-2]);
         page.splice(indexFile, 1, '');
       }
+      alert(indexFile);
     } else {
       if(lan === "en") {
         indexFile = page.lastIndexOf(page[page.length-3]);
@@ -25,6 +26,7 @@ function switchLanguage(lan) {
         } else {
           file = page[page.length-2] +"/"+ page[page.length-1];
         }
+        alert(indexFile);
         page.splice(indexFile, indexFile+1, file);
       } else {
         if(page[page.length-3] === "es" || page[page.length-3] === "ja" ){
@@ -35,11 +37,13 @@ function switchLanguage(lan) {
               file = page[page.length-2]
               indexFile = page.lastIndexOf(file);
               newUrl = lan + "/"+page[page.length-2]+"/" + page[page.length-1]; 
+              alert(newUrl);
               page.splice(indexFile, 2, newUrl)
             } else {
               file = page[page.length-1]
               indexFile = page.lastIndexOf(file);
               newUrl = lan + "/general/" + page[page.length-1]; 
+              alert(newUrl);
             //  newUrl = lan +"/" + page[page.length-1]; 
               page.splice(indexFile, 1, newUrl)
             }
