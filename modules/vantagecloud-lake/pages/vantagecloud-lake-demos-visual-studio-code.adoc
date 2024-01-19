@@ -131,7 +131,7 @@ Enter the token found in your terminal when mounting files to the Docker contain
 
 image::{dir}/server.password.png[server.password.png,align="center"]
 
-Change Server Display Name(Leave Blank To Use URL)
+Change Server Display Name (Leave Blank To Use URL)
 
 image::{dir}/server.display.name.png[server.display.name.png,align="center"]
 
