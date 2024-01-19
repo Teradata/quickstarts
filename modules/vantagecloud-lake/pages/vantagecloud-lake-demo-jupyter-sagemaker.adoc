@@ -5,7 +5,7 @@
 :page-revdate: January 16th, 2024
 :description: Run Teradata Jupyter Notebook Demos for VantageCloud Lake in SageMaker
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, cloud computing, machine learning, sagemaker, vantagecloud, vantagecloud lake, lake
-:dir: sagemaker-guide
+:dir: vantagecloud-lake-demo-jupyter-sagemaker
 
 == Overview
 Due to their flexibility, scalability, and user-friendly configuration, cloud-based artificial intelligence and machine learning platforms are a staple in the toolkit of many data science teams. This guide details the process for running the https://github.com/Teradata/lake-demos[Teradata Jupyter Notebook Demos for Vantage Cloud Lake], on SageMaker, the AI/ML platform from Amazon AWS.
