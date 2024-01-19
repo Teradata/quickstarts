@@ -8,7 +8,7 @@ function switchLanguage(lan) {
     let aiUnlimited = "ai-unlimited";
     let bi = "business-intelligence";
     alert('Components: ' + JSON.stringify(page));
-//    alert(page[page.length-1]);
+    alert(page[page.length-1]);
     if(page[page.length-1]==="" || page[page.length-1]==="index.html" || page[page.length-1]==="#" || page[page.length-1]==="index.html#") {
       if(page[page.length-2] !== "ja") {
         indexFile = page.lastIndexOf(page[page.length-1]);
@@ -40,13 +40,13 @@ function switchLanguage(lan) {
               file = page[page.length-2]
               indexFile = page.lastIndexOf(file);
               newUrl = lan + "/"+page[page.length-2]+"/" + page[page.length-1]; 
-              alert('newUrl: ' +newUrl);
+              alert('newUrl ja: ' +newUrl);
               page.splice(indexFile, 2, newUrl)
             } else {
               file = page[page.length-1]
               indexFile = page.lastIndexOf(file);
               newUrl = lan + "/general/" + page[page.length-1]; 
-              alert('newUrl: ' +newUrl);
+              alert('newUrl en: ' +newUrl);
             //  newUrl = lan +"/" + page[page.length-1]; 
               page.splice(indexFile, 1, newUrl)
             }
@@ -58,7 +58,8 @@ function switchLanguage(lan) {
     
     
     alert('Final URL: ' + salida);
-    window.location.href = salida; 
+    //window.location.href = salida; 
+    window.location.href = 'https://quickstarts.teradata.com/pr-preview/pr-152/nos.html';
   }
   /* 
   When the user clicks on the button, 
