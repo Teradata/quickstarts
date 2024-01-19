@@ -50,7 +50,8 @@ function switchLanguage(lan) {
         salida = salida.replace('//', '/');
       }
     }
-    window.location.href = salida+''; 
+    alert(String(salida));
+    window.location.href = String(salida); 
   }
   /* 
   When the user clicks on the button, 
