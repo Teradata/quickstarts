@@ -135,7 +135,7 @@ Change Server Display Name (Leave Blank To Use URL)
 
 image::{dir}/server.display.name.png[server.display.name.png,align="center"]
 
-You now have access to all the Teradata Vantage extension kernels. Select Python 3(ipykernel) from the running Jupyter server.
+You now have access to all the Teradata Vantage extension kernels. Select Python 3 (ipykernel) from the running Jupyter server.
 
 image::{dir}/python.kernel.png[python.kernel.png,align="center"]
 
