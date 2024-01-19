@@ -29,7 +29,7 @@ Begin by cloning the GitHub repository and navigating to the project directory:
 git clone https://github.com/Teradata/lake-demos.git
 cd lake-demos
 ----
-== Mount Docker files 
+== Start a Jupyterlab docker container with Teradata Jupyter Exensions
 To launch Teradata VantageCloud Lake demos, we need the https://hub.docker.com/r/teradata/jupyterlab-extensions[Teradata Jupyter Extensions for Docker]. These extensions provide the SQL ipython kernel, utilities to manage connections to Teradata, and the database object explorer to make you productive while interacting with the Teradata database.   
 ----
 docker pull teradata/jupyterlab-extensions
