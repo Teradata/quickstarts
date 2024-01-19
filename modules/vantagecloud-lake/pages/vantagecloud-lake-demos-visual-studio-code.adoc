@@ -31,9 +31,7 @@ cd lake-demos
 ----
 == Start a Jupyterlab docker container with Teradata Jupyter Exensions
 To launch Teradata VantageCloud Lake demos, we need the https://hub.docker.com/r/teradata/jupyterlab-extensions[Teradata Jupyter Extensions for Docker]. These extensions provide the SQL ipython kernel, utilities to manage connections to Teradata, and the database object explorer to make you productive while interacting with the Teradata database.   
-----
-docker pull teradata/jupyterlab-extensions
-----
+
 Next, start a container and bind it to the existing lake-demos directory. Choose the appropriate command based on your operating system: 
 [tabs]
 ====
@@ -86,10 +84,13 @@ Edit the *https://github.com/Teradata/lake-demos/blob/main/vars.json[vars.json f
 | *"dbc"*
 | The master password of your VantageCloud Lake environment.
 |====
-* You'll see that in the sample vars.json, the passwords of all users are defaulted to "password", this is just for matters of the sample file, you should change all of these password fields to strong passwords, secure them as necessary and follow other password management best practices.
 
-**To retrieve a Public IP address and Open Analytics Endpoint follow these https://quickstarts.teradata.com/vantagecloud-lake-demo-jupyter-docker.html#_create_vantagecloud_lake_environment[instructions].
+To retrieve a Public IP address and Open Analytics Endpoint follow these https://quickstarts.teradata.com/vantagecloud-lake-demo-jupyter-docker.html#_create_vantagecloud_lake_environment[instructions].
 
+====
+IMPORTANT: Change passwords in the vars.json file.
+ You'll see that in the sample vars.json, the passwords of all users are defaulted to "password", this is just for matters of the sample file, you should change all of these password fields to strong passwords, secure them as necessary and follow other password management best practices.
+====
 === Modify path to vars.json in UseCases directory
 
 In the UseCases directory, all .ipynb files use the path ../../vars.json to load the variables from the JSON file when working from Jupyterlab. To work directly from Visual Studio Code, update the code in each .ipynb to point to vars.json.
