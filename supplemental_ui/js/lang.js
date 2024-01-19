@@ -2,9 +2,7 @@ function switchLanguage(lan) {
 //    alert(lan);
     let path, page, indexFile, file, newUrl, salida;
     path = document.location.href;
-//    alert(path);
-    //path = document.location.pathname;
-    //page = path.split("/");
+
     page = path.split('/').filter(Boolean);
 //    alert(page);
     let aiUnlimited = "ai-unlimited";
@@ -50,7 +48,6 @@ function switchLanguage(lan) {
       }     
     }     
     salida = page.join('/');
-    //salida = '/' + page.join('/');
     alert('Original Path: ' + path);
     alert('Components: ' + JSON.stringify(page));
     alert('Final URL: ' + salida);
@@ -63,7 +60,6 @@ function switchLanguage(lan) {
   function langOptions() {
     document.getElementById("myDropdown").classList.toggle("show");
     const dropdownIcon = document.getElementById("dropdownIcon");
-
     dropdownIcon.classList.toggle("fa-chevron-up"); // Toggle the up-chevron class
     dropdownIcon.classList.toggle("fa-chevron-down"); // Toggle the down-chevron class
   }
