@@ -6,7 +6,9 @@ function switchLanguage(lan) {
     let aiUnlimited = "ai-unlimited";
     let bi = "business-intelligence";
     alert(page[page.length-1]);
-    if(page[page.length-1]==="" || page[page.length-1]==="index.html" || page[page.length-1]==="#" || page[page.length-1]==="index.html#") {
+    //if(page[page.length-1]==="" || page[page.length-1]==="index.html" || page[page.length-1]==="#" || page[page.length-1]==="index.html#") {
+    if (page[page.length - 1] === "" || page[page.length - 1] === "index.html" || page[page.length - 1] === "#" || (page[page.length - 1] !== "index.html" && page[page.length - 1] !== "#" && page[page.length - 1].indexOf("index") === -1)){
+    
       if(page[page.length-2] !== "ja") {
         indexFile = page.lastIndexOf(page[page.length-1]);
         page.splice(indexFile, 1, lan);
@@ -45,11 +47,11 @@ function switchLanguage(lan) {
     }     
 
     salida = page.join('/');
-    if(salida.includes('//')){
-      while (salida.includes('//')) {
-        salida = salida.replace('//', '/');
-      }
-    }
+    //if(salida.includes('//')){
+    //  while (salida.includes('//')) {
+    //    salida = salida.replace('//', '/');
+    //  }
+   // }
     alert(String(salida));
     window.location.href = String(salida); 
   }
