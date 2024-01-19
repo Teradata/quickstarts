@@ -59,7 +59,7 @@ function switchLanguage(lan) {
     
     alert('Final URL: ' + salida);
     window.location.href = salida; 
-
+    //window.location.href = 'https://quickstarts.teradata.com/pr-preview/pr-152/nos.html';
   }
   /* 
   When the user clicks on the button, 
