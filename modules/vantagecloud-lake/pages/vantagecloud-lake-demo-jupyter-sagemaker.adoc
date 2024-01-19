@@ -16,6 +16,7 @@ Due to their flexibility, scalability, and user-friendly configuration, cloud-ba
 * https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html[Access to a VantageCloud Lake environment]
 
 == AWS environment set-up
+In this section we will cover in detail each of the steps below:
 * Upload the Teradata modules for Jupyter to an S3 bucket
 * Create an IAM role for your Jupyter notebook instance
 * Create a lifecycle configuration for your Jupyter notebook instance
@@ -186,11 +187,10 @@ image::{dir}/sagemaker-vars.PNG[Initiate JupyterLab,align="center" width=75%]
 
 | *"UES_URI"* 
 | Open Analytics from your VantageCloud Lake environment
-
-| *"bucket"* 
-| vantagecloud-lake-demo-data
+| *"dbc"*
+| The master password of your VantageCloud Lake environment.
 |====
-* Leave rest of the variable values untouched in JSON file.
+* You'll see that in the sample vars.json, the passwords of all users are defaulted to "password", this is just for matters of the sample file, you should change all of these password fields to strong passwords, secure them as necessary and follow other password management best practices.
 
 == Run demos
 Open and execute all the cells in *0_Demo_Environment_Setup.ipynb* to setup your environment. Followed by *1_Demo_Setup_Base_Data.ipynb* to load the base data required for demo.
