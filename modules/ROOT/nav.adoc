@@ -72,3 +72,4 @@
 
 * VantageCloud Lake
 ** xref:getting-started-with-vantagecloud-lake.adoc[]
+** xref:vantagecloud-lake:vantagecloud-lake-demos-visual-studio-code.adoc[]
