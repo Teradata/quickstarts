@@ -3,20 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Teradata Vantage Engine Architecture and Concepts :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/teradata-vantage-engine-architecture-and-concepts.html">
-    <meta name="description" content="Teradata Vantage Architecture and Concepts.">
-    <meta name="keywords" content="data warehouses, teradata vantage engine architecture, teradata, vantage, Access Module Processors (AMP), Parsing Engines (PE), Massively Parallel Processing (MPP), Virtual Disk (Vdisks), BYNET">
+    <title>Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Docker :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/vantagecloud-lake/vantagecloud-lake-demo-jupyter-docker.html">
+    <meta name="description" content="Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Docker">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, docker, container, vantagecloud, vantagecloud lake, lake">
     <meta name="generator" content="Antora 3.0.1">
-    <link rel="stylesheet" href="./_/css/site.css">
+    <link rel="stylesheet" href="../_/css/site.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta property="og:title" content="Teradata Vantage Engine Architecture and Concepts :: Teradata Getting Started">
+<meta property="og:title" content="Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Docker :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Teradata Vantage Architecture and Concepts." />
+<meta property="og:description" content="Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Docker" />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/teradata-vantage-engine-architecture-and-concepts.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/vantagecloud-lake/vantagecloud-lake-demo-jupyter-docker.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -31,10 +31,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');
 </script>
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="./_/css/search.css">
-<link rel="stylesheet" href="./_/css/styles.css">
-<link rel="stylesheet" href="./_/css/newnavbar.css" >
-<link rel="stylesheet" href="./_/css/navbar.css">
+<link rel="stylesheet" href="../_/css/search.css">
+<link rel="stylesheet" href="../_/css/styles.css">
+<link rel="stylesheet" href="../_/css/newnavbar.css" >
+<link rel="stylesheet" href="../_/css/navbar.css">
 <style>
 
   /*New Style*/
@@ -92,7 +92,7 @@ article a[href^="https://"][target="_blank"]::after {
   width: 14px;
   height: 14px;
   margin-left: 4px;
-  background-image: url("./_/img/open_in_new.svg");
+  background-image: url("../_/img/open_in_new.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -329,7 +329,7 @@ button {
   border-radius: 8px;
   padding-left: 14px;
   padding-right: 14px;
-  background-image: url(./_/img/search.svg);
+  background-image: url(../_/img/search.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -703,7 +703,7 @@ aside.toc.sidebar {
 
 .report-an-issue {
   padding: 10px 20px 10px 10px;
-  background-image: url(./_/img/pan_tool.svg);
+  background-image: url(../_/img/pan_tool.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -711,7 +711,7 @@ aside.toc.sidebar {
 
 .edit-on-github {
   padding: 10px 20px 10px 10px;
-  background-image: url(./_/img/edit.svg);
+  background-image: url(../_/img/edit.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -822,19 +822,19 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/warning.svg");
+  content: url("../_/img/warning.svg");
 }
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .admonitionblock.question .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/question.mark.svg");
+  content: url("../_/img/question.mark.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .source-toolbox .source-lang {
@@ -845,7 +845,7 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .source-toolbox img.copy-icon {
-  content: url("./_/img/copy.svg");
+  content: url("../_/img/copy.svg");
 }
 
 .doc .source-toolbox>:not(:last-child)::after {
@@ -879,7 +879,7 @@ span.search-result-highlight {
 
 
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
-<link rel="icon" href="./_/img/favicon.ico" type="image/x-icon">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
   </head>
   <body class="article">
 <!-- Adding CDN to use sql-formatter for unpkg -->
@@ -923,7 +923,7 @@ span.search-result-highlight {
                     </div>
                     <ul class="header-nav__main-menu header-nav__element nav-1 list">
                       <li>
-                        <a href="./index.html" class="header-nav__main-menu__link active">Getting started</a>
+                        <a href="../index.html" class="header-nav__main-menu__link active">Getting started</a>
                       </li>
                       <li>
                         <button href="" onclick="docs()" class="header-nav__main-menu__link dropbtn">Docs</button>
@@ -940,13 +940,13 @@ span.search-result-highlight {
                         <div id="myCommunityDropdown" class="dropdown-content dc2">
                           <a href="https://support.teradata.com" title="Technical Medium Blogs" class="dropdown-item mt">Teradata Community</a>
                           <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item mb">Technical Medium Blogs&nbsp; &nbsp; 
-                            <img src='./_/img/small-external.svg' alt="External Icon">
+                            <img src='../_/img/small-external.svg' alt="External Icon">
                           </a>
                           <a href="https://github.com/Teradata" title="Teradata on GitHub" target="_blank" class="dropdown-item mb">GitHub&nbsp; &nbsp; 
-                            <img src='./_/img/small-external.svg' alt="External Icon">
+                            <img src='../_/img/small-external.svg' alt="External Icon">
                           </a>
                           <a href="https://stackoverflow.com/questions/tagged/teradata" title="Stack Overflow Teradata questions" target="_blank" class="dropdown-item">Stack Overflow&nbsp; &nbsp; 
-                            <img src='./_/img/small-external.svg' alt="External Icon">
+                            <img src='../_/img/small-external.svg' alt="External Icon">
                           </a>  
                         </div>
                       </li>
@@ -972,7 +972,7 @@ span.search-result-highlight {
               <nav class="d-flex custom-justify-content-between align-items-center px-6 shadow--s">
                   <a class="header-nav__logo d-flex align-items-center" href="/" aria-label="Teradata">
                       <div>
-                          <img class="teradata-logo" src='./_/img/TD-Logo.svg' alt="" title="" >
+                          <img class="teradata-logo" src='../_/img/TD-Logo.svg' alt="" title="" >
                       </div>
                   </a>
                   <a href="http://developers.teradata.com/" class="developers">Developers</a>
@@ -1044,17 +1044,17 @@ span.search-result-highlight {
                             </li>
                             <li>
                               <a class="nav-2 py-4 d-flex align-items-center color-slate" href="https://medium.com/teradata">
-                                Technical Medium Blogs&nbsp;&nbsp;<img src='./_/img/small-external.svg' class="mtop">
+                                Technical Medium Blogs&nbsp;&nbsp;<img src='../_/img/small-external.svg' class="mtop">
                               </a>
                             </li>
                             <li>
                               <a class="nav-2 py-4 d-flex color-slate" href="https://github.com/Teradata" target="_blank" rel="noopener">
-                                GitHub&nbsp;&nbsp;<img src='./_/img/small-external.svg' class="e">
+                                GitHub&nbsp;&nbsp;<img src='../_/img/small-external.svg' class="e">
                               </a>
                             </li>
                             <li>
                               <a class="nav-2 py-4 d-flex color-slate" href="https://stackoverflow.com/questions/tagged/teradata" target="_blank" rel="noopener">
-                                Stack Overflow&nbsp;&nbsp;<img src='./_/img/small-external.svg' class="">
+                                Stack Overflow&nbsp;&nbsp;<img src='../_/img/small-external.svg' class="">
                               </a>
                             </li>
                           </ul>
@@ -1216,8 +1216,8 @@ document.addEventListener("DOMContentLoaded", function () {
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Introduction</span>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="teradata-vantage-engine-architecture-and-concepts.html">Teradata Vantage Engine Architecture and Concepts</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../teradata-vantage-engine-architecture-and-concepts.html">Teradata Vantage Engine Architecture and Concepts</a>
   </li>
 </ul>
   </li>
@@ -1230,13 +1230,13 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">On your local</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
+    <a class="nav-link" href="../getting.started.vmware.html">Vantage Express on VMware</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
+    <a class="nav-link" href="../getting.started.vbox.html">Vantage Express on VirtualBox</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
+    <a class="nav-link" href="../getting.started.utm.html">Vantage Express on UTM</a>
   </li>
 </ul>
   </li>
@@ -1245,13 +1245,13 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">On your cloud infrastructure</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="run-vantage-express-on-aws.html">Vantage Express on AWS</a>
+    <a class="nav-link" href="../run-vantage-express-on-aws.html">Vantage Express on AWS</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on Google Cloud</a>
+    <a class="nav-link" href="../vantage.express.gcp.html">Vantage Express on Google Cloud</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
+    <a class="nav-link" href="../run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
   </li>
 </ul>
   </li>
@@ -1262,17 +1262,17 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Connect to Vantage</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
+    <a class="nav-link" href="../install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
+    <a class="nav-link" href="../other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Configure ODBC</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="odbc.ubuntu.html">Ubuntu</a>
+    <a class="nav-link" href="../odbc.ubuntu.html">Ubuntu</a>
   </li>
 </ul>
   </li>
@@ -1283,52 +1283,52 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Manage data</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nos.html">Query data stored in object storage</a>
+    <a class="nav-link" href="../nos.html">Query data stored in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="select-the-right-data-ingestion-tools-for-teradata-vantage.html">Select the right data ingestion solution for Teradata Vantage</a>
+    <a class="nav-link" href="../select-the-right-data-ingestion-tools-for-teradata-vantage.html">Select the right data ingestion solution for Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
+    <a class="nav-link" href="../dbt.html">dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="advanced-dbt.html">Advanced dbt use cases with Teradata Vantage</a>
+    <a class="nav-link" href="../advanced-dbt.html">Advanced dbt use cases with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="modelops/using-feast-feature-store-with-teradata-vantage.html">Build a FEAST feature store in Teradata Vantage</a>
+    <a class="nav-link" href="../modelops/using-feast-feature-store-with-teradata-vantage.html">Build a FEAST feature store in Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/getting.started.dbt-feast-teradata-pipeline.html">Use dbt and FEAST to build a feature store in Teradata Vantage</a>
+    <a class="nav-link" href="../other-integrations/getting.started.dbt-feast-teradata-pipeline.html">Use dbt and FEAST to build a feature store in Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html">Use Airbyte to load data from external sources to Teradata Vantage</a>
+    <a class="nav-link" href="../elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html">Use Airbyte to load data from external sources to Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="elt/transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.html">Transform data Loaded with Airbyte using dbt</a>
+    <a class="nav-link" href="../elt/transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.html">Transform data Loaded with Airbyte using dbt</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">Load data with TPT</a>
+    <a class="nav-link" href="../tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">Load data with TPT</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
+    <a class="nav-link" href="../create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
+    <a class="nav-link" href="../other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="segment.html">Store events from Twilio Segment</a>
+    <a class="nav-link" href="../segment.html">Store events from Twilio Segment</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
+    <a class="nav-link" href="../cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/configure-a-teradata-vantage-connection-in-datahub.html">Configure a Teradata Vantage connection in DataHub</a>
+    <a class="nav-link" href="../other-integrations/configure-a-teradata-vantage-connection-in-datahub.html">Configure a Teradata Vantage connection in DataHub</a>
   </li>
 </ul>
   </li>
@@ -1337,16 +1337,16 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Create applications</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
+    <a class="nav-link" href="../jdbc.html">Connect to Vantage using JDBC</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="teradatasql.html">Connect to Vantage using Python</a>
+    <a class="nav-link" href="../teradatasql.html">Connect to Vantage using Python</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+    <a class="nav-link" href="../mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="query-service/send-queries-using-rest-api.html">Send queries using REST API</a>
+    <a class="nav-link" href="../query-service/send-queries-using-rest-api.html">Send queries using REST API</a>
   </li>
 </ul>
   </li>
@@ -1355,43 +1355,43 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Analyze data</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
+    <a class="nav-link" href="../jupyter.html">Use Vantage from a Jupyter notebook</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+    <a class="nav-link" href="../local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ml.html">Train ML models in Vantage using Database Analytic Functions</a>
+    <a class="nav-link" href="../ml.html">Train ML models in Vantage using Database Analytic Functions</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
+    <a class="nav-link" href="../sto.html">Run scripts on Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="perform-time-series-analysis-using-teradata-vantage.html">Perform time series analysis</a>
+    <a class="nav-link" href="../perform-time-series-analysis-using-teradata-vantage.html">Perform time series analysis</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - Import and Deploy your first BYOM Model</a>
+    <a class="nav-link" href="../modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - Import and Deploy your first BYOM Model</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.html">ModelOps - Import and Deploy your first GIT Model</a>
+    <a class="nav-link" href="../modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.html">ModelOps - Import and Deploy your first GIT Model</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
+    <a class="nav-link" href="../cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
+    <a class="nav-link" href="../cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Integrate Teradata Jupyter extensions with SageMaker notebook instance</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Integrate Teradata Jupyter extensions with SageMaker notebook instance</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Create Vizualizations in Power BI using Vantage</a>
+    <a class="nav-link" href="../business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Create Vizualizations in Power BI using Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
+    <a class="nav-link" href="../other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
   </li>
 </ul>
   </li>
@@ -1400,47 +1400,47 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Teradata AI Unlimited</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ai-unlimited/getting-started-with-ai-unlimited.html">Getting Started with Teradata AI Unlimited</a>
+    <a class="nav-link" href="../ai-unlimited/getting-started-with-ai-unlimited.html">Getting Started with Teradata AI Unlimited</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Deploy locally using Docker</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited/install-ai-unlimited-workspaces-docker.html">Deploy and Setup Teradata AI Unlimited Workspace Service Using Docker</a>
+    <a class="nav-link" href="../ai-unlimited/install-ai-unlimited-workspaces-docker.html">Deploy and Setup Teradata AI Unlimited Workspace Service Using Docker</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited/install-ai-unlimited-interface-docker.html">Deploy a Teradata AI Unlimited Interface Using Docker</a>
+    <a class="nav-link" href="../ai-unlimited/install-ai-unlimited-interface-docker.html">Deploy a Teradata AI Unlimited Interface Using Docker</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ai-unlimited/using-ai-unlimited-workspace-cli.html">Use Teradata AI Unlimited With Workspace Client</a>
+    <a class="nav-link" href="../ai-unlimited/using-ai-unlimited-workspace-cli.html">Use Teradata AI Unlimited With Workspace Client</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Deploy on AWS</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited/deploy-ai-unlimited-aws-cloudformation.html">Deploy Teradata AI Unlimited Workspace Service and Interface using AWS CloudFormation Template</a>
+    <a class="nav-link" href="../ai-unlimited/deploy-ai-unlimited-aws-cloudformation.html">Deploy Teradata AI Unlimited Workspace Service and Interface using AWS CloudFormation Template</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited/ai-unlimited-aws-permissions-policies.html">Control AWS Access and Permissions using Custom Permissions and Policies</a>
+    <a class="nav-link" href="../ai-unlimited/ai-unlimited-aws-permissions-policies.html">Control AWS Access and Permissions using Custom Permissions and Policies</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited/deploy-ai-unlimited-awscli-cloudformation.html">Deploy CloudFormation Template from AWS CLI</a>
+    <a class="nav-link" href="../ai-unlimited/deploy-ai-unlimited-awscli-cloudformation.html">Deploy CloudFormation Template from AWS CLI</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ai-unlimited/running-sample-ai-unlimited-workload.html">Run a Sample Workload in JupyterLab Using Teradata AI Unlimited</a>
+    <a class="nav-link" href="../ai-unlimited/running-sample-ai-unlimited-workload.html">Run a Sample Workload in JupyterLab Using Teradata AI Unlimited</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Reference</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited/ai-unlimited-magic-reference.html">Teradata AI Unlimited JupyterLab Magic Command Reference</a>
+    <a class="nav-link" href="../ai-unlimited/ai-unlimited-magic-reference.html">Teradata AI Unlimited JupyterLab Magic Command Reference</a>
   </li>
 </ul>
   </li>
@@ -1451,16 +1451,16 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">VantageCloud Lake</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting-started-with-vantagecloud-lake.html">Getting Started with VantageCloud Lake</a>
+    <a class="nav-link" href="../getting-started-with-vantagecloud-lake.html">Getting Started with VantageCloud Lake</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="vantagecloud-lake-demo-jupyter-docker.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Docker</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantagecloud-lake/vantagecloud-lake-demo-jupyter-docker.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Docker</a>
+    <a class="nav-link" href="vantagecloud-lake-demos-visual-studio-code.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Visual Studio Code</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantagecloud-lake/vantagecloud-lake-demos-visual-studio-code.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Visual Studio Code</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantagecloud-lake/vantagecloud-lake-demo-jupyter-sagemaker.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in SageMaker</a>
+    <a class="nav-link" href="vantagecloud-lake-demo-jupyter-sagemaker.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in SageMaker</a>
   </li>
 </ul>
   </li>
@@ -1476,10 +1476,10 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
   <ul class="components">
     <li class="component is-current">
-      <a class="title" href="index.html">Getting Started Guides</a>
+      <a class="title" href="../index.html">Getting Started Guides</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">master</a>
+          <a href="../index.html">master</a>
         </li>
       </ul>
     </li>
@@ -1493,8 +1493,8 @@ document.addEventListener("DOMContentLoaded", function () {
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li>Introduction</li>
-    <li><a href="teradata-vantage-engine-architecture-and-concepts.html">Teradata Vantage Engine Architecture and Concepts</a></li>
+    <li>VantageCloud Lake</li>
+    <li><a href="vantagecloud-lake-demo-jupyter-docker.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Docker</a></li>
   </ul>
 </nav>
 </div>
@@ -1502,113 +1502,62 @@ document.addEventListener("DOMContentLoaded", function () {
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/teradata-vantage-engine-architecture-and-concepts.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/vantagecloud-lake/pages/vantagecloud-lake-demo-jupyter-docker.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Teradata Vantage Engine Architecture and Concepts</h1>
+<h1 class="page">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Docker</h1>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This article explains the underlying concepts of Teradata Vantage engine architecture. All editions of Vantage, including the Primary Cluster in VantageCloud Lake utilize the same engine.</p>
-</div>
-<div class="paragraph">
-<p>Teradata&#8217;s architecture is designed around a Massively Parallel Processing (MPP), shared-nothing architecture, which enables high-performance data processing and analytics. The MPP architecture distributes the workload into multiple vprocs or virtual processors. The virtual processor where query processing takes place is commonly referred to as an Access Module Processor (AMP). Each AMP is isolated from other AMPs, and processes the queries in parallel allowing Teradata to process large volumes of data rapidly.</p>
-</div>
-<div class="paragraph">
-<p>The major architectural components of the Teradata Vantage engine include the Parsing Engines (PEs), BYNET, Access Module Processors (AMPs), and Virtual Disks (Vdisks). Vdisks are assigned to AMPs in enterprise platforms, and to the Primary Cluster in the case of VantageCloud Lake environments.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/teradata-vantage-architecture-concepts/teradata_architecture_major_components.png" alt="Teradata Vantage Major Architectural Components" width="75%">
-</div>
+<p>In this how-to we will go through the steps for connecting to TeradataCloud Lake and run demos from a Jupyter notebook in Docker.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_teradata_vantage_engine_architecture_components"><a class="anchor" href="#_teradata_vantage_engine_architecture_components"></a>Teradata Vantage Engine Architecture Components</h2>
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a> installed</p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">Git</a> installed</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Required to download git repo from <a href="https://github.com/Teradata/lake-demos.git" class="bare">https://github.com/Teradata/lake-demos.git</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>A Teradata VantageCloud Lake account login</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Organization URL and login details from Teradata welcome letter</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>IDE of your choice</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_vantagecloud_lake_environment"><a class="anchor" href="#_create_vantagecloud_lake_environment"></a>Create VantageCloud Lake environment</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Teradata Vantage engine consists of the components below:</p>
-</div>
-<div class="sect2">
-<h3 id="_parsing_engines_pe"><a class="anchor" href="#_parsing_engines_pe"></a>Parsing Engines (PE)</h3>
-<div class="paragraph">
-<p>When a SQL query is run in Teradata, it first reaches the Parsing Engine. The functions of the Parsing Engine are:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Manage individual user sessions (up to 120).</p>
-</li>
-<li>
-<p>Check if the objects used in the SQL query exist.</p>
-</li>
-<li>
-<p>Check if the user has required privileges against the objects used in the SQL query.</p>
-</li>
-<li>
-<p>Parse and optimize the SQL queries.</p>
-</li>
-<li>
-<p>Prepare the execution plan to execute the SQL query and passes it to the corresponding AMPs.</p>
-</li>
-<li>
-<p>Receive the response from the AMPs and send it back to the requesting client.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_bynet"><a class="anchor" href="#_bynet"></a>BYNET</h3>
-<div class="paragraph">
-<p>BYNET is a system that enables component communication. The BYNET system provides high-speed bi-directional broadcast, multicast, and point-to-point communication and merge functions. It performs three key functions: coordinating multi-AMP queries, reading data from multiple AMPs, regulating message flow to prevent congestion, and processing platform throughput. These functions of BYNET make Vantage highly scalable and enable Massively Parallel Processing (MPP) capabilities.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_parallel_database_extension_pde"><a class="anchor" href="#_parallel_database_extension_pde"></a>Parallel Database Extension (PDE)</h3>
-<div class="paragraph">
-<p>Parallel Database Extension (PDE) is an intermediary software layer positioned between the operating system and the Teradata Vantage database. PDE enables MPP systems to use features such as BYNET and shared disks. It facilitates the parallelism that is responsible for the speed and linear scalability of the Teradata Vantage database.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_access_module_processor_amp"><a class="anchor" href="#_access_module_processor_amp"></a>Access Module Processor (AMP)</h3>
-<div class="paragraph">
-<p>AMPs are responsible for data storage and retrieval. Each AMP is associated with its own set of Virtual Disks (Vdisks) where the data is stored, and no other AMP can access that content in line with the shared-nothing architecture. The functions of AMP are:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Access storage using Vantage’s Block File System Software</p>
-</li>
-<li>
-<p>Lock management</p>
-</li>
-<li>
-<p>Sorting rows</p>
-</li>
-<li>
-<p>Aggregating columns</p>
-</li>
-<li>
-<p>Join processing</p>
-</li>
-<li>
-<p>Output conversion</p>
-</li>
-<li>
-<p>Disk space management</p>
-</li>
-<li>
-<p>Accounting</p>
-</li>
-<li>
-<p>Recovery processing</p>
-</li>
-</ul>
+<p>Follow the instructions from the <a href="https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html">VantageCloud Lake getting started</a> to create your own environment.<br>
+Once created, go to <strong>SETTINGS</strong> tab and provide your public IP address to <a href="https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html#_access_environment_from_public_internet">access the environment</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1617,151 +1566,261 @@ document.addEventListener("DOMContentLoaded", function () {
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>AMPs in VantageCore IntelliFlex, VantageCore VMware, VantageCloud Enterprise, and the Primary Cluster in the case of VantageCloud Lake, store data in a Block File System (BFS) format on Vdisks. AMPs in Compute Clusters and Compute Worker Nodes on VantageCloud Lake do not have BFS, they can only access data in object storage using the Object File System (OFS).</p>
+You can find your IP address from <a href="https://www.whatismyip.com/">WhatIsMyIp.com</a> website. Take note of the IPv4 address.
+</td>
+</tr>
+</table>
 </div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/vantagecloud-lake-demo-jupyter-docker/lake_ip_addresses.png" alt="IP whitelisting" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>Your environment card should show <strong>Public internet</strong> access now.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/vantagecloud-lake-demo-jupyter-docker/lake_public_internet_cv.png" alt="Public internet card view" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>From <strong>OVERVIEW</strong> tab, copy:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Public IP and</p>
+</li>
+<li>
+<p>Open Analytics Endpoint</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These values are required to access VantageCloud Lake from the Docker.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/vantagecloud-lake-demo-jupyter-docker/lake_overview_page.png" alt="Environment Overview page" width="75%">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_clone_vantagecloud_lake_demo_repository"><a class="anchor" href="#_clone_vantagecloud_lake_demo_repository"></a>Clone VantageCloud Lake Demo repository</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Clone VantageCloud Lake Demo repository in your local machine:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://github.com/Teradata/lake-demos.git
+cd lake-demos</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The repository contains different files and folders, the important ones are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Jupyter Notebooks</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/Teradata/lake-demos/blob/main/0_Demo_Environment_Setup.ipynb">0_Demo_Environment_Setup.ipynb</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Teradata/lake-demos/blob/main/1_Load_Base_Demo_Data.ipynb">1_Load_Base_Demo_Data.ipynb</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Teradata/lake-demos/blob/main/Data_Engineering_Exploration.ipynb">Data_Engineering_Exploration.ipynb</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Teradata/lake-demos/blob/main/Data_Science_OAF.ipynb">Data_Science_OAF.ipynb</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Teradata/lake-demos/blob/main/Demo_Admin.ipynb">Demo_Admin.ipynb</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/Teradata/lake-demos/blob/main/vars.json">vars.json file</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_edit_vars_json_file"><a class="anchor" href="#_edit_vars_json_file"></a>Edit vars.json file</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To connect Jupyter notebooks with VantageCloud Lake, you need to edit <a href="https://github.com/Teradata/lake-demos/blob/main/vars.json">vars.json file</a> and provide:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Variable</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>"host"</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Public IP value from <strong>OVERVIEW</strong> section (see above)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>"UES_URI"</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open Analytics Endpoint value from <strong>OVERVIEW</strong> section (see above)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>"dbc"</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The master password of your VantageCloud Lake environment</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+In the sample vars.json, the passwords of all users are defaulted to "password", this is just for illustration purposes. You should change all of these password fields to strong passwords, secure them as necessary, and follow other password management best practices.
 </td>
 </tr>
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_virtual_disks_vdisks"><a class="anchor" href="#_virtual_disks_vdisks"></a>Virtual Disks (Vdisks)</h3>
-<div class="paragraph">
-<p>These are units of storage space owned by an AMP. Virtual Disks are used to hold user data (rows within tables). Virtual Disks map to physical space on a disk.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_node"><a class="anchor" href="#_node"></a>Node</h3>
-<div class="paragraph">
-<p>A node, in the context of Teradata systems, represents an individual server that functions as a hardware platform for the database software. It serves as a processing unit where database operations are executed under the control of a single operating system. When Teradata is deployed in a cloud, it follows the same MPP, shared-nothing architecture but the physical nodes are replaced with virtual machines (VMs).</p>
-</div>
-</div>
-</div>
 </div>
 <div class="sect1">
-<h2 id="_teradata_vantage_architecture_concepts"><a class="anchor" href="#_teradata_vantage_architecture_concepts"></a>Teradata Vantage Architecture Concepts</h2>
+<h2 id="_mount_files_within_docker"><a class="anchor" href="#_mount_files_within_docker"></a>Mount files within Docker</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The concepts below are applicable to Teradata Vantage.</p>
+<p>To run VantageCloud Lake demos, we need the <a href="https://hub.docker.com/r/teradata/jupyterlab-extensions">Teradata Jupyter Extensions for Docker</a>. The extensions provide the SQL ipython kernel, utilities to manage connections to Teradata, and the database object explorer to make you productive while interacting with the Teradata database.</p>
 </div>
-<div class="sect2">
-<h3 id="_linear_growth_and_expandability"><a class="anchor" href="#_linear_growth_and_expandability"></a>Linear Growth and Expandability</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Make sure that you are running all the commands in the same folder where you have cloned the demo repository.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
-<p>Teradata is a linearly expandable RDBMS. As the workload and data volume increase, adding more hardware resources such as servers or nodes results in a proportional increase in performance and capacity. Linear Scalability allows for increased workload without decreased throughput.</p>
+<p>Start a container and bind it to the existing lake-demos directory. Choose the appropriate command based on your operating system:</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For Windows, run the docker command in PowerShell.
+</td>
+</tr>
+</table>
 </div>
-<div class="sect2">
-<h3 id="_teradata_parallelism"><a class="anchor" href="#_teradata_parallelism"></a>Teradata Parallelism</h3>
-<div class="paragraph">
-<p>Teradata parallelism refers to the inherent ability of the Teradata Database to perform parallel processing of data and queries across multiple nodes or components simultaneously.</p>
-</div>
-<div class="ulist">
+<div class="tabset is-loading">
+<div class="ulist tabs">
 <ul>
 <li>
-<p>Each Parsing Engine (PE) in Teradata has the capability to handle up to 120 sessions concurrently.</p>
+<p><a id="tabset1_windows"></a>Windows</p>
 </li>
 <li>
-<p>The BYNET in Teradata enables parallel handling of all message activity, including data redistribution for subsequent tasks.</p>
+<p><a id="tabset1_macos"></a>macOS</p>
 </li>
 <li>
-<p>All Access Module Processors (AMPs) in Teradata can collaborate in parallel to serve any incoming request.</p>
-</li>
-<li>
-<p>Each AMP can work on multiple requests concurrently, allowing for efficient parallel processing.</p>
+<p><a id="tabset1_linux"></a>Linux</p>
 </li>
 </ul>
 </div>
-<div class="imageblock">
 <div class="content">
-<img src="_images/teradata-vantage-architecture-concepts/teradata_parallelism.png" alt="Teradata Parallelism" width="75%">
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_teradata_retrieval_architecture"><a class="anchor" href="#_teradata_retrieval_architecture"></a>Teradata Retrieval Architecture</h3>
-<div class="paragraph">
-<p>The key steps involved in Teradata Retrieval Architecture are:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The Parsing Engine sends a request to retrieve one or more rows.</p>
-</li>
-<li>
-<p>The BYNET activates the relevant AMP(s) for processing.</p>
-</li>
-<li>
-<p>The AMP(s) concurrently locate and retrieve the desired row(s) through parallel access.</p>
-</li>
-<li>
-<p>The BYNET returns the retrieved row(s) to the Parsing Engine.</p>
-</li>
-<li>
-<p>The Parsing Engine then delivers the row(s) back to the requesting client application.</p>
-</li>
-</ol>
-</div>
-<div class="imageblock">
+<div class="tab-pane" aria-labelledby="tabset1_windows">
+<div class="listingblock">
 <div class="content">
-<img src="_images/teradata-vantage-architecture-concepts/teradata_retrieval_architecture.png" alt="Teradata Retrieval Architecture" width="75%">
+<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">docker run -e "accept_license=Y" -p 127.0.0.1:8888:8888 -v ${PWD}:/home/jovyan/JupyterLabRoot teradata/jupyterlab-extensions</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_teradata_data_distribution"><a class="anchor" href="#_teradata_data_distribution"></a>Teradata Data Distribution</h3>
+<div class="tab-pane" aria-labelledby="tabset1_macos">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -e "accept_license=Y" -p 127.0.0.1:8888:8888 -v $PWD:/home/jovyan/JupyterLabRoot teradata/jupyterlab-extensions</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_linux">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -e "accept_license=Y" -p 127.0.0.1:8888:8888 -v $PWD:/home/jovyan/JupyterLabRoot teradata/jupyterlab-extensions</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/vantagecloud-lake-demo-jupyter-docker/lake_docker_url.png" alt="docker logs" width="75%">
+</div>
+</div>
 <div class="paragraph">
-<p>Teradata&#8217;s MPP architecture requires an efficient means of distributing and retrieving data and does so using hash partitioning. Most tables in Vantage use hashing to distribute data for the tables based on the value of the row’s Primary Index (PI) to disk storage in Block File System (BFS) and may scan the entire table or use indexes to access the data. This approach ensures scalable performance and efficient data access.</p>
+<p>Click on the URL in docker logs to open Jupyter notebook in your browser.</p>
 </div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/vantagecloud-lake-demo-jupyter-docker/lake_jupyter_notebook.png" alt="Jupyter Notebook">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_run_demos"><a class="anchor" href="#_run_demos"></a>Run demos</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Open and execute all the cells in <strong>0_Demo_Environment_Setup.ipynb</strong> to setup your environment, followed by <strong>1_Demo_Setup_Base_Data.ipynb</strong> to load the base data required for the demos.<br></p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/vantagecloud-lake-demo-jupyter-docker/lake_0_setup.png" alt="Environment setup Jupyter Notebook">
+</div>
+</div>
+<div class="paragraph">
+<p>To learn more about the demo notebooks, go to <a href="https://github.com/Teradata/lake-demos">Teradata Lake demos</a> page on GitHub.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this quick start we learned how to run Teradata VantageCloud Lake demos from Jupyter Notebook in Docker.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further reading</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>If the Primary Index is unique then the rows in the tables are automatically distributed evenly by hash partitioning.</p>
+<p><a href="https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin">Teradata VantageCloud Lake documentation</a></p>
 </li>
 <li>
-<p>The designated Primary Index column(s) are hashed to generate consistent hash codes for the same values.</p>
-</li>
-<li>
-<p>No reorganization, repartitioning, or space management is required.</p>
-</li>
-<li>
-<p>Each AMP typically contains rows from all tables, ensuring efficient data access and processing.</p>
+<p><a href="https://quickstarts.teradata.com/jupyter.html">Use Vantage from a Jupyter notebook</a></p>
 </li>
 </ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/teradata-vantage-architecture-concepts/teradata_data_distribution.png" alt="Teradata Data Distribution" width="75%">
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_conclusion"><a class="anchor" href="#_conclusion"></a>Conclusion</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In this article, we covered the major architectural components of Teradata Vantage, such as the Parsing Engines (PEs), BYNET, Access Module Processors (AMPs), Virtual Disk (Vdisk), other architectural components such as Parallel Database Extension (PDE), Node and the essential concepts of Teradata Vantage such as Linear Growth and Expandability, Parallelism, Data Retrieval, and Data Distribution.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further Reading</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Introduction/Vantage-Hardware-and-Software-Architecture/Virtual-Processors/Parsing-Engine" target="_blank" rel="noopener">Parsing Engine</a></p>
-</div>
-<div class="paragraph">
-<p><a href="https://www.teradata.com/Blogs/What-Is-the-BYNET-and-Why-Is-It-Important-to-Vantage" target="_blank" rel="noopener">BYNET</a></p>
-</div>
-<div class="paragraph">
-<p><a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Introduction/Vantage-Hardware-and-Software-Architecture/Virtual-Processors/Access-Module-Processor" target="_blank" rel="noopener">Access Module Processor</a></p>
-</div>
-<div class="paragraph">
-<p><a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Introduction/Vantage-Hardware-and-Software-Architecture/Parallel-Database-Extensions" target="_blank" rel="noopener">Parallel Database Extensions</a></p>
-</div>
-<div class="paragraph">
-<p><a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Introduction/Data-Distribution-and-Data-Access-Methods" target="_blank" rel="noopener">Teradata Data Distribution and Data Access Methods</a></p>
 </div>
 </div>
 </div>
@@ -1866,14 +1925,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     <li>
                       <a href="https://teradata.my.site.com/teradataPRM/s/self-registration" data-celebrus="Footer Menu - Partner registration" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Partner registration | https://teradata.my.site.com/teradataPRM/s/self-registration" target="_blank" rel="noopener">Partner registration
                         <span class="material-symbols-outlined md-16 ms-2">
-                          <img src="./_/img/small-external.svg" alt="External Icon" width="" height="">
+                          <img src="../_/img/small-external.svg" alt="External Icon" width="" height="">
                         </span>
                       </a>
                     </li>
                     <li>
                       <a href="https://teradata.my.site.com/teradataPRM/s/login/" data-celebrus="Footer Menu - Partner portal login" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Partner portal login | https://teradata.my.site.com/teradataPRM/s/login/" target="_blank" rel="noopener">Partner portal login
                         <span class="material-symbols-outlined md-16 ms-2">
-                          <img src="./_/img/small-external.svg" alt="External Icon" width="" height="">
+                          <img src="../_/img/small-external.svg" alt="External Icon" width="" height="">
                         </span>
                       </a>
                     </li>
@@ -1994,14 +2053,14 @@ document.addEventListener("DOMContentLoaded", function () {
                             <li>
                               <a href="https://careers.teradata.com" data-celebrus="Footer Menu - Careers" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Careers | https://careers.teradata.com" target="_blank" rel="noopener">Careers
                                 <span class="material-symbols-outlined md-16 ms-2">
-                                  <img src="./_/img/small-external.svg" alt="External Icon" width="" height="">
+                                  <img src="../_/img/small-external.svg" alt="External Icon" width="" height="">
                                 </span>
                               </a>
                             </li>
                             <li>
                               <a href="https://investor.teradata.com" data-celebrus="Footer Menu - Investors" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Investors | https://investor.teradata.com" target="_blank" rel="noopener">Investors
                                 <span class="material-symbols-outlined md-16 ms-2">
-                                  <img src="./_/img/small-external.svg" alt="External Icon" width="" height="">
+                                  <img src="../_/img/small-external.svg" alt="External Icon" width="" height="">
                                 </span>
                               </a>
                             </li>
@@ -2200,25 +2259,25 @@ document.addEventListener("DOMContentLoaded", function () {
   const mainElement = document.getElementById('home'); 
   
   if (mainElement && mainElement.id === 'home') {
-    const scriptElement = document.querySelector('script[src="./_/js/site.js"]');
+    const scriptElement = document.querySelector('script[src="../_/js/site.js"]');
     if (scriptElement) {
       scriptElement.remove(); 
     }
   } else {
-    const scriptElement = document.querySelector('script[src="./_/js/site.js"]');
+    const scriptElement = document.querySelector('script[src="../_/js/site.js"]');
     if (!scriptElement) {
       const newScriptElement = document.createElement('script');
-      newScriptElement.src = './_/js/site.js';
+      newScriptElement.src = '../_/js/site.js';
       document.body.appendChild(newScriptElement);
     }
   }
 });
 </script>    
-<script async src="./_/js/behavior.js"></script>
-<script src="./_/js/vendor/lunr.js"></script>
-<script src="./_/js/search-ui.js" id="search-ui-script" data-site-root-path="." data-snippet-length="100" data-stylesheet="./_/css/search.css"></script>
-<script async src="./search-index.js"></script>
-<script src="./_/js/teradata.min.js"></script>
+<script async src="../_/js/behavior.js"></script>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+<script src="../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>

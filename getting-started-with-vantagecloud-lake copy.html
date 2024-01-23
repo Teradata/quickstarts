@@ -3,20 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Teradata Vantage Engine Architecture and Concepts :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/teradata-vantage-engine-architecture-and-concepts.html">
-    <meta name="description" content="Teradata Vantage Architecture and Concepts.">
-    <meta name="keywords" content="data warehouses, teradata vantage engine architecture, teradata, vantage, Access Module Processors (AMP), Parsing Engines (PE), Massively Parallel Processing (MPP), Virtual Disk (Vdisks), BYNET">
+    <title>Getting Started with VantageCloud Lake :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake%20copy.html">
+    <meta name="description" content="Create your own environment in VantageCloud Lake">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy, vantagecloud, vantagecloud lake, ip address, public internet, lake">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="./_/css/site.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta property="og:title" content="Teradata Vantage Engine Architecture and Concepts :: Teradata Getting Started">
+<meta property="og:title" content="Getting Started with VantageCloud Lake :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Teradata Vantage Architecture and Concepts." />
+<meta property="og:description" content="Create your own environment in VantageCloud Lake" />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/teradata-vantage-engine-architecture-and-concepts.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake%20copy.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -1216,7 +1216,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Introduction</span>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="teradata-vantage-engine-architecture-and-concepts.html">Teradata Vantage Engine Architecture and Concepts</a>
   </li>
 </ul>
@@ -1493,8 +1493,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li>Introduction</li>
-    <li><a href="teradata-vantage-engine-architecture-and-concepts.html">Teradata Vantage Engine Architecture and Concepts</a></li>
+    <li><a href="getting-started-with-vantagecloud-lake%20copy.html">Getting Started with VantageCloud Lake</a></li>
   </ul>
 </nav>
 </div>
@@ -1502,111 +1501,55 @@ document.addEventListener("DOMContentLoaded", function () {
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
       <div class="page-controls">
       <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/teradata-vantage-engine-architecture-and-concepts.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+      <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/getting-started-with-vantagecloud-lake%20copy.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu">
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">Teradata Vantage Engine Architecture and Concepts</h1>
+<h1 class="page">Getting Started with VantageCloud Lake</h1>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This article explains the underlying concepts of Teradata Vantage engine architecture. All editions of Vantage, including the Primary Cluster in VantageCloud Lake utilize the same engine.</p>
+<p>Teradata VantageCloud Lake is Teradata&#8217;s next-generation, cloud-native analytics and data platform. It provides lakehouse deployment patterns along with the ability to run independent elastic workloads using an object storage-centric design.<br>
+It empowers organizations to unlock their data, activate analytics, and accelerate value. Customers can optimize their analytics environment using specially configured compute cluster resources that best accommodate their workload requirements.<br></p>
 </div>
-<div class="paragraph">
-<p>Teradata&#8217;s architecture is designed around a Massively Parallel Processing (MPP), shared-nothing architecture, which enables high-performance data processing and analytics. The MPP architecture distributes the workload into multiple vprocs or virtual processors. The virtual processor where query processing takes place is commonly referred to as an Access Module Processor (AMP). Each AMP is isolated from other AMPs, and processes the queries in parallel allowing Teradata to process large volumes of data rapidly.</p>
-</div>
-<div class="paragraph">
-<p>The major architectural components of the Teradata Vantage engine include the Parsing Engines (PEs), BYNET, Access Module Processors (AMPs), and Virtual Disks (Vdisks). Vdisks are assigned to AMPs in enterprise platforms, and to the Primary Cluster in the case of VantageCloud Lake environments.</p>
-</div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
-<img src="_images/teradata-vantage-architecture-concepts/teradata_architecture_major_components.png" alt="Teradata Vantage Major Architectural Components" width="75%">
+<img src="_images/VantageCloud.png" alt="VantageCloud" width="50%">
 </div>
+</div>
+<div class="paragraph">
+<p>VantageCloud Lake provides all the benefits you’d expect in a cloud solution plus Teradata’s differentiated technology stack, including the industry-leading Analytics Database, ClearScape Analytics, and QueryGrid data fabric.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_teradata_vantage_engine_architecture_components"><a class="anchor" href="#_teradata_vantage_engine_architecture_components"></a>Teradata Vantage Engine Architecture Components</h2>
+<h2 id="_sign_on_to_vantagecloud_lake"><a class="anchor" href="#_sign_on_to_vantagecloud_lake"></a>Sign-on to VantageCloud Lake</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>The Teradata Vantage engine consists of the components below:</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+To get a VantageCloud Lake sign-on link and credentials, fill the <a href="https://www.teradata.com/about-us/contact">contact form</a> to reach out to Teradata team.
+</td>
+</tr>
+</table>
 </div>
-<div class="sect2">
-<h3 id="_parsing_engines_pe"><a class="anchor" href="#_parsing_engines_pe"></a>Parsing Engines (PE)</h3>
 <div class="paragraph">
-<p>When a SQL query is run in Teradata, it first reaches the Parsing Engine. The functions of the Parsing Engine are:</p>
+<p>Go to the URL provided by Teradata, for example, <strong><em>ourcompany.innovationlabs.teradata.com</em></strong> and sign on:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Manage individual user sessions (up to 120).</p>
+<p>Existing customers can use their organization admin username(email address) and password to sign on.</p>
 </li>
 <li>
-<p>Check if the objects used in the SQL query exist.</p>
-</li>
-<li>
-<p>Check if the user has required privileges against the objects used in the SQL query.</p>
-</li>
-<li>
-<p>Parse and optimize the SQL queries.</p>
-</li>
-<li>
-<p>Prepare the execution plan to execute the SQL query and passes it to the corresponding AMPs.</p>
-</li>
-<li>
-<p>Receive the response from the AMPs and send it back to the requesting client.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_bynet"><a class="anchor" href="#_bynet"></a>BYNET</h3>
-<div class="paragraph">
-<p>BYNET is a system that enables component communication. The BYNET system provides high-speed bi-directional broadcast, multicast, and point-to-point communication and merge functions. It performs three key functions: coordinating multi-AMP queries, reading data from multiple AMPs, regulating message flow to prevent congestion, and processing platform throughput. These functions of BYNET make Vantage highly scalable and enable Massively Parallel Processing (MPP) capabilities.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_parallel_database_extension_pde"><a class="anchor" href="#_parallel_database_extension_pde"></a>Parallel Database Extension (PDE)</h3>
-<div class="paragraph">
-<p>Parallel Database Extension (PDE) is an intermediary software layer positioned between the operating system and the Teradata Vantage database. PDE enables MPP systems to use features such as BYNET and shared disks. It facilitates the parallelism that is responsible for the speed and linear scalability of the Teradata Vantage database.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_access_module_processor_amp"><a class="anchor" href="#_access_module_processor_amp"></a>Access Module Processor (AMP)</h3>
-<div class="paragraph">
-<p>AMPs are responsible for data storage and retrieval. Each AMP is associated with its own set of Virtual Disks (Vdisks) where the data is stored, and no other AMP can access that content in line with the shared-nothing architecture. The functions of AMP are:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Access storage using Vantage’s Block File System Software</p>
-</li>
-<li>
-<p>Lock management</p>
-</li>
-<li>
-<p>Sorting rows</p>
-</li>
-<li>
-<p>Aggregating columns</p>
-</li>
-<li>
-<p>Join processing</p>
-</li>
-<li>
-<p>Output conversion</p>
-</li>
-<li>
-<p>Disk space management</p>
-</li>
-<li>
-<p>Accounting</p>
-</li>
-<li>
-<p>Recovery processing</p>
+<p>New customer can sign on with their organization admin username (from welcome letter: email address) and the password you created.</p>
 </li>
 </ul>
 </div>
@@ -1617,151 +1560,396 @@ document.addEventListener("DOMContentLoaded", function () {
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>AMPs in VantageCore IntelliFlex, VantageCore VMware, VantageCloud Enterprise, and the Primary Cluster in the case of VantageCloud Lake, store data in a Block File System (BFS) format on Vdisks. AMPs in Compute Clusters and Compute Worker Nodes on VantageCloud Lake do not have BFS, they can only access data in object storage using the Object File System (OFS).</p>
+Click <a href="https://login.customer.teradata.com/ext/pwdreset/Identify?AdapterId=CDSCustomer">here</a> to reset the organization admin password.
+</td>
+</tr>
+</table>
 </div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/lake_sign_on.png" alt="Sign On" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>The signing on takes you to VantageCloud Lake welcome page.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/lake_welcome_page.png" alt="Welcome Page" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>The Welcome page has navigation menu that not only gives you a complete control of your environments but also provides you various necessary tools:</p>
+</div>
+<div class="imageblock right text-right">
+<div class="content">
+<img src="_images/lake_expanded_menu.png" alt="Navigation Menu Items" width="60%">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Vantage - Home page of VantageCloud Lake portal</p>
+</li>
+<li>
+<p><a href="https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin/Step-1-Signing-On-and-Creating-Your-First-Environment">Environments</a> - Create your environments and see all the created environments</p>
+</li>
+<li>
+<p><a href="https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Introduction-to-VantageCloud-Lake/VantageCloud-Lake-Organizations-and-Environments">Organization</a> - View organizations configuration, manage Organization Admins and view the configuration and status of your account</p>
+</li>
+<li>
+<p><a href="https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Managing-Compute-Resources/Review-Consumption-Usage">Consumption</a> - Monitor how your organization consumes compute and storage resources</p>
+</li>
+<li>
+<p><a href="https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Using-VantageCloud-Lake-Console-to-Manage-VantageCloud-Lake/Using-the-Consumption-Estimates">Cost Calculator</a> - Calculate the cost and consumption of your environment and whole organization.</p>
+</li>
+<li>
+<p><a href="https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Running-and-Monitoring-Queries/Monitoring-and-Managing-Queries">Queries</a> - Inspect an environment&#8217;s queries to understand their efficiency.</p>
+</li>
+<li>
+<p><a href="https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Running-and-Monitoring-Queries">Editor</a> - Create and run queries in an editor.</p>
+</li>
+<li>
+<p><a href="https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Data-Copy">Data Copy</a> - Provision, configure and run data copy (also known as Data Mover) jobs from VantageCloud Lake Console.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_an_environment"><a class="anchor" href="#_create_an_environment"></a>Create an Environment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To create a primary cluster environment, click on "Environments" on the navigation menu. In a new opened view, click on "Create" button situated on the top right of the page.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/lake_environment_page.png" alt="Environment Page" width="75%">
+</div>
+</div>
+<div class="sect2">
+<h3 id="_environment_configuration"><a class="anchor" href="#_environment_configuration"></a>Environment configuration</h3>
+<div class="paragraph">
+<p>Fill out the Environment configuration fields:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Item</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Environment name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A contextual name for new environment</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Region</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The available region list was predetermined during the sales process.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Package</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">There are two service packages available to select from:<br>
+Lake: Premier 24x7 cloud support<br>
+Lake+: Premier 24x7 Priority cloud support + industry data models</p></td>
+</tr>
+</tbody>
+</table>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/lake_environment_configuration.png" alt="Environment configuration" width="50%">
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The <strong>Consumption estimates</strong>, to your right, provide guidance for configuring the environment. See <a href="https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Using-VantageCloud-Lake-Console-to-Manage-VantageCloud-Lake/Using-the-Consumption-Estimates">Using the Consumption Estimates</a> for more detail.
 </td>
 </tr>
 </table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_virtual_disks_vdisks"><a class="anchor" href="#_virtual_disks_vdisks"></a>Virtual Disks (Vdisks)</h3>
+<h3 id="_primary_cluster_configuration"><a class="anchor" href="#_primary_cluster_configuration"></a>Primary cluster configuration</h3>
 <div class="paragraph">
-<p>These are units of storage space owned by an AMP. Virtual Disks are used to hold user data (rows within tables). Virtual Disks map to physical space on a disk.</p>
+<p>Fill out the Primary cluster configuration fields:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Item</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Instance size</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Select an instance size suitable for your use-case:<br></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 66.6666%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Lake</th>
+<th class="tableblock halign-left valign-top">value (in units)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XSmall</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Small</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Large</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XLarge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">13</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2XLarge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">20</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3XLarge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">27</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 66.6666%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Lake+</th>
+<th class="tableblock halign-left valign-top">value (in units)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XSmall</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.4</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Small</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4.8</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8.4</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Large</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">12</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XLarge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">15.6</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2XLarge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">24</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3XLarge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32.4</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Instance count</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>2 to 64<br>
+Number of nodes in the primary clusters</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Instance storage</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1 to 72TB per instance</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/lake_primary_cluster_config.png" alt="Primary cluster configuration" width="50%">
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_node"><a class="anchor" href="#_node"></a>Node</h3>
+<h3 id="_database_credentials"><a class="anchor" href="#_database_credentials"></a>Database credentials</h3>
 <div class="paragraph">
-<p>A node, in the context of Teradata systems, represents an individual server that functions as a hardware platform for the database software. It serves as a processing unit where database operations are executed under the control of a single operating system. When Teradata is deployed in a cloud, it follows the same MPP, shared-nothing architecture but the physical nodes are replaced with virtual machines (VMs).</p>
+<p>Fill out the Database credential fields:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Item</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Description</strong></th>
+</tr>
+</thead>
+</table>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/lake_database_cred.png" alt="Primary cluster configuration" width="50%">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_advanced_options"><a class="anchor" href="#_advanced_options"></a>Advanced options</h3>
+<div class="paragraph">
+<p>To quickly get started, you can select <strong>Use Defaults</strong> or define the additional option settings.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/lake_advanced_option_default.png" alt="Advanced option with user default" width="50%">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Item</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AMPs per instance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Workload management<br>
+Select the number of AMPs per instance for the instance size you selected.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AWS: Storage encryption</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configure encryption for customer data. See <a href="https://docs.aws.amazon.com/kms/latest/developerguide/find-cmk-id-arn.html">Finding the key ID and key ARN</a><br>
+* Managed by Teradata<br>
+* Customer managed<br>
+* Key Alias ARN</p></td>
+</tr>
+</tbody>
+</table>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/lake_advanced_option.png" alt="Advanced option user defined" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>Review all the information and click on <strong>CREATE ENVIRONMENT</strong> button.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/lake_create_environment.png" alt="Create environment button" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>The deployment takes few minutes. Once complete, created environment can be found in <strong>Environments</strong> section as a card view(name of environment is quickstart_demo).</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/lake_available_environment.png" alt="Newly created available environment" width="50%">
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_teradata_vantage_architecture_concepts"><a class="anchor" href="#_teradata_vantage_architecture_concepts"></a>Teradata Vantage Architecture Concepts</h2>
+<h2 id="_access_environment_from_public_internet"><a class="anchor" href="#_access_environment_from_public_internet"></a>Access environment from public internet</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The concepts below are applicable to Teradata Vantage.</p>
+<p>The created environment is accessible through console only. To change that, click on created environment and go to <strong>SETTINGS</strong> tab.</p>
 </div>
-<div class="sect2">
-<h3 id="_linear_growth_and_expandability"><a class="anchor" href="#_linear_growth_and_expandability"></a>Linear Growth and Expandability</h3>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/lake_settings_menu.png" alt="Settings menu of created environment" width="75%">
+</div>
+</div>
 <div class="paragraph">
-<p>Teradata is a linearly expandable RDBMS. As the workload and data volume increase, adding more hardware resources such as servers or nodes results in a proportional increase in performance and capacity. Linear Scalability allows for increased workload without decreased throughput.</p>
+<p>In the <strong>SETTINGS</strong>, select the <strong>Internet connection</strong> checkbox and provide the IP addresses in CIDR format (for example, 192.168.2.0/24 specifies all IP addresses in the range: 192.168.2.0 to 192.168.2.255) with which you would want to access your environment.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Find more information on setting up an internet connection <a href="https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin/Step-2-Setting-the-Environment-Connection-Type/Setting-Up-an-Internet-Connection">here</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/lake_ip_addresses.png" alt="IP whitelisting" width="50%">
 </div>
 </div>
-<div class="sect2">
-<h3 id="_teradata_parallelism"><a class="anchor" href="#_teradata_parallelism"></a>Teradata Parallelism</h3>
 <div class="paragraph">
-<p>Teradata parallelism refers to the inherent ability of the Teradata Database to perform parallel processing of data and queries across multiple nodes or components simultaneously.</p>
+<p>Click on the <strong>SAVE</strong> button situated on right top of the page to confirm changes.<br></p>
 </div>
+<div class="paragraph">
+<p>Go back to the <strong>Environments</strong> section and check your environment card. It has <strong>Public internet</strong> access now.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/lake_public_internet_cv.png" alt="Public internet card view" width="50%">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this quick start we learned how to create an environment in VantageCloud Lake and allow it to be accessed from public internet.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further reading</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Each Parsing Engine (PE) in Teradata has the capability to handle up to 120 sessions concurrently.</p>
-</li>
-<li>
-<p>The BYNET in Teradata enables parallel handling of all message activity, including data redistribution for subsequent tasks.</p>
-</li>
-<li>
-<p>All Access Module Processors (AMPs) in Teradata can collaborate in parallel to serve any incoming request.</p>
-</li>
-<li>
-<p>Each AMP can work on multiple requests concurrently, allowing for efficient parallel processing.</p>
+<p><a href="https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin">Teradata VantageCloud Lake documentation</a></p>
 </li>
 </ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/teradata-vantage-architecture-concepts/teradata_parallelism.png" alt="Teradata Parallelism" width="75%">
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_teradata_retrieval_architecture"><a class="anchor" href="#_teradata_retrieval_architecture"></a>Teradata Retrieval Architecture</h3>
-<div class="paragraph">
-<p>The key steps involved in Teradata Retrieval Architecture are:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The Parsing Engine sends a request to retrieve one or more rows.</p>
-</li>
-<li>
-<p>The BYNET activates the relevant AMP(s) for processing.</p>
-</li>
-<li>
-<p>The AMP(s) concurrently locate and retrieve the desired row(s) through parallel access.</p>
-</li>
-<li>
-<p>The BYNET returns the retrieved row(s) to the Parsing Engine.</p>
-</li>
-<li>
-<p>The Parsing Engine then delivers the row(s) back to the requesting client application.</p>
-</li>
-</ol>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/teradata-vantage-architecture-concepts/teradata_retrieval_architecture.png" alt="Teradata Retrieval Architecture" width="75%">
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_teradata_data_distribution"><a class="anchor" href="#_teradata_data_distribution"></a>Teradata Data Distribution</h3>
-<div class="paragraph">
-<p>Teradata&#8217;s MPP architecture requires an efficient means of distributing and retrieving data and does so using hash partitioning. Most tables in Vantage use hashing to distribute data for the tables based on the value of the row’s Primary Index (PI) to disk storage in Block File System (BFS) and may scan the entire table or use indexes to access the data. This approach ensures scalable performance and efficient data access.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>If the Primary Index is unique then the rows in the tables are automatically distributed evenly by hash partitioning.</p>
-</li>
-<li>
-<p>The designated Primary Index column(s) are hashed to generate consistent hash codes for the same values.</p>
-</li>
-<li>
-<p>No reorganization, repartitioning, or space management is required.</p>
-</li>
-<li>
-<p>Each AMP typically contains rows from all tables, ensuring efficient data access and processing.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/teradata-vantage-architecture-concepts/teradata_data_distribution.png" alt="Teradata Data Distribution" width="75%">
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_conclusion"><a class="anchor" href="#_conclusion"></a>Conclusion</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In this article, we covered the major architectural components of Teradata Vantage, such as the Parsing Engines (PEs), BYNET, Access Module Processors (AMPs), Virtual Disk (Vdisk), other architectural components such as Parallel Database Extension (PDE), Node and the essential concepts of Teradata Vantage such as Linear Growth and Expandability, Parallelism, Data Retrieval, and Data Distribution.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further Reading</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Introduction/Vantage-Hardware-and-Software-Architecture/Virtual-Processors/Parsing-Engine" target="_blank" rel="noopener">Parsing Engine</a></p>
-</div>
-<div class="paragraph">
-<p><a href="https://www.teradata.com/Blogs/What-Is-the-BYNET-and-Why-Is-It-Important-to-Vantage" target="_blank" rel="noopener">BYNET</a></p>
-</div>
-<div class="paragraph">
-<p><a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Introduction/Vantage-Hardware-and-Software-Architecture/Virtual-Processors/Access-Module-Processor" target="_blank" rel="noopener">Access Module Processor</a></p>
-</div>
-<div class="paragraph">
-<p><a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Introduction/Vantage-Hardware-and-Software-Architecture/Parallel-Database-Extensions" target="_blank" rel="noopener">Parallel Database Extensions</a></p>
-</div>
-<div class="paragraph">
-<p><a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Introduction/Data-Distribution-and-Data-Access-Methods" target="_blank" rel="noopener">Teradata Data Distribution and Data Access Methods</a></p>
 </div>
 </div>
 </div>
