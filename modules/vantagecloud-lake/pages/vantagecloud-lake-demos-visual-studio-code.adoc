@@ -85,8 +85,7 @@ Edit the *https://github.com/Teradata/lake-demos/blob/main/vars.json[vars.json f
 | The master password of your VantageCloud Lake environment.
 |====
 
-To retrieve a Public IP address and Open Analytics Endpoint follow these https://quickstarts.teradata.com/vantagecloud-lake-demo-jupyter-docker.html#_create_vantagecloud_lake_environment[instructions].
-
+To retrieve a Public IP address and Open Analytics Endpoint follow these https://quickstarts.teradata.com/vantagecloud-lake/vantagecloud-lake-demo-jupyter-docker.html[instructions].
 ====
 IMPORTANT: Change passwords in the vars.json file.
  You'll see that in the sample vars.json, the passwords of all users are defaulted to "password", this is just for matters of the sample file, you should change all of these password fields to strong passwords, secure them as necessary and follow other password management best practices.
