@@ -72,5 +72,6 @@
 
 * VantageCloud Lake
 ** xref:getting-started-with-vantagecloud-lake.adoc[]
+** xref:vantagecloud-lake:vantagecloud-lake-demo-jupyter-docker.adoc[]
 ** xref:vantagecloud-lake:vantagecloud-lake-demos-visual-studio-code.adoc[]
 ** xref:vantagecloud-lake:vantagecloud-lake-demo-jupyter-sagemaker.adoc[]
