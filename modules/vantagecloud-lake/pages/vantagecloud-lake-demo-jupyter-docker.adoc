@@ -1,0 +1,132 @@
+= Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Docker
+:experimental:
+:page-author: Vidhan Bhonsle
+:page-email: vidhan.bhonsle@teradata.com
+:page-revdate: January 10th, 2024
+:description: Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Docker
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, docker, container, vantagecloud, vantagecloud lake, lake
+:dir: vantagecloud-lake-demo-jupyter-docker
+
+== Overview
+In this how-to we will go through the steps for connecting to TeradataCloud Lake and run demos from a Jupyter notebook in Docker. 
+
+== Prerequisites
+* https://www.docker.com/products/docker-desktop/[Docker Desktop] installed
+* https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[Git] installed
+** Required to download git repo from https://github.com/Teradata/lake-demos.git
+* A Teradata VantageCloud Lake account login
+** Organization URL and login details from Teradata welcome letter
+* IDE of your choice
+
+== Create VantageCloud Lake environment
+Follow the instructions from the https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html[VantageCloud Lake getting started] to create your own environment. +
+Once created, go to *SETTINGS* tab and provide your public IP address to https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html#_access_environment_from_public_internet[access the environment].
+
+NOTE: You can find your IP address from https://www.whatismyip.com/[WhatIsMyIp.com] website. Take note of the IPv4 address.
+
+image::{dir}/lake_ip_addresses.png[IP whitelisting,align="center",width=50%]
+
+Your environment card should show *Public internet* access now.
+
+image::{dir}/lake_public_internet_cv.png[Public internet card view,align="center",width=50%]
+
+From *OVERVIEW* tab, copy:
+
+* Public IP and
+* Open Analytics Endpoint
+
+These values are required to access VantageCloud Lake from the Docker.
+
+image::{dir}/lake_overview_page.png[Environment Overview page,align="center",width=75%]
+
+== Clone VantageCloud Lake Demo repository
+Clone VantageCloud Lake Demo repository in your local machine:
+
+[source, bash]
+----
+git clone https://github.com/Teradata/lake-demos.git
+cd lake-demos
+----
+
+The repository contains different files and folders, the important ones are:
+
+* Jupyter Notebooks
+** https://github.com/Teradata/lake-demos/blob/main/0_Demo_Environment_Setup.ipynb[0_Demo_Environment_Setup.ipynb]
+** https://github.com/Teradata/lake-demos/blob/main/1_Load_Base_Demo_Data.ipynb[1_Load_Base_Demo_Data.ipynb]
+** https://github.com/Teradata/lake-demos/blob/main/Data_Engineering_Exploration.ipynb[Data_Engineering_Exploration.ipynb]
+** https://github.com/Teradata/lake-demos/blob/main/Data_Science_OAF.ipynb[Data_Science_OAF.ipynb]
+** https://github.com/Teradata/lake-demos/blob/main/Demo_Admin.ipynb[Demo_Admin.ipynb]
+* https://github.com/Teradata/lake-demos/blob/main/vars.json[vars.json file]
+
+== Edit vars.json file
+To connect Jupyter notebooks with VantageCloud Lake, you need to edit https://github.com/Teradata/lake-demos/blob/main/vars.json[vars.json file] and provide:
+
+[cols="1,1"]
+|====
+| *Variable* | *Value*
+
+| *"host"* 
+| Public IP value from *OVERVIEW* section (see above)
+
+| *"UES_URI"* 
+| Open Analytics Endpoint value from *OVERVIEW* section (see above)
+
+| *"dbc"* 
+| The master password of your VantageCloud Lake environment
+
+|====
+
+IMPORTANT: In the sample vars.json, the passwords of all users are defaulted to "password", this is just for illustration purposes. You should change all of these password fields to strong passwords, secure them as necessary, and follow other password management best practices.
+
+== Mount files within Docker
+To run VantageCloud Lake demos, we need the https://hub.docker.com/r/teradata/jupyterlab-extensions[Teradata Jupyter Extensions for Docker]. The extensions provide the SQL ipython kernel, utilities to manage connections to Teradata, and the database object explorer to make you productive while interacting with the Teradata database.  
+
+IMPORTANT: Make sure that you are running all the commands in the same folder where you have cloned the demo repository.   
+
+Start a container and bind it to the existing lake-demos directory. Choose the appropriate command based on your operating system:
+
+NOTE: For Windows, run the docker command in PowerShell.
+
+[tabs]
+====
+Windows::
++
+[source,powershell]
+----
+docker run -e "accept_license=Y" -p 127.0.0.1:8888:8888 -v ${PWD}:/home/jovyan/JupyterLabRoot teradata/jupyterlab-extensions
+----
+macOS::
++
+[source,bash]
+----
+docker run -e "accept_license=Y" -p 127.0.0.1:8888:8888 -v $PWD:/home/jovyan/JupyterLabRoot teradata/jupyterlab-extensions
+----
+Linux::
++
+[source,bash]
+----
+docker run -e "accept_license=Y" -p 127.0.0.1:8888:8888 -v $PWD:/home/jovyan/JupyterLabRoot teradata/jupyterlab-extensions
+----
+====
+
+image::{dir}/lake_docker_url.png[docker logs,align="center",width=75%]
+
+Click on the URL in docker logs to open Jupyter notebook in your browser.
+
+image::{dir}/lake_jupyter_notebook.png[Jupyter Notebook,align="center"]
+
+== Run demos
+Open and execute all the cells in *0_Demo_Environment_Setup.ipynb* to setup your environment, followed by *1_Demo_Setup_Base_Data.ipynb* to load the base data required for the demos. +
+
+image::{dir}/lake_0_setup.png[Environment setup Jupyter Notebook,align="center"]
+
+To learn more about the demo notebooks, go to https://github.com/Teradata/lake-demos[Teradata Lake demos] page on GitHub.
+
+== Summary
+
+In this quick start we learned how to run Teradata VantageCloud Lake demos from Jupyter Notebook in Docker.
+
+== Further reading
+
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin[Teradata VantageCloud Lake documentation]
+* https://quickstarts.teradata.com/jupyter.html[Use Vantage from a Jupyter notebook]
