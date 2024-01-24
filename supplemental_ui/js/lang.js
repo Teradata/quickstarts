@@ -1,7 +1,6 @@
 function switchLanguage(lan) {
     let path, page, indexFile, file, newUrl, salida;
     path = document.location.href;
-  //  page = path.split('/').filter(Boolean);
     page = path.split("/");
 
     let aiUnlimited = "ai-unlimited";
@@ -46,12 +45,7 @@ function switchLanguage(lan) {
     }     
 
     salida = page.join('/');
-    //if(salida.includes('//')){
-    //  while (salida.includes('//')) {
-    //    salida = salida.replace('//', '/');
-    //  }
-   // }
-    alert(String(salida));
+
     window.location.href = String(salida); 
   }
   /* 
