@@ -1583,6 +1583,18 @@ cd lake-demos</code></pre>
 <div class="paragraph">
 <p>Next, start a container and bind it to the existing lake-demos directory. Choose the appropriate command based on your operating system:</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For Windows, run the docker command in PowerShell.
+</td>
+</tr>
+</table>
+</div>
 <div class="tabset is-loading">
 <div class="ulist tabs">
 <ul>
@@ -1601,7 +1613,7 @@ cd lake-demos</code></pre>
 <div class="tab-pane" aria-labelledby="tabset1_windows">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -e "accept_license=Y" -p 127.0.0.1:8888:8888 -v $(PWD):/home/jovyan/JupyterLabRoot teradata/jupyterlab-extensions</code></pre>
+<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">docker run -e "accept_license=Y" -p 127.0.0.1:8888:8888 -v ${PWD}:/home/jovyan/JupyterLabRoot teradata/jupyterlab-extensions</code></pre>
 </div>
 </div>
 </div>
