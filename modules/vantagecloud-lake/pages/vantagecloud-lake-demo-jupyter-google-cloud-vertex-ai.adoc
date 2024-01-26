@@ -30,7 +30,7 @@ When you create a new notebook instance, you can specify a startup script. This 
 image::{dir}/bucket.png[New bucket,align="center" width=75%]
 
 * 3. Upload the unizzped Jupyter extension package to your Google Cloud Storage bucket as a file.
-* 4. Write the following startup script and save it as `startup.sh`to your local machine. 
+* 4. Write the following startup script and save it as `startup.sh` to your local machine. 
 
 Below is an example script that retrieves the Teradata Jupyter extension package from Google Cloud Storage bucket and installs Teradata SQL kernel, extensions and clones the lake-demos repository.
 
