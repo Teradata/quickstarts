@@ -18,7 +18,7 @@ This quickstart explains how to run https://github.com/Teradata/lake-demos[Terad
 
 == Vertex AI Google Cloud environment setup
 
-When we create a new notebook instance, we can specify a startup script. This script, which runs only once after instance creation, will install the Teradata Jupyter extension package and clone a GitHub repository into the new user-managed notebooks instance.
+When you create a new notebook instance, you can specify a startup script. This script, which runs only once after instance creation, will install the Teradata Jupyter extension package and clone a GitHub repository into the new user-managed notebooks instance.
 
 * 1. Download Teradata Jupyter extensions package
 - Visit https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter page]
