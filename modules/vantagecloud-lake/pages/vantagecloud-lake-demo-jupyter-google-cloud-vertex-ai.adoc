@@ -96,7 +96,7 @@ image::{dir}/activenotebook.png[active notebook,align="center" width=75%]
 
 [IMPORTANT]
 ====
-We will whitelist this IP in your VantageCloud Lake environment in order to allow the connection. This is for purposes of this guide and the notebooks demos. For production environments, a configuration of VPCs, Subnets and Security Groups might need to be configured and whitelisted.
+You will have to whitelist this IP in your VantageCloud Lake environment to allow the connection. This solution is appropriate in a trial environment. For production environments, a configuration of VPCs, Subnets, and Security Groups might need to be configured and whitelisted.
 ====
 * On JupyterLab open a notebook with a Python kernel and run the following command for finding your notebook instance IP address.
 
