@@ -28,7 +28,7 @@ In this section we will cover in detail each of the steps below:
 
 image::{dir}/azure-console-0.PNG[Azure console,align="center" width=75%]
 
-* On App Services click Web App
+* In App Services click Web App
 
 image::{dir}/azure-app-service-1.PNG[Create Azure web app,align="center" width=75%]
 
