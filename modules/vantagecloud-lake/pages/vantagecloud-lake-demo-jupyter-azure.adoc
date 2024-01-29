@@ -45,9 +45,9 @@ image::{dir}/azure-app-service-2.PNG[Create Azure web app Basics,align="center" 
 
 * On the Docker tab:
 ** Select Single Container, the default option
-** On Image Source select Docker Hub
-** On Access Type select Public
-** On Image and tag type `teradata/jupyterlab-extensions:latest`
+** In Image Source select Docker Hub
+** In Access Type select Public
+** In Image and tag type `teradata/jupyterlab-extensions:latest`
 ** A startup command is not needed for this App Service
 
 image::{dir}/azure-app-service-3.PNG[Create Azure web app Docker,align="center" width=75%]
