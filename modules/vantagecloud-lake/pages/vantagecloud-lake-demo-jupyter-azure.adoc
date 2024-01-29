@@ -80,7 +80,7 @@ image::{dir}/azure-app-service-resource-6.PNG[Create Azure web app Complete,alig
 | *WEBSITES_PORT* 
 | 8888
 | *JUPYTER_TOKEN*
-| Define the Jupyter Lab access token that you would like to use. If you don't include this configuration key, the container will generate a new token and log it to the console. You will need to retrieve it from the application logs.
+| Define the Jupyter Lab access token that you would like to use. If you don't specify any, the container will generate a new token and log it to the console. You will need to retrieve it from the application logs.
 |====
 
 +
