@@ -24,40 +24,43 @@ In this section we will cover in detail each of the steps below:
 * Find the IP of the Jupyter Lab extensions Azure Web App
 
 === Create a Microsoft Azure Web App based on Teradata Jupyter Lab extensions Docker image
-* Login to Microsoft Azure and click on APP Services 
+* Login to Microsoft Azure and click on "APP Services"
 
 image::{dir}/azure-console-0.PNG[Azure console,align="center" width=75%]
 
-* In App Services click Web App
+* In "App Services" click Web App
 
 image::{dir}/azure-app-service-1.PNG[Create Azure web app,align="center" width=75%]
 
-* On the Basics tab:
-** Select the appropiate resource group
-** Enter a name for your web app
-** On Publish select Docker Container 
-** Select Linux as operating system
-** Select the appropiate region according to your needs
-** Select the appropiate App Service plan, if you don't have any a new one will be created with default configurations
-** For purposes of the VantageCloud Lake demo redundancy is not needed
+* On the "Basics" tab:
+** Select the appropriate resource group from the dropdown, or create a new one
+** Enter a name for your web app.
+** Select "Docker Container" in the "Publish" radio button options
+** Select "Linux" as the operating system
+** Select the appropriate region from the dropdown
+** Select the appropriate App Service plan. If you don't have one, a new one will be created with default configurations
++
+TIP: For purposes of the VantageCloud Lake demo redundancy is not needed
+** After completing this tab, click the "Docker" tab to continue
 
 image::{dir}/azure-app-service-2.PNG[Create Azure web app Basics,align="center" width=75%]
 
-* On the Docker tab:
-** Select Single Container, the default option
-** In Image Source select Docker Hub
-** In Access Type select Public
-** In Image and tag type `teradata/jupyterlab-extensions:latest`
-** A startup command is not needed for this App Service
+* On the "Docker" tab:
+** Select "Single Container" from the dropdown
+** In the "Image Source" dropdown select "Docker Hub"
+** In the "Access Type" dropdown select "Public"
+** In "Image and tag" type `teradata/jupyterlab-extensions:latest`
++
+TIP: A startup command is not needed for this App Service
+** Select the "Review + Create" tab to continue
 
 image::{dir}/azure-app-service-3.PNG[Create Azure web app Docker,align="center" width=75%]
 
-* Select Review + Create
-* Click on Create
+* In the "Review + Create" tab click the "Create" button
 
 image::{dir}/azure-app-service-4.PNG[Create Azure web app Review,align="center" width=75%]
 
-* When the deployment is complete click on Go to Resource
+* When the deployment is complete click the "Go to Resource" button
 
 image::{dir}/azure-app-service-deployment-complete-5.PNG[Create Azure web app Complete,align="center" width=75%]
 
@@ -77,8 +80,11 @@ image::{dir}/azure-app-service-resource-6.PNG[Create Azure web app Complete,alig
 | *WEBSITES_PORT* 
 | 8888
 | *JUPYTER_TOKEN*
-| Your desired Jupyter Lab token, if not added, Jupyter Lab will randomly generate one, requiring perusing the logs, if left blank Jupyter Lab the environment would not be locked
+| Define the Jupyter Lab access token that you would like to use. If you don't include this configuration key, the container will generate a new token and log it to the console. You will need to retrieve it from the application logs.
 |====
+
++
+IMPORTANT: If you include the "JUPYTER_TOKEN" configuration key but leave the value blank, the system will set the token as an empty string, resulting in an unprotected Jupyter Lab environment without any token security.
 
 * Click on save, your app will be restarted
 
@@ -105,7 +111,7 @@ image::{dir}/azure-jupyter-console-10.PNG[Config Azure web app,align="center" wi
 
 image::{dir}/azure-jupyter-console-clone-11.PNG[Config Azure web app,align="center" width=75%]
 
-* On the Jupyter Lab console click in the Lake Demos folder
+* On the Jupyter Lab console click in the `lake-demos` folder
 
 image::{dir}/azure-jupyter-console-click-lake-demos-12.PNG[Config Azure web app,align="center" width=75%]
 
@@ -136,7 +142,8 @@ image::{dir}/azure-app-service-ips-14.PNG[Loaded JupyterLab,align="center" width
 
 == VantageCloud Lake Configuration
 * In the VantageCloud Lake environment, under settings, add the IP of your notebook instance
-** A lake environment supports multiple address whitelisting
++
+TIP: A lake environment supports multiple address whitelisting
 
 image::{auxdir}/sagemaker-lake.PNG[Initiate JupyterLab,align="center" width=75%]
 
