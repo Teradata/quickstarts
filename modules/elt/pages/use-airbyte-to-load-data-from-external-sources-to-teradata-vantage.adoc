@@ -159,7 +159,7 @@ image::{dir}/data_sync_validation_in_teradata.png[Data Sync Validation in Terada
 %connect local 
 ----
 
-[source, bash, id="airbyte-select-query", role="emits-gtm-events"]
+[source, bash, id="airbyte_select_query", role="emits-gtm-events"]
 ----
 SELECT  DatabaseName, TableName, CreateTimeStamp, LastAlterTimeStamp
 FROM    DBC.TablesV

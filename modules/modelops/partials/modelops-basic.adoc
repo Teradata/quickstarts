@@ -70,7 +70,7 @@ Add datasets
 
 Features
 Query:
-[source, teradata-sql]
+[source, teradata-sql, id="modelops_feature_query", role="emits-gtm-events"]
 ----
 SELECT * FROM {your-db}.pima_patient_features
 ----

@@ -36,7 +36,7 @@ Next, start a container and bind it to the existing lake-demos directory. Choose
 
 NOTE: For Windows, run the docker command in PowerShell.
 
-[tabs]
+[tabs, id="vscode_tab_mount", role="emits-gtm-events"]
 ====
 Windows::
 +
