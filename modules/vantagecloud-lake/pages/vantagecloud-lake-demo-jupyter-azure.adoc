@@ -143,7 +143,7 @@ image::{auxdir}/sagemaker-lake.PNG[Initiate JupyterLab,align="center" width=75%]
 == Jupyter Notebook Demos for VantageCloud Lake
 
 === Configurations
-* The file https://github.com/Teradata/lake-demos/blob/main/vars.json[vars.json file] should be edited to match the configuration of your VantageCloud Lake environment +
+* https://github.com/Teradata/lake-demos/blob/main/vars.json[vars.json] should be edited to match the configuration of your VantageCloud Lake environment +
 
 image::{auxdir}/sagemaker-vars.PNG[Initiate JupyterLab,align="center" width=75%]
 
