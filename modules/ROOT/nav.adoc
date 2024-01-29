@@ -75,3 +75,5 @@
 ** xref:vantagecloud-lake:vantagecloud-lake-demo-jupyter-docker.adoc[]
 ** xref:vantagecloud-lake:vantagecloud-lake-demos-visual-studio-code.adoc[]
 ** xref:vantagecloud-lake:vantagecloud-lake-demo-jupyter-sagemaker.adoc[]
+** xref:vantagecloud-lake:vantagecloud-lake-demo-jupyter-google-cloud-vertex-ai.adoc[]
+** xref:vantagecloud-lake:vantagecloud-lake-demo-jupyter-azure.adoc[]

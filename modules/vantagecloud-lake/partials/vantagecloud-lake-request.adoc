@@ -1,0 +1,1 @@
+TIP: To request a VantageCloud Lake environment, refer to the form provided in this https://www.teradata.com/about-us/contact[link.] If you already have a VantageCloud Lake environment and seek guidance on configuration, please consult this https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html[guide.]
