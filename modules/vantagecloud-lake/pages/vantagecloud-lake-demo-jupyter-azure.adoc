@@ -77,7 +77,7 @@ image::{dir}/azure-app-service-resource-6.PNG[Create Azure web app Complete,alig
 | *WEBSITES_PORT* 
 | 8888
 | *JUPYTER_TOKEN*
-| Your desired Jupyter Lab token, if not added, Jupyter Lab will randomly generate one, requiring perusing the logs, if left blank Jupyter Lab the environment would not be locked
+| Define the Jupyter Lab access token that you would like to use. If you don't specify any, the container will generate a new token and log it to the console. You will need to retrieve it from the application logs.
 |====
 
 * Click on save, your app will be restarted
