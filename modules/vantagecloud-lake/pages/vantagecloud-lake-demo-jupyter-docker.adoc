@@ -87,7 +87,7 @@ Start a container and bind it to the existing lake-demos directory. Choose the a
 
 NOTE: For Windows, run the docker command in PowerShell.
 
-[tabs]
+[tabs, id="docker-tab-mount", role="emits-gtm-events"]
 ====
 Windows::
 +
