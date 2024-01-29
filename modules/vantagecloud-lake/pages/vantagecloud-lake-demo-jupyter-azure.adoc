@@ -164,9 +164,9 @@ image::{auxdir}/sagemaker-vars.PNG[Initiate JupyterLab,align="center" width=75%]
 |====
 
 +
-IMPORTANT: Remember to change all passwords in the vars.json file.
-
 * You'll see that in the sample vars.json, the passwords of all users are defaulted to "password", this is just for illustration purposes, you should change all of these password fields to strong passwords, secure them as necessary, and follow other password management best practices.
+
+IMPORTANT: Remember to change all passwords in the vars.json file.
 
 == Run demos
 Open and execute all the cells in *0_Demo_Environment_Setup.ipynb* to setup your environment. Followed by *1_Demo_Setup_Base_Data.ipynb* to load the base data required for demo.
