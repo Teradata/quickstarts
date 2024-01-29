@@ -112,7 +112,7 @@ image::{dir}/azure-jupyter-console-click-lake-demos-12.PNG[Config Azure web app,
 image::{dir}/azure-jupyter-console-lakedemos-13.PNG[Config Azure web app,align="center" width=75%]
 
 === Find the IP of the Jupyter Lab extensions Azure Web App
-* On JupyterLab open a notebook with Teradata Python kernel and run the following command for finding your notebook instance IP address.
+* In JupyterLab open a notebook with Teradata Python kernel and run the following command to find your notebook instance's IP address.
 
 +
 [source, python, id="lakedemos_azure_first_config", role="emits-gtm-events, content-editable"]
