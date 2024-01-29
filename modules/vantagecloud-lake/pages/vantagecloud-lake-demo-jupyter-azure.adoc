@@ -13,7 +13,9 @@ This quickstart details the process for running the https://github.com/Teradata/
 
 == Prerequisites
 * Access to a Microsoft Azure account
-* https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html[Access to a VantageCloud Lake environment]
+* Access to a VantageCloud Lake environment
++
+include::vantagecloud-lake:partial$vantagecloud-lake-request.adoc[]
 
 == Microsoft Azure setup
 In this section we will cover in detail each of the steps below:
@@ -80,11 +82,11 @@ image::{dir}/azure-app-service-resource-6.PNG[Create Azure web app Complete,alig
 | *WEBSITES_PORT* 
 | 8888
 | *JUPYTER_TOKEN*
-| Define the Jupyter Lab access token that you would like to use. If you don't specify any, the container will generate a new token and log it to the console. You will need to retrieve it from the application logs.
+| Define the Jupyter Lab access token that you would like to use.
 |====
 
 +
-IMPORTANT: If you include the "JUPYTER_TOKEN" configuration key but leave the value blank, the system will set the token as an empty string, resulting in an unprotected Jupyter Lab environment without any token security.
+IMPORTANT: If you don't include the "JUPYTER_TOKEN" configuration, the container will generate a new token and log it to the console. You will need to retrieve it from the application logs. If you include the "JUPYTER_TOKEN" configuration key but leave the value blank, the system will set the token as an empty string, resulting in an unprotected Jupyter Lab environment without any token security.
 
 * Click on save, your app will be restarted
 
