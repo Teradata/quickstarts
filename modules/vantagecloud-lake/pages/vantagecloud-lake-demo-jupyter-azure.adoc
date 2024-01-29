@@ -128,8 +128,8 @@ my_public_ip = get_public_ip()
 print("My Public IP is:", my_public_ip)
 ----
 
-** We will whitelist this IP in your VantageCloud Lake environment in order to allow the connection
-** This is for purposes of this guide and the notebooks demos. For production environments, a more robust networking setting might be needed
+** The next step is whitelist this IP in your VantageCloud Lake environment to allow the connection
+** This is for purposes of this guide and the notebook demos. For production environments, a more robust networking setting might be needed
 ** Azure App Service offers, as well, a list of all possible IP addresses that the service might expose. This is under the overview tab
 
 image::{dir}/azure-app-service-ips-14.PNG[Loaded JupyterLab,align="center" width=75%]
