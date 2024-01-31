@@ -5,7 +5,6 @@ function switchLanguage(lan) {
 
     let aiUnlimited = "ai-unlimited";
     let bi = "business-intelligence";
-    alert(page[page.length-1]);
     if(page[page.length-1]==="" || page[page.length-1]==="index.html" || page[page.length-1]==="#" || page[page.length-1]==="index.html#") {
       if(page[page.length-2] !== "ja") {
         indexFile = page.lastIndexOf(page[page.length-1]);
