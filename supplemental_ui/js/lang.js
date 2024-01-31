@@ -54,9 +54,8 @@ function switchLanguage(lan) {
   */
   function langOptions() {
     document.getElementById("myDropdown").classList.toggle("show");
-    const dropdownIcon = document.getElementById("dropdownIcon");
-    dropdownIcon.classList.toggle("fa-chevron-up"); // Toggle the up-chevron class
-    dropdownIcon.classList.toggle("fa-chevron-down"); // Toggle the down-chevron class
+    var languageSelector = document.querySelector('.td-language-selector');
+    languageSelector.classList.toggle('active');
   }
 
   // Close the dropdown if the user clicks outside of it
