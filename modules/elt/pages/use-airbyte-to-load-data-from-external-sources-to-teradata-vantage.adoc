@@ -10,7 +10,7 @@
 
 == Overview
 
-This tutorial showcases how to use Airbyte for data integraion with Teradata Vantage, detailing both the https://docs.airbyte.com/using-airbyte/getting-started/[Aibyte Open Source] and https://airbyte.com/[Airbyte Cloud options]. We work with a very simple end-to-end setup to load data from Google Sheets to Teradata Vantage using Airbyte.
+This tutorial showcases how to use Airbyte to move data from sources to Teradata Vantage, detailing both the https://docs.airbyte.com/using-airbyte/getting-started/[Aibyte Open Source] and https://airbyte.com/[Airbyte Cloud options]. This specific example covers replication from Google Sheets to Teradata Vantage.
 
 * Source: Google Sheets
 * Destination: Teradata Vantage
