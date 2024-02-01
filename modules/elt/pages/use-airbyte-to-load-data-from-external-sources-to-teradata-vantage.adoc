@@ -10,27 +10,28 @@
 
 == Overview
 
-This tutorial showcases how to use Airbyte (an open-source Extract Load Transform tool) with Teradata Vantage. We work with a very simple end-to-end setup to load data from Google Sheets to Teradata Vantage using Airbyte.
-
-
-image::{dir}/sample_employees_payrate_google_sheets.png[Sample Employees Payrate Google Sheets, width=75%]
+This tutorial showcases how to use Airbyte for data integraion with Teradata Vantage, detailing both the https://docs.airbyte.com/using-airbyte/getting-started/[Aibyte Open Source] and https://airbyte.com/[Airbyte Cloud options]. We work with a very simple end-to-end setup to load data from Google Sheets to Teradata Vantage using Airbyte.
 
 * Source: Google Sheets
 * Destination: Teradata Vantage
 
-== Prerequisites
+image::{dir}/sample_employees_payrate_google_sheets.png[Sample Employees Payrate Google Sheets,align="center", width=50%]
+
+== Prerequisites 
 * Access to a Teradata Vantage Instance. This will be defined as the destination of the Airbyte connection. You will need a database `Host`, `Username`, and `Password` for Airbyte’s configuration.
 +
 include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
-* Docker Compose to run link:https://github.com/airbytehq/airbyte[Airbyte Open Source,  window="_blank"] locally. Docker Compose comes with Docker Desktop. Please refer to link:https://docs.docker.com/compose/install/[docker docs,  window="_blank"] for more details. 
+* link:https://support.google.com/googleapi/answer/6158841?hl=en[Google Cloud Platform API enabled for your personal or organizational account,  window="_blank"]. You’ll need to authenticate your Google account via OAuth or via Service Account Key Authenticator. In this example, we use Service Account Key Authenticator.
 
 * Data from the source system. In this case, we use a link:https://docs.google.com/spreadsheets/d/1XNBYUw3p7xG6ptfwjChqZ-dNXbTuVwPi7ToQfYKgJIE/edit#gid=0[sample spreadsheet from google sheets,  window="_blank"]. The sample data is a breakdown of payrate by employee type.
 
-* link:https://support.google.com/googleapi/answer/6158841?hl=en[Google Cloud Platform API enabled for your personal or organizational account,  window="_blank"]. You’ll need to authenticate your Google account via OAuth or via Service Account Key Authenticator. In this example, we use Service Account Key Authenticator.
+=== Airbyte Cloud
+* Create an account on https://airbyte.com/[Airbyte Cloud] and skip to the instructions under the link:#airbyte_configuration[Airbyte Configuration] section.
 
+=== Airbyte Open Source
+* Install Docker Compose to run link:https://github.com/airbytehq/airbyte[Airbyte Open Source,  window="_blank"] locally. Docker Compose comes with Docker Desktop. Please refer to link:https://docs.docker.com/compose/install/[docker docs,  window="_blank"] for more details. 
 
-== Launch Airbyte Open Source
 * Clone the Airbyte Open Source repository and go to the airbyte directory.
 +
 [source, bash]
