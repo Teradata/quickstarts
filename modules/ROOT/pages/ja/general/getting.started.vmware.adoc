@@ -1,4 +1,5 @@
 = VMware 上で Vantage Express を実行する
+:page-lang: ja
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
 :page-revdate: 2023 年 1 月 9 日
@@ -6,7 +7,7 @@
 :keywords: データ ウェアハウス、コンピューティング ストレージの分離、teradata、vantage、クラウド データ プラットフォーム、オブジェクト ストレージ、ビジネス インテリジェンス、エンタープライズ分析
 :icons: font
 
-include::../partials/getting.started.intro.adoc[]
+include::../other/getting.started.intro.adoc[]
 
 == 前提条件
 
@@ -47,7 +48,7 @@ IMPORTANT: VMware は、MacOS 用の VMware Workstation Player を提供して�
 
  
 
-include::../partials/next.steps.adoc[]
+include::../other/next.steps.adoc[]
 
 == 参考文献
 * link:https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20[Teradata® Studio™ および Studio™ Express インストール ガイド]

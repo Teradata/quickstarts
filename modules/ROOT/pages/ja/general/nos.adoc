@@ -1,4 +1,5 @@
 = オブジェクトストレージに保存されたクエリーデータ
+:page-lang: ja
 :experimental:
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com

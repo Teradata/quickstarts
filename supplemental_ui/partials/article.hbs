@@ -5,7 +5,11 @@
 {{{page.contents}}}
 {{> pagination}}
 <div class="page-feedback bottom">
+   {{#if (eq page.attributes.lang 'ja')}}
+   <span>このページは役に立ちましたか?</span>
+   {{else}}
   <span>Did this page help?</span>
+  {{/if}}
   <i class="far fa-thumbs-up click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
   <i class="far fa-thumbs-down click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
 </div>

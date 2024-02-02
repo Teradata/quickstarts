@@ -1,4 +1,5 @@
 = Query data stored in object storage
+:page-lang: en
 :experimental:
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
