@@ -1519,12 +1519,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This tutorial showcases how to use Airbyte (an open-source Extract Load Transform tool) with Teradata Vantage. We work with a very simple end-to-end setup to load data from Google Sheets to Teradata Vantage using Airbyte.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/getting-started-with-airbyte/sample_employees_payrate_google_sheets.png" alt="Sample Employees Payrate Google Sheets" width="75%">
-</div>
+<p>This tutorial showcases how to use Airbyte to move data from sources to Teradata Vantage, detailing both the <a href="https://docs.airbyte.com/using-airbyte/getting-started/">Aibyte Open Source</a> and <a href="https://airbyte.com/">Airbyte Cloud options</a>. This specific example covers replication from Google Sheets to Teradata Vantage.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1535,6 +1530,11 @@ document.addEventListener("DOMContentLoaded", function () {
 <p>Destination: Teradata Vantage</p>
 </li>
 </ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/getting-started-with-airbyte/sample_employees_payrate_google_sheets.png" alt="Sample Employees Payrate Google Sheets" width="50%">
+</div>
 </div>
 </div>
 </div>
@@ -1559,23 +1559,30 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 </div>
 </li>
 <li>
-<p>Docker Compose to run <a href="https://github.com/airbytehq/airbyte" target="_blank" rel="noopener">Airbyte Open Source</a> locally. Docker Compose comes with Docker Desktop. Please refer to <a href="https://docs.docker.com/compose/install/" target="_blank" rel="noopener">docker docs</a> for more details.</p>
+<p><a href="https://support.google.com/googleapi/answer/6158841?hl=en" target="_blank" rel="noopener">Google Cloud Platform API enabled for your personal or organizational account</a>. You’ll need to authenticate your Google account via OAuth or via Service Account Key Authenticator. In this example, we use Service Account Key Authenticator.</p>
 </li>
 <li>
 <p>Data from the source system. In this case, we use a <a href="https://docs.google.com/spreadsheets/d/1XNBYUw3p7xG6ptfwjChqZ-dNXbTuVwPi7ToQfYKgJIE/edit#gid=0" target="_blank" rel="noopener">sample spreadsheet from google sheets</a>. The sample data is a breakdown of payrate by employee type.</p>
 </li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_airbyte_cloud"><a class="anchor" href="#_airbyte_cloud"></a>Airbyte Cloud</h3>
+<div class="ulist">
+<ul>
 <li>
-<p><a href="https://support.google.com/googleapi/answer/6158841?hl=en" target="_blank" rel="noopener">Google Cloud Platform API enabled for your personal or organizational account</a>. You’ll need to authenticate your Google account via OAuth or via Service Account Key Authenticator. In this example, we use Service Account Key Authenticator.</p>
+<p>Create an account on <a href="https://airbyte.com/">Airbyte Cloud</a> and skip to the instructions under the <a href="#airbyte_configuration">Airbyte Configuration</a> section.</p>
 </li>
 </ul>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_launch_airbyte_open_source"><a class="anchor" href="#_launch_airbyte_open_source"></a>Launch Airbyte Open Source</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_airbyte_open_source"><a class="anchor" href="#_airbyte_open_source"></a>Airbyte Open Source</h3>
 <div class="ulist">
 <ul>
+<li>
+<p>Install Docker Compose to run <a href="https://github.com/airbytehq/airbyte" target="_blank" rel="noopener">Airbyte Open Source</a> locally. Docker Compose comes with Docker Desktop. Please refer to <a href="https://docs.docker.com/compose/install/" target="_blank" rel="noopener">docker docs</a> for more details.</p>
+</li>
 <li>
 <p>Clone the Airbyte Open Source repository and go to the airbyte directory.</p>
 <div class="listingblock">
@@ -1635,6 +1642,7 @@ BASIC_AUTH_PASSWORD=password</code></pre>
 </div>
 <div class="paragraph">
 <p>Once Airbyte Open Source is launched you will see a connections dashboard. If you launched Airbyte Open Source for the first time, it would not show any connections.</p>
+</div>
 </div>
 </div>
 </div>
