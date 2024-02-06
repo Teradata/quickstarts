@@ -1,6 +1,9 @@
 * Introduction
 ** xref::teradata-vantage-engine-architecture-and-concepts.adoc[Teradata Vantage Engine Architecture and Concepts]
 
+* ClearScape Analytics^TM^
+** xref::csae.adoc[]
+
 * Get access to Vantage
 ** On your local
 *** xref::getting.started.vmware.adoc[Vantage Express on VMware]
