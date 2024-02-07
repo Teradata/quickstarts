@@ -5,7 +5,7 @@
       {{> nav-tree navigation=this}}
     </div>
     <ul class="nav-list">
-        {{> sub-nav-menu-jp }}
+      {{> sub-nav-menu-jp }}
     </ul>
   </nav>
 </div>
@@ -20,9 +20,21 @@
   } else {
     language = 'en';
   }
-
-  document.getElementById(language).style.visibility = 'visible';
+  console.log("language: ",language);
+  
   document.getElementById(language).style.display = 'block';
+
+  document.addEventListener('DOMContentLoaded', function() {
+      var toggleButton = document.querySelector('.nav-toggle');
+      toggleButton.addEventListener('click', function() {
+          if (toggleButton.classList.contains('is-active')) {
+              document.getElementById(language).style.visibility = 'hidden';
+          } else {
+              document.getElementById(language).style.visibility = 'visible';
+          }
+      });
+  });
+
   var parts = path.split('/');
   var pagina = parts[parts.length-2];
   var elementosMenu = document.querySelectorAll('.nav-item a');
