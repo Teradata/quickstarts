@@ -17,7 +17,7 @@ This tutorial demonstrates how to use airflow with Teradata Vantage. Airflow wil
 * Access to a Teradata Vantage instance.
 +
 include::ROOT:partial$vantage_clearscape_analytics.adoc[]
-* Python **3.8*, *3.9*, *3.10* or *3.11* installed.
+* Python *3.8*, *3.9*, *3.10* or *3.11* installed.
 
 == Install apache airflow
 
