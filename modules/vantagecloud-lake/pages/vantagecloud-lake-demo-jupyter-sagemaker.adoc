@@ -58,7 +58,7 @@ image::{dir}/sagemaker-config-2.PNG[Create lifecycle configuration,align="center
 
 ** On create script: 
 +
-[source, bash, id="sagemaker-first-config", role="content-editable emits-gtm-events"]
+[source, bash, id="sagemaker_first_config", role="content-editable emits-gtm-events"]
 ----
 #!/bin/bash
  
