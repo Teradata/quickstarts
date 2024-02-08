@@ -3,16 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>airflow with Teradata Vantage :: Teradata Getting Started</title>
+    <title>Use Apache Airflow with Teradata Vantage :: Teradata Getting Started</title>
     <link rel="canonical" href="https://quickstarts.teradata.com/airflow.html">
-    <meta name="description" content="Use Airflow with Teradata Vantage.">
+    <meta name="description" content="Use Apache Airflow with Teradata Vantage.">
     <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, elt, airflow, workflow.">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="./_/css/site.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta property="og:title" content="airflow with Teradata Vantage :: Teradata Getting Started">
+<meta property="og:title" content="Use Apache Airflow with Teradata Vantage :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Use Airflow with Teradata Vantage." />
+<meta property="og:description" content="Use Apache Airflow with Teradata Vantage." />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
@@ -1289,7 +1289,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <a class="nav-link" href="select-the-right-data-ingestion-tools-for-teradata-vantage.html">Select the right data ingestion solution for Teradata Vantage</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="airflow.html">airflow with Teradata Vantage</a>
+    <a class="nav-link" href="airflow.html">Use Apache Airflow with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
@@ -1503,7 +1503,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li>Manage data</li>
-    <li><a href="airflow.html">airflow with Teradata Vantage</a></li>
+    <li><a href="airflow.html">Use Apache Airflow with Teradata Vantage</a></li>
   </ul>
 </nav>
 </div>
@@ -1517,7 +1517,7 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
 </aside>
 <article class="doc">
-<h1 class="page">airflow with Teradata Vantage</h1>
+<h1 class="page">Use Apache Airflow with Teradata Vantage</h1>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
@@ -1557,12 +1557,12 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 </div>
 </div>
 <div class="sect1">
-<h2 id="_install_apache_airflow"><a class="anchor" href="#_install_apache_airflow"></a>Install apache airflow</h2>
+<h2 id="_install_apache_airflow"><a class="anchor" href="#_install_apache_airflow"></a>Install Apache Airflow</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Set Airflow home. Airflow requires a home directory, and uses ~/airflow by default, but you can set a different location if you prefer. The AIRFLOW_HOME environment variable is used to inform Airflow of the desired location.</p>
+<p>Set the AIRFLOW_HOME environment variable. Airflow requires a home directory and uses ~/airflow by default, but you can set a different location if you prefer. The AIRFLOW_HOME environment variable is used to inform Airflow of the desired location.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export AIRFLOW_HOME=~/airflow</code></pre>
@@ -1581,7 +1581,7 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 </div>
 </li>
 <li>
-<p>Install airflow teradata provider stable version 1.0.0 from PyPI repository.</p>
+<p>Install the Airflow Teradata provider stable version 1.0.0 from PyPI repository.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install "apache-airflow-providers-teradata==1.0.0"</code></pre>
@@ -1606,14 +1606,14 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 </div>
 </li>
 <li>
-<p>Access the Airflow UI. Visit localhost:8080 in browser and log in with the admin account details shown in the terminal.</p>
+<p>Access the Airflow UI. Visit <a href="https://localhost:8080" class="bare">https://localhost:8080</a> in the browser and log in with the admin account details shown in the terminal.</p>
 </li>
 </ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_define_teradata_connection_in_airflow_ui"><a class="anchor" href="#_define_teradata_connection_in_airflow_ui"></a>Define Teradata Connection in Airflow UI</h2>
+<h2 id="_define_a_teradata_connection_in_airflow_ui"><a class="anchor" href="#_define_a_teradata_connection_in_airflow_ui"></a>Define a Teradata connection in Airflow UI</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -1626,7 +1626,7 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 </div>
 </li>
 <li>
-<p>Fill below input details in New Connection Page.</p>
+<p>Fill in input details in New Connection Page.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/airflow/airflow-newconnection.png" alt="Airflow New Connection" width="75%">
@@ -1671,7 +1671,7 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 <p>In Airflow, DAGs are defined as Python code.</p>
 </li>
 <li>
-<p>Create a DAG as python file like sample.py under DAG_FOLDER - $AIRFLOW_HOME/files/dags directory.</p>
+<p>Create a DAG as a python file like sample.py under DAG_FOLDER - $AIRFLOW_HOME/files/dags directory.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">from datetime import datetime
@@ -1723,7 +1723,7 @@ with DAG(
 <p>DAGs will run in one of two ways:
 1. When they are triggered either manually or via the API
 2. On a defined schedule, which is defined as part of the DAG
-<code>example_teradata_operator</code> is defined to trigger as manually. To define schedule, any valid <a href="https://en.wikipedia.org/wiki/Cron" target="_blank" rel="noopener">Crontab</a> schedule value can be passed to schedule argument.</p>
+<code>example_teradata_operator</code> is defined to trigger as manually. To define a schedule, any valid <a href="https://en.wikipedia.org/wiki/Cron" target="_blank" rel="noopener">Crontab</a> schedule value can be passed to the schedule argument.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1739,7 +1739,7 @@ with DAG(
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This tutorial demonstrated how to use airflow and airflow teradata provider with Teradata instance. The example DAG provided creates my_users table in teradata instance defined in Connection UI.</p>
+<p>This tutorial demonstrated how to use Airflow and the Airflow Teradata provider with a Teradata Vantage instance. The example DAG provided creates <code>my_users</code> table in the Teradata Vantage instance defined in Connection UI.</p>
 </div>
 </div>
 </div>
