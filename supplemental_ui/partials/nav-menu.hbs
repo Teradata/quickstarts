@@ -1,7 +1,7 @@
 {{#with page.navigation}}
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <div id="en" style="visibility: hidden; display:none">
+    <div id="en">
       {{> nav-tree navigation=this}}
     </div>
     <ul class="nav-list">
@@ -10,6 +10,7 @@
   </nav>
 </div>
 {{/with}}
+
 
 <script>
   var path = document.location.href;
@@ -21,19 +22,15 @@
     language = 'en';
   }
   console.log("language: ",language);
-  
-  document.getElementById(language).style.display = 'block';
+  if (language === 'en'){
+    document.getElementById('ja').style.visibility = 'hidden';
+    document.getElementById('ja').style.display = 'none';
+  }
 
-  document.addEventListener('DOMContentLoaded', function() {
-      var toggleButton = document.querySelector('.nav-toggle');
-      toggleButton.addEventListener('click', function() {
-          if (toggleButton.classList.contains('is-active')) {
-              document.getElementById(language).style.visibility = 'hidden';
-          } else {
-              document.getElementById(language).style.visibility = 'visible';
-          }
-      });
-  });
+  if (language === 'ja'){
+    document.getElementById('en').style.visibility = 'hidden';
+    document.getElementById('en').style.display = 'none';
+  }
 
   var parts = path.split('/');
   var pagina = parts[parts.length-2];
