@@ -40,7 +40,7 @@ Below is an example script that retrieves the Teradata Jupyter extension package
 ====
 Remember to replace teradata_jupyter in the gsutil cp command.
 ====
-[source, bash, role="content-editable, emits-gtm-events"]
+[source, bash, id="vertex_ex_script", role="content-editable, emits-gtm-events"]
 ----
 #! /bin/bash
 
