@@ -20,6 +20,7 @@
 * Manage data
 ** xref::nos.adoc[]
 ** xref::select-the-right-data-ingestion-tools-for-teradata-vantage.adoc[]
+** xref::airflow.adoc[]
 ** xref::dbt.adoc[]
 ** xref::advanced-dbt.adoc[]
 ** xref:modelops:using-feast-feature-store-with-teradata-vantage.adoc[]
