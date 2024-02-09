@@ -1,9 +1,9 @@
-= Getting started with Teradata VantageCloud ClearScape Analytics^TM^
+= Getting started with ClearScape Analytics Experience
 :experimental:
 :page-author: Vidhan Bhonsle
 :page-email: vidhan.bhonsle@teradata.com
 :page-revdate: January 10th, 2024
-:description: Getting started with Teradata ClearScape Analytics Experience
+:description: Getting started with ClearScape Analytics Experience
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, clearscape, csae
 
 == Overview
@@ -11,14 +11,13 @@
 https://www.teradata.com/platform/clearscape-analytics[ClearScape Analytics^TM^] is a powerful analytics engine in https://www.teradata.com/platform/vantagecloud[Teradata VantageCloud]. It delivers breakthrough performance, value, and growth across the enterprise with the most powerful, open and connected AI/ML capabilities on the market.
 
 image::VantageCloud.png[VantageCloud,align="center",width=50%]
+  
 
-ClearScape Analytics Experience enables user to configure free lightweight cloud environments where they can scale AI/ML quickly and effectively to solve the most complex challenges, reduce cost and accelerate time to value.  
-
-In this how-to we will go through the steps for creating environment in Teradata VantageCloud ClearScape Analytics Experience and access in-built demos.
+In this how-to we will go through the steps for creating an environment in ClearScape Analytics Experience and access demos.
 
 == Create a ClearScape Analytics Experience account
 
-Head over to https://www.teradata.com/getting-started/demos/clearscape-analytics[ClearScape Analytics Experience] and create a free account.
+Head over to https://www.teradata.com/experience[ClearScape Analytics Experience] and create a free account.
 
 image::csae_register.png[Register,align="center",width=75%]
 
@@ -30,7 +29,7 @@ image::csae_signin.png[Sign in,align="center",width=60%]
 
 Once signed in, click on *CREATE ENVIRONMENT*
 
-image::csae_create_env.png[Create environment,align="center",width=75%]
+image::csae_create_env.png[Create environment,align="center",width=60%]
 
 You will need to provide:
 
@@ -39,28 +38,19 @@ You will need to provide:
 | *Variable* | *Value*
 
 | *environment name* 
-| A contextual name like "demo"
+| A name for your environment, e.g. "demo"
 
 | *database password* 
-| A password of your choice
+| A password of your choice, this password will be assigned to `dbc` and `demo_user` users
 
 | *Region* 
-| Select one from the dropdown +
-* us-central +
-* us-east +
-* us-west +
-* southamerica-east +
-* europe-west +
-* asia-south +
-* asia-northeast +
-* asia-southeast +
-* australia-southeast
+| Select a region from the dropdown
 
 |====
 
-IMPORTANT: Note down database password for future usage of environment 
+IMPORTANT: Note down the database password. You will need it to connect to the database.
 
-image::csae_env_params.png[Environment params,align="center",width=75%]
+image::csae_env_params.png[Environment params,align="center",width=65%]
 
 Click on *CREATE* button to complete the creation of your environment and now, you can see details of your environment.
 
@@ -68,18 +58,18 @@ image::csae_env_details.png[Environment details,align="center",width=75%]
 
 == Access demos
 
-The Teradata VantageCloud ClearScape Analytics environment comes with a bunch of pre-built demos to help you with your use-case. +
+The ClearScape Analytics Experience environment includes a variety of demos that showcase how to use analytics to solve business problems across many industries. +
 
 To access demos, click on *RUN DEMOS USING JUPYTER* button. It will open a Jupyter environment in a new tab of your browser. +
 
-You can find all the detail of demos on the *Demo.index* page.
+NOTE: You can find all the detail of demos on the demo index page.
 
 image::csae_jupyter.png[Usecases folder,align="center",width=75%]
 
 
 == Summary
 
-In this quick start we learned how to create an environment in Teradata VantageCloud ClearScape Analytics experience and access demos.
+In this quick start, we learned how to create an environment in ClearScape Analytics Experience and access demos.
 
 == Further reading
 

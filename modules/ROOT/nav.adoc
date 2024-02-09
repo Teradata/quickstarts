@@ -1,8 +1,7 @@
 * Introduction
 ** xref::teradata-vantage-engine-architecture-and-concepts.adoc[Teradata Vantage Engine Architecture and Concepts]
 
-* ClearScape Analytics^TM^
-** xref::csae.adoc[]
+
 
 * Get access to Vantage
 ** On your local
@@ -13,6 +12,8 @@
 *** xref::run-vantage-express-on-aws.adoc[Vantage Express on AWS]
 *** xref::vantage.express.gcp.adoc[Vantage Express on Google Cloud]
 *** xref::run-vantage-express-on-microsoft-azure.adoc[Vantage Express on Azure]
+** ClearScape Analytics Experience
+*** xref::getting-started-with-csae.adoc.adoc[]
 
 * Connect to Vantage
 ** xref:install-teradata-studio-on-mac-m1-m2.adoc[]
