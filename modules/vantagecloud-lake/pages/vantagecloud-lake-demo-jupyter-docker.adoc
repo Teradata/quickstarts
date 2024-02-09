@@ -8,7 +8,7 @@
 :dir: vantagecloud-lake-demo-jupyter-docker
 
 == Overview
-In this how-to we will go through the steps for connecting to TeradataCloud Lake and run demos from a Jupyter notebook in Docker. 
+In this how-to we will go through the steps for connecting to Teradata VantageCloud Lake and run demos from a Jupyter notebook in Docker. 
 
 == Prerequisites
 * https://www.docker.com/products/docker-desktop/[Docker Desktop] installed
