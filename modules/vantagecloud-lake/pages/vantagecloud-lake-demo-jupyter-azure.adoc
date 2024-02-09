@@ -1,4 +1,4 @@
-= Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Azure
+= Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Microsoft Azure
 :experimental:
 :page-author: Daniel Herrera
 :page-email: daniel.herrera2@teradata.com
