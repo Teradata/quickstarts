@@ -1,4 +1,4 @@
-= Run Teradata Jupyter Notebook Demos for VantageCloud Lake in SageMaker
+= Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Amazon SageMaker
 :experimental:
 :page-author: Daniel Herrera
 :page-email: daniel.herrera2@teradata.com
@@ -8,7 +8,7 @@
 :dir: vantagecloud-lake-demo-jupyter-sagemaker
 
 == Overview
-This quickstart details the process for running the https://github.com/Teradata/lake-demos[Teradata Jupyter Notebook Demos for Vantage Cloud Lake], on SageMaker, the AI/ML platform from Amazon AWS.
+This quickstart details the process for running the https://github.com/Teradata/lake-demos[Teradata Jupyter Notebook Demos for Vantage Cloud Lake], on Amazon SageMaker, the AI/ML platform from Amazon AWS.
 
 == Prerequisites
 * Teradata modules for Jupyter (download https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[here], registration required)
@@ -209,7 +209,7 @@ To learn more about the demo notebooks, go to https://github.com/Teradata/lake-d
 
 == Summary
 
-In this quick start we learned how to run Jupyter notebook demos for VantageCloud Lake in SageMaker.
+In this quick start we learned how to run Jupyter notebook demos for VantageCloud Lake in Amazon SageMaker.
 
 == Further reading
 
