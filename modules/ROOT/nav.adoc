@@ -13,7 +13,7 @@
 *** xref::vantage.express.gcp.adoc[Vantage Express on Google Cloud]
 *** xref::run-vantage-express-on-microsoft-azure.adoc[Vantage Express on Azure]
 ** ClearScape Analytics Experience
-*** xref::getting-started-with-csae.adoc.adoc[]
+*** xref::getting-started-with-csae.adoc[]
 
 * Connect to Vantage
 ** xref:install-teradata-studio-on-mac-m1-m2.adoc[]
