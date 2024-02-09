@@ -2,7 +2,7 @@
 :experimental:
 :page-author: Vidhan Bhonsle
 :page-email: vidhan.bhonsle@teradata.com
-:page-revdate: January 10th, 2024
+:page-revdate: February 9th, 2024
 :description: Getting started with ClearScape Analytics Experience
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, clearscape, csae
 
