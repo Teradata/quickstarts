@@ -8,7 +8,7 @@
 :dir: vantage-lake-demo-jupyter-google-cloud-vertex-ai
 
 == Overview
-This quickstart explains how to run https://github.com/Teradata/lake-demos[Teradata Jupyter Notebook Demos for Vantage Cloud Lake] on Vertex AI, the AI/ML platform for Google Cloud. 
+This quickstart explains how to run https://github.com/Teradata/lake-demos[Teradata Jupyter Notebook Demos for VantageCloud Lake] on Vertex AI, the AI/ML platform for Google Cloud. 
 
 == Prerequisites
 * Teradata modules for Jupyter **Linux desktop version** (download https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[here], registration required)
@@ -154,4 +154,4 @@ Execute all the cells in *0_Demo_Environment_Setup.ipynb* to setup your environm
 To learn more about the demo notebooks, go to https://github.com/Teradata/lake-demos[Teradata Lake demos] page on GitHub.
 
 == Summary 
-In this quickstart guide, we configured Google Cloud Vertex AI Workbench Notebooks to run  https://github.com/Teradata/lake-demos[Teradata Jupyter Notebook Demos for Vantage Cloud Lake].
+In this quickstart guide, we configured Google Cloud Vertex AI Workbench Notebooks to run  https://github.com/Teradata/lake-demos[Teradata Jupyter Notebook Demos for VantageCloud Lake].
