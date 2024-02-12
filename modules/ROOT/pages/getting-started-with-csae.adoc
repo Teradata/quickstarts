@@ -1,0 +1,77 @@
+= Getting started with ClearScape Analytics Experience
+:experimental:
+:page-author: Vidhan Bhonsle
+:page-email: vidhan.bhonsle@teradata.com
+:page-revdate: February 9th, 2024
+:description: Getting started with ClearScape Analytics Experience
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, clearscape, csae
+
+== Overview
+
+https://www.teradata.com/platform/clearscape-analytics[ClearScape Analytics^TM^] is a powerful analytics engine in https://www.teradata.com/platform/vantagecloud[Teradata VantageCloud]. It delivers breakthrough performance, value, and growth across the enterprise with the most powerful, open and connected AI/ML capabilities on the market. You can experience ClearClearScape Analytics^TM^ and Teradata Vantage, in a non-production setting, through https://www.teradata.com/experience[ClearScape Analytics Experience].
+
+In this how-to we will go through the steps for creating an environment in ClearScape Analytics Experience and access demos.
+
+image::VantageCloud.png[VantageCloud,align="center",width=50%]
+  
+== Create a ClearScape Analytics Experience account
+
+Head over to https://www.teradata.com/experience[ClearScape Analytics Experience] and create a free account.
+
+image::csae_register.png[Register,align="center",width=75%]
+
+Sign in to your https://clearscape.teradata.com/sign-in[ClearScape Analytics account] to create an environment and access demos.
+
+image::csae_signin.png[Sign in,align="center",width=60%]
+
+== Create an Environment
+
+Once signed in, click on *CREATE ENVIRONMENT*
+
+image::csae_create_env.png[Create environment,align="center",width=60%]
+
+You will need to provide:
+
+[cols="1,1"]
+|====
+| *Variable* | *Value*
+
+| *environment name* 
+| A name for your environment, e.g. "demo"
+
+| *database password* 
+| A password of your choice, this password will be assigned to `dbc` and `demo_user` users
+
+| *Region* 
+| Select a region from the dropdown
+
+|====
+
+IMPORTANT: Note down the database password. You will need it to connect to the database.
+
+image::csae_env_params.png[Environment params,align="center",width=65%]
+
+Click on *CREATE* button to complete the creation of your environment and now, you can see details of your environment.
+
+image::csae_env_details.png[Environment details,align="center",width=75%]
+
+== Access demos
+
+The ClearScape Analytics Experience environment includes a variety of demos that showcase how to use analytics to solve business problems across many industries. +
+
+To access demos, click on *RUN DEMOS USING JUPYTER* button. It will open a Jupyter environment in a new tab of your browser. +
+
+NOTE: You can find all the detail of demos on the demo index page.
+
+image::csae_jupyter.png[Usecases folder,align="center",width=75%]
+
+
+== Summary
+
+In this quick start, we learned how to create an environment in ClearScape Analytics Experience and access demos.
+
+== Further reading
+
+* https://api.clearscape.teradata.com/api-docs/[ClearScape Analytics Experience API documentation]
+* https://docs.teradata.com/[Teradata Documentation]
+
