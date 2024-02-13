@@ -1,8 +1,12 @@
 <aside class="toc sidebar" data-title="{{or page.attributes.toctitle 'Contents'}}" data-levels="{{{or page.attributes.toclevels 2}}}">
-      <div class="page-controls">
-      <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-      <a href="{{page.editUrl}}"><div class="edit-on-github">Edit on GitHub</div></a>
+    <div class="page-controls">
+      {{#if (ne page.attributes.lang 'ja')}}
+        <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
+        <a href="{{page.editUrl}}"><div class="edit-on-github">Edit on GitHub</div></a>
+      {{else}}
+        <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">問題を報告する</div></a>
+        <a href="{{page.editUrl}}"><div class="edit-on-github">GitHub で編集する</div></a>
+      {{/if}}
     </div>
-  <div class="toc-menu">
-  </div>
+  <div class="toc-menu"></div>
 </aside>

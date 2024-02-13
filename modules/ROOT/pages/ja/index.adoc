@@ -1,0 +1,5 @@
+= Main
+:page-lang: ja
+:page-layout: landing-page
+:description: Teradata Vantage をすぐに使いこなしましょう。 機能について学びます。 一般的なタスクのハウツーを検索します。 サンプル ソース コードを調べます。
+:keywords: データ ウェアハウス、クラウド データ ウェアハウス、コンピューティング ストレージの分離、teradata、vantage、クラウド データ プラットフォーム、Java アプリケーション、ビジネス インテリジェンス、エンタープライズ分析、ハイブリッド マルチクラウド、ビジネスの成果

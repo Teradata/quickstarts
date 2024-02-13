@@ -1,7 +1,43 @@
 {{#with page.navigation}}
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-{{> nav-tree navigation=this}}
+    <div id="en">
+      {{> nav-tree navigation=this}}
+    </div>
+    <ul class="nav-list">
+      {{> sub-nav-menu-jp }}
+    </ul>
   </nav>
 </div>
 {{/with}}
+
+
+<script>
+  var path = document.location.href;
+  var matchResult = path.match(/\/(es|ja)\//);
+  var language;
+  if (matchResult) {
+    language = matchResult[1];
+  } else {
+    language = 'en';
+  }
+  console.log("language: ",language);
+  if (language === 'en'){
+    document.getElementById('ja').style.visibility = 'hidden';
+    document.getElementById('ja').style.display = 'none';
+  }
+
+  if (language === 'ja'){
+    document.getElementById('en').style.visibility = 'hidden';
+    document.getElementById('en').style.display = 'none';
+  }
+
+  var parts = path.split('/');
+  var pagina = parts[parts.length-2];
+  var elementosMenu = document.querySelectorAll('.nav-item a');
+  elementosMenu.forEach(function(elemento) {
+    if (elemento.href === path) {
+      elemento.parentNode.classList.add('is-current-page');
+    }
+  });
+</script>
