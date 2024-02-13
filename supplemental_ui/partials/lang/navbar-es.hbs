@@ -11,17 +11,17 @@
                 </ul>
                 <div class="td-language-selector dropdown1">
                   <button onclick="langOptions()" class="td-language-selector__toggle selected">
-                    日本  
+                    Global 
                   </button>
                   <div id="myDropdown" class="nav-2 td-language-selector__dropdown dropdown-content1">
                     <li lang="en-US" class="td-language-selector__menu-item" onclick="switchLanguage('en')">
                       <a href="#" class="td-language-selector__location no-underline">Global</a>
                     </li>
                     <li lang="ja-JP" class="td-language-selector__menu-item" onclick="switchLanguage('ja')">
-                      <a href="#" class="td-language-selector__location no-underline active-lan">日本</a>
+                      <a href="#" class="td-language-selector__location no-underline">日本</a>
                     </li>
                     <li lang="es-MX" class="td-language-selector__menu-item" onclick="switchLanguage('es')">
-                      <a href="#" class="td-language-selector__location no-underline">Español</a>
+                      <a href="#" class="td-language-selector__location no-underline active-lan">Español</a>
                     </li>
                   </div>
                 </div>
@@ -47,23 +47,23 @@
                     </div>
                     <ul class="header-nav__main-menu header-nav__element nav-1 list">
                       <li>
-                        <a href="{{siteRootPath}}/ja/index.html" class="header-nav__main-menu__link active">スタートガイド</a>
+                        <a href="{{siteRootPath}}/index.html" class="header-nav__main-menu__link active">Empezar</a>
                       </li>
                       <li>
-                        <button href="" onclick="docs()" class="header-nav__main-menu__link dropbtn">ドキュメント</button>
+                        <button href="" onclick="docs()" class="header-nav__main-menu__link dropbtn">Docs</button>
                         <div id="myDocsDropdown" class="dropdown-content">
-                          <a href="https://docs.teradata.com/p/VantageCloud/Lake" class="dropdown-item mt">VantageCloud Lake ドキュメント</a>
-                          <a href="https://docs.teradata.com/" class="dropdown-item">すべてのドキュメント</a> 
+                          <a href="https://docs.teradata.com/p/VantageCloud/Lake" class="dropdown-item mt">Documentacion VantageCloud Lake</a>
+                          <a href="https://docs.teradata.com/" class="dropdown-item">Documentacion</a> 
                         </div>  
                       </li>
                       <li>
-                        <a href="https://downloads.teradata.com/" class="header-nav__main-menu__link">ダウンロード</a>
+                        <a href="https://downloads.teradata.com/" class="header-nav__main-menu__link">Descargas</a>
                       </li>
                       <li>
-                        <button href="" onclick="community()" class="header-nav__main-menu__link dropbtn">コミュニティ</button>
+                        <button href="" onclick="community()" class="header-nav__main-menu__link dropbtn">Comunidad</button>
                         <div id="myCommunityDropdown" class="dropdown-content dc2">
-                          <a href="https://support.teradata.com" title="Technical Medium Blogs" class="dropdown-item mt">Teradataコミュニティ</a>
-                          <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item mb">Medium技術ブログ&nbsp; &nbsp; 
+                          <a href="https://support.teradata.com" title="Technical Medium Blogs" class="dropdown-item mt">Comunidad Teradata</a>
+                          <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item mb">Blogs Tecnicos Medium&nbsp; &nbsp; 
                             <img src='{{uiRootPath}}/img/small-external.svg' alt="External Icon">
                           </a>
                           <a href="https://github.com/Teradata" title="Teradata on GitHub" target="_blank" class="dropdown-item mb">GitHub&nbsp; &nbsp; 
@@ -82,11 +82,9 @@
                             {{#if env.SITE_SEARCH_PROVIDER}}
                             {{#if (ne page.layout "landing-page")}}
                             <div class="navbar-item">
-                            
                               <div class="search-container">
-                                <input id="search-input" type="text" placeholder="検索 スタートガイド">
+                                <input id="search-input" type="text" placeholder="Busqueda">
                               </div>
-                            
                             </div>
                             {{/if}}
                             {{/if}}
@@ -132,23 +130,23 @@
                     <li class="header-nav-mobile__menu-listing__item has-sub-items">
                       <header data-celebrus="Mobile Main Menu - Who we help" data-gtm-category="Header" data-gtm-action="main nav click" data-gtm-label="Who we help" class="d-flex justify-content-between align-items-center border-bottom-light">
                         <div class="header-nav-mobile__menu-listing__header nav-1">
-                          <a class="nav-1 d-flex justify-content-between align-items-center" href="https://quickstarts.teradata.com/">スタートガイド</a>
+                          <a class="nav-1 d-flex justify-content-between align-items-center" href="https://quickstarts.teradata.com/es">Empezar</a>
                         </div>
                       </header>
                     </li>
 
                     <li class="border-bottom-light">
                       <div>
-                        <button id="toggleButtonDocs" class="py-4 nav-1 d-flex justify-content-between align-items-center w-100">ドキュメント
+                        <button id="toggleButtonDocs" class="py-4 nav-1 d-flex justify-content-between align-items-center w-100">Docs
                           <span class="caret caret--slate"></span>
                         </button>
                         <div class="slide-up-down__container hidden" style="--content-height: 94; transition: height 500ms ease-in-out 0s;">  
                           <ul class="ps-3 list">
                             <li>
-                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/p/VantageCloud/Lake">VantageCloud Lake ドキュメント</a>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/p/VantageCloud/Lake">Documentacion VantageCloud Lake</a>
                             </li>
                             <li>
-                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/">すべてのドキュメント</a>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/">Documentacion</a>
                             </li>
                           </ul>
                         </div>
@@ -158,23 +156,23 @@
                     <li class="header-nav-mobile__menu-listing__item has-sub-items">
                       <header class="d-flex justify-content-between align-items-center border-bottom-light">
                         <div class="header-nav-mobile__menu-listing__header nav-1">
-                          <a class="nav-1 d-flex justify-content-between align-items-center" href="https://downloads.teradata.com/">ダウンロード</a>
+                          <a class="nav-1 d-flex justify-content-between align-items-center" href="https://downloads.teradata.com/">Descargas</a>
                         </div>
                       </header>
                     </li>
                     <li class="border-bottom-light">
                       <div>
-                        <button id="toggleButtonComm" class="py-4 nav-1 d-flex justify-content-between align-items-center w-100">コミュニティ
+                        <button id="toggleButtonComm" class="py-4 nav-1 d-flex justify-content-between align-items-center w-100">
                           <span class="caret caret--slate"></span>
                         </button>
                         <div class="slide-up-down__container hidden" aria-hidden="false" style="--content-height: 235; transition: height 500ms ease-in-out 0s;">
                           <ul class="ps-3 list">
                             <li>
-                              <a class="nav-2 py-4 d-block color-slate" href="https://support.teradata.com">Teradataコミュニティ</a>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://support.teradata.com">Comunidad Teradata</a>
                             </li>
                             <li>
                               <a class="nav-2 py-4 d-flex align-items-center color-slate" href="https://medium.com/teradata">
-                                Medium技術ブログ&nbsp;&nbsp;<img src='{{uiRootPath}}/img/small-external.svg' class="mtop">
+                                Blogs Tecnicos Medium&nbsp;&nbsp;<img src='{{uiRootPath}}/img/small-external.svg' class="mtop">
                               </a>
                             </li>
                             <li>
@@ -207,6 +205,5 @@
              <div class="page-blackout"></div>
           </section>
         </div>
-
       </nav>
   </nav>
