@@ -156,7 +156,7 @@ pip install google-datacatalog-teradata-connector
 
 ==== Set environment variables
 
-[source, bash, role="content-editable emits-gtm-events"]
+[source, bash, id="gcp_env_var", role="content-editable emits-gtm-events"]
 ----
 export GOOGLE_APPLICATION_CREDENTIALS=<google_credentials_file>
 export TERADATA2DC_DATACATALOG_PROJECT_ID=<google_cloud_project_id>

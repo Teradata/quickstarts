@@ -26,7 +26,7 @@ include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 You can find more documentation about `WRITE_NOS` functionality in the https://docs.teradata.com/r/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide/June-2022/Writing-Data-to-External-Object-Store[NOS documentation].
 
 You will need access to a database where you can execute `WRITE_NOS` function. If you don't have such a database, run the following commands:
-[source, teradata-sql]
+[source, teradata-sql, id="parquet_create_user", role="emits-gtm-events"]
 ----
 CREATE USER db AS PERM=10e7, PASSWORD=db;
 

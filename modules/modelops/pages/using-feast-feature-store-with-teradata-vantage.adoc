@@ -34,7 +34,7 @@ Additionally, using Teradata as the registry (catalog) is already supported via 
 == Getting Started
 
 To get started, install the `feast-teradata` library
-[source, cli]
+[source, cli, id="feast_pip_install", role="emits-gtm-events"]
 ----
 pip install feast-teradata
 ----

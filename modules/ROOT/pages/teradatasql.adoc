@@ -16,7 +16,7 @@ This how-to demonstrates how to connect to Vantage using link:https://github.com
 
 * `teradatasql` driver installed in your system:
 +
-[source, bash]
+[source, bash, id="teradatasql_pip_install", role="emits-gtm-events"]
 ----
 pip install teradatasql
 ----

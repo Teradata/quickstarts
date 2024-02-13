@@ -1,6 +1,8 @@
 * Introduction
 ** xref::teradata-vantage-engine-architecture-and-concepts.adoc[Teradata Vantage Engine Architecture and Concepts]
 
+
+
 * Get access to Vantage
 ** On your local
 *** xref::getting.started.vmware.adoc[Vantage Express on VMware]
@@ -10,6 +12,8 @@
 *** xref::run-vantage-express-on-aws.adoc[Vantage Express on AWS]
 *** xref::vantage.express.gcp.adoc[Vantage Express on Google Cloud]
 *** xref::run-vantage-express-on-microsoft-azure.adoc[Vantage Express on Azure]
+** ClearScape Analytics Experience
+*** xref::getting-started-with-csae.adoc[]
 
 * Connect to Vantage
 ** xref:install-teradata-studio-on-mac-m1-m2.adoc[]
@@ -20,6 +24,7 @@
 * Manage data
 ** xref::nos.adoc[]
 ** xref::select-the-right-data-ingestion-tools-for-teradata-vantage.adoc[]
+** xref::airflow.adoc[]
 ** xref::dbt.adoc[]
 ** xref::advanced-dbt.adoc[]
 ** xref:modelops:using-feast-feature-store-with-teradata-vantage.adoc[]
@@ -72,3 +77,8 @@
 
 * VantageCloud Lake
 ** xref:getting-started-with-vantagecloud-lake.adoc[]
+** xref:vantagecloud-lake:vantagecloud-lake-demo-jupyter-docker.adoc[]
+** xref:vantagecloud-lake:vantagecloud-lake-demos-visual-studio-code.adoc[]
+** xref:vantagecloud-lake:vantagecloud-lake-demo-jupyter-sagemaker.adoc[]
+** xref:vantagecloud-lake:vantagecloud-lake-demo-jupyter-google-cloud-vertex-ai.adoc[]
+** xref:vantagecloud-lake:vantagecloud-lake-demo-jupyter-azure.adoc[]

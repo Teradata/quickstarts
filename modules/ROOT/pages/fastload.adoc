@@ -86,7 +86,7 @@ LOGON localhost/dbc,dbc;
 
 Now, that we are logged in, I'm going to prepare the database. I'm switching to `irs` database and making sure that the target table `irs_returns` and error tables (more about error tables later) do not exist:
 
-[source, teradata-sql]
+[source, teradata-sql, id="fastload_drop_table", role="emits-gtm-events"]
 ----
 DATABASE irs;
 DROP TABLE irs_returns;
