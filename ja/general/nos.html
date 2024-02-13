@@ -3,20 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Use dbt and FEAST to build a feature store in Teradata Vantage :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/other-integrations/getting.started.dbt-feast-teradata-pipeline.html">
-    <meta name="description" content="dbt Feast integration with Teradata">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, AI/ML, AI, ML, feature engineering, feature store, FEAST">
+    <title>オブジェクトストレージに保存されたクエリーデータ :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/ja/general/nos.html">
+    <meta name="description" content="Teradata Vantage Native Object Storage - オブジェクト ストレージへの読み取りと書き込み、Vantage およびオブジェクト ストレージ用の統合 SQL インターフェイス。">
+    <meta name="keywords" content="データ ウェアハウス、コンピューティング ストレージの分離、teradata、vantage、クラウド データ プラットフォーム、オブジェクト ストレージ、ビジネス インテリジェンス、エンタープライズ分析">
     <meta name="generator" content="Antora 3.0.1">
-    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/site.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta property="og:title" content="Use dbt and FEAST to build a feature store in Teradata Vantage :: Teradata Getting Started">
+<meta property="og:title" content="オブジェクトストレージに保存されたクエリーデータ :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="dbt Feast integration with Teradata" />
+<meta property="og:description" content="Teradata Vantage Native Object Storage - オブジェクト ストレージへの読み取りと書き込み、Vantage およびオブジェクト ストレージ用の統合 SQL インターフェイス。" />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/other-integrations/getting.started.dbt-feast-teradata-pipeline.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/ja/general/nos.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -31,10 +31,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');
 </script>
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="../_/css/search.css">
-<link rel="stylesheet" href="../_/css/styles.css">
-<link rel="stylesheet" href="../_/css/newnavbar.css" >
-<link rel="stylesheet" href="../_/css/navbar.css">
+<link rel="stylesheet" href="../../_/css/search.css">
+<link rel="stylesheet" href="../../_/css/styles.css">
+<link rel="stylesheet" href="../../_/css/newnavbar.css" >
+<link rel="stylesheet" href="../../_/css/navbar.css">
 <style>
 .footer-nav .footer_social .icon-social {
     width: 44px;
@@ -96,7 +96,7 @@ article a[href^="https://"][target="_blank"]::after {
   width: 14px;
   height: 14px;
   margin-left: 4px;
-  background-image: url("../_/img/open_in_new.svg");
+  background-image: url("../../_/img/open_in_new.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -334,7 +334,7 @@ button {
   border-radius: 8px;
   padding-left: 14px;
   padding-right: 14px;
-  background-image: url(../_/img/search.svg);
+  background-image: url(../../_/img/search.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -708,7 +708,7 @@ aside.toc.sidebar {
 
 .report-an-issue {
   padding: 10px 20px 10px 10px;
-  background-image: url(../_/img/pan_tool.svg);
+  background-image: url(../../_/img/pan_tool.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -716,7 +716,7 @@ aside.toc.sidebar {
 
 .edit-on-github {
   padding: 10px 20px 10px 10px;
-  background-image: url(../_/img/edit.svg);
+  background-image: url(../../_/img/edit.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -827,19 +827,19 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
-  content: url("../_/img/warning.svg");
+  content: url("../../_/img/warning.svg");
 }
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
-  content: url("../_/img/note.svg");
+  content: url("../../_/img/note.svg");
 }
 
 .doc .admonitionblock.question .icon i.fa[class*=' icon-']::before {
-  content: url("../_/img/question.mark.svg");
+  content: url("../../_/img/question.mark.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
-  content: url("../_/img/note.svg");
+  content: url("../../_/img/note.svg");
 }
 
 .doc .source-toolbox .source-lang {
@@ -850,7 +850,7 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .source-toolbox img.copy-icon {
-  content: url("../_/img/copy.svg");
+  content: url("../../_/img/copy.svg");
 }
 
 .doc .source-toolbox>:not(:last-child)::after {
@@ -884,10 +884,10 @@ span.search-result-highlight {
 
 
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
-<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
   </head>
   <body class="article">
-<script src="../_/js/lang.js"></script>
+<script src="../../_/js/lang.js"></script>
 <!-- Adding CDN to use sql-formatter for unpkg -->
 <script src="https://unpkg.com/sql-formatter/dist/sql-formatter.min.js"></script>
 
@@ -911,14 +911,14 @@ span.search-result-highlight {
                 </ul>
                 <div class="td-language-selector dropdown1">
                   <button onclick="langOptions()" class="td-language-selector__toggle selected">
-                    Global 
+                    日本  
                   </button>
                   <div id="myDropdown" class="nav-2 td-language-selector__dropdown dropdown-content1">
                     <li lang="en-US" class="td-language-selector__menu-item" onclick="switchLanguage('en')">
-                      <a href="#" class="td-language-selector__location no-underline active-lan">Global</a>
+                      <a href="#" class="td-language-selector__location no-underline">Global</a>
                     </li>
                     <li lang="ja-JP" class="td-language-selector__menu-item" onclick="switchLanguage('ja')">
-                      <a href="#" class="td-language-selector__location no-underline">日本</a>
+                      <a href="#" class="td-language-selector__location no-underline active-lan">日本</a>
                     </li>
                   </div>
                 </div>
@@ -944,30 +944,30 @@ span.search-result-highlight {
                     </div>
                     <ul class="header-nav__main-menu header-nav__element nav-1 list">
                       <li>
-                        <a href="../index.html" class="header-nav__main-menu__link active">Getting started</a>
+                        <a href="../../ja/index.html" class="header-nav__main-menu__link active">スタートガイド</a>
                       </li>
                       <li>
-                        <button href="" onclick="docs()" class="header-nav__main-menu__link dropbtn">Docs</button>
+                        <button href="" onclick="docs()" class="header-nav__main-menu__link dropbtn">ドキュメント</button>
                         <div id="myDocsDropdown" class="dropdown-content">
-                          <a href="https://docs.teradata.com/p/VantageCloud/Lake" class="dropdown-item mt">VantageCloud Lake Documentation</a>
-                          <a href="https://docs.teradata.com/" class="dropdown-item">All Documentation</a> 
+                          <a href="https://docs.teradata.com/p/VantageCloud/Lake" class="dropdown-item mt">VantageCloud Lake ドキュメント</a>
+                          <a href="https://docs.teradata.com/" class="dropdown-item">すべてのドキュメント</a> 
                         </div>  
                       </li>
                       <li>
-                        <a href="https://downloads.teradata.com/" class="header-nav__main-menu__link">Downloads</a>
+                        <a href="https://downloads.teradata.com/" class="header-nav__main-menu__link">ダウンロード</a>
                       </li>
                       <li>
-                        <button href="" onclick="community()" class="header-nav__main-menu__link dropbtn">Community</button>
+                        <button href="" onclick="community()" class="header-nav__main-menu__link dropbtn">コミュニティ</button>
                         <div id="myCommunityDropdown" class="dropdown-content dc2">
-                          <a href="https://support.teradata.com" title="Technical Medium Blogs" class="dropdown-item mt">Teradata Community</a>
-                          <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item mb">Technical Medium Blogs&nbsp; &nbsp; 
-                            <img src='../_/img/small-external.svg' alt="External Icon">
+                          <a href="https://support.teradata.com" title="Technical Medium Blogs" class="dropdown-item mt">Teradataコミュニティ</a>
+                          <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item mb">Medium技術ブログ&nbsp; &nbsp; 
+                            <img src='../../_/img/small-external.svg' alt="External Icon">
                           </a>
                           <a href="https://github.com/Teradata" title="Teradata on GitHub" target="_blank" class="dropdown-item mb">GitHub&nbsp; &nbsp; 
-                            <img src='../_/img/small-external.svg' alt="External Icon">
+                            <img src='../../_/img/small-external.svg' alt="External Icon">
                           </a>
                           <a href="https://stackoverflow.com/questions/tagged/teradata" title="Stack Overflow Teradata questions" target="_blank" class="dropdown-item">Stack Overflow&nbsp; &nbsp; 
-                            <img src='../_/img/small-external.svg' alt="External Icon">
+                            <img src='../../_/img/small-external.svg' alt="External Icon">
                           </a>  
                         </div>
                       </li>
@@ -977,9 +977,11 @@ span.search-result-highlight {
                         <li>
                           <section class="navbar-search" id="searchtextbox"> 
                             <div class="navbar-item">
+                            
                               <div class="search-container">
-                                <input id="search-input" type="text" placeholder="Search Getting Started">
+                                <input id="search-input" type="text" placeholder="検索 スタートガイド">
                               </div>
+                            
                             </div>
                           </section>
                         </li>
@@ -993,7 +995,7 @@ span.search-result-highlight {
               <nav class="d-flex custom-justify-content-between align-items-center px-6 shadow--s">
                   <a class="header-nav__logo d-flex align-items-center" href="/" aria-label="Teradata">
                       <div>
-                          <img class="teradata-logo" src='../_/img/TD-Logo.svg' alt="" title="" >
+                          <img class="teradata-logo" src='../../_/img/TD-Logo.svg' alt="" title="" >
                       </div>
                   </a>
                   <a href="http://developers.teradata.com/" class="developers">Developers</a>
@@ -1023,23 +1025,23 @@ span.search-result-highlight {
                     <li class="header-nav-mobile__menu-listing__item has-sub-items">
                       <header data-celebrus="Mobile Main Menu - Who we help" data-gtm-category="Header" data-gtm-action="main nav click" data-gtm-label="Who we help" class="d-flex justify-content-between align-items-center border-bottom-light">
                         <div class="header-nav-mobile__menu-listing__header nav-1">
-                          <a class="nav-1 d-flex justify-content-between align-items-center" href="https://quickstarts.teradata.com/">Getting started</a>
+                          <a class="nav-1 d-flex justify-content-between align-items-center" href="https://quickstarts.teradata.com/">スタートガイド</a>
                         </div>
                       </header>
                     </li>
 
                     <li class="border-bottom-light">
                       <div>
-                        <button id="toggleButtonDocs" class="py-4 nav-1 d-flex justify-content-between align-items-center w-100">Docs
+                        <button id="toggleButtonDocs" class="py-4 nav-1 d-flex justify-content-between align-items-center w-100">ドキュメント
                           <span class="caret caret--slate"></span>
                         </button>
                         <div class="slide-up-down__container hidden" style="--content-height: 94; transition: height 500ms ease-in-out 0s;">  
                           <ul class="ps-3 list">
                             <li>
-                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/p/VantageCloud/Lake">VantageCloud Lake Documentation</a>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/p/VantageCloud/Lake">VantageCloud Lake ドキュメント</a>
                             </li>
                             <li>
-                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/">All Documentation</a>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/">すべてのドキュメント</a>
                             </li>
                           </ul>
                         </div>
@@ -1049,33 +1051,33 @@ span.search-result-highlight {
                     <li class="header-nav-mobile__menu-listing__item has-sub-items">
                       <header class="d-flex justify-content-between align-items-center border-bottom-light">
                         <div class="header-nav-mobile__menu-listing__header nav-1">
-                          <a class="nav-1 d-flex justify-content-between align-items-center" href="https://downloads.teradata.com/">Downloads</a>
+                          <a class="nav-1 d-flex justify-content-between align-items-center" href="https://downloads.teradata.com/">ダウンロード</a>
                         </div>
                       </header>
                     </li>
                     <li class="border-bottom-light">
                       <div>
-                        <button id="toggleButtonComm" class="py-4 nav-1 d-flex justify-content-between align-items-center w-100">Community
+                        <button id="toggleButtonComm" class="py-4 nav-1 d-flex justify-content-between align-items-center w-100">コミュニティ
                           <span class="caret caret--slate"></span>
                         </button>
                         <div class="slide-up-down__container hidden" aria-hidden="false" style="--content-height: 235; transition: height 500ms ease-in-out 0s;">
                           <ul class="ps-3 list">
                             <li>
-                              <a class="nav-2 py-4 d-block color-slate" href="https://support.teradata.com">Teradata Community</a>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://support.teradata.com">Teradataコミュニティ</a>
                             </li>
                             <li>
                               <a class="nav-2 py-4 d-flex align-items-center color-slate" href="https://medium.com/teradata">
-                                Technical Medium Blogs&nbsp;&nbsp;<img src='../_/img/small-external.svg' class="mtop">
+                                Medium技術ブログ&nbsp;&nbsp;<img src='../../_/img/small-external.svg' class="mtop">
                               </a>
                             </li>
                             <li>
                               <a class="nav-2 py-4 d-flex color-slate" href="https://github.com/Teradata" target="_blank" rel="noopener">
-                                GitHub&nbsp;&nbsp;<img src='../_/img/small-external.svg' class="e">
+                                GitHub&nbsp;&nbsp;<img src='../../_/img/small-external.svg' class="e">
                               </a>
                             </li>
                             <li>
                               <a class="nav-2 py-4 d-flex color-slate" href="https://stackoverflow.com/questions/tagged/teradata" target="_blank" rel="noopener">
-                                Stack Overflow&nbsp;&nbsp;<img src='../_/img/small-external.svg' class="">
+                                Stack Overflow&nbsp;&nbsp;<img src='../../_/img/small-external.svg' class="">
                               </a>
                             </li>
                           </ul>
@@ -1098,6 +1100,7 @@ span.search-result-highlight {
              <div class="page-blackout"></div>
           </section>
         </div>
+
       </nav>
   </nav><!-- Navbar -->
 
@@ -1293,7 +1296,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Introduction</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../teradata-vantage-engine-architecture-and-concepts.html">Teradata Vantage Engine Architecture and Concepts</a>
+    <a class="nav-link" href="../../teradata-vantage-engine-architecture-and-concepts.html">Teradata Vantage Engine Architecture and Concepts</a>
   </li>
 </ul>
   </li>
@@ -1306,13 +1309,13 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">On your local</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../getting.started.vmware.html">Vantage Express on VMware</a>
+    <a class="nav-link" href="../../getting.started.vmware.html">Vantage Express on VMware</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../getting.started.vbox.html">Vantage Express on VirtualBox</a>
+    <a class="nav-link" href="../../getting.started.vbox.html">Vantage Express on VirtualBox</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../getting.started.utm.html">Vantage Express on UTM</a>
+    <a class="nav-link" href="../../getting.started.utm.html">Vantage Express on UTM</a>
   </li>
 </ul>
   </li>
@@ -1321,13 +1324,13 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">On your cloud infrastructure</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../run-vantage-express-on-aws.html">Vantage Express on AWS</a>
+    <a class="nav-link" href="../../run-vantage-express-on-aws.html">Vantage Express on AWS</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../vantage.express.gcp.html">Vantage Express on Google Cloud</a>
+    <a class="nav-link" href="../../vantage.express.gcp.html">Vantage Express on Google Cloud</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
+    <a class="nav-link" href="../../run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
   </li>
 </ul>
   </li>
@@ -1336,7 +1339,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">ClearScape Analytics Experience</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../getting-started-with-csae.html">Getting started with ClearScape Analytics Experience</a>
+    <a class="nav-link" href="../../getting-started-with-csae.html">Getting started with ClearScape Analytics Experience</a>
   </li>
 </ul>
   </li>
@@ -1347,17 +1350,17 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Connect to Vantage</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
+    <a class="nav-link" href="../../install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
+    <a class="nav-link" href="../../other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Configure ODBC</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../odbc.ubuntu.html">Ubuntu</a>
+    <a class="nav-link" href="../../odbc.ubuntu.html">Ubuntu</a>
   </li>
 </ul>
   </li>
@@ -1368,55 +1371,55 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Manage data</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../nos.html">Query data stored in object storage</a>
+    <a class="nav-link" href="../../nos.html">Query data stored in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../select-the-right-data-ingestion-tools-for-teradata-vantage.html">Select the right data ingestion solution for Teradata Vantage</a>
+    <a class="nav-link" href="../../select-the-right-data-ingestion-tools-for-teradata-vantage.html">Select the right data ingestion solution for Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../airflow.html">Use Apache Airflow with Teradata Vantage</a>
+    <a class="nav-link" href="../../airflow.html">Use Apache Airflow with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dbt.html">dbt with Teradata Vantage</a>
+    <a class="nav-link" href="../../dbt.html">dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../advanced-dbt.html">Advanced dbt use cases with Teradata Vantage</a>
+    <a class="nav-link" href="../../advanced-dbt.html">Advanced dbt use cases with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../modelops/using-feast-feature-store-with-teradata-vantage.html">Build a FEAST feature store in Teradata Vantage</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="getting.started.dbt-feast-teradata-pipeline.html">Use dbt and FEAST to build a feature store in Teradata Vantage</a>
+    <a class="nav-link" href="../../modelops/using-feast-feature-store-with-teradata-vantage.html">Build a FEAST feature store in Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html">Use Airbyte to load data from external sources to Teradata Vantage</a>
+    <a class="nav-link" href="../../other-integrations/getting.started.dbt-feast-teradata-pipeline.html">Use dbt and FEAST to build a feature store in Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../elt/transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.html">Transform data Loaded with Airbyte using dbt</a>
+    <a class="nav-link" href="../../elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html">Use Airbyte to load data from external sources to Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">Load data with TPT</a>
+    <a class="nav-link" href="../../elt/transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.html">Transform data Loaded with Airbyte using dbt</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
+    <a class="nav-link" href="../../tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">Load data with TPT</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
+    <a class="nav-link" href="../../create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
+    <a class="nav-link" href="../../other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../segment.html">Store events from Twilio Segment</a>
+    <a class="nav-link" href="../../cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
+    <a class="nav-link" href="../../segment.html">Store events from Twilio Segment</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
+    <a class="nav-link" href="../../cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="configure-a-teradata-vantage-connection-in-datahub.html">Configure a Teradata Vantage connection in DataHub</a>
+    <a class="nav-link" href="../../cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../other-integrations/configure-a-teradata-vantage-connection-in-datahub.html">Configure a Teradata Vantage connection in DataHub</a>
   </li>
 </ul>
   </li>
@@ -1425,16 +1428,16 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Create applications</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../jdbc.html">Connect to Vantage using JDBC</a>
+    <a class="nav-link" href="../../jdbc.html">Connect to Vantage using JDBC</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../teradatasql.html">Connect to Vantage using Python</a>
+    <a class="nav-link" href="../../teradatasql.html">Connect to Vantage using Python</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+    <a class="nav-link" href="../../mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../query-service/send-queries-using-rest-api.html">Send queries using REST API</a>
+    <a class="nav-link" href="../../query-service/send-queries-using-rest-api.html">Send queries using REST API</a>
   </li>
 </ul>
   </li>
@@ -1443,43 +1446,43 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Analyze data</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../jupyter.html">Use Vantage from a Jupyter notebook</a>
+    <a class="nav-link" href="../../jupyter.html">Use Vantage from a Jupyter notebook</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+    <a class="nav-link" href="../../local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../ml.html">Train ML models in Vantage using Database Analytic Functions</a>
+    <a class="nav-link" href="../../ml.html">Train ML models in Vantage using Database Analytic Functions</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../sto.html">Run scripts on Vantage</a>
+    <a class="nav-link" href="../../sto.html">Run scripts on Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../perform-time-series-analysis-using-teradata-vantage.html">Perform time series analysis</a>
+    <a class="nav-link" href="../../perform-time-series-analysis-using-teradata-vantage.html">Perform time series analysis</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - Import and Deploy your first BYOM Model</a>
+    <a class="nav-link" href="../../modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - Import and Deploy your first BYOM Model</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.html">ModelOps - Import and Deploy your first GIT Model</a>
+    <a class="nav-link" href="../../modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.html">ModelOps - Import and Deploy your first GIT Model</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
+    <a class="nav-link" href="../../cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
+    <a class="nav-link" href="../../cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
+    <a class="nav-link" href="../../cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Integrate Teradata Jupyter extensions with SageMaker notebook instance</a>
+    <a class="nav-link" href="../../cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Integrate Teradata Jupyter extensions with SageMaker notebook instance</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Create Vizualizations in Power BI using Vantage</a>
+    <a class="nav-link" href="../../business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Create Vizualizations in Power BI using Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
+    <a class="nav-link" href="../../other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
   </li>
 </ul>
   </li>
@@ -1488,47 +1491,47 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Teradata AI Unlimited</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../ai-unlimited/getting-started-with-ai-unlimited.html">Getting Started with Teradata AI Unlimited</a>
+    <a class="nav-link" href="../../ai-unlimited/getting-started-with-ai-unlimited.html">Getting Started with Teradata AI Unlimited</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Deploy locally using Docker</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../ai-unlimited/install-ai-unlimited-workspaces-docker.html">Deploy and Setup Teradata AI Unlimited Workspace Service Using Docker</a>
+    <a class="nav-link" href="../../ai-unlimited/install-ai-unlimited-workspaces-docker.html">Deploy and Setup Teradata AI Unlimited Workspace Service Using Docker</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../ai-unlimited/install-ai-unlimited-interface-docker.html">Deploy a Teradata AI Unlimited Interface Using Docker</a>
+    <a class="nav-link" href="../../ai-unlimited/install-ai-unlimited-interface-docker.html">Deploy a Teradata AI Unlimited Interface Using Docker</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../ai-unlimited/using-ai-unlimited-workspace-cli.html">Use Teradata AI Unlimited With Workspace Client</a>
+    <a class="nav-link" href="../../ai-unlimited/using-ai-unlimited-workspace-cli.html">Use Teradata AI Unlimited With Workspace Client</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Deploy on AWS</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../ai-unlimited/deploy-ai-unlimited-aws-cloudformation.html">Deploy Teradata AI Unlimited Workspace Service and Interface using AWS CloudFormation Template</a>
+    <a class="nav-link" href="../../ai-unlimited/deploy-ai-unlimited-aws-cloudformation.html">Deploy Teradata AI Unlimited Workspace Service and Interface using AWS CloudFormation Template</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../ai-unlimited/ai-unlimited-aws-permissions-policies.html">Control AWS Access and Permissions using Custom Permissions and Policies</a>
+    <a class="nav-link" href="../../ai-unlimited/ai-unlimited-aws-permissions-policies.html">Control AWS Access and Permissions using Custom Permissions and Policies</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../ai-unlimited/deploy-ai-unlimited-awscli-cloudformation.html">Deploy CloudFormation Template from AWS CLI</a>
+    <a class="nav-link" href="../../ai-unlimited/deploy-ai-unlimited-awscli-cloudformation.html">Deploy CloudFormation Template from AWS CLI</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../ai-unlimited/running-sample-ai-unlimited-workload.html">Run a Sample Workload in JupyterLab Using Teradata AI Unlimited</a>
+    <a class="nav-link" href="../../ai-unlimited/running-sample-ai-unlimited-workload.html">Run a Sample Workload in JupyterLab Using Teradata AI Unlimited</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Reference</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../ai-unlimited/ai-unlimited-magic-reference.html">Teradata AI Unlimited JupyterLab Magic Command Reference</a>
+    <a class="nav-link" href="../../ai-unlimited/ai-unlimited-magic-reference.html">Teradata AI Unlimited JupyterLab Magic Command Reference</a>
   </li>
 </ul>
   </li>
@@ -1539,22 +1542,22 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">VantageCloud Lake</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../getting-started-with-vantagecloud-lake.html">Getting Started with VantageCloud Lake</a>
+    <a class="nav-link" href="../../getting-started-with-vantagecloud-lake.html">Getting Started with VantageCloud Lake</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demo-jupyter-docker.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Docker</a>
+    <a class="nav-link" href="../../vantagecloud-lake/vantagecloud-lake-demo-jupyter-docker.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Docker</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demos-visual-studio-code.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Visual Studio Code</a>
+    <a class="nav-link" href="../../vantagecloud-lake/vantagecloud-lake-demos-visual-studio-code.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Visual Studio Code</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demo-jupyter-sagemaker.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Amazon SageMaker</a>
+    <a class="nav-link" href="../../vantagecloud-lake/vantagecloud-lake-demo-jupyter-sagemaker.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Amazon SageMaker</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demo-jupyter-google-cloud-vertex-ai.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Google Cloud Vertex AI</a>
+    <a class="nav-link" href="../../vantagecloud-lake/vantagecloud-lake-demo-jupyter-google-cloud-vertex-ai.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Google Cloud Vertex AI</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demo-jupyter-azure.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Microsoft Azure</a>
+    <a class="nav-link" href="../../vantagecloud-lake/vantagecloud-lake-demo-jupyter-azure.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Microsoft Azure</a>
   </li>
 </ul>
   </li>
@@ -1856,10 +1859,10 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
   <ul class="components">
     <li class="component is-current">
-      <a class="title" href="../index.html">Getting Started Guides</a>
+      <a class="title" href="../../index.html">Getting Started Guides</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">master</a>
+          <a href="../../index.html">master</a>
         </li>
       </ul>
     </li>
@@ -1873,146 +1876,42 @@ document.addEventListener("DOMContentLoaded", function () {
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li>Manage data</li>
-    <li><a href="getting.started.dbt-feast-teradata-pipeline.html">Use dbt and FEAST to build a feature store in Teradata Vantage</a></li>
+    <li><a href="nos.html">オブジェクトストレージに保存されたクエリーデータ</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
     <div class="page-controls">
-        <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-        <a href="https://github.com/Teradata/quickstarts/blob/main/modules/other-integrations/pages/getting.started.dbt-feast-teradata-pipeline.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+        <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">問題を報告する</div></a>
+        <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/ja/general/nos.adoc"><div class="edit-on-github">GitHub で編集する</div></a>
     </div>
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Use dbt and FEAST to build a feature store in Teradata Vantage</h1>
+<h1 class="page">オブジェクトストレージに保存されたクエリーデータ</h1>
 <div class="sect1">
-<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<h2 id="_概要"><a class="anchor" href="#_概要"></a>概要</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This tutorial shows an approach to creating a dbt pipeline that takes raw data and turns it into FEAST features. The pipeline leverages  '<a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Analytics-Database-Analytic-Functions-17.20">ClearScape Analytics functions</a>' for data transformations. The output of the transformations is loaded into FEAST to materialize features that can be used in ML models.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_dbt"><a class="anchor" href="#_dbt"></a>dbt</h3>
-<div class="paragraph">
-<p><a href="https://www.getdbt.com/product/what-is-dbt/">dbt</a> (Data Build Tool) is a data transformation tool that is the cornerstone of the Modern Data Stack. It takes care of the T in ELT (Extract Load Transform). The assumption is that some other process brings raw data into your data warehouse or lake. This data then needs to be transformed.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_feast"><a class="anchor" href="#_feast"></a>Feast</h3>
-<div class="paragraph">
-<p><a href="https://docs.feast.dev/">Feast</a> (Feature Store) is a flexible data system that utilizes existing technology to manage and provide machine learning features to real-time models. It allows for customization to meet specific needs. It also allows us to make features consistently available for training and serving, avoid data leakage and decouple ML from data infrastructure.</p>
-</div>
+<p>Native Object Storage (NOS) は、AWS S3、Google GCS、Azure Blob、またはオンプレミス実装などのオブジェクト ストレージ内のファイルに保存されているデータをクエリできるようにする Vantage の機能です。これは、Vantage にデータを取り込むためのデータ パイプラインを構築せずにデータを探索するシナリオに役立ちます。</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
+<h2 id="_前提条件"><a class="anchor" href="#_前提条件"></a>前提条件</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Access to a Teradata Vantage database instance.
-NOTE: If you need a test instance of Vantage, you can provision one for free at <a href="https://clearscape.teradata.com/sign-in?utm_source=dev_portal&amp;utm_medium=quickstart_tutorial&amp;utm_campaign=quickstarts" target="_blank" rel="noopener">https://clearscape.teradata.com.</a></p>
-</li>
-<li>
-<p>Feast-Teradata  installed locally. See <a href="https://quickstarts.teradata.com/modelops/using-feast-feature-store-with-teradata-vantage.html#_overview">Feast-Teradata installation instructions</a></p>
-</li>
-<li>
-<p>dbt installed locally. See <a href="https://quickstarts.teradata.com/dbt.html">dbt installation instructions</a></p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Teradata Vantage インスタンスにアクセスする必要があります。NOS は、バージョン 17.10 以降、Vantage Express から Developer、DYI、Vantage as a Service までのすべての Vantage エディションで有効になります。</p>
+</div>
+<div class="paragraph">
+<p>#include::ROOT:partial$vantage_clearscape_analytics.adoc[]</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_objective"><a class="anchor" href="#_objective"></a>Objective</h2>
+<h2 id="_nos_でデータを探索する"><a class="anchor" href="#_nos_でデータを探索する"></a>NOS でデータを探索する</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>The goal is to create a data pipeline with Teradata Vantage as a source, and perform data transformation on some variables in dbt. The principle transformation of data we do in dbt is the one-hot encoding of several columns like gender, marital status, state code, etc. On top of that, the account type column data will be transformed by performing aggregation operations on a couple of columns. All of this together generates the desired dataset with transformed data. The transformed dataset is used as an input into FEAST to store features. Features are then used to generate a training dataset for models.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting started</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Create a new python environment to manage dbt, feast, and their dependencies. Activate the environment:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python3 -m venv env
-source env/bin/activate</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Clone the tutorial repository and change the directory to the project directory:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://github.com/Teradata/tdata-pipeline.git</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The directory structure of the project cloned looks like this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>tdata-pipeline/
-    feature_repo/
-        feature_views.py
-        feature_store.yml
-    dbt_transformation/
-        ...
-        macros
-        models
-        ...
-    generate_training_data.py
-    CreateDB.sql
-    dbt_project.yml</pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_about_the_banking_warehouse"><a class="anchor" href="#_about_the_banking_warehouse"></a>About the Banking warehouse</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>teddy_bank is a fictitious dataset of banking customers, consisting of mainly 3 tables customers, accounts, and
-transactions, with the following entity-relationship diagram:</p>
-</div>
-<div class="imageblock kroki">
-<div class="content">
-<img src="_images/diag-2e3bc6beb3ead8209775ef6464a9f726fd0101b3.svg" alt="Diagram" width="100%">
-</div>
-</div>
-<div class="paragraph">
-<p>dbt takes this raw data and builds the following model, which is more suitable for ML modeling and analytics tools:</p>
-</div>
-<div class="imageblock kroki">
-<div class="content">
-<img src="_images/diag-a06cfc37fb213394532cc236ff7225b3dfdbc64b.svg" alt="Diagram" width="100%">
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_configure_dbt"><a class="anchor" href="#_configure_dbt"></a>Configure dbt</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Create file <code>$HOME/.dbt/profiles.yml</code> with the following content. Adjust <code>&lt;host&gt;</code>, <code>&lt;user&gt;</code>, <code>&lt;password&gt;</code> to match your Teradata instance.</p>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2020,224 +1919,298 @@ transactions, with the following entity-relationship diagram:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="title">Database setup</div>
-<div class="paragraph">
-<p>The following dbt profile points to a database called <code>teddy_bank</code>. You can change <code>schema</code> value to point to an existing database in your Teradata Vantage instance:</p>
-</div>
+現在、NOS は CSV、JSON (配列または改行区切りとして)、および Parquet データ形式をサポートしています。
 </td>
 </tr>
 </table>
 </div>
-<div id="dbt_first_config" class="listingblock emits-gtm-events">
+<div class="paragraph">
+<p>データセットが CSV ファイルとして S3 バケットに保存されているとします。データセットを Vantage に取り込むかどうかを決定する前に、データセットを探索したいと考えています。このシナリオでは、
+米国地質調査所によって収集された河川流量データを含む、Teradata によって公開された公開データセットを使用します。バケットは <a href="https://td-usgs-public.s3.amazonaws.com/にあります。" class="bare">https://td-usgs-public.s3.amazonaws.com/にあります。</a></p>
+</div>
+<div class="paragraph">
+<p>まずはCSVデータのサンプルを見てみましょう。Vantage がバケットからフェッチする最初の 10 行を取得します。</p>
+</div>
+<div id="nos_first_query" class="listingblock emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">dbt_transformation:
-  target: dev
-  outputs:
-    dev:
-      type: teradata
-      host: &lt;host&gt;
-      user: &lt;user&gt;
-      password: &lt;password&gt;
-      schema: teddy_bank
-      tmode: ANSI</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT
+  TOP 10 *
+FROM (
+	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+) AS d;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Validate the setup:</p>
+<p>私が持っているものは次のとおりです。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt debug</code></pre>
+<pre>GageHeight2 Flow   site_no datetime         Precipitation GageHeight
+----------- ----- -------- ---------------- ------------- -----------
+10.9        15300 09380000 2018-06-28 00:30 671           9.80
+10.8        14500 09380000 2018-06-28 01:00 673           9.64
+10.7        14100 09380000 2018-06-28 01:15 672           9.56
+11.0        16200 09380000 2018-06-27 00:00 669           9.97
+10.9        15700 09380000 2018-06-27 00:30 668           9.88
+10.8        15400 09380000 2018-06-27 00:45 672           9.82
+10.8        15100 09380000 2018-06-27 01:00 672           9.77
+10.8        14700 09380000 2018-06-27 01:15 672           9.68
+10.9        16000 09380000 2018-06-27 00:15 668           9.93
+10.8        14900 09380000 2018-06-28 00:45 672           9.72</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If the debug command returned errors, you likely have an issue with the content of <code>profiles.yml</code>.</p>
+<p>たくさんの数字が出てきましたが、それは何を意味するのでしょうか？この質問に答えるために、Vantage に CSV ファイルのスキーマを検出するように依頼します。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT
+  *
+FROM (
+	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+	RETURNTYPE='NOSREAD_SCHEMA'
+) AS d;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Vantage はデータ サンプルをフェッチしてスキーマを分析し、結果を返します。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Name            Datatype                            FileType  Location
+--------------- ----------------------------------- --------- -------------------------------------------------------------------
+GageHeight2     decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+Flow            decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+site_no         int                                 csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+datetime        TIMESTAMP(0) FORMAT'Y4-MM-DDBHH:MI' csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+Precipitation   decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+GageHeight      decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>CSV ファイルには 6 つの列があることがわかります。各列について、スキーマを推測するために使用された名前、データ型、ファイル座標を取得します。</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_configure_feast"><a class="anchor" href="#_configure_feast"></a>Configure FEAST</h2>
+<h2 id="_nos_を使用してデータをクエリーする"><a class="anchor" href="#_nos_を使用してデータをクエリーする"></a>NOS を使用してデータをクエリーする</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Feast configuration addresses connection to your Vantage database. The yaml file created while initializing the feast
-project, <code>$HOME/.feast/feature_repo/feature_store.yml</code> can hold the details of offline storage, online storage, provider
-and registry. Adjust <code>&lt;host&gt;</code>, <code>&lt;user&gt;</code>, <code>&lt;password&gt;</code> to match your Teradata instance.</p>
+<p>スキーマがわかったので、データセットを通常の SQL テーブルであるかのように操作できます。その要点を証明するために、データの集計を行ってみましょう。気温を収集しているサイトについて、サイトごとの平均気温を取得してみましょう。</p>
 </div>
-<div class="admonitionblock note">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT
+  site_no Site_no, AVG(Flow) Avg_Flow
+FROM (
+  LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+) AS d
+GROUP BY
+  site_no
+HAVING
+  Avg_Flow IS NOT NULL;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>結果：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Site_no  Avg_Flow
+-------- ---------
+09380000 11
+09423560 73
+09424900 93
+09429070 81</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>アドホック探索アクティビティを永続ソースとして登録するには、それを外部テーブルとして作成します。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- If you are running this sample as dbc user you will not have permissions
+-- to create a table in dbc database. Instead, create a new database and use
+-- the newly create database to create a foreign table.
+
+CREATE DATABASE Riverflow
+  AS PERMANENT = 60e6, -- 60MB
+  SPOOL = 120e6; -- 120MB
+
+-- change current database to Riverflow
+DATABASE Riverflow;
+
+CREATE FOREIGN TABLE riverflow
+  USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
+
+SELECT top 10 * FROM riverflow;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>結果：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Location                                                            GageHeight2 Flow site_no datetime            Precipitation GageHeight
+------------------------------------------------------------------- ----------- ---- ------- ------------------- ------------- ----------
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09429070/2018/07/02.csv null        null 9429070 2018-07-02 14:40:00 1.21          null
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:30:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:45:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 01:00:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:15:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09429070/2018/07/02.csv null        null 9429070 2018-07-02 14:38:00 1.06          null</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>今回の <code>SELECT</code> ステートメントは、データベース内のテーブルに対する通常の選択のように見えます。データのクエリー時に 1 秒未満の応答時間が必要な場合は、CSV データを Vantage に取り込んで処理を高速化する簡単な方法があります。その方法については、読み続けてください。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_nos_から_vantage_にデータをロードする"><a class="anchor" href="#_nos_から_vantage_にデータをロードする"></a>NOS から Vantage にデータをロードする</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>オブジェクト ストレージのクエリーには時間がかかります。データが興味深いと判断し、より迅速に答えが得られるソリューションを使用してさらに分析を行いたい場合はどうすればよいでしょうか? 良いニュースは、NOS で返されたデータを <code>CREATE TABLE</code> ステートメントのソースとして使用できることです。 <code>CREATE TABLE</code> 権限があると仮定すると、次を実行できます:</p>
+</div>
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-<div class="title">Database setup</div>
-<div class="paragraph">
-<p>The following dbt profile points to a database called <code>teddy_bank</code>. You can change <code>schema</code> value to point to an
-existing database in your Teradata Vantage instance</p>
-</div>
+このクエリは、前の手順でデータベース <code>河川流量</code> と <code>河川流量</code> という外部テーブルを作成したことを前提としています。
 </td>
 </tr>
 </table>
 </div>
-<div class="sect2">
-<h3 id="_offline_store_config"><a class="anchor" href="#_offline_store_config"></a>Offline Store Config</h3>
-<div id="feast_first_config" class="listingblock emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">project: td_pipeline
-registry:
-    registry_type: sql
-    path: teradatasql://&lt;user&gt;:&lt;password&gt;@&lt;hostIP&gt;/?database=teddy_bank&amp;LOGMECH=TDNEGO
-provider: local
-offline_store:
-    type: feast_teradata.offline.teradata.TeradataOfflineStore
-    host: &lt;host&gt;
-    database: teddy_bank
-    user: &lt;user&gt;
-    password: &lt;password&gt;
-    log_mech: TDNEGO
-entity_key_serialization_version: 2</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_syntax_for_teradata_sql_registry"><a class="anchor" href="#_syntax_for_teradata_sql_registry"></a>Syntax for Teradata SQL Registry</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">path = 'teradatasql://'+ teradata_user +':' + teradata_password + '@'+host + '/?database=' +
-        teradata_database + '&amp;LOGMECH=' + teradata_log_mech</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- This query assumes you created database `Riverflow`
+-- and a foreign table called `riverflow` in the previous step.
+
+CREATE MULTISET TABLE riverflow_native (site_no, Flow, GageHeight, datetime)
+AS (
+  SELECT site_no, Flow, GageHeight, datetime FROM riverflow
+) WITH DATA
+NO PRIMARY INDEX;
+
+SELECT TOP 10 * FROM riverflow_native;</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>結果：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>site_no   Flow  GageHeight  datetime
+-------  -----  ----------  -------------------
+9400815    .00        -.01  2018-07-10 00:30:00
+9400815    .00        -.01  2018-07-10 01:00:00
+9400815    .00        -.01  2018-07-10 01:15:00
+9400815    .00        -.01  2018-07-10 01:30:00
+9400815    .00        -.01  2018-07-10 02:00:00
+9400815    .00        -.01  2018-07-10 02:15:00
+9400815    .00        -.01  2018-07-10 01:45:00
+9400815    .00        -.01  2018-07-10 00:45:00
+9400815    .00        -.01  2018-07-10 00:15:00
+9400815    .00        -.01  2018-07-10 00:00:00</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>今回は、 <code>SELECT</code> クエリーは 1 秒以内に返されました。Vantage は NOS からデータを取得する必要がありませんでした。代わりに、ノード上にすでに存在していたデータを使用して応答しました。</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_run_dbt"><a class="anchor" href="#_run_dbt"></a>Run dbt</h2>
+<h2 id="_プライベートバケットにアクセスする"><a class="anchor" href="#_プライベートバケットにアクセスする"></a>プライベートバケットにアクセスする</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this step, we will populate the following data tables: <code>customers</code>, <code>accounts</code>, and <code>transactions</code>.</p>
+<p>これまではパブリックバケットを使用してきました。プライベートバケットがある場合はどうなるでしょうか? どの認証情報を使用する必要があるかを Vantage にどのように指示しますか?</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt seed</code></pre>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_create_the_dimensional_model"><a class="anchor" href="#_create_the_dimensional_model"></a>Create the dimensional model</h3>
 <div class="paragraph">
-<p>Now that we have the raw data tables, we can instruct dbt to create the dimensional model:</p>
+<p>資格情報をクエリーに直接インライン化することができます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dbt run --select Analytic_Dataset</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT
+  TOP 10 *
+FROM (
+  LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+  AUTHORIZATION='{"ACCESS_ID":"","ACCESS_KEY":""}'
+) AS d;</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>これらの認証情報を常に入力するのは面倒であり、安全性も低下する可能性があります。Vantage では、資格情報のコンテナとして機能する認可オブジェクトを作成できます。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE AUTHORIZATION aws_authorization
+  USER 'YOUR-ACCESS-KEY-ID'
+  PASSWORD 'YOUR-SECRET-ACCESS-KEY';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>これにより、外部テーブルを作成するときに認可オブジェクトを参照できるようになります。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE FOREIGN TABLE riverflow
+, EXTERNAL SECURITY aws_authorization
+USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_run_feast"><a class="anchor" href="#_run_feast"></a>Run FEAST</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_feature_repository_definition"><a class="anchor" href="#_feature_repository_definition"></a>Feature Repository definition</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><code>TeradataSource:</code> Data Source for features stored in Teradata (Enterprise or Lake) or accessible via a Foreign Table from Teradata (NOS, QueryGrid)</p>
-</li>
-<li>
-<p><code>Entity:</code> A collection of semantically related features</p>
-</li>
-<li>
-<p><code>Feature View:</code> A feature view is a group of feature data from a specific data source. Feature views allow you to consistently define features and their data sources, enabling the reuse of feature groups across a project</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">DBT_source = TeradataSource( database=dbload, table=f"Analytic_Dataset", timestamp_field="event_timestamp")
-
-customer = Entity(name = "customer", join_keys = ['cust_id'])
-
-ads_fv = FeatureView(name="ads_fv",entities=[customer],source=DBT_source, schema=[
-        Field(name="age", dtype=Float32),
-        Field(name="income", dtype=Float32),
-        Field(name="q1_trans_cnt", dtype=Int64),
-        Field(name="q2_trans_cnt", dtype=Int64),
-        Field(name="q3_trans_cnt", dtype=Int64),
-        Field(name="q4_trans_cnt", dtype=Int64),
-    ],)</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_generate_training_data"><a class="anchor" href="#_generate_training_data"></a>Generate training data</h3>
-<div class="paragraph">
-<p>The approach to generating training data can vary. Depending upon the requirements, 'entitydf' may be joined with the source data tables using the feature views mapping. Here is a sample function that generates a training dataset.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def get_Training_Data():
-    # Initialize a FeatureStore with our current repository's configurations
-    store = FeatureStore(repo_path="feature_repo")
-    con = create_context(host = os.environ["latest_vm"], username = os.environ["dbc_pwd"],
-            password = os.environ["dbc_pwd"], database = "EFS")
-    entitydf = DataFrame('Analytic_Dataset').to_pandas()
-    entitydf.reset_index(inplace=True)
-    print(entitydf)
-    entitydf = entitydf[['cust_id','event_timestamp']]
-    training_data = store.get_historical_features(
-        entity_df=entitydf,
-        features=[
-        "ads_fv:age"
-        ,"ads_fv:income"
-        ,"ads_fv:q1_trans_cnt"
-        ,"ads_fv:q2_trans_cnt"
-        ,"ads_fv:q3_trans_cnt"
-        ,"ads_fv:q4_trans_cnt"
-        ],
-        full_feature_names=True
-    ).to_df()
-
-    return training_data</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<h2 id="_vantage_からオブジェクト_ストレージにデータをエクスポートする"><a class="anchor" href="#_vantage_からオブジェクト_ストレージにデータをエクスポートする"></a>Vantage からオブジェクト ストレージにデータをエクスポートする</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This tutorial demonstrated how to use dbt and FEAST with Teradata Vantage. The sample project takes raw data from Teradata Vantage and produces features with dbt. Metadata of features that form the base to generate a training dataset for a model was then created with FEAST; all its corresponding tables that create the feature store, are also generated at runtime within the same database.</p>
+<p>これまで、オブジェクト ストレージからのデータの読み取りとインポートについて説明してきました。SQL を使用して Vantage からオブジェクト ストレージにデータをエクスポートする方法があれば素晴らしいと思いませんか? これはまさに <code>WRITE_NOS</code> 関数の目的です。 <code>riverflow_native</code> テーブルからオブジェクト ストレージにデータをエクスポートしたいとします。次のクエリを使用してこれを行うことができます。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM WRITE_NOS (
+  ON ( SELECT * FROM riverflow_native )
+  PARTITION BY site_no ORDER BY site_no
+  USING
+    LOCATION('YOUR-OBJECT-STORE-URI')
+    AUTHORIZATION(aws_authorization)
+    STOREDAS('PARQUET')
+    COMPRESSION('SNAPPY')
+    NAMING('RANGE')
+    INCLUDE_ORDERING('TRUE')
+) AS d;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>ここでは、Vantage に <code>riverflow_native</code> からデータを取得し、 <code>parquet</code> 形式を使用して <code>YOUR-OBJECT-STORE-URI</code> バケットに保存するように指示します。データは <code>site_no</code> 属性でファイルに分割されます。ファイルは圧縮されます。</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further Reading</h2>
+<h2 id="_まとめ"><a class="anchor" href="#_まとめ"></a>まとめ</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>このクイック スタートでは、Vantage のネイティブ オブジェクト ストレージ (NOS) 機能を使用してオブジェクト ストレージからデータを読み取る方法を学習しました。NOS は、CSV、JSON、および Parquet 形式で保存されたデータの読み取りとインポートをサポートしています。NOS は、Vantage からオブジェクト ストレージにデータをエクスポートすることもできます。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_参考文献"><a class="anchor" href="#_参考文献"></a>参考文献</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://docs.getdbt.com/docs/">dbt documentation</a></p>
-</li>
-<li>
-<p><a href="https://github.com/Teradata/dbt-teradata">dbt-teradata plugin documentation</a></p>
-</li>
-<li>
-<p><a href="https://docs.feast.dev/tutorials/using-scalable-registry">Feast Scalable Registry</a></p>
-</li>
-<li>
-<p><a href="https://medium.com/teradata/enabling-highly-scalable-feature-store-with-teradata-vantage-and-feast-e01008fa8fdb">Enabling highly scalable feature store with Teradata Vantage and FEAST</a></p>
-</li>
-<li>
-<p><a href="https://github.com/Teradata/tdata-pipeline">Git repository</a> for this project.</p>
+<p><a href="https://docs.teradata.com/r/2mw8ooFr~xX0EaaGFaDW8A/root">Teradata Vantage™ - ネイティブ オブジェクト ストア スタート ガイド</a></p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="page-feedback bottom">
-  <span>Did this page help?</span>
+   <span>このページは役に立ちましたか?</span>
   <i class="far fa-thumbs-up click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
   <i class="far fa-thumbs-down click-icon" name="feedback-icon" onclick="toggleFeedbackWidgets(this)"></i>
 </div>
@@ -2326,89 +2299,91 @@ ads_fv = FeatureView(name="ads_fv",entities=[customer],source=DBT_source, schema
           <ul class="row footer-nav__desktop d-none d-xl-flex list">
             <li class="col-12 col-md">
               <div>
-                <span class="h4 fontWeight-semiBold">Who we help</span>
+                <span class="h4 fontWeight-semiBold">ご支援できること</span>
                   <ul class="list">
                     <li>
-                      <a href="https://www.teradata.com/Who-We-Help" data-celebrus="Footer Menu - Roles" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Roles | /Who-We-Help">Roles</a>
+                      <a href="https://www.teradata.jp/Who-We-Help" data-celebrus="Footer Menu - Roles" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Roles | /Who-We-Help">お役職別</a>
                     </li>
                     <li>
-                      <a href="https://www.teradata.com/Partners" data-celebrus="Footer Menu - Partners" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Partners | /Partners">Partners</a>
+                      <a href="https://www.teradata.jp/Industries" data-celebrus="Footer Menu - Industries" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Industries | /Industries">業種別</a>
                     </li>
                     <li>
-                      <a href="https://teradata.my.site.com/teradataPRM/s/self-registration" data-celebrus="Footer Menu - Partner registration" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Partner registration | https://teradata.my.site.com/teradataPRM/s/self-registration" target="_blank" rel="noopener">Partner registration
+                      <a href="https://www.teradata.jp/Partners" data-celebrus="Footer Menu - Partners" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Partners | /Partners">パートナー</a>
+                    </li>
+                    <li>
+                      <a href="https://teradata.my.site.com/teradataPRM/s/self-registration" data-celebrus="Footer Menu - Partner registration" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Partner registration | https://teradata.my.site.com/teradataPRM/s/self-registration" target="_blank" rel="noopener">パートナー登録
                         <span class="material-symbols-outlined md-16 ms-2">
-                          <img src="../_/img/small-external.svg" alt="External Icon" width="" height="">
+                          <img src="../../_/img/small-external.svg" alt="External Icon" width="" height="">
                         </span>
                       </a>
                     </li>
                     <li>
-                      <a href="https://teradata.my.site.com/teradataPRM/s/login/" data-celebrus="Footer Menu - Partner portal login" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Partner portal login | https://teradata.my.site.com/teradataPRM/s/login/" target="_blank" rel="noopener">Partner portal login
+                      <a href="https://teradata.my.site.com/teradataPRM/s/login/" data-celebrus="Footer Menu - Partner portal login" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Partner portal login | https://teradata.my.site.com/teradataPRM/s/login/" target="_blank" rel="noopener">パートナーポータル
                         <span class="material-symbols-outlined md-16 ms-2">
-                          <img src="../_/img/small-external.svg" alt="External Icon" width="" height="">
+                          <img src="../../_/img/small-external.svg" alt="External Icon" width="" height="">
                         </span>
                       </a>
                     </li>
                     <li>
-                      <a href="https://www.teradata.com/Industries" data-celebrus="Footer Menu - Industries" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Industries | /Industries">Industries</a>
-                    </li>
-                    <li>
-                      <a href="https://www.teradata.com/Customers" data-celebrus="Footer Menu - Success stories" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Success stories | /Customers">Success stories</a>
+                      <a href="https://www.teradata.jp/Customers" data-celebrus="Footer Menu - Success stories" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Success stories | /Customers">事例</a>
                     </li>
                   </ul>
                 </div>
               </li>
               <li class="col-12 col-md">
                 <div>
-                  <span class="h4 fontWeight-semiBold">Our platform</span>
+                  <span class="h4 fontWeight-semiBold">ご提供できるもの</span>
                     <ul class="list">
                       <li>
-                        <a href="https://www.teradata.com/Platform" data-celebrus="Footer Menu - Platform" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Platform | /Platform">Platform</a>
+                        <a href="https://www.teradata.jp/Platform" data-celebrus="Footer Menu - Platform" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Platform | /Platform">プラットフォーム</a>
                       </li>
                       <li>
-                        <a href="https://www.teradata.com/Platform/ClearScape-Analytics" data-celebrus="Footer Menu - ClearScape Analytics" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="ClearScape Analytics | /Platform/ClearScape-Analytics">ClearScape Analytics</a>
+                        <a href="https://www.teradata.jp/Platform/ClearScape-Analytics" data-celebrus="Footer Menu - ClearScape Analytics" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="ClearScape Analytics | /Platform/ClearScape-Analytics">ClearScape Analytics</a>
                       </li>
                       <li>
-                        <a class="nav-2" href="https://www.teradata.com/platform/ai-ml" data-celebrus="">Unleash AI Innovation</a>
-                      </li>
-                      <li>
-                        <a href="https://www.teradata.com/Platform/Use-Cases" data-celebrus="Footer Menu - Use cases" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Use cases | /Platform/Use-Cases">Use cases</a>
-                      </li>
-                     <li>
-                        <a href="https://www.teradata.com/Platform/Deployment" data-celebrus="Footer Menu - Deployment" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Deployment | /Platform/Deployment">Deployment
+                        <a href="https://www.teradata.jp/platform/ai-ml" data-celebrus="Footer Menu - AI 改革を促進する" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="AI 改革を促進する | /platform/ai-ml">
+                          AI 改革を促進する
                         </a>
                       </li>
                       <li>
-                        <a href="https://www.teradata.com/Platform/VantageCloud" data-celebrus="Footer Menu - VantageCloud" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="VantageCloud | /Platform/VantageCloud">VantageCloud</a>
+                        <a href="https://www.teradata.jp/Platform/Use-Cases" data-celebrus="Footer Menu - Use cases" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Use cases | /Platform/Use-Cases">ユースケース</a>
+                      </li>
+                      <li>
+                        <a href="https://www.teradata.jp/Platform/Deployment" data-celebrus="Footer Menu - Deployment" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Deployment | /Platform/Deployment">デプロイ環境
+                        </a>
+                      </li>                      
+                      <li>
+                        <a href="https://www.teradata.jp/Platform/VantageCloud" data-celebrus="Footer Menu - VantageCloud" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="VantageCloud | /Platform/VantageCloud">VantageCloud</a>
                       </li>
                     </ul>
                   </div>
                 </li>
                 <li class="col-12 col-md">
                   <div>
-                    <span class="h4 fontWeight-semiBold">Getting started</span>
+                    <span class="h4 fontWeight-semiBold">はじめに</span>
                       <ul class="list">
                         <li>
-                          <a href="https://www.teradata.com/Getting-Started/Pricing" data-celebrus="Footer Menu - Pricing" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Pricing | /Getting-Started/Pricing">Pricing
+                          <a href="https://www.teradata.jp/Getting-Started/Pricing" data-celebrus="Footer Menu - Pricing" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Pricing | /Getting-Started/Pricing">価格
                           </a>
                         </li>
                         <li>
-                          <a href="https://www.teradata.com/Getting-Started/Demos" data-celebrus="Footer Menu - Demos" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Demos | /Getting-Started/Demos">Demos
+                          <a href="https://www.teradata.jp/Getting-Started/Demos" data-celebrus="Footer Menu - Demos" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Demos | /Getting-Started/Demos">デモ
                           </a>
                         </li>
                         <li>
-                          <a href="https://www.teradata.com/Getting-Started/Modernization-Workshop" data-celebrus="Footer Menu - Modernization workshop" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Modernization workshop | /Getting-Started/Modernization-Workshop">Modernization workshop
+                          <a href="https://www.teradata.jp/Getting-Started/Modernization-Workshop" data-celebrus="Footer Menu - Modernization workshop" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Modernization workshop | /Getting-Started/Modernization-Workshop">モダナイゼーションワークショップ
                           </a>
                         </li>
                         <li>
-                          <a href="https://www.teradata.com/Getting-Started/Executive-Briefing-Center" data-celebrus="Footer Menu - Executive Briefing Center" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Executive Briefing Center | /Getting-Started/Executive-Briefing-Center">Executive Briefing Center
+                          <a href="https://www.teradata.jp/Getting-Started/Executive-Briefing-Center" data-celebrus="Footer Menu - Executive Briefing Center" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Executive Briefing Center | /Getting-Started/Executive-Briefing-Center">ブリーフィングセンター
                           </a>
                         </li>
                         <li>
-                          <a href="https://www.teradata.com/Events" data-celebrus="Footer Menu - Events" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Events | /Events">Events
+                          <a href="https://www.teradata.jp/Events" data-celebrus="Footer Menu - Events" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Events | /Events">イベント
                           </a>
                         </li>
                         <li>
-                          <a href="https://www.teradata.com/University" data-celebrus="Footer Menu - Learning" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Learning | /University">Learning
+                          <a href="https://www.teradata.jp/University" data-celebrus="Footer Menu - Learning" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Learning | /University">ラーニング
                           </a>
                         </li>
                       </ul>
@@ -2416,34 +2391,33 @@ ads_fv = FeatureView(name="ads_fv",entities=[customer],source=DBT_source, schema
                   </li>
                   <li class="col-12 col-md">
                     <div>
-                      <span class="h4 fontWeight-semiBold">Insights</span>
+                      <span class="h4 fontWeight-semiBold">インサイト</span>
                         <ul class="list">
                           <li>
-                            <a href="https://www.teradata.com/Insights?Topics=AI-and-Machine-Learning" data-celebrus="Footer Menu - AI &amp; ML" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="AI &amp; ML | /Insights?Topics=AI-and-Machine-Learning">AI &amp; ML
+                            <a href="https://www.teradata.jp/insights/ai-and-machine-learning" data-celebrus="Footer Menu - AI &amp; ML" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="AI &amp; ML | /Insights?Topics=AI-and-Machine-Learning">AIと機械学習
                             </a>
                           </li>
                           <li>
-                            <a href="https://www.teradata.com/Insights?Topics=Big-Data" data-celebrus="Footer Menu - Big Data" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Big Data | /Insights?Topics=Big-Data">Big Data
+                            <a href="https://www.teradata.jp/insights/cloud-data-analytics" data-celebrus="Footer Menu - クラウドデータ分析" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="クラウドデータ分析 | /insights/cloud-data-analytics">クラウドデータ分析
                             </a>
                           </li>
                           <li>
-                            <a href="https://www.teradata.com/Insights?Topics=Cloud" data-celebrus="Footer Menu - Cloud" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Cloud | /Insights?Topics=Cloud">Cloud
+                            <a href="https://www.teradata.jp/insights/data-architecture" data-celebrus="Footer Menu - データアーキテクチャ" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="データアーキテクチャ | /insights/data-architecture">データアーキテクチャ
                             </a>
                           </li>
                           <li>
-                            <a href="https://www.teradata.com/Insights?Topics=Data-Analytics" data-celebrus="Footer Menu - Data Analytics" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Data Analytics | /Insights?Topics=Data-Analytics">Data Analytics
+                            <a href="https://www.teradata.jp/insights/data-platform" data-celebrus="Footer Menu - データプラットフォーム" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="データプラットフォーム | /insights/data-platform">
+                              データプラットフォーム
                             </a>
                           </li>
                           <li>
-                            <a href="https://www.teradata.com/Insights?Topics=Data-Management" data-celebrus="Footer Menu - Data Management" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Data Management | /Insights?Topics=Data-Management">Data Management
+                            <a href="https://www.teradata.jp/insights/data-security" data-celebrus="Footer Menu - データセキュリティ" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="データセキュリティ | /insights/data-security">
+                              データセキュリティ
                             </a>
                           </li>
                           <li>
-                            <a href="https://www.teradata.com/Insights?Topics=Data-Science" data-celebrus="Footer Menu - Data Science" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Data Science | /Insights?Topics=Data-Science">Data Science
-                            </a>
-                          </li>
-                          <li>
-                            <a href="https://www.teradata.com/Glossary" data-celebrus="Footer Menu - Glossary" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Glossary | /Glossary">Glossary
+                            <a href="https://www.teradata.jp/glossary" data-celebrus="Footer Menu - 用語集" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="用語集 | /glossary">
+                              用語集
                             </a>
                           </li>
                         </ul>
@@ -2451,31 +2425,41 @@ ads_fv = FeatureView(name="ads_fv",entities=[customer],source=DBT_source, schema
                     </li>
                     <li class="col-12 col-md">
                       <div>
-                        <span class="h4 fontWeight-semiBold">About us</span>
+                        <span class="h4 fontWeight-semiBold">Teradataについて</span>
                           <ul class="list">
                             <li>
-                              <a href="https://www.teradata.com/About-Us" data-celebrus="Footer Menu - Who we are" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Who we are | /About-Us">Who we are
+                              <a href="https://www.teradata.jp/About-Us" data-celebrus="Footer Menu - 概要" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="概要 | /about-us">
+                                概要
                               </a>
                             </li>
                             <li>
-                              <a href="https://www.teradata.com/About-Us/Leadership" data-celebrus="Footer Menu - Our leadership" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Our leadership | /About-Us/Leadership">Our leadership
+                              <a href="https://www.teradata.jp/about-us/japan-overview" data-celebrus="Footer Menu - 日本テラデータ概要" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="日本テラデータ概要 | /about-us/japan-overview">
+                                日本テラデータ概要
                               </a>
                             </li>
                             <li>
-                              <a href="https://www.teradata.com/Newsroom" data-celebrus="Footer Menu - Newsroom" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Newsroom | /Newsroom">Newsroom
+                              <a href="https://www.teradata.jp/About-Us/Leadership" data-celebrus="Footer Menu - リーダーシップ" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="リーダーシップ | /about-us/leadership">
+                                リーダーシップ
                               </a>
                             </li>
                             <li>
-                              <a href="https://careers.teradata.com" data-celebrus="Footer Menu - Careers" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Careers | https://careers.teradata.com" target="_blank" rel="noopener">Careers
+                              <a href="https://www.teradata.jp/Newsroom" data-celebrus="Footer Menu - ニュース" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="ニュース | /newsroom">
+                                ニュース
+                              </a>
+                            </li>
+                            <li>
+                              <a href="https://careers.teradata.com" data-celebrus="Footer Menu - キャリア" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="キャリア | https://careers.teradata.com" target="_blank" rel="noopener">
+                                キャリア 
                                 <span class="material-symbols-outlined md-16 ms-2">
-                                  <img src="../_/img/small-external.svg" alt="External Icon" width="" height="">
+                                  <img src="../../_/img/small-external.svg" alt="External Icon" width="" height="">
                                 </span>
                               </a>
                             </li>
                             <li>
-                              <a href="https://investor.teradata.com" data-celebrus="Footer Menu - Investors" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Investors | https://investor.teradata.com" target="_blank" rel="noopener">Investors
+                              <a href="https://investor.teradata.com" data-celebrus="Footer Menu - 投資家情報" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="投資家情報 | https://investor.teradata.com" target="_blank" rel="noopener">
+                                投資家情報
                                 <span class="material-symbols-outlined md-16 ms-2">
-                                  <img src="../_/img/small-external.svg" alt="External Icon" width="" height="">
+                                  <img src="../../_/img/small-external.svg" alt="External Icon" width="" height="">
                                 </span>
                               </a>
                             </li>
@@ -2483,7 +2467,7 @@ ads_fv = FeatureView(name="ads_fv",entities=[customer],source=DBT_source, schema
                         </div>  
                       </li>
                       <li class="col-12 col-md">
-                        <span class="h4">Social media</span>
+                        <span class="h4">ソーシャルメディア</span>
                   <ul class="footer_social list">
                       <li>
                           <a data-gtm-category="Footer" data-gtm-action="social click" data-gtm-label="https://www.linkedin.com/company/teradata" href="https://www.linkedin.com/company/teradata" data-celebrus="Social Link - LinkedIn" class="icon-social" target="_blank" rel="noopener" aria-label="Social Link - LinkedIn">
@@ -2533,76 +2517,76 @@ ads_fv = FeatureView(name="ads_fv",entities=[customer],source=DBT_source, schema
           <nav class="accordionContent accordionContent-centered d-block d-xl-none footer-nav__mobile">
                       <details>
                           <summary class="px-0 py-4 d-flex justify-content-between align-items-center">
-                              <span class="h4 fontWeight-semiBold p-0">Who we help</span>
+                              <span class="h4 fontWeight-semiBold p-0">ご支援できること</span>
                               <span class="icon caret"></span>
                           </summary>
                           <ul class="pb-4 list">
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Who-We-Help" data-celebrus="">Roles</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Partners" data-celebrus="">Partners</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://teradata.my.site.com/teradataPRM/s/self-registration" data-celebrus="" target="_blank" rel="noopener">Partner registration</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://teradata.my.site.com/teradataPRM/s/login/" data-celebrus="" target="_blank" rel="noopener">Partner portal login</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Industries" data-celebrus="">Industries</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Customers" data-celebrus="">Success stories</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/Who-We-Help" data-celebrus="">お役職別</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/industries" data-celebrus="">業種別</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/Partners" data-celebrus="">パートナー</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://teradata.my.site.com/teradataPRM/s/self-registration" data-celebrus="" target="_blank" rel="noopener">パートナー登録</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://teradata.my.site.com/teradataPRM/s/login/" data-celebrus="" target="_blank" rel="noopener">パートナーポータル</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/Customers" data-celebrus="">事例</a></li>
                           </ul>
                       </details>
                       <details>
                           <summary class="px-0 py-4 d-flex justify-content-between align-items-center">
-                              <span class="h4 fontWeight-semiBold p-0">Our platform</span>
+                              <span class="h4 fontWeight-semiBold p-0">ご提供できるもの</span>
                               <span class="icon caret"></span>
                           </summary>
                           <ul class="pb-4 list">
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Platform" data-celebrus="">Platform</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Platform/ClearScape-Analytics" data-celebrus="">ClearScape Analytics</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/platform/ai-ml" data-celebrus="">Unleash AI Innovation</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Platform/Use-Cases" data-celebrus="">Use cases</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Platform/Deployment" data-celebrus="">Deployment</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Platform/VantageCloud" data-celebrus="">VantageCloud</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/Platform" data-celebrus="">プラットフォーム</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/platform/clearscape-analytics" data-celebrus="">ClearScape Analytics</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/platform/ai-ml" data-celebrus="">AI 改革を促進する</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/Platform/Use-Cases" data-celebrus="">ユースケース</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/Platform/Deployment" data-celebrus="">デプロイ環境</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/Platform/VantageCloud" data-celebrus="">VantageCloud</a></li>                         
                           </ul>
                       </details>
                       <details>
                           <summary class="px-0 py-4 d-flex justify-content-between align-items-center">
-                              <span class="h4 fontWeight-semiBold p-0">Getting started</span>
+                              <span class="h4 fontWeight-semiBold p-0">はじめに</span>
                               <span class="icon caret"></span>
                           </summary>
                           <ul class="pb-4 list">
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Getting-Started/Pricing" data-celebrus="">Pricing</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Getting-Started/Demos" data-celebrus="">Demos</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Getting-Started/Modernization-Workshop" data-celebrus="">Modernization workshop</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Getting-Started/Executive-Briefing-Center" data-celebrus="">Executive Briefing Center</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Events" data-celebrus="">Events</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/University" data-celebrus="">Learning</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/Getting-Started/Pricing" data-celebrus="">価格</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/Getting-Started/Demos" data-celebrus="">デモ</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/Getting-Started/Modernization-Workshop" data-celebrus="">モダナイゼーションワークショップ</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/Getting-Started/Executive-Briefing-Center" data-celebrus="">ブリーフィングセンター</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Events" data-celebrus="">イベント</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/University" data-celebrus="">ラーニング</a></li>
                           </ul>
                       </details>
                       <details>
                           <summary class="px-0 py-4 d-flex justify-content-between align-items-center">
-                              <span class="h4 fontWeight-semiBold p-0">Insights</span>
+                              <span class="h4 fontWeight-semiBold p-0">インサイト</span>
                               <span class="icon caret"></span>
                           </summary>
                           <ul class="pb-4 list">
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Insights?Topics=AI-and-Machine-Learning" data-celebrus="">AI &amp; ML</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Insights?Topics=Big-Data" data-celebrus="">Big Data</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Insights?Topics=Cloud" data-celebrus="">Cloud</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Insights?Topics=Data-Analytics" data-celebrus="">Data Analytics</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Insights?Topics=Data-Management" data-celebrus="">Data Management</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Insights?Topics=Data-Science" data-celebrus="">Data Science</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Glossary" data-celebrus="">Glossary</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/insights/ai-and-machine-learning" data-celebrus="">AIと機械学習</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/insights/cloud-data-analytics" data-celebrus="">クラウドデータ分析</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/insights/data-architecture" data-celebrus="">データアーキテクチャ</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/insights/data-platform" data-celebrus="">データプラットフォーム</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/insights/data-security" data-celebrus="">データセキュリティ</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/Glossary" data-celebrus="">用語集</a></li>                             
                           </ul>
                       </details>
                       <details>
                           <summary class="px-0 py-4 d-flex justify-content-between align-items-center">
-                              <span class="h4 fontWeight-semiBold p-0">About us</span>
+                              <span class="h4 fontWeight-semiBold p-0">Teradataについて</span>
                               <span class="icon caret"></span>
                           </summary>
                           <ul class="pb-4 list">
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/About-Us" data-celebrus="">Who we are</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/About-Us/Leadership" data-celebrus="">Our leadership</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Newsroom" data-celebrus="">Newsroom</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://careers.teradata.com" data-celebrus="" target="_blank" rel="noopener">Careers</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://investor.teradata.com" data-celebrus="" target="_blank" rel="noopener">Investors</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/about-us" data-celebrus="">概要</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/about-us/japan-overview" data-celebrus="">日本テラデータ概要</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/about-us/leadership" data-celebrus="">リーダーシップ</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.jp/newsroom" data-celebrus="" target="_blank" rel="noopener">ニュース</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://careers.teradata.com/" data-celebrus="" target="_blank" rel="noopener">キャリア</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://investor.teradata.com" data-celebrus="" target="_blank" rel="noopener">投資家情報</a></li>
                           </ul>
                       </details>
               <nav class="my-7">
-                  <span class="h4">Social media</span>
+                  <span class="h4">ソーシャルメディア</span>
                   <ul class="footer_social list">
                       <li>
                         <a href="https://www.linkedin.com/company/teradata" class="icon-social" target="_blank" rel="noopener" aria-label="Social Link - LinkedIn">
@@ -2653,16 +2637,17 @@ ads_fv = FeatureView(name="ads_fv",entities=[customer],source=DBT_source, schema
   
           <div class="row footer-nav__baseline border-top-medium">
               <div class="col-12 col-lg-3 col-xl-4 px-lg-0">
-                  <span class="copyright">©2023 Teradata. All Rights Reserved</span>
+                  <span class="copyright">©2024 Teradata. All Rights Reserved</span>
               </div>
               <div class="col-12 col-lg-9 col-xl-8 d-flex justify-content-lg-end px-lg-0">
                   <ul class="d-flex flex-wrap justify-content-between nav-2 list">
-                      <li><a href="https://www.teradata.com/Privacy" data-celebrus="">Privacy</a></li>   
-                      <li><a href="https://www.teradata.com/Privacy#do-not-sell-share" data-celebrus="">Don’t Sell/Share My Info</a></li>   
-                      <li><a href="https://www.teradata.com/Legal/Terms-of-Use" data-celebrus="">Terms of use</a></li>   
-                      <li><a href="https://www.teradata.com/Legal/Legal-Notice" data-celebrus="">Legal</a></li>   
-                      <li><a href="https://www.teradata.com/Product-Support-Policy" data-celebrus="">Support Policies</a></li>   
-                      <li><a href="#tracking-consent" data-celebrus="">Tracking Consent</a></li>   
+                      <li><a href="https://www.teradata.com/Privacy" data-celebrus="">プライバシー</a></li>   
+                      <li><a href="https://www.teradata.com/Privacy#do-not-sell-share" data-celebrus="">個人情報共有</a></li>   
+                      <li><a href="https://www.teradata.com/Legal/Terms-of-Use" data-celebrus="">利用規約</a></li>   
+                      <li><a href="https://www.teradata.com/Legal/Legal-Notice" data-celebrus="">リーガル</a></li>   
+                      <li><a href="https://assets.teradata.com/pdf/jp/ISMS.pdf" data-celebrus="Legal - ISMS" target="_blank" rel="noopener">ISMS</a></li>
+                      <li><a href="https://www.teradata.com/Product-Support-Policy" data-celebrus="">サポートポリシー</a></li>   
+                      <li><a href="#tracking-consent" data-celebrus="">トラッキング</a></li>   
                   </ul>
               </div>
           </div>
@@ -2675,25 +2660,25 @@ ads_fv = FeatureView(name="ads_fv",entities=[customer],source=DBT_source, schema
   const mainElement = document.getElementById('home'); 
   
   if (mainElement && mainElement.id === 'home') {
-    const scriptElement = document.querySelector('script[src="../_/js/site.js"]');
+    const scriptElement = document.querySelector('script[src="../../_/js/site.js"]');
     if (scriptElement) {
       scriptElement.remove(); 
     }
   } else {
-    const scriptElement = document.querySelector('script[src="../_/js/site.js"]');
+    const scriptElement = document.querySelector('script[src="../../_/js/site.js"]');
     if (!scriptElement) {
       const newScriptElement = document.createElement('script');
-      newScriptElement.src = '../_/js/site.js';
+      newScriptElement.src = '../../_/js/site.js';
       document.body.appendChild(newScriptElement);
     }
   }
 });
 </script>    
-<script async src="../_/js/behavior.js"></script>
-<script src="../_/js/vendor/lunr.js"></script>
-<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
-<script async src="../search-index.js"></script>
-<script src="../_/js/teradata.min.js"></script>
+<script async src="../../_/js/behavior.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+<script src="../../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang=en>
+ 
   <head>
-    <meta charset="utf-8">
+        <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Main :: Teradata Getting Started</title>
     <link rel="canonical" href="https://quickstarts.teradata.com/index.html">
@@ -36,7 +38,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" href="./_/css/newnavbar.css" >
 <link rel="stylesheet" href="./_/css/navbar.css">
 <style>
-
+.footer-nav .footer_social .icon-social {
+    width: 44px;
+    height: 44px;
+    margin: 0 12px 0 0;
+}
   /*New Style*/
   .header-utility {
     height: 28px;
@@ -150,6 +156,7 @@ button {
   font: inherit;
   cursor: pointer;
   outline: inherit;
+  font-family: Inter, sans-Serif;
 }
 
 .header-nav-mobile__menu,
@@ -882,322 +889,9 @@ span.search-result-highlight {
 <link rel="icon" href="./_/img/favicon.ico" type="image/x-icon">
   </head>
   <body>
-<!-- Adding CDN to use sql-formatter for unpkg -->
-<script src="https://unpkg.com/sql-formatter/dist/sql-formatter.min.js"></script>
-
-<!-- Google Tag Manager (noscript) -->
-<noscript>
-  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7Q6CLV" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-</noscript>
-<!-- End Google Tag Manager (noscript) -->
-<!-- New Navbar -->
-      <nav>
-        <div class="header-nav-wrapper">
-          <section class="header-utility nav-3 background-grayLight color-navy d-none d-xl-flex">
-            <div class="container-wide d-flex align-items-center">
-              <div class="header-utility__right d-flex">
-                <ul class="header-utility__nav me-4 list">
-                  <li>
-                    <a href="https://teradata.com" target="_blank" class="tcom">Teradata.com</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </section>
-          <section id="site-header">
-            <header class="header-nav">
-              <div class="container-wide">
-                <div class="row">
-                  <nav class="col d-flex justify-content-between align-items-center">
-                    <div class="header-nav__element d-flex">
-                      <a class="header-nav__logo" href="https://www.teradata.com/" aria-label="Teradata" target="_blank">     
-                        <div class="logo">
-                          <svg class="teradata-logo" viewBox="0 0 107 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <use xlink:href="#teradata-logo"></use>
-                          </svg>
-                        </div>
-                      </a>
-                      <a href="https://developers.teradata.com" class="dev">
-                        <div>Developers</div>
-                      </a>
-                    </div>
-                    <ul class="header-nav__main-menu header-nav__element nav-1 list">
-                      <li>
-                        <a href="./index.html" class="header-nav__main-menu__link active">Getting started</a>
-                      </li>
-                      <li>
-                        <button href="" onclick="docs()" class="header-nav__main-menu__link dropbtn">Docs</button>
-                        <div id="myDocsDropdown" class="dropdown-content">
-                          <a href="https://docs.teradata.com/p/VantageCloud/Lake" class="dropdown-item mt">VantageCloud Lake Documentation</a>
-                          <a href="https://docs.teradata.com/" class="dropdown-item">All Documentation</a> 
-                        </div>  
-                      </li>
-                      <li>
-                        <a href="https://downloads.teradata.com/" class="header-nav__main-menu__link">Downloads</a>
-                      </li>
-                      <li>
-                        <button href="" onclick="community()" class="header-nav__main-menu__link dropbtn">Community</button>
-                        <div id="myCommunityDropdown" class="dropdown-content dc2">
-                          <a href="https://support.teradata.com" title="Technical Medium Blogs" class="dropdown-item mt">Teradata Community</a>
-                          <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item mb">Technical Medium Blogs&nbsp; &nbsp; 
-                            <img src='./_/img/small-external.svg' alt="External Icon">
-                          </a>
-                          <a href="https://github.com/Teradata" title="Teradata on GitHub" target="_blank" class="dropdown-item mb">GitHub&nbsp; &nbsp; 
-                            <img src='./_/img/small-external.svg' alt="External Icon">
-                          </a>
-                          <a href="https://stackoverflow.com/questions/tagged/teradata" title="Stack Overflow Teradata questions" target="_blank" class="dropdown-item">Stack Overflow&nbsp; &nbsp; 
-                            <img src='./_/img/small-external.svg' alt="External Icon">
-                          </a>  
-                        </div>
-                      </li>
-                    </ul>  
-                    <div class="head-nav__alt-menu-wrapper header-nav__element">
-                      <ul class="header-nav__alt-menu d-flex justify-content-end list">
-                        <li>
-                          <section class="navbar-search" id="searchtextbox"> 
-                          </section>
-                        </li>
-                      </ul>
-                    </div>
-                  </nav>
-                </div>
-              </div>
-            </header>
-            <header class="header-nav-mobile">
-              <nav class="d-flex custom-justify-content-between align-items-center px-6 shadow--s">
-                  <a class="header-nav__logo d-flex align-items-center" href="https://www.teradata.com/" aria-label="Teradata">
-                      <div>
-                          <img class="teradata-logo" src='./_/img/TD-Logo.svg' alt="" title="" >
-                      </div>
-                  </a>
-                  <a href="http://developers.teradata.com/" class="developers">Developers</a>
-                  <ul class="header-nav-mobile__top-links list">
-                      <li>
-                          <button id="showMenu" role="button" aria-label="Click or Press enter to open menu" tabindex="0" class="header-nav-mobile__menu-icon">
-                              <span></span>
-                              <span></span>
-                              <span></span>
-                              <span></span>
-                          </button>
-                      </li>
-                  </ul>
-              </nav>
-              <section id="vue-mobile-slide">
-                <div class="header-nav-mobile__menu-search" style="display: none;">
-                  <div class="header-nav-mobile__menu-search__input">
-                    <input type="text" id="search-mobile-input" placeholder="What can we help you find?" enterkeyhint="search">
-                    <button class="d-flex align-items-center justify-content-center" data-celebrus="Header - Search Mobile (Display Only)" data-gtm-action="search click">
-                      <span class="material-symbols-outlined md-24">search</span>
-                    </button>
-                  </div>
-                </div>
-                <!--Start Responsive NavBar-->
-                <section class="header-nav-mobile__menu-listing display-menu sidenav">
-                  <ul class="container-wide header-nav-mobile__menu-listing-ul list">
-                    <li class="header-nav-mobile__menu-listing__item has-sub-items">
-                      <header data-celebrus="Mobile Main Menu - Who we help" data-gtm-category="Header" data-gtm-action="main nav click" data-gtm-label="Who we help" class="d-flex justify-content-between align-items-center border-bottom-light">
-                        <div class="header-nav-mobile__menu-listing__header nav-1">
-                          <a class="nav-1 d-flex justify-content-between align-items-center" href="https://quickstarts.teradata.com/">Getting started</a>
-                        </div>
-                      </header>
-                    </li>
-
-                    <li class="border-bottom-light">
-                      <div>
-                        <button id="toggleButtonDocs" class="py-4 nav-1 d-flex justify-content-between align-items-center w-100">Docs
-                          <span class="caret caret--slate"></span>
-                        </button>
-                        <div class="slide-up-down__container hidden" style="--content-height: 94; transition: height 500ms ease-in-out 0s;">  
-                          <ul class="ps-3 list">
-                            <li>
-                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/p/VantageCloud/Lake">VantageCloud Lake Documentation</a>
-                            </li>
-                            <li>
-                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/">All Documentation</a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </li>
-
-                    <li class="header-nav-mobile__menu-listing__item has-sub-items">
-                      <header class="d-flex justify-content-between align-items-center border-bottom-light">
-                        <div class="header-nav-mobile__menu-listing__header nav-1">
-                          <a class="nav-1 d-flex justify-content-between align-items-center" href="https://downloads.teradata.com/">Downloads</a>
-                        </div>
-                      </header>
-                    </li>
-                    <li class="border-bottom-light">
-                      <div>
-                        <button id="toggleButtonComm" class="py-4 nav-1 d-flex justify-content-between align-items-center w-100">Community
-                          <span class="caret caret--slate"></span>
-                        </button>
-                        <div class="slide-up-down__container hidden" aria-hidden="false" style="--content-height: 235; transition: height 500ms ease-in-out 0s;">
-                          <ul class="ps-3 list">
-                            <li>
-                              <a class="nav-2 py-4 d-block color-slate" href="https://support.teradata.com">Teradata Community</a>
-                            </li>
-                            <li>
-                              <a class="nav-2 py-4 d-flex align-items-center color-slate" href="https://medium.com/teradata">
-                                Technical Medium Blogs&nbsp;&nbsp;<img src='./_/img/small-external.svg' class="mtop">
-                              </a>
-                            </li>
-                            <li>
-                              <a class="nav-2 py-4 d-flex color-slate" href="https://github.com/Teradata" target="_blank" rel="noopener">
-                                GitHub&nbsp;&nbsp;<img src='./_/img/small-external.svg' class="e">
-                              </a>
-                            </li>
-                            <li>
-                              <a class="nav-2 py-4 d-flex color-slate" href="https://stackoverflow.com/questions/tagged/teradata" target="_blank" rel="noopener">
-                                Stack Overflow&nbsp;&nbsp;<img src='./_/img/small-external.svg' class="">
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                  <footer>
-                    <div class="header-nav-mobile__sub-menu background-grayLight mt-6 py-6 container-wide">
-                      <ul class="row list">
-                        <li class="col-6">
-                          <a class="nav-1" href="https://teradata.com" target="_blank" rel="noopener">Teradata.com</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </footer>
-                </section>
-              </section>
-            </header>
-             <div class="page-blackout"></div>
-          </section>
-        </div>
-
-      </nav>
-  </nav>
-
-  <script>
-    var sectionElement = document.querySelector(".navbar-search");
-    var devElement = document.querySelector(".dev");
-    if (sectionElement.innerHTML.trim() === "") {
-      devElement.style.marginRight = "-225px"; 
-    }
-
-    /* Script for desktop dropdowns */
-    function community() {
-
-      var blackoutElement = document.querySelector('.page-blackout');
-
-      document.getElementById("myCommunityDropdown").classList.toggle("show");
-      document.getElementById("myDocsDropdown").classList.remove("show");
-      if(document.getElementById("myCommunityDropdown").classList.contains("dropdown-content") && 
-          document.getElementById("myCommunityDropdown").classList.contains("show")){
-        blackoutElement.classList.add('active');
-      }else{
-        blackoutElement.classList.remove('active');
-      }
-    }
-
-    function docs() {
-      var blackoutElement = document.querySelector('.page-blackout');   
-   
-      document.getElementById("myDocsDropdown").classList.toggle("show");
-      document.getElementById("myCommunityDropdown").classList.remove("show"); 
-      if(document.getElementById("myDocsDropdown").classList.contains("dropdown-content") && 
-          document.getElementById("myDocsDropdown").classList.contains("show")){
-        blackoutElement.classList.add('active');
-      }else{
-        blackoutElement.classList.remove('active');
-      }
-    }
-
-  // Close the dropdown if the user clicks outside of it
-  window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      var blackoutElement = document.querySelector('.page-blackout');
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
-          blackoutElement.classList.remove('active');
-        }
-      }
-      
-    }
-  }
-  /* Script for desktop dropdowns */
-
-  /* Mobile NavBar */
-  document.addEventListener("DOMContentLoaded", function () {
-  const showMenuButton = document.getElementById("showMenu");
-  const menuListing = document.querySelector(".header-nav-mobile__menu-listing");
-  const menu = document.getElementById('vue-mobile-slide');
-  const blackoutElement = document.querySelector('.page-blackout');
-
-  showMenuButton.addEventListener("click", function () {
-    menuListing.classList.toggle("display-menu"); 
-    showMenuButton.classList.toggle("active"); 
-    blackoutElement.classList.toggle("active");
-  });
-
-
-// sqlFormattingOptions based on sql-formatting configuration
-// https://github.com/sql-formatter-org/sql-formatter
-
-
-const sqlFormatterOptions = {
-    tabWidth: 2,
-    keywordCase: 'upper',
-    functionCase: 'upper',
-    linesBetweenQueries: 1,
-};
-
-
-// Select all elements with the class "language-teradata-sql"
-const sqlCodeElements = document.querySelectorAll('.language-teradata-sql');
-
-// Iterate through each SQL code element. 
-sqlCodeElements.forEach(sqlCodeElement => {
-  // Check if the element has already been formatted
-  if (!sqlCodeElement.classList.contains('formatted')) {
-      const sqlCode = sqlCodeElement.innerText;
-      // Format SQL code with custom options
-      const formattedSql = sqlFormatter.format(sqlCode, sqlFormatterOptions)
-
-      sqlCodeElement.innerHTML = formattedSql;
-
-      // Mark the element as formatted to avoid duplication
-      sqlCodeElement.classList.add('formatted');
-  } else {
-      console.log('Element with class "language-teradata-sql" already formatted.');
-  }
-});
-
-});
-
-
-  document.addEventListener("DOMContentLoaded", function () {
-  const toggleButtonDocs = document.getElementById("toggleButtonDocs");
-  const containerDocs = document.querySelector(".slide-up-down__container");
-
-  toggleButtonDocs.addEventListener("click", function () {
-    containerDocs.classList.toggle("hidden");
-    toggleButtonDocs.classList.toggle("toggle-active");
-  });
-});
- 
-document.addEventListener("DOMContentLoaded", function () {
-  const toggleButtonComm = document.getElementById("toggleButtonComm");
-  const containerComm = document.querySelectorAll(".slide-up-down__container")[1];
-
-  toggleButtonComm.addEventListener("click", function () {
-    containerComm.classList.toggle("hidden");
-    toggleButtonComm.classList.toggle("toggle-active");
-  });
-});
-  </script>
+    
+<!--<div class="body">-->
+    
 <!--<div class="body">-->
   <main class="article" id="home">
     <div class="content landing">
@@ -1215,7 +909,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   <path d="M9.35002 11.9669L8.63335 11.2669L11.4334 8.46686H2.66669V7.46686H11.4334L8.61669 4.6502L9.33335 3.9502L13.35 7.96686L9.35002 11.9669Z" fill="white"/>
                 </svg>
               </a>
-              <a class="call-to-action-button-secondary" href="#browse-content" style="width: 132px;" title="Browse Content" rel="nofollow">
+              <a class="call-to-action-button-secondary" href="#browse-content" title="Browse Content" rel="nofollow">
                 Browse
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M9.35008 11.9669L8.63341 11.2669L11.4334 8.46686H2.66675V7.46686H11.4334L8.61675 4.6502L9.33341 3.9502L13.3501 7.96686L9.35008 11.9669Z" fill="#00233C"/>
@@ -1558,7 +1252,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <tbody>
                   <tr>
                     <td class="icon">
-                      <img src="./_/img/icons/contribute-icon.svg" class="icon-color" alt="Question mark">
+                      <img src="./_/img/icons/contribute-icon.svg" class="icon-color">
                       Didn’t find what you were looking for?
                     </td>
                     <td class="content">
@@ -1578,6 +1272,7 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   </main>
 <!--</div>-->
+<!--</div>-->
 
 <style>
   body {
@@ -1588,11 +1283,21 @@ document.addEventListener("DOMContentLoaded", function () {
   main.article {
     padding-bottom: 30px;
   }
-/*
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 460px) { 
+  .button-container {
+    display: grid !important;
+  }
+}
+@media screen and (max-width: 576px) {  
+  /*
   .call-to-action .call-to-action-button,
   .call-to-action .call-to-action-button-secondary {
     width: 100%;
+    height: auto;
+  }*/
+  .call-to-action {
+    width: 100%;
+    height: auto;
   }
 }
 */
@@ -1657,8 +1362,8 @@ document.addEventListener("DOMContentLoaded", function () {
   border: 1px solid rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
   border-radius: 8px;
-  width: 100%;
-  height: 245px;
+/*  width: 100%;
+  height: 245px;*/
   background-repeat: no-repeat;
   background-position: right top;
   background-origin: content-box;
@@ -1820,7 +1525,6 @@ document.addEventListener("DOMContentLoaded", function () {
   font-weight: 600;
   line-height: 24px;
   color: #00233C;
-/*  padding: 9px 8px;*/
   position: absolute;
   bottom: 24px;
   right: 24px;
@@ -1837,7 +1541,6 @@ document.addEventListener("DOMContentLoaded", function () {
   color: #fff;
   padding: 16px;
   height: 58px;
-
 }
 
 .button-container {
@@ -1943,7 +1646,393 @@ div.tile-icons {
   text-decoration: none;
 }
 </style>
-<!-- Footer SVGs -->
+    <script src="./_/js/lang.js"></script>
+<!-- Adding CDN to use sql-formatter for unpkg -->
+<script src="https://unpkg.com/sql-formatter/dist/sql-formatter.min.js"></script>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7Q6CLV" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- Navbar -->
+    <!-- New Navbar -->
+      <nav>
+        <div class="header-nav-wrapper">
+          <section class="header-utility nav-3 background-grayLight color-navy d-none d-xl-flex">
+            <div class="container-wide d-flex align-items-center">
+              <div class="header-utility__right d-flex">
+                <ul class="header-utility__nav me-4 list">
+                  <li>
+                    <a href="https://teradata.com" target="_blank" class="tcom">Teradata.com</a>
+                  </li>
+                </ul>
+                <div class="td-language-selector dropdown1">
+                  <button onclick="langOptions()" class="td-language-selector__toggle selected">
+                    Global 
+                  </button>
+                  <div id="myDropdown" class="nav-2 td-language-selector__dropdown dropdown-content1">
+                    <li lang="en-US" class="td-language-selector__menu-item" onclick="switchLanguage('en')">
+                      <a href="#" class="td-language-selector__location no-underline active-lan">Global</a>
+                    </li>
+                    <li lang="ja-JP" class="td-language-selector__menu-item" onclick="switchLanguage('ja')">
+                      <a href="#" class="td-language-selector__location no-underline">日本</a>
+                    </li>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="site-header">
+            <header class="header-nav">
+              <div class="container-wide">
+                <div class="row">
+                  <nav class="col d-flex justify-content-between align-items-center">
+                    <div class="header-nav__element d-flex">
+                      <a class="header-nav__logo" href="https://www.teradata.com/" target="_blank">     
+                        <div class="logo">
+                          <svg class="teradata-logo" viewBox="0 0 107 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <use xlink:href="#teradata-logo"></use>
+                          </svg>
+                        </div>
+                      </a>
+                      <a href="https://developers.teradata.com" class="dev">
+                        <div>Developers</div>
+                      </a>
+                    </div>
+                    <ul class="header-nav__main-menu header-nav__element nav-1 list">
+                      <li>
+                        <a href="./index.html" class="header-nav__main-menu__link active">Getting started</a>
+                      </li>
+                      <li>
+                        <button href="" onclick="docs()" class="header-nav__main-menu__link dropbtn">Docs</button>
+                        <div id="myDocsDropdown" class="dropdown-content">
+                          <a href="https://docs.teradata.com/p/VantageCloud/Lake" class="dropdown-item mt">VantageCloud Lake Documentation</a>
+                          <a href="https://docs.teradata.com/" class="dropdown-item">All Documentation</a> 
+                        </div>  
+                      </li>
+                      <li>
+                        <a href="https://downloads.teradata.com/" class="header-nav__main-menu__link">Downloads</a>
+                      </li>
+                      <li>
+                        <button href="" onclick="community()" class="header-nav__main-menu__link dropbtn">Community</button>
+                        <div id="myCommunityDropdown" class="dropdown-content dc2">
+                          <a href="https://support.teradata.com" title="Technical Medium Blogs" class="dropdown-item mt">Teradata Community</a>
+                          <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item mb">Technical Medium Blogs&nbsp; &nbsp; 
+                            <img src='./_/img/small-external.svg' alt="External Icon">
+                          </a>
+                          <a href="https://github.com/Teradata" title="Teradata on GitHub" target="_blank" class="dropdown-item mb">GitHub&nbsp; &nbsp; 
+                            <img src='./_/img/small-external.svg' alt="External Icon">
+                          </a>
+                          <a href="https://stackoverflow.com/questions/tagged/teradata" title="Stack Overflow Teradata questions" target="_blank" class="dropdown-item">Stack Overflow&nbsp; &nbsp; 
+                            <img src='./_/img/small-external.svg' alt="External Icon">
+                          </a>  
+                        </div>
+                      </li>
+                    </ul>  
+                    <div class="head-nav__alt-menu-wrapper header-nav__element">
+                      <ul class="header-nav__alt-menu d-flex justify-content-end list">
+                        <li>
+                          <section class="navbar-search" id="searchtextbox"> 
+                          </section>
+                        </li>
+                      </ul>
+                    </div>
+                  </nav>
+                </div>
+              </div>
+            </header>
+            <header class="header-nav-mobile">
+              <nav class="d-flex custom-justify-content-between align-items-center px-6 shadow--s">
+                  <a class="header-nav__logo d-flex align-items-center" href="/" aria-label="Teradata">
+                      <div>
+                          <img class="teradata-logo" src='./_/img/TD-Logo.svg' alt="" title="" >
+                      </div>
+                  </a>
+                  <a href="http://developers.teradata.com/" class="developers">Developers</a>
+                  <ul class="header-nav-mobile__top-links list">
+                      <li>
+                          <button id="showMenu" role="button" aria-label="Click or Press enter to open menu" tabindex="0" class="header-nav-mobile__menu-icon">
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                          </button>
+                      </li>
+                  </ul>
+              </nav>
+              <section id="vue-mobile-slide">
+                <div class="header-nav-mobile__menu-search" style="display: none;">
+                  <div class="header-nav-mobile__menu-search__input">
+                    <input type="text" id="search-mobile-input" placeholder="What can we help you find?" enterkeyhint="search">
+                    <button class="d-flex align-items-center justify-content-center" data-celebrus="Header - Search Mobile (Display Only)" data-gtm-action="search click">
+                      <span class="material-symbols-outlined md-24">search</span>
+                    </button>
+                  </div>
+                </div>
+                <!--Start Responsive NavBar-->
+                <section class="header-nav-mobile__menu-listing display-menu sidenav">
+                  <ul class="container-wide header-nav-mobile__menu-listing-ul list">
+                    <li class="header-nav-mobile__menu-listing__item has-sub-items">
+                      <header data-celebrus="Mobile Main Menu - Who we help" data-gtm-category="Header" data-gtm-action="main nav click" data-gtm-label="Who we help" class="d-flex justify-content-between align-items-center border-bottom-light">
+                        <div class="header-nav-mobile__menu-listing__header nav-1">
+                          <a class="nav-1 d-flex justify-content-between align-items-center" href="https://quickstarts.teradata.com/">Getting started</a>
+                        </div>
+                      </header>
+                    </li>
+
+                    <li class="border-bottom-light">
+                      <div>
+                        <button id="toggleButtonDocs" class="py-4 nav-1 d-flex justify-content-between align-items-center w-100">Docs
+                          <span class="caret caret--slate"></span>
+                        </button>
+                        <div class="slide-up-down__container hidden" style="--content-height: 94; transition: height 500ms ease-in-out 0s;">  
+                          <ul class="ps-3 list">
+                            <li>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/p/VantageCloud/Lake">VantageCloud Lake Documentation</a>
+                            </li>
+                            <li>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/">All Documentation</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li class="header-nav-mobile__menu-listing__item has-sub-items">
+                      <header class="d-flex justify-content-between align-items-center border-bottom-light">
+                        <div class="header-nav-mobile__menu-listing__header nav-1">
+                          <a class="nav-1 d-flex justify-content-between align-items-center" href="https://downloads.teradata.com/">Downloads</a>
+                        </div>
+                      </header>
+                    </li>
+                    <li class="border-bottom-light">
+                      <div>
+                        <button id="toggleButtonComm" class="py-4 nav-1 d-flex justify-content-between align-items-center w-100">Community
+                          <span class="caret caret--slate"></span>
+                        </button>
+                        <div class="slide-up-down__container hidden" aria-hidden="false" style="--content-height: 235; transition: height 500ms ease-in-out 0s;">
+                          <ul class="ps-3 list">
+                            <li>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://support.teradata.com">Teradata Community</a>
+                            </li>
+                            <li>
+                              <a class="nav-2 py-4 d-flex align-items-center color-slate" href="https://medium.com/teradata">
+                                Technical Medium Blogs&nbsp;&nbsp;<img src='./_/img/small-external.svg' class="mtop">
+                              </a>
+                            </li>
+                            <li>
+                              <a class="nav-2 py-4 d-flex color-slate" href="https://github.com/Teradata" target="_blank" rel="noopener">
+                                GitHub&nbsp;&nbsp;<img src='./_/img/small-external.svg' class="e">
+                              </a>
+                            </li>
+                            <li>
+                              <a class="nav-2 py-4 d-flex color-slate" href="https://stackoverflow.com/questions/tagged/teradata" target="_blank" rel="noopener">
+                                Stack Overflow&nbsp;&nbsp;<img src='./_/img/small-external.svg' class="">
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <footer>
+                    <div class="header-nav-mobile__sub-menu background-grayLight mt-6 py-6 container-wide">
+                      <ul class="row list">
+                        <li class="col-6">
+                          <a class="nav-1" href="https://teradata.com" target="_blank" rel="noopener">Teradata.com</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </footer>
+                </section>
+              </section>
+            </header>
+             <div class="page-blackout"></div>
+          </section>
+        </div>
+      </nav>
+  </nav><!-- Navbar -->
+
+  <script>
+    var sectionElement = document.querySelector(".navbar-search");
+    var devElement = document.querySelector(".dev");
+    if (sectionElement.innerHTML.trim() === "") {
+      devElement.style.marginRight = "-65px"; 
+    }
+
+    /* Script for desktop dropdowns */
+    function community() {
+
+      var blackoutElement = document.querySelector('.page-blackout');
+
+      document.getElementById("myCommunityDropdown").classList.toggle("show");
+      document.getElementById("myDocsDropdown").classList.remove("show");
+      if(document.getElementById("myCommunityDropdown").classList.contains("dropdown-content") && 
+          document.getElementById("myCommunityDropdown").classList.contains("show")){
+        blackoutElement.classList.add('active');
+      }else{
+        blackoutElement.classList.remove('active');
+      }
+    }
+
+    function docs() {
+      var blackoutElement = document.querySelector('.page-blackout');   
+   
+      document.getElementById("myDocsDropdown").classList.toggle("show");
+      document.getElementById("myCommunityDropdown").classList.remove("show"); 
+      if(document.getElementById("myDocsDropdown").classList.contains("dropdown-content") && 
+          document.getElementById("myDocsDropdown").classList.contains("show")){
+        blackoutElement.classList.add('active');
+      }else{
+        blackoutElement.classList.remove('active');
+      }
+    }
+
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var blackoutElement = document.querySelector('.page-blackout');
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+          blackoutElement.classList.remove('active');
+        }
+      }
+      
+    }
+  }
+  /* Script for desktop dropdowns */
+
+  /* Mobile NavBar */
+  document.addEventListener("DOMContentLoaded", function () {
+  const showMenuButton = document.getElementById("showMenu");
+  const menuListing = document.querySelector(".header-nav-mobile__menu-listing");
+  const menu = document.getElementById('vue-mobile-slide');
+  const blackoutElement = document.querySelector('.page-blackout');
+
+  showMenuButton.addEventListener("click", function () {
+    menuListing.classList.toggle("display-menu"); 
+    showMenuButton.classList.toggle("active"); 
+    blackoutElement.classList.toggle("active");
+  });
+
+
+// sqlFormattingOptions based on sql-formatting configuration
+// https://github.com/sql-formatter-org/sql-formatter
+
+
+const sqlFormatterOptions = {
+    tabWidth: 2,
+    keywordCase: 'upper',
+    functionCase: 'upper',
+    linesBetweenQueries: 1,
+};
+
+
+// Select all elements with the class "language-teradata-sql"
+const sqlCodeElements = document.querySelectorAll('.language-teradata-sql');
+
+// Iterate through each SQL code element. 
+sqlCodeElements.forEach(sqlCodeElement => {
+  // Check if the element has already been formatted
+  if (!sqlCodeElement.classList.contains('formatted')) {
+      const sqlCode = sqlCodeElement.innerText;
+      // Format SQL code with custom options
+      const formattedSql = sqlFormatter.format(sqlCode, sqlFormatterOptions)
+
+      sqlCodeElement.innerHTML = formattedSql;
+
+      // Mark the element as formatted to avoid duplication
+      sqlCodeElement.classList.add('formatted');
+  } else {
+      console.log('Element with class "language-teradata-sql" already formatted.');
+  }
+});
+
+});
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+  const toggleButtonDocs = document.getElementById("toggleButtonDocs");
+  const containerDocs = document.querySelector(".slide-up-down__container");
+
+  toggleButtonDocs.addEventListener("click", function () {
+    containerDocs.classList.toggle("hidden");
+    toggleButtonDocs.classList.toggle("toggle-active");
+  });
+});
+ 
+document.addEventListener("DOMContentLoaded", function () {
+  const toggleButtonComm = document.getElementById("toggleButtonComm");
+  const containerComm = document.querySelectorAll(".slide-up-down__container")[1];
+
+  toggleButtonComm.addEventListener("click", function () {
+    containerComm.classList.toggle("hidden");
+    toggleButtonComm.classList.toggle("toggle-active");
+  });
+});
+  </script>
+<style>
+  .active-lan{
+    color: #ff5f02;
+    font-weight: 600;
+  }
+  .dropdown1 {
+    position: relative;
+    display: inline-block;
+  }
+  .td-language-selector {
+    position: relative;
+    padding: 6px 0;
+  }
+    .td-language-selector__toggle {
+    color: inherit;
+    align-items: center;
+    position: relative;
+    width: auto;
+    padding: 0 1.2rem;
+    display: flex;
+    z-index: 1;
+    transition: .25s;
+  }
+  .td-language-selector ul {
+    background: #f6f7fb;
+    border-radius: 2px;
+    box-shadow: 0 4px 4px rgba(0,0,0,.25);
+    color: #333a3e;
+    position: absolute;
+    top: 150%;
+    right: 0;
+    padding: 28px 32px;
+    overflow: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .25s ease;
+  }
+  .dropdown-content1 {
+    display: none;
+    position: absolute;
+    background: #f6f7fb;
+    min-width: 124px; 
+    overflow: auto;
+    box-shadow: 0 4px 4px rgba(0,0,0,.25);
+    z-index: 1;
+    top: 150%;
+    right: 0;
+    padding: 28px 32px;
+    transition: all .25s ease;
+  }
+  .show {display: block;}
+
+  .me-4 {
+    margin-right: 1rem!important;
+  }
+</style>      <!-- Footer SVGs -->
 <svg aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
   style="position: absolute; width: 0; height: 0; overflow: hidden;">
   <defs>
@@ -2013,14 +2102,14 @@ div.tile-icons {
                     <li>
                       <a href="https://teradata.my.site.com/teradataPRM/s/self-registration" data-celebrus="Footer Menu - Partner registration" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Partner registration | https://teradata.my.site.com/teradataPRM/s/self-registration" target="_blank" rel="noopener">Partner registration
                         <span class="material-symbols-outlined md-16 ms-2">
-                          <img src="./_/img/small-external.svg" alt="External Icon" width="16px" height="16px">
+                          <img src="./_/img/small-external.svg" alt="External Icon" width="" height="">
                         </span>
                       </a>
                     </li>
                     <li>
                       <a href="https://teradata.my.site.com/teradataPRM/s/login/" data-celebrus="Footer Menu - Partner portal login" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Partner portal login | https://teradata.my.site.com/teradataPRM/s/login/" target="_blank" rel="noopener">Partner portal login
                         <span class="material-symbols-outlined md-16 ms-2">
-                          <img src="./_/img/small-external.svg" alt="External Icon" width="16px" height="16px">
+                          <img src="./_/img/small-external.svg" alt="External Icon" width="" height="">
                         </span>
                       </a>
                     </li>
@@ -2041,17 +2130,20 @@ div.tile-icons {
                         <a href="https://www.teradata.com/Platform" data-celebrus="Footer Menu - Platform" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Platform | /Platform">Platform</a>
                       </li>
                       <li>
-                        <a href="https://www.teradata.com/Platform/Use-Cases" data-celebrus="Footer Menu - Use cases" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Use cases | /Platform/Use-Cases">Use cases</a>
-                      </li>
-                      <li>
-                        <a href="https://www.teradata.com/Platform/VantageCloud" data-celebrus="Footer Menu - VantageCloud" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="VantageCloud | /Platform/VantageCloud">VantageCloud</a>
-                      </li>
-                      <li>
                         <a href="https://www.teradata.com/Platform/ClearScape-Analytics" data-celebrus="Footer Menu - ClearScape Analytics" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="ClearScape Analytics | /Platform/ClearScape-Analytics">ClearScape Analytics</a>
                       </li>
                       <li>
+                        <a class="nav-2" href="https://www.teradata.com/platform/ai-ml" data-celebrus="">Unleash AI Innovation</a>
+                      </li>
+                      <li>
+                        <a href="https://www.teradata.com/Platform/Use-Cases" data-celebrus="Footer Menu - Use cases" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Use cases | /Platform/Use-Cases">Use cases</a>
+                      </li>
+                     <li>
                         <a href="https://www.teradata.com/Platform/Deployment" data-celebrus="Footer Menu - Deployment" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Deployment | /Platform/Deployment">Deployment
                         </a>
+                      </li>
+                      <li>
+                        <a href="https://www.teradata.com/Platform/VantageCloud" data-celebrus="Footer Menu - VantageCloud" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="VantageCloud | /Platform/VantageCloud">VantageCloud</a>
                       </li>
                     </ul>
                   </div>
@@ -2141,14 +2233,14 @@ div.tile-icons {
                             <li>
                               <a href="https://careers.teradata.com" data-celebrus="Footer Menu - Careers" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Careers | https://careers.teradata.com" target="_blank" rel="noopener">Careers
                                 <span class="material-symbols-outlined md-16 ms-2">
-                                  <img src="./_/img/small-external.svg" alt="External Icon" width="16px" height="16px">
+                                  <img src="./_/img/small-external.svg" alt="External Icon" width="" height="">
                                 </span>
                               </a>
                             </li>
                             <li>
                               <a href="https://investor.teradata.com" data-celebrus="Footer Menu - Investors" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Investors | https://investor.teradata.com" target="_blank" rel="noopener">Investors
                                 <span class="material-symbols-outlined md-16 ms-2">
-                                  <img src="./_/img/small-external.svg" alt="External Icon" width="16px" height="16px">
+                                  <img src="./_/img/small-external.svg" alt="External Icon" width="" height="">
                                 </span>
                               </a>
                             </li>
@@ -2225,10 +2317,11 @@ div.tile-icons {
                           </summary>
                           <ul class="pb-4 list">
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Platform" data-celebrus="">Platform</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Platform/Use-Cases" data-celebrus="">Use cases</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Platform/VantageCloud" data-celebrus="">VantageCloud</a></li>
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Platform/ClearScape-Analytics" data-celebrus="">ClearScape Analytics</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/platform/ai-ml" data-celebrus="">Unleash AI Innovation</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Platform/Use-Cases" data-celebrus="">Use cases</a></li>
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Platform/Deployment" data-celebrus="">Deployment</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Platform/VantageCloud" data-celebrus="">VantageCloud</a></li>
                           </ul>
                       </details>
                       <details>
@@ -2452,6 +2545,8 @@ div.tile-icons {
   // expand the nav menu
   document.querySelectorAll('.nav-item').forEach(function (item) { item.classList.add('is-active') })
 </script>
-
   </body>
 </html>
+<script>
+
+</script>
