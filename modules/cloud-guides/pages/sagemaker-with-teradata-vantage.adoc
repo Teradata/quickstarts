@@ -184,6 +184,8 @@ Now the model is deployed to the endpoint and can be used by client applications
 This how-to demonstrated how to extract training data from Vantage and use it to train a model in Amazon SageMaker. The solution used a Jupyter notebook to extract data from Vantage and write it to an S3 bucket. A SageMaker training job read data from the S3 bucket and produced a model. The model was deployed to AWS as a service endpoint.
 
 == Further reading
+* https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-API-Integration-Guide-for-Cloud-Machine-Learning/Amazon-Web-Services[API integration guide for AWS SageMaker]
+* https://quickstarts.teradata.com/cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html[Integrate Teradata Jupyter extensions with SageMaker notebook instance]
 * xref:ROOT:ml.adoc[Train ML models in Vantage using only SQL]
 
 include::ROOT:partial$community_link.adoc[]
