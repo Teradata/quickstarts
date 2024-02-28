@@ -70,7 +70,7 @@ sudo apt update && sudo apt install terraform
 ----
 ====
 
-== Environment Preparation
+== Environment preparation
 
 Prepare your environment by creating a directory for your Terraform configuration and initialize two files: `main.tf` and `variable.tf`.
 
