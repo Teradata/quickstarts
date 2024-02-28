@@ -2,7 +2,7 @@
 :experimental:
 :page-author: Janeth Graziani
 :page-email: Janeth.graziani@teradata.com
-:page-revdate: February 24, 2024
+:page-revdate: February 28, 2024
 :description: Use Terraform to manage Teradata data pipelines in Airbyte using Terraform.
 :keywords: Terraform, Airbyte, Teradata Vantage, data engineering, ELT, automation, data integration, CI/CD, version control  
 :dir: terraform-airbyte-provider
@@ -147,7 +147,7 @@ resource "airbyte_connection" "googlesheets_teradata" {
   }
 ----
 
-Note that this example uses cron expression for scheduling the data transfer to run every 15 minutes past the hour. 
+Note that this example uses a cron expression to schedule the data transfer to run every 15 minutes past the hour. 
 
 In our `main.tf` file we reference variables which are held in the `variables.tf` file, including the API key, workspace ID, Google Sheet id, Google private key and Teradata Vantage credentials. Copy the following template into the `variables.tf` file and populate with the appropriate configuration values in the `default` attribute.
 
