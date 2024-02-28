@@ -1,3 +1,7 @@
+window.onload = function() {
+  showDisclaimer();
+};
+
 function openMTD() {
   document.getElementById("mtModal").style.display = "block";
 }
