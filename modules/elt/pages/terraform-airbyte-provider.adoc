@@ -9,7 +9,7 @@
 
 == Overview 
 
-In this Quickstart, you'll learn to use Terraform to automate Airbyte ELT workflows on Teradata Vantage. Instead of manual configurations through the WebUI, we'll use code to manage Airbyte resources. The provided example illustrates a basic ELT workflow from Google Sheets to Teradata Vantage using Airbyte's Terraform provider.
+This quickstart explains how to use Terraform to manage Airbyte data pipelines as code. Instead of manual configurations through the WebUI, we'll use code to create and configure Airbyte resources. The provided example illustrates a basic ELT pipeline from Google Sheets to Teradata Vantage using Airbyte's Terraform provider.
 
 The Airbyte Terraform provider is available for users on Airbyte Cloud, OSS & Self-Managed Enterprise. 
 
