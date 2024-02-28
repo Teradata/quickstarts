@@ -1,4 +1,4 @@
-= Automate ELT workflows with Terraform and Airbyte on Teradata Vantage 
+= Manage ELT pipelines as code with Terraform and Airbyte on Teradata Vantage 
 :experimental:
 :page-author: Janeth Graziani
 :page-email: Janeth.graziani@teradata.com
