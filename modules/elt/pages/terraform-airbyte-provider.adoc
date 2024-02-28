@@ -81,7 +81,7 @@ cd terraform_airbyte
 touch main.tf variables.tf
 ----
 
-== Define your Data Workflow
+== Define a data pipeline
 Define your data source, destination and connection within the `main.tf` file. Open your newly created `main.tf` file in Visual Studio Code or your favorite code editor.
 
 - If using Visual Studio Code you can install https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform[HashiCorp Terraform Extensions] to add autocompletion and syntax highlighting. You can also add https://marketplace.visualstudio.com/items?itemName=4ops.terraform[Terraform by Anton Kulikov] for configuration language support. 
