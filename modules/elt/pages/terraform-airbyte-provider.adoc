@@ -9,7 +9,7 @@
 
 == Overview 
 
-This quickstart explains how to use Terraform to manage Airbyte data pipelines as code. Instead of manual configurations through the WebUI, we'll use code to create and configure Airbyte resources. The provided example illustrates a basic ELT pipeline from Google Sheets to Teradata Vantage using Airbyte's Terraform provider.
+This quickstart explains how to use Terraform to manage Airbyte data pipelines as code. Instead of manual configurations through the WebUI, we'll use code to create and manage Airbyte resources. The provided example illustrates a basic ELT pipeline from Google Sheets to Teradata Vantage using Airbyte's Terraform provider.
 
 The Airbyte Terraform provider is available for users on Airbyte Cloud, OSS & Self-Managed Enterprise. 
 
@@ -22,17 +22,17 @@ link:https://www.terraform.io/[Terraform] is a leading open-source tool in the I
 Airbyte, the data integration platform, has a Terraform provider that communicates directly with link:https://reference.airbyte.com/reference/start[Airbyte's API]. This allows data engineers to manage Airbyte configurations, enforce version control, and apply good data engineering practices within their ELT pipelines.
 
 == Prerequisites
-* https://airbyte.com/connectors/teradata-vantage[Airbyte Cloud Account]. Start with a 14-day free trial that begins after your first successful sync.
+* https://airbyte.com/connectors/teradata-vantage[Airbyte Cloud Account]. Start with a 14-day free trial that begins after the first successful sync.
 - Generate an Airbyte API Key by logging into the https://portal.airbyte.com[developer portal].
 * Teradata Vantage Instance. You will need a database `Host`, `Username`, and `Password` for Airbyte’s Terraform configuration. 
 - https://quickstarts.teradata.com/getting-started-with-csae.html[Create a free Teradata instance on ClearScape Analytics Experience]
 
-* Source Data. For demonstration purposes we will use a link:https://docs.google.com/spreadsheets/d/1XNBYUw3p7xG6ptfwjChqZ-dNXbTuVwPi7ToQfYKgJIE/edit#gid=0[sample google sheets,  window="_blank"]. Make a copy of it into your Google worspace. 
+* Source Data. For demonstration purposes we will use a link:https://docs.google.com/spreadsheets/d/1XNBYUw3p7xG6ptfwjChqZ-dNXbTuVwPi7ToQfYKgJIE/edit#gid=0[sample Google Sheets,  window="_blank"]. Make a copy of it into a personal Google worspace. 
 
 * link:https://support.google.com/googleapi/answer/6158841?hl=en[Google Cloud Platform API enabled for your personal or organizational account,  window="_blank"]. You’ll need to authenticate your Google account via OAuth or via Service Account Key Authenticator. In this example, we use https://cloud.google.com/iam/docs/keys-create-delete[Service Account Key Authenticator].
 
 == Install Terraform 
-* Apply the respective commands to install Terraform on your Operating system. Find additional options on the link:https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli[Terraform site].
+* Apply the respective commands to install Terraform on your Operating System. Find additional options on the link:https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli[Terraform site].
 
 [tabs, id="terraform_tab_install", role="emits-gtm-events"]
 ====
@@ -72,7 +72,7 @@ sudo apt update && sudo apt install terraform
 
 == Environment preparation
 
-Prepare your environment by creating a directory for your Terraform configuration and initialize two files: `main.tf` and `variable.tf`.
+Prepare the environment by creating a directory for the Terraform configuration and initialize two files: `main.tf` and `variables.tf`.
 
 [source, bash]
 ----
@@ -82,13 +82,13 @@ touch main.tf variables.tf
 ----
 
 == Define a data pipeline
-Define your data source, destination and connection within the `main.tf` file. Open your newly created `main.tf` file in Visual Studio Code or your favorite code editor.
+Define the data source, destination and connection within the `main.tf` file. Open the newly created `main.tf` file in Visual Studio Code or any preferred code editor.
 
-- If using Visual Studio Code you can install https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform[HashiCorp Terraform Extensions] to add autocompletion and syntax highlighting. You can also add https://marketplace.visualstudio.com/items?itemName=4ops.terraform[Terraform by Anton Kulikov] for configuration language support. 
+- If using Visual Studio Code, install https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform[HashiCorp Terraform Extensions] to add autocompletion and syntax highlighting. You can also add https://marketplace.visualstudio.com/items?itemName=4ops.terraform[Terraform by Anton Kulikov] for configuration language support. 
 
 image::{dir}/extensions.png[Terraform Extensions on Visual Studio Code, align="center" width=75%]
 
-Populate your main.tf file with the template provided.
+Populate the main.tf file with the template provided.
 [source, bash]
 ----
 # Provider Configuration
@@ -96,12 +96,12 @@ terraform {
   required_providers {
     airbyte = {
       source = "airbytehq/airbyte"
-      version = "0.4.1"  //latest version https://registry.terraform.io/providers/airbytehq/airbyte/latest
+      version = "0.4.1"  // Latest Version https://registry.terraform.io/providers/airbytehq/airbyte/latest
     }
   }
 }
 provider "airbyte" {
-  // If running on Airbyte Cloud, generate & save your API key from https://portal.airbyte.com
+  // If running on Airbyte Cloud, generate & save the API key from https://portal.airbyte.com
   bearer_auth = var.api_key
 }
 # Google Sheets Source Configuration
@@ -149,18 +149,18 @@ resource "airbyte_connection" "googlesheets_teradata" {
 
 Note that this example uses cron expression for scheduling the data transfer to run every 15 minutes past the hour. 
 
-In our `main.tf` file we reference variables which are held in the `variables.tf` file, including the API key, workspace ID, Google Sheet id, Google private key and Teradata Vantage credentials. Copy the following template into your `variables.tf` file and populate with your configuration values in the `default` key.
+In our `main.tf` file we reference variables which are held in the `variables.tf` file, including the API key, workspace ID, Google Sheet id, Google private key and Teradata Vantage credentials. Copy the following template into the `variables.tf` file and populate with the appropriate configuration values in the `default` attribute.
 
 == Configuring the variables.tf file
 
 [source, bash]
 ----
-#log in to https://portal.airbyte.com generate, save and populate the variable with your API key
+#log in to https://portal.airbyte.com generate, save and populate the variable with an API key
 variable "api_key" {
     type = string
     default = ""
 }
-#workspace_id is found in the url to your Airbyte Cloud account https://cloud.airbyte.com/workspaces/<workspace_id>/settings/dbt-cloud 
+#workspace_id is found in the url to the Airbyte Cloud account https://cloud.airbyte.com/workspaces/<workspace_id>/settings/dbt-cloud 
 variable "workspace_id" {
     type = string
     default = ""
@@ -200,7 +200,7 @@ image::{dir}/terraforminit.png[Initialize Terraform with Terraform init command,
 
 Run `terraform plan` to display the execution plan Terraform will use to create resource and make modifications to infrastructure. 
 
-For this example you will a plan for 3 resources created:
+For this example a plan for 3 new resources is created:
 
 Connection: # airbyte_connection.googlesheets_teradata will be created
 
@@ -214,8 +214,18 @@ Run `terraform apply` and `yes` to generate a plan and carry out the plan.
 
 image::{dir}/terraformapply.png[Apply the Terraform plan with terraform apply command, align="center" width=75%]
 
-The `terraform.tfstate` file is created after you run `terraform apply` for the first time. This file tracks the status of all sources, destinations, and connections managed by Terraform. For subsequent executions of `Terraform apply`, Terraform compares the code in the `main.tf` file with the code stored in the `tfstate` file. If resources are added or removed in `main.tf`, Terraform automatically updates both your deployment and the `.tfstate` file accordingly upon deployment. Do not modify this file by hand.
+The `terraform.tfstate` file is created after running `terraform apply` for the first time. This file tracks the status of all sources, destinations, and connections managed by Terraform. For subsequent executions of `Terraform apply`, Terraform compares the code in the `main.tf` file with the code stored in the `tfstate` file. If resources are added or removed in `main.tf`, Terraform automatically updates both deployment and the `.tfstate` file accordingly upon deployment. Do not modify this file by hand.
 
 You now have a Source, Destination and Connection on Airbyte Cloud created and managed via Terraform. 
 
 image::{dir}/airbyteconnection.png[Airbyte Connection in Airbyte Cloud UI, align="center" width=75%]
+
+== Additional Resources 
+
+https://quickstarts.teradata.com/elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html[Use Airbyte to load data from external sources to Teradata Vantage]
+
+https://quickstarts.teradata.com/elt/transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.html[Transform data Loaded with Airbyte using dbt]
+
+https://reference.airbyte.com/reference/createsource[Airbyte API reference documentation].
+
+https://registry.terraform.io/providers/airbytehq/airbyte/latest/docs/resources/destination_teradata#example-usage[Terraform Airbyte Provider Docs]
