@@ -3,7 +3,7 @@
 :page-author: Janeth Graziani
 :page-email: Janeth.graziani@teradata.com
 :page-revdate: February 24, 2024
-:description: Use Airbyte's Terraform provider to automate and version-control your Airbyte ELT workflows on Teradata Vantage.
+:description: Use Terraform to manage Teradata data pipelines in Airbyte using Terraform.
 :keywords: Terraform, Airbyte, Teradata Vantage, data engineering, ELT, automation, data integration, CI/CD, version control  
 :dir: terraform-airbyte-provider
 
