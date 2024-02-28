@@ -88,8 +88,7 @@ Define your data source, destination and connection within the `main.tf` file. O
 
 image::{dir}/extensions.png[Terraform Extensions on Visual Studio Code, align="center" width=75%]
 
-Populate your main.tf file with the template provided, adjusting for your specific source and destination. Detailed information and configurations can be found in the Airbyte API reference documentation for https://reference.airbyte.com/reference/createsource[creating Sources].  
-
+Populate your main.tf file with the template provided.
 [source, bash]
 ----
 # Provider Configuration
