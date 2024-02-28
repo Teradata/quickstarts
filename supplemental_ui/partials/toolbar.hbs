@@ -1,5 +1,9 @@
+{{#if (ne page.attributes.lang 'en')}}
+    {{> mt}}
+{{/if}}
 <div class="toolbar" role="navigation">
 {{> nav-toggle}}
 {{> breadcrumbs}}
 {{> page-versions}}
 </div>
+
