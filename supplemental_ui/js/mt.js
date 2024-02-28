@@ -3,10 +3,12 @@ window.onload = function() {
 };
 
 function openMTD() {
-  document.getElementById("mtModal").style.display = "block";
+  document.getElementById('overlay').style.display = 'block';
+  document.getElementById('mtModal').style.display = 'block';
 }
 
 function closeMTD() {
+  document.getElementById('overlay').style.display = 'none';
   document.getElementById("mtModal").style.display = "none";
 }
 
