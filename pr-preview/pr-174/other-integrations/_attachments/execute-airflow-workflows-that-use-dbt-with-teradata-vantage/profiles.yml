@@ -1,0 +1,15 @@
+jaffle_shop:
+  outputs:
+    dev:
+      type: teradata
+      host: 192.11.25.33
+      user: jaffle_shop
+      password: abcd
+      logmech: TD2
+      schema: jaffle_shop
+      tmode: ANSI
+      threads: 1
+      timeout_seconds: 300
+      priority: interactive
+      retries: 1
+  target: dev
