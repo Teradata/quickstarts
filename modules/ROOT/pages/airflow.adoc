@@ -45,6 +45,13 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 pip install "apache-airflow-providers-teradata"
 ----
 
++
+NOTE: For security reasons, the test connection functionality is disabled by default across Airflow UI, API and CLI.
+The availability of the functionality can be controlled by the test_connection flag in the core section of the Airflow configuration ($AIRFLOW_HOME/airflow.cfg) or Define below environment variable before starting airflow server.
+export AIRFLOW__CORE__TEST_CONNECTION=Enabled
++
+
+
 == Start Airflow Standalone
 
 1. Run Airflow Standalone
@@ -70,6 +77,8 @@ image::{dir}/airflow-newconnection.png[Airflow New Connection, width=75%]
 * Login (required): Specify the user name to connect.
 * Password (required): Specify the password to connect.
 * Click on Test and Save.
+
+
 
 == Define a DAG in Airflow
 
