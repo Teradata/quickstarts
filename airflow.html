@@ -1925,6 +1925,9 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 <li>
 <p>Python <strong>3.8</strong>, <strong>3.9</strong>, <strong>3.10</strong> or <strong>3.11</strong> installed.</p>
 </li>
+<li>
+<p>pip</p>
+</li>
 </ul>
 </div>
 </div>
@@ -1946,7 +1949,7 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 <p>Install <code>apache-airflow</code> stable version 2.8.1 from PyPI repository.:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">AIRFLOW_VERSION=2.8.1
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">AIRFLOW_VERSION=2.8.2
 PYTHON_VERSION="$(python --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
 CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
 pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"</code></pre>
@@ -1954,10 +1957,10 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 </div>
 </li>
 <li>
-<p>Install the Airflow Teradata provider stable version 1.0.0 from PyPI repository.</p>
+<p>Install the Airflow Teradata provider stable version from PyPI repository.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install "apache-airflow-providers-teradata==1.0.0"</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install "apache-airflow-providers-teradata"</code></pre>
 </div>
 </div>
 </li>
