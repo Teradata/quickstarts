@@ -2,26 +2,30 @@
 :experimental:
 :page-author: Krutik Pathak
 :page-email: krutik.pathak@teradata.com
-:page-revdate: August 9th, 2023
+:page-revdate: February 29th, 2024
 :description: Recommendation of data ingestions tools to be used in different use cases for Teradata Vantage
-:keywords: data ingestion, teradata, nos, tpt, bteq, querygrid, airbyte, object store, saas, vantage, apache, spark, presto, oracle
+:keywords: data ingestion, teradata, nos, tpt, bteq, querygrid, airbyte, object store, saas, vantage, apache, spark, presto, oracle, Flow
 :tabs:
 
 == Overview
 
 This article outlines different use cases involving data ingestion. It lists available solutions and recommends the optimal solution for each use case.
 
-=== High volume ingestion, including streaming
+=== High-volume ingestion, including streaming
 Available solutions:
 
 * Use link:https://docs.teradata.com/r/Teradata-Parallel-Transporter-Application-Programming-Interface-Programmer-Guide-17.20[Teradata Parallel Transporter API,window="_blank"]
 * Stream data to object storage and then ingest using link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide-17.20/Welcome-to-Native-Object-Store[Teradata Native Object Store (NOS), window="_blank"].
 * Use the https://docs.teradata.com/r/Teradata-Parallel-Transporter-User-Guide/June-2022/Introduction-to-Teradata-PT[Teradata Parallel Transporter (TPT),window="_blank"] command line utility.
+* Use link:https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022/Using-the-Query-Service-APIs/Getting-Started[Teradata Query Service] - REST API to execute SQL statements in the database.
 * Use Teradata database drivers such as JDBC (Java), teradatasql (Python), Node.js driver, ODBC, .NET Data Provider.
+
 
 Teradata Parallel Transport API is usually the most performant solution which offers high throughput and minimum latency. Use it if you need to ingest tens of thousands of rows per second and if you are comfortable using C language. 
 
 Use the Teradata database drivers when the number of events is in thousands per second. Consider using the Fastload protocol that is available in the most popular drivers e.g. JDBC, Python.
+
+If you don't want to manage the dependency on the driver libraries, use Query Service. Since Query Service uses the regular driver protocol to communicate to the database, the throughput of this solution is similar to the throughput offered by database drivers such as JDBC. If you are a vendor and are looking to integrate your product with Teradata, please be aware that not all Teradata customers have Query Service enabled in their sites.
 
 If your solution can accept higher latency, a good option is to stream events to object storage and then read the data using NOS. This solution usually requires the least amount of effort.
 
@@ -29,10 +33,11 @@ If your solution can accept higher latency, a good option is to stream events to
 
 Available solutions:
 
+* link:https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Loading-Data/Introduction-to-Flow[Flow (VantageCloud Lake only)]
 * link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide-17.20/Welcome-to-Native-Object-Store[Teradata Native Object Store (NOS), window="_blank"]
 * https://docs.teradata.com/r/Teradata-Parallel-Transporter-User-Guide/June-2022/Introduction-to-Teradata-PT[Teradata Parallel Transporter (TPT),window="_blank"]
 
-Teradata NOS is the recommended option to ingest data from files saved in object storage since NOS can leverage all Teradata nodes to perform ingestion. Teradata Parallel Transporter (TPT) runs on the client side. It can be used when there is no connectivity from NOS to object storage.
+Flow is the recommended ingestion mechanism to bring data from object storage to VantageCloud Lake. For all other Teradata Vantage editions, Teradata NOS is the recommended option. NOS can leverage all Teradata nodes to perform ingestion. Teradata Parallel Transporter (TPT) runs on the client side. It can be used when there is no connectivity from NOS to object storage.
 
 === Ingest data from local files
 Available solutions:
