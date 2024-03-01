@@ -1963,6 +1963,20 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install "apache-airflow-providers-teradata"</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For security reasons, the test connection functionality is disabled by default across Airflow UI, API and CLI.
+The availability of the functionality can be controlled by the test_connection flag in the core section of the Airflow configuration ($AIRFLOW_HOME/airflow.cfg) or Define below environment variable before starting airflow server.
+export AIRFLOW<em>CORE</em>TEST_CONNECTION=Enabled
+</td>
+</tr>
+</table>
+</div>
 </li>
 </ol>
 </div>
