@@ -1395,6 +1395,9 @@ document.addEventListener("DOMContentLoaded", function () {
     <a class="nav-link" href="elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html">Use Airbyte to load data from external sources to Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="elt/terraform-airbyte-provider.html">Manage ELT pipelines as code with Terraform and Airbyte on Teradata Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="elt/transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.html">Transform data Loaded with Airbyte using dbt</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -1925,6 +1928,9 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 <li>
 <p>Python <strong>3.8</strong>, <strong>3.9</strong>, <strong>3.10</strong> or <strong>3.11</strong> installed.</p>
 </li>
+<li>
+<p>pip</p>
+</li>
 </ul>
 </div>
 </div>
@@ -1946,7 +1952,7 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 <p>Install <code>apache-airflow</code> stable version 2.8.1 from PyPI repository.:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">AIRFLOW_VERSION=2.8.1
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">AIRFLOW_VERSION=2.8.2
 PYTHON_VERSION="$(python --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
 CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
 pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"</code></pre>
@@ -1954,11 +1960,25 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 </div>
 </li>
 <li>
-<p>Install the Airflow Teradata provider stable version 1.0.0 from PyPI repository.</p>
+<p>Install the Airflow Teradata provider stable version from PyPI repository.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install "apache-airflow-providers-teradata==1.0.0"</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install "apache-airflow-providers-teradata"</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For security reasons, the test connection functionality is disabled by default across Airflow UI, API and CLI.
+The availability of the functionality can be controlled by the test_connection flag in the core section of the Airflow configuration ($AIRFLOW_HOME/airflow.cfg) or Define below environment variable before starting airflow server.
+export AIRFLOW<em>CORE</em>TEST_CONNECTION=Enabled
+</td>
+</tr>
+</table>
 </div>
 </li>
 </ol>

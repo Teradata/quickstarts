@@ -3,20 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Select the right data ingestion solution for Teradata Vantage :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/select-the-right-data-ingestion-tools-for-teradata-vantage.html">
-    <meta name="description" content="Recommendation of data ingestions tools to be used in different use cases for Teradata Vantage">
-    <meta name="keywords" content="data ingestion, teradata, nos, tpt, bteq, querygrid, airbyte, object store, saas, vantage, apache, spark, presto, oracle, Flow">
+    <title>Manage ELT pipelines as code with Terraform and Airbyte on Teradata Vantage :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/elt/terraform-airbyte-provider.html">
+    <meta name="description" content="Use Terraform to manage Teradata data pipelines in Airbyte using Terraform.">
+    <meta name="keywords" content="Terraform, Airbyte, Teradata Vantage, data engineering, ELT, automation, data integration, CI/CD, version control">
     <meta name="generator" content="Antora 3.0.1">
-    <link rel="stylesheet" href="./_/css/site.css">
+    <link rel="stylesheet" href="../_/css/site.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta property="og:title" content="Select the right data ingestion solution for Teradata Vantage :: Teradata Getting Started">
+<meta property="og:title" content="Manage ELT pipelines as code with Terraform and Airbyte on Teradata Vantage :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Recommendation of data ingestions tools to be used in different use cases for Teradata Vantage" />
+<meta property="og:description" content="Use Terraform to manage Teradata data pipelines in Airbyte using Terraform." />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/select-the-right-data-ingestion-tools-for-teradata-vantage.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/elt/terraform-airbyte-provider.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -31,10 +31,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');
 </script>
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="./_/css/search.css">
-<link rel="stylesheet" href="./_/css/styles.css">
-<link rel="stylesheet" href="./_/css/newnavbar.css" >
-<link rel="stylesheet" href="./_/css/navbar.css">
+<link rel="stylesheet" href="../_/css/search.css">
+<link rel="stylesheet" href="../_/css/styles.css">
+<link rel="stylesheet" href="../_/css/newnavbar.css" >
+<link rel="stylesheet" href="../_/css/navbar.css">
 <style>
 .footer-nav .footer_social .icon-social {
     width: 44px;
@@ -96,7 +96,7 @@ article a[href^="https://"][target="_blank"]::after {
   width: 14px;
   height: 14px;
   margin-left: 4px;
-  background-image: url("./_/img/open_in_new.svg");
+  background-image: url("../_/img/open_in_new.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -334,7 +334,7 @@ button {
   border-radius: 8px;
   padding-left: 14px;
   padding-right: 14px;
-  background-image: url(./_/img/search.svg);
+  background-image: url(../_/img/search.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -708,7 +708,7 @@ aside.toc.sidebar {
 
 .report-an-issue {
   padding: 10px 20px 10px 10px;
-  background-image: url(./_/img/pan_tool.svg);
+  background-image: url(../_/img/pan_tool.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -716,7 +716,7 @@ aside.toc.sidebar {
 
 .edit-on-github {
   padding: 10px 20px 10px 10px;
-  background-image: url(./_/img/edit.svg);
+  background-image: url(../_/img/edit.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -827,19 +827,19 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/warning.svg");
+  content: url("../_/img/warning.svg");
 }
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .admonitionblock.question .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/question.mark.svg");
+  content: url("../_/img/question.mark.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .source-toolbox .source-lang {
@@ -850,7 +850,7 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .source-toolbox img.copy-icon {
-  content: url("./_/img/copy.svg");
+  content: url("../_/img/copy.svg");
 }
 
 .doc .source-toolbox>:not(:last-child)::after {
@@ -884,10 +884,10 @@ span.search-result-highlight {
 
 
 <script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
-<link rel="icon" href="./_/img/favicon.ico" type="image/x-icon">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
   </head>
   <body class="article">
-<script src="./_/js/lang.js"></script>
+<script src="../_/js/lang.js"></script>
 <!-- Adding CDN to use sql-formatter for unpkg -->
 <script src="https://unpkg.com/sql-formatter/dist/sql-formatter.min.js"></script>
 
@@ -947,7 +947,7 @@ span.search-result-highlight {
                     </div>
                     <ul class="header-nav__main-menu header-nav__element nav-1 list">
                       <li>
-                        <a href="./index.html" class="header-nav__main-menu__link active">Getting started</a>
+                        <a href="../index.html" class="header-nav__main-menu__link active">Getting started</a>
                       </li>
                       <li>
                         <button href="" onclick="docs()" class="header-nav__main-menu__link dropbtn">Docs</button>
@@ -964,13 +964,13 @@ span.search-result-highlight {
                         <div id="myCommunityDropdown" class="dropdown-content dc2">
                           <a href="https://support.teradata.com" title="Technical Medium Blogs" class="dropdown-item mt">Teradata Community</a>
                           <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item mb">Technical Medium Blogs&nbsp; &nbsp; 
-                            <img src='./_/img/small-external.svg' alt="External Icon">
+                            <img src='../_/img/small-external.svg' alt="External Icon">
                           </a>
                           <a href="https://github.com/Teradata" title="Teradata on GitHub" target="_blank" class="dropdown-item mb">GitHub&nbsp; &nbsp; 
-                            <img src='./_/img/small-external.svg' alt="External Icon">
+                            <img src='../_/img/small-external.svg' alt="External Icon">
                           </a>
                           <a href="https://stackoverflow.com/questions/tagged/teradata" title="Stack Overflow Teradata questions" target="_blank" class="dropdown-item">Stack Overflow&nbsp; &nbsp; 
-                            <img src='./_/img/small-external.svg' alt="External Icon">
+                            <img src='../_/img/small-external.svg' alt="External Icon">
                           </a>  
                         </div>
                       </li>
@@ -996,7 +996,7 @@ span.search-result-highlight {
               <nav class="d-flex custom-justify-content-between align-items-center px-6 shadow--s">
                   <a class="header-nav__logo d-flex align-items-center" href="/" aria-label="Teradata">
                       <div>
-                          <img class="teradata-logo" src='./_/img/TD-Logo.svg' alt="" title="" >
+                          <img class="teradata-logo" src='../_/img/TD-Logo.svg' alt="" title="" >
                       </div>
                   </a>
                   <a href="http://developers.teradata.com/" class="developers">Developers</a>
@@ -1068,17 +1068,17 @@ span.search-result-highlight {
                             </li>
                             <li>
                               <a class="nav-2 py-4 d-flex align-items-center color-slate" href="https://medium.com/teradata">
-                                Technical Medium Blogs&nbsp;&nbsp;<img src='./_/img/small-external.svg' class="mtop">
+                                Technical Medium Blogs&nbsp;&nbsp;<img src='../_/img/small-external.svg' class="mtop">
                               </a>
                             </li>
                             <li>
                               <a class="nav-2 py-4 d-flex color-slate" href="https://github.com/Teradata" target="_blank" rel="noopener">
-                                GitHub&nbsp;&nbsp;<img src='./_/img/small-external.svg' class="e">
+                                GitHub&nbsp;&nbsp;<img src='../_/img/small-external.svg' class="e">
                               </a>
                             </li>
                             <li>
                               <a class="nav-2 py-4 d-flex color-slate" href="https://stackoverflow.com/questions/tagged/teradata" target="_blank" rel="noopener">
-                                Stack Overflow&nbsp;&nbsp;<img src='./_/img/small-external.svg' class="">
+                                Stack Overflow&nbsp;&nbsp;<img src='../_/img/small-external.svg' class="">
                               </a>
                             </li>
                           </ul>
@@ -1296,7 +1296,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Introduction</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="teradata-vantage-engine-architecture-and-concepts.html">Teradata Vantage Engine Architecture and Concepts</a>
+    <a class="nav-link" href="../teradata-vantage-engine-architecture-and-concepts.html">Teradata Vantage Engine Architecture and Concepts</a>
   </li>
 </ul>
   </li>
@@ -1309,13 +1309,13 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">On your local</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
+    <a class="nav-link" href="../getting.started.vmware.html">Vantage Express on VMware</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
+    <a class="nav-link" href="../getting.started.vbox.html">Vantage Express on VirtualBox</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
+    <a class="nav-link" href="../getting.started.utm.html">Vantage Express on UTM</a>
   </li>
 </ul>
   </li>
@@ -1324,13 +1324,13 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">On your cloud infrastructure</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="run-vantage-express-on-aws.html">Vantage Express on AWS</a>
+    <a class="nav-link" href="../run-vantage-express-on-aws.html">Vantage Express on AWS</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on Google Cloud</a>
+    <a class="nav-link" href="../vantage.express.gcp.html">Vantage Express on Google Cloud</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
+    <a class="nav-link" href="../run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
   </li>
 </ul>
   </li>
@@ -1339,7 +1339,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">ClearScape Analytics Experience</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="getting-started-with-csae.html">Getting started with ClearScape Analytics Experience</a>
+    <a class="nav-link" href="../getting-started-with-csae.html">Getting started with ClearScape Analytics Experience</a>
   </li>
 </ul>
   </li>
@@ -1350,17 +1350,17 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Connect to Vantage</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
+    <a class="nav-link" href="../install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
+    <a class="nav-link" href="../other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Configure ODBC</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="odbc.ubuntu.html">Ubuntu</a>
+    <a class="nav-link" href="../odbc.ubuntu.html">Ubuntu</a>
   </li>
 </ul>
   </li>
@@ -1371,58 +1371,58 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Manage data</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nos.html">Query data stored in object storage</a>
+    <a class="nav-link" href="../nos.html">Query data stored in object storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../select-the-right-data-ingestion-tools-for-teradata-vantage.html">Select the right data ingestion solution for Teradata Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../airflow.html">Use Apache Airflow with Teradata Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dbt.html">dbt with Teradata Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../advanced-dbt.html">Advanced dbt use cases with Teradata Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modelops/using-feast-feature-store-with-teradata-vantage.html">Build a FEAST feature store in Teradata Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../other-integrations/getting.started.dbt-feast-teradata-pipeline.html">Use dbt and FEAST to build a feature store in Teradata Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html">Use Airbyte to load data from external sources to Teradata Vantage</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="select-the-right-data-ingestion-tools-for-teradata-vantage.html">Select the right data ingestion solution for Teradata Vantage</a>
+    <a class="nav-link" href="terraform-airbyte-provider.html">Manage ELT pipelines as code with Terraform and Airbyte on Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="airflow.html">Use Apache Airflow with Teradata Vantage</a>
+    <a class="nav-link" href="transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.html">Transform data Loaded with Airbyte using dbt</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
+    <a class="nav-link" href="../tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">Load data with TPT</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="advanced-dbt.html">Advanced dbt use cases with Teradata Vantage</a>
+    <a class="nav-link" href="../create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="modelops/using-feast-feature-store-with-teradata-vantage.html">Build a FEAST feature store in Teradata Vantage</a>
+    <a class="nav-link" href="../other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/getting.started.dbt-feast-teradata-pipeline.html">Use dbt and FEAST to build a feature store in Teradata Vantage</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html">Use Airbyte to load data from external sources to Teradata Vantage</a>
+    <a class="nav-link" href="../segment.html">Store events from Twilio Segment</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="elt/terraform-airbyte-provider.html">Manage ELT pipelines as code with Terraform and Airbyte on Teradata Vantage</a>
+    <a class="nav-link" href="../cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="elt/transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.html">Transform data Loaded with Airbyte using dbt</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">Load data with TPT</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="segment.html">Store events from Twilio Segment</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/configure-a-teradata-vantage-connection-in-datahub.html">Configure a Teradata Vantage connection in DataHub</a>
+    <a class="nav-link" href="../other-integrations/configure-a-teradata-vantage-connection-in-datahub.html">Configure a Teradata Vantage connection in DataHub</a>
   </li>
 </ul>
   </li>
@@ -1431,16 +1431,16 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Create applications</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
+    <a class="nav-link" href="../jdbc.html">Connect to Vantage using JDBC</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="teradatasql.html">Connect to Vantage using Python</a>
+    <a class="nav-link" href="../teradatasql.html">Connect to Vantage using Python</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+    <a class="nav-link" href="../mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="query-service/send-queries-using-rest-api.html">Send queries using REST API</a>
+    <a class="nav-link" href="../query-service/send-queries-using-rest-api.html">Send queries using REST API</a>
   </li>
 </ul>
   </li>
@@ -1449,43 +1449,43 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Analyze data</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
+    <a class="nav-link" href="../jupyter.html">Use Vantage from a Jupyter notebook</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+    <a class="nav-link" href="../local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ml.html">Train ML models in Vantage using Database Analytic Functions</a>
+    <a class="nav-link" href="../ml.html">Train ML models in Vantage using Database Analytic Functions</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
+    <a class="nav-link" href="../sto.html">Run scripts on Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="perform-time-series-analysis-using-teradata-vantage.html">Perform time series analysis</a>
+    <a class="nav-link" href="../perform-time-series-analysis-using-teradata-vantage.html">Perform time series analysis</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - Import and Deploy your first BYOM Model</a>
+    <a class="nav-link" href="../modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - Import and Deploy your first BYOM Model</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.html">ModelOps - Import and Deploy your first GIT Model</a>
+    <a class="nav-link" href="../modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.html">ModelOps - Import and Deploy your first GIT Model</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
+    <a class="nav-link" href="../cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
+    <a class="nav-link" href="../cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Integrate Teradata Jupyter extensions with SageMaker notebook instance</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Integrate Teradata Jupyter extensions with SageMaker notebook instance</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Create Vizualizations in Power BI using Vantage</a>
+    <a class="nav-link" href="../business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Create Vizualizations in Power BI using Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
+    <a class="nav-link" href="../other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
   </li>
 </ul>
   </li>
@@ -1494,47 +1494,47 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Teradata AI Unlimited</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ai-unlimited/getting-started-with-ai-unlimited.html">Getting Started with Teradata AI Unlimited</a>
+    <a class="nav-link" href="../ai-unlimited/getting-started-with-ai-unlimited.html">Getting Started with Teradata AI Unlimited</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Deploy locally using Docker</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited/install-ai-unlimited-workspaces-docker.html">Deploy and Setup Teradata AI Unlimited Workspace Service Using Docker</a>
+    <a class="nav-link" href="../ai-unlimited/install-ai-unlimited-workspaces-docker.html">Deploy and Setup Teradata AI Unlimited Workspace Service Using Docker</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited/install-ai-unlimited-interface-docker.html">Deploy a Teradata AI Unlimited Interface Using Docker</a>
+    <a class="nav-link" href="../ai-unlimited/install-ai-unlimited-interface-docker.html">Deploy a Teradata AI Unlimited Interface Using Docker</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ai-unlimited/using-ai-unlimited-workspace-cli.html">Use Teradata AI Unlimited With Workspace Client</a>
+    <a class="nav-link" href="../ai-unlimited/using-ai-unlimited-workspace-cli.html">Use Teradata AI Unlimited With Workspace Client</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Deploy on AWS</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited/deploy-ai-unlimited-aws-cloudformation.html">Deploy Teradata AI Unlimited Workspace Service and Interface using AWS CloudFormation Template</a>
+    <a class="nav-link" href="../ai-unlimited/deploy-ai-unlimited-aws-cloudformation.html">Deploy Teradata AI Unlimited Workspace Service and Interface using AWS CloudFormation Template</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited/ai-unlimited-aws-permissions-policies.html">Control AWS Access and Permissions using Custom Permissions and Policies</a>
+    <a class="nav-link" href="../ai-unlimited/ai-unlimited-aws-permissions-policies.html">Control AWS Access and Permissions using Custom Permissions and Policies</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited/deploy-ai-unlimited-awscli-cloudformation.html">Deploy CloudFormation Template from AWS CLI</a>
+    <a class="nav-link" href="../ai-unlimited/deploy-ai-unlimited-awscli-cloudformation.html">Deploy CloudFormation Template from AWS CLI</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ai-unlimited/running-sample-ai-unlimited-workload.html">Run a Sample Workload in JupyterLab Using Teradata AI Unlimited</a>
+    <a class="nav-link" href="../ai-unlimited/running-sample-ai-unlimited-workload.html">Run a Sample Workload in JupyterLab Using Teradata AI Unlimited</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Reference</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited/ai-unlimited-magic-reference.html">Teradata AI Unlimited JupyterLab Magic Command Reference</a>
+    <a class="nav-link" href="../ai-unlimited/ai-unlimited-magic-reference.html">Teradata AI Unlimited JupyterLab Magic Command Reference</a>
   </li>
 </ul>
   </li>
@@ -1545,22 +1545,22 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">VantageCloud Lake</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting-started-with-vantagecloud-lake.html">Getting Started with VantageCloud Lake</a>
+    <a class="nav-link" href="../getting-started-with-vantagecloud-lake.html">Getting Started with VantageCloud Lake</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantagecloud-lake/vantagecloud-lake-demo-jupyter-docker.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Docker</a>
+    <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demo-jupyter-docker.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Docker</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantagecloud-lake/vantagecloud-lake-demos-visual-studio-code.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Visual Studio Code</a>
+    <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demos-visual-studio-code.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Visual Studio Code</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantagecloud-lake/vantagecloud-lake-demo-jupyter-sagemaker.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Amazon SageMaker</a>
+    <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demo-jupyter-sagemaker.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Amazon SageMaker</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantagecloud-lake/vantagecloud-lake-demo-jupyter-google-cloud-vertex-ai.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Google Cloud Vertex AI</a>
+    <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demo-jupyter-google-cloud-vertex-ai.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Google Cloud Vertex AI</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantagecloud-lake/vantagecloud-lake-demo-jupyter-azure.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Microsoft Azure</a>
+    <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demo-jupyter-azure.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Microsoft Azure</a>
   </li>
 </ul>
   </li>
@@ -1862,10 +1862,10 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
   <ul class="components">
     <li class="component is-current">
-      <a class="title" href="index.html">Getting Started Guides</a>
+      <a class="title" href="../index.html">Getting Started Guides</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">master</a>
+          <a href="../index.html">master</a>
         </li>
       </ul>
     </li>
@@ -1880,7 +1880,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li>Manage data</li>
-    <li><a href="select-the-right-data-ingestion-tools-for-teradata-vantage.html">Select the right data ingestion solution for Teradata Vantage</a></li>
+    <li><a href="terraform-airbyte-provider.html">Manage ELT pipelines as code with Terraform and Airbyte on Teradata Vantage</a></li>
   </ul>
 </nav>
 </div>
@@ -1888,164 +1888,353 @@ document.addEventListener("DOMContentLoaded", function () {
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
     <div class="page-controls">
         <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-        <a href="https://github.com/Teradata/quickstarts/blob/HEAD/modules/ROOT/pages/select-the-right-data-ingestion-tools-for-teradata-vantage.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+        <a href="https://github.com/Teradata/quickstarts/blob/HEAD/modules/elt/pages/terraform-airbyte-provider.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Select the right data ingestion solution for Teradata Vantage</h1>
+<h1 class="page">Manage ELT pipelines as code with Terraform and Airbyte on Teradata Vantage</h1>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This article outlines different use cases involving data ingestion. It lists available solutions and recommends the optimal solution for each use case.</p>
-</div>
-<div class="sect2">
-<h3 id="_high_volume_ingestion_including_streaming"><a class="anchor" href="#_high_volume_ingestion_including_streaming"></a>High-volume ingestion, including streaming</h3>
-<div class="paragraph">
-<p>Available solutions:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Use <a href="https://docs.teradata.com/r/Teradata-Parallel-Transporter-Application-Programming-Interface-Programmer-Guide-17.20" target="_blank" rel="noopener">Teradata Parallel Transporter API</a></p>
-</li>
-<li>
-<p>Stream data to object storage and then ingest using <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide-17.20/Welcome-to-Native-Object-Store" target="_blank" rel="noopener">Teradata Native Object Store (NOS)</a>.</p>
-</li>
-<li>
-<p>Use the <a href="https://docs.teradata.com/r/Teradata-Parallel-Transporter-User-Guide/June-2022/Introduction-to-Teradata-PT" target="_blank" rel="noopener">Teradata Parallel Transporter (TPT)</a> command line utility.</p>
-</li>
-<li>
-<p>Use <a href="https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022/Using-the-Query-Service-APIs/Getting-Started">Teradata Query Service</a> - REST API to execute SQL statements in the database.</p>
-</li>
-<li>
-<p>Use Teradata database drivers such as JDBC (Java), teradatasql (Python), Node.js driver, ODBC, .NET Data Provider.</p>
-</li>
-</ul>
+<p>This quickstart explains how to use Terraform to manage Airbyte data pipelines as code. Instead of manual configurations through the WebUI, we&#8217;ll use code to create and manage Airbyte resources. The provided example illustrates a basic ELT pipeline from Google Sheets to Teradata Vantage using Airbyte&#8217;s Terraform provider.</p>
 </div>
 <div class="paragraph">
-<p>Teradata Parallel Transport API is usually the most performant solution which offers high throughput and minimum latency. Use it if you need to ingest tens of thousands of rows per second and if you are comfortable using C language.</p>
+<p>The Airbyte Terraform provider is available for users on Airbyte Cloud, OSS &amp; Self-Managed Enterprise.</p>
 </div>
-<div class="paragraph">
-<p>Use the Teradata database drivers when the number of events is in thousands per second. Consider using the Fastload protocol that is available in the most popular drivers e.g. JDBC, Python.</p>
-</div>
-<div class="paragraph">
-<p>If you don&#8217;t want to manage the dependency on the driver libraries, use Query Service. Since Query Service uses the regular driver protocol to communicate to the database, the throughput of this solution is similar to the throughput offered by database drivers such as JDBC. If you are a vendor and are looking to integrate your product with Teradata, please be aware that not all Teradata customers have Query Service enabled in their sites.</p>
-</div>
-<div class="paragraph">
-<p>If your solution can accept higher latency, a good option is to stream events to object storage and then read the data using NOS. This solution usually requires the least amount of effort.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ingest_data_from_object_storage"><a class="anchor" href="#_ingest_data_from_object_storage"></a>Ingest data from object storage</h3>
-<div class="paragraph">
-<p>Available solutions:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Loading-Data/Introduction-to-Flow">Flow (VantageCloud Lake only)</a></p>
-</li>
-<li>
-<p><a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide-17.20/Welcome-to-Native-Object-Store" target="_blank" rel="noopener">Teradata Native Object Store (NOS)</a></p>
-</li>
-<li>
-<p><a href="https://docs.teradata.com/r/Teradata-Parallel-Transporter-User-Guide/June-2022/Introduction-to-Teradata-PT" target="_blank" rel="noopener">Teradata Parallel Transporter (TPT)</a></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Flow is the recommended ingestion mechanism to bring data from object storage to VantageCloud Lake. For all other Teradata Vantage editions, Teradata NOS is the recommended option. NOS can leverage all Teradata nodes to perform ingestion. Teradata Parallel Transporter (TPT) runs on the client side. It can be used when there is no connectivity from NOS to object storage.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ingest_data_from_local_files"><a class="anchor" href="#_ingest_data_from_local_files"></a>Ingest data from local files</h3>
-<div class="paragraph">
-<p>Available solutions:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://docs.teradata.com/r/Teradata-Parallel-Transporter-User-Guide/June-2022/Introduction-to-Teradata-PT" target="_blank" rel="noopener">Teradata Parallel Transporter (TPT)</a></p>
-</li>
-<li>
-<p><a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_Lake_VMware/Basic-Teradata-Query-Reference-17.20/Introduction-to-BTEQ" target="_blank" rel="noopener">BTEQ</a></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>TPT is the recommended option to load data from local files. TPT is optimized for scalability and parallelism, thus it has the best throughput of all available options. BTEQ can be used when an ingestion process requires scripting. It also makes sense to  continue using BTEQ if all your other ingestion pipelines run in BTEQ.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ingest_data_from_saas_applications"><a class="anchor" href="#_ingest_data_from_saas_applications"></a>Ingest data from SaaS applications</h3>
-<div class="paragraph">
-<p>Available solutions:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Multiple 3rd party tools such as <a href="https://airbyte.com/" target="_blank" rel="noopener">Airbyte</a>, <a href="https://precog.com/" target="_blank" rel="noopener">Precog</a>, <a href="https://nexla.com/" target="_blank" rel="noopener">Nexla</a>, <a href="https://fivetran.com/" target="_blank" rel="noopener">Fivetran</a></p>
-</li>
-<li>
-<p>Export from SaaS apps to local files and then ingest using <a href="https://docs.teradata.com/r/Teradata-Parallel-Transporter-User-Guide/June-2022/Introduction-to-Teradata-PT" target="_blank" rel="noopener">Teradata Parallel Transporter (TPT)</a></p>
-</li>
-<li>
-<p>Export from SaaS apps to object storage and then ingest using <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide-17.20/Welcome-to-Native-Object-Store" target="_blank" rel="noopener">Teradata Native Object Store (NOS)</a>.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>3rd party tools are usually a better option to move data from SaaS applications to Teradata Vantage. They offer broad support for data sources and eliminate the need to manage intermediate steps such as exporting and storing exported datasets.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_use_data_stored_in_other_databases_for_unified_query_processing"><a class="anchor" href="#_use_data_stored_in_other_databases_for_unified_query_processing"></a>Use data stored in other databases for unified query processing</h3>
-<div class="paragraph">
-<p>Available solutions:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://docs.teradata.com/r/Teradata-QueryGridTM-Installation-and-User-Guide/October-2020/Teradata-QueryGrid-Overview" target="_blank" rel="noopener">Teradata QueryGrid</a></p>
-</li>
-<li>
-<p>Export from other databases to local files and then ingest using <a href="https://docs.teradata.com/r/Teradata-Parallel-Transporter-User-Guide/June-2022/Introduction-to-Teradata-PT" target="_blank" rel="noopener">Teradata Parallel Transporter (TPT)</a></p>
-</li>
-<li>
-<p>Export from other databases to object storage and then ingest using <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide-17.20/Welcome-to-Native-Object-Store" target="_blank" rel="noopener">Teradata Native Object Store (NOS)</a>.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>QueryGrid is the recommended option to move limited quantities of data between different systems/platforms. This includes movement within Vantage instances, Apache Spark, Oracle, Presto, etc. It is especially suited to situations when what needs to be synced is described by complex conditions that can be expressed in SQL.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/terraform-airbyte-provider/airbyteconnection.png" alt="Airbyte Connection in Airbyte Cloud UI" width="100%">
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this article, we explored various data ingestion use cases, provided a list of available tools for each use case, and identified the recommended options for different scenarios.</p>
+<p><a href="https://www.terraform.io/">Terraform</a> is a leading open-source tool in the Infrastructure as Code (IaC) space. It enables the automated provisioning and management of infrastructure, cloud platforms, and services via configuration files, instead of manual setup. Terraform uses plugins, known as Terraform providers, to communicate with infrastructure hosts, cloud providers, APIs, and SaaS platforms.</p>
+</div>
+<div class="paragraph">
+<p>Airbyte, the data integration platform, has a Terraform provider that communicates directly with <a href="https://reference.airbyte.com/reference/start">Airbyte&#8217;s API</a>. This allows data engineers to manage Airbyte configurations, enforce version control, and apply good data engineering practices within their ELT pipelines.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_further_reading"><a class="anchor" href="#_further_reading"></a>Further Reading</h2>
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://airbyte.com/connectors/teradata-vantage">Airbyte Cloud Account</a>. Start with a 14-day free trial that begins after the first successful sync.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Generate an Airbyte API Key by logging into the <a href="https://portal.airbyte.com">developer portal</a>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Teradata Vantage Instance. You will need a database <code>Host</code>, <code>Username</code>, and <code>Password</code> for Airbyte’s Terraform configuration.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://quickstarts.teradata.com/getting-started-with-csae.html">Create a free Teradata instance on ClearScape Analytics Experience</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Source Data. For demonstration purposes we will use a <a href="https://docs.google.com/spreadsheets/d/1XNBYUw3p7xG6ptfwjChqZ-dNXbTuVwPi7ToQfYKgJIE/edit#gid=0" target="_blank" rel="noopener">sample Google Sheets</a>. Make a copy of it into a personal Google worspace.</p>
+</li>
+<li>
+<p><a href="https://support.google.com/googleapi/answer/6158841?hl=en" target="_blank" rel="noopener">Google Cloud Platform API enabled for your personal or organizational account</a>. You’ll need to authenticate your Google account via OAuth or via Service Account Key Authenticator. In this example, we use <a href="https://cloud.google.com/iam/docs/keys-create-delete">Service Account Key Authenticator</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_terraform"><a class="anchor" href="#_install_terraform"></a>Install Terraform</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Apply the respective commands to install Terraform on your Operating System. Find additional options on the <a href="https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli">Terraform site</a>.</p>
+</li>
+</ul>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_macos"></a>macOS</p>
+</li>
+<li>
+<p><a id="tabset1_windows"></a>Windows</p>
+</li>
+<li>
+<p><a id="tabset1_linux"></a>Linux</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_macos">
+<div class="paragraph">
+<p>First, install the HashiCorp tap, a repository of all <a href="https://brew.sh/">Homebrew</a> packages.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"> brew tap hashicorp/tap</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Next, install Terraform with hashicorp/tap/terraform.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"> brew install hashicorp/tap/terraform</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_windows">
+<div class="paragraph">
+<p><a href="https://chocolatey.org/">Chocolatey</a> is a free and open-source package management system for Windows. Install the Terraform package from the command-line.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell"> choco install terraform</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_linux">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update &amp;&amp; sudo apt install terraform</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_environment_preparation"><a class="anchor" href="#_environment_preparation"></a>Environment preparation</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="https://quickstarts.teradata.com/nos.html" target="_blank" rel="noopener">Query data stored in object storage using NOS</a></p>
+<p>Prepare the environment by creating a directory for the Terraform configuration and initialize two files: <code>main.tf</code> and <code>variables.tf</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir terraform_airbyte
+cd terraform_airbyte
+touch main.tf variables.tf</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_define_a_data_pipeline"><a class="anchor" href="#_define_a_data_pipeline"></a>Define a data pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Define the data source, destination and connection within the <code>main.tf</code> file. Open the newly created <code>main.tf</code> file in Visual Studio Code or any preferred code editor.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If using Visual Studio Code, install <a href="https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform">HashiCorp Terraform Extensions</a> to add autocompletion and syntax highlighting. You can also add <a href="https://marketplace.visualstudio.com/items?itemName=4ops.terraform">Terraform by Anton Kulikov</a> for configuration language support.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/terraform-airbyte-provider/extensions.png" alt="Terraform Extensions on Visual Studio Code" width="75%">
+</div>
 </div>
 <div class="paragraph">
-<p><a href="https://quickstarts.teradata.com/tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html" target="_blank" rel="noopener">Run large bulkloads efficiently with Teradata Parallel Transporter</a></p>
+<p>Populate the main.tf file with the template provided.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Provider Configuration
+terraform {
+  required_providers {
+    airbyte = {
+      source = "airbytehq/airbyte"
+      version = "0.4.1"  // Latest Version https://registry.terraform.io/providers/airbytehq/airbyte/latest
+    }
+  }
+}
+provider "airbyte" {
+  // If running on Airbyte Cloud, generate &amp; save the API key from https://portal.airbyte.com
+  bearer_auth = var.api_key
+}
+# Google Sheets Source Configuration
+resource "airbyte_source_google_sheets" "my_source_gsheets" {
+  configuration = {
+    source_type = "google-sheets"
+     credentials = {
+      service_account_key_authentication = {
+        service_account_info = var.google_private_key
+      }
+    }
+    names_conversion = true,
+    spreadsheet_id = var.spreadsheet_id
+  }
+  name = "Google Sheets"
+  workspace_id = var.workspace_id
+}
+# Teradata Vantage Destination Configuration
+# For optional parameters visit https://registry.terraform.io/providers/airbytehq/airbyte/latest/docs/resources/destination_teradata
+resource "airbyte_destination_teradata" "my_destination_teradata" {
+  configuration = {
+    host            = var.host
+    password        = var.password
+    schema          = "airbyte_td_two"
+    ssl             = false
+    ssl_mode = {
+      allow = {}
+    }
+    username = var.username
+  }
+  name          = "Teradata"
+  workspace_id  = var.workspace_id
+}
+# Connection Configuration
+resource "airbyte_connection" "googlesheets_teradata" {
+  name = "Google Sheets - Teradata"
+  source_id = airbyte_source_google_sheets.my_source_gsheets.source_id
+  destination_id = airbyte_destination_teradata.my_destination_teradata.destination_id
+    schedule = {
+      schedule_type = "cron" // "manual"
+      cron_expression = "0 15 * * * ?" # This sets the data sync to run every 15 minutes of the hour
+    }
+  }</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p><a href="https://docs.teradata.com/r/Teradata-QueryGridTM-Installation-and-User-Guide/October-2020/Teradata-QueryGrid-Overview" target="_blank" rel="noopener">Teradata QueryGrid</a></p>
+<p>Note that this example uses a cron expression to schedule the data transfer to run every 15 minutes past the hour.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://quickstarts.teradata.com/elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html" target="_blank" rel="noopener">Use Airbyte to load data from external sources to Teradata Vantage</a></p>
+<p>In our <code>main.tf</code> file we reference variables which are held in the <code>variables.tf</code> file, including the API key, workspace ID, Google Sheet id, Google private key and Teradata Vantage credentials. Copy the following template into the <code>variables.tf</code> file and populate with the appropriate configuration values in the <code>default</code> attribute.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuring_the_variables_tf_file"><a class="anchor" href="#_configuring_the_variables_tf_file"></a>Configuring the variables.tf file</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">#log in to https://portal.airbyte.com generate, save and populate the variable with an API key
+variable "api_key" {
+    type = string
+    default = ""
+}
+#workspace_id is found in the url to the Airbyte Cloud account https://cloud.airbyte.com/workspaces/&lt;workspace_id&gt;/settings/dbt-cloud
+variable "workspace_id" {
+    type = string
+    default = ""
+}
+
+#Google spreadsheet id and Google private key
+variable "spreadsheet_id" {
+    type = string
+    default = ""
+}
+variable "google_private_key" {
+  type = string
+  default =  ""
+}
+# Teradata Vantage connection credentials
+variable "host" {
+  type = string
+  default = ""
+  }
+variable "username" {
+  type = string
+  default = "demo_user"
+  }
+  variable "password" {
+  type = string
+  default = ""
+  }</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_execution_commands"><a class="anchor" href="#_execution_commands"></a>Execution Commands</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Run <code>terraform init</code> pull down provider plugin from terraform provider page and initialize a working Terraform directory.</p>
+</div>
+<div class="paragraph">
+<p>This command should only be run after writing a new Terraform configuration or cloning an existing one from version control.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/terraform-airbyte-provider/terraforminit.png" alt="Initialize Terraform with Terraform init command" width="75%">
+</div>
+</div>
+<div class="paragraph">
+<p>Run <code>terraform plan</code> to display the execution plan Terraform will use to create resource and make modifications to infrastructure.</p>
+</div>
+<div class="paragraph">
+<p>For this example a plan for 3 new resources is created:</p>
+</div>
+<div class="paragraph">
+<p>Connection: # airbyte_connection.googlesheets_teradata will be created</p>
+</div>
+<div class="paragraph">
+<p>Destination: # airbyte_connection.googlesheets_teradata will be created</p>
+</div>
+<div class="paragraph">
+<p>Source: # airbyte_source_google_sheets.my_source_gsheets will be created</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/terraform-airbyte-provider/terraformplan.png" alt="View Terraform execution plan with terraform plan command" width="75%">
+</div>
+</div>
+<div class="paragraph">
+<p>Run <code>terraform apply</code> and <code>yes</code> to generate a plan and carry out the plan.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/terraform-airbyte-provider/terraformapply.png" alt="Apply the Terraform plan with terraform apply command" width="75%">
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>terraform.tfstate</code> file is created after running <code>terraform apply</code> for the first time. This file tracks the status of all sources, destinations, and connections managed by Terraform. For subsequent executions of <code>Terraform apply</code>, Terraform compares the code in the <code>main.tf</code> file with the code stored in the <code>tfstate</code> file. If resources are added or removed in <code>main.tf</code>, Terraform automatically updates both deployment and the <code>.tfstate</code> file accordingly upon deployment. Do not modify this file by hand.</p>
+</div>
+<div class="paragraph">
+<p>You now have a Source, Destination and Connection on Airbyte Cloud created and managed via Terraform.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/terraform-airbyte-provider/airbyteconnection.png" alt="Airbyte Connection in Airbyte Cloud UI" width="75%">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_resources"><a class="anchor" href="#_additional_resources"></a>Additional Resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://quickstarts.teradata.com/elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html">Use Airbyte to load data from external sources to Teradata Vantage</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://quickstarts.teradata.com/elt/transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.html">Transform data Loaded with Airbyte using dbt</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://reference.airbyte.com/reference/createsource">Airbyte API reference documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/airbytehq/airbyte/latest/docs/resources/destination_teradata#example-usage">Terraform Airbyte Provider Docs</a></p>
 </div>
 </div>
 </div>
@@ -2150,14 +2339,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     <li>
                       <a href="https://teradata.my.site.com/teradataPRM/s/self-registration" data-celebrus="Footer Menu - Partner registration" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Partner registration | https://teradata.my.site.com/teradataPRM/s/self-registration" target="_blank" rel="noopener">Partner registration
                         <span class="material-symbols-outlined md-16 ms-2">
-                          <img src="./_/img/small-external.svg" alt="External Icon" width="" height="">
+                          <img src="../_/img/small-external.svg" alt="External Icon" width="" height="">
                         </span>
                       </a>
                     </li>
                     <li>
                       <a href="https://teradata.my.site.com/teradataPRM/s/login/" data-celebrus="Footer Menu - Partner portal login" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Partner portal login | https://teradata.my.site.com/teradataPRM/s/login/" target="_blank" rel="noopener">Partner portal login
                         <span class="material-symbols-outlined md-16 ms-2">
-                          <img src="./_/img/small-external.svg" alt="External Icon" width="" height="">
+                          <img src="../_/img/small-external.svg" alt="External Icon" width="" height="">
                         </span>
                       </a>
                     </li>
@@ -2277,14 +2466,14 @@ document.addEventListener("DOMContentLoaded", function () {
                             <li>
                               <a href="https://careers.teradata.com" data-celebrus="Footer Menu - Careers" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Careers | https://careers.teradata.com" target="_blank" rel="noopener">Careers
                                 <span class="material-symbols-outlined md-16 ms-2">
-                                  <img src="./_/img/small-external.svg" alt="External Icon" width="" height="">
+                                  <img src="../_/img/small-external.svg" alt="External Icon" width="" height="">
                                 </span>
                               </a>
                             </li>
                             <li>
                               <a href="https://investor.teradata.com" data-celebrus="Footer Menu - Investors" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Investors | https://investor.teradata.com" target="_blank" rel="noopener">Investors
                                 <span class="material-symbols-outlined md-16 ms-2">
-                                  <img src="./_/img/small-external.svg" alt="External Icon" width="" height="">
+                                  <img src="../_/img/small-external.svg" alt="External Icon" width="" height="">
                                 </span>
                               </a>
                             </li>
@@ -2484,25 +2673,25 @@ document.addEventListener("DOMContentLoaded", function () {
   const mainElement = document.getElementById('home'); 
   
   if (mainElement && mainElement.id === 'home') {
-    const scriptElement = document.querySelector('script[src="./_/js/site.js"]');
+    const scriptElement = document.querySelector('script[src="../_/js/site.js"]');
     if (scriptElement) {
       scriptElement.remove(); 
     }
   } else {
-    const scriptElement = document.querySelector('script[src="./_/js/site.js"]');
+    const scriptElement = document.querySelector('script[src="../_/js/site.js"]');
     if (!scriptElement) {
       const newScriptElement = document.createElement('script');
-      newScriptElement.src = './_/js/site.js';
+      newScriptElement.src = '../_/js/site.js';
       document.body.appendChild(newScriptElement);
     }
   }
 });
 </script>    
-<script async src="./_/js/behavior.js"></script>
-<script src="./_/js/vendor/lunr.js"></script>
-<script src="./_/js/search-ui.js" id="search-ui-script" data-site-root-path="." data-snippet-length="100" data-stylesheet="./_/css/search.css"></script>
-<script async src="./search-index.js"></script>
-<script src="./_/js/teradata.min.js"></script>
+<script async src="../_/js/behavior.js"></script>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+<script src="../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>
