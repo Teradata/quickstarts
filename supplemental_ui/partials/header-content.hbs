@@ -11,6 +11,8 @@
 <!-- Navbar -->
   {{#if (eq page.attributes.lang 'ja')}}
     {{> navbar-ja}}
+  {{else if (eq page.attributes.lang 'es')}}
+    {{> navbar-es}}
   {{else}}
     {{> navbar-en}}
   {{/if}}

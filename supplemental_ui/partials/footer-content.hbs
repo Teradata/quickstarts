@@ -1,5 +1,7 @@
 {{#if (eq page.attributes.lang 'ja')}}
   {{> footer-ja}}
+{{else if (eq page.attributes.lang 'es')}}
+  {{> footer-es}}
 {{else}}
   {{> footer-en}}
 {{/if}}
