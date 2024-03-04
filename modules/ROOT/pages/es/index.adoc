@@ -1,0 +1,5 @@
+= Main
+:page-lang: es
+:page-layout: landing-page
+:description: Ponte rápidamente al día con Teradata Vantage. Aprende sobre sus características. Encuentra tutoriales sobre tareas comunes. Explora ejemplos de código fuente.
+:keywords: almacenes de datos, almacén de datos en la nube, separación de computación y almacenamiento, Teradata, Vantage, plataforma de datos en la nube, aplicaciones Java, inteligencia empresarial, analítica empresarial, nube híbrida multi-cloud, resultados empresariales

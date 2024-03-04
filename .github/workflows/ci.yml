@@ -2,7 +2,7 @@ name: CI
 on:
   workflow_dispatch:
   pull_request:
-    types: [opened, edited, reopened, closed]
+    types: [opened, edited, reopened, closed, synchronize]
 jobs:
   build:
     runs-on: ubuntu-latest

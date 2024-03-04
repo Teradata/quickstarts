@@ -6,12 +6,28 @@ function switchLanguage(lan) {
     let aiUnlimited = "ai-unlimited";
     let bi = "business-intelligence";
     if(page[page.length-1]==="" || page[page.length-1]==="index.html" || page[page.length-1]==="#" || page[page.length-1]==="index.html#") {
-      if(page[page.length-2] !== "ja") {
+      if(page[page.length-2] === "ja") {
+        if (lan === 'en'){
+          indexFile = page.lastIndexOf(page[page.length-2]);
+          page.splice(indexFile, 1, '');
+        }
+        if (lan === 'es'){
+          indexFile = page.lastIndexOf(page[page.length-2]);
+          page.splice(indexFile, 1, 'es');
+        }
+      }else if(page[page.length-2] === "es") {
+        if (lan === 'en'){
+          indexFile = page.lastIndexOf(page[page.length-2]);
+          page.splice(indexFile, 1, '');
+        }
+        if (lan === 'ja'){
+          indexFile = page.lastIndexOf(page[page.length-2]);
+          page.splice(indexFile, 1, 'ja');
+        }
+      }
+      else{
         indexFile = page.lastIndexOf(page[page.length-1]);
         page.splice(indexFile, 1, lan);
-      } else {
-        indexFile = page.lastIndexOf(page[page.length-2]);
-        page.splice(indexFile, 1, '');
       }
     } else {
       if(lan === "en") {
