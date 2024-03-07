@@ -517,7 +517,7 @@ main.article {
 */
 .toc .toc-menu a:hover {
 /*  color: #f3743f; */
-  color: #FF5F02;
+  color: #3053F4;
 }
 
 .nav-container {
@@ -687,20 +687,74 @@ aside.toc.sidebar {
 
 .is-current-page>.nav-link,
 .is-current-page>.nav-text {
-  font-weight: initial;
-  color: #00233C;
+  font-weight: 400;
+  color: #171A2C;
 }
 
 .is-current-page {
-  background: rgba(255, 125, 2, 0.08);
-  border-radius: 0px 16px 16px 0px;
+  background: #ECECFE;
+  border-radius: 16px 16px 16px 16px;
+  padding: 2px 10px;
+  margin-left: -10px;
 }
+.nav-item.is-active{
+  padding: 2px 10px;
+  margin-left: -10px;
+  width: 170px;
+}
+
+/* Hover effect in menu */
+.nav-item.is-active a:hover {
+   text-decoration: none;
+}
+.nav-item.is-active[data-depth="2"]:not(:has(> ul.nav-list > li[data-depth="3"])):hover {
+    background: rgba(30, 29, 30, 0.08);
+    border-radius: 16px;
+    padding: 2px 10px;
+    margin-left: -10px;
+    width: 170px;
+}
+
+.nav-item.is-active[data-depth="3"]:hover {
+    background: rgba(30, 29, 30, 0.08);
+    border-radius: 16px;
+    padding: 2px 10px;
+    margin-left: -10px;
+    width: 170px;
+}
+
+.nav-item.is-active[data-depth="2"]:has(> ul.nav-list > li[data-depth="3"]):hover {
+    background: transparent;  
+}
+
+.nav-item.is-active[data-depth="2"]:last-child:hover {
+    background: rgba(30, 29, 30, 0.08);
+    border-radius: 16px;
+    padding: px 10px;
+    margin-left: -10px;
+    width: 125%;
+}
+/* Hover effect in menu */
+
 
 .toc .toc-menu a.is-active {
-  border-left-color: #FF5F02;
-  color: rgba(0, 0, 0, 0.87);
+  border-left-color: #3053F4;
+  color: rgba(51, 68, 62, 1);
+  font-weight: 700;
 }
-
+.toc .toc-menu a {
+    border-left: 2px solid rgba(48, 83, 244, 0.2);
+}
+.sidebar.toc .toc-menu a {
+  line-height: 20px;
+}
+ .toc .toc-menu h3 {
+  color: #333A3E;
+  font-weight: 600;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0.15px;
+  }
 .page-controls {
   padding-top: 12px;
   font-size: 14px;
@@ -1886,7 +1940,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </nav>
 </div>
   <div class="content">
-<aside class="toc sidebar" data-title="Contents" data-levels="2">
+<aside class="toc sidebar" data-title="Contents" data-levels="2"> 
     <div class="page-controls">
         <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
         <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/pages/odbc.ubuntu.adoc"><div class="edit-on-github">Edit on GitHub</div></a>

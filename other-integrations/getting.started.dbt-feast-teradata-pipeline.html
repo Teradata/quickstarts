@@ -517,7 +517,7 @@ main.article {
 */
 .toc .toc-menu a:hover {
 /*  color: #f3743f; */
-  color: #FF5F02;
+  color: #3053F4;
 }
 
 .nav-container {
@@ -687,20 +687,74 @@ aside.toc.sidebar {
 
 .is-current-page>.nav-link,
 .is-current-page>.nav-text {
-  font-weight: initial;
-  color: #00233C;
+  font-weight: 400;
+  color: #171A2C;
 }
 
 .is-current-page {
-  background: rgba(255, 125, 2, 0.08);
-  border-radius: 0px 16px 16px 0px;
+  background: #ECECFE;
+  border-radius: 16px 16px 16px 16px;
+  padding: 2px 10px;
+  margin-left: -10px;
 }
+.nav-item.is-active{
+  padding: 2px 10px;
+  margin-left: -10px;
+  width: 170px;
+}
+
+/* Hover effect in menu */
+.nav-item.is-active a:hover {
+   text-decoration: none;
+}
+.nav-item.is-active[data-depth="2"]:not(:has(> ul.nav-list > li[data-depth="3"])):hover {
+    background: rgba(30, 29, 30, 0.08);
+    border-radius: 16px;
+    padding: 2px 10px;
+    margin-left: -10px;
+    width: 170px;
+}
+
+.nav-item.is-active[data-depth="3"]:hover {
+    background: rgba(30, 29, 30, 0.08);
+    border-radius: 16px;
+    padding: 2px 10px;
+    margin-left: -10px;
+    width: 170px;
+}
+
+.nav-item.is-active[data-depth="2"]:has(> ul.nav-list > li[data-depth="3"]):hover {
+    background: transparent;  
+}
+
+.nav-item.is-active[data-depth="2"]:last-child:hover {
+    background: rgba(30, 29, 30, 0.08);
+    border-radius: 16px;
+    padding: px 10px;
+    margin-left: -10px;
+    width: 125%;
+}
+/* Hover effect in menu */
+
 
 .toc .toc-menu a.is-active {
-  border-left-color: #FF5F02;
-  color: rgba(0, 0, 0, 0.87);
+  border-left-color: #3053F4;
+  color: rgba(51, 68, 62, 1);
+  font-weight: 700;
 }
-
+.toc .toc-menu a {
+    border-left: 2px solid rgba(48, 83, 244, 0.2);
+}
+.sidebar.toc .toc-menu a {
+  line-height: 20px;
+}
+ .toc .toc-menu h3 {
+  color: #333A3E;
+  font-weight: 600;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0.15px;
+  }
 .page-controls {
   padding-top: 12px;
   font-size: 14px;
@@ -1885,7 +1939,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </nav>
 </div>
   <div class="content">
-<aside class="toc sidebar" data-title="Contents" data-levels="2">
+<aside class="toc sidebar" data-title="Contents" data-levels="2"> 
     <div class="page-controls">
         <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
         <a href="https://github.com/Teradata/quickstarts/blob/main/modules/other-integrations/pages/getting.started.dbt-feast-teradata-pipeline.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
@@ -1998,17 +2052,100 @@ source env/bin/activate</code></pre>
 <p>teddy_bank is a fictitious dataset of banking customers, consisting of mainly 3 tables customers, accounts, and
 transactions, with the following entity-relationship diagram:</p>
 </div>
-<div class="imageblock kroki">
+<div class="literalblock kroki-error">
 <div class="content">
-<img src="_images/diag-2e3bc6beb3ead8209775ef6464a9f726fd0101b3.svg" alt="Diagram" width="100%">
+<pre># Entities
+
+
+[raw_customers] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+  *`cust_id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `income  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 1)", border: "1", border-color: "#ffffff"}
+  `age  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `years_with_bank  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `nbr_children  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `gender  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(1)", border: "1", border-color: "#ffffff"}
+  `marital_status  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(1)", border: "1", border-color: "#ffffff"}
+  `name_prefix  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(4)", border: "1", border-color: "#ffffff"}
+  `first_name  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(12)", border: "1", border-color: "#ffffff"}
+  `last_name  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(15)", border: "1", border-color: "#ffffff"}
+  `street_nbr  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(8)", border: "1", border-color: "#ffffff"}
+  `street_name  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(15)", border: "1", border-color: "#ffffff"}
+  `postal_code  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(5)", border: "1", border-color: "#ffffff"}
+  `city_name  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(16)", border: "1", border-color: "#ffffff"}
+  `state_code  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(2)", border: "1", border-color: "#ffffff"}
+
+
+[raw_accounts] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+  *`acct_nbr  ` {bgcolor: "#f9d6cd", color: "#000000", label: "VARCHAR(18)", border: "1", border-color: "#ffffff"}
+  +`cust_id  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `acct_type  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(2)", border: "1", border-color: "#ffffff"}
+  `account_active  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(1)", border: "1", border-color: "#ffffff"}
+  `acct_start_date  ` {bgcolor: "#fcece8", color: "#868686", label: "DATE", border: "1", border-color: "#ffffff"}
+  `acct_end_date  ` {bgcolor: "#fcece8", color: "#868686", label: "DATE", border: "1", border-color: "#ffffff"}
+  `starting_balance  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(11, 3)", border: "1", border-color: "#ffffff"}
+  `ending_balance  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(11, 3)", border: "1", border-color: "#ffffff"}
+
+[raw_transactions] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+  *`tran_id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  +`acct_nbr  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(18)", border: "1", border-color: "#ffffff"}
+  `tran_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(9, 2)", border: "1", border-color: "#ffffff"}
+  `principal_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 2)", border: "1", border-color: "#ffffff"}
+  `interest_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(11, 3)", border: "1", border-color: "#ffffff"}
+  `new_balance  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(9, 2)", border: "1", border-color: "#ffffff"}
+  `tran_date  ` {bgcolor: "#fcece8", color: "#868686", label: "DATE", border: "1", border-color: "#ffffff"}
+  `tran_time  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `channel  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(1)", border: "1", border-color: "#ffffff"}
+  `tran_code  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(2)", border: "1", border-color: "#ffffff"}
+
+# Relationships
+
+raw_customers   1--* raw_accounts
+raw_accounts      1--* raw_transactions</pre>
 </div>
 </div>
 <div class="paragraph">
 <p>dbt takes this raw data and builds the following model, which is more suitable for ML modeling and analytics tools:</p>
 </div>
-<div class="imageblock kroki">
+<div class="literalblock kroki-error">
 <div class="content">
-<img src="_images/diag-a06cfc37fb213394532cc236ff7225b3dfdbc64b.svg" alt="Diagram" width="100%">
+<pre># Entities
+
+[`fact: Analytic_Dataset`] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+  *`cust_id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `income  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 1)", border: "1", border-color: "#ffffff"}
+  `age  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `years_with_bank  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `nbr_children  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `marital_status_0  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `marital_status_1  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `marital_status_2  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `marital_status_other  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `gender_0  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `gender_1  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `gender_other  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `state_code_0  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `state_code_1  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `state_code_2  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `state_code_3  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `state_code_4  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `state_code_5  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `state_code_other  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `acct_type_0  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `acct_type_1  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `acct_type_2  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `acct_type_other  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `CK_avg_bal  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
+  `CK_avg_tran_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
+  `CC_avg_bal  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
+  `CC_avg_tran_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
+  `SV_avg_bal  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
+  `SV_avg_tran_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
+  `q1_trans_cnt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 0)", border: "1", border-color: "#ffffff"}
+  `q2_trans_cnt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 0)", border: "1", border-color: "#ffffff"}
+  `q3_trans_cnt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 0)", border: "1", border-color: "#ffffff"}
+  `q4_trans_cnt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 0)", border: "1", border-color: "#ffffff"}
+  `event_timestamp  ` {bgcolor: "#fcece8", color: "#868686", label: "TIMESTAMP(0)", border: "1", border-color: "#ffffff"}
+  `created  ` {bgcolor: "#fcece8", color: "#868686", label: "TIMESTAMP(0)", border: "1", border-color: "#ffffff"}</pre>
 </div>
 </div>
 </div>
