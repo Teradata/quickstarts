@@ -692,26 +692,33 @@ aside.toc.sidebar {
 .is-current-page {
   background: #ECECFE;
   border-radius: 16px 16px 16px 16px;
-  padding: 5px 10px 5px 10px;
+  padding: 2px 10px;
   margin-left: -10px;
 }
+.nav-item.is-active{
+  padding: 2px 10px;
+  margin-left: -10px;
+  width: 170px;
+}
+
 /* Hover effect in menu */
 .nav-item.is-active a:hover {
    text-decoration: none;
 }
-
 .nav-item.is-active[data-depth="2"]:not(:has(> ul.nav-list > li[data-depth="3"])):hover {
     background: rgba(30, 29, 30, 0.08);
     border-radius: 16px;
-    padding: 5px 10px;
+    padding: 2px 10px;
     margin-left: -10px;
+    width: 170px;
 }
 
 .nav-item.is-active[data-depth="3"]:hover {
     background: rgba(30, 29, 30, 0.08);
     border-radius: 16px;
-    padding: 5px 10px;
+    padding: 2px 10px;
     margin-left: -10px;
+    width: 170px;
 }
 
 .nav-item.is-active[data-depth="2"]:has(> ul.nav-list > li[data-depth="3"]):hover {
@@ -721,8 +728,9 @@ aside.toc.sidebar {
 .nav-item.is-active[data-depth="2"]:last-child:hover {
     background: rgba(30, 29, 30, 0.08);
     border-radius: 16px;
-    padding: 5px 10px;
+    padding: px 10px;
     margin-left: -10px;
+    width: 125%;
 }
 /* Hover effect in menu */
 
