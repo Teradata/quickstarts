@@ -1,0 +1,37 @@
+<div id="disclaimer">
+    <div class="section-1">
+        <img src="{{uiRootPath}}/img/language.svg" alt="Imagen" height="24px" width="24px">
+    </div>
+  <div class="section-2">
+    <span id="message"></span>
+  </div>
+  <div class="section-3">
+    <button href="" onclick="openMTD()" class="info">
+        <span id="info"></span>
+    </button>
+    <div id="mtModal" class="modal">
+        <div id="overlay"></div>
+        <div class="MTDcontent">
+            <p class="popup-header-text" id="header"></p>
+            <div class="cancel">
+                <button class="cancelbtn" onclick="closeMTD()">
+                    <span class="closeMT">&times;</span>
+                </button>
+            </div>
+            <div class="td-reader-popup-spacer"></div>
+            <p class="td-popup-body-text" id="content"></p>
+            <div class="btnspace">
+                <button onclick="closeMTD()" class="call-to-action-button">
+                    <span id="close"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="section-4">
+    <button onclick="hideDisclaimer()">
+        <img src="{{uiRootPath}}/img/close.svg" alt="Imagen" height="14px" width="14px">
+    </button>
+  </div>
+</div>
+ 
