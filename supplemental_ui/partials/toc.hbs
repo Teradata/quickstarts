@@ -1,4 +1,4 @@
-<aside class="toc sidebar" data-title="{{or page.attributes.toctitle 'Contents'}}" data-levels="{{{or page.attributes.toclevels 2}}}">
+<aside class="toc sidebar" data-title="{{#if (ne page.attributes.lang 'ja')}}{{or page.attributes.toctitle 'Contents'}}{{else}}コンテンツ{{/if}}" data-levels="{{{or page.attributes.toclevels 2}}}"> 
     <div class="page-controls">
       {{#if (ne page.attributes.lang 'ja')}}
         <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
