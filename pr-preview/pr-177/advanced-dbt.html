@@ -687,14 +687,47 @@ aside.toc.sidebar {
 
 .is-current-page>.nav-link,
 .is-current-page>.nav-text {
-  font-weight: initial;
-  color: #00233C;
+  font-weight: 400;
+  color: #171A2C;
 }
 
 .is-current-page {
-  background: rgba(255, 125, 2, 0.08);
-  border-radius: 0px 16px 16px 0px;
+  background: #ECECFE;
+  border-radius: 16px 16px 16px 16px;
+  padding: 5px 10px 5px 10px;
+  margin-left: -10px;
 }
+/* Hover effect in menu */
+.nav-item.is-active a:hover {
+   text-decoration: none;
+}
+
+.nav-item.is-active[data-depth="2"]:not(:has(> ul.nav-list > li[data-depth="3"])):hover {
+    background: rgba(30, 29, 30, 0.08);
+    border-radius: 16px;
+    padding: 5px 10px;
+    margin-left: -10px;
+}
+
+.nav-item.is-active[data-depth="3"]:hover {
+    background: rgba(30, 29, 30, 0.08);
+    border-radius: 16px;
+    padding: 5px 10px;
+    margin-left: -10px;
+}
+
+.nav-item.is-active[data-depth="2"]:has(> ul.nav-list > li[data-depth="3"]):hover {
+    background: transparent;  
+}
+
+.nav-item.is-active[data-depth="2"]:last-child:hover {
+    background: rgba(30, 29, 30, 0.08);
+    border-radius: 16px;
+    padding: 5px 10px;
+    margin-left: -10px;
+}
+/* Hover effect in menu */
+
 
 .toc .toc-menu a.is-active {
   border-left-color: #3053F4;
@@ -2107,17 +2140,77 @@ Through dbt driven transformations we transform source data ingested from the`te
 <div class="paragraph">
 <p>The source data consists of the following tables customers, orders, products, and order_products, according to the following Entity Relations Diagram:</p>
 </div>
-<div class="imageblock kroki">
+<div class="literalblock kroki-error">
 <div class="content">
-<img src="_images/diag-280ab8290137be73ca03012b0274cfa35160a364.svg" alt="Diagram" width="100%">
+<pre># Entities
+
+[customers] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+  *`id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "int", border: "1", border-color: "#ffffff"}
+  `name  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+  `surname  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+  `email  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+
+[orders] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+*`id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "int", border: "1", border-color: "#ffffff"}
+`customer_id  `{bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+`order_date  `{bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+`status  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+
+[order_products] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+`order_id   `{bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+`product_id  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+`quantity  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+
+[products] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+*`id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "int", border: "1", border-color: "#ffffff"}
+`name  `{bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+`category  `{bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+`unit_price  `{bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+
+# Relationships
+
+customers   1--* orders
+orders      1--* order_products
+products    1--* order_products</pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Using dbt, we leverage the source data tables to construct the following dimensional model, which is optimized for analytics tools.</p>
 </div>
-<div class="imageblock kroki">
+<div class="literalblock kroki-error">
 <div class="content">
-<img src="_images/diag-b0140f114a499a0a6a1334b4db839c8893062ed7.svg" alt="Diagram" width="100%">
+<pre># Entities
+
+[dim_customers] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+* `customer_id  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+`first_name  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+`last_name  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+`email  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+
+[dim_orders] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+* `order_id  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+`order_date  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+`order_status  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+
+[dim_products] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+* `product_id  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+`product_name  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+`product_category  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+`price_dollars  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+
+[fct_order_details] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+`order_id  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+`product_id  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+`customer_id  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+`order_date  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+`unit_price  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+`quantity  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+`amount  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+
+# Relationships
+`dim_customers`   1--* `fct_order_details`
+`dim_orders`   1--* `fct_order_details`
+`dim_products`   1--* `fct_order_details`</pre>
 </div>
 </div>
 </div>
