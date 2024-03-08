@@ -27,17 +27,17 @@ jobs:
         uses: foo-software/lighthouse-check-action@master
         with:
           outputDirectory: /tmp/artifacts
-          urls: 'https://quickstarts.teradata.com/pr-preview/pr-${{ github.event.pull_request.number }}/,https://quickstarts.teradata.com/pr-preview/pr-179/nos.html'
+          urls: 'https://quickstarts.teradata.com/pr-preview/pr-${{ github.event.pull_request.number }},https://quickstarts.teradata.com/pr-preview/pr-${{ github.event.pull_request.number }}/nos.html'
           device: 'all' 
       - name: Upload Lighthouse artifacts
         uses: actions/upload-artifact@master
         with:
           name: Lighthouse reports
           path: /tmp/artifacts
-      - name: Leave comment
+      - name: Leave Comment
         uses: foo-software/lighthouse-check-action@master
         with:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
           outputDirectory: /tmp/artifacts
-          urls: 'https://quickstarts.teradata.com/pr-preview/pr-${{ github.event.pull_request.number }}'
+          urls: 'https://quickstarts.teradata.com/pr-preview/pr-${{ github.event.pull_request.number }},https://quickstarts.teradata.com/pr-preview/pr-${{ github.event.pull_request.number }}/nos.html'
           device: 'desktop'
