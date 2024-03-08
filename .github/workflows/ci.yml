@@ -27,7 +27,7 @@ jobs:
         uses: foo-software/lighthouse-check-action@master
         with:
           outputDirectory: /tmp/artifacts
-          urls: 'https://quickstarts.teradata.com/pr-preview/pr-${{ github.event.pull_request.number }},https://quickstarts.teradata.com/pr-preview/pr-${{ github.event.pull_request.number }}/nos.html'
+          urls: 'https://quickstarts.teradata.com/pr-preview/pr-179/,https://quickstarts.teradata.com/pr-preview/pr-179/nos.html'
           device: 'all' 
       - name: Upload Lighthouse artifacts
         uses: actions/upload-artifact@master
@@ -39,5 +39,5 @@ jobs:
         with:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
           outputDirectory: /tmp/artifacts
-          urls: 'https://quickstarts.teradata.com/pr-preview/pr-${{ github.event.pull_request.number }},https://quickstarts.teradata.com/pr-preview/pr-${{ github.event.pull_request.number }}/nos.html'
+          urls: 'https://quickstarts.teradata.com/pr-preview/pr-${{ github.event.pull_request.number }}'
           device: 'desktop'
