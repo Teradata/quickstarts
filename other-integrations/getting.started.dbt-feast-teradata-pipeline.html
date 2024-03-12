@@ -2053,100 +2053,17 @@ source env/bin/activate</code></pre>
 <p>teddy_bank is a fictitious dataset of banking customers, consisting of mainly 3 tables customers, accounts, and
 transactions, with the following entity-relationship diagram:</p>
 </div>
-<div class="literalblock kroki-error">
+<div class="imageblock kroki">
 <div class="content">
-<pre># Entities
-
-
-[raw_customers] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
-  *`cust_id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `income  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 1)", border: "1", border-color: "#ffffff"}
-  `age  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `years_with_bank  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `nbr_children  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `gender  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(1)", border: "1", border-color: "#ffffff"}
-  `marital_status  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(1)", border: "1", border-color: "#ffffff"}
-  `name_prefix  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(4)", border: "1", border-color: "#ffffff"}
-  `first_name  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(12)", border: "1", border-color: "#ffffff"}
-  `last_name  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(15)", border: "1", border-color: "#ffffff"}
-  `street_nbr  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(8)", border: "1", border-color: "#ffffff"}
-  `street_name  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(15)", border: "1", border-color: "#ffffff"}
-  `postal_code  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(5)", border: "1", border-color: "#ffffff"}
-  `city_name  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(16)", border: "1", border-color: "#ffffff"}
-  `state_code  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(2)", border: "1", border-color: "#ffffff"}
-
-
-[raw_accounts] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
-  *`acct_nbr  ` {bgcolor: "#f9d6cd", color: "#000000", label: "VARCHAR(18)", border: "1", border-color: "#ffffff"}
-  +`cust_id  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `acct_type  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(2)", border: "1", border-color: "#ffffff"}
-  `account_active  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(1)", border: "1", border-color: "#ffffff"}
-  `acct_start_date  ` {bgcolor: "#fcece8", color: "#868686", label: "DATE", border: "1", border-color: "#ffffff"}
-  `acct_end_date  ` {bgcolor: "#fcece8", color: "#868686", label: "DATE", border: "1", border-color: "#ffffff"}
-  `starting_balance  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(11, 3)", border: "1", border-color: "#ffffff"}
-  `ending_balance  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(11, 3)", border: "1", border-color: "#ffffff"}
-
-[raw_transactions] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
-  *`tran_id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  +`acct_nbr  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(18)", border: "1", border-color: "#ffffff"}
-  `tran_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(9, 2)", border: "1", border-color: "#ffffff"}
-  `principal_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 2)", border: "1", border-color: "#ffffff"}
-  `interest_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(11, 3)", border: "1", border-color: "#ffffff"}
-  `new_balance  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(9, 2)", border: "1", border-color: "#ffffff"}
-  `tran_date  ` {bgcolor: "#fcece8", color: "#868686", label: "DATE", border: "1", border-color: "#ffffff"}
-  `tran_time  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `channel  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(1)", border: "1", border-color: "#ffffff"}
-  `tran_code  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(2)", border: "1", border-color: "#ffffff"}
-
-# Relationships
-
-raw_customers   1--* raw_accounts
-raw_accounts      1--* raw_transactions</pre>
+<img src="_images/diag-2e3bc6beb3ead8209775ef6464a9f726fd0101b3.svg" alt="Diagram" width="100%">
 </div>
 </div>
 <div class="paragraph">
 <p>dbt takes this raw data and builds the following model, which is more suitable for ML modeling and analytics tools:</p>
 </div>
-<div class="literalblock kroki-error">
+<div class="imageblock kroki">
 <div class="content">
-<pre># Entities
-
-[`fact: Analytic_Dataset`] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
-  *`cust_id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `income  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 1)", border: "1", border-color: "#ffffff"}
-  `age  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `years_with_bank  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `nbr_children  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `marital_status_0  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `marital_status_1  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `marital_status_2  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `marital_status_other  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `gender_0  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `gender_1  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `gender_other  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `state_code_0  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `state_code_1  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `state_code_2  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `state_code_3  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `state_code_4  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `state_code_5  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `state_code_other  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `acct_type_0  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `acct_type_1  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `acct_type_2  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `acct_type_other  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `CK_avg_bal  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
-  `CK_avg_tran_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
-  `CC_avg_bal  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
-  `CC_avg_tran_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
-  `SV_avg_bal  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
-  `SV_avg_tran_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
-  `q1_trans_cnt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 0)", border: "1", border-color: "#ffffff"}
-  `q2_trans_cnt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 0)", border: "1", border-color: "#ffffff"}
-  `q3_trans_cnt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 0)", border: "1", border-color: "#ffffff"}
-  `q4_trans_cnt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 0)", border: "1", border-color: "#ffffff"}
-  `event_timestamp  ` {bgcolor: "#fcece8", color: "#868686", label: "TIMESTAMP(0)", border: "1", border-color: "#ffffff"}
-  `created  ` {bgcolor: "#fcece8", color: "#868686", label: "TIMESTAMP(0)", border: "1", border-color: "#ffffff"}</pre>
+<img src="_images/diag-a06cfc37fb213394532cc236ff7225b3dfdbc64b.svg" alt="Diagram" width="100%">
 </div>
 </div>
 </div>
