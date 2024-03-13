@@ -8,7 +8,7 @@
 :dir: ingest-catalog-data-teradata-s3-with-glue
 
 == Overview
-This quickstart details the process of ingesting and cataloging Teradata Vantage data to Amazon S3, using AWS Glue. 
+This quickstart details the process of ingesting and cataloging data from Teradata Vantage to Amazon S3 with AWS Glue. 
 
 TIP: For ingesting data to Amazon S3 when cataloging is not a requirement consider https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/SQL-Data-Manipulation-Language/Working-with-External-Data/WRITE_NOS[Teradata Write NOS capabilities.]
 
