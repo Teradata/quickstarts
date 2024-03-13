@@ -2,7 +2,7 @@
 :experimental:
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
-:page-revdate: September 12th, 2022
+:page-revdate: March 6th, 2022
 :description: Configure a Teradata Vantage connection in DBeaver.
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, dbeaver, dbeaver prod, sql ide
 :page-image-directory: configure-a-teradata-connection-in-dbeaver
@@ -23,7 +23,7 @@ include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 1. Start the new connection wizard by clicking on the plug icon (image:{page-image-directory}/plug-icon.png[title="Add Connection Plug Icon", width="16px"]) in the upper left corner of the application window or go to `Database -> New Database Connection`.
 2. On `Select your database` screen, start typing `teradata` and select the Teradata icon.
 +
-image::{page-image-directory}/select-your-database.png[Select your database, width=75%]
+image::{page-image-directory}/select-your-database-windows.png[Select your database, width=65%]
 3. On the main tab, you need to set all primary connection settings. The required ones include `Host`, `Port`, `Database`, `Username`, and `Password`.
 +
 TIP: In Teradata Vantage, when a user is created a corresponding database with the same is created as well. DBeaver requires that you enter the database. If you don't know what database you want to connect to, use your username in the `database` field.
@@ -32,14 +32,35 @@ TIP: With DBeaver PRO, you can not only use the standard ordering of tables but 
 +
 TIP: In many environments Teradata Vantage can only be accessed using the TLS protocol. When in DBeaver PRO, check `Use TLS protocol` option to enable TLS.
 +
-image::{page-image-directory}/teradata-connection-settings.png[Teradata connection settings, width=75%]
+image::{page-image-directory}/teradata-connection-settings-windows.png[Teradata connection settings, width=65%]
 4. Click on `Finish`.
+
+== Optional: Logon Mechanisms
+
+The default logon mechanism when creating a DBeaver connection is TD2. To add other logon mechanisms, follow the steps below:
+
+1. Navigate to the database menu and click on Driver Manager.
+2. From the list of driver names, select Teradata and click "Copy".
++
+image::{page-image-directory}/copy-driver.png[Copy the Teradata driver, width=65%]
+3. In the "URL Template" field, define your selected logon mechanism.
++
+`jdbc:teradata://\{host}/LOGMECH=LDAP,DATABASE=\{database},DBS_PORT=\{port}`
++
+image::{page-image-directory}/configure-driver-string.png[Configure connection string, width=65%]
+4. Click "OK".
+5. The new driver is now available to create connections with the selected logon mechanism.
++
+image::{page-image-directory}/create-connection.png[Create a connection, width=65%]
+6. The process for setting up a new connection with the alternative mechanism is the same as described above for adding a new connection.
++
+image::{page-image-directory}/teradata-connection-settings-windows-ldap.png[Configure connection, width=65%]
 
 == Optional: SSH tunneling
 
 If your database cannot be accessed directly, you can use an SSH tunnel. All settings are available on the `SSH` tab. DBeaver supports the following authentication methods: user/password, public key, SSH agent authentication.
 
-image::{page-image-directory}/teradata-connection-settings-ssh.png[Teradata connection settings SSH, width=75%]
+image::{page-image-directory}/teradata-connection-settings-ssh-windows.png[Teradata connection settings SSH, width=65%]
 
 == Summary
 
