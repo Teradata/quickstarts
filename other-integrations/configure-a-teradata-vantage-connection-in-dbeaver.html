@@ -1996,7 +1996,7 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 <p>On <code>Select your database</code> screen, start typing <code>teradata</code> and select the Teradata icon.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/configure-a-teradata-connection-in-dbeaver/select-your-database.png" alt="Select your database" width="75%">
+<img src="_images/configure-a-teradata-connection-in-dbeaver/select-your-database-windows.png" alt="Select your database" width="65%">
 </div>
 </div>
 </li>
@@ -2040,12 +2040,65 @@ In many environments Teradata Vantage can only be accessed using the TLS protoco
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/configure-a-teradata-connection-in-dbeaver/teradata-connection-settings.png" alt="Teradata connection settings" width="75%">
+<img src="_images/configure-a-teradata-connection-in-dbeaver/teradata-connection-settings-windows.png" alt="Teradata connection settings" width="65%">
 </div>
 </div>
 </li>
 <li>
 <p>Click on <code>Finish</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_optional_logon_mechanisms"><a class="anchor" href="#_optional_logon_mechanisms"></a>Optional: Logon Mechanisms</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The default logon mechanism when creating a DBeaver connection is TD2. To add other logon mechanisms, follow the steps below:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to the database menu and click on Driver Manager.</p>
+</li>
+<li>
+<p>From the list of driver names, select Teradata and click "Copy".</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/configure-a-teradata-connection-in-dbeaver/copy-driver.png" alt="Copy the Teradata driver" width="65%">
+</div>
+</div>
+</li>
+<li>
+<p>In the "URL Template" field, define your selected logon mechanism.</p>
+<div class="paragraph">
+<p><code>jdbc:teradata://{host}/LOGMECH=LDAP,DATABASE={database},DBS_PORT={port}</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/configure-a-teradata-connection-in-dbeaver/configure-driver-string.png" alt="Configure connection string" width="65%">
+</div>
+</div>
+</li>
+<li>
+<p>Click "OK".</p>
+</li>
+<li>
+<p>The new driver is now available to create connections with the selected logon mechanism.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/configure-a-teradata-connection-in-dbeaver/create-connection.png" alt="Create a connection" width="65%">
+</div>
+</div>
+</li>
+<li>
+<p>The process for setting up a new connection with the alternative mechanism is the same as described above for adding a new connection.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/configure-a-teradata-connection-in-dbeaver/teradata-connection-settings-windows-ldap.png" alt="Configure connection" width="65%">
+</div>
+</div>
 </li>
 </ol>
 </div>
@@ -2059,7 +2112,7 @@ In many environments Teradata Vantage can only be accessed using the TLS protoco
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/configure-a-teradata-connection-in-dbeaver/teradata-connection-settings-ssh.png" alt="Teradata connection settings SSH" width="75%">
+<img src="_images/configure-a-teradata-connection-in-dbeaver/teradata-connection-settings-ssh-windows.png" alt="Teradata connection settings SSH" width="65%">
 </div>
 </div>
 </div>
