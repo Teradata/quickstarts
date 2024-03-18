@@ -1956,7 +1956,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This quickstart details the process of ingesting and cataloging Teradata Vantage data to Amazon S3, using AWS Glue.</p>
+<p>This quickstart details the process of ingesting and cataloging data from Teradata Vantage to Amazon S3 with AWS Glue.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -2043,22 +2043,89 @@ CREATE TABLE teddy_retailers_inventory.source_stock AS
 <div class="ulist">
 <ul>
 <li>
-<p>Store Teradata Vantage credentials in AWS Secrets Manager</p>
-</li>
-<li>
-<p>Create a connection to the Teradata Vantage Instance in AWS Glue</p>
+<p>Create an Amazon S3 bucket to ingest data</p>
 </li>
 <li>
 <p>Create an AWS Glue Catalog Database for storing metadata</p>
 </li>
 <li>
+<p>Store Teradata Vantage credentials in AWS Secrets Manager</p>
+</li>
+<li>
 <p>Create an AWS Glue Service Role to assign to ETL jobs</p>
+</li>
+<li>
+<p>Create a connection to a Teradata Vantage Instance in AWS Glue</p>
 </li>
 <li>
 <p>Create an AWS Glue Job</p>
 </li>
 <li>
 <p>Draft a script for automated ingestion and cataloging of Teradata Vantage data into Amazon S3</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_an_amazon_s3_bucket_to_ingest_data"><a class="anchor" href="#_create_an_amazon_s3_bucket_to_ingest_data"></a>Create an Amazon S3 Bucket to Ingest Data</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>In Amazon S3, select <code>Create bucket</code>.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/ingest-catalog-data-teradata-s3-with-glue/Buckets-1.PNG" alt="create bucket" width="80%">
+</div>
+</div>
+</li>
+<li>
+<p>Assign a name to your bucket and take note of it.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/ingest-catalog-data-teradata-s3-with-glue/Buckets-2.PNG" alt="name bucket" width="80%">
+</div>
+</div>
+</li>
+<li>
+<p>Leave all settings at their default values.</p>
+</li>
+<li>
+<p>Click on <code>Create bucket</code>.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/ingest-catalog-data-teradata-s3-with-glue/Buckets-3.PNG" alt="save bucket" width="80%">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_an_aws_glue_catalog_database_for_storing_metadata"><a class="anchor" href="#_create_an_aws_glue_catalog_database_for_storing_metadata"></a>Create an AWS Glue Catalog Database for Storing Metadata</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>In AWS Glue, select Data catalog, Databases.</p>
+</li>
+<li>
+<p>Click on <code>Add database</code>.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/ingest-catalog-data-teradata-s3-with-glue/Cat-1.PNG" alt="add database" width="80%">
+</div>
+</div>
+</li>
+<li>
+<p>Define a database name and click on <code>Create database</code>.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/ingest-catalog-data-teradata-s3-with-glue/Cat-2.PNG" alt="add database name" width="80%">
+</div>
+</div>
 </li>
 </ul>
 </div>
@@ -2115,34 +2182,6 @@ In the case of ClearScape Analytics Experience, the user is always "demo_user," 
 </li>
 <li>
 <p>Create the secret.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_create_an_aws_glue_catalog_database_for_storing_metadata"><a class="anchor" href="#_create_an_aws_glue_catalog_database_for_storing_metadata"></a>Create an AWS Glue Catalog Database for Storing Metadata</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>In AWS Glue, select Data catalog, Databases.</p>
-</li>
-<li>
-<p>Click on <code>Add database</code>.</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="_images/ingest-catalog-data-teradata-s3-with-glue/Cat-1.PNG" alt="add database" width="80%">
-</div>
-</div>
-</li>
-<li>
-<p>Define a database name and click on <code>Create database</code>.</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="_images/ingest-catalog-data-teradata-s3-with-glue/Cat-2.PNG" alt="add database name" width="80%">
-</div>
-</div>
 </li>
 </ul>
 </div>
@@ -2360,10 +2399,23 @@ In the case of ClearScape Analytics Experience, the URL follows the following st
 <div class="ulist">
 <ul>
 <li>
-<p>The script requires that you manually fill in the database and tables you want to ingest and catalog.</p>
+<p>The script requires the following modifications:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Substitute the name of your S3 bucket.</p>
 </li>
 <li>
-<p>The script contains a SQL query that can be modified to ingest the entire table. For cataloging purposes, only one row per table is ingested.</p>
+<p>Substitute the name of your Glue catalog database.</p>
+</li>
+<li>
+<p>If you are not following the example in the guide, modify the database name and the tables to be ingested and cataloged.</p>
+</li>
+<li>
+<p>For cataloging purposes, only the first row of each table is ingested in the example. This query can be modified to ingest the whole table or to filter selected rows.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -2397,7 +2449,7 @@ database_name = "teddy_retailers_inventory"
 table_names = ["source_catalog","source_stock"]
 
 # Target S3 Bucket
-target_s3_bucket = "&lt;s3://&lt;your-bucket-name&gt;"
+target_s3_bucket = "s3://&lt;your-bucket-name&gt;"
 
 #Target catalog database
 catalog_database_name = "&lt;your-catalog-database-name&gt;"
@@ -2465,6 +2517,26 @@ job.commit()</code></pre>
 <div class="imageblock text-center">
 <div class="content">
 <img src="_images/ingest-catalog-data-teradata-s3-with-glue/Glue-script-4.PNG" alt="script configurations" width="80%">
+</div>
+</div>
+</li>
+<li>
+<p>In <code>Advanced properties</code>, <code>Connections</code> select your connection to Teradata Vantage.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The connection created must be referenced twice, once in the job configuration, once in the script itself.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/ingest-catalog-data-teradata-s3-with-glue/Glue-script-5.PNG" alt="script configuration connection" width="80%">
 </div>
 </div>
 </li>
@@ -2542,6 +2614,29 @@ job.commit()</code></pre>
     margin-bottom: 20px;
   }
 }
+.hljs-keyword, .hljs-selector-tag, .hljs-subst {
+    color: #383A42;
+}
+.hljs-meta {
+    color: #6C6C6C;
+}
+.hljs-doctag, .hljs-string {
+    color: #AD0F00;
+}
+.hljs-built_in, .hljs-builtin-name {
+    color: #17749B;
+}
+.hljs-literal, .hljs-number, .hljs-tag .hljs-attr, .hljs-template-variable, .hljs-variable {
+    color: #0A7C08;
+}
+
+.hljs-comment, .hljs-quote {
+    color: #8E6102;
+}
+.hljs-class .hljs-title, .hljs-type {
+    color: #004FFD;
+}
+
 
 .article {
 /*  background-color: #f5f5f5;*/
