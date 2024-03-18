@@ -2,7 +2,7 @@
 :experimental:
 :page-author: Daniel Herrera
 :page-email: daniel.herrera2@teradata.com
-:page-revdate: March 13th, 2024
+:page-revdate: March 18, 2024
 :description: Ingest and catalog data from Teradata Vantage to Amazon S3
 :keywords: data warehouses, object storage, teradata, vantage, cloud data platform, data engineering, enterprise analytics, aws glue, aws lake formation, aws glue catalog 
 :dir: ingest-catalog-data-teradata-s3-with-glue
@@ -45,12 +45,35 @@ CREATE TABLE teddy_retailers_inventory.source_stock AS
 == Amazon AWS setup
 In this section, we will cover in detail each of the steps below:
 
-* Store Teradata Vantage credentials in AWS Secrets Manager
-* Create a connection to the Teradata Vantage Instance in AWS Glue
+* Create an Amazon S3 bucket to ingest data
 * Create an AWS Glue Catalog Database for storing metadata
+* Store Teradata Vantage credentials in AWS Secrets Manager
 * Create an AWS Glue Service Role to assign to ETL jobs
+* Create a connection to a Teradata Vantage Instance in AWS Glue
 * Create an AWS Glue Job
 * Draft a script for automated ingestion and cataloging of Teradata Vantage data into Amazon S3
+
+== Create an Amazon S3 Bucket to Ingest Data
+* In Amazon S3, select `Create bucket`.
++
+image::{dir}/Buckets-1.PNG[create bucket,align="center",width=80%]
+* Assign a name to your bucket and take note of it.
++
+image::{dir}/Buckets-2.PNG[name bucket,align="center",width=80%]
+* Leave all settings at their default values.
+* Click on `Create bucket`.
++
+image::{dir}/Buckets-3.PNG[save bucket,align="center",width=80%]
+
+== Create an AWS Glue Catalog Database for Storing Metadata
+
+* In AWS Glue, select Data catalog, Databases.
+* Click on `Add database`.
++
+image::{dir}/Cat-1.PNG[add database,align="center",width=80%]
+* Define a database name and click on `Create database`.
++
+image::{dir}/Cat-2.PNG[add database name,align="center",width=80%]
 
 == Store Teradata Vantage credentials in AWS Secrets Manager
 
@@ -67,16 +90,6 @@ image::{dir}/secret-2.PNG[secret values,align="center",width=80%]
 * Assign a name to the secret.
 * The rest of the steps can be left with the default values.
 * Create the secret.
-
-== Create an AWS Glue Catalog Database for Storing Metadata
-
-* In AWS Glue, select Data catalog, Databases.
-* Click on `Add database`.
-+
-image::{dir}/Cat-1.PNG[add database,align="center",width=80%]
-* Define a database name and click on `Create database`.
-+
-image::{dir}/Cat-2.PNG[add database name,align="center",width=80%]
 
 == Create an AWS Glue Service Role to Assign to ETL Jobs
 The role you create should have access to the typical permissions of a Glue Service Role, but also access to read the secret and S3 bucket you've created.
@@ -156,8 +169,11 @@ image::{dir}/Glue-script-2.PNG[script editor type,align="center",width=80%]
 == Draft a script for automated ingestion and cataloging of Teradata Vantage data into Amazon S3
 
 * Copy the following script into the editor.
-** The script requires that you manually fill in the database and tables you want to ingest and catalog.
-** The script contains a SQL query that can be modified to ingest the entire table. For cataloging purposes, only one row per table is ingested.
+** The script requires the following modifications:
+*** Substitute the name of your S3 bucket.
+*** Substitute the name of your Glue catalog database.
+*** If you are not following the example in the guide, modify the database name and the tables to be ingested and cataloged.
+*** For cataloging purposes, only the first row of each table is ingested in the example. This query can be modified to ingest the whole table or to filter selected rows.
 
 [source, python, id="glue-script-first-run" role="emits-gtm-events"]
 ----
@@ -186,7 +202,7 @@ database_name = "teddy_retailers_inventory"
 table_names = ["source_catalog","source_stock"]
 
 # Target S3 Bucket
-target_s3_bucket = "<s3://<your-bucket-name>"
+target_s3_bucket = "s3://<your-bucket-name>"
 
 #Target catalog database 
 catalog_database_name = "<your-catalog-database-name>" 
@@ -241,7 +257,11 @@ image::{dir}/Glue-script-3.PNG[script in editor,align="center",width=80%]
 ** For testing, select "2" as the Requested number of workers, this is the minimum allowed.
 +
 image::{dir}/Glue-script-4.PNG[script configurations,align="center",width=80%]
-
+** In `Advanced properties`, `Connections` select your connection to Teradata Vantage. 
++
+TIP: The connection created must be referenced twice, once in the job configuration, once in the script itself.
++
+image::{dir}/Glue-script-5.PNG[script configuration connection,align="center",width=80%]
 * Click on `Save`.
 * Click on `Run`.
 ** The ETL job takes a couple of minutes to complete, most of this time is related to starting the Spark cluster.
