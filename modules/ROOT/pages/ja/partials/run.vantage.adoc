@@ -1,0 +1,73 @@
+. kbd:[ENTER]を押して、強調表示されている `LINUX` ブートパーティションを選択します。
++
+image::run-vantage/boot-manager-menu.png[ブートマネージャメニュー, width=500]
+. 以下の画面で、もう一度 kbd:[ENTER] を押して、デフォルトの SUSE Linux カーネルを選択します。
++
+image::run-vantage/grub-menu.png[Grubメニュー, width=500]
+. 起動シーケンスが完了すると、以下のスクリーンショットに示すような端末ログイン プロンプトが表示されます。ターミナルには何も入力しないでください。システムが GUI を開始するまで待ちます。
++
+image::run-vantage/wait-for-gui.png[GUIを待つ, width=500]
+. しばらくすると、以下のプロンプトが表示されます。上記のコマンド ログイン プロンプトの後に何も入力しなかったと仮定します。下の画面で`okay`ボタンを押す。
++
+image::run-vantage/okay-the-security-popup.png[OK Security Popup, width=500]
+. VM が起動すると、そのデスクトップ環境が表示されます。username/password  の入力を求められたら、両方に `root` と入力します。
++
+image::run-vantage/vm.login.png[VMログイン, width=500]
+. データベースは VM とともに自動起動するように構成されています。データベースが開始されたことを確認するには、仮想デスクトップに移動し、`Gnome Terminal` を起動します。
++
+image::run-vantage/start-gnome-terminal.png[Gnome Terminalを起動する, width=500]
+
+. ターミナルで `pdestate` コマンドを実行すると、Vantage がすでに起動しているかどうかが通知されます。
++
+NOTE: Gnome Terminalに貼り付けるには、kbd:[SHIFT+CTRL+V] を押します。
++
+[source, bash, role="content-editable emits-gtm-events", id="pdestate"]
+----
+watch pdestate -a
+----
++
+以下のメッセージが表示されるまで待ちます。
++
+----
+PDE state is RUN/STARTED.
+DBS state is 5: Logons are enabled - The system is quiescent
+----
++
+++++
+<details
+<summary class="title">データベースの初期化中に<code>pdestate</code>返すメッセージの例を参照してください。</summary>
+<div class="content">
+<div class="listingblock">
+
+<pre>PDE state is DOWN/HARDSTOP.
+
+PDE state is START/NETCONFIG.
+
+PDE state is START/GDOSYNC.
+
+PDE state is START/TVSASTART.
+
+PDE state is START/READY.
+PDE state is RUN/STARTED.
+
+DBS state is 1/1: DBS Startup - Initializing DBS Vprocs
+PDE state is RUN/STARTED.
+
+DBS state is 1/5: DBS Startup - Voting for Transaction Recovery
+PDE state is RUN/STARTED.
+
+DBS state is 1/4: DBS Startup - Starting PE Partitions
+PDE state is RUN/STARTED.</pre>
+</div>
+</div>
+</details>
+++++
+. データベースが起動したので、仮想デスクトップに戻って`Teradata Studio Express`を起動します。
++
+image::run-vantage/start-teradata-studio-express.png[Teradata Studio Express を起動する, width=500]
+. 初めて開始すると、ツアーが提供されます。ツアーを終了すると、新しい接続を追加するためのウィザードウィンドウが表示さます。 `Teradata`を選択します。
++
+image::run-vantage/new.connection.profile.png[新規接続プロファイル, width=500]
+. 以下の画面で、ユーザー名とパスワードに `dbc` を使用してローカルホスト上のデータベースに接続します。
++
+image::run-vantage/new.connection.png[新規接続, width=500]

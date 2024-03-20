@@ -1,0 +1,1 @@
+NOTE: link:https://clearscape.teradata.com/[]では、Vantageのホストされたインスタンスを無料で入手できるようになりました。

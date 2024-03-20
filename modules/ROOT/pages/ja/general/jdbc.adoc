@@ -1,0 +1,56 @@
+= JDBC を使用して Vantage に接続する方法
+:page-lang: ja
+:experimental:
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: 2022 年 11 月 14 日
+:description: JDBCでVantageに接続する方法
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, JDBC, java applications, business intelligence, enterprise analytics
+
+== 概要
+
+このハウツーでは、サンプルのJavaアプリケーションであるlink:https://github.com/Teradata/jdbc-sample-app[]を使用して、JDBCを使用してTeradata Vantageに接続する方法を示します。
+
+== 前提条件
+
+* Teradata Vantageインスタンスへのアクセス。
++
+include::../partials/vantage_clearscape_analytics.adoc[]
+* JDKが必要で
+* Mavenが必要で
+
+== Maven プロジェクトに依存関係を追加する
+
+Teradata JDBC ドライバを依存関係として Maven POM XML ファイルに追加します。
+
+++++
+<script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fjdbc-sample-app%2Fblob%2Fmain%2Fpom.xml%23L109-L113&style=github&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on&fetchFromJsDelivr=on"></script>
+++++
+
+== クエリーを送信するコード
+
+NOTE: この手順では、Vantage データベースがポート `1025` の`localhost` で利用できることを前提としています。ラップトップでVantage Expressを実行している場合は、VMからホストマシンにポートを公開する必要があります。ポートを転送する方法については、仮想化ソフトウェアのドキュメントを参照してください。
+
+プロジェクトが設定されます。残っているのは、ドライバをロードし、接続パラメータと認証パラメータを渡し、クエリーを実行することだけです。
+
+++++
+<script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fjdbc-sample-app%2Fblob%2Fmain%2Fsrc%2Fmain%2Fjava%2Fcom%2Fteradata%2Fapp%2FApp.java%23L1-L51&style=github&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on&fetchFromJsDelivr=on"></script>
+++++
+
+== テストを実行する
+
+テストを実行する。
+
+[source, bash, id="run_mvn", role="content-editable emits-gtm-events"]
+----
+mvn test
+----
+
+== まとめ
+
+このハウツーでは、JDBC を使用して Teradata Vantage に接続する方法を説明しました。ここでは、Teradata JDBC ドライバを使用して SQL クエリーを Teradata Vantage に送信するビルド ツールとして Maven を使用するサンプル Java アプリケーションについて説明しました。
+
+== さらに詳しく
+* link:https://teradata-docs.s3.amazonaws.com/doc/connectivity/jdbc/reference/current/frameset.html[Teradata JDBC Driver リファレンス]
+
+include::../partials/community_link.adoc[]

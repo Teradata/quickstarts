@@ -1,0 +1,141 @@
+= Mule サービスから Teradata Vantage をクエリMule サービスから Teradata Vantage をクエリーするする方法
+:page-lang: ja
+:experimental:
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: 2023 年 8 月 30 日
+:description: Mule サービスから Teradata Vantage をクエリーします。
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, Mule, JDBC, microservices
+
+== 概要
+
+この例は、Mulesoft MySQL サンプル プロジェクトのクローンです。
+Teradata データベースにクエリーを実行し、REST API 経由で結果を公開する方法を示します。
+
+== 前提条件
+
+* Mulesoft Anypoint Studio。https://www.mulesoft.com/platform/studioから30日間のTryアルをダウンロードできる。
+* Teradata Vantageインスタンスへのアクセス。
++
+include::../partials/vantage_clearscape_analytics.adoc[]
+
+== サービスの例
+
+このサンプル Mule サービスは、HTTP リクエストを受け取り、Teradata Vantage データベースにクエリーを実行し、結果を JSON 形式で返します。
+
+image::flow.png[サービス フロー, width=500]
+
+Mule HTTP コネクタは、次の形式の HTTP GET リクエストをリッスンします。`http://<host>:8081/?lastname=<parameter>`.
+HTTP コネクタは、メッセージ プロパティの 1 つとして `<parameter>`の値をデータベース コネクタに渡します。
+データベース コネクタは、この値を抽出して以下の SQL クエリーで使用するように構成されています。
+
+[source,sql]
+----
+SELECT * FROM hr.employees WHERE LastName = :lastName
+----
+
+ご覧のとおり、HTTP コネクタに渡されたパラメータの値を参照してパラメータ化されたクエリーを使用しています。
+したがって、HTTP コネクタが http://localhost:8081/?lastname=Smithを受信すると、SQL クエリーは以下のようになります。
+
+[source,sql]
+----
+SELECT * FROM employees WHERE last_name = Smith
+----
+
+データベース コネクタは、データベース サーバーに SQL クエリーを実行するように指示し、クエリーの結果を取得して、その結果を JSON に変換する変換メッセージ プロセッサに渡します。
+HTTP コネクタはリクエスト/応答として構成されているため、結果は元の HTTP クライアントに返されます。
+
+== セットアップ
+
+.  `Teradata/mule-jdbc-example` リポジトリのクローンを作成します。
++
+[source,bash]
+----
+  git clone https://github.com/Teradata/mule-jdbc-example
+----
+
+. `src/main/mule/querying-a-teradata-database.xml`を編集し、Teradata接続文字列`jdbc:teradata://<HOST>/user=<username>,password=<password>`を検索し、Teradata接続パラメータを使用環境に合わせて置換します。
+
+[NOTE]
+====
+ClearScape Analytics Experience 経由で Vantage インスタンスにアクセスできるようにする場合は、<HOST> を ClearScape Analytics Experience 環境のホスト URL に置き換える必要があります。さらに、ClearScape Analytics 環境のユーザー名とパスワードを反映するように「ユーザー」と「パスワード」を更新する必要があります。
+====
+
+. Vantageインスタンスでサンプルデータベースを作成します。
+サンプルデータを入力します。
++
+[source, sql, id="mulesoft_load_data", role="emits-gtm-events"]
+----
+ -- create database
+ CREATE DATABASE HR
+   AS PERMANENT = 60e6, SPOOL = 120e6;
+
+ -- create table
+ CREATE SET TABLE HR.Employees (
+   GlobalID INTEGER,
+   FirstName VARCHAR(30),
+   LastName VARCHAR(30),
+   DateOfBirth DATE FORMAT 'YYYY-MM-DD',
+   JoinedDate DATE FORMAT 'YYYY-MM-DD',
+   DepartmentCode BYTEINT
+ )
+ UNIQUE PRIMARY INDEX ( GlobalID );
+
+ -- insert a record
+ INSERT INTO HR.Employees (
+   GlobalID,
+   FirstName,
+   LastName,
+   DateOfBirth,
+   JoinedDate,
+   DepartmentCode
+ ) VALUES (
+   101,
+   'Test',
+   'Testowsky',
+   '1980-01-05',
+   '2004-08-01',
+   01
+ );
+----
+
+. Anypoint Studioでプロジェクトを開きます。
+ ** Anypoint Studio に入ったら、 `Import projects..`をクリックします。
++
+image:anypoint.import.projects.png[Anypointインポートプロジェクトメニュー, width=500]
+
+ **  `Anypoint Studio project from File System`を選択します：
++
+image:select.import.option.png[Anypoint インポート オプション, width=500]
+
+ ** git リポジトリのクローンを作成したディレクトリを `プロジェクトルート` として使用します。その他の設定はデフォルトのままにしておきます。
+
+== 実行する
+
+.  「`Run`」 メニューを使用して、Anypoint Studio でサンプル アプリケーションを実行します。
+これでプロジェクトがビルドされ、実行されます。1分ほどかかります。
+. Web ブラウザに移動し、以下のリクエストを送信します。 http://localhost:8081/?lastname=Testowsky。
++
+以下の JSON 応答を取得する必要があります。
++
+[source,json]
+----
+[
+  {
+    "JoinedDate": "2004-08-01T00:00:00",
+    "DateOfBirth": "1980-01-05T00:00:00",
+    "FirstName": "Test",
+    "GlobalID": 101,
+    "DepartmentCode": 1,
+    "LastName": "Testowsky"
+  }
+]
+----
+
+== さらに詳しく
+
+* マシン上でデータベースコネクタを設定する方法の詳細については、このhttp://www.mulesoft.org/documentation/display/current/Database+Connector[ドキュメント]を参照してください。
+* データベースコネクタのプレーンhttp://www.mulesoft.org/documentation/display/current/Database+Connector+Reference[リファレンス資料]にアクセスしてください。
+*  http://www.mulesoft.org/documentation/display/current/DataSense[DataSense] の詳細については、こちらをご覧ください。
+
+include::../partials/community_link.adoc[]
