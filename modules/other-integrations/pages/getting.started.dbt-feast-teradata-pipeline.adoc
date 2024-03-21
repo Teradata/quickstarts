@@ -132,36 +132,7 @@ dbt takes this raw data and builds the following model, which is more suitable f
   `age  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
   `years_with_bank  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
   `nbr_children  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `marital_status_0  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `marital_status_1  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `marital_status_2  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `marital_status_other  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `gender_0  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `gender_1  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `gender_other  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `state_code_0  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `state_code_1  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `state_code_2  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `state_code_3  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `state_code_4  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `state_code_5  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `state_code_other  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `acct_type_0  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `acct_type_1  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `acct_type_2  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `acct_type_other  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
-  `CK_avg_bal  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
-  `CK_avg_tran_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
-  `CC_avg_bal  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
-  `CC_avg_tran_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
-  `SV_avg_bal  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
-  `SV_avg_tran_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
-  `q1_trans_cnt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 0)", border: "1", border-color: "#ffffff"}
-  `q2_trans_cnt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 0)", border: "1", border-color: "#ffffff"}
-  `q3_trans_cnt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 0)", border: "1", border-color: "#ffffff"}
-  `q4_trans_cnt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 0)", border: "1", border-color: "#ffffff"}
-  `event_timestamp  ` {bgcolor: "#fcece8", color: "#868686", label: "TIMESTAMP(0)", border: "1", border-color: "#ffffff"}
-  `created  ` {bgcolor: "#fcece8", color: "#868686", label: "TIMESTAMP(0)", border: "1", border-color: "#ffffff"}
+  `...  ` {bgcolor: "#fcece8", color: "#868686", label: "...", border: "1", border-color: "#ffffff"}
 ....
 
 
