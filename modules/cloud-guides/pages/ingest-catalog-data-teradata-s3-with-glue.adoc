@@ -13,11 +13,11 @@ This quickstart details the process of ingesting and cataloging data from Terada
 TIP: For ingesting data to Amazon S3 when cataloging is not a requirement consider https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/SQL-Data-Manipulation-Language/Working-with-External-Data/WRITE_NOS[Teradata Write NOS capabilities.]
 
 == Prerequisites
-* Access to an Amazon AWS account
+* Access to an https://aws.amazon.com[Amazon AWS account]
 * Access to a Teradata Vantage instance
 +
 include::ROOT:partial$vantage_clearscape_analytics.adoc[]
-* A database client to send queries for loading the test data
+* A database https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html[client] to send queries for loading the test data
 
 == Loading of test data
 * In your favorite database client run the following queries
@@ -280,3 +280,8 @@ image::{dir}/Results.PNG[result tables,align="center",width=80%]
 == Summary
 
 In this quick start, we learned how to ingest and catalog data in Teradata Vantage to Amazon S3 with AWS Glue Scripts.
+
+== Further reading
+* https://quickstarts.teradata.com/cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html[Integrate Teradata Vantage with Google Cloud Data Catalog]
+
+include::ROOT:partial$community_link.adoc[]

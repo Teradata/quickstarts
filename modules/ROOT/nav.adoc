@@ -40,6 +40,7 @@
 ** xref::segment.adoc[]
 ** xref:cloud-guides:connect-azure-data-share-to-teradata-vantage.adoc[]
 ** xref:cloud-guides:integrate-teradata-vantage-with-google-cloud-data-catalog.adoc[]
+** xref:cloud-guides:ingest-catalog-data-teradata-s3-with-glue.adoc[]
 ** xref:other-integrations:configure-a-teradata-vantage-connection-in-datahub.adoc[]
 
 * Create applications
