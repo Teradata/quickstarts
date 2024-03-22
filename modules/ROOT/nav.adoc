@@ -36,7 +36,6 @@
 ** xref::create-parquet-files-in-object-storage.adoc[]
 ** xref:other-integrations:execute-airflow-workflows-that-use-dbt-with-teradata-vantage.adoc[]
 ** xref:cloud-guides:integrate-teradata-vantage-to-salesforce-using-amazon-appflow.adoc[]
-** xref:cloud-guides:ingest-catalog-data-teradata-s3-with-glue.adoc[]
 ** xref::segment.adoc[]
 ** xref:cloud-guides:connect-azure-data-share-to-teradata-vantage.adoc[]
 ** xref:cloud-guides:integrate-teradata-vantage-with-google-cloud-data-catalog.adoc[]
