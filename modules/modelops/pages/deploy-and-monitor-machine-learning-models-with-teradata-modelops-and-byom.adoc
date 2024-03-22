@@ -115,6 +115,7 @@ Use your connection and select a database. e.g "aoa_byom_models"
 In this quick start we have learned how to follow a full lifecycle of BYOM models into ModelOps and how to deploy it into Vantage. Then how we can schedule a batch scoring or test restful or on-demand scorings and start monitoring on Data Drift and Model Quality metrics.
 
 == Further reading
-* link:https://docs.teradata.com/search/documents?query=ModelOps&sort=last_update&virtual-field=title_only&content-lang=
+* https://docs.teradata.com/search/documents?query=ModelOps&sort=last_update&virtual-field=title_only&content-lang=[+++ModelOps documentation+++].
 
 include::ROOT:partial$community_link.adoc[]
+

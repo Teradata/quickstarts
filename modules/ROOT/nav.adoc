@@ -56,6 +56,7 @@
 ** xref::perform-time-series-analysis-using-teradata-vantage.adoc[Perform time series analysis]
 ** xref:modelops:deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.adoc[]
 ** xref:modelops:deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.adoc[]
+** xref:modelops:execute-airflow-workflows-with-clearscape-analytics-modelops-model-factory-solution.adoc[]
 ** xref:cloud-guides:sagemaker-with-teradata-vantage.adoc[]
 ** xref:cloud-guides:use-teradata-vantage-with-azure-machine-learning-studio.adoc[]
 ** xref:cloud-guides:integrate-teradata-jupyter-extensions-with-google-vertex-ai.adoc[]
