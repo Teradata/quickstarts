@@ -1479,6 +1479,9 @@ document.addEventListener("DOMContentLoaded", function () {
     <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="cloud-guides/ingest-catalog-data-teradata-s3-with-glue.html">Ingest and Catalog Data from Teradata Vantage to Amazon S3 with AWS Glue Scripts</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="other-integrations/configure-a-teradata-vantage-connection-in-datahub.html">Configure a Teradata Vantage connection in DataHub</a>
   </li>
 </ul>
@@ -1525,6 +1528,9 @@ document.addEventListener("DOMContentLoaded", function () {
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.html">ModelOps - Import and Deploy your first GIT Model</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="modelops/execute-airflow-workflows-with-clearscape-analytics-modelops-model-factory-solution.html">Execute Airflow workflows with ModelOps - Model Factory Solution Accelerator</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
@@ -2061,10 +2067,23 @@ export AIRFLOW<em>CORE</em>TEST_CONNECTION=Enabled
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>Teradata Connections may be defined in Airflow in the following ways:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Using Airflow Web UI</p>
+</li>
+<li>
+<p>Using Environment Variable</p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_define_a_teradata_connection_in_airflow_ui"><a class="anchor" href="#_define_a_teradata_connection_in_airflow_ui"></a>Define a Teradata connection in Airflow UI</h2>
+<h2 id="_define_a_teradata_connection_in_airflow_web_ui"><a class="anchor" href="#_define_a_teradata_connection_in_airflow_web_ui"></a>Define a Teradata connection in Airflow Web UI</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -2110,6 +2129,70 @@ export AIRFLOW<em>CORE</em>TEST_CONNECTION=Enabled
 </div>
 </li>
 </ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_define_a_teradata_connection_in_environment_variable"><a class="anchor" href="#_define_a_teradata_connection_in_environment_variable"></a>Define a Teradata connection in Environment Variable</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Airflow connections may be defined in environment variables in either of one below formats.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>JSON format</p>
+</li>
+<li>
+<p>URI format</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The naming convention is AIRFLOW_CONN_{CONN_ID}, all uppercase (note the single underscores surrounding CONN).
+So if your connection id is teradata_conn_id then the variable name should be AIRFLOW_CONN_TERADATA_CONN_ID
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_json_format_example"><a class="anchor" href="#_json_format_example"></a>JSON format example</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export AIRFLOW_CONN_TERADATA_CONN_ID='{
+    "conn_type": "teradata",
+    "login": "teradata_user",
+    "password": "my-password",
+    "host": "my-host",
+    "schema": "my-schema",
+    "extra": {
+        "tmode": "TERA",
+        "sslmode": "verify-ca"
+    }
+}'</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_uri_format_example"><a class="anchor" href="#_uri_format_example"></a>URI format example</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export AIRFLOW_CONN_TERADATA_CONN_ID='teradata://teradata_user:my-password@my-host/my-schema?tmode=TERA&amp;sslmode=verify-ca'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Refer <a href="https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/connections/teradata.html">Teradata Hook</a>  for detailed information on Teradata Connection in Airflow.</p>
 </div>
 </div>
 </div>

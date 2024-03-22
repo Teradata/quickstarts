@@ -3,31 +3,31 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Use Vantage from a Jupyter notebook :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/jupyter.html">
-    <meta name="description" content="Use Teradata Vantage from a Jupyter notebook">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, JDBC, java applications, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy">
+    <title>Execute Airflow workflows with ModelOps - Model Factory Solution Accelerator :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/modelops/execute-airflow-workflows-with-clearscape-analytics-modelops-model-factory-solution.html">
+    <meta name="description" content="Tutorial for Model Factory Solution - Executing Airflow workflows with ClearScape Analytics ModelOps">
+    <meta name="keywords" content="modelfactory, modelops, byom, python, clearscape analytics, teradata, data warehouses, teradata, vantage, cloud data platform, machine learning, artificial intelligence, business intelligence, enterprise analytics">
     <meta name="generator" content="Antora 3.0.1">
-    <link rel="stylesheet" href="./_/css/site.css">
+    <link rel="stylesheet" href="../_/css/site.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta property="og:title" content="Use Vantage from a Jupyter notebook :: Teradata Getting Started">
+<meta property="og:title" content="Execute Airflow workflows with ModelOps - Model Factory Solution Accelerator :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Use Teradata Vantage from a Jupyter notebook" />
+<meta property="og:description" content="Tutorial for Model Factory Solution - Executing Airflow workflows with ClearScape Analytics ModelOps" />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/jupyter.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/modelops/execute-airflow-workflows-with-clearscape-analytics-modelops-model-factory-solution.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
 <meta name="twitter:site" content="@teradata" />
 
 <!-- End Google Tag Manager -->
-<link rel="stylesheet" href="./_/css/search.css">
-<link rel="stylesheet" href="./_/css/styles.css">
-<link rel="stylesheet" href="./_/css/newnavbar.css" >
-<link rel="stylesheet" href="./_/css/navbar.css">
-<link rel="stylesheet" href="./_/css/mt.css">
+<link rel="stylesheet" href="../_/css/search.css">
+<link rel="stylesheet" href="../_/css/styles.css">
+<link rel="stylesheet" href="../_/css/newnavbar.css" >
+<link rel="stylesheet" href="../_/css/navbar.css">
+<link rel="stylesheet" href="../_/css/mt.css">
 
 <style>
 .footer-nav .footer_social .icon-social {
@@ -90,7 +90,7 @@ article a[href^="https://"][target="_blank"]::after {
   width: 14px;
   height: 14px;
   margin-left: 4px;
-  background-image: url("./_/img/open_in_new.svg");
+  background-image: url("../_/img/open_in_new.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -328,7 +328,7 @@ button {
   border-radius: 8px;
   padding-left: 14px;
   padding-right: 14px;
-  background-image: url(./_/img/search.svg);
+  background-image: url(../_/img/search.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -756,7 +756,7 @@ aside.toc.sidebar {
 
 .report-an-issue {
   padding: 10px 20px 10px 10px;
-  background-image: url(./_/img/pan_tool.svg);
+  background-image: url(../_/img/pan_tool.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -764,7 +764,7 @@ aside.toc.sidebar {
 
 .edit-on-github {
   padding: 10px 20px 10px 10px;
-  background-image: url(./_/img/edit.svg);
+  background-image: url(../_/img/edit.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-origin: content-box;
@@ -875,19 +875,19 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .admonitionblock.important .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/warning.svg");
+  content: url("../_/img/warning.svg");
 }
 
 .doc .admonitionblock.note .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .admonitionblock.question .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/question.mark.svg");
+  content: url("../_/img/question.mark.svg");
 }
 
 .doc .admonitionblock.tip .icon i.fa[class*=' icon-']::before {
-  content: url("./_/img/note.svg");
+  content: url("../_/img/note.svg");
 }
 
 .doc .source-toolbox .source-lang {
@@ -898,7 +898,7 @@ i.fa[class*=' icon-']::before {
 }
 
 .doc .source-toolbox img.copy-icon {
-  content: url("./_/img/copy.svg");
+  content: url("../_/img/copy.svg");
 }
 
 .doc .source-toolbox>:not(:last-child)::after {
@@ -929,7 +929,7 @@ span.search-result-highlight {
 }
 
 </style>
-<link rel="icon" href="./_/img/favicon.ico" type="image/x-icon">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
 <!-- Google Tag Manager -->
 <script>
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -938,8 +938,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-T7Q6CLV');
 </script>
-<script src="./_/js/lang.js"></script>
-<script src="./_/js/translations/mt.js"></script>
+<script src="../_/js/lang.js"></script>
+<script src="../_/js/translations/mt.js"></script>
    </head>
   <body class="article">
 <!-- Adding CDN to use sql-formatter for unpkg -->
@@ -1001,7 +1001,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     </div>
                     <ul class="header-nav__main-menu header-nav__element nav-1 list">
                       <li>
-                        <a href="./index.html" class="header-nav__main-menu__link active">Getting started</a>
+                        <a href="../index.html" class="header-nav__main-menu__link active">Getting started</a>
                       </li>
                       <li>
                         <button href="" onclick="docs()" class="header-nav__main-menu__link dropbtn">Docs</button>
@@ -1018,13 +1018,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         <div id="myCommunityDropdown" class="dropdown-content dc2">
                           <a href="https://support.teradata.com" title="Technical Medium Blogs" class="dropdown-item mt">Teradata Community</a>
                           <a href="https://medium.com/teradata" title="Technical Medium Blogs" target="_blank" class="dropdown-item mb">Technical Medium Blogs&nbsp; &nbsp; 
-                            <img src='./_/img/small-external.svg' alt="External Icon">
+                            <img src='../_/img/small-external.svg' alt="External Icon">
                           </a>
                           <a href="https://github.com/Teradata" title="Teradata on GitHub" target="_blank" class="dropdown-item mb">GitHub&nbsp; &nbsp; 
-                            <img src='./_/img/small-external.svg' alt="External Icon">
+                            <img src='../_/img/small-external.svg' alt="External Icon">
                           </a>
                           <a href="https://stackoverflow.com/questions/tagged/teradata" title="Stack Overflow Teradata questions" target="_blank" class="dropdown-item">Stack Overflow&nbsp; &nbsp; 
-                            <img src='./_/img/small-external.svg' alt="External Icon">
+                            <img src='../_/img/small-external.svg' alt="External Icon">
                           </a>  
                         </div>
                       </li>
@@ -1050,7 +1050,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <nav class="d-flex custom-justify-content-between align-items-center px-6 shadow--s">
                   <a class="header-nav__logo d-flex align-items-center" href="/" aria-label="Teradata">
                       <div>
-                          <img class="teradata-logo" src='./_/img/TD-Logo.svg' alt="" title="" >
+                          <img class="teradata-logo" src='../_/img/TD-Logo.svg' alt="" title="" >
                       </div>
                   </a>
                   <a href="http://developers.teradata.com/" class="developers">Developers</a>
@@ -1122,17 +1122,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             </li>
                             <li>
                               <a class="nav-2 py-4 d-flex align-items-center color-slate" href="https://medium.com/teradata">
-                                Technical Medium Blogs&nbsp;&nbsp;<img src='./_/img/small-external.svg' class="mtop">
+                                Technical Medium Blogs&nbsp;&nbsp;<img src='../_/img/small-external.svg' class="mtop">
                               </a>
                             </li>
                             <li>
                               <a class="nav-2 py-4 d-flex color-slate" href="https://github.com/Teradata" target="_blank" rel="noopener">
-                                GitHub&nbsp;&nbsp;<img src='./_/img/small-external.svg' class="e">
+                                GitHub&nbsp;&nbsp;<img src='../_/img/small-external.svg' class="e">
                               </a>
                             </li>
                             <li>
                               <a class="nav-2 py-4 d-flex color-slate" href="https://stackoverflow.com/questions/tagged/teradata" target="_blank" rel="noopener">
-                                Stack Overflow&nbsp;&nbsp;<img src='./_/img/small-external.svg' class="">
+                                Stack Overflow&nbsp;&nbsp;<img src='../_/img/small-external.svg' class="">
                               </a>
                             </li>
                           </ul>
@@ -1350,7 +1350,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Introduction</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="teradata-vantage-engine-architecture-and-concepts.html">Teradata Vantage Engine Architecture and Concepts</a>
+    <a class="nav-link" href="../teradata-vantage-engine-architecture-and-concepts.html">Teradata Vantage Engine Architecture and Concepts</a>
   </li>
 </ul>
   </li>
@@ -1363,13 +1363,13 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">On your local</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="getting.started.vmware.html">Vantage Express on VMware</a>
+    <a class="nav-link" href="../getting.started.vmware.html">Vantage Express on VMware</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
+    <a class="nav-link" href="../getting.started.vbox.html">Vantage Express on VirtualBox</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
+    <a class="nav-link" href="../getting.started.utm.html">Vantage Express on UTM</a>
   </li>
 </ul>
   </li>
@@ -1378,13 +1378,13 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">On your cloud infrastructure</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="run-vantage-express-on-aws.html">Vantage Express on AWS</a>
+    <a class="nav-link" href="../run-vantage-express-on-aws.html">Vantage Express on AWS</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on Google Cloud</a>
+    <a class="nav-link" href="../vantage.express.gcp.html">Vantage Express on Google Cloud</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
+    <a class="nav-link" href="../run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
   </li>
 </ul>
   </li>
@@ -1393,7 +1393,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">ClearScape Analytics Experience</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="getting-started-with-csae.html">Getting started with ClearScape Analytics Experience</a>
+    <a class="nav-link" href="../getting-started-with-csae.html">Getting started with ClearScape Analytics Experience</a>
   </li>
 </ul>
   </li>
@@ -1404,17 +1404,17 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Connect to Vantage</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
+    <a class="nav-link" href="../install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
+    <a class="nav-link" href="../other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Configure ODBC</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="odbc.ubuntu.html">Ubuntu</a>
+    <a class="nav-link" href="../odbc.ubuntu.html">Ubuntu</a>
   </li>
 </ul>
   </li>
@@ -1425,64 +1425,64 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Manage data</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nos.html">Query data stored in object storage</a>
+    <a class="nav-link" href="../nos.html">Query data stored in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="select-the-right-data-ingestion-tools-for-teradata-vantage.html">Select the right data ingestion solution for Teradata Vantage</a>
+    <a class="nav-link" href="../select-the-right-data-ingestion-tools-for-teradata-vantage.html">Select the right data ingestion solution for Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="airflow.html">Use Apache Airflow with Teradata Vantage</a>
+    <a class="nav-link" href="../airflow.html">Use Apache Airflow with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
+    <a class="nav-link" href="../dbt.html">dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="advanced-dbt.html">Advanced dbt use cases with Teradata Vantage</a>
+    <a class="nav-link" href="../advanced-dbt.html">Advanced dbt use cases with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="modelops/using-feast-feature-store-with-teradata-vantage.html">Build a FEAST feature store in Teradata Vantage</a>
+    <a class="nav-link" href="using-feast-feature-store-with-teradata-vantage.html">Build a FEAST feature store in Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/getting.started.dbt-feast-teradata-pipeline.html">Use dbt and FEAST to build a feature store in Teradata Vantage</a>
+    <a class="nav-link" href="../other-integrations/getting.started.dbt-feast-teradata-pipeline.html">Use dbt and FEAST to build a feature store in Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html">Use Airbyte to load data from external sources to Teradata Vantage</a>
+    <a class="nav-link" href="../elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html">Use Airbyte to load data from external sources to Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="elt/terraform-airbyte-provider.html">Manage ELT pipelines as code with Terraform and Airbyte on Teradata Vantage</a>
+    <a class="nav-link" href="../elt/terraform-airbyte-provider.html">Manage ELT pipelines as code with Terraform and Airbyte on Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="elt/transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.html">Transform data Loaded with Airbyte using dbt</a>
+    <a class="nav-link" href="../elt/transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.html">Transform data Loaded with Airbyte using dbt</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">Load data with TPT</a>
+    <a class="nav-link" href="../tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">Load data with TPT</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
+    <a class="nav-link" href="../create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
+    <a class="nav-link" href="../other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/ingest-catalog-data-teradata-s3-with-glue.html">Ingest and Catalog Data from Teradata Vantage to Amazon S3 with AWS Glue Scripts</a>
+    <a class="nav-link" href="../cloud-guides/ingest-catalog-data-teradata-s3-with-glue.html">Ingest and Catalog Data from Teradata Vantage to Amazon S3 with AWS Glue Scripts</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="segment.html">Store events from Twilio Segment</a>
+    <a class="nav-link" href="../segment.html">Store events from Twilio Segment</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
+    <a class="nav-link" href="../cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/ingest-catalog-data-teradata-s3-with-glue.html">Ingest and Catalog Data from Teradata Vantage to Amazon S3 with AWS Glue Scripts</a>
+    <a class="nav-link" href="../cloud-guides/ingest-catalog-data-teradata-s3-with-glue.html">Ingest and Catalog Data from Teradata Vantage to Amazon S3 with AWS Glue Scripts</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/configure-a-teradata-vantage-connection-in-datahub.html">Configure a Teradata Vantage connection in DataHub</a>
+    <a class="nav-link" href="../other-integrations/configure-a-teradata-vantage-connection-in-datahub.html">Configure a Teradata Vantage connection in DataHub</a>
   </li>
 </ul>
   </li>
@@ -1491,16 +1491,16 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Create applications</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
+    <a class="nav-link" href="../jdbc.html">Connect to Vantage using JDBC</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="teradatasql.html">Connect to Vantage using Python</a>
+    <a class="nav-link" href="../teradatasql.html">Connect to Vantage using Python</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+    <a class="nav-link" href="../mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="query-service/send-queries-using-rest-api.html">Send queries using REST API</a>
+    <a class="nav-link" href="../query-service/send-queries-using-rest-api.html">Send queries using REST API</a>
   </li>
 </ul>
   </li>
@@ -1508,47 +1508,47 @@ document.addEventListener("DOMContentLoaded", function () {
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Analyze data</span>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../jupyter.html">Use Vantage from a Jupyter notebook</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ml.html">Train ML models in Vantage using Database Analytic Functions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sto.html">Run scripts on Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../perform-time-series-analysis-using-teradata-vantage.html">Perform time series analysis</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - Import and Deploy your first BYOM Model</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.html">ModelOps - Import and Deploy your first GIT Model</a>
+  </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
+    <a class="nav-link" href="execute-airflow-workflows-with-clearscape-analytics-modelops-model-factory-solution.html">Execute Airflow workflows with ModelOps - Model Factory Solution Accelerator</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+    <a class="nav-link" href="../cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ml.html">Train ML models in Vantage using Database Analytic Functions</a>
+    <a class="nav-link" href="../cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="perform-time-series-analysis-using-teradata-vantage.html">Perform time series analysis</a>
+    <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Integrate Teradata Jupyter extensions with SageMaker notebook instance</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - Import and Deploy your first BYOM Model</a>
+    <a class="nav-link" href="../business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Create Vizualizations in Power BI using Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.html">ModelOps - Import and Deploy your first GIT Model</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="modelops/execute-airflow-workflows-with-clearscape-analytics-modelops-model-factory-solution.html">Execute Airflow workflows with ModelOps - Model Factory Solution Accelerator</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Integrate Teradata Jupyter extensions with SageMaker notebook instance</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Create Vizualizations in Power BI using Vantage</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
+    <a class="nav-link" href="../other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
   </li>
 </ul>
   </li>
@@ -1557,47 +1557,47 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">Teradata AI Unlimited</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ai-unlimited/getting-started-with-ai-unlimited.html">Getting Started with Teradata AI Unlimited</a>
+    <a class="nav-link" href="../ai-unlimited/getting-started-with-ai-unlimited.html">Getting Started with Teradata AI Unlimited</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Deploy locally using Docker</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited/install-ai-unlimited-workspaces-docker.html">Deploy and Setup Teradata AI Unlimited Workspace Service Using Docker</a>
+    <a class="nav-link" href="../ai-unlimited/install-ai-unlimited-workspaces-docker.html">Deploy and Setup Teradata AI Unlimited Workspace Service Using Docker</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited/install-ai-unlimited-interface-docker.html">Deploy a Teradata AI Unlimited Interface Using Docker</a>
+    <a class="nav-link" href="../ai-unlimited/install-ai-unlimited-interface-docker.html">Deploy a Teradata AI Unlimited Interface Using Docker</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ai-unlimited/using-ai-unlimited-workspace-cli.html">Use Teradata AI Unlimited With Workspace Client</a>
+    <a class="nav-link" href="../ai-unlimited/using-ai-unlimited-workspace-cli.html">Use Teradata AI Unlimited With Workspace Client</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Deploy on AWS</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited/deploy-ai-unlimited-aws-cloudformation.html">Deploy Teradata AI Unlimited Workspace Service and Interface using AWS CloudFormation Template</a>
+    <a class="nav-link" href="../ai-unlimited/deploy-ai-unlimited-aws-cloudformation.html">Deploy Teradata AI Unlimited Workspace Service and Interface using AWS CloudFormation Template</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited/ai-unlimited-aws-permissions-policies.html">Control AWS Access and Permissions using Custom Permissions and Policies</a>
+    <a class="nav-link" href="../ai-unlimited/ai-unlimited-aws-permissions-policies.html">Control AWS Access and Permissions using Custom Permissions and Policies</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited/deploy-ai-unlimited-awscli-cloudformation.html">Deploy CloudFormation Template from AWS CLI</a>
+    <a class="nav-link" href="../ai-unlimited/deploy-ai-unlimited-awscli-cloudformation.html">Deploy CloudFormation Template from AWS CLI</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ai-unlimited/running-sample-ai-unlimited-workload.html">Run a Sample Workload in JupyterLab Using Teradata AI Unlimited</a>
+    <a class="nav-link" href="../ai-unlimited/running-sample-ai-unlimited-workload.html">Run a Sample Workload in JupyterLab Using Teradata AI Unlimited</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Reference</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited/ai-unlimited-magic-reference.html">Teradata AI Unlimited JupyterLab Magic Command Reference</a>
+    <a class="nav-link" href="../ai-unlimited/ai-unlimited-magic-reference.html">Teradata AI Unlimited JupyterLab Magic Command Reference</a>
   </li>
 </ul>
   </li>
@@ -1608,22 +1608,22 @@ document.addEventListener("DOMContentLoaded", function () {
     <span class="nav-text">VantageCloud Lake</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting-started-with-vantagecloud-lake.html">Getting Started with VantageCloud Lake</a>
+    <a class="nav-link" href="../getting-started-with-vantagecloud-lake.html">Getting Started with VantageCloud Lake</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantagecloud-lake/vantagecloud-lake-demo-jupyter-docker.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Docker</a>
+    <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demo-jupyter-docker.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Docker</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantagecloud-lake/vantagecloud-lake-demos-visual-studio-code.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Visual Studio Code</a>
+    <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demos-visual-studio-code.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Visual Studio Code</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantagecloud-lake/vantagecloud-lake-demo-jupyter-sagemaker.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Amazon SageMaker</a>
+    <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demo-jupyter-sagemaker.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Amazon SageMaker</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantagecloud-lake/vantagecloud-lake-demo-jupyter-google-cloud-vertex-ai.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Google Cloud Vertex AI</a>
+    <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demo-jupyter-google-cloud-vertex-ai.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Google Cloud Vertex AI</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="vantagecloud-lake/vantagecloud-lake-demo-jupyter-azure.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Microsoft Azure</a>
+    <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demo-jupyter-azure.html">Run Teradata Jupyter Notebook Demos for VantageCloud Lake in Microsoft Azure</a>
   </li>
 </ul>
   </li>
@@ -1925,10 +1925,10 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
   <ul class="components">
     <li class="component is-current">
-      <a class="title" href="index.html">Getting Started Guides</a>
+      <a class="title" href="../index.html">Getting Started Guides</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">master</a>
+          <a href="../index.html">master</a>
         </li>
       </ul>
     </li>
@@ -1943,7 +1943,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li>Analyze data</li>
-    <li><a href="jupyter.html">Use Vantage from a Jupyter notebook</a></li>
+    <li><a href="execute-airflow-workflows-with-clearscape-analytics-modelops-model-factory-solution.html">Execute Airflow workflows with ModelOps - Model Factory Solution Accelerator</a></li>
   </ul>
 </nav>
 </div>
@@ -1952,33 +1952,51 @@ document.addEventListener("DOMContentLoaded", function () {
 <aside class="toc sidebar" data-title="Contents" data-levels="2"> 
     <div class="page-controls">
         <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-        <a href="https://github.com/Teradata/quickstarts/blob/HEAD/modules/ROOT/pages/jupyter.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
+        <a href="https://github.com/Teradata/quickstarts/blob/HEAD/modules/modelops/pages/execute-airflow-workflows-with-clearscape-analytics-modelops-model-factory-solution.adoc"><div class="edit-on-github">Edit on GitHub</div></a>
     </div>
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Use Vantage from a Jupyter notebook</h1>
-<div id="preamble">
-<div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-This how-to shows you how to add Teradata Extensions to a Jupyter Notebooks environment. A hosted version of Jupyter Notebooks integrated with Teradata Extensions and analytics tools is available for functional testing for free at <a href="https://clearscape.teradata.com" class="bare">https://clearscape.teradata.com</a>.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
+<h1 class="page">Execute Airflow workflows with ModelOps - Model Factory Solution Accelerator</h1>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this how-to we will go through the steps for connecting to Teradata Vantage from a Jupyter notebook.</p>
+<p>The purpose of the <strong>Model Factory Solution Accelerator</strong> of <strong>ClearScape Analytics</strong> is to streamline and accelerate the end-to-end process of developing, deploying, and managing machine learning models within an organization at <strong>Horizontal Scale</strong> by operationalizing <strong>hundreds of models for a business domain at one effort</strong>. It leverages the scalability of in-database analytics and the openness of supporting partner model formats such as H2O or Dataiku. This unique combination enhances efficiency, scalability, and consistency across various stages of the machine learning lifecycle in Enterprise environments.</p>
+</div>
+<div class="paragraph">
+<p>By incorporating best practices, automation, and standardized workflows, the Model Factory Solution Accelerator enables teams to rapidly select the data to be used, configure the model required, ensure reproducibility, and deploy <strong>unlimited</strong> number of models seamlessly into production. Ultimately, it aims to reduce the time-to-value for machine learning initiatives and promote a more structured and efficient approach to building and deploying models at scale. Here is the diagram of an automated Workflow:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/execute-airflow-workflows-with-clearscape-analytics-modelops-model-factory-solution/Workflow.png" alt="Workflow" width="75%">
+</div>
+</div>
+<div class="paragraph">
+<p>Here are the steps to implement Model Factory Solution Accelerator using Airflow and ClearScape Analytics ModelOps. Apache Airflow is used for the scheduling and orchestration of data pipelines or workflows. So in this tutorial we are creating an Airflow DAG (Directed Acyclic Graph) which will be executed to automate the lifecycle of ModelOps.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>In this tutorial it is implemented on local machine using <strong>Visual Studio code</strong> IDE.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In order to execute shell commands, you can install the VS code extension <strong>"Remote Development"</strong> using the followng link. This extension pack includes the WSL extension, in addition to the Remote - SSH, and Dev Containers extensions, enabling you to open any folder in a container, on a remote machine, or in WSL:
+<a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack">VS code marketplace</a>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Access to a Teradata Vantage instance with ClearScape Analytics (includes ModelOps)</p>
+</li>
+</ul>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1995,201 +2013,686 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 </div>
 </div>
 <div class="sect1">
-<h2 id="_options"><a class="anchor" href="#_options"></a>Options</h2>
+<h2 id="_configuring_visual_studio_code_and_installing_airflow_on_docker_compose"><a class="anchor" href="#_configuring_visual_studio_code_and_installing_airflow_on_docker_compose"></a>Configuring Visual Studio Code and Installing Airflow on docker-compose</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Open Visual Studio code and select the option of open a remote window. Then select Connect to WSL-Ubuntu</p>
+</li>
+<li>
+<p>Select File &gt; Open Folder. Then select the desired folder or create a new one using this command: mkdir [folder_name]</p>
+</li>
+<li>
+<p>Set the AIRFLOW_HOME environment variable. Airflow requires a home directory and uses ~/airflow by default, but you can set a different location if you prefer. The AIRFLOW_HOME environment variable is used to inform Airflow of the desired location.</p>
+</li>
+</ul>
+</div>
+<div id="set Airflow Home directory" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">AIRFLOW_HOME=./[folder_name]</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Install apache-airflow stable version 2.8.2 from PyPI repository.:</p>
+</li>
+</ul>
+</div>
+<div id="Install Airflow" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">    AIRFLOW_VERSION=2.8.2
+
+    PYTHON_VERSION="$(python3 --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
+
+    CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
+
+    pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}" --default-timeout=100</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Install the Airflow Teradata provider stable version from PyPI repository.</p>
+</li>
+</ul>
+</div>
+<div id="Install Airflow Teradata" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install "apache-airflow-providers-teradata" --default-timeout=100</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Install Docker Desktop so that you can use docker container for running airflow. Ensure that the docker desktop is running.</p>
+</li>
+<li>
+<p>Check docker version using this command:</p>
+</li>
+</ul>
+</div>
+<div id="Check Docker version" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker --version</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Check the version of docker compose. Docker Compose is a tool for defining and running multi-container applications</p>
+</div>
+<div id="Check Docker compose version" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker-compose --version</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To deploy Airflow on Docker Compose, you need to fetch docker-compose.yaml using this curl command.</p>
+</div>
+<div id="Fetch docker-compose yaml" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">    curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.8.2/docker-compose.yaml'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create these folders to use later using following command:</p>
+</div>
+<div id="Create Airflow folders" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir -p ./dags ./logs ./plugins ./config</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuring_model_factory_solution_accelerator"><a class="anchor" href="#_configuring_model_factory_solution_accelerator"></a>Configuring Model Factory Solution Accelerator</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are a couple of ways to connect to Vantage from a Jupyter Notebook:</p>
+<p>Create a config file inside config folder and set the parameters to corresponding values depending on which model you want to train.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><a href="#_teradata_libraries">Use python or R libraries in a regular Python/R kernel notebook</a> - this option works well when you are in a restricted environment that doesn&#8217;t allow you to spawn your own Docker images. Also, it&#8217;s useful in traditional datascience scenarios when you have to mix SQL and Python/R in a notebook. If you are proficient with Jupyter and have your own set of preferred libraries and extensions, start with this option.</p>
-</li>
-<li>
-<p><a href="#_teradata_jupyter_docker_image">Use the Teradata Jupyter Docker image</a> - the Teradata Jupyter Docker image bundles the Teradata SQL kernel (more on this later), <code>teradataml</code> and <code>tdplyr</code> libraries, python and R drivers. It also contains Jupyter extensions that allow you to manage Teradata connections, explore objects in Vantage database. It&#8217;s convenient when you work a lot with SQL or would find a visual Navigator helpful. If you are new to Jupyter or if you prefer to get a currated assembly of libraries and extensions, start with this option.</p>
-</li>
-</ol>
-</div>
-<div class="sect2">
-<h3 id="_teradata_libraries"><a class="anchor" href="#_teradata_libraries"></a>Teradata libraries</h3>
-<div class="paragraph">
-<p>This option uses a regular Jupyter Lab notebook. We will see how to load the Teradata Python driver and use it from Python code. We will also examine <code>ipython-sql</code> extension that adds support for SQL-only cells.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>We start with a plain Jupyter Lab notebook. Here, I&#8217;m using docker but any method of starting a notebook, including Jupyter Hub, Google Cloud AI Platform Notebooks, AWS SageMaker Notebooks, Azure ML Notebooks will do.</p>
-<div id="jupyter_first_run" class="listingblock content-editable emits-gtm-events">
+<details>
+<summary class="title">Click to reveal the Python code</summary>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run --rm -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes \
-  -v "${PWD}":/home/jovyan/work jupyter/datascience-notebook</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Docker logs will display the url that you need to go to:</p>
-<div class="listingblock">
+<div id="Model Factory Solution Config File" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre>Entered start.sh with args: jupyter lab
-Executing the command: jupyter lab
-....
-To access the server, open this file in a browser:
-    file:///home/jovyan/.local/share/jupyter/runtime/jpserver-7-open.html
-Or copy and paste one of these URLs:
-    http://d5c2323ae5db:8888/lab?token=5fb43e674367c6895e8c2404188aa550b5c7bdf96f5b4a3a
-  or http://127.0.0.1:8888/lab?token=5fb43e674367c6895e8c2404188aa550b5c7bdf96f5b4a3a</pre>
-</div>
-</div>
-</li>
-<li>
-<p>We will open a new notebook and create a cell to install the required libraries:</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-I&#8217;ve published a notebook with all the cells described below on GitHub: <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/attachments/vantage-with-python-libraries.ipynb" class="bare">https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/attachments/vantage-with-python-libraries.ipynb</a>
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">import sys
-!{sys.executable} -m pip install teradatasqlalchemy</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Now, we will import <code>Pandas</code> and define the connection string to connect to Teradata. Since I&#8217;m running my notebook in Docker on my local machine and I want to connect to a local Vantage Express VM, I&#8217;m using <code>host.docker.internal</code> DNS name provided by Docker to reference the IP of my machine.</p>
-<div class="listingblock content-editable">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">import pandas as pd
-# Define the db connection string. Pandas uses SQLAlchemy connection strings.
-# For Teradata Vantage, it's teradatasql://username:password@host/database_name .
-# See https://pypi.org/project/teradatasqlalchemy/ for details.
-db_connection_string = "teradatasql://dbc:dbc@host.docker.internal/dbc"</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>I can now call Pandas to query Vantage and move the result to a Pandas dataframe:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">pd.read_sql("SELECT * FROM dbc.dbcinfo", con = db_connection_string)</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>The syntax above is concise but it can get tedious if all you need is to explore data in Vantage. We will use <code>ipython-sql</code> and its <code>%%sql</code> magic to create SQL-only cells. We start with importing the required libraries.</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">import sys
-!{sys.executable} -m pip install ipython-sql teradatasqlalchemy</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>We load <code>ipython-sql</code> and define the db connection string:</p>
-<div class="listingblock content-editable">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">%load_ext sql
-# Define the db connection string. The sql magic uses SQLAlchemy connection strings.
-# For Teradata Vantage, it's teradatasql://username:password@host/database_name .
-# See https://pypi.org/project/teradatasqlalchemy/ for details.
-%sql teradatasql://dbc:dbc@host.docker.internal/dbc</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>We can now use <code>%sql</code> and <code>%%sql</code> magic. Let&#8217;s say we want to explore data in a table. We can create a cell that says:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">%%sql
-SELECT * FROM dbc.dbcinfo</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>If we want to move the data to a Pandas frame, we can say:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">result = %sql SELECT * FROM dbc.dbcinfo
-result.DataFrame()</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>There are many other features that ipython-sql provides, including variable substitution, plotting with <code>matplotlib</code>, writting results to a local csv file or back to the database. See <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/attachments/vantage-with-python-libraries.ipynb">the demo notebook</a> for examples and <a href="https://github.com/catherinedevlin/ipython-sql/">ipython-sql github repo</a> for a complete reference.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_teradata_jupyter_docker_image"><a class="anchor" href="#_teradata_jupyter_docker_image"></a>Teradata Jupyter Docker image</h3>
-<div class="paragraph">
-<p>The Teradata Jupyter Docker image builds on <code>jupyter/datascience-notebook</code> Docker image. It adds the Teradata SQL kernel, Teradata Python and R libraries, Jupyter extensions to make you productive while interacting with Teradata Vantage. The image also contains sample notebooks that demonstrate how to use the SQL kernel and Teradata libraries.</p>
-</div>
-<div class="paragraph">
-<p>The SQL kernel and Teradata Jupyter extensions are useful for people that spend a lot of time with the SQL interface. Think about it as a notebook experience that, in many cases, is more convenient than using Teradata Studio. The Teradata Jupyter Docker image doesn&#8217;t try to replace Teradata Studio. It doesn&#8217;t have all the features. It&#8217;s designed for people who need a lightweight, web-based interface and enjoy the notebook UI.</p>
-</div>
-<div class="paragraph">
-<p>The Teradata Jupyter Docker image can be used when you want to run Jupyter locally or you have a place where you can run custom Jupyter docker images. The steps below demonstrate how to use the image locally.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Run the image:</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-By passing <code>-e "accept_license=Y</code> you accept <a href="https://github.com/Teradata/jupyterextensions/blob/master/licensefiles/license.txt">the license agreement</a> for Teradata Jupyter Extensions.
-</td>
-</tr>
-</table>
-</div>
-<div id="jupyter_td_image_first_run" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker volume create notebooks
-docker run -e "accept_license=Y" -p :8888:8888 \
-  -v notebooks:/home/jovyan/JupyterLabRoot \
-  teradata/jupyterlab-extensions</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Docker logs will display the url that you need to go to. For example, this is what I&#8217;ve got:</p>
-<div class="listingblock">
-<div class="content">
-<pre>Starting JupyterLab ...
-Docker Build ID = 3.2.0-ec02012022
-Using unencrypted HTTP
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">from configparser import ConfigParser
+import os
 
-Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
+config = ConfigParser()
 
-* Or enter this token when prompted by Jupyter: 96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
-* If you used a different port to run your Docker, replace 8888 with your port number</pre>
+config['MAIN'] = {
+    "projectId": "23e1df4b-b630-47a1-ab80-7ad5385fcd8d",
+    "bearerToken": os.environ['BEARER_TOKEN'],
+    "trainDatasetId": "ba39e766-2fdf-426f-ba5c-4ca3e90955fc",
+    "evaluateDatasetId": "74489d62-2af5-4402-b264-715e151a420a",
+    "datasetConnectionId" : "151abf05-1914-4d38-a90d-272d850f212c",
+    "datasetTemplateId": "d8a35d98-21ce-47d0-b9f2-00d355777de1"
+}
+
+config['HYPERPARAMETERS'] = {
+    "eta": 0.2,
+    "max_depth": 6
+}
+
+config['RESOURCES'] = {
+    "memory": "500m",
+    "cpu": "0.5"
+}
+
+config['MODEL'] = {
+    "modelId": "f937b5d8-02c6-5150-80c7-1e4ff07fea31",
+    "approvalComments": "Approving this model!",
+    "cron": "@once",
+    "engineType": "DOCKER_BATCH",
+    "engine": "python-batch",
+    "dockerImage": "artifacts.td.teradata.com/tdproduct-docker-snapshot/avmo/aoa-python-base:3.9.13-1"
+}
+
+
+with open('./config/modelOpsConfig.ini', 'w') as f:
+    config.write(f)</code></pre>
 </div>
 </div>
-</li>
+</div>
+</details>
+<div class="paragraph">
+<p>Now copy the Bearer token from the ModelOps user interface (Left Menu &#8594; Your Account &#8594; Session Details) and set it here as an environment varibale using the following command:</p>
+</div>
+<div id="Bearer token" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export BEARER_TOKEN='your_token_here'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now you can execute the previously created config file, which will create a new ini file inside config folder containing all the required parameters which will be used in the DAG creation step.</p>
+</div>
+<div id="Create config ini" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">python3 createConfig.py</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_a_airflow_dag_containing_full_modelops_lifecycle"><a class="anchor" href="#_create_a_airflow_dag_containing_full_modelops_lifecycle"></a>Create a Airflow DAG containing full ModelOps Lifecycle</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now you can create a DAG using the following python code. Add this python code file inside dags folder. This DAG contains 5 tasks of ModelOps lifecycle (i.e., Train, Evaluate, Approve, Deploy and Retire)</p>
+</div>
+<details>
+<summary class="title">Click to reveal the Python code</summary>
+<div class="content">
+<div id="DAG Code" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import base64
+from datetime import datetime, timedelta, date
+import json
+import os
+import time
+
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+
+import requests
+
+from configparser import ConfigParser
+
+# Read from Config file
+config = ConfigParser()
+config.read('config/modelOpsConfig.ini')
+
+config_main = config["MAIN"]
+config_hyper_params = config["HYPERPARAMETERS"]
+config_resources = config["RESOURCES"]
+config_model = config["MODEL"]
+
+# Default args for DAG
+default_args = {
+    'owner': 'Tayyaba',
+    'retries': 5,
+    'retry_delay': timedelta(minutes=2)
+}
+
+def get_job_status(job_id):
+
+    # Use the fetched Job ID to check Job Status
+    headers_for_status = {
+    'AOA-PROJECT-ID': config_main['projectid'],
+    'Authorization': 'Bearer ' + config_main['bearertoken'],
+    }
+
+    status_response = requests.get('https://airflow-u9usja4twtauvt3s.env.clearscape.teradata.com:8443/modelops/core/api/jobs/' + job_id + '?projection=expandJob', headers=headers_for_status)
+    status_json = status_response.json()
+    job_status = status_json.get('status')
+    return job_status
+
+
+def train_model(ti):
+
+    headers = {
+    'AOA-Project-ID': config_main['projectid'],
+    'Accept': 'application/json, text/plain, */*',
+    'Accept-Language': 'en-US,en;q=0.9',
+    'Authorization': 'Bearer ' + config_main['bearertoken'],
+    'Content-Type': 'application/json',
+    }
+
+    json_data = {
+        'datasetId': config_main['trainDatasetId'],
+        'datasetConnectionId': config_main['datasetConnectionId'],
+        'modelConfigurationOverrides': {
+            'hyperParameters': {
+                'eta': config_hyper_params['eta'],
+                'max_depth': config_hyper_params['max_depth'],
+            },
+        },
+        'automationOverrides': {
+            'resources': {
+                'memory': config_resources['memory'],
+                'cpu': config_resources['cpu'],
+            },
+            'dockerImage':  config_model['dockerImage'],
+        },
+    }
+
+
+    response = requests.post('https://airflow-u9usja4twtauvt3s.env.clearscape.teradata.com:8443/modelops/core/api/models/' + config_model['modelid'] + '/train', headers=headers, json=json_data)
+
+    json_data = response.json()
+
+    # Get the Training Job ID
+    job_id = json_data.get('id')
+    ti.xcom_push(key='train_job_id', value=job_id)
+
+    job_status = get_job_status(job_id)
+    print("Started - Training Job - Status: ", job_status)
+
+    while job_status != "COMPLETED":
+        if job_status=="ERROR":
+            print("The training job is terminated due to an Error")
+            ti.xcom_push(key='trained_model_id', value='NONE') # Setting the Trained Model Id to None here and check in next step (Evaluate)
+            break
+        elif job_status=="CANCELLED":
+            ti.xcom_push(key='trained_model_id', value='NONE')
+            print("The training job is Cancelled !!")
+            break
+        print("Job is not completed yet. Current status", job_status)
+        time.sleep(5) #wait 5s
+        job_status = get_job_status(job_id)
+
+    # Checking Job status at the end to push the correct trained_model_id
+    if(job_status == "COMPLETED"):
+        train_model_id = json_data['metadata']['trainedModel']['id']
+        ti.xcom_push(key='trained_model_id', value=train_model_id)
+        print('Model Trained Successfully! Job ID is : ', job_id, 'Trained Model Id : ', train_model_id, ' Status : ', job_status)
+    else:
+        ti.xcom_push(key='trained_model_id', value='NONE')
+        print("Training Job is terminated !!")
+
+
+def evaluate_model(ti):
+
+    trained_model_id = ti.xcom_pull(task_ids = 'task_train_model', key = 'trained_model_id')
+
+    headers = {
+    'AOA-Project-ID': config_main['projectid'],
+    'Accept': 'application/json, text/plain, */*',
+    'Accept-Language': 'en-US,en;q=0.9',
+    'Authorization': 'Bearer ' + config_main['bearertoken'],
+    'Content-Type': 'application/json',
+    }
+
+    json_data = {
+        'datasetId': config_main['evaluatedatasetid'],
+        'datasetConnectionId': config_main['datasetConnectionId'],
+        'modelConfigurationOverrides': {
+            'hyperParameters': {
+                'eta': config_hyper_params['eta'],
+                'max_depth': config_hyper_params['max_depth'],
+            },
+        },
+        'automationOverrides': {
+            'resources': {
+                'memory': config_resources['memory'],
+                'cpu': config_resources['cpu'],
+            },
+            'dockerImage':  config_model['dockerImage'],
+        },
+    }
+
+    if trained_model_id == 'NONE':
+        ti.xcom_push(key='evaluated_model_status', value='FALIED')
+        print("Evaluation cannot be done as the Training Job was terminated !!")
+    else:
+        response = requests.post('https://airflow-u9usja4twtauvt3s.env.clearscape.teradata.com:8443/modelops/core/api/trainedModels/' + trained_model_id + '/evaluate', headers=headers, json=json_data)
+        json_data = response.json()
+
+        # Get the Evaluation Job ID
+        eval_job_id = json_data.get('id')
+        ti.xcom_push(key='evaluate_job_id', value=eval_job_id)
+
+        job_status = get_job_status(eval_job_id)
+        print("Started - Job - Status: ", job_status)
+
+        while job_status != "COMPLETED":
+            if job_status=="ERROR":
+                print("The evaluation job is terminated due to an Error")
+                # Set the Trained Model Id to None here and check in next step (Evaluate)
+                break
+            elif job_status=="CANCELLED":
+                print("The evaluation job is Cancelled !!")
+                break
+            print("Job is not completed yet. Current status", job_status)
+            time.sleep(5) # wait 5s
+            job_status = get_job_status(eval_job_id)
+
+        # Checking Job status at the end to push the correct evaluate_job_id
+        if(job_status == "COMPLETED"):
+            ti.xcom_push(key='evaluated_model_status', value='EVALUATED')
+            print('Model Evaluated Successfully! Job ID is : ', eval_job_id, ' Status : ', job_status)
+        else:
+            ti.xcom_push(key='evaluated_model_status', value='FAILED')
+            print("Evaluation Job is terminated !!")
+
+
+def approve_model(ti):
+
+    evaluated_model_status = ti.xcom_pull(task_ids = 'task_evaluate_model', key = 'evaluated_model_status')
+
+    if evaluated_model_status == 'FAILED':
+        ti.xcom_push(key='approve_model_status', value='FALIED')
+        print("Approval cannot be done as the Evaluation was failed !!")
+    else:
+        trained_model_id = ti.xcom_pull(task_ids = 'task_train_model', key = 'trained_model_id')
+
+        headers = {
+        'AOA-Project-ID': config_main['projectid'],
+        'Accept': 'application/json, text/plain, */*',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Authorization': 'Bearer ' + config_main['bearertoken'],
+        'Content-Type': 'application/json',
+        }
+
+        json_data = {
+            "comments": (base64.b64encode(config_model['approvalComments'].encode()).decode())
+        }
+
+        response = requests.post('https://airflow-u9usja4twtauvt3s.env.clearscape.teradata.com:8443/modelops/core/api/trainedModels/' + trained_model_id + '/approve' , headers=headers, json=json_data)
+        response_json = response.json()
+        approval_status = response_json['status']
+        if(approval_status == 'APPROVED'):
+            ti.xcom_push(key='approve_model_status', value='EVALUATED')
+            print('Model Approved Successfully! Status: ', approval_status)
+        else:
+            ti.xcom_push(key='approve_model_status', value='FAILED')
+            print('Model not approved! Status: ', approval_status)
+
+
+def deploy_model(ti):
+
+    approve_model_status = ti.xcom_pull(task_ids = 'task_approve_model', key = 'approve_model_status')
+
+    headers = {
+        'AOA-Project-ID': config_main['projectid'],
+        'Accept': 'application/json, text/plain, */*',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Authorization': 'Bearer ' + config_main['bearertoken'],
+        'Content-Type': 'application/json',
+    }
+
+
+    json_data = {
+        'engineType': config_model['engineType'],
+        'engineTypeConfig': {
+            'dockerImage':  config_model['dockerImage'],
+            'engine': "python-batch",
+            'resources': {
+                'memory': config_resources['memory'],
+                'cpu': config_resources['cpu'],
+            }
+        },
+        'language':"python",
+        'datasetConnectionId': config_main['datasetConnectionId'],
+        'datasetTemplateId': config_main['datasetTemplateId'],
+        'cron': config_model['cron'],
+        'publishOnly': "false",
+        'args':{}
+    }
+
+    if approve_model_status == 'FAILED':
+        ti.xcom_push(key='deploy_model_status', value='FALIED')
+        print("Deployment cannot be done as the model is not approved !!")
+    else:
+        trained_model_id = ti.xcom_pull(task_ids = 'task_train_model', key = 'trained_model_id')
+
+        response = requests.post('https://airflow-u9usja4twtauvt3s.env.clearscape.teradata.com:8443/modelops/core/api/trainedModels/' + trained_model_id + '/deploy', headers=headers, json=json_data)
+        json_data = response.json()
+
+        # Get the Deployment Job ID
+        deploy_job_id = json_data.get('id')
+        ti.xcom_push(key='deploy_job_id', value=deploy_job_id)
+
+        # deployed_model_id = json_data['metadata']['deployedModel']['id']
+
+        job_status = get_job_status(deploy_job_id)
+        print("Started - Deployment Job - Status: ", job_status)
+
+        while job_status != "COMPLETED":
+            if job_status=="ERROR":
+                ti.xcom_push(key='deploy_model_status', value='FAILED')
+                print("The deployment job is terminated due to an Error")
+                break
+            elif job_status=="CANCELLED":
+                ti.xcom_push(key='deploy_model_status', value='FAILED')
+                print("The deployment job is Cancelled !!")
+                break
+            print("Job is not completed yet. Current status", job_status)
+            time.sleep(5) # wait 5s
+    job_status = get_job_status(deploy_job_id)
+
+    # Checking Job status at the end to push the correct deploy_model_status
+    if(job_status == "COMPLETED"):
+        ti.xcom_push(key='deploy_model_status', value='DEPLOYED')
+        print('Model Deployed Successfully! Job ID is : ', deploy_job_id, ' Status : ', job_status)
+    else:
+        ti.xcom_push(key='deploy_model_status', value='FAILED')
+        print("Deployment Job is terminated !!")
+
+
+
+def retire_model(ti):
+
+    deployed_model_status = ti.xcom_pull(task_ids = 'task_deploy_model', key = 'deploy_model_status')
+
+    if deployed_model_status == 'FAILED':
+        ti.xcom_push(key='retire_model_status', value='FALIED')
+        print("Retirement cannot be done as the model is not deployed !!")
+    else:
+        trained_model_id = ti.xcom_pull(task_ids = 'task_train_model', key = 'trained_model_id')
+
+        headers = {
+        'AOA-Project-ID': config_main['projectid'],
+        'Accept': 'application/json, text/plain, */*',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Authorization': 'Bearer ' + config_main['bearertoken'],
+        'Content-Type': 'application/json',
+        }
+
+        # Identifying the deployment ID
+        get_deployment_id_response = requests.get('https://airflow-u9usja4twtauvt3s.env.clearscape.teradata.com:8443/modelops/core/api/deployments/search/findByStatusAndTrainedModelId?projection=expandDeployment&amp;status=DEPLOYED&amp;trainedModelId=' + trained_model_id , headers=headers)
+
+        get_deployment_id_json = get_deployment_id_response.json()
+        deployment_id = get_deployment_id_json['_embedded']['deployments'][0]['id']
+
+        json_data = {
+            "deploymentId": deployment_id
+        }
+
+        # Retire the specific deployment
+        retire_model_response = requests.post('https://airflow-u9usja4twtauvt3s.env.clearscape.teradata.com:8443/modelops/core/api/trainedModels/' + trained_model_id + '/retire', headers=headers, json=json_data)
+        retire_model_response_json = retire_model_response.json()
+
+                # Get the Evaluation Job ID
+        retire_job_id = retire_model_response_json.get('id')
+        ti.xcom_push(key='retire_job_id', value=retire_job_id)
+
+        job_status = get_job_status(retire_job_id)
+        print("Started - Job - Status: ", job_status)
+
+        while job_status != "COMPLETED":
+            if job_status=="ERROR":
+                print("The Retire job is terminated due to an Error")
+                # Set the Trained Model Id to None here and check in next step (Evaluate)
+                break
+            elif job_status=="CANCELLED":
+                print("The Retire job is Cancelled !!")
+                break
+            print("Job is not completed yet. Current status", job_status)
+            time.sleep(5) # wait 5s
+            job_status = get_job_status(retire_job_id)
+
+        # Checking Job status at the end to push the correct evaluate_job_id
+        if(job_status == "COMPLETED"):
+            ti.xcom_push(key='retire_model_status', value='RETIRED')
+            print('Model Retired Successfully! Job ID is : ', retire_job_id, ' Status : ', job_status)
+        else:
+            ti.xcom_push(key='retire_model_status', value='FAILED')
+            print("Retire Job is terminated !!")
+
+
+
+with DAG(
+    dag_id = 'ModelOps_Accelerator_v1',
+    default_args=default_args,
+    description = 'ModelOps lifecycle accelerator for Python Diabetes Prediction model',
+    start_date=datetime.now(), # Set the start_date as per requirement
+    schedule_interval='@daily'
+) as dag:
+    task1 = PythonOperator(
+        task_id='task_train_model',
+        python_callable=train_model
+    )
+    task2 = PythonOperator(
+        task_id='task_evaluate_model',
+        python_callable=evaluate_model
+    )
+    task3 = PythonOperator(
+        task_id='task_approve_model',
+        python_callable=approve_model
+    )
+    task4 = PythonOperator(
+        task_id='task_deploy_model',
+        python_callable=deploy_model
+    )
+    task5 = PythonOperator(
+        task_id='task_retire_model',
+        python_callable=retire_model
+    )
+
+
+task1.set_downstream(task2)
+task2.set_downstream(task3)
+task3.set_downstream(task4)
+task4.set_downstream(task5)</code></pre>
+</div>
+</div>
+</div>
+</details>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_initialize_airflow_in_docker_compose"><a class="anchor" href="#_initialize_airflow_in_docker_compose"></a>Initialize Airflow in Docker Compose</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>While initializing Airflow services like the internal Airflow database, for operating systems other than Linux, you may get a warning that AIRFLOW_UID is not set, but you can safely ignore it. by setting its environment variable using the following command.</p>
+</div>
+<div id="UID Airflow variable" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo -e "AIRFLOW_UID=5000" &gt; .env</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To run internal database migrations and create the first user account, initialize the database using this command:</p>
+</div>
+<div id="" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker compose up airflow-init</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After initialization is complete, you should see a message like this:</p>
+</div>
+<div id="Check Airflow init" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"> airflow-init_1       | Upgrades done
+ airflow-init_1       | Admin user airflow created
+ airflow-init_1       | 2.8.2
+ start_airflow-init_1 exited with code 0</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_clean_up_airflow_demo_environment"><a class="anchor" href="#_clean_up_airflow_demo_environment"></a>Clean up Airflow demo environment¶</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can clean up the environment which will remove the preloaded example DAGs using this command:</p>
+</div>
+<div id="Docker compose down" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker-compose down -v</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then update this parameter in docker-compose.yaml file as given below:</p>
+</div>
+<div id="Docker compose yaml" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">AIRFLOW__CORE__LOAD_EXAMPLES: 'false'</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_launch_airflow_with_model_factory_solution_accelerator"><a class="anchor" href="#_launch_airflow_with_model_factory_solution_accelerator"></a>Launch Airflow with Model Factory Solution Accelerator</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Launch Airflow using this command:</p>
+</div>
+<div id="Docker compose up" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker-compose up -d</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_run_airflow_dag_of_model_factory_solution_with_modelops"><a class="anchor" href="#_run_airflow_dag_of_model_factory_solution_with_modelops"></a>Run Airflow DAG of Model Factory Solution with ModelOps</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
 <li>
-<p>Open up the URL and use the file explorer to open the following notebook: <code>jupyterextensions &#8594; notebooks &#8594; sql &#8594; GettingStartedDemo.ipynb</code>.</p>
+<p>Now you can access Airflow UI uisng the following link: <a href="http://localhost:8080/" class="bare">http://localhost:8080/</a></p>
 </li>
-<li>
-<p>Go through the demo of the Teradata SQL Kernel:</p>
+</ul>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/gettingstarteddemo.ipynb.png" alt="GettingStartedDemo.ipynb screenshot" width="100%">
+<img src="_images/execute-airflow-workflows-with-clearscape-analytics-modelops-model-factory-solution/LoginPage.png" alt="Airflow login" width="75%">
 </div>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>Login with Usename: airflow and Password: airflow. In the DAGs menu you will be able to see your created DAGs.</p>
 </li>
-</ol>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/execute-airflow-workflows-with-clearscape-analytics-modelops-model-factory-solution/DAGs.png" alt="DAGs" width="75%">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Select your latest created DAG and the graph will look like this:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/execute-airflow-workflows-with-clearscape-analytics-modelops-model-factory-solution/DAG_graph.png" alt="DAGs" width="75%">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Now you can trigger the DAG using the play icon on the top right side.</p>
+</li>
+<li>
+<p>You can check the logs by selecting any task and then click on the logs menu:</p>
+</li>
+<li>
+<p>On the ClearScape Analytics ModelOps - Jobs section you can see that the jobs have started running:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/execute-airflow-workflows-with-clearscape-analytics-modelops-model-factory-solution/modelOps1.png" alt="DAGs" width="75%">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Now you can see that all the tasks are successfully executed.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/execute-airflow-workflows-with-clearscape-analytics-modelops-model-factory-solution/successTasks.png" alt="DAGs" width="75%">
 </div>
 </div>
 </div>
@@ -2198,7 +2701,7 @@ Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This quick start covered different options to connect to Teradata Vantage from a Jupyter Notebook. We learned about the Teradata Jupyter Docker image that bundles multiple Teradata Python and R libraries. It also provides an SQL kernel, database object explorer and connection management. These features are useful when you spend a lot of time with the SQL interface. For more traditional data science scenarios, we explored the standalone Teradata Python driver and integration through the ipython sql extension.</p>
+<p>This tutorial aimed at providing a hands on exercise on how to install an Airflow environment on a Linux server and how to use Airflow to interact with ClearScape Analytics ModelOps and Teradata Vantage database. An additional example is provided on how to integrate Airflow and the data modelling and maintenance tool dbt to create and load a Teradata Vantage database.</p>
 </div>
 </div>
 </div>
@@ -2208,27 +2711,9 @@ Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://teradata.github.io/jupyterextensions">Teradata Jupyter Extensions Website</a></p>
-</li>
-<li>
-<p><a href="https://docs.teradata.com/r/KQLs1kPXZ02rGWaS9Ktoww/root">Teradata Vantage™ Modules for Jupyter Installation Guide</a></p>
-</li>
-<li>
-<p><a href="https://docs.teradata.com/r/1YKutX2ODdO9ppo_fnguTA/root">Teradata® Package for Python User Guide</a></p>
+<p><a href="https://docs.teradata.com/search/documents?query=ModelOps&amp;sort=last_update&amp;virtual-field=title_only&amp;content-lang=">ModelOps documentation</a>.</p>
 </li>
 </ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If you have any questions or need further assistance, please visit our <a href="https://support.teradata.com/community">community forum</a> where you can get support and interact with other community members.
-</td>
-</tr>
-</table>
 </div>
 </div>
 </div>
@@ -2356,14 +2841,14 @@ If you have any questions or need further assistance, please visit our <a href="
                     <li>
                       <a href="https://teradata.my.site.com/teradataPRM/s/self-registration" data-celebrus="Footer Menu - Partner registration" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Partner registration | https://teradata.my.site.com/teradataPRM/s/self-registration" target="_blank" rel="noopener">Partner registration
                         <span class="material-symbols-outlined md-16 ms-2">
-                          <img src="./_/img/small-external.svg" alt="External Icon" width="" height="">
+                          <img src="../_/img/small-external.svg" alt="External Icon" width="" height="">
                         </span>
                       </a>
                     </li>
                     <li>
                       <a href="https://teradata.my.site.com/teradataPRM/s/login/" data-celebrus="Footer Menu - Partner portal login" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Partner portal login | https://teradata.my.site.com/teradataPRM/s/login/" target="_blank" rel="noopener">Partner portal login
                         <span class="material-symbols-outlined md-16 ms-2">
-                          <img src="./_/img/small-external.svg" alt="External Icon" width="" height="">
+                          <img src="../_/img/small-external.svg" alt="External Icon" width="" height="">
                         </span>
                       </a>
                     </li>
@@ -2483,14 +2968,14 @@ If you have any questions or need further assistance, please visit our <a href="
                             <li>
                               <a href="https://careers.teradata.com" data-celebrus="Footer Menu - Careers" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Careers | https://careers.teradata.com" target="_blank" rel="noopener">Careers
                                 <span class="material-symbols-outlined md-16 ms-2">
-                                  <img src="./_/img/small-external.svg" alt="External Icon" width="" height="">
+                                  <img src="../_/img/small-external.svg" alt="External Icon" width="" height="">
                                 </span>
                               </a>
                             </li>
                             <li>
                               <a href="https://investor.teradata.com" data-celebrus="Footer Menu - Investors" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Investors | https://investor.teradata.com" target="_blank" rel="noopener">Investors
                                 <span class="material-symbols-outlined md-16 ms-2">
-                                  <img src="./_/img/small-external.svg" alt="External Icon" width="" height="">
+                                  <img src="../_/img/small-external.svg" alt="External Icon" width="" height="">
                                 </span>
                               </a>
                             </li>
@@ -2690,25 +3175,25 @@ If you have any questions or need further assistance, please visit our <a href="
   const mainElement = document.getElementById('home'); 
   
   if (mainElement && mainElement.id === 'home') {
-    const scriptElement = document.querySelector('script[src="./_/js/site.js"]');
+    const scriptElement = document.querySelector('script[src="../_/js/site.js"]');
     if (scriptElement) {
       scriptElement.remove(); 
     }
   } else {
-    const scriptElement = document.querySelector('script[src="./_/js/site.js"]');
+    const scriptElement = document.querySelector('script[src="../_/js/site.js"]');
     if (!scriptElement) {
       const newScriptElement = document.createElement('script');
-      newScriptElement.src = './_/js/site.js';
+      newScriptElement.src = '../_/js/site.js';
       document.body.appendChild(newScriptElement);
     }
   }
 });
 </script>    
-<script async src="./_/js/behavior.js"></script>
-<script src="./_/js/vendor/lunr.js"></script>
-<script src="./_/js/search-ui.js" id="search-ui-script" data-site-root-path="." data-snippet-length="100" data-stylesheet="./_/css/search.css"></script>
-<script async src="./search-index.js"></script>
-<script src="./_/js/teradata.min.js"></script>
+<script async src="../_/js/behavior.js"></script>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+<script src="../_/js/teradata.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/powershell.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/dockerfile.min.js"></script>
