@@ -1,0 +1,121 @@
+= Anypoint Studio を使用した Teradata コネクタ の構成 - Mule 4
+:page-aliases: connectors::database/example-configuration.adoc, connectors::db/example-configuration.adoc
+:page-author: Tan Nguyen
+:page-email: tan.nguyen@teradata.com
+:page-revdate: 2023 年 2 月 13 日
+:description: MuleSoft の Anypoint Studio には Teradata コネクタ を使用します。
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, mule, mulesoft, teradata connector, anypoint studio.
+:icons: font
+
+Anypoint Studio (Studio) エディタは、Mule アプリケーション、プロパティ、設定ファイルの設計と更新に役立ちます。
+
+Studio でコネクタを追加して構成するには:
+
+. <<create-mule-project>>.
+. <<add-connector-to-project,コネクタをMuleプロジェクトに追加する>>。
+. <<configure-input-source,コネクタのフローのソースを設定する>>。
+. <<add-connector-operation,フローにコネクタ操作を追加する>>。
+. <<configure-global-element,コネクタのグローバル構成要素を構成する>>。
+
+コネクタを実行すると、 <<view-app-log,「View the App Log」>>で説明されているように、 アプリ ログを表示して問題がないか確認できます。
+
+
+Studio でコネクタを構成するのが初めての場合は、 https://docs.mulesoft.com/connectors/introduction/intro-config-use-studio[「Anypoint Studio を使用したコネクタの構成」]を参照してください。このトピックを読んだ後にコネクタ フィールドに関する追加情報が必要な場合は、 xref:reference.adoc[「 Teradata コネクタ リファレンス 」]を参照してください。
+
+[[create-mule-project]]
+== Mule プロジェクトを作成する
+
+Studioで、コネクタを追加および設定する新しいMuleプロジェクトを作成します。
+
+. Studioで、*File > New > Mule Project*を選択します。
+. Muleプロジェクトの名前を入力し、*Finish*をクリックします。
+
+[[add-connector-to-project]]
+== Mule プロジェクトにコネクタを追加する
+
+Teradata コネクタを Mule プロジェクトに追加すると、XML コードにコネクタの名前空間とスキーマの格納場所が自動的に入力され、必要な依存関係がプロジェクトの `pom.xml` ファイルに追加されます。
+
+. *Mule Palette*ビューで、*(X) Search in Exchange*をクリックします。
+. *Add Dependencies to Project*ウィンドウで、検索するフィールドに`teradata`と入力します。
+.  *Available modules*の*Teradata コネクタ*をクリックします。
+. *Add*をクリックします。
+. *Finish*をクリックします。
+
+Studio で Mule プロジェクトにコネクタを追加しても、そのコネクタを Studio ワークスペースの他のプロジェクトで使用できるようになりません。
+
+[[configure-input-source]]
+== ソースを構成する
+
+ソースは、指定された条件が満たされるとフローを開始します。
+Teradata コネクタ で使用するように以下の入力ソースのいずれかを構成できます。
+
+* *Teradata > On Table Row* +
+一定の間隔でテーブルから選択することでフローを開始し、取得した行ごとに 1 つのメッセージを生成します。
+* *HTTP > Listener* +
+構成されたホストとポートでリクエストを受信するたびにフローを開始します。
+* *スケジューラ* +
+時間ベースの条件が満たされたときにフローを開始します。
+
+例えば、 *On Table Row* ソースを設定するには、以下の手順に従います。
+
+. *Mule Palette*ビューで、*Teradata > On Table Row*を選択します。
+. *On Table Row*をStudioキャンバスにドラッグします。
+. *On Table Row*設定画面で、*Display Name*フィールドの値を必要に応じて変更します。
+. *Connector configuration* フィールドの横にあるプラス記号 ( [*+*] ) をクリックして、アプリ内のソースのすべてのインスタンスで使用できるグローバル要素を構成します。
+. *Teradata Config*ウィンドウの「*General*」タブで、コネクタのデータベース接続情報を指定します。
+. 「*Transactions*」タブで、データベースに接続するときのトランザクション分離(XAトランザクション)をオプションで指定します。
+. *Advanced*タブで、必要に応じて、再接続方法を含む接続プーリングおよび再接続情報を指定します。
+. *Test Connection*をクリックして、Muleが指定したデータベースに接続できることを確認します。
+.  *OK*をクリックしてウィンドウを閉じます。
+. *On Table Row*設定画面の*Table*で、選択するテーブルの名前を指定します。
+
+[[add-connector-operation]]
+== コネクタ操作をフローに追加する
+
+コネクタ操作をフローに追加すると、そのコネクタが実行する特定の操作をすぐに定義できます。
+
+Teradata コネクタ の操作を追加するには、以下の手順に従います。
+
+. ［ *Mule Palette* ］ビューで *Teradata コネクタ*を選択し、目的の操作を選択します。
+. 操作をStudioキャンバス上の入力ソースの右側にドラッグします。
+
+以下のスクリーンショットは、Anypoint Studio の Mule Palette ビューでの Teradata コネクタ の操作を示しています。
+
+.Teradata コネクタ の操作
+image::teradata-operations.png[Teradata コネクタ の操作]
+
+== コネクタのグローバル要素を構成する
+
+コネクタを構成するときは、アプリ内のそのコネクタのすべてのインスタンスが使用できるグローバル要素を構成することをお勧めします。 
+
+Teradata コネクタ のグローバル要素を構成するには、以下の手順に従います。
+
+. Studioキャンバスで操作を選択します。
+. 操作の構成画面で、*Connector configuration* フィールドの横にあるプラス記号 ([*+*]) をクリックして、グローバル要素構成フィールドにアクセスします。
+. *Teradata Config*ウィンドウの「*General*」タブで、コネクタのデータベース接続情報を指定します。
+. 「*Transactions*」タブで、データベースに接続するときのトランザクション分離(XAトランザクション)をオプションで指定します。
+. *Advanced*タブで、必要に応じて、再接続方法を含む接続プーリングおよび再接続情報を指定します。
+. *Test Connection*をクリックして、Muleが指定したデータベースに接続できることを確認します。
+. *OK*をクリックします。
+
+以下のスクリーンショットは、Anypoint Studio の Teradata コネクタ *Global Element Configuration* ウィンドウを示しています。
+
+.Teradata コネクタのグローバル要素構成
+image::teradata-global-configuration.png[Teradata コネクタのグローバル要素構成]
+
+[[view-app-log]]
+== アプリログを表示する
+
+問題を確認するには、以下のようにアプリ ログを表示します。
+
+* Anypointプラットフォームからアプリを実行している場合、出力はAnypoint Studioコンソールウィンドウに表示されます。
+* コマンド ラインから Mule を使用してアプリを実行している場合、アプリのログは OS コンソールに表示されます。
+
+アプリのログ ファイル (`log4j2.xml`) でログ ファイルのパスがカスタマイズされていない限り、デフォルトの格納場所 `MULE_HOME/logs/<app-name>.log`にあるアプリ ログを表示することもできます。
+
+== 関連アイテム
+
+* xref:reference.adoc[Teradata コネクタ Reference]
+* https://help.mulesoft.com[MuleSoft ヘルプセンター]
+
+include::ROOT:partial$community_link.adoc[]

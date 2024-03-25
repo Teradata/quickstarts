@@ -1,0 +1,218 @@
+= Amazon SageMaker で VantageCloud Lake の Teradata Jupyter Notebook デモを実行する方法
+:page-lang: ja
+:experimental:
+:page-author: Daniel Herrera
+:page-email: daniel.herrera2@teradata.com
+:page-revdate: 2024 年 1 月 16 日
+:description: SageMaker で VantageCloud Lake の Teradata Jupyter Notebook デモを実行する
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, cloud computing, machine learning, sagemaker, vantagecloud, vantagecloud lake, lake
+:dir: vantagecloud-lake-demo-jupyter-sagemaker
+
+== 概要
+このクイックスタートでは、AWS の AI/ML プラットフォームである Amazon SageMaker でhttps://github.com/Teradata/lake-demos[ Teradata Jupyter Notebook Demos for VantageCloud Lake]を実行するプロセスについて詳しく説明します。
+
+== 前提条件
+* Teradata modules for Jupyter (ダウンロードはhttps://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[こちら]、登録が必要です)
+* S3 および SageMaker にアクセスできる AWS アカウント
+* https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html[VantageCloud Lake環境へのアクセス]
+
+== AWS環境のセットアップ
+このセクションでは、以下の各手順について詳しく説明します。
+
+* Teradata modules for JupyterをS3バケットにアップロードする
+* Jupyter ノートブック インスタンスの IAM ロールを作成する
+* Jupyter ノートブック インスタンスのライフサイクル構成を作成する
+* Jupyter ノートブック インスタンスを作成する
+* Jupyter ノートブック インスタンスの IP CIDR を検索する
+
+=== Teradata modules for Jupyter を S3 バケットにアップロードする
+* AWS S3 でバケットを作成し、割り当てられた名前を記録する
+* デフォルトのオプションは、このバケットに適している
+* 作成したバケットに Jupyter 用の Teradata モジュールをアップロードする 
+
+image::vantagecloud-lake/{dir}/sagemaker-bucket-upload.png[S3バケットのモジュールをロードする,align="center" width=100%]
+
+=== Jupyter ノートブック インスタンスの IAM ロールを作成する
+* SageMaker でロールマネージャに移動する 
+
+image::vantagecloud-lake/{dir}/sagemaker-iam-role-0.PNG[新しいロールを作成する,align="center" width=75%]
+* 新しいロールの作成する(まだ定義されていない場合)
+* このガイドの目的上、作成されたロールにはデータ サイエンティストのペルソナに割り当てる 
+
+image::vantagecloud-lake/{dir}/sagemaker-iam-role-1.PNG[ロール名とペルソナ,align="center" width=75%]
+* 設定に関しては、デフォルトのままにするのが適切です
+* 対応する画面で、Teradata Jupyter モジュールをアップロードしたバケットを定義する
+
+image::vantagecloud-lake/{dir}/sagemaker-iam-role-2.PNG[S3バケット,align="center" width=75%]
+* 次の設定では、S3 バケットへのアクセスに対応するポリシーを追加する  
+
+image::vantagecloud-lake/{dir}/sagemaker-iam-role-3.PNG[S3バケットの権限,align="center" width=75%]
+
+=== Jupyter Notebooks インスタンスのライフサイクル構成を作成する
+* SageMaker でライフサイクル構成に移動し、作成をクリックする 
+
+image::vantagecloud-lake/{dir}/sagemaker-config-1.PNG[ライフサイクル構成を作成する,align="center" width=75%]
+* 次のスクリプトを使用してライフサイクル構成を定義する
+** Windows 環境で作業する場合は、スクリプトをライフサイクル構成エディターに 1 行ずつコピーすることをお勧めします。コピーの問題を回避するには、エディターで各行の後で直接「Enter」を押します。このアプローチは、Windows と Linux のエンコーディングの違いによって発生する可能性のあるキャリッジ リターン エラーを防ぐのに役立ちます。このようなエラーは多くの場合、「/bin/bash^M: bad interpreter」として現れ、スクリプトの実行を中断する可能性があります。
+
+image::vantagecloud-lake/{dir}/sagemaker-config-2.PNG[ライフサイクル構成を作成する,align="center" width=75%]
+
+** スクリプトの作成時: 
++
+[source, bash, id="sagemaker_first_config", role="content-editable emits-gtm-events"]
+----
+#!/bin/bash
+ 
+set -e
+ 
+# This script installs a custom, persistent installation of conda on the Notebook Instance's EBS volume, and ensures
+# that these custom environments are available as kernels in Jupyter.
+ 
+ 
+sudo -u ec2-user -i <<'EOF'
+unset SUDO_UID
+# Install a separate conda installation via Miniconda
+WORKING_DIR=/home/ec2-user/SageMaker/custom-miniconda
+mkdir -p "$WORKING_DIR"
+wget https://repo.anaconda.com/miniconda/Miniconda3-4.6.14-Linux-x86_64.sh -O "$WORKING_DIR/miniconda.sh"
+bash "$WORKING_DIR/miniconda.sh" -b -u -p "$WORKING_DIR/miniconda"
+rm -rf "$WORKING_DIR/miniconda.sh"
+# Create a custom conda environment
+source "$WORKING_DIR/miniconda/bin/activate"
+KERNEL_NAME="teradatasql"
+ 
+PYTHON="3.8"
+conda create --yes --name "$KERNEL_NAME" python="$PYTHON"
+conda activate "$KERNEL_NAME"
+pip install --quiet ipykernel
+ 
+EOF
+----
+
+** スクリプトの開始時 (このスクリプトではバケットの名前を置き換え、Jupyter モジュールのバージョンを確認します)
++
+[source, bash, role="content-editable emits-gtm-events"]
+----
+#!/bin/bash
+ 
+set -e
+ 
+# This script installs Teradata Jupyter kernel and extensions.
+ 
+ 
+sudo -u ec2-user -i <<'EOF'
+unset SUDO_UID
+ 
+WORKING_DIR=/home/ec2-user/SageMaker/custom-miniconda
+ 
+source "$WORKING_DIR/miniconda/bin/activate" teradatasql
+
+# Install teradatasql, teradataml, and pandas in the teradatasql environment
+pip install teradataml
+pip install pandas
+
+# fetch Teradata Jupyter extensions package from S3 and unzip it
+mkdir -p "$WORKING_DIR/teradata"
+aws s3 cp s3://resources-jp-extensions/teradatasqllinux_3.4.1-d05242023.zip "$WORKING_DIR/teradata"
+cd "$WORKING_DIR/teradata"
+unzip -o teradatasqllinux_3.4.1-d05242023
+cp teradatakernel /home/ec2-user/anaconda3/condabin
+jupyter kernelspec install --user ./teradatasql
+source /home/ec2-user/anaconda3/bin/activate JupyterSystemEnv
+
+# Install other Teradata-related packages
+pip install teradata_connection_manager_prebuilt-3.4.1.tar.gz
+pip install teradata_database_explorer_prebuilt-3.4.1.tar.gz
+pip install teradata_preferences_prebuilt-3.4.1.tar.gz
+pip install teradata_resultset_renderer_prebuilt-3.4.1.tar.gz
+pip install teradata_sqlhighlighter_prebuilt-3.4.1.tar.gz
+
+conda deactivate
+EOF
+----
+
+=== Jupyter ノートブック インスタンスを作成する
+* SageMaker で、ノートブック、ノートブック インスタンスに移動し、ノートブック インスタンスを作成する
+* ノートブックインスタンスの名前を選択し、サイズを定義する(デモの場合は、利用可能な小さいインスタンスで十分です)
+* 追加の構成をクリックして、最近作成したライフサイクル構成を割り当てる 
+
+image::vantagecloud-lake/{dir}/sagemaker-create-notebook-1.PNG[Notebookインスタンスを作成する,align="center" width=75%]
+* 追加の構成をクリックして、最近作成したライフサイクル構成を割り当てる
+* 最近作成したIAMロールをノートブックインスタンスに割り当てる 
+
+image::vantagecloud-lake/{dir}/sagemaker-create-notebook-2.PNG[IAM ロールをノートブック インスタンスに割り当てる,align="center" width=75%]
+
+* 次のリンクhttps://github.com/Teradata/lake-demosを、ノートブックインスタンスのデフォルトのgithubリポジトリとしてペーストする
+
+image::vantagecloud-lake/{dir}/sagemaker-create-notebook-3.PNG[ノートブック インスタンスにデフォルトのリポジトリを割り当てる,align="center" width=75%]
+
+== Jupyter ノートブック インスタンスの IP CIDR を検索する
+* インスタンスが実行されたら、「JupyterLab を開く」をクリックします。 
+
+image::vantagecloud-lake/{dir}/sagemaker-create-notebook-4.PNG[JupyterLabを開始する,align="center" width=75%]
+
+image::vantagecloud-lake/{dir}/sagemaker-create-loaded-env.PNG[ロードされたJupyterLab,align="center" width=75%]
+
+* JupyterLab で、Teradata Python カーネルを含むノートブックを開き、次のコマンドを実行してノートブック インスタンスの IP アドレスを見つけます。
+** 接続を許可するために、VantageCloud Lake 環境でこの IP をホワイトリストに登録します。
+** これは、このガイドとノートブックのデモを目的としています。実稼働環境の場合、VPC、サブネット、セキュリティ グループの構成を構成し、ホワイトリストに登録する必要がある場合があります。
+
+[source, python, role="content-editable"]
+----
+import requests
+def get_public_ip():
+    try:
+        response = requests.get('https://api.ipify.org')
+        return response.text
+    except requests.RequestException as e:
+        return "Error: " + str(e)
+my_public_ip = get_public_ip()
+print("My Public IP is:", my_public_ip)
+----
+
+== VantageCloud Lakeを構成する
+* VantageCloud Lake 環境の設定で、ノートブック インスタンスの IP を追加する
+
+image::vantagecloud-lake/{dir}/sagemaker-lake.PNG[JupyterLabを開始する,align="center" width=75%]
+
+== VantageCloud Lake の Jupyter Notebook デモ
+
+=== 構成
+* https://github.com/Teradata/lake-demos/blob/main/vars.json[vars.json]は、VantageCloud Lake 環境の構成に一致するように編集する必要がある +
+
+image::vantagecloud-lake/{dir}/sagemaker-vars.PNG[JupyterLabを開始する,align="center" width=75%]
+
+* 特に次の値を追加する必要があります 
+
++
+[cols="1,1"]
+|====
+| *変数* | *値*
+
+| *"host"* 
+| VantageCloud Lake 環境からのPublic IP値
+
+| *"UES_URI"* 
+| VantageCloud Lake 環境からの Open Analytics
+| *dbc"*
+| VantageCloud Lake環境のマスターパスワード
+|====
+
++
+IMPORTANT: vars.json ファイル内のすべてのパスワードを忘れずに変更してください。
+
+* サンプル vars.json では、すべてのユーザーのパスワードがデフォルトで「password」に設定されていることがわかります。これは説明を目的としたものであり、これらのパスワード フィールドをすべて強力なパスワードに変更し、必要に応じて保護し、次の手順を実行する必要があります。 その他のパスワード管理のベスト プラクティス。
+
+== デモを実行する
+*0_Demo_Environment_Setup.ipynb*のすべてのセルを開いて実行し、環境変数を設定します。続いて *1_Demo_Setup_Base_Data.ipynb* を実行して、デモに必要な基本データをロードします。
+
+デモ ノートブックの詳細については、GGitHubのhttps://github.com/Teradata/lake-demos[Teradata Lake demos]ページを参照してください。
+
+== まとめ
+
+このクイックスタートでは、Amazon SageMaker で VantageCloud Lake の Jupyter ノートブック デモを実行する方法を学びました。
+
+== さらに詳しく
+
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin[Teradata VantageCloud Lakeのドキュメント]
+* https://quickstarts.teradata.com/jupyter.html[Jupyter NotebookからVantageを利用する方法]

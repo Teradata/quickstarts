@@ -1,0 +1,71 @@
+= KNIME Analytics PlatformとVantageを統合する
+:experimental:
+:page-author: Jeremy Yu
+:page-email: Jeremy.yu@teradata.com
+:page-revdate: 2022 年 5 月 18日
+:description: Teradata Vantage を KNIME と統合します。
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics,
+:tabs:
+:page-image-directory: integrate-teradata-vantage-with-knime
+
+
+== 概要
+
+このハウツーでは、KNIME Analytics PlatformからTerdata Vantageに接続する方法について説明します。
+
+=== KNIME Analytics Platform について
+
+KNIME分析プラットフォームは、データサイエンスのワークベンチです。Teradata Vantageを含むさまざまなデータソースの分析をサポートしています。
+
+== 前提条件
+
+* Teradata Vantage インスタンス、バージョン 17.10 以降へのアクセス。
++
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
+* KNIME がローカルにインストールされている。詳細については 、link:https://www.knime.com/installation[KNIME のインストール手順]を 参照してください。
+
+== 統合手順
+
+1. https://downloads.teradata.com/download/connectivity/jdbc-driver(初めての方は登録が必要です) にアクセスし、最新版のJDBCドライバをダウンロードします。
+2. ダウンロードしたファイルを解凍します。 `terajdbc4.jar` ファイルがあります。
+3．KNIME で、 `File → Preference`をクリックします。 `Databases` の `Add` をクリックします。
++
+image::{page-image-directory}/add-jar.png[jarを追加, width=75%]
+4. データベースドライバを新規に登録します。 `ID`、 `Name` 、 `Description` に以下のような値を指定します。`Add file`をクリックし、前にダウンロードした.jarファイルをポイントします。 `Find driver classes` をクリックすると、`Driver class:` に `jdbc.TeraDriver` が入力されます。
++
+image::{page-image-directory}/register-driver.png[ドライバを登録する, width=75%]
+5.`Apply and Close`をクリックします。
++
+image::{page-image-directory}/apply-and-close.png[Apply and Close, width=75%]
+6. 接続をテストするために、新しいKNIMEワークフローを作成し、右側のワークスペースにドラッグして `Database Reader (legacy)` ノードを追加してください。
++
+image::{page-image-directory}/test-connection-1.png[テスト接続ステップ 1, width=75%]
++
+image::{page-image-directory}/test-connection-2.png[テスト接続ステップ 2, width=75%]
+7. `Database Reader (legacy)` を右クリックし、設定を行います。ドロップダウンから `com.teradata.jdbc.Teradriver` を選択します。
++
+image::{page-image-directory}/start-configuration.png[設定を開始する, width=75%]
+8. Vantageサーバの名前とログインメカニズムを入力します。例:
++
+image::{page-image-directory}/enter-configuration.png[設定を編集する, width=75%]
+9. 接続をテストするには、右下のボックスに SQL 文を入力します。例えば、 `SELECT * FROM DBC.DBCInfoV` と入力し、 `Apply` をクリックしてダイアログを閉じます。
++
+image::{page-image-directory}/test-connection-apply.png[テスト接続の適用, width=75%]
+10. 接続をテストするノードを実行します。
++
+image::{page-image-directory}/execute-node.png[ノードの実行, width=75%]
+11. 正常に実行されると、ノードに緑色のランプが表示されます。右クリックして、 `5Data from Database` を選択すると、結果が表示されます。
++
+image::{page-image-directory}/view-results.png[結果を表示, width=75%]
++
+image::{page-image-directory}/view-results-final.png[結果を表示, width=75%]
+
+
+== まとめ
+
+このハウツーでは、KNIME Analytics PlatformからTeradata Vantageに接続する方法を説明します。
+
+== さらに詳しく
+* xref:ROOT:ml.adoc[SQL のみを使用して Vantage で ML モデルをトレーニングする方法]
+
+include::ROOT:partial$community_link.adoc[]

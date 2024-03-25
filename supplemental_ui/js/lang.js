@@ -5,6 +5,8 @@ function switchLanguage(lan) {
 
     let aiUnlimited = "ai-unlimited";
     let bi = "business-intelligence";
+    let vantagecloudLake = "vantagecloud-lake";
+    let muleTeradataCon = "mule-teradata-connector";
     if(page[page.length-1]==="" || page[page.length-1]==="index.html" || page[page.length-1]==="#" || page[page.length-1]==="index.html#") {
       if(page[page.length-2] === "ja") {
         if (lan === 'en'){
@@ -43,7 +45,8 @@ function switchLanguage(lan) {
           page[page.length-3] = lan;  
         } else {
           if(page[page.length-3] !== "en"){
-            if(page[page.length-2] === aiUnlimited || page[page.length-2] === bi){
+            if(page[page.length-2] === aiUnlimited || page[page.length-2] === bi || page[page.length-2] === vantagecloudLake || 
+               page[page.length-2] === muleTeradataCon){
               file = page[page.length-2]
               indexFile = page.lastIndexOf(file);
               newUrl = lan + "/"+page[page.length-2]+"/" + page[page.length-1]; 

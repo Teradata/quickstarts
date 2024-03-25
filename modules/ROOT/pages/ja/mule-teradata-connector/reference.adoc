@@ -1,0 +1,1113 @@
+= Teradata コネクタのリファレンス - Mule 4
+:page-aliases: connectors::database/reference.adoc, connectors::db/reference.adoc
+:page-author: Tan Nguyen
+:page-email: tan.nguyen@teradata.com
+:page-revdate: 2023 年 2 月 10 日
+:description: MuleSoft の Anypoint Studio 用の Teradata コネクタのテクニカル リファレンス。
+:keywords: 61data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, mule, mulesoft, teradata connector, anypoint studio.
+:icons: font
+
+Anypoint Connector for Teradata (Teradata コネクタ) は、Mule アプリと Teradata Vantage データベース間の通信を確立し、Teradata Vantage インスタンスに接続してデータをロードし、Teradata Vantage テーブルで SQL クエリーを実行できるようにします。
+
+リリース ノート: xref:release-notes.adoc[Teradata コネクタ リリース ノート]
+
+== 構成
+---
+[[config]]
+=== デフォルト構成
+
+
+これらのパラメータを使用して、デフォルト設定を設定します。
+
+
+==== パラメータ
+[%header,cols="20s,20a,35a,20a,5a"]
+|===
+| 名前 | 型 | 説明 | デフォルト値 | 必須
+|Name | 文字列 | この設定の名前。コネクタは、この名前の構成を参照します。 | | x
+| Connection a| * <<config_data-source, データソース参照接続>>
+* <<config_teradata, Teradata接続>>
+ | この構成に提供する接続タイプ。 | | x
+| Expiration Policy a| <<ExpirationPolicy>> |  動的設定インスタンスがアイドル状態を維持できる最小時間を設定します。この時間を経過すると、ESB Mule は有効期限切れの対象とみなします。これは、対象になった瞬間にプラットフォームがインスタンスを期限切れにするという意味ではありません。Mule は必須に応じてインスタンスをパージします。 |  |
+|===
+
+==== 接続タイプ
+[[config_data-source]]
+===== データソース参照接続
+
+参照されたデータ ソースからデータベース接続を作成する接続プロバイダの実装を構成します。 +
+
+データ ソース参照接続で _プロバイダのカスタム型_ を使用する場合は、データベース構成の詳細セクションの *列型* フォーム内の型を定義します。 +
+
+====== パラメータ
+[%header,cols="20s,20a,35a,20a,5a"]
+|===
+| 名前 | 型 | 説明 | デフォルト値 | 必須
+| Pooling Profile a| <<pooling-profile>> |  データベース接続プーリングを構成する方法を提供します |  |
+| Column Types a| 配列 <<ColumnType>> |  非標準の列型を指定します |  |
+| Reconnection a| <<Reconnection>> |  アプリケーションがデプロイされると、すべてのコネクタで接続テストが実行されます。`true`設定すると、関連するReconnection Strategyを使い果たした後にテストに合格しなかった場合、デプロイメントは失敗します。 |  |
+|===
+
+[[config_teradata]]
+===== Teradata接続
+
+====== パラメータ
+[%header,cols="20s,20a,35a,20a,5a"]
+|===
+| 名前 | 型 | 説明 | デフォルト値 | 必須
+| Pooling Profile a| <<pooling-profile>> |  データベース接続プーリングを構成する方法を提供します |  |
+| 列型 a| 配列 <<ColumnType>> |  非標準の列型を指定します |  |
+| Transaction Isolation a| 列挙、以下のいずれか:
+
+** NONE
+** READ_COMMITTED
+** READ_UNCOMMITTED
+** REPEATABLE_READ
+** SERIALIZABLE
+** NOT_CONFIGURED |  データベース接続時にドライバに設定するトランザクション分離レベル |  `NOT_CONFIGURED` |
+| Use XA Transactions a| BOOLEAN |  作成されたデータソースが XA トランザクションをサポートする必須があるかどうかを示します |  `false` |
+| URL(英語の可能性 a| 文字列 |  データベースへの接続に使用するJDBC URL |  | x
+| User a| 文字列 |  データベースのユーザー名 |  |
+| Password a| 文字列 |  データベースのパスワード |  |
+| 再接続 a| <<Reconnection>> |  アプリケーションがデプロイされると、すべてのコネクタで接続テストが実行されます。`true`に設定すると、関連するReconnection Strategyを使い果たした後にテストに合格しなかった場合、デプロイメントは失敗します。 |  |
+|===
+
+== 操作
+
+NOTE: オペレーション内のSQLクエリーにSQL関数を指定する場合は、SQL関数を `{fn function()}` 形式で指定します。例えば、SQL 関数 `CURRENT_TIMESTAMP` は `{fn CURRENT_TIMESTAMP()}`として指定されます。
+
+* <<bulkDelete>>
+* <<bulkInsert>>
+* <<bulkUpdate>>
+* <<delete>>
+* <<executeDdl>>
+* <<executeScript>>
+* <<insert>>
+* <<select>>
+* <<querySingle>>
+* <<storedProcedure>>
+* <<update>>
+
+== 関連ソース
+* <<listener>>
+
+[[bulkDelete]]
+=== 一括削除
+`<db:bulk-delete>`
+
+
+この操作により、さまざまなパラメータ バインディングと単一のデータベース文を使用して、さまざまな時点で削除操作を実行できます。これにより、単一の削除操作をさまざまなタイミングで実行する場合に比べてパフォーマンスが向上します。
+
+
+==== パラメータ
+[%header,cols="20s,20a,35a,20a,5a"]
+|===
+| 名前 | 型 | 説明 | デフォルト値 | 必須
+| Configuration | 文字列 | 使用する構成の名前 | | x
+| Input Parameters a| オブジェクトの配列 |  マップのリストを指定します。マップのリストには、キーとしてパラメータ名とパラメータがバインドされている値が含まれており、すべてのリストアイテムが挿入する行を表します。 |  `#[payload]` |
+| Transactional Action a| 列挙、以下のいずれか:
+
+** ALWAYS_JOIN
+** JOIN_IF_POSSIBLE
+** NOT_SUPPORTED |  トランザクションに関してオペレーションが実行できる参加アクションの型 |  `JOIN_IF_POSSIBLE` |
+| Query Timeout a| 数値 |  JDBC ドライバが実行中のドキュメントのキャンセルを試行するまでの最小時間を示します。デフォルトでは、タイムアウトは使用されません。 |  `0` |
+| Query Timeout Unit a| 列挙、以下のいずれか:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  `#queryTimeout`を限定する時間単位。ナノ秒、マイクロ秒、またはミリ秒で指定された値は、秒に丸められる。 | `SECONDS` |
+| Fetch Size a| 数値 |  結果セット から行を読み取るときにデータベースからフェッチする行数を示します。このプロパティは、ストリーミングがtrueの場合に必要であり、この場合、`10`の既定値が使用されます。 |  |
+| Max Rows a| 数値 |  このメッセージ プロセッサによって生成される 結果セット オブジェクトに含めることができる最大行数の制限を、指定された数に対して設定します。制限を超えると、超過した行は警告なしに削除されます。 |  |
+| SQL Query Text a| 文字列 |  実行するSQLクエリーのテキスト |  | x
+| Parameter Types a| 配列 <<ParameterType>> | このパラメータを使用すると、クエリー内の 1 つ以上のパラメータの型をオプションで指定できます。値が指定されている場合、すべてのパラメーターを参照する必須はありません。ただし、入力値に存在しないパラメータを参照することはできません。 |  |
+| Target Variable a| 文字列 |  操作の出力を格納する変数の名前 |  |
+| Target Value a| 文字列 |  操作の出力に対して評価し、式の結果をターゲット変数に格納する式 |  `#[payload]` |
+| Reconnection Strategy a| * <<reconnect>>
+* <<reconnect-forever>> |  接続エラーが発生した場合の再試行戦略 |  |
+|===
+
+==== 出力
+[%autowidth.spread]
+|===
+|型 |数値の配列
+|===
+
+=== 構成
+* <<config>>
+
+==== スロー
+
+* DB:CONNECTIVITY
+* DB:QUERY_EXECUTION
+* DB:RETRY_EXHAUSTED
+* DB:BAD_SQL_SYNTAX
+
+
+[[bulkInsert]]
+=== Bulk Insert
+`<db:bulk-insert>`
+
+
+この操作により、さまざまなパラメータ バインディングと単一のデータベース文を使用して、さまざまな時点で挿入を実行できます。これにより、単一の挿入操作をさまざまなタイミングで実行する場合に比べてパフォーマンスが向上します。
+
+
+==== パラメータ
+[%header,cols="20s,20a,35a,20a,5a"]
+|===
+| 名前 | 型 | 説明 | デフォルト値 | 必須
+| Configuration | 文字列 | 使用する構成の名前 | | x
+| Input Parameters a| オブジェクトの配列 |  すべてのリストアイテムが挿入される行を表すマップのリスト。マップにはキーとしてのパラメータ名とパラメーターがバインドされる値が含まれます。 |  `#[payload]` |
+| Transactional Action a| 列挙、以下のいずれか:
+
+** ALWAYS_JOIN
+** JOIN_IF_POSSIBLE
+** NOT_SUPPORTED |  トランザクションに関してオペレーションが実行できる参加アクションの型。 |  JOIN_IF_POSSIBLE |
+| Query Timeout a| 数値 |  JDBC ドライバが実行中の文のキャンセルを試行するまでの最小時間を示します。デフォルトではタイムアウトは使用されません。 |  0 |
+| Query Timeout Unit a| 列挙、以下のいずれか:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  `#queryTimeout`を修飾する TimeUnit。ナノ秒、マイクロ秒、またはミリ秒で指定された値は、秒に丸められる。 |  `SECONDS` |
+| Fetch Size a| 数値 |  結果セット から行を読み取るときにデータベースからフェッチする行数を示します。ストリーミングが true の場合、このプロパティは必須です。 その場合、デフォルト値 (10) が使用されます。 |  |
+| Max Rows a| 数値 |  このメッセージ プロセッサによって生成される 結果セット オブジェクトに含めることができる最大行数の制限を、指定された数に対して設定します。制限を超えると、超えた行は静かに削除されます。 |  |
+| SQL Query Text a| 文字列 |  実行するSQLクエリーのテキスト |  | x
+| Parameter Types a| 配列 <<ParameterType>> |  オプションで、クエリー内の 1 つ以上のパラメータの型を指定できます。指定した場合、すべてのパラメーターを参照する必須はありませんが、入力値に存在しないパラメーターを参照することはできません。 |  |
+| Target Variable a| 文字列 |  操作の出力を保存する変数の名前。 |  |
+| Target Value a| 文字列 |  操作の出力に対して評価し、式の結果をターゲット変数に格納する式 |  `#[payload]` |
+| Reconnection Strategy a| * <<reconnect>>
+* <<reconnect-forever>> |  接続エラーが発生した場合の再試行戦略。 |  |
+|===
+
+==== 出力
+[%autowidth.spread]
+|===
+|型 |数値の配列
+|===
+
+=== 構成
+* <<config>>
+
+==== スロー
+
+* DB:CONNECTIVITY
+* DB:QUERY_EXECUTION
+* DB:RETRY_EXHAUSTED
+* DB:BAD_SQL_SYNTAX
+
+
+[[bulkUpdate]]
+=== Bulk Update
+`<db:bulk-update>`
+
+
+この操作により、さまざまなパラメータ バインディングと単一のデータベース文を使用して、さまざまな時点で更新を実行できます。これにより、1 つの更新操作をさまざまなタイミングで実行する場合に比べて、パフォーマンスが向上します。
+
+
+==== パラメータ
+[%header,cols="20s,20a,35a,20a,5a"]
+|===
+| 名前 | 型 | 説明 | デフォルト値 | 必須
+| Configuration | 文字列 | 使用する構成の名前 | | x
+| 入力パラメータ a| オブジェクトの配列 |  マップのリストを指定します。マップのリストには、キーとしてパラメータ名とパラメータがバインドされている値が含まれており、すべてのリストアイテムが挿入する行を表します。 |  `#[payload]` |
+| Transactional Action a| 列挙、以下のいずれか:
+
+** ALWAYS_JOIN
+** JOIN_IF_POSSIBLE
+** NOT_SUPPORTED |  トランザクションに関してオペレーションが実行できる参加アクションの型。 |  JOIN_IF_POSSIBLE |
+| Query Timeout a| 数値 |  JDBC ドライバが実行中のドキュメントのキャンセルを試行するまでの最小時間を示します。デフォルトでは、タイムアウトは使用されない。 |  `0` |
+| Query Timeout Unit a| 列挙、以下のいずれか:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  `#queryTimeout`を限定する時間単位。ナノ秒、マイクロ秒、またはミリ秒で指定された値は、秒に丸められる。 | `SECONDS` |
+| Fetch Size a| 数値 |  結果セット から行を読み取るときにデータベースからフェッチする行数を示します。 | 10 |
+| Max Rows a| 数値 |  このメッセージ プロセッサによって生成される 結果セット オブジェクトに含めることができる最大行数の制限を、指定された数に対して設定します。制限を超えると、超えた行は静かに削除されます。 |  |
+| SQL Query Text a| 文字列 |  実行するSQLクエリーのテキスト |  | x
+| Parameter Types a| 配列 <<ParameterType>> |  オプションで、クエリー内の 1 つ以上のパラメータの型を指定できます。指定した場合、すべてのパラメータを参照する必要はありません。ただし、入力値に存在しないパラメータを参照することはできません。 |  |
+| Target Variable a| 文字列 |  操作の出力を格納する変数の名前 |  |
+| Target Value a| 文字列 |  操作の出力に対して評価し、式の結果をターゲット変数に格納する式 |  `#[payload]` |
+| Reconnection Strategy a| * <<reconnect>>
+* <<reconnect-forever>> |  接続エラーが発生した場合の再試行戦略 |  |
+|===
+
+==== 出力
+[%autowidth.spread]
+|===
+|型 |数値の配列
+|===
+
+=== 構成
+* <<config>>
+
+==== スロー
+
+* DB:CONNECTIVITY
+* DB:QUERY_EXECUTION
+* DB:RETRY_EXHAUSTED
+* DB:BAD_SQL_SYNTAX
+
+
+[[delete]]
+=== Delete
+`<db:delete>`
+
+
+この操作により、データベース内のデータが削除されます。
+
+
+==== パラメータ
+[%header,cols="20s,20a,35a,20a,5a"]
+|===
+| 名前 | 型 | 説明 | デフォルト値 | 必須
+| Configuration | 文字列 | 使用する構成の名前 | | x
+| Transactional Action a| 列挙、以下のいずれか:
+
+** ALWAYS_JOIN
+** JOIN_IF_POSSIBLE
+** NOT_SUPPORTED |  トランザクションに関してオペレーションが実行できる参加アクションの型 |  `JOIN_IF_POSSIBLE` |
+| Query Timeout a| 数値 |  JDBC ドライバが実行中のドキュメントのキャンセルを試行するまでの最小時間を示します。デフォルトでは、タイムアウトは使用されない。 |  `0` |
+| Query Timeout Unit a| 列挙、以下のいずれか:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  `#queryTimeout`を限定する時間単位。ナノ秒、マイクロ秒、またはミリ秒で指定された値は、秒に丸められる。 | `SECONDS` |
+| Fetch Size a| 数値 |  結果セット から行を読み取るときにデータベースからフェッチする行数を示します。 | 10 |
+| Max Rows a| 数値 |  このメッセージ プロセッサによって生成される 結果セット オブジェクトに含めることができる最大行数の制限を、指定された数に対して設定します。制限を超えると、超えた行は静かに削除されます。 |  |
+| SQL Query Text a| 文字列 |  実行するSQLクエリーのテキスト |  | x
+| Parameter Types a| 配列 <<ParameterType>> |  オプションで、クエリー内の 1 つ以上のパラメータの型を指定できます。値が指定されている場合、すべてのパラメータを参照する必要はありません。ただし、入力値に存在しないパラメータを参照することはできません。 |  |
+| Input Parameters a| オブジェクト |  キーが JDBC プリペアド文に設定する入力パラメータの名前であるマップ。各パラメータは SQL テキスト内でコロン接頭辞 ( `where id = :myParamName`など) を使用して参照する必須があります。 マップの値には、各パラメータの実際の割り当てが含まれています。 |  |
+| Target Variable a| 文字列 |  操作の出力を格納する変数の名前 |  |
+| Target Value a| 文字列 |  操作の出力に対して評価し、式の結果をターゲット変数に格納する式 |  `#[payload]` |
+| Reconnection Strategy a| * <<reconnect>>
+* <<reconnect-forever>> |  接続エラーが発生した場合の再試行戦略 |  |
+|===
+
+==== 出力
+[%autowidth.spread]
+|===
+|型 |数値
+|===
+
+=== 構成
+* <<config>>
+
+==== スロー
+
+* DB:CONNECTIVITY
+* DB:QUERY_EXECUTION
+* DB:RETRY_EXHAUSTED
+* DB:BAD_SQL_SYNTAX
+
+
+[[executeDdl]]
+=== Execute DDL
+`<db:execute-ddl>`
+
+
+この操作により、データベースに対して DDL クエリーを実行できるようになります。
+
+
+==== パラメータ
+[%header,cols="20s,20a,35a,20a,5a"]
+|===
+| 名前 | 型 | 説明 | デフォルト値 | 必須
+| Configuration | 文字列 | 使用する構成の名前 | | x
+| SQL Query Text a| 文字列 |  実行するSQLクエリーのテキスト |  | x
+| Transactional Action a| 列挙、以下のいずれか:
+
+** ALWAYS_JOIN
+** JOIN_IF_POSSIBLE
+** NOT_SUPPORTED |  トランザクションに関してオペレーションが実行できる参加アクションの型 |  `JOIN_IF_POSSIBLE` |
+| Query Timeout a| 数値 |  JDBC ドライバが実行中のドキュメントのキャンセルを試行するまでの最小時間を示します。デフォルトでは、タイムアウトは使用されない。 | `0` |
+| Query Timeout Unit a| 列挙、以下のいずれか:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  `#queryTimeout`を限定する時間単位。ナノ秒、マイクロ秒、またはミリ秒で指定された値は、秒に丸められる。 | `SECONDS` |
+| Fetch Size a| 数値 |  結果セット から行を読み取るときにデータベースからフェッチする行数を示します。 | 10 |
+| Max Rows a| 数値 |  このメッセージ プロセッサによって生成される 結果セット オブジェクトに含めることができる最大行数の制限を、指定された数に対して設定します。制限を超えると、超えた行は静かに削除されます。 |  |
+| Target Variable a| 文字列 |  操作の出力を格納する変数の名前 |  |
+| Target Value a| 文字列 |  操作の出力に対して評価し、式の結果をターゲット変数に格納する式 |  `#[payload]` |
+| Reconnection Strategy a| * <<reconnect>>
+* <<reconnect-forever>> |  接続エラーが発生した場合の再試行戦略 |  |
+|===
+
+==== 出力
+[%autowidth.spread]
+|===
+|型 |数値
+|===
+
+=== 構成
+* <<config>>
+
+==== スロー
+
+* DB:CONNECTIVITY
+* DB:QUERY_EXECUTION
+* DB:RETRY_EXHAUSTED
+* DB:BAD_SQL_SYNTAX
+
+
+[[executeScript]]
+=== Execute Script
+`<db:execute-script>`
+
+
+この操作では、単一のデータベース文で SQL スクリプトを実行します。スクリプトは、パラメータのバインドなしで、ユーザが指定したとおりに実行されます。
+
+
+==== パラメータ
+[%header,cols="20s,20a,35a,20a,5a"]
+|===
+| 名前 | 型 | 説明 | デフォルト値 | 必須
+| Configuration | 文字列 | 使用する構成の名前 | | x
+| Transactional Action a| 列挙、以下のいずれか:
+
+** ALWAYS_JOIN
+** JOIN_IF_POSSIBLE
+** NOT_SUPPORTED |  オペレーションがトランザクションに対して実行できる結合アクションの型。 |  `JOIN_IF_POSSIBLE` |
+| SQL Query Text a| 文字列 |  実行するSQLクエリーのテキスト |  |
+| Script Path a| 文字列 |  ロードするファイルの格納場所を指定します。ファイルは、クラスパスまたはディスク上のリソースを指すことができます。 |  |
+| Query Timeout a| 数値 |  JDBC ドライバが実行中のドキュメントのキャンセルを試行するまでの最小時間を示します。デフォルトでは、タイムアウトは使用されない。 |  `0` |
+| Query Timeout Unit a| 列挙、以下のいずれか:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  `#queryTimeout`を限定する時間単位。ナノ秒、マイクロ秒、またはミリ秒で指定された値は、秒に丸められる。 | `SECONDS` |
+| Fetch Size a| 数値 |  結果セット から行を読み取るときにデータベースからフェッチする行数を示します。 | 10 |
+| Max Rows a| 数値 |  このメッセージ プロセッサによって生成される 結果セット オブジェクトに含めることができる最大行数の制限を、指定された数に対して設定します。制限を超えると、超えた行は静かに削除されます。 |  |
+| Target Variable a| 文字列 |  操作の出力を格納する変数の名前 |  |
+| Target Value a| 文字列 |  操作の出力に対して評価し、式の結果をターゲット変数に格納する式 |  `#[payload]` |
+| Reconnection Strategy a| * <<reconnect>>
+* <<reconnect-forever>> |  接続エラーが発生した場合の再試行戦略 |  |
+|===
+
+==== 出力
+[%autowidth.spread]
+|===
+|型 |数値の配列
+|===
+
+=== 構成
+* <<config>>
+
+==== スロー
+
+* DB:CONNECTIVITY
+* DB:QUERY_EXECUTION
+* DB:RETRY_EXHAUSTED
+* DB:BAD_SQL_SYNTAX
+
+
+[[insert]]
+=== Insert
+`<db:insert>`
+
+
+この操作により、データベースにデータが挿入されます。
+
+
+==== パラメータ
+[%header,cols="20s,20a,35a,20a,5a"]
+|===
+| 名前 | 型 | 説明 | デフォルト値 | 必須
+| Configuration | 文字列 | 使用する構成の名前 | | x
+| Transactional Action a| 列挙、以下のいずれか:
+
+** ALWAYS_JOIN
+** JOIN_IF_POSSIBLE
+** NOT_SUPPORTED |  トランザクションに関してオペレーションが実行できる参加アクションの型 |  `JOIN_IF_POSSIBLE` |
+| Query Timeout a| 数値 |  JDBC ドライバが実行中のドキュメントのキャンセルを試行するまでの最小時間を示します。デフォルトでは、タイムアウトは使用されない。 |  `0` |
+| Query Timeout Unit a| 列挙、以下のいずれか:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  `#queryTimeout`を限定する時間単位。ナノ秒、マイクロ秒、またはミリ秒で指定された値は、秒に丸められる。 |  `SECONDS` |
+| Fetch Size a| 数値 |  結果セット から行を読み取るときにデータベースからフェッチする行数を示します。 | 10 |
+| Max Rows a| 数値 |  このメッセージ プロセッサによって生成される 結果セット オブジェクトに含めることができる最大行数の制限を、指定された数に対して設定します。制限を超えると、超えた行は静かに削除されます。 |  |
+| SQL Query Text a| 文字列 |  実行するSQLクエリーのテキスト |  | x
+| Parameter Types a| 配列 <<ParameterType>> |  オプションで、クエリー内の 1 つ以上のパラメータの型を指定できます。指定した場合、すべてのパラメータを参照する必要はありません。ただし、入力値に存在しないパラメータを参照することはできません。 |  |
+| Input Parameters a| オブジェクト |  キーが JDBC プリペアド文に設定される入力パラメータの名前であるマップ。各パラメータは SQL テキスト内でコロン接頭辞を使用して参照する必須があります (例: where id = :myParamName)。 マップの値には、各パラメータの実際の割り当てが含まれています。 |  |
+| Auto Generate Keys a| BOOLEAN |  自動生成されたキーを取得できるようにするタイミングを示す。 |  `false` |
+| Auto Generated Keys Column Indexes a| 数値の配列 |  どの自動生成キーを取得可能にするかを示す列インデックスのリスト |  |
+| Auto Generated Keys Column Names a| 文字列の配列 |  どの自動生成キーを取得可能にするかを示す列名のリスト |  |
+| Target Variable a| 文字列 |  操作の出力を格納する変数の名前 |  |
+| Target Value a| 文字列 |  操作の出力に対して評価し、式の結果をターゲット変数に格納する式 |  `#[payload]` |
+| Reconnection Strategy a| * <<reconnect>>
+* <<reconnect-forever>> |  接続エラーが発生した場合の再試行戦略 |  |
+|===
+
+==== 出力
+[%autowidth.spread]
+|===
+|型 |<<StatementResult>>
+|===
+
+=== 構成
+* <<config>>
+
+==== スロー
+
+* DB:CONNECTIVITY
+* DB:QUERY_EXECUTION
+* DB:RETRY_EXHAUSTED
+* DB:BAD_SQL_SYNTAX
+
+
+[[select]]
+=== Select
+`<db:select>`
+
+この操作はデータベースからデータをクエリーします。すべての結果を一度にロードしてパフォーマンスやメモリの問題を引き起こすことを防ぐために、結果は自動的にストリーミングされる。これは、必須に応じて _fetchSize_ 行のページがロードされることを意味します。この操作がトランザクション内 (つまり *Try* スコープ 構成要素内) で実行され、データを消費する前にそのトランザクションが閉じられた場合、ロードされていない結果へのアクセスは失敗します。
+
+==== パラメータ
+[%header,cols="20s,20a,35a,20a,5a"]
+|===
+| 名前 | 型 | 説明 | デフォルト値 | 必須
+| Configuration | 文字列 | 使用する構成の名前 | | x
+| Transactional Action a| 列挙、以下のいずれか:
+
+** ALWAYS_JOIN
+** JOIN_IF_POSSIBLE
+** NOT_SUPPORTED |  トランザクションに関してオペレーションが実行できる参加アクションの型 |  `JOIN_IF_POSSIBLE` |
+| Streaming Strategy a| * <<repeatable-in-memory-iterable>>
+* <<repeatable-file-store-iterable>>
+* non-repeatable-iterable |  反復可能なストリームを使用するように構成します。 |  |
+| Query Timeout a| 数値 |  JDBC ドライバが実行中のドキュメントのキャンセルを試行するまでの最小時間を示します。デフォルトでは、タイムアウトは使用されない。 |  `0` |
+| Query Timeout Unit a| 列挙、以下のいずれか:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  `#queryTimeout`を限定する時間単位。ナノ秒、マイクロ秒、またはミリ秒で指定された値は、秒に丸められる。 |  `SECONDS` |
+| Fetch Size a| 数値 |  結果セット から行を読み取るときにデータベースからフェッチする行数を示します。 | 10 |
+| Max Rows a| 数値 |  このメッセージ プロセッサによって生成される 結果セット オブジェクトに含めることができる最大行数の制限を、指定された数に対して設定します。制限を超えると、超えた行は静かに削除されます。 |  |
+| SQL Query Text a| 文字列 |  実行するSQLクエリーのテキスト |  | x
+| Parameter Types a| 配列 <<ParameterType>> |  オプションで、クエリー内の 1 つ以上のパラメータの型を指定できます。指定した場合、すべてのパラメータを参照する必要はありません。ただし、入力値に存在しないパラメータを参照することはできません。 |  |
+| Input Parameters a| オブジェクト |  キーが JDBC プリペアド 文に設定される入力パラメータの名前であるマップ。各パラメータは SQL テキスト内でコロン接頭辞を使用して参照する必要があります (例: where id = :myParamName)。 マップの値には、各パラメータの実際の割り当てが含まれます。 |  |
+| Target Variable a| 文字列 |  操作の出力を保存する変数の名前。 |  |
+| Target Value a| 文字列 |  操作の出力に対して評価し、式の結果をターゲット変数に格納する式 |  `#[payload]` |
+| Reconnection Strategy a| * <<reconnect>>
+* <<reconnect-forever>> |  接続エラーが発生した場合の再試行戦略。 |  |
+|===
+
+==== 出力
+[%autowidth.spread]
+|===
+|型 |オブジェクトの配列
+|===
+
+=== 構成
+* <<config>>
+
+=== プーリングプロファイルの操作
+プーリング プロファイルと *Select* 操作を使用する場合、接続は以下のいずれかが発生するまで開いたままになります。
+
+* フローの実行が終了する
+* ストリームの内容は完全に消費される
+* 接続はトランザクションキーです。
+
+[NOTE]
+LOB はストリームとして扱われるため、フローの実行が終了するまで、またはフローが完了する前にコンテンツが消費されるまで接続は開いたままになります。この場合、関連する接続を閉じるための最適なアプローチが取られます。
+
+この動作が発生するのは、操作が生成する結果セットがストリームを持つことも、進行中のトランザクションの一部になることもあるためです。
+
+
+==== スロー
+
+* DB:BAD_SQL_SYNTAX
+* DB:CONNECTIVITY
+* DB:QUERY_EXECUTION
+
+[[querySingle]]
+=== Query Single
+`<db:query-single>`
+
+
+この操作では、データベースから1つのデータレコードを選択する。複数の行を返す SQL クエリーを指定した場合、最初のレコードのみが処理されて返されます。この操作ではストリーミングは使用されない。つまり、単一クエリ操作を実行した直後に、選択したレコードの完全な内容がメモリにロードされる。
+
+==== パラメータ
+[%header,cols="20s,20a,35a,20a,5a"]
+|===
+| 名前 | 型 | 説明 | デフォルト値 | 必須
+| Configuration | 文字列 | 使用する構成の名前 | | x
+| Transactional Action a| 列挙、以下のいずれか:
+
+** ALWAYS_JOIN
+** JOIN_IF_POSSIBLE
+** NOT_SUPPORTED |  トランザクションに関してオペレーションが実行できる結合アクションの型 |  `JOIN_IF_POSSIBLE` |
+| Streaming Strategy a| * <<repeatable-in-memory-iterable>>
+* <<repeatable-file-store-iterable>>
+* non-repeatable-iterable |  繰り返し可能なストリームを使用するように設定する |  |
+| Query Timeout a| 数値 |  JDBC ドライバが実行中のドキュメントのキャンセルを試行するまでの最小時間を示します。デフォルトでは、タイムアウトは使用されない。 |  `0` |
+| Query Timeout Unit a| 列挙、以下のいずれか:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  `#queryTimeout`を限定する時間単位。ナノ秒、マイクロ秒、またはミリ秒で指定された値は、秒に丸められる。 |  `SECONDS` |
+| Fetch Size a| 数値 |  結果セット から行を読み取るときにデータベースからフェッチする行数を示します。 | 10 |
+| Max Rows a| 数値 |  このメッセージ プロセッサによって生成される 結果セット オブジェクトに含めることができる最大行数。制限を超えると、超えた行は静かに削除されます。 |  |
+| SQL Query Text a| 文字列 |  実行するSQLクエリーのテキスト |  | x
+| Parameter Types a| 配列 <<ParameterType>> |  オプションで、クエリー内の 1 つ以上のパラメータの型を指定できます。指定した場合、すべてのパラメータを参照する必須はありません。ただし、入力値に存在しないパラメータを参照することはできません。 |  |
+| Input Parameters a| オブジェクト |  キーが JDBC プリペアド 文に設定される入力パラメータの名前であるマップ。各パラメータは SQL テキスト内でコロン接頭辞を使用して参照する必要があります (例: where id = :myParamName)。 マップの値には、各パラメータの実際の割り当てが含まれます。 |  |
+| Target Variable a| 文字列 |  操作の出力を保存する変数の名前 |  |
+| Target Value a| 文字列 |  操作の出力を評価する式。式の結果はターゲット変数に保存されます。 |  `#[payload]` |
+| Reconnection Strategy a| * <<reconnect>>
+* <<reconnect-forever>> |  接続エラーが発生した場合の再試行戦略。 |  |
+|===
+
+==== 出力
+[%autowidth.spread]
+|===
+|型 | オブジェクト
+|===
+
+=== 構成
+* <<config>>
+
+=== プーリングプロファイルの操作
+プーリング プロファイルと Query Single 操作を使用する場合、接続は操作の実行後すぐにプールに戻ります。
+
+==== スロー
+
+* DB:BAD_SQL_SYNTAX
+* DB:CONNECTIVITY
+* DB:QUERY_EXECUTION
+
+
+[[storedProcedure]]
+=== Stored procedure
+`<db:stored-procedure>`
+
+
+データベース上のストアド プロシージャを呼び出す。 ストアド プロシージャが 1 つ以上の 結果セット インスタンスを返す場合、結果は一度にすべて読み取られるわけではありません。代わりに、パフォーマンスとメモリの問題を防ぐために、結果は自動的にストリーミングされます。この動作は、 `_fetchSize_` 行のページが必須に応じて遅延してロードされることを意味します。 *Stored procedure* 操作がトランザクション内 ( *Try* スコープ 構成要素内など) で実行され、そのトランザクションがデータを消費する前に閉じられた場合、ロードされていない結果へのアクセスは失敗します。
+
+
+==== パラメータ
+[%header,cols="20s,20a,35a,20a,5a"]
+|===
+| 名前 | 型 | 説明 | デフォルト値 | 必須
+| Configuration | 文字列 | 使用する構成の名前。 | | x
+| Transactional Action a| 列挙、以下のいずれか:
+
+** ALWAYS_JOIN
+** JOIN_IF_POSSIBLE
+** NOT_SUPPORTED |  トランザクションに関してオペレーションが実行できる参加アクションの型。 |  JOIN_IF_POSSIBLE |
+
+| Streaming Strategy a| * <<repeatable-in-memory-iterable>>
+* <<repeatable-file-store-iterable>>
+* non-repeatable-iterable |  反復可能なストリームを使用するように構成|  |
+| Query Timeout a| 数値 |  JDBC ドライバが実行中の文のキャンセルを試行するまでの最小時間を示します。デフォルトではタイムアウトは使用されません。 |  0 |
+| Query Timeout Unit a| 列挙、以下のいずれか:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  `#queryTimeout`を限定する時間単位。ナノ秒、マイクロ秒、またはミリ秒で指定された値は、秒に丸められる。 |  `SECONDS` |
+| Fetch Size a| 数値 |  結果セット から行を読み取るときにデータベースからフェッチする行数を示します。ストリーミングが true の場合、このプロパティは必須です。 その場合、デフォルト値 (10) が使用されます。 |  |
+| Max Rows a| 数値 |  このメッセージ プロセッサによって生成される 結果セット オブジェクトに含めることができる最大行数の制限を、指定された数に対して設定します。制限を超えると、超えた行は静かに削除されます。 |  |
+| SQL Query Text a| 文字列 |  実行するSQLクエリーのテキスト |  | x
+| Parameter Types a| 配列 <<ParameterType>> |  オプションで、クエリー内の 1 つ以上のパラメータの型を指定できます。指定した場合、すべてのパラメーターを参照する必須はありませんが、入力値に存在しないパラメーターを参照することはできません。 |  |
+| Input Parameters a| オブジェクト |  キーが JDBC プリペアド 文に設定される入力パラメータの名前であるマップ。各パラメータは SQL テキスト内でコロン接頭辞を使用して参照する必要があります (例: where id = :myParamName)。 マップの値には、各パラメータの実際の割り当てが含まれます。 |  |
+| Input - Output Parameters a| オブジェクト |  キーが入力と出力の両方である JDBC プリペアド文に設定されるパラメータの名前であるマップ。 各パラメータは SQL テキスト内でコロン接頭辞を使用して参照する必須があります (例: where id = :myParamName)。 マップの値には、各パラメータの実際の割り当てが含まれます。 |  |
+| Output Parameters a| 配列 <<OutputParameter>> |  JDBC プリペアド文に設定される出力パラメータのリスト。各パラメータは SQL テキスト内でコロン接頭辞を使用して参照する必要があります (例: call multiply(:value, :result))。 |  |
+| Auto Generate Keys a| BOOLEAN |  自動生成されたキーを取得できるようにするタイミングを示す。 |  `false` |
+| Auto Generated Keys Column Indexes a| 数値の配列 |  どの自動生成キーを取得可能にするかを示す列インデックスのリスト |  |
+| Auto Generated Keys Column Names a| 文字列の配列 |  どの自動生成キーを取得可能にするかを示す列名のリスト。 |  |
+| Target Variable a| 文字列 |  操作の出力を保存する変数の名前。 |  |
+| Target Value a| 文字列 |  操作の出力に対して評価し、式の結果をターゲット変数に格納する式 |  `#[payload]` |
+| Reconnection Strategy a| * <<reconnect>>
+* <<reconnect-forever>> |  接続エラーが発生した場合の再試行戦略 |  |
+|===
+
+==== 出力
+[%autowidth.spread]
+|===
+|型 |オブジェクト
+|===
+
+=== 構成
+* <<config>>
+
+=== プーリングプロファイルの操作
+
+プーリングプロファイルと*Stored procedure*操作を使用する場合、フローの実行が終了するか、ストリームのコンテンツが完全に消費されるまで、または接続がトランザクション キーである場合、接続は開いたままになります。この動作は、操作によって生成される結果セットにストリームが含まれているか、進行中のトランザクションの一部である可能性があるために発生します。
+
+データベース コネクタ1.8.3以降では、*Stored procedure*操作の接続がストリームまたはトランザクションの一部でない場合は、それらの接続が解放される。
+
+
+
+==== スロー
+
+* DB:BAD_SQL_SYNTAX
+* DB:CONNECTIVITY
+* DB:QUERY_EXECUTION
+* DB:RETRY_EXHAUSTED
+
+
+[[update]]
+=== Update
+`<db:update>`
+
+
+データベース内のデータを更新します。
+
+
+==== パラメータ
+[%header,cols="20s,20a,35a,20a,5a"]
+|===
+| 名前 | 型 | 説明 | デフォルト値 | 必須
+| Configuration | 文字列 | 使用する構成の名前 | | x
+| Transactional Action a| 列挙、以下のいずれか:
+
+** ALWAYS_JOIN
+** JOIN_IF_POSSIBLE
+** NOT_SUPPORTED |  オペレーションがトランザクションに対して実行できる結合アクションの型 |  `JOIN_IF_POSSIBLE` |
+| Query Timeout a| 数値 |  JDBC ドライバが実行中のドキュメントのキャンセルを試行するまでの最小時間を示します。デフォルトでは、タイムアウトは使用されない。 | `0` |
+| Query Timeout Unit a| 列挙、以下のいずれか:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  `#queryTimeout`を限定する時間単位。ナノ秒、マイクロ秒、またはミリ秒で指定された値は、秒に丸められる。 | `SECONDS` |
+| Fetch Size a| 数値 |  結果セット から行を読み取るときにデータベースからフェッチする行数を示します。 | 10 |
+| Max Rows a| 数値 |  このメッセージ プロセッサによって生成される 結果セット オブジェクトに含めることができる最大行数の制限を、指定された数に対して設定します。制限を超えると、超えた行は静かに削除されます。 |  |
+| SQL Query Text a| 文字列 |  実行するSQLクエリーのテキスト |  | x
+| Parameter Types a| 配列 <<ParameterType>> |  オプションで、クエリー内の 1 つ以上のパラメータの型を指定できます。指定した場合、すべてのパラメータを参照する必要はありません。ただし、入力値に存在しないパラメータを参照することはできません。 |  |
+| Input Parameters a| オブジェクト |  キーが JDBC プリペアド文に設定する入力パラメータの名前であるマップ。各パラメータは SQL テキスト内でコロン接頭辞を使用して参照する必須があります (例: where id = :myParamName)。 マップの値には、各パラメータの実際の割り当てが含まれています。 |  |
+| Auto Generate Keys a| BOOLEAN |  自動生成されたキーをいつ取得できるようにするかを示します |  `false` |
+| Auto Generated Keys Column Indexes a| 数値の配列 |  どの自動生成キーを取得可能にするかを示す列インデックスのリスト |  |
+| Auto Generated Keys Column Names a| 文字列の配列 |  どの自動生成キーを取得可能にするかを示す列名のリスト |  |
+| ターゲット変数 a| 文字列 |  操作の出力を格納する変数の名前 |  |
+| Target Value a| 文字列 |  操作の出力に対して評価し、式の結果をターゲット変数に格納する式 |  `#[payload]` |
+| Reconnection Strategy a| * <<reconnect>>
+* <<reconnect-forever>> |  接続エラーが発生した場合の再試行戦略 |  |
+|===
+
+==== 出力
+[%autowidth.spread]
+|===
+|型 |<<StatementResult>>
+|===
+
+=== 構成
+* <<config>>
+
+==== スロー
+
+* DB:BAD_SQL_SYNTAX
+* DB:CONNECTIVITY
+* DB:QUERY_EXECUTION
+* DB:RETRY_EXHAUSTED
+
+
+== ソース
+
+[[listener]]
+=== On Table Row
+`<db:listener>`
+
+
+この操作は、テーブルから一定の間隔で選択し、取得した行ごとに 1 つのメッセージを生成します。 オプションで、ウォーターマーク列と ID 列を指定できます。ウォーターマーク列が指定されている場合は、その列から取得した値を使用して以下のポーリングのコンテンツがフィルタリングされ、より大きなウォーターマーク値を持つ行のみが返されます。ID 列が指定されている場合、この構成要素は、同時ポーリングによって同じ行が 2 回選択されていないことを自動的に検証します。
+
+この操作はストリーミングをサポートしていません。つまり、操作の結果にアクセスするためにペイロードに追加の変換を実行する必須はありません。この動作は、バージョン1.9でリリースされた*Query Single*操作と同じです。
+
+==== パラメータ
+[%header,cols="20s,20a,35a,20a,5a"]
+|===
+| 名前 | 型 | 説明 | デフォルト値 | 必須
+| Configuration | 文字列 | 使用する構成の名前 | | x
+| Table a| 文字列 |  選択するテーブルの名前 |  | x
+| Watermark Column a| 文字列 |  透かしに使用する列の名前。この列から取得された値は、以下のポーリングのコンテンツをフィルタリングするために使用され、より大きなウォーターマーク値を持つ行のみが処理されます。 |  |
+| Id Column a| 文字列 |  行IDと見なす列の名前。指定した場合、この構成要素は、同時ポーリングによって同じ行が 2 回処理されないようにします。 |  |
+| Transactional Action a| 列挙、以下のいずれか:
+
+** ALWAYS_BEGIN
+** NONE |  トランザクションに関してソースが実行できる開始アクションの型 |  `NONE` |
+| Transaction Type a| 列挙、以下のいずれか:
+
+** LOCAL
+** XA |  作成するトランザクションの型。可用性はランタイムのバージョンによって異なります。 |  `LOCAL` |
+| Primary Node Only a| BOOLEAN |  クラスタ内で実行する場合、このソースをプライマリ ノードでのみ実行するかどうか |  |
+| Scheduling Strategy a| scheduling-strategy |  ポーリングをトリガーするスケジューラを設定します。 |  | x
+| Redelivery Policy a| <<RedeliveryPolicy>> |  同じメッセージの再配信を処理するためのポリシーを定義する |  |
+| Query Timeout a| 数値 |  JDBC ドライバが実行中のドキュメントのキャンセルを試行するまでの最小時間を示します。デフォルトでは、タイムアウトは使用されない。 | `0` |
+| Query Timeout Unit a| 列挙、以下のいずれか:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  `#queryTimeout`を限定する時間単位。ナノ秒、マイクロ秒、またはミリ秒で指定された値は、秒に丸められる。 |  `SECONDS` |
+| Fetch Size a| 数値 |  結果セット から行を読み取るときにデータベースからフェッチする行数を示します。 | 10 |
+| Max Rows a| 数値 |  このメッセージ プロセッサによって生成される 結果セット オブジェクトに含めることができる最大行数の制限を、指定された数に対して設定します。制限を超えると、超えた行は静かに削除されます。 |  |
+| Reconnection Strategy a| * <<reconnect>>
+* <<reconnect-forever>> |  接続エラーが発生した場合の再試行戦略。 |  |
+|===
+
+==== 出力
+[%autowidth.spread]
+|===
+|型 |オブジェクト
+|===
+
+=== 構成
+* <<config>>
+
+
+
+== 型
+[[pooling-profile]]
+=== プーリングプロファイル
+
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| Max Pool Size a| 数値 | 任意の時点でプールが保持する最大接続数 | `5` |
+| Min Pool Size a| 数値 | プールが常に維持する接続の最小数 | `0` |
+| Acquire Increment a| 数値 | プールが使い果たされたときに一度に取得を試みる接続の数を決定します | `1` |
+| Prepared Statement Cache Size a| 数値 | プールされた接続ごとにキャッシュされる文の数を決定します。これをゼロに設定すると、文のキャッシュが無効になります。 | `5` |
+| Max Wait a| 数値 | プールが使い果たされたときに、接続を取得しようとするクライアントが接続を取得するのを待つ時間。この値をゼロ (デフォルト) に設定すると、無期限に待機することになります。これは`checkoutTimeout`と同等であり、追加プロパティでオーバーライドすることはできません。 | `0` |
+| Max Wait Unit a| 列挙、以下のいずれか:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS | A #maxWait. | SECONDS |
+| Max Idle Time a| 数値 | 接続がプールされているが未使用のままで、破棄されるまでの秒数を決定します。この値をゼロ (デフォルト) に設定すると、アイドル状態の接続は期限切れになりません。 | `0` |
+| Additional Properties a| オブジェクト |  キーがプーリング プロファイル構成プロパティの名前であるマップ式の使用はサポートされていません。これらのプロパティを使用して、以前に指定したプロパティ (最大プール サイズや最小プール サイズなど) をオーバーライドすることはできません。オーバーライドしようとすると、メインのプロパティが優先されます。 マップの値には、各パラメータの実際の割り当てが含まれています。 |  |
+| Max Statement a| 数値 | DataSource がキャッシュする PreparedStatement の合計数を定義します。指定された制限に達すると、プールは最も最近使用された PreparedStatement を破棄します。 `0`に設定すると、文のキャッシュがオフになります |  |
+| Test connection on checkout a| BOOLEAN | パフォーマンスを向上させるために、チェックアウト時の接続テストを無効にします。 `true`に設定すると、接続が有効であることを検証するために接続チェックアウトのたびに操作が実行されます。より良い選択は、`c3p0.idleConnectionTestPeriod`を使用して定期的に接続を検証することです。パフォーマンスを向上させるには、このプロパティを`false`に設定します。 | `true` |
+|===
+
+[[ColumnType]]
+=== Column Type
+
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| Id a| 数値 | JDBCドライバが使用する型識別子 |  | x
+| Type Name a| 文字列 | JDBCドライバが使用するデータ型の名前 |  | x
+| Class Name a| 文字列 | データベース型をマップするためにどの Java クラスを使用する必須があるかを示します |  |
+|===
+
+[[Reconnection]]
+=== Reconnection
+
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| Fails Deployment a| BOOLEAN | アプリケーションがデプロイされると、すべてのコネクタに対して疎通確認が実行される。`true`に設定した場合、関連する再接続方法を試してもテストに合格しないと、デプロイは失敗する。 |  |
+| Reconnection Strategy a| * <<reconnect>>
+* <<reconnect-forever>> | 使用するReconnection Strategy |  |
+|===
+
+[[reconnect]]
+=== Reconnect
+
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| Frequency a| 数値 | 再接続の頻度(ミリ秒単位) | |
+| Count a| 数値 | 再接続の試行回数 | |
+| blocking |BOOLEAN | `false`に設定すると、再接続方法は個別の非ブロッキングスレッドで実行されます | `true` |
+|===
+
+[[reconnect-forever]]
+=== Reconnect Forever
+
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| Frequency a| 数値 | 再接続する頻度 (ミリ秒単位) | |
+| blocking |BOOLEAN | `false`に設定すると、再接続方法は個別の非ブロッキングスレッドで実行される | `true` |
+|===
+
+[[Tls]]
+=== Tls
+
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| Enabled Protocols a| 文字列 | このコンテキストでイネーブルにされているプロトコルのカンマ区切りのリスト。 |  |
+| Enabled Cipher Suites a| 文字列 | このコンテキストに対して有効な暗号スイートのカンマ区切りのリスト。 |  |
+| Trust Store a| <<TrustStore>> |  |  |
+| Key Store a| <<KeyStore>> |  |  |
+| Revocation Check a| * <<standard-revocation-check>>
+* <<custom-ocsp-responder>>
+* <<crl-file>> |  |  |
+|===
+
+[[TrustStore]]
+=== Trust Store
+
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| Path a| 文字列 | トラスト ストアの格納場所 (可能であれば、現在のクラスパスとファイル システムを基準にして解決されます)。 |  |
+| Password a| 文字列 | トラストストアを保護するために使用されるパスワード。 |  |
+| Type a| 文字列 | 使用されるストアの型。 |  |
+| Algorithm a| 文字列 | トラストストアで使用されるアルゴリズム。 |  |
+| Insecure a| BOOLEAN | true の場合、証明書の妥当性検査は実行されず、接続が攻撃に対して脆弱になります。自己責任で使用してください。 |  |
+|===
+
+[[KeyStore]]
+=== Key Store
+
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| Path a| 文字列 | キー ストアの格納場所 (可能であれば、現在のクラスパスとファイル システムを基準にして解決されます)。 |  |
+| Type a| 文字列 | 使用されるストアの型。 |  |
+| Alias a| 文字列 | キー ストアに多くの秘密キーが含まれている場合、この属性は使用する必須があるキーのエイリアスを示します。定義されていない場合、ファイル内の最初のキーがデフォルトで使用される。 |  |
+| Key Password a| 文字列 | 秘密キーを保護するために使用されるパスワード。 |  |
+| Password a| 文字列 | キーストアを保護するために使用されるパスワード。 |  |
+| Algorithm a| 文字列 | キーストアで使用されるアルゴリズム。 |  |
+|===
+
+[[standard-revocation-check]]
+=== Standard Revocation Check
+
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| Only End Entities a| BOOLEAN | 証明書チェーンの最後の構成要素のみを検証してください。 |  |
+| Prefer Crls a| BOOLEAN | 最初に OCSP の代わりに CRL を試してください。 |  |
+| No Fallback a| BOOLEAN | 2 番目のチェックメソッド (以前に選択されていない方法) は使用しないでください。 |  |
+| Soft Fail a| BOOLEAN | 失効サーバに到達できない場合やビジー状態の場合に、検証が失敗しないようにする。 |  |
+|===
+
+[[custom-ocsp-responder]]
+=== Custom Ocsp Responder
+
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| Url a| 文字列 | OCSPレスポンダーのURL。 |  |
+| Cert Alias a| 文字列 | OCSP 応答の署名証明書のエイリアス (トラスト ストア内にある必須があります) (存在する場合)。 |  |
+|===
+
+[[crl-file]]
+=== Crl File
+
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| Path a| 文字列 | CRLファイルへのパス。 |  |
+|===
+
+
+[[ExpirationPolicy]]
+=== Expiration Policy
+
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| Max Idle Time a| 数値 | 動的構成インスタンスが期限切れに適格であると見なされるまでにアイドルであることを許可される最大時間のスカラー時間値 |  |
+| Time Unit a| 列挙、以下のいずれか:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS | A time unit that qualifies the `maxIdleTime` attribute |  |
+|===
+
+[[RedeliveryPolicy]]
+=== Redelivery Policy
+
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| Max Redelivery Count a| 数値 | プロセス失敗メッセージをトリガーする前に、メッセージが再配信され、処理に失敗する最大回数 |  |
+| Use Secure Hash a| BOOLEAN | 再配信されたメッセージを識別するために、セキュアなハッシュアルゴリズムを使用するかどうか。 |  |
+| Message Digest Algorithm a| 文字列 | 使用するセキュアなハッシュアルゴリズム。これが設定されていない場合、デフォルトはSHA-256です。 | `SHA-256` |
+| Id Expression a| 文字列 | メッセージが再配信されたときに決定するために使用する1つ以上の式を定義する。このプロパティは、*Use secure hash*が`false`に設定されている場合にのみ設定できる。 |  |
+| Object Store a| Object Store | 各メッセージの再配信カウンタが格納されるオブジェクトストア |  |
+|===
+
+[[ParameterType]]
+=== Parameter Type
+
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| Key a| 文字列 | 入力パラメータの名前 |  | x
+| Type Classifier a| <<TypeClassifier>> |  |  | x
+|===
+
+[[TypeClassifier]]
+=== Type Classifier
+
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| Type a| 列挙、以下のいずれか:
+
+** BIT
+** TINYINT
+** SMALLINT
+** INTEGER
+** BIGINT
+** FLOAT
+** REAL
+** DOUBLE
+** NUMERIC
+** DECIMAL
+** CHAR
+** VARCHAR型
+** LONGVARCHAR
+** DATE
+** TIME
+** TIMESTAMP
+** BINARY
+** VARBINARY
+** LONGVARBINARY
+** NULL
+** OTHER
+** JAVA_OBJECT
+** DISTINCT
+** STRUCT
+** ARRAY
+** BLOB
+** CLOB
+** REF
+** DATALINK
+** BOOLEAN
+** ROWID
+** NCHAR
+** NVARCHAR
+** LONGNVARCHAR
+** NCLOB
+** SQLXML
+** UNKNOWN |  |  |
+| Custom Type a| 文字列 |  |  |
+|===
+
+[[StatementResult]]
+=== Statement Result
+
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| Affected Rows a| 数値 |  |  |
+| Generated Keys a| オブジェクト |  |  |
+|===
+
+[[repeatable-in-memory-iterable]]
+=== Repeatable In Memory Iterable
+
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| Initial Buffer Size a| 数値 | ストリームを消費し、ストリームへのランダムアクセスを提供するために、最初にメモリに保持することが許可されるインスタンスの数。このバッファに収まる量を超えるデータがストリームに含まれている場合、バッファは *Buffer size increment* 属性に従って拡張されます (上限は *最大メモリサイズ*)。デフォルト値は100インスタンスです。 | `100`  |
+| Buffer Size Increment a| 数値 | バッファサイズが初期サイズを超えた場合に拡張する量を指定する。値を0以下に設定すると、バッファは拡張されないことを意味する。この場合、バッファがいっぱいになると`STREAM_MAXIMUM_SIZE_EXCEEDED`エラーが発生する。デフォルト値は100インスタンスです。 | `100`  |
+| Max Buffer Size a| 数値 | 使用するメモリの最大量。指定された最大メモリ量を超えるメモリが使用されると、`STREAM_MAXIMUM_SIZE_EXCEEDE`D エラーが発生します。ゼロ以下の値は制限がないことを意味します。 |  |
+|===
+
+[[repeatable-file-store-iterable]]
+=== Repeatable File Store Iterable
+
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| In Memory Objects a| 数値 | メモリに保持するインスタンスの最大数。指定された最大値を超えるものが必須な場合、コンテンツはディスク上でバッファリングされ始めます。 |  |
+| In Memory Objects a| 列挙、以下のいずれか:
+
+** BYTE
+** KB
+** MB
+** GB | maxInMemorySizeを表す単位 |  |
+|===
+
+[[repeatable-in-memory-stream]]
+=== Repeatable In Memory Stream
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| Initial Buffer Size a| 数値 | ストリームを消費し、ストリームへのランダムアクセスを提供するために、最初にメモリに保持することが許可されるインスタンスの数。このバッファに収まる量を超えるデータがストリームに含まれている場合、バッファは *Buffer size increment* 属性に従って拡張され、上限は *最大メモリサイズ*になります。 |  |
+| Buffer Size Increment a| 数値 | バッファサイズが初期サイズを超えた場合に拡張する量を指定する。ゼロ以下の値を設定すると、バッファが拡張されないことを意味します。その場合、バッファがいっぱいになると `STREAM_MAXIMUM_SIZE_EXCEEDED`エラーが発生します。 |  |
+| Max Buffer Size a| 数値 | 使用するメモリの最大量。If more than the specified maximum amount of memory is used, then a `STREAM_MAXIMUM_SIZE_EXCEEDED` error is raised. ゼロ以下の値は、制限がないことを意味する。 |  |
+| Buffer Unit a| 列挙、以下のいずれか:
+** BYTE
+** KB
+** MB
+** GB | これらすべての属性が表現される単位 |  |
+|===
+[[repeatable-file-store-stream]]
+=== Repeatable File Store Stream
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| In Memory Size a| 数値 | ストリームがデータをメモリに保持するために使用する最大メモリを定義する。それ以上が消費されると、ディスク上のコンテンツはバッファされる。 |  |
+
+| Buffer Unit a| 列挙、以下のいずれか:
+
+** BYTE
+** KB
+** MB
+** GB | *Max in memory size*を表す単位 |  |
+|===
+
+[[OutputParameter]]
+=== Output Parameter
+
+[%header,cols="20s,25a,30a,15a,10a"]
+|===
+| フィールド | 型 | 説明 | デフォルト値 | 必須
+| Key a| 文字列 | 入力パラメータの名前 |  | x
+| Type Classifier a| <<TypeClassifier>> |  |  | x
+|===
+
+== 関連アイテム
+
+https://help.mulesoft.com[MuleSoft Help Center]
