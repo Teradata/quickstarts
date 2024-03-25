@@ -3,8 +3,3 @@ node_modules
 build
 buildw-local
 .vscode
-.idea/vcs.xml
-.idea/quickstarts.iml
-.idea/modules.xml
-.idea/misc.xml
-.idea/inspectionProfiles/profiles_settings.xml
