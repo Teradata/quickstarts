@@ -213,7 +213,7 @@ sudo -i
 mkdir /opt/downloads
 cd /opt/downloads
 ----
-include::partial$install.ve.in.public.cloud.adoc[]
+include::../partials/install.ve.in.public.cloud.adoc[]
 * インターネットから Vantage Express に接続したい場合は、VM にファイアウォールの穴を開ける必要があります。また、デフォルトのパスワードを  `dbc`ユーザーに変更する必要があります。
 .  `dbc` ユーザーのパスワードを変更するには、VM に移動して bteq を開始します。
 +
@@ -279,10 +279,10 @@ aws ec2 delete-vpc \
   --vpc-id $AWS_VPC_ID
 ----
 
-include::partial$next.steps.adoc[]
+include::../partials/next.steps.adoc[]
 
 == さらに詳しく
 * link:https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20[Teradata®Studio™およびStudio™Expressインストール ガイド]
 * link:https://docs.teradata.com/r/jmAxXLdiDu6NiyjT6hhk7g/root[BTEQの紹介]
 
-include::ROOT:partial$community_link.adoc[]
+include::../partials/community_link.adoc[]

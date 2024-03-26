@@ -76,7 +76,7 @@ bteq
 
 . `dbc`ユーザーを使用して、`HR`という新しいデータベースを作成します。このクエリーをコピー/貼り付けて、kbd:[Enter] を押して実行します。
 +
-include::partial$getting.started.queries.adoc[]
+include::../partials/getting.started.queries.adoc[]
 
 == オプションを設定する
 
