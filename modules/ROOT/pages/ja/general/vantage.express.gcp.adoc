@@ -130,7 +130,7 @@ gcloud compute firewall-rules delete vantage-express
 ----
 
 == 次のステップ
-* xref:../general/nos.adoc[オブジェクトストレージに保存されたクエリーデータ]
+* xref:general/nos.adoc[オブジェクトストレージに保存されたクエリーデータ]
 
 == さらに詳しく
 * link:https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20[Teradata®Studio™およびStudio™Expressインストール ガイド]
