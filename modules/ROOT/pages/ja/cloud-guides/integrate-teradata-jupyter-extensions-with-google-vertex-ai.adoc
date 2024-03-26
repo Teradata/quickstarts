@@ -1,0 +1,178 @@
+= Google Vertex AIとTeradata Jupyterエクステンションを統合する
+:page-lang: ja
+:experimental:
+:page-author: Hailing Jiang
+:page-email: Hailing.Jiang@teradata.com
+:page-revdate: 2022 年 6 月 28 日
+:description: Google Vertex AIとTeradata Jupyterエクステンションを統合する
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy
+:page-image-directory: integrate-teradata-jupyter-extensions-with-google-vertex-ai
+
+include::../partials/jupyter_notebook_clearscape_analytics_note.adoc[]
+
+== 概要
+Teradata Jupyter拡張は、Teradata SQLカーネルといくつかのUI拡張を提供し、ユーザーがJupyter環境からTeradataデータベースに容易にアクセスし、操作できるようにします。Google Vertex AIは、Google Cloudの新しい統合MLプラットフォームです。Vertex AI Workbenchは、データサイエンスワークフロー全体のためのJupyterベースの開発環境を提供します。今回は、Vertex AIユーザーがMLパイプラインでTeradata拡張を利用できるように、弊社のJupyterエクステンションをVertex AI Workbenchと統合するについて説明します。
+
+Vertex AI Workbenchは、マネージドNotebookとユーザーマネージドNotebookの2種類のNotebookをサポートしています。ここでは、ユーザー管理型Notebookに焦点を当てます。Jupyter 拡張機能をユーザー管理のNotebookと統合する 2 つの方法を示します。スタートアップスクリプトを使用してカーネルと拡張機能をインストールする方法と、カスタムコンテナを使用する方法の2種類があります。
+
+== 前提条件
+* Teradata Vantageインスタンスへのアクセス。
++
+include::../partials/vantage_clearscape_analytics.adoc[]
+* Vertex AIを有効にしたGoogle Cloudアカウント
+* 起動スクリプトとTeradata Jupyter拡張パッケージを保存するためのGoogleクラウドストレージ
+
+== 統合について
+
+Vertex AIでTeradata Jupyter Extensionsを実行するには、2つの方法があります。
+
+1. link:#_use_startup_script[スタートアップスクリプトを使用する]
+2.link:#_use_custom_container[カスタムコンテナを使用する]
+
+この2つの統合方法について、以下に説明します。
+
+=== スタートアップスクリプトを使用する
+
+新しいNotebookインスタンスを作成する際に、スタートアップスクリプトを指定することができます。このスクリプトは、インスタンスの作成後に一度だけ実行されます。以下はその手順です。
+
+1. Teradata Jupyter 拡張パッケージのダウンロードする
++
+link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter] ページから、Teradata Jupyter extensionsパッケージのバンドルLinux版をダウンロードします。
+
+2. パッケージを Google Cloud ストレージ バケットにアップロードする
+
+3. 起動スクリプトを作成し、クラウドストレージバケットにアップロードする
++
+下記はサンプルスクリプトです。クラウドストレージバケットからTeradata Jupyter extensionパッケージを取得し、Teradata SQLカーネルとエクステンションをインストールします。
++
+[source, bash, role="content-editable"]
+----
+#! /bin/bash
+
+cd /home/jupyter
+mkdir teradata
+cd teradata
+gsutil cp gs://teradata-jupyter/* .
+unzip teradatasql*.zip
+
+# Install Teradata kernel
+cp teradatakernel /usr/local/bin
+
+jupyter kernelspec install ./teradatasql --prefix=/opt/conda
+
+# Install Teradata extensions
+pip install --find-links . teradata_preferences_prebuilt
+pip install --find-links . teradata_connection_manager_prebuilt
+pip install --find-links . teradata_sqlhighlighter_prebuilt
+pip install --find-links . teradata_resultset_renderer_prebuilt
+pip install --find-links . teradata_database_explorer_prebuilt
+
+# PIP install the Teradata Python library
+pip install teradataml
+
+# Install Teradata R library (optional, uncomment this line only if you use an environment that supports R)
+#Rscript -e "install.packages('tdplyr',repos=c('https://r-repo.teradata.com','https://cloud.r-project.org'))"
+----
+
+
+4. 新しいNotebookを作成し、クラウドストレージバケットからスタートアップスクリプトを追加する
++
+image:cloud-guides/{page-image-directory}/vertex.create.notebook.startupscript.png[起動スクリプトを使用して新しいNotebookを作成する, width=75%]
+
+5. Notebookの作成が完了するまで、数分かかる場合があります。完了したら、 `Open notebook`をクリックする。
++
+image:cloud-guides/{page-image-directory}/vertex.open.notebook.png[Open notebook, width=75%]
+
+=== カスタムコンテナを使用する
+
+もう 1 つのオプションは、Notebookの作成時にカスタム コンテナを提供することです。
+
+1. Teradata Jupyter エクステンションパッケージのダウンロードする
++
+link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter ]ページから、Teradata Jupyter extensionsパッケージバンドルLinux版をダウンロードします。
+
+2. このパッケージを作業ディレクトリにコピーし、解凍する
+
+3. カスタム Docker イメージを構築する
++
+カスタムコンテナは、8080番ポートでサービスを公開する必要があります。Google Deep Learning Containersイメージから派生したコンテナを作成することをお勧めします。これらのイメージは、ユーザ管理Notebookと互換性があるようにすでに構成されているからです。
++
+以下は、Teradata SQLカーネルおよび拡張機能をインストールしたDockerイメージを構築するために使用できるDockerfileのサンプルです。
++
+[source, Dockerfile, role="content-editable"]
+----
+# Use one of the deep learning images as base image
+# if you need both Python and R, use one of the R images
+FROM gcr.io/deeplearning-platform-release/r-cpu:latest
+
+USER root
+
+##############################################################
+# Install kernel and copy supporting files
+##############################################################
+
+# Copy the kernel
+COPY ./teradatakernel /usr/local/bin
+
+RUN chmod 755 /usr/local/bin/teradatakernel
+
+# Copy directory with kernel.json file into image
+COPY ./teradatasql teradatasql/
+
+# Copy notebooks and licenses
+COPY ./notebooks/ /home/jupyter
+COPY ./license.txt /home/jupyter
+COPY ./ThirdPartyLicenses/ /home/jupyter
+
+# Install the kernel file to /opt/conda jupyter lab instance
+RUN jupyter kernelspec install ./teradatasql --prefix=/opt/conda
+
+##############################################################
+# Install Teradata extensions
+##############################################################
+
+RUN pip install --find-links . teradata_preferences_prebuilt && \
+    pip install --find-links . teradata_connection_manager_prebuilt && \
+    pip install --find-links . teradata_sqlhighlighter_prebuilt && \
+    pip install --find-links . teradata_resultset_renderer_prebuilt && \
+    pip install --find-links . teradata_database_explorer_prebuilt
+
+# Give back ownership of /opt/conda to jovyan
+RUN chown -R jupyter:users /opt/conda
+
+# PIP install the Teradata Python libraries
+RUN pip install teradataml
+
+# Install Teradata R library (optional, include it only if you use a base image that supports R)
+RUN Rscript -e "install.packages('tdplyr',repos=c('https://r-repo.teradata.com','https://cloud.r-project.org'))"
+----
+
+4. 作業ディレクトリ（Teradata Jupyter extensionsパッケージを解凍した場所）で、`docker build`を実行してイメージをビルドしてください。
++
+[source, bash, id="jupyterlab_ext_on_vertex_first_run", role="content-editable emits-gtm-events"]
+----
+docker build -f Dockerfile imagename:imagetag .
+----
+
+5. docker イメージを Google コンテナレジストリまたはアーティファクトレジストリにプッシュする。
++
+docker イメージをレジストリにプッシュするには、以下のドキュメントを参照してください。
++
+* link:https://cloud.google.com/container-registry/docs/pushing-and-pulling[コンテナレジストリ。イメージのプッシュとプル]
+* link:https://cloud.google.com/artifact-registry/docs/docker/pushing-and-pulling?hl=en[アーティファクトレジストリ。イメージのプッシュとプル]
+
+6. 新しいNotebookを作成する
++
+`Environment` セクションで、 `custom container` フィールドを新しく作成したカスタム コンテナの場所に設定します。
++
+image:cloud-guides/{page-image-directory}/vertex.custom.container.png[Open notebook, width=75%]
+
+== さらに詳しく
+* link:https://teradata.github.io/jupyterextensions[Teradata Jupyter 拡張機能 Web サイト]
+* link:https://docs.teradata.com/r/KQLs1kPXZ02rGWaS9Ktoww/root[Jupyter用Teradata Vantage™モジュールインストールガイド]
+* link:https://docs.teradata.com/r/1YKutX2ODdO9ppo_fnguTA/root[Python用Teradata®パッケージユーザガイド]
+* link:https://cloud.google.com/vertex-ai/docs/training/create-custom-container[Vertex AIのドキュメントです。学習用カスタムコンテナイメージの作成]
+* link:https://cloud.google.com/vertex-ai/docs/workbench/user-managed/custom-container[Vertex AIのドキュメントです。カスタムコンテナを使用してユーザー管理型Notebookインスタンスを作成する]
+* link:https://cloud.google.com/vertex-ai/docs/workbench/user-managed/create-new[Vertex AIのドキュメントです。ユーザーマネージドNotebookのインスタンスを作成する]
+
+include::ROOT:partial$community_link.adoc[]

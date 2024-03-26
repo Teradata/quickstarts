@@ -1,0 +1,725 @@
+= Amazon Appflowを使用してVantageからSalesforceへ接続する方法
+:page-lang: ja
+:experimental:
+:page-author: Wenjie Tehan
+:page-email: wenjie.tehan@teradata.com
+:page-revdate: 2022 年 2 月 14 日
+:description: Amazon AppFlow を使用して Teradata Vantage を Salesforce に接続します。
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, salesforce integration.
+:tabs:
+:page-image-directory: integrate-teradata-vantage-to-salesforce-using-amazon-appflow
+
+== 概要
+
+このハウツーでは、SalesforceとTeradata Vantageの間でデータを移行するプロセスについて説明します。2つのユースケースを含みます。
+
+1. Salesforceから顧客情報を取得し、Vantageから注文および出荷情報と組み合わせて、分析的な洞察を得ます。
+2. Vantage の `newleads` テーブルを Salesforce のデータで更新し、AppFlow を使用して新しいリードを Salesforce に追加します。
+
+image:cloud-guides/{page-image-directory}/image2.png[自動生成される図の説明,width=584,height=262]
+
+Amazon AppFlowは、SalesforceからAmazon S3に顧客アカウントデータを転送します。その後、Vantage は Native Object Store (NOS) の読み込み機能を使用して、Amazon S3 のデータと Vantage のデータを 1 回のクエリーで結合します。
+
+アカウント情報は、Vantage 上の `newleads` テーブルの更新に使用されます。テーブルが更新されると、VantageはNOS WriteでAmazon S3バケットに書き戻す。新しいリードデータファイルの到着時にLambda関数が起動し、データファイルをParquet形式からCSV形式に変換し、AppFlowは新しいリードをSalesforceに挿入し直します。
+
+== Amazon AppFlowについて
+
+Amazon AppFlowは、Salesforce、Marketo、Slack、ServiceNowなどのSaaSアプリケーションと、Amazon S3やAmazon RedshiftなどのAWSサービス間で安全にデータを転送できる、フルマネージド型の統合サービスです。AppFlowは、移動中のデータを自動的に暗号化し、AWS PrivateLinkと統合されたSaaSアプリケーションの公衆インターネット上でのデータのフローを制限することができ、セキュリティ脅威への露出を減らすことができます。
+
+現在、Amazon AppFlowは16のソースから選択でき、4つの宛先にデータを送信することができます。
+
+== Teradata Vantageについて
+
+Teradata Vantageは、エンタープライズ分析のためのマルチクラウド対応データプラットフォームであり、データに関する課題を最初から最後まで解決します。
+
+Vantageにより、企業は小規模から始めてコンピュートやストレージを弾力的に拡張し、使用した分だけ支払い、低コストのオブジェクトストアを活用し、分析ワークロードを統合することができます。Vantageは、R、Python、Teradata Studio、その他あらゆるSQLベースのツールをサポートします。
+
+Vantageは、記述的分析、予測的分析、処方的分析、自律的意思決定、ML機能、可視化ツールを統合したプラットフォームで、データがどこにあっても、リアルタイムのビジネスインテリジェンスを大規模に発掘することができます。
+
+Teradata Vantage Native Object Store（NOS）は、Amazon S3などの外部オブジェクトストアにあるデータを、標準SQLを使用して探索することが可能です。NOSを使用するために、特別なオブジェクトストレージ側の計算インフラは必要ありません。Amazon S3のバケットにあるデータを探索するには、バケットを指すNOSテーブル定義を作成するだけでよいのです。NOSを使用すると、Amazon S3からデータを迅速にインポートしたり、Vantageデータベースの他のテーブルと結合したりすることもできます。
+
+== 前提条件
+
+Amazon AppFlowサービスおよびTeradata Vantageに精通していることが前提です。
+
+以下のアカウントとシステムが必要です。
+
+* Teradata Vantageインスタンスへのアクセス。
++
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
+* フローの作成と実行が可能なロールを持つAWSアカウント。
+* Salesforce データを保存するための Amazon S3 バケット (例: ptctsoutput)
+* 生の Vantage データ (Parquet ファイル) を保存する Amazon S3 バケット (例: vantageparquet)。このバケットには、Amazon AppFlowのアクセスを認証するポリシーが必要です。
+* 変換された Vantage データ (CSV ファイル) を保存する Amazon S3 バケット (例: vantagecsv)
+* 以下の要件を満たすSalesforceアカウント。
+** お客様の Salesforce アカウントで、API アクセスを有効にする必要があります。Enterprise、Unlimited、Developer、および Performance エディションでは、API アクセスはデフォルトで有効になっています。
+** Salesforce アカウントで、接続アプリのインストールが認証されている必要があります。これが無効になっている場合は、Salesforce 管理者にお問い合わせください。Amazon AppFlow で Salesforce 接続を作成した後、「Amazon AppFlow Embedded Login App」という名前の接続アプリが Salesforce アカウントにインストールされていることを確認します。
+** Amazon AppFlow Embedded Login App」のリフレッシュトークンポリシーは、「Refresh token is valid until revoked」に設定されている必要があります。そうでない場合、リフレッシュトークンの有効期限が切れるとフローが失敗します。
+** イベント駆動型のフロートリガーを使用するには、SalesforceのChange Data Captureを有効にする必要があります。セットアップから、クイック検索に「Change Data Capture」と入力します。
+** Salesforce アプリが IP アドレスの制限を実施している場合、Amazon AppFlow で使用するアドレスをホワイトリストに登録する必要があります。詳細については、Amazon Web Services General Reference のhttps://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html[「AWS IP アドレス範囲」]を参照してください。
+** Salesforce のレコードを 100 万件以上転送する場合、Salesforce の複合フィールドを選択することはできません。Amazon AppFlow は転送に Salesforce Bulk API を使用するため、複合フィールドの転送は認証されません。
+** AWS PrivateLinkを使用してプライベート接続を作成するには、Salesforceアカウントで「メタデータの管理」と「外部接続の管理」の両方のユーザー権限を有効にする必要があります。プライベート接続は現在、us-east-1 および us-west-2 の AWS リージョンで利用可能です。
+** 履歴オブジェクトなど、更新できないSalesforceオブジェクトがあります。これらのオブジェクトについて、Amazon AppFlowは、スケジュールトリガー型のフローの増分エクスポート（「新しいデータのみを転送」オプション）をサポートしません。代わりに、「すべてのデータを転送する」オプションを選択し、適切なフィルタを選択して転送するレコードを制限することができます。
+
+== 手順
+
+前提条件を満たした上で、以下の手順で行います。
+
+
+1. Salesforce to Amazon S3 フローを作成する
+2. NOS を使用したデータの探索する
+3. NOS を使用して Vantage データを Amazon S3 にエクスポートする
+4. Amazon S3からSalesforceへのフローを作成する
+
+=== Salesforce to Amazon S3 フローの作成する
+
+このステップでは、Amazon AppFlowを使用してフローを作成します。この例では、 https://developer.salesforce.com/signup[Salesforce 開発者アカウント] を使用してSalesforceに接続します。
+
+ https://console.aws.amazon.com/appflow[AppFlow コンソール]にアクセスし、AWSログイン認証でサインインし、 *Create flow*をクリックします。正しいリージョンにいること、Salesforceのデータを保存するためのバケットが作成されていることを確認します。
+
+image:cloud-guides/{page-image-directory}/image3.png[ソーシャルメディア投稿のスクリーンショット 自動生成された説明,width=624,height=418]
+
+==== ステップ1：フローの詳細を指定する
+
+このステップでは、フローの基本情報を提供します。
+
+ *フロー名* (例： _salesforce_) と *フローの説明(オプション)*を入力し、 *暗号化設定のカスタマイズ(詳細)* のチェックを外したままにします。*次へ*をクリックします。
+
+==== ステップ2. フローを構成する
+
+このステップでは、フローのソースと宛先に関する情報を提供します。この例では、ソースとして *_Salesforce_* を、宛先として *_Amazon S3_* を使用します。
+
+*  *Source name*で _Salesforce_を選択し、*Choose Salesforce connection*で  *_Create new connection_*を選択します。
++
+image:cloud-guides/{page-image-directory}/image4.png[携帯電話のスクリーンショット 自動生成された説明,width=624,height=392]
+
+* *Salesforce環境*と*データの暗号化*にデフォルトを使用する。接続に名前（例：_salesforce_）を付けて、 *続行*をクリックします。
++
+image:cloud-guides/{page-image-directory}/image5.png[携帯電話のスクリーンショット 自動生成された説明,width=544,height=327]
+
+* salesforceのログインウィンドウで、*Username*と*Password*を入力します。クリックする *ログイン*
++
+image:cloud-guides/{page-image-directory}/image6.png[携帯電話のスクリーンショット 自動生成された説明,width=477,height=377]
+
+*  *Allow* をクリックして、AppFlowによるSalesforceのデータおよび情報へのアクセスを認証します。
++
+image:cloud-guides/{page-image-directory}/image7.png[携帯電話のスクリーンショット 自動生成された説明,width=473,height=383]
+
+* AppFlow の*Configure flow* ウィンドウに戻り、 *Salesforceオブジェクト*を使用し、Salesforce オブジェクトとして _Account_ を選択します。
++
+image:cloud-guides/{page-image-directory}/image8.png[携帯電話のスクリーンショット 自動生成された説明,width=624,height=390]
++
+image:cloud-guides/{page-image-directory}/image9.png[携帯電話のスクリーンショット 自動生成された説明,width=624,height=389]
+
+* *Destination name*として_Amazon S3_使用します。link:#prerequisites[先ほど]作成した、データを保存するバケット（例：_ptctsoutput_)を選択します。
++
+image:cloud-guides/{page-image-directory}/image10.png[携帯電話のスクリーンショット 自動生成された説明,width=624,height=355]
+
+* *フロートリガー* を _Run on demand_にします。 *Next*をクリックします。
++
+image:cloud-guides/{page-image-directory}/image11.png[携帯電話のスクリーンショット 自動生成された説明,width=624,height=344]
+
+==== ステップ3：データフィールドのマッピング
+
+このステップでは、データがソースから宛先に転送される方法を決定します。
+
+* *マッピング方法*
+として、_手動でフィールドをマッピングする_を使用します* 簡単のため、 *送信元から送信先へのマッピング*には_Map all fields directly_ を選択します。
++
+image:cloud-guides/{page-image-directory}/image12.png[携帯電話のスクリーンショット 自動生成された説明,width=623,height=355]
++
+「_Map all fields directly_」をクリックすると、*Mapped fields*の下にすべてのフィールドが表示される。 *Add formula (concatenates)*、 *Modify values (mask or truncate field values)*、または *Remove selected mappings*を行うフィールドのチェックボックスをクリックします。
++
+この例では、チェックボックスは選択されない。
+
+*  *_Validations_*では、「_Billing Address_」が含まれていないレコードを無視する条件を追加します（オプション）。 *Next*をクリックします。
++
+image:cloud-guides/{page-image-directory}/image13.png[携帯電話のスクリーンショット 自動生成された説明,width=624,height=132]
+
+==== ステップ4：フィルタの追加
+
+転送するレコードを決定するためのフィルタを指定することができます。この例では、削除されたレコードをフィルタリングする条件を追加します（オプション）。*Next*をクリックします。
+
+image:cloud-guides/{page-image-directory}/image14.png[携帯電話のスクリーンショット 自動生成された説明,width=624,height=179]
+
+==== ステップ 5. レビューと作成
+
+入力したすべての情報を確認します。必要であれば修正します。*Create flow*をクリックします 。
+
+フローが作成されると、フロー情報とともにフロー作成成功のメッセージが表示されます。
+
+image:cloud-guides/{page-image-directory}/image15.png[携帯電話のスクリーンショット 自動生成された説明,width=624,height=226]
+
+==== フローの実行
+
+右上の *Run flow* をクリックします。
+
+フローの実行が完了すると、実行に成功したことを示すメッセージが表示されます。
+
+メッセージの例:
+
+image:cloud-guides/{page-image-directory}/image16.png[Image,width=624,height=62]
+
+バケツのリンクをクリックすると、データが表示されます。Salesforce のデータは JSON 形式になります。
+
+==== データファイルのプロパティを変更する
+
+デフォルトでは、Salesforceのデータは暗号化されています。NOSがアクセスするためには、暗号化を解除する必要があります。
+
+Amazon S3バケット内のデータファイルをクリックし、 *Properties* タブをクリックします。
+
+image:cloud-guides/{page-image-directory}/image17.png[ソーシャルメディアの投稿のスクリーンショット説明は自動的に生成される,width=551,height=366]
+
+ *Encryption*から_AWS-KMS_ をクリックし、_AWS-KMS_ 暗号化から _None_に変更します。*Save*をクリックします。
+
+image:cloud-guides/{page-image-directory}/image18.png[ソーシャルメディア投稿のスクリーンショット 自動生成された説明,width=548,height=285]
+
+=== NOSを使ったデータの探索
+
+Native Object Storeには、Amazon S3内のデータを探索 分析するための機能が組み込まれています。ここでは、NOSのよく使われる機能をいくつか列挙します。
+
+==== 外部テーブルの作成
+
+外部テーブルを使用すると、Vantage Advanced SQL Engine 内で外部データを簡単に参照できるようになり、構造化されたリレーショナル形式でデータを利用できるようになります。
+
+外部テーブルを作成するには、まず認証情報を使用してTeradata Vantageシステムにログインします。Amazon S3バケットにアクセスするためのアクセスキーを持つAUTHORIZATIONオブジェクトを作成します。Authorizationオブジェクトは、誰がAmazon S3データにアクセスするために外部テーブルの使用を認証されるかの制御を確立することで、セキュリティを強化します。
+
+[source, teradata-sql]
+----
+CREATE AUTHORIZATION DefAuth_S3
+AS DEFINER TRUSTED
+USER 'A*****************' /* AccessKeyId */
+PASSWORD '********'; /* SecretAccessKey */
+----
+
+"USER "はAWSアカウントのAccessKeyId、"PASSWORD "はSecretAccessKeyです。
+
+Amazon S3上のJSONファイルに対して、以下のコマンドで外部テーブルを作成します。
+
+[source, teradata-sql]
+----
+CREATE MULTISET FOREIGN TABLE salesforce,
+EXTERNAL SECURITY DEFINER TRUSTED DefAuth_S3
+(
+  Location VARCHAR(2048) CHARACTER SET UNICODE CASESPECIFIC,
+  Payload JSON(8388096) INLINE LENGTH 32000 CHARACTER SET UNICODE
+)
+USING
+(
+  LOCATION ('/S3/s3.amazonaws.com/ptctstoutput/salesforce/1ce190bc-25a9-4493-99ad-7497b497a0d0/903790813-2020-08-21T21:02:25')
+);
+----
+
+最低限、外部テーブルの定義には、テーブル名と、オブジェクトストアのデータを指すLocation句（黄色でハイライトされています）を含める必要があります。Locationは、Amazonでは "bucket"と呼ばれるトップレベルの単一名が必要です。
+
+ファイル名の末尾に標準的な拡張子（.json, .csv, .parquet）がない場合、データファイルの種類を示すために、LocationとPayload列の定義も必要です（ターコイズ色でハイライトされている）。
+
+外部テーブルは常にNo Primary Index (NoPI)テーブルとして定義される。
+
+外部テーブルが作成されると、外部テーブル上で "選択 "を実行することにより、Amazon S3データセットの内容を照会することができます。
+
+[source, teradata-sql]
+----
+SELECT * FROM salesforce;
+SELECT payload.* FROM salesforce;
+----
+
+外部テーブルには、2つの列しか含まれていません。LocationとPayloadです。Locationは、オブジェクトストアシステム内のアドレスです。データ自体はpayload列で表され、外部テーブルの各レコード内のpayload値は、単一のJSONオブジェクトとそのすべての名前-値ペアを表します。
+
+”SELECT * FROM salesforce;” からの出力例。
+
+image:cloud-guides/{page-image-directory}/image19.png[自動的に生成される監視の説明を含むイメージ,width=624,height=257]
+
+サンプル出力形式 "SELECT payload.* FROM salesforce;"。
+
+image:cloud-guides/{page-image-directory}/image20.png[携帯電話のスクリーンショット 自動生成された説明,width=624,height=257]
+
+==== JSON_KEYS テーブルオペレータ
+
+JSONデータには、レコードごとに異なる属性が含まれることがあります。データストアに含まれる可能性のある属性の完全なリストを決定するには、JSON_KEYSを使用します。
+
+[source, teradata-sql]
+----
+|SELECT DISTINCT * FROM JSON_KEYS (ON (SELECT payload FROM salesforce)) AS j;
+----
+
+部分的に出力
+
+image:cloud-guides/{page-image-directory}/image21.png[携帯電話のスクリーンショット 自動生成された説明,width=196,height=225]
+
+==== ビューの作成
+
+ビューは、ペイロード属性に関連する名前を単純化し、オブジェクトストアのデータに対して実行可能なSQLを簡単にコーディングできるようにし、外部テーブルのLocation参照を隠して通常の列のように見えるようにすることができます。
+
+以下は、上記の JSON_KEYS テーブルオペレータから検出された属性を使用したビュー作成文のサンプルです。
+
+[source, teradata-sql]
+----
+REPLACE VIEW salesforceView AS (
+  SELECT
+    CAST(payload.Id AS VARCHAR(20)) Customer_ID,
+    CAST(payload."Name" AS VARCHAR(100)) Customer_Name,
+    CAST(payload.AccountNumber AS VARCHAR(10)) Acct_Number,
+    CAST(payload.BillingStreet AS VARCHAR(20)) Billing_Street,
+    CAST(payload.BillingCity AS VARCHAR(20)) Billing_City,
+    CAST(payload.BillingState AS VARCHAR(10)) Billing_State,
+    CAST(payload.BillingPostalCode AS VARCHAR(5)) Billing_Post_Code,
+    CAST(payload.BillingCountry AS VARCHAR(20)) Billing_Country,
+    CAST(payload.Phone AS VARCHAR(15)) Phone,
+    CAST(payload.Fax AS VARCHAR(15)) Fax,
+    CAST(payload.ShippingStreet AS VARCHAR(20)) Shipping_Street,
+    CAST(payload.ShippingCity AS VARCHAR(20)) Shipping_City,
+    CAST(payload.ShippingState AS VARCHAR(10)) Shipping_State,
+    CAST(payload.ShippingPostalCode AS VARCHAR(5)) Shipping_Post_Code,
+    CAST(payload.ShippingCountry AS VARCHAR(20)) Shipping_Country,
+    CAST(payload.Industry AS VARCHAR(50)) Industry,
+    CAST(payload.Description AS VARCHAR(200)) Description,
+    CAST(payload.NumberOfEmployees AS VARCHAR(10)) Num_Of_Employee,
+    CAST(payload.CustomerPriority__c AS VARCHAR(10)) Priority,
+    CAST(payload.Rating AS VARCHAR(10)) Rating,
+    CAST(payload.SLA__c AS VARCHAR(10)) SLA,
+    CAST(payload.AnnualRevenue AS VARCHAR(10)) Annual_Revenue,
+    CAST(payload."Type" AS VARCHAR(20)) Customer_Type,
+    CAST(payload.Website AS VARCHAR(100)) Customer_Website,
+    CAST(payload.LastActivityDate AS VARCHAR(50)) Last_Activity_Date
+  FROM salesforce
+);
+----
+
+[source, teradata-sql]
+----
+SELECT * FROM salesforceView;
+----
+
+部分的に出力
+
+image:cloud-guides/{page-image-directory}/image22.png[自動的に生成されたコンピューターの説明を含むイメージ,width=624,height=98]
+
+==== READ_NOSテーブルオペレータ
+
+READ_NOSテーブルオペレータは、最初に外部テーブルを定義せずにデータの一部をサンプリングして調査したり、Location句で指定したすべてのオブジェクトに関連するキーのリストを表示するために使用できます。
+
+[source, teradata-sql]
+----
+SELECT top 5 payload.*
+FROM READ_NOS (
+ ON (SELECT CAST(NULL AS JSON CHARACTER SET Unicode))
+USING
+LOCATION ('/S3/s3.amazonaws.com/ptctstoutput/salesforce/1ce190bc-25a9-4493-99ad-7497b497a0d0/903790813-2020-08-21T21:02:25')
+ ACCESS_ID ('A**********') /* AccessKeyId */
+ ACCESS_KEY ('***********') /* SecretAccessKey */
+ ) AS D
+GROUP BY 1;
+----
+
+出力:
+
+image:cloud-guides/{page-image-directory}/image23.png[携帯電話のスクリーンショット 自動生成された説明,width=321,height=234]
+
+==== Amazon S3 データとデータベース内テーブルの結合
+
+外部テーブルを Vantage 内のテーブルと結合して、さらに分析することができます。例えば、注文と配送の情報は、VantageのOrders、Order_Items、Shipping_Addressの3つのテーブルに格納されています。
+
+Orders の DDL:
+
+[source, teradata-sql]
+----
+CREATE TABLE Orders (
+  Order_ID INT NOT NULL,
+  Customer_ID VARCHAR(20) CHARACTER SET LATIN CASESPECIFIC,
+  Order_Status INT,
+  -- Order status: 1 = Pending; 2 = Processing; 3 = Rejected; 4 = Completed
+  Order_Date DATE NOT NULL,
+  Required_Date DATE NOT NULL,
+  Shipped_Date DATE,
+  Store_ID INT NOT NULL,
+  Staff_ID INT NOT NULL
+) Primary Index (Order_ID);
+----
+
+Order_Items の DDL:
+
+[source, teradata-sql]
+----
+CREATE TABLE Order_Items(
+  Order_ID INT NOT NULL,
+  Item_ID INT,
+  Product_ID INT NOT NULL,
+  Quantity INT NOT NULL,
+  List_Price DECIMAL (10, 2) NOT NULL,
+  Discount DECIMAL (4, 2) NOT NULL DEFAULT 0
+) Primary Index (Order_ID, Item_ID);
+----
+
+Shipping_Address の DDL:
+
+[source, teradata-sql]
+----
+CREATE TABLE Shipping_Address (
+  Customer_ID VARCHAR(20) CHARACTER SET LATIN CASESPECIFIC NOT NULL,
+  Street VARCHAR(100) CHARACTER SET LATIN CASESPECIFIC,
+  City VARCHAR(20) CHARACTER SET LATIN CASESPECIFIC,
+  State VARCHAR(15) CHARACTER SET LATIN CASESPECIFIC,
+  Postal_Code VARCHAR(10) CHARACTER SET LATIN CASESPECIFIC,
+  Country VARCHAR(20) CHARACTER SET LATIN CASESPECIFIC
+) Primary Index (Customer_ID);
+----
+
+そして、テーブルには以下のデータがあります。
+
+Orders:
+
+image:cloud-guides/{page-image-directory}/image24.png[Image,width=624,height=51]
+
+Order_Items:
+
+image:cloud-guides/{page-image-directory}/image25.png[Image,width=624,height=64]
+
+Shipping_Address:
+
+image:cloud-guides/{page-image-directory}/image26.png[Image,width=624,height=53]
+
+データベースのOrders, Order_Items, Shipping_Address テーブルにsalesforceの外部テーブルを結合することで、顧客の注文情報を顧客の配送情報とともに取得することができます。
+
+[source, teradata-sql]
+----
+SELECT
+  s.payload.Id as Customer_ID,
+  s.payload."Name" as Customer_Name,
+  s.payload.AccountNumber as Acct_Number,
+  o.Order_ID as Order_ID,
+  o.Order_Status as Order_Status,
+  o.Order_Date as Order_Date,
+  oi.Item_ID as Item_ID,
+  oi.Product_ID as Product_ID,
+  sa.Street as Shipping_Street,
+  sa.City as Shipping_City,
+  sa.State as Shipping_State,
+  sa.Postal_Code as Shipping_Postal_Code,
+  sa.Country as Shipping_Country
+FROM
+  salesforce s, Orders o, Order_Items oi, Shipping_Address sa
+WHERE
+  s.payload.Id = o.Customer_ID
+  AND o.Customer_ID = sa.Customer_ID
+  AND o.Order_ID = oi.Order_ID
+ORDER BY 1;
+----
+
+結果:
+
+image:cloud-guides/{page-image-directory}/image27.png[Image,width=631,height=27]
+
+==== Amazon S3データをVantageにインポートする
+
+Amazon S3データの永続的なコピーを持つことは、同じデータへの反復的なアクセスが予想される場合に便利です。NOSの外部テーブルでは、自動的にAmazon S3データの永続的なコピーを作成しません。データベースにデータを取り込むためのいくつかのアプローチについて、以下に説明します。
+
+CREATE TABLE AS … WITH DATAステートメントは、ソーステーブルとして機能する外部テーブル定義で使用することができます。このアプローチでは、外部テーブルのペイロードのうち、ターゲットテーブルに含めたい属性と、リレーショナルテーブルの列の名前を選択的に選択することができます。
+
+[source, teradata-sql]
+----
+CREATE TABLE salesforceVantage AS (
+  SELECT
+    CAST(payload.Id AS VARCHAR(20)) Customer_ID,
+    CAST(payload."Name" AS VARCHAR(100)) Customer_Name,
+    CAST(payload.AccountNumber AS VARCHAR(10)) Acct_Number,
+    CAST(payload.BillingStreet AS VARCHAR(20)) Billing_Street,
+    CAST(payload.BillingCity AS VARCHAR(20)) Billing_City,
+    CAST(payload.BillingState AS VARCHAR(10)) Billing_State,
+    CAST(payload.BillingPostalCode AS VARCHAR(5)) Billing_Post_Code,
+    CAST(payload.BillingCountry AS VARCHAR(20)) Billing_Country,
+    CAST(payload.Phone AS VARCHAR(15)) Phone,
+    CAST(payload.Fax AS VARCHAR(15)) Fax,
+    CAST(payload.ShippingStreet AS VARCHAR(20)) Shipping_Street,
+    CAST(payload.ShippingCity AS VARCHAR(20)) Shipping_City,
+    CAST(payload.ShippingState AS VARCHAR(10)) Shipping_State,
+    CAST(payload.ShippingPostalCode AS VARCHAR(5)) Shipping_Post_Code,
+    CAST(payload.ShippingCountry AS VARCHAR(20)) Shipping_Country,
+    CAST(payload.Industry AS VARCHAR(50)) Industry,
+    CAST(payload.Description AS VARCHAR(200)) Description,
+    CAST(payload.NumberOfEmployees AS INT) Num_Of_Employee,
+    CAST(payload.CustomerPriority__c AS VARCHAR(10)) Priority,
+    CAST(payload.Rating AS VARCHAR(10)) Rating,
+    CAST(payload.SLA__c AS VARCHAR(10)) SLA,
+    CAST(payload."Type" AS VARCHAR(20)) Customer_Type,
+    CAST(payload.Website AS VARCHAR(100)) Customer_Website,
+    CAST(payload.AnnualRevenue AS VARCHAR(10)) Annual_Revenue,
+    CAST(payload.LastActivityDate AS DATE) Last_Activity_Date
+  FROM salesforce)
+WITH DATA
+NO PRIMARY INDEX;
+----
+
+* `SELECT* * *FROM* salesforceVantage;` 部分的な結果:
+
+image:cloud-guides/{page-image-directory}/image28.png[コンピュータのスクリーンショット 自動生成された説明,width=624,height=96]
+
+外部テーブルを使用する代わりに、READ_NOS テーブルオペレータを使用することができます。このテーブルオペレータにより、最初に外部テーブルを構築することなく、オブジェクトストアから直接データにアクセスすることができます。READ_NOSをCREATE TABLE AS句と組み合わせて、データベース内にデータの永続的なバージョンを構築することができます。
+
+[source, teradata-sql]
+----
+CREATE TABLE salesforceReadNOS AS (
+ SELECT
+    CAST(payload.Id AS VARCHAR(20)) Customer_ID,
+    CAST(payload."Name" AS VARCHAR(100)) Customer_Name,
+    CAST(payload.AccountNumber AS VARCHAR(10)) Acct_Number,
+    CAST(payload.BillingStreet AS VARCHAR(20)) Billing_Street,
+    CAST(payload.BillingCity AS VARCHAR(20)) Billing_City,
+    CAST(payload.BillingState AS VARCHAR(10)) Billing_State,
+    CAST(payload.BillingPostalCode AS VARCHAR(5)) Billing_Post_Code,
+    CAST(payload.BillingCountry AS VARCHAR(20)) Billing_Country,
+    CAST(payload.Phone AS VARCHAR(15)) Phone,
+    CAST(payload.Fax AS VARCHAR(15)) Fax,
+    CAST(payload.ShippingStreet AS VARCHAR(20)) Shipping_Street,
+    CAST(payload.ShippingCity AS VARCHAR(20)) Shipping_City,
+    CAST(payload.ShippingState AS VARCHAR(10)) Shipping_State,
+    CAST(payload.ShippingPostalCode AS VARCHAR(5)) Shipping_Post_Code,
+    CAST(payload.ShippingCountry AS VARCHAR(20)) Shipping_Country,
+    CAST(payload.Industry AS VARCHAR(50)) Industry,
+    CAST(payload.Description AS VARCHAR(200)) Description,
+    CAST(payload.NumberOfEmployees AS INT) Num_Of_Employee,
+    CAST(payload.CustomerPriority__c AS VARCHAR(10)) Priority,
+    CAST(payload.Rating AS VARCHAR(10)) Rating,
+    CAST(payload.SLA__c AS VARCHAR(10)) SLA,
+    CAST(payload."Type" AS VARCHAR(20)) Customer_Type,
+    CAST(payload.Website AS VARCHAR(100)) Customer_Website,
+    CAST(payload.AnnualRevenue AS VARCHAR(10)) Annual_Revenue,
+    CAST(payload.LastActivityDate AS DATE) Last_Activity_Date
+  FROM READ_NOS (
+    ON (SELECT CAST(NULL AS JSON CHARACTER SET Unicode))
+    USING
+      LOCATION ('/S3/s3.amazonaws.com/ptctstoutput/salesforce/1ce190bc-25a9-4493-99ad-7497b497a0d0/903790813-2020-08-21T21:02:25')
+      ACCESS_ID ('A**********') /* AccessKeyId */
+      ACCESS_KEY ('***********') /* SecretAccessKey */
+  ) AS D
+) WITH DATA;
+----
+
+`salesforceReadNOS`テーブルからの結果:
+
+[source, teradata-sql]
+----
+SELECT * FROM salesforceReadNOS;
+----
+
+image:cloud-guides/{page-image-directory}/image29.png[大きなイメージが含まれるイメージ, people, riding Description automatically generated,width=624,height=97]
+
+Amazon S3データをリレーショナルテーブルに配置するもう一つの方法は、"INSERT SELECT "です。このアプローチでは、外部テーブルがソーステーブルであり、新しく作成されたパーマネントテーブルが挿入されるテーブルとなります。上記のREAD_NOSの例とは逆に、この方法ではパーマネントテーブルを事前に作成する必要があります。
+
+INSERT SELECT方式の利点の1つは、ターゲット テーブルの属性を変更できることです。例えば、ターゲットテーブルを`MULTISET`にするかしないかを指定したり、別のプライマリインデックスを選択したりすることができます。
+
+[source, teradata-sql]
+----
+CREATE TABLE salesforcePerm, FALLBACK ,
+NO BEFORE JOURNAL,
+NO AFTER JOURNAL,
+CHECKSUM = DEFAULT,
+DEFAULT MERGEBLOCKRATIO,
+MAP = TD_MAP1
+(
+  Customer_Id VARCHAR(20) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Customer_Name VARCHAR(100) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Acct_Number VARCHAR(10) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Billing_Street VARCHAR(20) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Billing_City VARCHAR(20) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Billing_State VARCHAR(10) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Billing_Post_Code VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Billing_Country VARCHAR(20) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Phone VARCHAR(15) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Fax VARCHAR(15) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Shipping_Street VARCHAR(20) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Shipping_City VARCHAR(20) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Shipping_State VARCHAR(10) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Shipping_Post_Code VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Shipping_Country VARCHAR(20) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Industry VARCHAR(50) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Description VARCHAR(200) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Num_Of_Employee INT,
+  Priority VARCHAR(10) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Rating VARCHAR(10) CHARACTER SET LATIN NOT CASESPECIFIC,
+  SLA VARCHAR(10) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Customer_Type VARCHAR(20) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Customer_Website VARCHAR(100) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Annual_Revenue VARCHAR(10) CHARACTER SET LATIN NOT CASESPECIFIC,
+  Last_Activity_Date DATE
+) PRIMARY INDEX (Customer_ID);
+----
+
+[source, teradata-sql]
+----
+INSERT INTO salesforcePerm
+  SELECT
+    CAST(payload.Id AS VARCHAR(20)) Customer_ID,
+    CAST(payload."Name" AS VARCHAR(100)) Customer_Name,
+    CAST(payload.AccountNumber AS VARCHAR(10)) Acct_Number,
+    CAST(payload.BillingStreet AS VARCHAR(20)) Billing_Street,
+    CAST(payload.BillingCity AS VARCHAR(20)) Billing_City,
+    CAST(payload.BillingState AS VARCHAR(10)) Billing_State,
+    CAST(payload.BillingPostalCode AS VARCHAR(5)) Billing_Post_Code,
+    CAST(payload.BillingCountry AS VARCHAR(20)) Billing_Country,
+    CAST(payload.Phone AS VARCHAR(15)) Phone,
+    CAST(payload.Fax AS VARCHAR(15)) Fax,
+    CAST(payload.ShippingStreet AS VARCHAR(20)) Shipping_Street,
+    CAST(payload.ShippingCity AS VARCHAR(20)) Shipping_City,
+    CAST(payload.ShippingState AS VARCHAR(10)) Shipping_State,
+    CAST(payload.ShippingPostalCode AS VARCHAR(5)) Shipping_Post_Code,
+    CAST(payload.ShippingCountry AS VARCHAR(20)) Shipping_Country,
+    CAST(payload.Industry AS VARCHAR(50)) Industry,
+    CAST(payload.Description AS VARCHAR(200)) Description,
+    CAST(payload.NumberOfEmployees AS INT) Num_Of_Employee,
+    CAST(payload.CustomerPriority__c AS VARCHAR(10)) Priority,
+    CAST(payload.Rating AS VARCHAR(10)) Rating,
+    CAST(payload.SLA__c AS VARCHAR(10)) SLA,
+    CAST(payload."Type" AS VARCHAR(20)) Customer_Type,
+    CAST(payload.Website AS VARCHAR(100)) Customer_Website,
+    CAST(payload.AnnualRevenue AS VARCHAR(10)) Annual_Revenue,
+    CAST(payload.LastActivityDate AS DATE) Last_Activity_Date
+  FROM salesforce;
+----
+
+[source, teradata-sql]
+----
+SELECT * FROM salesforcePerm;
+----
+
+結果のサンプル:
+
+image:cloud-guides/{page-image-directory}/image30.png[人物を含む画像 説明 自動生成,width=624,height=95]
+
+=== NOS を使用して Vantage データを Amazon S3 にエクスポートする
+
+Vantage システムで1 行を含む `newleads` テーブルがあります。
+
+image:cloud-guides/{page-image-directory}/image41.png[Image,width=624,height=24]
+
+このリードにはアドレス情報がないことに注記してください。Salesforceから取得したアカウント情報を使って、`newleads`テーブルを更新してみましょう。
+
+[source, teradata-sql]
+----
+UPDATE nl
+FROM
+  newleads AS nl,
+  salesforceReadNOS AS srn
+SET
+  Street = srn.Billing_Street,
+  City = srn.Billing_City,
+  State = srn.Billing_State,
+  Post_Code = srn.Billing_Post_Code,
+  Country = srn.Billing_Country
+  WHERE Account_ID = srn.Acct_Number;
+----
+
+これで、新しいリードにアドレス情報が付与されました。
+
+image:cloud-guides/{page-image-directory}/image42.png[Image,width=624,height=21]
+
+WRITE_NOSを使用して、新しいリード情報をS3バケットに書き込みます。
+
+[source, teradata-sql, id="salesforce_first_run", role="content-editable emits-gtm-events"]]
+----
+SELECT * FROM WRITE_NOS (
+ON (
+  SELECT
+    Account_ID,
+    Last_Name,
+    First_Name,
+    Company,
+    Cust_Title,
+    Email,
+    Status,
+    Owner_ID,
+    Street,
+    City,
+    State,
+    Post_Code,
+    Country
+  FROM newleads
+)
+USING
+  LOCATION ('/s3/vantageparquet.s3.amazonaws.com/')
+  AUTHORIZATION ('{"Access_ID":"A*****","Access_Key":"*****"}')
+  COMPRESSION ('SNAPPY')
+  NAMING ('DISCRETE')
+  INCLUDE_ORDERING ('FALSE')
+  STOREDAS ('CSV')
+) AS d;
+----
+
+ここで、Access_IDはAccessKeyID、Access_KeyはBucketに対するSecretAccessKeyです。
+
+=== Amazon S3からSalesforceへのフローを作成する
+
+ステップ1を繰り返し、ソースにAmazon S3、宛先にSalesforceを使用したフローを作成します。
+
+==== ステップ1. フローの詳細を指定する
+
+このステップでは、フローの基本情報を提供する。
+
+ *Flow name* (例： _vantage2SF_) と *Flow description (optional)*を入力し、 *Customize encryption settings (advanced)* のチェックは外したままにします。*Next*をクリックします。
+
+==== ステップ2. フローを構成する
+
+このステップでは、フローの送信元と送信先に関する情報を提供します。この例では、ソースとして *_Amazon S3_* を、宛先として *_Salesforce_* を使用します。
+
+*  *Source details*は、 _Amazon S3_を選択し、CSVファイルを書き込んだバケットを選択します（例：vantagecsv）。
+* *Destination details*は、_Salesforce_を選択し、*Choose Salesforce connection*のドロップダウンリストでStep1で作成した接続を使用し、_Lead_として *Choose Salesforce object*を選択します。
+* *Error handling*の場合は、デフォルトの_Stop the current flow run_を使用する。
+* *Flow trigger* は _Run on demand_です。 *Next*をクリックします。
+
+==== ステップ3. データフィールドをマッピングする
+
+このステップでは、ソースからデスティネーションへのデータ転送の方法を決定します。
+
+* *Mapping method*
+として、_Manually map fields_を使用します* *Destination record preference*
+として、_Insert new records (default)_を使用します*  *送信元から送信先へのマッピング*には、次のマッピングを使用します
++
+image:cloud-guides/{page-image-directory}/image43.png[グラフィカル ユーザー インターフェース, application, table Description automatically generated,width=624,height=396]
++
+image:cloud-guides/{page-image-directory}/image44.png[Image,width=624,height=40]
+
+* *Next* をクリックします。
+
+==== ステップ4．フィルタを追加する
+
+転送するレコードを決定するためのフィルタを指定することができます。この例では、フィルターは追加されません。*Next* をクリックします。
+
+==== ステップ5. レビューと作成
+
+入力したすべての情報を確認します。必要であれば修正します。*フローの作成*をクリックします 。
+
+フローが作成されると、フロー情報とともにフロー作成成功のメッセージが表示されます。
+
+==== フローの実行
+
+右上の *フローの実行* をクリックします。
+
+フローの実行が完了すると、実行に成功したことを示すメッセージが表示されます。
+
+メッセージの例:
+
+image:cloud-guides/{page-image-directory}/image45.png[Image,width=624,height=51]
+
+Salesforceのページを参照すると、新しいリードTom Johnsonが追加されています。
+
+image:cloud-guides/{page-image-directory}/image46.png[グラフィカル ユーザー インターフェース, application Description automatically generated,width=624,height=288]
+
+== クリーンアップ(オプション)
+
+Salesforce データの使用が完了したら、使用したリソースに対して AWS アカウント (https://aws.amazon.com/appflow/pricing/[AppFlow]、 Amazon https://aws.amazon.com/s3/pricing/[S3]、 https://www.teradata.com/Cloud/AWS/Do-it-Yourself/Pricing[Vantage] 、 https://aws.amazon.com/ec2/pricing/[VM]など) に請求されないように、以下の手順を実行します。
+
+1. AppFlow:
++
+* フローに作成した「接続」を削除する
+* フローを削除する
+
+2. Amazon S3バケットとファイル:
++
+* Vantage データファイルが保存されている Amazon S3 バケットに移動し、ファイルを削除する
+* バケットを保持する必要がない場合は、バケットを削除する
+
+3. Teradata Vantage インスタンス
++
+* 不要になったインスタンスを停止/終了する
+
+include::ROOT:partial$community_link.adoc[]

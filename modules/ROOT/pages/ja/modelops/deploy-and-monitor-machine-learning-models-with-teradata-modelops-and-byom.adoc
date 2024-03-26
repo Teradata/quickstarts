@@ -1,0 +1,121 @@
+= ModelOps - 初めてのBYOMモデルのインポートとデプロイ
+:page-lang: ja
+:experimental:
+:page-author: Pablo Escobar de la Oliva
+:page-email: pablo.escobardelaoliva@teradata.com
+:page-revdate: 2023 年 5 月 29 日
+:description: ClearScape Analytics ModelOps を使用して PMML モデルを Vantage にデプロイおよび監視するためのチュートリアル
+:keywords: ModelOps、BYOM、Python、ClearScape Analytics、Teradata、データ ウェアハウス、Teradata、Vantage、クラウド データ プラットフォーム、機械学習、人工知能、ビジネス インテリジェンス、エンタープライズ分析
+
+== 概要
+
+これは、ClearScape Analytics ModelOps を初めてご利用になる方を対象としたハウツーです。このチュートリアルでは、ModelOpsで新しいプロジェクトを作成し、必要なデータをVantageにアップロードし、BYOMメカニズムを使用してインポートしたDiabetesデモモデルのライフサイクルを完全に追跡することができます。
+
+== 前提条件
+
+* Teradata VantageインスタンスとClearScape Analytics（ModelOpsを含む）へのアクセス。
+
+* Jupyter Notebookを実行する機能
+
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
+
+必要なファイル
+
+
+まず、このチュートリアルに必要なファイルをダウンロードすることから始めましょう。これら4つの添付ファイルをダウンロードし、Notebookのファイルシステムにアップロードしてください。ModelOpsのバージョンに応じてファイルを選択します。
+
+ModelOpsバージョン6 (2022 年 10 月):
+
+link:{attachmentsdir}/ModelOps_Training_v6.ipynb[ModelOps トレーニング Notebookをダウンロード]
+
+link:{attachmentsdir}/BYOM_v6.ipynb[デモユースケース用の BYOM Notebook ファイルをダウンロード]
+
+link:{attachmentsdir}/ModelOps_Data_files_v6.zip[デモユースケース用のデータ ファイルをダウンロード]
+
+link:{attachmentsdir}/ModelOps_BYOM_files_v6.zip[デモユースケース用の BYOM コード ファイルをダウンロード]
+
+または、以下のレポをgit cloneしてください。
+[source, cli]
+----
+git clone https://github.com/willfleury/modelops-getting-started
+git clone https://github.com/Teradata/modelops-demo-models/
+----
+
+ModelOpsバージョン7 (2023 年 4 月):
+
+link:{attachmentsdir}/ModelOps_Training_v7.ipynb[ModelOps トレーニング Notebookをダウンロード]
+
+link:{attachmentsdir}/BYOM_v7.ipynb[デモユースケース用の BYOM Notebook ファイルをダウンロード]
+
+link:{attachmentsdir}/ModelOps_Data_files_v7.zip[デモユースケース用のデータ ファイルをダウンロード]
+
+link:{attachmentsdir}/ModelOps_BYOM_files_v7.zip[デモのユースケース用の BYOM コード ファイルをダウンロード]
+
+----
+git clone -b v7 https://github.com/willfleury/modelops-getting-started.git
+git clone https://github.com/Teradata/modelops-demo-models/
+----
+
+データベースと Jupyter 環境のセットアップ 
+
+ModelOps_Training Jupyter Notebookに従って、デモに必要なデータベース、テーブル、ライブラリのセットアップを行います。
+
+== メソドロジーにおける当社の位置づけを理解する
+
+image::../BYOM.png[ModelOps 方法論の BYOM スクリーンショット, width=100%]
+
+include::partials/modelops-basic.adoc[]
+
+== 新規 BYOM のモデル ライフサイクル
+
+必要なファイルをダウンロードして解凍します。リンクはチュートリアルの上部にあります。PMML ファイルについては、GIT モデルのトレーニングで生成された PMML をダウンロードすることもできます。
+
+* BYOM.ipynb
+
+* model.pmml 
+
+* requirements.txt
+
+* evaluation.py 
+
+* data_stats.json
+
+* __init__.py
+
+評価と監視による BYOM モデルの定義
+
+* インポートバージョン
+
+* v7 の場合 - BYOM コードは使用できません - 自動評価とデータ ドリフト監視を有効にすることができます。
+Monitoring ページで、BYOM ターゲット列を使用します。 CAST(CAST(json_report AS JSON).JSONExtractValue('$.predicted_HasDiabetes') AS INT)
+
+* 評価する
+
+* データセット統計を含む評価レポートを確認する
+
+* 承認する
+
+* Vantage でのデプロイ - エンジン、パブリッシュ、スケジュール。スコアリング データセットが必要です。
+接続を使用してデータベースを選択してください。例: "aoa_byom_models"
+
+* デプロイメント/実行
+
+* dataset2 を使用して再度評価します - モデル メトリクスの動作を監視します
+
+* モデルドリフトの監視 - データとメトリクス
+
+* v7 の場合 - Deployments -> Job ページから予測を直接確認します。
+
+* BYOM Notebookを開き、SQL コードから PMML 予測を実行します。 
+
+* リタイア
+
+
+== まとめ
+
+このクイックスタートではBYOMモデルの完全なライフサイクルをModelOpsで実行する方法とそれをVantageにデプロイする方法について学びました。そしてバッチスコアリング、レストフルまたはオンデマンドスコアリングのテスト、データドリフトとモデル品質メトリックのモニタリングの開始をスケジュールする方法を紹介しました。
+
+== さらに詳しく
+* リンク:https://docs.teradata.com/search/documents?query=ModelOps&sort=last_update&virtual-field=title_only&content-lang=
+
+include::ROOT:partial$community_link.adoc[]

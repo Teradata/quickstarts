@@ -5,8 +5,16 @@ function switchLanguage(lan) {
 
     let aiUnlimited = "ai-unlimited";
     let bi = "business-intelligence";
-    let vantagecloudLake = "vantagecloud-lake";
+    let cloudGuides = "cloud-guides";
+    let elt = "elt";
+    let jupyterDemos = "jupyter-demos";
+    let modelOps = "modelops";
     let muleTeradataCon = "mule-teradata-connector";
+    let otherIntegrations = "other-integrations";
+    let queryService = "query-service";
+    let toolsUtilities = "tools-and-utilities";
+    let vantagecloudLake = "vantagecloud-lake";
+    
     if(page[page.length-1]==="" || page[page.length-1]==="index.html" || page[page.length-1]==="#" || page[page.length-1]==="index.html#") {
       if(page[page.length-2] === "ja") {
         if (lan === 'en'){
@@ -45,8 +53,11 @@ function switchLanguage(lan) {
           page[page.length-3] = lan;  
         } else {
           if(page[page.length-3] !== "en"){
-            if(page[page.length-2] === aiUnlimited || page[page.length-2] === bi || page[page.length-2] === vantagecloudLake || 
-               page[page.length-2] === muleTeradataCon){
+            if(page[page.length-2] === aiUnlimited || page[page.length-2] === bi || 
+               page[page.length-2] === cloudGuides || page[page.length-2] === elt || 
+               page[page.length-2] === jupyterDemos || page[page.length-2] === modelOps ||
+               page[page.length-2] === muleTeradataCon || page[page.length-2] === otherIntegrations ||
+               page[page.length-2] === queryService || page[page.length-2] === toolsUtilities || page[page.length-2] === vantagecloudLake ){
               file = page[page.length-2]
               indexFile = page.lastIndexOf(file);
               newUrl = lan + "/"+page[page.length-2]+"/" + page[page.length-1]; 

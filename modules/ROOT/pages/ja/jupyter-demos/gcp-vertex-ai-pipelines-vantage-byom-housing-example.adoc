@@ -1,0 +1,9 @@
+=  Google Cloud Vertex AI Pipelines Vantage BYOM ハウジングの例
+:page-lang: ja
+:description: Teradata Vantage をすぐに使いこなしましょう。機能について学習します。一般的なタスクのハウツーを検索します。サンプル ソース コードを探索します。
+:keywords: データ ウェアハウス、クラウド データ ウェアハウス、コンピューティング ストレージの分離、Teradata、Vantage、クラウド データ プラットフォーム、Java アプリケーション、ビジネス インテリジェンス、エンタープライズ分析、ハイブリッド マルチクラウド、ビジネスの成果
+:page-jupyterbook: true
+
+
+// include::partials/vertex-pipelines-housing-example-byom.html[]
+

@@ -1,0 +1,203 @@
+= Airbyte を使用して外部ソースから Teradata Vantage にデータをロードする方法
+:page-lang: ja
+:experimental:
+:page-author: Krutik Pathak
+:page-email: krutik.pathak@teradata.com
+:page-revdate: 2023 年 6 月 9 日
+:description: Teradata Vantage で Airbyte を使用する方法
+:keywords: airbyte, data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, data transfer, data extraction, enterprise analytics, elt.
+:tabs:
+:dir: getting-started-with-airbyte
+
+== 概要
+
+このチュートリアルでは、Airbyteを使用してソースからTeradata Vantageにデータを移動する方法を紹介し、https://docs.airbyte.com/using-airbyte/getting-started/[Airbyte Open Source オプション]とhttps://airbyte.com/[Airbyte Cloud オプション]の両方について詳しく説明します。この具体的な例では、Google スプレッドシートから Teradata Vantage へのレプリケーションを取り上げます。
+
+* ソース: Google スプレッドシート
+* 宛先: Teradata Vantage
+
+image::elt/{dir}/sample_employees_payrate_google_sheets.png[サンプル従業員の給与Google スプレッドシート,align="center", width=50%]
+
+== 前提条件 
+* Teradata Vantageインスタンスへのアクセス。これは、Airbyte 接続の宛先として定義されます。Airbyteの設定には、データベースの`Host`、`Username`、`Password`が必要です。
++
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
+
+* link:https://support.google.com/googleapi/answer/6158841?hl=en[個人または組織のアカウントで Google Cloud Platform API が有効になっている,  window="_blank"]。OAuth またはサービス アカウント キー認証システムを介して Google アカウントを認証する必要があります。この例では、サービス アカウント キー認証システムを使用します。
+
+* ソース システムからのデータ。この場合は、link:https://docs.google.com/spreadsheets/d/1XNBYUw3p7xG6ptfwjChqZ-dNXbTuVwPi7ToQfYKgJIE/edit#gid=0[Google スプレッドシートのサンプルスプレッドシート、 window="_blank"]を使用する。サンプルデータは、従業員型別の給与の内訳です。
+
+=== Airbyte Cloud
+* https://airbyte.com/[Airbyte Cloud] でアカウントを作成し、link:#airbyte_configuration[Airbyte Configuration]セクションの手順に進みます。
+
+=== Airbyte Open Source
+* link:https://github.com/airbytehq/airbyte[Airbyte Open Source,  window="_blank"]をローカルで実行するには、Docker Compose をインストールします。Docker Compose には Docker Desktop が付属しています。詳細については 、link:https://docs.docker.com/compose/install/[docker ドキュメント,  window="_blank"] を参照してください。 
+
+* Airbyte Open Source リポジトリのクローンを作成し、airbyte ディレクトリに移動します。
++
+[source, bash]
+----
+git clone --depth 1 https://github.com/airbytehq/airbyte.git
+cd airbyte
+----
+
+シェルスクリプト`run-ab-platform`を実行する前に、Docker Desktopが実行されていることを確認します。
+
+* シェルスクリプト`run-ab-platform`を次のように実行しますを実行します。
+
++
+[source, bash]
+----
+./run-ab-platform.sh
+----
+
++
+[NOTE]
+====
+上記のコマンドは、Windowsの`git bash`で実行できます。詳細については 、link:https://docs.airbyte.com/deploying-airbyte/local-deployment/[Airbyte Local Deployment,  window="_blank"] を参照してください。 
+====
+
+* リポジトリに含まれる `env` ファイルにあるデフォルトの信頼証明を入力して、Web アプリ http://localhost:8000/ にログインします。
+
++
+[source, bash]
+----
+BASIC_AUTH_USERNAME=airbyte
+BASIC_AUTH_PASSWORD=password
+----
+
+
+初めてログインするとき、Airbyte は電子メール アドレスを入力し、製品の改善に関する設定を指定するように求めます。設定を入力し、「Get started.」をクリックします。
+
+image::elt/{dir}/specify_preferences.png[環境設定の指定, width=75%]
+
+Airbyte Open Sourceが起動すると、接続ダッシュボードが表示されます。Airbyte Open Sourceを初めて起動した場合は、接続は表示されません。
+
+== Airbyteの構成
+
+=== ソース接続をする
+* 「Create your first connection」をクリックするか、右上隅をクリックして、Airbyte の接続ダッシュボードで新しい接続ワークフローを開始できます。
+
+image::elt/{dir}/create_first_connection.png[最初の接続を作成するダッシュボード, width=75%]
+
+* Airbyte はソースを尋ねます。既存のソースから選択することも (すでに設定している場合)、新しいソースを設定することもできます。この場合は `Google スプレッドシート`を選択します。
+
+* 認証には、JSON形式のサービスアカウントキーを使用する`サービスアカウントキー認証`を使用している。デフォルトの`OAuth`から`サービスアカウントキー認証`に切り替えます。. サービス アカウント キー認証で Google アカウントを認証するには、 JSON 形式のlink:https://cloud.google.com/iam/docs/keys-create-delete#creating_service_account_keys[Google Cloud サービス アカウント キー, window="_blank"] を入力してください。 +
+サービス アカウントにプロジェクト閲覧者アクセス権があることを確認してください。スプレッドシートがリンクを使用して誰にでも表示できる場合は、それ以上の操作は必要ありません。そうでない場合は、 link:https://www.youtube.com/watch?v=GyomEw5a2NQ[サービス アカウントにスプレッドシートへのアクセスを認証してください。, window="_blank"]
+
+* ソーススプレッドシートへのリンクを`スプレッドシートのリンク`として追加します。
+
+
+image::elt/{dir}/configuring_source_gsheet_airbyte.png[Airbyteでのソースの設定]
+
+[NOTE]
+====
+詳細については、 link:https://docs.airbyte.com/integrations/sources/google-sheets/#:~:text=For%20Airbyte%20Open%20Source%3A[Airbyte オープン ソースのソース コネクタとして Google スプレッドシートを設定する, window="_blank"] 
+を参照してください。
+====
+
+* [Set up source]をクリックし、設定が正しければ、次のメッセージが表示されます。 `All connection tests passed!`
+
+
+=== 宛先接続の設定
+*  `Teradata Vantage`を使用して新しい接続を作成する場合は、「Set up the destination」セクションで宛先型として `Teradata Vantage` を選択します。
+* `Host`、`User`、および`Password`を追加する。これらは、Clearscape Analytics Environmentで使用される`Host`、`Username`、`Password`とそれぞれ同じです。
+* 特定のコンテキストに適したデフォルトのスキーマ名を指定します。ここでは、`gsheet_airbyte_td`を提供しました。
+
+
+
+image::elt/{dir}/configuring_destination_teradata_airbyte.png[Airbyteでの宛先Teradataの構成]
+
+
+* 「Set up destination」をクリックします。構成が正しい場合は、メッセージが表示されます。 `All connection tests passed!`
+
+
+=== データ同期の設定
+名前空間は、ソースまたは宛先内のストリーム (テーブル) のグループです。リレーショナル データベース システムのスキーマは、名前空間の一例です。ソースでは、名前空間はデータがレプリケート先にレプリケートされる格納場所です。宛先では、名前空間はレプリケートされたデータが宛先内に保存される格納場所です。
+詳細については 、link:https://docs.airbyte.com/understanding-airbyte/namespaces/[Airbyte 名前空間,window="_blank"]
+を参照してください。
+
+image::elt/{dir}/namespaces_in_destination.png[宛先の名前空間]
+
+
+この例では、宛先はデータベースであるため、名前空間は、宛先を設定したときに定義したデフォルトのスキーマ`gsheet_airbyte_td`です。ストリーム名は、ソース内のスプレッドシートの名前をミラーリングするテーブルであり、この場合は`sample_employee_payrate`です。単一のスプレッドシート コネクタを使用しているため、1 つのストリーム (アクティブなスプレッドシート) のみがサポートされます。 
+
+他のタイプのソースと宛先では、レイアウトが異なる場合があります。この例では、ソースとしてのGoogle スプレッドシートは名前空間をサポートしていない。
+この例では、宛先の名前空間として`<destination schema>`を使用しました。これは、宛先設定で宣言した`Default Schema`に基づいてAirbyteによって割り当てられたデフォルトの名前空間です。データベース`gsheet_airbyte_td`が、Teradata Vantageインスタンスに作成されます。
+
+
+==== レプリケーション頻度
+データを宛先に同期する頻度を示します。1時間ごと、2時間ごと、3時間ごとなどを選択できます。このケースの場合、24時間ごを使用しています。 
+
+image::elt/{dir}/replication_frequency_24hr.png[レプリケーション頻度 24 時間]
+
+Cron 式を使用して、同期を実行する時刻を指定することもできます。以下の例では、毎週水曜日の午後 12 時 43 分 (US/太平洋時間) に同期を実行するように Cron 式を設定します。
+
+image::elt/{dir}/replication_frequency_cron_expression.png[Replication Frequency Cron Expression]
+
+=== データ同期の妥当性検査
+
+Airbyte は、`Status` タブの [Sync History] セクションで同期の試行を追跡します。 
+
+image::elt/{dir}/data_sync_summary.png[データ同期のまとめ]
+
+次に、 link:https://clearscape.teradata.com/dashboard[ClearScape Analytics Experience に移動し,window="_blank"] で Jupyter Notebookを実行します。ClearScape Analytics Experience のNotebookは Teradata SQL クエリーを実行するように構成されており、データベース `gsheet_airbyte_td`、ストリーム (テーブル)、および完全なデータが存在するかどうかを検証します。
+
+image::elt/{dir}/data_sync_validation_in_teradata.png[Teradata でのデータ同期の妥当性検査]
+
+[source, bash]
+----
+%connect local 
+----
+
+[source, bash, id="airbyte_select_query", role="emits-gtm-events"]
+----
+SELECT  DatabaseName, TableName, CreateTimeStamp, LastAlterTimeStamp
+FROM    DBC.TablesV
+WHERE   DatabaseName = 'gsheet_airbyte_td'
+ORDER BY    TableName;
+----
+
+[source, bash]
+----
+DATABASE gsheet_airbyte_td; 
+----
+
+[source, bash]
+----
+SELECT * FROM _airbyte_raw_sample_employee_payrate;  
+----
+
+この接続では正規化と変換がサポートされておらず、 link:https://docs.airbyte.com/understanding-airbyte/namespaces/#:~:text=If%20you%20don%27t%20enable%20basic%20normalization%2C%20you%20will%20only%20receive%20the%20raw%20tables.[生のテーブル window="_blank" しかない]ため、宛先のストリーム (テーブル) 名には `\_airbyte_raw_` という接頭辞が付いています。各ストリーム (テーブル) には 3 つの列が含まれます。 
+
+1. `_airbyte_ab_id`: Airbyte によって処理される各イベントに割り当てられる uuid。Teradata の列型は `VARCHAR(256)`です。
+
+2. `_airbyte_emitted_at`: イベントがデータ ソースからいつ取得されたかを表すタイムスタンプ。Teradata の列型は `TIMESTAMP(6)`です。
+
+3. `_airbyte_data`: イベント データを表す json blob。Teradata の列型は `JSON`です。
+
+`_airbyte_data`カラムには、ソースのGoogle スプレッドシートと同じ9行が表示され、データはJSON形式で、必要に応じてさらに変換できる。
+
+=== 接続を閉じて削除する
+
+* 接続を無効にすることで、Airbyte での接続を閉じることができます。これにより、データ同期プロセスが停止します。
+
+image::elt/{dir}/close_airbyte_connection.png[Airbyte接続を閉じる]
+
+* 接続を削除することもできます。
+
+image::elt/{dir}/delete_airbyte_connection.png[Airbyte接続の削除]
+
+
+=== まとめ
+このチュートリアルでは、Google シートなどのソース システムからデータを抽出し、Airbyte ELT ツールを使用してデータを Teradata Vantage インスタンスにロードする方法を説明しました。エンドツーエンドのデータフローと、Airbyte Open Source をローカルで実行し、ソース接続と宛先接続を構成するための完全な構成手順を確認しました。また、レプリケーション頻度に基づいて利用可能なデータ同期構成についても説明しました。Cloudscape Analytics Experience を使用して宛先での結果を検証し、最終的に Airbyte 接続を一時停止および削除するメソッドを確認しました。 
+
+=== さらに詳しく
+link:https://docs.airbyte.com/integrations/destinations/teradata/?_ga=2.156631291.1502936448.1684794236-1752661382.1684794236[Teradata 宛先 | Airbyte ドキュメント,window="_blank"]
+
+link:https://docs.airbyte.com/cloud/core-concepts/#connection-sync-modes[コアコンセプト | Airbyte ドキュメント,window="_blank"]
+
+link:https://airbyte.com/community[Airbyte コミュニティ のSlack,window="_blank"]
+
+link:https://discuss.airbyte.io/[Airbyte コミュニティ,window="_blank"]
+

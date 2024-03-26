@@ -1,3 +1,4 @@
 == 次のステップ
+:page-lang: ja
 
 * xref:ja/general/nos.adoc[]

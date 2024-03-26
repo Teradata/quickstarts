@@ -1,4 +1,5 @@
 = dbt と FEAST を使用して Teradata Vantage でフィーチャストアを構築する方法
+:page-lang: ja
 :experimental:
 :page-author: Ravi Chillanki
 :page-email: ravi.chillanki@teradata.com

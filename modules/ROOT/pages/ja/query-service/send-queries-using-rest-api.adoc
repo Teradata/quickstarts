@@ -1,4 +1,5 @@
 = REST APIを使ってVantageにクエリーを送信する方法
+:page-lang: ja
 :experimental:
 :page-author: Sudha Vedula
 :page-email: sudha.vedula@teradata.com

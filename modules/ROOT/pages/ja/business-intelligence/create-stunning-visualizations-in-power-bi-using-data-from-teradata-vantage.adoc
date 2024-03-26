@@ -1,0 +1,137 @@
+= Vantage を使用して Power BI で視覚化を作成する
+:page-lang: ja
+:experimental:
+:page-author: Kevin Bogusch, Paul Ibberson
+:page-email: paul.ibberson2@teradata.com
+:page-revdate: 2022年1月14日
+:description: Teradata Vantage を Power BI Desktop に接続します。
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, microsoft power bi, power bi
+:tabs:
+:page-image-directory: connect-power-bi
+
+
+== 概要
+
+NOTE: このガイドには、Microsoft と Teradata の両方の製品ドキュメントの内容が含まれています。
+
+今回は、Power BI Desktop を Teradata Vantage に接続して、レポートやデータの劇的な視覚化を作成するプロセスについて説明します。 Power BI は Teradata Vantage をデータ ソースとしてサポートしており、Power BI Desktop の他のデータ ソースと同様に基になるデータを使用できます。
+
+https://docs.microsoft.com/en-us/power-bi/power-bi-overview[Power BI]  は、ソフトウェア サービス、アプリケーション、コネクタで構成され、これらが連携して、関連性のないデータ ソースを、一貫性があり、視覚的に没入型の対話型の分析情報に変換します。
+
+.Power BI は以下で構成されます。
+* https://docs.microsoft.com/en-us/power-bi/fundamentals/desktop-what-is-desktop[Power BI Desktop]
+と呼ばれる Windows デスクトップ アプリケーション* https://docs.microsoft.com/en-us/power-bi/fundamentals/power-bi-service-overview[Power BI サービス]
+と呼ばれるオンライン SaaS サービス* Windows、iOS、Android デバイス用の https://docs.microsoft.com/en-us/power-bi/consumer/mobile/mobile-apps-for-mobile-devices[Power BI モバイル] アプリ
+
+image::business-intelligence/{page-image-directory}/power.bi.elements.png[Power BI 要素, width=100%]
+
+これら 3 つの要素 (Power BI Desktop、Power BI サービス、モバイル アプリ) は、人々が自分や自分の役割に最も効果的に応える方法でビジネスの分析情報を作成、共有、利用できるように設計されています。
+
+image::business-intelligence/{page-image-directory}/power.bi.overview.blocks.png[Power BIの概要ブロック, width=100%]
+
+4 番目の要素である https://docs.microsoft.com/en-us/power-bi/report-server/get-started[Power BI Report Server を使用]すると、Power BI Desktop で Power BI レポートを作成した後、オンプレミスのレポート サーバーに発行できます。
+
+Power BI Desktop は、Vantage を「ネイティブ」データ ソースとしてではなく、サード パーティ データ ソースとしてサポートします。 代わりに、Power BI サービスで公開されたレポートは、 構成要素の https://docs.microsoft.com/en-us/power-bi/connect-data/service-gateway-onprem[オンプレミス データ ゲートウェイ] を使用して Vantage にアクセスする必要があります。
+
+この入門ガイドでは、Teradata Vantageへの接続方法について説明します。Power BI Desktop Teradata コネクタは https://downloads.teradata.com/download/connectivity/net-data-provider-for-teradata[.NET Data Provider for Teradata]を使用します。Power BI Desktopを使用するコンピューターにドライバをインストールする必要があります。.NET Data Provider for Teradata の単一インストールでは、32 ビットまたは 64 ビットの両方の Power BI Desktop アプリケーションがサポートされます。
+
+== 前提条件
+Azure サービス、Teradata Vantage、Power BI Desktop に精通していることが求められます。
+
+以下のアカウントとシステムが必要です。
+
+* Power BI Desktop は、Windows 用の無料アプリケーションです。(Power BI Desktop は Mac では利用できません。 https://www.parallels.com/[Parallels] や https://www.vmware.com/products/fusion.html[VMware Fusion]などの仮想マシン、または Apple の https://support.apple.com/en-vn/boot-camp[Boot Camp]で実行することもできますが、それはこの記事のスコープ外です。)
+
+* ユーザーとパスワードを持つ Teradata Vantage インスタンス。ユーザーは、Power BI Desktop で使用できるデータに対するアクセス認証を持っている必要があります。Vantage には Power BI Desktop からアクセスできる必要があります。
++
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
+
+* https://downloads.teradata.com/download/connectivity/net-data-provider-for-teradata[.NET Data Provider for Teradata]。
+
+== はじめに
+=== Power BI Desktopをインストールする
+Power BI Desktop は https://aka.ms/pbidesktopstore[Microsoft Store] からインストールすることも、 https://aka.ms/pbiSingleInstaller[インストーラーをダウンロード]し て直接実行することもできます。
+
+=== .NET Data Provider for Teradata をインストールする
+最新バージョンの https://downloads.teradata.com/download/connectivity/net-data-provider-for-teradata[.NET Data Provider for Teradata ]をダウンロードしてインストールします。
+
+ダウンロードできるファイルは複数あることに注記してください。「tdnetdp」で始まるファイルが必要です。
+
+=== Teradata Vantage に接続する
+* 黄色のアイコンが付いている Power BI Desktopを実行します。 
+
+image::business-intelligence/{page-image-directory}/power.bi.icon.png[Power BIアイコン, width=30%]
+
+* 開始 (スプラッシュ) 画面が表示されている場合は、「データの取得」をクリックします。
+
+image::business-intelligence/{page-image-directory}/power.bi.splash.screen.png[Power BIのスプラッシュ画面, width=70%]
+
+それ以外の場合、Power BI のメイン フォームを使用している場合は、_Home_リボン上にいることを確認し、_Get data_をクリックします。_More…_をクリックします。
+
+image::business-intelligence/{page-image-directory}/power.bi.get.data.menu.png[Power BIのGet Dataメニュー, width=70%]
+
+* 左側の_Database_をクリックします。
+* _Teradata database_が表示されるまで、右側のリストをスクロールします。_Teradata database_をクリックしてから、_Connect_ボタンをクリックします。
+
+(今回は、「Teradata database」と「Teradata Vantage」は同義です。)
+
+image::business-intelligence/{page-image-directory}/power.bi.database.picker.png[Power BI データベースの選択, width=70%]
+
+* 表示されるウィンドウで、Vantage システムの名前または IP アドレスをテキスト ボックスに入力します。データを Power BI データ モデルに直接_インポート_するか、 https://docs.microsoft.com/en-us/power-bi/desktop-use-directquery[DirectQuery] を使用してデータ ソースに直接接続して_OK_ をクリックするかを選択できます。
+
+image::business-intelligence/{page-image-directory}/power.bi.server.connect.png[Power BIサーバ接続, width=70%]
+
+(_Advanced_ オプションをクリックして、手作りした SQL文を送信します。)
+
+信頼証明については、Vantage で定義された _Windows_ ログインまたは _データベース_ ユーザー名を使用して接続するオプションがあります。これがより一般的です。適切な    認証方式を選択し、ユーザー名とパスワードを入力します。_Connect_をクリックします。
+
+また、LDAPサーバで認証するオプションもある。このオプションは、デフォルトでは非表示になっている。
+
+環境変数 _PBI_EnableTeradataLdap_を _true_ に設定すると、LDAP 認証方式が使用可能になります。
+
+image::business-intelligence/{page-image-directory}/power.bi.ldap.png[Power BI LDAP 接続, width=70%]
+
+LDAPは、Power BIサービスに発行されるレポートに使用されるオンプレミスデータゲートウェイではサポートされないことに注記してください。LDAP 認証が必要で、オンプレミス データ ゲートウェイを使用している場合は、Microsoft にインシデントを送信してサポートをリクエストする必要があります。
+
+あるいは、 https://docs.microsoft.com/en-us/power-bi/connect-data/service-gateway-sso-kerberos[Power BI サービスから Teradata などのオンプレミス データ ソースへの Kerberos ベースの SSO を構成]できます。
+
+Vantage システムに接続すると、Power BI Desktop は今後システムに接続するための信頼証明を記憶します。 _File > Optionsおよびsettings > Data source setting_ に移動すると、これらの信頼証明を変更できます。
+
+接続が成功すると、Navigatorウィンドウが表示されます。Vantageシステムで使用可能なデータが表示される。Power BI Desktop で使用する 1 つ以上の要素を選択できます。
+
+image::business-intelligence/{page-image-directory}/power.bi.navigator.png[Power BI Navigator, width=90%]
+
+テーブルの名前をクリックして、テーブルをプレビューする。Power BI Desktop にロードする場合は、テーブル名の横にあるチェックボックスを必ずオンにしてください。
+
+選択したテーブルを _ロード_ して、Power BI Desktop に取り込むことができます。クエリーを _編集_ することもできます。これにより、クエリー エディターが開き、ロードするデータのセットをフィルタして絞り込むことができます。
+
+_編集_ は、使用している Power BI Desktop のバージョンに応じて _データの変換_と呼ばれる場合があります。
+
+テーブルの結合の詳細については、 https://docs.microsoft.com/en-us/power-bi/desktop-create-and-manage-relationships[「Power BI Desktop 機能でのリレーションシップの作成と管理」] を参照してください。
+
+レポートを公開するには、Power BI Desktopの _Home_ リボンの [_Publish_] をクリックします。
+
+image::business-intelligence/{page-image-directory}/power.bi.publish.png[Power BI の公開, width=100%]
+
+Power BI Desktop では、レポートを保存するように求められます。_My workspace_を選択し、_Select_をクリックします。 
+
+image::business-intelligence/{page-image-directory}/power.bi.workspace.png[Power BIによるワークスペースへの公開, width=90%]
+
+レポートが公開されたら、_Got it_をクリックして閉じます。また、リンクにレポート名が含まれているリンクをクリックすることもできます。
+
+image::business-intelligence/{page-image-directory}/power.bi.success.png[パワーBIが正常に公開されました, width=90%]
+
+これは、Power BI Desktop で作成されたレポートの例です。
+
+image::business-intelligence/{page-image-directory}/power.bi.report.png[Power BIレポート, width=100%]
+
+== 次のステップ
+Power BI Desktop を使用して、さまざまなソースからのデータを組み合わせることができます。詳細については、以下のリンクを参照してください。
+
+* https://docs.microsoft.com/en-us/power-bi/desktop-what-is-desktop[Power BI Desktopとは何ですか?]
+* https://docs.microsoft.com/en-us/power-bi/desktop-data-sources[Power BI Desktop のデータ ソース]
+* https://docs.microsoft.com/en-us/power-bi/desktop-shape-and-combine-data[Power BI Desktop を使用してデータを整形および結合する]
+* https://docs.microsoft.com/en-us/power-bi/desktop-connect-excel[Power BI Desktop で Excel ブックに接続する]
+* https://docs.microsoft.com/en-us/power-bi/desktop-enter-data-directly-into-desktop[Power BI Desktop にデータを直接入力する]
+
+include::ROOT:partial$community_link.adoc[]
