@@ -2263,10 +2263,10 @@ AS PERMANENT = 60e6, -- 60MB
 </div>
 <div class="sidebarblock">
     <div id="right" style="float: right">
-    <a style="cursor: pointer; color: grey" onclick="this.parentElement.parentElement.style.display = 'none'">x</a>
+    <a style="cursor: pointer; color: grey" onclick="this.parentElement.parentElement.style.display = 'none''">x</a>
   </div>
   <div class="content">
-    <div class="paragraph">Were you able to run the query?
+    <div class="paragraph">クエリーを実行できましたか?
       <i class="far fa-thumbs-up click-icon" style="padding: 0rem 0.2rem;" onclick="toggleThumbs(this, 'first_query')"></i>
       <i class="far fa-thumbs-down click-icon" onclick="toggleThumbs(this 'first_query')"></i>
     </div>
@@ -2284,7 +2284,7 @@ AS PERMANENT = 60e6, -- 60MB
 </style>
 </li>
 <li>
-<p>Let&#8217;s create a sample table and insert some data and query it. We will first create a table to hold employee information:</p>
+<p>サンプルテーブルを作成し、データを挿入してクエリーを実行してみましょう。まず、従業員情報を保持するテーブルを作成する。</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE SET TABLE HR.Employees (
@@ -2300,7 +2300,7 @@ UNIQUE PRIMARY INDEX ( GlobalID );</code></pre>
 </div>
 </li>
 <li>
-<p>Now, let&#8217;s insert a record:</p>
+<p>次に、レコードを挿入する。</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">INSERT INTO HR.Employees (
@@ -2323,14 +2323,14 @@ VALUES (
 </div>
 </li>
 <li>
-<p>Finally, let&#8217;s see if we can retrieve the data:</p>
+<p>最後に、データを取得できるかどうかを確認する。</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM HR.Employees;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You should get the following results:</p>
+<p>以下の結果が得られるはずです。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2457,7 +2457,7 @@ systemctl start vantage-express</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="../../nos.html" class="xref page">Query data stored in object storage</a></p>
+<p><a href="#../general/nos.adoc" class="xref unresolved">オブジェクトストレージに保存されたクエリーデータ</a></p>
 </li>
 </ul>
 </div>

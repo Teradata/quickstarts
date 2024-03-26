@@ -2248,7 +2248,7 @@ cd /opt/downloads</code></pre>
 </div>
 </li>
 <li>
-<p>Install VirtualBox and 7zip:</p>
+<p>VirtualBoxと7 zipをインストールします。</p>
 <div id="apt" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apt update &amp;&amp; apt-get install p7zip-full p7zip-rar virtualbox -y</code></pre>
@@ -2256,28 +2256,28 @@ cd /opt/downloads</code></pre>
 </div>
 </li>
 <li>
-<p>Retrieve the curl command to download Vantage Express.</p>
+<p>curlコマンドを取得して、Vantage Expressをダウンロードします。</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Go to <a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Vantage Expess download page</a> (registration required).</p>
+<p><a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Vantage Expess のダウンロード ページ</a>に移動します (登録が必要です)。</p>
 </li>
 <li>
-<p>Click on the latest download link, e.g. "Vantage Express 17.20". You will see a license agreement popup. Don&#8217;t accept the license yet.</p>
+<p>「Vantage Express 17.20」などの最新のダウンロードリンクをクリックします。使用許諾契約のポップアップが表示されます。まだライセンスを受け入れません。</p>
 </li>
 <li>
-<p>Open the network view in your browser. For example, in Chrome press <kbd>F12</kbd> and navigate to <code>Network</code> tab:</p>
+<p>ブラウザでネットワークビューを開きます。例えば、Chrome で <kbd>F12</kbd> を押し「 <code>Network</code>」タブに移動します。</p>
 <div class="imageblock">
 <div class="content">
-<img src="../../_images/browser.network.png" alt="Browser Network Tab" width="500">
+<img src="../../_images/browser.network.png" alt="ブラウザの「Network」タブ" width="500">
 </div>
 </div>
 </li>
 <li>
-<p>Accept the license by clicking on <code>I Agree</code> button and cancel the download.</p>
+<p>`I Agree (同意する)`ボタンをクリックしてライセンスを受け入れ、ダウンロードをキャンセルします。</p>
 </li>
 <li>
-<p>In the network view, find the last request that starts with <code>VantageExpress</code>. Right click on it and select <code>Copy &#8594; Copy as cURL</code>:</p>
+<p>ネットワーク ビューで、 `VantageExpress`で始まる最後のリクエストを見つけます。それを右クリックして `Copy &#8594; Copy as cURL`を選択します。</p>
 <div class="imageblock">
 <div class="content">
 <img src="../../_images/browser.copy.curl.png" alt="Browser Copy culr" width="500">
@@ -2288,7 +2288,7 @@ cd /opt/downloads</code></pre>
 </div>
 </li>
 <li>
-<p>Head back to the ssh session and download Vantage Express by pasting the curl command. Add <code>-o ve.7z</code> to the command to save the download to file named <code>ve.7z</code>. You can remove all the HTTP headers, e.g.:</p>
+<p>ssh セッションに戻り、curl コマンドを貼り付けて Vantage Express をダウンロードします。ダウンロードを <code>ve.7z</code> という名前のファイルに保存するには、コマンドに <code>-o ve.7z</code> を追加します。次のように、すべてのHTTPヘッダーを削除できます。</p>
 <div id="download_ve" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -o ve.7z 'http://d289lrf5tw1zls.cloudfront.net/database/teradata-express/VantageExpress17.20_Sles12_202108300444.7z?Expires=1638719978&amp;Signature=GKBkNvery_long_signature__&amp;Key-Pair-Id=********************'</code></pre>
@@ -2296,7 +2296,7 @@ cd /opt/downloads</code></pre>
 </div>
 </li>
 <li>
-<p>Unzip the downloaded file. It will take several minutes:</p>
+<p>ダウンロードしたファイルを解凍します。数分かかります。</p>
 <div id="unzip" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">7z x ve.7z</code></pre>
@@ -2304,7 +2304,7 @@ cd /opt/downloads</code></pre>
 </div>
 </li>
 <li>
-<p>Start the VM in VirtualBox. The command will return immediately but the VM init process will take several minutes:</p>
+<p>VirtualBox で VM を起動しますコマンドはすぐに返されますが、VM の初期化プロセスには数分かかります。</p>
 <div id="start_vim" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export VM_IMAGE_DIR="/opt/downloads/VantageExpress17.20_Sles12"
@@ -2324,7 +2324,7 @@ vboxmanage controlvm "$VM_NAME" keyboardputscancode 1c 1c</code></pre>
 </div>
 </li>
 <li>
-<p>ssh to Vantage Express VM. Use <code>root</code> as password:</p>
+<p>Vantage Express VM に ssh で接続します。 <code>root</code> をパスワードとして使用します。</p>
 <div id="ssh_to_ve" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ssh -p 4422 root@localhost</code></pre>
@@ -2332,19 +2332,19 @@ vboxmanage controlvm "$VM_NAME" keyboardputscancode 1c 1c</code></pre>
 </div>
 </li>
 <li>
-<p>Validate that the DB is up:</p>
+<p>DBがアップしていることを確認します。</p>
 <div id="pde" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pdestate -a</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If the command returns <code>PDE state is RUN/STARTED. DBS state is 5: Logons are enabled - The system is quiescent</code>, it means that Vantage Express has started.
-If the status is different, repeat <code>pdestate -a</code> till you get the correct status.</p>
+<p>コマンドが`PDE state is RUN/STARTED. DBS state is 5: Logons are enabled - The system is quiescent`を返す場合は、Vantage Expressが起動したことを意味します。
+状態が異なる場合は、正しいステータスが得られるまで <code>pdestate -a</code> を繰り返します。</p>
 </div>
 </li>
 <li>
-<p>Once Vantage Express is up and running, start <code>bteq</code> client command line client. BTEQ (pronounced “bee-teek”) is a general-purpose, command-based client tool used to submit SQL queries to a Teradata Database.</p>
+<p>Vantage Expressが起動して実行されたら、<code>bteq</code> クライアントのコマンドラインクライアントを起動します。BTEQ (「ビーテック」と発音) は、Teradata Database に SQL クエリーを送信するために使用される、汎用のコマンド ベースのクライアント ツールです。</p>
 <div id="bteq" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bteq</code></pre>
@@ -2352,7 +2352,7 @@ If the status is different, repeat <code>pdestate -a</code> till you get the cor
 </div>
 </li>
 <li>
-<p>Once in bteq, connect to your Vantage Express instance. When asked for the password, enter <code>dbc</code>:</p>
+<p>bteqに入ったら、Vantage Expressインスタンスに接続します。パスワードを求められたら、 `dbc`を入力します。</p>
 <div id="bteq_logon" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">.logon localhost/dbc</code></pre>
@@ -2364,12 +2364,12 @@ If the status is different, repeat <code>pdestate -a</code> till you get the cor
 </div>
 </div>
 <div class="sect1">
-<h2 id="_run_sample_queries"><a class="anchor" href="#_run_sample_queries"></a>Run sample queries</h2>
+<h2 id="_サンプル_クエリーを実行する"><a class="anchor" href="#_サンプル_クエリーを実行する"></a>サンプル クエリーを実行する</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Using <code>dbc</code> user, we will create a new database called <code>HR</code>. Copy/paste this query and run press <kbd>Enter</kbd>:</p>
+<p>`dbc`ユーザーを使用して、`HR`という新しいデータベースを作成します。このクエリーをコピー/貼り付けて、<kbd>Enter</kbd> を押して実行します。</p>
 <div id="first_query" class="listingblock emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE HR
@@ -2379,10 +2379,10 @@ AS PERMANENT = 60e6, -- 60MB
 </div>
 <div class="sidebarblock">
     <div id="right" style="float: right">
-    <a style="cursor: pointer; color: grey" onclick="this.parentElement.parentElement.style.display = 'none'">x</a>
+    <a style="cursor: pointer; color: grey" onclick="this.parentElement.parentElement.style.display = 'none''">x</a>
   </div>
   <div class="content">
-    <div class="paragraph">Were you able to run the query?
+    <div class="paragraph">クエリーを実行できましたか?
       <i class="far fa-thumbs-up click-icon" style="padding: 0rem 0.2rem;" onclick="toggleThumbs(this, 'first_query')"></i>
       <i class="far fa-thumbs-down click-icon" onclick="toggleThumbs(this 'first_query')"></i>
     </div>
@@ -2400,7 +2400,7 @@ AS PERMANENT = 60e6, -- 60MB
 </style>
 </li>
 <li>
-<p>Let&#8217;s create a sample table and insert some data and query it. We will first create a table to hold employee information:</p>
+<p>サンプルテーブルを作成し、データを挿入してクエリーを実行してみましょう。まず、従業員情報を保持するテーブルを作成する。</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE SET TABLE HR.Employees (
@@ -2416,7 +2416,7 @@ UNIQUE PRIMARY INDEX ( GlobalID );</code></pre>
 </div>
 </li>
 <li>
-<p>Now, let&#8217;s insert a record:</p>
+<p>次に、レコードを挿入する。</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">INSERT INTO HR.Employees (
@@ -2439,14 +2439,14 @@ VALUES (
 </div>
 </li>
 <li>
-<p>Finally, let&#8217;s see if we can retrieve the data:</p>
+<p>最後に、データを取得できるかどうかを確認する。</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM HR.Employees;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You should get the following results:</p>
+<p>以下の結果が得られるはずです。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2461,12 +2461,12 @@ VALUES (
 </div>
 </div>
 <div class="sect1">
-<h2 id="_optional_setup"><a class="anchor" href="#_optional_setup"></a>Optional setup</h2>
+<h2 id="_オプションを設定する"><a class="anchor" href="#_オプションを設定する"></a>オプションを設定する</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>If you intend to stop and start the VM, you may want to add Vantage Express to autostart. ssh to your VM and run the following commands:</p>
+<p>VM を停止して起動する場合は、Vantage Express を自動起動に追加することをお勧めします。 VM に ssh で接続し、以下のコマンドを実行します。</p>
 <div id="autostart" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo -i
@@ -2590,12 +2590,12 @@ aws ec2 delete-vpc \
 </div>
 </div>
 <div class="sect1">
-<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h2>
+<h2 id="_次のステップ"><a class="anchor" href="#_次のステップ"></a>次のステップ</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><a href="../../nos.html" class="xref page">Query data stored in object storage</a></p>
+<p><a href="#../general/nos.adoc" class="xref unresolved">オブジェクトストレージに保存されたクエリーデータ</a></p>
 </li>
 </ul>
 </div>
@@ -2621,7 +2621,7 @@ aws ec2 delete-vpc \
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you have any questions or need further assistance, please visit our <a href="https://support.teradata.com/community">community forum</a> where you can get support and interact with other community members.
+ご質問がある場合、またはさらにサポートが必要な場合は、<a href="https://support.teradata.com/community">コミュニティ フォーラム</a>にアクセスしてサポートを受け、他のコミュニティ メンバーと交流してください。
 </td>
 </tr>
 </table>

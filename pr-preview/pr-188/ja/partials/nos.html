@@ -3,20 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>VirtualBox で Vantage Express を実行する方法 :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/ja/general/getting.started.vbox.html">
-    <meta name="description" content="VirtualBox を使用してラップトップで Vantage Express を実行します。">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics">
+    <title>オブジェクトストレージに保存されたクエリーデータ :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/ja/partials/nos.html">
+    <meta name="description" content="Teradata Vantage Native Object Storage - オブジェクト ストレージへの読み取りと書き込み、Vantage およびオブジェクト ストレージ用の統合 SQL インターフェイス。">
+    <meta name="keywords" content="データ ウェアハウス、コンピューティング ストレージの分離、teradata、vantage、クラウド データ プラットフォーム、オブジェクト ストレージ、ビジネス インテリジェンス、エンタープライズ分析">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta property="og:title" content="VirtualBox で Vantage Express を実行する方法 :: Teradata Getting Started">
+<meta property="og:title" content="オブジェクトストレージに保存されたクエリーデータ :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="VirtualBox を使用してラップトップで Vantage Express を実行します。" />
+<meta property="og:description" content="Teradata Vantage Native Object Storage - オブジェクト ストレージへの読み取りと書き込み、Vantage およびオブジェクト ストレージ用の統合 SQL インターフェイス。" />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/ja/general/getting.started.vbox.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/ja/partials/nos.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -1976,7 +1976,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="getting.started.vbox.html">VirtualBox で Vantage Express を実行する方法</a></li>
+    <li><a href="nos.html">オブジェクトストレージに保存されたクエリーデータ</a></li>
   </ul>
 </nav>
 </div>
@@ -1985,55 +1985,26 @@ document.addEventListener("DOMContentLoaded", function () {
 <aside class="toc sidebar" data-title="コンテンツ" data-levels="2"> 
     <div class="page-controls">
         <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">問題を報告する</div></a>
-        <a href="https://github.com/Teradata/quickstarts/blob/HEAD/modules/ROOT/pages/ja/general/getting.started.vbox.adoc"><div class="edit-on-github">GitHub で編集する</div></a>
+        <a href="https://github.com/Teradata/quickstarts/blob/HEAD/modules/ROOT/pages/ja/partials/nos.adoc"><div class="edit-on-github">GitHub で編集する</div></a>
     </div>
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">VirtualBox で Vantage Express を実行する方法</h1>
-<div id="preamble">
-<div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<a href="https://clearscape.teradata.com/" class="bare">https://clearscape.teradata.com/</a>では、Vantageのホストされたインスタンスを無料で入手できるようになりました。
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
+<h1 class="page">オブジェクトストレージに保存されたクエリーデータ</h1>
 <div class="sect1">
 <h2 id="_概要"><a class="anchor" href="#_概要"></a>概要</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このハウツーでは、Teradata データベースをローカル マシン上で実行してアクセスする方法を示します。手順を完了すると、コンピュータ上で動作する Teradata Vantage Express データベースが作成されます。</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-バージョン 17.20 以降、Vantage Express には以下の分析パッケージが含まれています。 <a href="https://docs.teradata.com/r/Vantage-Analytics-Library-User-Guide/January-2022">Vantage Analytics Library</a>、 <a href="https://docs.teradata.com/r/Teradata-VantageTM-Bring-Your-Own-Model-User-Guide/May-2022">Bring Your Own Model (BYOM)</a>、 <a href="https://docs.teradata.com/r/Teradata-VantageTM-API-Integration-Guide-for-Cloud-Machine-Learning/April-2022">API Integration with AWS SageMaker</a>。
-</td>
-</tr>
-</table>
+<p>Native Object Storage (NOS) は、AWS S3、Google GCS、Azure Blob、またはオンプレミス実装などのオブジェクト ストレージ内のファイルに保存されているデータをクエリできるようにする Vantage の機能です。これは、Vantage にデータを取り込むためのデータ パイプラインを構築せずにデータを探索するシナリオに役立ちます。</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_前提条件"><a class="anchor" href="#_前提条件"></a>前提条件</h2>
 <div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>以下のオペレーティング システムのいずれかを使用するコンピューター: Windows 10、Linux、または Intel ベースの MacOS。</p>
+<div class="paragraph">
+<p>Teradata Vantage インスタンスにアクセスする必要があります。NOS は、バージョン 17.10 以降、Vantage Express から Developer、DYI、Vantage as a Service までのすべての Vantage エディションで有効になります。</p>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2041,31 +2012,17 @@ document.addEventListener("DOMContentLoaded", function () {
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-M1/M2 MacOSシステムについては、<a href="../../getting.started.utm.html" class="xref page">Run Vantage Express on UTM</a>を参照してください。
+Vantage のテスト インスタンスが必要な場合は、 <a href="https://clearscape.teradata.com/sign-in?utm_source=dev_portal&amp;utm_medium=quickstart_tutorial&amp;utm_campaign=quickstarts" target="_blank" rel="noopener">https://clearscape.teradata.com.</a>
+で無料でプロビジョニングできます。
 </td>
 </tr>
 </table>
-</div>
-</li>
-<li>
-<p>少なくとも 1 つのコアと 6GB RAM を仮想マシン専用にできる 30GB のディスク領域と十分な CPU および RAM。</p>
-</li>
-<li>
-<p>ソフトウェアをインストールして実行できる管理者権限。</p>
-</li>
-</ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_インストール"><a class="anchor" href="#_インストール"></a>インストール</h2>
+<h2 id="_nos_でデータを探索する"><a class="anchor" href="#_nos_でデータを探索する"></a>NOS でデータを探索する</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_必要なソフトウェアのダウンロード"><a class="anchor" href="#_必要なソフトウェアのダウンロード"></a>必要なソフトウェアのダウンロード</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player" target="_blank" rel="noopener">Vantage Express VirtualBox Open Virtual Appliance (OVA)</a>の最新バージョン 。</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2073,341 +2030,273 @@ M1/M2 MacOSシステムについては、<a href="../../getting.started.utm.html
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-これまでに Teradata Downloads Web サイトを使用したことがない場合は、まず登録する必要があります。
+現在、NOS は CSV、JSON (配列または改行区切りとして)、および Parquet データ形式をサポートしています。
 </td>
 </tr>
 </table>
 </div>
-</li>
-<li>
-<p><a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="noopener">VirtualBox</a>、バージョン6.1。</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-`brew`およびその他のパッケージ マネージャを使用して VirtualBox をインストールすることもできます。
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>データセットが CSV ファイルとして S3 バケットに保存されているとします。データセットを Vantage に取り込むかどうかを決定する前に、データセットを探索したいと考えています。このシナリオでは、
+米国地質調査所によって収集された河川流量データを含む、Teradata によって公開された公開データセットを使用します。バケットは <a href="https://td-usgs-public.s3.amazonaws.com/にあります。" class="bare">https://td-usgs-public.s3.amazonaws.com/にあります。</a></p>
 </div>
-</li>
-</ol>
+<div class="paragraph">
+<p>まずはCSVデータのサンプルを見てみましょう。Vantage がバケットからフェッチする最初の 10 行を取得します。</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_インストーラを実行する"><a class="anchor" href="#_インストーラを実行する"></a>インストーラを実行する</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>インストーラーを実行し、デフォルト値を受け入れて、VirtualBox をインストールします。</p>
-</li>
-</ol>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-VirtualBox には、高い権限を必要とする機能が含まれています。VirtualBox を初めて起動するときは、この昇格されたアクセスを確認するように求められます。VirtualBox カーネル プラグインをアクティブにするためにマシンを再起動する必要がある場合もあります。
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_vantage_express_を実行する"><a class="anchor" href="#_vantage_express_を実行する"></a>Vantage Express を実行する</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>VirtualBoxを起動します。</p>
-</li>
-<li>
-<p>`File &#8594; Import Appliance&#8230;&#8203;`メニューに移動します。</p>
-</li>
-<li>
-<p><code>File</code> フィールドで、ダウンロードしたOVAファイルを選択します。</p>
-</li>
-<li>
-<p>以下の画面で、デフォルトを受け入れて `Import`をクリックします。</p>
-</li>
-<li>
-<p>メインの VirtualBox パネルに戻り、VM <code>Vantage  17.20</code> をダブルクリックして Vantage Express アプライアンスを起動します。</p>
-<div class="imageblock">
+<div id="nos_first_query" class="listingblock emits-gtm-events">
 <div class="content">
-<img src="../../_images/getting-started-vbox/start-vm.png" alt="VMを開始する" width="75%">
-</div>
-</div>
-</li>
-<li>
-<p><kbd>ENTER</kbd>を押して、強調表示されている <code>LINUX</code> ブートパーティションを選択します。</p>
-<div class="imageblock">
-<div class="content">
-<img src="../../_images/run-vantage/boot-manager-menu.png" alt="ブートマネージャメニュー" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>以下の画面で、もう一度 <kbd>ENTER</kbd> を押して、デフォルトの SUSE Linux カーネルを選択します。</p>
-<div class="imageblock">
-<div class="content">
-<img src="../../_images/run-vantage/grub-menu.png" alt="Grubメニュー" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>起動シーケンスが完了すると、以下のスクリーンショットに示すような端末ログイン プロンプトが表示されます。ターミナルには何も入力しないでください。システムが GUI を開始するまで待ちます。</p>
-<div class="imageblock">
-<div class="content">
-<img src="../../_images/run-vantage/wait-for-gui.png" alt="GUIを待つ" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>しばらくすると、以下のプロンプトが表示されます。上記のコマンド ログイン プロンプトの後に何も入力しなかったと仮定します。下の画面で`okay`ボタンを押す。</p>
-<div class="imageblock">
-<div class="content">
-<img src="../../_images/run-vantage/okay-the-security-popup.png" alt="OK Security Popup" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>VM が起動すると、そのデスクトップ環境が表示されます。username/password  の入力を求められたら、両方に <code>root</code> と入力します。</p>
-<div class="imageblock">
-<div class="content">
-<img src="../../_images/run-vantage/vm.login.png" alt="VMログイン" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>データベースは VM とともに自動起動するように構成されています。データベースが開始されたことを確認するには、仮想デスクトップに移動し、<code>Gnome Terminal</code> を起動します。</p>
-<div class="imageblock">
-<div class="content">
-<img src="../../_images/run-vantage/start-gnome-terminal.png" alt="Gnome Terminalを起動する" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>ターミナルで <code>pdestate</code> コマンドを実行すると、Vantage がすでに起動しているかどうかが通知されます。</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Gnome Terminalに貼り付けるには、<span class="keyseq"><kbd>SHIFT</kbd>+<kbd>CTRL</kbd>+<kbd>V</kbd></span> を押します。
-</td>
-</tr>
-</table>
-</div>
-<div id="pdestate" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">watch pdestate -a</code></pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT
+  TOP 10 *
+FROM (
+	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+) AS d;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>以下のメッセージが表示されるまで待ちます。</p>
+<p>私が持っているものは次のとおりです。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>PDE state is RUN/STARTED.
-DBS state is 5: Logons are enabled - The system is quiescent</pre>
-</div>
-</div>
-<details
-<summary class="title">データベースの初期化中に<code>pdestate</code>返すメッセージの例を参照してください。</summary>
-<div class="content">
-<div class="listingblock">
-
-<pre>PDE state is DOWN/HARDSTOP.
-
-PDE state is START/NETCONFIG.
-
-PDE state is START/GDOSYNC.
-
-PDE state is START/TVSASTART.
-
-PDE state is START/READY.
-PDE state is RUN/STARTED.
-
-DBS state is 1/1: DBS Startup - Initializing DBS Vprocs
-PDE state is RUN/STARTED.
-
-DBS state is 1/5: DBS Startup - Voting for Transaction Recovery
-PDE state is RUN/STARTED.
-
-DBS state is 1/4: DBS Startup - Starting PE Partitions
-PDE state is RUN/STARTED.</pre>
-</div>
-</div>
-</details>
-</li>
-<li>
-<p>データベースが起動したので、仮想デスクトップに戻って`Teradata Studio Express`を起動します。</p>
-<div class="imageblock">
-<div class="content">
-<img src="../../_images/run-vantage/start-teradata-studio-express.png" alt="Teradata Studio Express を起動する" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>初めて開始すると、ツアーが提供されます。ツアーを終了すると、新しい接続を追加するためのウィザードウィンドウが表示さます。 `Teradata`を選択します。</p>
-<div class="imageblock">
-<div class="content">
-<img src="../../_images/run-vantage/new.connection.profile.png" alt="新規接続プロファイル" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>以下の画面で、ユーザー名とパスワードに <code>dbc</code> を使用してローカルホスト上のデータベースに接続します。</p>
-<div class="imageblock">
-<div class="content">
-<img src="../../_images/run-vantage/new.connection.png" alt="新規接続" width="500">
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_サンプルクエリーを実行する"><a class="anchor" href="#_サンプルクエリーを実行する"></a>サンプルクエリーを実行する</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Teradata Studio Expressで、<code>クエリー開発`パースペクティブに移動すします(トップメニューに移動して、`Window</code> &#8594; <code>クエリー開発</code> を選択)。</p>
-</li>
-<li>
-<p><code>データベース接続</code> &#8594; `新規Teradata`をダブルクリックして、以前に作成した接続プロファイルを使用して接続します。</p>
-</li>
-<li>
-<p>`dbc`ユーザーを使用して、`HR`という新しいデータベースを作成します。このクエリーをコピー/ペーストし、Run Query (<span class="image"><img src="../../_images/run.query.button.png" alt="クエリを実行" width="24" height="24"></span>) ボタンまたは<kbd>F5</kbd>キーを押します。</p>
-<div id="first_query" class="listingblock emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE HR
-AS PERMANENT = 60e6, -- 60MB
-    SPOOL = 120e6; -- 120MB</code></pre>
-</div>
-</div>
-<div class="sidebarblock">
-    <div id="right" style="float: right">
-    <a style="cursor: pointer; color: grey" onclick="this.parentElement.parentElement.style.display = 'none''">x</a>
-  </div>
-  <div class="content">
-    <div class="paragraph">クエリーを実行できましたか?
-      <i class="far fa-thumbs-up click-icon" style="padding: 0rem 0.2rem;" onclick="toggleThumbs(this, 'first_query')"></i>
-      <i class="far fa-thumbs-down click-icon" onclick="toggleThumbs(this 'first_query')"></i>
-    </div>
-  </div>
-</div>
-<style>
-.closebtn {
-  position: absolute;
-  top: 5px;
-  right: 15px;
-  color: white;
-  font-size: 30px;
-  cursor: pointer;
-}
-</style>
-</li>
-<li>
-<p>サンプルテーブルを作成し、データを挿入してクエリーを実行してみましょう。まず、従業員情報を保持するテーブルを作成する。</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE SET TABLE HR.Employees (
-   GlobalID INTEGER,
-   FirstName VARCHAR(30),
-   LastName VARCHAR(30),
-   DateOfBirth DATE FORMAT 'YYYY-MM-DD',
-   JoinedDate DATE FORMAT 'YYYY-MM-DD',
-   DepartmentCode BYTEINT
-)
-UNIQUE PRIMARY INDEX ( GlobalID );</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>次に、レコードを挿入する。</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">INSERT INTO HR.Employees (
-   GlobalID,
-   FirstName,
-   LastName,
-   DateOfBirth,
-   JoinedDate,
-   DepartmentCode
-)
-VALUES (
-   101,
-   'Adam',
-   'Tworkowski',
-   '1980-01-05',
-   '2004-08-01',
-   01
-);</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>最後に、データを取得できるかどうかを確認する。</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM HR.Employees;</code></pre>
+<pre>GageHeight2 Flow   site_no datetime         Precipitation GageHeight
+----------- ----- -------- ---------------- ------------- -----------
+10.9        15300 09380000 2018-06-28 00:30 671           9.80
+10.8        14500 09380000 2018-06-28 01:00 673           9.64
+10.7        14100 09380000 2018-06-28 01:15 672           9.56
+11.0        16200 09380000 2018-06-27 00:00 669           9.97
+10.9        15700 09380000 2018-06-27 00:30 668           9.88
+10.8        15400 09380000 2018-06-27 00:45 672           9.82
+10.8        15100 09380000 2018-06-27 01:00 672           9.77
+10.8        14700 09380000 2018-06-27 01:15 672           9.68
+10.9        16000 09380000 2018-06-27 00:15 668           9.93
+10.8        14900 09380000 2018-06-28 00:45 672           9.72</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>以下の結果が得られるはずです。</p>
+<p>たくさんの数字が出てきましたが、それは何を意味するのでしょうか？この質問に答えるために、Vantage に CSV ファイルのスキーマを検出するように依頼します。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>GlobalID  FirstName  LastName   DateOfBirth  JoinedDate  DepartmentCode
---------  ---------  ---------- -----------  ----------  --------------
-     101  Adam       Tworkowski  1980-01-05  2004-08-01               1</pre>
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT
+  *
+FROM (
+	LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+	RETURNTYPE='NOSREAD_SCHEMA'
+) AS d;</code></pre>
 </div>
 </div>
-</li>
-</ol>
+<div class="paragraph">
+<p>Vantage はデータ サンプルをフェッチしてスキーマを分析し、結果を返します。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Name            Datatype                            FileType  Location
+--------------- ----------------------------------- --------- -------------------------------------------------------------------
+GageHeight2     decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+Flow            decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+site_no         int                                 csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+datetime        TIMESTAMP(0) FORMAT'Y4-MM-DDBHH:MI' csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+Precipitation   decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv
+GageHeight      decimal(3,2)                        csv       /S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09513780/2018/06/27.csv</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>CSV ファイルには 6 つの列があることがわかります。各列について、スキーマを推測するために使用された名前、データ型、ファイル座標を取得します。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_nos_を使用してデータをクエリーする"><a class="anchor" href="#_nos_を使用してデータをクエリーする"></a>NOS を使用してデータをクエリーする</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>スキーマがわかったので、データセットを通常の SQL テーブルであるかのように操作できます。その要点を証明するために、データの集計を行ってみましょう。気温を収集しているサイトについて、サイトごとの平均気温を取得してみましょう。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT
+  site_no Site_no, AVG(Flow) Avg_Flow
+FROM (
+  LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+) AS d
+GROUP BY
+  site_no
+HAVING
+  Avg_Flow IS NOT NULL;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>結果：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Site_no  Avg_Flow
+-------- ---------
+09380000 11
+09423560 73
+09424900 93
+09429070 81</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>アドホック探索アクティビティを永続ソースとして登録するには、それを外部テーブルとして作成します。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- If you are running this sample as dbc user you will not have permissions
+-- to create a table in dbc database. Instead, create a new database and use
+-- the newly create database to create a foreign table.
+
+CREATE DATABASE Riverflow
+  AS PERMANENT = 60e6, -- 60MB
+  SPOOL = 120e6; -- 120MB
+
+-- change current database to Riverflow
+DATABASE Riverflow;
+
+CREATE FOREIGN TABLE riverflow
+  USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
+
+SELECT top 10 * FROM riverflow;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>結果：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Location                                                            GageHeight2 Flow site_no datetime            Precipitation GageHeight
+------------------------------------------------------------------- ----------- ---- ------- ------------------- ------------- ----------
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09429070/2018/07/02.csv null        null 9429070 2018-07-02 14:40:00 1.21          null
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:30:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:45:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 01:00:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09400815/2018/07/10.csv null        0.00 9400815 2018-07-10 00:15:00 0.00          -0.01
+/S3/s3.amazonaws.com/td-usgs-public/CSVDATA/09429070/2018/07/02.csv null        null 9429070 2018-07-02 14:38:00 1.06          null</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>今回の <code>SELECT</code> ステートメントは、データベース内のテーブルに対する通常の選択のように見えます。データのクエリー時に 1 秒未満の応答時間が必要な場合は、CSV データを Vantage に取り込んで処理を高速化する簡単な方法があります。その方法については、読み続けてください。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_nos_から_vantage_にデータをロードする"><a class="anchor" href="#_nos_から_vantage_にデータをロードする"></a>NOS から Vantage にデータをロードする</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>オブジェクト ストレージのクエリーには時間がかかります。データが興味深いと判断し、より迅速に答えが得られるソリューションを使用してさらに分析を行いたい場合はどうすればよいでしょうか? 良いニュースは、NOS で返されたデータを <code>CREATE TABLE</code> ステートメントのソースとして使用できることです。 <code>CREATE TABLE</code> 権限があると仮定すると、次を実行できます:</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+このクエリは、前の手順でデータベース <code>河川流量</code> と <code>河川流量</code> という外部テーブルを作成したことを前提としています。
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">-- This query assumes you created database `Riverflow`
+-- and a foreign table called `riverflow` in the previous step.
+
+CREATE MULTISET TABLE riverflow_native (site_no, Flow, GageHeight, datetime)
+AS (
+  SELECT site_no, Flow, GageHeight, datetime FROM riverflow
+) WITH DATA
+NO PRIMARY INDEX;
+
+SELECT TOP 10 * FROM riverflow_native;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>結果：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>site_no   Flow  GageHeight  datetime
+-------  -----  ----------  -------------------
+9400815    .00        -.01  2018-07-10 00:30:00
+9400815    .00        -.01  2018-07-10 01:00:00
+9400815    .00        -.01  2018-07-10 01:15:00
+9400815    .00        -.01  2018-07-10 01:30:00
+9400815    .00        -.01  2018-07-10 02:00:00
+9400815    .00        -.01  2018-07-10 02:15:00
+9400815    .00        -.01  2018-07-10 01:45:00
+9400815    .00        -.01  2018-07-10 00:45:00
+9400815    .00        -.01  2018-07-10 00:15:00
+9400815    .00        -.01  2018-07-10 00:00:00</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>今回は、 <code>SELECT</code> クエリーは 1 秒以内に返されました。Vantage は NOS からデータを取得する必要がありませんでした。代わりに、ノード上にすでに存在していたデータを使用して応答しました。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_プライベートバケットにアクセスする"><a class="anchor" href="#_プライベートバケットにアクセスする"></a>プライベートバケットにアクセスする</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>これまではパブリックバケットを使用してきました。プライベートバケットがある場合はどうなるでしょうか? どの認証情報を使用する必要があるかを Vantage にどのように指示しますか?</p>
+</div>
+<div class="paragraph">
+<p>資格情報をクエリーに直接インライン化することができます。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT
+  TOP 10 *
+FROM (
+  LOCATION='/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/'
+  AUTHORIZATION='{"ACCESS_ID":"","ACCESS_KEY":""}'
+) AS d;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>これらの認証情報を常に入力するのは面倒であり、安全性も低下する可能性があります。Vantage では、資格情報のコンテナとして機能する認可オブジェクトを作成できます。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE AUTHORIZATION aws_authorization
+  USER 'YOUR-ACCESS-KEY-ID'
+  PASSWORD 'YOUR-SECRET-ACCESS-KEY';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>これにより、外部テーブルを作成するときに認可オブジェクトを参照できるようになります。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE FOREIGN TABLE riverflow
+, EXTERNAL SECURITY aws_authorization
+USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_virtualbox_ゲスト拡張機能の更新する"><a class="anchor" href="#_virtualbox_ゲスト拡張機能の更新する"></a>VirtualBox ゲスト拡張機能の更新する</h2>
+<h2 id="_vantage_からオブジェクト_ストレージにデータをエクスポートする"><a class="anchor" href="#_vantage_からオブジェクト_ストレージにデータをエクスポートする"></a>Vantage からオブジェクト ストレージにデータをエクスポートする</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>VirtualBox ゲスト拡張機能は、VM 内で実行されるソフトウェアです。これにより、VirtualBox上でのVMの実行が高速化されます。また、VM 画面の解像度とサイズ変更に対する応答性も向上します。双方向のクリップボードを実装し、ホストとゲストの間でドラッグ アンド ドロップを行います。VM 内の VirtualBox ゲスト拡張機能は、VirtualBox インストールのバージョンと一致する必要があります。最適なパフォーマンスを得るには、VirtualBox ゲスト拡張機能を更新する必要がある場合があります。</p>
+<p>これまで、オブジェクト ストレージからのデータの読み取りとインポートについて説明してきました。SQL を使用して Vantage からオブジェクト ストレージにデータをエクスポートする方法があれば素晴らしいと思いませんか? これはまさに <code>WRITE_NOS</code> 関数の目的です。 <code>riverflow_native</code> テーブルからオブジェクト ストレージにデータをエクスポートしたいとします。次のクエリを使用してこれを行うことができます。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM WRITE_NOS (
+  ON ( SELECT * FROM riverflow_native )
+  PARTITION BY site_no ORDER BY site_no
+  USING
+    LOCATION('YOUR-OBJECT-STORE-URI')
+    AUTHORIZATION(aws_authorization)
+    STOREDAS('PARQUET')
+    COMPRESSION('SNAPPY')
+    NAMING('RANGE')
+    INCLUDE_ORDERING('TRUE')
+) AS d;</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>VirtualBox ゲスト拡張機能を更新するには:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><code>Storage</code> セクションの <code>SATA Port 3: [Optical Drive]</code> をクリックして、VirtualBox ゲスト拡張機能DVD を挿入します。</p>
-<div class="imageblock">
-<div class="content">
-<img src="../../_images/insert-guest-additions-dvd.png" alt="Guest Additions DVD を挿入する" width="50%">
-</div>
-</div>
-</li>
-<li>
-<p>VMウィンドウに戻り、`Gnome ターミナル`アプリケーションを起動します。</p>
-</li>
-<li>
-<p>ターミナルで以下のコマンドを実行します。</p>
-<div id="update_guest_additions" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mount /dev/cdrom /media/dvd; /media/dvd/VBoxLinuxAdditions.run</code></pre>
-</div>
-</div>
-</li>
-</ol>
+<p>ここでは、Vantage に <code>riverflow_native</code> からデータを取得し、 <code>parquet</code> 形式を使用して <code>YOUR-OBJECT-STORE-URI</code> バケットに保存するように指示します。データは <code>site_no</code> 属性でファイルに分割されます。ファイルは圧縮されます。</p>
 </div>
 </div>
 </div>
@@ -2415,43 +2304,19 @@ VALUES (
 <h2 id="_まとめ"><a class="anchor" href="#_まとめ"></a>まとめ</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このガイドでは、動作する Teradata 環境を迅速に作成する方法について説明しました。VMware 上で実行されている VM で Teradata Vantage Express を使用しました。同じ VM で Teradata Studio Express を実行してクエリーを発行しました。すべてのソフトウェアをローカルにインストールしたため、クラウド リソースの料金を支払う必要はありませんでした。</p>
+<p>このクイック スタートでは、Vantage のネイティブ オブジェクト ストレージ (NOS) 機能を使用してオブジェクト ストレージからデータを読み取る方法を学習しました。NOS は、CSV、JSON、および Parquet 形式で保存されたデータの読み取りとインポートをサポートしています。NOS は、Vantage からオブジェクト ストレージにデータをエクスポートすることもできます。</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_次のステップ"><a class="anchor" href="#_次のステップ"></a>次のステップ</h2>
+<h2 id="_参考文献"><a class="anchor" href="#_参考文献"></a>参考文献</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><a href="../../nos.html" class="xref page">オブジェクトストレージに保存されたクエリーデータ</a></p>
+<p><a href="https://docs.teradata.com/r/2mw8ooFr~xX0EaaGFaDW8A/root">Teradata Vantage™ - ネイティブ オブジェクト ストア スタート ガイド</a></p>
 </li>
 </ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_さらに詳しく"><a class="anchor" href="#_さらに詳しく"></a>さらに詳しく</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20">Teradata®Studio™およびStudio™Expressインストール ガイド</a></p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-ご質問がある場合、またはさらにサポートが必要な場合は、<a href="https://support.teradata.com/community">コミュニティ フォーラム</a>にアクセスしてサポートを受け、他のコミュニティ メンバーと交流してください。
-</td>
-</tr>
-</table>
 </div>
 </div>
 </div>
