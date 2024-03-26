@@ -15,7 +15,7 @@ Native Object Storage (NOS) は、AWS S3、Google GCS、Azure Blob、または�
 
 Teradata Vantage インスタンスにアクセスする必要があります。NOS は、バージョン 17.10 以降、Vantage Express から Developer、DYI、Vantage as a Service までのすべての Vantage エディションで有効になります。
 
-#include::ROOT:partial$vantage_clearscape_analytics.adoc[]
+include::../partials/vantage_clearscape_analytics.adoc[]
 
 == NOS でデータを探索する
 

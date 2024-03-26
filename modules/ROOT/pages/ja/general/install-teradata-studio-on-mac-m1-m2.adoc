@@ -1,0 +1,31 @@
+= Apple Mac M1/M2でTeradata Studio/Expressを使用する
+:page-lang: ja
+:experimental:
+:page-author: Satish Chinthanippu
+:page-email: satish.chinthanippu@teradata.com
+:page-revdate: 2023 年 8 月 14 日
+:description: Apple Mac M1/M2 で Teradata Studio を実行します。
+:keywords: Teradata Studio, Teradata Studio Express, teradata, vantage, Mac, Apple Mac, Apple Mac M1,Apple Mac M2, Arm based Processor.
+:tabs:
+
+== 概要
+
+このハウツーでは、Apple Mac M1/M2 マシンへの Teradata Studio および Teradata Studio Express のインストールについて説明します。
+
+== 実行する手順
+
+1. Rosetta バイナリ トランスレータをインストールして有効にする。link:https://support.apple.com/en-us/HT211861[Apple Mac Rosetta インストールガイド]に従います。
+2. お好みのベンダーから x86 64 ビット ベースの JDK 11 をダウンロードしてインストールします。例えば、x86 64 ビット JDK 11 を link:https://www.azul.com/downloads/?version=java-11-lts&os=macos&architecture=x86-64-bit&package=jdkGet[Azul]
+からダウンロードできます。
+3. Teradata ダウンロード ページから最新の Teradata Studio または Teradata Studio Express リリースをダウンロードします。
+* link:https://downloads.teradata.com/download/tools/teradata-studio[Teradata Studio]
+* link:https://downloads.teradata.com/download/tools/teradata-studio-express[Teradata Studio Express]
+4. Teradata Studio/Teradata Studio Expressをインストールします。詳細については 、link:{attachmentsdir}/Studio-Express-InstallGuide.pdf[「Teradata Studio および Teradata Studio Express インストール ガイド」] を参照してください。
+
+
+
+== まとめ
+
+Apple は、Apple MAC M1/M2 マシンに ARM ベースのプロセッサをデプロイメントしました。Intel x64 ベースのアプリケーションは、デフォルトでは ARM ベースのプロセッサでは動作しません。現在の Studio macOS ビルドは Intel x64 ベースのアプリケーションであるため、Teradata Studio または Teradata Studio Express もデフォルトでは動作しません。このハウツーでは、Intel x64 ベースの JDK と Teradata Studio または Teradata Studio Express を Apple Mac M1/M2 にインストールする方法を示します。
+
+include::../partials/community_link.adoc[]
