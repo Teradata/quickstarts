@@ -1,0 +1,231 @@
+= VantageCloud Lake の使用を開始する 
+:page-lang: ja
+:experimental:
+:page-author: Vidhan Bhonsle
+:page-email: vidhan.bhonsle@teradata.com
+:page-revdate: 2024 年 1 月 2 日
+:description: VantageCloud Lake で独自の環境を作成する
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy, vantagecloud, vantagecloud lake, ip address, public internet, lake
+
+== 概要
+
+Teradata VantageCloud Lakeは、Teradataの次世代のクラウドネイティブな分析およびデータプラットフォームです。これは、オブジェクト ストレージ中心の設計を使用して、独立した柔軟なワークロードを実行する機能とともに、レイクハウス デプロイメント パターンを提供します。 +
+これにより、組織はデータのロックを解除し、分析をアクティブ化し、価値を加速できるようになります。お客様は、ワークロード要件に最適なように特別に構成されたコンピューティング クラスタ リソースを使用して、分析環境を最適化できます。 +
+
+image::VantageCloud.png[VantageCloud,align="center",width=50%]
+
+
+VantageCloud Lake は、クラウド ソリューションに期待されるすべてのメリットに加え、業界をリードする Analytics Database、ClearScape Analytics、QueryGrid データ ファブリックなどの Teradata の差別化されたテクノロジー スタックを提供します。
+
+== VantageCloud Lake へのサインオン
+
+IMPORTANT: VantageCloud Lake のサインオン リンクと資格情報を取得するには、https://www.teradata.com/about-us/contact[お問い合わせフォーム]に記入して Teradata チームに連絡してください。   
+
+Teradataが提供するURL(*_ourcompany.innovationlabs.teradata.com_*など)に移動し、サインオンします。
+
+* 既存の顧客は、組織管理者のユーザー名 (電子メール アドレス) とパスワードを使用してサインオンできます。
+* clear​130 / 5,000翻訳結果翻訳の結果新しい顧客は、組織管理者のユーザー名 (ウェルカム レターから: 電子メール アドレス) と作成したパスワードを使用してサインオンできます。 
+
+NOTE: https://login.customer.teradata.com/ext/pwdreset/Identify?AdapterId=CDSCustomer[ここ]をクリックして、組織の管理者パスワードをリセットします。
+
+image::lake_sign_on.png[サインオン,align="center",width=50%]
+
+サインオンすると、VantageCloud Lakeのようこそページに移動します。
+
+image::lake_welcome_page.png[ようこそページ,align="center",width=50%]
+
+ようこそページにはナビゲーション メニューがあり、環境を完全に制御できるだけでなく、さまざまな必要なツールも提供されます。
+
+image::lake_expanded_menu.png[ナビゲーションメニューアイテム,align="right",float="right",width=60%]
+
+* Vantage-VantageCloud Lakeポータルのホームページ
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin/Step-1-Signing-On-and-Creating-Your-First-Environment[環境] - 環境を作成し、作成されたすべての環境を確認する
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Introduction-to-VantageCloud-Lake/VantageCloud-Lake-Organizations-and-Environments[組織] - 組織の構成の表示、組織管理者の管理、アカウントの構成とステータスを表示する
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Managing-Compute-Resources/Review-Consumption-Usage[消費量] - 組織がコンピューティングリソースとストレージリソースをどのように消費しているかを監視する
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Using-VantageCloud-Lake-Console-to-Manage-VantageCloud-Lake/Using-the-Consumption-Estimates[コスト試算] - 環境と組織全体のコストと消費量を計算する。 
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Running-and-Monitoring-Queries/Monitoring-and-Managing-Queries[クエリー] - 環境のクエリーを検査して、その効率を理解する。
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Running-and-Monitoring-Queries[エディタ] - エディタでクエリーを作成して実行する。  
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Data-Copy[データ コピー] - VantageCloud Lake コンソールからデータ コピー (Data Mover とも呼ばれる) ジョブをプロビジョニング、構成、実行しする。
+
+
+== 環境を作成する
+プライマリ クラスタ環境を作成するには、ナビゲーション メニューの [環境] をクリックします。新しく開いたビューで、ページの右上にある「作成」ボタンをクリックします。
+
+image::lake_environment_page.png[環境ページ,align="center",width=75%]
+
+=== 環境の構成
+
+環境の構成フィールドに入力します。
+
+[cols="1,1"]
+|====
+| *アイテム* | *説明*
+
+| 環境名 
+| 新しい環境のコンテキスト名
+
+| リージョン 
+| 利用可能なリージョン リストは、販売プロセス中に事前に決定されます。
+
+| パッケージ 
+| 次の2つのサービスパッケージから選択できます。 +
+Lake: プレミア 24x7 クラウドサポート  +
+Lake+: プレミア 24x7 優先クラウドサポート + 業界データモデル 
+|====
+
+image::lake_environment_configuration.png[環境の構成,align="center",width=50%]
+
+IMPORTANT: *推定消費量*(右側)は、環境作成のためのガイダンスを提供します。詳細については、https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Using-VantageCloud-Lake-Console-to-Manage-VantageCloud-Lake/Using-the-Consumption-Estimates[推定消費量の使用]を参照してください。   
+
+=== プライマリ クラスタの構成
+
+プライマリ クラスタの構成フィールドに入力します。
+
+[cols="1,2a"]
+|====
+| *アイテム* | *説明*
+
+| インスタンス サイズ 
+| ユースケースに適したインスタンス サイズを選択します。 +
+[cols="2,1"]
+!===
+! Lake ! 値(単位)
+
+! XSmall
+! 2
+
+! Small
+! 4
+
+! Medium
+! 7
+
+! Large
+! 10
+
+! XLarge
+! 13
+
+! 2XLarge
+! 20
+
+! 3XLarge
+! 27
+
+!===
+
+[cols="2,1"]
+!===
+! Lake+ ! 値(単位)
+
+! XSmall
+! 2.4
+
+! Small
+! 4.8
+
+! Medium
+! 8.4
+
+! Large
+! 12
+
+! XLarge
+! 15.6
+
+! 2XLarge
+! 24
+
+! 3XLarge
+! 32.4
+
+!===
+
+| インスタンス数
+| 2から64 +
+プライマリ クラスタ内のノードの数
+
+| インスタンス ストレージ
+| インスタンスあたり1～72 TB
+
+|====
+
+image::lake_primary_cluster_config.png[プライマリ クラスタの構成,align="center",width=50%]
+
+=== データベースの認証情報
+
+データベースの認証情報フィールドに入力します。
+
+[cols="1,1"]
+|====
+| *アイテム* | *説明*
+
+| DBCパスワード 
+Teradata Vantage 環境のプライマリ管理アカウントは「dbc」と呼ばれます。Linux の root ユーザーと同様に、dbc アカウントは包括的な管理特権を保持します。環境の作成後は、日常的なタスク用に追加の管理ユーザーを確立し、dbc 資格情報の共有や利用を控えることをお勧めします。
+dbcのパスワードを設定します。 +
+* 8～64文字 +
+* 英数字と特殊文字の両方を使用できます +
+* ディクショナに載っている単語がない 
+
+|====
+
+image::lake_database_cred.png[プライマリ クラスタの構成,align="center",width=50%]
+
+=== 詳細オプション
+
+すぐに開始するには、*デフォルトを使用*を選択するか、追加のオプション設定を定義することができる。
+
+image::lake_advanced_option_default.png[ユーザーのデフォルトを使用する詳細オプション,align="center",width=50%]
+
+[cols="1,1"]
+|====
+| *アイテム* | *説明*
+
+| インスタンスあたりのAMP数 
+| ワークロード管理 +
+選択したインスタンスサイズに対して、インスタンスあたりのAMP数を選択します。
+
+| AWS:ストレージの暗号化
+| 顧客データの暗号化を設定します。https://docs.aws.amazon.com/kms/latest/developerguide/find-cmk-id-arn.html[キー ID とキー ARN を検索する]を参照してください +
+* Teradataによる管理 +
+* 顧客管理 +
+* キーエイリアスARN
+
+|====
+
+image::lake_advanced_option.png[ユーザー定義の詳細オプション,align="center",width=50%]
+
+すべての情報を確認し、*CREATE ENVIRONMENT*ボタンをクリックします。
+
+image::lake_create_environment.png[環境の作成ボタン,align="center",width=50%]
+
+デプロイには数分かかります。完了すると、作成された環境がカード ビューとして [*環境*] セクションに表示されます (環境の名前は Quickstart_demo)。 
+
+image::lake_available_environment.png[新しく作成された使用可能な環境,align="center",width=50%]
+
+== パブリック インターネットからのアクセス環境
+
+作成された環境には、コンソールからのみアクセスできます。これを変更するには、作成された環境変数をクリックして、*設定*タブに移動します。
+
+image::lake_settings_menu.png[作成した環境の設定メニュー,align="center",width=75%]
+
+[*設定*] で [*インターネット接続*] チェックボックスをオンにし、環境へのアクセスに使用する IP アドレスを CIDR 形式で指定します (たとえば、192.168.2.0/24 は 192.168.2.0 から 192.168.2.255 の範囲内のすべての IP アドレスを指定します)。 
+
+NOTE: インターネット接続の設定の詳細については、https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin/Step-2-Setting-the-Environment-Connection-Type/Setting-Up-an-Internet-Connection[こちら]をご覧ください。
+
+image::lake_ip_addresses.png[IPホワイトリスト,align="center",width=50%]
+
+ページの右上にある*保存*ボタンをクリックして、変更を確認します。 +
+
+*環境*のセクションに戻って、環境庁カードを確認してください。現在、*パブリック インターネット*にアクセスできます。
+
+image::lake_public_internet_cv.png[パブリック インターネット カード ビュー,align="center",width=50%]
+
+
+== まとめ
+
+このクイック スタートでは、VantageCloud Lake に環境を作成し、パブリック インターネットからアクセスできるようにする方法を学びました。
+
+== さらに詳しく
+
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin[Teradata VantageCloud Lakeのドキュメント]

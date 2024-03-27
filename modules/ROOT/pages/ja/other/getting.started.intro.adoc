@@ -1,3 +1,4 @@
+:page-lang: ja
 :experimental:
 
 == 概要

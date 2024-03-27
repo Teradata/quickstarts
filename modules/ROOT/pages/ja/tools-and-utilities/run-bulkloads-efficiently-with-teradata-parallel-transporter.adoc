@@ -1,0 +1,274 @@
+= Teradata Parallel Transporter（TPT）を使用した巨大なデータのバルクロード
+:page-lang: ja
+:experimental:
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: 2022 年 4 月 6 日
+:description: Teradata Parallel Transporter (TPT) を使用して、データを Vantage に効率的にロードします。
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, Fastload, Teradata Parallel Transporter, TPT
+:tabs:
+
+== 概要
+
+Vantageに大量のデータを移動させるニーズはよくあります。Teradataはこのようなニーズにこたえるため `Teradata Parallel Transporter (TPT)` ユーティリティを提供しています。このハウツーでは、`TPT` の使用方法を説明します。このシナリオでは30万件以上のレコードをもつ40MB以上のデータを数秒でロードします。
+
+== 前提条件
+
+* Teradata Vantageインスタンスへのアクセス。
++
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
+* Teradata Tools and Utilities (TTU) をダウンロード -  サポートされているプラットフォーム: link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-windows-installation-package[Windows]、 link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-mac-osx-installation-package[MacOS]、 link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-linux-installation-package-0[Linux] (登録が必要です)。
+
+== TTUをインストールする
+
+[tabs]
+====
+Windows::
++
+--
+ダウンロードしたファイルを解凍し、`setup.exe` を実行します。
+--
+MacOS::
++
+--
+ダウンロードしたファイルを解凍し、`TeradataToolsAndUtilitiesXX.XX.XX.pkg` を実行します。
+--
+Linux::
++
+--
+ダウンロードしたファイルを解凍し、解凍したディレクトリに移動して次のコマンドを実行します。
+[source, bash]
+----
+./setup.sh a
+----
+--
+====
+
+== サンプルデータの入手
+
+非営利団体の米国税務申告を扱います。非営利の納税申告は公開データです。アメリカ内国歳入庁は、これらを S3 バケットで公開します。2020 年の提出書類の概要を見てみましょう。 `https://storage.googleapis.com/clearscape_analytics_demo_data/TPT/index_2020.csv` ブラウザ、`wget`、または`curl`を使用して、ファイルをローカルに保存できます。
+
+== データベースを作成する
+
+Vantageでデータベースを作成しましょう。お気に入りの SQL ツールを使用して、以下のクエリーを実行します。
+
+[source, teradata-sql]
+----
+CREATE DATABASE irs
+AS PERMANENT = 120e6, -- 120MB
+    SPOOL = 120e6; -- 120MB
+----
+
+== TPT を実行する
+
+これから `TPT` を実行します。`TPT` は、Teradata Vantageでデータのロード、抽出、更新に使用できるコマンドラインツールです。これらのさまざまな機能は、いわゆる`オペレータ`で実装されます。例えば、Vantage へのデータのロードは `Load` オペレータによって処理されます。 `Load` オペレータは、大量のデータを Vantage にアップロードする場合に非常に効率的です。 `Load` オペレータには、高速化するためにいくつかの制限があります。空のテーブルのみを設定できます。すでにデータが設定されているテーブルへの挿入はサポートされていません。セカンダリ インデックスを持つテーブルはサポートされていません。また、テーブルが `MULTISET` テーブルであっても、重複レコードは挿入されません。制限の完全なリストについては link:https://docs.teradata.com/r/Teradata-Parallel-Transporter-Reference/February-2022/Load-Operator/Usage-Notes/Normalized-Tables/Restrictions-and-Limitations[、「Teradata® TPT リファレンス - ロード オペレータ - 制限と制約」]を参照してください。
+
+TPT には独自のスクリプト言語があります。この言語を使用すると、任意の SQLコマンドを使用してデータベースを準備し、入力ソースを宣言し、Vantage にデータを挿入する方法を定義できます。
+
+CSV データを Vantage にロードするには、ジョブを定義して実行します。ジョブはデータベースを準備します。古いログテーブルとエラーテーブルが削除され、ターゲット テーブルが作成されます。次に、ファイルを読み込み、データをデータベースに挿入するします。
+
+. TPTにVantageデータベースへの接続方法を指示するジョブ変数ファイルを作成します。ファイル `jobvars.txt` を作成し、以下の内容を挿入します。`host`をデータベースのホスト ネームで置き換えます。例えば、ローカルの Vantage Express インスタンスを使用している場合は、 `127.0.0.1`を使用します。 `username` はデータベース ユーザー名、 `password` はデータベース パスワードです。準備ステップ (DDL) とロード ステップにはそれぞれ独自の構成値があり、DDLとロード ステップの両方を構成するには構成値を2回入力する必要があることに注記してください。
++
+[source, bash, id="tpt_first_config", role="emits-gtm-events"]
+----
+TargetTdpId           = 'host'
+TargetUserName        = 'username'
+TargetUserPassword    = 'password'
+
+FileReaderDirectoryPath = ''
+FileReaderFileName      = 'index_2020.csv'
+FileReaderFormat        = 'Delimited'
+FileReaderOpenMode      = 'Read'
+FileReaderTextDelimiter = ','
+FileReaderSkipRows      = 1
+
+DDLErrorList = '3807'
+
+LoadLogTable    = 'irs.irs_returns_lg'
+LoadErrorTable1 = 'irs.irs_returns_et'
+LoadErrorTable2 = 'irs.irs_returns_uv'
+LoadTargetTable = 'irs.irs_returns'
+----
+
+. 以下の内容のファイルを作成し、 `load.txt`として保存します。ジョブファイルの構造を理解するには、ジョブファイル内のコメントを参照してください。
++
+[source, bash]
+----
+DEFINE JOB file_load
+DESCRIPTION 'Load a Teradata table from a file'
+(
+  /*
+    Define the schema of the data in the csv file
+  */
+  DEFINE SCHEMA SCHEMA_IRS
+    (
+      in_return_id     VARCHAR(19),
+      in_filing_type   VARCHAR(5),
+      in_ein           VARCHAR(19),
+      in_tax_period    VARCHAR(19),
+      in_sub_date      VARCHAR(22),
+      in_taxpayer_name VARCHAR(100),
+      in_return_type   VARCHAR(5),
+      in_dln           VARCHAR(19),
+      in_object_id     VARCHAR(19)
+    );
+
+  /*
+     In the first step, we are sending statements to remove old tables
+     and create a new one.
+     This step replies on configuration stored in `od_IRS` operator
+  */
+  STEP st_Setup_Tables
+  (
+    APPLY
+      ('DROP TABLE ' || @LoadLogTable || ';'),
+      ('DROP TABLE ' || @LoadErrorTable1 || ';'),
+      ('DROP TABLE ' || @LoadErrorTable2 || ';'),
+      ('DROP TABLE ' || @LoadTargetTable || ';'),
+      ('CREATE TABLE ' || @LoadTargetTable || ' (
+          return_id INT,
+          filing_type VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
+          ein INT,
+          tax_period INT,
+          sub_date VARCHAR(100) CHARACTER SET LATIN NOT CASESPECIFIC,
+          taxpayer_name VARCHAR(100) CHARACTER SET LATIN NOT CASESPECIFIC,
+          return_type VARCHAR(5) CHARACTER SET LATIN NOT CASESPECIFIC,
+          dln BIGINT,
+          object_id BIGINT
+        )
+        PRIMARY INDEX ( return_id );')
+    TO OPERATOR ($DDL);
+  );
+
+  /*
+    Finally, in this step we read the data from the file operator
+    and send it to the load operator.
+  */
+  STEP st_Load_File
+  (
+    APPLY
+      ('INSERT INTO ' || @LoadTargetTable || ' (
+          return_id,
+          filing_type,
+          ein,
+          tax_period,
+          sub_date,
+          taxpayer_name,
+          return_type,
+          dln,
+          object_id
+      ) VALUES (
+          :in_return_id,
+          :in_filing_type,
+          :in_ein,
+          :in_tax_period,
+          :in_sub_date,
+          :in_taxpayer_name,
+          :in_return_type,
+          :in_dln,
+          :in_object_id
+      );')
+    TO OPERATOR ($LOAD)
+    SELECT * FROM OPERATOR($FILE_READER(SCHEMA_IRS));
+  );
+);
+----
+
+. ジョブを実行する:
++
+[source, bash]
+----
+tbuild -f load.txt -v jobvars.txt -j file_load
+----
++
+実行が成功すると、以下のようなログが返されます。
++
+----
+Teradata Parallel Transporter Version 17.10.00.10 64-Bit
+The global configuration file '/opt/teradata/client/17.10/tbuild/twbcfg.ini' is used.
+   Log Directory: /opt/teradata/client/17.10/tbuild/logs
+   Checkpoint Directory: /opt/teradata/client/17.10/tbuild/checkpoint
+
+Job log: /opt/teradata/client/17.10/tbuild/logs/file_load-4.out
+Job id is file_load-4, running on osboxes
+Teradata Parallel Transporter SQL DDL Operator Version 17.10.00.10
+od_IRS: private log not specified
+od_IRS: connecting sessions
+od_IRS: sending SQL requests
+od_IRS: TPT10508: RDBMS error 3807: Object 'irs_returns_lg' does not exist.
+od_IRS: TPT18046: Error is ignored as requested in ErrorList
+od_IRS: TPT10508: RDBMS error 3807: Object 'irs_returns_et' does not exist.
+od_IRS: TPT18046: Error is ignored as requested in ErrorList
+od_IRS: TPT10508: RDBMS error 3807: Object 'irs_returns_uv' does not exist.
+od_IRS: TPT18046: Error is ignored as requested in ErrorList
+od_IRS: disconnecting sessions
+od_IRS: Total processor time used = '0.013471 Second(s)'
+od_IRS: Start : Thu Apr  7 20:56:32 2022
+od_IRS: End   : Thu Apr  7 20:56:32 2022
+Job step st_Setup_Tables completed successfully
+Teradata Parallel Transporter Load Operator Version 17.10.00.10
+ol_IRS: private log not specified
+Teradata Parallel Transporter DataConnector Operator Version 17.10.00.10
+op_IRS[1]: Instance 1 directing private log report to 'dtacop-root-368731-1'.
+op_IRS[1]: DataConnector Producer operator Instances: 1
+op_IRS[1]: ECI operator ID: 'op_IRS-368731'
+op_IRS[1]: Operator instance 1 processing file 'index_2020.csv'.
+ol_IRS: connecting sessions
+ol_IRS: preparing target table
+ol_IRS: entering Acquisition Phase
+ol_IRS: entering Application Phase
+ol_IRS: Statistics for Target Table:  'irs.irs_returns'
+ol_IRS: Total Rows Sent To RDBMS:      333722
+ol_IRS: Total Rows Applied:            333722
+ol_IRS: Total Rows in Error Table 1:   0
+ol_IRS: Total Rows in Error Table 2:   0
+ol_IRS: Total Duplicate Rows:          0
+op_IRS[1]: Total files processed: 1.
+ol_IRS: disconnecting sessions
+Job step st_Load_File completed successfully
+Job file_load completed successfully
+ol_IRS: Performance metrics:
+ol_IRS:     MB/sec in Acquisition phase: 9.225
+ol_IRS:     Elapsed time from start to Acquisition phase:   2 second(s)
+ol_IRS:     Elapsed time in Acquisition phase:   5 second(s)
+ol_IRS:     Elapsed time in Application phase:   3 second(s)
+ol_IRS:     Elapsed time from Application phase to end: < 1 second
+ol_IRS: Total processor time used = '0.254337 Second(s)'
+ol_IRS: Start : Thu Apr  7 20:56:32 2022
+ol_IRS: End   : Thu Apr  7 20:56:42 2022
+Job start: Thu Apr  7 20:56:32 2022
+Job end:   Thu Apr  7 20:56:42 2022
+----
+
+
+== `TPT` vs. NOS
+
+この例では、ファイルは S3 バケット内にあります。つまり、Native Object Storage (NOS) を使用してデータを取り込むことができます。
+
+[source, teradata-sql]
+----
+-- create an S3-backed foreign table
+CREATE FOREIGN TABLE irs_returns_nos
+    USING ( LOCATION('/s3/s3.amazonaws.com/irs-form-990/index_2020.csv') );
+
+-- load the data into a native table
+CREATE MULTISET TABLE irs_returns_nos_native
+    (RETURN_ID, FILING_TYPE, EIN, TAX_PERIOD, SUB_DATE, TAXPAYER_NAME)
+AS (
+    SELECT RETURN_ID, FILING_TYPE, EIN, TAX_PERIOD, SUB_DATE, TAXPAYER_NAME FROM irs_returns_nos
+) WITH DATA
+NO PRIMARY INDEX;
+----
+
+NOS ソリューションは追加のツールに依存しないため便利です。SQLのみで実装可能です。NOS タスクが AMP に委任され、並行して実行されるため、特に多数の AMP を備えた Vantage デプロイメント環境では良好なパフォーマンスを発揮します。また、オブジェクト ストレージ内のデータを複数のファイルに分割すると、パフォーマンスがさらに向上する可能性があります。
+
+== まとめ
+
+このハウツーでは、大量のデータを Vantage に取り込む方法を説明しました。`TPT`を使用して、数十万件のレコードを数秒でVantageにロードしました。
+
+== さらに詳しく
+* link:https://docs.teradata.com/r/Teradata-Parallel-Transporter-User-Guide/February-2022[Teradata®TPTユーザー ガイド]
+* link:https://docs.teradata.com/r/Teradata-Parallel-Transporter-Reference/February-2022[Teradata®  TPT リファレンス]
+* xref:ROOT:nos.adoc[]
+
+include::ROOT:partial$community_link.adoc[]

@@ -1,0 +1,226 @@
+= VantageのデータをAzure Machine Learning Studioで使用する方法
+:page-lang: ja
+:experimental:
+:page-author: Rupal Shah
+:page-email: rupal.shah@teradata.com
+:page-revdate: 2022 年 2 月 14 日
+:description: VantageのデータをAzure Machine Learning Studioで使用する方法
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, data cloud, machine learning, azure, azure machine learning studio
+:tabs:
+:page-image-directory: use-teradata-vantage-with-azure-machine-learning-studio
+
+== 概要
+
+https://docs.microsoft.com/en-us/azure/machine-learning/studio/what-is-ml-studio[Azure Machine Learning (ML) Studio]は、データに対する予測分析ソリューションの構築、テスト、およびデプロイに使用できる、ドラッグ＆ドロップ可能なコラボレーションツールです。ML Studioは、Azure Blob Storageからデータを取得することができます。このスタートガイドでは、ML Studio に組み込まれた Jupter Notebook 機能を使用して Teradata Vantage データセットを Blob Storage にコピーする方法を説明します。このデータは、ML Studio で機械学習モデルを構築、学習し、本番環境にデプロイするために使用することができます。
+
+
+image:cloud-guides/{page-image-directory}/image2.png[Image,width=534,height=118]
+
+
+== 前提条件
+
+* Teradata Vantageインスタンスへのアクセス。
++
+include::../partials/vantage_clearscape_analytics.adoc[]
+* Azureサブスクリプションまたはhttps://azure.microsoft.com/free/[無料アカウント]
+作成* https://docs.microsoft.com/en-us/azure/machine-learning/studio/create-workspace[Azure ML Studio ワークスペース]
+* (オプション) https://docs.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-2017[AdventureWorks DW 2016データベース] のダウンロード(_「モデルの学習」_ セクションなど)
+**  _「vTargetMail」_ テーブルを SQL Server から Teradata Vantageに復元およびコピーします。
+
+
+== 手順
+
+=== 初期設定
+
+
+* 現在利用可能な格納場所にストレージ アカウントがあり、このスタート ガイドの*Web service plan* に *DEVTEST Standard* を選択していない限り、ML Studio ワークスペースの作成中に、新規のストレージ アカウントを作成する必要がある場合があります。 https://portal.azure.com/[Azure ポータル]にログオンし、ストレージ アカウントを開き、 *コンテナ* がまだ存在しない場合は作成します。
++
+image:cloud-guides/{page-image-directory}/image3.png[Image,width=520,height=126]
+
+*  *ストレージアカウント名* と *キー* をメモ帳にコピーし、Python3 NotebookでAzure Blob Storageアカウントにアクセスするために使用します。
++
+image:cloud-guides/{page-image-directory}/image4.png[Image,width=448,height=182]
+
+* 最後に、*Configuration*プロパティを開き、*_'Secure transfer required'_*を*_Disabled_*に設定して、ML Studioインポートデータモジュールがブロブストレージアカウントにアクセスできるようにする。
++
+image:cloud-guides/{page-image-directory}/image5.png[Image,width=449,height=78]
+
+=== データのロード
+
+ML Studioにデータを取り込むために、まずはTeradata VantageからAzure Blob Storageにデータをロードする必要があります。ML Jupyter Notebookを作成し、Teradataに接続するためのPythonパッケージをインストールし、Azure Blob Storageにデータを保存することにします。
+
+ https://portal.azure.com/[Azure ポータル]にログオンし、 *ML Studioワークスペース* に移動して、 https://studio.azureml.net/[Machine Learning Studio を起動]し 、 *サインイン*します。
+
+1. 以下の画面が表示されます。 *Notebooks* をクリックして、正しいリージョン/ワークスペースにいることを確認し、Notebook の*New*
++
+をクリックします。image:cloud-guides/{page-image-directory}/image6.png[Image,width=519,height=250]
+
+2. *Python3*を選択し、Notebook インスタンスに*名前を付け* ます。
++
+image:cloud-guides/{page-image-directory}/image7.png[Image,width=524,height=187]
+
+3. Jupyter Notebook インスタンスに、 https://pypi.org/project/teradataml/[Teradata Vantage Python package for Advanced Analytics]をインストールします。
++
+[source, python]
+----
+pip install teradataml
+----
++
+NOTE: Microsoft Azure ML StudioとTeradata Vantage Pythonパッケージの間の検証は行われていません。
+
+4. https://pypi.org/project/azure-storage-blob/[Microsoft Azure Storage Blob Client Library for Python]をインストールします。
++
+[source, python]
+----
+!pip install azure-storage-blob
+----
+
+5. 以下のライブラリをインポートしてください。
++
+[source, python]
+----
+import teradataml as tdml
+from teradataml import create_context, get_context, remove_context
+from teradataml.dataframe.dataframe import DataFrame
+import pandas as pd
+from azure.storage.blob import (BlockBlobService)
+----
+
+6. 以下のコマンドを使用して Teradata に接続します。
++
+[source, python]
+----
+create_context(host = '<hostname>', username = '<database user name>', password = '<password>')
+----
+
+7. Teradata Python DataFrameモジュールを使用してデータを取得します。
++
+[source, python]
+----
+train_data = DataFrame.from_table("<table_name>")
+----
+
+8. Teradata DataFrameをPanda DataFrameに変換します。
++
+[source, python]
+----
+trainDF = train_data.to_pandas()
+----
+
+9. データをCSVに変換します。
++
+[source, python]
+----
+trainDF = trainDF.to_csv(head=True,index=False)
+----
+
+10. Azue Blob Storage アカウント名、キー、コンテナ名の変数を割り当てます。
++
+[source, python]
+----
+accountName="<account_name>"
+accountKey="<account_key>"
+containerName="mldata"
+----
+
+11. Azure Blob Storageにファイルをアップロードします。
++
+[source, python, id="azure_ml_studio_first_config", role="content-editable emits-gtm-events"]]
+----
+blobService = BlockBlobService(account_name=accountName, account_key=accountKey)
+blobService.create_blob_from_text(containerNAme, 'vTargetMail.csv', trainDF)
+----
+
+12. Azure ポータル にログオンし、BLOB ストレージ アカウントを開いて、アップロードされたファイルを表示します。
++
+image:cloud-guides/{page-image-directory}/image17.png[Image,width=618,height=118]
+
+=== モデルの学習
+
+既存の https://docs.microsoft.com/en-us/azure/sql-data-warehouse/sql-data-warehouse-get-started-analyze-with-azure-machine-learning[「Azure Machine Learning を使用したデータの分析」] の記事を使って、Azure Blob Storageのデータに基づいて予測型機械学習モデルを構築します。顧客が自転車を購入する可能性があるかどうかを予測することで、自転車店であるアドベンチャーワークスのためのターゲットマーケティングキャンペーンを構築する予定です。
+
+==== データのインポート
+
+データは、上のセクションでコピーした `vTargetMail.csv` という Azure Blob Storage ファイルにあります。
+
+1.. https://studio.azureml.net/[Azure Machine Learning Studio] にサインインし、 *Experiments*をクリックします。
+ 2.. 画面左下の *+NEW* をクリックし、 *Blank Experiment*を選択します。
+ 3.. 実験の名前として「Targeted Marketing」を入力します。
+】 4..  *Data Input and output*の下にある*Import data*モジュールをモジュール ペインからキャンバスにドラッグします。
+ 5.. [プロパティ] ペインで Azure Blob Storage の詳細 (アカウント名、キー、コンテナ名) を指定します。
+
+experimentキャンバスの下にある *Run* をクリックして、実験を実行します。
+
+image:cloud-guides/{page-image-directory}/image18.png[Image,width=401,height=281]
+
+実験が正常に終了したら、Import Data モジュールの下部にある出力ポートをクリックし、 *Visualize* を選択してインポートしたデータを確認します。
+
+image:cloud-guides/{page-image-directory}/image19.png[Image,width=480,height=359]
+
+
+==== データのクリーンアップ
+
+データをクリーンアップするには、モデルに関連しないいくつかの列を削除する。次を実行します。
+
+1. *Data Transformation < Manipulation* の下にある*Select Columns in Dataset*モジュールをキャンバスにドラッグします。このモジュールを*Import Data*モジュールに接続します。
+2. プロパティペインの*Launch column selector*をクリックして、ドロップする列を指定します。
++
+image:cloud-guides/{page-image-directory}/image20.png[Image,width=456,height=301]
+3.*CustomerAlternateKey*と*GeographyKey*の2 つのカラムを除外します。
++
+image:cloud-guides/{page-image-directory}/image21.png[Image,width=443,height=372]
+
+==== モデルの構築
+
+80%は機械学習モデルの学習用、20%はモデルのテスト用としてデータを80対20に分割します。この2値分類問題には、「2クラス」アルゴリズムを使用します。
+
+1. *SplitData* モジュールをキャンバスにドラッグし、「Select Columns in DataSet」で接続します。
+2. プロパティペインで「Fraction of rows in the first output dataset」に「0.8」を入力します。
++
+image:cloud-guides/{page-image-directory}/image22.png[Image,width=399,height=336]
+
+3. *Two-Class Boosted Decision Tree* モジュールを検索し、キャンバスにドラッグします。
+4. *Train Model*モジュールを検索してキャンバスにドラッグし、*Two-Class Boosted Decision Tree*(MLアルゴリズム)モジュールと*Split* *Data*(アルゴリズムをトレーニングするためのデータ)モジュールに接続して入力を指定する。
++
+image:cloud-guides/{page-image-directory}/image23.png[Image,width=396,height=333]
+
+5. 次に、[プロパティ]ペインで *Launch column selector* をクリックします。予測するカラムとして*BikeBuyer*カラムを選択します。
++
+image:cloud-guides/{page-image-directory}/image24.png[Image,width=396,height=330]
+
+==== モデルの評価
+
+次に、このモデルがテストデータでどのように動作するかをテストします。選択したアルゴリズムと異なるアルゴリズムを比較し、どちらがより良いパフォーマンスを示すかを確認します。
+
+1. *Score Model* モジュールをキャンバスにドラッグし、 *Train Model* と *Split Data* モジュールに接続します。
++
+
+image:cloud-guides/{page-image-directory}/image25.png[Image,width=398,height=334]
+
+2. *Two-Class Bayes Point Machine* を検索し、実験キャンバスにドラッグします。このアルゴリズムが、Two-Class Boosted Decision Treeと比較して、どのようなパフォーマンスを示すかを比較します。
+3. Train Model 」と「Score Model」モジュールをコピーして、キャンバスに貼り付けます。
+4. *Evaluate Model* モジュールを検索して、キャンバスにドラッグし、2つのアルゴリズムを比較します。
+5. *実行* 実験します。
++
+image:cloud-guides/{page-image-directory}/image26.png[Image,width=537,height=351]
+6. Evaluate Model モジュールの下部にある出力ポートをクリックし、Visualize をクリックします。
++
+image:cloud-guides/{page-image-directory}/image27.png[Image,width=447,height=199]
+
+
+提供される指標は、ROC曲線、精度-再現性ダイアグラム、リフトカーブです。これらの指標を見ると、最初のモデルが2番目のモデルよりも良い性能を発揮していることがわかります。最初のモデルが何を予測したかを見るには、スコア モデルの出力ポートをクリックし、可視化をクリックします。
+
+image:cloud-guides/{page-image-directory}/image28.png[Image,width=464,height=204]
+
+テストデータセットに2つの列が追加されているのがわかります。
+1. スコアリングされた確率：顧客がバイクの購入者である可能性。
+2. スコアされたラベル：モデルによって行われた分類 - 自転車の購入者（1）またはそうでない（0）。このラベリングのための確率の閾値は50％に設定されており、調整することが可能です。
+
+BikeBuyer列（実際）とScored Labels列（予測）を比較すると、モデルがどの程度うまく機能したかが分かります。次のステップとして、このモデルを使用して新規顧客の予測を行い、このモデルをWebサービスとして公開したり、SQL Data Warehouseに結果を書き戻したりすることが可能です。
+
+== さらに詳しく
+
+* 予測型機械学習モデルの構築の詳細については、 https://azure.microsoft.com/documentation/articles/machine-learning-what-is-machine-learning/[+++Introduction to Machine Learning on Azure+++]を参照してください。
+* 大規模なデータセットのコピーには、Teradata Parallel Transporterのロード/アンロード オペレーターとAzure Blob Storageの間のインターフェイスである https://docs.teradata.com/reader/p~0sSD4zl4K8YPbEGnM3Rg/TTu_WJMMIpo2TEaxFMFopQ[Teradata Access Module for Azure] の利用を検討してください。
+
+include::ROOT:partial$community_link.adoc[]

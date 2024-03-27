@@ -1,0 +1,312 @@
+= dbt を使用して Airbyte に読み込まれたデータを変換する方法
+:page-lang: ja
+:experimental:
+:page-author: Krutik Pathak
+:page-email: krutik.pathak@teradata.com
+:page-revdate: 2023 年 7 月 27 日
+:description: このチュートリアルでは、Airbyte を通じてロードされた外部データを dbt で変換するために必要な変換の型について説明します。
+:keywords: dbt、airbyte、データ変換、データ ウェアハウス、コンピューティング ストレージの分離、teradata、vantage、クラウド データ プラットフォーム、オブジェクト ストレージ、データ転送、データ抽出、エンタープライズ分析、elt。
+:tabs:
+:dir: getting-started-with-airbyte-dbt
+
+
+== 概要
+
+このチュートリアルでは、Teradata Vantage で link:https://docs.getdbt.com/docs/introduction[dbt (Data Build Tool),window="_blank"] を使用して link:https://github.com/airbytehq/airbyte[、Airbyte,window="_blank" ] (オープンソースの抽出ロード ツール) を介して外部データ ロードを変換する方法を説明します。 
+
+このチュートリアルは 、元の link:https://github.com/dbt-labs/jaffle_shop-dev[dbt Jaffle Shop tutorial,window="_blank" ]に基づいていますが、 `dbt seed` コマンドを使用する代わりに、Airbyte を使用して Jaffle Shop データセットが Google Sheets から Teradata Vantage にロードされるという小さな変更が加えられています。airbyte を通じてロードされたデータは、以下の図に示すように JSON カラムに含まれています。
+
+image::elt/{dir}/raw_data_vantage_dbeaver.png[Teradata Vantageの生データ, width=75%]
+
+== 前提条件
+
+* Teradata Vantageインスタンスへのアクセス。
++
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
+* サンプルデータ: サンプルデータ link:https://docs.google.com/spreadsheets/d/1-R4F3q8J9KDnFRWpiT3Ysp1RlOoUu3PeQR7xDeLxFts/edit#gid=42273685[Jaffle Shop Dataset, window="_blank"]は、 Google スプレッドシートにあります。
+* 参照 dbt プロジェクト リポジトリ: link:https://github.com/Teradata/airbyte-dbt-jaffle[Jaffle Project with Airbyte., window="_blank"]
+* Python 3.7、3.8、3.9、3.10、または3.11がインストールされている。
+
+== サンプルデータのローディング
+*  link:https://quickstarts.teradata.com/elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html[Airbyte tutorial, window="_blank"]の手順に従います。Airbyte チュートリアルで参照されるデフォルトのデータセットではなく、link:https://docs.google.com/spreadsheets/d/1-R4F3q8J9KDnFRWpiT3Ysp1RlOoUu3PeQR7xDeLxFts/edit#gid=42273685[Jaffle Shop spreadsheet]からデータをロードするようにしてください。また、Teradata宛先の`Default Schema`を`airbyte_jaffle_shop`に設定する。
+
+[NOTE]
+====
+AirbyteでTeradata宛先を設定すると、`Default Schema`をリクエストされます。`Default Schema`を`airbyte_jaffle_shop`に設定する。 
+====
+
+== プロジェクトのクローンを作成する
+チュートリアル リポジトリのクローンを作成し、ディレクトリをプロジェクト ディレクトリに変更します。
++
+[source, bash]
+----
+git clone https://github.com/Teradata/airbyte-dbt-jaffle
+cd airbyte-dbt-jaffle
+----
+
+== dbtをインストールする
+* dbt とその依存関係を管理するための新しい Python 環境を作成します。環境を有効化します。
++
+[source, bash]
+----
+python3 -m venv env
+source env/bin/activate
+----
+
++
+[NOTE]
+====
+対応するバッチ ファイル `/myenv/Scripts/activate`を実行すると、Windows で仮想環境を有効化できます。
+====
+
+* `dbt-teradata`モジュールとその依存関係をインストールします。dbtのコアモジュールも依存関係のあるモジュールとして含まれているので、別にインストールする必要はありません。
++
+[source, bash]
+----
+pip install dbt-teradata
+----
+
+== dbtを構成する
+* dbtプロジェクトを初期化します。
++
+[source, bash]
+----
+dbt init
+----
+
++
+dbt プロジェクト ウィザードでは、プロジェクト名と、プロジェクトで使用するデータベース管理システムの入力を求められます。このデモでは、プロジェクト名を`dbt_airbyte_demo`と定義します。dbt-teradataコネクタを使用しているため、使用可能なデータベース管理システムはTeradataのみです。
++
+image::elt/{dir}/dbt_init_project_name.png[プロジェクト名プロンプト, width=75%]
++
+image::elt/{dir}/dbt_init_database_name.png[データベース名プロンプト, width=75%]
+ 
+* `$HOME/.dbt`ディレクトリにある`profiles.yml`ファイルを設定します。`profiles.yml`ファイルが存在しない場合は、新しいファイルを作成できます。 
+* Teradataインスタンスの`HOST`、`Username`、`Password`に合わせて、`server`、`username`、`password`をそれぞれ調整します。 
+* この構成では、`schema`はサンプルデータを含むデータベースを表し、この場合は、Airbyte`airbyte_jaffle_shop`で定義したデフォルト スキーマです。
++
+[source, yaml, id="dbt_first_config", role="emits-gtm-events"]
+----
+dbt_airbyte_demo:
+  target: dev
+  outputs:
+    dev:
+      type: teradata
+      server: <host>
+      schema: airbyte_jaffle_shop
+      username: <user>
+      password: <password>
+      tmode: ANSI
+
+----
+
+* `profiles.yml`ファイルの準備ができたら、設定を検証できます。dbt プロジェクト フォルダに移動し、以下のコマンドを実行します。
++
+[source, bash]
+----
+dbt debug
+----
++
+デバッグ コマンドがエラーを返した場合は、 `profiles.yml`のコンテンツに問題がある可能性があります。設定が正しければ、次のメッセージが表示されます。 `All checks passed!`
++
+image::elt/{dir}/dbt_debug.png[dbt debug output, width=75%]
+
+== Jaffle Shop dbtプロジェクト
+
+`jaffle_shop` は、オンラインで注文を受ける架空のレストランです。このビジネスのデータは、以下のエンティティリレーション図に従う `customers`、 `orders` 、および `payments` のテーブルで構成されています。
+
+[erd, format=svg, width=100%]
+....
+# Entities
+
+[customers] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+  *`id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "int", border: "1", border-color: "#ffffff"}
+  `first_name  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+  `last_name  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+  `email  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+
+[orders] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+  *`id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "int", border: "1", border-color: "#ffffff"}
+  +`user_id  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+  `order_date  ` {bgcolor: "#fcece8", color: "#868686", label: "date", border: "1", border-color: "#ffffff"}
+  `status  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+
+[payments] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+  *`id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "int", border: "1", border-color: "#ffffff"}
+  +`order_id  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+  `payment_method  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+  `amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+
+# Relationships
+
+customers   1--* orders
+orders      1--* payments
+....
+
+ソース システムのデータは正規化されています。同じデータに基づいた、分析ツールにより適したディメンションモデルを以下に示します。
+[erd, format=svg, width=100%]
+....
+# Entities
+
+[`dimension: customers`] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+  *`customer_id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "int", border: "1", border-color: "#ffffff"}
+  `first_name  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+  `last_name  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+  `email  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+  `first_order  ` {bgcolor: "#fcece8", color: "#868686", label: "date", border: "1", border-color: "#ffffff"}
+  `most_recent_order  ` {bgcolor: "#fcece8", color: "#868686", label: "date", border: "1", border-color: "#ffffff"}
+  `number_of_orders  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+  `total_order_amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+
+[`fact: orders`] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+  *`order_id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "int", border: "1", border-color: "#ffffff"}
+  +`customer_id  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+  `order_date  ` {bgcolor: "#fcece8", color: "#868686", label: "date", border: "1", border-color: "#ffffff"}
+  `status  ` {bgcolor: "#fcece8", color: "#868686", label: "varchar", border: "1", border-color: "#ffffff"}
+  `amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+  `credit_card_amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+  `coupon_amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+  `bank_transfer_amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+  `gift_card_amount  ` {bgcolor: "#fcece8", color: "#868686", label: "int", border: "1", border-color: "#ffffff"}
+
+# Relationships
+`dimension: customers`   1--* `fact: orders`
+....
+
+== dbt の変換
+[NOTE]
+====
+以下で詳しく説明する変換を含む完全な dbt プロジェクトは link:https://github.com/Teradata/airbyte-dbt-jaffle[Airbyte用いたJaffle プロジェクト。,window="_blank"]
+にあります
+====
+
+参照 dbt プロジェクトは 2 つの型の変換を実行します。
+
+* まず、Airbyte 経由で Google スプレッドシートからロードされた生データ (JSON 形式) をステージング ビューに変換します。この段階でデータは正規化されます。 
+* 次に、正規化されたビューを、分析に使用できるディメンションモデルに変換します。
+
+以下の図は、dbt を使用した Teradata Vantage の変換手順を示しています。
+[ditaa]
+----
+    /--------------\   JSON Transformation  /------------------\
+    | Raw JSON Data|----------------------->| Normalized Views |
+    \--------------/                        \------------------/
+                                                      |
+                                                      | Dimensional Modeling
+                                                      v
+                                               /-------------\
+                                               |  Dimension  |  
+                                               |    and      |
+                                               | Fact Tables |
+                                               \-------------/     
+----
+
+すべての dbt プロジェクトと同様に、フォルダ `models` には、プロジェクトまたは個々のモデル レベルでの対応する構成に従って、プロジェクトがテーブルまたはビューとしてマテリアライズドするデータ モデルが含まれています。 
+
+モデルは、データ ウェアハウス/レイクの編成における目的に応じて、さまざまなフォルダに編成できます。一般的なフォルダ レイアウトには、 `staging`のフォルダ、 `core`のフォルダ、および `marts`のフォルダが含まれます。この構造は、dbt の動作に影響を与えることなく簡素化できます。
+
+=== ステージングモデル
+オリジナルの link:https://github.com/dbt-labs/jaffle_shop-dev[dbt Jaffle Shop チュートリア,window="_blank"] プロジェクトのデータは、dbt の`seed`コマンドを使用して  `./data`フォルダにある csv ファイルからロードされます。 `seed` コマンドはテーブルからデータをロードするためによく使用されますが、このコマンドはデータ ローディングを実行するように設計されていません。 
+
+このデモでは、データ ローディング用に設計されたツール Airbyte を使用してデータウェアハウス/レイクにデータを読み込む、より一般的なセットアップを想定しています。
+ただし、Airbyte を通じてロードされたデータは生の JSON 文字列として表されます。これらの生データから、正規化されたステージング ビューを作成しています。このタスクは、以下のステージング モデルを通じて実行します。 
+
+* `stg_customers`モデルは、`_airbyte_raw_customers`テーブルから`customers`の正規化されたステージングビューを作成します。 
+* `stg_orders`モデルは、`_airbyte_raw_orders`テーブルから`orders`の正規化されたステージングビューを作成します。  
+* `stg_payments`モデルは、`_airbyte_raw_payments`テーブルから`payments`の正規化されたステージングビューを作成します。 
+
+
+以下は、`stg_orders.sql`モデルを介して生の JSON データをビューに変換する例です。 
+[source, sql]
+----
+WITH source AS (
+    SELECT * FROM {{ source('airbyte_jaffle_shop', '_airbyte_raw_orders')}}
+),
+
+flattened_json_data AS (
+  SELECT
+    _airbyte_data.JSONExtractValue('$.id') AS order_id,
+    _airbyte_data.JSONExtractValue('$.user_id') AS customer_id,
+    _airbyte_data.JSONExtractValue('$.order_date') AS order_date,
+    _airbyte_data.JSONExtractValue('$.status') AS status
+  FROM source
+)
+
+
+SELECT * FROM flattened_json_data
+----
+
+* このモデルでは、ソースは生のテーブル`_airbyte_raw_orders`として定義されます。 
+* この生のテーブル列には、メタデータと実際に取り込まれたデータの両方が含まれています。データ列は`_airbyte_data`と呼ばれます。 
+* この列は Teradata JSON 型です。この型は、JSON オブジェクトからスカラー値を取得するメソッド JSONExtractValue をサポートします。
+* このモデルでは、ビューをマテリアライズドするために、対象の各属性を取得し、意味のあるエイリアスを追加しています。
+
+=== ディメンションモデル (マート)
+ディメンションモデルの構築は、以下の 2 段階のプロセスです。 
+
+* 最初に、`stg_orders`、`stg_customers`、`stg_payments`の正規化されたビューを取得し、非正規化された中間結合テーブル`customer_orders`、`order_payments`、`customer_payments`を構築します。これらのテーブルの定義は `./models/marts/core/intermediate` にあります。  
+* 2 番目のステップでは、 `dim_customers` と `fct_orders` モデルを作成します。これらは、BI ツールに公開するディメンション モデル テーブルを構成します。これらのテーブルの定義は `./models/marts/core`にあります。
+
+=== 変換の実行
+dbt プロジェクトで定義された変換を実行するには、以下のコマンドを実行します。
+
+[source, bash]
+----
+dbt run
+----
+以下に示すように、各モデルのステータスが取得されます。
+
+image::elt/{dir}/dbt_run.png[dbt run output, width=75%]
+
+=== テストデータ
+ディメンションモデル内のデータが正しいことを確認するために、dbt を使用すると、データに対するテストを定義して実行できます。 
+
+テストは  `/models/marts/core/schema.yml` と `/models/staging/schema.yml` で定義されています。 各列には、`tests`キーの下で複数のテストを構成できます。 
+
+* 例えば、 `fct_orders.order_id` 列には固有な非 NULL 値が含まれることが予想されます。 
+
+生成されたテーブルのデータがテスト条件を満たしていることを検証するには、以下のコマンドを実行します。
+
+[source, bash]
+----
+dbt test
+----
+
+モデル内のデータがすべてのテスト ケースを満たしている場合、このコマンドの結果は以下のようになります。
+
+image::elt/{dir}/dbt_test.png[dbt test output, width=75%]
+
+=== ドキュメントの生成
+
+このモデルは、わずか数個のテーブルで構成されています。より多くのデータ ソースとより複雑なディメンションモデルを使用するシナリオでは、データ系統と各中間モデルの目的をドキュメント化することが非常に重要です。 
+
+dbt を使用してこの型のドキュメントを生成するのは非常に簡単です。
+
+[source, bash]
+----
+dbt docs generate
+----
+
+これにより、`./target`ディレクトリにhtmlファイルが生成されます。
+
+独自のサーバーを起動してドキュメントを参照できます。以下のコマンドはサーバーを起動し、ドキュメントのランディング ページが表示されたブラウザ タブを開きます。
+
+[source, bash]
+----
+dbt docs serve
+----
+
+==== Lineage graph
+
+image::elt/{dir}/dbt_docs_serve.png[dbt lineage graph, width=75%]
+
+== まとめ
+
+このチュートリアルでは、dbt を使用して、Airbyte 経由でロードされた生の JSON データを Teradata Vantage のディメンションモデルに変換する方法を説明しました。サンプル プロジェクトは、Teradata Vantage にロードされた生の JSON データを取得し、正規化されたビューを作成し、最終的にディメンションデータ マートを生成します。dbt を使用して JSON を正規化ビューに変換し、複数の dbt コマンドを使用してモデルの作成 (`dbt run`)、データのテスト (`dbt test`)、モデルドキュメントの生成と提供 (`dbt docs generate`, `dbt docs serve`) を行いました。
+
+
+== さらに詳しく
+* link:https://docs.getdbt.com/docs/[dbt のドキュメント]
+* link:https://github.com/Teradata/dbt-teradata[dbt-teradata プラグインのドキュメント]
+
+include::ROOT:partial$community_link.adoc[]
