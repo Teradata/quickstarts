@@ -46,7 +46,7 @@ Amazon AppFlowサービスおよびTeradata Vantageに精通していること�
 
 * Teradata Vantageインスタンスへのアクセス。
 +
-include::ROOT:partial$vantage_clearscape_analytics.adoc[]
+include::../partials/vantage_clearscape_analytics.adoc[]
 * フローの作成と実行が可能なロールを持つAWSアカウント。
 * Salesforce データを保存するための Amazon S3 バケット (例: ptctsoutput)
 * 生の Vantage データ (Parquet ファイル) を保存する Amazon S3 バケット (例: vantageparquet)。このバケットには、Amazon AppFlowのアクセスを認証するポリシーが必要です。
@@ -722,4 +722,4 @@ Salesforce データの使用が完了したら、使用したリソースに対
 +
 * 不要になったインスタンスを停止/終了する
 
-include::ROOT:partial$community_link.adoc[]
+include::../partials/community_link.adoc[]

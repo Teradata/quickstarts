@@ -1,0 +1,206 @@
+= Teradata AI Unlimitedを使用してJupyterLabでサンプルワークロードを実行する
+:page-lang: ja
+:experimental:
+:page-author: Thripti Aravind
+:page-email: thripti.aravind@teradata.com
+:page-revdate: 2023 年 11 月 14 日
+:description: 簡単なワークフローを実行し、Teradata AI Unlimited の使用方法を学びます。
+:keywords: Teradata AI Unlimited, Teradata AI Unlimited Workspace service, Teradata AI Unlimited Compute Engine
+:page-image-directory: running-sample-ai-unlimited-workload
+
+IMPORTANT: この製品はプレビュー版であり、変更される可能性があります。このサービスの詳細について興味がある場合は、Teradata サポートにお問い合わせください。
+
+== 概要
+
+このドキュメントでは、JupyterLab を使用して以下のことを行うための簡単なワークフローについて説明します。
+
+* オンデマンドでスケーラブルなコンピューティングをデプロイメントする
+* 外部データソースに接続する
+* ワークロードの実行する
+* 計算を中断する
+
+== 始める前に
+
+* Teradata AI Unlimited Workspaces と JupyterLab をデプロイして構成します。 link:install-ai-unlimited-workspaces-docker.html[Dockerを使用した Teradata AI Unlimited Workspaceサービスのデプロイとセットアップ] と link:install-ai-unlimited-interface-docker.html[Dockerを使用した Teradata AI Unlimited インターフェースのデプロイ] を参照してください。
+
+* 以下をコピーして保持します。
+
+** コンソールからの CSP 環境変数。link:https://docs.aws.amazon.com/sdkref/latest/guide/environment-variables.html[環境変数] を参照してください。
+** ワークスペースサービスからのAPIキー。
+
+== 最初のワークロードを実行する
+
+マジックコマンドの詳細については、`%help`または`%help <command>`を実行してください。詳細については、 link:ai-unlimited-magic-reference.html[Teradata AI Unlimited JupyterLab マジック コマンド リファレンス] を参照してください。
+
+1. URL: http://localhost:8888 を使用して JupyterLab に接続し、プロンプトが表示されたらトークンを入力します。
+2. APIキーを使用してワークスペースサービスに接続します。
++
+[source, bash, id="connect_workspaces", role="content-editable emits-gtm-events"]
+----
+%workspaces_config host=<ip_or_hostname>, apikey=<API_Key>, withtls=F
+----
+3. 新しいプロジェクトを作成します。
++
+NOTE: 現在、Teradata AI Unlimited は AWS と Azure をサポートしています。
++
+
+[source, bash, id="create_project", role="content-editable emits-gtm-events"]
+----
+%project_create project=<Project_Name>, env=<CSP>, team=<Project_Team>
+----
+
+4. (オプション) CSP 信頼証明を保存するための認証オブジェクトを作成します。
++
+`ACCESS_KEY_ID`、`SECRET_ACCESS_KEY`、および`REGION`を実際の値に置き換えます。
++
+
+[source, bash, id="create_auth", role="content-editable emits-gtm-events"]
+----
+%project_auth_create name=<Auth_Name>, project=<Project_Name>, key=<ACCESS_KEY_ID>, secret=<SECRET_ACCESS_KEy>, region=<REGION>
+----
+
+5. プロジェクトのエンジンをデプロイします。
++
+<Project_Name> を任意の名前に置き換えます。サイズパラメータ値には、small、medium、large、またはextralargeを指定できます。デフォルトのサイズはsmallです。
++
+
+[source, bash, id="deploy_query_engine", role="content-editable emits-gtm-events"]
+----
+%project_engine_deploy name=<Project_Name>, size=<Size_of_Engine>
+----
+
++
+デプロイのプロセスが完了するまでに数分かかります。デプロイメントが成功すると、パスワードが生成されます。
+
+6. プロジェクトとの接続を確立します。
++
+
+[source, bash, id="connect_project", role="content-editable emits-gtm-events"]
+----
+%connect <Project_Name>
+----
++
+接続が確立されると、インターフェースによってパスワードの入力が求められます。前のステップで生成されたパスワードを入力します。
+
+7. サンプルワークロードを実行します。
++
+NOTE: 選択したデータベースに SalesCenter または SalesDemo という名前のテーブルがないことを確認してください。
++
+a. 販売センターのデータを格納するテーブルを作成します。
++
+まず、テーブルがすでに存在する場合は削除します。テーブルが存在しない場合、コマンドは失敗します。
++
+
+[source, teradata-sql, id="create_table", role="content-editable emits-gtm-events"]
+----
+DROP TABLE SalesCenter;
+CREATE MULTISET TABLE SalesCenter ,NO FALLBACK ,
+     NO BEFORE JOURNAL,
+     NO AFTER JOURNAL,
+     CHECKSUM = DEFAULT,
+     DEFAULT MERGEBLOCKRATIO
+     (
+      Sales_Center_id INTEGER NOT NULL,
+      Sales_Center_Name VARCHAR(255) CHARACTER SET LATIN NOT CASESPECIFIC)
+NO PRIMARY INDEX ;
+----
+
+b. `%dataload`マジックコマンドを使用して、データをSalesCenterテーブルにロードします。
++
+
+[source, bash, id="data_load", role="content-editable emits-gtm-events"]
+----
+%dataload DATABASE=<Project_Name>, TABLE=SalesCenter, FILEPATH=notebooks/sql/data/salescenter.csv
+----
++
+NOTE: salescenter.csv ファイルが見つかりませんか?link:https://github.com/Teradata/jupyter-demos/tree/main/Getting_Started/Charting_and_Visualization/data[GitHub Demo:Charting and Visualization Data]からファイルをダウンロードします。
++
+データが挿入されたことを確認します。
++
+
+[source, teradata-sql, id="verify_data_load", role="content-editable emits-gtm-events"]
+----
+SELECT * FROM SalesCenter ORDER BY 1
+----
+
+c. 販売デモ データを含むテーブルを作成します。
++
+
+[source, teradata-sql, id="create_table_data", role="content-editable emits-gtm-events"]
+----
+DROP TABLE SalesDemo;
+CREATE MULTISET TABLE SalesDemo ,NO FALLBACK ,
+     NO BEFORE JOURNAL,
+     NO AFTER JOURNAL,
+     CHECKSUM = DEFAULT,
+     DEFAULT MERGEBLOCKRATIO
+     (
+      Sales_Center_ID INTEGER NOT NULL,
+      UNITS DECIMAL(15,4),
+      SALES DECIMAL(15,2),
+      COST DECIMAL(15,2))
+NO PRIMARY INDEX ;
+----
+
+d. `%dataload`マジック コマンドを使用して、SalesDemo テーブルにデータをロードします。
++
+
+[source, bash, id="load_data_table", role="content-editable emits-gtm-events"]
+----
+%dataload DATABASE=<Project_Name>, TABLE=SalesDemo, FILEPATH=notebooks/sql/data/salesdemo.csv
+----
++
+NOTE: salesdemo.csv ファイルが見つかりませんか?link:https://github.com/Teradata/jupyter-demos/tree/main/Getting_Started/Charting_and_Visualization/data[GitHub Demo:Charting and Visualization Data]からファイルをダウンロードします。
++
+販売デモ データが正常に挿入されたことを確認します。
++
+[source, teradata-sql, id="verify_sales_data", role="content-editable emits-gtm-events"]
+----
+SELECT * FROM SalesDemo ORDER BY sales
+----
++
+接続のナビゲータを開き、テーブルが作成されたことを確認します。テーブルで行カウントを実行して、データがロードされたことを確認します。
+
+e. チャートマジックを使用して、結果を視覚化します。
++
+チャートにX軸とY軸を提供しま。
++
+
+[source, bash, id="plot_chart", role="content-editable emits-gtm-events"]
+----
+%chart sales_center_name, sales, title=Sales Data
+----
+
+f.	テーブルをドロップします。
++
+
+[source, teradata-sql, id="drop_tables", role="content-editable emits-gtm-events"]
+----
+DROP TABLE SalesCenter;
+DROP TABLE SalesDemo;
+----
+
+8. プロジェクトのメタデータとオブジェクト定義を GitHub リポジトリにバックアップします。
++
+
+[source, bash, id="backup_project", role="content-editable emits-gtm-events"]
+----
+%project_backup project=<Project_Name>
+----
+9. エンジンを停止します。
++
+
+[source, bash, id="suspend_query_engine", role="content-editable emits-gtm-events"]
+----
+%project_engine_suspend project=<Project_Name>
+----
+
+おめでとうございます！JupyterLab で最初のユースケースが正常に実行されました。
+
+== 次のステップ
+
+* 高度なユースケースを探索することに興味がありますか? 近日公開! GitHub リンクについては、このスペースを引き続き監視してください。
+
+* JupyterLab で利用できるマジック コマンドについて学びます。 link:ai-unlimited-magic-reference.html[Teradata AI Unlimited JupyterLab マジック コマンド リファレンス] を参照してください。
+
+include::../partials/community_link.adoc[]

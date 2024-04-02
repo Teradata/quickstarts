@@ -1,0 +1,82 @@
+= AWS CLI から CloudFormation テンプレートをデプロイする
+:page-lang: ja
+:experimental:
+:page-author: Thripti Aravind
+:page-email: thripti.aravind@teradata.com
+:page-revdate: 2023 年 11 月 14 日
+:description: AWS CLI から Teradata AI Unlimited CloudFormation テンプレートをデプロイする方法を学びます。
+:keywords: 4Teradata AI Unlimited, Teradata AI Unlimited Workspace service, Teradata AI Unlimited Compute Engine
+:page-image-directory: deploy-ai-unlimited-awscli-cloudformation
+
+IMPORTANT: この製品はプレビュー版であり、変更される可能性があります。このサービスの詳細については、Teradataサポートに連絡してください。
+
+== 概要
+
+AWS CLIから`aws cloudformation create-stack`または`aws cloudformation deploy`コマンドを使用してスタックをデプロイできる。このセクションの例では、create-stackコマンドを使用している。 `create-stack` コマンドと `deploy` コマンドの構文の違いについては 、link:https://docs.aws.amazon.com/cli/latest/reference/cloudformation/#cli-aws-cloudformation[AWS CLI コマンド リファレンス]ドキュメントを参照してください。
+
+== 始める前に
+
+* AWS CLIをインストールして設定する。 link:https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html[「AWS CLI の開始方法」]を参照してください。
+* 以下を確認します。
+** 必須の AWS 認証情報。
+** リソースを作成および管理するために必要な IAM アクセス権。必要なアクセス権がない場合は、組織管理者に問い合わせて、指定されたすべてのロールを作成してください。
+** 必要なパラメータファイルとCloudFormationテンプレート。ファイルはlink:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws[AI Unlimited GitHubリポジトリ]からダウンロードできます。
+
+== スタックを作成する
+AWS CLI で以下のコマンドを実行します。
+
+[source, bash, id="aws_cli_create_stack", role="content-editable emits-gtm-events"]
+----
+aws cloudformation create-stack --stack-name all-in-one \
+  --template-body file://all-in-one.yaml \
+  --parameters file://test_parameters/all-in-one.json \
+  --tags Key=ThisIsAKey,Value=AndThisIsAValue \
+  --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM
+----
+
+NOTE: 
+
+* IamRoleが新規に設定されている場合は、CAPABILITY_IAMが必要です。
+* IamRoleがNewに設定され、IamRoleNameに値が指定されている場合は、CAPABILITY_NAMED_IAM が必要です。
+
+既存のロールを使用するには、「アクセス権とポリシーを使用した AWS アクセスとアクセス権の制御」を参照してください。
+
+== スタックを削除する
+
+AWS CLI で以下のコマンドを実行します。
+
+[source, bash, id="aws_cli_delete_stack", role="content-editable emits-gtm-events"]
+----
+aws cloudformation delete-stack --stack-name <stackname> 
+----
+
+== スタック情報を取得する
+
+AWS CLI で以下のコマンドを実行します。
+
+[source, bash, id="aws_cli_get_stack_info", role="content-editable emits-gtm-events"]
+----
+aws cloudformation delete-stack --stack-name <stackname> 
+aws cloudformation describe-stacks --stack-name <stackname> 
+aws cloudformation describe-stack-events --stack-name <stackname> 
+aws cloudformation describe-stack-instance --stack-name <stackname> 
+aws cloudformation describe-stack-resource --stack-name <stackname> 
+aws cloudformation describe-stack-resources --stack-name <stackname>
+----
+ 
+== スタック出力を取得する
+
+AWS CLI で以下のコマンドを実行します。
+
+[source, bash, id="aws_cli_get_stack_output", role="content-editable emits-gtm-events"]
+----
+aws cloudformation describe-stacks --stack-name <stackname>  --query 'Stacks[0].Outputs' --output table
+----
+
+== 次のステップ
+
+* 簡単なワークフローを実行して、Teradata AI Unlimited を開始します。link:running-sample-ai-unlimited-workload.html[Teradata AI Unlimitedを使用してJupyterLabでサンプルワークロードを実行する] を参照してください。
+
+* Teradata AI Unlimited が実際のユースケースでどのように役立つかを知りたいですか? 近日公開! GitHub リンクについては、このスペースを引き続き監視してください。
+
+include::../partials/community_link.adoc[]

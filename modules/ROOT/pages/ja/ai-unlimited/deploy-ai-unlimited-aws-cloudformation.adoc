@@ -1,0 +1,311 @@
+= AWS CloudFormation テンプレートを使用して Teradata AI Unlimited Workspace サービスとインターフェースをデプロイする
+:page-lang: ja
+:experimental:
+:page-author: Thripti Aravind
+:page-email: thripti.aravind@teradata.com
+:page-revdate: 2023 年 11 月 14 日
+:description: AWS CloudFormation テンプレートを使用して Teradata AI Unlimited ワークスペースサービスと JupyterLab をデプロイする方法を学びます。
+:keywords: Teradata AI Unlimited, Teradata AI Unlimited Workspace service, Teradata AI Unlimited Compute Engine
+:page-image-directory: deploy-ai-unlimited-aws-cloudformation
+
+IMPORTANT: この製品はプレビュー版であり、変更される可能性があります。このサービスの詳細については、Teradataサポートに連絡してください。
+
+== 概要
+
+AWS CloudFormation テンプレートは、AWS コンピューティング、ネットワーク、ストレージ、およびワークスペース サービスと JupyterLab を AWS にデプロイするために必要なその他のサービスを起動、設定、実行します。
+以下のいずれかの方法を使用して CloudFormation テンプレートをデプロイできます。
+
+* <<_deploy_cloudformation_template_from_aws_console, AWSコンソール>>
+* link:deploy-ai-unlimited-awscli-cloudformation.html[AWS CLI から CloudFormation テンプレートをデプロイする]
+
+== AWS Console から CloudFormation テンプレートをデプロイする
+
+=== コストと請求
+
+ワークスペース サービスのダウンロードに追加料金はかかりません。 ただし、ワークスペース サービスとエンジンのデプロイ中に使用される AWS のサービスまたはリソースのコストはお客様の負担となります。
+AWS CloudFormation テンプレートには、カスタマイズできる設定パラメータが含まれています。インスタンス型などの設定の一部は、デプロイメントのコストに影響します。コストの見積もりについては、マーケットプレイスの契約ページを確認してください。
+
+=== 始める前に
+
+ターミナル ウィンドウを開き、 link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws[Teradata AI Unlimited GitHub リポジトリ]のクローンを作成します。このリポジトリには、ワークスペース サービスと JupyterLab をデプロイするためのサンプル CloudFormation テンプレートが含まれています。
+
+[source, bash, id="clone_ai_unlimited_repo", role="content-editable emits-gtm-events"]
+----
+git clone https://github.com/Teradata/ai-unlimited
+----
+
+=== ステップ1: AWSアカウントを準備する
+
+1. AWS アカウントをまだお持ちでない場合は、画面上の指示に従って、link:https://aws.amazon.com[https://aws.amazon.com]でアカウントを作成します。  
+2. ワークスペース サービスをデプロイするアカウントに、IAM ロールまたは IAM ポリシーを作成するための十分な IAM アクセス権があることを確認してます。アカウントに必要なアクセス権がない場合は、組織の管理者に問い合わせてください。 link:ai-unlimited-aws-permissions-policies.html[カスタム権限とポリシーを使用してAWSのアクセスと権限を制御する] を参照してください。
+3. ナビゲーション バーのリージョン セレクターを使用して、Teradata AI Unlimited ワークスペース サービスをデプロイする AWS リージョンを選択します。 
+4. ワークスペース サービス インスタンスの起動後に SSH を使用して安全に接続するためのキー ペアを生成します。link:https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html[Amazon EC2キーペアとLinuxインスタンス]を参照してください。
++
+NOTE: あるいは、AWS Session Manager を使用してワークスペース サービス インスタンスに接続することもできます。その場合、session-manager.json ポリシーを IAM ロールに付与する必要があります。 link:ai-unlimited-aws-permissions-policies.html[カスタム権限とポリシーを使用してAWSのアクセスと権限を制御する] を参照してください。ホスト OS へのアクセスが必要ない場合は、これらの接続方法のいずれも使用しないことを選択できます。
+
+
+=== ステップ2:Teradata AI Unlimited AMIに登録する
+
+今回は、AWS で実行される Teradata AI Unlimited の Amazon Machine Image (AMI) サブスクリプションが必要です。Teradata AI Unlimitedのライセンスを取得するには、Teradataサポートに連絡してください。
+
+サブスクライブするには: 
+
+1. AWSアカウントにログオンする。 
+2. Teradata AI UnlimitedのAWSマーケットプレイスページを開き、**Continue**を選択する。 
+3. エンジンイメージの利用規約を確認し、同意する。 
+
++
+
+* Leader: link:https://aws.amazon.com/marketplace/pp/prodview-6vip7ar4pi6ey?ref_=aws-mp-console-subscription-detail[https://aws.amazon.com/marketplace/pp/prodview-6vip7ar4pi6ey?ref_=aws-mp-console-subscription-detail]
+
+* Follower: link:https://aws.amazon.com/marketplace/pp/prodview-xcwypvttluuiw?ref_=aws-mp-console-subscription-detail[https://aws.amazon.com/marketplace/pp/prodview-xcwypvttluuiw?ref_=aws-mp-console-subscription-detail]
+
+
+=== ステップ3: AWSコンソールからワークスペースサービスとJupyterLabをデプロイする
+
+1. AWSコンソールでAWSアカウントにサインオンする。
+2. ナビゲーションバーの右上隅に表示される**AWSリージョン**を確認し、必要に応じて変更します。Teradataでは、プライマリ作業場所に最も近いリージョンを選択することをお薦めする。
+3.	**CloudFormation**>**Create Stack**に移動します。 **Create Stack** を選択し、 **With new resources (standard)** を選択します。
+4. **テンプレートの準備ができました**を選択し、Teradata AI Unlimited GitHub リポジトリからダウンロードしたテンプレート ファイルの 1 つをアップロードします。
++
+
+* link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#workspaces-template[Workspaces テンプレート]: systemd によって制御されるコンテナー内で実行されるワークスペースを含む単一のインスタンスをデプロイします。
+** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/workspaces.yaml[workspaces.yaml] CloudFormation テンプレート
+** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/parameters/workspaces.json[parameters/workspaces.json] パラメータ ファイル
+* link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#jupyter-template[Jupyter テンプレート]: systemd によって制御されるコンテナ内で実行される JupyterLab を含む単一のインスタンスをデプロイします。
+** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/jupyter.yaml[jupyter.yaml] CloudFormation テンプレート
+** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/parameters/jupyter.json[parameters/jupyter.json] パラメータ ファイル
+* link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#all-in-one-template[All-In-One ワンテンプレート]: Workspaces と JupyterLab が同じインスタンス上で実行される単一のインスタンスをデプロイします。 
+** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/all-in-one.yaml[all-in-one.yaml] CloudFormation テンプレート
+** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/parameters/all-in-one.json[parameters/all-in-one.json] パラメータ ファイル
++
+このテンプレートを使用している場合は、埋め込み JupyterLab サービスを使用することも、外部 JupyterLab インスタンスに接続することもできます。埋め込み JupyterLab サービスに接続するときは、JupyterLab Notebookで適切な接続アドレス (例えば、127.0.0.1) を設定する必要があります。また、外部クライアントの場合は、適切なパブリック/プライベート IP または DNS 名を設定する必要があります。
+5.	テンプレートのパラメータを確認します。入力が必要なパラメータの値を指定します。その他のすべてのパラメータについては、デフォルト設定を確認し、必要に応じてカスタマイズします。パラメータの確認とカスタマイズが終了したら、**Next**を選択します。  
++
+以下のテーブルでは、パラメータがカテゴリ別にリストされています。
++
+**AWSインスタンスとネットワーク設定**
++
+[cols="1,1,1,1,1"]
+|===
+|パラメータ |説明 |必須? |デフォルト |注記
+
+|InstanceType
+|サービスに使用する EC2 インスタンスの型。			
+|デフォルトでは必須
+|t3.small
+|Teradata では、コストを節約するためにデフォルトのインスタンス型を使用することをお勧めします。 
+
+|RootVolumeSize	
+|インスタンスに接続するroot ディスクのサイズ (GB 単位)。			
+|デフォルトでは必須
+|8
+|8～1000の値をサポートします。
+
+|TerminationProtection			
+|インスタンス終了保護を有効にします。
+|デフォルトでは必須
+|false
+|
+
+|IamRole			
+|CloudFormationが新しいIAMロールを作成するか、既存のロールを使用するかを指定します。
+|デフォルトでは必須
+|New
+|サポートされているオプションは以下のとおりです: NewまたはExisting
+
+link:ai-unlimited-aws-permissions-policies.html[] を参照してください。
+
+|IamRoleName	
+|インスタンスに割り当てるIAMロールの名前。既存のIAMロールまたは で新しく作成されたIAMロールのいずれか。 	
+|デフォルトではオプション	
+|workspaces-iam-role
+|新しい IAM ロールに名前を付ける場合、CloudFormation には CAPABILITY_NAMED_IAM 機能が必要です。
+
+自動生成された名前を使用する場合は、このフィールドを空白のままにします。
+
+|IamPermissionsBoundary	
+|インスタンスに割り当てられた IAM ロールに関連付ける IAM アクセス権境界の ARN。
+|オプション
+|
+|
+
+|AvailabilityZone
+|インスタンスをデプロイするアベイラビリティゾーン。
+|必須
+|
+|値はサブネット、既存のボリュームのゾーンと一致する必要があり、インスタンス型は選択したゾーンで使用できる必要があります。
+
+|LoadBalancing			
+|インスタンスがNLBを介してアクセスされるかどうかを指定します。
+|デフォルトでは必須
+|NetworkLoadBalancer
+|サポートされているオプションは以下のとおりです: NetworkLoadBalancer または なし
+
+|LoadBalancerScheme	
+|ロードバランサが使用されている場合、このフィールドは、インスタンスがインターネットからアクセスできるか、VPC 内からのみアクセスできるかを指定します。	
+|デフォルトではオプション	
+|Internet-facing	
+|インターネットに接続されたロード バランサーの DNS 名は、ノードのパブリック IP アドレスにパブリックに解決できます。したがって、インターネットに接続されたロード バランサーは、クライアントからのリクエストをインターネット経由でルーティングできます。内部ロード バランサのノードにはプライベート IP アドレスのみがあります。インターネットに接続された内部ロード バランサーの DNS 名は、ノードのパブリック個人 IP アドレスにパブリックに解決できます。したがって、内部ロードバランサーは、ロードバランサーの VPC にアクセスできるクライアントからのリクエストをルーティングできます。
+
+|Private			
+|サービスをパブリック IP のないプライベート ネットワークにデプロイするかどうかを指定します。
+|必須
+|false
+|
+
+|Session			
+|AWSセッションマネージャを使用してインスタンスにアクセスできるかどうかを指定する。
+|必須
+|false
+|
+
+|Vpc		
+|インスタンスをデプロイするネットワーク。
+|必須
+|
+|
+
+|Subnet				
+|インスタンスをデプロイするサブネットワーク。
+|必須
+|
+|サブネットは、選択した可用性ゾーン内に存在する必要があります。
+
+|KeyName				
+|インスタンスの起動後に安全に接続できるようにする公開鍵と秘密鍵のペア。AWS アカウントを作成するとき、これは優先リージョンで作成するキー ペアです。
+|オプション
+|
+|SSHキーを含めない場合は、このフィールドを空白のままにします。
+
+|AccessCIDR	
+|インスタンスへのアクセスが認証される CIDR IP アドレス範囲。 
+|オプション
+|
+|Teradata では、この値を信頼できる IP 範囲に設定することをお勧めします。
+カスタム セキュリティ グループ受信ルールを作成しない限り、受信通信量を認証するには、AccessCIDR、PrefixList、または SecurityGroup の少なくとも 1 つを定義します。
+
+|PrefixList			
+|インスタンスとの通信に使用できる接頭辞リスト。
+|オプション
+|
+|カスタム セキュリティ グループ受信ルールを作成しない限り、受信通信量を認証するには、AccessCIDR、PrefixList、または SecurityGroup の少なくとも 1 つを定義します。
+
+|SecurityGroup			
+|インスタンスへのインバウンドおよびアウトバウンドの通信量を制御する仮想ファイアウォール。	
+|オプション
+|
+|SecurityGroup は、インスタンスへのアクセスを認証するプロトコル、ポート、IP アドレスまたは CIDR ブロックを指定する一連のルールとして実装されます。
+カスタム セキュリティ グループ受信ルールを作成しない限り、受信通信量を認証するには、AccessCIDR、PrefixList、または SecurityGroup の少なくとも 1 つを定義します。
+
+|UsePersistentVolume	 			
+|データの保存に永続ボリュームを使用するかどうかを指定します。
+|デフォルトではオプション
+|なし
+|サポートされるオプションは、ユースケースに応じて、新しい永続ボリューム、既存の永続ボリューム、またはなしです。
+
+|PersistentVolumeSize				
+|インスタンスに付与できる永続ボリュームのサイズ (GB 単位)。
+|デフォルトでは必須
+|8
+|8 ～ 1000 の値をサポート
+
+|ExistingPersistentVolumeId			
+|インスタンスに付与できる既存の永続ボリュームの ID。 
+|UsePersistentVolume が Existing に設定されている場合は必須	
+|
+|永続ボリュームは、ワークスペース サービス インスタンスと同じ可用性ゾーンに存在する必要があります。
+
+|PersistentVolumeDeletionPolicy				
+|CloudOmatics の配置を削除したときの永続的なボリュームの動作。
+|デフォルトでは必須
+|Delete
+|サポートされているオプションは、 Delete、Retain、RetainExceptOnCreate、およびSnapshotです。
+
+|LatestAmiId	 
+|AMI の最新バージョンを指すイメージの ID。この値は SSM ルックアップに使用されます。
+|デフォルトでは必須	
+|
+|このデプロイメントでは、利用可能な最新の ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2 イメージを使用します。
+IMPORTANT: この値を変更すると、スタックが破損する可能性があります。
+|===
+
++
+**Workspace サービスのパラメータ**
++
+[cols="1,1,1,1,1"]
+|===
+|パラメータ |説明 |必須? |デフォルト |注記
+
+|WorkspacesHttpPort		
+|Workspace サービス UI にアクセスするためのポート。
+|デフォルトでは必須	
+|3000
+|
+
+|WorkspacesGrpcPort			
+|Workspace サービス API にアクセスするためのポート。
+|デフォルトでは必須
+|3282
+|
+
+|WorkspacesVersion				
+|デプロイするワークスペース サービスのバージョン。
+|デフォルトでは必須
+|latest
+|値はコンテナのバージョンタグ (latest など) です。
+|===
+
++
+**JupyterLabのパラメータ**
++
+[cols="1,1,1,1,1"]
+|===
+|パラメータ |説明 |必須? |デフォルト |注記
+
+|JupyterHttpPort	
+|JupyterLab サービス UI にアクセスするためのポート
+|デフォルトでは必須	
+|8888
+|
+
+|JupyterToken		
+|UI から JupyterLab にアクセスするために使用されるトークンまたはパスワード	
+|必須
+|
+|トークンは文字で始まり、英数字のみを含む必要があります。認証されるパターンは ^[a-zA-Z][a-zA-Z0-9-]* です。
+
+|JupyterVersion
+|デプロイしたいJupyterLabのバージョン。
+|デフォルトでは必須
+|latest
+|値はコンテナのバージョンタグ (latest など) です。
+|===
+
+
++
+NOTE: Workspace サービスをデプロイしているアカウントに、IAM ロールまたは IAM ポリシーを作成するための十分な IAM アクセス権がない場合は、クラウド管理者に問い合わせてください。
+
+6. **オプション** ページでは、スタック内のリソースのタグ (キーと値のペア) の指定、アクセス権の設定、スタック障害オプションの設定、および詳細オプションの設定を行うことができます。終了したら、**Next**を選択します。 
+7. **Review**ページで、テンプレート設定を確認します。[Capabilities]で、テンプレートがIAMリソースを作成することを確認するチェックボックスをオンにします。 
+8. **Create**を選択してstackをデプロイします。
+9. スタックのステータスを監視します。ステータスが`CREATE_COMPLETE`の場合、Teradata AI Unlimitedワークスペースサービスの準備が整っています。 
+10。スタックの**Outputs**タブに表示されるURLを使用して、作成されたリソースを表示します。
+
+=== ステップ4:ワークスペースサービスの設定とセットアップ
+
+link:https://quickstarts.teradata.com/ai-unlimited/install-ai-unlimited-workspaces-docker.html#_configure_and_set_up_workspace_service[ワークスペースサービスの設定とセットアップ]参照してください。
+
+NOTE: ワークスペース サービスのみをデプロイした場合は、ワークロードを実行する前にインターフェースをデプロイする必要があります。インターフェースをDocker上にローカルにデプロイするには、 link:install-ai-unlimited-interface-docker.html[Dockerを使用した Teradata AI Unlimited インターフェースのデプロイ]を参照してください。 link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#jupyter-template[Jupyter テンプレート] を使用して、systemd によって制御されるコンテナ内で実行される JupyterLab を持つ単一のインスタンスをデプロイすることもできます。
+
+Teradata AI Unlimited の準備が整いました。
+
+== 次のステップ
+
+* 簡単なワークフローを実行して、Teradata AI Unlimited を開始します。 link:running-sample-ai-unlimited-workload.html[Teradata AI Unlimitedを使用してJupyterLabでサンプルワークロードを実行する]  を参照してください。
+
+* Teradata AI Unlimited-AWS IAMのロールとポリシーについて詳しく知りたいですか? link:ai-unlimited-aws-permissions-policies.html[カスタム権限とポリシーを使用してAWSのアクセスと権限を制御する] を参照してください。
+
+* Teradata AI Unlimited が実際のユースケースでどのように役立つかを知りたいですか? 近日公開! GitHub リンクについては、このスペースを引き続き監視してください。
+
+include::../partials/community_link.adoc[]

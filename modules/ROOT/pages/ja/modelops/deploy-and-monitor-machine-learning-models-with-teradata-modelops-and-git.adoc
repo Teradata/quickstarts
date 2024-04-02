@@ -17,7 +17,7 @@
 
 * Jupyter Notebookを実行する機能
 
-include::ROOT:partial$vantage_clearscape_analytics.adoc[]
+include::../partials/vantage_clearscape_analytics.adoc[]
 
 必要なファイル
 
@@ -199,4 +199,4 @@ model_definitions->python-diabetes->model_modulesに移動します。
 == さらに詳しく
 * リンク:https://docs.teradata.com/search/documents?query=ModelOps&sort=last_update&virtual-field=title_only&content-lang=
 
-include::ROOT:partial$community_link.adoc[]
+include::../partials/community_link.adoc[]

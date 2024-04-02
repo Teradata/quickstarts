@@ -45,7 +45,7 @@ Teradata Vantage Native Object Store（NOS）は、標準的なSQLを使用し�
 
 * Teradata Vantageインスタンスへのアクセス。
 
-include::ROOT:partial$vantage_clearscape_analytics.adoc[]
+include::../partials/vantage_clearscape_analytics.adoc[]
 
 * Azureアカウント。 https://azure.microsoft.com/free/[無料アカウント]で始めることができます。
 * データデータセットを保存するための https://docs.microsoft.com/en-us/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal[Azure Blob Storage]アカウント。
@@ -629,4 +629,4 @@ CREATE MULTISET TABLE WeatherData_temp AS (
 WITH DATA
 ----
 
-include::ROOT:partial$community_link.adoc[]
+include::../partials/community_link.adoc[]

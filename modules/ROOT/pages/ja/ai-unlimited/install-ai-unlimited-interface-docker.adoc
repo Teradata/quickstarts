@@ -1,0 +1,96 @@
+= Dockerを使用した Teradata AI Unlimited インターフェースのデプロイ
+:page-lang: ja
+:experimental:
+:page-author: Thripti Aravind
+:page-email: thripti.aravind@teradata.com
+:page-revdate: 2023 年 11 月 14 日
+:description: Docker Engine と Docker Compose を使用して Teradata AI Unlimited インターフェースをインストールする方法を学びます。
+:keywords: Teradata AI Unlimited、Teradata AI Unlimited Workspaceサービス、Teradata AI Unlimited Compute Engine
+:page-image-directory: install-ai-unlimited-interface-docker
+
+IMPORTANT: この製品はプレビュー版であり、変更される可能性があります。このサービスの詳細について興味がある場合は、Teradata サポートにお問い合わせください。
+
+このドキュメントでは、Dockerを使用して Teradata AI Unlimited インターフェースをデプロイおよび設定する手順の概要を説明します。Teradata AI Unlimited インターフェースとして JupyterLab またはワークスペース クライアントを使用できます。 
+
+JupyterLabは、次の手法でデプロイできます。
+
+** <<_deploy_jupyterLab_using_docker_engine, Docker Engine>>
+
+** <<_deploy_jupyterLab_using_docker_compose, Docker Compose >>
+ 
+ワークスペース クライアントの詳細については、 link:using-ai-unlimited-workspace-cli.html[Workspace Client で Teradata AI Unlimited を使用する]を参照してください。
+
+== Docker Engineを使用した JupyterLab のデプロイ
+
+1. link:https://hub.docker.com/r/teradata/ai-unlimited-jupyter[https://hub.docker.com/r/teradata/ai-unlimited-jupyter]にある DockerHub からDockerイメージをプルします。
+
+2. `JUPYTER_HOME` 変数を設定したら、Dockerイメージを実行します。
++
+NOTE: 要件に基づいてディレクトリを変更します。
++
+
+[source, bash, id="docker_engine_jupyter", role="content-editable emits-gtm-events"]
+----
+docker run -detach \
+  --env “accept_license=Y” \
+  --publish 8888:8888 \
+  --volume ${JUPYTER_HOME}:/home/jovyan/JupyterLabRoot \
+  teradata/ai-unlimited-jupyter:latest
+----
+
+このコマンドは、JupyterLab コンテナをダウンロードして起動し、それにアクセスするために必要なポートを公開します。
+URLhttp://localhost:8888 を使用して JupyterLab に接続し、プロンプトが表示されたらトークンを入力します。詳細な手順については、 link:https://docs.teradata.com/r/Teradata-VantageTM-Modules-for-Jupyter-Installation-Guide/Teradata-Vantage-Modules-for-Jupyter/Teradata-Vantage-Modules-for-Jupyter[「Teradata Vantage™ Modules for Jupyter インストール ガイド」] または link:https://quickstarts.teradata.com/jupyter.html[「Jupyter Notebook から Vantage を使用する」]を参照してください。
+
+== Docker Composeを使用した JupyterLab のデプロイ
+
+Docker Compose を使用すると、Dockerベースの JupyterLab インストールを簡単に構成、インストール、アップグレードできます。
+
+
+1. Docker Composeをインストールします。link:https://docs.docker.com/compose/install/[https://docs.docker.com/compose/install/] を参照してください。
+
+2.	**jupyter.yml**ファイルを作成します。
++
+[source, bash, id="docker_compose_jupyter", role="content-editable emits-gtm-events"]
+----
+
+version: "3.9"
+
+services:
+  jupyter:
+    deploy:
+      replicas: 1
+    platform: linux/amd64
+    container_name: jupyter
+    image: ${JUPYTER_IMAGE_NAME:-teradata/ai-unlimited-jupyter}:${JUPYTER_IMAGE_TAG:-latest}
+    environment:
+      accept_license: "Y"
+    ports:
+      - 8888:8888
+    volumes:
+      - ${JUPYTER_HOME:-./volumes/jupyter}:/home/jovyan/JupyterLabRoot/userdata
+    networks:
+      - td-ai-unlimited
+
+networks:
+  td-ai-unlimited:
+
+----
+
+3.	**jupyter.yml**ファイルがあるディレクトリに移動し、JupyterLabを起動します。
++
+[source, bash, id="docker_compose_jupyter_up", role="content-editable emits-gtm-events"]
+----
+docker compose -f jupyter.yml up
+----
++
+JupyterLabサーバーが初期化されて起動されると、URL: http://localhost:8888を使用してJupyterLabに接続し、プロンプトが表示されたらトークンを入力します。詳細な手順については、 link:https://docs.teradata.com/r/Teradata-VantageTM-Modules-for-Jupyter-Installation-Guide/Teradata-Vantage-Modules-for-Jupyter/Teradata-Vantage-Modules-for-Jupyter[「Teradata Vantage™ Modules for Jupyter インストール ガイド」] または link:https://quickstarts.teradata.com/jupyter.html[「Jupyter Notebook から Vantage を使用する」]を参照してください。
+
+おめでとうございます！これで、Teradata AI Unlimitedを使用するための設定は完了しました。
+
+== 次のステップ
+
+* 簡単なワークフローを実行して、Teradata AI Unlimited を開始します。link:running-sample-ai-unlimited-workload.html[Teradata AI Unlimitedを使用してJupyterLabでサンプルワークロードを実行する] を参照してください。
+
+* Teradata AI Unlimited が実際のユースケースでどのように役立つかを知りたいですか? 近日公開! GitHub リンクについては、このスペースを引き続き監視してください。
+
+include::../partials/community_link.adoc[]

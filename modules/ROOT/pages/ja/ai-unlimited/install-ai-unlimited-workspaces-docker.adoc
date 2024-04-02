@@ -1,0 +1,339 @@
+= Dockerを使用した Teradata AI Unlimited Workspaceサービスのデプロイとセットアップ
+:page-lang: ja
+:experimental:
+:page-author: Thripti Aravind
+:page-email: thripti.aravind@teradata.com
+:page-revdate: 2023 年 11 月 14 日
+:description: Docker Engine と Docker Compose を使用して Teradata AI Unlimited Workspace サービスをインストールおよび構成する方法を学びます。
+:keywords: Teradata AI Unlimited、Teradata AI Unlimited Workspaceサービス、Teradata AI Unlimited Compute Engine
+:page-image-directory: install-ai-unlimited-workspaces-docker
+
+IMPORTANT: この製品はプレビュー版であり、変更される可能性があります。このサービスの詳細について興味がある場合は、Teradata サポートにお問い合わせください。
+
+== 概要
+
+このドキュメントでは、Dockerを使用して Teradata AI Unlimited ワークスペース サービスをデプロイおよび設定する手順の概要を説明します。 
+
+ワークスペースサービスは、次の方法でインストールできます。
+
+* <<_deploy_workspace_service_using_docker_engine,Docker Engine>>
+* <<_deploy_workspace_service_using_docker_compose, Docker Compose>>
+
+Teradata AI Unlimitedをワークスペース クライアントで使用するには、link:using-ai-unlimited-workspace-cli.html[Workspace Client で Teradata AI Unlimited を使用する]を参照してください。
+
+== 始める前に
+
+次のものが揃っていることを確認してください。
+
+* GitHubアカウント: GitHubのアカウントをまだ持っていない場合は、link:https://github.com/[https://github.com/]で作成してください。
+* CSPアカウント: AWSまたはAzure上のエンジンをホストできるもの。 
++
+
+[tabs]
+====
+AWS::
++
+--
+link:https://aws.amazon.com/free/[https://aws.amazon.com/free/]で AWS 無料利用枠アカウントにサインアップします。AWS CLI を設定するには、「 link:https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html[https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html]」を参照してください。
+
+--
+Azure::
++
+--
+link:https://azure.microsoft.com/en-us/free[https://azure.microsoft.com/en-us/free]で Azure の無料アカウントにサインアップします。Azure CLI をインストールし、ワークスペース サービスを実行しているマシンに信頼証明を構成します。link:https://learn.microsoft.com/en-us/cli/azure/get-started-with-azure-cli[https://learn.microsoft.com/en-us/cli/azure/get-started-with-azure-cli] を参照してください。
+--
+====
+
+* Docker: Dockerをダウンロードしてインストールするには、 link:https://docs.docker.com/docker-for-windows/install/[https://docs.docker.com/docker-for-windows/install/]を参照してください。
+
+== Dockerイメージをロードして環境を準備する
+
+Dockerイメージは、単一のコンテナ内で必要なサービスを実行するワークスペース サービスのモノリシック イメージです。
+
+ link:https://hub.docker.com/r/teradata/ai-unlimited-workspaces[Docker Hub]から Dockerイメージをプルします。
+
+[source, bash, id="docker_pull", role="content-editable emits-gtm-events"]
+----
+docker pull teradata/ai-unlimited-workspaces
+----
+
+続行する前に、必ず以下のことを行ってください。
+
+* AWSコンソールからCSP環境変数をコピーして保持します。 
+
+** AWS: `AWS_ACCESS_KEY_ID`、`AWS_SECRET_ACCESS_KEY`、および `AWS_SESSION_TOKEN`
++
+link:https://docs.aws.amazon.com/sdkref/latest/guide/environment-variables.html[環境変数] を参照してください。
+
+** Azure:`ARM_SUBSCRIPTION_ID`、`ARM_CLIENT_ID`、および `ARM_CLIENT_SECRET`
++
+Azure CLIを使用した環境変数の取得については、link:https://github.com/paulbouwer/terraform-azure-quickstarts-samples/blob/master/README.md#azure-authentication[Azure認証]を参照してください。
+
+* 環境変数`WORKSPACES_HOME`を、構成ファイルとデータファイルがあるディレクトリに設定します。ディレクトリが存在し、適切なアクセス権が付与されていることを確認してください。`WORKSPACES_HOME`を設定しない場合、デフォルトの場所は**./volumes/workspaces**です。
++
+[cols="1,1,1"]
+|===
+|ローカルの場所 |コンテナの場所 |使用方法
+
+|$WORKSPACES_HOME
+|/etc/td
+|データと構成の保存
+
+|$WORKSPACES_HOME/tls
+|/etc/td/tls
+|証明書ファイルの保存
+|===
+
+
+== Docker Engineを使用してワークスペース サービスをデプロイする
+
+ `WORKSPACES_HOME` 変数を設定したら、Dockerイメージを実行します。
+
+NOTE: 要件に基づいてディレクトリを変更します。
+
+[source, bash, id="docker_engine_run", role="content-editable emits-gtm-events"]
+----
+docker run -detach \
+  --env accept_license="Y" \
+  --env AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
+  --env AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \
+  --env AWS_SESSION_TOKEN="${AWS_SESSION_TOKEN}" \
+  --publish 3000:3000 \
+  --publish 3282:3282 \
+  --volume ${WORKSPACES_HOME}:/etc/td \
+  teradata/ai-unlimited-workspaces:latest
+----
+
+NOTE: Azure の場合、Teradata では Docker Compose を使用してワークスペース サービスをデプロイすることをお勧めします。
+
+このコマンドは、ワークスペース サービス コンテナをダウンロードして開始し、アクセスするために必要なポートを公開します。ワークスペース サービス サーバーが初期化され、開始されると、URL: http://<ip_or_hostname>:3000/を使用してアクセスできます。
+
+== Docker Composeを使用してワークスペース サービスをデプロイする
+
+Docker Compose を使用すると、Docker ベースのワークスペース サービス インストールを簡単に構成、インストール、アップグレードできます。
+
+1. Docker Composeをインストールします。link:https://docs.docker.com/compose/install/[https://docs.docker.com/compose/install/] を参照してください。
+
+2.	**workspaces.yml**ファイルを作成します。
++
+NOTE: 以下の例では、ローカル ボリュームを使用して CSP 信頼証明を保存します。CSP 環境変数を含む別の YAML ファイルを作成し、Docker Compose ファイルを実行できます。他のオプションについては、 link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/docker/README.md[「AI Unlimited GitHub: Docker Compose を使用して AI Unlimited をインストールする」]を参照してください。
++
+
+[tabs]
+====
+AWS::
++
+--
+[source, bash, id="aws_docker_compose", role="content-editable emits-gtm-events"]
+----
+version: "3.9"
+	
+services:
+  workspaces:
+    deploy:
+      replicas: 1
+    platform: linux/amd64
+    container_name: workspaces
+    image: ${WORKSPACES_IMAGE_NAME:-teradata/ai-unlimited-workspaces}:${WORKSPACES_IMAGE_TAG:-latest}
+    command: workspaces serve -v
+    restart: unless-stopped
+    ports:
+      - "443:443/tcp"
+      - "3000:3000/tcp"
+      - "3282:3282/tcp"
+    environment:
+      accept_license: "Y"
+      TZ: ${WS_TZ:-UTC}
+    volumes:
+    - ${WORKSPACES_HOME:-./volumes/workspaces}:/etc/td
+    - ${WORKSPACES_AWS_CONFIG:-~/.aws}:/root/.aws
+  
+    networks:
+      - td-ai-unlimited
+----
+--
+Azure::
++
+--
+[source, bash, id="azure_docker_compose", role="content-editable emits-gtm-events"]
+----
+version: "3.9"
+
+services:
+  workspaces:
+    deploy:
+      replicas: 1
+    platform: linux/amd64
+    container_name: workspaces
+    image: ${WORKSPACES_IMAGE_NAME:-teradata/ai-unlimited-workspaces}:${WORKSPACES_IMAGE_TAG:-latest}
+    command: workspaces serve -v
+    restart: unless-stopped
+    ports:
+      - "443:443/tcp"
+      - "3000:3000/tcp"
+      - "3282:3282/tcp"
+    environment:
+      accept_license: "Y"
+      TZ: ${WS_TZ:-UTC}
+    volumes:
+      - ${WORKSPACES_HOME:-./volumes/workspaces}:/etc/td
+      - ${WS_HOME:-~/.azure}:/root/.azure
+
+    networks:
+      - td-ai-unlimited
+
+----
+--
+====
+
+3.	**workspaces.yml**ファイルが配置されているディレクトリに移動し、ワークスペース サービスを開始します。
++
+[source, bash, id="docker_compose_run", role="content-editable emits-gtm-events"]
+----
+docker compose -f workspaces.yaml
+----
++
+ワークスペース サービス サーバーが初期化され、開始されると、URL: http://<ip_or_hostname>:3000/を使用してアクセスできます。
+
+== ワークスペースサービスの設定とセットアップ
+
+ワークスペース サービスは、GitHub OAuth アプリを使用してユーザーを承認し、プロジェクトの状態を管理します。ワークスペース サービスにプロジェクト インスタンス構成を保存する権限を与えるには、GitHub OAuth アプリの登録時に生成されたクライアント ID とクライアント シークレット キーを使用します。プロジェクト インスタンスの構成値は GitHub リポジトリに保持されており、ワークスペース サービスの **Profile**ページで表示できます。
+
+初めてのユーザーは、続行する前に以下の手順を完了する必要があります。VPC の構成やアクセス権について不明な点がある場合は、組織の管理者に問い合わせてください。
+
+1.	GitHub アカウントにログオンし、OAuth アプリを作成します。 link:https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app[GitHub ドキュメント]を参照してください。
++
+OAuth アプリを登録するときに、URL フィールドに以下のワークスペース サービス URL を入力します。
++
+* **ホームページのURL**: http://<ip_or_hostname>:3000/
+* **認証コールバック URL**: http://<ip_or_hostname>:3000/auth/github/callback
+
+2.	**クライアントID**と**クライアントの秘密鍵**をコピーして保持します。
+
+
+ワークスペース サービスを設定するには、以下の手順を実行します。
+
+1. URL: http://<ip_or_hostname> :3000/ を使用してワークスペース サービスにアクセスします。
++
+image::ai-unlimited/{page-image-directory}/ai.unlimited.workspaces.setting.png[]
+
+2. **セットアップ**の下に以下の一般的なサービス構成を適用します。
++
+[cols="1,1,1"]
+|===
+|設定 |説明 |必須?
+
+|Service Base URL
+|[編集不可] サービスのroot URL。
+|はい
+
+|Git Provider
+|Git 統合のプロバイダ。現在、Teradata AI Unlimited は GitHub と GitLab をサポートしています。
+|はい
+
+|Service Log Lev
+|ロギングのレベル。
+|はい
+
+|Engine IP Network Type
+|エンジン インスタンスに割り当てられるネットワークの型。パブリックまたはプライベートのいずれかになります。ワークスペースサービスと同じVPCにエンジンをデプロイする場合は、**Private**オプションを選択します。
+|はい
+
+|Use TLS
+|TLSサポートが有効かどうかを示します。インスタンスにプライベート ネットワーク内からのみアクセスでき、信頼済みユーザーのみがアクセスできる場合は、デフォルト値を無視できます。Teradataでは、機密データ、パブリックネットワーク、およびコンプライアンス要件に対してTLSオプションを有効にすることを推奨している。
+|はい
+
+|Service TLS Certification
+|サーバIDを認証するためのサーバ証明書。
+|いいえ
+
+|Service TLS Certificate Key
+|サーバ証明書キー。
+|いいえ
+|===
+
+3. **Service Base URL**に自己署名証明書を使用するには、**GENERATE TLS**を選択します。証明書と秘密鍵が生成され、それぞれのフィールドに表示されます。
+
+4. **Save Changes**を選択します。
+
+5. 選択した **Cloud Integrations: CSP**の下に以下の設定を適用します。
++
+[cols="1,1,1"]
+|===
+|設定 |説明 |必須?
+
+|Default Region
+|エンジンを配置するリージョン。Teradataでは、プライマリ作業ロケーションに最も近いリージョンを選択することをお薦めします。3.
+|はい
+
+|Default Subnet
+|エンジンインスタンスにインターネットゲートウェイへのルートを提供するサブネット。サブネットを指定しない場合、エンジンは自動的にデフォルトのサブネットに関連付けられます。
+|はい
+
+|Default IAM Role
+|AWS でユーザーができることとできないことを決定するデフォルトの IAM ID。デフォルトの IAM ロールがユーザーまたはリソースに割り当てられると、ユーザーまたはリソースは自動的にそのロールが付与されたと想定し、そのロールに付与されたアクセス権を取得します。
+|いいえ
+
+|Resource Tag
+|リソースに関するメタデータを保持するためにリソースに適用されるキーと値のペア。リソースタグを使用すると、環境で使用するリソースを迅速に識別、整理、管理できる。
+|いいえ
+
+|Default CIDRs
+|エンジンに使用されるクラスレス ドメイン間ルーティング (CIDR) アドレスのリスト。CIDRを使用すると、ネットワーク内で柔軟かつ効率的にIPアドレスを割り当てることができる。CIDR を指定しない場合、エンジンはデフォルトの CIDR に自動的に関連付けられます。
+|いいえ
+
+|Default Security Groups
+|各リージョンの VPC のセキュリティ グループのリスト。セキュリティ グループを指定しない場合、エンジンは VPC のデフォルトのセキュリティ グループに自動的に関連付けられます。
+|いいえ
+
+|Role Prefix
+|ロールの名前の先頭に追加される文字列。ロール接頭辞を使用すると、ロールを編成および管理し、命名規則を適用できます。
+|いいえ
+
+|Permission Boundary
+|アイデンティティベースのポリシーで定義されたアクセス権に関係なく、IAM エンティティが持つことができる最大アクセス認証。ユーザーのアクセス権と役割を定義および管理し、コンプライアンス要件を強制できます。
+|いいえ
+|===
+
+6. **Save Changes** を選択します。
+7. **Git Integrations**の下に以下の設定を適用します。
++
+[cols="1,1,1"]
+|===
+|設定 |説明 |必須?
+
+|GitHub Client ID
+|OAuthアプリを作成する際にGitHubから受け取ったクライアントID。
+|はい
+
+|GitHub Client Secret
+|OAuth アプリの作成時に GitHub から受け取ったクライアント シークレット ID。
+|はい
+
+|Auth Organization
+|チームと共同作業するために使用する GitHub 組織アカウントの名前。
+|いいえ
+
+|GitHub Base URL
+|GitHubアカウントのベースURL。URL はアカウントの型によって異なる場合があります。例えば、GitHub Enterprise アカウントの場合は https://github.company.com/ 。
+|いいえ
+|===
+
+8.	**Authenticate**を選択します 。GitHub にリダイレクトされます。
+
+9.	GitHub 信頼証明を使用してログオンし、ワークスペース サービスを承認します。
++
+認証後、Workspace サービス **Profile** ページにリダイレクトされ、API キーが生成されます。API キーを使用して、ワークスペース サービスにリクエストを行うことができます。
++
+NOTE: ワークスペースサービスに接続するたびに、新しいAPIキーが生成されます。
+
+Teradata AI Unlimited の準備が整いました。
+
+
+== 次のステップ
+
+* ワークスペース サービスを Teradata AI Unlimited Interface に接続し、エンジンをデプロイします。link:install-ai-unlimited-interface-docker.html[Dockerを使用した Teradata AI Unlimited インターフェースのデプロイ] を参照してください。
+
+* Teradata AI Unlimited が実際のユースケースでどのように役立つかを知りたいですか? 近日公開! GitHub リンクについては、このスペースを引き続き監視してください。
+
+include::../partials/community_link.adoc[]

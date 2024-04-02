@@ -1,0 +1,287 @@
+= カスタム権限とポリシーを使用してAWSのアクセスと権限を制御する
+:page-lang: ja
+:experimental:
+:page-author: Thripti Aravind
+:page-email: thripti.aravind@teradata.com
+:page-revdate: 2023年11月7日
+:description: AWS IAMの役割とポリシーが、Teradata AI Unlimited WorkspacesとJupyterLabのデプロイにどのように影響するかを学ぶ。
+:keywords: Teradata AI Unlimited, Teradata AI Unlimited Workspace service, Teradata AI Unlimited Compute Engine
+:page-image-directory: ai-unlimited-aws-permissions-policies
+
+IMPORTANT: この製品はプレビュー版であり、変更される可能性があります。このサービスの詳細については、Teradataサポートに連絡してください。
+
+== 概要
+
+AWSリソースへのアクセスを提供するために必要な権限を持つポリシーを設定します。ワークスペース サービスをデプロイしているアカウントに、IAM ロールまたは IAM ポリシーを作成するための十分な IAM 権限がない場合、組織管理者はロールとポリシーを定義して、それらをワークスペース サービス テンプレートに付与することができます。 
+
+この記事には、新しいIAMロールに必要なサンプルIAMポリシーが含まれています。
+
+これらのポリシーは、**Security & Identity**>**Identity & Access Management**>**Create Policy**で設定します。詳細な手順については、 link:https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions_create-policies.html[「ロールの作成とポリシーのアタッチ (コンソール) - AWS Identity and Access Management」]を参照してください。
+
+=== workspaces-with-iam-role-permissions.json
+
+以下の JSON サンプルには、AI Unlimited インスタンスを作成するために必要な権限が含まれており、エンジン用のクラスタ固有の IAM ロールとポリシーを作成する権限をワークスペース サービスに付与します。
+
+[source, bash, id="workspaces-with-iam-role-permission", role="content-editable emits-gtm-events"]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [
+      {
+          "Action": [
+              "iam:PassRole",
+              "iam:AddRoleToInstanceProfile",
+              "iam:CreateInstanceProfile",
+              "iam:CreateRole",
+              "iam:DeleteInstanceProfile",
+              "iam:DeleteRole",
+              "iam:DeleteRolePolicy",
+              "iam:GetInstanceProfile",
+              "iam:GetRole",
+              "iam:GetRolePolicy",
+              "iam:ListAttachedRolePolicies",
+              "iam:ListInstanceProfilesForRole",
+              "iam:ListRolePolicies",
+              "iam:PutRolePolicy",
+              "iam:RemoveRoleFromInstanceProfile",
+              "iam:TagRole",
+              "iam:TagInstanceProfile",
+              "ec2:TerminateInstances",
+              "ec2:RunInstances",
+              "ec2:RevokeSecurityGroupEgress",
+              "ec2:ModifyInstanceAttribute",
+              "ec2:ImportKeyPair",
+              "ec2:DescribeVpcs",
+              "ec2:DescribeVolumes",
+              "ec2:DescribeTags",
+              "ec2:DescribeSubnets",
+              "ec2:DescribeSecurityGroups",
+              "ec2:DescribePlacementGroups",
+              "ec2:DescribeNetworkInterfaces",
+              "ec2:DescribeLaunchTemplates",
+              "ec2:DescribeLaunchTemplateVersions",
+              "ec2:DescribeKeyPairs",
+              "ec2:DescribeInstanceTypes",
+              "ec2:DescribeInstanceTypeOfferings",
+              "ec2:DescribeInstances",
+              "ec2:DescribeInstanceAttribute",
+              "ec2:DescribeImages",
+              "ec2:DescribeAccountAttributes",
+              "ec2:DeleteSecurityGroup",
+              "ec2:DeletePlacementGroup",
+              "ec2:DeleteLaunchTemplate",
+              "ec2:DeleteKeyPair",
+              "ec2:CreateTags",
+              "ec2:CreateSecurityGroup",
+              "ec2:CreatePlacementGroup",
+              "ec2:CreateLaunchTemplateVersion",
+              "ec2:CreateLaunchTemplate",
+              "ec2:AuthorizeSecurityGroupIngress",
+              "ec2:AuthorizeSecurityGroupEgress",
+              "secretsmanager:CreateSecret",
+              "secretsmanager:DeleteSecret",
+              "secretsmanager:DescribeSecret",
+              "secretsmanager:GetResourcePolicy",
+              "secretsmanager:GetSecretValue",
+              "secretsmanager:PutSecretValue",
+              "secretsmanager:TagResource"
+          ],
+          "Resource": "*",
+          "Effect": "Allow"
+      }
+  ]
+}
+
+----
+
+=== workspaces-without-iam-role-permissions.json
+
+以下の JSON サンプルには、AI Unlimited インスタンスの作成に必要な権限が含まれています。アカウントの制限により、ワークスペース サービスが IAM ロールとポリシーを作成できない場合は、エンジンに渡すポリシーを IAM ロールに付与する必要があります。この場合、以下の変更されたワークスペース サービス ポリシーを使用できます。これには、IAM ロールまたは IAM ポリシーを作成する権限が含まれていません。
+
+[source, bash, id="workspaces_without_iam_role_permissions", role="content-editable emits-gtm-events"]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [
+      {
+          "Action": [
+              "iam:PassRole",
+              "iam:AddRoleToInstanceProfile",
+              "iam:CreateInstanceProfile",
+              "iam:DeleteInstanceProfile",
+              "iam:GetInstanceProfile",
+              "iam:GetRole",
+              "iam:GetRolePolicy",
+              "iam:ListAttachedRolePolicies",
+              "iam:ListInstanceProfilesForRole",
+              "iam:ListRolePolicies",
+              "iam:PutRolePolicy",
+              "iam:RemoveRoleFromInstanceProfile",
+              "iam:TagRole",
+              "iam:TagInstanceProfile",
+              "ec2:TerminateInstances",
+              "ec2:RunInstances",
+              "ec2:RevokeSecurityGroupEgress",
+              "ec2:ModifyInstanceAttribute",
+              "ec2:ImportKeyPair",
+              "ec2:DescribeVpcs",
+              "ec2:DescribeVolumes",
+              "ec2:DescribeTags",
+              "ec2:DescribeSubnets",
+              "ec2:DescribeSecurityGroups",
+              "ec2:DescribePlacementGroups",
+              "ec2:DescribeNetworkInterfaces",
+              "ec2:DescribeLaunchTemplates",
+              "ec2:DescribeLaunchTemplateVersions",
+              "ec2:DescribeKeyPairs",
+              "ec2:DescribeInstanceTypes",
+              "ec2:DescribeInstanceTypeOfferings",
+              "ec2:DescribeInstances",
+              "ec2:DescribeInstanceAttribute",
+              "ec2:DescribeImages",
+              "ec2:DescribeAccountAttributes",
+              "ec2:DeleteSecurityGroup",
+              "ec2:DeletePlacementGroup",
+              "ec2:DeleteLaunchTemplate",
+              "ec2:DeleteKeyPair",
+              "ec2:CreateTags",
+              "ec2:CreateSecurityGroup",
+              "ec2:CreatePlacementGroup",
+              "ec2:CreateLaunchTemplateVersion",
+              "ec2:CreateLaunchTemplate",
+              "ec2:AuthorizeSecurityGroupIngress",
+              "ec2:AuthorizeSecurityGroupEgress",
+              "secretsmanager:CreateSecret",
+              "secretsmanager:DeleteSecret",
+              "secretsmanager:DescribeSecret",
+              "secretsmanager:GetResourcePolicy",
+              "secretsmanager:GetSecretValue",
+              "secretsmanager:PutSecretValue",
+              "secretsmanager:TagResource"
+          ],
+          "Resource": "*",
+          "Effect": "Allow"
+      }
+  ]
+}
+
+----
+
+=== session-manager.json
+
+以下の JSON サンプルには、AWS Session Manager と対話するために必要な権限が含まれています。AWS Session Manager を使用してインスタンスに接続する場合は、このポリシーを IAM ロールに付与する必要があります。
+
+[source, bash, id="session_manager", role="content-editable emits-gtm-events"]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [
+      {
+          "Action": [
+              "ssm:DescribeAssociation",
+              "ssm:GetDeployablePatchSnapshotForInstance",
+              "ssm:GetDocument",
+              "ssm:DescribeDocument",
+              "ssm:GetManifest",
+              "ssm:ListAssociations",
+              "ssm:ListInstanceAssociations",
+              "ssm:PutInventory",
+              "ssm:PutComplianceItems",
+              "ssm:PutConfigurePackageResult",
+              "ssm:UpdateAssociationStatus",
+              "ssm:UpdateInstanceAssociationStatus",
+              "ssm:UpdateInstanceInformation"
+          ],
+          "Resource": "*",
+          "Effect": "Allow"
+      },
+      {
+          "Action": [
+              "ssmmessages:CreateControlChannel",
+              "ssmmessages:CreateDataChannel",
+              "ssmmessages:OpenControlChannel",
+              "ssmmessages:OpenDataChannel"
+          ],
+          "Resource": "*",
+          "Effect": "Allow"
+      },
+      {
+          "Action": [
+              "ec2messages:AcknowledgeMessage",
+              "ec2messages:DeleteMessage",
+              "ec2messages:FailMessage",
+              "ec2messages:GetEndpoint",
+              "ec2messages:GetMessages",
+              "ec2messages:SendReply"
+          ],
+          "Resource": "*",
+          "Effect": "Allow"
+      }
+  ]
+}
+
+----
+
+=== unlimited-engine.json	
+ワークスペース サービスにクラスタ固有のロールの作成を認証する代わりに、Teradata AI Unlimited IAM ロールを新しいエンジンに渡す場合は、以下の JSON サンプルを出発点としてポリシーを作成できます。
+
+[source, bash, id="ai_unlimited", role="content-editable emits-gtm-events"]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "secretsmanager:GetSecretValue",
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:secretsmanager:<REGION>:<ACCOUNT_ID>:secret:compute-engine/*"
+      ]
+    }
+  ]
+}
+
+----
+
+ワークスペース サービスがエンジンのポリシーを作成する場合、ポリシーは以下のように制限されます。
+
+[source, bash, id="restricted_policy", role="content-editable emits-gtm-events"]
+----
+"Resource": ["arn:aws:secretsmanager:<REGION>:<ACCOUNT_ID>:secret:compute-engine/<CLUSTER_NAME>/<SECRET_NAME>"]
+----
+
+IAM ロールとポリシーを指定する場合、クラスタ名を予測することはできません。この状況を回避するには、以下のような置換ポリシーでワイルドカードを使用できます。
+
+[source, bash, id="restricted_policy_wildcard", role="content-editable emits-gtm-events"]
+----
+"arn:aws:secretsmanager:<REGION>:<ACCOUNT_ID>:secret:compute-engine/*"
+or
+"arn:aws:secretsmanager:<REGION>:111111111111:secret:compute-engine/*"
+or
+"arn:aws:secretsmanager:us-west-2:111111111111:secret:compute-engine/*"
+----
+
+== AWSで永続的なボリュームを使用する
+
+Teradata AI Unlimitedを使用すると、コンテナ、ポッド、またはノードのクラッシュや終了に関係なく、状態を持続させる必要があるエンジンを再デプロイできます。この機能には、永続的なストレージ、つまり、コンテナ、ポッド、またはノードの存続期間を超えて存続するストレージが必要です。Teradata AI Unlimited は、インスタンスのインスタンス ルート ボリュームを使用して、JupyterLab **/userdata** フォルダ、ワークスペース サービス データベース、および構成ファイルにデータを保存します。インスタンスをシャットダウン、再起動、またはスナップショットを作成して再起動しても、データは保持されます。ただし、インスタンスが終了すると、JupyterLabのデータとワークスペースサービスのデータベースが失われるため、その場でインスタンスを実行した場合に問題が発生する可能性があり、警告なしに削除される可能性があります。高度に永続的なインスタンスが必要な場合は、 `UsePersistentVolume` パラメータを有効にして、JupyterLab データとワークスペース サービス データベースを別のボリュームに移動します。
+
+以下の推奨される永続ボリューム フローでは、ボリュームが再マウントされ、データが保持されます。
+
+1. `UsePersistentVolume`セットを**New**、`PersistentVolumeDeletionPolicy`セットを**Retain**として、新しいデプロイメントを作成する。
+2. スタック出力では、将来使用するためにvolume-idをメモする。
+3. インスタンスが終了するまで、インスタンスを構成して使用する。
+4. 次回のデプロイでは、以下の設定を使用します。
++
+* `UsePersistentVolume` を以下として設定 **New**
+* `PersistentVolumeDeletionPolicy` を以下として設定 **Retain** 
+* `ExistingPersistentVolumeId` が以前のデプロイメントの volume-id に設定される
+
+以前のデータでインスタンスを再作成する必要がある場合は、いつでも同じ設定でテンプレートを再起動できる。
+
+
+== 次のステップ
+
+* 簡単なワークフローを実行して、Teradata AI Unlimited を開始します。link:running-sample-ai-unlimited-workload.html[Teradata AI Unlimitedを使用してJupyterLabでサンプルワークロードを実行する] を参照してください。
+
+* Teradata AI Unlimited が実際のユースケースでどのように役立つかを知りたいですか? 近日公開! GitHub リンクについては、このスペースを引き続き監視してください。
+
+include::../partials/community_link.adoc[]

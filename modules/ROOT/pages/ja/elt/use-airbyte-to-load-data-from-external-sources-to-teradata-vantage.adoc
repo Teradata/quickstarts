@@ -21,7 +21,7 @@ image::elt/{dir}/sample_employees_payrate_google_sheets.png[サンプル従業�
 == 前提条件 
 * Teradata Vantageインスタンスへのアクセス。これは、Airbyte 接続の宛先として定義されます。Airbyteの設定には、データベースの`Host`、`Username`、`Password`が必要です。
 +
-include::ROOT:partial$vantage_clearscape_analytics.adoc[]
+include::../partials/vantage_clearscape_analytics.adoc[]
 
 * link:https://support.google.com/googleapi/answer/6158841?hl=en[個人または組織のアカウントで Google Cloud Platform API が有効になっている,  window="_blank"]。OAuth またはサービス アカウント キー認証システムを介して Google アカウントを認証する必要があります。この例では、サービス アカウント キー認証システムを使用します。
 

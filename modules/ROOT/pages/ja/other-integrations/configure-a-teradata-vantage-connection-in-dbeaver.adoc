@@ -46,4 +46,4 @@ image::other-integrations/{page-image-directory}/teradata-connection-settings-ss
 
 このハウツーでは、DBeaver を使用して Teradata Vantage への接続を作成する方法を説明しました。
 
-include::ROOT:partial$community_link.adoc[]
+include::../partials/community_link.adoc[]

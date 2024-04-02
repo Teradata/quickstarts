@@ -15,7 +15,7 @@ Feast の Teradata 用コネクタは、すべての機能をサポートする�
 
 Teradata Vantageインスタンスへのアクセス。
 
-include::ROOT:partial$vantage_clearscape_analytics.adoc[]
+include::../partials/vantage_clearscape_analytics.adoc[]
 
 
 == 概要
@@ -258,4 +258,4 @@ Enterprise Feature Store は、データ分析の重要な段階で価値を獲�
 * link:https://docs.feast.dev/tutorials/using-scalable-registry[Feast ののスケーラブルなレジストリ （英語）]
 * link:https://medium.com/teradata/enabling-highly-scalable-feature-store-with-teradata-vantage-and-feast-e01008fa8fdb[Teradata Vantage と FEAST で拡張性の高い機能ストアを実現する （英語）]
 
-include::ROOT:partial$community_link.adoc[]
+include::../partials/community_link.adoc[]

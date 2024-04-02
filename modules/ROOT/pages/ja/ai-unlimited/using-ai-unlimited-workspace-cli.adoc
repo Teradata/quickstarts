@@ -1,0 +1,511 @@
+= Workspace Client で Teradata AI Unlimited を使用する
+:page-lang: ja
+:experimental:
+:page-author: Thripti Aravind
+:page-email: thripti.aravind@teradata.com
+:page-revdate: 2023 年 11 月 14 日
+:description: workspacectl を使用して Teradata AI Unlimited を管理する方法を学びます。
+:keywords: Teradata AI Unlimited, Teradata AI Unlimited Workspace service, Teradata AI Unlimited Compute Engine
+:page-image-directory: using-ai-unlimited-workspace-cli
+
+IMPORTANT: この製品はプレビュー版であり、変更される可能性があります。このサービスの詳細について興味がある場合は、Teradata サポートにお問い合わせください。
+
+== 概要
+
+Workspace Client (workspacectl) は、Teradata AI Unlimited のコマンド ライン インターフェース (CLI) です。このドキュメントでは、workspacectlをインストールするための手順を説明します。このドキュメントには、CLI コマンドに関する必要な情報とガイダンスがすべて記載されており、コマンド ラインを迅速かつ効率的に操作できるようになります。現在のリリースでは、workspacectl を使用してワークスペース サービスに接続し、エンジンを管理することのみが可能です。Teradata では、データ探索用の Teradata AI Unlimited インターフェースとして JupyterLab を使用することを推奨しています。 
+
+link:install-ai-unlimited-interface-docker.html[Dockerを使用した Teradata AI Unlimited インターフェースのデプロイ] を参照してください。
+
+== 始める前に
+
+以下を確認します。
+
+* link:install-ai-unlimited-workspaces-docker.html[Dockerを使用した Teradata AI Unlimited Workspaceサービスのデプロイとセットアップ]で説明されている手順を使用して、ワークスペースサービスをインストール、設定、およびセットアップしている。
+* AWS環境変数とAPIキーをコピーして保持している。
+
+
+== workspacectlのインストール
+
+link:https://downloads.teradata.com/download/tools/ai-unlimited-ctl[https://downloads.teradata.com/download/tools/ai-unlimited-ctl]からworkspacectlの実行可能ファイルをダウンロードします。
+
+NOTE: Workspacectlはすべての主要なオペレーティングシステムをサポートしています。
+
+== workspacectlを使用する
+
+1. ターミナルウィンドウを開き、workspacectlファイルを実行します。
++
+[tabs]
+====
+Windows::
++
+--
+[source, powershell, role="content-editable emits-gtm-events", id="run_workspaces_win"]
+----
+worksapcesctl.exe
+----
+--
+MacOS::
++
+--
+[source, bash, role="content-editable emits-gtm-events", id="run_workspaces_macos"]
+----
+workspacesctl
+----
+--
+====
++
+image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.workspaces.png[AI Unlimited CLI]
+
+2. API キーを使用してワークスペース サービスを構成します。
++
+[source, bash, id="workspaces_use_config", role="content-editable emits-gtm-events"]
+----
+workspacesctl workspaces config
+----
+
+3. 新しいプロジェクトを作成します。
++
+[source, bash, id="workspaces_use_project_create", role="content-editable emits-gtm-events"]
+----
+workspacesctl project create <Project_Name> -e <CSP> --no-tls
+----
+
+4. プロジェクトのエンジンをデプロイします。
++
+[source, bash, id="workspaces_use_project_engine_deploy", role="content-editable emits-gtm-events"]
+----
+workspacesctl project engine deploy <Project_Name> -t <Size_of_Engine> --no-tls
+----
+
+5. サンプルワークロードを実行します。
+
+6. プロジェクトとエンジンを管理します。
+
+7. プロジェクトをバックアップする。
++
+[source, bash, id="workspaces_use_project_backup", role="content-editable emits-gtm-events"]
+----
+workspacesctl project backup <Project_Name> --no-tls
+----
+
+8. エンジンを停止します。
++
+[source, bash, id="workspaces_use_project_engine_suspend", role="content-editable emits-gtm-events"]
+----
+workspacesctl project engine suspend <Project_Name> --no-tls
+----
+
+サポートされているコマンドのリストについては、<<_workspaces_cli_reference, ワークスペースクライアントのリファレンス>>を参照してください。
+
+
+== ワークスペースクライアントのリファレンス
+
+=== workspaces config
+
+**説明**: CLI をワークスペース サービスにバインドするための 1 回限りの構成。ワークスペースサービスのプロファイルページに移動し、APIキーをコピーします。
+
+**使用方法**:
+
+[source, bash, id="workspaces_config", role="content-editable emits-gtm-events"]
+----
+workspacesctl workspaces config
+----
+
+**フラグ**:
+
+`-h`、`--help`:   コマンドの詳細をリストします。
+
+**出力**:
+
+image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.workspaces.config.png[AI Unlimited の CLI 構成]
+
+プロンプトに従って、ワークスペースサービスのエンドポイントとAPIキーを選択します。
+
+=== workspaces user list
+
+**説明**: GitHub で Teradata AI Unlimited 用に設定されたユーザーのリストを表示します。
+
+**使用方法**:
+[source, bash, id="workspaces_user_list", role="content-editable emits-gtm-events"]
+----
+workspacesctl workspaces user list --no-tls
+----
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+
+**フラグ**:
+
+`-h`、`--help`:   コマンドの詳細をリストします。
+
+**出力**:
+
+image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.user.list.png[AI Unlimited CLIユーザーリスト]
+
+=== project create
+
+**説明**: Teradata AI Unlimitedでプロジェクトを作成します。このコマンドは、プロジェクトに対応する GitHub リポジトリも作成します。
+
+**使用方法**:
+[source, bash, id="workspaces_project_create", role="content-editable emits-gtm-events"]
+----
+workspacesctl project create <Project_Name> -e <CSP> --no-tls
+----
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+
+**フラグ**:
+[cols="1,1,1,1"]
+|===
+|フラグ |型| 説明 |必須?
+
+|`-e`, `--environment`
+|文字列
+|プロジェクト エンジンがホストされる環境。値:aws、azure、またはgcloud。現在、Teradata AI Unlimited は aws と azure をサポートしています。
+|はい
+
+|`-f`, `--manifest`
+|文字列
+|入力に使用されるyamlファイルをマニフェストするためのパス。
+|いいえ
+
+|`-t`, `--team`
+|文字列
+|プロジェクトに割り当てられたチーム。
+|いいえ
+
+|`-h`, `--help`
+|
+|コマンドの詳細をリストします。
+|いいえ
+
+|===
+
+**出力**:
+
+image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.project.create.png[AI Unlimited CLI プロジェクトの作成]
+
+=== project list
+
+**説明**: Teradata AI Unlimited で設定されているすべてのプロジェクトの一覧表示します。
+
+**使用方法**:
+[source, bash, id="workspaces_project_list", role="content-editable emits-gtm-events"]
+----
+workspacesctl project list --no-tls
+----
+または
+[source, bash, id="workspaces_project_list_name", role="content-editable emits-gtm-events"]
+----
+workspacesctl project list <Project_Name> --no-tls
+----
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+
+**フラグ**:
+
+`-h`、`--help`:   コマンドの詳細をリストします。
+
+**出力**:
+
+image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.project.list.png[AI Unlimited CLI プロジェクトのリスト]
+
+=== project delete
+
+**説明**: Teradata AI Unlimited でプロジェクトを削除します。
+
+**使用方法**:
+[source, bash, id="workspaces_project_delete", role="content-editable emits-gtm-events"]
+----
+ workspacesctl project delete <Project_Name> --no-tls
+----
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+
+**フラグ**:
+
+`-h`、`--help`:   コマンドの詳細をリストします。
+
+**出力**:
+
+NOTE: 出力は YAML 形式です。
+
+image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.project.delete.png[AI Unlimited CLI プロジェクトの削除]
+
+
+=== project user list
+
+**説明**: GitHub でプロジェクトに割り当てられた共同作業者をリストします。
+
+**使用方法**:
+[source, bash, id="workspaces_project_user_list", role="content-editable emits-gtm-events"]
+----
+workspacesctl project user list <Project_Name> --no-tls
+----
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+
+**フラグ**:
+
+`-h`、`--help`:   コマンドの詳細をリストします。
+
+**出力**:
+
+image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.project.user.list.png[AI Unlimited CLI プロジェクトユーザーのリスト]
+
+=== project backup
+
+**説明**:  エンジン オブジェクト定義を、プロジェクトに割り当てられた GitHub リポジトリにバックアップします。
+
+**使用方法**:
+[source, bash, id="workspaces_project_backup", role="content-editable emits-gtm-events"]
+----
+workspacesctl project backup <Project_Name> --no-tls
+----
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+
+**フラグ**:
+
+`-h`、`--help`:   コマンドの詳細をリストします。
+
+**出力**:
+
+NOTE: 出力はYAML形式です。
+
+image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.project.backup.png[AI Unlimited の CLI プロジェクトのバックアップ]
+
+=== project restore
+
+**説明**: プロジェクトの GitHub リポジトリからすべてのエンジン オブジェクト定義を復元します。
+
+**使用方法**:
+[source, bash, id="workspaces_project_restore", role="content-editable emits-gtm-events"]
+----
+workspacesctl project restore <Project_Name> --no-tls
+----
+または
+
+[source, bash, id="workspaces_project_restore_name", role="content-editable emits-gtm-events"]
+----
+workspacesctl project restore <Project_Name> --gitref <git_reference> --no-tls
+----
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+
+**フラグ**:
+[cols="1,1,1,1"]
+|===
+|フラグ |型| 説明 |必須?
+
+|`-g`, `--gitref`
+|文字列
+|タグ、SHA、またはブランチ名。
+|いいえ
+
+|`-h`, `--help`
+|
+|コマンドの詳細をリストします。
+|いいえ
+
+|===
+
+**出力**:
+
+NOTE: 出力はYAML形式です。
+
+image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.project.restore.png[AI Unlimited CLI プロジェクトの復元]
+
+=== project engine deploy
+
+**説明**: プロジェクトのエンジンをデプロイします。
+
+**使用方法**:
+[source, bash, id="workspaces_project_engine_deploy", role="content-editable emits-gtm-events"]
+----
+workspacesctl project engine deploy <Project_Name> -t small --no-tls
+----
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+
+**フラグ**:
+[cols="1,1,1,1"]
+|===
+|フラグ |型| 説明 |必須?
+
+|`-c`, `--instance-count`
+|Int
+|エンジン ノードの数。デフォルト値は1です。
+|いいえ
+
+|`-t`, `--instance-size`
+|文字列
+|エンジンのインスタンス サイズ。
+|いいえ
+
+|`-f`, `--manifest`
+|文字列
+|入力に使用する yaml ファイルをマニフェストするパス。
+|いいえ
+
+|`-r`, `--region`
+|文字列
+|デプロイメントのリージョン。
+|いいえ
+
+|`-s`, `--subnet-id`
+|文字列
+|デプロイメントのサブネット ID。
+|いいえ
+
+|`-h`, `--help`
+|
+|コマンドの詳細をリストします。
+|いいえ
+
+|===
+
+
+=== project engine suspend
+
+**説明**: デプロイされたエンジンを破棄し、セッション中に作成されたオブジェクト定義をバックアップします。
+
+**使用方法**:
+[source, bash, id="workspaces_project_engine_suspend", role="content-editable emits-gtm-events"]
+----
+workspacesctl project engine suspend <Project_Name> --no-tls
+----
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+
+**フラグ**:
+
+`-h`、`--help`:   コマンドの詳細をリストします。
+
+**出力**:
+
+NOTE: 出力はYAML形式です。
+
+image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.engine.suspend.png[AI Unlimited CLIエンジンの停止]
+
+=== project engine list
+
+**説明**: プロジェクトのエンジンに関する詳細情報を表示します。このコマンドは、エンジンの最後の状態を表示します。
+
+**使用方法**:
+[source, bash, id="workspaces_project_engine_list", role="content-editable emits-gtm-events"]
+----
+workspacesctl project engine list <Project_Name> --no-tls
+----
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+
+**フラグ**:
+
+`-h`、`--help`:   コマンドの詳細をリストします。
+
+**出力**:
+
+NOTE: 出力はYAML形式です。
+
+image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.engine.list.png[AI Unlimited CLIエンジンのリスト]
+
+=== project auth create
+
+**説明**: オブジェクト ストアの認証を作成します。
+
+**使用方法**:
+[source, bash, id="workspaces_project_auth_create", role="content-editable emits-gtm-events"]
+----
+workspacesctl project auth create <Project_Name> -n <Auth_Name> -a <Auth_Key> -s <Auth_Secret> -r <ObjectStore_Region> --no-tls
+----
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+
+**フラグ**:
+[cols="1,1,1,1"]
+|===
+|フラグ |型| 説明 |必須?
+
+|`-a`, `--accesskey`
+|文字列
+|認証アクセスキーまたはID。
+|はい (`-f`フラグを使用していない場合)。
+
+|`-n`, `--name string`
+|文字列
+|オブジェクトストアの認証名。
+|はい (`-f`フラグを使用していない場合)。
+
+|`-f`, `--manifest`
+|文字列
+|入力に使用する yaml ファイルをマニフェストするパス。
+|いいえ
+
+|`-r`, `--region`
+|文字列
+|オブジェクトストアのリージョン。
+|はい
+
+|-s, --secret string
+|文字列
+|オブジェクト ストアの認証シークレット アクセス キー。
+|はい (`-f`フラグを使用していない場合)。
+
+|`-h`, `--help`
+|
+|コマンドの詳細をリストします。
+|いいえ
+
+|===
+
+**出力**:
+
+NOTE: 出力はYAML形式です。
+
+image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.auth.create.png[AI Unlimited CLI 認証の作成]
+
+=== project auth list
+
+**説明**: プロジェクトに対して作成されたオブジェクト ストアの認証をリストします。
+
+**使用方法**:
+[source, bash, id="workspaces_project_auth_list", role="content-editable emits-gtm-events"]
+----
+workspacesctl project auth list <Project_Name> --no-tls
+----
+NOTE: 設定にTLS設定が含まれている場合は、` `パラメータを追加する必要はありません。-no-tls
+
+**フラグ**:
+
+`-h`、`--help`:   コマンドの詳細をリストします。
+
+**出力**:
+
+NOTE: 出力はYAML形式です。
+
+image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.auth.list.png[AI Unlimited CLI 認証のリスト]
+
+=== project auth delete
+
+**説明**: プロジェクトに対して作成されたオブジェクト ストアの認証を削除します。
+
+**使用方法**:
+[source, bash, id="workspaces_project_auth_delete", role="content-editable emits-gtm-events"]
+----
+workspacesctl project auth delete <Project_Name> -n <Auth_Name> --no-tls
+----
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+
+**フラグ**:
+[cols="1,1,1,1"]
+|===
+|フラグ |型| 説明 |必須?
+
+|`-n`, `--name`
+|文字列
+|削除するオブジェクト ストアの認証の名前。
+|はい
+
+|`-h`, `--help`
+|
+|コマンドの詳細をリストします。
+|いいえ
+
+|===
+
+**出力**:
+
+NOTE: 出力はYAML形式です。
+
+image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.auth.delete.png[AI Unlimited CLI 認証の削除]
+
+include::../partials/community_link.adoc[]

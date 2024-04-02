@@ -1,0 +1,347 @@
+= Teradata AI Unlimited JupyterLab マジック コマンド リファレンス
+:page-lang: ja
+:experimental:
+:page-author: Thripti Aravind
+:page-email: thripti.aravind@teradata.com
+:page-revdate: 2023年10月19日
+:description: Teradata AI Unlimited JupyterLab マジック コマンドについて学びましょう。
+:keywords: Teradata AI Unlimited, Teradata AI Unlimited Workspace service, Teradata AI Unlimited Compute Engine
+:page-image-directory: ai-unlimited-magic-reference
+
+IMPORTANT: この製品はプレビュー版であり、変更される可能性があります。このサービスの詳細については、Teradataサポートに連絡してください。
+
+== 概要
+
+AI Unlimited JupyterLab は、既存の Teradata SQL Kernel マジック コマンドに加えて、以下のマジック コマンドをサポートします。 link:https://github.com/Teradata/jupyterextensions/blob/master/notebooks/sql/GettingStarted.ipynb[「 Teradata JupyterLab Getting Started Guide 」]を参照してください。
+
+== %workspaces_config
+
+**説明**:ワークスペースサービスとバインドするための1回限りの設定。
+
+**使用方法**:
+
+[source, bash, id="magic_workspaces_config", role="content-editable emits-gtm-events"]
+----
+%workspaces_config host=<RPC_Service_URL>, apikey=<Workspace_API_Key>, withtls=<T|F>
+----
+構文規則：
+
+* host:  エンジン サービスの名前または IP アドレス。
+
+* apikey: ワークスペース  サービス **Profile**ページの API キー値。
+
+* [オプション] withTLS: False (F) の場合、デフォルトのクライアント サーバー通信では TLS が使用されません。
+
+出力:
+
+----
+Workspace configured for host=<RPC_Service_URL>
+----
+
+== %project_create
+
+**説明**:新しいプロジェクトを作成する。このコマンドは、GitHubアカウントにプロジェクト名を持つ新しいリポジトリも作成されます。設定は**engine.yml**ファイルに保存されます。
+
+**使用方法**:
+
+[source, bash, id="magic_project_create", role="content-editable emits-gtm-events"]
+----
+%project_create project=<Project_Name>, env=<CSP>, team=<Project_Team>
+----
+構文規則：
+
+* project: 作成されるプロジェクトの名前。
+
+* env: プロジェクトがホストされるクラウド環境。値はaws、azure、gcp、またはvsphereを指定できます。現在のリリースでは、AWSとAzureがサポートされています。
+
+* [オプション] team: プロジェクトで共同作業しているチームの名前。
+
+**出力**:
+----
+Project <Project_Name> created
+----
+
+== %project_delete
+
+**説明**:プロジェクトを削除する。
+
+WARNING: このコマンドを実行すると、Teradata AI Unlimitedを使用して作成されたオブジェクトを含むGitHubリポジトリが削除されます。
+
+**使用方法**:
+[source, bash, id="magic_project_delete", role="content-editable emits-gtm-events"]
+----
+%project_delete project=<Project_Name>, team=<Project_Team>
+----
+構文規則：
+
+* project: 削除されるプロジェクトの名前。
+
+* [オプション] team: プロジェクトで共同作業しているチームの名前。
+
+**出力**:
+----
+Project <Project_Name> deleted
+----
+
+
+== %project_list
+
+**説明**: プロジェクトの詳細をリストする。
+
+特定のプロジェクトの詳細を取得するには、project パラメータを使用します。パラメータを指定せずにコマンドを実行すると、すべてのプロジェクトがリストされます。
+
+**使用方法**:
+[source, bash, id="magic_project_list", role="content-editable emits-gtm-events"]
+----
+%project_list project=<Project_Name>
+----
+構文規則：
+
+* project: リストされるプロジェクトの名前。
+
+**出力**:
+
+image::ai-unlimited/{page-image-directory}/ai.unlimited.project.list.png[プロジェクトをリスト, width=500]
+
+
+== %project_auth_create
+
+**説明**: オブジェクト ストア認証情報を保存するための認証オブジェクトを作成する。
+
+エンジンをデプロイする前に、認証オブジェクトを作成する必要があります。認証の詳細は保持され、プロジェクトの再デプロイ時に組み込まれます。オプションで、エンジンのデプロイ後に `CREATE AUTHORIZATION`の SQL コマンドを使用して認証を手動で作成できます。この場合、認証の詳細は保持されません。
+
+
+**使用方法**:
+[source, bash, id="magic_auth_create", role="content-editable emits-gtm-events"]
+----
+%project_auth_create project=<Project_Name>, name=<Auth_Name>, key=<Auth_Key>, secret=<Auth_Secret>, region=<ObjectStore_Region>, token= <Session_Token>, role=<Role>, ExternalID=<External_ID>
+----
+構文規則：
+
+* project: プロジェクトの名前。
+
+* name:	オブジェクトストアの認証名。
+
+* key: オブジェクト ストアの認証キー。
+
+* secret: オブジェクト ストアの認証シークレット アクセス ID。
+
+* region: オブジェクトストアのリージョン。 local はローカル オブジェクト ストアの場合です。
+
+* [オプション] token: オブジェクト ストア アクセス用のセッション トークン。
+
+* [オプション] role: ロールとその資格を引き受けることで、AWS アカウントから AWS リソースにアクセスするための IAM ユーザーまたはサービス アカウント。AWSリソースの所有者がロールを定義します。例: arn:aws:iam::00000:role/STSAssumeRole。
+
+* ExternalID: オブジェクト ストアへのアクセスに使用される外部 ID。
+
+
+**出力**:
+
+----
+Authorization 'name' created
+----
+
+== %project_auth_update
+
+**説明**: オブジェクト ストアの認証を更新する。
+
+**使用方法**:
+[source, bash, id="magic_auth_update", role="content-editable emits-gtm-events"]
+----
+%project_auth_update project=<Project_Name>, name=<Auth_Name>, key=<Auth_Key>, secret=<Auth_Secret>, region=<ObjectStore_Region>, token= <Session_Token>, role=<Role>, ExternalID=<External_ID>
+----
+構文規則：
+
+* project: プロジェクトの名前。
+* name: オブジェクトストアの認証名。
+* key: オブジェクト ストアの認証キー。
+* [オプション] secret: オブジェクト ストアの認証シークレット アクセス ID。
+* [オプション] region: オブジェクト ストアのリージョン。 local はローカル オブジェクト ストアの場合です。
+* [オプション] token: オブジェクト ストア アクセス用のセッション トークン。
+* [オプション] role: ロールとその資格を引き受けることで、AWS アカウントから AWS リソースにアクセスするための IAM ユーザーまたはサービス アカウント。AWSリソースの所有者がロールを定義します。例: arn:aws:iam::00000:role/STSAssumeRole。
+* ExternalID: オブジェクト ストアへのアクセスに使用される外部 ID。
+
+**出力**:
+
+----
+Authorization 'name' updated
+----
+
+== %project_auth_delete
+
+**説明**: オブジェクト ストアの認証を削除する。
+
+**使用方法**:
+[source, bash, id="magic_auth_delete", role="content-editable emits-gtm-events"]
+----
+%project_auth_delete project=<Project_Name>, name=<Auth_Name>
+----
+構文規則：
+
+* project: プロジェクトの名前。
+* name:	オブジェクトストアの認証名。
+
+**出力**:
+----
+Authorization 'name' deleted
+----
+
+== %project_auth_list
+
+**説明**: プロジェクトに対して作成されたオブジェクト ストア認証をリストする。
+
+**使用方法**:
+[source, bash, id="magic_auth_list", role="content-editable emits-gtm-events"]
+----
+%project_auth_list project=<Project_Name>
+----
+構文規則：
+
+* project: プロジェクトの名前。
+
+**出力**:
+
+image::ai-unlimited/{page-image-directory}/ai.unlimited.auth.list.png[認証をリスト, width=500]
+
+== %project_engine_deploy
+
+**説明**: プロジェクトのエンジンをデプロイする。デプロイのプロセスが完了するまでに数分かかります。デプロイメントが成功すると、パスワードが生成されます。
+
+**使用方法**:
+[source, bash, id="magic_engine_deploy", role="content-editable emits-gtm-events"]
+----
+%project_engine_deploy project=<Project_Name>, size=<Size_of_Engine>, node=<Number_of_Nodes>, subnet=<Subnet_id>, region=<Region>, secgroups=<Security_Group>, cidrs=<CIDR>
+----
+構文規則：
+
+* project:	 プロジェクトの名前。
+* size: エンジンのサイズ。値は以下のとおりです。
+** small
+** medium
+** large
+** extralarge
+* [オプション] node: デプロイするエンジン ノードの数。デフォルト値は 1 です。
+* [オプション] subnet: サービスからのデフォルト値がない場合にエンジンに使用されるサブネット。
+* [オプション] region: サービスからのデフォルト値がない場合にエンジンに使用されるリージョン。
+* [オプション]secgroups:各リージョンのVPCのセキュリティグループのリスト。セキュリティ グループを指定しない場合、エンジンは VPC のデフォルトのセキュリティ グループに自動的に関連付けられます。
+* [オプション] cidr: エンジンに使用される CIDR アドレスのリスト。
+
+
+**出力**:
+----
+Started deploying.
+Success: Compute Engine setup, look at the connection manager
+----
+
+image::ai-unlimited/{page-image-directory}/ai.unlimited.engine.deploy.png[エンジンのデプロイ, width=500]
+
+== %project_engine_suspend
+
+**説明**：作業が終わったらエンジンを停止する。
+
+**使用方法**:
+[source, bash, id="magic_engine_suspend", role="content-editable emits-gtm-events"]
+----
+%project_engine_suspend <Project_Name>
+----
+構文規則：
+
+* project: プロジェクトの名前。
+
+**出力**:
+
+----
+Started suspend. Success: connection removed
+Success: Suspending Compute Engine
+----
+
+== %project_engine_list
+
+**説明**: プロジェクトにデプロイされているエンジンの一覧表示します。
+
+**使用方法**:
+[source, bash, id="magic_engine_list", role="content-editable emits-gtm-events"]
+----
+%project_engine_list project=<Project_Name>
+----
+構文規則：
+
+* project: プロジェクトの名前。
+
+**出力**:
+
+image::ai-unlimited/{page-image-directory}/ai.unlimited.engine.list.png[エンジンのリスト, width=500]
+
+== %project_user_list
+
+**説明**: プロジェクトに割り当てられた共同作業者の一覧表示します。
+
+**使用方法**:
+[source, bash, id="magic_project_user_list", role="content-editable emits-gtm-events"]
+----
+%project_user_list project=<Project_Name>
+----
+
+構文規則：
+
+* [オプション] project: プロジェクトの名前。
+
+**出力**:
+
+image::ai-unlimited/{page-image-directory}/ai.unlimited.user.list.png[ユーザーリスト, width=500]
+
+== %project_backup
+
+**説明**: エンジン内のプロジェクトのメタデータとオブジェクト定義をバックアップする。
+
+**使用方法**:
+[source, bash, id="magic_project_backup", role="content-editable emits-gtm-events"]
+----
+%project_backup project=<Project_Name>
+----
+構文規則：
+
+* project:	 プロジェクトの名前。
+
+**出力**:
+----
+Backup of the object definitions created
+----
+
+== %project_restore
+
+**説明**:GitHubリポジトリからプロジェクトのメタデータとオブジェクト定義を復元する。
+
+**使用方法**:
+[source, bash, id="magic_project_restore", role="content-editable emits-gtm-events"]
+----
+%project_restore project=<Project_Name>, gitref=<Git_Reference>
+----
+構文規則：
+
+* project:	 プロジェクトの名前。
+* [オプション] gitref:Gitリファレンス。
+
+**出力**:
+----
+Restore of the object definitions done
+----
+
+== %help
+
+**説明**: AI-Unlimited-Teradata SQL CE Kernel で提供されるマジックを一覧表示する。
+
+**使用方法**:
+[source, bash, id="magic_help", role="content-editable emits-gtm-events"]
+----
+%help
+----
+さらに、コマンドごとに詳細なヘルプメッセージを表示することもできます。
+
+**使用方法**:
+[source, bash, id="magic_command_help", role="content-editable emits-gtm-events"]
+----
+%help <command>
+----
+
+include::../partials/community_link.adoc[]
