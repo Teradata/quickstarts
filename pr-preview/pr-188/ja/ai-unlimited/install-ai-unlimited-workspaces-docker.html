@@ -3,20 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Google Cloud で Vantage Express を実行する方法 :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/ja/general/vantage.express.gcp.html">
-    <meta name="description" content="Google Cloud で Vantage Express を実行します。">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics">
+    <title>Dockerを使用した Teradata AI Unlimited Workspaceサービスのデプロイとセットアップ :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/ja/ai-unlimited/install-ai-unlimited-workspaces-docker.html">
+    <meta name="description" content="Docker Engine と Docker Compose を使用して Teradata AI Unlimited Workspace サービスをインストールおよび構成する方法を学びます。">
+    <meta name="keywords" content="Teradata AI Unlimited、Teradata AI Unlimited Workspaceサービス、Teradata AI Unlimited Compute Engine">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta property="og:title" content="Google Cloud で Vantage Express を実行する方法 :: Teradata Getting Started">
+<meta property="og:title" content="Dockerを使用した Teradata AI Unlimited Workspaceサービスのデプロイとセットアップ :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Google Cloud で Vantage Express を実行します。" />
+<meta property="og:description" content="Docker Engine と Docker Compose を使用して Teradata AI Unlimited Workspace サービスをインストールおよび構成する方法を学びます。" />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/ja/general/vantage.express.gcp.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/ja/ai-unlimited/install-ai-unlimited-workspaces-docker.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -1976,7 +1976,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="vantage.express.gcp.html">Google Cloud で Vantage Express を実行する方法</a></li>
+    <li><a href="install-ai-unlimited-workspaces-docker.html">Dockerを使用した Teradata AI Unlimited Workspaceサービスのデプロイとセットアップ</a></li>
   </ul>
 </nav>
 </div>
@@ -1985,22 +1985,22 @@ document.addEventListener("DOMContentLoaded", function () {
 <aside class="toc sidebar" data-title="コンテンツ" data-levels="2"> 
     <div class="page-controls">
         <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">問題を報告する</div></a>
-        <a href="https://github.com/Teradata/quickstarts/blob/HEAD/modules/ROOT/pages/ja/general/vantage.express.gcp.adoc"><div class="edit-on-github">GitHub で編集する</div></a>
+        <a href="https://github.com/Teradata/quickstarts/blob/HEAD/modules/ROOT/pages/ja/ai-unlimited/install-ai-unlimited-workspaces-docker.adoc"><div class="edit-on-github">GitHub で編集する</div></a>
     </div>
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Google Cloud で Vantage Express を実行する方法</h1>
+<h1 class="page">Dockerを使用した Teradata AI Unlimited Workspaceサービスのデプロイとセットアップ</h1>
 <div id="preamble">
 <div class="sectionbody">
-<div class="admonitionblock note">
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-<a href="https://clearscape.teradata.com/" class="bare">https://clearscape.teradata.com/</a>では、Vantageのホストされたインスタンスを無料で入手できるようになりました。
+この製品はプレビュー版であり、変更される可能性があります。このサービスの詳細について興味がある場合は、Teradata サポートにお問い合わせください。
 </td>
 </tr>
 </table>
@@ -2011,7 +2011,151 @@ document.addEventListener("DOMContentLoaded", function () {
 <h2 id="_概要"><a class="anchor" href="#_概要"></a>概要</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このハウツーでは、Google Cloud Platform で Vantage Express を実行する方法を説明します。Vantage Express には、完全に機能する Teradata SQL Engineが含まれています。</p>
+<p>このドキュメントでは、Dockerを使用して Teradata AI Unlimited ワークスペース サービスをデプロイおよび設定する手順の概要を説明します。</p>
+</div>
+<div class="paragraph">
+<p>ワークスペースサービスは、次の方法でインストールできます。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#_deploy_workspace_service_using_docker_engine">Docker Engine</a></p>
+</li>
+<li>
+<p><a href="#_deploy_workspace_service_using_docker_compose">Docker Compose</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Teradata AI Unlimitedをワークスペース クライアントで使用するには、<a href="using-ai-unlimited-workspace-cli.html">Workspace Client で Teradata AI Unlimited を使用する</a>を参照してください。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_始める前に"><a class="anchor" href="#_始める前に"></a>始める前に</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>次のものが揃っていることを確認してください。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>GitHubアカウント: GitHubのアカウントをまだ持っていない場合は、<a href="https://github.com/">https://github.com/</a>で作成してください。</p>
+</li>
+<li>
+<p>CSPアカウント: AWSまたはAzure上のエンジンをホストできるもの。</p>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_aws"></a>AWS</p>
+</li>
+<li>
+<p><a id="tabset1_azure"></a>Azure</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_aws">
+<div class="paragraph">
+<p><a href="https://aws.amazon.com/free/">https://aws.amazon.com/free/</a>で AWS 無料利用枠アカウントにサインアップします。AWS CLI を設定するには、「 <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html">https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html</a>」を参照してください。</p>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_azure">
+<div class="paragraph">
+<p><a href="https://azure.microsoft.com/en-us/free">https://azure.microsoft.com/en-us/free</a>で Azure の無料アカウントにサインアップします。Azure CLI をインストールし、ワークスペース サービスを実行しているマシンに信頼証明を構成します。<a href="https://learn.microsoft.com/en-us/cli/azure/get-started-with-azure-cli">https://learn.microsoft.com/en-us/cli/azure/get-started-with-azure-cli</a> を参照してください。</p>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Docker: Dockerをダウンロードしてインストールするには、 <a href="https://docs.docker.com/docker-for-windows/install/">https://docs.docker.com/docker-for-windows/install/</a>を参照してください。</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_dockerイメージをロードして環境を準備する"><a class="anchor" href="#_dockerイメージをロードして環境を準備する"></a>Dockerイメージをロードして環境を準備する</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Dockerイメージは、単一のコンテナ内で必要なサービスを実行するワークスペース サービスのモノリシック イメージです。</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>link:https://hub.docker.com/r/teradata/ai-unlimited-workspaces[Docker Hub]から Dockerイメージをプルします。</pre>
+</div>
+</div>
+<div id="docker_pull" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker pull teradata/ai-unlimited-workspaces</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>続行する前に、必ず以下のことを行ってください。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>AWSコンソールからCSP環境変数をコピーして保持します。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>AWS: <code>AWS_ACCESS_KEY_ID</code>、<code>AWS_SECRET_ACCESS_KEY</code>、および <code>AWS_SESSION_TOKEN</code></p>
+<div class="paragraph">
+<p><a href="https://docs.aws.amazon.com/sdkref/latest/guide/environment-variables.html">環境変数</a> を参照してください。</p>
+</div>
+</li>
+<li>
+<p>Azure:`ARM_SUBSCRIPTION_ID`、<code>ARM_CLIENT_ID</code>、および <code>ARM_CLIENT_SECRET</code></p>
+<div class="paragraph">
+<p>Azure CLIを使用した環境変数の取得については、<a href="https://github.com/paulbouwer/terraform-azure-quickstarts-samples/blob/master/README.md#azure-authentication">Azure認証</a>を参照してください。</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>環境変数`WORKSPACES_HOME`を、構成ファイルとデータファイルがあるディレクトリに設定します。ディレクトリが存在し、適切なアクセス権が付与されていることを確認してください。`WORKSPACES_HOME`を設定しない場合、デフォルトの場所は<strong>./volumes/workspaces</strong>です。</p>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">ローカルの場所</th>
+<th class="tableblock halign-left valign-top">コンテナの場所</th>
+<th class="tableblock halign-left valign-top">使用方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">$WORKSPACES_HOME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/etc/td</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">データと構成の保存</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">$WORKSPACES_HOME/tls</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/etc/td/tls</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">証明書ファイルの保存</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_docker_engineを使用してワークスペース_サービスをデプロイする"><a class="anchor" href="#_docker_engineを使用してワークスペース_サービスをデプロイする"></a>Docker Engineを使用してワークスペース サービスをデプロイする</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>`WORKSPACES_HOME` 変数を設定したら、Dockerイメージを実行します。</pre>
+</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2020,227 +2164,150 @@ document.addEventListener("DOMContentLoaded", function () {
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-クラウドの使用料を支払いたくない場合は、<a href="getting.started.vmware.adoc">VMware</a>、<a href="getting.started.vbox">VirtualBox</a>、<a href="getting.started.utm">UTM</a> を使用して Vantage Express をローカルにインストールできます。
+要件に基づいてディレクトリを変更します。
 </td>
 </tr>
 </table>
 </div>
+<div id="docker_engine_run" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -detach \
+  --env accept_license="Y" \
+  --env AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
+  --env AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \
+  --env AWS_SESSION_TOKEN="${AWS_SESSION_TOKEN}" \
+  --publish 3000:3000 \
+  --publish 3282:3282 \
+  --volume ${WORKSPACES_HOME}:/etc/td \
+  teradata/ai-unlimited-workspaces:latest</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Azure の場合、Teradata では Docker Compose を使用してワークスペース サービスをデプロイすることをお勧めします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>このコマンドは、ワークスペース サービス コンテナをダウンロードして開始し、アクセスするために必要なポートを公開します。ワークスペース サービス サーバーが初期化され、開始されると、URL: <a href="http://&lt;ip_or_hostname&gt;:3000/を使用してアクセスできます。" class="bare">http://&lt;ip_or_hostname&gt;:3000/を使用してアクセスできます。</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_前提条件"><a class="anchor" href="#_前提条件"></a>前提条件</h2>
+<h2 id="_docker_composeを使用してワークスペース_サービスをデプロイする"><a class="anchor" href="#_docker_composeを使用してワークスペース_サービスをデプロイする"></a>Docker Composeを使用してワークスペース サービスをデプロイする</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Docker Compose を使用すると、Docker ベースのワークスペース サービス インストールを簡単に構成、インストール、アップグレードできます。</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Googleクラウドアカウント。</p>
+<p>Docker Composeをインストールします。<a href="https://docs.docker.com/compose/install/">https://docs.docker.com/compose/install/</a> を参照してください。</p>
 </li>
 <li>
-<p><code>gcloud</code> コマンド ラインユーティリティがマシンにインストールされている。インストール手順はここで見つけることができます。https://cloud.google.com/sdk/docs/install</p>
-</li>
-</ol>
+<p><strong>workspaces.yml</strong>ファイルを作成します。</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+以下の例では、ローカル ボリュームを使用して CSP 信頼証明を保存します。CSP 環境変数を含む別の YAML ファイルを作成し、Docker Compose ファイルを実行できます。他のオプションについては、 <a href="https://github.com/Teradata/ai-unlimited/blob/develop/deployments/docker/README.md">「AI Unlimited GitHub: Docker Compose を使用して AI Unlimited をインストールする」</a>を参照してください。
+</td>
+</tr>
+</table>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_インストール"><a class="anchor" href="#_インストール"></a>インストール</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>4 つの CPU と 8 GB の RAM、70 GB のバランス ディスクを備えた Ubuntu VM を作成します。以下のコマンドは、 <code>us-central1</code> リージョンに VM を作成します。最高のパフォーマンスを得るには、 リージョンを最も近いリージョンに置き換えてください。サポートされているリージョンのリストについては、 <a href="https://cloud.google.com/compute/docs/regions-zones">Google Cloud リージョンのドキュメント</a>をご覧ください。</p>
 <div class="tabset is-loading">
 <div class="ulist tabs">
 <ul>
 <li>
-<p><a id="tabset1_windows"></a>Windows</p>
+<p><a id="tabset2_aws"></a>AWS</p>
 </li>
 <li>
-<p><a id="tabset1_macos"></a>MacOS</p>
-</li>
-<li>
-<p><a id="tabset1_linux"></a>Linux</p>
+<p><a id="tabset2_azure"></a>Azure</p>
 </li>
 </ul>
 </div>
 <div class="content">
-<div class="tab-pane" aria-labelledby="tabset1_windows">
-<div class="paragraph">
-<p>Powershell で実行する。</p>
-</div>
-<div id="gcloud_create_vm_win" class="listingblock content-editable emits-gtm-events">
+<div class="tab-pane" aria-labelledby="tabset2_aws">
+<div id="aws_docker_compose" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">gcloud compute instances create teradata-vantage-express `
-  --zone=us-central1-a `
-  --machine-type=n2-custom-4-8192 `
-  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced `
-  --enable-nested-virtualization `
-  --tags=ve</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">version: "3.9"
+
+services:
+  workspaces:
+    deploy:
+      replicas: 1
+    platform: linux/amd64
+    container_name: workspaces
+    image: ${WORKSPACES_IMAGE_NAME:-teradata/ai-unlimited-workspaces}:${WORKSPACES_IMAGE_TAG:-latest}
+    command: workspaces serve -v
+    restart: unless-stopped
+    ports:
+      - "443:443/tcp"
+      - "3000:3000/tcp"
+      - "3282:3282/tcp"
+    environment:
+      accept_license: "Y"
+      TZ: ${WS_TZ:-UTC}
+    volumes:
+    - ${WORKSPACES_HOME:-./volumes/workspaces}:/etc/td
+    - ${WORKSPACES_AWS_CONFIG:-~/.aws}:/root/.aws
+
+    networks:
+      - td-ai-unlimited</code></pre>
 </div>
 </div>
 </div>
-<div class="tab-pane" aria-labelledby="tabset1_macos">
-<div id="gcloud_create_vm_macos" class="listingblock content-editable emits-gtm-events">
+<div class="tab-pane" aria-labelledby="tabset2_azure">
+<div id="azure_docker_compose" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute instances create teradata-vantage-express \
-  --zone=us-central1-a \
-  --machine-type=n2-custom-4-8192 \
-  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
-  --enable-nested-virtualization \
-  --tags=ve</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">version: "3.9"
+
+services:
+  workspaces:
+    deploy:
+      replicas: 1
+    platform: linux/amd64
+    container_name: workspaces
+    image: ${WORKSPACES_IMAGE_NAME:-teradata/ai-unlimited-workspaces}:${WORKSPACES_IMAGE_TAG:-latest}
+    command: workspaces serve -v
+    restart: unless-stopped
+    ports:
+      - "443:443/tcp"
+      - "3000:3000/tcp"
+      - "3282:3282/tcp"
+    environment:
+      accept_license: "Y"
+      TZ: ${WS_TZ:-UTC}
+    volumes:
+      - ${WORKSPACES_HOME:-./volumes/workspaces}:/etc/td
+      - ${WS_HOME:-~/.azure}:/root/.azure
+
+    networks:
+      - td-ai-unlimited</code></pre>
 </div>
 </div>
 </div>
-<div class="tab-pane" aria-labelledby="tabset1_linux">
-<div id="gcloud_create_vm_linux" class="listingblock content-editable emits-gtm-events">
+</div>
+</div>
+</li>
+<li>
+<p><strong>workspaces.yml</strong>ファイルが配置されているディレクトリに移動し、ワークスペース サービスを開始します。</p>
+<div id="docker_compose_run" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute instances create teradata-vantage-express \
-  --zone=us-central1-a \
-  --machine-type=n2-custom-4-8192 \
-  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
-  --enable-nested-virtualization \
-  --tags=ve</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>VMにsshで接続する。</p>
-<div id="gcloud_ssh" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute ssh teradata-vantage-express --zone=us-central1-a</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><code>root</code> ユーザーに切り替えます。</p>
-<div id="sudo" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo -i</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Vantage Express用のダウンロードディレクトリを準備する。</p>
-<div id="download_dir" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir /opt/downloads
-cd /opt/downloads</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>VirtualBoxと7 zipをインストールします。</p>
-<div id="apt" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apt update &amp;&amp; apt-get install p7zip-full p7zip-rar virtualbox -y</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>curlコマンドを取得して、Vantage Expressをダウンロードします。</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p><a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Vantage Expess のダウンロード ページ</a>に移動します (登録が必要です)。</p>
-</li>
-<li>
-<p>「Vantage Express 17.20」などの最新のダウンロードリンクをクリックします。使用許諾契約のポップアップが表示されます。まだライセンスを受け入れません。</p>
-</li>
-<li>
-<p>ブラウザでネットワークビューを開きます。例えば、Chrome で <kbd>F12</kbd> を押し「 <code>Network</code>」タブに移動します。</p>
-<div class="imageblock">
-<div class="content">
-<img src="../../_images/browser.network.png" alt="ブラウザの「Network」タブ" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>`I Agree (同意する)`ボタンをクリックしてライセンスを受け入れ、ダウンロードをキャンセルします。</p>
-</li>
-<li>
-<p>ネットワーク ビューで、 `VantageExpress`で始まる最後のリクエストを見つけます。それを右クリックして `Copy &#8594; Copy as cURL`を選択します。</p>
-<div class="imageblock">
-<div class="content">
-<img src="../../_images/browser.copy.curl.png" alt="Browser Copy culr" width="500">
-</div>
-</div>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>ssh セッションに戻り、curl コマンドを貼り付けて Vantage Express をダウンロードします。ダウンロードを <code>ve.7z</code> という名前のファイルに保存するには、コマンドに <code>-o ve.7z</code> を追加します。次のように、すべてのHTTPヘッダーを削除できます。</p>
-<div id="download_ve" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -o ve.7z 'http://d289lrf5tw1zls.cloudfront.net/database/teradata-express/VantageExpress17.20_Sles12_202108300444.7z?Expires=1638719978&amp;Signature=GKBkNvery_long_signature__&amp;Key-Pair-Id=********************'</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>ダウンロードしたファイルを解凍します。数分かかります。</p>
-<div id="unzip" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">7z x ve.7z</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>VirtualBox で VM を起動しますコマンドはすぐに返されますが、VM の初期化プロセスには数分かかります。</p>
-<div id="start_vim" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export VM_IMAGE_DIR="/opt/downloads/VantageExpress17.20_Sles12"
-DEFAULT_VM_NAME="vantage-express"
-VM_NAME="${VM_NAME:-$DEFAULT_VM_NAME}"
-vboxmanage createvm --name "$VM_NAME" --register --ostype openSUSE_64
-vboxmanage modifyvm "$VM_NAME" --ioapic on --memory 6000 --vram 128 --nic1 nat --cpus 4
-vboxmanage storagectl "$VM_NAME" --name "SATA Controller" --add sata --controller IntelAhci
-vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk1*')"
-vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 1 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk2*')"
-vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 2 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk3*')"
-vboxmanage modifyvm "$VM_NAME" --natpf1 "tdssh,tcp,,4422,,22"
-vboxmanage modifyvm "$VM_NAME" --natpf1 "tddb,tcp,,1025,,1025"
-vboxmanage startvm "$VM_NAME" --type headless
-vboxmanage controlvm "$VM_NAME" keyboardputscancode 1c 1c</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Vantage Express VM に ssh で接続します。 <code>root</code> をパスワードとして使用します。</p>
-<div id="ssh_to_ve" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ssh -p 4422 root@localhost</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>DBがアップしていることを確認します。</p>
-<div id="pde" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pdestate -a</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker compose -f workspaces.yaml</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>コマンドが`PDE state is RUN/STARTED. DBS state is 5: Logons are enabled - The system is quiescent`を返す場合は、Vantage Expressが起動したことを意味します。
-状態が異なる場合は、正しいステータスが得られるまで <code>pdestate -a</code> を繰り返します。</p>
-</div>
-</li>
-<li>
-<p>Vantage Expressが起動して実行されたら、<code>bteq</code> クライアントのコマンドラインクライアントを起動します。BTEQ (「ビーテック」と発音) は、Teradata Database に SQL クエリーを送信するために使用される、汎用のコマンド ベースのクライアント ツールです。</p>
-<div id="bteq" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bteq</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>bteqに入ったら、Vantage Expressインスタンスに接続します。パスワードを求められたら、 `dbc`を入力します。</p>
-<div id="bteq_logon" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">.logon localhost/dbc</code></pre>
-</div>
+<p>ワークスペース サービス サーバーが初期化され、開始されると、URL: <a href="http://&lt;ip_or_hostname&gt;:3000/を使用してアクセスできます。" class="bare">http://&lt;ip_or_hostname&gt;:3000/を使用してアクセスできます。</a></p>
 </div>
 </li>
 </ol>
@@ -2248,206 +2315,236 @@ vboxmanage controlvm "$VM_NAME" keyboardputscancode 1c 1c</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_サンプル_クエリーを実行する"><a class="anchor" href="#_サンプル_クエリーを実行する"></a>サンプル クエリーを実行する</h2>
+<h2 id="_ワークスペースサービスの設定とセットアップ"><a class="anchor" href="#_ワークスペースサービスの設定とセットアップ"></a>ワークスペースサービスの設定とセットアップ</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>ワークスペース サービスは、GitHub OAuth アプリを使用してユーザーを承認し、プロジェクトの状態を管理します。ワークスペース サービスにプロジェクト インスタンス構成を保存する権限を与えるには、GitHub OAuth アプリの登録時に生成されたクライアント ID とクライアント シークレット キーを使用します。プロジェクト インスタンスの構成値は GitHub リポジトリに保持されており、ワークスペース サービスの <strong>Profile</strong>ページで表示できます。</p>
+</div>
+<div class="paragraph">
+<p>初めてのユーザーは、続行する前に以下の手順を完了する必要があります。VPC の構成やアクセス権について不明な点がある場合は、組織の管理者に問い合わせてください。</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>`dbc`ユーザーを使用して、`HR`という新しいデータベースを作成します。このクエリーをコピー/貼り付けて、<kbd>Enter</kbd> を押して実行します。</p>
-<div id="first_query" class="listingblock emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE HR
-AS PERMANENT = 60e6, -- 60MB
-    SPOOL = 120e6; -- 120MB</code></pre>
-</div>
-</div>
-<div class="sidebarblock">
-    <div id="right" style="float: right">
-    <a style="cursor: pointer; color: grey" onclick="this.parentElement.parentElement.style.display = 'none''">x</a>
-  </div>
-  <div class="content">
-    <div class="paragraph">クエリーを実行できましたか?
-      <i class="far fa-thumbs-up click-icon" style="padding: 0rem 0.2rem;" onclick="toggleThumbs(this, 'first_query')"></i>
-      <i class="far fa-thumbs-down click-icon" onclick="toggleThumbs(this 'first_query')"></i>
-    </div>
-  </div>
-</div>
-<style>
-.closebtn {
-  position: absolute;
-  top: 5px;
-  right: 15px;
-  color: white;
-  font-size: 30px;
-  cursor: pointer;
-}
-</style>
-</li>
-<li>
-<p>サンプルテーブルを作成し、データを挿入してクエリーを実行してみましょう。まず、従業員情報を保持するテーブルを作成する。</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE SET TABLE HR.Employees (
-   GlobalID INTEGER,
-   FirstName VARCHAR(30),
-   LastName VARCHAR(30),
-   DateOfBirth DATE FORMAT 'YYYY-MM-DD',
-   JoinedDate DATE FORMAT 'YYYY-MM-DD',
-   DepartmentCode BYTEINT
-)
-UNIQUE PRIMARY INDEX ( GlobalID );</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>次に、レコードを挿入する。</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">INSERT INTO HR.Employees (
-   GlobalID,
-   FirstName,
-   LastName,
-   DateOfBirth,
-   JoinedDate,
-   DepartmentCode
-)
-VALUES (
-   101,
-   'Adam',
-   'Tworkowski',
-   '1980-01-05',
-   '2004-08-01',
-   01
-);</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>最後に、データを取得できるかどうかを確認する。</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM HR.Employees;</code></pre>
-</div>
-</div>
+<p>GitHub アカウントにログオンし、OAuth アプリを作成します。 <a href="https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app">GitHub ドキュメント</a>を参照してください。</p>
 <div class="paragraph">
-<p>以下の結果が得られるはずです。</p>
+<p>OAuth アプリを登録するときに、URL フィールドに以下のワークスペース サービス URL を入力します。</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>GlobalID  FirstName  LastName   DateOfBirth  JoinedDate  DepartmentCode
---------  ---------  ---------- -----------  ----------  --------------
-     101  Adam       Tworkowski  1980-01-05  2004-08-01               1</pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_オプションを設定する"><a class="anchor" href="#_オプションを設定する"></a>オプションを設定する</h2>
-<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>VM を停止して起動する場合は、Vantage Express を自動起動に追加することをお勧めします。 VM に ssh で接続し、以下のコマンドを実行します。</p>
-<div id="autostart" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo -i
-
-cat &lt;&lt;EOF &gt;&gt; /etc/default/virtualbox
-VBOXAUTOSTART_DB=/etc/vbox
-VBOXAUTOSTART_CONFIG=/etc/vbox/autostart.cfg
-EOF
-
-cat &lt;&lt;EOF &gt; /etc/systemd/system/vantage-express.service
-[Unit]
-Description=vm1
-After=network.target virtualbox.service
-Before=runlevel2.target shutdown.target
-[Service]
-User=root
-Group=root
-Type=forking
-Restart=no
-TimeoutSec=5min
-IgnoreSIGPIPE=no
-KillMode=process
-GuessMainPID=no
-RemainAfterExit=yes
-ExecStart=/usr/bin/VBoxManage startvm vantage-express --type headless
-ExecStop=/usr/bin/VBoxManage controlvm vantage-express savestate
-[Install]
-WantedBy=multi-user.target
-EOF
-
-systemctl daemon-reload
-systemctl enable vantage-express
-systemctl start vantage-express</code></pre>
-</div>
+<p><strong>ホームページのURL</strong>: <a href="http://&lt;ip_or_hostname&gt;:3000/" class="bare">http://&lt;ip_or_hostname&gt;:3000/</a></p>
+</li>
+<li>
+<p><strong>認証コールバック URL</strong>: <a href="http://&lt;ip_or_hostname&gt;:3000/auth/github/callback" class="bare">http://&lt;ip_or_hostname&gt;:3000/auth/github/callback</a></p>
+</li>
+</ul>
 </div>
 </li>
 <li>
-<p>インターネットからVantage Expressに接続したい場合は、VMに対してファイアウォールの穴を開ける必要がある。また、デフォルトのパスワードを  `dbc`ユーザーに変更する必要がある。</p>
+<p><strong>クライアントID</strong>と<strong>クライアントの秘密鍵</strong>をコピーして保持します。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>ワークスペース サービスを設定するには、以下の手順を実行します。</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>dbc</code> ユーザーのパスワードを変更するには、VM に移動して bteq を開始する。</p>
-<div id="pw_change_bteq" class="listingblock content-editable emits-gtm-events">
+<p>URL: <a href="http://&lt;ip_or_hostname&gt" class="bare">http://&lt;ip_or_hostname&gt</a>; :3000/ を使用してワークスペース サービスにアクセスします。</p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bteq</code></pre>
+<img src="../../_images/ai-unlimited/install-ai-unlimited-workspaces-docker/ai.unlimited.workspaces.setting.png" alt="ai.unlimited.workspaces.setting">
 </div>
 </div>
 </li>
 <li>
-<p>ユーザー名とパスワードとして <code>dbc</code> を使用してデータベースにログインする。</p>
-<div id="pw_change_bteq_logon" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">.logon localhost/dbc</code></pre>
-</div>
-</div>
+<p><strong>セットアップ</strong>の下に以下の一般的なサービス構成を適用します。</p>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">設定</th>
+<th class="tableblock halign-left valign-top">説明</th>
+<th class="tableblock halign-left valign-top">必須?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Service Base URL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[編集不可] サービスのroot URL。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">はい</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Git Provider</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Git 統合のプロバイダ。現在、Teradata AI Unlimited は GitHub と GitLab をサポートしています。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">はい</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Service Log Lev</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ロギングのレベル。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">はい</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Engine IP Network Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">エンジン インスタンスに割り当てられるネットワークの型。パブリックまたはプライベートのいずれかになります。ワークスペースサービスと同じVPCにエンジンをデプロイする場合は、<strong>Private</strong>オプションを選択します。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">はい</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use TLS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TLSサポートが有効かどうかを示します。インスタンスにプライベート ネットワーク内からのみアクセスでき、信頼済みユーザーのみがアクセスできる場合は、デフォルト値を無視できます。Teradataでは、機密データ、パブリックネットワーク、およびコンプライアンス要件に対してTLSオプションを有効にすることを推奨している。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">はい</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Service TLS Certification</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">サーバIDを認証するためのサーバ証明書。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Service TLS Certificate Key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">サーバ証明書キー。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+</tbody>
+</table>
 </li>
 <li>
-<p><code>dbc</code> ユーザーのパスワードを変更する。</p>
-<div id="pw_change_mod_user" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">MODIFY USER dbc AS PASSWORD = new_password;</code></pre>
-</div>
-</div>
+<p><strong>Service Base URL</strong>に自己署名証明書を使用するには、<strong>GENERATE TLS</strong>を選択します。証明書と秘密鍵が生成され、それぞれのフィールドに表示されます。</p>
 </li>
 <li>
-<p>gcloud コマンドを使用して、ポート 1025 をインターネットに開くことができるようになりました。</p>
-<div id="gcloud_fw_rule" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute firewall-rules create vantage-express --allow=tcp:1025 --direction=IN --target-tags=ve</code></pre>
+<p><strong>Save Changes</strong>を選択します。</p>
+</li>
+<li>
+<p>選択した <strong>Cloud Integrations: CSP</strong>の下に以下の設定を適用します。</p>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">設定</th>
+<th class="tableblock halign-left valign-top">説明</th>
+<th class="tableblock halign-left valign-top">必須?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default Region</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">エンジンを配置するリージョン。Teradataでは、プライマリ作業ロケーションに最も近いリージョンを選択することをお薦めします。3.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">はい</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default Subnet</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">エンジンインスタンスにインターネットゲートウェイへのルートを提供するサブネット。サブネットを指定しない場合、エンジンは自動的にデフォルトのサブネットに関連付けられます。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">はい</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default IAM Role</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AWS でユーザーができることとできないことを決定するデフォルトの IAM ID。デフォルトの IAM ロールがユーザーまたはリソースに割り当てられると、ユーザーまたはリソースは自動的にそのロールが付与されたと想定し、そのロールに付与されたアクセス権を取得します。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resource Tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">リソースに関するメタデータを保持するためにリソースに適用されるキーと値のペア。リソースタグを使用すると、環境で使用するリソースを迅速に識別、整理、管理できる。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default CIDRs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">エンジンに使用されるクラスレス ドメイン間ルーティング (CIDR) アドレスのリスト。CIDRを使用すると、ネットワーク内で柔軟かつ効率的にIPアドレスを割り当てることができる。CIDR を指定しない場合、エンジンはデフォルトの CIDR に自動的に関連付けられます。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default Security Groups</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">各リージョンの VPC のセキュリティ グループのリスト。セキュリティ グループを指定しない場合、エンジンは VPC のデフォルトのセキュリティ グループに自動的に関連付けられます。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Role Prefix</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ロールの名前の先頭に追加される文字列。ロール接頭辞を使用すると、ロールを編成および管理し、命名規則を適用できます。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Permission Boundary</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">アイデンティティベースのポリシーで定義されたアクセス権に関係なく、IAM エンティティが持つことができる最大アクセス認証。ユーザーのアクセス権と役割を定義および管理し、コンプライアンス要件を強制できます。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>Save Changes</strong> を選択します。</p>
+</li>
+<li>
+<p><strong>Git Integrations</strong>の下に以下の設定を適用します。</p>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">設定</th>
+<th class="tableblock halign-left valign-top">説明</th>
+<th class="tableblock halign-left valign-top">必須?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GitHub Client ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OAuthアプリを作成する際にGitHubから受け取ったクライアントID。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">はい</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GitHub Client Secret</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OAuth アプリの作成時に GitHub から受け取ったクライアント シークレット ID。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">はい</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Auth Organization</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">チームと共同作業するために使用する GitHub 組織アカウントの名前。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GitHub Base URL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GitHubアカウントのベースURL。URL はアカウントの型によって異なる場合があります。例えば、GitHub Enterprise アカウントの場合は <a href="https://github.company.com/" class="bare">https://github.company.com/</a> 。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>Authenticate</strong>を選択します 。GitHub にリダイレクトされます。</p>
+</li>
+<li>
+<p>GitHub 信頼証明を使用してログオンし、ワークスペース サービスを承認します。</p>
+<div class="paragraph">
+<p>認証後、Workspace サービス <strong>Profile</strong> ページにリダイレクトされ、API キーが生成されます。API キーを使用して、ワークスペース サービスにリクエストを行うことができます。</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ワークスペースサービスに接続するたびに、新しいAPIキーが生成されます。
+</td>
+</tr>
+</table>
 </div>
 </li>
 </ol>
 </div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_クリーンアップ"><a class="anchor" href="#_クリーンアップ"></a>クリーンアップ</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>料金の発生を停止するには、VM を削除する。</p>
-</div>
-<div id="delete_vm" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute instances delete teradata-vantage-express --zone=us-central1-a</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>また、追加したファイアウォール ルールも忘れずに削除してください。例:</p>
-</div>
-<div id="delete_fw_rule" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute firewall-rules delete vantage-express</code></pre>
-</div>
+<p>Teradata AI Unlimited の準備が整いました。</p>
 </div>
 </div>
 </div>
@@ -2457,22 +2554,10 @@ systemctl start vantage-express</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="../../nos.html" class="xref page">オブジェクトストレージに保存されたクエリーデータ</a></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_さらに詳しく"><a class="anchor" href="#_さらに詳しく"></a>さらに詳しく</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20">Teradata®Studio™およびStudio™Expressインストール ガイド</a></p>
+<p>ワークスペース サービスを Teradata AI Unlimited Interface に接続し、エンジンをデプロイします。<a href="install-ai-unlimited-interface-docker.html">Dockerを使用した Teradata AI Unlimited インターフェースのデプロイ</a> を参照してください。</p>
 </li>
 <li>
-<p><a href="https://docs.teradata.com/r/jmAxXLdiDu6NiyjT6hhk7g/root">BTEQの紹介</a></p>
+<p>Teradata AI Unlimited が実際のユースケースでどのように役立つかを知りたいですか? 近日公開! GitHub リンクについては、このスペースを引き続き監視してください。</p>
 </li>
 </ul>
 </div>

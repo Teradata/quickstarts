@@ -3,20 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Google Cloud で Vantage Express を実行する方法 :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/ja/general/vantage.express.gcp.html">
-    <meta name="description" content="Google Cloud で Vantage Express を実行します。">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics">
+    <title>Workspace Client で Teradata AI Unlimited を使用する :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/ja/ai-unlimited/using-ai-unlimited-workspace-cli.html">
+    <meta name="description" content="workspacectl を使用して Teradata AI Unlimited を管理する方法を学びます。">
+    <meta name="keywords" content="Teradata AI Unlimited, Teradata AI Unlimited Workspace service, Teradata AI Unlimited Compute Engine">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta property="og:title" content="Google Cloud で Vantage Express を実行する方法 :: Teradata Getting Started">
+<meta property="og:title" content="Workspace Client で Teradata AI Unlimited を使用する :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Google Cloud で Vantage Express を実行します。" />
+<meta property="og:description" content="workspacectl を使用して Teradata AI Unlimited を管理する方法を学びます。" />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/ja/general/vantage.express.gcp.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/ja/ai-unlimited/using-ai-unlimited-workspace-cli.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -1976,7 +1976,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="vantage.express.gcp.html">Google Cloud で Vantage Express を実行する方法</a></li>
+    <li><a href="using-ai-unlimited-workspace-cli.html">Workspace Client で Teradata AI Unlimited を使用する</a></li>
   </ul>
 </nav>
 </div>
@@ -1985,22 +1985,22 @@ document.addEventListener("DOMContentLoaded", function () {
 <aside class="toc sidebar" data-title="コンテンツ" data-levels="2"> 
     <div class="page-controls">
         <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">問題を報告する</div></a>
-        <a href="https://github.com/Teradata/quickstarts/blob/HEAD/modules/ROOT/pages/ja/general/vantage.express.gcp.adoc"><div class="edit-on-github">GitHub で編集する</div></a>
+        <a href="https://github.com/Teradata/quickstarts/blob/HEAD/modules/ROOT/pages/ja/ai-unlimited/using-ai-unlimited-workspace-cli.adoc"><div class="edit-on-github">GitHub で編集する</div></a>
     </div>
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Google Cloud で Vantage Express を実行する方法</h1>
+<h1 class="page">Workspace Client で Teradata AI Unlimited を使用する</h1>
 <div id="preamble">
 <div class="sectionbody">
-<div class="admonitionblock note">
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-<a href="https://clearscape.teradata.com/" class="bare">https://clearscape.teradata.com/</a>では、Vantageのホストされたインスタンスを無料で入手できるようになりました。
+この製品はプレビュー版であり、変更される可能性があります。このサービスの詳細について興味がある場合は、Teradata サポートにお問い合わせください。
 </td>
 </tr>
 </table>
@@ -2011,7 +2011,36 @@ document.addEventListener("DOMContentLoaded", function () {
 <h2 id="_概要"><a class="anchor" href="#_概要"></a>概要</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このハウツーでは、Google Cloud Platform で Vantage Express を実行する方法を説明します。Vantage Express には、完全に機能する Teradata SQL Engineが含まれています。</p>
+<p>Workspace Client (workspacectl) は、Teradata AI Unlimited のコマンド ライン インターフェース (CLI) です。このドキュメントでは、workspacectlをインストールするための手順を説明します。このドキュメントには、CLI コマンドに関する必要な情報とガイダンスがすべて記載されており、コマンド ラインを迅速かつ効率的に操作できるようになります。現在のリリースでは、workspacectl を使用してワークスペース サービスに接続し、エンジンを管理することのみが可能です。Teradata では、データ探索用の Teradata AI Unlimited インターフェースとして JupyterLab を使用することを推奨しています。</p>
+</div>
+<div class="paragraph">
+<p><a href="install-ai-unlimited-interface-docker.html">Dockerを使用した Teradata AI Unlimited インターフェースのデプロイ</a> を参照してください。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_始める前に"><a class="anchor" href="#_始める前に"></a>始める前に</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>以下を確認します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="install-ai-unlimited-workspaces-docker.html">Dockerを使用した Teradata AI Unlimited Workspaceサービスのデプロイとセットアップ</a>で説明されている手順を使用して、ワークスペースサービスをインストール、設定、およびセットアップしている。</p>
+</li>
+<li>
+<p>AWS環境変数とAPIキーをコピーして保持している。</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_workspacectlのインストール"><a class="anchor" href="#_workspacectlのインストール"></a>workspacectlのインストール</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://downloads.teradata.com/download/tools/ai-unlimited-ctl">https://downloads.teradata.com/download/tools/ai-unlimited-ctl</a>からworkspacectlの実行可能ファイルをダウンロードします。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2020,7 +2049,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-クラウドの使用料を支払いたくない場合は、<a href="getting.started.vmware.adoc">VMware</a>、<a href="getting.started.vbox">VirtualBox</a>、<a href="getting.started.utm">UTM</a> を使用して Vantage Express をローカルにインストールできます。
+Workspacectlはすべての主要なオペレーティングシステムをサポートしています。
 </td>
 </tr>
 </table>
@@ -2028,27 +2057,12 @@ document.addEventListener("DOMContentLoaded", function () {
 </div>
 </div>
 <div class="sect1">
-<h2 id="_前提条件"><a class="anchor" href="#_前提条件"></a>前提条件</h2>
+<h2 id="_workspacectlを使用する"><a class="anchor" href="#_workspacectlを使用する"></a>workspacectlを使用する</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Googleクラウドアカウント。</p>
-</li>
-<li>
-<p><code>gcloud</code> コマンド ラインユーティリティがマシンにインストールされている。インストール手順はここで見つけることができます。https://cloud.google.com/sdk/docs/install</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_インストール"><a class="anchor" href="#_インストール"></a>インストール</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>4 つの CPU と 8 GB の RAM、70 GB のバランス ディスクを備えた Ubuntu VM を作成します。以下のコマンドは、 <code>us-central1</code> リージョンに VM を作成します。最高のパフォーマンスを得るには、 リージョンを最も近いリージョンに置き換えてください。サポートされているリージョンのリストについては、 <a href="https://cloud.google.com/compute/docs/regions-zones">Google Cloud リージョンのドキュメント</a>をご覧ください。</p>
+<p>ターミナルウィンドウを開き、workspacectlファイルを実行します。</p>
 <div class="tabset is-loading">
 <div class="ulist tabs">
 <ul>
@@ -2058,423 +2072,935 @@ document.addEventListener("DOMContentLoaded", function () {
 <li>
 <p><a id="tabset1_macos"></a>MacOS</p>
 </li>
-<li>
-<p><a id="tabset1_linux"></a>Linux</p>
-</li>
 </ul>
 </div>
 <div class="content">
 <div class="tab-pane" aria-labelledby="tabset1_windows">
-<div class="paragraph">
-<p>Powershell で実行する。</p>
-</div>
-<div id="gcloud_create_vm_win" class="listingblock content-editable emits-gtm-events">
+<div id="run_workspaces_win" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">gcloud compute instances create teradata-vantage-express `
-  --zone=us-central1-a `
-  --machine-type=n2-custom-4-8192 `
-  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced `
-  --enable-nested-virtualization `
-  --tags=ve</code></pre>
+<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">worksapcesctl.exe</code></pre>
 </div>
 </div>
 </div>
 <div class="tab-pane" aria-labelledby="tabset1_macos">
-<div id="gcloud_create_vm_macos" class="listingblock content-editable emits-gtm-events">
+<div id="run_workspaces_macos" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute instances create teradata-vantage-express \
-  --zone=us-central1-a \
-  --machine-type=n2-custom-4-8192 \
-  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
-  --enable-nested-virtualization \
-  --tags=ve</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_linux">
-<div id="gcloud_create_vm_linux" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute instances create teradata-vantage-express \
-  --zone=us-central1-a \
-  --machine-type=n2-custom-4-8192 \
-  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
-  --enable-nested-virtualization \
-  --tags=ve</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl</code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-</li>
-<li>
-<p>VMにsshで接続する。</p>
-<div id="gcloud_ssh" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute ssh teradata-vantage-express --zone=us-central1-a</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><code>root</code> ユーザーに切り替えます。</p>
-<div id="sudo" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo -i</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Vantage Express用のダウンロードディレクトリを準備する。</p>
-<div id="download_dir" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir /opt/downloads
-cd /opt/downloads</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>VirtualBoxと7 zipをインストールします。</p>
-<div id="apt" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apt update &amp;&amp; apt-get install p7zip-full p7zip-rar virtualbox -y</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>curlコマンドを取得して、Vantage Expressをダウンロードします。</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p><a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Vantage Expess のダウンロード ページ</a>に移動します (登録が必要です)。</p>
-</li>
-<li>
-<p>「Vantage Express 17.20」などの最新のダウンロードリンクをクリックします。使用許諾契約のポップアップが表示されます。まだライセンスを受け入れません。</p>
-</li>
-<li>
-<p>ブラウザでネットワークビューを開きます。例えば、Chrome で <kbd>F12</kbd> を押し「 <code>Network</code>」タブに移動します。</p>
 <div class="imageblock">
 <div class="content">
-<img src="../../_images/browser.network.png" alt="ブラウザの「Network」タブ" width="500">
+<img src="../../_images/ai-unlimited/using-ai-unlimited-workspace-cli/ai.unlimited.cli.workspaces.png" alt="AI Unlimited CLI">
 </div>
 </div>
 </li>
 <li>
-<p>`I Agree (同意する)`ボタンをクリックしてライセンスを受け入れ、ダウンロードをキャンセルします。</p>
+<p>API キーを使用してワークスペース サービスを構成します。</p>
+<div id="workspaces_use_config" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl workspaces config</code></pre>
+</div>
+</div>
 </li>
 <li>
-<p>ネットワーク ビューで、 `VantageExpress`で始まる最後のリクエストを見つけます。それを右クリックして `Copy &#8594; Copy as cURL`を選択します。</p>
+<p>新しいプロジェクトを作成します。</p>
+<div id="workspaces_use_project_create" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl project create &lt;Project_Name&gt; -e &lt;CSP&gt; --no-tls</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>プロジェクトのエンジンをデプロイします。</p>
+<div id="workspaces_use_project_engine_deploy" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl project engine deploy &lt;Project_Name&gt; -t &lt;Size_of_Engine&gt; --no-tls</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>サンプルワークロードを実行します。</p>
+</li>
+<li>
+<p>プロジェクトとエンジンを管理します。</p>
+</li>
+<li>
+<p>プロジェクトをバックアップする。</p>
+<div id="workspaces_use_project_backup" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl project backup &lt;Project_Name&gt; --no-tls</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>エンジンを停止します。</p>
+<div id="workspaces_use_project_engine_suspend" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl project engine suspend &lt;Project_Name&gt; --no-tls</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>サポートされているコマンドのリストについては、<a href="#_workspaces_cli_reference">ワークスペースクライアントのリファレンス</a>を参照してください。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ワークスペースクライアントのリファレンス"><a class="anchor" href="#_ワークスペースクライアントのリファレンス"></a>ワークスペースクライアントのリファレンス</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_workspaces_config"><a class="anchor" href="#_workspaces_config"></a>workspaces config</h3>
+<div class="paragraph">
+<p><strong>説明</strong>: CLI をワークスペース サービスにバインドするための 1 回限りの構成。ワークスペースサービスのプロファイルページに移動し、APIキーをコピーします。</p>
+</div>
+<div class="paragraph">
+<p><strong>使用方法</strong>:</p>
+</div>
+<div id="workspaces_config" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl workspaces config</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>フラグ</strong>:</p>
+</div>
+<div class="paragraph">
+<p><code>-h</code>、<code>--help</code>:   コマンドの詳細をリストします。</p>
+</div>
+<div class="paragraph">
+<p><strong>出力</strong>:</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="../../_images/browser.copy.curl.png" alt="Browser Copy culr" width="500">
-</div>
-</div>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>ssh セッションに戻り、curl コマンドを貼り付けて Vantage Express をダウンロードします。ダウンロードを <code>ve.7z</code> という名前のファイルに保存するには、コマンドに <code>-o ve.7z</code> を追加します。次のように、すべてのHTTPヘッダーを削除できます。</p>
-<div id="download_ve" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -o ve.7z 'http://d289lrf5tw1zls.cloudfront.net/database/teradata-express/VantageExpress17.20_Sles12_202108300444.7z?Expires=1638719978&amp;Signature=GKBkNvery_long_signature__&amp;Key-Pair-Id=********************'</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>ダウンロードしたファイルを解凍します。数分かかります。</p>
-<div id="unzip" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">7z x ve.7z</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>VirtualBox で VM を起動しますコマンドはすぐに返されますが、VM の初期化プロセスには数分かかります。</p>
-<div id="start_vim" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export VM_IMAGE_DIR="/opt/downloads/VantageExpress17.20_Sles12"
-DEFAULT_VM_NAME="vantage-express"
-VM_NAME="${VM_NAME:-$DEFAULT_VM_NAME}"
-vboxmanage createvm --name "$VM_NAME" --register --ostype openSUSE_64
-vboxmanage modifyvm "$VM_NAME" --ioapic on --memory 6000 --vram 128 --nic1 nat --cpus 4
-vboxmanage storagectl "$VM_NAME" --name "SATA Controller" --add sata --controller IntelAhci
-vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk1*')"
-vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 1 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk2*')"
-vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 2 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk3*')"
-vboxmanage modifyvm "$VM_NAME" --natpf1 "tdssh,tcp,,4422,,22"
-vboxmanage modifyvm "$VM_NAME" --natpf1 "tddb,tcp,,1025,,1025"
-vboxmanage startvm "$VM_NAME" --type headless
-vboxmanage controlvm "$VM_NAME" keyboardputscancode 1c 1c</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Vantage Express VM に ssh で接続します。 <code>root</code> をパスワードとして使用します。</p>
-<div id="ssh_to_ve" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ssh -p 4422 root@localhost</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>DBがアップしていることを確認します。</p>
-<div id="pde" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pdestate -a</code></pre>
+<img src="../../_images/ai-unlimited/using-ai-unlimited-workspace-cli/ai.unlimited.cli.workspaces.config.png" alt="AI Unlimited の CLI 構成">
 </div>
 </div>
 <div class="paragraph">
-<p>コマンドが`PDE state is RUN/STARTED. DBS state is 5: Logons are enabled - The system is quiescent`を返す場合は、Vantage Expressが起動したことを意味します。
-状態が異なる場合は、正しいステータスが得られるまで <code>pdestate -a</code> を繰り返します。</p>
+<p>プロンプトに従って、ワークスペースサービスのエンドポイントとAPIキーを選択します。</p>
 </div>
-</li>
-<li>
-<p>Vantage Expressが起動して実行されたら、<code>bteq</code> クライアントのコマンドラインクライアントを起動します。BTEQ (「ビーテック」と発音) は、Teradata Database に SQL クエリーを送信するために使用される、汎用のコマンド ベースのクライアント ツールです。</p>
-<div id="bteq" class="listingblock content-editable emits-gtm-events">
+</div>
+<div class="sect2">
+<h3 id="_workspaces_user_list"><a class="anchor" href="#_workspaces_user_list"></a>workspaces user list</h3>
+<div class="paragraph">
+<p><strong>説明</strong>: GitHub で Teradata AI Unlimited 用に設定されたユーザーのリストを表示します。</p>
+</div>
+<div class="paragraph">
+<p><strong>使用方法</strong>:</p>
+</div>
+<div id="workspaces_user_list" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bteq</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl workspaces user list --no-tls</code></pre>
 </div>
 </div>
-</li>
-<li>
-<p>bteqに入ったら、Vantage Expressインスタンスに接続します。パスワードを求められたら、 `dbc`を入力します。</p>
-<div id="bteq_logon" class="listingblock content-editable emits-gtm-events">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>フラグ</strong>:</p>
+</div>
+<div class="paragraph">
+<p><code>-h</code>、<code>--help</code>:   コマンドの詳細をリストします。</p>
+</div>
+<div class="paragraph">
+<p><strong>出力</strong>:</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">.logon localhost/dbc</code></pre>
-</div>
-</div>
-</li>
-</ol>
+<img src="../../_images/ai-unlimited/using-ai-unlimited-workspace-cli/ai.unlimited.cli.user.list.png" alt="AI Unlimited CLIユーザーリスト">
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_サンプル_クエリーを実行する"><a class="anchor" href="#_サンプル_クエリーを実行する"></a>サンプル クエリーを実行する</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>`dbc`ユーザーを使用して、`HR`という新しいデータベースを作成します。このクエリーをコピー/貼り付けて、<kbd>Enter</kbd> を押して実行します。</p>
-<div id="first_query" class="listingblock emits-gtm-events">
+<div class="sect2">
+<h3 id="_project_create"><a class="anchor" href="#_project_create"></a>project create</h3>
+<div class="paragraph">
+<p><strong>説明</strong>: Teradata AI Unlimitedでプロジェクトを作成します。このコマンドは、プロジェクトに対応する GitHub リポジトリも作成します。</p>
+</div>
+<div class="paragraph">
+<p><strong>使用方法</strong>:</p>
+</div>
+<div id="workspaces_project_create" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE HR
-AS PERMANENT = 60e6, -- 60MB
-    SPOOL = 120e6; -- 120MB</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl project create &lt;Project_Name&gt; -e &lt;CSP&gt; --no-tls</code></pre>
 </div>
 </div>
-<div class="sidebarblock">
-    <div id="right" style="float: right">
-    <a style="cursor: pointer; color: grey" onclick="this.parentElement.parentElement.style.display = 'none''">x</a>
-  </div>
-  <div class="content">
-    <div class="paragraph">クエリーを実行できましたか?
-      <i class="far fa-thumbs-up click-icon" style="padding: 0rem 0.2rem;" onclick="toggleThumbs(this, 'first_query')"></i>
-      <i class="far fa-thumbs-down click-icon" onclick="toggleThumbs(this 'first_query')"></i>
-    </div>
-  </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+</td>
+</tr>
+</table>
 </div>
-<style>
-.closebtn {
-  position: absolute;
-  top: 5px;
-  right: 15px;
-  color: white;
-  font-size: 30px;
-  cursor: pointer;
-}
-</style>
-</li>
-<li>
-<p>サンプルテーブルを作成し、データを挿入してクエリーを実行してみましょう。まず、従業員情報を保持するテーブルを作成する。</p>
-<div class="listingblock">
+<div class="paragraph">
+<p><strong>フラグ</strong>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">フラグ</th>
+<th class="tableblock halign-left valign-top">型</th>
+<th class="tableblock halign-left valign-top">説明</th>
+<th class="tableblock halign-left valign-top">必須?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-e</code>, <code>--environment</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">文字列</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">プロジェクト エンジンがホストされる環境。値:aws、azure、またはgcloud。現在、Teradata AI Unlimited は aws と azure をサポートしています。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">はい</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-f</code>, <code>--manifest</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">文字列</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">入力に使用されるyamlファイルをマニフェストするためのパス。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-t</code>, <code>--team</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">文字列</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">プロジェクトに割り当てられたチーム。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-h</code>, <code>--help</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">コマンドの詳細をリストします。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>出力</strong>:</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE SET TABLE HR.Employees (
-   GlobalID INTEGER,
-   FirstName VARCHAR(30),
-   LastName VARCHAR(30),
-   DateOfBirth DATE FORMAT 'YYYY-MM-DD',
-   JoinedDate DATE FORMAT 'YYYY-MM-DD',
-   DepartmentCode BYTEINT
-)
-UNIQUE PRIMARY INDEX ( GlobalID );</code></pre>
+<img src="../../_images/ai-unlimited/using-ai-unlimited-workspace-cli/ai.unlimited.cli.project.create.png" alt="AI Unlimited CLI プロジェクトの作成">
 </div>
 </div>
-</li>
-<li>
-<p>次に、レコードを挿入する。</p>
-<div class="listingblock">
+</div>
+<div class="sect2">
+<h3 id="_project_list"><a class="anchor" href="#_project_list"></a>project list</h3>
+<div class="paragraph">
+<p><strong>説明</strong>: Teradata AI Unlimited で設定されているすべてのプロジェクトの一覧表示します。</p>
+</div>
+<div class="paragraph">
+<p><strong>使用方法</strong>:</p>
+</div>
+<div id="workspaces_project_list" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">INSERT INTO HR.Employees (
-   GlobalID,
-   FirstName,
-   LastName,
-   DateOfBirth,
-   JoinedDate,
-   DepartmentCode
-)
-VALUES (
-   101,
-   'Adam',
-   'Tworkowski',
-   '1980-01-05',
-   '2004-08-01',
-   01
-);</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>最後に、データを取得できるかどうかを確認する。</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM HR.Employees;</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl project list --no-tls</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>以下の結果が得られるはずです。</p>
+<p>または</p>
 </div>
-<div class="listingblock">
+<div id="workspaces_project_list_name" class="listingblock content-editable emits-gtm-events">
 <div class="content">
-<pre>GlobalID  FirstName  LastName   DateOfBirth  JoinedDate  DepartmentCode
---------  ---------  ---------- -----------  ----------  --------------
-     101  Adam       Tworkowski  1980-01-05  2004-08-01               1</pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl project list &lt;Project_Name&gt; --no-tls</code></pre>
 </div>
 </div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_オプションを設定する"><a class="anchor" href="#_オプションを設定する"></a>オプションを設定する</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>VM を停止して起動する場合は、Vantage Express を自動起動に追加することをお勧めします。 VM に ssh で接続し、以下のコマンドを実行します。</p>
-<div id="autostart" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo -i
-
-cat &lt;&lt;EOF &gt;&gt; /etc/default/virtualbox
-VBOXAUTOSTART_DB=/etc/vbox
-VBOXAUTOSTART_CONFIG=/etc/vbox/autostart.cfg
-EOF
-
-cat &lt;&lt;EOF &gt; /etc/systemd/system/vantage-express.service
-[Unit]
-Description=vm1
-After=network.target virtualbox.service
-Before=runlevel2.target shutdown.target
-[Service]
-User=root
-Group=root
-Type=forking
-Restart=no
-TimeoutSec=5min
-IgnoreSIGPIPE=no
-KillMode=process
-GuessMainPID=no
-RemainAfterExit=yes
-ExecStart=/usr/bin/VBoxManage startvm vantage-express --type headless
-ExecStop=/usr/bin/VBoxManage controlvm vantage-express savestate
-[Install]
-WantedBy=multi-user.target
-EOF
-
-systemctl daemon-reload
-systemctl enable vantage-express
-systemctl start vantage-express</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>インターネットからVantage Expressに接続したい場合は、VMに対してファイアウォールの穴を開ける必要がある。また、デフォルトのパスワードを  `dbc`ユーザーに変更する必要がある。</p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><code>dbc</code> ユーザーのパスワードを変更するには、VM に移動して bteq を開始する。</p>
-<div id="pw_change_bteq" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bteq</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>ユーザー名とパスワードとして <code>dbc</code> を使用してデータベースにログインする。</p>
-<div id="pw_change_bteq_logon" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">.logon localhost/dbc</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><code>dbc</code> ユーザーのパスワードを変更する。</p>
-<div id="pw_change_mod_user" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">MODIFY USER dbc AS PASSWORD = new_password;</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>gcloud コマンドを使用して、ポート 1025 をインターネットに開くことができるようになりました。</p>
-<div id="gcloud_fw_rule" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute firewall-rules create vantage-express --allow=tcp:1025 --direction=IN --target-tags=ve</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_クリーンアップ"><a class="anchor" href="#_クリーンアップ"></a>クリーンアップ</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>料金の発生を停止するには、VM を削除する。</p>
-</div>
-<div id="delete_vm" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute instances delete teradata-vantage-express --zone=us-central1-a</code></pre>
-</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>また、追加したファイアウォール ルールも忘れずに削除してください。例:</p>
+<p><strong>フラグ</strong>:</p>
 </div>
-<div id="delete_fw_rule" class="listingblock content-editable emits-gtm-events">
+<div class="paragraph">
+<p><code>-h</code>、<code>--help</code>:   コマンドの詳細をリストします。</p>
+</div>
+<div class="paragraph">
+<p><strong>出力</strong>:</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute firewall-rules delete vantage-express</code></pre>
+<img src="../../_images/ai-unlimited/using-ai-unlimited-workspace-cli/ai.unlimited.cli.project.list.png" alt="AI Unlimited CLI プロジェクトのリスト">
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_project_delete"><a class="anchor" href="#_project_delete"></a>project delete</h3>
+<div class="paragraph">
+<p><strong>説明</strong>: Teradata AI Unlimited でプロジェクトを削除します。</p>
 </div>
-<div class="sect1">
-<h2 id="_次のステップ"><a class="anchor" href="#_次のステップ"></a>次のステップ</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="../../nos.html" class="xref page">オブジェクトストレージに保存されたクエリーデータ</a></p>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong>使用方法</strong>:</p>
+</div>
+<div id="workspaces_project_delete" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"> workspacesctl project delete &lt;Project_Name&gt; --no-tls</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>フラグ</strong>:</p>
+</div>
+<div class="paragraph">
+<p><code>-h</code>、<code>--help</code>:   コマンドの詳細をリストします。</p>
+</div>
+<div class="paragraph">
+<p><strong>出力</strong>:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+出力は YAML 形式です。
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/ai-unlimited/using-ai-unlimited-workspace-cli/ai.unlimited.cli.project.delete.png" alt="AI Unlimited CLI プロジェクトの削除">
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_さらに詳しく"><a class="anchor" href="#_さらに詳しく"></a>さらに詳しく</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20">Teradata®Studio™およびStudio™Expressインストール ガイド</a></p>
-</li>
-<li>
-<p><a href="https://docs.teradata.com/r/jmAxXLdiDu6NiyjT6hhk7g/root">BTEQの紹介</a></p>
-</li>
-</ul>
+<div class="sect2">
+<h3 id="_project_user_list"><a class="anchor" href="#_project_user_list"></a>project user list</h3>
+<div class="paragraph">
+<p><strong>説明</strong>: GitHub でプロジェクトに割り当てられた共同作業者をリストします。</p>
+</div>
+<div class="paragraph">
+<p><strong>使用方法</strong>:</p>
+</div>
+<div id="workspaces_project_user_list" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl project user list &lt;Project_Name&gt; --no-tls</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>フラグ</strong>:</p>
+</div>
+<div class="paragraph">
+<p><code>-h</code>、<code>--help</code>:   コマンドの詳細をリストします。</p>
+</div>
+<div class="paragraph">
+<p><strong>出力</strong>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/ai-unlimited/using-ai-unlimited-workspace-cli/ai.unlimited.cli.project.user.list.png" alt="AI Unlimited CLI プロジェクトユーザーのリスト">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_project_backup"><a class="anchor" href="#_project_backup"></a>project backup</h3>
+<div class="paragraph">
+<p><strong>説明</strong>:  エンジン オブジェクト定義を、プロジェクトに割り当てられた GitHub リポジトリにバックアップします。</p>
+</div>
+<div class="paragraph">
+<p><strong>使用方法</strong>:</p>
+</div>
+<div id="workspaces_project_backup" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl project backup &lt;Project_Name&gt; --no-tls</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>フラグ</strong>:</p>
+</div>
+<div class="paragraph">
+<p><code>-h</code>、<code>--help</code>:   コマンドの詳細をリストします。</p>
+</div>
+<div class="paragraph">
+<p><strong>出力</strong>:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+出力はYAML形式です。
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/ai-unlimited/using-ai-unlimited-workspace-cli/ai.unlimited.cli.project.backup.png" alt="AI Unlimited の CLI プロジェクトのバックアップ">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_project_restore"><a class="anchor" href="#_project_restore"></a>project restore</h3>
+<div class="paragraph">
+<p><strong>説明</strong>: プロジェクトの GitHub リポジトリからすべてのエンジン オブジェクト定義を復元します。</p>
+</div>
+<div class="paragraph">
+<p><strong>使用方法</strong>:</p>
+</div>
+<div id="workspaces_project_restore" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl project restore &lt;Project_Name&gt; --no-tls</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>または</p>
+</div>
+<div id="workspaces_project_restore_name" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl project restore &lt;Project_Name&gt; --gitref &lt;git_reference&gt; --no-tls</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>フラグ</strong>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">フラグ</th>
+<th class="tableblock halign-left valign-top">型</th>
+<th class="tableblock halign-left valign-top">説明</th>
+<th class="tableblock halign-left valign-top">必須?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-g</code>, <code>--gitref</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">文字列</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">タグ、SHA、またはブランチ名。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-h</code>, <code>--help</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">コマンドの詳細をリストします。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>出力</strong>:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+出力はYAML形式です。
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/ai-unlimited/using-ai-unlimited-workspace-cli/ai.unlimited.cli.project.restore.png" alt="AI Unlimited CLI プロジェクトの復元">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_project_engine_deploy"><a class="anchor" href="#_project_engine_deploy"></a>project engine deploy</h3>
+<div class="paragraph">
+<p><strong>説明</strong>: プロジェクトのエンジンをデプロイします。</p>
+</div>
+<div class="paragraph">
+<p><strong>使用方法</strong>:</p>
+</div>
+<div id="workspaces_project_engine_deploy" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl project engine deploy &lt;Project_Name&gt; -t small --no-tls</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>フラグ</strong>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">フラグ</th>
+<th class="tableblock halign-left valign-top">型</th>
+<th class="tableblock halign-left valign-top">説明</th>
+<th class="tableblock halign-left valign-top">必須?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-c</code>, <code>--instance-count</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">エンジン ノードの数。デフォルト値は1です。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-t</code>, <code>--instance-size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">文字列</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">エンジンのインスタンス サイズ。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-f</code>, <code>--manifest</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">文字列</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">入力に使用する yaml ファイルをマニフェストするパス。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-r</code>, <code>--region</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">文字列</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デプロイメントのリージョン。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-s</code>, <code>--subnet-id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">文字列</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デプロイメントのサブネット ID。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-h</code>, <code>--help</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">コマンドの詳細をリストします。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_project_engine_suspend"><a class="anchor" href="#_project_engine_suspend"></a>project engine suspend</h3>
+<div class="paragraph">
+<p><strong>説明</strong>: デプロイされたエンジンを破棄し、セッション中に作成されたオブジェクト定義をバックアップします。</p>
+</div>
+<div class="paragraph">
+<p><strong>使用方法</strong>:</p>
+</div>
+<div id="workspaces_project_engine_suspend" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl project engine suspend &lt;Project_Name&gt; --no-tls</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>フラグ</strong>:</p>
+</div>
+<div class="paragraph">
+<p><code>-h</code>、<code>--help</code>:   コマンドの詳細をリストします。</p>
+</div>
+<div class="paragraph">
+<p><strong>出力</strong>:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+出力はYAML形式です。
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/ai-unlimited/using-ai-unlimited-workspace-cli/ai.unlimited.cli.engine.suspend.png" alt="AI Unlimited CLIエンジンの停止">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_project_engine_list"><a class="anchor" href="#_project_engine_list"></a>project engine list</h3>
+<div class="paragraph">
+<p><strong>説明</strong>: プロジェクトのエンジンに関する詳細情報を表示します。このコマンドは、エンジンの最後の状態を表示します。</p>
+</div>
+<div class="paragraph">
+<p><strong>使用方法</strong>:</p>
+</div>
+<div id="workspaces_project_engine_list" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl project engine list &lt;Project_Name&gt; --no-tls</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>フラグ</strong>:</p>
+</div>
+<div class="paragraph">
+<p><code>-h</code>、<code>--help</code>:   コマンドの詳細をリストします。</p>
+</div>
+<div class="paragraph">
+<p><strong>出力</strong>:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+出力はYAML形式です。
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/ai-unlimited/using-ai-unlimited-workspace-cli/ai.unlimited.cli.engine.list.png" alt="AI Unlimited CLIエンジンのリスト">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_project_auth_create"><a class="anchor" href="#_project_auth_create"></a>project auth create</h3>
+<div class="paragraph">
+<p><strong>説明</strong>: オブジェクト ストアの認証を作成します。</p>
+</div>
+<div class="paragraph">
+<p><strong>使用方法</strong>:</p>
+</div>
+<div id="workspaces_project_auth_create" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl project auth create &lt;Project_Name&gt; -n &lt;Auth_Name&gt; -a &lt;Auth_Key&gt; -s &lt;Auth_Secret&gt; -r &lt;ObjectStore_Region&gt; --no-tls</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>フラグ</strong>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">フラグ</th>
+<th class="tableblock halign-left valign-top">型</th>
+<th class="tableblock halign-left valign-top">説明</th>
+<th class="tableblock halign-left valign-top">必須?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-a</code>, <code>--accesskey</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">文字列</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">認証アクセスキーまたはID。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">はい (`-f`フラグを使用していない場合)。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-n</code>, <code>--name string</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">文字列</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">オブジェクトストアの認証名。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">はい (`-f`フラグを使用していない場合)。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-f</code>, <code>--manifest</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">文字列</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">入力に使用する yaml ファイルをマニフェストするパス。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-r</code>, <code>--region</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">文字列</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">オブジェクトストアのリージョン。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">はい</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-s, --secret string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">文字列</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">オブジェクト ストアの認証シークレット アクセス キー。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">はい (`-f`フラグを使用していない場合)。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-h</code>, <code>--help</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">コマンドの詳細をリストします。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>出力</strong>:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+出力はYAML形式です。
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/ai-unlimited/using-ai-unlimited-workspace-cli/ai.unlimited.cli.auth.create.png" alt="AI Unlimited CLI 認証の作成">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_project_auth_list"><a class="anchor" href="#_project_auth_list"></a>project auth list</h3>
+<div class="paragraph">
+<p><strong>説明</strong>: プロジェクトに対して作成されたオブジェクト ストアの認証をリストします。</p>
+</div>
+<div class="paragraph">
+<p><strong>使用方法</strong>:</p>
+</div>
+<div id="workspaces_project_auth_list" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl project auth list &lt;Project_Name&gt; --no-tls</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+設定にTLS設定が含まれている場合は、` `パラメータを追加する必要はありません。-no-tls
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>フラグ</strong>:</p>
+</div>
+<div class="paragraph">
+<p><code>-h</code>、<code>--help</code>:   コマンドの詳細をリストします。</p>
+</div>
+<div class="paragraph">
+<p><strong>出力</strong>:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+出力はYAML形式です。
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/ai-unlimited/using-ai-unlimited-workspace-cli/ai.unlimited.cli.auth.list.png" alt="AI Unlimited CLI 認証のリスト">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_project_auth_delete"><a class="anchor" href="#_project_auth_delete"></a>project auth delete</h3>
+<div class="paragraph">
+<p><strong>説明</strong>: プロジェクトに対して作成されたオブジェクト ストアの認証を削除します。</p>
+</div>
+<div class="paragraph">
+<p><strong>使用方法</strong>:</p>
+</div>
+<div id="workspaces_project_auth_delete" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workspacesctl project auth delete &lt;Project_Name&gt; -n &lt;Auth_Name&gt; --no-tls</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>フラグ</strong>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">フラグ</th>
+<th class="tableblock halign-left valign-top">型</th>
+<th class="tableblock halign-left valign-top">説明</th>
+<th class="tableblock halign-left valign-top">必須?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-n</code>, <code>--name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">文字列</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">削除するオブジェクト ストアの認証の名前。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">はい</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-h</code>, <code>--help</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">コマンドの詳細をリストします。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>出力</strong>:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+出力はYAML形式です。
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/ai-unlimited/using-ai-unlimited-workspace-cli/ai.unlimited.cli.auth.delete.png" alt="AI Unlimited CLI 認証の削除">
+</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2487,6 +3013,7 @@ systemctl start vantage-express</code></pre>
 </td>
 </tr>
 </table>
+</div>
 </div>
 </div>
 </div>

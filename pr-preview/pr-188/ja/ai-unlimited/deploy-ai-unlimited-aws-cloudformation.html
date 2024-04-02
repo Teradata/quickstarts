@@ -3,20 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Google Cloud で Vantage Express を実行する方法 :: Teradata Getting Started</title>
-    <link rel="canonical" href="https://quickstarts.teradata.com/ja/general/vantage.express.gcp.html">
-    <meta name="description" content="Google Cloud で Vantage Express を実行します。">
-    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics">
+    <title>AWS CloudFormation テンプレートを使用して Teradata AI Unlimited Workspace サービスとインターフェースをデプロイする :: Teradata Getting Started</title>
+    <link rel="canonical" href="https://quickstarts.teradata.com/ja/ai-unlimited/deploy-ai-unlimited-aws-cloudformation.html">
+    <meta name="description" content="AWS CloudFormation テンプレートを使用して Teradata AI Unlimited ワークスペースサービスと JupyterLab をデプロイする方法を学びます。">
+    <meta name="keywords" content="Teradata AI Unlimited, Teradata AI Unlimited Workspace service, Teradata AI Unlimited Compute Engine">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta property="og:title" content="Google Cloud で Vantage Express を実行する方法 :: Teradata Getting Started">
+<meta property="og:title" content="AWS CloudFormation テンプレートを使用して Teradata AI Unlimited Workspace サービスとインターフェースをデプロイする :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Google Cloud で Vantage Express を実行します。" />
+<meta property="og:description" content="AWS CloudFormation テンプレートを使用して Teradata AI Unlimited ワークスペースサービスと JupyterLab をデプロイする方法を学びます。" />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
-<meta property="og:url" content="https://quickstarts.teradata.com/ja/general/vantage.express.gcp.html">
+<meta property="og:url" content="https://quickstarts.teradata.com/ja/ai-unlimited/deploy-ai-unlimited-aws-cloudformation.html">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png" />
@@ -1976,7 +1976,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="vantage.express.gcp.html">Google Cloud で Vantage Express を実行する方法</a></li>
+    <li><a href="deploy-ai-unlimited-aws-cloudformation.html">AWS CloudFormation テンプレートを使用して Teradata AI Unlimited Workspace サービスとインターフェースをデプロイする</a></li>
   </ul>
 </nav>
 </div>
@@ -1985,22 +1985,22 @@ document.addEventListener("DOMContentLoaded", function () {
 <aside class="toc sidebar" data-title="コンテンツ" data-levels="2"> 
     <div class="page-controls">
         <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">問題を報告する</div></a>
-        <a href="https://github.com/Teradata/quickstarts/blob/HEAD/modules/ROOT/pages/ja/general/vantage.express.gcp.adoc"><div class="edit-on-github">GitHub で編集する</div></a>
+        <a href="https://github.com/Teradata/quickstarts/blob/HEAD/modules/ROOT/pages/ja/ai-unlimited/deploy-ai-unlimited-aws-cloudformation.adoc"><div class="edit-on-github">GitHub で編集する</div></a>
     </div>
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Google Cloud で Vantage Express を実行する方法</h1>
+<h1 class="page">AWS CloudFormation テンプレートを使用して Teradata AI Unlimited Workspace サービスとインターフェースをデプロイする</h1>
 <div id="preamble">
 <div class="sectionbody">
-<div class="admonitionblock note">
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-<a href="https://clearscape.teradata.com/" class="bare">https://clearscape.teradata.com/</a>では、Vantageのホストされたインスタンスを無料で入手できるようになりました。
+この製品はプレビュー版であり、変更される可能性があります。このサービスの詳細については、Teradataサポートに連絡してください。
 </td>
 </tr>
 </table>
@@ -2011,7 +2011,475 @@ document.addEventListener("DOMContentLoaded", function () {
 <h2 id="_概要"><a class="anchor" href="#_概要"></a>概要</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このハウツーでは、Google Cloud Platform で Vantage Express を実行する方法を説明します。Vantage Express には、完全に機能する Teradata SQL Engineが含まれています。</p>
+<p>AWS CloudFormation テンプレートは、AWS コンピューティング、ネットワーク、ストレージ、およびワークスペース サービスと JupyterLab を AWS にデプロイするために必要なその他のサービスを起動、設定、実行します。
+以下のいずれかの方法を使用して CloudFormation テンプレートをデプロイできます。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#_deploy_cloudformation_template_from_aws_console">AWSコンソール</a></p>
+</li>
+<li>
+<p><a href="deploy-ai-unlimited-awscli-cloudformation.html">AWS CLI から CloudFormation テンプレートをデプロイする</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_aws_console_から_cloudformation_テンプレートをデプロイする"><a class="anchor" href="#_aws_console_から_cloudformation_テンプレートをデプロイする"></a>AWS Console から CloudFormation テンプレートをデプロイする</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_コストと請求"><a class="anchor" href="#_コストと請求"></a>コストと請求</h3>
+<div class="paragraph">
+<p>ワークスペース サービスのダウンロードに追加料金はかかりません。 ただし、ワークスペース サービスとエンジンのデプロイ中に使用される AWS のサービスまたはリソースのコストはお客様の負担となります。
+AWS CloudFormation テンプレートには、カスタマイズできる設定パラメータが含まれています。インスタンス型などの設定の一部は、デプロイメントのコストに影響します。コストの見積もりについては、マーケットプレイスの契約ページを確認してください。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_始める前に"><a class="anchor" href="#_始める前に"></a>始める前に</h3>
+<div class="paragraph">
+<p>ターミナル ウィンドウを開き、 <a href="https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws">Teradata AI Unlimited GitHub リポジトリ</a>のクローンを作成します。このリポジトリには、ワークスペース サービスと JupyterLab をデプロイするためのサンプル CloudFormation テンプレートが含まれています。</p>
+</div>
+<div id="clone_ai_unlimited_repo" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://github.com/Teradata/ai-unlimited</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ステップ1_awsアカウントを準備する"><a class="anchor" href="#_ステップ1_awsアカウントを準備する"></a>ステップ1: AWSアカウントを準備する</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>AWS アカウントをまだお持ちでない場合は、画面上の指示に従って、<a href="https://aws.amazon.com">https://aws.amazon.com</a>でアカウントを作成します。</p>
+</li>
+<li>
+<p>ワークスペース サービスをデプロイするアカウントに、IAM ロールまたは IAM ポリシーを作成するための十分な IAM アクセス権があることを確認してます。アカウントに必要なアクセス権がない場合は、組織の管理者に問い合わせてください。 <a href="ai-unlimited-aws-permissions-policies.html">カスタム権限とポリシーを使用してAWSのアクセスと権限を制御する</a> を参照してください。</p>
+</li>
+<li>
+<p>ナビゲーション バーのリージョン セレクターを使用して、Teradata AI Unlimited ワークスペース サービスをデプロイする AWS リージョンを選択します。</p>
+</li>
+<li>
+<p>ワークスペース サービス インスタンスの起動後に SSH を使用して安全に接続するためのキー ペアを生成します。<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon EC2キーペアとLinuxインスタンス</a>を参照してください。</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+あるいは、AWS Session Manager を使用してワークスペース サービス インスタンスに接続することもできます。その場合、session-manager.json ポリシーを IAM ロールに付与する必要があります。 <a href="ai-unlimited-aws-permissions-policies.html">カスタム権限とポリシーを使用してAWSのアクセスと権限を制御する</a> を参照してください。ホスト OS へのアクセスが必要ない場合は、これらの接続方法のいずれも使用しないことを選択できます。
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ステップ2teradata_ai_unlimited_amiに登録する"><a class="anchor" href="#_ステップ2teradata_ai_unlimited_amiに登録する"></a>ステップ2:Teradata AI Unlimited AMIに登録する</h3>
+<div class="paragraph">
+<p>今回は、AWS で実行される Teradata AI Unlimited の Amazon Machine Image (AMI) サブスクリプションが必要です。Teradata AI Unlimitedのライセンスを取得するには、Teradataサポートに連絡してください。</p>
+</div>
+<div class="paragraph">
+<p>サブスクライブするには:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>AWSアカウントにログオンする。</p>
+</li>
+<li>
+<p>Teradata AI UnlimitedのAWSマーケットプレイスページを開き、<strong>Continue</strong>を選択する。</p>
+</li>
+<li>
+<p>エンジンイメージの利用規約を確認し、同意する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Leader: <a href="https://aws.amazon.com/marketplace/pp/prodview-6vip7ar4pi6ey?ref_=aws-mp-console-subscription-detail">https://aws.amazon.com/marketplace/pp/prodview-6vip7ar4pi6ey?ref_=aws-mp-console-subscription-detail</a></p>
+</li>
+<li>
+<p>Follower: <a href="https://aws.amazon.com/marketplace/pp/prodview-xcwypvttluuiw?ref_=aws-mp-console-subscription-detail">https://aws.amazon.com/marketplace/pp/prodview-xcwypvttluuiw?ref_=aws-mp-console-subscription-detail</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ステップ3_awsコンソールからワークスペースサービスとjupyterlabをデプロイする"><a class="anchor" href="#_ステップ3_awsコンソールからワークスペースサービスとjupyterlabをデプロイする"></a>ステップ3: AWSコンソールからワークスペースサービスとJupyterLabをデプロイする</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>AWSコンソールでAWSアカウントにサインオンする。</p>
+</li>
+<li>
+<p>ナビゲーションバーの右上隅に表示される<strong>AWSリージョン</strong>を確認し、必要に応じて変更します。Teradataでは、プライマリ作業場所に最も近いリージョンを選択することをお薦めする。</p>
+</li>
+<li>
+<p><strong>CloudFormation</strong>&gt;<strong>Create Stack</strong>に移動します。 <strong>Create Stack</strong> を選択し、 <strong>With new resources (standard)</strong> を選択します。</p>
+</li>
+<li>
+<p><strong>テンプレートの準備ができました</strong>を選択し、Teradata AI Unlimited GitHub リポジトリからダウンロードしたテンプレート ファイルの 1 つをアップロードします。</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#workspaces-template">Workspaces テンプレート</a>: systemd によって制御されるコンテナー内で実行されるワークスペースを含む単一のインスタンスをデプロイします。</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/workspaces.yaml">workspaces.yaml</a> CloudFormation テンプレート</p>
+</li>
+<li>
+<p><a href="https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/parameters/workspaces.json">parameters/workspaces.json</a> パラメータ ファイル</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#jupyter-template">Jupyter テンプレート</a>: systemd によって制御されるコンテナ内で実行される JupyterLab を含む単一のインスタンスをデプロイします。</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/jupyter.yaml">jupyter.yaml</a> CloudFormation テンプレート</p>
+</li>
+<li>
+<p><a href="https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/parameters/jupyter.json">parameters/jupyter.json</a> パラメータ ファイル</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#all-in-one-template">All-In-One ワンテンプレート</a>: Workspaces と JupyterLab が同じインスタンス上で実行される単一のインスタンスをデプロイします。</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/all-in-one.yaml">all-in-one.yaml</a> CloudFormation テンプレート</p>
+</li>
+<li>
+<p><a href="https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/parameters/all-in-one.json">parameters/all-in-one.json</a> パラメータ ファイル</p>
+<div class="paragraph">
+<p>このテンプレートを使用している場合は、埋め込み JupyterLab サービスを使用することも、外部 JupyterLab インスタンスに接続することもできます。埋め込み JupyterLab サービスに接続するときは、JupyterLab Notebookで適切な接続アドレス (例えば、127.0.0.1) を設定する必要があります。また、外部クライアントの場合は、適切なパブリック/プライベート IP または DNS 名を設定する必要があります。</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>テンプレートのパラメータを確認します。入力が必要なパラメータの値を指定します。その他のすべてのパラメータについては、デフォルト設定を確認し、必要に応じてカスタマイズします。パラメータの確認とカスタマイズが終了したら、<strong>Next</strong>を選択します。</p>
+<div class="paragraph">
+<p>以下のテーブルでは、パラメータがカテゴリ別にリストされています。</p>
+</div>
+<div class="paragraph">
+<p><strong>AWSインスタンスとネットワーク設定</strong></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">パラメータ</th>
+<th class="tableblock halign-left valign-top">説明</th>
+<th class="tableblock halign-left valign-top">必須?</th>
+<th class="tableblock halign-left valign-top">デフォルト</th>
+<th class="tableblock halign-left valign-top">注記</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">InstanceType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">サービスに使用する EC2 インスタンスの型。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デフォルトでは必須</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">t3.small</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Teradata では、コストを節約するためにデフォルトのインスタンス型を使用することをお勧めします。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RootVolumeSize</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">インスタンスに接続するroot ディスクのサイズ (GB 単位)。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デフォルトでは必須</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8～1000の値をサポートします。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TerminationProtection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">インスタンス終了保護を有効にします。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デフォルトでは必須</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IamRole</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CloudFormationが新しいIAMロールを作成するか、既存のロールを使用するかを指定します。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デフォルトでは必須</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">New</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">サポートされているオプションは以下のとおりです: NewまたはExisting</p>
+<p class="tableblock"><a href="ai-unlimited-aws-permissions-policies.html" class="bare">ai-unlimited-aws-permissions-policies.html</a> を参照してください。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IamRoleName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">インスタンスに割り当てるIAMロールの名前。既存のIAMロールまたは で新しく作成されたIAMロールのいずれか。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デフォルトではオプション</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">workspaces-iam-role</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">新しい IAM ロールに名前を付ける場合、CloudFormation には CAPABILITY_NAMED_IAM 機能が必要です。</p>
+<p class="tableblock">自動生成された名前を使用する場合は、このフィールドを空白のままにします。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IamPermissionsBoundary</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">インスタンスに割り当てられた IAM ロールに関連付ける IAM アクセス権境界の ARN。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">オプション</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AvailabilityZone</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">インスタンスをデプロイするアベイラビリティゾーン。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">必須</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">値はサブネット、既存のボリュームのゾーンと一致する必要があり、インスタンス型は選択したゾーンで使用できる必要があります。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LoadBalancing</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">インスタンスがNLBを介してアクセスされるかどうかを指定します。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デフォルトでは必須</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NetworkLoadBalancer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">サポートされているオプションは以下のとおりです: NetworkLoadBalancer または なし</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LoadBalancerScheme</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ロードバランサが使用されている場合、このフィールドは、インスタンスがインターネットからアクセスできるか、VPC 内からのみアクセスできるかを指定します。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デフォルトではオプション</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Internet-facing</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">インターネットに接続されたロード バランサーの DNS 名は、ノードのパブリック IP アドレスにパブリックに解決できます。したがって、インターネットに接続されたロード バランサーは、クライアントからのリクエストをインターネット経由でルーティングできます。内部ロード バランサのノードにはプライベート IP アドレスのみがあります。インターネットに接続された内部ロード バランサーの DNS 名は、ノードのパブリック個人 IP アドレスにパブリックに解決できます。したがって、内部ロードバランサーは、ロードバランサーの VPC にアクセスできるクライアントからのリクエストをルーティングできます。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Private</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">サービスをパブリック IP のないプライベート ネットワークにデプロイするかどうかを指定します。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">必須</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Session</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AWSセッションマネージャを使用してインスタンスにアクセスできるかどうかを指定する。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">必須</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vpc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">インスタンスをデプロイするネットワーク。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">必須</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subnet</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">インスタンスをデプロイするサブネットワーク。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">必須</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">サブネットは、選択した可用性ゾーン内に存在する必要があります。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KeyName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">インスタンスの起動後に安全に接続できるようにする公開鍵と秘密鍵のペア。AWS アカウントを作成するとき、これは優先リージョンで作成するキー ペアです。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">オプション</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SSHキーを含めない場合は、このフィールドを空白のままにします。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AccessCIDR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">インスタンスへのアクセスが認証される CIDR IP アドレス範囲。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">オプション</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Teradata では、この値を信頼できる IP 範囲に設定することをお勧めします。
+カスタム セキュリティ グループ受信ルールを作成しない限り、受信通信量を認証するには、AccessCIDR、PrefixList、または SecurityGroup の少なくとも 1 つを定義します。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PrefixList</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">インスタンスとの通信に使用できる接頭辞リスト。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">オプション</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">カスタム セキュリティ グループ受信ルールを作成しない限り、受信通信量を認証するには、AccessCIDR、PrefixList、または SecurityGroup の少なくとも 1 つを定義します。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SecurityGroup</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">インスタンスへのインバウンドおよびアウトバウンドの通信量を制御する仮想ファイアウォール。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">オプション</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SecurityGroup は、インスタンスへのアクセスを認証するプロトコル、ポート、IP アドレスまたは CIDR ブロックを指定する一連のルールとして実装されます。
+カスタム セキュリティ グループ受信ルールを作成しない限り、受信通信量を認証するには、AccessCIDR、PrefixList、または SecurityGroup の少なくとも 1 つを定義します。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UsePersistentVolume</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">データの保存に永続ボリュームを使用するかどうかを指定します。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デフォルトではオプション</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">なし</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">サポートされるオプションは、ユースケースに応じて、新しい永続ボリューム、既存の永続ボリューム、またはなしです。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PersistentVolumeSize</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">インスタンスに付与できる永続ボリュームのサイズ (GB 単位)。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デフォルトでは必須</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8 ～ 1000 の値をサポート</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExistingPersistentVolumeId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">インスタンスに付与できる既存の永続ボリュームの ID。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UsePersistentVolume が Existing に設定されている場合は必須</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">永続ボリュームは、ワークスペース サービス インスタンスと同じ可用性ゾーンに存在する必要があります。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PersistentVolumeDeletionPolicy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CloudOmatics の配置を削除したときの永続的なボリュームの動作。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デフォルトでは必須</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">サポートされているオプションは、 Delete、Retain、RetainExceptOnCreate、およびSnapshotです。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LatestAmiId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AMI の最新バージョンを指すイメージの ID。この値は SSM ルックアップに使用されます。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デフォルトでは必須</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">このデプロイメントでは、利用可能な最新の ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2 イメージを使用します。
+IMPORTANT: この値を変更すると、スタックが破損する可能性があります。</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Workspace サービスのパラメータ</strong></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">パラメータ</th>
+<th class="tableblock halign-left valign-top">説明</th>
+<th class="tableblock halign-left valign-top">必須?</th>
+<th class="tableblock halign-left valign-top">デフォルト</th>
+<th class="tableblock halign-left valign-top">注記</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WorkspacesHttpPort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Workspace サービス UI にアクセスするためのポート。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デフォルトでは必須</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3000</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WorkspacesGrpcPort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Workspace サービス API にアクセスするためのポート。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デフォルトでは必須</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3282</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WorkspacesVersion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デプロイするワークスペース サービスのバージョン。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デフォルトでは必須</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">latest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">値はコンテナのバージョンタグ (latest など) です。</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>JupyterLabのパラメータ</strong></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">パラメータ</th>
+<th class="tableblock halign-left valign-top">説明</th>
+<th class="tableblock halign-left valign-top">必須?</th>
+<th class="tableblock halign-left valign-top">デフォルト</th>
+<th class="tableblock halign-left valign-top">注記</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JupyterHttpPort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JupyterLab サービス UI にアクセスするためのポート</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デフォルトでは必須</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8888</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JupyterToken</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UI から JupyterLab にアクセスするために使用されるトークンまたはパスワード</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">必須</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">トークンは文字で始まり、英数字のみを含む必要があります。認証されるパターンは ^[a-zA-Z][a-zA-Z0-9-]* です。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JupyterVersion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デプロイしたいJupyterLabのバージョン。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">デフォルトでは必須</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">latest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">値はコンテナのバージョンタグ (latest など) です。</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Workspace サービスをデプロイしているアカウントに、IAM ロールまたは IAM ポリシーを作成するための十分な IAM アクセス権がない場合は、クラウド管理者に問い合わせてください。
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p><strong>オプション</strong> ページでは、スタック内のリソースのタグ (キーと値のペア) の指定、アクセス権の設定、スタック障害オプションの設定、および詳細オプションの設定を行うことができます。終了したら、<strong>Next</strong>を選択します。</p>
+</li>
+<li>
+<p><strong>Review</strong>ページで、テンプレート設定を確認します。[Capabilities]で、テンプレートがIAMリソースを作成することを確認するチェックボックスをオンにします。</p>
+</li>
+<li>
+<p><strong>Create</strong>を選択してstackをデプロイします。</p>
+</li>
+<li>
+<p>スタックのステータスを監視します。ステータスが`CREATE_COMPLETE`の場合、Teradata AI Unlimitedワークスペースサービスの準備が整っています。
+10。スタックの<strong>Outputs</strong>タブに表示されるURLを使用して、作成されたリソースを表示します。</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ステップ4ワークスペースサービスの設定とセットアップ"><a class="anchor" href="#_ステップ4ワークスペースサービスの設定とセットアップ"></a>ステップ4:ワークスペースサービスの設定とセットアップ</h3>
+<div class="paragraph">
+<p><a href="https://quickstarts.teradata.com/ai-unlimited/install-ai-unlimited-workspaces-docker.html#_configure_and_set_up_workspace_service">ワークスペースサービスの設定とセットアップ</a>参照してください。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2020,433 +2488,13 @@ document.addEventListener("DOMContentLoaded", function () {
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-クラウドの使用料を支払いたくない場合は、<a href="getting.started.vmware.adoc">VMware</a>、<a href="getting.started.vbox">VirtualBox</a>、<a href="getting.started.utm">UTM</a> を使用して Vantage Express をローカルにインストールできます。
+ワークスペース サービスのみをデプロイした場合は、ワークロードを実行する前にインターフェースをデプロイする必要があります。インターフェースをDocker上にローカルにデプロイするには、 <a href="install-ai-unlimited-interface-docker.html">Dockerを使用した Teradata AI Unlimited インターフェースのデプロイ</a>を参照してください。 <a href="https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#jupyter-template">Jupyter テンプレート</a> を使用して、systemd によって制御されるコンテナ内で実行される JupyterLab を持つ単一のインスタンスをデプロイすることもできます。
 </td>
 </tr>
 </table>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_前提条件"><a class="anchor" href="#_前提条件"></a>前提条件</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Googleクラウドアカウント。</p>
-</li>
-<li>
-<p><code>gcloud</code> コマンド ラインユーティリティがマシンにインストールされている。インストール手順はここで見つけることができます。https://cloud.google.com/sdk/docs/install</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_インストール"><a class="anchor" href="#_インストール"></a>インストール</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>4 つの CPU と 8 GB の RAM、70 GB のバランス ディスクを備えた Ubuntu VM を作成します。以下のコマンドは、 <code>us-central1</code> リージョンに VM を作成します。最高のパフォーマンスを得るには、 リージョンを最も近いリージョンに置き換えてください。サポートされているリージョンのリストについては、 <a href="https://cloud.google.com/compute/docs/regions-zones">Google Cloud リージョンのドキュメント</a>をご覧ください。</p>
-<div class="tabset is-loading">
-<div class="ulist tabs">
-<ul>
-<li>
-<p><a id="tabset1_windows"></a>Windows</p>
-</li>
-<li>
-<p><a id="tabset1_macos"></a>MacOS</p>
-</li>
-<li>
-<p><a id="tabset1_linux"></a>Linux</p>
-</li>
-</ul>
-</div>
-<div class="content">
-<div class="tab-pane" aria-labelledby="tabset1_windows">
 <div class="paragraph">
-<p>Powershell で実行する。</p>
-</div>
-<div id="gcloud_create_vm_win" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-powershell hljs" data-lang="powershell">gcloud compute instances create teradata-vantage-express `
-  --zone=us-central1-a `
-  --machine-type=n2-custom-4-8192 `
-  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced `
-  --enable-nested-virtualization `
-  --tags=ve</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_macos">
-<div id="gcloud_create_vm_macos" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute instances create teradata-vantage-express \
-  --zone=us-central1-a \
-  --machine-type=n2-custom-4-8192 \
-  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
-  --enable-nested-virtualization \
-  --tags=ve</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_linux">
-<div id="gcloud_create_vm_linux" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute instances create teradata-vantage-express \
-  --zone=us-central1-a \
-  --machine-type=n2-custom-4-8192 \
-  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
-  --enable-nested-virtualization \
-  --tags=ve</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>VMにsshで接続する。</p>
-<div id="gcloud_ssh" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute ssh teradata-vantage-express --zone=us-central1-a</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><code>root</code> ユーザーに切り替えます。</p>
-<div id="sudo" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo -i</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Vantage Express用のダウンロードディレクトリを準備する。</p>
-<div id="download_dir" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir /opt/downloads
-cd /opt/downloads</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>VirtualBoxと7 zipをインストールします。</p>
-<div id="apt" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apt update &amp;&amp; apt-get install p7zip-full p7zip-rar virtualbox -y</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>curlコマンドを取得して、Vantage Expressをダウンロードします。</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p><a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Vantage Expess のダウンロード ページ</a>に移動します (登録が必要です)。</p>
-</li>
-<li>
-<p>「Vantage Express 17.20」などの最新のダウンロードリンクをクリックします。使用許諾契約のポップアップが表示されます。まだライセンスを受け入れません。</p>
-</li>
-<li>
-<p>ブラウザでネットワークビューを開きます。例えば、Chrome で <kbd>F12</kbd> を押し「 <code>Network</code>」タブに移動します。</p>
-<div class="imageblock">
-<div class="content">
-<img src="../../_images/browser.network.png" alt="ブラウザの「Network」タブ" width="500">
-</div>
-</div>
-</li>
-<li>
-<p>`I Agree (同意する)`ボタンをクリックしてライセンスを受け入れ、ダウンロードをキャンセルします。</p>
-</li>
-<li>
-<p>ネットワーク ビューで、 `VantageExpress`で始まる最後のリクエストを見つけます。それを右クリックして `Copy &#8594; Copy as cURL`を選択します。</p>
-<div class="imageblock">
-<div class="content">
-<img src="../../_images/browser.copy.curl.png" alt="Browser Copy culr" width="500">
-</div>
-</div>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>ssh セッションに戻り、curl コマンドを貼り付けて Vantage Express をダウンロードします。ダウンロードを <code>ve.7z</code> という名前のファイルに保存するには、コマンドに <code>-o ve.7z</code> を追加します。次のように、すべてのHTTPヘッダーを削除できます。</p>
-<div id="download_ve" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -o ve.7z 'http://d289lrf5tw1zls.cloudfront.net/database/teradata-express/VantageExpress17.20_Sles12_202108300444.7z?Expires=1638719978&amp;Signature=GKBkNvery_long_signature__&amp;Key-Pair-Id=********************'</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>ダウンロードしたファイルを解凍します。数分かかります。</p>
-<div id="unzip" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">7z x ve.7z</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>VirtualBox で VM を起動しますコマンドはすぐに返されますが、VM の初期化プロセスには数分かかります。</p>
-<div id="start_vim" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export VM_IMAGE_DIR="/opt/downloads/VantageExpress17.20_Sles12"
-DEFAULT_VM_NAME="vantage-express"
-VM_NAME="${VM_NAME:-$DEFAULT_VM_NAME}"
-vboxmanage createvm --name "$VM_NAME" --register --ostype openSUSE_64
-vboxmanage modifyvm "$VM_NAME" --ioapic on --memory 6000 --vram 128 --nic1 nat --cpus 4
-vboxmanage storagectl "$VM_NAME" --name "SATA Controller" --add sata --controller IntelAhci
-vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk1*')"
-vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 1 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk2*')"
-vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 2 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk3*')"
-vboxmanage modifyvm "$VM_NAME" --natpf1 "tdssh,tcp,,4422,,22"
-vboxmanage modifyvm "$VM_NAME" --natpf1 "tddb,tcp,,1025,,1025"
-vboxmanage startvm "$VM_NAME" --type headless
-vboxmanage controlvm "$VM_NAME" keyboardputscancode 1c 1c</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Vantage Express VM に ssh で接続します。 <code>root</code> をパスワードとして使用します。</p>
-<div id="ssh_to_ve" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ssh -p 4422 root@localhost</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>DBがアップしていることを確認します。</p>
-<div id="pde" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pdestate -a</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>コマンドが`PDE state is RUN/STARTED. DBS state is 5: Logons are enabled - The system is quiescent`を返す場合は、Vantage Expressが起動したことを意味します。
-状態が異なる場合は、正しいステータスが得られるまで <code>pdestate -a</code> を繰り返します。</p>
-</div>
-</li>
-<li>
-<p>Vantage Expressが起動して実行されたら、<code>bteq</code> クライアントのコマンドラインクライアントを起動します。BTEQ (「ビーテック」と発音) は、Teradata Database に SQL クエリーを送信するために使用される、汎用のコマンド ベースのクライアント ツールです。</p>
-<div id="bteq" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bteq</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>bteqに入ったら、Vantage Expressインスタンスに接続します。パスワードを求められたら、 `dbc`を入力します。</p>
-<div id="bteq_logon" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">.logon localhost/dbc</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_サンプル_クエリーを実行する"><a class="anchor" href="#_サンプル_クエリーを実行する"></a>サンプル クエリーを実行する</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>`dbc`ユーザーを使用して、`HR`という新しいデータベースを作成します。このクエリーをコピー/貼り付けて、<kbd>Enter</kbd> を押して実行します。</p>
-<div id="first_query" class="listingblock emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE HR
-AS PERMANENT = 60e6, -- 60MB
-    SPOOL = 120e6; -- 120MB</code></pre>
-</div>
-</div>
-<div class="sidebarblock">
-    <div id="right" style="float: right">
-    <a style="cursor: pointer; color: grey" onclick="this.parentElement.parentElement.style.display = 'none''">x</a>
-  </div>
-  <div class="content">
-    <div class="paragraph">クエリーを実行できましたか?
-      <i class="far fa-thumbs-up click-icon" style="padding: 0rem 0.2rem;" onclick="toggleThumbs(this, 'first_query')"></i>
-      <i class="far fa-thumbs-down click-icon" onclick="toggleThumbs(this 'first_query')"></i>
-    </div>
-  </div>
-</div>
-<style>
-.closebtn {
-  position: absolute;
-  top: 5px;
-  right: 15px;
-  color: white;
-  font-size: 30px;
-  cursor: pointer;
-}
-</style>
-</li>
-<li>
-<p>サンプルテーブルを作成し、データを挿入してクエリーを実行してみましょう。まず、従業員情報を保持するテーブルを作成する。</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE SET TABLE HR.Employees (
-   GlobalID INTEGER,
-   FirstName VARCHAR(30),
-   LastName VARCHAR(30),
-   DateOfBirth DATE FORMAT 'YYYY-MM-DD',
-   JoinedDate DATE FORMAT 'YYYY-MM-DD',
-   DepartmentCode BYTEINT
-)
-UNIQUE PRIMARY INDEX ( GlobalID );</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>次に、レコードを挿入する。</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">INSERT INTO HR.Employees (
-   GlobalID,
-   FirstName,
-   LastName,
-   DateOfBirth,
-   JoinedDate,
-   DepartmentCode
-)
-VALUES (
-   101,
-   'Adam',
-   'Tworkowski',
-   '1980-01-05',
-   '2004-08-01',
-   01
-);</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>最後に、データを取得できるかどうかを確認する。</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM HR.Employees;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>以下の結果が得られるはずです。</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>GlobalID  FirstName  LastName   DateOfBirth  JoinedDate  DepartmentCode
---------  ---------  ---------- -----------  ----------  --------------
-     101  Adam       Tworkowski  1980-01-05  2004-08-01               1</pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_オプションを設定する"><a class="anchor" href="#_オプションを設定する"></a>オプションを設定する</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>VM を停止して起動する場合は、Vantage Express を自動起動に追加することをお勧めします。 VM に ssh で接続し、以下のコマンドを実行します。</p>
-<div id="autostart" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo -i
-
-cat &lt;&lt;EOF &gt;&gt; /etc/default/virtualbox
-VBOXAUTOSTART_DB=/etc/vbox
-VBOXAUTOSTART_CONFIG=/etc/vbox/autostart.cfg
-EOF
-
-cat &lt;&lt;EOF &gt; /etc/systemd/system/vantage-express.service
-[Unit]
-Description=vm1
-After=network.target virtualbox.service
-Before=runlevel2.target shutdown.target
-[Service]
-User=root
-Group=root
-Type=forking
-Restart=no
-TimeoutSec=5min
-IgnoreSIGPIPE=no
-KillMode=process
-GuessMainPID=no
-RemainAfterExit=yes
-ExecStart=/usr/bin/VBoxManage startvm vantage-express --type headless
-ExecStop=/usr/bin/VBoxManage controlvm vantage-express savestate
-[Install]
-WantedBy=multi-user.target
-EOF
-
-systemctl daemon-reload
-systemctl enable vantage-express
-systemctl start vantage-express</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>インターネットからVantage Expressに接続したい場合は、VMに対してファイアウォールの穴を開ける必要がある。また、デフォルトのパスワードを  `dbc`ユーザーに変更する必要がある。</p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><code>dbc</code> ユーザーのパスワードを変更するには、VM に移動して bteq を開始する。</p>
-<div id="pw_change_bteq" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bteq</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>ユーザー名とパスワードとして <code>dbc</code> を使用してデータベースにログインする。</p>
-<div id="pw_change_bteq_logon" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">.logon localhost/dbc</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><code>dbc</code> ユーザーのパスワードを変更する。</p>
-<div id="pw_change_mod_user" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">MODIFY USER dbc AS PASSWORD = new_password;</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>gcloud コマンドを使用して、ポート 1025 をインターネットに開くことができるようになりました。</p>
-<div id="gcloud_fw_rule" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute firewall-rules create vantage-express --allow=tcp:1025 --direction=IN --target-tags=ve</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_クリーンアップ"><a class="anchor" href="#_クリーンアップ"></a>クリーンアップ</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>料金の発生を停止するには、VM を削除する。</p>
-</div>
-<div id="delete_vm" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute instances delete teradata-vantage-express --zone=us-central1-a</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>また、追加したファイアウォール ルールも忘れずに削除してください。例:</p>
-</div>
-<div id="delete_fw_rule" class="listingblock content-editable emits-gtm-events">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcloud compute firewall-rules delete vantage-express</code></pre>
+<p>Teradata AI Unlimited の準備が整いました。</p>
 </div>
 </div>
 </div>
@@ -2457,22 +2505,13 @@ systemctl start vantage-express</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="../../nos.html" class="xref page">オブジェクトストレージに保存されたクエリーデータ</a></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_さらに詳しく"><a class="anchor" href="#_さらに詳しく"></a>さらに詳しく</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20">Teradata®Studio™およびStudio™Expressインストール ガイド</a></p>
+<p>簡単なワークフローを実行して、Teradata AI Unlimited を開始します。 <a href="running-sample-ai-unlimited-workload.html">Teradata AI Unlimitedを使用してJupyterLabでサンプルワークロードを実行する</a>  を参照してください。</p>
 </li>
 <li>
-<p><a href="https://docs.teradata.com/r/jmAxXLdiDu6NiyjT6hhk7g/root">BTEQの紹介</a></p>
+<p>Teradata AI Unlimited-AWS IAMのロールとポリシーについて詳しく知りたいですか? <a href="ai-unlimited-aws-permissions-policies.html">カスタム権限とポリシーを使用してAWSのアクセスと権限を制御する</a> を参照してください。</p>
+</li>
+<li>
+<p>Teradata AI Unlimited が実際のユースケースでどのように役立つかを知りたいですか? 近日公開! GitHub リンクについては、このスペースを引き続き監視してください。</p>
 </li>
 </ul>
 </div>
