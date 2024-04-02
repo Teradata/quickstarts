@@ -130,4 +130,5 @@ image::vantagecloud-lake/{dir}/lake_0_setup.png[環境構築Jupyter Notebook,ali
 == さらに詳しく
 
 * https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin[Teradata VantageCloud Lakeのドキュメント]
-* https://quickstarts.teradata.com/jupyter.html[Jupyter NotebookからVantageを利用する方法]
+* link:../general/jupyter.html[Jupyter NotebookからVantageを利用する方法] 
+
