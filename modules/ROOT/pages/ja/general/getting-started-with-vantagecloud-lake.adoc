@@ -211,7 +211,7 @@ image::lake_settings_menu.png[作成した環境の設定メニュー,align="cen
 
 [*設定*] で [*インターネット接続*] チェックボックスをオンにし、環境へのアクセスに使用する IP アドレスを CIDR 形式で指定します (たとえば、192.168.2.0/24 は 192.168.2.0 から 192.168.2.255 の範囲内のすべての IP アドレスを指定します)。 
 
-NOTE: インターネット接続の設定の詳細については、https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin/Step-2-Setting-the-Environment-Connection-Type/Setting-Up-an-Internet-Connection[こちら]をご覧ください。
+NOTE: インターネット接続の設定の詳細については、 https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin/Step-2-Setting-the-Environment-Connection-Type/Setting-Up-an-Internet-Connection[こちら] をご覧ください。
 
 image::lake_ip_addresses.png[IPホワイトリスト,align="center",width=50%]
 
