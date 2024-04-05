@@ -33,7 +33,7 @@ include::../partials/vantage_clearscape_analytics.adoc[]
 
 == クエリーを送信するコード
 
-これは、`teradatasql`を使用してTeradata Vantageに接続するための単純なPythonコードです。残っているのは、接続パラメータと認証パラメータを渡してクエリーを実行することだけです。
+これは、`teradatasql` を使用してTeradata Vantageに接続するための単純なPythonコードです。残っているのは、接続パラメータと認証パラメータを渡してクエリーを実行することだけです。
 
 ++++
 <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fdev-rel-python-driver-demo%2Fblob%2Fmain%2Fsrc%2Fteradata_python_connection.py&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></script>
@@ -41,7 +41,7 @@ include::../partials/vantage_clearscape_analytics.adoc[]
 
 == まとめ
 
-このハウツーでは、 `teradatasql` Python データベース ドライバを使用して Teradata Vantage に接続する方法を説明しました。 `teradatasql`を使用して SQL クエリーを Teradata Vantage に送信するサンプル Python コードについて説明しました。
+このハウツーでは、 `teradatasql` Python データベース ドライバを使用して Teradata Vantage に接続する方法を説明しました。 `teradatasql` を使用して SQL クエリーを Teradata Vantage に送信するサンプル Python コードについて説明しました。
 
 == さらに詳しく
 * link:https://github.com/Teradata/python-driver[teradatasql Python ドライバ リファレンス,window="_blank"]

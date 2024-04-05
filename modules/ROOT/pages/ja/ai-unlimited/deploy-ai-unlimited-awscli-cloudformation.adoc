@@ -12,7 +12,7 @@ IMPORTANT: この製品はプレビュー版であり、変更される可能性
 
 == 概要
 
-AWS CLIから`aws cloudformation create-stack`または`aws cloudformation deploy`コマンドを使用してスタックをデプロイできる。このセクションの例では、create-stackコマンドを使用している。 `create-stack` コマンドと `deploy` コマンドの構文の違いについては 、link:https://docs.aws.amazon.com/cli/latest/reference/cloudformation/#cli-aws-cloudformation[AWS CLI コマンド リファレンス]ドキュメントを参照してください。
+AWS CLIから`aws cloudformation create-stack`または`aws cloudformation deploy`コマンドを使用してスタックをデプロイできる。このセクションの例では、create-stackコマンドを使用している。 `create-stack` コマンドと `deploy` コマンドの構文の違いについては 、 link:https://docs.aws.amazon.com/cli/latest/reference/cloudformation/#cli-aws-cloudformation[AWS CLI コマンド リファレンス]ドキュメントを参照してください。
 
 == 始める前に
 
@@ -20,7 +20,7 @@ AWS CLIから`aws cloudformation create-stack`または`aws cloudformation deplo
 * 以下を確認します。
 ** 必須の AWS 認証情報。
 ** リソースを作成および管理するために必要な IAM アクセス権。必要なアクセス権がない場合は、組織管理者に問い合わせて、指定されたすべてのロールを作成してください。
-** 必要なパラメータファイルとCloudFormationテンプレート。ファイルはlink:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws[AI Unlimited GitHubリポジトリ]からダウンロードできます。
+** 必要なパラメータファイルとCloudFormationテンプレート。ファイルは link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws[AI Unlimited GitHubリポジトリ] からダウンロードできます。
 
 == スタックを作成する
 AWS CLI で以下のコマンドを実行します。

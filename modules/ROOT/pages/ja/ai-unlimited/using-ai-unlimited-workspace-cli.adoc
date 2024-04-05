@@ -95,7 +95,7 @@ workspacesctl project backup <Project_Name> --no-tls
 workspacesctl project engine suspend <Project_Name> --no-tls
 ----
 
-サポートされているコマンドのリストについては、<<_workspaces_cli_reference, ワークスペースクライアントのリファレンス>>を参照してください。
+サポートされているコマンドのリストについては、 <<_workspaces_cli_reference, ワークスペースクライアントのリファレンス>> を参照してください。
 
 
 == ワークスペースクライアントのリファレンス
@@ -149,7 +149,7 @@ image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.user.list.png[AI Unl
 ----
 workspacesctl project create <Project_Name> -e <CSP> --no-tls
 ----
-NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls` パラメータを追加する必要はありません。
 
 **フラグ**:
 [cols="1,1,1,1"]
@@ -196,7 +196,7 @@ workspacesctl project list --no-tls
 ----
 workspacesctl project list <Project_Name> --no-tls
 ----
-NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls` パラメータを追加する必要はありません。
 
 **フラグ**:
 
@@ -237,7 +237,7 @@ image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.project.delete.png[A
 ----
 workspacesctl project user list <Project_Name> --no-tls
 ----
-NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls` パラメータを追加する必要はありません。
 
 **フラグ**:
 
@@ -256,7 +256,7 @@ image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.project.user.list.pn
 ----
 workspacesctl project backup <Project_Name> --no-tls
 ----
-NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls` パラメータを追加する必要はありません。
 
 **フラグ**:
 
@@ -283,7 +283,7 @@ workspacesctl project restore <Project_Name> --no-tls
 ----
 workspacesctl project restore <Project_Name> --gitref <git_reference> --no-tls
 ----
-NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls` パラメータを追加する必要はありません。
 
 **フラグ**:
 [cols="1,1,1,1"]
@@ -317,7 +317,7 @@ image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.project.restore.png[
 ----
 workspacesctl project engine deploy <Project_Name> -t small --no-tls
 ----
-NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls` パラメータを追加する必要はありません。
 
 **フラグ**:
 [cols="1,1,1,1"]
@@ -408,7 +408,7 @@ image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.engine.list.png[AI U
 ----
 workspacesctl project auth create <Project_Name> -n <Auth_Name> -a <Auth_Key> -s <Auth_Secret> -r <ObjectStore_Region> --no-tls
 ----
-NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls` パラメータを追加する必要はありません。
 
 **フラグ**:
 [cols="1,1,1,1"]
@@ -418,12 +418,12 @@ NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメー�
 |`-a`, `--accesskey`
 |文字列
 |認証アクセスキーまたはID。
-|はい (`-f`フラグを使用していない場合)。
+|はい ( `-f` フラグを使用していない場合)。
 
 |`-n`, `--name string`
 |文字列
 |オブジェクトストアの認証名。
-|はい (`-f`フラグを使用していない場合)。
+|はい ( `-f` フラグを使用していない場合)。
 
 |`-f`, `--manifest`
 |文字列
@@ -438,7 +438,7 @@ NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメー�
 |-s, --secret string
 |文字列
 |オブジェクト ストアの認証シークレット アクセス キー。
-|はい (`-f`フラグを使用していない場合)。
+|はい ( `-f` フラグを使用していない場合)。
 
 |`-h`, `--help`
 |
@@ -462,7 +462,8 @@ image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.auth.create.png[AI U
 ----
 workspacesctl project auth list <Project_Name> --no-tls
 ----
-NOTE: 設定にTLS設定が含まれている場合は、` `パラメータを追加する必要はありません。-no-tls
+NOTE: 設定にTLS設定が含まれている場合は、 `-no-tls`パラメータを追加する必要はありません。
+
 
 **フラグ**:
 
@@ -483,7 +484,7 @@ image::ai-unlimited/{page-image-directory}/ai.unlimited.cli.auth.list.png[AI Unl
 ----
 workspacesctl project auth delete <Project_Name> -n <Auth_Name> --no-tls
 ----
-NOTE: 設定にTLS設定が含まれている場合は、`-no-tls`パラメータを追加する必要はありません。
+NOTE: 設定にTLS設定が含まれている場合は、`-no-tls` パラメータを追加する必要はありません。
 
 **フラグ**:
 [cols="1,1,1,1"]

@@ -65,7 +65,7 @@ image::modelops-git.png[ModelOps 方法論の GIT スクリーンショット, w
 
 include::partials/modelops-basic.adoc[]
 
-== コードテンプレートの準備
+== コードテンプレートを準備する
 
 Gitモデルでは、新しいモデルを追加するときに使用可能なコードテンプレートを入力する必要があります。 
 

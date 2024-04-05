@@ -24,9 +24,9 @@ include::../partials/vantage_clearscape_analytics.adoc[]
 
 `WRITE_NOS` を使用するとデータベーステーブルまたはクエリーの結果を選択したまたはすべてのカラムを使用してAmazon S3, Azure Blob storage, Azure Data Lake Storage Gen2, Google Cloud Storageなどの外部オブジェクト ストレージに書き込むことができます。この機能ではデータをParquet形式で保存します。
 
- `WRITE_NOS` 機能については、 https://docs.teradata.com/r/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide/June-2022/Writing-Data-to-External-Object-Store[NOS ドキュメント]に詳細なドキュメントが掲載されていますので参考にしてください。
+`WRITE_NOS` 機能については、 https://docs.teradata.com/r/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide/June-2022/Writing-Data-to-External-Object-Store[NOS ドキュメント] に詳細なドキュメントが掲載されていますので参考にしてください。
 
- `WRITE_NOS` 関数を実行できるデータベースへのアクセス権が必要です。そのようなデータベースがない場合は、以下のSQLでVantageユーザーを作成します。
+`WRITE_NOS` 関数を実行できるデータベースへのアクセス権が必要です。そのようなデータベースがない場合は、以下のSQLでVantageユーザーを作成します。
 [source, teradata-sql, id="parquet_create_user", role="emits-gtm-events"]
 ----
 CREATE USER db AS PERM=10e7, PASSWORD=db;
@@ -36,8 +36,7 @@ GRANT EXECUTE FUNCTION on TD_SYSFNLIB.READ_NOS to db;
 GRANT EXECUTE FUNCTION on TD_SYSFNLIB.WRITE_NOS to db;
 ----
 
-NOTE: ユーザーとその権限の設定についてもっと詳しく知りたい場合は、https://docs.teradata.com/r/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide/June-2022/Setting-Up-Access/Setting-Access-Privileges[NOS ドキュメント]を参照してください。
-
+NOTE: ユーザーとその権限の設定についてもっと詳しく知りたい場合は、 https://docs.teradata.com/r/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide/June-2022/Setting-Up-Access/Setting-Access-Privileges[NOS ドキュメント] を参照してください。
 
 1. まず、Teradata Vantageインスタンスにテーブルを作成します。
 +
@@ -75,9 +74,9 @@ column1   column2       column3
       3  22/01/03          3.30
 ----
 
-3. `WRITE_NOS`を使用してParquetファイルを作成します。`<BUCKET_NAME>`をs3バケットの名前に置き換えることを忘れないでください。また、`<YOUR-ACCESS-KEY-ID>` と `<YOUR-SECRET-ACCESS-KEY>` をアクセス キーとシークレットに置き換えます。
+3. `WRITE_NOS` を使用してParquetファイルを作成します。`<BUCKET_NAME>` をs3バケットの名前に置き換えることを忘れないでください。また、`<YOUR-ACCESS-KEY-ID>` と `<YOUR-SECRET-ACCESS-KEY>` をアクセス キーとシークレットに置き換えます。
 +
-NOTE: オブジェクト ストレージにアクセスするための信頼証明を作成する方法については、クラウド プロバイダのドキュメントを確認してください。例えば、AWS の場合は 、https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key/[「How do I create an AWS access key? (AWS アクセス キーを作成するにはどうすればよいですか?)」]を確認してください。
+NOTE: オブジェクト ストレージにアクセスするための信頼証明を作成する方法については、クラウド プロバイダのドキュメントを確認してください。例えば、AWS の場合は 、  https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key/[How do I create an AWS access key? (AWS アクセス キーを作成するにはどうすればよいですか?)」] を確認してください。
 +
 [source, teradata-sql]
 ----
@@ -97,7 +96,7 @@ INCLUDE_HASHBY('TRUE')
 +
 これで、オブジェクト ストレージ バケットにparquetファイルが作成されました。ファイルを簡単にクエリーするには、ステップ 4 に従う必要があります。
 
-4. NOSでサポートされる外部テーブルを作成します。`<BUCKET_NAME>`をs3バケットの名前に置き換えることを忘れないでください。また、 `<YOUR-ACCESS-KEY-ID>` と `<YOUR-SECRET-ACCESS-KEY>` をアクセス キーとシークレットに置き換えます。
+4. NOSでサポートされる外部テーブルを作成します。`<BUCKET_NAME>` をs3バケットの名前に置き換えることを忘れないでください。また、 `<YOUR-ACCESS-KEY-ID>` と `<YOUR-SECRET-ACCESS-KEY>` をアクセス キーとシークレットに置き換えます。
 +
 [source, teradata-sql]
 ----

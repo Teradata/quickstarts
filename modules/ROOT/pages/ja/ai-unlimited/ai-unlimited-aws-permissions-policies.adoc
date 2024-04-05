@@ -16,7 +16,7 @@ AWSリソースへのアクセスを提供するために必要な権限を持�
 
 この記事には、新しいIAMロールに必要なサンプルIAMポリシーが含まれています。
 
-これらのポリシーは、**Security & Identity**>**Identity & Access Management**>**Create Policy**で設定します。詳細な手順については、 link:https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions_create-policies.html[「ロールの作成とポリシーのアタッチ (コンソール) - AWS Identity and Access Management」]を参照してください。
+これらのポリシーは、 **Security & Identity** > **Identity & Access Management** > **Create Policy**で設定します。詳細な手順については、 link:https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions_create-policies.html[「ロールの作成とポリシーのアタッチ (コンソール) - AWS Identity and Access Management」] を参照してください。
 
 === workspaces-with-iam-role-permissions.json
 
@@ -266,7 +266,7 @@ Teradata AI Unlimitedを使用すると、コンテナ、ポッド、または�
 
 以下の推奨される永続ボリューム フローでは、ボリュームが再マウントされ、データが保持されます。
 
-1. `UsePersistentVolume`セットを**New**、`PersistentVolumeDeletionPolicy`セットを**Retain**として、新しいデプロイメントを作成する。
+1. `UsePersistentVolume` を **New** として、`PersistentVolumeDeletionPolicy` を **Retain**として設定して、新しいデプロイメントを作成する。
 2. スタック出力では、将来使用するためにvolume-idをメモする。
 3. インスタンスが終了するまで、インスタンスを構成して使用する。
 4. 次回のデプロイでは、以下の設定を使用します。

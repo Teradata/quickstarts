@@ -19,7 +19,7 @@ include::../partials/vantage_clearscape_analytics.adoc[]
 
 == サンプルデータをロードする
 
-この例では、`val`データベースのサンプルデータを使用します。`accounts`、`customer`、`16transactions`のテーブルを使用します。この過程でいくつかのテーブルを作成しますが、`val` データベースにテーブルを作成する際に問題が発生する可能性があるため、独自のデータベース `td_analytics_functions_demo` を作成しましょう。
+この例では、`val` データベースのサンプルデータを使用します。`accounts`、`customer`、`16transactions` のテーブルを使用します。この過程でいくつかのテーブルを作成しますが、`val` データベースにテーブルを作成する際に問題が発生する可能性があるため、独自のデータベース `td_analytics_functions_demo` を作成しましょう。
 
 [source, teradata-sql]
 ----
@@ -50,13 +50,13 @@ SELECT * FROM val.transactions
 
 == サンプルデータを理解する
 
-サンプルテーブルが`td_analytics_functions_demo`にロードされたので、データを調べてみましょう。これは、銀行の顧客(700行ほど)、口座(1400行ほど)、取引(77,000行ほど)の単純で架空のデータセットです。これらは以下のように相互に関連しています。
+サンプルテーブルが `td_analytics_functions_demo` にロードされたので、データを調べてみましょう。これは、銀行の顧客(700行ほど)、口座(1400行ほど)、取引(77,000行ほど)の単純で架空のデータセットです。これらは以下のように相互に関連しています。
 
 image::banking.model.png[銀行モデル, width=100%]
 
 このハウツーの後半では、テーブル内のクレジット カードに関連しないすべての変数に基づいて、銀行顧客のクレジット カードの月平均残高を予測するモデルを構築できるかどうかを検討していきます。
 
-== データセットの準備
+== データセットを準備する
  
 3つの異なるテーブルにデータがあり、それらを結合してフィーチャを作成します。まず、結合されたテーブルを作成します。 
 
@@ -97,11 +97,11 @@ image::joined_table_ml.png[結合されたテーブル, width=100%]
 
 == 特徴量エンジニアリング
 
-データを見ると、`cc_avg_bal`を予測するために考慮できる特徴がいくつかあることがわかります。
+データを見ると、`cc_avg_bal`を予測するために考慮できる特徴がいくつかあることがわかります。 
 
 === TD_OneHotEncodingFit
 
-このデータセットには、`gender`、`marital status`、`state code`などのカテゴリ機能がある。データベース分析関数 link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Feature-Engineering-Transform-Functions/TD_OneHotEncodingFit[TD_OneHotEncodingFit,window="_blank" ]を 利用して、カテゴリをワンホット数値ベクトルにエンコードします。 
+このデータセットには、`gender`、`marital status`、`state code` などのカテゴリ機能がある。データベース分析関数 link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Feature-Engineering-Transform-Functions/TD_OneHotEncodingFit[TD_OneHotEncodingFit,window="_blank" ] を 利用して、カテゴリをワンホット数値ベクトルにエンコードします。 
 
 [source, teradata-sql]
 ----
@@ -119,7 +119,7 @@ Approach('Auto')
 
 === TD_ScaleFit
 
-データを見ると、`tot_income`、`tot_age`、`ck_avg_bal`などのいくつかの列は、異なる範囲の値を持っています。勾配降下法などの最適化アルゴリズムの場合、より高速な収束、スケールの一貫性、およびモデルのパフォーマンスの向上のために、値を同じスケールに正規化することが重要です。 link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Feature-Engineering-Transform-Functions/TD_ScaleFit[TD_ScaleFit, window="_blank"] 関数を利用して、さまざまなスケールで値を正規化します。
+データを見ると、`tot_income`、`tot_age`、`ck_avg_bal` などのいくつかの列は、異なる範囲の値を持っています。勾配降下法などの最適化アルゴリズムの場合、より高速な収束、スケールの一貫性、およびモデルのパフォーマンスの向上のために、値を同じスケールに正規化することが重要です。 link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Feature-Engineering-Transform-Functions/TD_ScaleFit[TD_ScaleFit, window="_blank"] 関数を利用して、さまざまなスケールで値を正規化します。
 
 [source, teradata-sql]
 ----
@@ -135,7 +135,7 @@ Approach('Auto')
 
 === TD_ColumnTransformer
 
-Teradataのデータベース分析関数は、通常、データ変換のためにペアで動作します。最初のステップは、データの "fitting" に専念します。次に、第2の関数は、フィッティングプロセスから導出されたパラメータを利用して、データに対して実際の変換を実行します。 link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Feature-Engineering-Transform-Functions/TD_ColumnTransformer[TD_ColumnTransformer, window="_blank" ]は、 FIT テーブルを関数に受け取り、入力テーブルの列を 1 回の操作で変換します。
+Teradataのデータベース分析関数は、通常、データ変換のためにペアで動作します。最初のステップは、データの "fitting" に専念します。次に、第2の関数は、フィッティングプロセスから導出されたパラメータを利用して、データに対して実際の変換を実行します。 link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Feature-Engineering-Transform-Functions/TD_ColumnTransformer[TD_ColumnTransformer, window="_blank" ] は、 FIT テーブルを関数に受け取り、入力テーブルの列を 1 回の操作で変換します。
 
 [source, teradata-sql]
 ----
@@ -149,7 +149,7 @@ ON scale_fit_joined_table_input AS ScaleFitTable DIMENSION
 ) WITH DATA;
 ----
 
-変換を実行すると、以下のイメージに示すように、カテゴリ列がワンホット エンコードされ、数値がスケーリングされたことがわかります。たとえば、`tot_income`は[0,1]の範囲にあり、`gender`は`gender_0`、`gender_1`、`gender_other`に1ホットエンコードされます。
+変換を実行すると、以下のイメージに示すように、カテゴリ列がone-hot エンコードされ、数値がスケーリングされたことがわかります。たとえば、`tot_income` は[0,1]の範囲にあり、`gender` は`gender_0`、`gender_1`、`gender_other` に one-hot エンコードされます。
 
 image::ml_tot_income_scaled.png[合計所得金額換算, width=50%]
 
@@ -174,11 +174,11 @@ Seed (42)
 );
 ----
 
-以下のイメージからわかるように、この関数は新しい列 `TD_IsTrainRow`を追加します。 
+以下のイメージからわかるように、この関数は新しい列 `TD_IsTrainRow` を追加します。 
 
 image::ml_train_col.png[行列のトレーニング, width=100%]
 
-`TD_IsTrainRow`を使用して、トレーニング用とテスト用の2つのテーブルを作成します。
+`TD_IsTrainRow` を使用して、トレーニング用とテスト用の2つのテーブルを作成します。
 
 [source, teradata-sql]
 ----
@@ -197,7 +197,7 @@ CREATE TABLE td_analytics_functions_demo.testing_table AS (
 
 == 一般化線形モデルを使用したトレーニング 
 
-ここで 、link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Training-Functions/TD_GLM[TD_GLM, window="_blank"] データベース分析関数を使用して、トレーニング データセットでトレーニングします。`TD_GLM`関数は、データセットに対して回帰および分類の分析を実行する一般化線形モデル(GLM)です。ここでは、 `tot_income`、 `ck_avg_bal`、`cc_avg_tran_amt`、婚姻ステータス、性別、ステータスのワンホット エンコードされた値など、多数の入力列を使用しています。 `cc_avg_bal` は依存列または応答列であり、連続しているため、回帰問題となります。回帰には `Family` として `Gaussian` 、分類には `Binomial` として使用します。 
+ここで 、link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Training-Functions/TD_GLM[TD_GLM, window="_blank"] データベース分析関数を使用して、トレーニング データセットでトレーニングします。`TD_GLM` 関数は、データセットに対して回帰および分類の分析を実行する一般化線形モデル(GLM)です。ここでは、 `tot_income`、 `ck_avg_bal`、`cc_avg_tran_amt`、婚姻ステータス、性別、ステータスのワンホット エンコードされた値など、多数の入力列を使用しています。 `cc_avg_bal` は依存列または応答列であり、連続しているため、回帰問題となります。回帰には `Family` として `Gaussian` 、分類には `Binomial` として使用します。 
 
 パラメータ `Tolerance` は、反復を停止するためにモデルの予測精度に必要な最小限の改善を示し、 `MaxIterNum` は認証される反復の最大数を示します。モデルは、最初に満たされた条件に基づいてトレーニングを終了します。例えば、以下の例では、58 回の反復後のモデルは `CONVERGED` になります。
 
@@ -222,7 +222,7 @@ image::ml_model_trained.png[トレーニングされたGLM, width=100%]
 
 == テストデータセットのスコアリング
 
-次に、モデル `GLM_model_training` を使用して 、link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Scoring-Functions/TD_GLMPredict[TD_GLMPredict,window="_blank"] データベース分析関数を使用してテスト データセット `testing_table` をスコアリングします。
+次に、モデル `GLM_model_training` を使用して 、link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Scoring-Functions/TD_GLMPredict[TD_GLMPredict,window="_blank"]  データベース分析関数を使用してテスト データセット `testing_table` をスコアリングします。
 
 [source, teradata-sql]
 ----
@@ -242,7 +242,7 @@ image::ml_model_scored.png[スコア付けされたGLM, width=100%]
 
 == モデル評価
 
-最後に、スコア化された結果に基づいてモデルを評価します。ここでは link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Evaluation-Functions/TD_RegressionEvaluator[TD_RegressionEvaluator, window="_blank"] 関数を使用しています。モデルは、 `R2`、 `RMSE`、 `F_score`などのパラメータに基づいて評価できます。 
+最後に、スコア化された結果に基づいてモデルを評価します。ここでは link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Evaluation-Functions/TD_RegressionEvaluator[TD_RegressionEvaluator, window="_blank"] 関数を使用しています。モデルは、 `R2`、 `RMSE`、 `F_score` などのパラメータに基づいて評価できます。 
 
 [source, teradata-sql]
 ----
@@ -262,7 +262,7 @@ NOTE: このハウツーの目的は、特徴量エンジニアリングを説�
 
 == まとめ
 
-このクイック スタートでは、Teradata Database Analytic 関数を使用して ML モデルを作成する方法を学習しました。`val`データベースから `customer`、`accounts`、 `transactions` のデータを使用して独自のデータベース `td_analytics_functions_demo` を構築しました。`TD_OneHotEncodingFit`、`TD_ScaleFit`、`TD_ColumnTransformer`を使用して列を変換することにより、特徴量エンジニアリングを実行しました。次に、テスト分割のトレーニングに `TD_TrainTestSplit` を使用しました。`TD_GLM`モデルを使用してトレーニングデータセットをトレーニングし、テストデータセットをスコア化しました。最後に、`TD_RegressionEvaluator`機能を用いてスコア化した結果を評価しました。 
+このクイック スタートでは、Teradata Database Analytic 関数を使用して ML モデルを作成する方法を学習しました。`val` データベースから `customer`、`accounts`、 `transactions` のデータを使用して独自のデータベース `td_analytics_functions_demo` を構築しました。`TD_OneHotEncodingFit`、`TD_ScaleFit`、`TD_ColumnTransformer` を使用して列を変換することにより、特徴量エンジニアリングを実行しました。次に、テスト分割のトレーニングに `TD_TrainTestSplit` を使用しました。`TD_GLM` モデルを使用してトレーニングデータセットをトレーニングし、テストデータセットをスコア化しました。最後に、`TD_RegressionEvaluator` 機能を用いてスコア化した結果を評価しました。 
 
 == さらに詳しく
 * link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Introduction-to-Analytics-Database-Analytic-Functions[Vantage データベース分析関数ユーザー ガイド,window="_blank"]

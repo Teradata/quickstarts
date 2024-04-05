@@ -17,7 +17,7 @@ Teradata Query Service は、Vantage 用の REST API で、これを使用する
 
 始める前に、以下のものが揃っていることを確認してください。
 
-*	Query Service がプロビジョニングされている VantageCloud システム、または Query Service が有効な接続を備えた VantageCore へのアクセス。管理者で、Query Service をインストールする必要がある場合は、link:https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022[Query Service のインストール、構成、および使用ガイド]を参照してください。
+*	Query Service がプロビジョニングされている VantageCloud システム、または Query Service が有効な接続を備えた VantageCore へのアクセス。管理者で、Query Service をインストールする必要がある場合は、 link:https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022[Query Service のインストール、構成、および使用ガイド] を参照してください。
 +
 include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 *	Query Service のホスト名とシステム名
@@ -297,7 +297,7 @@ Y5WYUUXj                      ,0.0,0.009313225746154785,0.0,0.009313225746154785
 
 トランザクションが複数のリクエストにまたがる必要がある場合や、揮発性のテーブルを使用する場合は、明示的なセッションを使用します。これらのセッションは、クエリーリクエストでセッションを参照する場合にのみ再利用されます。リクエストがすでに使用されている明示的セッションを参照する場合、リクエストはキューに入れられます。
 
-1. セッションを作成します
+1. セッションを作成します。
 +
 POST リクエストを `/system/<SYSTEM_NAME>/sessions` エンドポイントに送信します。リクエストは新しいデータベース セッションを作成し、セッションの詳細を応答として返します。
 +
@@ -343,7 +343,7 @@ print(response.text)
 +
 以下の例では、リクエストには以下のものが含まれます。
 +
-* `SELECT * FROM DBC.DBCInfo`: エイリアス `<SYSTEM_NAME>`を持つシステムへのクエリー。
+* `SELECT * FROM DBC.DBCInfo`: エイリアス `<SYSTEM_NAME>` を持つシステムへのクエリー。
 * `'format': 'OBJECT'`:応答の形式。
 * `'Session' : <Session ID>`:明示的なセッションを作成するためにステップ1で返されたセッションID。
 
@@ -454,7 +454,7 @@ print(response.text)
 +
 GET リクエストを `/system/<SYSTEM_NAME>/queries/<queryID>` エンドポイントに送信し、 `<queryID>` をステップ 1 で取得した ID に置き換えます。
 +
-リクエストは、 `*queryState*`、 `*queueOrder*`、 `*queueDuration*`などを含む特定のクエリーの詳細を返します。応答フィールドの完全なリストとその説明については、link:https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022/Using-the-Query-Service-APIs/Submitting-SQL-Statement/Request-Body[「Query Service のインストール、構成、および使用ガイド」]を参照してください。
+リクエストは、 `*queryState*`、 `*queueOrder*`、 `*queueDuration*` などを含む特定のクエリーの詳細を返します。応答フィールドの完全なリストとその説明については、link:https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022/Using-the-Query-Service-APIs/Submitting-SQL-Statement/Request-Body[「Query Service のインストール、構成、および使用ガイド」]を参照してください。
 +
 リクエスト
 +
@@ -608,7 +608,7 @@ print(response.json())
 
 == リソース
 
-* 機能、例、および参考資料:link:https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022[クエリサービスのインストール、設定、および使用ガイド]
+* 機能、例、および参考資料: link:https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022[クエリサービスのインストール、設定、および使用ガイド]
 * link:https://downloads.teradata.com/api/teradata_query_service[Query Service API OpenAPI 仕様]
 
-include::ROOT:partial$community_link.adoc[]
+include::../partials/community_link.adoc[]

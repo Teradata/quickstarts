@@ -10,7 +10,7 @@
 :auxdir: vantagecloud-lake-demo-jupyter-sagemaker
 
 == 概要
-このクイックスタートでは、https://github.com/Teradata/lake-demos[Teradata Jupyter Notebook Demos for VantageCloud Lake]をMicrosoft Azure上で実行するためのプロセスについて詳しく説明します。
+このクイックスタートでは、 https://github.com/Teradata/lake-demos[Teradata Jupyter Notebook Demos for VantageCloud Lake] をMicrosoft Azure上で実行するためのプロセスについて詳しく説明します。
 
 == 前提条件
 * Microsoft Azureアカウントへのアクセス
@@ -153,7 +153,8 @@ image::vantagecloud-lake/{dir}/sagemaker-lake.PNG[JupyterLabを開始する,alig
 == VantageCloud Lake の Jupyter Notebook デモ
 
 === 構成
-* https://github.com/Teradata/lake-demos/blob/main/vars.json[vars.json]は、VantageCloud Lake 環境の構成に一致するように編集する必要がある +
+* https://github.com/Teradata/lake-demos/blob/main/vars.json[vars.json] は、VantageCloud Lake 環境の構成に一致するように編集する必要がある 
++
 
 image::vantagecloud-lake/{auxdir}/sagemaker-vars.PNG[JupyterLabを開始する,align="center" width=75%]
 
@@ -179,9 +180,10 @@ image::vantagecloud-lake/{auxdir}/sagemaker-vars.PNG[JupyterLabを開始する,a
 IMPORTANT: vars.json ファイル内のすべてのパスワードを忘れずに変更してください。
 
 == デモを実行する
-*0_Demo_Environment_Setup.ipynb*のすべてのセルを開いて実行し、環境変数を設定する続いて *1_Demo_Setup_Base_Data.ipynb* を実行して、デモに必要な基本データをロードします。
+*0_Demo_Environment_Setup.ipynb* のすべてのセルを開いて実行し、環境変数を設定する続いて *1_Demo_Setup_Base_Data.ipynb* を実行して、デモに必要な基本データをロードします。
 
-デモノートブックの詳細については、GitHubのhttps://github.com/Teradata/lake-demos[Teradata Lake demos]ページを参照してください。
+デモノートブックの詳細については、GitHubの https://github.com/Teradata/lake-demos[Teradata Lake demos] ページを参照してください。
+
 
 == まとめ
 

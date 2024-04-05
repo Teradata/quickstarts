@@ -11,7 +11,7 @@
 [IMPORTANT]
 .廃止のお知らせ
 ====
-このハウツーでは、`Fastload`ユーティリティについて説明しています。このユーティリティは廃止されました。新しい実装では、link:https://docs.teradata.com/search/documents?query=Teradata+Parallel+Transporter+Quick+Start+Guide&sort=last_update&virtual-field=title_only&content-lang=en-US[Teradata Parallel Transporter(TPT)]の使用を検討してください。
+このハウツーでは、`Fastload` ユーティリティについて説明しています。このユーティリティは廃止されました。新しい実装では、 link:https://docs.teradata.com/search/documents?query=Teradata+Parallel+Transporter+Quick+Start+Guide&sort=last_update&virtual-field=title_only&content-lang=en-US[Teradata Parallel Transporter(TPT)] の使用を検討してください。
 ====
 
 == 概要
@@ -23,7 +23,7 @@ Vantageに大量のデータを移動させるニーズはよくあります。T
 * Teradata Vantageインスタンスへのアクセス。
 +
 include::../partials/vantage_clearscape_analytics.adoc[]
-* Teradata Tools and Utilities (TTU) をダウンロード -  サポートされているプラットフォーム: link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-windows-installation-package[Windows]、 link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-macos-installation-package[MacOS]、 link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-linux-installation-package-0[Linux] (登録が必要です)。
+* Teradata Tools and Utilities (TTU) をダウンロード -   サポートされているプラットフォーム: link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-windows-installation-package[Windows]、 link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-macos-installation-package[MacOS]、 link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-linux-installation-package-0[Linux] (登録が必要です)。
 
 == TTUのインストール
 
@@ -50,9 +50,9 @@ Linux::
 --
 ====
 
-== サンプルデータの入手
+== サンプルデータを入手する
 
-非営利団体の米国税務申告を扱います。非営利の納税申告は公開データです。アメリカ内国歳入庁は、これらを S3 バケットで公開します。2020 年の提出書類のまとめを見てみましょう: `https://s3.amazonaws.com/irs-form-990/index_2020.csv`。ブラウザ、`wget`、または`curl`を使用して、ファイルをローカルに保存できます。
+非営利団体の米国税務申告を扱います。非営利の納税申告は公開データです。アメリカ内国歳入庁は、これらを S3 バケットで公開します。2020 年の提出書類のまとめを見てみましょう: `https://s3.amazonaws.com/irs-form-990/index_2020.csv`。ブラウザ、`wget`、または `curl` を使用して、ファイルをローカルに保存できます。
 
 == データベースを作成する
 
@@ -67,7 +67,7 @@ AS PERMANENT = 120e6, -- 120MB
 
 == Fastloadを実行する
 
-これから`Fastload`を実行する。`Fastload` は、大量のデータを Vantage にアップロードする際に非常に効率的なコマンドラインツールです。`Fastload`は、高速にするためにいくつかの制限が設けられています。空のテーブルのみを設定でき、すでに設定されているテーブルへの挿入はサポートされていません。セカンダリ インデックスを持つテーブルはサポートされません。また、テーブルが `MULTISET` テーブルであっても、重複レコードは挿入されない。 制限の完全なリストについては、link:https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root[Teradata®  `Fastload`リファレンス]を参照してください。
+これから `Fastload` を実行する。`Fastload` は、大量のデータを Vantage にアップロードする際に非常に効率的なコマンドラインツールです。`Fastload` は、高速にするためにいくつかの制限が設けられています。空のテーブルのみを設定でき、すでに設定されているテーブルへの挿入はサポートされていません。セカンダリ インデックスを持つテーブルはサポートされません。また、テーブルが `MULTISET` テーブルであっても、重複レコードは挿入されない。 制限の完全なリストについては、link:https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root[Teradata®  `Fastload`リファレンス] を参照してください。
 
 Fastload には独自のスクリプト言語があります。この言語を使用すると、任意の SQLコマンドを使用してデータベースを準備し、入力ソースを宣言し、Vantage にデータを挿入する方法を定義できます。このツールは対話型モードとバッチ モードの両方をサポートしています。このセクションでは、対話型モードを使用します。
 
@@ -121,7 +121,7 @@ BEGIN LOADING irs_returns
     ERRORFILES irs_returns_err1, irs_returns_err2;
 ----
 
-`Fastload`に 10k 行ごとにチェックポイントを保存するように指示します。ジョブを再開する必要がある場合に便利です。最後のチェックポイントから再開できるようになります。
+`Fastload` に 10k 行ごとにチェックポイントを保存するように指示します。ジョブを再開する必要がある場合に便利です。最後のチェックポイントから再開できるようになります。
 
 [source, teradata-sql]
 ----
@@ -164,7 +164,7 @@ BEGIN LOADING irs_returns
     FILE = /tmp/index_2020.csv;
 ----
 
-最後に、データベースにデータを入れる INSERT 文を定義し、`LOADING`ブロックを閉じます。 
+最後に、データベースにデータを入れる INSERT 文を定義し、`LOADING` ブロックを閉じます。 
 
 [source, teradata-sql]
 ----
@@ -293,14 +293,15 @@ AS (
 NO PRIMARY INDEX;
 ----
 
-NOS ソリューションは追加のツールに依存しないため便利です。clear​37 / 5,000翻訳結果翻訳の結果SQLのみで実装可能です。NOS タスクが AMP に委任され、並行して実行されるため、特に多数の AMP を備えた Vantage デプロイメント環境では良好なパフォーマンスを発揮します。また、オブジェクト ストレージ内のデータを複数のファイルに分割すると、パフォーマンスがさらに向上する可能性があります。
+NOS ソリューションは追加のツールに依存しないため便利です。SQLのみで実装可能です。NOS タスクが AMP に委任され、並行して実行されるため、特に多数の AMP を備えた Vantage デプロイメント環境では良好なパフォーマンスを発揮します。また、オブジェクト ストレージ内のデータを複数のファイルに分割すると、パフォーマンスがさらに向上する可能性があります。
 
 == まとめ
 
-このハウツーでは、大量のデータを Vantage に取り込む方法を説明しました。`Fastload`を使用して、数十万のレコードを Vantage に数秒でロードしました。
+このハウツーでは、大量のデータを Vantage に取り込む方法を説明しました。`Fastload` を使用して、数十万のレコードを Vantage に数秒でロードしました。
+
 
 == さらに詳しく
 * link:https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root[Teradata® `Fastload` リファレンス]
-* xref::nos.adoc[]
+* link:nos.html[オブジェクトストレージに保存されたクエリーデータ]
 
 include::../partials/community_link.adoc[]

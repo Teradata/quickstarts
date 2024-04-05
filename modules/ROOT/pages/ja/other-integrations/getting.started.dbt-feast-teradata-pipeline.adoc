@@ -10,7 +10,7 @@
 
 == 概要
 
-このチュートリアルでは、生データを取得して FEAST フィーチャに変換する dbt パイプラインを作成するアプローチを示します。パイプラインは、データ変換に 「link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Analytics-Database-Analytic-Functions-17.20[ClearScape分析関数]」を活用します。変換の出力は FEAST にロードされ、ML モデルで使用できるフィーチャがマテリアライズドされます。
+このチュートリアルでは、生データを取得して FEAST フィーチャに変換する dbt パイプラインを作成するアプローチを示します。パイプラインは、データ変換に   link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Analytics-Database-Analytic-Functions-17.20[ClearScape分析関数] を活用します。変換の出力は FEAST にロードされ、ML モデルで使用できるフィーチャがマテリアライズドされます。
 
 == はじめに
 === dbt
@@ -24,8 +24,8 @@ link:https://docs.feast.dev/[Feast] (Feature Store) は、既存のテクノロ�
 
 * Teradata Vantageインスタンスへのアクセス。
 include::../partials/vantage_clearscape_analytics.adoc[]
-* Feast-Teradata  がローカルにインストールされている。 link:https://quickstarts.teradata.com/modelops/using-feast-feature-store-with-teradata-vantage.html#_overview[Feast-Teradata のインストール手順]
-を参照してください。
+* Feast-Teradata   がローカルにインストールされている。 link:https://quickstarts.teradata.com/modelops/using-feast-feature-store-with-teradata-vantage.html#_overview[Feast-Teradata のインストール手順]
+ を参照してください。
 * dbt はローカルにインストールされている。 link:https://quickstarts.teradata.com/dbt.html[dbtのインストール手順]
 を参照してください。
 == 目的
@@ -166,13 +166,13 @@ dbt はこの生データを取得し、ML モデリングおよび分析ツー�
 ....
 
 
-== dbtの構成
-以下の内容のファイル `$HOME/.dbt/profiles.yml` を作成します。Teradata インスタンスに一致するように`<host>`、`<user>` 、`<password>` を調整します。
+== dbtを構成する
+以下の内容のファイル `$HOME/.dbt/profiles.yml` を作成します。Teradata インスタンスに一致するように `<host>`、`<user>` 、`<password>` を調整します。
 
 [NOTE]
-.データベースの設定
+.データベースを設定する
 ====
-以下の dbt プロファイルは、 `teddy_bank`というデータベースを指します。Teradata Vantage インスタンス内の既存のデータベースを指すように `schema` 値を変更できます。
+以下の dbt プロファイルは、 `teddy_bank` というデータベースを指します。Teradata Vantage インスタンス内の既存のデータベースを指すように `schema` 値を変更できます。
 ====
 
 [source, yaml, id="dbt_first_config", role="emits-gtm-events"]
@@ -234,7 +234,7 @@ path = 'teradatasql://'+ teradata_user +':' + teradata_password + '@'+host + '/?
         teradata_database + '&LOGMECH=' + teradata_log_mech
 ----
 == dbtを実行する
-このステップでは、`customers`、`accounts`、`transactions`のデータテーブルを入力します。
+このステップでは、`customers`、`accounts`、`transactions` のデータテーブルを入力します。
 
 [source, bash]
 ----
@@ -312,4 +312,5 @@ def get_Training_Data():
 * link:https://github.com/Teradata/dbt-teradata[dbt-teradata プラグインのドキュメント]
 * link:https://docs.feast.dev/tutorials/using-scalable-registry[Feast ののスケーラブルなレジストリScalable Registry]
 * link:https://medium.com/teradata/enabling-highly-scalable-feature-store-with-teradata-vantage-and-feast-e01008fa8fdb[Teradata Vantage と FEAST でスケーラブルなフィーチャストアを実現]
-* このプロジェクトのlink:https://github.com/Teradata/tdata-pipeline[Gitリポジトリ]。
+* このプロジェクトの link:https://github.com/Teradata/tdata-pipeline[Gitリポジトリ] 。
+

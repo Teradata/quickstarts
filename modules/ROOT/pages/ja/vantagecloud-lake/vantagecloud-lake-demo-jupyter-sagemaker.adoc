@@ -9,10 +9,10 @@
 :dir: vantagecloud-lake-demo-jupyter-sagemaker
 
 == 概要
-このクイックスタートでは、AWS の AI/ML プラットフォームである Amazon SageMaker でhttps://github.com/Teradata/lake-demos[ Teradata Jupyter Notebook Demos for VantageCloud Lake]を実行するプロセスについて詳しく説明します。
+このクイックスタートでは、AWS の AI/ML プラットフォームである Amazon SageMaker で https://github.com/Teradata/lake-demos[ Teradata Jupyter Notebook Demos for VantageCloud Lake] を実行するプロセスについて詳しく説明します。
 
 == 前提条件
-* Teradata modules for Jupyter (ダウンロードはhttps://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[こちら]、登録が必要です)
+* Teradata modules for Jupyter (ダウンロードは https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[こちら] 、登録が必要です)
 * S3 および SageMaker にアクセスできる AWS アカウント
 * https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html[VantageCloud Lake環境へのアクセス]
 
@@ -178,7 +178,8 @@ image::vantagecloud-lake/{dir}/sagemaker-lake.PNG[JupyterLabを開始する,alig
 == VantageCloud Lake の Jupyter Notebook デモ
 
 === 構成
-* https://github.com/Teradata/lake-demos/blob/main/vars.json[vars.json]は、VantageCloud Lake 環境の構成に一致するように編集する必要がある +
+* https://github.com/Teradata/lake-demos/blob/main/vars.json[vars.json] は、VantageCloud Lake 環境の構成に一致するように編集する必要がある 
++
 
 image::vantagecloud-lake/{dir}/sagemaker-vars.PNG[JupyterLabを開始する,align="center" width=75%]
 
@@ -204,9 +205,9 @@ IMPORTANT: vars.json ファイル内のすべてのパスワードを忘れず�
 * サンプル vars.json では、すべてのユーザーのパスワードがデフォルトで「password」に設定されていることがわかります。これは説明を目的としたものであり、これらのパスワード フィールドをすべて強力なパスワードに変更し、必要に応じて保護し、次の手順を実行する必要があります。 その他のパスワード管理のベスト プラクティス。
 
 == デモを実行する
-*0_Demo_Environment_Setup.ipynb*のすべてのセルを開いて実行し、環境変数を設定します。続いて *1_Demo_Setup_Base_Data.ipynb* を実行して、デモに必要な基本データをロードします。
+*0_Demo_Environment_Setup.ipynb* のすべてのセルを開いて実行し、環境変数を設定します。続いて *1_Demo_Setup_Base_Data.ipynb* を実行して、デモに必要な基本データをロードします。
 
-デモ ノートブックの詳細については、GGitHubのhttps://github.com/Teradata/lake-demos[Teradata Lake demos]ページを参照してください。
+デモ ノートブックの詳細については、GGitHubの https://github.com/Teradata/lake-demos[Teradata Lake demos] ページを参照してください。
 
 == まとめ
 

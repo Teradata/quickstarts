@@ -23,8 +23,8 @@ NOTE: ローカルマシンに管理者権限がありませんか?xref:run-vant
 
 === 必要なソフトウェアをダウンロードする
 
-. link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Express]の最新バージョン。これまでに Teradata Downloads Web サイトを使用したことがない場合は、登録する必要があります。
-. link:https://mac.getutm.app/[UTM]の最新バージョン。
+. link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Express] の最新バージョン。これまでに Teradata Downloads Web サイトを使用したことがない場合は、登録する必要があります。
+. link:https://mac.getutm.app/[UTM] の最新バージョン。
 
 === UTMインストーラを実行する
 
@@ -39,17 +39,17 @@ NOTE: ローカルマシンに管理者権限がありませんか?xref:run-vant
 . `Hardware`画面で、少なくとも4 GBのメモリと少なくとも1つのCPUコアを割り当てます。10GB RAM と 2 つの CPU を推奨します。
 +
 image::utm.hardware.png[UTM Hardware, width=500, align="left"]
-. `Storage`画面で`Next`をクリックして、デフォルトを受け入れる。
+. `Storage` 画面で `Next` をクリックして、デフォルトを受け入れます。
 . `Shared Direct` 画面で `Next` をクリックします。
 .  `Summary` 画面で `Open VM Settings` にチェックを入れ、 `Save`をクリックします。
-. セットアップウィザードを実行する。以下のタブを調整するだけで済みます。
-* *QEMU* - `UEFI Boot` オプションを無効にする
+. セットアップウィザードを実行します。以下のタブを調整するだけで済みます。
+* *QEMU* - `UEFI Boot` オプションを無効にします。
 * *Network* - ホスト コンピューター上で ssh (22) ポートと Vantage (1025) ポートを公開します。
 +
 image::utm.network.png[UTMネットワーク, width=500]
-. ドライブのマッピング:
-* デフォルトの`IDE Drive`を削除する。
-* ダウンロードした VM zip ファイルからディスク ファイルをインポートして、3 つの Vantage Express ドライブをマッピングします。`-disk1`、`-disk2`、`-disk3`の正しい順序でマッピングするようにしてください。最初のディスクはブート可能であり、データベース自体が含まれています。Disks 2と3はいわゆる`pdisks`と呼ばれ、データを含んでいます。ファイルをインポートすると、UTMは自動的に`vmdk`から`qcow2`形式に変換する。各ディスクが `IDE` インターフェースを使用して構成されていることを確認してください。
+. ドライブをマップします。
+* デフォルトの `IDE Drive` を削除します。
+* ダウンロードした VM zip ファイルからディスク ファイルをインポートして、3 つの Vantage Express ドライブをマッピングします。`-disk1`、`-disk2`、`-disk3` の正しい順序でマッピングするようにしてください。最初のディスクはブート可能であり、データベース自体が含まれています。Disks 2と3はいわゆる `pdisks` と呼ばれ、データを含んでいます。ファイルをインポートすると、UTMは自動的に `vmdk` から `qcow2` 形式に変換する。各ディスクが `IDE` インターフェースを使用して構成されていることを確認してください。
 +
 image::utm.drives.png[UTMドライブ, width=500]
 +

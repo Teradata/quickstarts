@@ -56,7 +56,7 @@ include::../partials/vantage_clearscape_analytics.adoc[]
 ** Salesforce アカウントで、接続アプリのインストールが認証されている必要があります。これが無効になっている場合は、Salesforce 管理者にお問い合わせください。Amazon AppFlow で Salesforce 接続を作成した後、「Amazon AppFlow Embedded Login App」という名前の接続アプリが Salesforce アカウントにインストールされていることを確認します。
 ** Amazon AppFlow Embedded Login App」のリフレッシュトークンポリシーは、「Refresh token is valid until revoked」に設定されている必要があります。そうでない場合、リフレッシュトークンの有効期限が切れるとフローが失敗します。
 ** イベント駆動型のフロートリガーを使用するには、SalesforceのChange Data Captureを有効にする必要があります。セットアップから、クイック検索に「Change Data Capture」と入力します。
-** Salesforce アプリが IP アドレスの制限を実施している場合、Amazon AppFlow で使用するアドレスをホワイトリストに登録する必要があります。詳細については、Amazon Web Services General Reference のhttps://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html[「AWS IP アドレス範囲」]を参照してください。
+** Salesforce アプリが IP アドレスの制限を実施している場合、Amazon AppFlow で使用するアドレスをホワイトリストに登録する必要があります。詳細については、Amazon Web Services General Reference の https://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html[AWS IP アドレス範囲] を参照してください。
 ** Salesforce のレコードを 100 万件以上転送する場合、Salesforce の複合フィールドを選択することはできません。Amazon AppFlow は転送に Salesforce Bulk API を使用するため、複合フィールドの転送は認証されません。
 ** AWS PrivateLinkを使用してプライベート接続を作成するには、Salesforceアカウントで「メタデータの管理」と「外部接続の管理」の両方のユーザー権限を有効にする必要があります。プライベート接続は現在、us-east-1 および us-west-2 の AWS リージョンで利用可能です。
 ** 履歴オブジェクトなど、更新できないSalesforceオブジェクトがあります。これらのオブジェクトについて、Amazon AppFlowは、スケジュールトリガー型のフローの増分エクスポート（「新しいデータのみを転送」オプション）をサポートしません。代わりに、「すべてのデータを転送する」オプションを選択し、適切なフィルタを選択して転送するレコードを制限することができます。
@@ -75,7 +75,7 @@ include::../partials/vantage_clearscape_analytics.adoc[]
 
 このステップでは、Amazon AppFlowを使用してフローを作成します。この例では、 https://developer.salesforce.com/signup[Salesforce 開発者アカウント] を使用してSalesforceに接続します。
 
- https://console.aws.amazon.com/appflow[AppFlow コンソール]にアクセスし、AWSログイン認証でサインインし、 *Create flow*をクリックします。正しいリージョンにいること、Salesforceのデータを保存するためのバケットが作成されていることを確認します。
+ https://console.aws.amazon.com/appflow[AppFlow コンソール] にアクセスし、AWSログイン認証でサインインし、 *Create flow* をクリックします。正しいリージョンにいること、Salesforceのデータを保存するためのバケットが作成されていることを確認します。
 
 image:cloud-guides/{page-image-directory}/image3.png[ソーシャルメディア投稿のスクリーンショット 自動生成された説明,width=624,height=418]
 
@@ -83,21 +83,21 @@ image:cloud-guides/{page-image-directory}/image3.png[ソーシャルメディア
 
 このステップでは、フローの基本情報を提供します。
 
- *フロー名* (例： _salesforce_) と *フローの説明(オプション)*を入力し、 *暗号化設定のカスタマイズ(詳細)* のチェックを外したままにします。*次へ*をクリックします。
+ *フロー名* (例： _salesforce_) と *フローの説明(オプション)* を入力し、 *暗号化設定のカスタマイズ(詳細)* のチェックを外したままにします。*次へ* をクリックします。
 
 ==== ステップ2. フローを構成する
 
 このステップでは、フローのソースと宛先に関する情報を提供します。この例では、ソースとして *_Salesforce_* を、宛先として *_Amazon S3_* を使用します。
 
-*  *Source name*で _Salesforce_を選択し、*Choose Salesforce connection*で  *_Create new connection_*を選択します。
+*  *Source name* で _Salesforce_ を選択し、*Choose Salesforce connection*で  * _Create new connection_*を選択します。
 +
 image:cloud-guides/{page-image-directory}/image4.png[携帯電話のスクリーンショット 自動生成された説明,width=624,height=392]
 
-* *Salesforce環境*と*データの暗号化*にデフォルトを使用する。接続に名前（例：_salesforce_）を付けて、 *続行*をクリックします。
+* *Salesforce環境* と *データの暗号化* にデフォルトを使用する。接続に名前（例：_salesforce_）を付けて、 *Continue* をクリックします。
 +
 image:cloud-guides/{page-image-directory}/image5.png[携帯電話のスクリーンショット 自動生成された説明,width=544,height=327]
 
-* salesforceのログインウィンドウで、*Username*と*Password*を入力します。クリックする *ログイン*
+* salesforceのログインウィンドウで、 *Username* と *Password* を入力します。 *ログイン* をクリックします。
 +
 image:cloud-guides/{page-image-directory}/image6.png[携帯電話のスクリーンショット 自動生成された説明,width=477,height=377]
 
@@ -105,17 +105,17 @@ image:cloud-guides/{page-image-directory}/image6.png[携帯電話のスクリー
 +
 image:cloud-guides/{page-image-directory}/image7.png[携帯電話のスクリーンショット 自動生成された説明,width=473,height=383]
 
-* AppFlow の*Configure flow* ウィンドウに戻り、 *Salesforceオブジェクト*を使用し、Salesforce オブジェクトとして _Account_ を選択します。
+* AppFlow の*Configure flow* ウィンドウに戻り、 *Salesforceオブジェクト* を使用し、Salesforce オブジェクトとして _Account_ を選択します。
 +
 image:cloud-guides/{page-image-directory}/image8.png[携帯電話のスクリーンショット 自動生成された説明,width=624,height=390]
 +
 image:cloud-guides/{page-image-directory}/image9.png[携帯電話のスクリーンショット 自動生成された説明,width=624,height=389]
 
-* *Destination name*として_Amazon S3_使用します。link:#prerequisites[先ほど]作成した、データを保存するバケット（例：_ptctsoutput_)を選択します。
+* *Destination name* として _Amazon S3_ を使用します。 link:#prerequisites[先ほど] 作成した、データを保存するバケット（例：_ptctsoutput_)を選択します。
 +
 image:cloud-guides/{page-image-directory}/image10.png[携帯電話のスクリーンショット 自動生成された説明,width=624,height=355]
 
-* *フロートリガー* を _Run on demand_にします。 *Next*をクリックします。
+* *Flow trigger* を _Run on demand_ にします。 *Next* をクリックします。
 +
 image:cloud-guides/{page-image-directory}/image11.png[携帯電話のスクリーンショット 自動生成された説明,width=624,height=344]
 
@@ -124,7 +124,7 @@ image:cloud-guides/{page-image-directory}/image11.png[携帯電話のスクリ�
 このステップでは、データがソースから宛先に転送される方法を決定します。
 
 * *マッピング方法*
-として、_手動でフィールドをマッピングする_を使用します* 簡単のため、 *送信元から送信先へのマッピング*には_Map all fields directly_ を選択します。
+として、_手動でフィールドをマッピングする_ を使用します* 簡単のため、 *送信元から送信先へのマッピング* には _Map all fields directly_ を選択します。
 +
 image:cloud-guides/{page-image-directory}/image12.png[携帯電話のスクリーンショット 自動生成された説明,width=623,height=355]
 +
@@ -132,19 +132,19 @@ image:cloud-guides/{page-image-directory}/image12.png[携帯電話のスクリ�
 +
 この例では、チェックボックスは選択されない。
 
-*  *_Validations_*では、「_Billing Address_」が含まれていないレコードを無視する条件を追加します（オプション）。 *Next*をクリックします。
+*  *_Validations_* では、「_Billing Address_」が含まれていないレコードを無視する条件を追加します（オプション）。 *Next* をクリックします。
 +
 image:cloud-guides/{page-image-directory}/image13.png[携帯電話のスクリーンショット 自動生成された説明,width=624,height=132]
 
 ==== ステップ4：フィルタの追加
 
-転送するレコードを決定するためのフィルタを指定することができます。この例では、削除されたレコードをフィルタリングする条件を追加します（オプション）。*Next*をクリックします。
+転送するレコードを決定するためのフィルタを指定することができます。この例では、削除されたレコードをフィルタリングする条件を追加します（オプション）。*Next* をクリックします。
 
 image:cloud-guides/{page-image-directory}/image14.png[携帯電話のスクリーンショット 自動生成された説明,width=624,height=179]
 
 ==== ステップ 5. レビューと作成
 
-入力したすべての情報を確認します。必要であれば修正します。*Create flow*をクリックします 。
+入力したすべての情報を確認します。必要であれば修正します。*Create flow* をクリックします 。
 
 フローが作成されると、フロー情報とともにフロー作成成功のメッセージが表示されます。
 
@@ -174,11 +174,11 @@ image:cloud-guides/{page-image-directory}/image17.png[ソーシャルメディ�
 
 image:cloud-guides/{page-image-directory}/image18.png[ソーシャルメディア投稿のスクリーンショット 自動生成された説明,width=548,height=285]
 
-=== NOSを使ったデータの探索
+=== NOSを使ったデータを探索する
 
 Native Object Storeには、Amazon S3内のデータを探索 分析するための機能が組み込まれています。ここでは、NOSのよく使われる機能をいくつか列挙します。
 
-==== 外部テーブルの作成
+==== 外部テーブルを作成する
 
 外部テーブルを使用すると、Vantage Advanced SQL Engine 内で外部データを簡単に参照できるようになり、構造化されたリレーショナル形式でデータを利用できるようになります。
 
@@ -243,11 +243,11 @@ JSONデータには、レコードごとに異なる属性が含まれること�
 |SELECT DISTINCT * FROM JSON_KEYS (ON (SELECT payload FROM salesforce)) AS j;
 ----
 
-部分的に出力
+部分出力
 
 image:cloud-guides/{page-image-directory}/image21.png[携帯電話のスクリーンショット 自動生成された説明,width=196,height=225]
 
-==== ビューの作成
+==== ビューを作成する
 
 ビューは、ペイロード属性に関連する名前を単純化し、オブジェクトストアのデータに対して実行可能なSQLを簡単にコーディングできるようにし、外部テーブルのLocation参照を隠して通常の列のように見えるようにすることができます。
 
@@ -291,7 +291,7 @@ REPLACE VIEW salesforceView AS (
 SELECT * FROM salesforceView;
 ----
 
-部分的に出力
+部分出力
 
 image:cloud-guides/{page-image-directory}/image22.png[自動的に生成されたコンピューターの説明を含むイメージ,width=624,height=98]
 
@@ -662,7 +662,7 @@ USING
 このステップでは、フローの送信元と送信先に関する情報を提供します。この例では、ソースとして *_Amazon S3_* を、宛先として *_Salesforce_* を使用します。
 
 *  *Source details*は、 _Amazon S3_を選択し、CSVファイルを書き込んだバケットを選択します（例：vantagecsv）。
-* *Destination details*は、_Salesforce_を選択し、*Choose Salesforce connection*のドロップダウンリストでStep1で作成した接続を使用し、_Lead_として *Choose Salesforce object*を選択します。
+* *Destination details* は、_Salesforce_ を選択し、*Choose Salesforce connection* のドロップダウンリストでStep1で作成した接続を使用し、*Choose Salesforce object* として_Lead_ を選択します。
 * *Error handling*の場合は、デフォルトの_Stop the current flow run_を使用する。
 * *Flow trigger* は _Run on demand_です。 *Next*をクリックします。
 
@@ -671,8 +671,8 @@ USING
 このステップでは、ソースからデスティネーションへのデータ転送の方法を決定します。
 
 * *Mapping method*
-として、_Manually map fields_を使用します* *Destination record preference*
-として、_Insert new records (default)_を使用します*  *送信元から送信先へのマッピング*には、次のマッピングを使用します
+ として、_Manually map fields_ を使用します* *Destination record preference*
+ として、_Insert new records (default)_ を使用します*  *送信元から送信先へのマッピング* には、次のマッピングを使用します
 +
 image:cloud-guides/{page-image-directory}/image43.png[グラフィカル ユーザー インターフェース, application, table Description automatically generated,width=624,height=396]
 +
@@ -684,13 +684,13 @@ image:cloud-guides/{page-image-directory}/image44.png[Image,width=624,height=40]
 
 転送するレコードを決定するためのフィルタを指定することができます。この例では、フィルターは追加されません。*Next* をクリックします。
 
-==== ステップ5. レビューと作成
+==== ステップ5. レビューして作成する
 
 入力したすべての情報を確認します。必要であれば修正します。*フローの作成*をクリックします 。
 
 フローが作成されると、フロー情報とともにフロー作成成功のメッセージが表示されます。
 
-==== フローの実行
+==== フローを実行する
 
 右上の *フローの実行* をクリックします。
 
@@ -704,7 +704,7 @@ Salesforceのページを参照すると、新しいリードTom Johnsonが追�
 
 image:cloud-guides/{page-image-directory}/image46.png[グラフィカル ユーザー インターフェース, application Description automatically generated,width=624,height=288]
 
-== クリーンアップ(オプション)
+== クリーンアップする(オプション)
 
 Salesforce データの使用が完了したら、使用したリソースに対して AWS アカウント (https://aws.amazon.com/appflow/pricing/[AppFlow]、 Amazon https://aws.amazon.com/s3/pricing/[S3]、 https://www.teradata.com/Cloud/AWS/Do-it-Yourself/Pricing[Vantage] 、 https://aws.amazon.com/ec2/pricing/[VM]など) に請求されないように、以下の手順を実行します。
 

@@ -21,7 +21,8 @@ IMPORTANT: この製品はプレビュー版であり、変更される可能性
 
 == 始める前に
 
-* Teradata AI Unlimited Workspaces と JupyterLab をデプロイして構成します。 link:install-ai-unlimited-workspaces-docker.html[Dockerを使用した Teradata AI Unlimited Workspaceサービスのデプロイとセットアップ] と link:install-ai-unlimited-interface-docker.html[Dockerを使用した Teradata AI Unlimited インターフェースのデプロイ] を参照してください。
+
+* Teradata AI Unlimited Workspaces と JupyterLab をデプロイして構成します。link:install-ai-unlimited-workspaces-docker.html[Dockerを使用した Teradata AI Unlimited Workspaceサービスのデプロイとセットアップ] と link:install-ai-unlimited-interface-docker.html[Dockerを使用した Teradata AI Unlimited インターフェースのデプロイ] を参照してください。
 
 * 以下をコピーして保持します。
 
@@ -30,7 +31,7 @@ IMPORTANT: この製品はプレビュー版であり、変更される可能性
 
 == 最初のワークロードを実行する
 
-マジックコマンドの詳細については、`%help`または`%help <command>`を実行してください。詳細については、 link:ai-unlimited-magic-reference.html[Teradata AI Unlimited JupyterLab マジック コマンド リファレンス] を参照してください。
+マジックコマンドの詳細については、`%help` または `%help <command>` を実行してください。詳細については、link:ai-unlimited-magic-reference.html[Teradata AI Unlimited JupyterLab マジック コマンド リファレンス] を参照してください。
 
 1. URL: http://localhost:8888 を使用して JupyterLab に接続し、プロンプトが表示されたらトークンを入力します。
 2. APIキーを使用してワークスペースサービスに接続します。
@@ -51,7 +52,7 @@ NOTE: 現在、Teradata AI Unlimited は AWS と Azure をサポートしてい�
 
 4. (オプション) CSP 信頼証明を保存するための認証オブジェクトを作成します。
 +
-`ACCESS_KEY_ID`、`SECRET_ACCESS_KEY`、および`REGION`を実際の値に置き換えます。
+`ACCESS_KEY_ID`、`SECRET_ACCESS_KEY`、および `REGION` を実際の値に置き換えます。
 +
 
 [source, bash, id="create_auth", role="content-editable emits-gtm-events"]
@@ -105,7 +106,7 @@ CREATE MULTISET TABLE SalesCenter ,NO FALLBACK ,
 NO PRIMARY INDEX ;
 ----
 
-b. `%dataload`マジックコマンドを使用して、データをSalesCenterテーブルにロードします。
+b. `%dataload` マジックコマンドを使用して、データをSalesCenterテーブルにロードします。
 +
 
 [source, bash, id="data_load", role="content-editable emits-gtm-events"]
@@ -113,7 +114,7 @@ b. `%dataload`マジックコマンドを使用して、データをSalesCenter�
 %dataload DATABASE=<Project_Name>, TABLE=SalesCenter, FILEPATH=notebooks/sql/data/salescenter.csv
 ----
 +
-NOTE: salescenter.csv ファイルが見つかりませんか?link:https://github.com/Teradata/jupyter-demos/tree/main/Getting_Started/Charting_and_Visualization/data[GitHub Demo:Charting and Visualization Data]からファイルをダウンロードします。
+NOTE: salescenter.csv ファイルが見つかりませんか? link:https://github.com/Teradata/jupyter-demos/tree/main/Getting_Started/Charting_and_Visualization/data[GitHub Demo:Charting and Visualization Data] からファイルをダウンロードします。 
 +
 データが挿入されたことを確認します。
 +
@@ -150,7 +151,7 @@ d. `%dataload`マジック コマンドを使用して、SalesDemo テーブル�
 %dataload DATABASE=<Project_Name>, TABLE=SalesDemo, FILEPATH=notebooks/sql/data/salesdemo.csv
 ----
 +
-NOTE: salesdemo.csv ファイルが見つかりませんか?link:https://github.com/Teradata/jupyter-demos/tree/main/Getting_Started/Charting_and_Visualization/data[GitHub Demo:Charting and Visualization Data]からファイルをダウンロードします。
+NOTE: salesdemo.csv ファイルが見つかりませんか? link:https://github.com/Teradata/jupyter-demos/tree/main/Getting_Started/Charting_and_Visualization/data[GitHub Demo:Charting and Visualization Data] からファイルをダウンロードします。
 +
 販売デモ データが正常に挿入されたことを確認します。
 +

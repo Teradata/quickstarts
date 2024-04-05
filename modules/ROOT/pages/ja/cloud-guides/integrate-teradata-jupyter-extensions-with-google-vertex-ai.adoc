@@ -27,7 +27,7 @@ include::../partials/vantage_clearscape_analytics.adoc[]
 Vertex AIでTeradata Jupyter Extensionsを実行するには、2つの方法があります。
 
 1. link:#_use_startup_script[スタートアップスクリプトを使用する]
-2.link:#_use_custom_container[カスタムコンテナを使用する]
+2. link:#_use_custom_container[カスタムコンテナを使用する]
 
 この2つの統合方法について、以下に説明します。
 
@@ -79,7 +79,7 @@ pip install teradataml
 +
 image:cloud-guides/{page-image-directory}/vertex.create.notebook.startupscript.png[起動スクリプトを使用して新しいNotebookを作成する, width=75%]
 
-5. Notebookの作成が完了するまで、数分かかる場合があります。完了したら、 `Open notebook`をクリックする。
+5. Notebookの作成が完了するまで、数分かかる場合があります。完了したら、 `Open notebook` をクリックする。
 +
 image:cloud-guides/{page-image-directory}/vertex.open.notebook.png[Open notebook, width=75%]
 
@@ -89,7 +89,8 @@ image:cloud-guides/{page-image-directory}/vertex.open.notebook.png[Open notebook
 
 1. Teradata Jupyter エクステンションパッケージのダウンロードする
 +
-link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter ]ページから、Teradata Jupyter extensionsパッケージバンドルLinux版をダウンロードします。
+link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter ] ページから、Teradata Jupyter extensionsパッケージバンドルLinux版をダウンロードします。
+
 
 2. このパッケージを作業ディレクトリにコピーし、解凍する
 
@@ -171,8 +172,8 @@ image:cloud-guides/{page-image-directory}/vertex.custom.container.png[Open noteb
 * link:https://teradata.github.io/jupyterextensions[Teradata Jupyter 拡張機能 Web サイト]
 * link:https://docs.teradata.com/r/KQLs1kPXZ02rGWaS9Ktoww/root[Jupyter用Teradata Vantage™モジュールインストールガイド]
 * link:https://docs.teradata.com/r/1YKutX2ODdO9ppo_fnguTA/root[Python用Teradata®パッケージユーザガイド]
-* link:https://cloud.google.com/vertex-ai/docs/training/create-custom-container[Vertex AIのドキュメントです。学習用カスタムコンテナイメージの作成]
-* link:https://cloud.google.com/vertex-ai/docs/workbench/user-managed/custom-container[Vertex AIのドキュメントです。カスタムコンテナを使用してユーザー管理型Notebookインスタンスを作成する]
-* link:https://cloud.google.com/vertex-ai/docs/workbench/user-managed/create-new[Vertex AIのドキュメントです。ユーザーマネージドNotebookのインスタンスを作成する]
+*  link:https://cloud.google.com/vertex-ai/docs/training/create-custom-container[Vertex AIのドキュメントです。学習用カスタムコンテナイメージを作成します]
+*  link:https://cloud.google.com/vertex-ai/docs/workbench/user-managed/custom-container[Vertex AIのドキュメントです。カスタムコンテナを使用してユーザー管理型Notebookインスタンスを作成します]
+*  link:https://cloud.google.com/vertex-ai/docs/workbench/user-managed/create-new[Vertex AIのドキュメントです。ユーザーマネージドNotebookのインスタンスを作成します]
 
-include::ROOT:partial$community_link.adoc[]
+include::../partials/community_link.adoc[]

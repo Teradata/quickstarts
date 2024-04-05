@@ -28,7 +28,7 @@ AI Unlimited JupyterLab は、既存の Teradata SQL Kernel マジック コマ�
 
 * host:  エンジン サービスの名前または IP アドレス。
 
-* apikey: ワークスペース  サービス **Profile**ページの API キー値。
+* apikey: ワークスペース  サービスの **Profile** ページからの API キー値。
 
 * [オプション] withTLS: False (F) の場合、デフォルトのクライアント サーバー通信では TLS が使用されません。
 
@@ -40,7 +40,7 @@ Workspace configured for host=<RPC_Service_URL>
 
 == %project_create
 
-**説明**:新しいプロジェクトを作成する。このコマンドは、GitHubアカウントにプロジェクト名を持つ新しいリポジトリも作成されます。設定は**engine.yml**ファイルに保存されます。
+**説明**:新しいプロジェクトを作成する。このコマンドは、GitHubアカウントにプロジェクト名を持つ新しいリポジトリも作成されます。設定は **engine.yml** ファイルに保存されます。
 
 **使用方法**:
 
@@ -108,8 +108,7 @@ image::ai-unlimited/{page-image-directory}/ai.unlimited.project.list.png[プロ�
 
 **説明**: オブジェクト ストア認証情報を保存するための認証オブジェクトを作成する。
 
-エンジンをデプロイする前に、認証オブジェクトを作成する必要があります。認証の詳細は保持され、プロジェクトの再デプロイ時に組み込まれます。オプションで、エンジンのデプロイ後に `CREATE AUTHORIZATION`の SQL コマンドを使用して認証を手動で作成できます。この場合、認証の詳細は保持されません。
-
+エンジンをデプロイする前に、認証オブジェクトを作成する必要があります。認証の詳細は保持され、プロジェクトの再デプロイ時に組み込まれます。オプションで、エンジンのデプロイ後に `CREATE AUTHORIZATION` の SQL コマンドを使用して認証を手動で作成できます。この場合、認証の詳細は保持されません。
 
 **使用方法**:
 [source, bash, id="magic_auth_create", role="content-editable emits-gtm-events"]

@@ -44,7 +44,7 @@ image::cloud-guides/{page-image-directory}/create.notebook.png[Notebookインス
 +
 image::cloud-guides/{page-image-directory}/open.notebook.instance.png[Notebook インスタンスを開く]
 
-3. `新規作成 -> conda_python3`をクリックして新規ファイルを起動します。
+3. `New -> conda_python3` をクリックして新規ファイルを起動します。
 +
 image::cloud-guides/{page-image-directory}/start.new.file.png[新しいファイルを開始する]
 
@@ -66,7 +66,7 @@ import pandas as pd
 import boto3, os
 ----
 
-6. 新しいセルで、Teradata Vantageに接続します。`<hostname>`、 `<database user name>`、 `<database password>`はVantageの環境にあわせて置き換えてください。
+6. 新しいセルで、Teradata Vantageに接続します。`<hostname>`、 `<database user name>`、 `<database password>` はVantageの環境にあわせて置き換えてください。
 +
 [source, python]
 ----
@@ -102,19 +102,19 @@ boto3.Session().resource('s3').Bucket(bucket).Object(os.path.join(prefix, localF
 
 == モデルのトレーニング
 
-1. 左メニューの `Training`の下にある `Training jobs` を選択し、 `Create training job`をクリックします。
+1. 左メニューの `Training` の下にある `Training jobs` を選択し、 `Create training job` をクリックします。
 +
 image::cloud-guides/{page-image-directory}/create.training.job.png[Create training job]
 
-2. `トレーニングジョブの作成` ウィンドウで、`ジョブ名`(例: `xgboost-bank`) を入力しIAMロールの`新しいロールを作成`します。Amazon S3 バケットに `Any S3バケット` 、 `ロールの作成`に
+2. `トレーニングジョブの作成` ウィンドウで、`ジョブ名` (例: `xgboost-bank` ) を入力しIAMロールの `新しいロールを作成` します。Amazon S3 バケットに `Any S3バケット` 、 `ロールの作成` に 
 +
 を選択します。image::cloud-guides/{page-image-directory}/create.iam.role.png[IAMロールの作成,width=50%]
 
-3. `Create training job` ウィンドウに戻りアルゴリズムとして`XGBoost`を使用します。
+3. `Create training job` ウィンドウに戻りアルゴリズムとして `XGBoost` を使用します。
 +
-image::cloud-guides/{page-image-directory}/choose.an.algorithm.png[Choose an algorithm,width=50%]
+image::cloud-guides/{page-image-directory}/choose.an.algorithm.png[アルゴリズムの選択,width=50%]
 
-4. インスタンスタイプはデフォルトの`ml.m4.xlarge`、インスタンスあたりの追加ストレージボリュームは30GBを使用します。これは短いトレーニングジョブで10分以上はかからないはずです。
+4. インスタンスタイプはデフォルトの `ml.m4.xlarge`、インスタンスあたりの追加ストレージボリュームは30GBを使用します。これは短いトレーニングジョブで10分以上はかからないはずです。
 +
 image::cloud-guides/{page-image-directory}/resource.configuration.png[リソースを構成,width=50%]
 
@@ -131,11 +131,11 @@ subsample=0.8
 objective='binary:logistic'
 ----
 
-6. `Input data configuration`には学習データを保存したAmazon S3バケットを入力します。Input modeは `File`です。Content typeは `csv`です。`S3 location` はファイルのアップロード先です。
+6. `Input data configuration` には学習データを保存したAmazon S3バケットを入力します。Input modeは `File` です。Content typeは `csv` です。`S3 location` はファイルのアップロード先です。
 +
 image::cloud-guides/{page-image-directory}/input.data.configuration.png[Input data configuration,width=50%]
 
-7. `Output data configuration`には出力データを保存するパスを入力します。
+7. `Output data configuration` には出力データを保存するパスを入力します。
 +
 image::cloud-guides/{page-image-directory}/output.data.configuration.png[Output data configuration,width=50%]
 
@@ -149,19 +149,19 @@ image::cloud-guides/{page-image-directory}/output.data.configuration.png[Output 
 
 === モデルの作成
 
-1. 左パネルの [ `Inference` の下にある `Models` を選択し、 `Create model`を選択します。モデル名 (例: `xgboost-bank`) を入力し前のステップで作成したIAMロールを選択します。
-2.	`コンテナ定義1`では`433757028032.dkr.ecr.us-west-2.amazonaws.com/xgboost:latest` を `Location of inference code image`として使用します。`Location of model artifacts` には学習ジョブの出力パスを指定します。
+1. 左パネルの [ `Inference` の下にある `Models` を選択し、 `Create model` を選択します。モデル名 (例: `xgboost-bank`) を入力し前のステップで作成したIAMロールを選択します。
+2.	`コンテナ定義1` では `433757028032.dkr.ecr.us-west-2.amazonaws.com/xgboost:latest` を `Location of inference code image` として使用します。`Location of model artifacts` には学習ジョブの出力パスを指定します。
 +
 image::cloud-guides/{page-image-directory}/container.definition.1.png[コンテナ定義1,,width=50%]
-3. 他はデフォルトのまま`モデルを作成`します。
+3. 他はデフォルトのまま `モデルを作成` します。
 
-=== エンドポイントコンフィギュレーションを作成する
+=== エンドポイントコンフィギュレーションの作成
 
-1. 作成したモデルを選択し、 `Create endpoint configuration`をクリックします。
+1. 作成したモデルを選択し、 `Create endpoint configuration` をクリックします。
 +
 image::cloud-guides/{page-image-directory}/create.endpoint.configuration.png[Create endpoint configuration]
 
-2. 名前（例： `xgboost-bank`)を記入しその他はdefaultを使用します。モデル名とトレーニングジョブは自動的に入力されるはずです。 `Create endpoint configuration`をクリックします。
+2. 名前（例： `xgboost-bank`)を記入しその他はdefaultを使用します。モデル名とトレーニングジョブは自動的に入力されるはずです。 `Create endpoint configuration` をクリックします。
 
 === エンドポイントの作成
 
@@ -172,11 +172,11 @@ image::cloud-guides/{page-image-directory}/create.endpoint.png[Create endpoint]
 2. 名前 (例: `xgboost-bank`)を入力し、`既存のエンドポイント構成を使用する`:
 を選択します。image::{page-image-directory}/attach.endpoint.configuration.png[エンドポイント構成を添付する]
 
-3. 前回の手順で作成したエンドポイント構成を選択し`エンドポイント構成の選択`をクリックします。
+3. 前回の手順で作成したエンドポイント構成を選択し `エンドポイント構成の選択` をクリックします。
 +
 image::cloud-guides/{page-image-directory}/select.endpoint.configuration.png[エンドポイント構成の選択,width=50%]
 
-4. 他のすべてをデフォルトのままにして`エンドポイントを作成`をクリックします。
+4. 他のすべてをデフォルトのままにして `エンドポイントを作成` をクリックします。
 
 これでモデルがエンドポイントにデプロイされクライアントアプリケーションから利用できるようになります。
 

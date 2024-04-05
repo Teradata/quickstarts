@@ -5,7 +5,7 @@
 :page-email: adam.tworkiewicz@teradata.com
 :page-revdate: 2022 年 11 月 10 日
 :description: Jupyter Notebookから Teradata Vantage を使用する
-:keywords: データ ウェアハウス、コンピューティング ストレージの分離、teradata、vantage、クラウド データ プラットフォーム、JDBC、Java アプリケーション、ビジネス インテリジェンス、エンタープライズ分析、jupyter、teradatasql、ipython-sql、teradatasqlalchemy
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, JDBC, java applications, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy
 
 include::../partials/jupyter_notebook_clearscape_analytics_note.adoc[]
 
@@ -18,12 +18,12 @@ include::../partials/vantage_clearscape_analytics.adoc[]
 
 Jupyter Notebook から Vantage に接続するには、いくつかの方法があります。
 
-1. <<_teradata_libraries,通常の Python/R カーネル Notebookで Python または R ライブラリを使用します>> 。このオプションは、独自のDockerイメージを生成できない制限された環境にいる場合にうまく機能します。また、Notebook内で SQL と Python/R を混在させる必要がある従来のデータサイエンス シナリオでも役立ちます。Jupyter に精通していて、独自の優先ライブラリと拡張機能のセットがある場合は、このオプションから始めてください。
+1. <<_teradata_libraries,通常の Python/R カーネル Notebookで Python または R ライブラリを使用する >> - このオプションは、独自のDockerイメージを生成できない制限された環境にいる場合にうまく機能します。また、Notebook内で SQL と Python/R を混在させる必要がある従来のデータサイエンス シナリオでも役立ちます。Jupyter に精通していて、独自の優先ライブラリと拡張機能のセットがある場合は、このオプションから始めてください。
 2.<<_teradata_jupyter_docker_image,Teradata Jupyter Docker イメージを使用する>> - Teradata Jupyter Docker イメージには、Teradata SQL カーネル (詳細は後述)、`teradataml` および `tdplyr` ライブラリ、Python および R ドライバーがバンドルされています。また、Teradata 接続の管理、Vantage データベース内のオブジェクトの探索を可能にする Jupyter 拡張機能も含まれています。SQLを頻繁に使用する場合や、視覚的なナビゲータが役立つ場合に便利です。Jupyter を初めて使用する場合、またはライブラリと拡張機能の厳選されたアセンブリを入手したい場合は、このオプションから始めてください。
 
 === Teradataライブラリ
 
-このオプションでは、通常の Jupyter Lab Notebookを使用します。Teradata Python ドライバをロードし、Python コードから使用する方法を見ていきます。また、SQLのみのセルのサポートを追加する`ipython-sql`拡張に機能も検討します。
+このオプションでは、通常の Jupyter Lab Notebookを使用します。Teradata Python ドライバをロードし、Python コードから使用する方法を見ていきます。また、SQLのみのセルのサポートを追加する `ipython-sql` 拡張に機能も検討します。
 
 1. シンプルな Jupyter Lab Notebookから始めます。ここでは Dockerを使用していますが、Jupyter Hub、Google Cloud AI Platform Notebooks、AWS SageMaker Notebooks、Azure ML Notebooks など、Notebookを起動する任意のメソッドを使用できます。
 +
@@ -76,7 +76,7 @@ pd.read_sql("SELECT * FROM dbc.dbcinfo", con = db_connection_string)
 import sys
 !{sys.executable} -m pip install ipython-sql teradatasqlalchemy
 ----
-7. `ipython-sql`をロードし、db接続文字列を定義します。
+7. `ipython-sql` をロードし、db接続文字列を定義します。
 +
 [source, ipython, role="content-editable"]
 ----
@@ -86,7 +86,7 @@ import sys
 # See https://pypi.org/project/teradatasqlalchemy/ for details.
 %sql teradatasql://dbc:dbc@host.docker.internal/dbc
 ----
-8. `%sql`と`%%sql`の魔法が使えるようになりました。テーブル内のデータを調査したいとします。以下のようなセルを作成できます。
+8. `%sql` と `%%sql` の魔法が使えるようになりました。テーブル内のデータを調査したいとします。以下のようなセルを作成できます。
 +
 [source, ipython]
 ----
@@ -101,11 +101,11 @@ result = %sql SELECT * FROM dbc.dbcinfo
 result.DataFrame()
 ----
 
-ipython-sql には、変数置換、`matplotlib` によるプロット、ローカル CSV ファイルへの結果の書き込みやデータベースへの結果の書き込みなど、他にも多くの機能があります。例については link:https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/attachments/vantage-with-python-libraries.ipynb[デモ Notebookを] 、完全なリファレンスについては link:https://github.com/catherinedevlin/ipython-sql/[ipython-sql github リポジトリ] を参照してください。
+ipython-sql には、変数置換、`matplotlib` によるプロット、ローカル CSV ファイルへの結果の書き込みやデータベースへの結果の書き込みなど、他にも多くの機能があります。例については link:https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/attachments/vantage-with-python-libraries.ipynb[Notebookのデモ] を 、完全なリファレンスについては link:https://github.com/catherinedevlin/ipython-sql/[ipython-sql github リポジトリ] を参照してください。
 
 === Teradata Jupyter Dockerイメージ
 
-Teradata Jupyter Dockerイメージは、 `jupyter/datascience-notebook`Dockerイメージに基づいて構築されています。Teradata SQL カーネル、Teradata Python および R ライブラリ、Jupyter 拡張機能が追加され、Teradata Vantage との対話時の生産性が向上します。このイメージには、SQL カーネルと Teradata ライブラリの使用方法を示すサンプル Notebookも含まれています。
+Teradata Jupyter Dockerイメージは、 `jupyter/datascience-notebook` Dockerイメージに基づいて構築されています。Teradata SQL カーネル、Teradata Python および R ライブラリ、Jupyter 拡張機能が追加され、Teradata Vantage との対話時の生産性が向上します。このイメージには、SQL カーネルと Teradata ライブラリの使用方法を示すサンプル Notebookも含まれています。
 
 SQL カーネルと Teradata Jupyter 拡張機能は、SQL インターフェースの使用に多くの時間を費やす人にとって役立ちます。これは、多くの場合、Teradata Studio を使用するよりも便利なNotebook エクスペリエンスと考えてください。Teradata Jupyter Docker イメージは、Teradata Studio を置き換えようとするものではありません。すべての機能が備わっているわけではありません。軽量の Web ベースのインターフェースを必要とし、Notebook UI を楽しむ人向けに設計されています。
 
@@ -113,8 +113,9 @@ Teradata Jupyter Dockerイメージは、Jupyter をローカルで実行する�
 
 1. イメージを実行します。
 +
-NOTE: `-e"accept_license=Y` を渡すと、Teradata Jupyter Extensions のhttps://github.com/Teradata/jupyterextensions/blob/master/licensefiles/license.txt[使用許諾契約]に同意したことになります。
+NOTE: `-e"accept_license=Y` を渡すと、Teradata Jupyter Extensions の https://github.com/Teradata/jupyterextensions/blob/master/licensefiles/license.txt[使用許諾契約] に同意したことになります。
 +
+
 [source, bash, id="jupyter_td_image_first_run", role="content-editable emits-gtm-events"]
 ----
 docker volume create notebooks
@@ -134,8 +135,8 @@ Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400
 * Or enter this token when prompted by Jupyter: 96a3ab874a03779c400966bf492fe270c2221cdcc74b61ed
 * If you used a different port to run your Docker, replace 8888 with your port number
 ----
-3. URL を開き、ファイル エクスプローラを使用してNotebook `67jupyterextensions -> notebooks -> sql -> GettingStartedDemo.ipynb`を開きます。
-4．Teradata SQL カーネルのデモを確認してください。
+3. URL を開き、ファイル エクスプローラを使用してNotebook `jupyterextensions -> notebooks -> sql -> GettingStartedDemo.ipynb`を開きます。
+4. Teradata SQL カーネルのデモを確認してください。
 +
 image::gettingstarteddemo.ipynb.png[GettingStartedDemo.ipynbのスクリーンショット, width=100%]
 

@@ -20,9 +20,9 @@ image:cloud-guides/{page-image-directory}/image2.png[Image,width=50%]
 
 === Azure Data Shareについて
 
-https://docs.microsoft.com/en-us/azure/data-share/overview[Azure Data Share] は、企業が複数の顧客やパートナーと簡単かつ安全にデータを共有することを可能にします。データ提供者とデータ消費者の両方が、データを共有および受信するためにAzureサブスクリプションを持つ必要があります。Azure Data Shareは現在、スナップショットベースの共有とインプレース共有を提供しています。現在、Azure Data Shareがhttps://docs.microsoft.com/en-us/azure/data-share/supported-data-stores[サポートしているデータストア]は、Azure Blob Storage、Azure Data Lake Storage Gen1およびGen2、Azure SQL Database、Azure Synapse Analytics、Azure Data Explorerです。Azure Data Shareを使用してデータセット共有を送信すると、データ消費者はAzure Blob Storageなどの任意のデータストアでそのデータを受け取り、Teradata Vantageを使用してデータを探索、分析することができます。
+https://docs.microsoft.com/en-us/azure/data-share/overview[Azure Data Share] は、企業が複数の顧客やパートナーと簡単かつ安全にデータを共有することを可能にします。データ提供者とデータ消費者の両方が、データを共有および受信するためにAzureサブスクリプションを持つ必要があります。Azure Data Shareは現在、スナップショットベースの共有とインプレース共有を提供しています。現在、Azure Data Shareが https://docs.microsoft.com/en-us/azure/data-share/supported-data-stores[サポートしているデータストア] は、Azure Blob Storage、Azure Data Lake Storage Gen1およびGen2、Azure SQL Database、Azure Synapse Analytics、Azure Data Explorerです。Azure Data Shareを使用してデータセット共有を送信すると、データ消費者はAzure Blob Storageなどの任意のデータストアでそのデータを受け取り、Teradata Vantageを使用してデータを探索、分析することができます。
 
-詳細については、https://docs.microsoft.com/en-us/azure/data-share/[ドキュメント]を参照してください。
+詳細については、https://docs.microsoft.com/en-us/azure/data-share/[ドキュメント] を参照してください。
 
 === Teradata Vantageについて
 
@@ -47,8 +47,8 @@ Teradata Vantage Native Object Store（NOS）は、標準的なSQLを使用し�
 
 include::../partials/vantage_clearscape_analytics.adoc[]
 
-* Azureアカウント。 https://azure.microsoft.com/free/[無料アカウント]で始めることができます。
-* データデータセットを保存するための https://docs.microsoft.com/en-us/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal[Azure Blob Storage]アカウント。
+* Azureアカウント。 https://azure.microsoft.com/free/[無料アカウント] で始めることができます。
+* データデータセットを保存するための https://docs.microsoft.com/en-us/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal[Azure Blob Storage] アカウント。
 
 == 手順
 
@@ -62,51 +62,52 @@ include::../partials/vantage_clearscape_analytics.adoc[]
 6. lob Storageのデータセットにクエリーを実行する
 7. Blob StorageからVantageにデータをロードする（オプション）
 
-=== Azure Blob Storageアカウントとコンテナの作成
+=== Azure Blob Storageアカウントとコンテナを作成する
 
-* ブラウザで https://portal.azure.com/[Azureポータル]を開き（Chrome、Firefox、Safariでうまくいきます）、この記事の_myProviderStorage_rg_というリソースグループにhttps://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal#create-a-storage-account-1[ストレージアカウントを作成する]の手順に従います。
+* ブラウザで https://portal.azure.com/[Azureポータル] を開き（Chrome、Firefox、Safariでうまくいきます）、この記事の _myProviderStorage_rg_ というリソースグループに https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal#create-a-storage-account-1[ストレージアカウントを作成する] の手順に従います。
 
 * ストレージ名と接続方式を入力します。今回は、 _myproviderstorage_ と _public endpoint_ を使用します。
 +
 NOTE: 作成するすべてのサービスに同じ場所を使用することをお勧めします。
 
-*  *Review + create* を選択し、*Create*を選択します。
+*  *Review + create* を選択し、*Create* を選択します。
 
 * *Go to resource* をクリックし、 *Containers* をクリックし、コンテナを作成します。
 
-*  *+ Container*ボタンをクリックします。
+*  *+ Container* ボタンをクリックします。
 
 * コンテナ名を入力します。今回は _providerdata_ を使用します。
 +
 image:cloud-guides/{page-image-directory}/image3.png[image,width=623,height=138]
 
-* *作成*をクリックします。
+* *作成* をクリックします。
 
 === データシェアアカウントの作成
 
 データセットを共有するプロバイダーのデータ共有アカウントを作成します。
 
-この記事の https://docs.microsoft.com/en-us/azure/data-share/share-your-data?tabs=azure-portal#create-a-data-share-account[「Azure データ共有アカウントの作成」] 手順に従い、 _myDataShareProvider_rg_ というリソース グループにリソースを作成します。
+この記事の https://docs.microsoft.com/en-us/azure/data-share/share-your-data?tabs=azure-portal#create-a-data-share-account[Azure データ共有アカウントの作成] の手順に従い、 _myDataShareProvider_rg_ というリソース グループにリソースを作成します。
 
-* *Basics*タブで、データ共有アカウント名を入力します。今回は 、_mydatashareprovider_ を使用します。
+* *Basics* タブで、データ共有アカウント名を入力します。今回は 、_mydatashareprovider_ を使用します。
 +
 image:cloud-guides/{page-image-directory}/image4.png[image,width=576,height=394]
 +
 NOTE: 作成するすべてのサービスに同じ場所を使用することをお勧めします。
 
-*  *Review + create* を選択し、*Create*を選択します。
+*  *Review + create* を選択し、*Create* を選択します。
 
-* デプロイが完了したら、*Go to resource*を選択します。
+* デプロイが完了したら、*Go to resource* を選択します。
 
 === 共有の作成
 
-* [データ共有]の概要ページに移動し、 https://docs.microsoft.com/en-us/azure/data-share/share-your-data?tabs=azure-portal#create-a-share[「共有を作成」]の手順に従います。
+* [データ共有]の概要ページに移動し、 https://docs.microsoft.com/en-us/azure/data-share/share-your-data?tabs=azure-portal#create-a-share[共有を作成] の手順に従います。
 
 * *Start sharing your data* を選択します。
 
 * + *Create* を選択します。
 
-* *Details*タブで、共有名と共有タイプを入力します。今回は、_WeatherData_ と _Snapshot_ を使用します。
+* *Details* タブで、共有名と共有タイプを入力します。今回は、_WeatherData_ と _Snapshot_ を使用します。
+
 +
 image:cloud-guides/{page-image-directory}/image5.png[image,width=472,height=381]
 
@@ -126,11 +127,11 @@ image:cloud-guides/{page-image-directory}/image5.png[image,width=472,height=381]
 サポートされているデータストア Azure データエクスプローラ
 ====
 
-* *Continue*をクリックします。
+* *Continue* をクリックします。
 
-* *Datasets*タブで、 *Add datasets*
-をクリックします。
-* を選択します *Azure Blob Storage*
+* *Datasets* タブで、 *Add datasets*
+ をクリックします。
+* *Azure Blob Storage* を選択します。
 +
 image:cloud-guides/{page-image-directory}/image6.png[Image,width=378,height=360]
 
@@ -141,7 +142,7 @@ image:cloud-guides/{page-image-directory}/image6.png[Image,width=378,height=360]
 image:cloud-guides/{page-image-directory}/image7.png[Image,width=394,height=364]
 
 
-*  *Next*をクリックします。
+*  *Next* をクリックします。
 
 * コンテナをダブルクリックして、データセットを選択します。今回は 、_providerdata_ と _onpoint_history_postal-code_hour.csv_ ファイルを使用します。
 +
@@ -151,19 +152,19 @@ image:cloud-guides/{page-image-directory}/image8.png[Image,width=381,height=259]
 
 NOTE: Azure Data Share は、フォルダおよびファイル レベルで共有できます。ファイルのアップロードには、Azure Blob Storageリソースを使用します。
 
-* *次へ*をクリックします。
+* *次へ* をクリックします。
 
-* コンシューマに表示されるフォルダとデータセットのデータセット名を入力します。今回はデフォルトの名前を使用しますが、providerdata フォルダを削除します。*Add datasets*をクリックします。
+* コンシューマに表示されるフォルダとデータセットのデータセット名を入力します。今回はデフォルトの名前を使用しますが、providerdata フォルダを削除します。*Add datasets* をクリックします。
 +
 image:cloud-guides/{page-image-directory}/image9.png[Image,width=392,height=266]
 
-* *Add datasets*をクリックします。
+* *Add datasets* をクリックします。
 +
 image:cloud-guides/{page-image-directory}/image10.png[送信済み共有に追加されたデータセット,image,width=624,height=242]
 
-* *Continue*をクリックします。
+* *Continue* をクリックします。
 
-*  *Recipients*タブで、 *Add recipient*の電子メールアドレスを追加するをクリックします。。
+*  *Recipients* タブで、 *Add recipient* の電子メールアドレスを追加するをクリックします。。
 
 * 消費者の電子メールアドレスを入力します。
 +
@@ -171,15 +172,15 @@ image:cloud-guides/{page-image-directory}/image11.png[受信者の電子メー�
 
 TIP: 消費者が受け入れることができるシェア有効期限を設定します。
 
-* *Continue*をクリックします。
+* *Continue* をクリックします。
 
 *  [*Settings*] タブで、スナップショットのスケジュールを設定します。今回は、デフォルトで _チェックを外して_ 使用します。
 +
 image:cloud-guides/{page-image-directory}/image12.png[スナップショットのスケジュールを設定,image,width=437,height=299]
 
-* *Continue*をクリックします。
+* *Continue* をクリックします。
 
-* *Review + Create*タブの *Create*をクリックします。
+* *Review + Create* タブの *Create*をクリックします。
 +
 image:cloud-guides/{page-image-directory}/image13.png[Review + Create,image,width=440,height=334]
 
@@ -191,17 +192,17 @@ image:cloud-guides/{page-image-directory}/image14.png[データ共有の準備�
 
 今回は、受信者/消費者が Azure Blob ストレージ アカウントにデータを受信することを想定しています。
 
-データ共有_プロバイダ_と同様に、データ共有の招待を受け入れる前に、_コンシューマ_のすべての事前要件が完了していることを確認します。
+データ共有 _プロバイダ_ と同様に、データ共有の招待を受け入れる前に、_コンシューマ_ のすべての事前要件が完了していることを確認します。
 
-* Azureのサブスクリプション。持っていない場合は、事前にhttps://azure.microsoft.com/free/[+++無料アカウント+++]を作成してください。
-* Azure Blob Storage アカウントとコンテナ:  _myConsumerStorage_rg_というリソース グループを作成し、アカウント名 _myconsumerstorage_ とコンテナ _consumerdata_を作成します。
+* Azureのサブスクリプション。持っていない場合は、事前に https://azure.microsoft.com/free/[+++無料アカウント+++] を作成してください。
+* Azure Blob Storage アカウントとコンテナ:  _myConsumerStorage_rg_ というリソース グループを作成し、アカウント名 _myconsumerstorage_ とコンテナ _consumerdata_ を作成します。
 * Azure Data Share アカウント: _myDataShareConsumer_rg_ というリソース グループを作成し、 _mydatashareconsumer_ というデータ共有アカウント名を作成して、データを受け入れます。
 
- https://docs.microsoft.com/en-us/azure/data-share/subscribe-to-data-share?tabs=azure-portal[「Azure Data Shareを使用してデータを受信する」]の手順に従います。
+ https://docs.microsoft.com/en-us/azure/data-share/subscribe-to-data-share?tabs=azure-portal[Azure Data Shareを使用してデータを受信する]の手順に従います。
 
 ==== 招待状を開く
 
-* メールには、Microsoft Azureから「Azure Data Share invitation from *mailto:yourdataprovider@domain.com[+++yourdataprovider@domain.com+++].*という件名の招待状が届いています。*View invitation(招待状を表示する)*をクリックすると、Azureで招待状を表示することができます。
+* メールには、Microsoft Azureから「Azure Data Share invitation from *mailto:yourdataprovider@domain.com[+++yourdataprovider@domain.com+++].*という件名の招待状が届いています。*View invitation(招待状を表示する)* をクリックすると、Azureで招待状を表示することができます。
 +
 image:cloud-guides/{page-image-directory}/image15.png[受信者へのData Share招待状メール,image,width=387,height=192]
 
@@ -215,7 +216,7 @@ image:cloud-guides/{page-image-directory}/image16.png[Data Shareへの招待,ima
 
 *  _Target Data Share Account(ターゲット データ共有アカウント)_ で、データシェアをデプロイするサブスクリプションとリソースグループを選択するか、ここで新しいデータシェアを作成することができます。
 +
-NOTE: プロバイダが利用規約の承諾を必要とする場合、ダイアログボックスが表示され、利用規約に同意することを示すボックスにチェックを入れる必要があります。
+NOTE: f プロバイダが利用規約の承諾を必要とする場合、ダイアログボックスが表示され、利用規約に同意することを示すボックスにチェックを入れる必要があります。
 
 * Resource groupとData share accountを入力します。今回は _myDataShareConsumer_rg_ と _mydatashareconsumer_ のアカウントを使用します。
 +
@@ -229,7 +230,7 @@ image:cloud-guides/{page-image-directory}/image17.png[Target Data Share アカ�
 +
 image:cloud-guides/{page-image-directory}/image18.png[DatasetとMap to targetを選択,image,width=568,height=186]
 
-* ターゲットデータストアの種類と、データを格納するパスを選択します。この記事のスナップショットの例では、コンシューマーの Azure Blob Storage アカウント  _myconsumerstorage_ とコンテナ _consumerdata_を使用することにします。
+* ターゲットデータストアの種類と、データを格納するパスを選択します。この記事のスナップショットの例では、コンシューマーの Azure Blob Storage アカウント  _myconsumerstorage_ とコンテナ  _consumerdata_ を使用することにします。
 +
 NOTE: Azure Data Shareは、異なるデータストアから、または異なるデータストアへの共有機能を含む、オープンで柔軟なデータ共有を提供します。スナップショットおよびインプレース共有を受け入れることができるhttps://docs.microsoft.com/en-us/azure/data-share/supported-data-stores#supported-data-stores[サポートされた]データソースを確認します。
 +
@@ -237,14 +238,13 @@ image:cloud-guides/{page-image-directory}/image19.png[データセットをタ�
 
 * *Map to target*をクリックします。
 
-* マッピングが完了したら、スナップショットベースの共有のために、*Details*タブをクリックし、_フル_または_インクリメンタル_インクリメンタルで *Trigger snapshot*をクリックします。プロバイダからデータを受け取るのは初めてなので、完全なコピーを選択します。
+* マッピングが完了したら、スナップショットベースの共有の場合は、*Details* タブをクリックし、_Full_ または _Incremental_ で *Trigger snapshot* をクリックします。プロバイダからデータを受け取るのは初めてなので、完全なコピーを選択します。
 +
 image:cloud-guides/{page-image-directory}/image20.png[フルまたはインクリメンタルのスナップショットをトリガーする,image,width=326,height=280]
 
-* 最終実行ステータスが_successful (成功)_したら、ターゲットデータストアに移動して受信したデータを表示します。 *Datasets* を選択し、Target Pathにあるリンクをクリックします。
+* 最終実行ステータスが _成功_ したら、ターゲットデータストアに移動して受信したデータを表示します。 *Datasets* を選択し、Target Pathにあるリンクをクリックします。
 +
 image:cloud-guides/{page-image-directory}/image21.png[共有データを表示するためのデータセットとターゲットパス,image,width=623,height=118]
-
 
 === Azure Blob Storage への NOS アクセスの構成
 
@@ -320,7 +320,7 @@ image:cloud-guides/{page-image-directory}/image23.png[WeatherData テーブル�
 ビューを使用すると、ペイロード属性に関連する名前を簡素化でき、オブジェクトデータに対するSQLを簡単にコーディングでき、外部テーブルのLocation参照を隠蔽できます。
 
 
-NOTE: Vantage の外部テーブルでは、オブジェクト名と列名の区切りに`..`(ダブルドットまたはダブルピリオド) オペレータが使用されます。
+NOTE: Vantage の外部テーブルでは、オブジェクト名と列名の区切りに `..` (ダブルドットまたはダブルピリオド) オペレータが使用されます。
 
 * 以下の SQL コマンドを実行し、ビューを作成します。
 +
@@ -552,8 +552,8 @@ FROM
 +
 **  _LOCATION_ では、ストレージアカウント名とコンテナ名が必要です。これは上記で黄色で強調表示されています。これを自分のストレージアカウント名とコンテナ名で置き換える必要があります。
 **  _ACCESS_ID_ の文字列を、ストレージアカウント名で置き換えます。
-**  _ACCES_KEY_ の文字列を、ストレージアカウントのアクセスキーまたはSASトークン
-に置き換えます。
+**  _ACCES_KEY_ の文字列を、ストレージアカウントのアクセスキーまたはSASトークン 
+ に置き換えます。
 +
 image:cloud-guides/{page-image-directory}/image27.png[READ_NOS,width=624,height=86]
 
@@ -576,7 +576,7 @@ FROM
   ) AS THE_TABLE
 ORDER BY 1
 ----
-**  _LOCATION_、 _ACCESS_ID_、および _ACCESS_KEY_の値を入れ替えてください。
+**  _LOCATION_、 _ACCESS_ID_、および  _ACCESS_KEY_ の値を入れ替えてください。
 
 +
 image:cloud-guides/{page-image-directory}/image28.png[READ_NOSオブジェクトの長さ,image,width=623,height=30]

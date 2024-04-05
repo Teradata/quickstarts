@@ -19,7 +19,7 @@
 * Teradata Vantageインスタンスへのアクセス。
 +
 include::../partials/vantage_clearscape_analytics.adoc[]
-* Python *3.8*、*3.9*、*3.10*、または *3.11*がインストールされていること。
+* Python *3.8*、*3.9*、*3.10*、または *3.11* がインストールされていること。
 
 == Apache Airflowをインストールする
 
@@ -29,7 +29,7 @@ include::../partials/vantage_clearscape_analytics.adoc[]
 ----
 export AIRFLOW_HOME=~/airflow
 ----
-2. PyPIリポジトリから`apache-airflow`の安定版バージョン2. 8.1をインストールします。
+2. PyPIリポジトリから `apache-airflow` の安定版バージョン2. 8.1をインストールします。
 +
 [source, bash]
 ----
@@ -53,7 +53,7 @@ pip install "apache-airflow-providers-teradata==1.0.0"
 ----
 airflow standalone
 ----
-2. Airflow UIにアクセスします。ブラウザでhttps://localhost:8080にアクセスし、ターミナルに表示されている管理者アカウントの詳細でログインします。
+2. Airflow UIにアクセスします。ブラウザで https://localhost:8080 にアクセスし、ターミナルに表示されている管理者アカウントの詳細でログインします。
 
 == Airflow UIでTeradata接続を定義する
 
@@ -107,7 +107,7 @@ with DAG(
     )
 ----
 
-== DAGのロード
+== DAGをロードする
 
 Airflowは、PythonソースファイルからDAGをロードし、設定されたDAG_FOLDER-$AIRFLOW_HOME/files/DAGsディレクトリ内で検索されます。
 
@@ -115,7 +115,7 @@ Airflowは、PythonソースファイルからDAGをロードし、設定され�
 DAG は次の 2 つの方法のいずれかで実行されます。
 1. 手動または API 経由でトリガーされた場合
 2. DAG の一部として定義されている定義されたスケジュールで、
-`example_teradata_operator`が手動でトリガーされるように定義されています。スケジュールを定義するには、link:https://en.wikipedia.org/wiki/Cron[Crontab, window="_blank"] スケジュール値をスケジュール引数に渡すことができます。
+`example_teradata_operator` が手動でトリガーされるように定義されています。スケジュールを定義するには、link:https://en.wikipedia.org/wiki/Cron[Crontab, window="_blank"] スケジュール値をスケジュール引数に渡すことができます。
 [source, python]
 ----
 with DAG(
@@ -126,7 +126,7 @@ with DAG(
 
 == まとめ
 
-このチュートリアルでは、Airflow と Airflow Teradata プロバイダーを Teradata Vantage インスタンスで使用する方法を説明しました。提供されているサンプルDAGは、Connection UIで定義されたTeradata Vantageインスタンスに`my_users`テーブルを作成します。 
+このチュートリアルでは、Airflow と Airflow Teradata プロバイダーを Teradata Vantage インスタンスで使用する方法を説明しました。提供されているサンプルDAGは、Connection UIで定義されたTeradata Vantageインスタンスに `my_users` テーブルを作成します。 
 
 == さらに詳しく
 * link:https://airflow.apache.org/docs/apache-airflow/stable/start.html[Airflow のドキュメンテーション]

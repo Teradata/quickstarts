@@ -14,7 +14,7 @@ Teradata データベースにクエリーを実行し、REST API 経由で結�
 
 == 前提条件
 
-* Mulesoft Anypoint Studio。https://www.mulesoft.com/platform/studioから30日間のTryアルをダウンロードできる。
+* Mulesoft Anypoint Studio。https://www.mulesoft.com/platform/studio から30日間のTryアルをダウンロードできる。
 * Teradata Vantageインスタンスへのアクセス。
 +
 include::../partials/vantage_clearscape_analytics.adoc[]
@@ -26,7 +26,7 @@ include::../partials/vantage_clearscape_analytics.adoc[]
 image::flow.png[サービス フロー, width=500]
 
 Mule HTTP コネクタは、次の形式の HTTP GET リクエストをリッスンします。`http://<host>:8081/?lastname=<parameter>`.
-HTTP コネクタは、メッセージ プロパティの 1 つとして `<parameter>`の値をデータベース コネクタに渡します。
+HTTP コネクタは、メッセージ プロパティの 1 つとして `<parameter>` の値をデータベース コネクタに渡します。
 データベース コネクタは、この値を抽出して以下の SQL クエリーで使用するように構成されています。
 
 [source,sql]
@@ -54,7 +54,7 @@ HTTP コネクタはリクエスト/応答として構成されているため�
   git clone https://github.com/Teradata/mule-jdbc-example
 ----
 
-. `src/main/mule/querying-a-teradata-database.xml`を編集し、Teradata接続文字列`jdbc:teradata://<HOST>/user=<username>,password=<password>`を検索し、Teradata接続パラメータを使用環境に合わせて置換します。
+. `src/main/mule/querying-a-teradata-database.xml` を編集し、Teradata接続文字列 `jdbc:teradata://<HOST>/user=<username>,password=<password>` を検索し、Teradata接続パラメータを使用環境に合わせて置換します。
 
 [NOTE]
 ====
@@ -104,7 +104,7 @@ ClearScape Analytics Experience 経由で Vantage インスタンスにアクセ
 +
 image:anypoint.import.projects.png[Anypointインポートプロジェクトメニュー, width=500]
 
- **  `Anypoint Studio project from File System`を選択します：
+ **  `Anypoint Studio project from File System` を選択します：
 +
 image:select.import.option.png[Anypoint インポート オプション, width=500]
 
@@ -112,7 +112,7 @@ image:select.import.option.png[Anypoint インポート オプション, width=5
 
 == 実行する
 
-.  「`Run`」 メニューを使用して、Anypoint Studio でサンプル アプリケーションを実行します。
+.  `Run` メニューを使用して、Anypoint Studio でサンプル アプリケーションを実行します。
 これでプロジェクトがビルドされ、実行されます。1分ほどかかります。
 . Web ブラウザに移動し、以下のリクエストを送信します。 http://localhost:8081/?lastname=Testowsky。
 +
@@ -134,8 +134,8 @@ image:select.import.option.png[Anypoint インポート オプション, width=5
 
 == さらに詳しく
 
-* マシン上でデータベースコネクタを設定する方法の詳細については、このhttp://www.mulesoft.org/documentation/display/current/Database+Connector[ドキュメント]を参照してください。
-* データベースコネクタのプレーンhttp://www.mulesoft.org/documentation/display/current/Database+Connector+Reference[リファレンス資料]にアクセスしてください。
+* マシン上でデータベースコネクタを設定する方法の詳細については、この http://www.mulesoft.org/documentation/display/current/Database+Connector[ドキュメント] を参照してください。
+* データベースコネクタのプレーンの http://www.mulesoft.org/documentation/display/current/Database+Connector+Reference[リファレンス資料] にアクセスしてください。
 *  http://www.mulesoft.org/documentation/display/current/DataSense[DataSense] の詳細については、こちらをご覧ください。
 
 include::../partials/community_link.adoc[]

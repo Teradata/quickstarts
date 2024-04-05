@@ -1,1 +1,1 @@
-TIP: VantageCloud Lake 環境をリクエストするには、このhttps://www.teradata.com/about-us/contact[リンク]にあるフォームを参照してください。すでに VantageCloud Lake 環境をお持ちで、構成に関するガイダンスが必要な場合は、こちらのhttps://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html[ガイド]を参照してください。
+TIP: VantageCloud Lake 環境をリクエストするには、この https://www.teradata.com/about-us/contact[リンク] にあるフォームを参照してください。すでに VantageCloud Lake 環境をお持ちで、構成に関するガイダンスが必要な場合は、こちらの https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html[ガイド] を参照してください。

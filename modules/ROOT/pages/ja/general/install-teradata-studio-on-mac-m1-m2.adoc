@@ -14,14 +14,13 @@
 
 == 実行する手順
 
-1. Rosetta バイナリ トランスレータをインストールして有効にする。link:https://support.apple.com/en-us/HT211861[Apple Mac Rosetta インストールガイド]に従います。
+1. Rosetta バイナリ トランスレータをインストールして有効にする。link:https://support.apple.com/en-us/HT211861[Apple Mac Rosetta インストールガイド] に従います。
 2. お好みのベンダーから x86 64 ビット ベースの JDK 11 をダウンロードしてインストールします。例えば、x86 64 ビット JDK 11 を link:https://www.azul.com/downloads/?version=java-11-lts&os=macos&architecture=x86-64-bit&package=jdkGet[Azul]
-からダウンロードできます。
+ からダウンロードできます。
 3. Teradata ダウンロード ページから最新の Teradata Studio または Teradata Studio Express リリースをダウンロードします。
 * link:https://downloads.teradata.com/download/tools/teradata-studio[Teradata Studio]
 * link:https://downloads.teradata.com/download/tools/teradata-studio-express[Teradata Studio Express]
-4. Teradata Studio/Teradata Studio Expressをインストールします。詳細については 、link:{attachmentsdir}/Studio-Express-InstallGuide.pdf[「Teradata Studio および Teradata Studio Express インストール ガイド」] を参照してください。
-
+4. Teradata Studio/Teradata Studio Expressをインストールします。詳細については 、link:{attachmentsdir}/Studio-Express-InstallGuide.pdf[Teradata Studio および Teradata Studio Express インストール ガイド] を参照してください。
 
 
 == まとめ

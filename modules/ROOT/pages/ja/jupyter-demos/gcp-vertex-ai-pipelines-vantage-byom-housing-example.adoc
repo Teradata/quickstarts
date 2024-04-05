@@ -6,4 +6,3 @@
 
 
 // include::partials/vertex-pipelines-housing-example-byom.html[]
-

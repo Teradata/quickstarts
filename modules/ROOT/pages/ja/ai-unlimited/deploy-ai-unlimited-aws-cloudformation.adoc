@@ -27,7 +27,7 @@ AWS CloudFormation テンプレートには、カスタマイズできる設定�
 
 === 始める前に
 
-ターミナル ウィンドウを開き、 link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws[Teradata AI Unlimited GitHub リポジトリ]のクローンを作成します。このリポジトリには、ワークスペース サービスと JupyterLab をデプロイするためのサンプル CloudFormation テンプレートが含まれています。
+ターミナル ウィンドウを開き、 link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws[Teradata AI Unlimited GitHub リポジトリ] のクローンを作成します。このリポジトリには、ワークスペース サービスと JupyterLab をデプロイするためのサンプル CloudFormation テンプレートが含まれています。
 
 [source, bash, id="clone_ai_unlimited_repo", role="content-editable emits-gtm-events"]
 ----
@@ -39,7 +39,7 @@ git clone https://github.com/Teradata/ai-unlimited
 1. AWS アカウントをまだお持ちでない場合は、画面上の指示に従って、link:https://aws.amazon.com[https://aws.amazon.com]でアカウントを作成します。  
 2. ワークスペース サービスをデプロイするアカウントに、IAM ロールまたは IAM ポリシーを作成するための十分な IAM アクセス権があることを確認してます。アカウントに必要なアクセス権がない場合は、組織の管理者に問い合わせてください。 link:ai-unlimited-aws-permissions-policies.html[カスタム権限とポリシーを使用してAWSのアクセスと権限を制御する] を参照してください。
 3. ナビゲーション バーのリージョン セレクターを使用して、Teradata AI Unlimited ワークスペース サービスをデプロイする AWS リージョンを選択します。 
-4. ワークスペース サービス インスタンスの起動後に SSH を使用して安全に接続するためのキー ペアを生成します。link:https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html[Amazon EC2キーペアとLinuxインスタンス]を参照してください。
+4. ワークスペース サービス インスタンスの起動後に SSH を使用して安全に接続するためのキー ペアを生成します。 link:https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html[Amazon EC2キーペアとLinuxインスタンス] を参照してください。
 +
 NOTE: あるいは、AWS Session Manager を使用してワークスペース サービス インスタンスに接続することもできます。その場合、session-manager.json ポリシーを IAM ロールに付与する必要があります。 link:ai-unlimited-aws-permissions-policies.html[カスタム権限とポリシーを使用してAWSのアクセスと権限を制御する] を参照してください。ホスト OS へのアクセスが必要ない場合は、これらの接続方法のいずれも使用しないことを選択できます。
 
@@ -51,7 +51,7 @@ NOTE: あるいは、AWS Session Manager を使用してワークスペース �
 サブスクライブするには: 
 
 1. AWSアカウントにログオンする。 
-2. Teradata AI UnlimitedのAWSマーケットプレイスページを開き、**Continue**を選択する。 
+2. Teradata AI UnlimitedのAWSマーケットプレイスページを開き、**Continue** を選択する。 
 3. エンジンイメージの利用規約を確認し、同意する。 
 
 +
@@ -64,9 +64,9 @@ NOTE: あるいは、AWS Session Manager を使用してワークスペース �
 === ステップ3: AWSコンソールからワークスペースサービスとJupyterLabをデプロイする
 
 1. AWSコンソールでAWSアカウントにサインオンする。
-2. ナビゲーションバーの右上隅に表示される**AWSリージョン**を確認し、必要に応じて変更します。Teradataでは、プライマリ作業場所に最も近いリージョンを選択することをお薦めする。
-3.	**CloudFormation**>**Create Stack**に移動します。 **Create Stack** を選択し、 **With new resources (standard)** を選択します。
-4. **テンプレートの準備ができました**を選択し、Teradata AI Unlimited GitHub リポジトリからダウンロードしたテンプレート ファイルの 1 つをアップロードします。
+2. ナビゲーションバーの右上隅に表示される **AWSリージョン** を確認し、必要に応じて変更します。Teradataでは、プライマリ作業場所に最も近いリージョンを選択することをお薦めする。
+3. **CloudFormation** > **Create Stack** に移動します。 **Create Stack** を選択し、 **With new resources (standard)** を選択します。
+4. **テンプレートの準備ができました** を選択し、Teradata AI Unlimited GitHub リポジトリからダウンロードしたテンプレート ファイルの 1 つをアップロードします。
 +
 
 * link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#workspaces-template[Workspaces テンプレート]: systemd によって制御されるコンテナー内で実行されるワークスペースを含む単一のインスタンスをデプロイします。
@@ -80,7 +80,8 @@ NOTE: あるいは、AWS Session Manager を使用してワークスペース �
 ** link:https://github.com/Teradata/ai-unlimited/blob/develop/deployments/aws/parameters/all-in-one.json[parameters/all-in-one.json] パラメータ ファイル
 +
 このテンプレートを使用している場合は、埋め込み JupyterLab サービスを使用することも、外部 JupyterLab インスタンスに接続することもできます。埋め込み JupyterLab サービスに接続するときは、JupyterLab Notebookで適切な接続アドレス (例えば、127.0.0.1) を設定する必要があります。また、外部クライアントの場合は、適切なパブリック/プライベート IP または DNS 名を設定する必要があります。
-5.	テンプレートのパラメータを確認します。入力が必要なパラメータの値を指定します。その他のすべてのパラメータについては、デフォルト設定を確認し、必要に応じてカスタマイズします。パラメータの確認とカスタマイズが終了したら、**Next**を選択します。  
+5. テンプレートのパラメータを確認します。入力が必要なパラメータの値を指定します。その他のすべてのパラメータについては、デフォルト設定を確認し、必要に応じてカスタマイズします。パラメータの確認とカスタマイズが終了したら、**Next** を選択します。  
+  
 +
 以下のテーブルでは、パラメータがカテゴリ別にリストされています。
 +
@@ -109,7 +110,7 @@ NOTE: あるいは、AWS Session Manager を使用してワークスペース �
 |
 
 |IamRole			
-|CloudFormationが新しいIAMロールを作成するか、既存のロールを使用するかを指定します。
+|インスタンスに割り当てるIAMロールの名前。既存のIAMロールまたは 新しく作成されたIAMロールのいずれか。 	
 |デフォルトでは必須
 |New
 |サポートされているオプションは以下のとおりです: NewまたはExisting
@@ -286,17 +287,17 @@ IMPORTANT: この値を変更すると、スタックが破損する可能性が
 +
 NOTE: Workspace サービスをデプロイしているアカウントに、IAM ロールまたは IAM ポリシーを作成するための十分な IAM アクセス権がない場合は、クラウド管理者に問い合わせてください。
 
-6. **オプション** ページでは、スタック内のリソースのタグ (キーと値のペア) の指定、アクセス権の設定、スタック障害オプションの設定、および詳細オプションの設定を行うことができます。終了したら、**Next**を選択します。 
+6. **オプション** ページでは、スタック内のリソースのタグ (キーと値のペア) の指定、アクセス権の設定、スタック障害オプションの設定、および詳細オプションの設定を行うことができます。終了したら、**Next** を選択します。 
 7. **Review**ページで、テンプレート設定を確認します。[Capabilities]で、テンプレートがIAMリソースを作成することを確認するチェックボックスをオンにします。 
 8. **Create**を選択してstackをデプロイします。
 9. スタックのステータスを監視します。ステータスが`CREATE_COMPLETE`の場合、Teradata AI Unlimitedワークスペースサービスの準備が整っています。 
-10。スタックの**Outputs**タブに表示されるURLを使用して、作成されたリソースを表示します。
+10. スタックの **Outputs** タブに表示されるURLを使用して、作成されたリソースを表示します。
 
 === ステップ4:ワークスペースサービスの設定とセットアップ
 
-link:https://quickstarts.teradata.com/ai-unlimited/install-ai-unlimited-workspaces-docker.html#_configure_and_set_up_workspace_service[ワークスペースサービスの設定とセットアップ]参照してください。
+link:https://quickstarts.teradata.com/ai-unlimited/install-ai-unlimited-workspaces-docker.html#_configure_and_set_up_workspace_service[ワークスペースサービスの設定とセットアップ] を参照してください。
 
-NOTE: ワークスペース サービスのみをデプロイした場合は、ワークロードを実行する前にインターフェースをデプロイする必要があります。インターフェースをDocker上にローカルにデプロイするには、 link:install-ai-unlimited-interface-docker.html[Dockerを使用した Teradata AI Unlimited インターフェースのデプロイ]を参照してください。 link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#jupyter-template[Jupyter テンプレート] を使用して、systemd によって制御されるコンテナ内で実行される JupyterLab を持つ単一のインスタンスをデプロイすることもできます。
+NOTE: ワークスペース サービスのみをデプロイした場合は、ワークロードを実行する前にインターフェースをデプロイする必要があります。インターフェースをDocker上にローカルにデプロイするには、 link:install-ai-unlimited-interface-docker.html[Dockerを使用した Teradata AI Unlimited インターフェースのデプロイ] を参照してください。 link:https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#jupyter-template[Jupyter テンプレート] を使用して、systemd によって制御されるコンテナ内で実行される JupyterLab を持つ単一のインスタンスをデプロイすることもできます。
 
 Teradata AI Unlimited の準備が整いました。
 

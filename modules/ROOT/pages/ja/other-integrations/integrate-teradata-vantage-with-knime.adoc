@@ -23,19 +23,19 @@ KNIME分析プラットフォームは、データサイエンスのワークベ
 * Teradata Vantage インスタンス、バージョン 17.10 以降へのアクセス。
 +
 include::../partials/vantage_clearscape_analytics.adoc[]
-* KNIME がローカルにインストールされている。詳細については 、link:https://www.knime.com/installation[KNIME のインストール手順]を 参照してください。
+* KNIME がローカルにインストールされている。詳細については 、 link:https://www.knime.com/installation[KNIME のインストール手順] を 参照してください。
 
 == 統合手順
 
-1. https://downloads.teradata.com/download/connectivity/jdbc-driver(初めての方は登録が必要です) にアクセスし、最新版のJDBCドライバをダウンロードします。
+1. https://downloads.teradata.com/download/connectivity/jdbc-driver (初めての方は登録が必要です) にアクセスし、最新版のJDBCドライバをダウンロードします。
 2. ダウンロードしたファイルを解凍します。 `terajdbc4.jar` ファイルがあります。
-3. KNIME で、 `File → Preference`をクリックします。 `Databases` の `Add` をクリックします。
+3. KNIME で、 `File → Preference` をクリックします。 `Databases` の `Add` をクリックします。
 +
 image::other-integrations/{page-image-directory}/add-jar.png[jarを追加, width=75%]
 4. データベースドライバを新規に登録します。 `ID`、 `Name` 、 `Description` に以下のような値を指定します。`Add file`をクリックし、前にダウンロードした.jarファイルをポイントします。 `Find driver classes` をクリックすると、`Driver class:` に `jdbc.TeraDriver` が入力されます。
 +
 image::other-integrations/{page-image-directory}/register-driver.png[ドライバを登録する, width=75%]
-5. `Apply and Close`をクリックします。
+5. `Apply and Close` をクリックします。
 +
 image::other-integrations/{page-image-directory}/apply-and-close.png[Apply and Close, width=75%]
 6. 接続をテストするために、新しいKNIMEワークフローを作成し、右側のワークスペースにドラッグして `Database Reader (legacy)` ノードを追加してください。

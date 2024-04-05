@@ -19,8 +19,8 @@
 +
 include::../partials/vantage_clearscape_analytics.adoc[]
 
-* DataHubがインストールされている。link:https://datahubproject.io/docs/quickstart/[DataHubクイックスタートガイド]
-を参照してください。
+* DataHubがインストールされている。 link:https://datahubproject.io/docs/quickstart/[DataHubクイックスタートガイド]
+ を参照してください。
 == DataHubの設定
 
 * DataHubがインストールされている環境にDataHub用のTeradataプラグインをインストールする

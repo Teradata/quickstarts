@@ -14,7 +14,7 @@
 
 このチュートリアルでは、Teradata Vantage で link:https://docs.getdbt.com/docs/introduction[dbt (Data Build Tool),window="_blank"] を使用して link:https://github.com/airbytehq/airbyte[、Airbyte,window="_blank" ] (オープンソースの抽出ロード ツール) を介して外部データ ロードを変換する方法を説明します。 
 
-このチュートリアルは 、元の link:https://github.com/dbt-labs/jaffle_shop-dev[dbt Jaffle Shop tutorial,window="_blank" ]に基づいていますが、 `dbt seed` コマンドを使用する代わりに、Airbyte を使用して Jaffle Shop データセットが Google Sheets から Teradata Vantage にロードされるという小さな変更が加えられています。airbyte を通じてロードされたデータは、以下の図に示すように JSON カラムに含まれています。
+このチュートリアルは 、元の link:https://github.com/dbt-labs/jaffle_shop-dev[dbt Jaffle Shop tutorial,window="_blank" ] に基づいていますが、 `dbt seed` コマンドを使用する代わりに、Airbyte を使用して Jaffle Shop データセットが Google Sheets から Teradata Vantage にロードされるという小さな変更が加えられています。airbyte を通じてロードされたデータは、以下の図に示すように JSON カラムに含まれています。
 
 image::elt/{dir}/raw_data_vantage_dbeaver.png[Teradata Vantageの生データ, width=75%]
 
@@ -22,17 +22,17 @@ image::elt/{dir}/raw_data_vantage_dbeaver.png[Teradata Vantageの生データ, w
 
 * Teradata Vantageインスタンスへのアクセス。
 +
-include::ROOT:partial$vantage_clearscape_analytics.adoc[]
-* サンプルデータ: サンプルデータ link:https://docs.google.com/spreadsheets/d/1-R4F3q8J9KDnFRWpiT3Ysp1RlOoUu3PeQR7xDeLxFts/edit#gid=42273685[Jaffle Shop Dataset, window="_blank"]は、 Google スプレッドシートにあります。
+include::../partials/vantage_clearscape_analytics.adoc[]
+* サンプルデータ: サンプルデータ  link:https://docs.google.com/spreadsheets/d/1-R4F3q8J9KDnFRWpiT3Ysp1RlOoUu3PeQR7xDeLxFts/edit#gid=42273685[Jaffle Shop Dataset, window="_blank"] は、 Google スプレッドシートにあります。
 * 参照 dbt プロジェクト リポジトリ: link:https://github.com/Teradata/airbyte-dbt-jaffle[Jaffle Project with Airbyte., window="_blank"]
 * Python 3.7、3.8、3.9、3.10、または3.11がインストールされている。
 
 == サンプルデータのローディング
-*  link:https://quickstarts.teradata.com/elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html[Airbyte tutorial, window="_blank"]の手順に従います。Airbyte チュートリアルで参照されるデフォルトのデータセットではなく、link:https://docs.google.com/spreadsheets/d/1-R4F3q8J9KDnFRWpiT3Ysp1RlOoUu3PeQR7xDeLxFts/edit#gid=42273685[Jaffle Shop spreadsheet]からデータをロードするようにしてください。また、Teradata宛先の`Default Schema`を`airbyte_jaffle_shop`に設定する。
+*  link:https://quickstarts.teradata.com/elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html[Airbyte tutorial, window="_blank"] の手順に従います。Airbyte チュートリアルで参照されるデフォルトのデータセットではなく、link:https://docs.google.com/spreadsheets/d/1-R4F3q8J9KDnFRWpiT3Ysp1RlOoUu3PeQR7xDeLxFts/edit#gid=42273685[Jaffle Shop spreadsheet] からデータをロードするようにしてください。また、Teradata宛先の `Default Schema` を `airbyte_jaffle_shop` に設定する。
 
 [NOTE]
 ====
-AirbyteでTeradata宛先を設定すると、`Default Schema`をリクエストされます。`Default Schema`を`airbyte_jaffle_shop`に設定する。 
+AirbyteでTeradata宛先を設定すると、`Default Schema` をリクエストされます。`Default Schema` を `airbyte_jaffle_shop` に設定する。 
 ====
 
 == プロジェクトのクローンを作成する
@@ -75,15 +75,15 @@ dbt init
 ----
 
 +
-dbt プロジェクト ウィザードでは、プロジェクト名と、プロジェクトで使用するデータベース管理システムの入力を求められます。このデモでは、プロジェクト名を`dbt_airbyte_demo`と定義します。dbt-teradataコネクタを使用しているため、使用可能なデータベース管理システムはTeradataのみです。
+dbt プロジェクト ウィザードでは、プロジェクト名と、プロジェクトで使用するデータベース管理システムの入力を求められます。このデモでは、プロジェクト名を `dbt_airbyte_demo` と定義します。dbt-teradataコネクタを使用しているため、使用可能なデータベース管理システムはTeradataのみです。
 +
 image::elt/{dir}/dbt_init_project_name.png[プロジェクト名プロンプト, width=75%]
 +
 image::elt/{dir}/dbt_init_database_name.png[データベース名プロンプト, width=75%]
  
-* `$HOME/.dbt`ディレクトリにある`profiles.yml`ファイルを設定します。`profiles.yml`ファイルが存在しない場合は、新しいファイルを作成できます。 
-* Teradataインスタンスの`HOST`、`Username`、`Password`に合わせて、`server`、`username`、`password`をそれぞれ調整します。 
-* この構成では、`schema`はサンプルデータを含むデータベースを表し、この場合は、Airbyte`airbyte_jaffle_shop`で定義したデフォルト スキーマです。
+* `$HOME/.dbt` ディレクトリにある `profiles.yml` ファイルを設定します。`profiles.yml` ファイルが存在しない場合は、新しいファイルを作成できます。 
+* Teradataインスタンスの `HOST`、`Username`、`Password` に合わせて、`server`、`username`、`password` をそれぞれ調整します。 
+* この構成では、`schema` はサンプルデータを含むデータベースを表し、この場合は、Airbyte `airbyte_jaffle_shop` で定義したデフォルト スキーマです。
 +
 [source, yaml, id="dbt_first_config", role="emits-gtm-events"]
 ----
@@ -100,14 +100,14 @@ dbt_airbyte_demo:
 
 ----
 
-* `profiles.yml`ファイルの準備ができたら、設定を検証できます。dbt プロジェクト フォルダに移動し、以下のコマンドを実行します。
+* `profiles.yml` ファイルの準備ができたら、設定を検証できます。dbt プロジェクト フォルダに移動し、以下のコマンドを実行します。
 +
 [source, bash]
 ----
 dbt debug
 ----
 +
-デバッグ コマンドがエラーを返した場合は、 `profiles.yml`のコンテンツに問題がある可能性があります。設定が正しければ、次のメッセージが表示されます。 `All checks passed!`
+デバッグ コマンドがエラーを返した場合は、 `profiles.yml` のコンテンツに問題がある可能性があります。設定が正しければ、次のメッセージが表示されます。 `All checks passed!`
 +
 image::elt/{dir}/dbt_debug.png[dbt debug output, width=75%]
 
@@ -176,8 +176,7 @@ orders      1--* payments
 == dbt の変換
 [NOTE]
 ====
-以下で詳しく説明する変換を含む完全な dbt プロジェクトは link:https://github.com/Teradata/airbyte-dbt-jaffle[Airbyte用いたJaffle プロジェクト。,window="_blank"]
-にあります
+以下で詳しく説明する変換を含む完全な dbt プロジェクトは link:https://github.com/Teradata/airbyte-dbt-jaffle[Airbyte用いたJaffle プロジェクト,window="_blank"] にあります。
 ====
 
 参照 dbt プロジェクトは 2 つの型の変換を実行します。
@@ -203,20 +202,24 @@ orders      1--* payments
 
 すべての dbt プロジェクトと同様に、フォルダ `models` には、プロジェクトまたは個々のモデル レベルでの対応する構成に従って、プロジェクトがテーブルまたはビューとしてマテリアライズドするデータ モデルが含まれています。 
 
-モデルは、データ ウェアハウス/レイクの編成における目的に応じて、さまざまなフォルダに編成できます。一般的なフォルダ レイアウトには、 `staging`のフォルダ、 `core`のフォルダ、および `marts`のフォルダが含まれます。この構造は、dbt の動作に影響を与えることなく簡素化できます。
+モデルは、データ ウェアハウス/レイクの編成における目的に応じて、さまざまなフォルダに編成できます。一般的なフォルダ レイアウトには、 `staging` のフォルダ、 `core` のフォルダ、および `marts` のフォルダが含まれます。この構造は、dbt の動作に影響を与えることなく簡素化できます。
 
 === ステージングモデル
-オリジナルの link:https://github.com/dbt-labs/jaffle_shop-dev[dbt Jaffle Shop チュートリア,window="_blank"] プロジェクトのデータは、dbt の`seed`コマンドを使用して  `./data`フォルダにある csv ファイルからロードされます。 `seed` コマンドはテーブルからデータをロードするためによく使用されますが、このコマンドはデータ ローディングを実行するように設計されていません。 
+オリジナルの link:https://github.com/dbt-labs/jaffle_shop-dev[dbt Jaffle Shop チュートリア,window="_blank"] プロジェクトのデータは、dbt の `seed` コマンドを使用して  `./data` フォルダにある csv ファイルからロードされます。 `seed` コマンドはテーブルからデータをロードするためによく使用されますが、このコマンドはデータ ローディングを実行するように設計されていません。 
 
 このデモでは、データ ローディング用に設計されたツール Airbyte を使用してデータウェアハウス/レイクにデータを読み込む、より一般的なセットアップを想定しています。
 ただし、Airbyte を通じてロードされたデータは生の JSON 文字列として表されます。これらの生データから、正規化されたステージング ビューを作成しています。このタスクは、以下のステージング モデルを通じて実行します。 
 
-* `stg_customers`モデルは、`_airbyte_raw_customers`テーブルから`customers`の正規化されたステージングビューを作成します。 
-* `stg_orders`モデルは、`_airbyte_raw_orders`テーブルから`orders`の正規化されたステージングビューを作成します。  
-* `stg_payments`モデルは、`_airbyte_raw_payments`テーブルから`payments`の正規化されたステージングビューを作成します。 
+* `stg_customers` モデルは、`_airbyte_raw_customers` テーブルから `customers` の正規化されたステージングビューを作成します。 
+* `stg_orders` モデルは、`_airbyte_raw_orders` テーブルから `orders` の正規化されたステージングビューを作成します。  
+* `stg_payments` モデルは、`_airbyte_raw_payments` テーブルから `payments` の正規化されたステージングビューを作成します。 
 
+[NOTE]
+====
+JSON 文字列を抽出するメソッドはすべてのステージング モデルで一貫しているため、これらのモデルの 1 つだけを例として使用して、変換の詳細な説明を提供します。  
+====
 
-以下は、`stg_orders.sql`モデルを介して生の JSON データをビューに変換する例です。 
+以下は、`stg_orders.sql` モデルを介して生の JSON データをビューに変換する例です。 
 [source, sql]
 ----
 WITH source AS (
@@ -236,18 +239,18 @@ flattened_json_data AS (
 SELECT * FROM flattened_json_data
 ----
 
-* このモデルでは、ソースは生のテーブル`_airbyte_raw_orders`として定義されます。 
-* この生のテーブル列には、メタデータと実際に取り込まれたデータの両方が含まれています。データ列は`_airbyte_data`と呼ばれます。 
+* このモデルでは、ソースは生のテーブル `_airbyte_raw_orders` として定義されます。 
+* この生のテーブル列には、メタデータと実際に取り込まれたデータの両方が含まれています。データ列は `_airbyte_data` と呼ばれます。 
 * この列は Teradata JSON 型です。この型は、JSON オブジェクトからスカラー値を取得するメソッド JSONExtractValue をサポートします。
 * このモデルでは、ビューをマテリアライズドするために、対象の各属性を取得し、意味のあるエイリアスを追加しています。
 
 === ディメンションモデル (マート)
 ディメンションモデルの構築は、以下の 2 段階のプロセスです。 
 
-* 最初に、`stg_orders`、`stg_customers`、`stg_payments`の正規化されたビューを取得し、非正規化された中間結合テーブル`customer_orders`、`order_payments`、`customer_payments`を構築します。これらのテーブルの定義は `./models/marts/core/intermediate` にあります。  
-* 2 番目のステップでは、 `dim_customers` と `fct_orders` モデルを作成します。これらは、BI ツールに公開するディメンション モデル テーブルを構成します。これらのテーブルの定義は `./models/marts/core`にあります。
+* 最初に、`stg_orders`、`stg_customers`、`stg_payments` の正規化されたビューを取得し、非正規化された中間結合テーブル `customer_orders`、`order_payments`、`customer_payments` を構築します。これらのテーブルの定義は `./models/marts/core/intermediate` にあります。  
+* 2 番目のステップでは、 `dim_customers` と `fct_orders` モデルを作成します。これらは、BI ツールに公開するディメンション モデル テーブルを構成します。これらのテーブルの定義は `./models/marts/core` にあります。
 
-=== 変換の実行
+=== 変換を実行する
 dbt プロジェクトで定義された変換を実行するには、以下のコマンドを実行します。
 
 [source, bash]
@@ -261,7 +264,7 @@ image::elt/{dir}/dbt_run.png[dbt run output, width=75%]
 === テストデータ
 ディメンションモデル内のデータが正しいことを確認するために、dbt を使用すると、データに対するテストを定義して実行できます。 
 
-テストは  `/models/marts/core/schema.yml` と `/models/staging/schema.yml` で定義されています。 各列には、`tests`キーの下で複数のテストを構成できます。 
+テストは  `/models/marts/core/schema.yml` と `/models/staging/schema.yml` で定義されています。 各列には、`tests` キーの下で複数のテストを構成できます。 
 
 * 例えば、 `fct_orders.order_id` 列には固有な非 NULL 値が含まれることが予想されます。 
 
@@ -276,7 +279,7 @@ dbt test
 
 image::elt/{dir}/dbt_test.png[dbt test output, width=75%]
 
-=== ドキュメントの生成
+=== ドキュメントを生成する
 
 このモデルは、わずか数個のテーブルで構成されています。より多くのデータ ソースとより複雑なディメンションモデルを使用するシナリオでは、データ系統と各中間モデルの目的をドキュメント化することが非常に重要です。 
 
@@ -296,7 +299,7 @@ dbt docs generate
 dbt docs serve
 ----
 
-==== Lineage graph
+==== Lineage Graph
 
 image::elt/{dir}/dbt_docs_serve.png[dbt lineage graph, width=75%]
 
@@ -309,4 +312,4 @@ image::elt/{dir}/dbt_docs_serve.png[dbt lineage graph, width=75%]
 * link:https://docs.getdbt.com/docs/[dbt のドキュメント]
 * link:https://github.com/Teradata/dbt-teradata[dbt-teradata プラグインのドキュメント]
 
-include::ROOT:partial$community_link.adoc[]
+include::../partials/community_link.adoc[]

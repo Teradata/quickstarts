@@ -20,8 +20,9 @@
 TIP: このチュートリアルは、このドキュメントで紹介したマシン（AWS上のt2.2xlarge EC2、ストレージは約100GB）と同等の計算能力とストレージを持ち、インターネットに接続されていれば、他の計算プラットフォームやベアメタルマシンでも調整することが可能です。もし、別の計算機プラットフォームを使用する場合は、チュートリアルのいくつかのステップを変更する必要があります。
 2. SSHクライアントが必要です。
 +
-TIP: MacやLinuxマシンであれば、これらのツールはすでに含まれています。Windowsであれば、link:https://www.putty.org/[PuTTY] または link:https://mobaxterm.mobatek.net/download.html[MobaXterm]を検討してください。
-3．Teradata Vantageインスタンスにアクセスする必要があります。Teradata Vantage をご利用でない場合は、開発者向けの無償版であるlink:https://quickstarts.teradata.com/#getting-access-to-vantage[Vantage Express] を探索してください。
+TIP: MacやLinuxマシンであれば、これらのツールはすでに含まれています。Windowsであれば、link:https://www.putty.org/[PuTTY] または link:https://mobaxterm.mobatek.net/download.html[MobaXterm] を検討してください。
+3. Teradata Vantageインスタンスにアクセスする必要があります。Teradata Vantage をご利用でない場合は、開発者向けの無償版である link:https://quickstarts.teradata.com/#getting-access-to-vantage[Vantage Express] を探索してください。
+
 
 == Airflow をインストールして実行する
 
@@ -61,7 +62,7 @@ mkdir -p ./dags ./logs ./plugins ./data ./config ./data
 echo -e "AIRFLOW_UID=$(id -u)" > .env
 ----
 
-2. お好みのファイル転送ツール (`scp`、 `PuTTY`、 `MobaXterm`など) を使用して、 link:{attachmentsdir}/{dir}/airflow.cfg[airflow.cfg] ファイルを `airflow/config` ディレクトリにアップロードします。
+2. お好みのファイル転送ツール ( `scp`、 `PuTTY`、 `MobaXterm` など) を使用して、 link:{attachmentsdir}/{dir}/airflow.cfg[airflow.cfg] ファイルを `airflow/config` ディレクトリにアップロードします。
 
 === Dockerのインストール
 
@@ -130,14 +131,14 @@ sudo docker ps
 [TIP]
 .「docker-compose.yaml」と「Dockerfile」の機能
 ====
-`docker-compose.yaml` および `Dockerfile` は、インストール時に環境を構築するために必要なファイルです。 `docker-compose.yaml`ファイルは、Airflowのdockerコンテナをダウンロードし、インストールするものです。このコンテナには、Web UI、メタデータ用のPostgresデータベース、スケジューラ、3つのワーカー（3つのタスクを並行して実行可能）、トリガー、 `dbt`が生成するドキュメントを表示するためのnginx Webサーバーが含まれています。このほか、コンテナへのホストディレクトリのマウントや、各種インストール処理も行われます。`Dockerfile` は、各コンテナに必要なパッケージを追加でインストールします。
+`docker-compose.yaml` および `Dockerfile` は、インストール時に環境を構築するために必要なファイルです。 `docker-compose.yaml` ファイルは、Airflowのdockerコンテナをダウンロードし、インストールするものです。このコンテナには、Web UI、メタデータ用のPostgresデータベース、スケジューラ、3つのワーカー（3つのタスクを並行して実行可能）、トリガー、 `dbt` が生成するドキュメントを表示するためのnginx Webサーバーが含まれています。このほか、コンテナへのホストディレクトリのマウントや、各種インストール処理も行われます。`Dockerfile` は、各コンテナに必要なパッケージを追加でインストールします。
 
  `docker-compose.yaml` と `Dockerfile` が何をするファイルなのか、もっと詳しく知りたい方はこれらのファイルをご覧ください。何がなぜインストールされるのかを明確にするためのコメントもあります。
 ====
 
 2. docker-composeをインストールします(yamlファイルを実行するために必要)。
 +
-NOTE: この手順は、バージョン 1.29.2 に基づいています。最新のリリースは https://github.com/docker/compose/releases で確認し、必要に応じて以下のコマンドを更新してください。
+NOTE: この手順は、バージョン 1.29.2 に基づいています。最新のリリースは  https://github.com/docker/compose/releases で確認し、必要に応じて以下のコマンドを更新してください。
 +
 [source, bash, id="install_docker_compose", role="content-editable emits-gtm-events"]
 ----
@@ -153,7 +154,7 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 docker-compose --version
 ----
 
-=== テスト の dbt  プロジェクトをインストールする
+=== テスト  dbt  プロジェクトのインストール
 
 NOTE: これらの手順では、サンプル dbt プロジェクトをセットアップします。 `dbt` ツール自体は、後で `docker-compose`によってコンテナにインストールされます。
 
@@ -204,7 +205,7 @@ mkdir .dbt
 
 === DockerでAirflow環境を作成する
 
-1.  `Dockerfile` と `docker-compose.yaml` がある`airflow`ディレクトリで、Docker環境作成スクリプトを実行します。
+1.  `Dockerfile` と `docker-compose.yaml` がある `airflow` ディレクトリで、Docker環境作成スクリプトを実行します。
 +
 [source, bash, id="run_docker_compose", role="content-editable emits-gtm-events"]
 ----
@@ -281,8 +282,9 @@ sudo docker-compose down --volumes --rmi all
 *  `Admin -> Variables` メニューアイテムをクリックし、Variables ページに移動します。
 +
 image::other-integrations/{dir}/admin-dropdown.png[Airflow管理ドロップダウン, width=75%]
-*  `Choose File`をクリックし、ファイル エクスプローラで `variable.json` を選択して `Import Variables`
-をクリックします。+
+*  `Choose File` をクリックし、ファイル エクスプローラで `variable.json` を選択して `Import Variables`
+ をクリックします。
++
 image::other-integrations/{dir}/import-variables.png[Airflow管理ドロップダウン, width=75%]
 * お使いの環境に合わせて、変数を編集します。
 

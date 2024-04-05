@@ -13,7 +13,7 @@ include::../partials/getting.started.intro.adoc[]
 
 . 次のオペレーティング システムのいずれかを使用するコンピュータ: Windows、Linux、または Intel ベースの MacOS。
 +
-NOTE: M1/M2 MacOSシステムについては、xref:getting.started.utm.adoc[]を参照してください。
+NOTE: M1/M2 MacOSシステムについては、xref:getting.started.utm.adoc[] を参照してください。
 . 少なくとも 1 つのコアと 6GB RAM を仮想マシン専用にできる 30GB のディスク領域と十分な CPU および RAM。
 . ソフトウェアをインストールして実行できる管理者権限。
 +
@@ -23,23 +23,24 @@ NOTE: M1/M2 MacOSシステムについては、xref:getting.started.utm.adoc[]�
 
 === 必要なソフトウェアのダウンロード
 
-. link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Express]の最新バージョン。これまでに Teradata Downloads Web サイトを使用したことがない場合は、登録する必要があります。
-. link:https://www.vmware.com/products/workstation-player.html[VMware Workstation Player]。
+. link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Express] の最新バージョン。これまでに Teradata Downloads Web サイトを使用したことがない場合は、登録する必要があります。
+. link:https://www.vmware.com/products/workstation-player.html[VMware Workstation Player] 。
 +
-IMPORTANT: 営利団体では、VMware Workstation Playerを使用するために商用ライセンスが必要です。VMwareライセンスを取得しない場合は、xref:getting.started.vbox.adoc[VirtualBox]でVantage Expressを実行できます。
+IMPORTANT: 営利団体では、VMware Workstation Playerを使用するために商用ライセンスが必要です。VMwareライセンスを取得しない場合は、xref:getting.started.vbox.adoc[VirtualBox] でVantage Expressを実行できます。
 +
-IMPORTANT: VMware は、MacOS 用の VMware Workstation Player を提供していません。Macを使用している場合は、代わりにlink:https://www.vmware.com/products/fusion/fusion-evaluation.html[VMware Fusion]をインストールする必要があります。これは有料製品ですが、VMware では 30 日間の無料試用版を提供しています。または、xref:getting.started.vbox.adoc[VirtualBox]またはxref:getting.started.utm.adoc[UTM]上でVantage Expressを実行することもできます。
-. Windowsでは、Vantage Expressを解凍するためにlink:https://www.7-zip.org/download.html[7 zip]も必要です。
+IMPORTANT: VMware は、MacOS 用の VMware Workstation Player を提供していません。Macを使用している場合は、代わりに link:https://www.vmware.com/products/fusion/fusion-evaluation.html[VMware Fusion] をインストールする必要があります。これは有料製品ですが、VMware では 30 日間の無料試用版を提供しています。または、xref:getting.started.vbox.adoc[VirtualBox] または xref:getting.started.utm.adoc[UTM] 上でVantage Expressを実行することもできます。
+. Windowsでは、Vantage Expressを解凍するために link:https://www.7-zip.org/download.html[7 zip] も必要です。
 
-=== インストーラを実をする
+=== インストーラを実行する
 
 . インストーラを実行し、デフォルト値を受け入れて、VMware Player または VMware Fusion をインストールします。
-. Windowsの場合は、`7zip`をインストールします。
+. Windowsの場合は、`7zip` をインストールします。
 
 === Vantage Express を実行する
 
 . Vantage Expressをダウンロードしたディレクトリに移動し、ダウンロードしたファイルを解凍します。
-. `.vmx`ファイルをダブルクリックします。これにより、VMware Player/FusionでVMイメージが起動されます。
+. `.vmx` ファイルをダブルクリックします。これにより、VMware Player/FusionでVMイメージが起動されます。
+
 include::../partials/run.vantage.adoc[]
 
 === サンプルクエリーを実行する

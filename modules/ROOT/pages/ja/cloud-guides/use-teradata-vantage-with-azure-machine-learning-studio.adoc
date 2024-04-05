@@ -22,9 +22,9 @@ image:cloud-guides/{page-image-directory}/image2.png[Image,width=534,height=118]
 * Teradata Vantageインスタンスへのアクセス。
 +
 include::../partials/vantage_clearscape_analytics.adoc[]
-* Azureサブスクリプションまたはhttps://azure.microsoft.com/free/[無料アカウント]
-作成* https://docs.microsoft.com/en-us/azure/machine-learning/studio/create-workspace[Azure ML Studio ワークスペース]
-* (オプション) https://docs.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-2017[AdventureWorks DW 2016データベース] のダウンロード(_「モデルの学習」_ セクションなど)
+* Azureサブスクリプションまたは https://azure.microsoft.com/free/[無料アカウント]
+ の作成* https://docs.microsoft.com/en-us/azure/machine-learning/studio/create-workspace[Azure ML Studio ワークスペース]
+* (オプション) https://docs.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-2017[AdventureWorks DW 2016データベース] のダウンロード( _「モデルの学習」_ セクションなど)
 **  _「vTargetMail」_ テーブルを SQL Server から Teradata Vantageに復元およびコピーします。
 
 
@@ -33,7 +33,7 @@ include::../partials/vantage_clearscape_analytics.adoc[]
 === 初期設定
 
 
-* 現在利用可能な格納場所にストレージ アカウントがあり、このスタート ガイドの*Web service plan* に *DEVTEST Standard* を選択していない限り、ML Studio ワークスペースの作成中に、新規のストレージ アカウントを作成する必要がある場合があります。 https://portal.azure.com/[Azure ポータル]にログオンし、ストレージ アカウントを開き、 *コンテナ* がまだ存在しない場合は作成します。
+* 現在利用可能な格納場所にストレージ アカウントがあり、このスタート ガイドの *Web service plan* に *DEVTEST Standard* を選択していない限り、ML Studio ワークスペースの作成中に、新規のストレージ アカウントを作成する必要がある場合があります。 https://portal.azure.com/[Azure ポータル] にログオンし、ストレージ アカウントを開き、 *コンテナ* がまだ存在しない場合は作成します。
 +
 image:cloud-guides/{page-image-directory}/image3.png[Image,width=520,height=126]
 
@@ -41,7 +41,7 @@ image:cloud-guides/{page-image-directory}/image3.png[Image,width=520,height=126]
 +
 image:cloud-guides/{page-image-directory}/image4.png[Image,width=448,height=182]
 
-* 最後に、*Configuration*プロパティを開き、*_'Secure transfer required'_*を*_Disabled_*に設定して、ML Studioインポートデータモジュールがブロブストレージアカウントにアクセスできるようにする。
+* 最後に、*Configuration* プロパティを開き、*_'Secure transfer required'_* を *_Disabled_* に設定して、ML Studioインポートデータモジュールがブロブストレージアカウントにアクセスできるようにする。
 +
 image:cloud-guides/{page-image-directory}/image5.png[Image,width=449,height=78]
 
@@ -49,17 +49,17 @@ image:cloud-guides/{page-image-directory}/image5.png[Image,width=449,height=78]
 
 ML Studioにデータを取り込むために、まずはTeradata VantageからAzure Blob Storageにデータをロードする必要があります。ML Jupyter Notebookを作成し、Teradataに接続するためのPythonパッケージをインストールし、Azure Blob Storageにデータを保存することにします。
 
- https://portal.azure.com/[Azure ポータル]にログオンし、 *ML Studioワークスペース* に移動して、 https://studio.azureml.net/[Machine Learning Studio を起動]し 、 *サインイン*します。
+ https://portal.azure.com/[Azure ポータル] にログオンし、 *ML Studioワークスペース* に移動して、 https://studio.azureml.net/[Machine Learning Studio を起動] し 、 *サインイン*します。
 
-1. 以下の画面が表示されます。 *Notebooks* をクリックして、正しいリージョン/ワークスペースにいることを確認し、Notebook の*New*
+1. 以下の画面が表示されます。 *Notebooks* をクリックして、正しいリージョン/ワークスペースにいることを確認し、Notebook の *New*
 +
 をクリックします。image:cloud-guides/{page-image-directory}/image6.png[Image,width=519,height=250]
 
-2. *Python3*を選択し、Notebook インスタンスに*名前を付け* ます。
+2. *Python3* を選択し、Notebook インスタンスに *名前を付け* ます。
 +
 image:cloud-guides/{page-image-directory}/image7.png[Image,width=524,height=187]
 
-3. Jupyter Notebook インスタンスに、 https://pypi.org/project/teradataml/[Teradata Vantage Python package for Advanced Analytics]をインストールします。
+3. Jupyter Notebook インスタンスに、 https://pypi.org/project/teradataml/[Teradata Vantage Python package for Advanced Analytics] をインストールします。
 +
 [source, python]
 ----
@@ -68,7 +68,7 @@ pip install teradataml
 +
 NOTE: Microsoft Azure ML StudioとTeradata Vantage Pythonパッケージの間の検証は行われていません。
 
-4. https://pypi.org/project/azure-storage-blob/[Microsoft Azure Storage Blob Client Library for Python]をインストールします。
+4. https://pypi.org/project/azure-storage-blob/[Microsoft Azure Storage Blob Client Library for Python] をインストールします。
 +
 [source, python]
 ----
@@ -137,17 +137,18 @@ image:cloud-guides/{page-image-directory}/image17.png[Image,width=618,height=118
 
 === モデルの学習
 
-既存の https://docs.microsoft.com/en-us/azure/sql-data-warehouse/sql-data-warehouse-get-started-analyze-with-azure-machine-learning[「Azure Machine Learning を使用したデータの分析」] の記事を使って、Azure Blob Storageのデータに基づいて予測型機械学習モデルを構築します。顧客が自転車を購入する可能性があるかどうかを予測することで、自転車店であるアドベンチャーワークスのためのターゲットマーケティングキャンペーンを構築する予定です。
+既存の https://docs.microsoft.com/en-us/azure/sql-data-warehouse/sql-data-warehouse-get-started-analyze-with-azure-machine-learning[Azure Machine Learning を使用したデータの分析] の記事を使って、Azure Blob Storageのデータに基づいて予測型機械学習モデルを構築します。顧客が自転車を購入する可能性があるかどうかを予測することで、自転車店であるアドベンチャーワークスのためのターゲットマーケティングキャンペーンを構築する予定です。
 
 ==== データのインポート
 
 データは、上のセクションでコピーした `vTargetMail.csv` という Azure Blob Storage ファイルにあります。
 
-1.. https://studio.azureml.net/[Azure Machine Learning Studio] にサインインし、 *Experiments*をクリックします。
- 2.. 画面左下の *+NEW* をクリックし、 *Blank Experiment*を選択します。
- 3.. 実験の名前として「Targeted Marketing」を入力します。
-】 4..  *Data Input and output*の下にある*Import data*モジュールをモジュール ペインからキャンバスにドラッグします。
- 5.. [プロパティ] ペインで Azure Blob Storage の詳細 (アカウント名、キー、コンテナ名) を指定します。
+1.. https://studio.azureml.net/[Azure Machine Learning Studio] にサインインし、 *Experiments* をクリックします。
+2.. 画面左下の *+NEW* をクリックし、 *Blank Experiment* を選択します。
+3.. 実験の名前として「Targeted Marketing」を入力します。
+4..  *Data Input and output* の下にある *Import data* モジュールをモジュール ペインからキャンバスにドラッグします。
+5.. [プロパティ] ペインで Azure Blob Storage の詳細 (アカウント名、キー、コンテナ名) を指定します。
+
 
 experimentキャンバスの下にある *Run* をクリックして、実験を実行します。
 
@@ -172,7 +173,7 @@ image:cloud-guides/{page-image-directory}/image21.png[Image,width=443,height=372
 
 ==== モデルの構築
 
-80%は機械学習モデルの学習用、20%はモデルのテスト用としてデータを80対20に分割します。この2値分類問題には、「2クラス」アルゴリズムを使用します。
+80%は機械学習モデルの学習用、20%はモデルのテスト用としてデータを80対20に分割します。この2値分類問題には、「Two-Class」アルゴリズムを使用します。
 
 1. *SplitData* モジュールをキャンバスにドラッグし、「Select Columns in DataSet」で接続します。
 2. プロパティペインで「Fraction of rows in the first output dataset」に「0.8」を入力します。
@@ -180,11 +181,11 @@ image:cloud-guides/{page-image-directory}/image21.png[Image,width=443,height=372
 image:cloud-guides/{page-image-directory}/image22.png[Image,width=399,height=336]
 
 3. *Two-Class Boosted Decision Tree* モジュールを検索し、キャンバスにドラッグします。
-4. *Train Model*モジュールを検索してキャンバスにドラッグし、*Two-Class Boosted Decision Tree*(MLアルゴリズム)モジュールと*Split* *Data*(アルゴリズムをトレーニングするためのデータ)モジュールに接続して入力を指定する。
+4. *Train Model* モジュールを検索してキャンバスにドラッグし、*Two-Class Boosted Decision Tree* (MLアルゴリズム)モジュールと *Split* *Data* (アルゴリズムをトレーニングするためのデータ)モジュールに接続して入力を指定する。
 +
 image:cloud-guides/{page-image-directory}/image23.png[Image,width=396,height=333]
 
-5. 次に、[プロパティ]ペインで *Launch column selector* をクリックします。予測するカラムとして*BikeBuyer*カラムを選択します。
+5. 次に、[プロパティ]ペインで *Launch column selector* をクリックします。予測するカラムとして *BikeBuyer* カラムを選択します。
 +
 image:cloud-guides/{page-image-directory}/image24.png[Image,width=396,height=330]
 

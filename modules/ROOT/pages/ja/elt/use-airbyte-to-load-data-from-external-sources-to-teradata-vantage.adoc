@@ -11,7 +11,7 @@
 
 == 概要
 
-このチュートリアルでは、Airbyteを使用してソースからTeradata Vantageにデータを移動する方法を紹介し、https://docs.airbyte.com/using-airbyte/getting-started/[Airbyte Open Source オプション]とhttps://airbyte.com/[Airbyte Cloud オプション]の両方について詳しく説明します。この具体的な例では、Google スプレッドシートから Teradata Vantage へのレプリケーションを取り上げます。
+このチュートリアルでは、Airbyteを使用してソースからTeradata Vantageにデータを移動する方法を紹介し、 https://docs.airbyte.com/using-airbyte/getting-started/[Airbyte Open Source オプション] と https://airbyte.com/[Airbyte Cloud オプション] の両方について詳しく説明します。 この具体的な例では、Google スプレッドシートから Teradata Vantage へのレプリケーションを取り上げます。
 
 * ソース: Google スプレッドシート
 * 宛先: Teradata Vantage
@@ -19,19 +19,19 @@
 image::elt/{dir}/sample_employees_payrate_google_sheets.png[サンプル従業員の給与Google スプレッドシート,align="center", width=50%]
 
 == 前提条件 
-* Teradata Vantageインスタンスへのアクセス。これは、Airbyte 接続の宛先として定義されます。Airbyteの設定には、データベースの`Host`、`Username`、`Password`が必要です。
+* Teradata Vantageインスタンスへのアクセス。これは、Airbyte 接続の宛先として定義されます。Airbyteの設定には、データベースの `Host`、`Username`、`Password` が必要です。
 +
 include::../partials/vantage_clearscape_analytics.adoc[]
 
 * link:https://support.google.com/googleapi/answer/6158841?hl=en[個人または組織のアカウントで Google Cloud Platform API が有効になっている,  window="_blank"]。OAuth またはサービス アカウント キー認証システムを介して Google アカウントを認証する必要があります。この例では、サービス アカウント キー認証システムを使用します。
 
-* ソース システムからのデータ。この場合は、link:https://docs.google.com/spreadsheets/d/1XNBYUw3p7xG6ptfwjChqZ-dNXbTuVwPi7ToQfYKgJIE/edit#gid=0[Google スプレッドシートのサンプルスプレッドシート、 window="_blank"]を使用する。サンプルデータは、従業員型別の給与の内訳です。
+* ソース システムからのデータ。この場合は、link:https://docs.google.com/spreadsheets/d/1XNBYUw3p7xG6ptfwjChqZ-dNXbTuVwPi7ToQfYKgJIE/edit#gid=0[Google スプレッドシートのサンプルスプレッドシート,  window="_blank"] を使用する。サンプルデータは、従業員型別の給与の内訳です。
 
 === Airbyte Cloud
-* https://airbyte.com/[Airbyte Cloud] でアカウントを作成し、link:#airbyte_configuration[Airbyte Configuration]セクションの手順に進みます。
+* https://airbyte.com/[Airbyte Cloud] でアカウントを作成し、link:#airbyte_configuration[Airbyte Configuration] セクションの手順に進みます。 
 
 === Airbyte Open Source
-* link:https://github.com/airbytehq/airbyte[Airbyte Open Source,  window="_blank"]をローカルで実行するには、Docker Compose をインストールします。Docker Compose には Docker Desktop が付属しています。詳細については 、link:https://docs.docker.com/compose/install/[docker ドキュメント,  window="_blank"] を参照してください。 
+* link:https://github.com/airbytehq/airbyte[Airbyte Open Source,  window="_blank"] をローカルで実行するには、Docker Compose をインストールします。Docker Compose には Docker Desktop が付属しています。詳細については 、link:https://docs.docker.com/compose/install/[docker ドキュメント,  window="_blank"] を参照してください。 
 
 * Airbyte Open Source リポジトリのクローンを作成し、airbyte ディレクトリに移動します。
 +
@@ -43,7 +43,7 @@ cd airbyte
 
 シェルスクリプト`run-ab-platform`を実行する前に、Docker Desktopが実行されていることを確認します。
 
-* シェルスクリプト`run-ab-platform`を次のように実行しますを実行します。
+* シェルスクリプト `run-ab-platform` を次のように実行しますを実行します。
 
 +
 [source, bash]
@@ -54,7 +54,7 @@ cd airbyte
 +
 [NOTE]
 ====
-上記のコマンドは、Windowsの`git bash`で実行できます。詳細については 、link:https://docs.airbyte.com/deploying-airbyte/local-deployment/[Airbyte Local Deployment,  window="_blank"] を参照してください。 
+上記のコマンドは、Windowsの `git bash` で実行できます。詳細については 、link:https://docs.airbyte.com/deploying-airbyte/local-deployment/[Airbyte Local Deployment,  window="_blank"] を参照してください。 
 ====
 
 * リポジトリに含まれる `env` ファイルにあるデフォルトの信頼証明を入力して、Web アプリ http://localhost:8000/ にログインします。
@@ -75,36 +75,39 @@ Airbyte Open Sourceが起動すると、接続ダッシュボードが表示さ�
 
 == Airbyteの構成
 
-=== ソース接続をする
+=== ソース接続の設定
 * 「Create your first connection」をクリックするか、右上隅をクリックして、Airbyte の接続ダッシュボードで新しい接続ワークフローを開始できます。
 
 image::elt/{dir}/create_first_connection.png[最初の接続を作成するダッシュボード, width=75%]
 
-* Airbyte はソースを尋ねます。既存のソースから選択することも (すでに設定している場合)、新しいソースを設定することもできます。この場合は `Google スプレッドシート`を選択します。
+* Airbyte はソースを尋ねます。既存のソースから選択することも (すでに設定している場合)、新しいソースを設定することもできます。この場合は `Google スプレッドシート` を選択します。
 
-* 認証には、JSON形式のサービスアカウントキーを使用する`サービスアカウントキー認証`を使用している。デフォルトの`OAuth`から`サービスアカウントキー認証`に切り替えます。. サービス アカウント キー認証で Google アカウントを認証するには、 JSON 形式のlink:https://cloud.google.com/iam/docs/keys-create-delete#creating_service_account_keys[Google Cloud サービス アカウント キー, window="_blank"] を入力してください。 +
+* 認証には、JSON形式のサービスアカウントキーを使用する `サービスアカウントキー認証` を使用している。デフォルトの `OAuth` から `サービスアカウントキー認証` に切り替えます。. サービス アカウント キー認証で Google アカウントを認証するには、 JSON 形式の link:https://cloud.google.com/iam/docs/keys-create-delete#creating_service_account_keys[Google Cloud サービス アカウント キー, window="_blank"] を入力してください。 
++
 サービス アカウントにプロジェクト閲覧者アクセス権があることを確認してください。スプレッドシートがリンクを使用して誰にでも表示できる場合は、それ以上の操作は必要ありません。そうでない場合は、 link:https://www.youtube.com/watch?v=GyomEw5a2NQ[サービス アカウントにスプレッドシートへのアクセスを認証してください。, window="_blank"]
 
-* ソーススプレッドシートへのリンクを`スプレッドシートのリンク`として追加します。
-
+* ソーススプレッドシートへのリンクを `スプレッドシートのリンク` として追加します。
 
 image::elt/{dir}/configuring_source_gsheet_airbyte.png[Airbyteでのソースの設定]
 
 [NOTE]
 ====
 詳細については、 link:https://docs.airbyte.com/integrations/sources/google-sheets/#:~:text=For%20Airbyte%20Open%20Source%3A[Airbyte オープン ソースのソース コネクタとして Google スプレッドシートを設定する, window="_blank"] 
-を参照してください。
+ を参照してください。
 ====
 
 * [Set up source]をクリックし、設定が正しければ、次のメッセージが表示されます。 `All connection tests passed!`
 
 
 === 宛先接続の設定
-*  `Teradata Vantage`を使用して新しい接続を作成する場合は、「Set up the destination」セクションで宛先型として `Teradata Vantage` を選択します。
-* `Host`、`User`、および`Password`を追加する。これらは、Clearscape Analytics Environmentで使用される`Host`、`Username`、`Password`とそれぞれ同じです。
-* 特定のコンテキストに適したデフォルトのスキーマ名を指定します。ここでは、`gsheet_airbyte_td`を提供しました。
+* `Teradata Vantage` を使用して新しい接続を作成する場合は、「Set up the destination」セクションで宛先型として  `Teradata Vantage` を選択します。
+* `Host`、`User`、および `Password` を追加する。これらは、Clearscape Analytics Environmentで使用される `Host`、`Username`、`Password` とそれぞれ同じです。 
+* 特定のコンテキストに適したデフォルトのスキーマ名を指定します。ここでは、`gsheet_airbyte_td` を提供しました。
 
-
+[NOTE]
+====
+ `Default Schema` を指定しない場合は、 "Connector failed while creating schema"というエラーが表示されます。 `Default Schema` に適切な名前を指定していることを確認してください。
+====
 
 image::elt/{dir}/configuring_destination_teradata_airbyte.png[Airbyteでの宛先Teradataの構成]
 
@@ -141,7 +144,7 @@ Airbyte は、`Status` タブの [Sync History] セクションで同期の試�
 
 image::elt/{dir}/data_sync_summary.png[データ同期のまとめ]
 
-次に、 link:https://clearscape.teradata.com/dashboard[ClearScape Analytics Experience に移動し,window="_blank"] で Jupyter Notebookを実行します。ClearScape Analytics Experience のNotebookは Teradata SQL クエリーを実行するように構成されており、データベース `gsheet_airbyte_td`、ストリーム (テーブル)、および完全なデータが存在するかどうかを検証します。
+次に、 link:https://clearscape.teradata.com/dashboard[ClearScape Analytics Experience,window="_blank"]  に移動しで Jupyter Notebookを実行します。ClearScape Analytics Experience のNotebookは Teradata SQL クエリーを実行するように構成されており、データベース `gsheet_airbyte_td`、ストリーム (テーブル)、および完全なデータが存在するかどうかを検証します。
 
 image::elt/{dir}/data_sync_validation_in_teradata.png[Teradata でのデータ同期の妥当性検査]
 
@@ -168,13 +171,13 @@ DATABASE gsheet_airbyte_td;
 SELECT * FROM _airbyte_raw_sample_employee_payrate;  
 ----
 
-この接続では正規化と変換がサポートされておらず、 link:https://docs.airbyte.com/understanding-airbyte/namespaces/#:~:text=If%20you%20don%27t%20enable%20basic%20normalization%2C%20you%20will%20only%20receive%20the%20raw%20tables.[生のテーブル window="_blank" しかない]ため、宛先のストリーム (テーブル) 名には `\_airbyte_raw_` という接頭辞が付いています。各ストリーム (テーブル) には 3 つの列が含まれます。 
+この接続では正規化と変換がサポートされておらず、 link:https://docs.airbyte.com/understanding-airbyte/namespaces/#:~:text=If%20you%20don%27t%20enable%20basic%20normalization%2C%20you%20will%20only%20receive%20the%20raw%20tables.[生のテーブル, window="_blank"] しかないため、宛先のストリーム (テーブル) 名には `\_airbyte_raw_` という接頭辞が付いています。各ストリーム (テーブル) には 3 つの列が含まれます。 
 
-1. `_airbyte_ab_id`: Airbyte によって処理される各イベントに割り当てられる uuid。Teradata の列型は `VARCHAR(256)`です。
+1. `_airbyte_ab_id`: Airbyte によって処理される各イベントに割り当てられる uuid。Teradata の列型は `VARCHAR(256)` です。
 
-2. `_airbyte_emitted_at`: イベントがデータ ソースからいつ取得されたかを表すタイムスタンプ。Teradata の列型は `TIMESTAMP(6)`です。
+2. `_airbyte_emitted_at`: イベントがデータ ソースからいつ取得されたかを表すタイムスタンプ。Teradata の列型は `TIMESTAMP(6)` です。
 
-3. `_airbyte_data`: イベント データを表す json blob。Teradata の列型は `JSON`です。
+3. `_airbyte_data`: イベント データを表す json blob。Teradata の列型は `JSON` です。
 
 `_airbyte_data`カラムには、ソースのGoogle スプレッドシートと同じ9行が表示され、データはJSON形式で、必要に応じてさらに変換できる。
 

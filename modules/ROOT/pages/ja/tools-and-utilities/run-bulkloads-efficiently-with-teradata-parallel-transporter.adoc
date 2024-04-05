@@ -16,10 +16,10 @@ Vantageに大量のデータを移動させるニーズはよくあります。T
 
 * Teradata Vantageインスタンスへのアクセス。
 +
-include::ROOT:partial$vantage_clearscape_analytics.adoc[]
+include::../partials/vantage_clearscape_analytics.adoc[]
 * Teradata Tools and Utilities (TTU) をダウンロード -  サポートされているプラットフォーム: link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-windows-installation-package[Windows]、 link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-mac-osx-installation-package[MacOS]、 link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-linux-installation-package-0[Linux] (登録が必要です)。
 
-== TTUをインストールする
+== TTUのインストール
 
 [tabs]
 ====
@@ -44,9 +44,9 @@ Linux::
 --
 ====
 
-== サンプルデータの入手
+== サンプルデータを入手する
 
-非営利団体の米国税務申告を扱います。非営利の納税申告は公開データです。アメリカ内国歳入庁は、これらを S3 バケットで公開します。2020 年の提出書類の概要を見てみましょう。 `https://storage.googleapis.com/clearscape_analytics_demo_data/TPT/index_2020.csv` ブラウザ、`wget`、または`curl`を使用して、ファイルをローカルに保存できます。
+非営利団体の米国税務申告を扱います。非営利の納税申告は公開データです。アメリカ内国歳入庁は、これらを S3 バケットで公開します。2020 年の提出書類の概要を見てみましょう。 `https://storage.googleapis.com/clearscape_analytics_demo_data/TPT/index_2020.csv` ブラウザ、`wget`、または `curl` を使用して、ファイルをローカルに保存できます。
 
 == データベースを作成する
 
@@ -61,13 +61,13 @@ AS PERMANENT = 120e6, -- 120MB
 
 == TPT を実行する
 
-これから `TPT` を実行します。`TPT` は、Teradata Vantageでデータのロード、抽出、更新に使用できるコマンドラインツールです。これらのさまざまな機能は、いわゆる`オペレータ`で実装されます。例えば、Vantage へのデータのロードは `Load` オペレータによって処理されます。 `Load` オペレータは、大量のデータを Vantage にアップロードする場合に非常に効率的です。 `Load` オペレータには、高速化するためにいくつかの制限があります。空のテーブルのみを設定できます。すでにデータが設定されているテーブルへの挿入はサポートされていません。セカンダリ インデックスを持つテーブルはサポートされていません。また、テーブルが `MULTISET` テーブルであっても、重複レコードは挿入されません。制限の完全なリストについては link:https://docs.teradata.com/r/Teradata-Parallel-Transporter-Reference/February-2022/Load-Operator/Usage-Notes/Normalized-Tables/Restrictions-and-Limitations[、「Teradata® TPT リファレンス - ロード オペレータ - 制限と制約」]を参照してください。
+これから `TPT` を実行します。`TPT` は、Teradata Vantageでデータのロード、抽出、更新に使用できるコマンドラインツールです。これらのさまざまな機能は、いわゆる `オペレータ` で実装されます。 例えば、Vantage へのデータのロードは `Load` オペレータによって処理されます。 `Load` オペレータは、大量のデータを Vantage にアップロードする場合に非常に効率的です。 `Load` オペレータには、高速化するためにいくつかの制限があります。空のテーブルのみを設定できます。すでにデータが設定されているテーブルへの挿入はサポートされていません。セカンダリ インデックスを持つテーブルはサポートされていません。また、テーブルが `MULTISET` テーブルであっても、重複レコードは挿入されません。制限の完全なリストについては 、 link:https://docs.teradata.com/r/Teradata-Parallel-Transporter-Reference/February-2022/Load-Operator/Usage-Notes/Normalized-Tables/Restrictions-and-Limitations[Teradata® TPT リファレンス - ロード オペレータ - 制限と制約] を参照してください。
 
 TPT には独自のスクリプト言語があります。この言語を使用すると、任意の SQLコマンドを使用してデータベースを準備し、入力ソースを宣言し、Vantage にデータを挿入する方法を定義できます。
 
 CSV データを Vantage にロードするには、ジョブを定義して実行します。ジョブはデータベースを準備します。古いログテーブルとエラーテーブルが削除され、ターゲット テーブルが作成されます。次に、ファイルを読み込み、データをデータベースに挿入するします。
 
-. TPTにVantageデータベースへの接続方法を指示するジョブ変数ファイルを作成します。ファイル `jobvars.txt` を作成し、以下の内容を挿入します。`host`をデータベースのホスト ネームで置き換えます。例えば、ローカルの Vantage Express インスタンスを使用している場合は、 `127.0.0.1`を使用します。 `username` はデータベース ユーザー名、 `password` はデータベース パスワードです。準備ステップ (DDL) とロード ステップにはそれぞれ独自の構成値があり、DDLとロード ステップの両方を構成するには構成値を2回入力する必要があることに注記してください。
+. TPTにVantageデータベースへの接続方法を指示するジョブ変数ファイルを作成します。ファイル `jobvars.txt` を作成し、以下の内容を挿入します。`host` をデータベースのホスト ネームで置き換えます。例えば、ローカルの Vantage Express インスタンスを使用している場合は、 `127.0.0.1` を使用します。 `username` はデータベース ユーザー名、 `password` はデータベース パスワードです。準備ステップ (DDL) とロード ステップにはそれぞれ独自の構成値があり、DDLとロード ステップの両方を構成するには構成値を2回入力する必要があることに注記してください。
 +
 [source, bash, id="tpt_first_config", role="emits-gtm-events"]
 ----
@@ -90,7 +90,7 @@ LoadErrorTable2 = 'irs.irs_returns_uv'
 LoadTargetTable = 'irs.irs_returns'
 ----
 
-. 以下の内容のファイルを作成し、 `load.txt`として保存します。ジョブファイルの構造を理解するには、ジョブファイル内のコメントを参照してください。
+. 以下の内容のファイルを作成し、 `load.txt` として保存します。ジョブファイルの構造を理解するには、ジョブファイル内のコメントを参照してください。
 +
 [source, bash]
 ----
@@ -264,11 +264,11 @@ NOS ソリューションは追加のツールに依存しないため便利で�
 
 == まとめ
 
-このハウツーでは、大量のデータを Vantage に取り込む方法を説明しました。`TPT`を使用して、数十万件のレコードを数秒でVantageにロードしました。
+このハウツーでは、大量のデータを Vantage に取り込む方法を説明しました。`TPT` を使用して、数十万件のレコードを数秒でVantageにロードしました。
 
 == さらに詳しく
 * link:https://docs.teradata.com/r/Teradata-Parallel-Transporter-User-Guide/February-2022[Teradata®TPTユーザー ガイド]
 * link:https://docs.teradata.com/r/Teradata-Parallel-Transporter-Reference/February-2022[Teradata®  TPT リファレンス]
-* xref:ROOT:nos.adoc[]
+* link:../general/nos.html[オブジェクトストレージに保存されたクエリーデータ]
 
-include::ROOT:partial$community_link.adoc[]
+include::../partials/community_link.adoc[]

@@ -76,7 +76,7 @@ with con.cursor () as cur:
 
 === Vantageからマップを使用する
 
-ここで、お気に入りの*SQL クライアント*を開き、Vantageシステムに接続します。
+ここで、お気に入りの *SQL クライアント* を開き、Vantageシステムに接続します。
 
 ClearScape 分析の JSON 関数を使用して GeoJson ドキュメントを解析し、各フィーチャ (この例では都市を表す各フィーチャ) に最も関連するプロパティとジオメトリ自体 (都市の座標) を抽出します。
 次に、GeomFromGeoJSON 関数を使用して、ジオメトリをネイティブ Vantage ジオメトリ データ型 (ST_GEOMETRY) としてキャストします。
@@ -156,7 +156,7 @@ CROSS JOIN (SEL city_coord FROM cities_geo WHERE city_name='Lvov') l
 
 Python json およびリスト操作関数と Python 用の Teradata SQL ドライバを使用すると、このプロセスが非常にシンプルかつ効率的になります。
 
-この例では、https://datahub.ioで利用可能な世界の国の境界を使用します。
+この例では、https://datahub.io で利用可能な世界の国の境界を使用します。
 
 
 さっそく見ていきましょう。
@@ -214,7 +214,7 @@ teradatasql カーソルを使用して行のセットをロードするには�
 
 === Vantage接続を作成し、ステージングテーブルにファイルをロードする
 
-必要に応じて、Vantage のホスト名、ユーザー名を使用してこのコードを変更し、_logmech_パラメータを使用して高度なログイン メカニズム (LDAP、Kerberos など) を指定します。
+必要に応じて、Vantage のホスト名、ユーザー名を使用してこのコードを変更し、_logmech_ パラメータを使用して高度なログイン メカニズム (LDAP、Kerberos など) を指定します。
 すべての接続パラメータは、teradatasql PyPi ページに文書化されています。 https://pypi.org/project/teradatasql/
 
 以下のコードは、単に Vantage 接続を作成し、カーソルを開いてテーブルを作成し、それをリストとともにロードします。
@@ -261,7 +261,7 @@ WITH con.cursor () AS cur:
 
 === データを使用する
 
-これで、お気に入りの*SQL クライアント*と Teradata の優れたhttps://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Geospatial-Data-Types-17.20[地理空間データ型と分析関数]を使用してテーブルにクエリーを実行できるようになります。
+これで、お気に入りの *SQL クライアント* と Teradata の優れた https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Geospatial-Data-Types-17.20[地理空間データ型と分析関数] を使用してテーブルにクエリーを実行できるようになります。
 
 例えば、このチュートリアル中にロードした 2 つのデータセットを使用して、どの国が存在するかをチェックインします。
 

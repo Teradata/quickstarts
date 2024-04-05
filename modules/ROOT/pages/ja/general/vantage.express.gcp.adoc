@@ -24,7 +24,7 @@ NOTE: クラウドの使用料を支払いたくない場合は、link:getting.s
 
 == インストール
 
-. 4 つの CPU と 8 GB の RAM、70 GB のバランス ディスクを備えた Ubuntu VM を作成します。以下のコマンドは、 `us-central1` リージョンに VM を作成します。最高のパフォーマンスを得るには、 リージョンを最も近いリージョンに置き換えてください。サポートされているリージョンのリストについては、 link:https://cloud.google.com/compute/docs/regions-zones[Google Cloud リージョンのドキュメント]をご覧ください。
+. 4 つの CPU と 8 GB の RAM、70 GB のバランス ディスクを備えた Ubuntu VM を作成します。以下のコマンドは、 `us-central1` リージョンに VM を作成します。最高のパフォーマンスを得るには、  リージョンを最も近いリージョンに置き換えてください。サポートされているリージョンのリストについては、 link:https://cloud.google.com/compute/docs/regions-zones[Google Cloud リージョンのドキュメント] をご覧ください。
 +
 [tabs]
 ====
@@ -89,7 +89,7 @@ mkdir /opt/downloads
 cd /opt/downloads
 ----
 include::../partials/install.ve.in.public.cloud.adoc[]
-* インターネットからVantage Expressに接続したい場合は、VMに対してファイアウォールの穴を開ける必要がある。また、デフォルトのパスワードを  `dbc`ユーザーに変更する必要がある。
+* インターネットからVantage Expressに接続したい場合は、VMに対してファイアウォールの穴を開ける必要がある。また、デフォルトのパスワードを  `dbc` ユーザーに変更する必要がある。
 .  `dbc` ユーザーのパスワードを変更するには、VM に移動して bteq を開始する。
 +
 [source, bash, role="content-editable emits-gtm-events", id="pw_change_bteq"]

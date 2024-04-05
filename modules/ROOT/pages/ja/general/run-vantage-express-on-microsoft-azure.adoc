@@ -21,7 +21,7 @@ include::../partials/use.csae.adoc[]
 
 == インストール
 
-. デフォルトのリージョンを自分に最も近いリージョンに設定します (場所をリストするには `az account list-locations -o table`を実行します)。
+. デフォルトのリージョンを自分に最も近いリージョンに設定します (場所をリストするには  `az account list-locations -o table` を実行します)。
 +
 [source, bash]
 ----
@@ -115,7 +115,7 @@ az vm disk attach --vm-name teradata-vantage-express --name $DISK_ID
 ----
 ssh -i <path_to_private_key_file> azureuser@<vm_ip>
 ----
-. VM に接続したら、  ユーザーに切り替えます`root`。
+. VM に接続したら、`root`  ユーザーに切り替えます。
 +
 [source, bash, role="content-editable emits-gtm-events", id="sudo"]
 ----
@@ -139,7 +139,7 @@ export DISK_UUID=$(blkid | grep sdc1 | cut -d"\"" -f2)
 echo "UUID=$DISK_UUID  /opt/downloads   xfs   defaults,nofail   1   2" >> /etc/fstab
 ----
 include::../partials/install.ve.in.public.cloud.adoc[]
-* インターネットからVantage Expressに接続したい場合は、VMに対してファイアウォールの穴を開ける必要がある。また、デフォルトのパスワードを  `dbc`ユーザーに変更する必要があります。
+* インターネットからVantage Expressに接続したい場合は、VMに対してファイアウォールの穴を開ける必要がある。また、デフォルトのパスワードを  `dbc` ユーザーに変更する必要があります。
 .  `dbc` ユーザーのパスワードを変更するには、VM に移動して bteq を開始します。
 +
 [source, bash, role="content-editable emits-gtm-events", id="pw_change_bteq"]

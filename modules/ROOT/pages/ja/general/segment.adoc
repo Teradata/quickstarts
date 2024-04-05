@@ -3,7 +3,7 @@
 :experimental:
 :page-author: Adam Tworkiewicz
 :page-email: adam.tworkiewicz@teradata.com
-:page-revdate: January 18th, 2022
+:page-revdate: 2022 年 1 月 18 日
 :description: Twilio Segmentからのイベントを Teradata Vantage に保存します。
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, customer data platform, cdp, segment
 :tabs:
@@ -20,9 +20,9 @@ image::segment.flow.diagram.png[Segment Google Cloud フローダイアグラム
 == デプロイメント
 
 === 前提条件
-1. Google Cloudアカウント。アカウントをお持ちでない場合は、https://console.cloud.google.com/で作成できます。
-2. `gcloud`がインストールされている。https://cloud.google.com/sdk/docs/install を参照してください。
-3．Google Cloud Runが対話できるTeradata Vantageインスタンス。
+1. Google Cloudアカウント。アカウントをお持ちでない場合は、https://console.cloud.google.com/ で作成できます。
+2. `gcloud` がインストールされている。https://cloud.google.com/sdk/docs/install を参照してください。
+3. Google Cloud Runが対話できるTeradata Vantageインスタンス。
 +
 include::../partials/vantage_clearscape_analytics.adoc[]
 
@@ -35,8 +35,8 @@ include::../partials/vantage_clearscape_analytics.adoc[]
 git clone git@github.com:Teradata/segment-integration-tutorial.git
 ----
 
-2. リポジトリには、データベースを設定する `segment.sql` ファイルが含まれています。 お気に入りの SQL IDE、[Teradata Studio](https://downloads.teradata.com/download/tools/teradata-studio)、または`bteq`というコマンド ライン ツール (https://downloads.teradata.com/node/7314[Windows]、https://downloads.teradata.com/node/200442[Linux]、https://downloads.teradata.com/node/201214[macOS ]用にダウンロード) を使用して、Vantage データベース上のスクリプトを実行します。
-SQL スクリプトは、`Segment`と呼ばれる新しいデータベースと、セグメント イベントを保存するためのテーブルのセットを作成します。
+2. リポジトリには、データベースを設定する `segment.sql` ファイルが含まれています。 お気に入りの SQL IDE、Teradata Studio (https://downloads.teradata.com/download/tools/teradata-studio)、または `bteq` というコマンド ライン ツール (https://downloads.teradata.com/node/7314[Windows]、https://downloads.teradata.com/node/200442[Linux]、https://downloads.teradata.com/node/201214[macOS ]用にダウンロード) を使用して、Vantage データベース上のスクリプトを実行します。
+SQL スクリプトは、`Segment` と呼ばれる新しいデータベースと、セグメント イベントを保存するためのテーブルのセットを作成します。
 
 3. デフォルトのプロジェクトとリージョンを設定します。
 +
@@ -150,7 +150,7 @@ gcloud pubsub subscriptions create segment-events-cloudrun-subscription --topic 
    --min-retry-delay 30
 ----
 
-15. Segmentがトピックに公開できるようにします。これを行うには、https://console.cloud.google.com/cloudpubsub/topic/listのプロジェクトの `pubsub@segment-integrations.iam.gserviceaccount.com` ロール `Pub/Sub Publisher`を割り当てます。詳細は https://segment.com/docs/connections/destinations/catalog/google-cloud-pubsub/#authentication[Segment マニュアル] を参照してください。
+15. Segmentがトピックに公開できるようにします。これを行うには、https://console.cloud.google.com/cloudpubsub/topic/list のプロジェクトの  `pubsub@segment-integrations.iam.gserviceaccount.com`  ロール  `Pub/Sub Publisher` を割り当てます。詳細は  https://segment.com/docs/connections/destinations/catalog/google-cloud-pubsub/#authentication[Segment マニュアル] を参照してください。
 
 16. Google Cloud Pub/Sub をSegmentの宛先として構成します。完全なトピック `projects/<PROJECT_ID>/topics/segment-events` を使用し、すべてのSegment イベント型 ( `*` 文字を使用) をトピックにマップします。
 

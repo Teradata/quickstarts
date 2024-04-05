@@ -13,7 +13,7 @@
 1. Teradata Jupyter Dockerイメージを使用する。
 2. 既存のDockerイメージをカスタマイズして、Teradata 拡張機能を含める。
 
-このページでは、2つのオプションの詳細な手順を説明します。この手順は、手順は、お客様のJupyterHubのデプロイがlink:https://zero-to-jupyterhub.readthedocs.io/en/latest/index.html[Zero to JupyterHub with Kubernetes]をベースにしていることを前提にしています。
+このページでは、2つのオプションの詳細な手順を説明します。この手順は、手順は、お客様のJupyterHubのデプロイが link:https://zero-to-jupyterhub.readthedocs.io/en/latest/index.html[Zero to JupyterHub with Kubernetes] をベースにしていることを前提にしています。
 
 include::../partials/vantage_clearscape_analytics.adoc[]
 
@@ -30,8 +30,8 @@ Teradata は 、link:https://hub.docker.com/r/jupyter/datascience-notebook/[jupy
 
 === Teradata Jupyter Dockerイメージをレジストリにインストールする
 
-1. link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter] のページに移動し、Dockerイメージをダウンロードします。tarballで、`teradatajupyterlabext_VERSION.tar.gz`という形式になっています。
-2. イメージをロードします。
+1. link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter] のページに移動し、Dockerイメージをダウンロードします。tarballで、`teradatajupyterlabext_VERSION.tar.gz` という形式になっています。
+2.  イメージをロードします。
 +
 [source, bash, role="content-editable"]
 ----
@@ -55,7 +55,7 @@ docker tag OLD_IMAGE_NAME NEW_IMAGE_NAME
 
 === JupyterHub で Teradata Jupyter Dockerイメージを使用する
 
-1. Teradata Jupyter Dockerイメージを JupyterHub クラスタで直接使用するには、 link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#choose-and-use-an-existing-docker-image[JupyterHubドキュメント]の説明に従ってオーバーライド ファイルを変更します。 `REGISTRY_URL` と `VERSION` を上記の手順で適切な値に置き換えてください。
+1. Teradata Jupyter Dockerイメージを JupyterHub クラスタで直接使用するには、 link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#choose-and-use-an-existing-docker-image[JupyterHubドキュメント] の説明に従ってオーバーライド ファイルを変更します。 `REGISTRY_URL` と `VERSION` を上記の手順で適切な値に置き換えてください。
 +
 [source, yaml, role="content-editable"]
 ----
@@ -64,11 +64,11 @@ singleuser:
   name: REGISTRY_URL/teradatajupyterlabext_VERSION
   tag: latest
 ----
-2. link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/extending-jupyterhub.html#applying-configuration-changes[JupyterHub ドキュメント]に記載されているように、クラスタに変更を適用します。
+2. link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/extending-jupyterhub.html#applying-configuration-changes[JupyterHub ドキュメント] に記載されているように、クラスタに変更を適用します。
 +
-TIP: 複数のプロファイルを使用することで、ユーザーがJupyterHubにログインする際に使用する画像を選択することができます。複数のプロファイルを設定する詳細な手順と例については、link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#using-multiple-profiles-to-let-users-select-their-environment[JupyterHub ドキュメント]を参照してください。
+TIP: 複数のプロファイルを使用することで、ユーザーがJupyterHubにログインする際に使用する画像を選択することができます。複数のプロファイルを設定する詳細な手順と例については、link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#using-multiple-profiles-to-let-users-select-their-environment[JupyterHub ドキュメント] を参照してください。
 
-=== Teradata Jupyter Dockerイメージのカスタマイズ
+=== Teradata Jupyter Dockerイメージをカスタマイズする
 
 Teradata Jupyter Dockerイメージにバンドルされていないパッケージやノートブックが必要な場合、Teradataイメージをベースイメージとして使用し、その上に新しいイメージをビルドすることをお勧めします。
 
@@ -88,8 +88,8 @@ COPY notebooks/. /tmp/JupyterLabRoot/DemoNotebooks/
 
 Teradata SQLカーネルとエクステンションは、現在使用している既存のイメージに含めることができます。
 
-1. link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter]ページから、zip圧縮されたTeradata Jupyter extensionsパッケージバンドルがダウンロードできます。 既存の
-DockerイメージがLinuxベースである場合は、Linux版のダウンロードを使用します。 そうでない場合は、使用しているプラットフォーム用にダウンロードします。 .zipファイルには、Teradata SQL Kernel、エクステンション、サンプル
+1. link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter] ページから、zip圧縮されたTeradata Jupyter extensionsパッケージバンドルがダウンロードできます。既存の
+DockerイメージがLinuxベースである場合は、Linux版のダウンロードを使用します。そうでない場合は、使用しているプラットフォーム用にダウンロードします。.zipファイルには、Teradata SQL Kernel、エクステンション、サンプル
 ノートブックが含まれています。
 2. バンドル ファイルを作業ディレクトリに解凍します。
 3. 以下は、既存のDockerイメージにTeradata Jupyterエクステンションを追加するためのDockerfileの例です。Dockerfileを使用して新しいDockerイメージを構築し、イメージを指定のレジストリにプッシュし、新しいイメージをシングルユーザーイメージとして使用するために上記のようにオーバーライドファイルを変更し、変更をクラスタに適用します。

@@ -20,7 +20,7 @@ include::../partials/vantage_clearscape_analytics.adoc[]
 
 == 概要
 このハウツーでは、feastの用語をご存知であることを前提に説明しています。復習が必要な場合は、 https://docs.feast.dev/[FEAST ドキュメント]
-をご覧ください。
+ をご覧ください。
 このドキュメントは、開発者が `Teradataのオフラインおよびオンライン ストア` をFeastに統合する方法を説明します。Teradataのオフラインストアにより、ユーザーは任意のデータストアをオフラインフィーチャーストアとして使用することができます。モデル学習のためにオフラインストアからフィーチャーを取得し、モデル推論時に使用するためにオンラインフィーチャーストアに実体化させることができます。
 
 一方、オンラインストアは、低レイテンシーで機能を提供するために使用されます。 `materialize` コマンドは、データソース（またはオフラインストア）からオンラインストアに特徴量をロードするために使用されます。
@@ -30,7 +30,7 @@ include::../partials/vantage_clearscape_analytics.adoc[]
 * `オフラインストア`
 * `オンラインストア`
 
-さらに、レジストリ(カタログ)としてTeradataを使用することは、`registry_type: sql`を介して既にサポートされており、我々のサンプルに含まれています。これは、すべてがTeradataに配置されることを意味します。しかし、要件やインストールなどによっては、他のシステムと適宜混在させることが可能です。
+さらに、レジストリ(カタログ)としてTeradataを使用することは、`registry_type: sql` を介して既にサポートされており、我々のサンプルに含まれています。これは、すべてがTeradataに配置されることを意味します。しかし、要件やインストールなどによっては、他のシステムと適宜混在させることが可能です。
 
 == はじめに
 
@@ -47,7 +47,7 @@ pip install feast-teradata
 feast-td init-repo
 ----
 
-すると、Teradataシステムの必要な情報を入力するプロンプトが表示され、サンプルデータセットがアップロードされます。上記のコマンドを実行する際に、レポ名`demo` を使用したと仮定します。リポジトリ ファイルと、 `test_workflow.py`というファイルが表示されます。この `test_workflow.py` を実行すると、Teradataをレジストリ、OfflineStore、OnlineStoreとして、饗宴のための完全なワークフローが実行されます。
+すると、Teradataシステムの必要な情報を入力するプロンプトが表示され、サンプルデータセットがアップロードされます。上記のコマンドを実行する際に、レポ名 `demo` を使用したと仮定します。リポジトリ ファイルと、 `test_workflow.py` というファイルが表示されます。この `test_workflow.py` を実行すると、Teradataをレジストリ、OfflineStore、OnlineStoreとして、饗宴のための完全なワークフローが実行されます。
 
 [source, cli]
 ----
@@ -135,7 +135,7 @@ driver_stats_fv = FeatureView(
 
 オフラインストアのテストには、以下に説明するように2種類の方法があります。しかし、その前に、いくつかの必須ステップがあります。
 
-では、過去`60`日間にイベントを見たことのあるエンティティ（母集団）のみを使って、学習用の素性を一括して読み込んでみましょう。使用する述語（フィルタ）は、与えられた学習用データセットのエンティティ（母集団）選択に関連するものであれば何でも構いません。`event_timestamp`は例示のためだけのものです。
+では、過去 `60` 日間にイベントを見たことのあるエンティティ（母集団）のみを使って、学習用の素性を一括して読み込んでみましょう。使用する述語（フィルタ）は、与えられた学習用データセットのエンティティ（母集団）選択に関連するものであれば何でも構いません。`event_timestamp` は例示のためだけのものです。
 
 [source, python]
 ----
@@ -159,7 +159,7 @@ training_df = store.get_historical_features(
 print(training_df.head())
 ----
 
-`feast-teradata`ライブラリを使用すると、豊富なAPIと機能の完全なセットを使用することができます。できることの詳細については、公式のfeastのhttps://docs.feast.dev/getting-started/quickstart[クイックスタート] を参照してください。
+`feast-teradata`ライブラリを使用すると、豊富なAPIと機能の完全なセットを使用することができます。できることの詳細については、公式のfeastの https://docs.feast.dev/getting-started/quickstart[クイックスタート] を参照してください。
 
 == オンラインストア
 
@@ -185,7 +185,7 @@ offline_store:
 == オンラインストアの利用状況
 オンラインストアをテストする前に、いくつか必須の手順があります。
 
-`materialize_incremental` コマンドは、オンラインストアの機能を徐々にマテリアライズドするために使用されます。追加する新しい特徴がない場合、このコマンドは基本的に何も行いません。祝宴`materialize_incremental`では、開始時間はnow-ttl(フィーチャビューで定義したttl)または最新の実体化の時間のいずれかです。少なくとも一度でも機能をマテリアライズしていれば、それ以降のマテリアライズは、前回のマテリアライズの時点でストアに存在しなかった機能のみをフェッチすることになります。
+`materialize_incremental` コマンドは、オンラインストアの機能を徐々にマテリアライズドするために使用されます。追加する新しい特徴がない場合、このコマンドは基本的に何も行いません。feast `materialize_incremental`では、開始時間はnow-ttl(フィーチャビューで定義したttl)または最新の実体化の時間のいずれかです。少なくとも一度でも機能をマテリアライズしていれば、それ以降のマテリアライズは、前回のマテリアライズの時点でストアに存在しなかった機能のみをフェッチすることになります。
 
 [source, cli]
 ----
@@ -193,7 +193,7 @@ CURRENT_TIME=$(date +'%Y-%m-%dT%H:%M:%S')
 feast materialize-incremental $CURRENT_TIME
 ----
 
-次に、オンライン機能を取得する際に、`features`と`entity_rows`の2つのパラメータを用意します。 `features` パラメータはリストで、`df_feature_view`に存在する特徴を任意の数だけ取ることができます。上の例では、4つの特徴しかありませんが、4つ以下でもかまいません。次に、 `entity_rows`パラメータもリストで、`{feature_identifier_column: value_to_be_fetched}`という形式のディクショナリーを取ります。この場合、driver_id列は、エンティティドライバの異なる行を一意に識別するために使用されます。現在、driver_idが5に等しいフィーチャーの値をフェッチしています。また、このような行を複数取得することもできます。 `[{driver_id: val_1}, {driver_id: val_2}, .., {driver_id: val_n}] [{driver_id: val_1}, {driver_id: val_2}, .., {driver_id: val_n}]`
+次に、オンライン機能を取得する際に、`features` と `entity_rows` の2つのパラメータを用意します。 `features` パラメータはリストで、`df_feature_view` に存在する特徴を任意の数だけ取ることができます。上の例では、4つの特徴しかありませんが、4つ以下でもかまいません。次に、 `entity_rows` パラメータもリストで、`{feature_identifier_column: value_to_be_fetched}` という形式のディクショナリーを取ります。この場合、driver_id列は、エンティティドライバの異なる行を一意に識別するために使用されます。現在、driver_idが5に等しいフィーチャーの値をフェッチしています。また、このような行を複数取得することもできます。 `[{driver_id: val_1}, {driver_id: val_2}, .., {driver_id: val_n}] [{driver_id: val_1}, {driver_id: val_2}, .., {driver_id: val_n}]`
 
 
 [source, python]
@@ -249,7 +249,7 @@ path = 'teradatasql://'+ teradata_user +':' + teradata_password + '@'+host + '/?
 
 * on_demand_feature_views (feature_view_name, project_id, last_updated_timestamp, feature_view_proto, user_metadata)
 
-さらに、完全な（しかし実世界ではない）、エンドツーエンドのワークフローの例を見たい場合は、`demo/test_workflow.py`スクリプトを参照してください。これは、完全な饗宴の機能をテストするために使用されます。
+さらに、完全な（しかし実世界ではない）、エンドツーエンドのワークフローの例を見たい場合は、`demo/test_workflow.py` スクリプトを参照してください。これは、完全な饗宴の機能をテストするために使用されます。
 
 Enterprise Feature Store は、データ分析の重要な段階で価値を獲得するプロセスを加速します。生産性が向上し、製品を市場にデプロイメントするまでの時間が短縮されます。Teradataとfeastを統合することで、Teradataの高効率な並列処理をFeature Store内で利用できるようになり、パフォーマンスの向上が期待されます。
 

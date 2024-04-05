@@ -24,9 +24,10 @@ IMPORTANT: VantageCloud Lake のサインオン リンクと資格情報を取�
 Teradataが提供するURL(*_ourcompany.innovationlabs.teradata.com_*など)に移動し、サインオンします。
 
 * 既存の顧客は、組織管理者のユーザー名 (電子メール アドレス) とパスワードを使用してサインオンできます。
-* clear​130 / 5,000翻訳結果翻訳の結果新しい顧客は、組織管理者のユーザー名 (ウェルカム レターから: 電子メール アドレス) と作成したパスワードを使用してサインオンできます。 
+* 新しい顧客は、組織管理者のユーザー名 (ウェルカム レターから: 電子メール アドレス) と作成したパスワードを使用してサインオンできます。 
 
-NOTE: https://login.customer.teradata.com/ext/pwdreset/Identify?AdapterId=CDSCustomer[ここ]をクリックして、組織の管理者パスワードをリセットします。
+NOTE: https://login.customer.teradata.com/ext/pwdreset/Identify?AdapterId=CDSCustomer[ここ] をクリックして、組織の管理者パスワードをリセットします。
+
 
 image::lake_sign_on.png[サインオン,align="center",width=50%]
 
@@ -75,7 +76,7 @@ Lake+: プレミア 24x7 優先クラウドサポート + 業界データモデ�
 
 image::lake_environment_configuration.png[環境の構成,align="center",width=50%]
 
-IMPORTANT: *推定消費量*(右側)は、環境作成のためのガイダンスを提供します。詳細については、https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Using-VantageCloud-Lake-Console-to-Manage-VantageCloud-Lake/Using-the-Consumption-Estimates[推定消費量の使用]を参照してください。   
+IMPORTANT: *推定消費量* (右側)は、環境作成のためのガイダンスを提供します。詳細については、https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Using-VantageCloud-Lake-Console-to-Manage-VantageCloud-Lake/Using-the-Consumption-Estimates[推定消費量の使用] を参照してください。   
 
 === プライマリ クラスタの構成
 
@@ -173,7 +174,7 @@ image::lake_database_cred.png[プライマリ クラスタの構成,align="cente
 
 === 詳細オプション
 
-すぐに開始するには、*デフォルトを使用*を選択するか、追加のオプション設定を定義することができる。
+すぐに開始するには、*デフォルトを使用* を選択するか、追加のオプション設定を定義することができる。
 
 image::lake_advanced_option_default.png[ユーザーのデフォルトを使用する詳細オプション,align="center",width=50%]
 
@@ -186,38 +187,41 @@ image::lake_advanced_option_default.png[ユーザーのデフォルトを使用�
 選択したインスタンスサイズに対して、インスタンスあたりのAMP数を選択します。
 
 | AWS:ストレージの暗号化
-| 顧客データの暗号化を設定します。https://docs.aws.amazon.com/kms/latest/developerguide/find-cmk-id-arn.html[キー ID とキー ARN を検索する]を参照してください +
-* Teradataによる管理 +
-* 顧客管理 +
+| 顧客データの暗号化を設定します。https://docs.aws.amazon.com/kms/latest/developerguide/find-cmk-id-arn.html[キー ID とキー ARN を検索する] を参照してください +
+* Teradataによる管理 
++
+* 顧客管理 
++
 * キーエイリアスARN
 
 |====
 
 image::lake_advanced_option.png[ユーザー定義の詳細オプション,align="center",width=50%]
 
-すべての情報を確認し、*CREATE ENVIRONMENT*ボタンをクリックします。
+すべての情報を確認し、*CREATE ENVIRONMENT* ボタンをクリックします。
 
 image::lake_create_environment.png[環境の作成ボタン,align="center",width=50%]
 
-デプロイには数分かかります。完了すると、作成された環境がカード ビューとして [*環境*] セクションに表示されます (環境の名前は Quickstart_demo)。 
+デプロイには数分かかります。完了すると、作成された環境がカード ビューとして *環境* セクションに表示されます (環境の名前は Quickstart_demo)。 
 
 image::lake_available_environment.png[新しく作成された使用可能な環境,align="center",width=50%]
 
 == パブリック インターネットからのアクセス環境
 
-作成された環境には、コンソールからのみアクセスできます。これを変更するには、作成された環境変数をクリックして、*設定*タブに移動します。
+作成された環境には、コンソールからのみアクセスできます。これを変更するには、作成された環境変数をクリックして、*設定* タブに移動します。
 
 image::lake_settings_menu.png[作成した環境の設定メニュー,align="center",width=75%]
 
-[*設定*] で [*インターネット接続*] チェックボックスをオンにし、環境へのアクセスに使用する IP アドレスを CIDR 形式で指定します (たとえば、192.168.2.0/24 は 192.168.2.0 から 192.168.2.255 の範囲内のすべての IP アドレスを指定します)。 
+*設定* で *インターネット接続* チェックボックスをオンにし、環境へのアクセスに使用する IP アドレスを CIDR 形式で指定します (たとえば、192.168.2.0/24 は 192.168.2.0 から 192.168.2.255 の範囲内のすべての IP アドレスを指定します) 
 
-NOTE: インターネット接続の設定の詳細については、 https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin/Step-2-Setting-the-Environment-Connection-Type/Setting-Up-an-Internet-Connection[こちら] をご覧ください。
+NOTE: インターネット接続の設定の詳細については、https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin/Step-2-Setting-the-Environment-Connection-Type/Setting-Up-an-Internet-Connection[こちら] をご覧ください。
 
 image::lake_ip_addresses.png[IPホワイトリスト,align="center",width=50%]
 
-ページの右上にある*保存*ボタンをクリックして、変更を確認します。 +
+ページの右上にある *保存* ボタンをクリックして、変更を確認します。 
++
 
-*環境*のセクションに戻って、環境庁カードを確認してください。現在、*パブリック インターネット*にアクセスできます。
+*環境* のセクションに戻って、環境庁カードを確認してください。現在、*パブリック インターネット* にアクセスできます。
 
 image::lake_public_internet_cv.png[パブリック インターネット カード ビュー,align="center",width=50%]
 

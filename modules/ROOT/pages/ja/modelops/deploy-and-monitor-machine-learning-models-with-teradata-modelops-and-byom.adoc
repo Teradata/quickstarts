@@ -108,7 +108,7 @@ Monitoring ページで、BYOM ターゲット列を使用します。 CAST(CAST
 
 * BYOM Notebookを開き、SQL コードから PMML 予測を実行します。 
 
-* リタイア
+* リタイアする
 
 
 == まとめ

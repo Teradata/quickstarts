@@ -86,9 +86,9 @@ Teradata Retrieval Architecture (取得アーキテクチャ)に含まれる主�
 
 1. Parsing Engineは、1 つ以上の行を取得するリクエストを送信する。 
 2. BYNETは、処理のために関連するAMPを活性化する。 
-3。AMPは、並列アクセスを介して、目的の行を同時に見つけて検索する。 
-4。BYNET は、取得した行をParsing Engineに返す。 
-5．次に、Parsing Engineは、リクエスト元のクライアント アプリケーションに行を返す。 
+3. AMPは、並列アクセスを介して、目的の行を同時に見つけて検索する。
+4. BYNET は、取得した行をParsing Engineに返す。
+5. 次に、Parsing Engineは、リクエスト元のクライアント アプリケーションに行を返す。 
 
 image::{dir}/teradata_retrieval_architecture.png[Teradata Retrieval Architecture (取得アーキテクチャ), width=75%]
 
@@ -103,7 +103,7 @@ Teradata の MPP アーキテクチャでは、データを分散および取得
 image::{dir}/teradata_data_distribution.png[Teradata Data Distribution (データ分散), width=75%]
 
 == まとめ 
-この記事では、Parsing Engines  (PE)、BYNET、ccess Module Processors (AMP)、Virtual Disk (Vdisk) などの Teradata Vantage の主要なアーキテクチャ コンポーネント、および Parallel Database Extension (PDE) などのその他のアーキテクチャ コンポーネントについて説明しました。 ノードと、線形成長と拡張性、並列処理、データ取得、データ分散などの Teradata Vantage の重要な概念。   
+この記事では、Parsing Engines (PE)、BYNET、Access Module Processors (AMP)、Virtual Disk (Vdisk)などのTeradata Vantageの主要なアーキテクチャ コンポーネント、Parallel Database Extension(PDE)、Nodeなどのその他のアーキテクチャ コンポーネント、および線形拡張と拡張性、並列処理、データ取得、データ分散などのTeradata Vantageの基本的な概念について説明しました。   
 
 == さらに詳しく 
 link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Introduction/Vantage-Hardware-and-Software-Architecture/Virtual-Processors/Parsing-Engine[Parsing Engine,window="_blank"]

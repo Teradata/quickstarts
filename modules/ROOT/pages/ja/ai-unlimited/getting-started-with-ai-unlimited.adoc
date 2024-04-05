@@ -17,7 +17,7 @@ Teradata AI Unlimited は、以下の構成要素で構成されています。
 
 * **ワークスペースサービス**: Teradata AI Unlimited の自動化とデプロイを制御および管理するオーケストレーション サービス。また、データ関連プロジェクトの実行時にシームレスなユーザー エクスペリエンスを提供する統合構成要素も制御します。ワークスペースサービスには、ユーザーを承認し、CSP 統合の選択を定義するために使用できる Web ベースの UI が含まれています。
 
-* **インターフェース**: データ プロジェクトを作成して実行し、Teradata システムに接続し、データを視覚化するための環境。JupyterLabまたはワークスペースクライアント(workspacectl)のいずれかを使用できます。
+* **インターフェース**:  データ プロジェクトを作成して実行し、Teradata システムに接続し、データを視覚化するための環境。JupyterLabまたはワークスペースクライアント(workspacectl)のいずれかを使用できます。
 
 * **エンジン**: データ サイエンスおよび分析ワークロードの実行に使用できる、フルマネージドの計算リソース。
 
@@ -30,7 +30,7 @@ Teradata AI Unlimited は、以下の構成要素で構成されています。
 * VPC 上の同じインスタンス上のワークスペース サービスと JupyterLab
 * Network Load Balancer の背後にあるワークスペースサービスと JupyterLab
 
-開発環境またはテスト環境の場合、Dockerを使用してワークスペース サービスと JupyterLab をデプロイできます。link:install-ai-unlimited-workspaces-docker.html[Dockerを使用した Teradata AI Unlimited Workspaceサービスのデプロイとセットアップ] を参照してください。クラウド インフラストラクチャにアクセスできるエンタープライズ ユーザーの場合は、ワークスペース サービスと JupyterLab を VPC にデプロイできます。link:deploy-ai-unlimited-aws-cloudformation.html[AWS CloudFormation テンプレートを使用して Teradata AI Unlimited Workspace サービスとインターフェースをデプロイする]とAzure を使用して 「Teradata AI Unlimited をデプロイ」(近日公開)を参照してください。
+開発環境またはテスト環境の場合、Dockerを使用してワークスペース サービスと JupyterLab をデプロイできます。link:install-ai-unlimited-workspaces-docker.html[Dockerを使用した Teradata AI Unlimited Workspaceサービスのデプロイとセットアップ] を参照してください。クラウド インフラストラクチャにアクセスできるエンタープライズ ユーザーの場合は、ワークスペース サービスと JupyterLab を VPC にデプロイできます。link:deploy-ai-unlimited-aws-cloudformation.html[AWS CloudFormation テンプレートを使用して Teradata AI Unlimited Workspace サービスとインターフェースをデプロイする] と「Azure を使用してTeradata AI Unlimited をデプロイする方法」(近日公開)を参照してください。
 
 == 次のステップ
 

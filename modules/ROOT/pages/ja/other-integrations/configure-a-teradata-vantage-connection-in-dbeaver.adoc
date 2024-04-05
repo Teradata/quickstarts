@@ -21,24 +21,24 @@ include::../partials/vantage_clearscape_analytics.adoc[]
 
 == DBeaverにTeradataの接続を追加する
 
-1. アプリケーション ウィンドウの左上隅にあるプラグ アイコン (image:other-integrations/{page-image-directory}/plug-icon.png[title="接続プラグアイコンを追加する", width="16px"]) をクリックして、新しい接続ウィザードを開始するか、 `Database -> New Database Connection`に移動します。
-2. `Select your database`画面で`teradata`と入力し、Teradataアイコンを選択します。
+1. アプリケーション ウィンドウの左上隅にあるプラグ アイコン (image:other-integrations/{page-image-directory}/plug-icon.png[title="接続プラグアイコンを追加する", width="16px"]) をクリックして、新しい接続ウィザードを開始するか、 `Database -> New Database Connection` に移動します。
+2. `Select your database` 画面で `teradata` と入力し、Teradataアイコンを選択します。
 +
 image::other-integrations/{page-image-directory}/select-your-database.png[データベースを選択します。, width=75%]
-3. メインタブでは、すべてのプライマリ接続設定を設定する必要があります。必要なものには、`Host`、`Port`、`Database`、`Username`、および`Password`があります。
+3. メインタブでは、すべてのプライマリ接続設定を設定する必要があります。必要なものには、`Host`、`Port`、`Database`、`Username`、および `Password` があります。
 +
-TIP: Teradata Vantageでは、ユーザが作成されると、それに対応するデータベースも作成されます。DBeaver では、データベースに接続する必要があります。接続先のデータベースがわからない場合は、`database`フィールドにユーザー名を入力します。
+TIP: Teradata Vantageでは、ユーザが作成されると、それに対応するデータベースも作成されます。DBeaver では、データベースに接続する必要があります。接続先のデータベースがわからない場合は、`database` フィールドにユーザー名を入力します。
 +
-TIP: DBeaver PRO を使用すると、テーブルの標準的な順序を使用できるだけでなく、テーブルを特定のデータベースまたはユーザーに階層的にリンクすることもできます。データベースまたはユーザーをデプロイしたり折りたたんだりすると、データベース ナビゲータ ウィンドウをいっぱいにすることなく、あるリージョンから別のリージョンに移動できるようになります。この設定を有効にするには、「`Show databases and users hierarchically`」ボックスをオンにします。
+TIP: DBeaver PRO を使用すると、テーブルの標準的な順序を使用できるだけでなく、テーブルを特定のデータベースまたはユーザーに階層的にリンクすることもできます。データベースまたはユーザーをデプロイしたり折りたたんだりすると、データベース ナビゲータ ウィンドウをいっぱいにすることなく、あるリージョンから別のリージョンに移動できるようになります。この設定を有効にするには、 `Show databases and users hierarchically` ボックスをオンにします。
 +
 TIP: 多くの環境では、Teradata Vantage には TLS プロトコルを使用してのみアクセスできます。DB aver PROでは、`Use TLS protocol`オプションをチェックしてTLSを有効にする。
 +
 image::other-integrations/{page-image-directory}/teradata-connection-settings.png[Teradata接続設定, width=75%]
-4.`Finish`をクリックします。
+4. `Finish` をクリックします。
 
 == オプション: SSHトンネリング
 
-データベースに直接アクセスできない場合は、SSH トンネルを使用できます。すべての設定は、`SSH`タブで利用できます。DBeaver は、ユーザー/パスワード、公開キー、SSH エージェント認証の認証方法をサポートしています。
+データベースに直接アクセスできない場合は、SSH トンネルを使用できます。すべての設定は、`SSH` タブで利用できます。DBeaver は、ユーザー/パスワード、公開キー、SSH エージェント認証の認証方法をサポートしています。
 
 image::other-integrations/{page-image-directory}/teradata-connection-settings-ssh.png[Teradata 接続設定 SSH, width=75%]
 

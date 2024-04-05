@@ -19,14 +19,14 @@ include::../partials/use.csae.adoc[]
 ====
 Vantage Express は仮想マシン イメージとして配布されます。このハウツーでは EC2 `c5n.metal` インスタンス型を使用します。これは、$3/h以上かかるベアメタル インスタンスです。
 
-より安価なオプションが必要な場合は、ネストされた仮想化をサポートし、安価なVMでVantage Expressを実行できるxref:vantage.express.gcp.adoc[Google Cloud]とxref:run-vantage-express-on-microsoft-azure.adoc[Azure]を試してください。
+より安価なオプションが必要な場合は、ネストされた仮想化をサポートし、安価なVMでVantage Expressを実行できるxref:vantage.express.gcp.adoc[Google Cloud] と  xref:run-vantage-express-on-microsoft-azure.adoc[Azure] を試してください。
 
-クラウド利用に対して料金を払いたくない場合は、link:https://clearscape.teradata.com/[]でVantageの無料ホストインスタンスを入手できます。または、xref:getting.started.vmware.adoc[VMware]、xref:getting.started.vbox.adoc[VirtualBox]、またはxref:getting.started.utm.adoc[UTM]を使用してVantage Expressをローカルにインストールすることもできます。
+クラウド利用に対して料金を払いたくない場合は、link:https://clearscape.teradata.com/[] でVantageの無料ホストインスタンスを入手できます。または、xref:getting.started.vmware.adoc[VMware]、xref:getting.started.vbox.adoc[VirtualBox]、または xref:getting.started.utm.adoc[UTM] を使用してVantage Expressをローカルにインストールすることもできます。
 ====
 
 == 前提条件
 
-. AWS アカウント新しいアカウントを作成する必要がある場合は、https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/[AWS の公式手順]に従ってください。
+. AWS アカウント。新しいアカウントを作成する必要がある場合は、 https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/[AWS の公式手順] に従ってください。
 . `awscli` コマンド ライン ユーティリティがマシンにインストールされ、設定されていること。インストール手順はここで見つけることができます。https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 
 == インストール
@@ -215,7 +215,7 @@ cd /opt/downloads
 ----
 include::../partials/install.ve.in.public.cloud.adoc[]
 
-* インターネットから Vantage Express に接続したい場合は、VM にファイアウォールの穴を開ける必要があります。また、デフォルトのパスワードを  `dbc`ユーザーに変更する必要があります。
+* インターネットから Vantage Express に接続したい場合は、VM にファイアウォールの穴を開ける必要があります。また、デフォルトのパスワードを  `dbc` ユーザーに変更する必要があります。
 .  `dbc` ユーザーのパスワードを変更するには、VM に移動して bteq を開始します。
 +
 [source, bash, role="content-editable emits-gtm-events", id="pw_change_bteq"]
@@ -243,7 +243,7 @@ aws ec2 authorize-security-group-ingress \
   --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 1025, "ToPort": 1025, "IpRanges": [{"CidrIp": "0.0.0.0/0", "Description": "Allow Teradata port"}]}]'
 ----
 
-== クリーンアップ
+== クリーンアップする
 
 課金を停止するには、すべてのリソースを削除します。
 

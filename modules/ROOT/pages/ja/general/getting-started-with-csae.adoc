@@ -9,7 +9,7 @@
 
 == 概要
 
-https://www.teradata.com/platform/clearscape-analytics[ClearScape Analytics^TM^] は、https://www.teradata.com/platform/vantagecloud[Teradata VantageCloud]の強力な分析エンジンです。市場で最も強力でオープンで接続された AI/ML 機能により、企業全体に画期的なパフォーマンス、価値、成長をもたらします。https://www.teradata.com/experience[ClearScape Analytics Experience] を通じて、ClearScape Analytics^TM^ および Teradata Vantage を非運用設定で体験できます。
+https://www.teradata.com/platform/clearscape-analytics[ClearScape Analytics^TM^] は、https://www.teradata.com/platform/vantagecloud[Teradata VantageCloud] の強力な分析エンジンです。市場で最も強力でオープンで接続された AI/ML 機能により、企業全体に画期的なパフォーマンス、価値、成長をもたらします。https://www.teradata.com/experience[ClearScape Analytics Experience] を通じて、ClearScape Analytics^TM^ および Teradata Vantage を非運用設定で体験できます。
 
 このハウツーでは、ClearScapeアナリティクスエクスペリエンスで環境構築のステップを実行し、デモにアクセスする。
 
@@ -41,7 +41,7 @@ image::csae_create_env.png[環境を作成する,align="center",width=60%]
 | 環境の名前(例:「demo」)
 
 | *database password* 
-| 選択したパスワード。このパスワードは、`dbc` および `demo_user` ユーザーに割り当てられます。
+| 選択したパスワード。このパスワードは、`dbc` および  `demo_user` ユーザーに割り当てられます。
 
 | *Region* 
 | ドロップダウンからリージョンを選択します。
@@ -58,9 +58,11 @@ image::csae_env_details.png[環境の詳細,align="center",width=75%]
 
 == デモへのアクセス
 
-ClearScape Analytics Experience 環境には、分析を使用してさまざまな業界のビジネス上の問題を解決する方法を紹介するさまざまなデモが含まれています。 +
+ClearScape Analytics Experience 環境には、分析を使用してさまざまな業界のビジネス上の問題を解決する方法を紹介するさまざまなデモが含まれています。 
++
 
-デモにアクセスするには、*RUN DEMOS USING JUPYTER*ボタンをクリックします。ブラウザの新しいタブで Jupyter 環境が開きます。 +
+デモにアクセスするには、*RUN DEMOS USING JUPYTER* ボタンをクリックします。ブラウザの新しいタブで Jupyter 環境が開きます。 
++
 
 NOTE: デモの詳細はすべて、デモ インデックス ページでご覧いただけます。
 
