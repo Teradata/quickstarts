@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2032,7 +2036,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </ol>
 </div>
 <div class="paragraph">
-<p>このページでは、2つのオプションの詳細な手順を説明します。この手順は、手順は、お客様のJupyterHubのデプロイが<a href="https://zero-to-jupyterhub.readthedocs.io/en/latest/index.html">Zero to JupyterHub with Kubernetes</a>をベースにしていることを前提にしています。</p>
+<p>このページでは、2つのオプションの詳細な手順を説明します。この手順は、手順は、お客様のJupyterHubのデプロイが <a href="https://zero-to-jupyterhub.readthedocs.io/en/latest/index.html">Zero to JupyterHub with Kubernetes</a> をベースにしていることを前提にしています。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2076,7 +2080,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter">Vantage Modules for Jupyter</a> のページに移動し、Dockerイメージをダウンロードします。tarballで、`teradatajupyterlabext_VERSION.tar.gz`という形式になっています。</p>
+<p><a href="https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter">Vantage Modules for Jupyter</a> のページに移動し、Dockerイメージをダウンロードします。tarballで、<code>teradatajupyterlabext_VERSION.tar.gz</code> という形式になっています。</p>
 </li>
 <li>
 <p>イメージをロードします。</p>
@@ -2121,7 +2125,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Teradata Jupyter Dockerイメージを JupyterHub クラスタで直接使用するには、 <a href="https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#choose-and-use-an-existing-docker-image">JupyterHubドキュメント</a>の説明に従ってオーバーライド ファイルを変更します。 <code>REGISTRY_URL</code> と <code>VERSION</code> を上記の手順で適切な値に置き換えてください。</p>
+<p>Teradata Jupyter Dockerイメージを JupyterHub クラスタで直接使用するには、 <a href="https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#choose-and-use-an-existing-docker-image">JupyterHubドキュメント</a> の説明に従ってオーバーライド ファイルを変更します。 <code>REGISTRY_URL</code> と <code>VERSION</code> を上記の手順で適切な値に置き換えてください。</p>
 <div class="listingblock content-editable">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">singleuser:
@@ -2132,7 +2136,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </li>
 <li>
-<p><a href="https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/extending-jupyterhub.html#applying-configuration-changes">JupyterHub ドキュメント</a>に記載されているように、クラスタに変更を適用します。</p>
+<p><a href="https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/extending-jupyterhub.html#applying-configuration-changes">JupyterHub ドキュメント</a> に記載されているように、クラスタに変更を適用します。</p>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -2140,7 +2144,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-複数のプロファイルを使用することで、ユーザーがJupyterHubにログインする際に使用する画像を選択することができます。複数のプロファイルを設定する詳細な手順と例については、<a href="https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#using-multiple-profiles-to-let-users-select-their-environment">JupyterHub ドキュメント</a>を参照してください。
+複数のプロファイルを使用することで、ユーザーがJupyterHubにログインする際に使用する画像を選択することができます。複数のプロファイルを設定する詳細な手順と例については、<a href="https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#using-multiple-profiles-to-let-users-select-their-environment">JupyterHub ドキュメント</a> を参照してください。
 </td>
 </tr>
 </table>
@@ -2150,7 +2154,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </div>
 <div class="sect2">
-<h3 id="_teradata_jupyter_dockerイメージのカスタマイズ"><a class="anchor" href="#_teradata_jupyter_dockerイメージのカスタマイズ"></a>Teradata Jupyter Dockerイメージのカスタマイズ</h3>
+<h3 id="_teradata_jupyter_dockerイメージをカスタマイズする"><a class="anchor" href="#_teradata_jupyter_dockerイメージをカスタマイズする"></a>Teradata Jupyter Dockerイメージをカスタマイズする</h3>
 <div class="paragraph">
 <p>Teradata Jupyter Dockerイメージにバンドルされていないパッケージやノートブックが必要な場合、Teradataイメージをベースイメージとして使用し、その上に新しいイメージをビルドすることをお勧めします。</p>
 </div>
@@ -2180,8 +2184,8 @@ COPY notebooks/. /tmp/JupyterLabRoot/DemoNotebooks/</code></pre>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter">Vantage Modules for Jupyter</a>ページから、zip圧縮されたTeradata Jupyter extensionsパッケージバンドルがダウンロードできます。 既存の
-DockerイメージがLinuxベースである場合は、Linux版のダウンロードを使用します。 そうでない場合は、使用しているプラットフォーム用にダウンロードします。 .zipファイルには、Teradata SQL Kernel、エクステンション、サンプル
+<p><a href="https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter">Vantage Modules for Jupyter</a> ページから、zip圧縮されたTeradata Jupyter extensionsパッケージバンドルがダウンロードできます。既存の
+DockerイメージがLinuxベースである場合は、Linux版のダウンロードを使用します。そうでない場合は、使用しているプラットフォーム用にダウンロードします。.zipファイルには、Teradata SQL Kernel、エクステンション、サンプル
 ノートブックが含まれています。</p>
 </li>
 <li>

@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2126,7 +2130,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <p>イベント駆動型のフロートリガーを使用するには、SalesforceのChange Data Captureを有効にする必要があります。セットアップから、クイック検索に「Change Data Capture」と入力します。</p>
 </li>
 <li>
-<p>Salesforce アプリが IP アドレスの制限を実施している場合、Amazon AppFlow で使用するアドレスをホワイトリストに登録する必要があります。詳細については、Amazon Web Services General Reference のhttps://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html[「AWS IP アドレス範囲」]を参照してください。</p>
+<p>Salesforce アプリが IP アドレスの制限を実施している場合、Amazon AppFlow で使用するアドレスをホワイトリストに登録する必要があります。詳細については、Amazon Web Services General Reference の <a href="https://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html">AWS IP アドレス範囲</a> を参照してください。</p>
 </li>
 <li>
 <p>Salesforce のレコードを 100 万件以上転送する場合、Salesforce の複合フィールドを選択することはできません。Amazon AppFlow は転送に Salesforce Bulk API を使用するため、複合フィールドの転送は認証されません。</p>
@@ -2173,7 +2177,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>https://console.aws.amazon.com/appflow[AppFlow コンソール]にアクセスし、AWSログイン認証でサインインし、 *Create flow*をクリックします。正しいリージョンにいること、Salesforceのデータを保存するためのバケットが作成されていることを確認します。</pre>
+<pre>https://console.aws.amazon.com/appflow[AppFlow コンソール] にアクセスし、AWSログイン認証でサインインし、 *Create flow* をクリックします。正しいリージョンにいること、Salesforceのデータを保存するためのバケットが作成されていることを確認します。</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2186,7 +2190,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>*フロー名* (例： _salesforce_) と *フローの説明(オプション)*を入力し、 *暗号化設定のカスタマイズ(詳細)* のチェックを外したままにします。*次へ*をクリックします。</pre>
+<pre>*フロー名* (例： _salesforce_) と *フローの説明(オプション)* を入力し、 *暗号化設定のカスタマイズ(詳細)* のチェックを外したままにします。*次へ* をクリックします。</pre>
 </div>
 </div>
 </div>
@@ -2198,19 +2202,19 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <div class="ulist">
 <ul>
 <li>
-<p>*Source name*で <em>Salesforce_を選択し、*Choose Salesforce connection*で  *_Create new connection</em>*を選択します。</p>
+<p><strong>Source name</strong> で <em>Salesforce</em> を選択し、*Choose Salesforce connection*で  * <em>Create new connection</em>*を選択します。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image4.png" alt="携帯電話のスクリーンショット 自動生成された説明" width="624" height="392"></span></p>
 </div>
 </li>
 <li>
-<p>*Salesforce環境*と*データの暗号化*にデフォルトを使用する。接続に名前（例：<em>salesforce</em>）を付けて、 *続行*をクリックします。</p>
+<p><strong>Salesforce環境</strong> と <strong>データの暗号化</strong> にデフォルトを使用する。接続に名前（例：<em>salesforce</em>）を付けて、 <strong>Continue</strong> をクリックします。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image5.png" alt="携帯電話のスクリーンショット 自動生成された説明" width="544" height="327"></span></p>
 </div>
 </li>
 <li>
-<p>salesforceのログインウィンドウで、<strong>Username*と*Password*を入力します。クリックする *ログイン</strong></p>
+<p>salesforceのログインウィンドウで、 <strong>Username</strong> と <strong>Password</strong> を入力します。 <strong>ログイン</strong> をクリックします。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image6.png" alt="携帯電話のスクリーンショット 自動生成された説明" width="477" height="377"></span></p>
 </div>
@@ -2222,7 +2226,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </li>
 <li>
-<p>AppFlow の*Configure flow* ウィンドウに戻り、 *Salesforceオブジェクト*を使用し、Salesforce オブジェクトとして <em>Account</em> を選択します。</p>
+<p>AppFlow の*Configure flow* ウィンドウに戻り、 <strong>Salesforceオブジェクト</strong> を使用し、Salesforce オブジェクトとして <em>Account</em> を選択します。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image8.png" alt="携帯電話のスクリーンショット 自動生成された説明" width="624" height="390"></span></p>
 </div>
@@ -2231,13 +2235,13 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </li>
 <li>
-<p>*Destination name*として_Amazon S3_使用します。<a href="#prerequisites">先ほど</a>作成した、データを保存するバケット（例：<em>ptctsoutput</em>)を選択します。</p>
+<p><strong>Destination name</strong> として <em>Amazon S3</em> を使用します。 <a href="#prerequisites">先ほど</a> 作成した、データを保存するバケット（例：<em>ptctsoutput</em>)を選択します。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image10.png" alt="携帯電話のスクリーンショット 自動生成された説明" width="624" height="355"></span></p>
 </div>
 </li>
 <li>
-<p><strong>フロートリガー</strong> を _Run on demand_にします。 *Next*をクリックします。</p>
+<p><strong>Flow trigger</strong> を <em>Run on demand</em> にします。 <strong>Next</strong> をクリックします。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image11.png" alt="携帯電話のスクリーンショット 自動生成された説明" width="624" height="344"></span></p>
 </div>
@@ -2254,7 +2258,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <ul>
 <li>
 <p><strong>マッピング方法</strong>
-として、<em>手動でフィールドをマッピングする_を使用します* 簡単のため、 *送信元から送信先へのマッピング*には_Map all fields directly</em> を選択します。</p>
+として、<em>手動でフィールドをマッピングする</em> を使用します* 簡単のため、 <strong>送信元から送信先へのマッピング</strong> には <em>Map all fields directly</em> を選択します。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image12.png" alt="携帯電話のスクリーンショット 自動生成された説明" width="623" height="355"></span></p>
 </div>
@@ -2266,7 +2270,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </li>
 <li>
-<p>*<em>Validations</em>*では、「<em>Billing Address</em>」が含まれていないレコードを無視する条件を追加します（オプション）。 *Next*をクリックします。</p>
+<p><strong><em>Validations</em></strong> では、「<em>Billing Address</em>」が含まれていないレコードを無視する条件を追加します（オプション）。 <strong>Next</strong> をクリックします。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image13.png" alt="携帯電話のスクリーンショット 自動生成された説明" width="624" height="132"></span></p>
 </div>
@@ -2277,7 +2281,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <div class="sect3">
 <h4 id="_ステップ4フィルタの追加"><a class="anchor" href="#_ステップ4フィルタの追加"></a>ステップ4：フィルタの追加</h4>
 <div class="paragraph">
-<p>転送するレコードを決定するためのフィルタを指定することができます。この例では、削除されたレコードをフィルタリングする条件を追加します（オプション）。*Next*をクリックします。</p>
+<p>転送するレコードを決定するためのフィルタを指定することができます。この例では、削除されたレコードをフィルタリングする条件を追加します（オプション）。<strong>Next</strong> をクリックします。</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image14.png" alt="携帯電話のスクリーンショット 自動生成された説明" width="624" height="179"></span></p>
@@ -2286,7 +2290,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <div class="sect3">
 <h4 id="_ステップ_5_レビューと作成"><a class="anchor" href="#_ステップ_5_レビューと作成"></a>ステップ 5. レビューと作成</h4>
 <div class="paragraph">
-<p>入力したすべての情報を確認します。必要であれば修正します。*Create flow*をクリックします 。</p>
+<p>入力したすべての情報を確認します。必要であれば修正します。<strong>Create flow</strong> をクリックします 。</p>
 </div>
 <div class="paragraph">
 <p>フローが作成されると、フロー情報とともにフロー作成成功のメッセージが表示されます。</p>
@@ -2335,12 +2339,12 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </div>
 <div class="sect2">
-<h3 id="_nosを使ったデータの探索"><a class="anchor" href="#_nosを使ったデータの探索"></a>NOSを使ったデータの探索</h3>
+<h3 id="_nosを使ったデータを探索する"><a class="anchor" href="#_nosを使ったデータを探索する"></a>NOSを使ったデータを探索する</h3>
 <div class="paragraph">
 <p>Native Object Storeには、Amazon S3内のデータを探索 分析するための機能が組み込まれています。ここでは、NOSのよく使われる機能をいくつか列挙します。</p>
 </div>
 <div class="sect3">
-<h4 id="_外部テーブルの作成"><a class="anchor" href="#_外部テーブルの作成"></a>外部テーブルの作成</h4>
+<h4 id="_外部テーブルを作成する"><a class="anchor" href="#_外部テーブルを作成する"></a>外部テーブルを作成する</h4>
 <div class="paragraph">
 <p>外部テーブルを使用すると、Vantage Advanced SQL Engine 内で外部データを簡単に参照できるようになり、構造化されたリレーショナル形式でデータを利用できるようになります。</p>
 </div>
@@ -2420,14 +2424,14 @@ SELECT payload.* FROM salesforce;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>部分的に出力</p>
+<p>部分出力</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image21.png" alt="携帯電話のスクリーンショット 自動生成された説明" width="196" height="225"></span></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ビューの作成"><a class="anchor" href="#_ビューの作成"></a>ビューの作成</h4>
+<h4 id="_ビューを作成する"><a class="anchor" href="#_ビューを作成する"></a>ビューを作成する</h4>
 <div class="paragraph">
 <p>ビューは、ペイロード属性に関連する名前を単純化し、オブジェクトストアのデータに対して実行可能なSQLを簡単にコーディングできるようにし、外部テーブルのLocation参照を隠して通常の列のように見えるようにすることができます。</p>
 </div>
@@ -2473,7 +2477,7 @@ SELECT payload.* FROM salesforce;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>部分的に出力</p>
+<p>部分出力</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image22.png" alt="自動的に生成されたコンピューターの説明を含むイメージ" width="624" height="98"></span></p>
@@ -2902,7 +2906,7 @@ USING
 <p>*Source details*は、 _Amazon S3_を選択し、CSVファイルを書き込んだバケットを選択します（例：vantagecsv）。</p>
 </li>
 <li>
-<p>*Destination details*は、_Salesforce_を選択し、*Choose Salesforce connection*のドロップダウンリストでStep1で作成した接続を使用し、_Lead_として *Choose Salesforce object*を選択します。</p>
+<p><strong>Destination details</strong> は、<em>Salesforce</em> を選択し、<strong>Choose Salesforce connection</strong> のドロップダウンリストでStep1で作成した接続を使用し、<strong>Choose Salesforce object</strong> として_Lead_ を選択します。</p>
 </li>
 <li>
 <p>*Error handling*の場合は、デフォルトの_Stop the current flow run_を使用する。</p>
@@ -2922,8 +2926,8 @@ USING
 <ul>
 <li>
 <p><strong>Mapping method</strong>
-として、_Manually map fields_を使用します* <strong>Destination record preference</strong>
-として、_Insert new records (default)_を使用します*  *送信元から送信先へのマッピング*には、次のマッピングを使用します</p>
+として、<em>Manually map fields</em> を使用します* <strong>Destination record preference</strong>
+として、<em>Insert new records (default)</em> を使用します*  <strong>送信元から送信先へのマッピング</strong> には、次のマッピングを使用します</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow/image43.png" alt="グラフィカル ユーザー インターフェース" width="624" height="396"></span></p>
 </div>
@@ -2944,7 +2948,7 @@ USING
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ステップ5_レビューと作成"><a class="anchor" href="#_ステップ5_レビューと作成"></a>ステップ5. レビューと作成</h4>
+<h4 id="_ステップ5_レビューして作成する"><a class="anchor" href="#_ステップ5_レビューして作成する"></a>ステップ5. レビューして作成する</h4>
 <div class="paragraph">
 <p>入力したすべての情報を確認します。必要であれば修正します。*フローの作成*をクリックします 。</p>
 </div>
@@ -2953,7 +2957,7 @@ USING
 </div>
 </div>
 <div class="sect3">
-<h4 id="_フローの実行_2"><a class="anchor" href="#_フローの実行_2"></a>フローの実行</h4>
+<h4 id="_フローを実行する"><a class="anchor" href="#_フローを実行する"></a>フローを実行する</h4>
 <div class="paragraph">
 <p>右上の <strong>フローの実行</strong> をクリックします。</p>
 </div>
@@ -2977,7 +2981,7 @@ USING
 </div>
 </div>
 <div class="sect1">
-<h2 id="_クリーンアップオプション"><a class="anchor" href="#_クリーンアップオプション"></a>クリーンアップ(オプション)</h2>
+<h2 id="_クリーンアップするオプション"><a class="anchor" href="#_クリーンアップするオプション"></a>クリーンアップする(オプション)</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Salesforce データの使用が完了したら、使用したリソースに対して AWS アカウント (<a href="https://aws.amazon.com/appflow/pricing/">AppFlow</a>、 Amazon <a href="https://aws.amazon.com/s3/pricing/">S3</a>、 <a href="https://www.teradata.com/Cloud/AWS/Do-it-Yourself/Pricing">Vantage</a> 、 <a href="https://aws.amazon.com/ec2/pricing/">VM</a>など) に請求されないように、以下の手順を実行します。</p>

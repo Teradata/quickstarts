@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2048,7 +2052,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </li>
 <li>
-<p>Python <strong>3.8</strong>、<strong>3.9</strong>、<strong>3.10</strong>、または *3.11*がインストールされていること。</p>
+<p>Python <strong>3.8</strong>、<strong>3.9</strong>、<strong>3.10</strong>、または <strong>3.11</strong> がインストールされていること。</p>
 </li>
 </ul>
 </div>
@@ -2068,7 +2072,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </li>
 <li>
-<p>PyPIリポジトリから`apache-airflow`の安定版バージョン2. 8.1をインストールします。</p>
+<p>PyPIリポジトリから <code>apache-airflow</code> の安定版バージョン2. 8.1をインストールします。</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">AIRFLOW_VERSION=2.8.1
@@ -2104,7 +2108,7 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 </div>
 </li>
 <li>
-<p>Airflow UIにアクセスします。ブラウザでhttps://localhost:8080にアクセスし、ターミナルに表示されている管理者アカウントの詳細でログインします。</p>
+<p>Airflow UIにアクセスします。ブラウザで <a href="https://localhost:8080" class="bare">https://localhost:8080</a> にアクセスし、ターミナルに表示されている管理者アカウントの詳細でログインします。</p>
 </li>
 </ol>
 </div>
@@ -2207,7 +2211,7 @@ with DAG(
 </div>
 </div>
 <div class="sect1">
-<h2 id="_dagのロード"><a class="anchor" href="#_dagのロード"></a>DAGのロード</h2>
+<h2 id="_dagをロードする"><a class="anchor" href="#_dagをロードする"></a>DAGをロードする</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Airflowは、PythonソースファイルからDAGをロードし、設定されたDAG_FOLDER-$AIRFLOW_HOME/files/DAGsディレクトリ内で検索されます。</p>
@@ -2221,7 +2225,7 @@ with DAG(
 <p>DAG は次の 2 つの方法のいずれかで実行されます。
 1. 手動または API 経由でトリガーされた場合
 2. DAG の一部として定義されている定義されたスケジュールで、
-`example_teradata_operator`が手動でトリガーされるように定義されています。スケジュールを定義するには、<a href="https://en.wikipedia.org/wiki/Cron" target="_blank" rel="noopener">Crontab</a> スケジュール値をスケジュール引数に渡すことができます。</p>
+<code>example_teradata_operator</code> が手動でトリガーされるように定義されています。スケジュールを定義するには、<a href="https://en.wikipedia.org/wiki/Cron" target="_blank" rel="noopener">Crontab</a> スケジュール値をスケジュール引数に渡すことができます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2237,7 +2241,7 @@ with DAG(
 <h2 id="_まとめ"><a class="anchor" href="#_まとめ"></a>まとめ</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このチュートリアルでは、Airflow と Airflow Teradata プロバイダーを Teradata Vantage インスタンスで使用する方法を説明しました。提供されているサンプルDAGは、Connection UIで定義されたTeradata Vantageインスタンスに`my_users`テーブルを作成します。</p>
+<p>このチュートリアルでは、Airflow と Airflow Teradata プロバイダーを Teradata Vantage インスタンスで使用する方法を説明しました。提供されているサンプルDAGは、Connection UIで定義されたTeradata Vantageインスタンスに <code>my_users</code> テーブルを作成します。</p>
 </div>
 </div>
 </div>

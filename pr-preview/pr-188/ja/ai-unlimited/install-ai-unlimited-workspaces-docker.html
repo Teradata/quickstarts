@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2051,7 +2055,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </ul>
 </div>
 <div class="paragraph">
-<p>Teradata AI Unlimitedをワークスペース クライアントで使用するには、<a href="using-ai-unlimited-workspace-cli.html">Workspace Client で Teradata AI Unlimited を使用する</a>を参照してください。</p>
+<p>Teradata AI Unlimitedをワークスペース クライアントで使用するには、<a href="using-ai-unlimited-workspace-cli.html">Workspace Client で Teradata AI Unlimited を使用する</a> を参照してください。</p>
 </div>
 </div>
 </div>
@@ -2082,7 +2086,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="content">
 <div class="tab-pane" aria-labelledby="tabset1_aws">
 <div class="paragraph">
-<p><a href="https://aws.amazon.com/free/">https://aws.amazon.com/free/</a>で AWS 無料利用枠アカウントにサインアップします。AWS CLI を設定するには、「 <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html">https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html</a>」を参照してください。</p>
+<p><a href="https://aws.amazon.com/free/">https://aws.amazon.com/free/</a> で AWS 無料利用枠アカウントにサインアップします。AWS CLI を設定するには、「 <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html">https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html</a>」を参照してください。</p>
 </div>
 </div>
 <div class="tab-pane" aria-labelledby="tabset1_azure">
@@ -2108,7 +2112,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>link:https://hub.docker.com/r/teradata/ai-unlimited-workspaces[Docker Hub]から Dockerイメージをプルします。</pre>
+<pre>link:https://hub.docker.com/r/teradata/ai-unlimited-workspaces[Docker Hub] から Dockerイメージをプルします。</pre>
 </div>
 </div>
 <div id="docker_pull" class="listingblock content-editable emits-gtm-events">
@@ -2132,16 +2136,16 @@ document.addEventListener("DOMContentLoaded", function () {
 </div>
 </li>
 <li>
-<p>Azure:`ARM_SUBSCRIPTION_ID`、<code>ARM_CLIENT_ID</code>、および <code>ARM_CLIENT_SECRET</code></p>
+<p>Azure: <code>ARM_SUBSCRIPTION_ID</code>、<code>ARM_CLIENT_ID</code>、および <code>ARM_CLIENT_SECRET</code></p>
 <div class="paragraph">
-<p>Azure CLIを使用した環境変数の取得については、<a href="https://github.com/paulbouwer/terraform-azure-quickstarts-samples/blob/master/README.md#azure-authentication">Azure認証</a>を参照してください。</p>
+<p>Azure CLIを使用した環境変数の取得については、<a href="https://github.com/paulbouwer/terraform-azure-quickstarts-samples/blob/master/README.md#azure-authentication">Azure認証</a> を参照してください。</p>
 </div>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>環境変数`WORKSPACES_HOME`を、構成ファイルとデータファイルがあるディレクトリに設定します。ディレクトリが存在し、適切なアクセス権が付与されていることを確認してください。`WORKSPACES_HOME`を設定しない場合、デフォルトの場所は<strong>./volumes/workspaces</strong>です。</p>
+<p>環境変数 <code>WORKSPACES_HOME</code> を、構成ファイルとデータファイルがあるディレクトリに設定します。ディレクトリが存在し、適切なアクセス権が付与されていることを確認してください。<code>WORKSPACES_HOME</code> を設定しない場合、デフォルトの場所は <strong>./volumes/workspaces</strong> です。</p>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -2164,7 +2168,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">$WORKSPACES_HOME/tls</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">/etc/td/tls</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">証明書ファイルの保存</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">証明書ファイルの保存する</p></td>
 </tr>
 </tbody>
 </table>
@@ -2178,7 +2182,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="sectionbody">
 <div class="literalblock">
 <div class="content">
-<pre>`WORKSPACES_HOME` 変数を設定したら、Dockerイメージを実行します。</pre>
+<pre>`WORKSPACES_HOME` 変数を設定したら、Dockerイメージを実行する。</pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -2235,7 +2239,7 @@ Azure の場合、Teradata では Docker Compose を使用してワークスペ�
 <p>Docker Composeをインストールします。<a href="https://docs.docker.com/compose/install/">https://docs.docker.com/compose/install/</a> を参照してください。</p>
 </li>
 <li>
-<p><strong>workspaces.yml</strong>ファイルを作成します。</p>
+<p><strong>workspaces.yml</strong> ファイルを作成します。</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2243,7 +2247,7 @@ Azure の場合、Teradata では Docker Compose を使用してワークスペ�
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-以下の例では、ローカル ボリュームを使用して CSP 信頼証明を保存します。CSP 環境変数を含む別の YAML ファイルを作成し、Docker Compose ファイルを実行できます。他のオプションについては、 <a href="https://github.com/Teradata/ai-unlimited/blob/develop/deployments/docker/README.md">「AI Unlimited GitHub: Docker Compose を使用して AI Unlimited をインストールする」</a>を参照してください。
+以下の例では、ローカル ボリュームを使用して CSP 信頼証明を保存します。CSP 環境変数を含む別の YAML ファイルを作成し、Docker Compose ファイルを実行できます。他のオプションについては、 <a href="https://github.com/Teradata/ai-unlimited/blob/develop/deployments/docker/README.md">「AI Unlimited GitHub: Docker Compose を使用して AI Unlimited をインストールする」</a> を参照してください。
 </td>
 </tr>
 </table>
@@ -2324,7 +2328,7 @@ services:
 </div>
 </li>
 <li>
-<p><strong>workspaces.yml</strong>ファイルが配置されているディレクトリに移動し、ワークスペース サービスを開始します。</p>
+<p><strong>workspaces.yml</strong> ファイルが配置されているディレクトリに移動し、ワークスペース サービスを開始します。</p>
 <div id="docker_compose_run" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker compose -f workspaces.yaml</code></pre>
@@ -2342,7 +2346,7 @@ services:
 <h2 id="_ワークスペースサービスの設定とセットアップ"><a class="anchor" href="#_ワークスペースサービスの設定とセットアップ"></a>ワークスペースサービスの設定とセットアップ</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>ワークスペース サービスは、GitHub OAuth アプリを使用してユーザーを承認し、プロジェクトの状態を管理します。ワークスペース サービスにプロジェクト インスタンス構成を保存する権限を与えるには、GitHub OAuth アプリの登録時に生成されたクライアント ID とクライアント シークレット キーを使用します。プロジェクト インスタンスの構成値は GitHub リポジトリに保持されており、ワークスペース サービスの <strong>Profile</strong>ページで表示できます。</p>
+<p>ワークスペース サービスは、GitHub OAuth アプリを使用してユーザーを承認し、プロジェクトの状態を管理します。ワークスペース サービスにプロジェクト インスタンス構成を保存する権限を与えるには、GitHub OAuth アプリの登録時に生成されたクライアント ID とクライアント シークレット キーを使用します。プロジェクト インスタンスの構成値は GitHub リポジトリに保持されており、ワークスペース サービスの <strong>Profile</strong> ページで表示できます。</p>
 </div>
 <div class="paragraph">
 <p>初めてのユーザーは、続行する前に以下の手順を完了する必要があります。VPC の構成やアクセス権について不明な点がある場合は、組織の管理者に問い合わせてください。</p>
@@ -2350,7 +2354,7 @@ services:
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>GitHub アカウントにログオンし、OAuth アプリを作成します。 <a href="https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app">GitHub ドキュメント</a>を参照してください。</p>
+<p>GitHub アカウントにログオンし、OAuth アプリを作成します。 <a href="https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app">GitHub ドキュメント</a> を参照してください。</p>
 <div class="paragraph">
 <p>OAuth アプリを登録するときに、URL フィールドに以下のワークスペース サービス URL を入力します。</p>
 </div>
@@ -2366,7 +2370,7 @@ services:
 </div>
 </li>
 <li>
-<p><strong>クライアントID</strong>と<strong>クライアントの秘密鍵</strong>をコピーして保持します。</p>
+<p><strong>クライアントID</strong> と <strong>クライアントの秘密鍵</strong> をコピーして保持します。</p>
 </li>
 </ol>
 </div>
@@ -2384,7 +2388,7 @@ services:
 </div>
 </li>
 <li>
-<p><strong>セットアップ</strong>の下に以下の一般的なサービス構成を適用します。</p>
+<p><strong>セットアップ</strong> の下に以下の一般的なサービス構成を適用します。</p>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -2416,7 +2420,7 @@ services:
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Engine IP Network Type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">エンジン インスタンスに割り当てられるネットワークの型。パブリックまたはプライベートのいずれかになります。ワークスペースサービスと同じVPCにエンジンをデプロイする場合は、<strong>Private</strong>オプションを選択します。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">エンジン インスタンスに割り当てられるネットワークの型。パブリックまたはプライベートのいずれかになります。ワークスペースサービスと同じVPCにエンジンをデプロイする場合は、<strong>Private</strong> オプションを選択します。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">はい</p></td>
 </tr>
 <tr>
@@ -2438,13 +2442,13 @@ services:
 </table>
 </li>
 <li>
-<p><strong>Service Base URL</strong>に自己署名証明書を使用するには、<strong>GENERATE TLS</strong>を選択します。証明書と秘密鍵が生成され、それぞれのフィールドに表示されます。</p>
+<p><strong>Service Base URL</strong> に自己署名証明書を使用するには、<strong>GENERATE TLS</strong> を選択します。証明書と秘密鍵が生成され、それぞれのフィールドに表示されます。</p>
 </li>
 <li>
-<p><strong>Save Changes</strong>を選択します。</p>
+<p><strong>Save Changes</strong> を選択します。</p>
 </li>
 <li>
-<p>選択した <strong>Cloud Integrations: CSP</strong>の下に以下の設定を適用します。</p>
+<p>選択した  <strong>Cloud Integrations: CSP</strong> の下に以下の設定を適用します。</p>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -2506,7 +2510,7 @@ services:
 <p><strong>Save Changes</strong> を選択します。</p>
 </li>
 <li>
-<p><strong>Git Integrations</strong>の下に以下の設定を適用します。</p>
+<p><strong>Git Integrations</strong> の下に以下の設定を適用します。</p>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -2538,14 +2542,14 @@ services:
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GitHub Base URL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">GitHubアカウントのベースURL。URL はアカウントの型によって異なる場合があります。例えば、GitHub Enterprise アカウントの場合は <a href="https://github.company.com/" class="bare">https://github.company.com/</a> 。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GitHubアカウントのベースURL。URL はアカウントの型によって異なる場合があります。例えば、GitHub Enterprise アカウントの場合は <a href="https://github.company.com/" class="bare">https://github.company.com/</a> です。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">いいえ</p></td>
 </tr>
 </tbody>
 </table>
 </li>
 <li>
-<p><strong>Authenticate</strong>を選択します 。GitHub にリダイレクトされます。</p>
+<p><strong>Authenticate</strong> を選択します 。GitHub にリダイレクトされます。</p>
 </li>
 <li>
 <p>GitHub 信頼証明を使用してログオンし、ワークスペース サービスを承認します。</p>

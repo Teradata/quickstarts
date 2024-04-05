@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2019,7 +2023,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <h2 id="_概要"><a class="anchor" href="#_概要"></a>概要</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このチュートリアルでは、生データを取得して FEAST フィーチャに変換する dbt パイプラインを作成するアプローチを示します。パイプラインは、データ変換に 「<a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Analytics-Database-Analytic-Functions-17.20">ClearScape分析関数</a>」を活用します。変換の出力は FEAST にロードされ、ML モデルで使用できるフィーチャがマテリアライズドされます。</p>
+<p>このチュートリアルでは、生データを取得して FEAST フィーチャに変換する dbt パイプラインを作成するアプローチを示します。パイプラインは、データ変換に   <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Analytics-Database-Analytic-Functions-17.20">ClearScape分析関数</a> を活用します。変換の出力は FEAST にロードされ、ML モデルで使用できるフィーチャがマテリアライズドされます。</p>
 </div>
 </div>
 </div>
@@ -2051,7 +2055,7 @@ NOTE: Vantage のテスト インスタンスが必要な場合は、 <a href="h
 で無料でプロビジョニングできます。</p>
 </li>
 <li>
-<p>Feast-Teradata  がローカルにインストールされている。 <a href="https://quickstarts.teradata.com/modelops/using-feast-feature-store-with-teradata-vantage.html#_overview">Feast-Teradata のインストール手順</a>
+<p>Feast-Teradata   がローカルにインストールされている。 <a href="https://quickstarts.teradata.com/modelops/using-feast-feature-store-with-teradata-vantage.html#_overview">Feast-Teradata のインストール手順</a>
 を参照してください。</p>
 </li>
 <li>
@@ -2132,10 +2136,10 @@ source env/bin/activate</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_dbtの構成"><a class="anchor" href="#_dbtの構成"></a>dbtの構成</h2>
+<h2 id="_dbtを構成する"><a class="anchor" href="#_dbtを構成する"></a>dbtを構成する</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>以下の内容のファイル <code>$HOME/.dbt/profiles.yml</code> を作成します。Teradata インスタンスに一致するように`&lt;host&gt;`、<code>&lt;user&gt;</code> 、<code>&lt;password&gt;</code> を調整します。</p>
+<p>以下の内容のファイル <code>$HOME/.dbt/profiles.yml</code> を作成します。Teradata インスタンスに一致するように <code>&lt;host&gt;</code>、<code>&lt;user&gt;</code> 、<code>&lt;password&gt;</code> を調整します。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2144,9 +2148,9 @@ source env/bin/activate</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="title">データベースの設定</div>
+<div class="title">データベースを設定する</div>
 <div class="paragraph">
-<p>以下の dbt プロファイルは、 <code>teddy_bank`というデータベースを指します。Teradata Vantage インスタンス内の既存のデータベースを指すように `schema</code> 値を変更できます。</p>
+<p>以下の dbt プロファイルは、 <code>teddy_bank</code> というデータベースを指します。Teradata Vantage インスタンス内の既存のデータベースを指すように <code>schema</code> 値を変更できます。</p>
 </div>
 </td>
 </tr>
@@ -2238,7 +2242,7 @@ entity_key_serialization_version: 2</code></pre>
 <h2 id="_dbtを実行する"><a class="anchor" href="#_dbtを実行する"></a>dbtを実行する</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このステップでは、<code>customers</code>、<code>accounts</code>、`transactions`のデータテーブルを入力します。</p>
+<p>このステップでは、<code>customers</code>、<code>accounts</code>、<code>transactions</code> のデータテーブルを入力します。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2354,7 +2358,7 @@ ads_fv = FeatureView(name="ads_fv",entities=[customer],source=DBT_source, schema
 <p><a href="https://medium.com/teradata/enabling-highly-scalable-feature-store-with-teradata-vantage-and-feast-e01008fa8fdb">Teradata Vantage と FEAST でスケーラブルなフィーチャストアを実現</a></p>
 </li>
 <li>
-<p>このプロジェクトの<a href="https://github.com/Teradata/tdata-pipeline">Gitリポジトリ</a>。</p>
+<p>このプロジェクトの <a href="https://github.com/Teradata/tdata-pipeline">Gitリポジトリ</a> 。</p>
 </li>
 </ul>
 </div>

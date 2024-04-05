@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2195,10 +2199,16 @@ document.addEventListener("DOMContentLoaded", function () {
 <p>Parsing Engineは、1 つ以上の行を取得するリクエストを送信する。</p>
 </li>
 <li>
-<p>BYNETは、処理のために関連するAMPを活性化する。
-3。AMPは、並列アクセスを介して、目的の行を同時に見つけて検索する。
-4。BYNET は、取得した行をParsing Engineに返す。
-5．次に、Parsing Engineは、リクエスト元のクライアント アプリケーションに行を返す。</p>
+<p>BYNETは、処理のために関連するAMPを活性化する。</p>
+</li>
+<li>
+<p>AMPは、並列アクセスを介して、目的の行を同時に見つけて検索する。</p>
+</li>
+<li>
+<p>BYNET は、取得した行をParsing Engineに返す。</p>
+</li>
+<li>
+<p>次に、Parsing Engineは、リクエスト元のクライアント アプリケーションに行を返す。</p>
 </li>
 </ol>
 </div>
@@ -2241,7 +2251,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <h2 id="_まとめ"><a class="anchor" href="#_まとめ"></a>まとめ</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>この記事では、Parsing Engines  (PE)、BYNET、ccess Module Processors (AMP)、Virtual Disk (Vdisk) などの Teradata Vantage の主要なアーキテクチャ コンポーネント、および Parallel Database Extension (PDE) などのその他のアーキテクチャ コンポーネントについて説明しました。 ノードと、線形成長と拡張性、並列処理、データ取得、データ分散などの Teradata Vantage の重要な概念。</p>
+<p>この記事では、Parsing Engines (PE)、BYNET、Access Module Processors (AMP)、Virtual Disk (Vdisk)などのTeradata Vantageの主要なアーキテクチャ コンポーネント、Parallel Database Extension(PDE)、Nodeなどのその他のアーキテクチャ コンポーネント、および線形拡張と拡張性、並列処理、データ取得、データ分散などのTeradata Vantageの基本的な概念について説明しました。</p>
 </div>
 </div>
 </div>

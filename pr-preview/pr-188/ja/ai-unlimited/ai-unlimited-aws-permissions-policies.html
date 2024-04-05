@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2041,7 +2045,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <p>この記事には、新しいIAMロールに必要なサンプルIAMポリシーが含まれています。</p>
 </div>
 <div class="paragraph">
-<p>これらのポリシーは、<strong>Security &amp; Identity</strong>&gt;<strong>Identity &amp; Access Management</strong>&gt;<strong>Create Policy</strong>で設定します。詳細な手順については、 <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions_create-policies.html">「ロールの作成とポリシーのアタッチ (コンソール) - AWS Identity and Access Management」</a>を参照してください。</p>
+<p>これらのポリシーは、 <strong>Security &amp; Identity</strong> &gt; <strong>Identity &amp; Access Management</strong> &gt; <strong>Create Policy</strong>で設定します。詳細な手順については、 <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions_create-policies.html">「ロールの作成とポリシーのアタッチ (コンソール) - AWS Identity and Access Management」</a> を参照してください。</p>
 </div>
 <div class="sect2">
 <h3 id="_workspaces_with_iam_role_permissions_json"><a class="anchor" href="#_workspaces_with_iam_role_permissions_json"></a>workspaces-with-iam-role-permissions.json</h3>
@@ -2306,7 +2310,7 @@ or
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>`UsePersistentVolume`セットを<strong>New</strong>、`PersistentVolumeDeletionPolicy`セットを<strong>Retain</strong>として、新しいデプロイメントを作成する。</p>
+<p><code>UsePersistentVolume</code> を <strong>New</strong> として、<code>PersistentVolumeDeletionPolicy</code> を <strong>Retain</strong>として設定して、新しいデプロイメントを作成する。</p>
 </li>
 <li>
 <p>スタック出力では、将来使用するためにvolume-idをメモする。</p>

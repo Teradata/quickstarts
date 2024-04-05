@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2030,7 +2034,7 @@ Teradata データベースにクエリーを実行し、REST API 経由で結�
 <div class="ulist">
 <ul>
 <li>
-<p>Mulesoft Anypoint Studio。https://www.mulesoft.com/platform/studioから30日間のTryアルをダウンロードできる。</p>
+<p>Mulesoft Anypoint Studio。https://www.mulesoft.com/platform/studio から30日間のTryアルをダウンロードできる。</p>
 </li>
 <li>
 <p>Teradata Vantageインスタンスへのアクセス。</p>
@@ -2065,7 +2069,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 <div class="paragraph">
 <p>Mule HTTP コネクタは、次の形式の HTTP GET リクエストをリッスンします。<code><a href="http://&lt;host&gt;:8081/?lastname=&lt;parameter&gt" class="bare">http://&lt;host&gt;:8081/?lastname=&lt;parameter&gt</a>;</code>.
-HTTP コネクタは、メッセージ プロパティの 1 つとして `&lt;parameter&gt;`の値をデータベース コネクタに渡します。
+HTTP コネクタは、メッセージ プロパティの 1 つとして <code>&lt;parameter&gt;</code> の値をデータベース コネクタに渡します。
 データベース コネクタは、この値を抽出して以下の SQL クエリーで使用するように構成されています。</p>
 </div>
 <div class="listingblock">
@@ -2102,7 +2106,7 @@ HTTP コネクタはリクエスト/応答として構成されているため�
 </div>
 </li>
 <li>
-<p>`src/main/mule/querying-a-teradata-database.xml`を編集し、Teradata接続文字列`jdbc:teradata://&lt;HOST&gt;/user=&lt;username&gt;,password=&lt;password&gt;`を検索し、Teradata接続パラメータを使用環境に合わせて置換します。</p>
+<p><code>src/main/mule/querying-a-teradata-database.xml</code> を編集し、Teradata接続文字列 <code>jdbc:teradata://&lt;HOST&gt;/user=&lt;username&gt;,password=&lt;password&gt;</code> を検索し、Teradata接続パラメータを使用環境に合わせて置換します。</p>
 </li>
 </ol>
 </div>
@@ -2172,7 +2176,7 @@ HTTP コネクタはリクエスト/応答として構成されているため�
 </div>
 </li>
 <li>
-<p>`Anypoint Studio project from File System`を選択します：</p>
+<p><code>Anypoint Studio project from File System</code> を選択します：</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/select.import.option.png" alt="Anypoint インポート オプション" width="500"></span></p>
 </div>
@@ -2193,7 +2197,7 @@ HTTP コネクタはリクエスト/応答として構成されているため�
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>「<code>Run</code>」 メニューを使用して、Anypoint Studio でサンプル アプリケーションを実行します。
+<p><code>Run</code> メニューを使用して、Anypoint Studio でサンプル アプリケーションを実行します。
 これでプロジェクトがビルドされ、実行されます。1分ほどかかります。</p>
 </li>
 <li>
@@ -2226,10 +2230,10 @@ HTTP コネクタはリクエスト/応答として構成されているため�
 <div class="ulist">
 <ul>
 <li>
-<p>マシン上でデータベースコネクタを設定する方法の詳細については、このhttp://www.mulesoft.org/documentation/display/current/Database+Connector[ドキュメント]を参照してください。</p>
+<p>マシン上でデータベースコネクタを設定する方法の詳細については、この <a href="http://www.mulesoft.org/documentation/display/current/Database+Connector">ドキュメント</a> を参照してください。</p>
 </li>
 <li>
-<p>データベースコネクタのプレーンhttp://www.mulesoft.org/documentation/display/current/Database+Connector+Reference[リファレンス資料]にアクセスしてください。</p>
+<p>データベースコネクタのプレーンの <a href="http://www.mulesoft.org/documentation/display/current/Database+Connector+Reference">リファレンス資料</a> にアクセスしてください。</p>
 </li>
 <li>
 <p><a href="http://www.mulesoft.org/documentation/display/current/DataSense">DataSense</a> の詳細については、こちらをご覧ください。</p>

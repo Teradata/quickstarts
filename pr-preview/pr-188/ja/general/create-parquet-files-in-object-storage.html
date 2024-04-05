@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2064,15 +2068,11 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <div class="paragraph">
 <p><code>WRITE_NOS</code> を使用するとデータベーステーブルまたはクエリーの結果を選択したまたはすべてのカラムを使用してAmazon S3, Azure Blob storage, Azure Data Lake Storage Gen2, Google Cloud Storageなどの外部オブジェクト ストレージに書き込むことができます。この機能ではデータをParquet形式で保存します。</p>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>`WRITE_NOS` 機能については、 https://docs.teradata.com/r/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide/June-2022/Writing-Data-to-External-Object-Store[NOS ドキュメント]に詳細なドキュメントが掲載されていますので参考にしてください。</pre>
+<div class="paragraph">
+<p><code>WRITE_NOS</code> 機能については、 <a href="https://docs.teradata.com/r/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide/June-2022/Writing-Data-to-External-Object-Store">NOS ドキュメント</a> に詳細なドキュメントが掲載されていますので参考にしてください。</p>
 </div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>`WRITE_NOS` 関数を実行できるデータベースへのアクセス権が必要です。そのようなデータベースがない場合は、以下のSQLでVantageユーザーを作成します。</pre>
-</div>
+<div class="paragraph">
+<p><code>WRITE_NOS</code> 関数を実行できるデータベースへのアクセス権が必要です。そのようなデータベースがない場合は、以下のSQLでVantageユーザーを作成します。</p>
 </div>
 <div id="parquet_create_user" class="listingblock emits-gtm-events">
 <div class="content">
@@ -2090,7 +2090,7 @@ GRANT EXECUTE FUNCTION on TD_SYSFNLIB.WRITE_NOS to db;</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-ユーザーとその権限の設定についてもっと詳しく知りたい場合は、https://docs.teradata.com/r/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide/June-2022/Setting-Up-Access/Setting-Access-Privileges[NOS ドキュメント]を参照してください。
+ユーザーとその権限の設定についてもっと詳しく知りたい場合は、 <a href="https://docs.teradata.com/r/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide/June-2022/Setting-Up-Access/Setting-Access-Privileges">NOS ドキュメント</a> を参照してください。
 </td>
 </tr>
 </table>
@@ -2138,7 +2138,7 @@ INSERT INTO db.parquet_table (3,'2022/01/03',3.3);</code></pre>
 </div>
 </li>
 <li>
-<p><code>WRITE_NOS`を使用してParquetファイルを作成します。</code>&lt;BUCKET_NAME&gt;`をs3バケットの名前に置き換えることを忘れないでください。また、<code>&lt;YOUR-ACCESS-KEY-ID&gt;</code> と <code>&lt;YOUR-SECRET-ACCESS-KEY&gt;</code> をアクセス キーとシークレットに置き換えます。</p>
+<p><code>WRITE_NOS</code> を使用してParquetファイルを作成します。<code>&lt;BUCKET_NAME&gt;</code> をs3バケットの名前に置き換えることを忘れないでください。また、<code>&lt;YOUR-ACCESS-KEY-ID&gt;</code> と <code>&lt;YOUR-SECRET-ACCESS-KEY&gt;</code> をアクセス キーとシークレットに置き換えます。</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2146,7 +2146,7 @@ INSERT INTO db.parquet_table (3,'2022/01/03',3.3);</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-オブジェクト ストレージにアクセスするための信頼証明を作成する方法については、クラウド プロバイダのドキュメントを確認してください。例えば、AWS の場合は 、https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key/[「How do I create an AWS access key? (AWS アクセス キーを作成するにはどうすればよいですか?)」]を確認してください。
+オブジェクト ストレージにアクセスするための信頼証明を作成する方法については、クラウド プロバイダのドキュメントを確認してください。例えば、AWS の場合は 、  <a href="https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key/">How do I create an AWS access key? (AWS アクセス キーを作成するにはどうすればよいですか?)」</a> を確認してください。
 </td>
 </tr>
 </table>
@@ -2172,7 +2172,7 @@ INCLUDE_HASHBY('TRUE')
 </div>
 </li>
 <li>
-<p>NOSでサポートされる外部テーブルを作成します。<code>&lt;BUCKET_NAME&gt;`をs3バケットの名前に置き換えることを忘れないでください。また、 `&lt;YOUR-ACCESS-KEY-ID&gt;</code> と <code>&lt;YOUR-SECRET-ACCESS-KEY&gt;</code> をアクセス キーとシークレットに置き換えます。</p>
+<p>NOSでサポートされる外部テーブルを作成します。<code>&lt;BUCKET_NAME&gt;</code> をs3バケットの名前に置き換えることを忘れないでください。また、 <code>&lt;YOUR-ACCESS-KEY-ID&gt;</code> と <code>&lt;YOUR-SECRET-ACCESS-KEY&gt;</code> をアクセス キーとシークレットに置き換えます。</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE MULTISET FOREIGN TABLE db.parquet_table_to_read_file_on_NOS

@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2144,7 +2148,7 @@ with con.cursor () as cur:
 <div class="sect2">
 <h3 id="_vantageからマップを使用する"><a class="anchor" href="#_vantageからマップを使用する"></a>Vantageからマップを使用する</h3>
 <div class="paragraph">
-<p>ここで、お気に入りの*SQL クライアント*を開き、Vantageシステムに接続します。</p>
+<p>ここで、お気に入りの <strong>SQL クライアント</strong> を開き、Vantageシステムに接続します。</p>
 </div>
 <div class="paragraph">
 <p>ClearScape 分析の JSON 関数を使用して GeoJson ドキュメントを解析し、各フィーチャ (この例では都市を表す各フィーチャ) に最も関連するプロパティとジオメトリ自体 (都市の座標) を抽出します。
@@ -2290,7 +2294,7 @@ CROSS JOIN (SEL city_coord FROM cities_geo WHERE city_name='Lvov') l</code></pre
 <p>Python json およびリスト操作関数と Python 用の Teradata SQL ドライバを使用すると、このプロセスが非常にシンプルかつ効率的になります。</p>
 </div>
 <div class="paragraph">
-<p>この例では、https://datahub.ioで利用可能な世界の国の境界を使用します。</p>
+<p>この例では、https://datahub.io で利用可能な世界の国の境界を使用します。</p>
 </div>
 <div class="paragraph">
 <p>さっそく見ていきましょう。</p>
@@ -2379,7 +2383,7 @@ print(countries_json['features'][0]['geometry']['coordinates'])</code></pre>
 <div class="sect2">
 <h3 id="_vantage接続を作成しステージングテーブルにファイルをロードする"><a class="anchor" href="#_vantage接続を作成しステージングテーブルにファイルをロードする"></a>Vantage接続を作成し、ステージングテーブルにファイルをロードする</h3>
 <div class="paragraph">
-<p>必要に応じて、Vantage のホスト名、ユーザー名を使用してこのコードを変更し、_logmech_パラメータを使用して高度なログイン メカニズム (LDAP、Kerberos など) を指定します。
+<p>必要に応じて、Vantage のホスト名、ユーザー名を使用してこのコードを変更し、<em>logmech</em> パラメータを使用して高度なログイン メカニズム (LDAP、Kerberos など) を指定します。
 すべての接続パラメータは、teradatasql PyPi ページに文書化されています。 <a href="https://pypi.org/project/teradatasql/" class="bare">https://pypi.org/project/teradatasql/</a></p>
 </div>
 <div class="paragraph">
@@ -2432,7 +2436,7 @@ WITH con.cursor () AS cur:
 <div class="sect2">
 <h3 id="_データを使用する"><a class="anchor" href="#_データを使用する"></a>データを使用する</h3>
 <div class="paragraph">
-<p>これで、お気に入りの*SQL クライアント*と Teradata の優れたhttps://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Geospatial-Data-Types-17.20[地理空間データ型と分析関数]を使用してテーブルにクエリーを実行できるようになります。</p>
+<p>これで、お気に入りの <strong>SQL クライアント</strong> と Teradata の優れた <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Geospatial-Data-Types-17.20">地理空間データ型と分析関数</a> を使用してテーブルにクエリーを実行できるようになります。</p>
 </div>
 <div class="paragraph">
 <p>例えば、このチュートリアル中にロードした 2 つのデータセットを使用して、どの国が存在するかをチェックインします。</p>

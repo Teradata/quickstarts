@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2060,7 +2064,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>デフォルトのリージョンを自分に最も近いリージョンに設定します (場所をリストするには `az account list-locations -o table`を実行します)。</p>
+<p>デフォルトのリージョンを自分に最も近いリージョンに設定します (場所をリストするには  <code>az account list-locations -o table</code> を実行します)。</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">az config set defaults.location=&lt;location&gt;</code></pre>
@@ -2172,7 +2176,7 @@ az vm disk attach --vm-name teradata-vantage-express --name $DISK_ID</code></pre
 </div>
 </li>
 <li>
-<p>VM に接続したら、  ユーザーに切り替えます`root`。</p>
+<p>VM に接続したら、<code>root</code>  ユーザーに切り替えます。</p>
 <div id="sudo" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo -i</code></pre>
@@ -2457,7 +2461,7 @@ systemctl start vantage-express</code></pre>
 </div>
 </li>
 <li>
-<p>インターネットからVantage Expressに接続したい場合は、VMに対してファイアウォールの穴を開ける必要がある。また、デフォルトのパスワードを  `dbc`ユーザーに変更する必要があります。</p>
+<p>インターネットからVantage Expressに接続したい場合は、VMに対してファイアウォールの穴を開ける必要がある。また、デフォルトのパスワードを  <code>dbc</code> ユーザーに変更する必要があります。</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

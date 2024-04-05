@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2056,7 +2060,7 @@ VantageCloud Lake のサインオン リンクと資格情報を取得するに�
 <p>既存の顧客は、組織管理者のユーザー名 (電子メール アドレス) とパスワードを使用してサインオンできます。</p>
 </li>
 <li>
-<p>clear​130 / 5,000翻訳結果翻訳の結果新しい顧客は、組織管理者のユーザー名 (ウェルカム レターから: 電子メール アドレス) と作成したパスワードを使用してサインオンできます。</p>
+<p>新しい顧客は、組織管理者のユーザー名 (ウェルカム レターから: 電子メール アドレス) と作成したパスワードを使用してサインオンできます。</p>
 </li>
 </ul>
 </div>
@@ -2067,7 +2071,7 @@ VantageCloud Lake のサインオン リンクと資格情報を取得するに�
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<a href="https://login.customer.teradata.com/ext/pwdreset/Identify?AdapterId=CDSCustomer">ここ</a>をクリックして、組織の管理者パスワードをリセットします。
+<a href="https://login.customer.teradata.com/ext/pwdreset/Identify?AdapterId=CDSCustomer">ここ</a> をクリックして、組織の管理者パスワードをリセットします。
 </td>
 </tr>
 </table>
@@ -2179,7 +2183,7 @@ Lake+: プレミア 24x7 優先クラウドサポート + 業界データモデ�
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-<strong>推定消費量</strong>(右側)は、環境作成のためのガイダンスを提供します。詳細については、https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Using-VantageCloud-Lake-Console-to-Manage-VantageCloud-Lake/Using-the-Consumption-Estimates[推定消費量の使用]を参照してください。
+<strong>推定消費量</strong> (右側)は、環境作成のためのガイダンスを提供します。詳細については、https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Using-VantageCloud-Lake-Console-to-Manage-VantageCloud-Lake/Using-the-Consumption-Estimates[推定消費量の使用] を参照してください。
 </td>
 </tr>
 </table>
@@ -2339,7 +2343,7 @@ Lake+: プレミア 24x7 優先クラウドサポート + 業界データモデ�
 <div class="sect2">
 <h3 id="_詳細オプション"><a class="anchor" href="#_詳細オプション"></a>詳細オプション</h3>
 <div class="paragraph">
-<p>すぐに開始するには、*デフォルトを使用*を選択するか、追加のオプション設定を定義することができる。</p>
+<p>すぐに開始するには、<strong>デフォルトを使用</strong> を選択するか、追加のオプション設定を定義することができる。</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -2365,9 +2369,11 @@ Lake+: プレミア 24x7 優先クラウドサポート + 業界データモデ�
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">AWS:ストレージの暗号化</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">顧客データの暗号化を設定します。https://docs.aws.amazon.com/kms/latest/developerguide/find-cmk-id-arn.html[キー ID とキー ARN を検索する]を参照してください<br>
-* Teradataによる管理<br>
-* 顧客管理<br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">顧客データの暗号化を設定します。https://docs.aws.amazon.com/kms/latest/developerguide/find-cmk-id-arn.html[キー ID とキー ARN を検索する] を参照してください<br>
+* Teradataによる管理
++
+* 顧客管理
++
 * キーエイリアスARN</p></td>
 </tr>
 </tbody>
@@ -2378,7 +2384,7 @@ Lake+: プレミア 24x7 優先クラウドサポート + 業界データモデ�
 </div>
 </div>
 <div class="paragraph">
-<p>すべての情報を確認し、*CREATE ENVIRONMENT*ボタンをクリックします。</p>
+<p>すべての情報を確認し、<strong>CREATE ENVIRONMENT</strong> ボタンをクリックします。</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -2386,7 +2392,7 @@ Lake+: プレミア 24x7 優先クラウドサポート + 業界データモデ�
 </div>
 </div>
 <div class="paragraph">
-<p>デプロイには数分かかります。完了すると、作成された環境がカード ビューとして [<strong>環境</strong>] セクションに表示されます (環境の名前は Quickstart_demo)。</p>
+<p>デプロイには数分かかります。完了すると、作成された環境がカード ビューとして <strong>環境</strong> セクションに表示されます (環境の名前は Quickstart_demo)。</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -2400,7 +2406,7 @@ Lake+: プレミア 24x7 優先クラウドサポート + 業界データモデ�
 <h2 id="_パブリック_インターネットからのアクセス環境"><a class="anchor" href="#_パブリック_インターネットからのアクセス環境"></a>パブリック インターネットからのアクセス環境</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>作成された環境には、コンソールからのみアクセスできます。これを変更するには、作成された環境変数をクリックして、*設定*タブに移動します。</p>
+<p>作成された環境には、コンソールからのみアクセスできます。これを変更するには、作成された環境変数をクリックして、<strong>設定</strong> タブに移動します。</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -2408,7 +2414,7 @@ Lake+: プレミア 24x7 優先クラウドサポート + 業界データモデ�
 </div>
 </div>
 <div class="paragraph">
-<p>[<strong>設定</strong>] で [<strong>インターネット接続</strong>] チェックボックスをオンにし、環境へのアクセスに使用する IP アドレスを CIDR 形式で指定します (たとえば、192.168.2.0/24 は 192.168.2.0 から 192.168.2.255 の範囲内のすべての IP アドレスを指定します)。</p>
+<p><strong>設定</strong> で <strong>インターネット接続</strong> チェックボックスをオンにし、環境へのアクセスに使用する IP アドレスを CIDR 形式で指定します (たとえば、192.168.2.0/24 は 192.168.2.0 から 192.168.2.255 の範囲内のすべての IP アドレスを指定します)</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2417,7 +2423,7 @@ Lake+: プレミア 24x7 優先クラウドサポート + 業界データモデ�
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-インターネット接続の設定の詳細については、 <a href="https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin/Step-2-Setting-the-Environment-Connection-Type/Setting-Up-an-Internet-Connection">こちら</a> をご覧ください。
+インターネット接続の設定の詳細については、https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin/Step-2-Setting-the-Environment-Connection-Type/Setting-Up-an-Internet-Connection[こちら] をご覧ください。
 </td>
 </tr>
 </table>
@@ -2428,10 +2434,13 @@ Lake+: プレミア 24x7 優先クラウドサポート + 業界データモデ�
 </div>
 </div>
 <div class="paragraph">
-<p>ページの右上にある*保存*ボタンをクリックして、変更を確認します。<br></p>
+<p>ページの右上にある <strong>保存</strong> ボタンをクリックして、変更を確認します。</p>
 </div>
 <div class="paragraph">
-<p>*環境*のセクションに戻って、環境庁カードを確認してください。現在、*パブリック インターネット*にアクセスできます。</p>
+<p>+</p>
+</div>
+<div class="paragraph">
+<p><strong>環境</strong> のセクションに戻って、環境庁カードを確認してください。現在、<strong>パブリック インターネット</strong> にアクセスできます。</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">

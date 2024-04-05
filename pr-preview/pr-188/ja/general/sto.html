@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2117,7 +2121,7 @@ SELECT hashamp()+1 AS number_of_amps;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>スクリプトが <code>/tmp/helloworld.py</code> のローカルマシンにあると仮定します。</p>
+<p>スクリプトが  <code>/tmp/helloworld.py</code> のローカルマシンにあると仮定します。</p>
 </div>
 <div class="paragraph">
 <p>まず、Vantage でアクセス権を設定する必要があります。クリーンな状態を保つために、新しいデータベースを使用してこれを実行します。</p>
@@ -2182,10 +2186,10 @@ Hello World!</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_vantage_に保存されているデータを_script_に渡します"><a class="anchor" href="#_vantage_に保存されているデータを_script_に渡します"></a>Vantage に保存されているデータを SCRIPT に渡します。</h2>
+<h2 id="_vantage_に保存されているデータを_script_に渡す"><a class="anchor" href="#_vantage_に保存されているデータを_script_に渡す"></a>Vantage に保存されているデータを SCRIPT に渡す</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>これまで、スタンドアロン スクリプトを実行するために <code>SCRIPT</code> オペレータを使用してきました。ただし、Vantage でスクリプトを実行する主な目的は、Vantage 内のデータを処理することです。Vantageからデータを取得して、`SCRIPT`に渡す方法を見てみましょう。</p>
+<p>これまで、スタンドアロン スクリプトを実行するために <code>SCRIPT</code> オペレータを使用してきました。ただし、Vantage でスクリプトを実行する主な目的は、Vantage 内のデータを処理することです。Vantageからデータを取得して、<code>SCRIPT</code> に渡す方法を見てみましょう。</p>
 </div>
 <div class="paragraph">
 <p>まず、数行のテーブルを作成します。</p>
@@ -2223,7 +2227,7 @@ for line in sys.stdin:
 </div>
 </div>
 <div class="paragraph">
-<p>スクリプトでは、URLが1行ずつ`stdin`に入力されると仮定していることに注記してください。また、値の間の区切り記号としてタブ文字を使用して、結果を 1 行ずつ出力する方法にも注目してください。</p>
+<p>スクリプトでは、URLが1行ずつ <code>stdin</code> に入力されると仮定していることに注記してください。また、値の間の区切り記号としてタブ文字を使用して、結果を 1 行ずつ出力する方法にも注目してください。</p>
 </div>
 <div class="paragraph">
 <p>スクリプトをインストールしましょう。ここでは、スクリプト ファイルがローカル マシンの <code>/tmp/urlparser.py</code> にあると仮定します。</p>

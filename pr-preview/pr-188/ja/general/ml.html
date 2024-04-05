@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2048,7 +2052,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <h2 id="_サンプルデータをロードする"><a class="anchor" href="#_サンプルデータをロードする"></a>サンプルデータをロードする</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>この例では、<code>val`データベースのサンプルデータを使用します。`accounts</code>、<code>customer</code>、<code>16transactions`のテーブルを使用します。この過程でいくつかのテーブルを作成しますが、`val</code> データベースにテーブルを作成する際に問題が発生する可能性があるため、独自のデータベース <code>td_analytics_functions_demo</code> を作成しましょう。</p>
+<p>この例では、<code>val</code> データベースのサンプルデータを使用します。<code>accounts</code>、<code>customer</code>、<code>16transactions</code> のテーブルを使用します。この過程でいくつかのテーブルを作成しますが、<code>val</code> データベースにテーブルを作成する際に問題が発生する可能性があるため、独自のデータベース <code>td_analytics_functions_demo</code> を作成しましょう。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2096,7 +2100,7 @@ SELECT * FROM val.transactions
 <h2 id="_サンプルデータを理解する"><a class="anchor" href="#_サンプルデータを理解する"></a>サンプルデータを理解する</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>サンプルテーブルが`td_analytics_functions_demo`にロードされたので、データを調べてみましょう。これは、銀行の顧客(700行ほど)、口座(1400行ほど)、取引(77,000行ほど)の単純で架空のデータセットです。これらは以下のように相互に関連しています。</p>
+<p>サンプルテーブルが <code>td_analytics_functions_demo</code> にロードされたので、データを調べてみましょう。これは、銀行の顧客(700行ほど)、口座(1400行ほど)、取引(77,000行ほど)の単純で架空のデータセットです。これらは以下のように相互に関連しています。</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -2109,7 +2113,7 @@ SELECT * FROM val.transactions
 </div>
 </div>
 <div class="sect1">
-<h2 id="_データセットの準備"><a class="anchor" href="#_データセットの準備"></a>データセットの準備</h2>
+<h2 id="_データセットを準備する"><a class="anchor" href="#_データセットを準備する"></a>データセットを準備する</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>3つの異なるテーブルにデータがあり、それらを結合してフィーチャを作成します。まず、結合されたテーブルを作成します。</p>
@@ -2164,7 +2168,7 @@ GROUP BY T1.cust_id) WITH DATA UNIQUE PRIMARY INDEX (cust_id);</code></pre>
 <div class="sect2">
 <h3 id="_td_onehotencodingfit"><a class="anchor" href="#_td_onehotencodingfit"></a>TD_OneHotEncodingFit</h3>
 <div class="paragraph">
-<p>このデータセットには、<code>gender</code>、<code>marital status</code>、`state code`などのカテゴリ機能がある。データベース分析関数 <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Feature-Engineering-Transform-Functions/TD_OneHotEncodingFit" target="_blank" rel="noopener">TD_OneHotEncodingFit</a>を 利用して、カテゴリをワンホット数値ベクトルにエンコードします。</p>
+<p>このデータセットには、<code>gender</code>、<code>marital status</code>、<code>state code</code> などのカテゴリ機能がある。データベース分析関数 <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Feature-Engineering-Transform-Functions/TD_OneHotEncodingFit" target="_blank" rel="noopener">TD_OneHotEncodingFit</a> を 利用して、カテゴリをワンホット数値ベクトルにエンコードします。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2184,7 +2188,7 @@ Approach('Auto')
 <div class="sect2">
 <h3 id="_td_scalefit"><a class="anchor" href="#_td_scalefit"></a>TD_ScaleFit</h3>
 <div class="paragraph">
-<p>データを見ると、<code>tot_income</code>、<code>tot_age</code>、`ck_avg_bal`などのいくつかの列は、異なる範囲の値を持っています。勾配降下法などの最適化アルゴリズムの場合、より高速な収束、スケールの一貫性、およびモデルのパフォーマンスの向上のために、値を同じスケールに正規化することが重要です。 <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Feature-Engineering-Transform-Functions/TD_ScaleFit" target="_blank" rel="noopener">TD_ScaleFit</a> 関数を利用して、さまざまなスケールで値を正規化します。</p>
+<p>データを見ると、<code>tot_income</code>、<code>tot_age</code>、<code>ck_avg_bal</code> などのいくつかの列は、異なる範囲の値を持っています。勾配降下法などの最適化アルゴリズムの場合、より高速な収束、スケールの一貫性、およびモデルのパフォーマンスの向上のために、値を同じスケールに正規化することが重要です。 <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Feature-Engineering-Transform-Functions/TD_ScaleFit" target="_blank" rel="noopener">TD_ScaleFit</a> 関数を利用して、さまざまなスケールで値を正規化します。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2202,7 +2206,7 @@ Approach('Auto')
 <div class="sect2">
 <h3 id="_td_columntransformer"><a class="anchor" href="#_td_columntransformer"></a>TD_ColumnTransformer</h3>
 <div class="paragraph">
-<p>Teradataのデータベース分析関数は、通常、データ変換のためにペアで動作します。最初のステップは、データの "fitting" に専念します。次に、第2の関数は、フィッティングプロセスから導出されたパラメータを利用して、データに対して実際の変換を実行します。 <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Feature-Engineering-Transform-Functions/TD_ColumnTransformer" target="_blank" rel="noopener">TD_ColumnTransformer</a>は、 FIT テーブルを関数に受け取り、入力テーブルの列を 1 回の操作で変換します。</p>
+<p>Teradataのデータベース分析関数は、通常、データ変換のためにペアで動作します。最初のステップは、データの "fitting" に専念します。次に、第2の関数は、フィッティングプロセスから導出されたパラメータを利用して、データに対して実際の変換を実行します。 <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Feature-Engineering-Transform-Functions/TD_ColumnTransformer" target="_blank" rel="noopener">TD_ColumnTransformer</a> は、 FIT テーブルを関数に受け取り、入力テーブルの列を 1 回の操作で変換します。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2217,7 +2221,7 @@ ON scale_fit_joined_table_input AS ScaleFitTable DIMENSION
 </div>
 </div>
 <div class="paragraph">
-<p>変換を実行すると、以下のイメージに示すように、カテゴリ列がワンホット エンコードされ、数値がスケーリングされたことがわかります。たとえば、<code>tot_income`は[0,1]の範囲にあり、`gender`は`gender_0</code>、<code>gender_1</code>、`gender_other`に1ホットエンコードされます。</p>
+<p>変換を実行すると、以下のイメージに示すように、カテゴリ列がone-hot エンコードされ、数値がスケーリングされたことがわかります。たとえば、<code>tot_income</code> は[0,1]の範囲にあり、<code>gender</code> は`gender_0`、<code>gender_1</code>、<code>gender_other</code> に one-hot エンコードされます。</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -2254,7 +2258,7 @@ Seed (42)
 </div>
 </div>
 <div class="paragraph">
-<p>以下のイメージからわかるように、この関数は新しい列 `TD_IsTrainRow`を追加します。</p>
+<p>以下のイメージからわかるように、この関数は新しい列 <code>TD_IsTrainRow</code> を追加します。</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -2262,7 +2266,7 @@ Seed (42)
 </div>
 </div>
 <div class="paragraph">
-<p>`TD_IsTrainRow`を使用して、トレーニング用とテスト用の2つのテーブルを作成します。</p>
+<p><code>TD_IsTrainRow</code> を使用して、トレーニング用とテスト用の2つのテーブルを作成します。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2285,7 +2289,7 @@ CREATE TABLE td_analytics_functions_demo.testing_table AS (
 <h2 id="_一般化線形モデルを使用したトレーニング"><a class="anchor" href="#_一般化線形モデルを使用したトレーニング"></a>一般化線形モデルを使用したトレーニング</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>ここで 、<a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Training-Functions/TD_GLM" target="_blank" rel="noopener">TD_GLM</a> データベース分析関数を使用して、トレーニング データセットでトレーニングします。<code>TD_GLM`関数は、データセットに対して回帰および分類の分析を実行する一般化線形モデル(GLM)です。ここでは、 `tot_income</code>、 <code>ck_avg_bal</code>、<code>cc_avg_tran_amt</code>、婚姻ステータス、性別、ステータスのワンホット エンコードされた値など、多数の入力列を使用しています。 <code>cc_avg_bal</code> は依存列または応答列であり、連続しているため、回帰問題となります。回帰には <code>Family</code> として <code>Gaussian</code> 、分類には <code>Binomial</code> として使用します。</p>
+<p>ここで 、<a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Training-Functions/TD_GLM" target="_blank" rel="noopener">TD_GLM</a> データベース分析関数を使用して、トレーニング データセットでトレーニングします。<code>TD_GLM</code> 関数は、データセットに対して回帰および分類の分析を実行する一般化線形モデル(GLM)です。ここでは、 <code>tot_income</code>、 <code>ck_avg_bal</code>、<code>cc_avg_tran_amt</code>、婚姻ステータス、性別、ステータスのワンホット エンコードされた値など、多数の入力列を使用しています。 <code>cc_avg_bal</code> は依存列または応答列であり、連続しているため、回帰問題となります。回帰には <code>Family</code> として <code>Gaussian</code> 、分類には <code>Binomial</code> として使用します。</p>
 </div>
 <div class="paragraph">
 <p>パラメータ <code>Tolerance</code> は、反復を停止するためにモデルの予測精度に必要な最小限の改善を示し、 <code>MaxIterNum</code> は認証される反復の最大数を示します。モデルは、最初に満たされた条件に基づいてトレーニングを終了します。例えば、以下の例では、58 回の反復後のモデルは <code>CONVERGED</code> になります。</p>
@@ -2318,7 +2322,7 @@ SELECT * FROM TD_GLM (
 <h2 id="_テストデータセットのスコアリング"><a class="anchor" href="#_テストデータセットのスコアリング"></a>テストデータセットのスコアリング</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>次に、モデル <code>GLM_model_training</code> を使用して 、<a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Scoring-Functions/TD_GLMPredict" target="_blank" rel="noopener">TD_GLMPredict</a> データベース分析関数を使用してテスト データセット <code>testing_table</code> をスコアリングします。</p>
+<p>次に、モデル <code>GLM_model_training</code> を使用して 、<a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Scoring-Functions/TD_GLMPredict" target="_blank" rel="noopener">TD_GLMPredict</a>  データベース分析関数を使用してテスト データセット <code>testing_table</code> をスコアリングします。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2345,7 +2349,7 @@ Accumulate('cc_avg_bal')
 <h2 id="_モデル評価"><a class="anchor" href="#_モデル評価"></a>モデル評価</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>最後に、スコア化された結果に基づいてモデルを評価します。ここでは <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Evaluation-Functions/TD_RegressionEvaluator" target="_blank" rel="noopener">TD_RegressionEvaluator</a> 関数を使用しています。モデルは、 <code>R2</code>、 <code>RMSE</code>、 `F_score`などのパラメータに基づいて評価できます。</p>
+<p>最後に、スコア化された結果に基づいてモデルを評価します。ここでは <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Database-Analytic-Functions/Model-Evaluation-Functions/TD_RegressionEvaluator" target="_blank" rel="noopener">TD_RegressionEvaluator</a> 関数を使用しています。モデルは、 <code>R2</code>、 <code>RMSE</code>、 <code>F_score</code> などのパラメータに基づいて評価できます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2382,7 +2386,7 @@ Metrics('RMSE','MAE','R2')
 <h2 id="_まとめ"><a class="anchor" href="#_まとめ"></a>まとめ</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このクイック スタートでは、Teradata Database Analytic 関数を使用して ML モデルを作成する方法を学習しました。<code>val`データベースから `customer</code>、<code>accounts</code>、 <code>transactions</code> のデータを使用して独自のデータベース <code>td_analytics_functions_demo</code> を構築しました。<code>TD_OneHotEncodingFit</code>、<code>TD_ScaleFit</code>、<code>TD_ColumnTransformer`を使用して列を変換することにより、特徴量エンジニアリングを実行しました。次に、テスト分割のトレーニングに `TD_TrainTestSplit</code> を使用しました。`TD_GLM`モデルを使用してトレーニングデータセットをトレーニングし、テストデータセットをスコア化しました。最後に、`TD_RegressionEvaluator`機能を用いてスコア化した結果を評価しました。</p>
+<p>このクイック スタートでは、Teradata Database Analytic 関数を使用して ML モデルを作成する方法を学習しました。<code>val</code> データベースから <code>customer</code>、<code>accounts</code>、 <code>transactions</code> のデータを使用して独自のデータベース <code>td_analytics_functions_demo</code> を構築しました。<code>TD_OneHotEncodingFit</code>、<code>TD_ScaleFit</code>、<code>TD_ColumnTransformer</code> を使用して列を変換することにより、特徴量エンジニアリングを実行しました。次に、テスト分割のトレーニングに <code>TD_TrainTestSplit</code> を使用しました。<code>TD_GLM</code> モデルを使用してトレーニングデータセットをトレーニングし、テストデータセットをスコア化しました。最後に、<code>TD_RegressionEvaluator</code> 機能を用いてスコア化した結果を評価しました。</p>
 </div>
 </div>
 </div>

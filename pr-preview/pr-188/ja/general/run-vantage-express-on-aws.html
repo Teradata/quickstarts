@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2049,10 +2053,10 @@ document.addEventListener("DOMContentLoaded", function () {
 <p>Vantage Express は仮想マシン イメージとして配布されます。このハウツーでは EC2 <code>c5n.metal</code> インスタンス型を使用します。これは、$3/h以上かかるベアメタル インスタンスです。</p>
 </div>
 <div class="paragraph">
-<p>より安価なオプションが必要な場合は、ネストされた仮想化をサポートし、安価なVMでVantage Expressを実行できる<a href="../../vantage.express.gcp.html" class="xref page">Google Cloud</a>と<a href="../../run-vantage-express-on-microsoft-azure.html" class="xref page">Azure</a>を試してください。</p>
+<p>より安価なオプションが必要な場合は、ネストされた仮想化をサポートし、安価なVMでVantage Expressを実行できる<a href="../../vantage.express.gcp.html" class="xref page">Google Cloud</a> と  <a href="../../run-vantage-express-on-microsoft-azure.html" class="xref page">Azure</a> を試してください。</p>
 </div>
 <div class="paragraph">
-<p>クラウド利用に対して料金を払いたくない場合は、<a href="https://clearscape.teradata.com/" class="bare">https://clearscape.teradata.com/</a>でVantageの無料ホストインスタンスを入手できます。または、<a href="../../getting.started.vmware.html" class="xref page">VMware</a>、<a href="../../getting.started.vbox.html" class="xref page">VirtualBox</a>、または<a href="../../getting.started.utm.html" class="xref page">UTM</a>を使用してVantage Expressをローカルにインストールすることもできます。</p>
+<p>クラウド利用に対して料金を払いたくない場合は、<a href="https://clearscape.teradata.com/" class="bare">https://clearscape.teradata.com/</a> でVantageの無料ホストインスタンスを入手できます。または、<a href="../../getting.started.vmware.html" class="xref page">VMware</a>、<a href="../../getting.started.vbox.html" class="xref page">VirtualBox</a>、または <a href="../../getting.started.utm.html" class="xref page">UTM</a> を使用してVantage Expressをローカルにインストールすることもできます。</p>
 </div>
 </td>
 </tr>
@@ -2066,7 +2070,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>AWS アカウント新しいアカウントを作成する必要がある場合は、https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/[AWS の公式手順]に従ってください。</p>
+<p>AWS アカウント。新しいアカウントを作成する必要がある場合は、 <a href="https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/">AWS の公式手順</a> に従ってください。</p>
 </li>
 <li>
 <p><code>awscli</code> コマンド ライン ユーティリティがマシンにインストールされ、設定されていること。インストール手順はここで見つけることができます。https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html</p>
@@ -2528,7 +2532,7 @@ systemctl start vantage-express</code></pre>
 </div>
 </li>
 <li>
-<p>インターネットから Vantage Express に接続したい場合は、VM にファイアウォールの穴を開ける必要があります。また、デフォルトのパスワードを  `dbc`ユーザーに変更する必要があります。</p>
+<p>インターネットから Vantage Express に接続したい場合は、VM にファイアウォールの穴を開ける必要があります。また、デフォルトのパスワードを  <code>dbc</code> ユーザーに変更する必要があります。</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2573,7 +2577,7 @@ systemctl start vantage-express</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_クリーンアップ"><a class="anchor" href="#_クリーンアップ"></a>クリーンアップ</h2>
+<h2 id="_クリーンアップする"><a class="anchor" href="#_クリーンアップする"></a>クリーンアップする</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>課金を停止するには、すべてのリソースを削除します。</p>

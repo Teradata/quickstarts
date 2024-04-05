@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2021,7 +2025,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="paragraph">
 <p>このプロジェクトでは、上級ユーザーの観点から dbt と Teradata Vantage の統合を紹介します。
 dbt を使用したデータ エンジニアリングが初めての場合は、<a href="https://quickstarts.teradata.com/dbt.html" target="_blank window=">導入プロジェクト</a>
-から始めることをお勧めします。
+ から始めることをお勧めします。
 デモで紹介されている高度なユースケースは以下のとおりです。</p>
 </div>
 <div class="ulist">
@@ -2038,7 +2042,7 @@ dbt を使用したデータ エンジニアリングが初めての場合は、
 </ul>
 </div>
 <div class="paragraph">
-<p>これらの概念の適用は、架空の店舗である`teddy_retailers`のELTプロセスを通じて説明されています。</p>
+<p>これらの概念の適用は、架空の店舗である <code>teddy_retailers</code> のELTプロセスを通じて説明されています。</p>
 </div>
 </div>
 </div>
@@ -2064,10 +2068,10 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </li>
 <li>
-<p>Python <strong>3.7</strong>、<strong>3.8</strong>、<strong>3.9</strong>、または *3.10*がインストールされていること。</p>
+<p>Python <strong>3.7</strong>、<strong>3.8</strong>、<strong>3.9</strong>、または <strong>3.10</strong> がインストールされていること。</p>
 </li>
 <li>
-<p>データベース コマンドを実行するためのデータベース クライアント。 このようなクライアントの構成例は、 <a href="https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html" target="_blank" rel="noopener">tutorial.</a> に示されています。</p>
+<p>データベース コマンドを実行するためのデータベース クライアント。 このようなクライアントの構成例は、<a href="https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html" target="_blank" rel="noopener">チュートリアル</a> に示されています。</p>
 </li>
 </ul>
 </div>
@@ -2135,7 +2139,7 @@ cd teddy_retailers</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_データ_ウェアハウスの設定"><a class="anchor" href="#_データ_ウェアハウスの設定"></a>データ ウェアハウスの設定</h2>
+<h2 id="_データ_ウェアハウスを設定する"><a class="anchor" href="#_データ_ウェアハウスを設定する"></a>データ ウェアハウスを設定する</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>デモ プロジェクトでは、ソース データがデータ ウェアハウスにすでに読み込まれていることを前提としています。これは、実働環境での dbt の使用方法を模倣しています。
@@ -2163,12 +2167,12 @@ AS PERMANENT = 110e6,
 </div>
 </div>
 <div class="sect1">
-<h2 id="_dbtの構成"><a class="anchor" href="#_dbtの構成"></a>dbtの構成</h2>
+<h2 id="_dbtを構成する"><a class="anchor" href="#_dbtを構成する"></a>dbtを構成する</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>ここで、dbtを設定してVantageデータベースに接続します。
-以下の内容のファイル <code>$HOME/.dbt/profiles.yml</code> を作成します。Teradata Vantageに一致するように`&lt;host&gt;`、<code>&lt;user&gt;</code> 、`&lt;password&gt;`を調整します。
-ご使用の環境ですでに dbt を使用したことがある場合は、ホームのディレクトリ `dbt/profiles.yml`ファイルにプロジェクトのプロファイルを追加するだけで済みます。
+以下の内容のファイル <code>$HOME/.dbt/profiles.yml</code> を作成します。Teradata Vantageに一致するように`&lt;host&gt;`、<code>&lt;user&gt;</code> 、<code>&lt;password&gt;</code> を調整します。
+ご使用の環境ですでに dbt を使用したことがある場合は、ホームのディレクトリ <code>dbt/profiles.yml</code> ファイルにプロジェクトのプロファイルを追加するだけで済みます。
 ディレクトリ.dbtがまだシステムに存在しない場合は、それを作成し、dbtプロファイルを管理するためにprofiles.ymlを追加する必要があります。</p>
 </div>
 <div id="dbt_first_config" class="listingblock emits-gtm-events">
@@ -2199,7 +2203,7 @@ AS PERMANENT = 110e6,
 </div>
 </div>
 <div class="paragraph">
-<p>デバッグ コマンドがエラーを返した場合は、 `profiles.yml`の内容に問題がある可能性があります。</p>
+<p>デバッグ コマンドがエラーを返した場合は、 <code>profiles.yml</code> の内容に問題がある可能性があります。</p>
 </div>
 </div>
 </div>
@@ -2207,7 +2211,7 @@ AS PERMANENT = 110e6,
 <h2 id="_teddy_retailers_のウェアハウスについて"><a class="anchor" href="#_teddy_retailers_のウェアハウスについて"></a>Teddy Retailers のウェアハウスについて</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>前述のように、`teddy_retailers`は架空の店舗です。
+<p>前述のように、<code>teddy_retailers</code> は架空の店舗です。
 dbt 主導の変換を通じて、「teddy_retailers」 トランザクション データベースから取り込まれたソース データを、分析に使用できるスター スキーマに変換します。</p>
 </div>
 <div class="sect2">
@@ -2294,7 +2298,7 @@ dim_products] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: 
 <div class="ulist">
 <ul>
 <li>
-<p>Teddy Retailersの場合、`orders`と`order_products`のソースは、組織のELT(抽出、ロード、変換)プロセスによって定期的に更新される。</p>
+<p>Teddy Retailersの場合、<code>orders</code> と <code>order_products</code> のソースは、組織のELT(抽出、ロード、変換)プロセスによって定期的に更新される。</p>
 </li>
 <li>
 <p>更新されたデータには、データセット全体ではなく、最新の変更のみが含まれる。これは、データセットが大量であるためです。</p>
@@ -2314,14 +2318,14 @@ dim_products] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: 
 <p>プロジェクトの models ディレクトリ内の`schema.yml`ファイルは、モデルのソースを指定します。これらのソースは、SQL スクリプトを使用して GCP からロードしたデータと一致しています。</p>
 </div>
 <div class="sect2">
-<h3 id="_ステージングリージョン"><a class="anchor" href="#_ステージングリージョン"></a>ステージングリージョン</h3>
+<h3 id="_ステージング_エリア"><a class="anchor" href="#_ステージング_エリア"></a>ステージング エリア</h3>
 <div class="paragraph">
 <p>ステージングエリアモデルは、各ソースからデータを取り込み、必要に応じて各フィールドの名前を変更するだけです。
 このディレクトリの schema.yml では、主キーの基本的な保全性チェックを定義します。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_コアエリア"><a class="anchor" href="#_コアエリア"></a>コアエリア</h3>
+<h3 id="_コア_エリア"><a class="anchor" href="#_コア_エリア"></a>コア エリア</h3>
 <div class="paragraph">
 <p>この段階では、以下の高度な dbt 概念がモデルに適用されます。</p>
 </div>
@@ -2334,10 +2338,10 @@ dim_products] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: 
 <div class="ulist">
 <ul>
 <li>
-<p>`all_orders model`には、削除+挿入方式を使用する。この戦略が実装されるのは、データ更新に含まれる注文のステータスに変更がある可能性があるためです。</p>
+<p><code>all_orders model</code> には、削除+挿入方式を使用する。この戦略が実装されるのは、データ更新に含まれる注文のステータスに変更がある可能性があるためです。</p>
 </li>
 <li>
-<p>`all_order_products`モデルでは、デフォルトの追加戦略を採用します。このアプローチが選択されたのは、`order_id`と`product_id`の同じ組み合わせがソースに複数回出現する可能性があるためです。
+<p><code>all_order_products`モデルでは、デフォルトの追加戦略を採用します。このアプローチが選択されたのは、`order_id</code> と <code>product_id</code> の同じ組み合わせがソースに複数回出現する可能性があるためです。
 これは、同じ製品の新しい数量が特定の注文に追加または削除されたことを示します。</p>
 </li>
 </ul>
@@ -2364,7 +2368,7 @@ dim_products] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: 
 </div>
 </div>
 <div class="sect1">
-<h2 id="_変換の実行"><a class="anchor" href="#_変換の実行"></a>変換の実行</h2>
+<h2 id="_変換を実行する"><a class="anchor" href="#_変換を実行する"></a>変換を実行する</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_ベースライン_データを使用してディメンションモデルを作成する"><a class="anchor" href="#_ベースライン_データを使用してディメンションモデルを作成する"></a>ベースライン データを使用してディメンションモデルを作成する</h3>
@@ -2377,7 +2381,7 @@ dim_products] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: 
 </div>
 </div>
 <div class="paragraph">
-<p>これにより、ベースラインデータを使用して、コアモデルと次元モデルの両方が作成される。</p>
+<p>これにより、ベースラインデータを使用して、コアモデルと次元モデルの両方が作成されます。</p>
 </div>
 </div>
 <div class="sect2">
@@ -2398,9 +2402,9 @@ dim_products] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_eltプロセスのモック"><a class="anchor" href="#_eltプロセスのモック"></a>ELTプロセスのモック</h3>
+<h3 id="_eltプロセスをモック化する"><a class="anchor" href="#_eltプロセスをモック化する"></a>ELTプロセスをモック化する</h3>
 <div class="paragraph">
-<p>更新をソースデータセットにロードするためのスクリプトは、プロジェクトの`references/inserts/update_data.sql`パスにあります。</p>
+<p>更新をソースデータセットにロードするためのスクリプトは、プロジェクトの <code>references/inserts/update_data.sql</code> パスにあります。</p>
 </div>
 <div class="paragraph">
 <p>データ ソースを更新した後、前述の手順 (dbt の実行、データのテスト、サンプル クエリーの実行) に進むことができます。これにより、データの変動と増分更新を視覚化できるようになります。</p>

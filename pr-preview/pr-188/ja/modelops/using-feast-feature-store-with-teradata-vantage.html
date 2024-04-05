@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2049,7 +2053,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <div class="sectionbody">
 <div class="paragraph">
 <p>このハウツーでは、feastの用語をご存知であることを前提に説明しています。復習が必要な場合は、 <a href="https://docs.feast.dev/">FEAST ドキュメント</a>
-をご覧ください。
+ をご覧ください。
 このドキュメントは、開発者が <code>Teradataのオフラインおよびオンライン ストア</code> をFeastに統合する方法を説明します。Teradataのオフラインストアにより、ユーザーは任意のデータストアをオフラインフィーチャーストアとして使用することができます。モデル学習のためにオフラインストアからフィーチャーを取得し、モデル推論時に使用するためにオンラインフィーチャーストアに実体化させることができます。</p>
 </div>
 <div class="paragraph">
@@ -2071,7 +2075,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </ul>
 </div>
 <div class="paragraph">
-<p>さらに、レジストリ(カタログ)としてTeradataを使用することは、`registry_type: sql`を介して既にサポートされており、我々のサンプルに含まれています。これは、すべてがTeradataに配置されることを意味します。しかし、要件やインストールなどによっては、他のシステムと適宜混在させることが可能です。</p>
+<p>さらに、レジストリ(カタログ)としてTeradataを使用することは、<code>registry_type: sql</code> を介して既にサポートされており、我々のサンプルに含まれています。これは、すべてがTeradataに配置されることを意味します。しかし、要件やインストールなどによっては、他のシステムと適宜混在させることが可能です。</p>
 </div>
 </div>
 </div>
@@ -2095,7 +2099,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </div>
 <div class="paragraph">
-<p>すると、Teradataシステムの必要な情報を入力するプロンプトが表示され、サンプルデータセットがアップロードされます。上記のコマンドを実行する際に、レポ名`demo` を使用したと仮定します。リポジトリ ファイルと、 <code>test_workflow.py`というファイルが表示されます。この `test_workflow.py</code> を実行すると、Teradataをレジストリ、OfflineStore、OnlineStoreとして、饗宴のための完全なワークフローが実行されます。</p>
+<p>すると、Teradataシステムの必要な情報を入力するプロンプトが表示され、サンプルデータセットがアップロードされます。上記のコマンドを実行する際に、レポ名 <code>demo</code> を使用したと仮定します。リポジトリ ファイルと、 <code>test_workflow.py</code> というファイルが表示されます。この <code>test_workflow.py</code> を実行すると、Teradataをレジストリ、OfflineStore、OnlineStoreとして、饗宴のための完全なワークフローが実行されます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2204,7 +2208,7 @@ driver_stats_fv = FeatureView(
 <p>オフラインストアのテストには、以下に説明するように2種類の方法があります。しかし、その前に、いくつかの必須ステップがあります。</p>
 </div>
 <div class="paragraph">
-<p>では、過去`60`日間にイベントを見たことのあるエンティティ（母集団）のみを使って、学習用の素性を一括して読み込んでみましょう。使用する述語（フィルタ）は、与えられた学習用データセットのエンティティ（母集団）選択に関連するものであれば何でも構いません。`event_timestamp`は例示のためだけのものです。</p>
+<p>では、過去 <code>60</code> 日間にイベントを見たことのあるエンティティ（母集団）のみを使って、学習用の素性を一括して読み込んでみましょう。使用する述語（フィルタ）は、与えられた学習用データセットのエンティティ（母集団）選択に関連するものであれば何でも構いません。<code>event_timestamp</code> は例示のためだけのものです。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2228,7 +2232,7 @@ print(training_df.head())</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>`feast-teradata`ライブラリを使用すると、豊富なAPIと機能の完全なセットを使用することができます。できることの詳細については、公式のfeastのhttps://docs.feast.dev/getting-started/quickstart[クイックスタート] を参照してください。</p>
+<p>`feast-teradata`ライブラリを使用すると、豊富なAPIと機能の完全なセットを使用することができます。できることの詳細については、公式のfeastの <a href="https://docs.feast.dev/getting-started/quickstart">クイックスタート</a> を参照してください。</p>
 </div>
 </div>
 </div>
@@ -2269,7 +2273,7 @@ offline_store:
 <p>オンラインストアをテストする前に、いくつか必須の手順があります。</p>
 </div>
 <div class="paragraph">
-<p><code>materialize_incremental</code> コマンドは、オンラインストアの機能を徐々にマテリアライズドするために使用されます。追加する新しい特徴がない場合、このコマンドは基本的に何も行いません。祝宴`materialize_incremental`では、開始時間はnow-ttl(フィーチャビューで定義したttl)または最新の実体化の時間のいずれかです。少なくとも一度でも機能をマテリアライズしていれば、それ以降のマテリアライズは、前回のマテリアライズの時点でストアに存在しなかった機能のみをフェッチすることになります。</p>
+<p><code>materialize_incremental</code> コマンドは、オンラインストアの機能を徐々にマテリアライズドするために使用されます。追加する新しい特徴がない場合、このコマンドは基本的に何も行いません。feast `materialize_incremental`では、開始時間はnow-ttl(フィーチャビューで定義したttl)または最新の実体化の時間のいずれかです。少なくとも一度でも機能をマテリアライズしていれば、それ以降のマテリアライズは、前回のマテリアライズの時点でストアに存在しなかった機能のみをフェッチすることになります。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2278,7 +2282,7 @@ feast materialize-incremental $CURRENT_TIME</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>次に、オンライン機能を取得する際に、<code>features`と`entity_rows`の2つのパラメータを用意します。 `features</code> パラメータはリストで、<code>df_feature_view`に存在する特徴を任意の数だけ取ることができます。上の例では、4つの特徴しかありませんが、4つ以下でもかまいません。次に、 `entity_rows`パラメータもリストで、</code>{feature_identifier_column: value_to_be_fetched}`という形式のディクショナリーを取ります。この場合、driver_id列は、エンティティドライバの異なる行を一意に識別するために使用されます。現在、driver_idが5に等しいフィーチャーの値をフェッチしています。また、このような行を複数取得することもできます。 <code>[{driver_id: val_1}, {driver_id: val_2}, .., {driver_id: val_n}] [{driver_id: val_1}, {driver_id: val_2}, .., {driver_id: val_n}]</code></p>
+<p>次に、オンライン機能を取得する際に、<code>features</code> と <code>entity_rows</code> の2つのパラメータを用意します。 <code>features</code> パラメータはリストで、<code>df_feature_view</code> に存在する特徴を任意の数だけ取ることができます。上の例では、4つの特徴しかありませんが、4つ以下でもかまいません。次に、 <code>entity_rows</code> パラメータもリストで、<code>{feature_identifier_column: value_to_be_fetched}</code> という形式のディクショナリーを取ります。この場合、driver_id列は、エンティティドライバの異なる行を一意に識別するために使用されます。現在、driver_idが5に等しいフィーチャーの値をフェッチしています。また、このような行を複数取得することもできます。 <code>[{driver_id: val_1}, {driver_id: val_2}, .., {driver_id: val_n}] [{driver_id: val_1}, {driver_id: val_2}, .., {driver_id: val_n}]</code></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2354,7 +2358,7 @@ for key, value in sorted(returned_features.items()):
 </ul>
 </div>
 <div class="paragraph">
-<p>さらに、完全な（しかし実世界ではない）、エンドツーエンドのワークフローの例を見たい場合は、`demo/test_workflow.py`スクリプトを参照してください。これは、完全な饗宴の機能をテストするために使用されます。</p>
+<p>さらに、完全な（しかし実世界ではない）、エンドツーエンドのワークフローの例を見たい場合は、<code>demo/test_workflow.py</code> スクリプトを参照してください。これは、完全な饗宴の機能をテストするために使用されます。</p>
 </div>
 <div class="paragraph">
 <p>Enterprise Feature Store は、データ分析の重要な段階で価値を獲得するプロセスを加速します。生産性が向上し、製品を市場にデプロイメントするまでの時間が短縮されます。Teradataとfeastを統合することで、Teradataの高効率な並列処理をFeature Store内で利用できるようになり、パフォーマンスの向上が期待されます。</p>

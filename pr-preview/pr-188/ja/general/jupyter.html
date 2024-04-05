@@ -6,7 +6,7 @@
     <title>Jupyter NotebookからVantageを利用する方法 :: Teradata Getting Started</title>
     <link rel="canonical" href="https://quickstarts.teradata.com/ja/general/jupyter.html">
     <meta name="description" content="Jupyter Notebookから Teradata Vantage を使用する">
-    <meta name="keywords" content="データ ウェアハウス、コンピューティング ストレージの分離、teradata、vantage、クラウド データ プラットフォーム、JDBC、Java アプリケーション、ビジネス インテリジェンス、エンタープライズ分析、jupyter、teradatasql、ipython-sql、teradatasqlalchemy">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, JDBC, java applications, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -842,6 +842,10 @@ aside.toc.sidebar {
 .doc .admonitionblock .icon i {
   font-family: Inter;
   font-size: 16px;
+}
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
 }
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
@@ -2061,7 +2065,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="#_teradata_libraries">通常の Python/R カーネル Notebookで Python または R ライブラリを使用します</a> 。このオプションは、独自のDockerイメージを生成できない制限された環境にいる場合にうまく機能します。また、Notebook内で SQL と Python/R を混在させる必要がある従来のデータサイエンス シナリオでも役立ちます。Jupyter に精通していて、独自の優先ライブラリと拡張機能のセットがある場合は、このオプションから始めてください。
+<p><a href="#_teradata_libraries">通常の Python/R カーネル Notebookで Python または R ライブラリを使用する </a> - このオプションは、独自のDockerイメージを生成できない制限された環境にいる場合にうまく機能します。また、Notebook内で SQL と Python/R を混在させる必要がある従来のデータサイエンス シナリオでも役立ちます。Jupyter に精通していて、独自の優先ライブラリと拡張機能のセットがある場合は、このオプションから始めてください。
 2.<a href="#_teradata_jupyter_docker_image">Teradata Jupyter Docker イメージを使用する</a> - Teradata Jupyter Docker イメージには、Teradata SQL カーネル (詳細は後述)、<code>teradataml</code> および <code>tdplyr</code> ライブラリ、Python および R ドライバーがバンドルされています。また、Teradata 接続の管理、Vantage データベース内のオブジェクトの探索を可能にする Jupyter 拡張機能も含まれています。SQLを頻繁に使用する場合や、視覚的なナビゲータが役立つ場合に便利です。Jupyter を初めて使用する場合、またはライブラリと拡張機能の厳選されたアセンブリを入手したい場合は、このオプションから始めてください。</p>
 </li>
 </ol>
@@ -2069,7 +2073,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <div class="sect2">
 <h3 id="_teradataライブラリ"><a class="anchor" href="#_teradataライブラリ"></a>Teradataライブラリ</h3>
 <div class="paragraph">
-<p>このオプションでは、通常の Jupyter Lab Notebookを使用します。Teradata Python ドライバをロードし、Python コードから使用する方法を見ていきます。また、SQLのみのセルのサポートを追加する`ipython-sql`拡張に機能も検討します。</p>
+<p>このオプションでは、通常の Jupyter Lab Notebookを使用します。Teradata Python ドライバをロードし、Python コードから使用する方法を見ていきます。また、SQLのみのセルのサポートを追加する <code>ipython-sql</code> 拡張に機能も検討します。</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -2148,7 +2152,7 @@ db_connection_string = "teradatasql://dbc:dbc@host.docker.internal/dbc"</code></
 </div>
 </li>
 <li>
-<p>`ipython-sql`をロードし、db接続文字列を定義します。</p>
+<p><code>ipython-sql</code> をロードし、db接続文字列を定義します。</p>
 <div class="listingblock content-editable">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">%load_ext sql
@@ -2160,7 +2164,7 @@ db_connection_string = "teradatasql://dbc:dbc@host.docker.internal/dbc"</code></
 </div>
 </li>
 <li>
-<p><code>%sql`と</code>%%sql`の魔法が使えるようになりました。テーブル内のデータを調査したいとします。以下のようなセルを作成できます。</p>
+<p><code>%sql</code> と <code>%%sql</code> の魔法が使えるようになりました。テーブル内のデータを調査したいとします。以下のようなセルを作成できます。</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-ipython hljs" data-lang="ipython">%%sql
@@ -2180,13 +2184,13 @@ result.DataFrame()</code></pre>
 </ol>
 </div>
 <div class="paragraph">
-<p>ipython-sql には、変数置換、<code>matplotlib</code> によるプロット、ローカル CSV ファイルへの結果の書き込みやデータベースへの結果の書き込みなど、他にも多くの機能があります。例については <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/attachments/vantage-with-python-libraries.ipynb">デモ Notebookを</a> 、完全なリファレンスについては <a href="https://github.com/catherinedevlin/ipython-sql/">ipython-sql github リポジトリ</a> を参照してください。</p>
+<p>ipython-sql には、変数置換、<code>matplotlib</code> によるプロット、ローカル CSV ファイルへの結果の書き込みやデータベースへの結果の書き込みなど、他にも多くの機能があります。例については <a href="https://github.com/Teradata/quickstarts/blob/main/modules/ROOT/attachments/vantage-with-python-libraries.ipynb">Notebookのデモ</a> を 、完全なリファレンスについては <a href="https://github.com/catherinedevlin/ipython-sql/">ipython-sql github リポジトリ</a> を参照してください。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_teradata_jupyter_dockerイメージ"><a class="anchor" href="#_teradata_jupyter_dockerイメージ"></a>Teradata Jupyter Dockerイメージ</h3>
 <div class="paragraph">
-<p>Teradata Jupyter Dockerイメージは、 `jupyter/datascience-notebook`Dockerイメージに基づいて構築されています。Teradata SQL カーネル、Teradata Python および R ライブラリ、Jupyter 拡張機能が追加され、Teradata Vantage との対話時の生産性が向上します。このイメージには、SQL カーネルと Teradata ライブラリの使用方法を示すサンプル Notebookも含まれています。</p>
+<p>Teradata Jupyter Dockerイメージは、 <code>jupyter/datascience-notebook</code> Dockerイメージに基づいて構築されています。Teradata SQL カーネル、Teradata Python および R ライブラリ、Jupyter 拡張機能が追加され、Teradata Vantage との対話時の生産性が向上します。このイメージには、SQL カーネルと Teradata ライブラリの使用方法を示すサンプル Notebookも含まれています。</p>
 </div>
 <div class="paragraph">
 <p>SQL カーネルと Teradata Jupyter 拡張機能は、SQL インターフェースの使用に多くの時間を費やす人にとって役立ちます。これは、多くの場合、Teradata Studio を使用するよりも便利なNotebook エクスペリエンスと考えてください。Teradata Jupyter Docker イメージは、Teradata Studio を置き換えようとするものではありません。すべての機能が備わっているわけではありません。軽量の Web ベースのインターフェースを必要とし、Notebook UI を楽しむ人向けに設計されています。</p>
@@ -2205,7 +2209,7 @@ result.DataFrame()</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<code>-e"accept_license=Y</code> を渡すと、Teradata Jupyter Extensions のhttps://github.com/Teradata/jupyterextensions/blob/master/licensefiles/license.txt[使用許諾契約]に同意したことになります。
+<code>-e"accept_license=Y</code> を渡すと、Teradata Jupyter Extensions の <a href="https://github.com/Teradata/jupyterextensions/blob/master/licensefiles/license.txt">使用許諾契約</a> に同意したことになります。
 </td>
 </tr>
 </table>
@@ -2235,8 +2239,10 @@ Enter this URL in your browser:  http://localhost:8888?token=96a3ab874a03779c400
 </div>
 </li>
 <li>
-<p>URL を開き、ファイル エクスプローラを使用してNotebook `67jupyterextensions &#8594; notebooks &#8594; sql &#8594; GettingStartedDemo.ipynb`を開きます。
-4．Teradata SQL カーネルのデモを確認してください。</p>
+<p>URL を開き、ファイル エクスプローラを使用してNotebook `jupyterextensions &#8594; notebooks &#8594; sql &#8594; GettingStartedDemo.ipynb`を開きます。</p>
+</li>
+<li>
+<p>Teradata SQL カーネルのデモを確認してください。</p>
 <div class="imageblock">
 <div class="content">
 <img src="../../_images/gettingstarteddemo.ipynb.png" alt="GettingStartedDemo.ipynbのスクリーンショット" width="100%">

@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2037,7 +2041,8 @@ document.addEventListener("DOMContentLoaded", function () {
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you need a test instance of Vantage, you can provision one for free at <a href="https://clearscape.teradata.com/sign-in?utm_source=dev_portal&amp;utm_medium=quickstart_tutorial&amp;utm_campaign=quickstarts" target="_blank" rel="noopener">https://clearscape.teradata.com.</a>
+Vantage のテスト インスタンスが必要な場合は、 <a href="https://clearscape.teradata.com/sign-in?utm_source=dev_portal&amp;utm_medium=quickstart_tutorial&amp;utm_campaign=quickstarts" target="_blank" rel="noopener">https://clearscape.teradata.com.</a>
+で無料でプロビジョニングできます。
 </td>
 </tr>
 </table>
@@ -2051,7 +2056,7 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 </div>
 </div>
 <div class="sect1">
-<h2 id="_ttuをインストールする"><a class="anchor" href="#_ttuをインストールする"></a>TTUをインストールする</h2>
+<h2 id="_ttuのインストール"><a class="anchor" href="#_ttuのインストール"></a>TTUのインストール</h2>
 <div class="sectionbody">
 <div class="tabset is-loading">
 <div class="ulist tabs">
@@ -2093,10 +2098,10 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 </div>
 </div>
 <div class="sect1">
-<h2 id="_サンプルデータの入手"><a class="anchor" href="#_サンプルデータの入手"></a>サンプルデータの入手</h2>
+<h2 id="_サンプルデータを入手する"><a class="anchor" href="#_サンプルデータを入手する"></a>サンプルデータを入手する</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>非営利団体の米国税務申告を扱います。非営利の納税申告は公開データです。アメリカ内国歳入庁は、これらを S3 バケットで公開します。2020 年の提出書類の概要を見てみましょう。 <code><a href="https://storage.googleapis.com/clearscape_analytics_demo_data/TPT/index_2020.csv" class="bare">https://storage.googleapis.com/clearscape_analytics_demo_data/TPT/index_2020.csv</a></code> ブラウザ、<code>wget</code>、または`curl`を使用して、ファイルをローカルに保存できます。</p>
+<p>非営利団体の米国税務申告を扱います。非営利の納税申告は公開データです。アメリカ内国歳入庁は、これらを S3 バケットで公開します。2020 年の提出書類の概要を見てみましょう。 <code><a href="https://storage.googleapis.com/clearscape_analytics_demo_data/TPT/index_2020.csv" class="bare">https://storage.googleapis.com/clearscape_analytics_demo_data/TPT/index_2020.csv</a></code> ブラウザ、<code>wget</code>、または <code>curl</code> を使用して、ファイルをローカルに保存できます。</p>
 </div>
 </div>
 </div>
@@ -2119,7 +2124,7 @@ AS PERMANENT = 120e6, -- 120MB
 <h2 id="_tpt_を実行する"><a class="anchor" href="#_tpt_を実行する"></a>TPT を実行する</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>これから <code>TPT</code> を実行します。<code>TPT</code> は、Teradata Vantageでデータのロード、抽出、更新に使用できるコマンドラインツールです。これらのさまざまな機能は、いわゆる`オペレータ`で実装されます。例えば、Vantage へのデータのロードは <code>Load</code> オペレータによって処理されます。 <code>Load</code> オペレータは、大量のデータを Vantage にアップロードする場合に非常に効率的です。 <code>Load</code> オペレータには、高速化するためにいくつかの制限があります。空のテーブルのみを設定できます。すでにデータが設定されているテーブルへの挿入はサポートされていません。セカンダリ インデックスを持つテーブルはサポートされていません。また、テーブルが <code>MULTISET</code> テーブルであっても、重複レコードは挿入されません。制限の完全なリストについては <a href="https://docs.teradata.com/r/Teradata-Parallel-Transporter-Reference/February-2022/Load-Operator/Usage-Notes/Normalized-Tables/Restrictions-and-Limitations">、「Teradata® TPT リファレンス - ロード オペレータ - 制限と制約」</a>を参照してください。</p>
+<p>これから <code>TPT</code> を実行します。<code>TPT</code> は、Teradata Vantageでデータのロード、抽出、更新に使用できるコマンドラインツールです。これらのさまざまな機能は、いわゆる <code>オペレータ</code> で実装されます。 例えば、Vantage へのデータのロードは <code>Load</code> オペレータによって処理されます。 <code>Load</code> オペレータは、大量のデータを Vantage にアップロードする場合に非常に効率的です。 <code>Load</code> オペレータには、高速化するためにいくつかの制限があります。空のテーブルのみを設定できます。すでにデータが設定されているテーブルへの挿入はサポートされていません。セカンダリ インデックスを持つテーブルはサポートされていません。また、テーブルが <code>MULTISET</code> テーブルであっても、重複レコードは挿入されません。制限の完全なリストについては 、 <a href="https://docs.teradata.com/r/Teradata-Parallel-Transporter-Reference/February-2022/Load-Operator/Usage-Notes/Normalized-Tables/Restrictions-and-Limitations">Teradata® TPT リファレンス - ロード オペレータ - 制限と制約</a> を参照してください。</p>
 </div>
 <div class="paragraph">
 <p>TPT には独自のスクリプト言語があります。この言語を使用すると、任意の SQLコマンドを使用してデータベースを準備し、入力ソースを宣言し、Vantage にデータを挿入する方法を定義できます。</p>
@@ -2130,7 +2135,7 @@ AS PERMANENT = 120e6, -- 120MB
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>TPTにVantageデータベースへの接続方法を指示するジョブ変数ファイルを作成します。ファイル <code>jobvars.txt</code> を作成し、以下の内容を挿入します。<code>host`をデータベースのホスト ネームで置き換えます。例えば、ローカルの Vantage Express インスタンスを使用している場合は、 `127.0.0.1`を使用します。 `username</code> はデータベース ユーザー名、 <code>password</code> はデータベース パスワードです。準備ステップ (DDL) とロード ステップにはそれぞれ独自の構成値があり、DDLとロード ステップの両方を構成するには構成値を2回入力する必要があることに注記してください。</p>
+<p>TPTにVantageデータベースへの接続方法を指示するジョブ変数ファイルを作成します。ファイル <code>jobvars.txt</code> を作成し、以下の内容を挿入します。<code>host</code> をデータベースのホスト ネームで置き換えます。例えば、ローカルの Vantage Express インスタンスを使用している場合は、 <code>127.0.0.1</code> を使用します。 <code>username</code> はデータベース ユーザー名、 <code>password</code> はデータベース パスワードです。準備ステップ (DDL) とロード ステップにはそれぞれ独自の構成値があり、DDLとロード ステップの両方を構成するには構成値を2回入力する必要があることに注記してください。</p>
 <div id="tpt_first_config" class="listingblock emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">TargetTdpId           = 'host'
@@ -2154,7 +2159,7 @@ LoadTargetTable = 'irs.irs_returns'</code></pre>
 </div>
 </li>
 <li>
-<p>以下の内容のファイルを作成し、 `load.txt`として保存します。ジョブファイルの構造を理解するには、ジョブファイル内のコメントを参照してください。</p>
+<p>以下の内容のファイルを作成し、 <code>load.txt</code> として保存します。ジョブファイルの構造を理解するには、ジョブファイル内のコメントを参照してください。</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">DEFINE JOB file_load
@@ -2341,7 +2346,7 @@ NO PRIMARY INDEX;</code></pre>
 <h2 id="_まとめ"><a class="anchor" href="#_まとめ"></a>まとめ</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このハウツーでは、大量のデータを Vantage に取り込む方法を説明しました。`TPT`を使用して、数十万件のレコードを数秒でVantageにロードしました。</p>
+<p>このハウツーでは、大量のデータを Vantage に取り込む方法を説明しました。<code>TPT</code> を使用して、数十万件のレコードを数秒でVantageにロードしました。</p>
 </div>
 </div>
 </div>
@@ -2357,7 +2362,7 @@ NO PRIMARY INDEX;</code></pre>
 <p><a href="https://docs.teradata.com/r/Teradata-Parallel-Transporter-Reference/February-2022">Teradata®  TPT リファレンス</a></p>
 </li>
 <li>
-<p><a href="../../nos.html" class="xref page">Query data stored in object storage</a></p>
+<p><a href="../general/nos.html">オブジェクトストレージに保存されたクエリーデータ</a></p>
 </li>
 </ul>
 </div>
@@ -2368,7 +2373,7 @@ NO PRIMARY INDEX;</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you have any questions or need further assistance, please visit our <a href="https://support.teradata.com/community">community forum</a> where you can get support and interact with other community members.
+ご質問がある場合、またはさらにサポートが必要な場合は、<a href="https://support.teradata.com/community">コミュニティ フォーラム</a>にアクセスしてサポートを受け、他のコミュニティ メンバーと交流してください。
 </td>
 </tr>
 </table>

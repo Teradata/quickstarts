@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2037,10 +2041,10 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="ulist">
 <ul>
 <li>
-<p>インストールされたhttps://www.docker.com/products/docker-desktop/[Docker Desktop]</p>
+<p>インストールされた <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a></p>
 </li>
 <li>
-<p>インストールされたhttps://git-scm.com/book/en/v2/Getting-Started-Installing-Git[Git]</p>
+<p>インストールされた <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">Git</a></p>
 <div class="ulist">
 <ul>
 <li>
@@ -2050,14 +2054,14 @@ document.addEventListener("DOMContentLoaded", function () {
 </div>
 </li>
 <li>
-<p>インストールされたhttps://code.visualstudio.com/download[Visual Studio Code]</p>
+<p>インストールされた <a href="https://code.visualstudio.com/download">Visual Studio Code</a></p>
 </li>
 <li>
 <p>Teradata ウェルカム レターの組織 URL とログイン詳細を含む Teradata VantageCloud Lake アカウント</p>
 <div class="ulist">
 <ul>
 <li>
-<p>ログインしたら、次のhttps://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html#_create_an_environment[手順]に従って VantageCloud Lake 環境を作成する</p>
+<p>ログインしたら、次の <a href="https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html#_create_an_environment">手順</a> に従って VantageCloud Lake 環境を作成する</p>
 </li>
 </ul>
 </div>
@@ -2084,7 +2088,7 @@ cd lake-demos</code></pre>
 <h2 id="_teradata_jupyter_exrementsを使用してjupyterlabのdockerコンテナを起動する"><a class="anchor" href="#_teradata_jupyter_exrementsを使用してjupyterlabのdockerコンテナを起動する"></a>Teradata Jupyter Exrementsを使用してJupyterlabのDockerコンテナを起動する</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>VantageCloud Lake デモを起動するには、https://hub.docker.com/r/teradata/jupyterlab-extensions[Teradata Jupyter Extensions for Docker]が必要です。これらの拡張機能は、SQL ipython カーネル、Teradata への接続を管理するユーティリティ、および Teradata データベースとの対話時の生産性を高めるデータベース オブジェクト エクスプローラを提供します。</p>
+<p>VantageCloud Lake デモを起動するには、 <a href="https://hub.docker.com/r/teradata/jupyterlab-extensions">Teradata Jupyter Extensions for Docker</a> が必要です。 これらの拡張機能は、SQL ipython カーネル、Teradata への接続を管理するユーティリティ、および Teradata データベースとの対話時の生産性を高めるデータベース オブジェクト エクスプローラを提供します。</p>
 </div>
 <div class="paragraph">
 <p>次に、コンテナを起動し、既存の lake-demos ディレクトリにバインドします。オペレーティング システムに基づいて適切なコマンドを選択します。</p>
@@ -2153,7 +2157,7 @@ Windows の場合は、PowerShell で docker コマンドを実行します。
 <h2 id="_visual_studio_code_の構成"><a class="anchor" href="#_visual_studio_code_の構成"></a>Visual Studio Code の構成</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Visual Studio Codeで`lake-demos`プロジェクトディレクトリを開く。リポジトリには次のプロジェクト ツリーが含まれている。</p>
+<p>Visual Studio Codeで <code>lake-demos</code> プロジェクトディレクトリを開く。リポジトリには次のプロジェクト ツリーが含まれている。</p>
 </div>
 <div class="paragraph">
 <p>LAKE_DEMOS</p>
@@ -2190,7 +2194,10 @@ Windows の場合は、PowerShell で docker コマンドを実行します。
 <div class="sect2">
 <h3 id="_vars_json_ファイルを編集する"><a class="anchor" href="#_vars_json_ファイルを編集する"></a>vars.json ファイルを編集する</h3>
 <div class="paragraph">
-<p>*https://github.com/Teradata/lake-demos/blob/main/vars.json[vars.json file]*ファイルを編集して、デモを実行するために必要な認証情報を含める<br></p>
+<p><strong><a href="https://github.com/Teradata/lake-demos/blob/main/vars.json">vars.json file</a></strong> ファイルを編集して、デモを実行するために必要な認証情報を含める</p>
+</div>
+<div class="paragraph">
+<p>+</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -2217,7 +2224,7 @@ Windows の場合は、PowerShell で docker コマンドを実行します。
 </tbody>
 </table>
 <div class="paragraph">
-<p>Public IPアドレスとOpen Analyticsエンドポイントを取得するには、次のhttps://quickstarts.teradata.com/vantagecloud-lake/vantagecloud-lake-demo-jupyter-docker.html[手順]に従います。</p>
+<p>Public IPアドレスとOpen Analyticsエンドポイントを取得するには、次の <a href="https://quickstarts.teradata.com/vantagecloud-lake/vantagecloud-lake-demo-jupyter-docker.html">手順</a> に従います。</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -2272,7 +2279,7 @@ vars.json ファイルのパスワードを変更します。
 <div class="sect2">
 <h3 id="_jupyterカーネルを構成する"><a class="anchor" href="#_jupyterカーネルを構成する"></a>Jupyterカーネルを構成する</h3>
 <div class="paragraph">
-<p>*0_Demo_Environment_Setup.ipynb*を開き、Visual Studio Codeの右上にあるSelect Kernelをクリックします。</p>
+<p><strong>0_Demo_Environment_Setup.ipynb</strong> を開き、Visual Studio Codeの右上にあるSelect Kernelをクリックします。</p>
 </div>
 <div class="paragraph">
 <p>Jupyter および Python 拡張機能をインストールしていない場合は、Visual Studio Code によってそれらをインストールするように求められます。これらの拡張機能は、Visual Studio Code がカーネルを検出するために必要です。これらをインストールするには、「Install/Enable suggested extensions for Python and Jupyter」を選択します。</p>
@@ -2283,7 +2290,7 @@ vars.json ファイルのパスワードを変更します。
 </div>
 </div>
 <div class="paragraph">
-<p>必要な拡張機能をインストールすると、ドロップダウン メニューにオプションが表示されます。<strong>既存のJupyterカーネル</strong>を選択します。</p>
+<p>必要な拡張機能をインストールすると、ドロップダウン メニューにオプションが表示されます。<strong>既存のJupyterカーネル</strong> を選択します。</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -2331,8 +2338,8 @@ vars.json ファイルのパスワードを変更します。
 <div class="sect2">
 <h3 id="_デモを実行する"><a class="anchor" href="#_デモを実行する"></a>デモを実行する</h3>
 <div class="paragraph">
-<p><strong>0_Demo_Environment_Setup.ipynb*内のすべてのセルを実行して、環境をセットアップします。続いて *1_Demo_Setup_Base_Data.ipynb</strong> を実行して、デモに必要な基本データをロードします。
-デモ ノートブックの詳細については、GGitHubのhttps://github.com/Teradata/lake-demos[Teradata Lake demos]ページを参照してください。</p>
+<p><strong>0_Demo_Environment_Setup.ipynb</strong> 内のすべてのセルを実行して、環境をセットアップします。続いて <strong>1_Demo_Setup_Base_Data.ipynb</strong> を実行して、デモに必要な基本データをロードします。
+デモ ノートブックの詳細については、GGitHubの <a href="https://github.com/Teradata/lake-demos">Teradata Lake demos</a> ページを参照してください。</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">

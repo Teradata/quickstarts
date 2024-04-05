@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2098,7 +2102,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </li>
 <li>
-<p>`新規作成 &#8594; conda_python3`をクリックして新規ファイルを起動します。</p>
+<p><code>New &#8594; conda_python3</code> をクリックして新規ファイルを起動します。</p>
 <div class="imageblock">
 <div class="content">
 <img src="../../_images/cloud-guides/sagemaker-with-teradata-vantage/start.new.file.png" alt="新しいファイルを開始する">
@@ -2126,7 +2130,7 @@ import boto3, os</code></pre>
 </div>
 </li>
 <li>
-<p>新しいセルで、Teradata Vantageに接続します。<code>&lt;hostname&gt;</code>、 <code>&lt;database user name&gt;</code>、 `&lt;database password&gt;`はVantageの環境にあわせて置き換えてください。</p>
+<p>新しいセルで、Teradata Vantageに接続します。<code>&lt;hostname&gt;</code>、 <code>&lt;database user name&gt;</code>、 <code>&lt;database password&gt;</code> はVantageの環境にあわせて置き換えてください。</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">create_context(host = '&lt;hostname&gt;', username = '&lt;database user name&gt;', password = '&lt;database password&gt;')</code></pre>
@@ -2173,7 +2177,7 @@ boto3.Session().resource('s3').Bucket(bucket).Object(os.path.join(prefix, localF
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>左メニューの <code>Training`の下にある `Training jobs</code> を選択し、 `Create training job`をクリックします。</p>
+<p>左メニューの <code>Training</code> の下にある <code>Training jobs</code> を選択し、 <code>Create training job</code> をクリックします。</p>
 <div class="imageblock">
 <div class="content">
 <img src="../../_images/cloud-guides/sagemaker-with-teradata-vantage/create.training.job.png" alt="Create training job">
@@ -2181,21 +2185,21 @@ boto3.Session().resource('s3').Bucket(bucket).Object(os.path.join(prefix, localF
 </div>
 </li>
 <li>
-<p><code>トレーニングジョブの作成</code> ウィンドウで、<code>ジョブ名</code>(例: <code>xgboost-bank</code>) を入力しIAMロールの`新しいロールを作成`します。Amazon S3 バケットに <code>Any S3バケット</code> 、 `ロールの作成`に</p>
+<p><code>トレーニングジョブの作成</code> ウィンドウで、<code>ジョブ名</code> (例: <code>xgboost-bank</code> ) を入力しIAMロールの <code>新しいロールを作成</code> します。Amazon S3 バケットに <code>Any S3バケット</code> 、 <code>ロールの作成</code> に</p>
 <div class="paragraph">
 <p>を選択します。image::cloud-guides/sagemaker-with-teradata-vantage/create.iam.role.png[IAMロールの作成,width=50%]</p>
 </div>
 </li>
 <li>
-<p><code>Create training job</code> ウィンドウに戻りアルゴリズムとして`XGBoost`を使用します。</p>
+<p><code>Create training job</code> ウィンドウに戻りアルゴリズムとして <code>XGBoost</code> を使用します。</p>
 <div class="imageblock">
 <div class="content">
-<img src="../../_images/cloud-guides/sagemaker-with-teradata-vantage/choose.an.algorithm.png" alt="Choose an algorithm" width="50%">
+<img src="../../_images/cloud-guides/sagemaker-with-teradata-vantage/choose.an.algorithm.png" alt="アルゴリズムの選択" width="50%">
 </div>
 </div>
 </li>
 <li>
-<p>インスタンスタイプはデフォルトの`ml.m4.xlarge`、インスタンスあたりの追加ストレージボリュームは30GBを使用します。これは短いトレーニングジョブで10分以上はかからないはずです。</p>
+<p>インスタンスタイプはデフォルトの <code>ml.m4.xlarge</code>、インスタンスあたりの追加ストレージボリュームは30GBを使用します。これは短いトレーニングジョブで10分以上はかからないはずです。</p>
 <div class="imageblock">
 <div class="content">
 <img src="../../_images/cloud-guides/sagemaker-with-teradata-vantage/resource.configuration.png" alt="リソースを構成" width="50%">
@@ -2218,7 +2222,7 @@ objective='binary:logistic'</pre>
 </div>
 </li>
 <li>
-<p><code>Input data configuration`には学習データを保存したAmazon S3バケットを入力します。Input modeは `File`です。Content typeは `csv`です。`S3 location</code> はファイルのアップロード先です。</p>
+<p><code>Input data configuration</code> には学習データを保存したAmazon S3バケットを入力します。Input modeは <code>File</code> です。Content typeは <code>csv</code> です。<code>S3 location</code> はファイルのアップロード先です。</p>
 <div class="imageblock">
 <div class="content">
 <img src="../../_images/cloud-guides/sagemaker-with-teradata-vantage/input.data.configuration.png" alt="Input data configuration" width="50%">
@@ -2226,7 +2230,7 @@ objective='binary:logistic'</pre>
 </div>
 </li>
 <li>
-<p>`Output data configuration`には出力データを保存するパスを入力します。</p>
+<p><code>Output data configuration</code> には出力データを保存するパスを入力します。</p>
 <div class="imageblock">
 <div class="content">
 <img src="../../_images/cloud-guides/sagemaker-with-teradata-vantage/output.data.configuration.png" alt="Output data configuration" width="50%">
@@ -2254,10 +2258,10 @@ objective='binary:logistic'</pre>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>左パネルの [ <code>Inference</code> の下にある <code>Models</code> を選択し、 <code>Create model`を選択します。モデル名 (例: `xgboost-bank</code>) を入力し前のステップで作成したIAMロールを選択します。</p>
+<p>左パネルの [ <code>Inference</code> の下にある <code>Models</code> を選択し、 <code>Create model</code> を選択します。モデル名 (例: <code>xgboost-bank</code>) を入力し前のステップで作成したIAMロールを選択します。</p>
 </li>
 <li>
-<p><code>コンテナ定義1`では`433757028032.dkr.ecr.us-west-2.amazonaws.com/xgboost:latest</code> を <code>Location of inference code image`として使用します。`Location of model artifacts</code> には学習ジョブの出力パスを指定します。</p>
+<p><code>コンテナ定義1</code> では <code>433757028032.dkr.ecr.us-west-2.amazonaws.com/xgboost:latest</code> を <code>Location of inference code image</code> として使用します。<code>Location of model artifacts</code> には学習ジョブの出力パスを指定します。</p>
 <div class="imageblock">
 <div class="content">
 <img src="../../_images/cloud-guides/sagemaker-with-teradata-vantage/container.definition.1.png" alt="コンテナ定義1" width="50%">
@@ -2265,17 +2269,17 @@ objective='binary:logistic'</pre>
 </div>
 </li>
 <li>
-<p>他はデフォルトのまま`モデルを作成`します。</p>
+<p>他はデフォルトのまま <code>モデルを作成</code> します。</p>
 </li>
 </ol>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_エンドポイントコンフィギュレーションを作成する"><a class="anchor" href="#_エンドポイントコンフィギュレーションを作成する"></a>エンドポイントコンフィギュレーションを作成する</h3>
+<h3 id="_エンドポイントコンフィギュレーションの作成"><a class="anchor" href="#_エンドポイントコンフィギュレーションの作成"></a>エンドポイントコンフィギュレーションの作成</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>作成したモデルを選択し、 `Create endpoint configuration`をクリックします。</p>
+<p>作成したモデルを選択し、 <code>Create endpoint configuration</code> をクリックします。</p>
 <div class="imageblock">
 <div class="content">
 <img src="../../_images/cloud-guides/sagemaker-with-teradata-vantage/create.endpoint.configuration.png" alt="Create endpoint configuration">
@@ -2283,7 +2287,7 @@ objective='binary:logistic'</pre>
 </div>
 </li>
 <li>
-<p>名前（例： <code>xgboost-bank</code>)を記入しその他はdefaultを使用します。モデル名とトレーニングジョブは自動的に入力されるはずです。 `Create endpoint configuration`をクリックします。</p>
+<p>名前（例： <code>xgboost-bank</code>)を記入しその他はdefaultを使用します。モデル名とトレーニングジョブは自動的に入力されるはずです。 <code>Create endpoint configuration</code> をクリックします。</p>
 </li>
 </ol>
 </div>
@@ -2305,7 +2309,7 @@ objective='binary:logistic'</pre>
 を選択します。image::sagemaker-with-teradata-vantage/attach.endpoint.configuration.png[エンドポイント構成を添付する]</p>
 </li>
 <li>
-<p>前回の手順で作成したエンドポイント構成を選択し`エンドポイント構成の選択`をクリックします。</p>
+<p>前回の手順で作成したエンドポイント構成を選択し <code>エンドポイント構成の選択</code> をクリックします。</p>
 <div class="imageblock">
 <div class="content">
 <img src="../../_images/cloud-guides/sagemaker-with-teradata-vantage/select.endpoint.configuration.png" alt="エンドポイント構成の選択" width="50%">
@@ -2313,7 +2317,7 @@ objective='binary:logistic'</pre>
 </div>
 </li>
 <li>
-<p>他のすべてをデフォルトのままにして`エンドポイントを作成`をクリックします。</p>
+<p>他のすべてをデフォルトのままにして <code>エンドポイントを作成</code> をクリックします。</p>
 </li>
 </ol>
 </div>

@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2019,7 +2023,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <h2 id="_概要"><a class="anchor" href="#_概要"></a>概要</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このクイックスタートでは、Google Cloud の AI/ML プラットフォームである Vertex AI で <a href="https://github.com/Teradata/lake-demos">Teradata Jupyter Notebook Demos for VantageCloud Lake</a>を実行する方法について説明します。</p>
+<p>このクイックスタートでは、Google Cloud の AI/ML プラットフォームである Vertex AI で <a href="https://github.com/Teradata/lake-demos">Teradata Jupyter Notebook Demos for VantageCloud Lake</a> を実行する方法について説明します。</p>
 </div>
 </div>
 </div>
@@ -2029,7 +2033,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="ulist">
 <ul>
 <li>
-<p>Teradata modules for Jupyter <strong>Linuxデスクトップ版</strong>(ダウンロードはhttps://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[こちら]、登録が必要です)</p>
+<p>Teradata modules for Jupyter <strong>Linuxデスクトップ版</strong>(ダウンロードは <a href="https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter">こちら</a> 、登録が必要です)</p>
 </li>
 <li>
 <p><a href="https://console.cloud.google.com/flows/enableapi?apiid=notebooks.googleapis.com,aiplatform.googleapis.com&amp;redirect=https://console.cloud.google.com&amp;_ga=2.180323111.284679914.1706204112-1996764819.1705688373">Vertex AI と Notebooks API</a> が有効になっている Google Cloud アカウント</p>
@@ -2089,7 +2093,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <p>解凍された Jupyter 拡張機能パッケージを Google Cloud Storage バケットにファイルとしてアップロードする。</p>
 </li>
 <li>
-<p>次の起動スクリプトを作成し、`startup.sh`としてローカルマシンに保存する。</p>
+<p>次の起動スクリプトを作成し、<code>startup.sh</code> としてローカルマシンに保存する。</p>
 </li>
 </ul>
 </div>
@@ -2184,7 +2188,7 @@ su - jupyter -c "git clone https://github.com/Teradata/lake-demos.git"</code></p
 <div class="ulist">
 <ul>
 <li>
-<p>Environment(環境)で<strong>Browse(参照)</strong>を選択して、Google Cloud Bucketからstartup.shスクリプトを選択する。</p>
+<p>Environment(環境)で <strong>Browse(参照)</strong> を選択して、Google Cloud Bucketからstartup.shスクリプトを選択する。</p>
 </li>
 </ul>
 </div>
@@ -2268,7 +2272,7 @@ print("My Public IP is:", my_public_ip)</code></pre>
 <h2 id="_vars_jsonを編集する"><a class="anchor" href="#_vars_jsonを編集する"></a>vars.jsonを編集する</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>ノートブックの`lake-demos`ディレクトリに移動します。</p>
+<p>ノートブックの <code>lake-demos</code> ディレクトリに移動します。</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -2311,7 +2315,7 @@ print("My Public IP is:", my_public_ip)</code></pre>
 </tbody>
 </table>
 <div class="paragraph">
-<p>Public IPアドレスとOpen Analyticsエンドポイントを取得するには、次のhttps://quickstarts.teradata.com/vantagecloud-lake/vantagecloud-lake-demo-jupyter-docker.html#_create_vantagecloud_lake_environment[手順]に従います。</p>
+<p>Public IPアドレスとOpen Analyticsエンドポイントを取得するには、次の <a href="https://quickstarts.teradata.com/vantagecloud-lake/vantagecloud-lake-demo-jupyter-docker.html#_create_vantagecloud_lake_environment">手順</a> に従います。</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -2335,10 +2339,10 @@ vars.json ファイルのパスワードを変更します。サンプル vars.j
 <h2 id="_デモを実行する"><a class="anchor" href="#_デモを実行する"></a>デモを実行する</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>*0_Demo_Environment_Setup.ipynb*内のすべてのセルを実行して、環境をセットアップします。続いて*1_Demo_Setup_Base_Data.ipynb*を実行して、デモに必要な基本データをロードします。</p>
+<p><strong>0_Demo_Environment_Setup.ipynb</strong> 内のすべてのセルを実行して、環境をセットアップします。続いて <strong>1_Demo_Setup_Base_Data.ipynb</strong> を実行して、デモに必要な基本データをロードします。</p>
 </div>
 <div class="paragraph">
-<p>デモ ノートブックの詳細については、GGitHubのhttps://github.com/Teradata/lake-demos[Teradata Lake demos]ページを参照してください。</p>
+<p>デモ ノートブックの詳細については、GitHubの <a href="https://github.com/Teradata/lake-demos">Teradata Lake demos</a> ページを参照してください。</p>
 </div>
 </div>
 </div>
@@ -2346,7 +2350,7 @@ vars.json ファイルのパスワードを変更します。サンプル vars.j
 <h2 id="_まとめ"><a class="anchor" href="#_まとめ"></a>まとめ</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このクイックスタート ガイドでは、VantageCloud Lake の  <a href="https://github.com/Teradata/lake-demos">Teradata Jupyter Notebook Demos</a> を実行するように Google Cloud Vertex AI Workbench Notebooks を構成しました。</p>
+<p>このクイックスタート ガイドでは、VantageCloud Lake の <a href="https://github.com/Teradata/lake-demos">Teradata Jupyter Notebook Demos</a> を実行するように Google Cloud Vertex AI Workbench Notebooks を構成しました。</p>
 </div>
 </div>
 </div>

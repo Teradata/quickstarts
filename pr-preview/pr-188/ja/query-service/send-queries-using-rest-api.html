@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2035,7 +2039,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="ulist">
 <ul>
 <li>
-<p>Query Service がプロビジョニングされている VantageCloud システム、または Query Service が有効な接続を備えた VantageCore へのアクセス。管理者で、Query Service をインストールする必要がある場合は、<a href="https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022">Query Service のインストール、構成、および使用ガイド</a>を参照してください。</p>
+<p>Query Service がプロビジョニングされている VantageCloud システム、または Query Service が有効な接続を備えた VantageCore へのアクセス。管理者で、Query Service をインストールする必要がある場合は、 <a href="https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022">Query Service のインストール、構成、および使用ガイド</a> を参照してください。</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2427,7 +2431,7 @@ Y5WYUUXj                      ,0.0,0.009313225746154785,0.0,0.009313225746154785
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>セッションを作成します</p>
+<p>セッションを作成します。</p>
 <div class="paragraph">
 <p>POST リクエストを <code>/system/&lt;SYSTEM_NAME&gt;/sessions</code> エンドポイントに送信します。リクエストは新しいデータベース セッションを作成し、セッションの詳細を応答として返します。</p>
 </div>
@@ -2486,7 +2490,7 @@ print(response.text)</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><code>SELECT * FROM DBC.DBCInfo</code>: エイリアス `&lt;SYSTEM_NAME&gt;`を持つシステムへのクエリー。</p>
+<p><code>SELECT * FROM DBC.DBCInfo</code>: エイリアス <code>&lt;SYSTEM_NAME&gt;</code> を持つシステムへのクエリー。</p>
 </li>
 <li>
 <p><code>'format': 'OBJECT'</code>:応答の形式。</p>
@@ -2643,7 +2647,7 @@ print(response.text)</code></pre>
 <p>GET リクエストを <code>/system/&lt;SYSTEM_NAME&gt;/queries/&lt;queryID&gt;</code> エンドポイントに送信し、 <code>&lt;queryID&gt;</code> をステップ 1 で取得した ID に置き換えます。</p>
 </div>
 <div class="paragraph">
-<p>リクエストは、 <code><strong>queryState</strong></code>、 <code><strong>queueOrder</strong></code>、 `<strong>queueDuration</strong>`などを含む特定のクエリーの詳細を返します。応答フィールドの完全なリストとその説明については、<a href="https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022/Using-the-Query-Service-APIs/Submitting-SQL-Statement/Request-Body">「Query Service のインストール、構成、および使用ガイド」</a>を参照してください。</p>
+<p>リクエストは、 <code><strong>queryState</strong></code>、 <code><strong>queueOrder</strong></code>、 <code><strong>queueDuration</strong></code> などを含む特定のクエリーの詳細を返します。応答フィールドの完全なリストとその説明については、<a href="https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022/Using-the-Query-Service-APIs/Submitting-SQL-Statement/Request-Body">「Query Service のインストール、構成、および使用ガイド」</a>を参照してください。</p>
 </div>
 <div class="paragraph">
 <p>リクエスト</p>
@@ -2822,7 +2826,7 @@ print(response.json())</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>機能、例、および参考資料:<a href="https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022">クエリサービスのインストール、設定、および使用ガイド</a></p>
+<p>機能、例、および参考資料: <a href="https://docs.teradata.com/r/Teradata-Query-Service-Installation-Configuration-and-Usage-Guide-for-Customers/April-2022">クエリサービスのインストール、設定、および使用ガイド</a></p>
 </li>
 <li>
 <p><a href="https://downloads.teradata.com/api/teradata_query_service">Query Service API OpenAPI 仕様</a></p>
@@ -2836,7 +2840,7 @@ print(response.json())</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you have any questions or need further assistance, please visit our <a href="https://support.teradata.com/community">community forum</a> where you can get support and interact with other community members.
+ご質問がある場合、またはさらにサポートが必要な場合は、<a href="https://support.teradata.com/community">コミュニティ フォーラム</a>にアクセスしてサポートを受け、他のコミュニティ メンバーと交流してください。
 </td>
 </tr>
 </table>

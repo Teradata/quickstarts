@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2044,11 +2048,13 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Google Cloudアカウント。アカウントをお持ちでない場合は、https://console.cloud.google.com/で作成できます。</p>
+<p>Google Cloudアカウント。アカウントをお持ちでない場合は、https://console.cloud.google.com/ で作成できます。</p>
 </li>
 <li>
-<p>`gcloud`がインストールされている。https://cloud.google.com/sdk/docs/install を参照してください。
-3．Google Cloud Runが対話できるTeradata Vantageインスタンス。</p>
+<p><code>gcloud</code> がインストールされている。https://cloud.google.com/sdk/docs/install を参照してください。</p>
+</li>
+<li>
+<p>Google Cloud Runが対話できるTeradata Vantageインスタンス。</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2079,8 +2085,8 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </li>
 <li>
-<p>リポジトリには、データベースを設定する <code>segment.sql</code> ファイルが含まれています。 お気に入りの SQL IDE、[Teradata Studio](<a href="https://downloads.teradata.com/download/tools/teradata-studio)、または`bteq`というコマンド" class="bare">https://downloads.teradata.com/download/tools/teradata-studio)、または`bteq`というコマンド</a> ライン ツール (<a href="https://downloads.teradata.com/node/7314">Windows</a>、https://downloads.teradata.com/node/200442[Linux]、https://downloads.teradata.com/node/201214[macOS ]用にダウンロード) を使用して、Vantage データベース上のスクリプトを実行します。
-SQL スクリプトは、`Segment`と呼ばれる新しいデータベースと、セグメント イベントを保存するためのテーブルのセットを作成します。</p>
+<p>リポジトリには、データベースを設定する <code>segment.sql</code> ファイルが含まれています。 お気に入りの SQL IDE、Teradata Studio (<a href="https://downloads.teradata.com/download/tools/teradata-studio)、または" class="bare">https://downloads.teradata.com/download/tools/teradata-studio)、または</a> <code>bteq</code> というコマンド ライン ツール (<a href="https://downloads.teradata.com/node/7314">Windows</a>、https://downloads.teradata.com/node/200442[Linux]、https://downloads.teradata.com/node/201214[macOS ]用にダウンロード) を使用して、Vantage データベース上のスクリプトを実行します。
+SQL スクリプトは、<code>Segment</code> と呼ばれる新しいデータベースと、セグメント イベントを保存するためのテーブルのセットを作成します。</p>
 </li>
 <li>
 <p>デフォルトのプロジェクトとリージョンを設定します。</p>
@@ -2208,7 +2214,7 @@ export SERVICE_URL=$(gcloud run services describe segment-listener --platform ma
 </div>
 </li>
 <li>
-<p>Segmentがトピックに公開できるようにします。これを行うには、https://console.cloud.google.com/cloudpubsub/topic/listのプロジェクトの <code>pubsub@segment-integrations.iam.gserviceaccount.com</code> ロール `Pub/Sub Publisher`を割り当てます。詳細は <a href="https://segment.com/docs/connections/destinations/catalog/google-cloud-pubsub/#authentication">Segment マニュアル</a> を参照してください。</p>
+<p>Segmentがトピックに公開できるようにします。これを行うには、https://console.cloud.google.com/cloudpubsub/topic/list のプロジェクトの  <code>pubsub@segment-integrations.iam.gserviceaccount.com</code>  ロール  <code>Pub/Sub Publisher</code> を割り当てます。詳細は  <a href="https://segment.com/docs/connections/destinations/catalog/google-cloud-pubsub/#authentication">Segment マニュアル</a> を参照してください。</p>
 </li>
 <li>
 <p>Google Cloud Pub/Sub をSegmentの宛先として構成します。完全なトピック <code>projects/&lt;PROJECT_ID&gt;/topics/segment-events</code> を使用し、すべてのSegment イベント型 ( <code>*</code> 文字を使用) をトピックにマップします。</p>

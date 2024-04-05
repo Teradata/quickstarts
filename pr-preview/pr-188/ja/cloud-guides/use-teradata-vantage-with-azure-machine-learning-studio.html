@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2048,11 +2052,11 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </li>
 <li>
-<p>Azureサブスクリプションまたはhttps://azure.microsoft.com/free/[無料アカウント]
-作成* <a href="https://docs.microsoft.com/en-us/azure/machine-learning/studio/create-workspace">Azure ML Studio ワークスペース</a></p>
+<p>Azureサブスクリプションまたは <a href="https://azure.microsoft.com/free/">無料アカウント</a>
+の作成* <a href="https://docs.microsoft.com/en-us/azure/machine-learning/studio/create-workspace">Azure ML Studio ワークスペース</a></p>
 </li>
 <li>
-<p>(オプション) <a href="https://docs.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-2017">AdventureWorks DW 2016データベース</a> のダウンロード(<em>「モデルの学習」</em> セクションなど)</p>
+<p>(オプション) <a href="https://docs.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-2017">AdventureWorks DW 2016データベース</a> のダウンロード( <em>「モデルの学習」</em> セクションなど)</p>
 <div class="ulist">
 <ul>
 <li>
@@ -2073,7 +2077,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <div class="ulist">
 <ul>
 <li>
-<p>現在利用可能な格納場所にストレージ アカウントがあり、このスタート ガイドの*Web service plan* に <strong>DEVTEST Standard</strong> を選択していない限り、ML Studio ワークスペースの作成中に、新規のストレージ アカウントを作成する必要がある場合があります。 <a href="https://portal.azure.com/">Azure ポータル</a>にログオンし、ストレージ アカウントを開き、 <strong>コンテナ</strong> がまだ存在しない場合は作成します。</p>
+<p>現在利用可能な格納場所にストレージ アカウントがあり、このスタート ガイドの <strong>Web service plan</strong> に <strong>DEVTEST Standard</strong> を選択していない限り、ML Studio ワークスペースの作成中に、新規のストレージ アカウントを作成する必要がある場合があります。 <a href="https://portal.azure.com/">Azure ポータル</a> にログオンし、ストレージ アカウントを開き、 <strong>コンテナ</strong> がまだ存在しない場合は作成します。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio/image3.png" alt="Image" width="520" height="126"></span></p>
 </div>
@@ -2085,7 +2089,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </li>
 <li>
-<p>最後に、*Configuration*プロパティを開き、*<em>'Secure transfer required'</em>*を*<em>Disabled</em>*に設定して、ML Studioインポートデータモジュールがブロブストレージアカウントにアクセスできるようにする。</p>
+<p>最後に、<strong>Configuration</strong> プロパティを開き、<strong><em>'Secure transfer required'</em></strong> を <strong><em>Disabled</em></strong> に設定して、ML Studioインポートデータモジュールがブロブストレージアカウントにアクセスできるようにする。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio/image5.png" alt="Image" width="449" height="78"></span></p>
 </div>
@@ -2100,25 +2104,25 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>https://portal.azure.com/[Azure ポータル]にログオンし、 *ML Studioワークスペース* に移動して、 https://studio.azureml.net/[Machine Learning Studio を起動]し 、 *サインイン*します。</pre>
+<pre>https://portal.azure.com/[Azure ポータル] にログオンし、 *ML Studioワークスペース* に移動して、 https://studio.azureml.net/[Machine Learning Studio を起動] し 、 *サインイン*します。</pre>
 </div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>以下の画面が表示されます。 <strong>Notebooks</strong> をクリックして、正しいリージョン/ワークスペースにいることを確認し、Notebook の*New*</p>
+<p>以下の画面が表示されます。 <strong>Notebooks</strong> をクリックして、正しいリージョン/ワークスペースにいることを確認し、Notebook の <strong>New</strong></p>
 <div class="paragraph">
 <p>をクリックします。<span class="image"><img src="../../_images/cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio/image6.png" alt="Image" width="519" height="250"></span></p>
 </div>
 </li>
 <li>
-<p><strong>Python3*を選択し、Notebook インスタンスに*名前を付け</strong> ます。</p>
+<p><strong>Python3</strong> を選択し、Notebook インスタンスに <strong>名前を付け</strong> ます。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio/image7.png" alt="Image" width="524" height="187"></span></p>
 </div>
 </li>
 <li>
-<p>Jupyter Notebook インスタンスに、 <a href="https://pypi.org/project/teradataml/">Teradata Vantage Python package for Advanced Analytics</a>をインストールします。</p>
+<p>Jupyter Notebook インスタンスに、 <a href="https://pypi.org/project/teradataml/">Teradata Vantage Python package for Advanced Analytics</a> をインストールします。</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">pip install teradataml</code></pre>
@@ -2138,7 +2142,7 @@ Microsoft Azure ML StudioとTeradata Vantage Pythonパッケージの間の検�
 </div>
 </li>
 <li>
-<p><a href="https://pypi.org/project/azure-storage-blob/">Microsoft Azure Storage Blob Client Library for Python</a>をインストールします。</p>
+<p><a href="https://pypi.org/project/azure-storage-blob/">Microsoft Azure Storage Blob Client Library for Python</a> をインストールします。</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">!pip install azure-storage-blob</code></pre>
@@ -2220,7 +2224,7 @@ blobService.create_blob_from_text(containerNAme, 'vTargetMail.csv', trainDF)</co
 <div class="sect2">
 <h3 id="_モデルの学習"><a class="anchor" href="#_モデルの学習"></a>モデルの学習</h3>
 <div class="paragraph">
-<p>既存の <a href="https://docs.microsoft.com/en-us/azure/sql-data-warehouse/sql-data-warehouse-get-started-analyze-with-azure-machine-learning">「Azure Machine Learning を使用したデータの分析」</a> の記事を使って、Azure Blob Storageのデータに基づいて予測型機械学習モデルを構築します。顧客が自転車を購入する可能性があるかどうかを予測することで、自転車店であるアドベンチャーワークスのためのターゲットマーケティングキャンペーンを構築する予定です。</p>
+<p>既存の <a href="https://docs.microsoft.com/en-us/azure/sql-data-warehouse/sql-data-warehouse-get-started-analyze-with-azure-machine-learning">Azure Machine Learning を使用したデータの分析</a> の記事を使って、Azure Blob Storageのデータに基づいて予測型機械学習モデルを構築します。顧客が自転車を購入する可能性があるかどうかを予測することで、自転車店であるアドベンチャーワークスのためのターゲットマーケティングキャンペーンを構築する予定です。</p>
 </div>
 <div class="sect3">
 <h4 id="_データのインポート"><a class="anchor" href="#_データのインポート"></a>データのインポート</h4>
@@ -2228,11 +2232,11 @@ blobService.create_blob_from_text(containerNAme, 'vTargetMail.csv', trainDF)</co
 <p>データは、上のセクションでコピーした <code>vTargetMail.csv</code> という Azure Blob Storage ファイルにあります。</p>
 </div>
 <div class="paragraph">
-<p>1.. <a href="https://studio.azureml.net/">Azure Machine Learning Studio</a> にサインインし、 <strong>Experiments*をクリックします。
- 2.. 画面左下の *+NEW</strong> をクリックし、 *Blank Experiment*を選択します。
- 3.. 実験の名前として「Targeted Marketing」を入力します。
-】 4..  *Data Input and output*の下にある*Import data*モジュールをモジュール ペインからキャンバスにドラッグします。
- 5.. [プロパティ] ペインで Azure Blob Storage の詳細 (アカウント名、キー、コンテナ名) を指定します。</p>
+<p>1.. <a href="https://studio.azureml.net/">Azure Machine Learning Studio</a> にサインインし、 <strong>Experiments</strong> をクリックします。
+2.. 画面左下の <strong>+NEW</strong> をクリックし、 <strong>Blank Experiment</strong> を選択します。
+3.. 実験の名前として「Targeted Marketing」を入力します。
+4..  <strong>Data Input and output</strong> の下にある <strong>Import data</strong> モジュールをモジュール ペインからキャンバスにドラッグします。
+5.. [プロパティ] ペインで Azure Blob Storage の詳細 (アカウント名、キー、コンテナ名) を指定します。</p>
 </div>
 <div class="paragraph">
 <p>experimentキャンバスの下にある <strong>Run</strong> をクリックして、実験を実行します。</p>
@@ -2273,7 +2277,7 @@ blobService.create_blob_from_text(containerNAme, 'vTargetMail.csv', trainDF)</co
 <div class="sect3">
 <h4 id="_モデルの構築"><a class="anchor" href="#_モデルの構築"></a>モデルの構築</h4>
 <div class="paragraph">
-<p>80%は機械学習モデルの学習用、20%はモデルのテスト用としてデータを80対20に分割します。この2値分類問題には、「2クラス」アルゴリズムを使用します。</p>
+<p>80%は機械学習モデルの学習用、20%はモデルのテスト用としてデータを80対20に分割します。この2値分類問題には、「Two-Class」アルゴリズムを使用します。</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -2290,13 +2294,13 @@ blobService.create_blob_from_text(containerNAme, 'vTargetMail.csv', trainDF)</co
 <p><strong>Two-Class Boosted Decision Tree</strong> モジュールを検索し、キャンバスにドラッグします。</p>
 </li>
 <li>
-<p><strong>Train Model*モジュールを検索してキャンバスにドラッグし、*Two-Class Boosted Decision Tree</strong>(MLアルゴリズム)モジュールと*Split* <strong>Data</strong>(アルゴリズムをトレーニングするためのデータ)モジュールに接続して入力を指定する。</p>
+<p><strong>Train Model</strong> モジュールを検索してキャンバスにドラッグし、<strong>Two-Class Boosted Decision Tree</strong> (MLアルゴリズム)モジュールと <strong>Split</strong> <strong>Data</strong> (アルゴリズムをトレーニングするためのデータ)モジュールに接続して入力を指定する。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio/image23.png" alt="Image" width="396" height="333"></span></p>
 </div>
 </li>
 <li>
-<p>次に、[プロパティ]ペインで <strong>Launch column selector</strong> をクリックします。予測するカラムとして*BikeBuyer*カラムを選択します。</p>
+<p>次に、[プロパティ]ペインで <strong>Launch column selector</strong> をクリックします。予測するカラムとして <strong>BikeBuyer</strong> カラムを選択します。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio/image24.png" alt="Image" width="396" height="330"></span></p>
 </div>

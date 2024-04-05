@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2029,10 +2033,10 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="ulist">
 <ul>
 <li>
-<p>インストールされたhttps://www.docker.com/products/docker-desktop/[Docker Desktop]</p>
+<p>インストールされた <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a></p>
 </li>
 <li>
-<p>インストールされたhttps://git-scm.com/book/en/v2/Getting-Started-Installing-Git[Git]</p>
+<p>インストールされた <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">Git</a></p>
 <div class="ulist">
 <ul>
 <li>
@@ -2062,8 +2066,8 @@ document.addEventListener("DOMContentLoaded", function () {
 <h2 id="_vantagecloud_lake_環境を作成する"><a class="anchor" href="#_vantagecloud_lake_環境を作成する"></a>VantageCloud Lake 環境を作成する</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Vhttps://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html[antageCloud Lake の開始手順]に従って、独自の環境を作成します。<br>
-作成したら、[<strong>SETTINGS</strong>] タブに移動し、https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html#_access_environment_from_public_internet[環境にアクセスするため]のパブリック IP アドレスを指定します。</p>
+<p><a href="https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html">VantageCloud Lake をはじめる</a> に従って、独自の環境を作成します。<br>
+作成したら、[<strong>SETTINGS</strong>] タブに移動し、https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html#_access_environment_from_public_internet[環境にアクセスする] ためのパブリック IP アドレスを指定します。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2091,8 +2095,8 @@ IP アドレスは <a href="https://www.whatismyip.com/">WhatIsMyIp.com</a> のW
 </div>
 </div>
 <div class="paragraph">
-<p>*OVERVIEW*タブから、
-をコピーする。
+<p><strong>OVERVIEW</strong> タブから、
+ をコピーする。
 * Public IP および
 * Open Analytics Endpoint</p>
 </div>
@@ -2156,7 +2160,7 @@ cd lake-demos</code></pre>
 <h2 id="_vars_json_ファイルを編集する"><a class="anchor" href="#_vars_json_ファイルを編集する"></a>vars.json ファイルを編集する</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Jupyter NotebookをVantageCloud Lakeに接続するには、https://github.com/Teradata/lake-demos/blob/main/vars.json[vars.jsonファイル]を編集して、次の情報を提供する必要があります。</p>
+<p>Jupyter NotebookをVantageCloud Lakeに接続するには、 <a href="https://github.com/Teradata/lake-demos/blob/main/vars.json">vars.jsonファイル</a> を編集して、次の情報を提供する必要があります。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -2176,7 +2180,7 @@ cd lake-demos</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>"UES_URI"</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">*OVERVIEW*セクションからのOpen Analytics Endpoint 値(上記を参照)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>OVERVIEW</strong> セクションからのOpen Analytics Endpoint 値(上記を参照)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>dbc"</strong></p></td>
@@ -2202,7 +2206,7 @@ cd lake-demos</code></pre>
 <h2 id="_docker_内でファイルをマウントする"><a class="anchor" href="#_docker_内でファイルをマウントする"></a>Docker 内でファイルをマウントする</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>VantageCloud Lake デモを実行するには、https://hub.docker.com/r/teradata/jupyterlab-extensions[Teradata Jupyter Extensions for Docker]が必要です。この拡張機能は、SQL ipython カーネル、Teradata への接続を管理するユーティリティ、および Teradata データベースとの対話時の生産性を高めるデータベース オブジェクト エクスプローラを提供します。</p>
+<p>VantageCloud Lake デモを実行するには、https://hub.docker.com/r/teradata/jupyterlab-extensions[Teradata Jupyter Extensions for Docker] が必要です。 この拡張機能は、SQL ipython カーネル、Teradata への接続を管理するユーティリティ、および Teradata データベースとの対話時の生産性を高めるデータベース オブジェクト エクスプローラを提供します。</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -2288,7 +2292,10 @@ Windowsの場合は、PowerShellでdockerコマンドを実行する。
 <h2 id="_デモを実行する"><a class="anchor" href="#_デモを実行する"></a>デモを実行する</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>*0_Demo_Environment_Setup.ipynb*内のすべてのセルを開いて実行して環境をセットアップし、続いて*1_Demo_Setup_Base_Data.ipynb*を実行してデモに必要な基本データをロードします。<br></p>
+<p><strong>0_Demo_Environment_Setup.ipynb</strong> 内のすべてのセルを開いて実行して環境をセットアップし、続いて <strong>1_Demo_Setup_Base_Data.ipynb</strong> を実行してデモに必要な基本データをロードします。</p>
+</div>
+<div class="paragraph">
+<p>+</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -2296,7 +2303,7 @@ Windowsの場合は、PowerShellでdockerコマンドを実行する。
 </div>
 </div>
 <div class="paragraph">
-<p>デモ用のNotebookの詳細については、GGitHubのhttps://github.com/Teradata/lake-demos[Teradata Lake demos]ページを参照してください。</p>
+<p>デモ用のNotebookの詳細については、GGitHubの <a href="https://github.com/Teradata/lake-demos">Teradata Lake demos</a> ページを参照してください。</p>
 </div>
 </div>
 </div>

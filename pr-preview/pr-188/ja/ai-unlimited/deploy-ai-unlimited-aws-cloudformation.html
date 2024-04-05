@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2063,7 +2067,7 @@ AWS CloudFormation テンプレートには、カスタマイズできる設定�
 <div class="sect2">
 <h3 id="_始める前に"><a class="anchor" href="#_始める前に"></a>始める前に</h3>
 <div class="paragraph">
-<p>ターミナル ウィンドウを開き、 <a href="https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws">Teradata AI Unlimited GitHub リポジトリ</a>のクローンを作成します。このリポジトリには、ワークスペース サービスと JupyterLab をデプロイするためのサンプル CloudFormation テンプレートが含まれています。</p>
+<p>ターミナル ウィンドウを開き、 <a href="https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws">Teradata AI Unlimited GitHub リポジトリ</a> のクローンを作成します。このリポジトリには、ワークスペース サービスと JupyterLab をデプロイするためのサンプル CloudFormation テンプレートが含まれています。</p>
 </div>
 <div id="clone_ai_unlimited_repo" class="listingblock content-editable emits-gtm-events">
 <div class="content">
@@ -2085,7 +2089,7 @@ AWS CloudFormation テンプレートには、カスタマイズできる設定�
 <p>ナビゲーション バーのリージョン セレクターを使用して、Teradata AI Unlimited ワークスペース サービスをデプロイする AWS リージョンを選択します。</p>
 </li>
 <li>
-<p>ワークスペース サービス インスタンスの起動後に SSH を使用して安全に接続するためのキー ペアを生成します。<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon EC2キーペアとLinuxインスタンス</a>を参照してください。</p>
+<p>ワークスペース サービス インスタンスの起動後に SSH を使用して安全に接続するためのキー ペアを生成します。 <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon EC2キーペアとLinuxインスタンス</a> を参照してください。</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2116,7 +2120,7 @@ AWS CloudFormation テンプレートには、カスタマイズできる設定�
 <p>AWSアカウントにログオンする。</p>
 </li>
 <li>
-<p>Teradata AI UnlimitedのAWSマーケットプレイスページを開き、<strong>Continue</strong>を選択する。</p>
+<p>Teradata AI UnlimitedのAWSマーケットプレイスページを開き、<strong>Continue</strong> を選択する。</p>
 </li>
 <li>
 <p>エンジンイメージの利用規約を確認し、同意する。</p>
@@ -2142,13 +2146,13 @@ AWS CloudFormation テンプレートには、カスタマイズできる設定�
 <p>AWSコンソールでAWSアカウントにサインオンする。</p>
 </li>
 <li>
-<p>ナビゲーションバーの右上隅に表示される<strong>AWSリージョン</strong>を確認し、必要に応じて変更します。Teradataでは、プライマリ作業場所に最も近いリージョンを選択することをお薦めする。</p>
+<p>ナビゲーションバーの右上隅に表示される <strong>AWSリージョン</strong> を確認し、必要に応じて変更します。Teradataでは、プライマリ作業場所に最も近いリージョンを選択することをお薦めする。</p>
 </li>
 <li>
-<p><strong>CloudFormation</strong>&gt;<strong>Create Stack</strong>に移動します。 <strong>Create Stack</strong> を選択し、 <strong>With new resources (standard)</strong> を選択します。</p>
+<p><strong>CloudFormation</strong> &gt; <strong>Create Stack</strong> に移動します。 <strong>Create Stack</strong> を選択し、 <strong>With new resources (standard)</strong> を選択します。</p>
 </li>
 <li>
-<p><strong>テンプレートの準備ができました</strong>を選択し、Teradata AI Unlimited GitHub リポジトリからダウンロードしたテンプレート ファイルの 1 つをアップロードします。</p>
+<p><strong>テンプレートの準備ができました</strong> を選択し、Teradata AI Unlimited GitHub リポジトリからダウンロードしたテンプレート ファイルの 1 つをアップロードします。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -2197,7 +2201,7 @@ AWS CloudFormation テンプレートには、カスタマイズできる設定�
 </div>
 </li>
 <li>
-<p>テンプレートのパラメータを確認します。入力が必要なパラメータの値を指定します。その他のすべてのパラメータについては、デフォルト設定を確認し、必要に応じてカスタマイズします。パラメータの確認とカスタマイズが終了したら、<strong>Next</strong>を選択します。</p>
+<p>テンプレートのパラメータを確認します。入力が必要なパラメータの値を指定します。その他のすべてのパラメータについては、デフォルト設定を確認し、必要に応じてカスタマイズします。パラメータの確認とカスタマイズが終了したら、<strong>Next</strong> を選択します。</p>
 <div class="paragraph">
 <p>以下のテーブルでは、パラメータがカテゴリ別にリストされています。</p>
 </div>
@@ -2245,7 +2249,7 @@ AWS CloudFormation テンプレートには、カスタマイズできる設定�
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">IamRole</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CloudFormationが新しいIAMロールを作成するか、既存のロールを使用するかを指定します。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">インスタンスに割り当てるIAMロールの名前。既存のIAMロールまたは 新しく作成されたIAMロールのいずれか。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">デフォルトでは必須</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">New</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">サポートされているオプションは以下のとおりです: NewまたはExisting</p>
@@ -2485,7 +2489,7 @@ Workspace サービスをデプロイしているアカウントに、IAM ロー
 </div>
 </li>
 <li>
-<p><strong>オプション</strong> ページでは、スタック内のリソースのタグ (キーと値のペア) の指定、アクセス権の設定、スタック障害オプションの設定、および詳細オプションの設定を行うことができます。終了したら、<strong>Next</strong>を選択します。</p>
+<p><strong>オプション</strong> ページでは、スタック内のリソースのタグ (キーと値のペア) の指定、アクセス権の設定、スタック障害オプションの設定、および詳細オプションの設定を行うことができます。終了したら、<strong>Next</strong> を選択します。</p>
 </li>
 <li>
 <p><strong>Review</strong>ページで、テンプレート設定を確認します。[Capabilities]で、テンプレートがIAMリソースを作成することを確認するチェックボックスをオンにします。</p>
@@ -2494,8 +2498,10 @@ Workspace サービスをデプロイしているアカウントに、IAM ロー
 <p><strong>Create</strong>を選択してstackをデプロイします。</p>
 </li>
 <li>
-<p>スタックのステータスを監視します。ステータスが`CREATE_COMPLETE`の場合、Teradata AI Unlimitedワークスペースサービスの準備が整っています。
-10。スタックの<strong>Outputs</strong>タブに表示されるURLを使用して、作成されたリソースを表示します。</p>
+<p>スタックのステータスを監視します。ステータスが`CREATE_COMPLETE`の場合、Teradata AI Unlimitedワークスペースサービスの準備が整っています。</p>
+</li>
+<li>
+<p>スタックの <strong>Outputs</strong> タブに表示されるURLを使用して、作成されたリソースを表示します。</p>
 </li>
 </ol>
 </div>
@@ -2503,7 +2509,7 @@ Workspace サービスをデプロイしているアカウントに、IAM ロー
 <div class="sect2">
 <h3 id="_ステップ4ワークスペースサービスの設定とセットアップ"><a class="anchor" href="#_ステップ4ワークスペースサービスの設定とセットアップ"></a>ステップ4:ワークスペースサービスの設定とセットアップ</h3>
 <div class="paragraph">
-<p><a href="https://quickstarts.teradata.com/ai-unlimited/install-ai-unlimited-workspaces-docker.html#_configure_and_set_up_workspace_service">ワークスペースサービスの設定とセットアップ</a>参照してください。</p>
+<p><a href="https://quickstarts.teradata.com/ai-unlimited/install-ai-unlimited-workspaces-docker.html#_configure_and_set_up_workspace_service">ワークスペースサービスの設定とセットアップ</a> を参照してください。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2512,7 +2518,7 @@ Workspace サービスをデプロイしているアカウントに、IAM ロー
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-ワークスペース サービスのみをデプロイした場合は、ワークロードを実行する前にインターフェースをデプロイする必要があります。インターフェースをDocker上にローカルにデプロイするには、 <a href="install-ai-unlimited-interface-docker.html">Dockerを使用した Teradata AI Unlimited インターフェースのデプロイ</a>を参照してください。 <a href="https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#jupyter-template">Jupyter テンプレート</a> を使用して、systemd によって制御されるコンテナ内で実行される JupyterLab を持つ単一のインスタンスをデプロイすることもできます。
+ワークスペース サービスのみをデプロイした場合は、ワークロードを実行する前にインターフェースをデプロイする必要があります。インターフェースをDocker上にローカルにデプロイするには、 <a href="install-ai-unlimited-interface-docker.html">Dockerを使用した Teradata AI Unlimited インターフェースのデプロイ</a> を参照してください。 <a href="https://github.com/Teradata/ai-unlimited/tree/develop/deployments/aws#jupyter-template">Jupyter テンプレート</a> を使用して、systemd によって制御されるコンテナ内で実行される JupyterLab を持つ単一のインスタンスをデプロイすることもできます。
 </td>
 </tr>
 </table>

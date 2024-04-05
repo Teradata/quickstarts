@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2061,7 +2065,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="ulist">
 <ul>
 <li>
-<p>Teradata AI Unlimited Workspaces と JupyterLab をデプロイして構成します。 <a href="install-ai-unlimited-workspaces-docker.html">Dockerを使用した Teradata AI Unlimited Workspaceサービスのデプロイとセットアップ</a> と <a href="install-ai-unlimited-interface-docker.html">Dockerを使用した Teradata AI Unlimited インターフェースのデプロイ</a> を参照してください。</p>
+<p>Teradata AI Unlimited Workspaces と JupyterLab をデプロイして構成します。<a href="install-ai-unlimited-workspaces-docker.html">Dockerを使用した Teradata AI Unlimited Workspaceサービスのデプロイとセットアップ</a> と <a href="install-ai-unlimited-interface-docker.html">Dockerを使用した Teradata AI Unlimited インターフェースのデプロイ</a> を参照してください。</p>
 </li>
 <li>
 <p>以下をコピーして保持します。</p>
@@ -2084,7 +2088,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <h2 id="_最初のワークロードを実行する"><a class="anchor" href="#_最初のワークロードを実行する"></a>最初のワークロードを実行する</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>マジックコマンドの詳細については、<code>%help`または</code>%help &lt;command&gt;`を実行してください。詳細については、 <a href="ai-unlimited-magic-reference.html">Teradata AI Unlimited JupyterLab マジック コマンド リファレンス</a> を参照してください。</p>
+<p>マジックコマンドの詳細については、<code>%help</code> または <code>%help &lt;command&gt;</code> を実行してください。詳細については、<a href="ai-unlimited-magic-reference.html">Teradata AI Unlimited JupyterLab マジック コマンド リファレンス</a> を参照してください。</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -2122,7 +2126,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <li>
 <p>(オプション) CSP 信頼証明を保存するための認証オブジェクトを作成します。</p>
 <div class="paragraph">
-<p><code>ACCESS_KEY_ID</code>、<code>SECRET_ACCESS_KEY</code>、および`REGION`を実際の値に置き換えます。</p>
+<p><code>ACCESS_KEY_ID</code>、<code>SECRET_ACCESS_KEY</code>、および <code>REGION</code> を実際の値に置き換えます。</p>
 </div>
 <div id="create_auth" class="listingblock content-editable emits-gtm-events">
 <div class="content">
@@ -2192,7 +2196,7 @@ NO PRIMARY INDEX ;</code></pre>
 </div>
 </li>
 <li>
-<p>`%dataload`マジックコマンドを使用して、データをSalesCenterテーブルにロードします。</p>
+<p><code>%dataload</code> マジックコマンドを使用して、データをSalesCenterテーブルにロードします。</p>
 <div id="data_load" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%dataload DATABASE=&lt;Project_Name&gt;, TABLE=SalesCenter, FILEPATH=notebooks/sql/data/salescenter.csv</code></pre>
@@ -2205,7 +2209,7 @@ NO PRIMARY INDEX ;</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-salescenter.csv ファイルが見つかりませんか?<a href="https://github.com/Teradata/jupyter-demos/tree/main/Getting_Started/Charting_and_Visualization/data">GitHub Demo:Charting and Visualization Data</a>からファイルをダウンロードします。
+salescenter.csv ファイルが見つかりませんか? <a href="https://github.com/Teradata/jupyter-demos/tree/main/Getting_Started/Charting_and_Visualization/data">GitHub Demo:Charting and Visualization Data</a> からファイルをダウンロードします。
 </td>
 </tr>
 </table>
@@ -2252,7 +2256,7 @@ NO PRIMARY INDEX ;</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-salesdemo.csv ファイルが見つかりませんか?<a href="https://github.com/Teradata/jupyter-demos/tree/main/Getting_Started/Charting_and_Visualization/data">GitHub Demo:Charting and Visualization Data</a>からファイルをダウンロードします。
+salesdemo.csv ファイルが見つかりませんか? <a href="https://github.com/Teradata/jupyter-demos/tree/main/Getting_Started/Charting_and_Visualization/data">GitHub Demo:Charting and Visualization Data</a> からファイルをダウンロードします。
 </td>
 </tr>
 </table>

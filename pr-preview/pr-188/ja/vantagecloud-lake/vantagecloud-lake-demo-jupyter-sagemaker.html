@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2019,7 +2023,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <h2 id="_概要"><a class="anchor" href="#_概要"></a>概要</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このクイックスタートでは、AWS の AI/ML プラットフォームである Amazon SageMaker でhttps://github.com/Teradata/lake-demos[ Teradata Jupyter Notebook Demos for VantageCloud Lake]を実行するプロセスについて詳しく説明します。</p>
+<p>このクイックスタートでは、AWS の AI/ML プラットフォームである Amazon SageMaker で <a href="https://github.com/Teradata/lake-demos"> Teradata Jupyter Notebook Demos for VantageCloud Lake</a> を実行するプロセスについて詳しく説明します。</p>
 </div>
 </div>
 </div>
@@ -2029,7 +2033,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="ulist">
 <ul>
 <li>
-<p>Teradata modules for Jupyter (ダウンロードはhttps://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[こちら]、登録が必要です)</p>
+<p>Teradata modules for Jupyter (ダウンロードは <a href="https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter">こちら</a> 、登録が必要です)</p>
 </li>
 <li>
 <p>S3 および SageMaker にアクセスできる AWS アカウント</p>
@@ -2385,17 +2389,13 @@ print("My Public IP is:", my_public_ip)</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://github.com/Teradata/lake-demos/blob/main/vars.json">vars.json</a>は、VantageCloud Lake 環境の構成に一致するように編集する必要がある<br></p>
-</li>
-</ul>
-</div>
+<p><a href="https://github.com/Teradata/lake-demos/blob/main/vars.json">vars.json</a> は、VantageCloud Lake 環境の構成に一致するように編集する必要がある</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../../_images/vantagecloud-lake/vantagecloud-lake-demo-jupyter-sagemaker/sagemaker-vars.PNG" alt="JupyterLabを開始する" width="75%">
 </div>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>特に次の値を追加する必要があります</p>
 <table class="tableblock frame-all grid-all stretch">
@@ -2449,10 +2449,10 @@ vars.json ファイル内のすべてのパスワードを忘れずに変更し�
 <h2 id="_デモを実行する"><a class="anchor" href="#_デモを実行する"></a>デモを実行する</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>0_Demo_Environment_Setup.ipynb*のすべてのセルを開いて実行し、環境変数を設定します。続いて *1_Demo_Setup_Base_Data.ipynb</strong> を実行して、デモに必要な基本データをロードします。</p>
+<p><strong>0_Demo_Environment_Setup.ipynb</strong> のすべてのセルを開いて実行し、環境変数を設定します。続いて <strong>1_Demo_Setup_Base_Data.ipynb</strong> を実行して、デモに必要な基本データをロードします。</p>
 </div>
 <div class="paragraph">
-<p>デモ ノートブックの詳細については、GGitHubのhttps://github.com/Teradata/lake-demos[Teradata Lake demos]ページを参照してください。</p>
+<p>デモ ノートブックの詳細については、GGitHubの <a href="https://github.com/Teradata/lake-demos">Teradata Lake demos</a> ページを参照してください。</p>
 </div>
 </div>
 </div>

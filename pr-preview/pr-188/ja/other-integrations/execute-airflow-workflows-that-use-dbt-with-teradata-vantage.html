@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2052,12 +2056,14 @@ document.addEventListener("DOMContentLoaded", function () {
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-MacやLinuxマシンであれば、これらのツールはすでに含まれています。Windowsであれば、<a href="https://www.putty.org/">PuTTY</a> または <a href="https://mobaxterm.mobatek.net/download.html">MobaXterm</a>を検討してください。
-3．Teradata Vantageインスタンスにアクセスする必要があります。Teradata Vantage をご利用でない場合は、開発者向けの無償版である<a href="https://quickstarts.teradata.com/#getting-access-to-vantage">Vantage Express</a> を探索してください。
+MacやLinuxマシンであれば、これらのツールはすでに含まれています。Windowsであれば、<a href="https://www.putty.org/">PuTTY</a> または <a href="https://mobaxterm.mobatek.net/download.html">MobaXterm</a> を検討してください。
 </td>
 </tr>
 </table>
 </div>
+</li>
+<li>
+<p>Teradata Vantageインスタンスにアクセスする必要があります。Teradata Vantage をご利用でない場合は、開発者向けの無償版である <a href="https://quickstarts.teradata.com/#getting-access-to-vantage">Vantage Express</a> を探索してください。</p>
 </li>
 </ol>
 </div>
@@ -2131,7 +2137,7 @@ echo -e "AIRFLOW_UID=$(id -u)" &gt; .env</code></pre>
 </div>
 </li>
 <li>
-<p>お好みのファイル転送ツール (<code>scp</code>、 <code>PuTTY</code>、 <code>MobaXterm`など) を使用して、 <a href="../../_attachments/execute-airflow-workflows-that-use-dbt-with-teradata-vantage/airflow.cfg">airflow.cfg</a> ファイルを `airflow/config</code> ディレクトリにアップロードします。</p>
+<p>お好みのファイル転送ツール ( <code>scp</code>、 <code>PuTTY</code>、 <code>MobaXterm</code> など) を使用して、 <a href="../../_attachments/execute-airflow-workflows-that-use-dbt-with-teradata-vantage/airflow.cfg">airflow.cfg</a> ファイルを <code>airflow/config</code> ディレクトリにアップロードします。</p>
 </li>
 </ol>
 </div>
@@ -2233,7 +2239,7 @@ sudo systemctl start docker</code></pre>
 <td class="content">
 <div class="title">「docker-compose.yaml」と「Dockerfile」の機能</div>
 <div class="paragraph">
-<p><code>docker-compose.yaml</code> および <code>Dockerfile</code> は、インストール時に環境を構築するために必要なファイルです。 <code>docker-compose.yaml`ファイルは、Airflowのdockerコンテナをダウンロードし、インストールするものです。このコンテナには、Web UI、メタデータ用のPostgresデータベース、スケジューラ、3つのワーカー（3つのタスクを並行して実行可能）、トリガー、 `dbt`が生成するドキュメントを表示するためのnginx Webサーバーが含まれています。このほか、コンテナへのホストディレクトリのマウントや、各種インストール処理も行われます。`Dockerfile</code> は、各コンテナに必要なパッケージを追加でインストールします。</p>
+<p><code>docker-compose.yaml</code> および <code>Dockerfile</code> は、インストール時に環境を構築するために必要なファイルです。 <code>docker-compose.yaml</code> ファイルは、Airflowのdockerコンテナをダウンロードし、インストールするものです。このコンテナには、Web UI、メタデータ用のPostgresデータベース、スケジューラ、3つのワーカー（3つのタスクを並行して実行可能）、トリガー、 <code>dbt</code> が生成するドキュメントを表示するためのnginx Webサーバーが含まれています。このほか、コンテナへのホストディレクトリのマウントや、各種インストール処理も行われます。<code>Dockerfile</code> は、各コンテナに必要なパッケージを追加でインストールします。</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -2254,7 +2260,7 @@ sudo systemctl start docker</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-この手順は、バージョン 1.29.2 に基づいています。最新のリリースは <a href="https://github.com/docker/compose/releases" class="bare">https://github.com/docker/compose/releases</a> で確認し、必要に応じて以下のコマンドを更新してください。
+この手順は、バージョン 1.29.2 に基づいています。最新のリリースは  <a href="https://github.com/docker/compose/releases" class="bare">https://github.com/docker/compose/releases</a> で確認し、必要に応じて以下のコマンドを更新してください。
 </td>
 </tr>
 </table>
@@ -2279,7 +2285,7 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_テスト_の_dbt_プロジェクトをインストールする"><a class="anchor" href="#_テスト_の_dbt_プロジェクトをインストールする"></a>テスト の dbt  プロジェクトをインストールする</h3>
+<h3 id="_テスト_dbt_プロジェクトのインストール"><a class="anchor" href="#_テスト_dbt_プロジェクトのインストール"></a>テスト  dbt  プロジェクトのインストール</h3>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2363,7 +2369,7 @@ mkdir .dbt</code></pre>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>Dockerfile</code> と <code>docker-compose.yaml</code> がある`airflow`ディレクトリで、Docker環境作成スクリプトを実行します。</p>
+<p><code>Dockerfile</code> と <code>docker-compose.yaml</code> がある <code>airflow</code> ディレクトリで、Docker環境作成スクリプトを実行します。</p>
 <div id="run_docker_compose" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd ~/airflow
@@ -2490,9 +2496,13 @@ e2b46ec98274   apache/airflow:2.2.4   "/usr/bin/dumb-init …"   18 minutes ago 
 </div>
 </li>
 <li>
-<p><code>Choose File`をクリックし、ファイル エクスプローラで `variable.json</code> を選択して <code>Import Variables</code>
-をクリックします。+
-image::other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage/import-variables.png[Airflow管理ドロップダウン, width=75%]</p>
+<p><code>Choose File</code> をクリックし、ファイル エクスプローラで <code>variable.json</code> を選択して <code>Import Variables</code>
+をクリックします。</p>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage/import-variables.png" alt="Airflow管理ドロップダウン" width="75%">
+</div>
+</div>
 </li>
 <li>
 <p>お使いの環境に合わせて、変数を編集します。</p>

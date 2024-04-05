@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2062,7 +2066,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <p>host:  エンジン サービスの名前または IP アドレス。</p>
 </li>
 <li>
-<p>apikey: ワークスペース  サービス <strong>Profile</strong>ページの API キー値。</p>
+<p>apikey: ワークスペース  サービスの <strong>Profile</strong> ページからの API キー値。</p>
 </li>
 <li>
 <p>[オプション] withTLS: False (F) の場合、デフォルトのクライアント サーバー通信では TLS が使用されません。</p>
@@ -2083,7 +2087,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <h2 id="_project_create"><a class="anchor" href="#_project_create"></a>%project_create</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>説明</strong>:新しいプロジェクトを作成する。このコマンドは、GitHubアカウントにプロジェクト名を持つ新しいリポジトリも作成されます。設定は<strong>engine.yml</strong>ファイルに保存されます。</p>
+<p><strong>説明</strong>:新しいプロジェクトを作成する。このコマンドは、GitHubアカウントにプロジェクト名を持つ新しいリポジトリも作成されます。設定は <strong>engine.yml</strong> ファイルに保存されます。</p>
 </div>
 <div class="paragraph">
 <p><strong>使用方法</strong>:</p>
@@ -2212,7 +2216,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <p><strong>説明</strong>: オブジェクト ストア認証情報を保存するための認証オブジェクトを作成する。</p>
 </div>
 <div class="paragraph">
-<p>エンジンをデプロイする前に、認証オブジェクトを作成する必要があります。認証の詳細は保持され、プロジェクトの再デプロイ時に組み込まれます。オプションで、エンジンのデプロイ後に `CREATE AUTHORIZATION`の SQL コマンドを使用して認証を手動で作成できます。この場合、認証の詳細は保持されません。</p>
+<p>エンジンをデプロイする前に、認証オブジェクトを作成する必要があります。認証の詳細は保持され、プロジェクトの再デプロイ時に組み込まれます。オプションで、エンジンのデプロイ後に <code>CREATE AUTHORIZATION</code> の SQL コマンドを使用して認証を手動で作成できます。この場合、認証の詳細は保持されません。</p>
 </div>
 <div class="paragraph">
 <p><strong>使用方法</strong>:</p>

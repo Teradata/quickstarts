@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2065,7 +2069,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-M1/M2 MacOSシステムについては、<a href="../../getting.started.utm.html" class="xref page">Run Vantage Express on UTM</a>を参照してください。
+M1/M2 MacOSシステムについては、<a href="../../getting.started.utm.html" class="xref page">Run Vantage Express on UTM</a> を参照してください。
 </td>
 </tr>
 </table>
@@ -2089,10 +2093,10 @@ M1/M2 MacOSシステムについては、<a href="../../getting.started.utm.html
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Vantage Express</a>の最新バージョン。これまでに Teradata Downloads Web サイトを使用したことがない場合は、登録する必要があります。</p>
+<p><a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Vantage Express</a> の最新バージョン。これまでに Teradata Downloads Web サイトを使用したことがない場合は、登録する必要があります。</p>
 </li>
 <li>
-<p><a href="https://www.vmware.com/products/workstation-player.html">VMware Workstation Player</a>。</p>
+<p><a href="https://www.vmware.com/products/workstation-player.html">VMware Workstation Player</a> 。</p>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -2100,7 +2104,7 @@ M1/M2 MacOSシステムについては、<a href="../../getting.started.utm.html
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-営利団体では、VMware Workstation Playerを使用するために商用ライセンスが必要です。VMwareライセンスを取得しない場合は、<a href="../../getting.started.vbox.html" class="xref page">VirtualBox</a>でVantage Expressを実行できます。
+営利団体では、VMware Workstation Playerを使用するために商用ライセンスが必要です。VMwareライセンスを取得しない場合は、<a href="../../getting.started.vbox.html" class="xref page">VirtualBox</a> でVantage Expressを実行できます。
 </td>
 </tr>
 </table>
@@ -2112,27 +2116,27 @@ M1/M2 MacOSシステムについては、<a href="../../getting.started.utm.html
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-VMware は、MacOS 用の VMware Workstation Player を提供していません。Macを使用している場合は、代わりに<a href="https://www.vmware.com/products/fusion/fusion-evaluation.html">VMware Fusion</a>をインストールする必要があります。これは有料製品ですが、VMware では 30 日間の無料試用版を提供しています。または、<a href="../../getting.started.vbox.html" class="xref page">VirtualBox</a>または<a href="../../getting.started.utm.html" class="xref page">UTM</a>上でVantage Expressを実行することもできます。
+VMware は、MacOS 用の VMware Workstation Player を提供していません。Macを使用している場合は、代わりに <a href="https://www.vmware.com/products/fusion/fusion-evaluation.html">VMware Fusion</a> をインストールする必要があります。これは有料製品ですが、VMware では 30 日間の無料試用版を提供しています。または、<a href="../../getting.started.vbox.html" class="xref page">VirtualBox</a> または <a href="../../getting.started.utm.html" class="xref page">UTM</a> 上でVantage Expressを実行することもできます。
 </td>
 </tr>
 </table>
 </div>
 </li>
 <li>
-<p>Windowsでは、Vantage Expressを解凍するために<a href="https://www.7-zip.org/download.html">7 zip</a>も必要です。</p>
+<p>Windowsでは、Vantage Expressを解凍するために <a href="https://www.7-zip.org/download.html">7 zip</a> も必要です。</p>
 </li>
 </ol>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_インストーラを実をする"><a class="anchor" href="#_インストーラを実をする"></a>インストーラを実をする</h3>
+<h3 id="_インストーラを実行する"><a class="anchor" href="#_インストーラを実行する"></a>インストーラを実行する</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
 <p>インストーラを実行し、デフォルト値を受け入れて、VMware Player または VMware Fusion をインストールします。</p>
 </li>
 <li>
-<p>Windowsの場合は、`7zip`をインストールします。</p>
+<p>Windowsの場合は、<code>7zip</code> をインストールします。</p>
 </li>
 </ol>
 </div>
@@ -2145,7 +2149,7 @@ VMware は、MacOS 用の VMware Workstation Player を提供していません�
 <p>Vantage Expressをダウンロードしたディレクトリに移動し、ダウンロードしたファイルを解凍します。</p>
 </li>
 <li>
-<p>`.vmx`ファイルをダブルクリックします。これにより、VMware Player/FusionでVMイメージが起動されます。</p>
+<p><code>.vmx</code> ファイルをダブルクリックします。これにより、VMware Player/FusionでVMイメージが起動されます。</p>
 </li>
 <li>
 <p><kbd>ENTER</kbd>を押して、強調表示されている <code>LINUX</code> ブートパーティションを選択します。</p>

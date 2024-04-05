@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2101,10 +2105,10 @@ Vantage Expressはx86アーキテクチャで動作する。VMをM1/2チップ�
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Vantage Express</a>の最新バージョン。これまでに Teradata Downloads Web サイトを使用したことがない場合は、登録する必要があります。</p>
+<p><a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Vantage Express</a> の最新バージョン。これまでに Teradata Downloads Web サイトを使用したことがない場合は、登録する必要があります。</p>
 </li>
 <li>
-<p><a href="https://mac.getutm.app/">UTM</a>の最新バージョン。</p>
+<p><a href="https://mac.getutm.app/">UTM</a> の最新バージョン。</p>
 </li>
 </ol>
 </div>
@@ -2144,7 +2148,7 @@ Vantage Expressはx86アーキテクチャで動作する。VMをM1/2チップ�
 </div>
 </li>
 <li>
-<p>`Storage`画面で`Next`をクリックして、デフォルトを受け入れる。</p>
+<p><code>Storage</code> 画面で <code>Next</code> をクリックして、デフォルトを受け入れます。</p>
 </li>
 <li>
 <p><code>Shared Direct</code> 画面で <code>Next</code> をクリックします。</p>
@@ -2153,11 +2157,11 @@ Vantage Expressはx86アーキテクチャで動作する。VMをM1/2チップ�
 <p><code>Summary</code> 画面で <code>Open VM Settings</code> にチェックを入れ、 `Save`をクリックします。</p>
 </li>
 <li>
-<p>セットアップウィザードを実行する。以下のタブを調整するだけで済みます。</p>
+<p>セットアップウィザードを実行します。以下のタブを調整するだけで済みます。</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>QEMU</strong> - <code>UEFI Boot</code> オプションを無効にする</p>
+<p><strong>QEMU</strong> - <code>UEFI Boot</code> オプションを無効にします。</p>
 </li>
 <li>
 <p><strong>Network</strong> - ホスト コンピューター上で ssh (22) ポートと Vantage (1025) ポートを公開します。</p>
@@ -2171,14 +2175,14 @@ Vantage Expressはx86アーキテクチャで動作する。VMをM1/2チップ�
 </div>
 </li>
 <li>
-<p>ドライブのマッピング:</p>
+<p>ドライブをマップします。</p>
 <div class="ulist">
 <ul>
 <li>
-<p>デフォルトの`IDE Drive`を削除する。</p>
+<p>デフォルトの <code>IDE Drive</code> を削除します。</p>
 </li>
 <li>
-<p>ダウンロードした VM zip ファイルからディスク ファイルをインポートして、3 つの Vantage Express ドライブをマッピングします。<code>-disk1</code>、<code>-disk2</code>、<code>-disk3`の正しい順序でマッピングするようにしてください。最初のディスクはブート可能であり、データベース自体が含まれています。Disks 2と3はいわゆる`pdisks`と呼ばれ、データを含んでいます。ファイルをインポートすると、UTMは自動的に`vmdk`から`qcow2`形式に変換する。各ディスクが `IDE</code> インターフェースを使用して構成されていることを確認してください。</p>
+<p>ダウンロードした VM zip ファイルからディスク ファイルをインポートして、3 つの Vantage Express ドライブをマッピングします。<code>-disk1</code>、<code>-disk2</code>、<code>-disk3</code> の正しい順序でマッピングするようにしてください。最初のディスクはブート可能であり、データベース自体が含まれています。Disks 2と3はいわゆる <code>pdisks</code> と呼ばれ、データを含んでいます。ファイルをインポートすると、UTMは自動的に <code>vmdk</code> から <code>qcow2</code> 形式に変換する。各ディスクが <code>IDE</code> インターフェースを使用して構成されていることを確認してください。</p>
 <div class="imageblock">
 <div class="content">
 <img src="../../_images/utm.drives.png" alt="UTMドライブ" width="500">

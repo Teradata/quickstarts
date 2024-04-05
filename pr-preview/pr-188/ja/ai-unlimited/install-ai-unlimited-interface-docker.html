@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2056,7 +2060,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="https://hub.docker.com/r/teradata/ai-unlimited-jupyter">https://hub.docker.com/r/teradata/ai-unlimited-jupyter</a>にある DockerHub からDockerイメージをプルします。</p>
+<p><a href="https://hub.docker.com/r/teradata/ai-unlimited-jupyter">https://hub.docker.com/r/teradata/ai-unlimited-jupyter</a> にある DockerHub からDockerイメージをプルします。</p>
 </li>
 <li>
 <p><code>JUPYTER_HOME</code> 変数を設定したら、Dockerイメージを実行します。</p>
@@ -2086,7 +2090,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </div>
 <div class="paragraph">
 <p>このコマンドは、JupyterLab コンテナをダウンロードして起動し、それにアクセスするために必要なポートを公開します。
-URLhttp://localhost:8888 を使用して JupyterLab に接続し、プロンプトが表示されたらトークンを入力します。詳細な手順については、 <a href="https://docs.teradata.com/r/Teradata-VantageTM-Modules-for-Jupyter-Installation-Guide/Teradata-Vantage-Modules-for-Jupyter/Teradata-Vantage-Modules-for-Jupyter">「Teradata Vantage™ Modules for Jupyter インストール ガイド」</a> または <a href="https://quickstarts.teradata.com/jupyter.html">「Jupyter Notebook から Vantage を使用する」</a>を参照してください。</p>
+URL: <a href="http://localhost:8888" class="bare">http://localhost:8888</a> を使用して JupyterLab に接続し、プロンプトが表示されたらトークンを入力します。詳細な手順については、 <a href="https://docs.teradata.com/r/Teradata-VantageTM-Modules-for-Jupyter-Installation-Guide/Teradata-Vantage-Modules-for-Jupyter/Teradata-Vantage-Modules-for-Jupyter">「Teradata Vantage™ Modules for Jupyter インストール ガイド」</a> または <a href="https://quickstarts.teradata.com/jupyter.html">「Jupyter Notebook から Vantage を使用する」</a> を参照してください。</p>
 </div>
 </div>
 </div>
@@ -2102,7 +2106,7 @@ URLhttp://localhost:8888 を使用して JupyterLab に接続し、プロンプ�
 <p>Docker Composeをインストールします。<a href="https://docs.docker.com/compose/install/">https://docs.docker.com/compose/install/</a> を参照してください。</p>
 </li>
 <li>
-<p><strong>jupyter.yml</strong>ファイルを作成します。</p>
+<p><strong>jupyter.yml</strong> ファイル を作成します。</p>
 <div id="docker_compose_jupyter" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">version: "3.9"
@@ -2129,14 +2133,14 @@ networks:
 </div>
 </li>
 <li>
-<p><strong>jupyter.yml</strong>ファイルがあるディレクトリに移動し、JupyterLabを起動します。</p>
+<p><strong>jupyter.yml</strong> ファイルがあるディレクトリに移動し、JupyterLabを起動します。</p>
 <div id="docker_compose_jupyter_up" class="listingblock content-editable emits-gtm-events">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker compose -f jupyter.yml up</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>JupyterLabサーバーが初期化されて起動されると、URL: <a href="http://localhost:8888を使用してJupyterLabに接続し、プロンプトが表示されたらトークンを入力します。詳細な手順については、" class="bare">http://localhost:8888を使用してJupyterLabに接続し、プロンプトが表示されたらトークンを入力します。詳細な手順については、</a> <a href="https://docs.teradata.com/r/Teradata-VantageTM-Modules-for-Jupyter-Installation-Guide/Teradata-Vantage-Modules-for-Jupyter/Teradata-Vantage-Modules-for-Jupyter">「Teradata Vantage™ Modules for Jupyter インストール ガイド」</a> または <a href="https://quickstarts.teradata.com/jupyter.html">「Jupyter Notebook から Vantage を使用する」</a>を参照してください。</p>
+<p>JupyterLabサーバーが初期化されて起動されると、URL: <a href="http://localhost:8888を使用してJupyterLabに接続し、プロンプトが表示されたらトークンを入力します。詳細な手順については、" class="bare">http://localhost:8888を使用してJupyterLabに接続し、プロンプトが表示されたらトークンを入力します。詳細な手順については、</a> <a href="https://docs.teradata.com/r/Teradata-VantageTM-Modules-for-Jupyter-Installation-Guide/Teradata-Vantage-Modules-for-Jupyter/Teradata-Vantage-Modules-for-Jupyter">「Teradata Vantage™ Modules for Jupyter インストール ガイド」</a> または <a href="https://quickstarts.teradata.com/jupyter.html">「Jupyter Notebook から Vantage を使用する」</a> を参照してください。</p>
 </div>
 </li>
 </ol>

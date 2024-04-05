@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Teradata Jupyter Extentionsと SageMakerNotebookインスタンスの統合 :: Teradata Getting Started</title>
+    <title>Teradata Jupyter Extentionsと SageMakerNotebookインスタンスを統合する :: Teradata Getting Started</title>
     <link rel="canonical" href="https://quickstarts.teradata.com/ja/cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">
     <meta name="description" content="Teradata Jupyter 拡張機能を SageMaker Notebook インスタンスと統合する">
     <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta property="og:title" content="Teradata Jupyter Extentionsと SageMakerNotebookインスタンスの統合 :: Teradata Getting Started">
+<meta property="og:title" content="Teradata Jupyter Extentionsと SageMakerNotebookインスタンスを統合する :: Teradata Getting Started">
 <meta property="og:type" content="article" />
 <meta property="og:description" content="Teradata Jupyter 拡張機能を SageMaker Notebook インスタンスと統合する" />
 <meta property="og:site_name" content="Teradata Getting Started">
@@ -842,6 +842,10 @@ aside.toc.sidebar {
 .doc .admonitionblock .icon i {
   font-family: Inter;
   font-size: 16px;
+}
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
 }
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
@@ -2000,7 +2004,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="integrate-teradata-jupyter-extensions-with-sagemaker.html">Teradata Jupyter Extentionsと SageMakerNotebookインスタンスの統合</a></li>
+    <li><a href="integrate-teradata-jupyter-extensions-with-sagemaker.html">Teradata Jupyter Extentionsと SageMakerNotebookインスタンスを統合する</a></li>
   </ul>
 </nav>
 </div>
@@ -2014,7 +2018,7 @@ document.addEventListener("DOMContentLoaded", function () {
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Teradata Jupyter Extentionsと SageMakerNotebookインスタンスの統合</h1>
+<h1 class="page">Teradata Jupyter Extentionsと SageMakerNotebookインスタンスを統合する</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="admonitionblock note">
@@ -2083,7 +2087,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <li>
 <p>Teradata Jupyter Extentionsパッケージのダウンロードする</p>
 <div class="paragraph">
-<p>Linux版をhttps://downloads.teradata.com/download/tools/vantage-modules-for-jupyter からダウンロードし、S3バケットにアップロードしてください。Teradata Jupyterのカーネルとエクステンションを含むzipパッケージです。各エクステンションには2つのファイルがあり、名前に"_prebuilt "が付いているものがPIPでインストールできるプリビルドエクステンション、もう1つが "jupyter labextension "でインストールする必要があるソースエクステンションになります。プレビルド拡張を使用することをお勧めします。</p>
+<p>Linux版を <a href="https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter" class="bare">https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter</a> からダウンロードし、S3バケットにアップロードしてください。Teradata Jupyterのカーネルとエクステンションを含むzipパッケージです。各エクステンションには2つのファイルがあり、名前に"_prebuilt "が付いているものがPIPでインストールできるプリビルドエクステンション、もう1つが "jupyter labextension "でインストールする必要があるソースエクステンションになります。プレビルド拡張を使用することをお勧めします。</p>
 </div>
 </li>
 <li>

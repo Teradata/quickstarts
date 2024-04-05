@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2019,7 +2023,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <h2 id="_概要"><a class="anchor" href="#_概要"></a>概要</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このチュートリアルでは、Teradata Vantage で dbt (データ構築ツール) を使用する方法を説明します。これは、オリジナルの <a href="https://github.com/dbt-labs/jaffle_shop-dev">dbt Jaffle Shop チュートリアル</a>に基づいています。いくつかのモデルは、Vantage がサポートする SQL Dialectに合わせて調整されています。</p>
+<p>このチュートリアルでは、Teradata Vantage で dbt (データ構築ツール) を使用する方法を説明します。これは、オリジナルの  <a href="https://github.com/dbt-labs/jaffle_shop-dev">dbt Jaffle Shop チュートリアル</a> に基づいています。いくつかのモデルは、Vantage がサポートする SQL Dialectに合わせて調整されています。</p>
 </div>
 </div>
 </div>
@@ -2045,7 +2049,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </li>
 <li>
-<p>Python <strong>3.7</strong>、<strong>3.8</strong>、<strong>3.9</strong>、<strong>3.10</strong>、または *3.11*がインストールされていること。</p>
+<p>Python <strong>3.7</strong>、<strong>3.8</strong>、<strong>3.9</strong>、<strong>3.10</strong>、または <strong>3.11</strong> がインストールされていること。</p>
 </li>
 </ul>
 </div>
@@ -2110,7 +2114,7 @@ source env/bin/activate</code></pre>
 </div>
 </li>
 <li>
-<p>`dbt-teradata`モジュールとその依存関係をインストールします。dbtのコアモジュールも依存関係のあるモジュールとして含まれているので、別にインストールする必要はありません。</p>
+<p><code>dbt-teradata</code> モジュールとその依存関係をインストールします。dbtのコアモジュールも依存関係のあるモジュールとして含まれているので、別にインストールする必要はありません。</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install dbt-teradata</code></pre>
@@ -2122,7 +2126,7 @@ source env/bin/activate</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_dbtの構成"><a class="anchor" href="#_dbtの構成"></a>dbtの構成</h2>
+<h2 id="_dbtを構成する"><a class="anchor" href="#_dbtを構成する"></a>dbtを構成する</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>ここで、dbtを設定してVantageデータベースに接続します。以下の内容のファイル <code>$HOME/.dbt/profiles.yml</code> を作成します。Teradata インスタンスに一致するように`&lt;host&gt;`、<code>&lt;user&gt;</code> 、<code>&lt;password&gt;</code> を調整します。</p>
@@ -2134,7 +2138,7 @@ source env/bin/activate</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="title">データベースの設定</div>
+<div class="title">データベースを設定する</div>
 <div class="paragraph">
 <p>以下の dbt プロファイルは、 <code>jaffle_shop`というデータベースを指します。データベースがTeradata Vantageインスタンスに存在しない場合は、作成されます。インスタンス内の既存のデータベースを指すように `schema</code> 値を変更することもできます。</p>
 </div>
@@ -2204,7 +2208,7 @@ source env/bin/activate</code></pre>
 <div class="sect2">
 <h3 id="_生データテーブルを作成する"><a class="anchor" href="#_生データテーブルを作成する"></a>生データテーブルを作成する</h3>
 <div class="paragraph">
-<p>実際には、Segment、Stitch、Fivetran、または別の ETL ツールなどのプラットフォームから生データを取得することになります。この例では、dbtの`seed`機能を使用して、csvファイルからテーブルを作成します。csvファイルは、`./data`ディレクトリにあります。各 csv ファイルによって 1 つのテーブルが作成されます。 dbt はファイルを検査し、型推論を行って列に使用するデータ型を決定します。</p>
+<p>実際には、Segment、Stitch、Fivetran、または別の ETL ツールなどのプラットフォームから生データを取得することになります。この例では、dbtの <code>seed</code> 機能を使用して、csvファイルからテーブルを作成します。csvファイルは、<code>./data</code> ディレクトリにあります。各 csv ファイルによって 1 つのテーブルが作成されます。 dbt はファイルを検査し、型推論を行って列に使用するデータ型を決定します。</p>
 </div>
 <div class="paragraph">
 <p>生データ テーブルを作成しましょう。</p>
@@ -2229,8 +2233,8 @@ source env/bin/activate</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>では、ここで何があったのか? dbtは`CREATE TABLE/VIEW FROM SELECT`SQLを使用して追加のテーブルを作成した。最初の変換では、dbtは生のテーブルを取得し、<code>customer_orders</code>、<code>order_payments</code>、<code>customer_payments`と呼ばれる非正規化結合テーブルを構築しました。これらのテーブルの定義は</code>./marts/core/intermediate`に記載されています。
-2番目のステップでは、dbtは <code>dim_customers</code> と`fct_orders`のテーブルを作成しました。これらは、BI ツールに公開するディメンション モデル テーブルです。</p>
+<p>では、ここで何があったのか? dbtは <code>CREATE TABLE/VIEW FROM SELECT</code> SQLを使用して追加のテーブルを作成した。最初の変換では、dbtは生のテーブルを取得し、<code>customer_orders</code>、<code>order_payments</code>、<code>customer_payments</code> と呼ばれる非正規化結合テーブルを構築しました。これらのテーブルの定義は <code>./marts/core/intermediate</code> に記載されています。
+2番目のステップでは、dbtは <code>dim_customers</code> と <code>fct_orders</code> のテーブルを作成しました。これらは、BI ツールに公開するディメンション モデル テーブルです。</p>
 </div>
 </div>
 <div class="sect2">
@@ -2245,7 +2249,7 @@ source env/bin/activate</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ドキュメントの生成"><a class="anchor" href="#_ドキュメントの生成"></a>ドキュメントの生成</h3>
+<h3 id="_ドキュメントを生成する"><a class="anchor" href="#_ドキュメントを生成する"></a>ドキュメントを生成する</h3>
 <div class="paragraph">
 <p>このモデルは、わずか数個のテーブルで構成されています。さらに多くのデータ ソースと、より複雑なディメンションモデルがあるシナリオを想像してください。また、生データと Data Vault 2.0 の原則に従ったディメンションモデルの間に中間ゾーンを設けることもできます。入力、変換、出力を何らかの方法でドキュメント化できたら便利ではないでしょうか? dbt を使用すると、構成ファイルからドキュメントを生成できます。</p>
 </div>
@@ -2255,7 +2259,7 @@ source env/bin/activate</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>これにより、`./target`ディレクトリにhtmlファイルが生成されます。</p>
+<p>これにより、<code>./target</code> ディレクトリにhtmlファイルが生成されます。</p>
 </div>
 <div class="paragraph">
 <p>独自のサーバーを起動してドキュメントを参照できます。以下のコマンドはサーバーを起動し、ドキュメントのランディング ページが表示されたブラウザ タブを開きます。</p>

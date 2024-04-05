@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2030,10 +2034,10 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="sect2">
 <h3 id="_azure_data_shareについて"><a class="anchor" href="#_azure_data_shareについて"></a>Azure Data Shareについて</h3>
 <div class="paragraph">
-<p><a href="https://docs.microsoft.com/en-us/azure/data-share/overview">Azure Data Share</a> は、企業が複数の顧客やパートナーと簡単かつ安全にデータを共有することを可能にします。データ提供者とデータ消費者の両方が、データを共有および受信するためにAzureサブスクリプションを持つ必要があります。Azure Data Shareは現在、スナップショットベースの共有とインプレース共有を提供しています。現在、Azure Data Shareがhttps://docs.microsoft.com/en-us/azure/data-share/supported-data-stores[サポートしているデータストア]は、Azure Blob Storage、Azure Data Lake Storage Gen1およびGen2、Azure SQL Database、Azure Synapse Analytics、Azure Data Explorerです。Azure Data Shareを使用してデータセット共有を送信すると、データ消費者はAzure Blob Storageなどの任意のデータストアでそのデータを受け取り、Teradata Vantageを使用してデータを探索、分析することができます。</p>
+<p><a href="https://docs.microsoft.com/en-us/azure/data-share/overview">Azure Data Share</a> は、企業が複数の顧客やパートナーと簡単かつ安全にデータを共有することを可能にします。データ提供者とデータ消費者の両方が、データを共有および受信するためにAzureサブスクリプションを持つ必要があります。Azure Data Shareは現在、スナップショットベースの共有とインプレース共有を提供しています。現在、Azure Data Shareが <a href="https://docs.microsoft.com/en-us/azure/data-share/supported-data-stores">サポートしているデータストア</a> は、Azure Blob Storage、Azure Data Lake Storage Gen1およびGen2、Azure SQL Database、Azure Synapse Analytics、Azure Data Explorerです。Azure Data Shareを使用してデータセット共有を送信すると、データ消費者はAzure Blob Storageなどの任意のデータストアでそのデータを受け取り、Teradata Vantageを使用してデータを探索、分析することができます。</p>
 </div>
 <div class="paragraph">
-<p>詳細については、https://docs.microsoft.com/en-us/azure/data-share/[ドキュメント]を参照してください。</p>
+<p>詳細については、https://docs.microsoft.com/en-us/azure/data-share/[ドキュメント] を参照してください。</p>
 </div>
 </div>
 <div class="sect2">
@@ -2088,10 +2092,10 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <div class="ulist">
 <ul>
 <li>
-<p>Azureアカウント。 <a href="https://azure.microsoft.com/free/">無料アカウント</a>で始めることができます。</p>
+<p>Azureアカウント。 <a href="https://azure.microsoft.com/free/">無料アカウント</a> で始めることができます。</p>
 </li>
 <li>
-<p>データデータセットを保存するための <a href="https://docs.microsoft.com/en-us/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal">Azure Blob Storage</a>アカウント。</p>
+<p>データデータセットを保存するための <a href="https://docs.microsoft.com/en-us/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal">Azure Blob Storage</a> アカウント。</p>
 </li>
 </ul>
 </div>
@@ -2129,11 +2133,11 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </ol>
 </div>
 <div class="sect2">
-<h3 id="_azure_blob_storageアカウントとコンテナの作成"><a class="anchor" href="#_azure_blob_storageアカウントとコンテナの作成"></a>Azure Blob Storageアカウントとコンテナの作成</h3>
+<h3 id="_azure_blob_storageアカウントとコンテナを作成する"><a class="anchor" href="#_azure_blob_storageアカウントとコンテナを作成する"></a>Azure Blob Storageアカウントとコンテナを作成する</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>ブラウザで <a href="https://portal.azure.com/">Azureポータル</a>を開き（Chrome、Firefox、Safariでうまくいきます）、この記事の_myProviderStorage_rg_というリソースグループにhttps://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal#create-a-storage-account-1[ストレージアカウントを作成する]の手順に従います。</p>
+<p>ブラウザで <a href="https://portal.azure.com/">Azureポータル</a> を開き（Chrome、Firefox、Safariでうまくいきます）、この記事の <em>myProviderStorage_rg</em> というリソースグループに <a href="https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal#create-a-storage-account-1">ストレージアカウントを作成する</a> の手順に従います。</p>
 </li>
 <li>
 <p>ストレージ名と接続方式を入力します。今回は、 <em>myproviderstorage</em> と <em>public endpoint</em> を使用します。</p>
@@ -2151,13 +2155,13 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </li>
 <li>
-<p><strong>Review + create</strong> を選択し、*Create*を選択します。</p>
+<p><strong>Review + create</strong> を選択し、<strong>Create</strong> を選択します。</p>
 </li>
 <li>
 <p><strong>Go to resource</strong> をクリックし、 <strong>Containers</strong> をクリックし、コンテナを作成します。</p>
 </li>
 <li>
-<p>*+ Container*ボタンをクリックします。</p>
+<p><strong>+ Container</strong> ボタンをクリックします。</p>
 </li>
 <li>
 <p>コンテナ名を入力します。今回は <em>providerdata</em> を使用します。</p>
@@ -2166,7 +2170,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </li>
 <li>
-<p>*作成*をクリックします。</p>
+<p><strong>作成</strong> をクリックします。</p>
 </li>
 </ul>
 </div>
@@ -2177,12 +2181,12 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <p>データセットを共有するプロバイダーのデータ共有アカウントを作成します。</p>
 </div>
 <div class="paragraph">
-<p>この記事の <a href="https://docs.microsoft.com/en-us/azure/data-share/share-your-data?tabs=azure-portal#create-a-data-share-account">「Azure データ共有アカウントの作成」</a> 手順に従い、 <em>myDataShareProvider_rg</em> というリソース グループにリソースを作成します。</p>
+<p>この記事の <a href="https://docs.microsoft.com/en-us/azure/data-share/share-your-data?tabs=azure-portal#create-a-data-share-account">Azure データ共有アカウントの作成</a> の手順に従い、 <em>myDataShareProvider_rg</em> というリソース グループにリソースを作成します。</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>*Basics*タブで、データ共有アカウント名を入力します。今回は 、<em>mydatashareprovider</em> を使用します。</p>
+<p><strong>Basics</strong> タブで、データ共有アカウント名を入力します。今回は 、<em>mydatashareprovider</em> を使用します。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/connect-azure-data-share-to-teradata-vantage/image4.png" alt="image" width="576" height="394"></span></p>
 </div>
@@ -2200,10 +2204,10 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </li>
 <li>
-<p><strong>Review + create</strong> を選択し、*Create*を選択します。</p>
+<p><strong>Review + create</strong> を選択し、<strong>Create</strong> を選択します。</p>
 </li>
 <li>
-<p>デプロイが完了したら、*Go to resource*を選択します。</p>
+<p>デプロイが完了したら、<strong>Go to resource</strong> を選択します。</p>
 </li>
 </ul>
 </div>
@@ -2213,7 +2217,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <div class="ulist">
 <ul>
 <li>
-<p>[データ共有]の概要ページに移動し、 <a href="https://docs.microsoft.com/en-us/azure/data-share/share-your-data?tabs=azure-portal#create-a-share">「共有を作成」</a>の手順に従います。</p>
+<p>[データ共有]の概要ページに移動し、 <a href="https://docs.microsoft.com/en-us/azure/data-share/share-your-data?tabs=azure-portal#create-a-share">共有を作成</a> の手順に従います。</p>
 </li>
 <li>
 <p><strong>Start sharing your data</strong> を選択します。</p>
@@ -2222,7 +2226,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <p>+ <strong>Create</strong> を選択します。</p>
 </li>
 <li>
-<p>*Details*タブで、共有名と共有タイプを入力します。今回は、<em>WeatherData</em> と <em>Snapshot</em> を使用します。</p>
+<p><strong>Details</strong> タブで、共有名と共有タイプを入力します。今回は、<em>WeatherData</em> と <em>Snapshot</em> を使用します。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/connect-azure-data-share-to-teradata-vantage/image5.png" alt="image" width="472" height="381"></span></p>
 </div>
@@ -2268,14 +2272,14 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <div class="ulist">
 <ul>
 <li>
-<p>*Continue*をクリックします。</p>
+<p><strong>Continue</strong> をクリックします。</p>
 </li>
 <li>
-<p><strong>Datasets*タブで、 *Add datasets</strong>
+<p><strong>Datasets</strong> タブで、 <strong>Add datasets</strong>
 をクリックします。</p>
 </li>
 <li>
-<p>を選択します <strong>Azure Blob Storage</strong></p>
+<p><strong>Azure Blob Storage</strong> を選択します。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/connect-azure-data-share-to-teradata-vantage/image6.png" alt="Image" width="378" height="360"></span></p>
 </div>
@@ -2290,7 +2294,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </li>
 <li>
-<p>*Next*をクリックします。</p>
+<p><strong>Next</strong> をクリックします。</p>
 </li>
 <li>
 <p>コンテナをダブルクリックして、データセットを選択します。今回は 、<em>providerdata</em> と <em>onpoint_history_postal-code_hour.csv</em> ファイルを使用します。</p>
@@ -2318,25 +2322,25 @@ Azure Data Share は、フォルダおよびファイル レベルで共有で�
 <div class="ulist">
 <ul>
 <li>
-<p>*次へ*をクリックします。</p>
+<p><strong>次へ</strong> をクリックします。</p>
 </li>
 <li>
-<p>コンシューマに表示されるフォルダとデータセットのデータセット名を入力します。今回はデフォルトの名前を使用しますが、providerdata フォルダを削除します。*Add datasets*をクリックします。</p>
+<p>コンシューマに表示されるフォルダとデータセットのデータセット名を入力します。今回はデフォルトの名前を使用しますが、providerdata フォルダを削除します。<strong>Add datasets</strong> をクリックします。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/connect-azure-data-share-to-teradata-vantage/image9.png" alt="Image" width="392" height="266"></span></p>
 </div>
 </li>
 <li>
-<p>*Add datasets*をクリックします。</p>
+<p><strong>Add datasets</strong> をクリックします。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/connect-azure-data-share-to-teradata-vantage/image10.png" alt="送信済み共有に追加されたデータセット" width="624" height="242"></span></p>
 </div>
 </li>
 <li>
-<p>*Continue*をクリックします。</p>
+<p><strong>Continue</strong> をクリックします。</p>
 </li>
 <li>
-<p>*Recipients*タブで、 *Add recipient*の電子メールアドレスを追加するをクリックします。。</p>
+<p><strong>Recipients</strong> タブで、 <strong>Add recipient</strong> の電子メールアドレスを追加するをクリックします。。</p>
 </li>
 <li>
 <p>消費者の電子メールアドレスを入力します。</p>
@@ -2361,7 +2365,7 @@ Azure Data Share は、フォルダおよびファイル レベルで共有で�
 <div class="ulist">
 <ul>
 <li>
-<p>*Continue*をクリックします。</p>
+<p><strong>Continue</strong> をクリックします。</p>
 </li>
 <li>
 <p>[<strong>Settings</strong>] タブで、スナップショットのスケジュールを設定します。今回は、デフォルトで <em>チェックを外して</em> 使用します。</p>
@@ -2370,10 +2374,10 @@ Azure Data Share は、フォルダおよびファイル レベルで共有で�
 </div>
 </li>
 <li>
-<p>*Continue*をクリックします。</p>
+<p><strong>Continue</strong> をクリックします。</p>
 </li>
 <li>
-<p>*Review + Create*タブの *Create*をクリックします。</p>
+<p><strong>Review + Create</strong> タブの *Create*をクリックします。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/connect-azure-data-share-to-teradata-vantage/image13.png" alt="Review + Create" width="440" height="334"></span></p>
 </div>
@@ -2393,21 +2397,21 @@ Azure Data Share は、フォルダおよびファイル レベルで共有で�
 <p>今回は、受信者/消費者が Azure Blob ストレージ アカウントにデータを受信することを想定しています。</p>
 </div>
 <div class="paragraph">
-<p>データ共有_プロバイダ_と同様に、データ共有の招待を受け入れる前に、_コンシューマ_のすべての事前要件が完了していることを確認します。</p>
+<p>データ共有 <em>プロバイダ</em> と同様に、データ共有の招待を受け入れる前に、<em>コンシューマ</em> のすべての事前要件が完了していることを確認します。</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Azureのサブスクリプション。持っていない場合は、事前にhttps://azure.microsoft.com/free/[無料アカウント]を作成してください。</p>
+<p>Azureのサブスクリプション。持っていない場合は、事前に <a href="https://azure.microsoft.com/free/">無料アカウント</a> を作成してください。</p>
 </li>
 <li>
-<p>Azure Blob Storage アカウントとコンテナ:  <em>myConsumerStorage_rg_というリソース グループを作成し、アカウント名 _myconsumerstorage</em> とコンテナ _consumerdata_を作成します。</p>
+<p>Azure Blob Storage アカウントとコンテナ:  <em>myConsumerStorage_rg</em> というリソース グループを作成し、アカウント名 <em>myconsumerstorage</em> とコンテナ <em>consumerdata</em> を作成します。</p>
 </li>
 <li>
 <p>Azure Data Share アカウント: <em>myDataShareConsumer_rg</em> というリソース グループを作成し、 <em>mydatashareconsumer</em> というデータ共有アカウント名を作成して、データを受け入れます。</p>
 <div class="literalblock">
 <div class="content">
-<pre>https://docs.microsoft.com/en-us/azure/data-share/subscribe-to-data-share?tabs=azure-portal[「Azure Data Shareを使用してデータを受信する」]の手順に従います。</pre>
+<pre>https://docs.microsoft.com/en-us/azure/data-share/subscribe-to-data-share?tabs=azure-portal[Azure Data Shareを使用してデータを受信する]の手順に従います。</pre>
 </div>
 </div>
 </li>
@@ -2418,7 +2422,7 @@ Azure Data Share は、フォルダおよびファイル レベルで共有で�
 <div class="ulist">
 <ul>
 <li>
-<p>メールには、Microsoft Azureから「Azure Data Share invitation from *<a href="mailto:yourdataprovider@domain.com">yourdataprovider@domain.com</a>.*という件名の招待状が届いています。*View invitation(招待状を表示する)*をクリックすると、Azureで招待状を表示することができます。</p>
+<p>メールには、Microsoft Azureから「Azure Data Share invitation from <strong><a href="mailto:yourdataprovider@domain.com">yourdataprovider@domain.com</a>.*という件名の招待状が届いています。*View invitation(招待状を表示する)</strong> をクリックすると、Azureで招待状を表示することができます。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/connect-azure-data-share-to-teradata-vantage/image15.png" alt="受信者へのData Share招待状メール" width="387" height="192"></span></p>
 </div>
@@ -2448,7 +2452,7 @@ Azure Data Share は、フォルダおよびファイル レベルで共有で�
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-プロバイダが利用規約の承諾を必要とする場合、ダイアログボックスが表示され、利用規約に同意することを示すボックスにチェックを入れる必要があります。
+f プロバイダが利用規約の承諾を必要とする場合、ダイアログボックスが表示され、利用規約に同意することを示すボックスにチェックを入れる必要があります。
 </td>
 </tr>
 </table>
@@ -2477,7 +2481,7 @@ Azure Data Share は、フォルダおよびファイル レベルで共有で�
 </div>
 </li>
 <li>
-<p>ターゲットデータストアの種類と、データを格納するパスを選択します。この記事のスナップショットの例では、コンシューマーの Azure Blob Storage アカウント  <em>myconsumerstorage</em> とコンテナ _consumerdata_を使用することにします。</p>
+<p>ターゲットデータストアの種類と、データを格納するパスを選択します。この記事のスナップショットの例では、コンシューマーの Azure Blob Storage アカウント  <em>myconsumerstorage</em> とコンテナ  <em>consumerdata</em> を使用することにします。</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2498,13 +2502,13 @@ Azure Data Shareは、異なるデータストアから、または異なるデ�
 <p>*Map to target*をクリックします。</p>
 </li>
 <li>
-<p>マッピングが完了したら、スナップショットベースの共有のために、*Details*タブをクリックし、_フル_または_インクリメンタル_インクリメンタルで *Trigger snapshot*をクリックします。プロバイダからデータを受け取るのは初めてなので、完全なコピーを選択します。</p>
+<p>マッピングが完了したら、スナップショットベースの共有の場合は、<strong>Details</strong> タブをクリックし、<em>Full</em> または <em>Incremental</em> で <strong>Trigger snapshot</strong> をクリックします。プロバイダからデータを受け取るのは初めてなので、完全なコピーを選択します。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/connect-azure-data-share-to-teradata-vantage/image20.png" alt="フルまたはインクリメンタルのスナップショットをトリガーする" width="326" height="280"></span></p>
 </div>
 </li>
 <li>
-<p>最終実行ステータスが_successful (成功)_したら、ターゲットデータストアに移動して受信したデータを表示します。 <strong>Datasets</strong> を選択し、Target Pathにあるリンクをクリックします。</p>
+<p>最終実行ステータスが <em>成功</em> したら、ターゲットデータストアに移動して受信したデータを表示します。 <strong>Datasets</strong> を選択し、Target Pathにあるリンクをクリックします。</p>
 <div class="paragraph">
 <p><span class="image"><img src="../../_images/cloud-guides/connect-azure-data-share-to-teradata-vantage/image21.png" alt="共有データを表示するためのデータセットとターゲットパス" width="623" height="118"></span></p>
 </div>
@@ -2640,7 +2644,7 @@ USING (
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Vantage の外部テーブルでは、オブジェクト名と列名の区切りに`..`(ダブルドットまたはダブルピリオド) オペレータが使用されます。
+Vantage の外部テーブルでは、オブジェクト名と列名の区切りに <code>..</code> (ダブルドットまたはダブルピリオド) オペレータが使用されます。
 </td>
 </tr>
 </table>
@@ -2960,7 +2964,7 @@ ORDER BY 1</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><em>LOCATION</em>、 <em>ACCESS_ID</em>、および _ACCESS_KEY_の値を入れ替えてください。</p>
+<p><em>LOCATION</em>、 <em>ACCESS_ID</em>、および  <em>ACCESS_KEY</em> の値を入れ替えてください。</p>
 </li>
 </ul>
 </div>

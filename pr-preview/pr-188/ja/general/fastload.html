@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2026,7 +2030,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <td class="content">
 <div class="title">廃止のお知らせ</div>
 <div class="paragraph">
-<p>このハウツーでは、`Fastload`ユーティリティについて説明しています。このユーティリティは廃止されました。新しい実装では、<a href="https://docs.teradata.com/search/documents?query=Teradata+Parallel+Transporter+Quick+Start+Guide&amp;sort=last_update&amp;virtual-field=title_only&amp;content-lang=en-US">Teradata Parallel Transporter(TPT)</a>の使用を検討してください。</p>
+<p>このハウツーでは、<code>Fastload</code> ユーティリティについて説明しています。このユーティリティは廃止されました。新しい実装では、 <a href="https://docs.teradata.com/search/documents?query=Teradata+Parallel+Transporter+Quick+Start+Guide&amp;sort=last_update&amp;virtual-field=title_only&amp;content-lang=en-US">Teradata Parallel Transporter(TPT)</a> の使用を検討してください。</p>
 </div>
 </td>
 </tr>
@@ -2064,7 +2068,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </li>
 <li>
-<p>Teradata Tools and Utilities (TTU) をダウンロード -  サポートされているプラットフォーム: <a href="https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-windows-installation-package">Windows</a>、 <a href="https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-macos-installation-package">MacOS</a>、 <a href="https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-linux-installation-package-0">Linux</a> (登録が必要です)。</p>
+<p>Teradata Tools and Utilities (TTU) をダウンロード -   サポートされているプラットフォーム: <a href="https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-windows-installation-package">Windows</a>、 <a href="https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-macos-installation-package">MacOS</a>、 <a href="https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-linux-installation-package-0">Linux</a> (登録が必要です)。</p>
 </li>
 </ul>
 </div>
@@ -2113,10 +2117,10 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 </div>
 </div>
 <div class="sect1">
-<h2 id="_サンプルデータの入手"><a class="anchor" href="#_サンプルデータの入手"></a>サンプルデータの入手</h2>
+<h2 id="_サンプルデータを入手する"><a class="anchor" href="#_サンプルデータを入手する"></a>サンプルデータを入手する</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>非営利団体の米国税務申告を扱います。非営利の納税申告は公開データです。アメリカ内国歳入庁は、これらを S3 バケットで公開します。2020 年の提出書類のまとめを見てみましょう: <code><a href="https://s3.amazonaws.com/irs-form-990/index_2020.csv" class="bare">https://s3.amazonaws.com/irs-form-990/index_2020.csv</a></code>。ブラウザ、<code>wget</code>、または`curl`を使用して、ファイルをローカルに保存できます。</p>
+<p>非営利団体の米国税務申告を扱います。非営利の納税申告は公開データです。アメリカ内国歳入庁は、これらを S3 バケットで公開します。2020 年の提出書類のまとめを見てみましょう: <code><a href="https://s3.amazonaws.com/irs-form-990/index_2020.csv" class="bare">https://s3.amazonaws.com/irs-form-990/index_2020.csv</a></code>。ブラウザ、<code>wget</code>、または <code>curl</code> を使用して、ファイルをローカルに保存できます。</p>
 </div>
 </div>
 </div>
@@ -2139,7 +2143,7 @@ AS PERMANENT = 120e6, -- 120MB
 <h2 id="_fastloadを実行する"><a class="anchor" href="#_fastloadを実行する"></a>Fastloadを実行する</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>これから`Fastload`を実行する。<code>Fastload</code> は、大量のデータを Vantage にアップロードする際に非常に効率的なコマンドラインツールです。<code>Fastload`は、高速にするためにいくつかの制限が設けられています。空のテーブルのみを設定でき、すでに設定されているテーブルへの挿入はサポートされていません。セカンダリ インデックスを持つテーブルはサポートされません。また、テーブルが `MULTISET</code> テーブルであっても、重複レコードは挿入されない。 制限の完全なリストについては、<a href="https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root">Teradata®  `Fastload`リファレンス</a>を参照してください。</p>
+<p>これから <code>Fastload</code> を実行する。<code>Fastload</code> は、大量のデータを Vantage にアップロードする際に非常に効率的なコマンドラインツールです。<code>Fastload</code> は、高速にするためにいくつかの制限が設けられています。空のテーブルのみを設定でき、すでに設定されているテーブルへの挿入はサポートされていません。セカンダリ インデックスを持つテーブルはサポートされません。また、テーブルが <code>MULTISET</code> テーブルであっても、重複レコードは挿入されない。 制限の完全なリストについては、<a href="https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root">Teradata®  `Fastload`リファレンス</a> を参照してください。</p>
 </div>
 <div class="paragraph">
 <p>Fastload には独自のスクリプト言語があります。この言語を使用すると、任意の SQLコマンドを使用してデータベースを準備し、入力ソースを宣言し、Vantage にデータを挿入する方法を定義できます。このツールは対話型モードとバッチ モードの両方をサポートしています。このセクションでは、対話型モードを使用します。</p>
@@ -2200,7 +2204,7 @@ PRIMARY INDEX ( return_id );</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>`Fastload`に 10k 行ごとにチェックポイントを保存するように指示します。ジョブを再開する必要がある場合に便利です。最後のチェックポイントから再開できるようになります。</p>
+<p><code>Fastload</code> に 10k 行ごとにチェックポイントを保存するように指示します。ジョブを再開する必要がある場合に便利です。最後のチェックポイントから再開できるようになります。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2248,7 +2252,7 @@ PRIMARY INDEX ( return_id );</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>最後に、データベースにデータを入れる INSERT 文を定義し、`LOADING`ブロックを閉じます。</p>
+<p>最後に、データベースにデータを入れる INSERT 文を定義し、<code>LOADING</code> ブロックを閉じます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2389,7 +2393,7 @@ NO PRIMARY INDEX;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>NOS ソリューションは追加のツールに依存しないため便利です。clear​37 / 5,000翻訳結果翻訳の結果SQLのみで実装可能です。NOS タスクが AMP に委任され、並行して実行されるため、特に多数の AMP を備えた Vantage デプロイメント環境では良好なパフォーマンスを発揮します。また、オブジェクト ストレージ内のデータを複数のファイルに分割すると、パフォーマンスがさらに向上する可能性があります。</p>
+<p>NOS ソリューションは追加のツールに依存しないため便利です。SQLのみで実装可能です。NOS タスクが AMP に委任され、並行して実行されるため、特に多数の AMP を備えた Vantage デプロイメント環境では良好なパフォーマンスを発揮します。また、オブジェクト ストレージ内のデータを複数のファイルに分割すると、パフォーマンスがさらに向上する可能性があります。</p>
 </div>
 </div>
 </div>
@@ -2397,7 +2401,7 @@ NO PRIMARY INDEX;</code></pre>
 <h2 id="_まとめ"><a class="anchor" href="#_まとめ"></a>まとめ</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このハウツーでは、大量のデータを Vantage に取り込む方法を説明しました。`Fastload`を使用して、数十万のレコードを Vantage に数秒でロードしました。</p>
+<p>このハウツーでは、大量のデータを Vantage に取り込む方法を説明しました。<code>Fastload</code> を使用して、数十万のレコードを Vantage に数秒でロードしました。</p>
 </div>
 </div>
 </div>
@@ -2410,7 +2414,7 @@ NO PRIMARY INDEX;</code></pre>
 <p><a href="https://docs.teradata.com/r/hBBrRBhRY0MFN4~xApbUqw/root">Teradata® <code>Fastload</code> リファレンス</a></p>
 </li>
 <li>
-<p><a href="../../nos.html" class="xref page">Query data stored in object storage</a></p>
+<p><a href="nos.html">オブジェクトストレージに保存されたクエリーデータ</a></p>
 </li>
 </ul>
 </div>

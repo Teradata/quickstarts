@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -2019,7 +2023,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <h2 id="_概要"><a class="anchor" href="#_概要"></a>概要</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このチュートリアルでは、Airbyteを使用してソースからTeradata Vantageにデータを移動する方法を紹介し、https://docs.airbyte.com/using-airbyte/getting-started/[Airbyte Open Source オプション]とhttps://airbyte.com/[Airbyte Cloud オプション]の両方について詳しく説明します。この具体的な例では、Google スプレッドシートから Teradata Vantage へのレプリケーションを取り上げます。</p>
+<p>このチュートリアルでは、Airbyteを使用してソースからTeradata Vantageにデータを移動する方法を紹介し、 <a href="https://docs.airbyte.com/using-airbyte/getting-started/">Airbyte Open Source オプション</a> と <a href="https://airbyte.com/">Airbyte Cloud オプション</a> の両方について詳しく説明します。 この具体的な例では、Google スプレッドシートから Teradata Vantage へのレプリケーションを取り上げます。</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2044,7 +2048,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="ulist">
 <ul>
 <li>
-<p>Teradata Vantageインスタンスへのアクセス。これは、Airbyte 接続の宛先として定義されます。Airbyteの設定には、データベースの`Host`、<code>Username</code>、`Password`が必要です。</p>
+<p>Teradata Vantageインスタンスへのアクセス。これは、Airbyte 接続の宛先として定義されます。Airbyteの設定には、データベースの <code>Host</code>、<code>Username</code>、<code>Password</code> が必要です。</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2063,7 +2067,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <p><a href="https://support.google.com/googleapi/answer/6158841?hl=en" target="_blank" rel="noopener">個人または組織のアカウントで Google Cloud Platform API が有効になっている</a>。OAuth またはサービス アカウント キー認証システムを介して Google アカウントを認証する必要があります。この例では、サービス アカウント キー認証システムを使用します。</p>
 </li>
 <li>
-<p>ソース システムからのデータ。この場合は、<a href="https://docs.google.com/spreadsheets/d/1XNBYUw3p7xG6ptfwjChqZ-dNXbTuVwPi7ToQfYKgJIE/edit#gid=0">Google スプレッドシートのサンプルスプレッドシート、 window="_blank"</a>を使用する。サンプルデータは、従業員型別の給与の内訳です。</p>
+<p>ソース システムからのデータ。この場合は、<a href="https://docs.google.com/spreadsheets/d/1XNBYUw3p7xG6ptfwjChqZ-dNXbTuVwPi7ToQfYKgJIE/edit#gid=0" target="_blank" rel="noopener">Google スプレッドシートのサンプルスプレッドシート</a> を使用する。サンプルデータは、従業員型別の給与の内訳です。</p>
 </li>
 </ul>
 </div>
@@ -2072,7 +2076,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://airbyte.com/">Airbyte Cloud</a> でアカウントを作成し、<a href="#airbyte_configuration">Airbyte Configuration</a>セクションの手順に進みます。</p>
+<p><a href="https://airbyte.com/">Airbyte Cloud</a> でアカウントを作成し、<a href="#airbyte_configuration">Airbyte Configuration</a> セクションの手順に進みます。</p>
 </li>
 </ul>
 </div>
@@ -2082,7 +2086,7 @@ Vantage のテスト インスタンスが必要な場合は、 <a href="https:/
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://github.com/airbytehq/airbyte" target="_blank" rel="noopener">Airbyte Open Source</a>をローカルで実行するには、Docker Compose をインストールします。Docker Compose には Docker Desktop が付属しています。詳細については 、<a href="https://docs.docker.com/compose/install/" target="_blank" rel="noopener">docker ドキュメント</a> を参照してください。</p>
+<p><a href="https://github.com/airbytehq/airbyte" target="_blank" rel="noopener">Airbyte Open Source</a> をローカルで実行するには、Docker Compose をインストールします。Docker Compose には Docker Desktop が付属しています。詳細については 、<a href="https://docs.docker.com/compose/install/" target="_blank" rel="noopener">docker ドキュメント</a> を参照してください。</p>
 </li>
 <li>
 <p>Airbyte Open Source リポジトリのクローンを作成し、airbyte ディレクトリに移動します。</p>
@@ -2101,7 +2105,7 @@ cd airbyte</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>シェルスクリプト`run-ab-platform`を次のように実行しますを実行します。</p>
+<p>シェルスクリプト <code>run-ab-platform</code> を次のように実行しますを実行します。</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./run-ab-platform.sh</code></pre>
@@ -2115,7 +2119,7 @@ cd airbyte</code></pre>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>上記のコマンドは、Windowsの`git bash`で実行できます。詳細については 、<a href="https://docs.airbyte.com/deploying-airbyte/local-deployment/" target="_blank" rel="noopener">Airbyte Local Deployment</a> を参照してください。</p>
+<p>上記のコマンドは、Windowsの <code>git bash</code> で実行できます。詳細については 、<a href="https://docs.airbyte.com/deploying-airbyte/local-deployment/" target="_blank" rel="noopener">Airbyte Local Deployment</a> を参照してください。</p>
 </div>
 </td>
 </tr>
@@ -2151,7 +2155,7 @@ BASIC_AUTH_PASSWORD=password</code></pre>
 <h2 id="_airbyteの構成"><a class="anchor" href="#_airbyteの構成"></a>Airbyteの構成</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_ソース接続をする"><a class="anchor" href="#_ソース接続をする"></a>ソース接続をする</h3>
+<h3 id="_ソース接続の設定"><a class="anchor" href="#_ソース接続の設定"></a>ソース接続の設定</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2167,14 +2171,16 @@ BASIC_AUTH_PASSWORD=password</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Airbyte はソースを尋ねます。既存のソースから選択することも (すでに設定している場合)、新しいソースを設定することもできます。この場合は `Google スプレッドシート`を選択します。</p>
+<p>Airbyte はソースを尋ねます。既存のソースから選択することも (すでに設定している場合)、新しいソースを設定することもできます。この場合は <code>Google スプレッドシート</code> を選択します。</p>
 </li>
 <li>
-<p>認証には、JSON形式のサービスアカウントキーを使用する`サービスアカウントキー認証`を使用している。デフォルトの`OAuth`から`サービスアカウントキー認証`に切り替えます。. サービス アカウント キー認証で Google アカウントを認証するには、 JSON 形式の<a href="https://cloud.google.com/iam/docs/keys-create-delete#creating_service_account_keys" target="_blank" rel="noopener">Google Cloud サービス アカウント キー</a> を入力してください。<br>
-サービス アカウントにプロジェクト閲覧者アクセス権があることを確認してください。スプレッドシートがリンクを使用して誰にでも表示できる場合は、それ以上の操作は必要ありません。そうでない場合は、 <a href="https://www.youtube.com/watch?v=GyomEw5a2NQ" target="_blank" rel="noopener">サービス アカウントにスプレッドシートへのアクセスを認証してください。</a></p>
+<p>認証には、JSON形式のサービスアカウントキーを使用する <code>サービスアカウントキー認証</code> を使用している。デフォルトの <code>OAuth</code> から <code>サービスアカウントキー認証</code> に切り替えます。. サービス アカウント キー認証で Google アカウントを認証するには、 JSON 形式の <a href="https://cloud.google.com/iam/docs/keys-create-delete#creating_service_account_keys" target="_blank" rel="noopener">Google Cloud サービス アカウント キー</a> を入力してください。</p>
+<div class="paragraph">
+<p>サービス アカウントにプロジェクト閲覧者アクセス権があることを確認してください。スプレッドシートがリンクを使用して誰にでも表示できる場合は、それ以上の操作は必要ありません。そうでない場合は、 <a href="https://www.youtube.com/watch?v=GyomEw5a2NQ" target="_blank" rel="noopener">サービス アカウントにスプレッドシートへのアクセスを認証してください。</a></p>
+</div>
 </li>
 <li>
-<p>ソーススプレッドシートへのリンクを`スプレッドシートのリンク`として追加します。</p>
+<p>ソーススプレッドシートへのリンクを <code>スプレッドシートのリンク</code> として追加します。</p>
 </li>
 </ul>
 </div>
@@ -2192,7 +2198,7 @@ BASIC_AUTH_PASSWORD=password</code></pre>
 <td class="content">
 <div class="paragraph">
 <p>詳細については、 <a href="https://docs.airbyte.com/integrations/sources/google-sheets/#:~:text=For%20Airbyte%20Open%20Source%3A" target="_blank" rel="noopener">Airbyte オープン ソースのソース コネクタとして Google スプレッドシートを設定する</a>
-を参照してください。</p>
+ を参照してください。</p>
 </div>
 </td>
 </tr>
@@ -2211,15 +2217,31 @@ BASIC_AUTH_PASSWORD=password</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><code>Teradata Vantage`を使用して新しい接続を作成する場合は、「Set up the destination」セクションで宛先型として `Teradata Vantage</code> を選択します。</p>
+<p><code>Teradata Vantage</code> を使用して新しい接続を作成する場合は、「Set up the destination」セクションで宛先型として  <code>Teradata Vantage</code> を選択します。</p>
 </li>
 <li>
-<p><code>Host</code>、<code>User</code>、および`Password`を追加する。これらは、Clearscape Analytics Environmentで使用される`Host`、<code>Username</code>、`Password`とそれぞれ同じです。</p>
+<p><code>Host</code>、<code>User</code>、および <code>Password</code> を追加する。これらは、Clearscape Analytics Environmentで使用される <code>Host</code>、<code>Username</code>、<code>Password</code> とそれぞれ同じです。</p>
 </li>
 <li>
-<p>特定のコンテキストに適したデフォルトのスキーマ名を指定します。ここでは、`gsheet_airbyte_td`を提供しました。</p>
+<p>特定のコンテキストに適したデフォルトのスキーマ名を指定します。ここでは、<code>gsheet_airbyte_td</code> を提供しました。</p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="literalblock">
+<div class="content">
+<pre>`Default Schema` を指定しない場合は、 "Connector failed while creating schema"というエラーが表示されます。 `Default Schema` に適切な名前を指定していることを確認してください。</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -2284,7 +2306,7 @@ BASIC_AUTH_PASSWORD=password</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>次に、 <a href="https://clearscape.teradata.com/dashboard" target="_blank" rel="noopener">ClearScape Analytics Experience に移動し</a> で Jupyter Notebookを実行します。ClearScape Analytics Experience のNotebookは Teradata SQL クエリーを実行するように構成されており、データベース <code>gsheet_airbyte_td</code>、ストリーム (テーブル)、および完全なデータが存在するかどうかを検証します。</p>
+<p>次に、 <a href="https://clearscape.teradata.com/dashboard" target="_blank" rel="noopener">ClearScape Analytics Experience</a>  に移動しで Jupyter Notebookを実行します。ClearScape Analytics Experience のNotebookは Teradata SQL クエリーを実行するように構成されており、データベース <code>gsheet_airbyte_td</code>、ストリーム (テーブル)、および完全なデータが存在するかどうかを検証します。</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -2315,18 +2337,18 @@ ORDER BY    TableName;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>この接続では正規化と変換がサポートされておらず、 <a href="https://docs.airbyte.com/understanding-airbyte/namespaces/#:~:text=If%20you%20don%27t%20enable%20basic%20normalization%2C%20you%20will%20only%20receive%20the%20raw%20tables.">生のテーブル window="<em>blank" しかない</a>ため、宛先のストリーム (テーブル) 名には <code>\_airbyte_raw</em></code> という接頭辞が付いています。各ストリーム (テーブル) には 3 つの列が含まれます。</p>
+<p>この接続では正規化と変換がサポートされておらず、 <a href="https://docs.airbyte.com/understanding-airbyte/namespaces/#:~:text=If%20you%20don%27t%20enable%20basic%20normalization%2C%20you%20will%20only%20receive%20the%20raw%20tables." target="<em>blank">生のテーブル</a> しかないため、宛先のストリーム (テーブル) 名には <code>\_airbyte_raw</em></code> という接頭辞が付いています。各ストリーム (テーブル) には 3 つの列が含まれます。</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>_airbyte_ab_id</code>: Airbyte によって処理される各イベントに割り当てられる uuid。Teradata の列型は `VARCHAR(256)`です。</p>
+<p><code>_airbyte_ab_id</code>: Airbyte によって処理される各イベントに割り当てられる uuid。Teradata の列型は <code>VARCHAR(256)</code> です。</p>
 </li>
 <li>
-<p><code>_airbyte_emitted_at</code>: イベントがデータ ソースからいつ取得されたかを表すタイムスタンプ。Teradata の列型は `TIMESTAMP(6)`です。</p>
+<p><code>_airbyte_emitted_at</code>: イベントがデータ ソースからいつ取得されたかを表すタイムスタンプ。Teradata の列型は <code>TIMESTAMP(6)</code> です。</p>
 </li>
 <li>
-<p><code>_airbyte_data</code>: イベント データを表す json blob。Teradata の列型は `JSON`です。</p>
+<p><code>_airbyte_data</code>: イベント データを表す json blob。Teradata の列型は <code>JSON</code> です。</p>
 </li>
 </ol>
 </div>
