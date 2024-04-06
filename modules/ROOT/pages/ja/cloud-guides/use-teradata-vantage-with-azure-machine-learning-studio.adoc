@@ -224,4 +224,4 @@ BikeBuyer列（実際）とScored Labels列（予測）を比較すると、モ�
 * 予測型機械学習モデルの構築の詳細については、 https://azure.microsoft.com/documentation/articles/machine-learning-what-is-machine-learning/[+++Introduction to Machine Learning on Azure+++]を参照してください。
 * 大規模なデータセットのコピーには、Teradata Parallel Transporterのロード/アンロード オペレーターとAzure Blob Storageの間のインターフェイスである https://docs.teradata.com/reader/p~0sSD4zl4K8YPbEGnM3Rg/TTu_WJMMIpo2TEaxFMFopQ[Teradata Access Module for Azure] の利用を検討してください。
 
-include::ROOT:partial$community_link.adoc[]
+include::../partials/community_link.adoc[]

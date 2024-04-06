@@ -140,4 +140,4 @@ image:cloud-guides/{page-image-directory}/sagemaker.notebook.start.png[デモNot
 * link:https://github.com/aws-samples/amazon-sagemaker-notebook-instance-lifecycle-config-samples/blob/master/scripts/persistent-conda-ebs/on-create.sh[amazon sagemaker Notebook インスタンスのライフサイクル構成サンプル]
 
 
-include::ROOT:partial$community_link.adoc[]
+include::../partials/community_link.adoc[]
