@@ -1,0 +1,275 @@
+= Teradata VantageとGoogle Cloud Data Catalogを統合する
+:page-lang: ja
+:experimental:
+:page-author: Wenjie Tehan
+:page-email: wenjie.tehan@teradata.com
+:page-revdate: 2022 年 2 月 14 日
+:description: Teradata VantageとGoogle Cloud Data Catalogを統合する
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, google cloud, google cloud data catalog.
+:tabs:
+:page-image-directory: integrate-teradata-vantage-with-google-cloud-data-catalog
+
+
+== 概要
+
+この記事では、 https://github.com/GoogleCloudPlatform/datacatalog-connectors-rdbms/tree/master/google-datacatalog-teradata-connector[Data Catalog Teradata Connector on GitHub] を使用して Teradata VantageとGoogle Cloud Data Catalogを接続し、Data Catalog経由でVantageテーブルのメタデータを探索する手順について説明します。
+
+image:cloud-guides/{page-image-directory}/image2.png[図の説明が自動的に生成される,width=525,height=242]
+
+* Scrape: Teradata Vantageに接続し、利用可能なすべてのメタデータを取得する
+* Prepare: Data Catalogエンティティでメタデータを変換し、タグを作成する
+* Ingest: Data CatalogエンティティをGoogle Cloudプロジェクトに送信する
+
+=== Google Cloud Data Catalogについて
+
+Google Cloud Data Catalog は、完全に管理されたデータ検出およびメタデータ管理サービスです。Data Catalog は、データ アセットのネイティブなメタデータをカタログ化することができます。Data Catalog はサーバーレスであり、テクニカルメタデータとビジネスメタデータの両方を構造化された形式で取り込むためのセントラルカタログを提供します。
+
+=== Teradata Vantage について
+
+Vantageは、データウェアハウス、データレイク、アナリティクスを単一の接続されたエコシステムに統合する最新のクラウドプラットフォームです。
+
+Vantageは、記述的分析、予測的分析、処方的分析、自律的意思決定、ML機能、可視化ツールを統合したプラットフォームで、データの所在を問わず、リアルタイムのビジネスインテリジェンスを大規模に発掘することが可能です。
+
+Vantageは、小規模から始めて、コンピュートやストレージを弾力的に拡張し、使用した分だけ支払い、低コストのオブジェクトストアを活用し、分析ワークロードを統合することを可能にします。
+
+Vantageは、R、Python、Teradata Studio、およびその他のSQLベースのツールをサポートしています。Vantageは、パブリッククラウド、オンプレミス、最適化されたインフラ、コモディティインフラ、as-a-serviceのいずれでもデプロイメント可能です。
+
+Teradata Vantage の詳細については、 https://docs.teradata.com/home[ドキュメント] を参照してください。
+
+== 前提条件
+
+* Teradata Vantageインスタンスへのアクセス。
++
+include::../partials/vantage_clearscape_analytics.adoc[]
+* Data Catalog 管理者ロールを持つ **https://support.google.com/accounts/answer/27441?hl=en[Google Service Account] **
+* アカウント用にhttps://cloud.google.com/resource-manager/docs/creating-managing-projects[*作成されたCloud Consoleプロジェクト*] (例、partner-integration-lab)  
+* 課金が有効になっている
+* Google Cloud SDKの https://cloud.google.com/sdk/docs/install[インストール] と https://cloud.google.com/sdk/docs/initializing[初期化]
+されている* https://www.python.org/downloads/[Python ] がインストールされている
+* https://pip.pypa.io/en/stable/installation/[Pip] がインストールされている
+
+== 手順
+
+1. Data Catalog API を有効にする
+2. Teradata Data Catalog コネクタをインストールする
+3. 実行する
+4. Teradata VantageのメタデータをData Catalogで探索する
+
+=== Data Catalog APIを有効にする
+
+*  http://console.cloud.google.com/[Google] にログインし、ナビゲーションメニューから *APIs & Services* を選択し、 _Library_をクリックします。トップメニューバーでプロジェクトが選択されていることを確認します。
++
+image:cloud-guides/{page-image-directory}/image3.png[グラフィカル ユーザー インターフェース, text, application Description automatically generated,width=483,height=472]
+
+* 検索ボックスに _Data Catalog_ を入力し、 *Google Cloud Data Catalog API* をクリックし、 *ENABLE*
+ をクリックします
++
+image:cloud-guides/{page-image-directory}/image4.png[グラフィカル ユーザー インターフェース, text, application, email Description automatically generated,width=624,height=212]
+
+=== Teradata Data Catalog コネクタをインストールする
+
+Teradata Data Catalog コネクタは https://github.com/GoogleCloudPlatform/datacatalog-connectors-rdbms/tree/master/google-datacatalog-teradata-connector[GitHub] で公開されています。このコネクタは Python で記述されています。
+
+* 以下のコマンドを実行し、gcloudを認証して、Googleのユーザー認証でCloud Platformにアクセスできるようにします。
++
+[source, bash]
+----
+gcloud auth login
+----
+
+* Googleのログインページが開くので、Googleアカウントを選択し、次のページで _Allow_ をクリックします。
+
+* 次に、デフォルトプロジェクトの設定がまだの場合は設定します。
++
+[source, bash]
+----
+gcloud config set project <project id>
+----
+
+==== virtualenv をインストールする
+
+Teradata Data Catalog コネクタは、分離されたPython環境にインストールすることをお勧めします。これを行うには、まず https://virtualenv.pypa.io/en/latest/[virtualenv] をインストールします。
+
+[tabs]
+====
+Windows::
++
+--
+管理者としてPowerShellで実行:
+[source, powershell, role="content-editable emits-gtm-events"]
+----
+pip install virtualenv
+virtualenv --python python3.6 <your-env>
+<your-env>\Scripts\activate
+----
+--
+MacOS::
++
+--
+[source, bash, role="content-editable emits-gtm-events"]
+----
+pip install virtualenv
+virtualenv --python python3.6 <your-env>
+source <your-env>/bin/activate
+----
+--
+Linux::
++
+--
+[source, bash, role="content-editable emits-gtm-events"]
+----
+pip install virtualenv
+virtualenv --python python3.6 <your-env>
+source <your-env>/bin/activate
+----
+--
+====
+
+
+==== Data Catalog Teradataコネクタのインストール
+
+[tabs]
+====
+Windows::
++
+--
+[source, powershell, role="content-editable emits-gtm-events"]
+----
+pip.exe install google-datacatalog-teradata-connector
+----
+--
+MacOS::
++
+--
+[source, bash, role="content-editable emits-gtm-events"]
+----
+pip install google-datacatalog-teradata-connector
+----
+--
+Linux::
++
+--
+[source, bash, role="content-editable emits-gtm-events"]
+----
+pip install google-datacatalog-teradata-connector
+----
+--
+====
+
+==== 環境変数の設定
+
+[source, bash, id="gcp_env_var", role="content-editable emits-gtm-events"]
+----
+export GOOGLE_APPLICATION_CREDENTIALS=<google_credentials_file>
+export TERADATA2DC_DATACATALOG_PROJECT_ID=<google_cloud_project_id>
+export TERADATA2DC_DATACATALOG_LOCATION_ID=<google_cloud_location_id>
+export TERADATA2DC_TERADATA_SERVER=<teradata_server>
+export TERADATA2DC_TERADATA_USERNAME=<teradata_username>
+export TERADATA2DC_TERADATA_PASSWORD=<teradata_password>
+----
+
+ `<google_credential_file>` には、サービスアカウントのキー（jsonファイル）を指定します。
+
+=== 実行する
+
+ `google-datacatalog-teradata-connector` コマンドを実行して、Vantage データベースへのエ ントリポイントを確立します。
+
+[source, bash, id="gcp_data_catalog_first_run" role="content-editable emits-gtm-events"]
+----
+google-datacatalog-teradata-connector \
+  --datacatalog-project-id=$TERADATA2DC_DATACATALOG_PROJECT_ID \
+  --datacatalog-location-id=$TERADATA2DC_DATACATALOG_LOCATION_ID \
+  --teradata-host=$TERADATA2DC_TERADATA_SERVER \
+  --teradata-user=$TERADATA2DC_TERADATA_USERNAME \
+  --teradata-pass=$TERADATA2DC_TERADATA_PASSWORD
+----
+
+google-datacatalog-teradata-connectorコマンドの出力例です。
+
+----
+INFO:root:
+==============Starting CLI===============
+INFO:root:This SQL connector does not implement the user defined datacatalog-entry-resource-url-prefix
+INFO:root:This SQL connector uses the default entry resoure URL
+
+============Start teradata-to-datacatalog===========
+
+==============Scrape metadata===============
+INFO:root:Scrapping metadata from connection_args
+
+1 table containers ready to be ingested...
+
+==============Prepare metadata===============
+
+--> database: Gcpuser
+37 tables ready to be ingested...
+
+==============Ingest metadata===============
+
+DEBUG:google.auth._default:Checking /Users/Teradata/Apps/Cloud/GCP/teradata2dc-credentials.json for explicit credentials as part of auth process...
+INFO:root:Starting to clean up the catalog...
+DEBUG:google.auth.transport.requests:Making request: POST https://oauth2.googleapis.com/token
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): oauth2.googleapis.com:443
+DEBUG:urllib3.connectionpool:https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+INFO:root:0 entries that match the search query exist in Data Catalog!
+INFO:root:Looking for entries to be deleted...
+INFO:root:0 entries will be deleted.
+
+Starting to ingest custom metadata...
+
+DEBUG:google.auth._default:Checking /Users/Teradata/Apps/Cloud/GCP/teradata2dc-credentials.json for explicit credentials as part of auth process...
+INFO:root:Starting the ingestion flow...
+DEBUG:google.auth.transport.requests:Making request: POST https://oauth2.googleapis.com/token
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): oauth2.googleapis.com:443
+DEBUG:urllib3.connectionpool:https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+INFO:root:Tag Template created: projects/partner-integration-lab/locations/us-west1/tagTemplates/teradata_database_metadata
+INFO:root:Tag Template created: projects/partner-integration-lab/locations/us-west1/tagTemplates/teradata_table_metadata
+INFO:root:Tag Template created: projects/partner-integration-lab/locations/us-west1/tagTemplates/teradata_column_metadata
+INFO:root:Entry Group created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata
+INFO:root:1/38
+INFO:root:Entry does not exist: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser
+INFO:root:Entry created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser
+INFO:root: ^ [database] 34.105.107.155/gcpuser
+INFO:root:Starting the upsert tags step
+INFO:root:Processing Tag from Template: projects/partner-integration-lab/locations/us-west1/tagTemplates/teradata_database_metadata ...
+INFO:root:Tag created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser/tags/CWHNiGQeQmPT
+INFO:root:2/38
+INFO:root:Entry does not exist: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser_Categories
+INFO:root:Entry created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser_Categories
+INFO:root: ^ [table] 34.105.107.155/gcpuser/Categories
+INFO:root:Starting the upsert tags step
+INFO:root:Processing Tag from Template: projects/partner-integration-lab/locations/us-west1/tagTemplates/teradata_table_metadata ...
+INFO:root:Tag created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser_Categories/tags/Ceij5G9t915o
+INFO:root:38/38
+INFO:root:Entry does not exist: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser_tablesv_instantiated_latest
+INFO:root:Entry created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser_tablesv_instantiated_latest
+INFO:root: ^ [table] 34.105.107.155/gcpuser/tablesv_instantiated_latest
+INFO:root:Starting the upsert tags step
+INFO:root:Processing Tag from Template: projects/partner-integration-lab/locations/us-west1/tagTemplates/teradata_table_metadata ...
+INFO:root:Tag created: projects/partner-integration-lab/locations/us-west1/entryGroups/teradata/entries/gcpuser_tablesv_instantiated_latest/tags/Ceij5G9t915o
+INFO:root:
+============End teradata-to-datacatalog============
+----
+
+=== Teradata VantageのメタデータをData Catalogで探索する
+
+*  https://console.cloud.google.com/datacatalog[Data Catalog] コンソールに移動し、 *Projects*の下にあるプロジェクト（例：Partner-integration-lab）をクリックします。右側のパネルにTeradataのテーブルが表示されます。
++
+image:cloud-guides/{page-image-directory}/image5.png[グラフィカル ユーザー インターフェース, application Description automatically generated,width=624,height=379]
+
+* 目的のテーブル(CITY_LEVEL_TRANS)をクリックすると、このテーブルに関するメタデータが表示される。
++
+image:cloud-guides/{page-image-directory}/image6.png[グラフィカル ユーザー インターフェース, text, application, email Description automatically generated,width=624,height=331]
+
+== クリーンアップ (オプション)
+
+* データカタログからメタデータをクリーンアップする。これを行うには、 https://github.com/GoogleCloudPlatform/datacatalog-connectors-rdbms/blob/master/google-datacatalog-teradata-connector/tools/cleanup_datacatalog.py をローカルディレクトリにコピーする。
+
+* このファイルがあるディレクトリに移動し、以下のコマンドを実行する。
++
+[source, bash, role="content-editable emits-gtm-events"]
+----
+python cleanup_datacatalog.py --datacatalog-project-ids=$TERADATA2DC_DATACATALOG_PROJECT_ID
+----
+
+include::ROOT:partial$community_link.adoc[]

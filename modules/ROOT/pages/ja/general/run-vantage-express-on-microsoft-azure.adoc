@@ -1,0 +1,182 @@
+= Azure で Vantage Express を実行する方法
+:page-lang: ja
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: 2022 年 8 月 22 日
+:description: Azure で Vantage Express を実行する方法
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics
+:tabs:
+:experimental:
+
+include::../partials/use.csae.adoc[]
+
+== 概要
+
+このハウツーでは、Microsoft Azure で Vantage Express を実行する方法を示します。Vantage Express には、完全に機能する Teradata SQL Engineが含まれています。
+
+== 前提条件
+
+. Azureアカウント。ここで作成できます。 https://azure.microsoft.com/en-us/free/
+. `az` コマンド ラインユーティリティがマシンにインストールされています。インストール手順はここで見つけることができます。https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
+
+== インストール
+
+. デフォルトのリージョンを自分に最も近いリージョンに設定します (場所をリストするには  `az account list-locations -o table` を実行します)。
++
+[source, bash]
+----
+az config set defaults.location=<location>
+----
+
+.  `tdve-resource-group` という名前の新しいリソース グループを作成し、デフォルトに追加します。
++
+[source, bash]
+----
+az group create -n tdve-resource-group
+az config set defaults.group=tdve-resource-group
+----
+
+. VMを作成するには、sshキーペアが必要です。まだ持っていない場合は、作成する。
++
+[source, bash]
+----
+az sshkey create --name vantage-ssh-key
+----
+
+. 秘密キーへのアクセスを制限する。 `<path_to_private_key_file>` を前述のコマンドで返された秘密キーのパスに置き換えます。
++
+[source, bash]
+----
+chmod 600 <path_to_private_key_file>
+----
+
+. 4つの CPU と 8GB の RAM、30GB の OS ディスク、60GB のデータディスクを備えた Ubuntu VM を作成します。
++
+[tabs]
+====
+Windows::
++
+--
+[source, powershell, role="content-editable emits-gtm-events", id="az_create_vm_win"]
+----
+az disk create -n teradata-vantage-express --size-gb 60
+az vm create `
+  --name teradata-vantage-express `
+  --image UbuntuLTS `
+  --admin-username azureuser `
+  --ssh-key-name vantage-ssh-key `
+  --size Standard_F4s_v2 `
+  --public-ip-sku Standard
+
+$diskId = (az disk show -n teradata-vantage-express --query 'id' -o tsv) | Out-String
+az vm disk attach --vm-name teradata-vantage-express --name $diskId
+----
+--
+MacOS::
++
+--
+[source, bash, role="content-editable emits-gtm-events", id="az_create_vm_macos"]
+----
+az disk create -n teradata-vantage-express --size-gb 60
+az vm create \
+  --name teradata-vantage-express \
+  --image UbuntuLTS \
+  --admin-username azureuser \
+  --ssh-key-name vantage-ssh-key \
+  --size Standard_F4s_v2 \
+  --public-ip-sku Standard
+
+DISK_ID=$(az disk show -n teradata-vantage-express --query 'id' -o tsv)
+az vm disk attach --vm-name teradata-vantage-express --name $DISK_ID
+----
+--
+Linux::
++
+--
+[source, bash, role="content-editable emits-gtm-events", id="az_create_vm_linux"]
+----
+az disk create -n teradata-vantage-express --size-gb 60
+az vm create \
+  --name teradata-vantage-express \
+  --image UbuntuLTS \
+  --admin-username azureuser \
+  --ssh-key-name vantage-ssh-key \
+  --size Standard_F4s_v2 \
+  --public-ip-sku Standard
+
+DISK_ID=$(az disk show -n teradata-vantage-express --query 'id' -o tsv)
+az vm disk attach --vm-name teradata-vantage-express --name $DISK_ID
+----
+--
+====
+. VMにsshで接続します。 `<path_to_private_key_file>` と `<vm_ip>` を環境に一致する値に置き換えます。
++
+[source, bash, role="content-editable emits-gtm-events", id="az_ssh"]
+----
+ssh -i <path_to_private_key_file> azureuser@<vm_ip>
+----
+. VM に接続したら、`root`  ユーザーに切り替えます。
++
+[source, bash, role="content-editable emits-gtm-events", id="sudo"]
+----
+sudo -i
+----
+. Vantage Express用のダウンロードディレクトリを準備します。
++
+[source, bash, role="content-editable emits-gtm-events", id="download_dir"]
+----
+mkdir /opt/downloads
+cd /opt/downloads
+----
+. データ ディスクをマウントします。
++
+[source, bash, role="content-editable emits-gtm-events", id="mount_data_disk"]
+----
+parted /dev/sdc --script mklabel gpt mkpart xfspart xfs 0% 100%
+mkfs.xfs /dev/sdc1
+partprobe /dev/sdc1
+export DISK_UUID=$(blkid | grep sdc1 | cut -d"\"" -f2)
+echo "UUID=$DISK_UUID  /opt/downloads   xfs   defaults,nofail   1   2" >> /etc/fstab
+----
+include::../partials/install.ve.in.public.cloud.adoc[]
+* インターネットからVantage Expressに接続したい場合は、VMに対してファイアウォールの穴を開ける必要がある。また、デフォルトのパスワードを  `dbc` ユーザーに変更する必要があります。
+.  `dbc` ユーザーのパスワードを変更するには、VM に移動して bteq を開始します。
++
+[source, bash, role="content-editable emits-gtm-events", id="pw_change_bteq"]
+----
+bteq
+----
+. ユーザー名とパスワードとして `dbc` を使用してデータベースにログインします。
++
+[source, teradata-sql, role="content-editable emits-gtm-events", id="pw_change_bteq_logon"]
+----
+.logon localhost/dbc
+----
+.  `dbc` ユーザーのパスワードを変更します。
++
+[source, teradata-sql, role="content-editable emits-gtm-events", id="pw_change_mod_user"]
+----
+MODIFY USER dbc AS PASSWORD = new_password;
+----
+. gcloud コマンドを使用して、ポート 1025 をインターネットに開くことができるようになりました。
++
+[source%prewrap, bash, role="content-editable emits-gtm-events", id="az_fw_rule"]
+----
+az vm open-port --name teradata-vantage-express --port 1025
+----
+
+== クリーンアップ
+
+料金の発生を停止するには、リソース グループに関連付けられているすべてのリソースを削除します。
+[source, bash, role="content-editable emits-gtm-events", id="delete_resource_group"]
+----
+az group delete --no-wait -n tdve-resource-group
+----
+
+include::../partials/next.steps.adoc[]
+
+== さらに詳しく
+* link:https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20[Teradata®Studio™およびStudio™Expressインストール ガイド]
+* link:https://docs.teradata.com/r/jmAxXLdiDu6NiyjT6hhk7g/root[BTEQの紹介]
+
+include::../partials/community_link.adoc[]

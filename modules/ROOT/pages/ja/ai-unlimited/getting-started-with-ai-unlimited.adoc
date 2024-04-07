@@ -1,0 +1,43 @@
+= Teradata AI Unlimited のスタートガイド
+:page-lang: ja
+:page-author: Thripti Aravind
+:page-email: thripti.aravind@teradata.com
+:page-revdate: 2023 年 11 月 14 日
+:description: Teradata AI Unlimited の構成要素と利用可能なデプロイオプションについて学びます。
+:keywords: Teradata AI Unlimited, Teradata AI Unlimited Workspace service, Teradata AI Unlimited Compute Engine
+:page-image-directory: getting-started-with-ai-unlimited
+
+IMPORTANT: この製品はプレビュー版であり、変更される可能性があります。このサービスの詳細について興味がある場合は、Teradata サポートにお問い合わせください。
+
+== 概要
+
+Teradata AI Unlimited は、SQL エンジンをデプロイしてデータ レイクに接続できるようにするセルフサービスのオンデマンド プラットフォームです。その後、任意のクラウド サービス プロバイダ (CSP) にデプロイされたスケーラブルな AI Unlimited コンピューティング エンジンでワークロードを実行できます。エンジンを使用すると、データ管理の必要性を排除しながら、高度な並列データベースの機能を活用できます。
+
+Teradata AI Unlimited は、以下の構成要素で構成されています。
+
+* **ワークスペースサービス**: Teradata AI Unlimited の自動化とデプロイを制御および管理するオーケストレーション サービス。また、データ関連プロジェクトの実行時にシームレスなユーザー エクスペリエンスを提供する統合構成要素も制御します。ワークスペースサービスには、ユーザーを承認し、CSP 統合の選択を定義するために使用できる Web ベースの UI が含まれています。
+
+* **インターフェース**:  データ プロジェクトを作成して実行し、Teradata システムに接続し、データを視覚化するための環境。JupyterLabまたはワークスペースクライアント(workspacectl)のいずれかを使用できます。
+
+* **エンジン**: データ サイエンスおよび分析ワークロードの実行に使用できる、フルマネージドの計算リソース。
+
+== デプロイメントオプション
+
+以下のオプションのいずれかを使用して、Teradata AI Unlimited 構成要素をデプロイできます。 
+
+* Docker上でローカルに実行されるワークスペースサービスと JupyterLab
+* Virtual Private Cloud (VPC) 上のワークスペース サービスと、Docker上でローカルに実行されている JupyterLab
+* VPC 上の同じインスタンス上のワークスペース サービスと JupyterLab
+* Network Load Balancer の背後にあるワークスペースサービスと JupyterLab
+
+開発環境またはテスト環境の場合、Dockerを使用してワークスペース サービスと JupyterLab をデプロイできます。link:install-ai-unlimited-workspaces-docker.html[Dockerを使用した Teradata AI Unlimited Workspaceサービスのデプロイとセットアップ] を参照してください。クラウド インフラストラクチャにアクセスできるエンタープライズ ユーザーの場合は、ワークスペース サービスと JupyterLab を VPC にデプロイできます。link:deploy-ai-unlimited-aws-cloudformation.html[AWS CloudFormation テンプレートを使用して Teradata AI Unlimited Workspace サービスとインターフェースをデプロイする] と「Azure を使用してTeradata AI Unlimited をデプロイする方法」(近日公開)を参照してください。
+
+== 次のステップ
+
+* Dockerを使用して Teradata AI Unlimited をローカルにデプロイしたいですか?link:install-ai-unlimited-workspaces-docker.html[Dockerを使用した Teradata AI Unlimited Workspaceサービスのデプロイとセットアップ] を参照してください。
+
+* CloudFormation テンプレートを使用して AWS に Teradata AI Unlimited をデプロイしたいですか?link:deploy-ai-unlimited-aws-cloudformation.html[AWS CloudFormation テンプレートを使用して Teradata AI Unlimited Workspace サービスとインターフェースをデプロイする] を参照してください。
+
+* Teradata AI Unlimited が実際のユースケースでどのように役立つかを知りたいですか? 近日公開! GitHub リンクについては、このスペースを引き続き監視してください。
+
+include::../partials/community_link.adoc[]

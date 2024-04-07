@@ -1,0 +1,172 @@
+= Twilio Segmentからイベントを保存する方法
+:page-lang: ja
+:experimental:
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: 2022 年 1 月 18 日
+:description: Twilio Segmentからのイベントを Teradata Vantage に保存します。
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, customer data platform, cdp, segment
+:tabs:
+
+== 概要
+このソリューションは、Twilio Segmentからのイベントをリッスンし、Teradata Vantage インスタンスにデータを書き込みます。この例ではGoogle Cloudを使用しているが、任意のクラウドプラットフォームに変換できます。
+
+== アーキテクチャ
+
+このソリューションでは、Twilio Segmentが生のイベント データを Google Cloud Pub/Sub に書き込みます。Pub/SubはイベントをCloud Runアプリケーションに転送します。Cloud Runアプリは、Teradata Vantageデータベースにデータを書き込みます。これは、VMの割り当てや管理を必要としないサーバレスソリューションです。
+
+image::segment.flow.diagram.png[Segment Google Cloud フローダイアグラム, width=500, align="left"]
+
+== デプロイメント
+
+=== 前提条件
+1. Google Cloudアカウント。アカウントをお持ちでない場合は、https://console.cloud.google.com/ で作成できます。
+2. `gcloud` がインストールされている。https://cloud.google.com/sdk/docs/install を参照してください。
+3. Google Cloud Runが対話できるTeradata Vantageインスタンス。
++
+include::../partials/vantage_clearscape_analytics.adoc[]
+
+=== 構築とデプロイ
+
+1. サンプル リポジトリのクローンを作成します。
++
+[source, bash]
+----
+git clone git@github.com:Teradata/segment-integration-tutorial.git
+----
+
+2. リポジトリには、データベースを設定する `segment.sql` ファイルが含まれています。 お気に入りの SQL IDE、Teradata Studio (https://downloads.teradata.com/download/tools/teradata-studio)、または `bteq` というコマンド ライン ツール (https://downloads.teradata.com/node/7314[Windows]、https://downloads.teradata.com/node/200442[Linux]、https://downloads.teradata.com/node/201214[macOS ]用にダウンロード) を使用して、Vantage データベース上のスクリプトを実行します。
+SQL スクリプトは、`Segment` と呼ばれる新しいデータベースと、セグメント イベントを保存するためのテーブルのセットを作成します。
+
+3. デフォルトのプロジェクトとリージョンを設定します。
++
+[source, bash]
+----
+gcloud config set project <PROJECT_ID>
+gcloud config set compute/region <REGION>
+----
+
+4. プロジェクトのIDと番号を取得します。これは後続のステップで必要になります。
++
+[source, bash]
+----
+export PROJECT_ID=$(gcloud config get-value project)
+
+export PROJECT_NUMBER=$(gcloud projects list \
+  --filter="$(gcloud config get-value project)" \
+  --format="value(PROJECT_NUMBER)")
+----
+
+5. 必要な Google Cloud サービスを有効にします。
++
+[source, bash]
+----
+gcloud services enable cloudbuild.googleapis.com containerregistry.googleapis.com run.googleapis.com secretmanager.googleapis.com pubsub.googleapis.com
+----
+
+6. アプリケーションを構築します。
++
+[source, bash]
+----
+gcloud builds submit --tag gcr.io/$PROJECT_ID/segment-listener
+----
+
+7. Segmentと共有する API キーを定義します。APIキーをGoogle Cloud Secret Managerに保存します。
++
+[source, bash]
+----
+gcloud secrets create VANTAGE_USER_SECRET
+echo -n 'dbc' > /tmp/vantage_user.txt
+gcloud secrets versions add VANTAGE_USER_SECRET --data-file=/tmp/vantage_user.txt
+
+gcloud secrets create VANTAGE_PASSWORD_SECRET
+echo -n 'dbc' > /tmp/vantage_password.txt
+gcloud secrets versions add VANTAGE_PASSWORD_SECRET --data-file=/tmp/vantage_password.txt
+----
+
+8. Segment データを Vantage に書き込むアプリケーションは Cloud Run を使用します。まず、Cloud Runがシークレットにアクセスできるようにする必要があります。
++
+[source, bash]
+----
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+     --member=serviceAccount:$PROJECT_NUMBER-compute@developer.gserviceaccount.com \
+     --role=roles/secretmanager.secretAccessor
+----
+
+9. アプリを Cloud Run にデプロイします (`<VANTAGE_HOST>` を Teradata Vantage データベースのホスト名または IP に置き換えます)。2 番目のエクスポート文は、後続のコマンドで必要になるサービス URL を保存します。
++
+[source, bash]
+----
+gcloud run deploy --image gcr.io/$PROJECT_ID/segment-listener segment-listener \
+  --region $(gcloud config get-value compute/region) \
+  --update-env-vars VANTAGE_HOST=35.239.251.1 \
+  --update-secrets 'VANTAGE_USER=VANTAGE_USER_SECRET:1, VANTAGE_PASSWORD=VANTAGE_PASSWORD_SECRET:1' \
+  --no-allow-unauthenticated
+
+export SERVICE_URL=$(gcloud run services describe segment-listener --platform managed --region $(gcloud config get-value compute/region) --format 'value(status.url)')
+----
+10. Segmentからイベントを受信する Pub/Sub トピックを作成します。
++
+[source, bash]
+----
+gcloud pubsub topics create segment-events
+----
+
+11. Pub/Sub が Cloud Run アプリを呼び出すために使用するサービス アカウントを作成します。
++
+[source, bash]
+----
+gcloud iam service-accounts create cloud-run-pubsub-invoker \
+     --display-name "Cloud Run Pub/Sub Invoker"
+----
+
+12. サービス アカウントに Cloud Run を呼び出すアクセス権を付与します。
++
+[source, bash]
+----
+gcloud run services add-iam-policy-binding segment-listener \
+  --region $(gcloud config get-value compute/region) \
+  --member=serviceAccount:cloud-run-pubsub-invoker@$PROJECT_ID.iam.gserviceaccount.com \
+  --role=roles/run.invoker
+----
+
+13. Pub/Sub がプロジェクト内に認証トークンを作成できるようにします。
++
+[source, bash]
+----
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member=serviceAccount:service-$PROJECT_NUMBER@gcp-sa-pubsub.iam.gserviceaccount.com \
+  --role=roles/iam.serviceAccountTokenCreator
+----
+
+14. サービス アカウントを使用してPub/Subサブスクリプションを作成します。
++
+[source, bash, id="segment_first_run", role="content-editable emits-gtm-events"]]
+----
+gcloud pubsub subscriptions create segment-events-cloudrun-subscription --topic projects/$PROJECT_ID/topics/segment-events \
+   --push-endpoint=$SERVICE_URL \
+   --push-auth-service-account=cloud-run-pubsub-invoker@$PROJECT_ID.iam.gserviceaccount.com \
+   --max-retry-delay 600 \
+   --min-retry-delay 30
+----
+
+15. Segmentがトピックに公開できるようにします。これを行うには、https://console.cloud.google.com/cloudpubsub/topic/list のプロジェクトの  `pubsub@segment-integrations.iam.gserviceaccount.com`  ロール  `Pub/Sub Publisher` を割り当てます。詳細は  https://segment.com/docs/connections/destinations/catalog/google-cloud-pubsub/#authentication[Segment マニュアル] を参照してください。
+
+16. Google Cloud Pub/Sub をSegmentの宛先として構成します。完全なトピック `projects/<PROJECT_ID>/topics/segment-events` を使用し、すべてのSegment イベント型 ( `*` 文字を使用) をトピックにマップします。
+
+== 試してみる
+
+1. Segmentのイベント テスター機能を使用して、サンプル ペイロードをトピックに送信します。サンプルデータがVantageに保存されていることを確認します。
+
+== 制約
+
+* この例では、アプリを単一リージョンにデプロイする方法を示します。多くの場合、この設定では十分な稼働時間は保証されません。Cloud Run アプリは、グローバル ロード バランサの背後にある複数のリージョンにデプロイする必要があります。
+
+== まとめ
+
+このハウツーでは、Segment イベントを Teradata Vantage に送信する方法を説明します。この構成では、イベントがSegmentから Google Cloud Pub/Sub に転送され、さらに Cloud Run アプリケーションに転送されます。アプリケーションは Teradata Vantage にデータを書き込みます。
+
+== さらに詳しく
+* link:https://segment.com/docs/connections/destinations/catalog/google-cloud-pubsub/[Segmentの Pub/Sub 宛先ドキュメント]
+
+include::../partials/community_link.adoc[]

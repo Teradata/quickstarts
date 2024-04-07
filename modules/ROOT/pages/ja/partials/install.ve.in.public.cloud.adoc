@@ -1,0 +1,118 @@
+. VirtualBoxと7 zipをインストールします。
++
+[source, bash, role="content-editable emits-gtm-events", id="apt"]
+----
+apt update && apt-get install p7zip-full p7zip-rar virtualbox -y
+----
+. curlコマンドを取得して、Vantage Expressをダウンロードします。
+.. link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Expess のダウンロード ページ]に移動します (登録が必要です)。
+.. 「Vantage Express 17.20」などの最新のダウンロードリンクをクリックします。使用許諾契約のポップアップが表示されます。まだライセンスを受け入れません。
+.. ブラウザでネットワークビューを開きます。例えば、Chrome で kbd:[F12] を押し「 `Network`」タブに移動します。
++
+image::browser.network.png[ブラウザの「Network」タブ, width=500]
+.. `I Agree (同意する)`ボタンをクリックしてライセンスを受け入れ、ダウンロードをキャンセルします。
+.. ネットワーク ビューで、 `VantageExpress`で始まる最後のリクエストを見つけます。それを右クリックして `Copy -> Copy as cURL`を選択します。
++
+image::browser.copy.curl.png[Browser Copy culr, width=500]
+. ssh セッションに戻り、curl コマンドを貼り付けて Vantage Express をダウンロードします。ダウンロードを `ve.7z` という名前のファイルに保存するには、コマンドに `-o ve.7z` を追加します。次のように、すべてのHTTPヘッダーを削除できます。
++
+[source, bash, role="content-editable emits-gtm-events", id="download_ve"]
+----
+curl -o ve.7z 'http://d289lrf5tw1zls.cloudfront.net/database/teradata-express/VantageExpress17.20_Sles12_202108300444.7z?Expires=1638719978&Signature=GKBkNvery_long_signature__&Key-Pair-Id=********************'
+----
+. ダウンロードしたファイルを解凍します。数分かかります。
++
+[source, bash, role="content-editable emits-gtm-events", id="unzip"]
+----
+7z x ve.7z
+----
+. VirtualBox で VM を起動しますコマンドはすぐに返されますが、VM の初期化プロセスには数分かかります。
++
+[source, bash, role="content-editable emits-gtm-events", id="start_vim"]
+----
+export VM_IMAGE_DIR="/opt/downloads/VantageExpress17.20_Sles12"
+DEFAULT_VM_NAME="vantage-express"
+VM_NAME="${VM_NAME:-$DEFAULT_VM_NAME}"
+vboxmanage createvm --name "$VM_NAME" --register --ostype openSUSE_64
+vboxmanage modifyvm "$VM_NAME" --ioapic on --memory 6000 --vram 128 --nic1 nat --cpus 4
+vboxmanage storagectl "$VM_NAME" --name "SATA Controller" --add sata --controller IntelAhci
+vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk1*')"
+vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 1 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk2*')"
+vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 2 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk3*')"
+vboxmanage modifyvm "$VM_NAME" --natpf1 "tdssh,tcp,,4422,,22"
+vboxmanage modifyvm "$VM_NAME" --natpf1 "tddb,tcp,,1025,,1025"
+vboxmanage startvm "$VM_NAME" --type headless
+vboxmanage controlvm "$VM_NAME" keyboardputscancode 1c 1c
+----
+. Vantage Express VM に ssh で接続します。 `root` をパスワードとして使用します。
++
+[source, bash, role="content-editable emits-gtm-events", id="ssh_to_ve"]
+----
+ssh -p 4422 root@localhost
+----
+. DBがアップしていることを確認します。
++
+[source, bash, role="content-editable emits-gtm-events", id="pde"]
+----
+pdestate -a
+----
++
+コマンドが`PDE state is RUN/STARTED. DBS state is 5: Logons are enabled - The system is quiescent`を返す場合は、Vantage Expressが起動したことを意味します。
+状態が異なる場合は、正しいステータスが得られるまで `pdestate -a` を繰り返します。
+. Vantage Expressが起動して実行されたら、`bteq` クライアントのコマンドラインクライアントを起動します。BTEQ (「ビーテック」と発音) は、Teradata Database に SQL クエリーを送信するために使用される、汎用のコマンド ベースのクライアント ツールです。
++
+[source, bash, role="content-editable emits-gtm-events", id="bteq"]
+----
+bteq
+----
+. bteqに入ったら、Vantage Expressインスタンスに接続します。パスワードを求められたら、 `dbc`を入力します。
++
+[source, bash, role="content-editable emits-gtm-events", id="bteq_logon"]
+----
+.logon localhost/dbc
+----
+
+== サンプル クエリーを実行する
+
+. `dbc`ユーザーを使用して、`HR`という新しいデータベースを作成します。このクエリーをコピー/貼り付けて、kbd:[Enter] を押して実行します。
++
+include::../partials/getting.started.queries.adoc[]
+
+== オプションを設定する
+
+* VM を停止して起動する場合は、Vantage Express を自動起動に追加することをお勧めします。 VM に ssh で接続し、以下のコマンドを実行します。
++
+[source, bash, role="content-editable emits-gtm-events", id="autostart"]
+----
+sudo -i
+
+cat <<EOF >> /etc/default/virtualbox
+VBOXAUTOSTART_DB=/etc/vbox
+VBOXAUTOSTART_CONFIG=/etc/vbox/autostart.cfg
+EOF
+
+cat <<EOF > /etc/systemd/system/vantage-express.service
+[Unit]
+Description=vm1
+After=network.target virtualbox.service
+Before=runlevel2.target shutdown.target
+[Service]
+User=root
+Group=root
+Type=forking
+Restart=no
+TimeoutSec=5min
+IgnoreSIGPIPE=no
+KillMode=process
+GuessMainPID=no
+RemainAfterExit=yes
+ExecStart=/usr/bin/VBoxManage startvm vantage-express --type headless
+ExecStop=/usr/bin/VBoxManage controlvm vantage-express savestate
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+systemctl enable vantage-express
+systemctl start vantage-express
+----

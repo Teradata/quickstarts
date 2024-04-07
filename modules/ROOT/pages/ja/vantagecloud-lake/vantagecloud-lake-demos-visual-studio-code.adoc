@@ -1,0 +1,154 @@
+= Visual Studio Code で VantageCloud Lake の Teradata Jupyter Notebook デモを実行する方法
+:page-lang: ja
+:experimental:
+:page-author: Janeth Graziani
+:page-email: Janeth.graziani@teradata.com
+:page-revdate: 2024 年 1 月 11 日
+:description: Visual Studio Code で Jupyter ノートブックを使用して VantageCloud Lake デモを実行する方法を学びます。 
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy, vantagecloud, vantagecloud lake, public internet, visual studio code, IDE, data analytics, data science
+:dir: vantagecloud-lake-demos-visual-studio-code
+
+== 概要
+Visual Studio Code は、Windows、MacO、Linux と互換性のある人気のオープンソース コード エディタです。開発者は、アプリケーションのコーディング、デバッグ、構築、展開にこの統合開発環境 (IDE) を使用します。このクイックスタート ガイドでは、Visual Studio Code 内で VantageCloud Lake Jupyter ノートブック デモを起動します。 
+
+image::vantagecloud-lake/{dir}/vscode.png[vscode.png,align="center", width=80%]
+
+== 前提条件
+始める前に、次の前提条件が整っていることを確認します。
+
+* インストールされた https://www.docker.com/products/docker-desktop/[Docker Desktop]
+* インストールされた https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[Git]
+** git repoをダウンロードする必要がある https://github.com/Teradata/lake-demos.git
+* インストールされた https://code.visualstudio.com/download[Visual Studio Code]
+* Teradata ウェルカム レターの組織 URL とログイン詳細を含む Teradata VantageCloud Lake アカウント
+** ログインしたら、次の https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html#_create_an_environment[手順] に従って VantageCloud Lake 環境を作成する
+
+== VantageCloud Lakeデモリポジトリのクローンを作成する 
+まず、GitHub リポジトリのクローンを作成し、プロジェクト ディレクトリに移動する。
+[source, bash]
+----
+git clone https://github.com/Teradata/lake-demos.git
+cd lake-demos
+----
+== Teradata Jupyter Exrementsを使用してJupyterlabのDockerコンテナを起動する
+VantageCloud Lake デモを起動するには、 https://hub.docker.com/r/teradata/jupyterlab-extensions[Teradata Jupyter Extensions for Docker] が必要です。 これらの拡張機能は、SQL ipython カーネル、Teradata への接続を管理するユーティリティ、および Teradata データベースとの対話時の生産性を高めるデータベース オブジェクト エクスプローラを提供します。   
+
+次に、コンテナを起動し、既存の lake-demos ディレクトリにバインドします。オペレーティング システムに基づいて適切なコマンドを選択します。 
+
+NOTE: Windows の場合は、PowerShell で docker コマンドを実行します。
+
+[tabs, id="vscode_tab_mount", role="emits-gtm-events"]
+====
+Windows::
++
+[source,powershell]
+----
+docker run -e "accept_license=Y" -p 127.0.0.1:8888:8888 -v ${PWD}:/home/jovyan/JupyterLabRoot teradata/jupyterlab-extensions
+----
+macOS::
++
+[source,bash]
+----
+docker run -e "accept_license=Y" -p 127.0.0.1:8888:8888 -v $PWD:/home/jovyan/JupyterLabRoot teradata/jupyterlab-extensions
+----
+Linux::
++
+[source,bash]
+----
+docker run -e "accept_license=Y" -p 127.0.0.1:8888:8888 -v $PWD:/home/jovyan/JupyterLabRoot teradata/jupyterlab-extensions
+----
+====
+結果の URL とトークンをメモします。 これらは、Visual Studio Code から接続を確立するために必要になります。
+
+image::vantagecloud-lake/{dir}/terminal.png[terminal.png,align="center", width=80%]
+
+== Visual Studio Code の構成
+Visual Studio Codeで `lake-demos` プロジェクトディレクトリを開く。リポジトリには次のプロジェクト ツリーが含まれている。 
+
+LAKE_DEMOS
+
+* https://github.com/Teradata/lake-demos/tree/main/UseCases[UseCases]
+** https://github.com/Teradata/lake-demos/blob/main/0_Demo_Environment_Setup.ipynb[0_Demo_Environment_Setup.ipynb]
+** https://github.com/Teradata/lake-demos/blob/main/1_Load_Base_Demo_Data.ipynb[1_Load_Base_Demo_Data.ipynb]
+** https://github.com/Teradata/lake-demos/blob/main/Data_Engineering_Exploration.ipynb[Data_Engineering_Exploration.ipynb]
+** https://github.com/Teradata/lake-demos/blob/main/Data_Science_OAF.ipynb[Data_Engineering_Exploration.ipynb]
+** https://github.com/Teradata/lake-demos/blob/main/Demo_Admin.ipynb[Demo_Admin.ipynb]
+* https://github.com/Teradata/lake-demos/blob/main/vars.json[vars.jsonファイル]
+
+=== vars.json ファイルを編集する 
+*https://github.com/Teradata/lake-demos/blob/main/vars.json[vars.json file]* ファイルを編集して、デモを実行するために必要な認証情報を含める 
++
+
+[cols="1,1"]
+|====
+| *変数* | *値*
+| *"host"* 
+| VantageCloud Lake 環境からの Public IP値
+| *"UES_URI"* 
+| VantageCloud Lake 環境からの Open Analytics
+| *"dbc"*
+| VantageCloud Lake 環境のマスター パスワード
+|====
+
+Public IPアドレスとOpen Analyticsエンドポイントを取得するには、次の https://quickstarts.teradata.com/vantagecloud-lake/vantagecloud-lake-demo-jupyter-docker.html[手順] に従います。
+====
+IMPORTANT: vars.json ファイルのパスワードを変更します。
+ サンプル vars.json では、すべてのユーザーのパスワードがデフォルトで「password」に設定されていることがわかります。これはサンプル ファイルに関するものであり、これらのパスワード フィールドをすべて強力なパスワードに変更し、必要に応じて保護する必要があります。 他のパスワード管理のベスト プラクティスに従ってください。
+====
+=== UseCases ディレクトリ内の vars.json へのパスを変更する
+
+ユースケースディレクトリでは、すべての.ipynbファイルは、Jupyterlabから作業するときに、パス././vars.jsonを使用してJSONファイルから変数をロードする。Visual Studio Code から直接作業するには、vars.json を指すように各 .ipynb 内のコードを更新します。
+
+これらの変更を行う最も簡単な方法は、左側の垂直 メニューの検索機能を使用することです。検索対象 
+
+----
+'../../vars.json'
+----
+
+次のように置換します。
+
+----
+'vars.json'
+----
+
+image::vantagecloud-lake/{dir}/search.png[検索,width=50%,opts="inline"]
+
+image::vantagecloud-lake/{dir}/replace.png[置換,width=50%,opts="inline"]
+
+=== Jupyterカーネルを構成する
+*0_Demo_Environment_Setup.ipynb* を開き、Visual Studio Codeの右上にあるSelect Kernelをクリックします。 
+
+Jupyter および Python 拡張機能をインストールしていない場合は、Visual Studio Code によってそれらをインストールするように求められます。これらの拡張機能は、Visual Studio Code がカーネルを検出するために必要です。これらをインストールするには、「Install/Enable suggested extensions for Python and Jupyter」を選択します。
+
+image::vantagecloud-lake/{dir}/select.kernel.png[select.kernel.png,align="center"]
+
+必要な拡張機能をインストールすると、ドロップダウン メニューにオプションが表示されます。**既存のJupyterカーネル** を選択します。
+
+image::vantagecloud-lake/{dir}/existing.kernel.png[existing.kernel.png,align="center"]
+
+実行中の Jupyter Server の URL を入力し、Enter キーを押します。
+----
+http://localhost:8888
+----
+image::vantagecloud-lake/{dir}/server.url.png[server.url.png,align="center"]
+
+ファイルを Docker コンテナにマウントするときにターミナルで見つかったトークンを入力し、Enter キーを押します。
+
+image::vantagecloud-lake/{dir}/server.password.png[server.password.png,align="center"]
+
+サーバー表示名を変更する (URL を使用するには空白のままにします)
+
+image::vantagecloud-lake/{dir}/server.display.name.png[server.display.name.png,align="center"]
+
+これで、すべての Teradata Vantage 拡張カーネルにアクセスできるようになりました。実行中の Jupyter サーバーから Python 3 (ipykernel) を選択します。
+
+image::vantagecloud-lake/{dir}/python.kernel.png[python.kernel.png,align="center"]
+
+=== デモを実行する
+*0_Demo_Environment_Setup.ipynb* 内のすべてのセルを実行して、環境をセットアップします。続いて *1_Demo_Setup_Base_Data.ipynb* を実行して、デモに必要な基本データをロードします。
+デモ ノートブックの詳細については、GGitHubの https://github.com/Teradata/lake-demos[Teradata Lake demos] ページを参照してください。
+
+image::vantagecloud-lake/{dir}/demoenvsetup.png[demoenvsetup.png,align="center", width=70%]
+
+== まとめ 
+このクイックスタート ガイドでは、Jupyter ノートブックを使用して VantageCloud Lake デモにアクセスするように Visual Studio Code を構成しました。 

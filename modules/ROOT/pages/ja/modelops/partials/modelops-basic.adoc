@@ -1,0 +1,157 @@
+== 新しいプロジェクトを作成するか、既存のプロジェクトを使用する
+
+新しいプロジェクトを追加する
+
+* プロジェクトを作成する
+
+* 詳細
+
+* 名前: Demo: your-name
+
+* 説明: ModelOps Demo
+
+* グループ: your-name
+
+* パス： https://github.com/Teradata/modelops-demo-models
+
+* 信頼証明: 信頼証明なし
+
+* ブランチ: master
+
+ここで git 接続をテストできます。緑色の場合は、保存して続行します。ここではサービス接続設定をスキップします。
+
+新しいプロジェクトを作成するとき、ModelOpsは新しい接続をリクエストします。 
+
+== パーソナル接続を作成する
+
+パーソナル接続
+
+* 名前: Vantage personal your-name
+
+* 説明: Vantage デモ環境
+
+* ホスト: tdprd.td.teradata.com (teradata transcendの内部のみ)
+
+* データベース: your-db
+
+* VAL データベース: TRNG_XSP (teradata transcendの内部のみ)
+
+* BYOM データベース: TRNG_BYOM (teradata transcendの内部のみ)
+
+* ログインメカニズム: TDNEGO
+
+* ユーザー名/パスワード
+
+== SQL データベースの VAL および BYOM のアクセス権を検証する
+
+接続パネルの新しいヘルスチェックパネルでアクセス権を確認できます。
+
+image::ModelOps_Healthcheck.png[ModelOps Healtcheckのスクリーンショット, width=500]
+
+== BYOM の評価とスコアリングのために Vantage テーブルを識別するためのデータセットを追加する
+
+新しいデータセット テンプレートを作成してから、トレーニング用に 1 つのデータセット、評価用に 2 つのデータセットを作成して、2 つの異なるデータセットでモデルの品質メトリクスを監視できるようにしましょう。
+
+データセットの追加
+
+* データセットテンプレートの作成
+
+* カタログ
+
+* 名前: PIMA
+
+* 説明: PIMA Diabetes
+
+* フィーチャカタログ: Vantage
+
+* データベース: your-db
+
+* テーブル: aoa_feature_metadata
+
+フィーチャ
+クエリー:
+[source, teradata-sql, id="modelops_feature_query", role="emits-gtm-events"]
+----
+SELECT * FROM {your-db}.pima_patient_features
+----
+エンティティ キー: PatientId
+フィーチャ: NumTimesPrg、PlGlcConc、BloodP、SkinThick、TwoHourSerIns、BMI、DiPedFunc、Age
+
+エンティティとターゲット
+クエリー: 
+[source, teradata-sql]
+----
+SELECT * FROM {your-db}.pima_patient_diagnoses
+----
+エンティティキー: PatientId
+Target: HasDiabetes
+
+予測
+
+* データベース: your-db
+
+* 表:pima_patient_predictions
+
+エンティティの選択: 
+
+クエリー: 
+[source, teradata-sql]
+----
+SELECT * FROM pima_patient_features WHERE patientid MOD 5 = 0
+----
+v6のみ(v7では、これをBYOMのコードなし画面で定義する):BYOMターゲットカラム:CAST(CAST(json_report AS JSON).JSONExtractValue('$.predicted_HasDiabetes')AS INT)
+
+== トレーニングデータセットの作成
+
+ベーシック
+
+* 名前: トレーニング
+
+* 説明: トレーニングデータセット
+
+* スコープ: トレーニング
+
+* エンティティとターゲット
+
+クエリー: 
+[source, teradata-sql]
+----
+SELECT * FROM {your-db}.pima_patient_diagnoses WHERE patientid MOD 5 = 1
+----
+
+== 評価データセット1を作成する
+
+ベーシック
+
+* 名前: Evaluate
+
+* 説明: Evaluate データセット
+
+* スコープ: Evaluation
+
+* エンティティとターゲット
+
+クエリー: 
+[source, teradata-sql]
+----
+SELECT * FROM {your-db}.pima_patient_diagnoses WHERE patientid MOD 5 = 2
+----
+
+
+== 評価データセット2を作成する
+
+ベーシック
+
+* 名前: Evaluate
+
+* 説明: Evaluate データセット
+
+* スコープ: Evaluation
+
+* エンティティとターゲット
+
+クエリー: 
+[source, teradata-sql]
+----
+SELECT * FROM {your-db}.pima_patient_diagnoses WHERE patientid MOD 5 = 3
+----

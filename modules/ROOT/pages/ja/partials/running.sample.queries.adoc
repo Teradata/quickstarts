@@ -1,0 +1,7 @@
+. Teradata Studio Expressで、`クエリー開発`パースペクティブに移動すします(トップメニューに移動して、`Window` -> `クエリー開発` を選択)。
+
+. `データベース接続` -> `新規Teradata`をダブルクリックして、以前に作成した接続プロファイルを使用して接続します。
+
+. `dbc`ユーザーを使用して、`HR`という新しいデータベースを作成します。このクエリーをコピー/ペーストし、Run Query (image:run.query.button.png[クエリを実行, 24, 24]) ボタンまたはkbd:[F5]キーを押します。
++
+include::getting.started.queries.adoc[]

@@ -1,0 +1,167 @@
+= Teradata Jupyter ExtensionsをJupyter Hubにデプロイする方法
+:page-lang: ja
+:experimental:
+:page-author: Hailing Jiang
+:page-email: Hailing.iang@teradata.com
+:page-revdate: 2021 年 11 月 17 日
+:description: Teradata Jupyter 拡張機能を顧客の JupyterHub クラスタにデプロイする
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, java applications, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy
+
+== 概要
+独自のJupyterHubクラスタをお持ちのお客様には、Teradata Jupyterエクステンションを既存のクラスタに統合するための2つのオプションがあります。
+
+1. Teradata Jupyter Dockerイメージを使用する。
+2. 既存のDockerイメージをカスタマイズして、Teradata 拡張機能を含める。
+
+このページでは、2つのオプションの詳細な手順を説明します。この手順は、手順は、お客様のJupyterHubのデプロイが link:https://zero-to-jupyterhub.readthedocs.io/en/latest/index.html[Zero to JupyterHub with Kubernetes] をベースにしていることを前提にしています。
+
+include::../partials/vantage_clearscape_analytics.adoc[]
+
+== Teradata Jupyter Dockerイメージの使用
+
+Teradata は 、link:https://hub.docker.com/r/jupyter/datascience-notebook/[jupyter/datascience-notebook] イメージをベースにした、すぐに実行可能なDockerイメージを提供しています。Teradata SQLカーネル、Teradata PythonおよびRライブラリとドライバー、Teradata Jupyter拡張をバンドルし、Teradataデータベースと対話しながら生産性を向上させることができます。また、このイメージには、SQLカーネル、拡張機能、Teradataライブラリの使用方法を示すサンプルノートブックが含まれています。
+
+このイメージは以下のように使用することができます。
+
+* ローカルのDockerコンテナで個人用Jupyter Notebookサーバを起動する
+* JupyterHubを使用してチームのJupyterLabサーバを実行する
+
+ローカルDockerコンテナで個人用JupyterLabサーバーを起動する手順については、link:https://docs.teradata.com/r/KQLs1kPXZ02rGWaS9Ktoww/Fwvns7y_a7juDWx1NixC2A[インストール ガイド]を参照してください。ここでは、お客様の既存のJupyterHub環境でTeradata Jupyter Dockerイメージを使用する方法を中心に説明します。
+
+=== Teradata Jupyter Dockerイメージをレジストリにインストールする
+
+1. link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter] のページに移動し、Dockerイメージをダウンロードします。tarballで、`teradatajupyterlabext_VERSION.tar.gz` という形式になっています。
+2.  イメージをロードします。
++
+[source, bash, role="content-editable"]
+----
+docker load -i teradatajupyterlabext_VERSION.tar.gz
+----
+3. イメージをDockerレジストリにプッシュします。
++
+[source, bash, role="content-editable"]
+----
+docker push
+----
++
+[TIP]
+====
+シンプルにするために、読み込んだ画像の名前を変更することを検討するとよいでしょう。
+[source, bash, role="content-editable"]
+----
+docker tag OLD_IMAGE_NAME NEW_IMAGE_NAME
+----
+====
+
+=== JupyterHub で Teradata Jupyter Dockerイメージを使用する
+
+1. Teradata Jupyter Dockerイメージを JupyterHub クラスタで直接使用するには、 link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#choose-and-use-an-existing-docker-image[JupyterHubドキュメント] の説明に従ってオーバーライド ファイルを変更します。 `REGISTRY_URL` と `VERSION` を上記の手順で適切な値に置き換えてください。
++
+[source, yaml, role="content-editable"]
+----
+singleuser:
+  image:
+  name: REGISTRY_URL/teradatajupyterlabext_VERSION
+  tag: latest
+----
+2. link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/extending-jupyterhub.html#applying-configuration-changes[JupyterHub ドキュメント] に記載されているように、クラスタに変更を適用します。
++
+TIP: 複数のプロファイルを使用することで、ユーザーがJupyterHubにログインする際に使用する画像を選択することができます。複数のプロファイルを設定する詳細な手順と例については、link:https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-environment.html#using-multiple-profiles-to-let-users-select-their-environment[JupyterHub ドキュメント] を参照してください。
+
+=== Teradata Jupyter Dockerイメージをカスタマイズする
+
+Teradata Jupyter Dockerイメージにバンドルされていないパッケージやノートブックが必要な場合、Teradataイメージをベースイメージとして使用し、その上に新しいイメージをビルドすることをお勧めします。
+
+以下は、Teradataイメージの上にビルドし、追加のパッケージとノートブックを追加するDockerfileの例です。Dockerfileを使用して新しいDockerイメージを構築し、イメージを指定のレジストリにプッシュし、新しいイメージをシングルユーザーイメージとして使用するために上記のようにオーバーライドファイルを変更し、上記のようにクラスタに変更を適用します。 `REGISTRY_URL` と `VERSION` は適切な値に置き換えてください。
+[source, Dockerfile, role="content-editable"]
+----
+FROM REGISTRY_URL/teradatajupyterlabext_VERSION:latest
+
+# install additional packages
+RUN pip install --no-cache-dir astropy
+
+# copy notebooks
+COPY notebooks/. /tmp/JupyterLabRoot/DemoNotebooks/
+----
+
+== 既存のDockerイメージをカスタマイズして Teradata 拡張機能を含める
+
+Teradata SQLカーネルとエクステンションは、現在使用している既存のイメージに含めることができます。
+
+1. link:https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[Vantage Modules for Jupyter] ページから、zip圧縮されたTeradata Jupyter extensionsパッケージバンドルがダウンロードできます。既存の
+DockerイメージがLinuxベースである場合は、Linux版のダウンロードを使用します。そうでない場合は、使用しているプラットフォーム用にダウンロードします。.zipファイルには、Teradata SQL Kernel、エクステンション、サンプル
+ノートブックが含まれています。
+2. バンドル ファイルを作業ディレクトリに解凍します。
+3. 以下は、既存のDockerイメージにTeradata Jupyterエクステンションを追加するためのDockerfileの例です。Dockerfileを使用して新しいDockerイメージを構築し、イメージを指定のレジストリにプッシュし、新しいイメージをシングルユーザーイメージとして使用するために上記のようにオーバーライドファイルを変更し、変更をクラスタに適用します。
++
+[source, Dockerfile, id="jupyterhub_first_run", role="content-editable emits-gtm-events"]
+----
+FROM REGISTRY_URL/your-existing-image:tag
+ENV NB_USER=jovyan \
+  HOME=/home/jovyan \
+  EXT_DIR=/opt/teradata/jupyterext/packages
+
+USER root
+
+##############################################################
+# Install kernel and copy supporting files
+##############################################################
+
+# Copy the kernel
+COPY ./teradatakernel /usr/local/bin
+RUN chmod 755 /usr/local/bin/teradatakernel
+
+# Copy directory with kernel.json file into image
+COPY ./teradatasql teradatasql/
+
+##############################################################
+# Switch to user jovyan to copy the notebooks and license files.
+##############################################################
+
+USER $NB_USER
+
+# Copy notebooks
+COPY ./notebooks/ /tmp/JupyterLabRoot/TeradataSampleNotebooks/
+
+# Copy license files
+COPY ./ThirdPartyLicenses /tmp/JupyterLabRoot/ThirdPartyLicenses/
+
+USER root
+
+# Install the kernel file to /opt/conda jupyter lab instance
+RUN jupyter kernelspec install ./teradatasql --prefix=/opt/conda
+
+##############################################################
+# Install Teradata extensions
+##############################################################
+
+COPY ./teradata_*.tgz $EXT_DIR
+
+WORKDIR $EXT_DIR
+
+RUN jupyter labextension install --no-build teradata_database* && \
+  jupyter labextension install --no-build teradata_resultset* && \
+  jupyter labextension install --no-build teradata_sqlhighlighter* && \
+  jupyter labextension install --no-build teradata_connection_manager* && \
+  jupyter labextension install --no-build teradata_preferences* && \
+  jupyter lab build --dev-build=False --minimize=False && \
+  rm -rf *
+
+WORKDIR $HOME
+
+# Give back ownership of /opt/conda to  jovyan
+RUN chown -R jovyan:users /opt/conda
+
+# Jupyter will create .local directory
+RUN rm -rf $HOME/.local
+----
+4. Teradata package for PythonとTeradata package for Rはオプションでインストールすることができます。詳細については、以下のページを参照してください。
+* link:https://downloads.teradata.com/download/aster/teradata-python-package-teradataml[Teradata Package for Python - teradataml のダウンロード ページ]
+* link:https://downloads.teradata.com/download/aster/tdplyr-download-page[Teradata Package for R - tdplyr のダウンロード ページ]
+
+== さらに詳しく
+* link:https://teradata.github.io/jupyterextensions[Teradata Jupyter 拡張機能 Web サイト]
+* link:https://docs.teradata.com/r/KQLs1kPXZ02rGWaS9Ktoww/root[Jupyter用Teradata Vantage™モジュールインストールガイド]
+* link:https://docs.teradata.com/r/1YKutX2ODdO9ppo_fnguTA/root[Python用Teradata®パッケージユーザガイド]
+
+include::../partials/community_link.adoc[]

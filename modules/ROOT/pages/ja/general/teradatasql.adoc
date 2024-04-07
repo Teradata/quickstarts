@@ -1,0 +1,49 @@
+= Python を使用して Vantage に接続する方法
+:page-lang: ja
+:experimental:
+:page-author: Krutik Pathak
+:page-email: krutik.pathak@teradata.com
+:page-revdate: 2023 年 8 月 2 日
+:description: teradatasql Python データベース ドライバを使用して Teradata Vantage に接続する方法
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, teradatasql, python applications, business intelligence, enterprise analytics
+
+== 概要
+
+このハウツーでは、Teradata Vantage 用の Python データベース ドライバ link:https://github.com/Teradata/python-driver[teradatasql,window="_blank"] を使用して Vantage に接続する方法を示します。
+
+== 前提条件
+
+* 64ビットPython 3.4以降。
+
+* `teradatasql` システムにインストールされているドライバ:
++
+[source, bash, id="teradatasql_pip_install", role="emits-gtm-events"]
+----
+pip install teradatasql
+----
++
+[NOTE]
+====
+`teradatasql` パッケージはWindows、macOS(10.14 Mojave以降)、Linuxで動作します。Linuxでは、現在、Linux x86-64アーキテクチャのみがサポートされています。  
+====
+
+* Teradata Vantageインスタンスへのアクセス。現在、ドライバは Teradata Database 16.10 以降のリリースでの使用がサポートされています。
++
+include::../partials/vantage_clearscape_analytics.adoc[]
+
+== クエリーを送信するコード
+
+これは、`teradatasql` を使用してTeradata Vantageに接続するための単純なPythonコードです。残っているのは、接続パラメータと認証パラメータを渡してクエリーを実行することだけです。
+
+++++
+<script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fdev-rel-python-driver-demo%2Fblob%2Fmain%2Fsrc%2Fteradata_python_connection.py&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></script>
+++++
+
+== まとめ
+
+このハウツーでは、 `teradatasql` Python データベース ドライバを使用して Teradata Vantage に接続する方法を説明しました。 `teradatasql` を使用して SQL クエリーを Teradata Vantage に送信するサンプル Python コードについて説明しました。
+
+== さらに詳しく
+* link:https://github.com/Teradata/python-driver[teradatasql Python ドライバ リファレンス,window="_blank"]
+
+include::../partials/community_link.adoc[]

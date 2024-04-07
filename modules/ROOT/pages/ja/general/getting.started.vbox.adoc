@@ -1,0 +1,79 @@
+= VirtualBox で Vantage Express を実行する方法
+:page-lang: ja
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: 2023 年 1 月 9 日
+:description: VirtualBox を使用してラップトップで Vantage Express を実行します。
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics
+:tabs:
+
+include::../partials/getting.started.intro.adoc[]
+
+== 前提条件
+
+. 以下のオペレーティング システムのいずれかを使用するコンピューター: Windows 10、Linux、または Intel ベースの MacOS。
++
+NOTE: M1/M2 MacOSシステムについては、xref:getting.started.utm.adoc[] を参照してください。
+. 少なくとも 1 つのコアと 6GB RAM を仮想マシン専用にできる 30GB のディスク領域と十分な CPU および RAM。
+. ソフトウェアをインストールして実行できる管理者権限。
++
+// NOTE: No admin rights on your local machine? No problem! Have a look at how to run Vantage Express in link:#[AWS], link:#[Azure], link:#[Google Cloud].
+
+== インストール
+
+=== 必要なソフトウェアのダウンロード
+
+.  link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Express VirtualBox Open Virtual Appliance (OVA),window=_blank]の最新バージョン 。
++
+NOTE: これまでに Teradata Downloads Web サイトを使用したことがない場合は、まず登録する必要があります。
+. link:https://www.virtualbox.org/wiki/Downloads[VirtualBox,window=_blank]、バージョン6.1。
++
+NOTE: `brew` およびその他のパッケージ マネージャを使用して VirtualBox をインストールすることもできます。
+
+=== インストーラを実行する
+
+. インストーラーを実行し、デフォルト値を受け入れて、VirtualBox をインストールします。
+
+NOTE: VirtualBox には、高い権限を必要とする機能が含まれています。VirtualBox を初めて起動するときは、この昇格されたアクセスを確認するように求められます。VirtualBox カーネル プラグインをアクティブにするためにマシンを再起動する必要がある場合もあります。
+
+=== Vantage Express を実行する
+
+. VirtualBoxを起動します。
+. `File -> Import Appliance...`メニューに移動します。
+.  `File` フィールドで、ダウンロードしたOVAファイルを選択します。
+. 以下の画面で、デフォルトを受け入れて `Import`をクリックします。
+. メインの VirtualBox パネルに戻り、VM `Vantage  17.20` をダブルクリックして Vantage Express アプライアンスを起動します。
++
+image::getting-started-vbox/start-vm.png[VMを開始する, width=75%]
+
+include::../partials/run.vantage.adoc[]
+
+=== サンプルクエリーを実行する
+
+include::../partials/running.sample.queries.adoc[]
+
+== VirtualBox ゲスト拡張機能を更新する
+
+VirtualBox ゲスト拡張機能は、VM 内で実行されるソフトウェアです。これにより、VirtualBox上でのVMの実行が高速化されます。また、VM 画面の解像度とサイズ変更に対する応答性も向上します。双方向のクリップボードを実装し、ホストとゲストの間でドラッグ アンド ドロップを行います。VM 内の VirtualBox ゲスト拡張機能は、VirtualBox インストールのバージョンと一致する必要があります。最適なパフォーマンスを得るには、VirtualBox ゲスト拡張機能を更新する必要がある場合があります。
+
+VirtualBox ゲスト拡張機能を更新するには:
+
+.  `Storage` セクションの `SATA Port 3: [Optical Drive]` をクリックして、VirtualBox ゲスト拡張機能DVD を挿入します。
++
+image::insert-guest-additions-dvd.png[Guest Additions DVD を挿入する, width=50%]
+. VMウィンドウに戻り、`Gnome ターミナル` アプリケーションを起動します。
+. ターミナルで以下のコマンドを実行します。
++
+[source, bash, id="update_guest_additions", role="content-editable emits-gtm-events"]
+----
+mount /dev/cdrom /media/dvd; /media/dvd/VBoxLinuxAdditions.run
+----
+
+include::../partials/getting.started.summary.adoc[]
+
+include::../partials/next.steps.adoc[]
+
+== さらに詳しく
+* link:https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20[Teradata®Studio™およびStudio™Expressインストール ガイド]
+
+include::../partials/community_link.adoc[]

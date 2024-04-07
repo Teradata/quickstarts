@@ -1,0 +1,1 @@
+NOTE: このハウツーでは、Teradata Extensions を Jupyter Notebooks 環境に追加する方法を示します。Teradata Extensions および分析ツールと統合された Jupyter Notebooks のホストされたバージョンは、https://clearscape.teradata.comで無料で機能テストに利用できます。

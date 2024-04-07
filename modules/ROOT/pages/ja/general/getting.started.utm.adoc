@@ -1,0 +1,76 @@
+= UTM で Vantage Express を実行する方法
+:page-lang: ja
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: 2023 年 1 月 9 日
+:description: UTM を使用して Mac で Vantage Express を実行します。
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics
+:icons: font
+
+include::../partials/getting.started.intro.adoc[]
+
+== 前提条件
+
+. Macコンピュータ。IntelとM1/2チップの両方がサポートされている。
++
+NOTE: Vantage Expressはx86アーキテクチャで動作する。VMをM1/2チップ上で実行する場合、UTMはx86をエミュレートする必要がある。これは仮想化よりも大幅に低速です。M1/M2 上の Vantage Express がニーズに対して遅すぎると判断した場合は、クラウド ( xref:run-vantage-express-on-aws.adoc[AWS]、 xref:run-vantage-express-on-microsoft-azure.adoc[Azure]、 xref:vantage.express.gcp.adoc[Google Cloud] )で Vantage Express を実行することを検討してください。
+. 少なくとも 1 つのコアと 4GB RAM を仮想マシン専用にできる 30GB のディスク領域と十分な CPU および RAM。
+. ソフトウェアをインストールして実行できる管理者権限。
++
+NOTE: ローカルマシンに管理者権限がありませんか?xref:run-vantage-express-on-aws.adoc[AWS]、xref:run-vantage-express-on-microsoft-azure.adoc[Azure]、xref:vantage.express.gcp.adoc[Google Cloud]でVantage Expressを実行する方法を見てください。
+
+== インストール
+
+=== 必要なソフトウェアをダウンロードする
+
+. link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Express] の最新バージョン。これまでに Teradata Downloads Web サイトを使用したことがない場合は、登録する必要があります。
+. link:https://mac.getutm.app/[UTM] の最新バージョン。
+
+=== UTMインストーラを実行する
+
+. インストーラを実行し、デフォルト値を受け入れてUTMをインストールします。
+
+=== Vantage Expressを実行する
+
+. Vantage Expressをダウンロードしたディレクトリに移動し、ダウンロードしたファイルを解凍します。
+. UTM を起動し、 `+` の記号をクリックして、 `Virtualize` (Intel Mac の場合) または `Emulate` (M1 Mac の場合) を選択します。
+.  `Operating System` 画面で `Other`を選択します。
+.  `Other` 画面で `Skip ISO Boot`を選択します。
+. `Hardware`画面で、少なくとも4 GBのメモリと少なくとも1つのCPUコアを割り当てます。10GB RAM と 2 つの CPU を推奨します。
++
+image::utm.hardware.png[UTM Hardware, width=500, align="left"]
+. `Storage` 画面で `Next` をクリックして、デフォルトを受け入れます。
+. `Shared Direct` 画面で `Next` をクリックします。
+.  `Summary` 画面で `Open VM Settings` にチェックを入れ、 `Save`をクリックします。
+. セットアップウィザードを実行します。以下のタブを調整するだけで済みます。
+* *QEMU* - `UEFI Boot` オプションを無効にします。
+* *Network* - ホスト コンピューター上で ssh (22) ポートと Vantage (1025) ポートを公開します。
++
+image::utm.network.png[UTMネットワーク, width=500]
+. ドライブをマップします。
+* デフォルトの `IDE Drive` を削除します。
+* ダウンロードした VM zip ファイルからディスク ファイルをインポートして、3 つの Vantage Express ドライブをマッピングします。`-disk1`、`-disk2`、`-disk3` の正しい順序でマッピングするようにしてください。最初のディスクはブート可能であり、データベース自体が含まれています。Disks 2と3はいわゆる `pdisks` と呼ばれ、データを含んでいます。ファイルをインポートすると、UTMは自動的に `vmdk` から `qcow2` 形式に変換する。各ディスクが `IDE` インターフェースを使用して構成されていることを確認してください。
++
+image::utm.drives.png[UTMドライブ, width=500]
++
+3 つのドライブすべてのマッピングが完了すると、構成は次のようになります。
++
+image::utm.final.png[UTMドライブの最終版, width=500]
+. 構成を保存し、VM を起動します。
+
+include::../partials/run.vantage.adoc[]
+
+=== サンプルクエリーを実行する
+
+. 次に、VM でいくつかのクエリーを実行します。ホストと VM 間のコピー/ペーストの問題を回避するために、VM でこのクイック スタートを開きます。仮想デスクトップに移動し、Firefox を起動して、このクイック スタートを指定します。
+
+include::../partials/running.sample.queries.adoc[]
+
+include::../partials/getting.started.summary.adoc[]
+
+include::../partials/next.steps.adoc[]
+
+== さらに詳しく
+* link:https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20[Teradata®Studio™およびStudio™Expressインストール ガイド]
+
+include::../partials/community_link.adoc[]

@@ -15,14 +15,14 @@ Native Object Storage (NOS) は、AWS S3、Google GCS、Azure Blob、または�
 
 Teradata Vantage インスタンスにアクセスする必要があります。NOS は、バージョン 17.10 以降、Vantage Express から Developer、DYI、Vantage as a Service までのすべての Vantage エディションで有効になります。
 
-#include::ROOT:partial$vantage_clearscape_analytics.adoc[]
+include::../partials/vantage_clearscape_analytics.adoc[]
 
 == NOS でデータを探索する
 
 NOTE: 現在、NOS は CSV、JSON (配列または改行区切りとして)、および Parquet データ形式をサポートしています。
 
-データセットが CSV ファイルとして S3 バケットに保存されているとします。データセットを Vantage に取り込むかどうかを決定する前に、データセットを探索したいと考えています。このシナリオでは、
-米国地質調査所によって収集された河川流量データを含む、Teradata によって公開された公開データセットを使用します。バケットは https://td-usgs-public.s3.amazonaws.com/にあります。
+データセットが CSV ファイルとして S3 バケットに保存されているとします。データセットを Vantage に取り込むかどうかを決定する前に、データセットを探索したいと考えています。このシナリオでは、the
+U.S. Geological Surveyによって収集された河川流量データを含む、Teradataによって公開された公開データセットを使用します。バケットは  https://td-usgs-public.s3.amazonaws.com/ にあります。
 
 まずはCSVデータのサンプルを見てみましょう。Vantage がバケットからフェッチする最初の 10 行を取得します。
 
@@ -148,7 +148,7 @@ Location                                                            GageHeight2 
 
 == NOS から Vantage にデータをロードする
 
-オブジェクト ストレージのクエリーには時間がかかります。データが興味深いと判断し、より迅速に答えが得られるソリューションを使用してさらに分析を行いたい場合はどうすればよいでしょうか? 良いニュースは、NOS で返されたデータを `CREATE TABLE` ステートメントのソースとして使用できることです。 `CREATE TABLE` 権限があると仮定すると、次を実行できます:
+オブジェクト ストレージのクエリーには時間がかかります。データが興味深いと判断し、より迅速に答えが得られるソリューションを使用してさらに分析を行いたい場合はどうすればよいでしょうか? 良いニュースは、NOS で返されたデータを `CREATE TABLE` 文のソースとして使用できることです。`CREATE TABLE` 権限があると仮定すると、次を実行できます。
 
 IMPORTANT: このクエリは、前の手順でデータベース `河川流量` と `河川流量` という外部テーブルを作成したことを前提としています。
 
@@ -222,7 +222,7 @@ USING ( LOCATION('/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/') );
 
 == Vantage からオブジェクト ストレージにデータをエクスポートする
 
-これまで、オブジェクト ストレージからのデータの読み取りとインポートについて説明してきました。SQL を使用して Vantage からオブジェクト ストレージにデータをエクスポートする方法があれば素晴らしいと思いませんか? これはまさに `WRITE_NOS` 関数の目的です。 `riverflow_native` テーブルからオブジェクト ストレージにデータをエクスポートしたいとします。次のクエリを使用してこれを行うことができます。
+ここまで、オブジェクト ストレージからのデータの読み取りとインポートについて説明してきました。SQL を使用して Vantage からオブジェクト ストレージにデータをエクスポートする方法があれば素晴らしいと思いませんか? これはまさに `WRITE_NOS` 機能のためのものです。`riverflow_native` テーブルからオブジェクト ストレージにデータをエクスポートする場合を考えてみましょう。以下のクエリーを使用してこれを行うことができます。
 
 [source, teradata-sql]
 ----
@@ -239,7 +239,7 @@ SELECT * FROM WRITE_NOS (
 ) AS d;
 ----
 
-ここでは、Vantage に `riverflow_native` からデータを取得し、 `parquet` 形式を使用して `YOUR-OBJECT-STORE-URI` バケットに保存するように指示します。データは `site_no` 属性でファイルに分割されます。ファイルは圧縮されます。
+ここでは、`riverflow_native` からデータを取得し、`parquet` 形式を使用して `YOUR-OBJECT-STORE-URI` バケットに保存するように Vantage に指示します。データは `site_no` 属性によってファイルに分割されます。ファイルは圧縮されます。
 
 == まとめ
 

@@ -1,0 +1,143 @@
+= Teradata Jupyter Extentionsと SageMakerNotebookインスタンスを統合する
+:page-lang: ja
+:experimental:
+:page-author: Hailing Jiang
+:page-email: Hailing.Jiang@teradata.com
+:page-revdate: 2022 年 9 月 27 日
+:description: Teradata Jupyter 拡張機能を SageMaker Notebook インスタンスと統合する
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, jupyter, teradatasql, ipython-sql, teradatasqlalchemy
+:page-image-directory: integrate-teradata-jupyter-extensions-with-sagemaker
+
+include::../partials/jupyter_notebook_clearscape_analytics_note.adoc[]
+
+== 概要
+Teradata Jupyter ExtentionsはTeradata SQLカーネルといくつかのUI拡張を提供しユーザーがJupyter環境からTeradataデータベースを簡単に操作できるようにするものです。今回は、Jupyter ExtentionsとSageMakerNotebookインスタンスを連携させる方法について説明します。
+
+== 前提条件
+* Teradata Vantageインスタンスへのアクセス。
++
+include::../partials/vantage_clearscape_analytics.adoc[]
+* AWS アカウント
+* ライフサイクル構成スクリプトとTeradata Jupyter Extentionsパッケージを格納するためのAWS S3バケット
+
+== 統合について
+
+SageMakerは、ライフサイクルコンフィギュレーションスクリプトを使用したNotebookインスタンスのカスタマイズをサポートしています。以下では、ライフサイクル構成スクリプトを使用して、Jupyterカーネルと拡張機能をNotebookインスタンスにインストールする方法をデモします。
+
+=== notebookインスタンスと連携するための手順
+
+1. Teradata Jupyter Extentionsパッケージのダウンロードする
++
+Linux版を https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter からダウンロードし、S3バケットにアップロードしてください。Teradata Jupyterのカーネルとエクステンションを含むzipパッケージです。各エクステンションには2つのファイルがあり、名前に"_prebuilt "が付いているものがPIPでインストールできるプリビルドエクステンション、もう1つが "jupyter labextension "でインストールする必要があるソースエクステンションになります。プレビルド拡張を使用することをお勧めします。
++
+
+2. notebookインスタンスのライフサイクル設定の作成する
++
+image:cloud-guides/{page-image-directory}/sagemaker.notebook.create.lifecycle.config.png[Notebook インスタンスのライフサイクル構成を作成する, width=75%]
+
++
+以下はS3バケットからTeradataパッケージを取得しJupyterカーネルとエクステンションをインストールするスクリプトのサンプルです。on-create.shはNotebookインスタンスのEBSボリュームに永続化するカスタムconda envを作成し、Notebook再起動後にインストールが失われないようにしています。on-start.shは、カスタムconda envにTeradataカーネルとエクステンションをインストールします。
+
++
+on-create.sh
++
+[source, bash, role="content-editable"]
+----
+#!/bin/bash
+ 
+set -e
+ 
+# This script installs a custom, persistent installation of conda on the Notebook Instance's EBS volume, and ensures
+# that these custom environments are available as kernels in Jupyter.
+ 
+ 
+sudo -u ec2-user -i <<'EOF'
+unset SUDO_UID
+# Install a separate conda installation via Miniconda
+WORKING_DIR=/home/ec2-user/SageMaker/custom-miniconda
+mkdir -p "$WORKING_DIR"
+wget https://repo.anaconda.com/miniconda/Miniconda3-4.6.14-Linux-x86_64.sh -O "$WORKING_DIR/miniconda.sh"
+bash "$WORKING_DIR/miniconda.sh" -b -u -p "$WORKING_DIR/miniconda"
+rm -rf "$WORKING_DIR/miniconda.sh"
+# Create a custom conda environment
+source "$WORKING_DIR/miniconda/bin/activate"
+KERNEL_NAME="teradatasql"
+ 
+PYTHON="3.8"
+conda create --yes --name "$KERNEL_NAME" python="$PYTHON"
+conda activate "$KERNEL_NAME"
+pip install --quiet ipykernel
+ 
+EOF
+----
+
++
+on-start.sh
++
+[source, bash, role="content-editable"]
+----
+#!/bin/bash
+ 
+set -e
+ 
+# This script installs Teradata Jupyter kernel and extensions.
+ 
+ 
+sudo -u ec2-user -i <<'EOF'
+unset SUDO_UID
+ 
+WORKING_DIR=/home/ec2-user/SageMaker/custom-miniconda
+ 
+source "$WORKING_DIR/miniconda/bin/activate" teradatasql
+ 
+# fetch Teradata Jupyter extensions package from S3 and unzip it
+mkdir -p "$WORKING_DIR/teradata"
+aws s3 cp s3://sagemaker-teradata-bucket/teradatasqllinux_3.3.0-ec06172022.zip "$WORKING_DIR/teradata"
+cd "$WORKING_DIR/teradata"
+ 
+unzip -o teradatasqllinux_3.3.0-ec06172022.zip
+ 
+# install Teradata kernel
+cp teradatakernel /home/ec2-user/anaconda3/condabin
+jupyter kernelspec install --user ./teradatasql
+ 
+# install Teradata Jupyter extensions
+source /home/ec2-user/anaconda3/bin/activate JupyterSystemEnv
+ 
+pip install teradata_connection_manager_prebuilt-3.3.0.tar.gz
+pip install teradata_database_explorer_prebuilt-3.3.0.tar.gz
+pip install teradata_preferences_prebuilt-3.3.0.tar.gz
+pip install teradata_resultset_renderer_prebuilt-3.3.0.tar.gz
+pip install teradata_sqlhighlighter_prebuilt-3.3.0.tar.gz
+ 
+conda deactivate
+EOF
+----
++
+3. Notebook インスタンスを作成するPlatform identifierに「Amazon Linux 2, Jupyter Lab3」を選択しLifecycle configurationに手順2で作成したライフサイクル構成を選択してください。
+
++
+image:cloud-guides/{page-image-directory}/sagemaker.notebook.create.notebook.instance.png[Notebookインスタンスの作成する, width=75%]
++
+また、Teradataデータベースにアクセスするために「Network」セクションにvpc、サブネット、セキュリティグループを追加する必要がある場合があります。
+
+4. Notebookインスタンスのステータスが「InService」になるまで待ち「Open JupyterLab」をクリックし、Notebookを開く。
+
++
+image:cloud-guides/{page-image-directory}/sagemaker.notebook.notebook.inservice.png[Notebookを開く, width=75%]
+
+
+デモノートにアクセスし使い方のヒントを得ることができます。
++
+image:cloud-guides/{page-image-directory}/sagemaker.notebook.start.png[デモNotebookにアクセスする, width=75%]
+
+
+== さらに詳しく
+* link:https://teradata.github.io/jupyterextensions[Teradata Jupyter 拡張機能 Web サイト]
+* link:https://docs.teradata.com/r/KQLs1kPXZ02rGWaS9Ktoww/root[Jupyter用Teradata Vantage™モジュールインストールガイド]
+* link:https://docs.teradata.com/r/1YKutX2ODdO9ppo_fnguTA/root[Python用Teradata®パッケージユーザガイド]
+* link:https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html[ライフサイクル構成スクリプトを使用したNotebook インスタンスのカスタマイズ]
+* link:https://github.com/aws-samples/amazon-sagemaker-notebook-instance-lifecycle-config-samples/blob/master/scripts/persistent-conda-ebs/on-create.sh[amazon sagemaker Notebook インスタンスのライフサイクル構成サンプル]
+
+
+include::../partials/community_link.adoc[]

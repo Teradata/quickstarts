@@ -1,0 +1,632 @@
+= Azure Data Share を Teradata Vantage に接続する
+:page-lang: ja
+:experimental:
+:page-author: Rupal Shah
+:page-email: rupal.shah@teradata.com
+:page-revdate: 2022 年 2 月 14 日
+:description: Azure Data Share を Teradata Vantage に接続します。
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, data cloud, data sharing.
+:tabs:
+:page-image-directory: connect-azure-data-share-to-teradata-vantage
+
+== 概要
+
+今回は、Azure Data Shareサービスを使用してAzure Blob Storageデータセットをあるユーザーから別のユーザーに共有し、Teradata VantageでNative Object Store（NOS）機能を活用してクエリを実行する手順について説明します。両方のユーザーに対してストレージアカウントとデータ共有アカウントを作成し、使用することになります。
+
+これは、ワークフローの図です。
+
+image:cloud-guides/{page-image-directory}/image2.png[Image,width=50%]
+
+
+=== Azure Data Shareについて
+
+https://docs.microsoft.com/en-us/azure/data-share/overview[Azure Data Share] は、企業が複数の顧客やパートナーと簡単かつ安全にデータを共有することを可能にします。データ提供者とデータ消費者の両方が、データを共有および受信するためにAzureサブスクリプションを持つ必要があります。Azure Data Shareは現在、スナップショットベースの共有とインプレース共有を提供しています。現在、Azure Data Shareが https://docs.microsoft.com/en-us/azure/data-share/supported-data-stores[サポートしているデータストア] は、Azure Blob Storage、Azure Data Lake Storage Gen1およびGen2、Azure SQL Database、Azure Synapse Analytics、Azure Data Explorerです。Azure Data Shareを使用してデータセット共有を送信すると、データ消費者はAzure Blob Storageなどの任意のデータストアでそのデータを受け取り、Teradata Vantageを使用してデータを探索、分析することができます。
+
+詳細については、https://docs.microsoft.com/en-us/azure/data-share/[ドキュメント] を参照してください。
+
+=== Teradata Vantageについて
+
+Vantageは、データウェアハウス、データレイク、アナリティクスを単一の接続されたエコシステムに統合する最新のクラウドプラットフォームです。
+
+Vantageは、記述的分析、予測的分析、処方的分析、自律的意思決定、ML機能、可視化ツールを統合したプラットフォームで、データの所在を問わず、リアルタイムのビジネスインテリジェンスを大規模に発掘することが可能です。
+
+Vantageは、小規模から始めて、コンピュートやストレージを弾力的に拡張し、使用した分だけ支払い、低コストのオブジェクトストアを活用し、分析ワークロードを統合することを可能にします。
+
+Vantageは、R、Python、Teradata Studio、およびその他のSQLベースのツールをサポートしています。Vantageは、パブリッククラウド、オンプレミス、最適化されたインフラ、コモディティインフラ、as-a-serviceのいずれでもデプロイメント可能です。
+
+Teradata Vantage Native Object Store（NOS）は、標準的なSQLを使用して、Azure Blob Storageなどの外部オブジェクトストアにあるデータを探索することが可能です。NOSを使用するために、特別なオブジェクトストレージ側の計算インフラは必要ありません。コンテナを指すNOSテーブル定義を作成するだけで、Blob Storageコンテナにあるデータを探索することができます。NOSを使用すると、Blob Storageからデータを迅速にインポートしたり、データベース内の他のテーブルと結合したりすることも可能です。
+
+また、Teradata Parallel Transporter（TPT）ユーティリティを使用して、Blob StorageからTeradata Vantageにデータを一括でインポートすることも可能です。Vantage内で効率的にクエリ一することができます。
+
+詳細については、https://docs.teradata.com/home[*ドキュメント*]を参照してください。
+
+== 前提条件
+
+
+* Teradata Vantageインスタンスへのアクセス。
+
+include::../partials/vantage_clearscape_analytics.adoc[]
+
+* Azureアカウント。 https://azure.microsoft.com/free/[無料アカウント] で始めることができます。
+* データデータセットを保存するための https://docs.microsoft.com/en-us/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal[Azure Blob Storage] アカウント。
+
+== 手順
+
+前提条件を満たしたら、以下の手順を実行します。
+
+1. Azure Blob Storage アカウントとコンテナを作成する
+2. データ共有アカウントを作成する
+3. 共有を作成する
+4. データ共有を使用してデータを受信および受信する
+5. Blob Storage への NOS アクセスを構成する
+6. lob Storageのデータセットにクエリーを実行する
+7. Blob StorageからVantageにデータをロードする（オプション）
+
+=== Azure Blob Storageアカウントとコンテナを作成する
+
+* ブラウザで https://portal.azure.com/[Azureポータル] を開き（Chrome、Firefox、Safariでうまくいきます）、この記事の _myProviderStorage_rg_ というリソースグループに https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal#create-a-storage-account-1[ストレージアカウントを作成する] の手順に従います。
+
+* ストレージ名と接続方式を入力します。今回は、 _myproviderstorage_ と _public endpoint_ を使用します。
++
+NOTE: 作成するすべてのサービスに同じ場所を使用することをお勧めします。
+
+*  *Review + create* を選択し、*Create* を選択します。
+
+* *Go to resource* をクリックし、 *Containers* をクリックし、コンテナを作成します。
+
+*  *+ Container* ボタンをクリックします。
+
+* コンテナ名を入力します。今回は _providerdata_ を使用します。
++
+image:cloud-guides/{page-image-directory}/image3.png[image,width=623,height=138]
+
+* *作成* をクリックします。
+
+=== データシェアアカウントの作成
+
+データセットを共有するプロバイダーのデータ共有アカウントを作成します。
+
+この記事の https://docs.microsoft.com/en-us/azure/data-share/share-your-data?tabs=azure-portal#create-a-data-share-account[Azure データ共有アカウントの作成] の手順に従い、 _myDataShareProvider_rg_ というリソース グループにリソースを作成します。
+
+* *Basics* タブで、データ共有アカウント名を入力します。今回は 、_mydatashareprovider_ を使用します。
++
+image:cloud-guides/{page-image-directory}/image4.png[image,width=576,height=394]
++
+NOTE: 作成するすべてのサービスに同じ場所を使用することをお勧めします。
+
+*  *Review + create* を選択し、*Create* を選択します。
+
+* デプロイが完了したら、*Go to resource* を選択します。
+
+=== 共有の作成
+
+* [データ共有]の概要ページに移動し、 https://docs.microsoft.com/en-us/azure/data-share/share-your-data?tabs=azure-portal#create-a-share[共有を作成] の手順に従います。
+
+* *Start sharing your data* を選択します。
+
+* + *Create* を選択します。
+
+* *Details* タブで、共有名と共有タイプを入力します。今回は、_WeatherData_ と _Snapshot_ を使用します。
+
++
+image:cloud-guides/{page-image-directory}/image5.png[image,width=472,height=381]
+
+[NOTE]
+.スナップショット共有
+====
+受信者にデータのコピーを提供するために、スナップショット共有を選択します。
+
+サポートされているデータストア Azure Blob Storage、Azure Data Lake Storage Gen1、Azure Data Lake Storage Gen2、Azure SQL Database、Azure Synapse Analytics (旧 SQL DW)
+====
+
+[NOTE]
+.インプレース共有
+====
+データへのアクセスをソースで提供するために、インプレース共有を選択します。
+
+サポートされているデータストア Azure データエクスプローラ
+====
+
+* *Continue* をクリックします。
+
+* *Datasets* タブで、 *Add datasets*
+ をクリックします。
+* *Azure Blob Storage* を選択します。
++
+image:cloud-guides/{page-image-directory}/image6.png[Image,width=378,height=360]
+
+*  *次へ*をクリックします。
+
+* データセットを提供するストレージアカウントを入力します。今回は、 _myproviderstorage_ を使用します。
++
+image:cloud-guides/{page-image-directory}/image7.png[Image,width=394,height=364]
+
+
+*  *Next* をクリックします。
+
+* コンテナをダブルクリックして、データセットを選択します。今回は 、_providerdata_ と _onpoint_history_postal-code_hour.csv_ ファイルを使用します。
++
+image:cloud-guides/{page-image-directory}/image8.png[Image,width=381,height=259]
+
+図 6 ストレージ コンテナとデータセットの選択
+
+NOTE: Azure Data Share は、フォルダおよびファイル レベルで共有できます。ファイルのアップロードには、Azure Blob Storageリソースを使用します。
+
+* *次へ* をクリックします。
+
+* コンシューマに表示されるフォルダとデータセットのデータセット名を入力します。今回はデフォルトの名前を使用しますが、providerdata フォルダを削除します。*Add datasets* をクリックします。
++
+image:cloud-guides/{page-image-directory}/image9.png[Image,width=392,height=266]
+
+* *Add datasets* をクリックします。
++
+image:cloud-guides/{page-image-directory}/image10.png[送信済み共有に追加されたデータセット,image,width=624,height=242]
+
+* *Continue* をクリックします。
+
+*  *Recipients* タブで、 *Add recipient* の電子メールアドレスを追加するをクリックします。。
+
+* 消費者の電子メールアドレスを入力します。
++
+image:cloud-guides/{page-image-directory}/image11.png[受信者の電子メールアドレスを追加,image,width=624,height=180]
+
+TIP: 消費者が受け入れることができるシェア有効期限を設定します。
+
+* *Continue* をクリックします。
+
+*  [*Settings*] タブで、スナップショットのスケジュールを設定します。今回は、デフォルトで _チェックを外して_ 使用します。
++
+image:cloud-guides/{page-image-directory}/image12.png[スナップショットのスケジュールを設定,image,width=437,height=299]
+
+* *Continue* をクリックします。
+
+* *Review + Create* タブの *Create*をクリックします。
++
+image:cloud-guides/{page-image-directory}/image13.png[Review + Create,image,width=440,height=334]
+
+* これでAzureデータ共有が作成され、データ共有の受信者が招待を受け入れる準備ができました。
++
+image:cloud-guides/{page-image-directory}/image14.png[データ共有の準備の完了と受信者への招待の送信,image,width=474,height=169]
+
+=== Azure Data Share を使用したデータの受理と受信
+
+今回は、受信者/消費者が Azure Blob ストレージ アカウントにデータを受信することを想定しています。
+
+データ共有 _プロバイダ_ と同様に、データ共有の招待を受け入れる前に、_コンシューマ_ のすべての事前要件が完了していることを確認します。
+
+* Azureのサブスクリプション。持っていない場合は、事前に https://azure.microsoft.com/free/[+++無料アカウント+++] を作成してください。
+* Azure Blob Storage アカウントとコンテナ:  _myConsumerStorage_rg_ というリソース グループを作成し、アカウント名 _myconsumerstorage_ とコンテナ _consumerdata_ を作成します。
+* Azure Data Share アカウント: _myDataShareConsumer_rg_ というリソース グループを作成し、 _mydatashareconsumer_ というデータ共有アカウント名を作成して、データを受け入れます。
+
+ https://docs.microsoft.com/en-us/azure/data-share/subscribe-to-data-share?tabs=azure-portal[Azure Data Shareを使用してデータを受信する]の手順に従います。
+
+==== 招待状を開く
+
+* メールには、Microsoft Azureから「Azure Data Share invitation from *mailto:yourdataprovider@domain.com[+++yourdataprovider@domain.com+++].*という件名の招待状が届いています。*View invitation(招待状を表示する)* をクリックすると、Azureで招待状を表示することができます。
++
+image:cloud-guides/{page-image-directory}/image15.png[受信者へのData Share招待状メール,image,width=387,height=192]
+
+* ブラウザでData Shareの招待状の一覧を表示するアクションです。
++
+image:cloud-guides/{page-image-directory}/image16.png[Data Shareへの招待,image,width=624,height=165]
+
+* 表示したいシェアを選択します。今回は 、_WeatherData_ を選択します。
+
+==== 招待を受け入れる
+
+*  _Target Data Share Account(ターゲット データ共有アカウント)_ で、データシェアをデプロイするサブスクリプションとリソースグループを選択するか、ここで新しいデータシェアを作成することができます。
++
+NOTE: f プロバイダが利用規約の承諾を必要とする場合、ダイアログボックスが表示され、利用規約に同意することを示すボックスにチェックを入れる必要があります。
+
+* Resource groupとData share accountを入力します。今回は _myDataShareConsumer_rg_ と _mydatashareconsumer_ のアカウントを使用します。
++
+image:cloud-guides/{page-image-directory}/image17.png[Target Data Share アカウント,image,width=424,height=228]
+
+*  *Accept and configure* を選択すると、Share subscriptionが作成されます。
+
+==== 受信共有の設定
+
+*  *Datasets* タブを選択します。宛先を指定するデータセットの横にあるチェックボックスをオンにします。+ *Map to target* を選択し、ターゲット データ ストアを選択します。
++
+image:cloud-guides/{page-image-directory}/image18.png[DatasetとMap to targetを選択,image,width=568,height=186]
+
+* ターゲットデータストアの種類と、データを格納するパスを選択します。この記事のスナップショットの例では、コンシューマーの Azure Blob Storage アカウント  _myconsumerstorage_ とコンテナ  _consumerdata_ を使用することにします。
++
+NOTE: Azure Data Shareは、異なるデータストアから、または異なるデータストアへの共有機能を含む、オープンで柔軟なデータ共有を提供します。スナップショットおよびインプレース共有を受け入れることができるhttps://docs.microsoft.com/en-us/azure/data-share/supported-data-stores#supported-data-stores[サポートされた]データソースを確認します。
++
+image:cloud-guides/{page-image-directory}/image19.png[データセットをターゲットにマッピングする,image,width=291,height=286]
+
+* *Map to target*をクリックします。
+
+* マッピングが完了したら、スナップショットベースの共有の場合は、*Details* タブをクリックし、_Full_ または _Incremental_ で *Trigger snapshot* をクリックします。プロバイダからデータを受け取るのは初めてなので、完全なコピーを選択します。
++
+image:cloud-guides/{page-image-directory}/image20.png[フルまたはインクリメンタルのスナップショットをトリガーする,image,width=326,height=280]
+
+* 最終実行ステータスが _成功_ したら、ターゲットデータストアに移動して受信したデータを表示します。 *Datasets* を選択し、Target Pathにあるリンクをクリックします。
++
+image:cloud-guides/{page-image-directory}/image21.png[共有データを表示するためのデータセットとターゲットパス,image,width=623,height=118]
+
+=== Azure Blob Storage への NOS アクセスの構成
+
+Native Object Store（NOS）は、Azure Blob Storageのデータを直接読み込むことができるため、明示的にデータを読み込むことなくBlob Storageのデータを探索、分析することが可能です。
+
+==== 外部テーブル定義の作成
+
+外部テーブル定義により、Blob Storage内のデータをAdvanced SQL Engine内で簡単に参照することができ、構造化されたリレーショナル形式でデータを利用できるようになります。
+
+NOTE: NOSは、CSV、JSON、Parquet形式のデータをサポートしています。
+
+* Teradata Studioを使用してVantageシステムにログインします。
+
+* 以下のSQLコマンドを使用して、Blob StorageコンテナにアクセスするためのAUTHORIZATIONオブジェクトを作成します。
++
+[source, teradata-sql]
+----
+CREATE AUTHORIZATION DefAuth_AZ
+AS DEFINER TRUSTED
+USER 'myconsumerstorage' /* Storage Account Name */
+PASSWORD '*****************' /* Storage Account Access Key or SAS Token */
+----
++
+**  _USER_ の文字列は、ストレージアカウント名に置き換えてください。
+**  _PASSWORD_ の文字列は、ストレージアカウントのアクセスキーまたは SAS トークンに置き換えます。
+
+* 以下のSQLコマンドで、Blob Storage上のCSVファイルに対する外部テーブル定義を作成します。
++
+[source, teradata-sql]
+----
+CREATE MULTISET FOREIGN TABLE WeatherData,
+EXTERNAL SECURITY DEFINER TRUSTED DefAuth_AZ (
+  Location VARCHAR(2048) CHARACTER SET UNICODE CASESPECIFIC,
+  Payload DATASET INLINE LENGTH 64000 STORAGE FORMAT CSV
+)
+USING (
+  LOCATION ('/AZ/myconsumerstorage.blob.core.windows.net/consumerdata/')
+)
+----
++
+NOTE: 最低限、外部テーブルの定義には、テーブル名（WeatherData）と、オブジェクトストアのデータを指し示すロケーション句を含める必要があります。
++
+_LOCATION_ では、ストレージアカウント名とコンテナ名が必要です。これを自分のストレージアカウント名とコンテナ名に置き換える必要があります。
++
+オブジェクトに標準拡張子 (例えば、「.json」、「.csv」、「.parquet」) がない場合、 _Location…Payload_ 列定義句も必要であり、LOCATION フェーズにファイル名を含める必要があります。例えば、以下のようになります。LOCATION (`AZ/<storage account name>.blob.core.windows.net/<container>/<filename>`)。
++
+外部テーブルは常にNoPI（No Primary Index）テーブルとして定義されます。
+
+=== Azure Blob Storage のデータセットにクエリーを実行する
+
+以下のSQL コマンドを実行して、データセットにクエリを実行します。
+
+[source, teradata-sql]
+----
+SELECT * FROM WeatherData SAMPLE 10;
+----
+
+外部テーブルには、2つの列しか含まれていません。LocationとPayloadです。Locationは、オブジェクトストアシステム内のアドレスです。データ自体はpayload列で表現され、外部テーブルの各レコード内のpayloadの値が1つのCSV行を表現します。
+
+image:cloud-guides/{page-image-directory}/image22.png[WeatherDataテーブル,image,width=572,height=104]
+
+以下のSQLコマンドを実行し、オブジェクト内のデータに注目します。
+
+[source, teradata-sql]
+----
+SELECT payload..* FROM WeatherData SAMPLE 10;
+----
+
+image:cloud-guides/{page-image-directory}/image23.png[WeatherData テーブルのペイロード,width=574,height=140]
+
+==== ビューを作成する
+
+ビューを使用すると、ペイロード属性に関連する名前を簡素化でき、オブジェクトデータに対するSQLを簡単にコーディングでき、外部テーブルのLocation参照を隠蔽できます。
+
+
+NOTE: Vantage の外部テーブルでは、オブジェクト名と列名の区切りに `..` (ダブルドットまたはダブルピリオド) オペレータが使用されます。
+
+* 以下の SQL コマンドを実行し、ビューを作成します。
++
+[source, teradata-sql]
+----
+REPLACE VIEW WeatherData_view AS (
+  SELECT
+    CAST(payload..postal_code AS VARCHAR(10)) Postal_code,
+    CAST(payload..country AS CHAR(2)) Country,
+    CAST(payload..time_valid_utc AS TIMESTAMP(0) FORMAT 'YYYY-MM-DDBHH:MI:SS') Time_Valid_UTC,
+    CAST(payload..doy_utc AS INTEGER) DOY_UTC,
+    CAST(payload..hour_utc AS INTEGER) Hour_UTC,
+    CAST(payload..time_valid_lcl AS TIMESTAMP(0) FORMAT 'YYYY-MM-DDBHH:MI:SS') Time_Valid_LCL,
+    CAST(payload..dst_offset_minutes AS INTEGER) DST_Offset_Minutes,
+    CAST(payload..temperature_air_2m_f AS DECIMAL(4,1)) Temperature_Air_2M_F,
+    CAST(payload..temperature_wetbulb_2m_f AS DECIMAL(3,1)) Temperature_Wetbulb_2M_F,
+    CAST(payload..temperature_dewpoint_2m_f AS DECIMAL(3,1)) Temperature_Dewpoint_2M_F,
+    CAST(payload..temperature_feelslike_2m_f AS DECIMAL(4,1)) Temperature_Feelslike_2M_F,
+    CAST(payload..temperature_windchill_2m_f AS DECIMAL(4,1)) Temperature_Windchill_2M_F,
+    CAST(payload..temperature_heatindex_2m_f AS DECIMAL(4,1)) Temperature_Heatindex_2M_F,
+    CAST(payload..humidity_relative_2m_pct AS DECIMAL(3,1)) Humidity_Relative_2M_Pct,
+    CAST(payload..humidity_specific_2m_gpkg AS DECIMAL(3,1)) Humdity_Specific_2M_GPKG,
+    CAST(payload..pressure_2m_mb AS DECIMAL(5,1)) Pressure_2M_Mb,
+    CAST(payload..pressure_tendency_2m_mb AS DECIMAL(2,1)) Pressure_Tendency_2M_Mb,
+    CAST(payload..pressure_mean_sea_level_mb AS DECIMAL(5,1)) Pressure_Mean_Sea_Level_Mb,
+    CAST(payload..wind_speed_10m_mph AS DECIMAL(3,1)) Wind_Speed_10M_MPH,
+    CAST(payload..wind_direction_10m_deg AS DECIMAL(4,1)) Wind_Direction_10M_Deg,
+    CAST(payload..wind_speed_80m_mph AS DECIMAL(3,1)) Wind_Speed_80M_MPH,
+    CAST(payload..wind_direction_80m_deg AS DECIMAL(4,1)) Wind_Direction_80M_Deg,
+    CAST(payload..wind_speed_100m_mph AS DECIMAL(3,1)) Wind_Speed_100M_MPH,
+    CAST(payload..wind_direction_100m_deg AS DECIMAL(4,1)) Wind_Direction_100M_Deg,
+    CAST(payload..precipitation_in AS DECIMAL(3,2)) Precipitation_in,
+    CAST(payload..snowfall_in AS DECIMAL(3,2)) Snowfall_in,
+    CAST(payload..cloud_cover_pct AS INTEGER) Cloud_Cover_Pct,
+    CAST(payload..radiation_solar_total_wpm2 AS DECIMAL(5,1)) Radiation_Solar_Total_WPM2
+  FROM WeatherData
+)
+----
+
+* 以下の SQL コマンドを実行し、ビューを検証します。
++
+[source, teradata-sql]
+----
+SELECT * FROM WeatherData_view SAMPLE 10;
+----
++
+image:cloud-guides/{page-image-directory}/image24.png[WeatherData_view,image,width=624,height=75]
+
+ビューを作成した後は、オブジェクト ストアのデータをクエリで簡単に参照し、他のテーブル（Vantage のリレーショナル テーブルとオブジェクト ストアの外部テーブルの両方）と結合することができます。これにより、データがどこにあっても、Vantageの完全な分析機能を100%活用することができます。
+
+=== Blob StorageからVantageへのデータのロード（オプション）
+
+Blob Storageデータの永続的なコピーを持つことは、同じデータに繰り返しアクセスすることが予想される場合に便利です。NOS では、Blob Storage データの永続的なコピーは自動的に作成されません。外部テーブルを参照するたびに、VantageはBlob Storageからデータをフェッチします。(一部のデータはキャッシュされることがありますが、これは Blob Storage 内のデータのサイズと Vantage の他のアクティブなワークロードに依存します)。
+
+また、Blob Storage から転送されるデータに対してネットワーク料金が課金される場合があります。Blob Storage内のデータを複数回参照する場合は、一時的にでもVantageにロードすることでコストを削減することができます。
+
+Vantageにデータをロードする方法は、以下の中から選択できます。
+
+==== 単一のステートメントでテーブルの作成とデータの読み込みを行う
+
+単一のステートメントで、テーブルの作成とデータのロードの両方を行うことができます。外部テーブルのペイロードから必要な属性を選択し、それらがリレーショナルテーブルでどのように呼ばれるかを選択することができます。
+
+  *CREATE TABLE AS … WITH DATA*ステートメントは、ソーステーブルとして外部テーブル定義を使用することができます。
+
+* 以下のSQLコマンドを実行してリレーショナル テーブルを作成しデータをロードします。
++
+[source, teradata-sql]
+----
+CREATE MULTISET TABLE WeatherData_temp AS (
+  SELECT
+    CAST(payload..postal_code AS VARCHAR(10)) Postal_code,
+    CAST(payload..country AS CHAR(2)) Country,
+    CAST(payload..time_valid_utc AS TIMESTAMP(0) FORMAT 'YYYY-MM-DDBHH:MI:SS') Time_Valid_UTC,
+    CAST(payload..doy_utc AS INTEGER) DOY_UTC,
+    CAST(payload..hour_utc AS INTEGER) Hour_UTC,
+    CAST(payload..time_valid_lcl AS TIMESTAMP(0) FORMAT 'YYYY-MM-DDBHH:MI:SS') Time_Valid_LCL,
+    CAST(payload..dst_offset_minutes AS INTEGER) DST_Offset_Minutes,
+    CAST(payload..temperature_air_2m_f AS DECIMAL(4,1)) Temperature_Air_2M_F,
+    CAST(payload..temperature_wetbulb_2m_f AS DECIMAL(3,1)) Temperature_Wetbulb_2M_F,
+    CAST(payload..temperature_dewpoint_2m_f AS DECIMAL(3,1)) Temperature_Dewpoint_2M_F,
+    CAST(payload..temperature_feelslike_2m_f AS DECIMAL(4,1)) Temperature_Feelslike_2M_F,
+    CAST(payload..temperature_windchill_2m_f AS DECIMAL(4,1)) Temperature_Windchill_2M_F,
+    CAST(payload..temperature_heatindex_2m_f AS DECIMAL(4,1)) Temperature_Heatindex_2M_F,
+    CAST(payload..humidity_relative_2m_pct AS DECIMAL(3,1)) Humidity_Relative_2M_Pct,
+    CAST(payload..humidity_specific_2m_gpkg AS DECIMAL(3,1)) Humdity_Specific_2M_GPKG,
+    CAST(payload..pressure_2m_mb AS DECIMAL(5,1)) Pressure_2M_Mb,
+    CAST(payload..pressure_tendency_2m_mb AS DECIMAL(2,1)) Pressure_Tendency_2M_Mb,
+    CAST(payload..pressure_mean_sea_level_mb AS DECIMAL(5,1)) Pressure_Mean_Sea_Level_Mb,
+    CAST(payload..wind_speed_10m_mph AS DECIMAL(3,1)) Wind_Speed_10M_MPH,
+    CAST(payload..wind_direction_10m_deg AS DECIMAL(4,1)) Wind_Direction_10M_Deg,
+    CAST(payload..wind_speed_80m_mph AS DECIMAL(3,1)) Wind_Speed_80M_MPH,
+    CAST(payload..wind_direction_80m_deg AS DECIMAL(4,1)) Wind_Direction_80M_Deg,
+    CAST(payload..wind_speed_100m_mph AS DECIMAL(3,1)) Wind_Speed_100M_MPH,
+    CAST(payload..wind_direction_100m_deg AS DECIMAL(4,1)) Wind_Direction_100M_Deg,
+    CAST(payload..precipitation_in AS DECIMAL(3,2)) Precipitation_in,
+    CAST(payload..snowfall_in AS DECIMAL(3,2)) Snowfall_in,
+    CAST(payload..cloud_cover_pct AS INTEGER) Cloud_Cover_Pct,
+    CAST(payload..radiation_solar_total_wpm2 AS DECIMAL(5,1)) Radiation_Solar_Total_WPM2
+  FROM
+    WeatherData
+  WHERE
+    Postal_Code = '36101'
+)
+WITH DATA
+NO PRIMARY INDEX
+----
+
+* 下のSQLコマンドを実行し、テーブルの内容を検証します。
++
+[source, teradata-sql]
+----
+SELECT * FROM WeatherData_temp SAMPLE 10;
+----
++
+image:cloud-guides/{page-image-directory}/image25.png[気象データ,width=624,height=87]
+
+==== 複数のステートメントでテーブルを作成し、データをロードする
+
+複数のステートメントを使用して、最初にリレーショナルテーブルを作成し、その後データをロードすることもできます。この選択の利点は、複数のロードを実行できることです。オブジェクトが非常に大きい場合は、異なるデータを選択したり、より小さな増分でロードしたりできる可能性があります。
+
+* 以下の SQLコマンドを実行し、リレーショナルテーブルを作成します。
++
+[source, teradata-sql]
+----
+CREATE MULTISET TABLE WeatherData_temp (
+  Postal_code VARCHAR(10),
+  Country CHAR(2),
+  Time_Valid_UTC TIMESTAMP(0) FORMAT 'YYYY-MM-DDBHH:MI:SS',
+  DOY_UTC INTEGER,
+  Hour_UTC INTEGER,
+  Time_Valid_LCL TIMESTAMP(0) FORMAT 'YYYY-MM-DDBHH:MI:SS',
+  DST_Offset_Minutes INTEGER,
+  Temperature_Air_2M_F DECIMAL(4,1),
+  Temperature_Wetbulb_2M_F DECIMAL(3,1),
+  Temperature_Dewpoint_2M_F DECIMAL(3,1),
+  Temperature_Feelslike_2M_F DECIMAL(4,1),
+  Temperature_Windchill_2M_F DECIMAL(4,1),
+  Temperature_Heatindex_2M_F DECIMAL(4,1),
+  Humidity_Relative_2M_Pct DECIMAL(3,1),
+  Humdity_Specific_2M_GPKG DECIMAL(3,1),
+  Pressure_2M_Mb DECIMAL(5,1),
+  Pressure_Tendency_2M_Mb DECIMAL(2,1),
+  Pressure_Mean_Sea_Level_Mb DECIMAL(5,1),
+  Wind_Speed_10M_MPH DECIMAL(3,1),
+  Wind_Direction_10M_Deg DECIMAL(4,1),
+  Wind_Speed_80M_MPH DECIMAL(3,1),
+  Wind_Direction_80M_Deg DECIMAL(4,1),
+  Wind_Speed_100M_MPH DECIMAL(3,1),
+  Wind_Direction_100M_Deg DECIMAL(4,1),
+  Precipitation_in DECIMAL(3,2),
+  Snowfall_in DECIMAL(3,2),
+  Cloud_Cover_Pct INTEGER,
+  Radiation_Solar_Total_WPM2 DECIMAL(5,1)
+)
+UNIQUE PRIMARY INDEX ( Postal_Code, Time_Valid_UTC )
+----
+
+* 以下の SQLを実行し、データをテーブルにロードします。
++
+[source, teradata-sql]
+----
+INSERT INTO WeatherData_temp
+  SELECT
+    CAST(payload..postal_code AS VARCHAR(10)) Postal_code,
+    CAST(payload..country AS CHAR(2)) Country,
+    CAST(payload..time_valid_utc AS TIMESTAMP(0) FORMAT 'YYYY-MM-DDBHH:MI:SS') Time_Valid_UTC,
+    CAST(payload..doy_utc AS INTEGER) DOY_UTC,
+    CAST(payload..hour_utc AS INTEGER) Hour_UTC,
+    CAST(payload..time_valid_lcl AS TIMESTAMP(0) FORMAT 'YYYY-MM-DDBHH:MI:SS') Time_Valid_LCL,
+    CAST(payload..dst_offset_minutes AS INTEGER) DST_Offset_Minutes,
+    CAST(payload..temperature_air_2m_f AS DECIMAL (4,1)) Temperature_Air_2M_F,
+    CAST(payload..temperature_wetbulb_2m_f AS DECIMAL(3,1)) Temperature_Wetbulb_2M_F,
+    CAST(payload..temperature_dewpoint_2m_f AS DECIMAL(3,1)) Temperature_Dewpoint_2M_F,
+    CAST(payload..temperature_feelslike_2m_f AS DECIMAL(4,1)) Temperature_Feelslike_2M_F,
+    CAST(payload..temperature_windchill_2m_f AS DECIMAL(4,1)) Temperature_Windchill_2M_F,
+    CAST(payload..temperature_heatindex_2m_f AS DECIMAL(4,1)) Temperature_Heatindex_2M_F,
+    CAST(payload..humidity_relative_2m_pct AS DECIMAL(3,1)) Humidity_Relative_2M_Pct,
+    CAST(payload..humidity_specific_2m_gpkg AS DECIMAL(3,1)) Humdity_Specific_2M_GPKG,
+    CAST(payload..pressure_2m_mb AS DECIMAL(5,1)) Pressure_2M_Mb,
+    CAST(payload..pressure_tendency_2m_mb AS DECIMAL(2,1)) Pressure_Tendency_2M_Mb,
+    CAST(payload..pressure_mean_sea_level_mb AS DECIMAL(5,1)) Pressure_Mean_Sea_Level_Mb,
+    CAST(payload..wind_speed_10m_mph AS DECIMAL(3,1)) Wind_Speed_10M_MPH,
+    CAST(payload..wind_direction_10m_deg AS DECIMAL(4,1)) Wind_Direction_10M_Deg,
+    CAST(payload..wind_speed_80m_mph AS DECIMAL(3,1)) Wind_Speed_80M_MPH,
+    CAST(payload..wind_direction_80m_deg AS DECIMAL(4,1)) Wind_Direction_80M_Deg,
+    CAST(payload..wind_speed_100m_mph AS DECIMAL(3,1)) Wind_Speed_100M_MPH,
+    CAST(payload..wind_direction_100m_deg AS DECIMAL(4,1)) Wind_Direction_100M_Deg,
+    CAST(payload..precipitation_in AS DECIMAL(3,2)) Precipitation_in,
+    CAST(payload..snowfall_in AS DECIMAL(3,2)) Snowfall_in,
+    CAST(payload..cloud_cover_pct AS INTEGER) Cloud_Cover_Pct,
+    CAST(payload..radiation_solar_total_wpm2 AS DECIMAL(5,1)) Radiation_Solar_Total_WPM2
+  FROM
+    WeatherData
+  WHERE
+    Postal_Code = '30301'
+----
+
+* 以下の SQL コマンドを実行し、テーブルの内容を検証します。
++
+[source, teradata-sql]
+----
+SELECT * FROM WeatherData_temp SAMPLE 10;
+----
++
+image:cloud-guides/{page-image-directory}/image26.png[WeatherData_temp,width=624,height=84]
+
+==== READ_NOS - 外部テーブルの代替方法
+
+外部テーブルを定義する代わりに、 `READ_NOS` テーブルオペレータを使用する方法があります。このテーブルオペレータを使うと、最初に外部テーブルを作成することなく、オブジェクトストアから直接データにアクセスしたり、Location句で指定されたすべてのオブジェクトに関連するキーの一覧を表示したりすることができます。
+
+ `READ_NOS` テーブルオペレータを使用すると、オブジェクト内のデータを探索することができます。
+
+* 以下のコマンドを実行し、オブジェクト内のデータを調査します。
++
+[source, teradata-sql, id="azure_data_share_first_run", role="content-editable emits-gtm-events"]]
+----
+SELECT
+  TOP 5 payload..*
+FROM
+  READ_NOS (
+    ON (SELECT CAST( NULL AS DATASET STORAGE FORMAT CSV))
+    USING
+      LOCATION ('/AZ/myconsumerstorage.blob.core.windows.net/consumerdata')
+      ACCESS_ID('myconsumerstorage')
+      ACCESS_KEY('*****')
+  ) AS THE_TABLE
+  ORDER BY 1
+----
++
+**  _LOCATION_ では、ストレージアカウント名とコンテナ名が必要です。これは上記で黄色で強調表示されています。これを自分のストレージアカウント名とコンテナ名で置き換える必要があります。
+**  _ACCESS_ID_ の文字列を、ストレージアカウント名で置き換えます。
+**  _ACCES_KEY_ の文字列を、ストレージアカウントのアクセスキーまたはSASトークン 
+ に置き換えます。
++
+image:cloud-guides/{page-image-directory}/image27.png[READ_NOS,width=624,height=86]
+
+また、READ_NOSテーブルオペレータを活用して、オブジェクトの長さ（サイズ）を取得することも可能です。
+
+* 以下の SQL コマンドを実行し、オブジェクトのサイズを表示します。
++
+[source, teradata-sql]
+----
+SELECT
+  location(CHAR(120)), ObjectLength
+FROM
+  READ_NOS (
+    ON (SELECT CAST( NULL AS DATASET STORAGE FORMAT CSV))
+    USING
+      LOCATION ('/AZ/myconsumerstorage.blob.core.windows.net/consumerdata')
+      ACCESS_ID('myconsumerstorage')
+      ACCESS_KEY('*****')
+      RETURNTYPE('NOSREAD_KEYS')
+  ) AS THE_TABLE
+ORDER BY 1
+----
+**  _LOCATION_、 _ACCESS_ID_、および  _ACCESS_KEY_ の値を入れ替えてください。
+
++
+image:cloud-guides/{page-image-directory}/image28.png[READ_NOSオブジェクトの長さ,image,width=623,height=30]
+
+NOS_READテーブルオペレータは、上記セクションの外部テーブル定義で、データをリレーショナルテーブルに読み込むために代用することができます。
+
+[source, teradata-sql]
+----
+CREATE MULTISET TABLE WeatherData_temp AS (
+  SELECT
+    CAST(payload..postal_code AS VARCHAR(10)) Postal_code,
+    CAST(payload..country AS CHAR(2)) Country,
+    CAST(payload..time_valid_utc AS TIMESTAMP(0) FORMAT 'YYYY-MM-DDBHH:MI:SS') Time_Valid_UTC,
+    CAST(payload..doy_utc AS INTEGER) DOY_UTC,
+    CAST(payload..hour_utc AS INTEGER) Hour_UTC,
+    CAST(payload..time_valid_lcl AS TIMESTAMP(0) FORMAT 'YYYY-MM-DDBHH:MI:SS') Time_Valid_LCL,
+    CAST(payload..dst_offset_minutes AS INTEGER) DST_Offset_Minutes,
+    CAST(payload..temperature_air_2m_f AS DECIMAL (4,1)) Temperature_Air_2M_F,
+    CAST(payload..temperature_wetbulb_2m_f AS DECIMAL(3,1)) Temperature_Wetbulb_2M_F,
+    CAST(payload..temperature_dewpoint_2m_f AS DECIMAL(3,1)) Temperature_Dewpoint_2M_F,
+    CAST(payload..temperature_feelslike_2m_f AS DECIMAL(4,1)) Temperature_Feelslike_2M_F,
+    CAST(payload..temperature_windchill_2m_f AS DECIMAL(4,1)) Temperature_Windchill_2M_F,
+    CAST(payload..temperature_heatindex_2m_f AS DECIMAL(4,1)) Temperature_Heatindex_2M_F,
+    CAST(payload..humidity_relative_2m_pct AS DECIMAL(3,1)) Humidity_Relative_2M_Pct,
+    CAST(payload..humidity_specific_2m_gpkg AS DECIMAL(3,1)) Humdity_Specific_2M_GPKG,
+    CAST(payload..pressure_2m_mb AS DECIMAL(5,1)) Pressure_2M_Mb,
+    CAST(payload..pressure_tendency_2m_mb AS DECIMAL(2,1)) Pressure_Tendency_2M_Mb,
+    CAST(payload..pressure_mean_sea_level_mb AS DECIMAL(5,1)) Pressure_Mean_Sea_Level_Mb,
+    CAST(payload..wind_speed_10m_mph AS DECIMAL(3,1)) Wind_Speed_10M_MPH,
+    CAST(payload..wind_direction_10m_deg AS DECIMAL(4,1)) Wind_Direction_10M_Deg,
+    CAST(payload..wind_speed_80m_mph AS DECIMAL(3,1)) Wind_Speed_80M_MPH,
+    CAST(payload..wind_direction_80m_deg AS DECIMAL(4,1)) Wind_Direction_80M_Deg,
+    CAST(payload..wind_speed_100m_mph AS DECIMAL(3,1)) Wind_Speed_100M_MPH,
+    CAST(payload..wind_direction_100m_deg AS DECIMAL(4,1)) Wind_Direction_100M_Deg,
+    CAST(payload..precipitation_in AS DECIMAL(3,2)) Precipitation_in,
+    CAST(payload..snowfall_in AS DECIMAL(3,2)) Snowfall_in,
+    CAST(payload..cloud_cover_pct AS INTEGER) Cloud_Cover_Pct,
+    CAST(payload..radiation_solar_total_wpm2 AS DECIMAL(5,1)) Radiation_Solar_Total_WPM2
+  FROM
+    READ_NOS (
+      ON (SELECT CAST( NULL AS DATASET STORAGE FORMAT CSV))
+      USING
+        LOCATION ('/AZ/myconsumerstorage.blob.core.windows.net/consumerdata')
+        ACCESS_ID('myconsumerstorage')
+        ACCESS_KEY('*****')
+    ) AS THE_TABLE
+  WHERE
+    Postal_Code = '36101'
+)
+WITH DATA
+----
+
+include::../partials/community_link.adoc[]

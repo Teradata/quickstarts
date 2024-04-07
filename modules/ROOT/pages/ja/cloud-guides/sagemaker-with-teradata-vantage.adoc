@@ -1,0 +1,191 @@
+= VantageからSageMakerのAPIを実行する方法
+:page-lang: ja
+:experimental:
+:page-author: Wenjie Tehan
+:page-email: wenjie.tehan@teradata.com
+:page-revdate: 2022 年 2 月 8 日
+:description: VantageからSageMakerのAPIを実行する方法
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, ai, artificial intelligence, aws sagemaker.
+:tabs:
+:page-image-directory: sagemaker-with-teradata-vantage
+
+== 概要
+
+このハウツーは、Amazon SageMakerとTeradata Vantageを統合するのに役立ちます。このガイドで説明するアプローチはこのサービスと統合するための多くの潜在的なアプローチの1つです。
+
+Amazon SageMakerはフルマネージドな機械学習プラットフォームを提供します。Amazon SageMakerとTeradataには2つのユースケースがあります。
+
+1.	データはTeradata Vantage上に存在しAmazon SageMakerはモデル定義とその後のスコアリングの両方に使用されます。このユースケースではTeradataはAmazon S3環境にデータを提供し、Amazon SageMakerがモデル開発のためにトレーニングおよびテストデータセットを利用できるようにします。TeradataはさらにAmazon S3を通じてAmazon SageMakerによるその後のスコアリングのためにデータを利用できるようにします。このモデルではTeradataはデータリポジトリのみとなります。
+
+2.	データはTeradata Vantage上に存在しAmazon SageMakerはモデル定義に使用され、Teradataはその後のスコアリングに使用されます。このユースケースでは、TeradataはAmazon S3環境にデータを提供しAmazon SageMakerはモデル開発のためにトレーニングおよびテストデータセットを消費できるようにします。Teradataは、Amazon SageMakerのモデルをTeradataのテーブルにインポートしTeradata Vantageでスコアリングを行う必要があります。このモデルではTeradataはデータリポジトリでありスコアリングエンジンでもあります。
+
+このドキュメントでは、最初のユースケースについて説明します。
+
+Amazon SageMakerはAmazon S3バケットからトレーニングデータとテストデータを消費します。この記事ではTeradataの分析データセットをAmazon S3バケットにロードする方法について説明します。その後、データはAmazon SageMakerで利用可能になり機械学習モデルを構築してトレーニングし本番環境にデプロイすることができます。
+
+
+== 前提条件
+
+* Teradata Vantageインスタンスへのアクセス。
++
+include::../partials/vantage_clearscape_analytics.adoc[]
+*	Amazon S3バケットにアクセスしAmazon SageMakerサービスを使用するためのIAM権限。
+*	学習データを保存するためのAmazon S3バケット。
+
+== データの読み込み
+
+Amazon SageMakerはAmazon S3バケットからデータをトレーニングします。以下はVantageからAmazon S3バケットにトレーニングデータをロードする手順です。
+
+1.	Amazon SageMakerコンソールに移動しNotebookインスタンスを作成します。Notebookインスタンスを作成する方法については、 link:https://docs.aws.amazon.com/sagemaker/latest/dg/gs-setup-working-env.html[Amazon SageMaker 開発者ガイド] を参照してください。
++
+image::cloud-guides/{page-image-directory}/create.notebook.png[Notebookインスタンスを作成する]
+
+2.	Notebookのインスタンスを開きます。
++
+image::cloud-guides/{page-image-directory}/open.notebook.instance.png[Notebook インスタンスを開く]
+
+3. `New -> conda_python3` をクリックして新規ファイルを起動します。
++
+image::cloud-guides/{page-image-directory}/start.new.file.png[新しいファイルを開始する]
+
+4. Teradata Pythonライブラリをインストールします。
++
+[source, ipython]
+----
+!pip install teradataml
+----
+
+5. 新しいセルに追加のライブラリをインポートします。
++
+[source, python]
+----
+import teradataml as tdml
+from teradataml import create_context, get_context, remove_context
+from teradataml.dataframe.dataframe import DataFrame
+import pandas as pd
+import boto3, os
+----
+
+6. 新しいセルで、Teradata Vantageに接続します。`<hostname>`、 `<database user name>`、 `<database password>` はVantageの環境にあわせて置き換えてください。
++
+[source, python]
+----
+create_context(host = '<hostname>', username = '<database user name>', password = '<database password>')
+----
+
+7. TeradataML DataFrame APIを使用して学習用データセットが存在するテーブルからデータを取得します。
++
+[source, python]
+----
+train_data = tdml.DataFrame('table_with_training_data')
+trainDF = train_data.to_pandas()
+----
+
+8. ローカルファイルにデータを書き込みます。
++
+[source, python]
+----
+trainFileName = 'train.csv'
+trainDF.to_csv(trainFileName, header=None, index=False)
+----
+
+9. Amazon S3にファイルをアップロードします。
++
+[source, python, id="sagemaker_first_usage", role="content-editable emits-gtm-events"]]
+----
+bucket = 'sagedemo'
+prefix = 'sagemaker/train'
+
+trainFile = open(trainFileName, 'rb')
+boto3.Session().resource('s3').Bucket(bucket).Object(os.path.join(prefix, localFile)).upload_fileobj(trainFile)
+----
+
+== モデルのトレーニング
+
+1. 左メニューの `Training` の下にある `Training jobs` を選択し、 `Create training job` をクリックします。
++
+image::cloud-guides/{page-image-directory}/create.training.job.png[Create training job]
+
+2. `トレーニングジョブの作成` ウィンドウで、`ジョブ名` (例: `xgboost-bank` ) を入力しIAMロールの `新しいロールを作成` します。Amazon S3 バケットに `Any S3バケット` 、 `ロールの作成` に 
++
+を選択します。image::cloud-guides/{page-image-directory}/create.iam.role.png[IAMロールの作成,width=50%]
+
+3. `Create training job` ウィンドウに戻りアルゴリズムとして `XGBoost` を使用します。
++
+image::cloud-guides/{page-image-directory}/choose.an.algorithm.png[アルゴリズムの選択,width=50%]
+
+4. インスタンスタイプはデフォルトの `ml.m4.xlarge`、インスタンスあたりの追加ストレージボリュームは30GBを使用します。これは短いトレーニングジョブで10分以上はかからないはずです。
++
+image::cloud-guides/{page-image-directory}/resource.configuration.png[リソースを構成,width=50%]
+
+5. 以下のハイパーパラメータを入力しそれ以外はデフォルトのままにしてください。
++
+----
+num_round=100
+silent=0
+eta=0.2
+gamma=4
+max_depth=5
+min_child_weight=6
+subsample=0.8
+objective='binary:logistic'
+----
+
+6. `Input data configuration` には学習データを保存したAmazon S3バケットを入力します。Input modeは `File` です。Content typeは `csv` です。`S3 location` はファイルのアップロード先です。
++
+image::cloud-guides/{page-image-directory}/input.data.configuration.png[Input data configuration,width=50%]
+
+7. `Output data configuration` には出力データを保存するパスを入力します。
++
+image::cloud-guides/{page-image-directory}/output.data.configuration.png[Output data configuration,width=50%]
+
+8. 他はデフォルトのまま「トレーニングジョブの作成」をクリックします。トレーニングジョブの設定方法の詳細は 、link:https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-mkt-algo-train.html#sagemaker-mkt-algo-train-console[「Amazon SageMaker 開発者ガイド」]に記載されています。
+
+トレーニングジョブが作成されるとAmazon SageMakerはMLインスタンスを起動してモデルをトレーニングし、結果のモデル成果物やその他の出力を`Output data configuration`デフォルトでは`path/<training job name>/output`）に格納します。
+
+== モデルのデプロイ
+
+モデルを学習させた後、永続的なエンドポイントを使用してモデルをデプロイします。
+
+=== モデルの作成
+
+1. 左パネルの [ `Inference` の下にある `Models` を選択し、 `Create model` を選択します。モデル名 (例: `xgboost-bank`) を入力し前のステップで作成したIAMロールを選択します。
+2.	`コンテナ定義1` では `433757028032.dkr.ecr.us-west-2.amazonaws.com/xgboost:latest` を `Location of inference code image` として使用します。`Location of model artifacts` には学習ジョブの出力パスを指定します。
++
+image::cloud-guides/{page-image-directory}/container.definition.1.png[コンテナ定義1,,width=50%]
+3. 他はデフォルトのまま `モデルを作成` します。
+
+=== エンドポイントコンフィギュレーションの作成
+
+1. 作成したモデルを選択し、 `Create endpoint configuration` をクリックします。
++
+image::cloud-guides/{page-image-directory}/create.endpoint.configuration.png[Create endpoint configuration]
+
+2. 名前（例： `xgboost-bank`)を記入しその他はdefaultを使用します。モデル名とトレーニングジョブは自動的に入力されるはずです。 `Create endpoint configuration` をクリックします。
+
+=== エンドポイントの作成
+
+1. 左パネルから `Inference` -> `Models` を選択し、再度モデルを選択し、今度は`Create endpoint` をクリックします。
++
+image::cloud-guides/{page-image-directory}/create.endpoint.png[Create endpoint]
+
+2. 名前 (例: `xgboost-bank`)を入力し、`既存のエンドポイント構成を使用する`:
+を選択します。image::{page-image-directory}/attach.endpoint.configuration.png[エンドポイント構成を添付する]
+
+3. 前回の手順で作成したエンドポイント構成を選択し `エンドポイント構成の選択` をクリックします。
++
+image::cloud-guides/{page-image-directory}/select.endpoint.configuration.png[エンドポイント構成の選択,width=50%]
+
+4. 他のすべてをデフォルトのままにして `エンドポイントを作成` をクリックします。
+
+これでモデルがエンドポイントにデプロイされクライアントアプリケーションから利用できるようになります。
+
+== まとめ
+
+このハウツーでは、Vantageから学習データを抽出し、それを使ってAmazon SageMakerでモデルを学習させる方法を紹介しました。このソリューションでは、Jupyter Notebookを使用して Vantage からデータを抽出し、S3 バケットに書き込みました。SageMaker トレーニング ジョブは、S3 バケットからデータを読み取り、モデルを生成します。このモデルをサービスエンドポイントとして AWS にデプロイしました。
+
+== さらに詳しく
+* xref:../general/ml.html[SQL のみを使用して Vantage で ML モデルをトレーニングする方法]
+
+include::../partials/community_link.adoc[]
+

@@ -1,0 +1,138 @@
+= DataHubでのTeradata Vantageの接続設定
+:page-lang: ja
+:experimental:
+:page-author: Paul Ibberson
+:page-email: paul.ibberson2@teradata.com
+:page-revdate: 2023年 12 月 19 日 
+:page-image-directory: configure-a-teradata-connection-in-datahub
+:description: DataHub で Teradata Vantage 接続を構成します。
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, datahub, data catalog, data lineage
+
+
+== 概要
+
+このハウツーでは、DataHub を使用して Teradata Vantage への接続を作成し、テーブルとビューに関するメタデータを使用状況と系統情報とともに取り込む方法を示します。
+
+== 前提条件
+
+* Teradata Vantageインスタンスへのアクセス。
++
+include::../partials/vantage_clearscape_analytics.adoc[]
+
+* DataHubがインストールされている。 link:https://datahubproject.io/docs/quickstart/[DataHubクイックスタートガイド]
+ を参照してください。
+== DataHubの設定
+
+* DataHubがインストールされている環境にDataHub用のTeradataプラグインをインストールする
++
+[source, bash]
+----
+pip install 'acryl-datahub[teradata]'
+----
+
+* Teradataユーザーを設定し、そのユーザーがディクショナリ テーブルを読み取ることができるように権限を設定する
++
+[source, sql ]
+----
+CREATE USER datahub FROM <database> AS PASSWORD = <password> PERM = 20000000;
+
+GRANT SELECT ON dbc.columns TO datahub;
+GRANT SELECT ON dbc.databases TO datahub;
+GRANT SELECT ON dbc.tables TO datahub;
+GRANT SELECT ON DBC.All_RI_ChildrenV TO datahub;
+GRANT SELECT ON DBC.ColumnsV TO datahub;
+GRANT SELECT ON DBC.IndicesV TO datahub;
+GRANT SELECT ON dbc.TableTextV TO datahub;
+GRANT SELECT ON dbc.TablesV TO datahub;
+GRANT SELECT ON dbc.dbqlogtbl TO datahub; -- if lineage or usage extraction is enabled
+----
+* プロファイリングを実行する場合は、プロファイリングするすべてのテーブルに対する選択権限を付与する必要があります。
+
+* Lineageまたは使用状況のメタデータを抽出する場合は、クエリー ログを有効にし、クエリーに適したサイズに設定する必要があります (Teradata がキャプチャするデフォルトのクエリー テキスト サイズは最大 200 文字です)。すべてのユーザーに対して設定する方法の例 :
++
+[source, sql ]
+----
+-- set up query logging on all
+
+REPLACE QUERY LOGGING LIMIT SQLTEXT=2000 ON ALL;
+----
+
+== DataHubにTeradataの接続を追加する
+DataHubが実行されている状態で、DataHub GUIを開き、ログインします。 この例では、localhost:9002 で実行されています。 
+
+. インジェストプラグアイコンをクリックして、新しい接続ウィザードを開始します。 
++
+image::other-integrations/{page-image-directory}/ingestion-icon.png[Ingestionラベル, width=75%]
++
+「Create new source」を選択します。 
++
+image::other-integrations/{page-image-directory}/create-new-source.png[Create New Source, width=50%]
+
+. 使用可能なソースのリストをスクロールし、[Other]を選択します。 
++
+image::other-integrations/{page-image-directory}/select-other-source.png[Select Source, width=50%]
+
+. Teradata への接続を構成し、テーブルと列の系統をキャプチャするか、データのプロファイリングを行うか、使用統計を取得するかなど、必要なオプションを定義するには、Recipeが必要です。 以下は、簡単なRecipeです。ホスト、ユーザー名、パスワードは環境に合わせて変更する必要があります。
++
+[source, yaml]
+----
+pipeline_name: my-teradata-ingestion-pipeline
+source:
+  type: teradata
+  config:
+    host_port: "myteradatainstance.teradata.com:1025"
+    username: myuser
+    password: mypassword
+    #database_pattern:
+    #  allow:
+    #    - "my_database"
+    #  ignoreCase: true
+    include_table_lineage: true
+    include_usage_statistics: true
+    stateful_ingestion:
+      enabled: true
+----
++
+Recipeをウィンドウに貼り付けると、次のようになります。 
++
+image::other-integrations/{page-image-directory}/new-ingestion-source.png[New Ingestion Source, width=75%]
+
+. [Next]をクリックして、必要なスケジュールを設定します。 
++
+image::other-integrations/{page-image-directory}/set-schedule.png[Set Schedule, width=75%]
+
+. [Next]をクリックして[Finish Up]を選択し、接続に名前を付けます。[Advanced]をクリックして、正しい CLI バージョンを設定できるようにします。DataHub による Teradata のサポートは、CLI 0.12.x で利用可能になりました。 最適な互換性を確保するには、最新バージョンを選択することをお勧めします。
++
+image::other-integrations/{page-image-directory}/finish-up.png[Finish up, width=75%]
+
+. 新しいソースを保存したら、「Run」をクリックして手動で実行できます。 
++
+image::other-integrations/{page-image-directory}/execute.png[Execute, width=75%]
++
+実行が成功した後に「Succeeded」をクリックすると、これと同様のダイアログが表示され、DataHub に取り込まれたデータベース、テーブル、ビューが表示されます。  
++
+image::other-integrations/{page-image-directory}/ingestion-result.png[Ingestion Result, width=75%]
+
+. GUI で以下を参照してメタデータを探索できるようになりました。
+.. DataSets は、ロードされたデータセット (テーブルとビュー) のリストを提供します。
++
+image::other-integrations/{page-image-directory}/datasets.png[datasets, width=75%]
+.. データベースから取得されたエンティティ
++
+image::other-integrations/{page-image-directory}/entities-list.png[Entities, width=75%]
+.. 列/フィールド名、データ型、およびキャプチャされている場合の使用法を示すエンティティのスキーマ
++
+image::other-integrations/{page-image-directory}/schema.png[スキーマ表示, width=75%]
+.. Lineageは、テーブルとビューの間でデータがどのようにリンクされているかを視覚的に表現します。
++
+image::other-integrations/{page-image-directory}/lineage-weather.png[Lineageの図, width=75%]
+
+== まとめ
+
+このハウツーでは、テーブル、ビューのメタデータをリネージおよび使用統計とともにキャプチャするために、DataHub を使用して Teradata Vantage への接続を作成する方法を説明しました。
+
+== さらに詳しく
+* https://datahubproject.io/docs/generated/ingestion/sources/teradata[DataHubとTeradata Vantageの統合]
+* https://datahubproject.io/docs/metadata-ingestion/#recipes[RecipesのDataHub統合オプション]
+
+include::../partials/community_link.adoc[]

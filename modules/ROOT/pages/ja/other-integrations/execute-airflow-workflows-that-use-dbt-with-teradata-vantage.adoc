@@ -1,0 +1,303 @@
+=  dbtを使用するAirflowワークフローをTeradata Vantageを使って実行してみる
+:page-lang: ja
+:experimental:
+:page-author: Igor Machin, Ambrose Inman
+:page-email: igor.machin@teradata.com
+:page-revdate: 2022 年 11 月 18 日
+:description: dbtを使用するAirflowワークフローをTeradata Vantageを使って実行してみる
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, airflow, queries, dbt
+:tabs:
+:dir: execute-airflow-workflows-that-use-dbt-with-teradata-vantage
+
+== 概要
+
+このチュートリアルでは、Airflow を AWS EC2 VM にインストールし、dbt を使用するようにワークフローを構成し、Teradata Vantage データベースに対して実行する方法を示します。Airflowは、データを処理しロードするためのデータパイプラインを構築するために通常使用されるタスクスケジューリングツールです。この例ではDockerベースのAirflow環境を作成するAirflowのインストールプロセスを実行します。Airflowをインストールしたら、Teradata VantageデータベースにデータをロードするAirflow DAG（Direct Acyclic Graph、または単にワークフロー）の例をいくつか実行します。
+
+== 前提条件
+
+1. AWS（Amazon Web Services）にアクセスしVMを作成するための権限を持つこと
++
+TIP: このチュートリアルは、このドキュメントで紹介したマシン（AWS上のt2.2xlarge EC2、ストレージは約100GB）と同等の計算能力とストレージを持ち、インターネットに接続されていれば、他の計算プラットフォームやベアメタルマシンでも調整することが可能です。もし、別の計算機プラットフォームを使用する場合は、チュートリアルのいくつかのステップを変更する必要があります。
+2. SSHクライアントが必要です。
++
+TIP: MacやLinuxマシンであれば、これらのツールはすでに含まれています。Windowsであれば、link:https://www.putty.org/[PuTTY] または link:https://mobaxterm.mobatek.net/download.html[MobaXterm] を検討してください。
+3. Teradata Vantageインスタンスにアクセスする必要があります。Teradata Vantage をご利用でない場合は、開発者向けの無償版である link:https://quickstarts.teradata.com/#getting-access-to-vantage[Vantage Express] を探索してください。
+
+
+== Airflow をインストールして実行する
+
+=== VMを作成する
+1. AWS EC2コンソールに移動し、`Launch instance`をクリックします。
+2. オペレーティングシステムイメージの`Red Hat`を選択します。
+3. インスタンスタイプは `t2.2xlarge` を選択します。
+4. 新しいキー ペアを作成するか、既存のキー ペアを使用します。
+5. ネットワーク設定を適用して、サーバーにsshでアクセスできるようにし、サーバーがインターネットにアウトバウンド接続できるようにします。通常、デフォルトの設定を適用します。
+6. 100 GBのストレージを割り当てます。
+
+=== Pythonのインストール
+
+1. `ec2-user`ユーザーを使用してマシンにsshします。
+
+2. pythonがインストールされているか確認します（Python3.7以上である必要があります）。コマンド ラインから `python` または `python3` 入力してください。
+
+3. Python がインストールされていない場合 ( `コマンドが見つからない` というメッセージが出る場合)は、以下のコマンドを実行してインストールします。コマンドは、 `y` と入力してインストールを確認するようリクエストする場合があります。
++
+[source, bash, id="install_python", role="content-editable emits-gtm-events"]
+----
+sudo yum install python3
+# create a virtual environment for the project
+sudo yum install python3-pip
+sudo pip3 install virtualenv
+----
+
+=== Airflow環境の構築
+
+1. Airflowディレクトリ構造を作成します(ec2-userホームディレクトリ/home/ec2-userから)
++
+[source, bash, id="install_airflow", role="content-editable emits-gtm-events"]
+----
+mkdir airflow
+cd airflow
+mkdir -p ./dags ./logs ./plugins ./data ./config ./data
+echo -e "AIRFLOW_UID=$(id -u)" > .env
+----
+
+2. お好みのファイル転送ツール ( `scp`、 `PuTTY`、 `MobaXterm` など) を使用して、 link:{attachmentsdir}/{dir}/airflow.cfg[airflow.cfg] ファイルを `airflow/config` ディレクトリにアップロードします。
+
+=== Dockerのインストール
+
+Dockerはコンテナ化ツールであり、Airflowをコンテナ環境にインストールすることができます。
+
+NOTE: 手順は、`airflow` ディレクトリで実行する必要があります。
+
+1. podman (RHELのコンテナ化ツール)をアンインストールします。
++
+[source, bash, id="uninstall_podman", role="content-editable emits-gtm-events"]
+----
+sudo yum remove docker \
+docker-client \
+docker-client-latest \
+docker-common \
+docker-latest \
+docker-latest-logrotate \
+docker-logrotate \
+docker-engine \
+podman \
+runc
+----
+
+2. yumユーティリティをインストールします。
++
+[source, bash, id="install_yum", role="content-editable emits-gtm-events"]
+----
+sudo yum install -y yum-utils
+----
+
+3. Dockerを yum リポジトリに追加します。
++
+[source, bash, id="add_docker_to_yum", role="content-editable emits-gtm-events"]
+----
+sudo yum-config-manager \
+--add-repo \
+https://download.docker.com/linux/centos/docker-ce.repo
+----
+
+4. Dockerをインストールします。
++
+[source, bash, id="install_docker", role="content-editable emits-gtm-events"]
+----
+sudo yum install docker-ce docker-ce-cli containerd.io
+----
+
+5. サービスとしてDockerを起動します。最初のコマンドは、次回システムが起動するときにDockerサービスを自動的に実行します。2 番目のコマンドはDockerを起動します。
++
+[source, bash, id="start_docker", role="content-editable emits-gtm-events"]
+----
+sudo systemctl enable docker
+sudo systemctl start docker
+----
+
+6. Dockerが正しくインストールされているかどうかを確認します。このコマンドは、コンテナの空のリストを返すはずです (まだコンテナを開始していないため)。
++
+[source, bash, id="check_docker", role="content-editable emits-gtm-events"]
+----
+sudo docker ps
+----
+
+===  `docker-compose` とDocker環境設定ファイルのインストール
+
+1. link:{attachmentsdir}/{dir}/docker-compose.yaml[docker-compose.yaml] と link:{attachmentsdir}/{dir}/Dockerfile[Dockerfile] ファイルを VM にアップロードし、 `airflow` ディレクトリに保存します。
++
+[TIP]
+.「docker-compose.yaml」と「Dockerfile」の機能
+====
+`docker-compose.yaml` および `Dockerfile` は、インストール時に環境を構築するために必要なファイルです。 `docker-compose.yaml` ファイルは、Airflowのdockerコンテナをダウンロードし、インストールするものです。このコンテナには、Web UI、メタデータ用のPostgresデータベース、スケジューラ、3つのワーカー（3つのタスクを並行して実行可能）、トリガー、 `dbt` が生成するドキュメントを表示するためのnginx Webサーバーが含まれています。このほか、コンテナへのホストディレクトリのマウントや、各種インストール処理も行われます。`Dockerfile` は、各コンテナに必要なパッケージを追加でインストールします。
+
+ `docker-compose.yaml` と `Dockerfile` が何をするファイルなのか、もっと詳しく知りたい方はこれらのファイルをご覧ください。何がなぜインストールされるのかを明確にするためのコメントもあります。
+====
+
+2. docker-composeをインストールします(yamlファイルを実行するために必要)。
++
+NOTE: この手順は、バージョン 1.29.2 に基づいています。最新のリリースは  https://github.com/docker/compose/releases で確認し、必要に応じて以下のコマンドを更新してください。
++
+[source, bash, id="install_docker_compose", role="content-editable emits-gtm-events"]
+----
+sudo curl -L https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+----
+
+3. docker-composeのインストールをテストします。このコマンドは、docker-composeバージョンを返す必要があります。たとえば、`docker-compose version 1.29.2, build 5becea4c`:
++
+[source, bash, id="check_docker_compose", role="content-editable emits-gtm-events"]
+----
+docker-compose --version
+----
+
+=== テスト  dbt  プロジェクトのインストール
+
+NOTE: これらの手順では、サンプル dbt プロジェクトをセットアップします。 `dbt` ツール自体は、後で `docker-compose`によってコンテナにインストールされます。
+
+1. gitをインストールします。
++
+[source, bash, id="install_git", role="content-editable emits-gtm-events"]
+----
+sudo yum install git
+----
+
+2. jaffle shop の dbt プロジェクトのサンプルを入手します。
++
+NOTE: dbt ディレクトリは、ホーム ディレクトリの下に作成されます ( `airflow`の下ではありません)。この例では、ホームディレクトリは`/home/ec2-user`です。
++
+[source, bash, id="download_sample_dbt_project", role="content-editable emits-gtm-events"]
+----
+# move to home dir
+cd
+mkdir dbt
+cd dbt
+git clone https://github.com/Teradata/jaffle_shop-dev.git jaffle_shop
+cd jaffle_shop
+mkdir target
+chmod 777 target
+echo '' > target/index.html
+chmod o+w target/index.html
+----
+
+3. Teradata Studio Express、`bteq` などのデータベースツールを使用して、Teradataデータベース上に `airflowtest` と  `jaffle_shop` のユーザー/データベースを作成します。 `dbc` としてデータベースにログインし、コマンドを実行します（必要に応じてパスワードを変更します）。
++
+[source, teradata-sql, id="create_databases", role="content-editable emits-gtm-events"]
+----
+CREATE USER "airflowtest" FROM "dbc" AS PERM=5000000000 PASSWORD="abcd";
+CREATE USER "jaffle_shop" FROM "dbc" AS PERM=5000000000 PASSWORD="abcd";
+----
+
+4. dbt構成ディレクトリを作成します。
++
+[source, bash, id="create_dbt_config_dir", role="content-editable emits-gtm-events"]
+----
+cd
+mkdir .dbt
+----
+
+5. link:{attachmentsdir}/{dir}/profiles.yml[profiles.yml ] を `.dbt` ディレクトリにコピーします。
+
+6. Teradataデータベースの設定に対応するように、ファイルを編集します。最低でも、ホスト、ユーザー、パスワードは変更する必要があります。手順 3 で設定した `jaffle_shop` のユーザー信頼証明を使用します。
+
+=== DockerでAirflow環境を作成する
+
+1.  `Dockerfile` と `docker-compose.yaml` がある `airflow` ディレクトリで、Docker環境作成スクリプトを実行します。
++
+[source, bash, id="run_docker_compose", role="content-editable emits-gtm-events"]
+----
+cd ~/airflow
+sudo docker-compose up --build
+----
++
+これには 5 ～ 10 分かかる場合があります。インストールが完了すると、画面に次のようなメッセージが表示されます。
++
+[source, bash, id="run_docker_compose_response", role="content-editable emits-gtm-events"]
+----
+airflow-webserver_1  | 127.0.0.1 - - [13/Sep/2022:00:20:48 +0000] "GET /health HTTP/1.1" 200 187 "-" "curl/7.74.0"
+----
++
+これは、Airflow Webサーバがコールを受け入れる準備ができていることを意味する。
+
+2. これで、Airflowが起動したはずです。インストール時に使用していたターミナルセッションは、ログメッセージの表示に使用されますので、
+以降の手順では別のターミナルセッションを開くことをお勧めします。Airflow の設置型を確認します。
++
+[source, bash, id="check_airflow_in_docker", role="content-editable emits-gtm-events"]
+----
+sudo docker ps
+----
++
+結果は以下のようになります。
++
+[source, bash, id="check_airflow_in_docker_output", role="content-editable emits-gtm-events"]
+----
+CONTAINER ID   IMAGE                  COMMAND                  CREATED          STATUS                    PORTS                                                 NAMES
+60d50d9f43f5   apache/airflow:2.2.4   "/usr/bin/dumb-init …"   18 minutes ago   Up 18 minutes (healthy)   8080/tcp                                              airflow_airflow-scheduler_1
+e2b46ec98274   apache/airflow:2.2.4   "/usr/bin/dumb-init …"   18 minutes ago   Up 18 minutes (healthy)   8080/tcp                                              airflow_airflow-worker_3_1
+7b44004c7277   apache/airflow:2.2.4   "/usr/bin/dumb-init …"   18 minutes ago   Up 18 minutes (healthy)   8080/tcp                                              airflow_airflow-worker_1_1
+4017b8ce9235   apache/airflow:2.2.4   "/usr/bin/dumb-init …"   18 minutes ago   Up 18 minutes (healthy)   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp             airflow_airflow-webserver_1
+3cc407e2d565   apache/airflow:2.2.4   "/usr/bin/dumb-init …"   18 minutes ago   Up 18 minutes (healthy)   0.0.0.0:5555->5555/tcp, :::5555->5555/tcp, 8080/tcp   airflow_flower_1
+340a83b202e3   apache/airflow:2.2.4   "/usr/bin/dumb-init …"   18 minutes ago   Up 18 minutes (healthy)   8080/tcp                                              airflow_airflow-triggerer_1
+82198f0d8b84   apache/airflow:2.2.4   "/usr/bin/dumb-init …"   18 minutes ago   Up 18 minutes (healthy)   8080/tcp                                              airflow_airflow-worker_2_1
+382c3077c1e5   redis:latest           "docker-entrypoint.s…"   18 minutes ago   Up 18 minutes (healthy)   6379/tcp                                              airflow_redis_1
+8a3be8d8a7f4   nginx                  "/docker-entrypoint.…"   18 minutes ago   Up 18 minutes (healthy)   0.0.0.0:4000->80/tcp, :::4000->80/tcp                 airflow_nginx_1
+9ca888e9e8df   postgres:13            "docker-entrypoint.s…"   18 minutes ago   Up 18 minutes (healthy)   5432/tcp                                              airflow_postgres_1
+----
+
+3. Dockerのインストールを削除したい場合（例えば、docker-compose.yamlとDockerfileファイルを更新して別の環境を再作成する場合）、コマンドは（これらのファイルがあるairflowディレクトリから）です。
++
+[source, bash, id="docker_compose_down", role="content-editable emits-gtm-events"]
+----
+sudo docker-compose down --volumes --rmi all
+----
++
+スタックが停止したら、設定ファイルを更新し、手順 1 のコマンドを実行して再起動します。
+
+
+4. AirflowのWeb UIが動作するかどうかをテストするには、ブラウザで次のURLを入力します。 `<VM_IP_ADDRESS>` をVMの外部IPアドレスに置き換えてください。
+  * DAG UI: `http://<YOUR_IP_ADDRESS> :8080/home` - username: airflow / password: airflow
+  * Flower Airflow UI (worker control): `http://<YOUR_IP_ADDRESS>:5555/`
+
+=== Airflow DAG の実行
+
+1. link:{attachmentsdir}/{dir}/airflow_dbt_integration.py[airflow_dbt_integration.py]、 link:{attachmentsdir}/{dir}/db_test_example_dag.py[db_test_example_dag.py]、 link:{attachmentsdir}/{dir}/discover_dag.txt[discover_dag.txt]、 link:{attachmentsdir}/{dir}/variables.json[variables.json] ファイルを `/home/ec2-user/airflow/dags`にコピーします。
+2. ファイルを確認します。
+* `airflow_dbt_integration.py` - いくつかのテーブルを作成し、クエリーを実行する簡単な Teradata SQL の例です。
+* `db_test_example_dag.py` - dbtのサンプル（dbtとairflowをTeradataデータベースと統合する）を実行します。この例では、架空のjaffle_shopデータモデルが作成、ロードされ、このプロジェクトのドキュメントが作成されます（ブラウザで `http://<VM_IP_ADDRESS>:4000/`) を指定すると見ることができます）。
++
+[IMPORTANT]
+.`db_test_example_dag.py`を調整
+====
+`db_test_example_dag.py` を更新して、TeradataデータベースのIPアドレスがあなたのデータベースを指すようにする必要があります。
+====
+
+* `discover_dag.py` - 様々なタイプのデータファイル（CSV, Parquet, JSON）を読み込む方法の例です。ソースコードファイルには、プログラムが何を行い、どのようにそれを使用するかを説明するコメントが含まれています。この例では、`variables.json`ファイルを使用します。このファイルは、Airflowにインポートする必要があります。それは後続のステップで行われます。
+
+3. これらのdagファイルがエアフローツールに拾われるまで数分待ちます。これらのファイルがピックアップされると、Airflow ホームページのダグリストに表示されます。
+
+4. `variables.json` ファイルを変数ファイルとして Airflow にインポートします。
+*  `Admin -> Variables` メニューアイテムをクリックし、Variables ページに移動します。
++
+image::other-integrations/{dir}/admin-dropdown.png[Airflow管理ドロップダウン, width=75%]
+*  `Choose File` をクリックし、ファイル エクスプローラで `variable.json` を選択して `Import Variables`
+ をクリックします。
++
+image::other-integrations/{dir}/import-variables.png[Airflow管理ドロップダウン, width=75%]
+* お使いの環境に合わせて、変数を編集します。
+
+
+5. UIからDAGを実行し、ログを確認します。
+
+
+
+== まとめ
+
+このチュートリアルは、Linux サーバーに Airflow 環境をインストールする方法と、Airflow を使用して Teradata Vantage データベースと対話する方法について、実践的な演習を提供することを目的とし ています。また、Airflow とデータモデリングおよびメンテナンスツールである dbt を統合して、Teradata Vantage データベースを作成およびロードする方法についての例も提供されます。
+
+== さらに詳しく
+* https://quickstarts.teradata.com/dbt.html#_install_dbt[Teradata Vantage で dbt (データ構築ツール) を使用する]
+
+include::../partials/community_link.adoc[]
