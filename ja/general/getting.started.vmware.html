@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>VMware 上で Vantage Express を実行する :: Teradata Getting Started</title>
+    <title>VMware で Vantage Express を実行する方法 :: Teradata Getting Started</title>
     <link rel="canonical" href="https://quickstarts.teradata.com/ja/general/getting.started.vmware.html">
     <meta name="description" content="VMware を使用してラップトップで Vantage Express を実行します。">
-    <meta name="keywords" content="データ ウェアハウス、コンピューティング ストレージの分離、teradata、vantage、クラウド データ プラットフォーム、オブジェクト ストレージ、ビジネス インテリジェンス、エンタープライズ分析">
+    <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta property="og:title" content="VMware 上で Vantage Express を実行する :: Teradata Getting Started">
+<meta property="og:title" content="VMware で Vantage Express を実行する方法 :: Teradata Getting Started">
 <meta property="og:type" content="article" />
 <meta property="og:description" content="VMware を使用してラップトップで Vantage Express を実行します。" />
 <meta property="og:site_name" content="Teradata Getting Started">
@@ -843,6 +843,10 @@ aside.toc.sidebar {
   font-family: Inter;
   font-size: 16px;
 }
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: transparent;
+  color: #00233C;
+}
 .doc .admonitionblock td.icon i.icon-note {
   background-color: transparent;
   color: #00233C;
@@ -1479,9 +1483,6 @@ document.addEventListener("DOMContentLoaded", function () {
     <a class="nav-link" href="../../cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../../cloud-guides/ingest-catalog-data-teradata-s3-with-glue.html">Ingest and Catalog Data from Teradata Vantage to Amazon S3 with AWS Glue Scripts</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../../other-integrations/configure-a-teradata-vantage-connection-in-datahub.html">Configure a Teradata Vantage connection in DataHub</a>
   </li>
 </ul>
@@ -1639,65 +1640,74 @@ document.addEventListener("DOMContentLoaded", function () {
     <ul class="nav-list">
       <li class="nav-item is-active" data-depth="1">
         <button class="nav-item-toggle"></button>
-        <span class="nav-text" style="cursor: pointer;">Introduction</span>
+        <span class="nav-text" style="cursor: pointer;">はじめに</span>
     <ul class="nav-list">
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="teradata-vantage-engine-architecture-and-concepts.html">Teradata Vantage Engine Architecture and Concepts</a>
+        <a class="nav-link" href="../general/teradata-vantage-engine-architecture-and-concepts.html">Teradata Vantage エンジンのアーキテクチャと概念</a>
       </li>
     </ul>
       </li>
       <li class="nav-item is-active is-current-path" data-depth="1">
         <button class="nav-item-toggle"></button>
-        <span class="nav-text" style="cursor: pointer;">Get access to Vantage</span>
+        <span class="nav-text" style="cursor: pointer;">Vantageへのアクセス</span>
     <ul class="nav-list">
       <li class="nav-item is-current-path" data-depth="2">
         <button class="nav-item-toggle"></button>
-        <span class="nav-text" style="cursor: pointer;">On your local</span>
+        <span class="nav-text" style="cursor: pointer;">ローカル</span>
     <ul class="nav-list">
       <li class="nav-item is-active" data-depth="3">
-        <a class="nav-link" href="getting.started.vmware.html">VMware 上で Vantage Express</a>
+        <a class="nav-link" href="../general/getting.started.vmware.html">VMware で Vantage Express を実行する方法</a>
       </li>
       <li class="nav-item is-active" data-depth="3">
-        <a class="nav-link" href="getting.started.vbox.html">Vantage Express on VirtualBox</a>
+        <a class="nav-link" href="../general/getting.started.vbox.html">VirtualBox で Vantage Express を実行する方法</a>
       </li>
       <li class="nav-item is-active" data-depth="3">
-        <a class="nav-link" href="getting.started.utm.html">Vantage Express on UTM</a>
+        <a class="nav-link" href="../general/getting.started.utm.html">UTM で Vantage Express を実行する方法</a>
       </li>
     </ul>
       </li>
       <li class="nav-item" data-depth="2">
         <button class="nav-item-toggle"></button>
-        <span class="nav-text" style="cursor: pointer;">On your cloud infrastructure</span>
-    <ul class="nav-list">
-      <li class="nav-item is-active" data-depth="3">
-        <a class="nav-link" href="run-vantage-express-on-aws.html">Vantage Express on AWS</a>
+        <span class="nav-text" style="cursor: pointer;">クラウド インフラストラクチャ</span>
+        <ul class="nav-list">
+          <li class="nav-item is-active" data-depth="3">
+            <a class="nav-link" href="../general/run-vantage-express-on-aws.html">AWS で Vantage Express を実行する方法</a>
+          </li>
+          <li class="nav-item is-active" data-depth="3">
+            <a class="nav-link" href="../general/vantage.express.gcp.html">Google Cloud で Vantage Express を実行する方法</a>
+          </li>
+          <li class="nav-item is-active" data-depth="3">
+            <a class="nav-link" href="../general/run-vantage-express-on-microsoft-azure.html">Azure で Vantage Express を実行する方法</a>
+          </li>
+        </ul>
       </li>
-      <li class="nav-item is-active" data-depth="3">
-        <a class="nav-link" href="vantage.express.gcp.html">Vantage Express on Google Cloud</a>
-      </li>
-      <li class="nav-item is-active" data-depth="3">
-        <a class="nav-link" href="run-vantage-express-on-microsoft-azure.html">Vantage Express on Azure</a>
-      </li>
-    </ul>
+          <li class="nav-item" data-depth="2">
+        <button class="nav-item-toggle"></button>
+        <span class="nav-text" style="cursor: pointer;">ClearScape Analytics Experience</span>
+        <ul class="nav-list">
+          <li class="nav-item is-active" data-depth="3">
+            <a class="nav-link" href="../general/getting-started-with-csae.html">ClearScape Analytics Experience を始める</a>
+          </li>
+        </ul>
       </li>
     </ul>
       </li>
       <li class="nav-item is-active" data-depth="1">
         <button class="nav-item-toggle"></button>
-        <span class="nav-text" style="cursor: pointer;">Connect to Vantage</span>
+        <span class="nav-text" style="cursor: pointer;">Vantage への接続</span>
     <ul class="nav-list">
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="install-teradata-studio-on-mac-m1-m2.html">Use Teradata Studio/Express on Apple Mac M1/M2</a>
+        <a class="nav-link" href="../general/install-teradata-studio-on-mac-m1-m2.html">Apple Mac M1/M2でTeradata Studio/Expressを使用する</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">Configure a Teradata Vantage connection in DBeaver</a>
+        <a class="nav-link" href="../other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">DBeaverでのTeradata Vantageの接続設定</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
         <button class="nav-item-toggle"></button>
-        <span class="nav-text" style="cursor: pointer;">Configure ODBC</span>
+        <span class="nav-text" style="cursor: pointer;">ODBCの設定</span>
     <ul class="nav-list">
       <li class="nav-item is-active" data-depth="3">
-        <a class="nav-link" href="odbc.ubuntu.html">Ubuntu</a>
+        <a class="nav-link" href="../general/odbc.ubuntu.html">Ubuntu</a>
       </li>
     </ul>
       </li>
@@ -1708,115 +1718,115 @@ document.addEventListener("DOMContentLoaded", function () {
         <span class="nav-text" style="cursor: pointer;">データの管理</span>
     <ul class="nav-list">
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="nos.html">オブジェクトストレージに保存されたクエリデータ</a>
+        <a class="nav-link" href="../general/nos.html">オブジェクトストレージに保存されたクエリデータ</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="select-the-right-data-ingestion-tools-for-teradata-vantage.html">Select the right data ingestion solution for Teradata Vantage</a>
+        <a class="nav-link" href="../general/select-the-right-data-ingestion-tools-for-teradata-vantage.html">Teradata Vantageに適したデータ取り込みソリューションを選択する</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="dbt.html">dbt with Teradata Vantage</a>
+        <a class="nav-link" href="../general/dbt.html">Teradata Vantage dbt</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="advanced-dbt.html">Advanced dbt use cases with Teradata Vantage</a>
+        <a class="nav-link" href="../general/advanced-dbt.html">Teradata Vantage を使用した高度な dbt のユースケース</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="modelops/using-feast-feature-store-with-teradata-vantage.html">Build a FEAST feature store in Teradata Vantage</a>
+        <a class="nav-link" href="../modelops/using-feast-feature-store-with-teradata-vantage.html">Teradata VantageとFEASTで拡張性の高いフィーチャーストアを実現</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="other-integrations/getting.started.dbt-feast-teradata-pipeline.html">Use dbt and FEAST to build a feature store in Teradata Vantage</a>
+        <a class="nav-link" href="../other-integrations/getting.started.dbt-feast-teradata-pipeline.html">dbt と FEAST を使用して Teradata Vantage でフィーチャストアを構築する方法</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html">Use Airbyte to load data from external sources to Teradata Vantage</a>
+        <a class="nav-link" href="../elt/use-airbyte-to-load-data-from-external-sources-to-teradata-vantage.html">Airbyte を使用して外部ソースから Teradata Vantage にデータをロードする方法</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="elt/transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.html">Transform data Loaded with Airbyte using dbt</a>
+        <a class="nav-link" href="../elt/transforming-external-data-loaded-via-airbyte-in-teradata-vantage-using-dbt.html">dbt を使用して Airbyte に読み込まれたデータを変換する方法</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">Load data with TPT</a>
+        <a class="nav-link" href="../tools-and-utilities/run-bulkloads-efficiently-with-teradata-parallel-transporter.html">TPTでデータロード</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
+        <a class="nav-link" href="../general/create-parquet-files-in-object-storage.html">VantageからのオブジェクトストアへのParquetファイルの作成</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
+        <a class="nav-link" href="../other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">dbtを使用するAirflowワークフローをTeradata Vantageを使って実行してみる</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
+        <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Amazon Appflowを使用してVantageからSalesforceへ接続する方法</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="segment.html">Store events from Twilio Segment</a>
+        <a class="nav-link" href="../general/segment.html">Twilio Segmentからイベントを保存する方法</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Connect Azure Data Share to Teradata Vantage</a>
+        <a class="nav-link" href="../cloud-guides/connect-azure-data-share-to-teradata-vantage.html">Azure Data Share を Teradata Vantage に接続する</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Integrate Teradata Vantage with Google Cloud Data Catalog</a>
+        <a class="nav-link" href="../cloud-guides/integrate-teradata-vantage-with-google-cloud-data-catalog.html">Teradata VantageとGoogle Cloud Data Catalogを統合する</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="other-integrations/configure-a-teradata-vantage-connection-in-datahub.html">Configure a Teradata Vantage connection in DataHub</a>
+        <a class="nav-link" href="../other-integrations/configure-a-teradata-vantage-connection-in-datahub.html">DataHubでのTeradata Vantageの接続設定</a>
       </li>
     </ul>
       </li>
       <li class="nav-item is-active" data-depth="1">
         <button class="nav-item-toggle"></button>
-        <span class="nav-text" style="cursor: pointer;">Create applications</span>
+        <span class="nav-text" style="cursor: pointer;">アプリケーションの作成</span>
     <ul class="nav-list">
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="jdbc.html">Connect to Vantage using JDBC</a>
+        <a class="nav-link" href="../general/jdbc.html">JDBC を使用して Vantage に接続する方法</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="teradatasql.html">Connect to Vantage using Python</a>
+        <a class="nav-link" href="../general/teradatasql.html">Python を使用して Vantage に接続する方法</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="mule.jdbc.example.html">Query Teradata Vantage from a Mule service</a>
+        <a class="nav-link" href="../general/mule.jdbc.example.html">Mule サービスから Teradata Vantage をクエリ</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="query-service/send-queries-using-rest-api.html">Send queries using REST API</a>
+        <a class="nav-link" href="../query-service/send-queries-using-rest-api.html">REST APIを使ってVantageにクエリーを送信する方法</a>
       </li>
     </ul>
       </li>
       <li class="nav-item is-active" data-depth="1">
         <button class="nav-item-toggle"></button>
-        <span class="nav-text" style="cursor: pointer;">Analyze data</span>
+        <span class="nav-text" style="cursor: pointer;">データの分析</span>
     <ul class="nav-list">
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="jupyter.html">Use Vantage from a Jupyter notebook</a>
+        <a class="nav-link" href="../general/jupyter.html">Jupyter NotebookからVantageを利用する方法</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="local.jupyter.hub.html">Deploy Teradata Jupyter extensions to JupyterHub</a>
+        <a class="nav-link" href="../general/local.jupyter.hub.html">Teradata Jupyter ExtensionsをJupyter Hubにデプロイする方法</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="ml.html">Train ML models in Vantage using Database Analytic Functions</a>
+        <a class="nav-link" href="../general/ml.html">データベース分析関数を使用したVantageでのMLモデルのトレーニング</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="sto.html">Run scripts on Vantage</a>
+        <a class="nav-link" href="../general/sto.html">Vantage でスクリプトを実行する方法</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="perform-time-series-analysis-using-teradata-vantage.html">Perform time series analysis</a>
+        <a class="nav-link" href="../general/perform-time-series-analysis-using-teradata-vantage.html">時系列分析の実行</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - Import and Deploy your first BYOM Model</a>
+        <a class="nav-link" href="../modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-byom.html">ModelOps - 初めてのBYOMモデルのインポートとデプロイ</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.html">ModelOps - Import and Deploy your first GIT Model</a>
+        <a class="nav-link" href="../modelops/deploy-and-monitor-machine-learning-models-with-teradata-modelops-and-git.html">ModelOps - 初めてのGITモデルのインポートとデプロイ</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="cloud-guides/sagemaker-with-teradata-vantage.html">Use AWS SageMaker with Teradata Vantage</a>
+        <a class="nav-link" href="../cloud-guides/sagemaker-with-teradata-vantage.html">VantageからSageMakerのAPIを実行する方法</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">Use Teradata Vantage with Azure Machine Learning Studio</a>
+        <a class="nav-link" href="../cloud-guides/use-teradata-vantage-with-azure-machine-learning-studio.html">VantageのデータをAzure Machine Learning Studioで使用する方法</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Integrate Teradata Jupyter extensions with Google Vertex AI</a>
+        <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-google-vertex-ai.html">Google Vertex AIとTeradata Jupyterエクステンションを統合する</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Integrate Teradata Jupyter extensions with SageMaker notebook instance</a>
+        <a class="nav-link" href="../cloud-guides/integrate-teradata-jupyter-extensions-with-sagemaker.html">Teradata Jupyter Extentionsと SageMakerNotebookインスタンスの統合</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Create Vizualizations in Power BI using Vantage</a>
+        <a class="nav-link" href="../business-intelligence/create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.html">Vantage を使用して Power BI で視覚化を作成する</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="other-integrations/integrate-teradata-vantage-with-knime.html">Integrate Teradata Vantage with KNIME Analytics Platform</a>
+        <a class="nav-link" href="../other-integrations/integrate-teradata-vantage-with-knime.html">KNIME Analytics PlatformとVantageを統合する</a>
       </li>
     </ul>
       </li>
@@ -1825,47 +1835,47 @@ document.addEventListener("DOMContentLoaded", function () {
         <span class="nav-text" style="cursor: pointer;">Teradata AI Unlimited</span>
     <ul class="nav-list">
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="ai-unlimited/getting-started-with-ai-unlimited.html">Getting Started with Teradata AI Unlimited</a>
+        <a class="nav-link" href="../ai-unlimited/getting-started-with-ai-unlimited.html">Teradata AI Unlimited のスタートガイド</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
         <button class="nav-item-toggle"></button>
-        <span class="nav-text" style="cursor: pointer;">Deploy locally using Docker</span>
+        <span class="nav-text" style="cursor: pointer;">Dockerを使用してローカルにデプロイ</span>
     <ul class="nav-list">
       <li class="nav-item is-active" data-depth="3">
-        <a class="nav-link" href="ai-unlimited/install-ai-unlimited-workspaces-docker.html">Deploy and Setup Teradata AI Unlimited Workspace Service Using Docker</a>
+        <a class="nav-link" href="../ai-unlimited/install-ai-unlimited-workspaces-docker.html">Dockerを使用した Teradata AI Unlimited Workspaceサービスのデプロイとセットアップ</a>
       </li>
       <li class="nav-item is-active" data-depth="3">
-        <a class="nav-link" href="ai-unlimited/install-ai-unlimited-interface-docker.html">Deploy a Teradata AI Unlimited Interface Using Docker</a>
+        <a class="nav-link" href="../ai-unlimited/install-ai-unlimited-interface-docker.html">Dockerを使用した Teradata AI Unlimited インターフェースのデプロイ</a>
       </li>
     </ul>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="ai-unlimited/using-ai-unlimited-workspace-cli.html">Use Teradata AI Unlimited With Workspace Client</a>
+        <a class="nav-link" href="../ai-unlimited/using-ai-unlimited-workspace-cli.html">Workspace Client で Teradata AI Unlimited を使用する</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
         <button class="nav-item-toggle"></button>
-        <span class="nav-text" style="cursor: pointer;">Deploy on AWS</span>
+        <span class="nav-text" style="cursor: pointer;">AWSへのデプロイ</span>
     <ul class="nav-list">
       <li class="nav-item is-active" data-depth="3">
-        <a class="nav-link" href="ai-unlimited/deploy-ai-unlimited-aws-cloudformation.html">Deploy Teradata AI Unlimited Workspace Service and Interface using AWS CloudFormation Template</a>
+        <a class="nav-link" href="../ai-unlimited/deploy-ai-unlimited-aws-cloudformation.html">AWS CloudFormation テンプレートを使用して Teradata AI Unlimited Workspace サービスとインターフェースをデプロイする</a>
       </li>
       <li class="nav-item is-active" data-depth="3">
-        <a class="nav-link" href="ai-unlimited/ai-unlimited-aws-permissions-policies.html">Control AWS Access and Permissions using Custom Permissions and Policies</a>
+        <a class="nav-link" href="../ai-unlimited/ai-unlimited-aws-permissions-policies.html">カスタム権限とポリシーを使用してAWSのアクセスと権限を制御する</a>
       </li>
       <li class="nav-item is-active" data-depth="3">
-        <a class="nav-link" href="ai-unlimited/deploy-ai-unlimited-awscli-cloudformation.html">Deploy CloudFormation Template from AWS CLI</a>
+        <a class="nav-link" href="../ai-unlimited/deploy-ai-unlimited-awscli-cloudformation.html">AWS CLI から CloudFormation テンプレートをデプロイする</a>
       </li>
     </ul>
       </li>
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="ai-unlimited/running-sample-ai-unlimited-workload.html">Run a Sample Workload in JupyterLab Using Teradata AI Unlimited</a>
+        <a class="nav-link" href="../ai-unlimited/running-sample-ai-unlimited-workload.html">Teradata AI Unlimitedを使用してJupyterLabでサンプルワークロードを実行する</a>
       </li>
       <li class="nav-item is-active" data-depth="2">
         <button class="nav-item-toggle"></button>
-        <span class="nav-text" style="cursor: pointer;">Reference</span>
+        <span class="nav-text" style="cursor: pointer;">参照</span>
     <ul class="nav-list">
       <li class="nav-item is-active" data-depth="3">
-        <a class="nav-link" href="ai-unlimited/ai-unlimited-magic-reference.html">Teradata AI Unlimited JupyterLab Magic Command Reference</a>
+        <a class="nav-link" href="../ai-unlimited/ai-unlimited-magic-reference.html">Teradata AI Unlimited JupyterLab マジック コマンド リファレンス</a>
       </li>
     </ul>
       </li>
@@ -1876,7 +1886,22 @@ document.addEventListener("DOMContentLoaded", function () {
         <span class="nav-text" style="cursor: pointer;">VantageCloud Lake</span>
     <ul class="nav-list">
       <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="getting-started-with-vantagecloud-lake.html">Getting Started with VantageCloud Lake</a>
+        <a class="nav-link" href="../general/getting-started-with-vantagecloud-lake.html">VantageCloud Lake の使用を開始する</a>
+      </li>
+       <li class="nav-item is-active" data-depth="2">
+        <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demo-jupyter-docker.html">Docker で VantageCloud Lake の Teradata Jupyter Notebook デモを実行する方法</a>
+      </li>
+      <li class="nav-item is-active" data-depth="2">
+        <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demos-visual-studio-code.html">Visual Studio Code で VantageCloud Lake の Teradata Jupyter Notebook デモを実行する方法</a>
+      </li>
+      <li class="nav-item is-active" data-depth="2">
+        <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demo-jupyter-sagemaker.html">Amazon SageMaker で VantageCloud Lake の Teradata Jupyter Notebook デモを実行する方法</a>
+      </li>
+      <li class="nav-item is-active" data-depth="2">
+        <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demo-jupyter-google-cloud-vertex-ai.html">Google Cloud Vertex AI で VantageCloud Lake の Teradata Jupyter Notebook デモを実行する方法</a>
+      </li>
+      <li class="nav-item is-active" data-depth="2">
+        <a class="nav-link" href="../vantagecloud-lake/vantagecloud-lake-demo-jupyter-azure.html">Microsoft AzureでVantageCloud LakeのTeradata Jupyter Notebookデモを実行する方法</a>
       </li>
     </ul>
       </li>
@@ -1979,7 +2004,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="getting.started.vmware.html">VMware 上で Vantage Express を実行する</a></li>
+    <li><a href="getting.started.vmware.html">VMware で Vantage Express を実行する方法</a></li>
   </ul>
 </nav>
 </div>
@@ -1993,12 +2018,28 @@ document.addEventListener("DOMContentLoaded", function () {
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">VMware 上で Vantage Express を実行する</h1>
+<h1 class="page">VMware で Vantage Express を実行する方法</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<a href="https://clearscape.teradata.com/" class="bare">https://clearscape.teradata.com/</a>では、Vantageのホストされたインスタンスを無料で入手できるようになりました。
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_概要"><a class="anchor" href="#_概要"></a>概要</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このハウツーでは、Teradata データベースをローカル マシン上で実行してアクセスする方法を示します。Teradata をインストールするにはさまざまな方法があります。このドキュメントでは、クラウド リソースにコストを費やすことなく、最初のクエリーまでの時間を最短にするように最適化します。手順を完了すると、コンピュータ上で動作する Teradata Vantage Express データベースが作成されます。</p>
+<p>このハウツーでは、Teradata データベースをローカル マシン上で実行してアクセスする方法を示します。手順を完了すると、コンピュータ上で動作する Teradata Vantage Express データベースが作成されます。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2007,7 +2048,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-バージョン 17.20 以降、Vantage Express には次の分析パッケージが含まれています: <a href="https://docs.teradata.com/r/Vantage-Analytics-Library-User-Guide/January-2022">Vantage Analytics Library</a>、 <a href="https://docs.teradata.com/r/Teradata-VantageTM-Bring-Your-Own-Model-User-Guide/May-2022">Bring Your Own Model (BYOM)</a>、 <a href="https://docs.teradata.com/r/Teradata-VantageTM-API-Integration-Guide-for-Cloud-Machine-Learning/April-2022">API Integration with AWS SageMaker</a>。
+バージョン 17.20 以降、Vantage Express には以下の分析パッケージが含まれています。 <a href="https://docs.teradata.com/r/Vantage-Analytics-Library-User-Guide/January-2022">Vantage Analytics Library</a>、 <a href="https://docs.teradata.com/r/Teradata-VantageTM-Bring-Your-Own-Model-User-Guide/May-2022">Bring Your Own Model (BYOM)</a>、 <a href="https://docs.teradata.com/r/Teradata-VantageTM-API-Integration-Guide-for-Cloud-Machine-Learning/April-2022">API Integration with AWS SageMaker</a>。
 </td>
 </tr>
 </table>
@@ -2028,14 +2069,14 @@ document.addEventListener("DOMContentLoaded", function () {
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-M1/M2 MacOS システムについては、  を参照してください。
+M1/M2 MacOSシステムについては、<a href="../../getting.started.utm.html" class="xref page">Run Vantage Express on UTM</a> を参照してください。
 </td>
 </tr>
 </table>
 </div>
 </li>
 <li>
-<p>少なくとも 1 つのコアと 6 GB RAM を仮想マシン専用にできる 30 GB のディスク領域と十分な CPU および RAM。</p>
+<p>少なくとも 1 つのコアと 6GB RAM を仮想マシン専用にできる 30GB のディスク領域と十分な CPU および RAM。</p>
 </li>
 <li>
 <p>ソフトウェアをインストールして実行できる管理者権限。</p>
@@ -2048,16 +2089,25 @@ M1/M2 MacOS システムについては、  を参照してください。
 <h2 id="_インストール"><a class="anchor" href="#_インストール"></a>インストール</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_必要なソフトウェアをダウンロードする"><a class="anchor" href="#_必要なソフトウェアをダウンロードする"></a>必要なソフトウェアをダウンロードする</h3>
+<h3 id="_必要なソフトウェアのダウンロード"><a class="anchor" href="#_必要なソフトウェアのダウンロード"></a>必要なソフトウェアのダウンロード</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Vantage Express</a>の最新バージョン。これまでに Teradata ダウンロード Web サイトを使用したことがない場合は、登録する必要があります。</p>
+<p><a href="https://downloads.teradata.com/download/database/teradata-express-for-vmware-player">Vantage Express</a> の最新バージョン。これまでに Teradata Downloads Web サイトを使用したことがない場合は、登録する必要があります。</p>
 </li>
 <li>
-<p><a href="https://www.vmware.com/products/workstation-player.html">VMware Workstation Player</a>。</p>
-<div class="paragraph">
-<p>IMPORTANT:</p>
+<p><a href="https://www.vmware.com/products/workstation-player.html">VMware Workstation Player</a> 。</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+営利団体では、VMware Workstation Playerを使用するために商用ライセンスが必要です。VMwareライセンスを取得しない場合は、<a href="../../getting.started.vbox.html" class="xref page">VirtualBox</a> でVantage Expressを実行できます。
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -2066,40 +2116,168 @@ M1/M2 MacOS システムについては、  を参照してください。
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-VMware は、MacOS 用の VMware Workstation Player を提供していません。Mac を使用している場合は、代わりに <a href="https://www.vmware.com/products/fusion/fusion-evaluation.html">VMware Fusion</a> をインストールする必要があります。これは有料製品ですが、VMware では 30 日間の無料試用版を提供しています。あるいは、Vantage Express を
+VMware は、MacOS 用の VMware Workstation Player を提供していません。Macを使用している場合は、代わりに <a href="https://www.vmware.com/products/fusion/fusion-evaluation.html">VMware Fusion</a> をインストールする必要があります。これは有料製品ですが、VMware では 30 日間の無料試用版を提供しています。または、<a href="../../getting.started.vbox.html" class="xref page">VirtualBox</a> または <a href="../../getting.started.utm.html" class="xref page">UTM</a> 上でVantage Expressを実行することもできます。
 </td>
 </tr>
 </table>
 </div>
 </li>
 <li>
-<p>Windows では、Vantage Express を解凍するために <a href="https://www.7-zip.org/download.html">7zip</a> も必要です。</p>
+<p>Windowsでは、Vantage Expressを解凍するために <a href="https://www.7-zip.org/download.html">7 zip</a> も必要です。</p>
 </li>
 </ol>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_インストーラーを実行する"><a class="anchor" href="#_インストーラーを実行する"></a>インストーラーを実行する</h3>
+<h3 id="_インストーラを実行する"><a class="anchor" href="#_インストーラを実行する"></a>インストーラを実行する</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
 <p>インストーラを実行し、デフォルト値を受け入れて、VMware Player または VMware Fusion をインストールします。</p>
 </li>
 <li>
-<p>Windows の場合は、 `7zip`をインストールします。</p>
+<p>Windowsの場合は、<code>7zip</code> をインストールします。</p>
 </li>
 </ol>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ヴァンテージ_エクスプレスを実行する"><a class="anchor" href="#_ヴァンテージ_エクスプレスを実行する"></a>ヴァンテージ エクスプレスを実行する</h3>
+<h3 id="_vantage_express_を実行する"><a class="anchor" href="#_vantage_express_を実行する"></a>Vantage Express を実行する</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Vantage Express をダウンロードしたディレクトリに移動し、ダウンロードしたファイルを解凍します。</p>
+<p>Vantage Expressをダウンロードしたディレクトリに移動し、ダウンロードしたファイルを解凍します。</p>
 </li>
 <li>
-<p><code>.vmx</code> ファイルをダブルクリックします。これにより、VMware Player/Fusion で VM イメージが起動します。</p>
+<p><code>.vmx</code> ファイルをダブルクリックします。これにより、VMware Player/FusionでVMイメージが起動されます。</p>
+</li>
+<li>
+<p><kbd>ENTER</kbd>を押して、強調表示されている <code>LINUX</code> ブートパーティションを選択します。</p>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/run-vantage/boot-manager-menu.png" alt="ブートマネージャメニュー" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>以下の画面で、もう一度 <kbd>ENTER</kbd> を押して、デフォルトの SUSE Linux カーネルを選択します。</p>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/run-vantage/grub-menu.png" alt="Grubメニュー" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>起動シーケンスが完了すると、以下のスクリーンショットに示すような端末ログイン プロンプトが表示されます。ターミナルには何も入力しないでください。システムが GUI を開始するまで待ちます。</p>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/run-vantage/wait-for-gui.png" alt="GUIを待つ" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>しばらくすると、以下のプロンプトが表示されます。上記のコマンド ログイン プロンプトの後に何も入力しなかったと仮定します。下の画面で`okay`ボタンを押す。</p>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/run-vantage/okay-the-security-popup.png" alt="OK Security Popup" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>VM が起動すると、そのデスクトップ環境が表示されます。username/password  の入力を求められたら、両方に <code>root</code> と入力します。</p>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/run-vantage/vm.login.png" alt="VMログイン" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>データベースは VM とともに自動起動するように構成されています。データベースが開始されたことを確認するには、仮想デスクトップに移動し、<code>Gnome Terminal</code> を起動します。</p>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/run-vantage/start-gnome-terminal.png" alt="Gnome Terminalを起動する" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>ターミナルで <code>pdestate</code> コマンドを実行すると、Vantage がすでに起動しているかどうかが通知されます。</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Gnome Terminalに貼り付けるには、<span class="keyseq"><kbd>SHIFT</kbd>+<kbd>CTRL</kbd>+<kbd>V</kbd></span> を押します。
+</td>
+</tr>
+</table>
+</div>
+<div id="pdestate" class="listingblock content-editable emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">watch pdestate -a</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>以下のメッセージが表示されるまで待ちます。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>PDE state is RUN/STARTED.
+DBS state is 5: Logons are enabled - The system is quiescent</pre>
+</div>
+</div>
+<details
+<summary class="title">データベースの初期化中に<code>pdestate</code>返すメッセージの例を参照してください。</summary>
+<div class="content">
+<div class="listingblock">
+
+<pre>PDE state is DOWN/HARDSTOP.
+
+PDE state is START/NETCONFIG.
+
+PDE state is START/GDOSYNC.
+
+PDE state is START/TVSASTART.
+
+PDE state is START/READY.
+PDE state is RUN/STARTED.
+
+DBS state is 1/1: DBS Startup - Initializing DBS Vprocs
+PDE state is RUN/STARTED.
+
+DBS state is 1/5: DBS Startup - Voting for Transaction Recovery
+PDE state is RUN/STARTED.
+
+DBS state is 1/4: DBS Startup - Starting PE Partitions
+PDE state is RUN/STARTED.</pre>
+</div>
+</div>
+</details>
+</li>
+<li>
+<p>データベースが起動したので、仮想デスクトップに戻って`Teradata Studio Express`を起動します。</p>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/run-vantage/start-teradata-studio-express.png" alt="Teradata Studio Express を起動する" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>初めて開始すると、ツアーが提供されます。ツアーを終了すると、新しい接続を追加するためのウィザードウィンドウが表示さます。 `Teradata`を選択します。</p>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/run-vantage/new.connection.profile.png" alt="新規接続プロファイル" width="500">
+</div>
+</div>
+</li>
+<li>
+<p>以下の画面で、ユーザー名とパスワードに <code>dbc</code> を使用してローカルホスト上のデータベースに接続します。</p>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/run-vantage/new.connection.png" alt="新規接続" width="500">
+</div>
+</div>
 </li>
 </ol>
 </div>
@@ -2109,10 +2287,112 @@ VMware は、MacOS 用の VMware Workstation Player を提供していません�
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>次に、VM でいくつかのクエリーを実行します。ホストと VM の間のコピー/ペーストの問題を回避するために、VM でこのクイック スタートを開きます。仮想デスクトップに移動し、Firefox を起動して、このクイック スタートを指定します。</p>
+<p>次に、VM でいくつかのクエリーを実行します。ホストと VM 間のコピー/ペーストの問題を回避するために、VM でこのクイック スタートを開きます。仮想デスクトップに移動し、Firefox を起動して、このクイック スタートを指定します。</p>
+</li>
+<li>
+<p>Teradata Studio Expressで、<code>クエリー開発`パースペクティブに移動すします(トップメニューに移動して、`Window</code> &#8594; <code>クエリー開発</code> を選択)。</p>
+</li>
+<li>
+<p><code>データベース接続</code> &#8594; `新規Teradata`をダブルクリックして、以前に作成した接続プロファイルを使用して接続します。</p>
+</li>
+<li>
+<p>`dbc`ユーザーを使用して、`HR`という新しいデータベースを作成します。このクエリーをコピー/ペーストし、Run Query (<span class="image"><img src="../../_images/run.query.button.png" alt="クエリを実行" width="24" height="24"></span>) ボタンまたは<kbd>F5</kbd>キーを押します。</p>
+<div id="first_query" class="listingblock emits-gtm-events">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE DATABASE HR
+AS PERMANENT = 60e6, -- 60MB
+    SPOOL = 120e6; -- 120MB</code></pre>
+</div>
+</div>
+<div class="sidebarblock">
+    <div id="right" style="float: right">
+    <a style="cursor: pointer; color: grey" onclick="this.parentElement.parentElement.style.display = 'none''">x</a>
+  </div>
+  <div class="content">
+    <div class="paragraph">クエリーを実行できましたか?
+      <i class="far fa-thumbs-up click-icon" style="padding: 0rem 0.2rem;" onclick="toggleThumbs(this, 'first_query')"></i>
+      <i class="far fa-thumbs-down click-icon" onclick="toggleThumbs(this 'first_query')"></i>
+    </div>
+  </div>
+</div>
+<style>
+.closebtn {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+</style>
+</li>
+<li>
+<p>サンプルテーブルを作成し、データを挿入してクエリーを実行してみましょう。まず、従業員情報を保持するテーブルを作成する。</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE SET TABLE HR.Employees (
+   GlobalID INTEGER,
+   FirstName VARCHAR(30),
+   LastName VARCHAR(30),
+   DateOfBirth DATE FORMAT 'YYYY-MM-DD',
+   JoinedDate DATE FORMAT 'YYYY-MM-DD',
+   DepartmentCode BYTEINT
+)
+UNIQUE PRIMARY INDEX ( GlobalID );</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>次に、レコードを挿入する。</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">INSERT INTO HR.Employees (
+   GlobalID,
+   FirstName,
+   LastName,
+   DateOfBirth,
+   JoinedDate,
+   DepartmentCode
+)
+VALUES (
+   101,
+   'Adam',
+   'Tworkowski',
+   '1980-01-05',
+   '2004-08-01',
+   01
+);</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>最後に、データを取得できるかどうかを確認する。</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">SELECT * FROM HR.Employees;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>以下の結果が得られるはずです。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>GlobalID  FirstName  LastName   DateOfBirth  JoinedDate  DepartmentCode
+--------  ---------  ---------- -----------  ----------  --------------
+     101  Adam       Tworkowski  1980-01-05  2004-08-01               1</pre>
+</div>
+</div>
 </li>
 </ol>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_まとめ"><a class="anchor" href="#_まとめ"></a>まとめ</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>このガイドでは、動作する Teradata 環境を迅速に作成する方法について説明しました。VMware 上で実行されている VM で Teradata Vantage Express を使用しました。同じ VM で Teradata Studio Express を実行してクエリーを発行しました。すべてのソフトウェアをローカルにインストールしたため、クラウド リソースの料金を支払う必要はありませんでした。</p>
 </div>
 </div>
 </div>
@@ -2122,21 +2402,33 @@ VMware は、MacOS 用の VMware Workstation Player を提供していません�
 <div class="ulist">
 <ul>
 <li>
-<p><a href="nos.html" class="xref page">オブジェクトストレージに保存されたクエリーデータ</a></p>
+<p><a href="../../nos.html" class="xref page">オブジェクトストレージに保存されたクエリーデータ</a></p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_参考文献"><a class="anchor" href="#_参考文献"></a>参考文献</h2>
+<h2 id="_さらに詳しく"><a class="anchor" href="#_さらに詳しく"></a>さらに詳しく</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20">Teradata® Studio™ および Studio™ Express インストール ガイド</a></p>
+<p><a href="https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20">Teradata®Studio™およびStudio™Expressインストール ガイド</a></p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ご質問がある場合、またはさらにサポートが必要な場合は、<a href="https://support.teradata.com/community">コミュニティ フォーラム</a>にアクセスしてサポートを受け、他のコミュニティ メンバーと交流してください。
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
