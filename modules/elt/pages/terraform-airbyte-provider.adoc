@@ -15,7 +15,7 @@ The Airbyte Terraform provider is available for users on Airbyte Cloud, OSS & Se
 
 Watch this concise explanation of how this integration works:
 
-video::Df8VcbWW_BM[Youtube]
+video::Df8VcbWW_BM[youtube, width=100%]
 
 
 == Introduction
