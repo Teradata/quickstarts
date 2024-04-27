@@ -98,7 +98,7 @@
     return hits
   }
 
-  function createSearchResult (result, store, searchResultDataset) {
+  function createSearchResult (result, store, searchResultDataset, contentLanguage) {
     result.forEach(function (item) {
       var url = item.ref
       var hash
@@ -107,9 +107,20 @@
         url = url.replace('#' + hash, '')
       }
       var doc = store[url]
+
+      var partes = doc.url.split("/");
+      var lang = partes[1];
+      if (lang !== 'ja'){
+        lang = 'en';
+      }
+      if (lang !== contentLanguage) {
+        return
+      }
+      
       var metadata = item.matchData.metadata
       var hits = highlightHit(metadata, hash, doc)
       searchResultDataset.appendChild(createSearchResultItem(doc, item, hits))
+      
     })
   }
 
@@ -144,6 +155,7 @@
     message.innerText = 'No results found for query "' + text + '"'
     documentHit.appendChild(message)
     searchResultItem.appendChild(documentHit)
+
     return searchResultItem
   }
 
@@ -169,6 +181,8 @@
   }
 
   function searchIndex (index, store, text) {
+    var contentLanguage = document.querySelector('meta[http-equiv="Content-Language"]').getAttribute('content');
+
     clearSearchResults(false)
     if (text.trim() === '') {
       return
@@ -178,7 +192,7 @@
     searchResultDataset.classList.add('search-result-dataset')
     searchResult.appendChild(searchResultDataset)
     if (result.length > 0) {
-      createSearchResult(result, store, searchResultDataset)
+      createSearchResult(result, store, searchResultDataset, contentLanguage)
     } else {
       searchResultDataset.appendChild(createNoResult(text))
     }
@@ -205,6 +219,9 @@
   }
 
   function initSearch (lunr, data) {
+  //  console.log("data: ",data.store);
+  //  var urls = Object.keys(data.store);
+  //  console.log(urls[0]);
     var index = Object.assign({ index: lunr.Index.load(data.index), store: data.store })
     var debug = 'URLSearchParams' in globalScope && new URLSearchParams(globalScope.location.search).has('lunr-debug')
     searchInput.addEventListener(
