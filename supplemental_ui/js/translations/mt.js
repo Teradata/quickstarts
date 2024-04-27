@@ -46,10 +46,11 @@ function translateDisclaimer(language) {
 
 function showDisclaimer(language) {
   var translation = translateDisclaimer(language);
+ 
+  document.getElementById("message") && (document.getElementById("message").textContent = translation.text);
+  document.getElementById("info") && (document.getElementById("info").textContent = translation.info);
+  document.getElementById("header") && (document.getElementById("header").textContent = translation.mtTitle);
+  document.getElementById("content") && (document.getElementById("content").textContent = translation.mtContent);
+  document.getElementById("close") && (document.getElementById("close").textContent = translation.exitButton);
 
-  document.getElementById("message").textContent = translation.text;
-  document.getElementById("info").textContent = translation.info;
-  document.getElementById("header").textContent = translation.mtTitle;
-  document.getElementById("content").textContent = translation.mtContent;
-  document.getElementById("close").textContent = translation.exitButton;
 }
