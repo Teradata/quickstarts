@@ -2,120 +2,503 @@
 :experimental:
 :page-author: Pablo Escobar de la Oliva
 :page-email: pablo.escobardelaoliva@teradata.com
-:page-revdate: May 29th, 2023
+:page-revdate: May 1st, 2024
 :description: Tutorial for deploying and monitoring a PMML model into Vantage using ClearScape Analytics ModelOps
 :keywords: modelops, byom, python, clearscape analytics, teradata, data warehouses, teradata, vantage, cloud data platform, machine learning, artificial intelligence, business intelligence, enterprise analytics
 
 == Overview
 
-This is a how-to for people who are new to ClearScape Analytics ModelOps. In the tutorial, you will be able to create a new project in ModelOps, upload the required data to Vantage, and track the full lifecycle of an imported Diabetes demo model using BYOM mechanisms.
+This tutorial helps you to get started quickly using ClearScape Analytics ModelOps. We discuss key concepts briefly, so you can get right down to importing your first Bring-your-own-model (BYOM) models into ModelOps. In other tutorials in this quickstart site, you will have the opportunity to go deeper into other deployment and automation patterns with ClearSCape Analytics ModelOps.
+
+In this tutorial, you will learn:
+
+* What’s the difference between BYOM functions and ModelOps BYOM
+
+* Importing your first BYOM model in the Model Registry through the graphical user interface
+
+* Deploying the model in Vantage with automated scheduling and monitoring capabilities
 
 == Prerequisites
 
+We provide an associated notebook and sample data that you can import into your clearscape environment to access and run all of the code examples included in the quickstart. link:{attachmentsdir}/ModelOps_BYOM_Quickstart.zip[Download the ModelOps sample notebooks and data]
+
+
 * Access to a Teradata Vantage instance with ClearScape Analytics (includes ModelOps)
 
-* Ability to run Jupyter notebooks
+* Access to a Jupyter notebook environment or use the one available in ClearScape Analytics Experience:
 
 include::ROOT:partial$vantage_clearscape_analytics.adoc[]
 
-Files needed
+
+== Key concepts you should know about first
+
+=== Bring your own model (BYOM) in Teradata Vantage
+
+The Vantage Bring Your Own Model (BYOM) package gives data scientists and analysts the ability to operationalize predictive models in Vantage. Predictive models trained in external tools can be used to score data stored in Vantage using the BYOM Predict functions. 
+
+Create or convert your predictive model using a supported model interchange format (PMML, MOJO, ONNX, Dataiku, and DataRobot are currently available), import it in a Vantage table, and use the BYOM PMMLPredict, H2OPredict, ONNXPredict, DataikuPredict, or DataRobotPredict to score your data with the model.
+
+=== Bring your own model (BYOM) in Teradata Vantage with ModelOps
+
+In ModelOps the BYOM package is enriched with additional governance, automation, and monitoring capabilities for data scientists and machine learning engineers with the possibility of applying all of this without coding. In addition to the compatible formats of BYOM package, ModelOps extends the possibility to import and score models inside Vantage to Python scripts, R scripts and SAS scoring accelerator models. 
+Once you have your compatible model created or converted using a supported format (PMML, MOJO, ONNX, Dataiku, DataRobot, Python script, R script and SAS scoring accelerator model) then you can either use the ModelOps graphical user interface or the ModelOps code SDK to import into the model registry. 
+
+=== Understand where we will focus at the ModelOps methodology
+In this tutorial, we will show you the end-to-end of this process using the associated Notebook and the ModelOps graphical user interface. 
+
+image::byom_meth.png[ModelOps Methodology BYOM screenshot, width=100%]
+
+== Steps in this Guide
+
+1. Create a project and connection (ModelOps)
+2. Environment Setup (Notebook)
+3. Creating datasets (ModelOps)
+4. Train a model and export to PMML (Notebook)
+5. Import the PMML into Vantage using BYOM functions (Notebook)
+6. Import the PMML into Vantage using ModelOps Graphical user interface (ModelOps)
+7. Go through Automated Lifecycle - Evaluation, Approve, Deploy (ModelOps)
+8. Default and Custom alerting rules for Monitoring (ModelOps)
+9. Custom Evaluation metrics and charts (Notebook)
+
+== 1. Create a project
+
+Login into ModelOps and navigate to the Projects screen.
+
+Click on the CREATE PROJECT button located on the top-right of the screen. We're using an cloned demo code in ModelOps with this path: /app/built-in/demo-models as git repository. Here we recommend you clone into your git repository instance the demo models public git: https://github.com/Teradata/modelops-demo-models.git in the branch "tmo"
+
+image::projects.png[ModelOps projects screenshot, width=120%]
+
+Inside the Project creation sheet panel, include the following values:
+
+* Name: "BYOM Quickstart"
+
+* Description: "BYOM Quickstart"
+
+* Group: DEMO
+
+* Path: /app/built-in/demo-models
+
+* Credentials: No Credentials
+
+* Branch: tmo
+
+Click the TEST GIT CONNECTION button. If the test is succesful then click on save and continue.
+
+image::Project_Creating.png[ModelOps projects creating, width=50%]
+
+== Create a Personal Connection
+
+In this guide we will skip creating a service connection, so click SAVE & CONTINUE and then NEXT to create a personal connection. 
+
+image::save_continue.png[ModelOps projects save, width=20%]
+image::personal1.png[ModelOps projects personal, width=50%]
+
+Inside the Personal Connection of the Projects creation sheet panel, include the following values:
+
+* Name: Quickstart Personal
+
+* Description: Quickstart Personal Connection
+
+* Host: ClearScape-url
+
+* Database: "demo_user"
+
+* VAL Database Name: "VAL"
+
+* BYOM Database Name: "MLDB"
+
+* Login Mechanism: "TDNEGO"
+
+* Username: demo_user
+
+* Pasword: your-password
+
+Test the Vantage connection by clicking on the TEST CONNECTION button.
+
+Click save.
+
+image::Personal_Connection.png[ModelOps connection, width=50%]
+
+This is how the Projects panel will show with the new project created:
+
+image::projects_quickstart.png[ModelOps projects with quickstart screenshot, width=120%]
+
+== Connection Healthcheck panel
+
+Enter into the project by clicking on it, and get inside Settings on the Left-hand menu. Use View details from your connection
+
+image::view_details.png[ModelOps view, width=100%]
+
+Then you should get the healthcheck panel, where it will show if SQLE, BYOM and VAL associated rights are enabled for this connection user. If there is any error here, contact your dba to apply the specific rights. Review the onboarding bteq script that comes in the attached files of the quickstart for the specific GRANT commands that are required.
+
+image::healthcheck.png[ModelOps healthcheck, width=50%]
+
+== 2. Environment Setup (Notebook)
+
+Follow the Notebook attached in this quickstart to perform the envrionnment setup and checks at the database level.
+
+== 3. Creating datasets (ModelOps)
+
+Click on your newly created project and then click on the Datasets button located on the left-hand menu. Click on CREATE DATASET TEMPLATE.
+
+image::dataset_template.png[ModelOps dataset, width=120%]
 
 
-Let's start by downloading the needed files for this tutorial. Download these 4 attachments and upload them in your Notebook filesystem. Select the files depending on your version of ModelOps:
+Enter the following values:
 
-ModelOps version 6 (October 2022):
+* Name: dataset
 
-link:{attachmentsdir}/ModelOps_Training_v6.ipynb[Download the ModelOps training Notebook]
+* Description: dataset
 
-link:{attachmentsdir}/BYOM_v6.ipynb[Download BYOM Notebook file for demo use case]
+* Feature Catalog: Vantage
 
-link:{attachmentsdir}/ModelOps_Data_files_v6.zip[Download data files for demo use case]
+* Database: your-db
 
-link:{attachmentsdir}/ModelOps_BYOM_files_v6.zip[Download BYOM code files for demo use case]
+* Table: aoa_statistics_metadata
 
-Alternatively you can git clone following repos
-[source, cli]
+image::dataset_template2.png[ModelOps dataset edit, width=50%]
+
+Click next and enter the Features Query: This query will be used to identify the features table, you can also Validate statistics and preview Data:
+
+[source, sql]
 ----
-git clone https://github.com/willfleury/modelops-getting-started
-git clone https://github.com/Teradata/modelops-demo-models/
+SELECT * FROM pima_patient_features
 ----
 
-ModelOps version 7 (April 2023):
+image::dataset_template_features.png[ModelOps dataset features, width=50%]
 
-link:{attachmentsdir}/ModelOps_Training_v7.ipynb[Download the ModelOps training Notebook]
 
-link:{attachmentsdir}/BYOM_v7.ipynb[Download BYOM Notebook file for demo use case]
 
-link:{attachmentsdir}/ModelOps_Data_files_v7.zip[Download data files for demo use case]
+Continue to Entity & Target and include the query: This query will be used to join with the features based on the same entity and to filter the rows of the Training, Evaluation and Scoring Datasets.
 
-link:{attachmentsdir}/ModelOps_BYOM_files_v7.zip[Download BYOM code files for demo use case]
+You need to select HasDiabetes as the target variable from this query, then Validate Statistics
 
+[source, sql]
 ----
-git clone -b v7 https://github.com/willfleury/modelops-getting-started.git
-git clone https://github.com/Teradata/modelops-demo-models/
+SELECT * FROM pima_patient_diagnoses
 ----
 
-Setting up the Database and Jupyter environment 
+image::dataset_template_target.png[ModelOps dataset features, width=50%]
 
-Follow the ModelOps_Training Jupyter Notebook to setup the database, tables and libraries needed for the demo.
 
-== Understand where we are in the Methodology
+Continue to Predictions and include the details of the database, table, and the query: This query will be used as the Input of the execution of your model in Production when this model will be deployed as BATCH (Note: BYOM models can only be deployed as batch in ModelOps version 7)
 
-image::BYOM.png[ModelOps Methodology BYOM screenshot, width=100%]
+* Database: your-db
 
-include::partial$modelops-basic.adoc[]
+* Table: pima_patient_predictions
 
-== Model Lifecycle for a new BYOM
+* Query:
 
-Download and unzip the files needed, links are at the top of the tutorial. For PMML file you can also download a PMML generated in the training of a GIT model.
+[source, sql]
+----
+SELECT * FROM pima_patient_features WHERE patientid MOD 5 = 0
+----
 
-* BYOM.ipynb
+image::dataset_template_prediction.png[ModelOps dataset features, width=50%]
 
-* model.pmml 
+=== Create Training dataset
 
-* requirements.txt
+Click on create dataset, Enter the name and description and Select training and click next.
 
-* evaluation.py 
+This query we want to filter and get 80% of rows of the dataset, we use MOD 5 <> 0 to get this:
 
-* data_stats.json
+[source, sql]
+----
+SELECT * FROM pima_patient_diagnoses WHERE patientid MOD 5 <> 0
+----
 
-* __init__.py
+image::training_dataset_basic.png[ModelOps dataset basic, width=50%]
+image::training_dataset.png[ModelOps dataset training, width=50%]
 
-Define BYOM Model with Evaluation and Monitoring
+Confirm the query and click on create.
 
-* Import Version
+=== Create Evaluation dataset
 
-* for v7 - BYOM no code is available - You can enable automated evaluation and data drift monitoring. 
-In Monitoring page use BYOM Target Column: CAST(CAST(json_report AS JSON).JSONExtractValue('$.predicted_HasDiabetes') AS INT)
+Click on create dataset, Enter the name and description and Select evaluation and click next.
 
-* Evaluate
+This query we want to filter and get 20% of rows of the dataset, we use MOD 5 = 0 to get this:
 
-* Review evaluation report, including dataset statistics
+[source, sql]
+----
+SELECT * FROM pima_patient_diagnoses WHERE patientid MOD 5 = 0
+----
 
-* Approve
+image::evaluation_dataset_basic.png[ModelOps eval dataset, width=50%]
+image::evaluation_dataset.png[ModelOps eval dataset details, width=50%]
 
-* Deploy in Vantage - Engine, Publish, Schedule. Scoring dataset is required
-Use your connection and select a database. e.g "aoa_byom_models"
 
-* Deployments/executions
+Confirm the query and click on create.
 
-* Evaluate again with dataset2 - to monitor model metrics behavior
+This is how it should show both datasets for Training and Evaluation
 
-* Monitor Model Drift - Data and Metrics
+image::datasets_created.png[datasets_created, width=120%]
 
-* for v7 - Review your predictions directly from Deployments -> Job page
+== 4. Train a model and export to PMML (Notebook)
 
-* Open BYOM notebook to execute the PMML predict from SQL code 
+Follow the Notebook attached in this quickstart to perform the model training, conversion and download the model pmml file for following steps.
 
-* Retire
+== 5. Import the PMML into Vantage using BYOM functions (Notebook)
 
+Follow the Notebook attached in this quickstart to use and understand the BYOM package functions, this way will publish the models in Vantage, but not in the ModelOps registry and we will not have governance, automation or monitoring capabilities.
+
+== 6. Import the PMML into Vantage using ModelOps Graphical user interface (ModelOps)
+
+=== Import into ModelOps 
+
+Go to Models at the left-hand menu and click on DEFINE BYOM MODEL
+
+image::define_new.png[ModelOps define new model, width=120%]
+
+Fill the fields with this values as example:
+
+* Name: byom
+
+* Description: byom
+
+* Format: PMML
+
+Click on Save Model & Import versions
+
+image::byom_basic.png[ModelOps define new byom model, width=50%]
+
+Fill the field for external id to track it from the training tool, and upload the model.pmml file - NOTE It has to be this exact name: model.pmml
+
+* External id: 001
+
+* model file: model.pmml
+
+image::byom_model.png[ModelOps define new byom model, width=50%]
+
+=== Enable default automated Evaluation and Monitoring 
+
+In this screen we are going to keep marked the Enable Monitoring capabily. 
+
+We need to select the training dataset that was used for this model pmml when training. We have already created this dataset before, so we select
+
+Then we press on VALIDATE. 
+
+BYOM predict functions generate an output based on a JSON, and this is different for every BYOM model. We need to know the specific field that is the target/output of our prediction. In order to use it in our evaluation logic and generate model metrics (accuracy, precision, etc.). For this we require a CAST expression on the JSON output file.
+
+We have included a Generate Link to help us on validating and implementing this CAST expression. So click on the Generate button to move into the helper screen and get the expression
+
+image::byom_monitoring1.png[ModelOps monitoring1, width=50%]
+
+Now select the target/output variable of our prediction. In this demo case is: predicted_HasDiabetes.
+
+Click on Save and let the helper copy the expression for you. 
+
+image::byom_monitoring2.png[ModelOps monitoring2, width=50%]
+
+This is the CAST expression, Click on Save on the dialog:
+CAST(CAST(json_report AS JSON).JSONExtractValue('$.predicted_HasDiabetes') AS INT)
+
+image::byom_monitoring_save.png[ModelOps monitoring save, width=50%]
+
+Now you can validate the Cast Expression and click on Save:
+
+image::byom_monitoring_3.png[ModelOps monitoring save, width=50%]
+
+A new job for MODEL IMPORT and another job for COMPUTE STATISTICS will run for few minutes. 
+
+image::statistics_job.png[ModelOps monitoring save, width=50%]
+
+== 7. Go through Automated Lifecycle - Evaluation, Approve, Deploy (ModelOps)
+
+=== Evaluate the model version in ModelOps
+
+After finishing the jobs a new model version will be available in the Model version catalog of this byom model like the following image. Click on the model version to get inside Lifecycle:
+
+image::model_version.png[ModelOps lifecycle, width=120%]
+
+The model is in IMPORT stage. we can now evaluate the model, click EVALUATE to run the automated default evaluation job
+
+image::model_evaluate.png[ModelOps evaluate, width=120%]
+
+Select the evaluation dataset and click on EVALUATE MODEL. 
+
+image::model_evaluate2.png[ModelOps evaluate dataset, width=50%]
+
+This will create a new Job for the Evaluation and will show the log. These screen can be closed at the X button at the top-right.
+
+image::evaluation_job.png[ModelOps evaluation job, width=50%]
+
+You can access at any time at the left-hand menu JOBS screen. to go again into the log you just need to click on the 3 dots of the job and VIEW DETAILS. This is how it should look:
+
+image::jobs.png[ModelOps evaluation job, width=120%]
+
+Once the job is finished, model will be in the EVALUATE stage in the lifecycle screen. Go to your model version to see it.
+
+You can check all the details of the evaluation step, including an evaluation REPORT, where you will see metrics and Charts that the default Evaluation logic has generated. NOTE: These metrics are default for Classification and Regression models and can be customized with a coded template that will share later in the quickstart.
+
+image::evaluation_report.png[ModelOps evaluation lifecycle, width=100%]
+image::evaluation_report2.png[ModelOps evaluation lifecycle, width=100%]
+
+=== Approve the model version
+
+Once the model version is evaluated, it is ready to be approved or rejected. This approval can be done through model lifecycle screen, in the model report screen and it can also be done through REST API integrating an external tool like Jira/BPM case management systems.
+
+Let's get into the Approval dialog and include the following description, as an example: 
+
+* Approval comment: Go for Production
+
+image::go.png[ModelOps approval, width=30%]
+
+=== Deploy the model version and schedule scoring
+
+to deploy the model you need to use the DEPLOY button in the model lifecycle screen.
+
+image::deploy.png[ModelOps deploy, width=120%]
+
+For BYOM models the deployment target available is In-Vantage, as we want to leverage the BYOM predict functions in Vantage:
+
+image::deploy_details1.png[ModelOps deploy, width=50%]
+
+Publish the model: Select the connection to Vantage that will be used to publish the model, the database and the table. Here we will use our created connection and the table we created for storing BYOM models: aoa_byom_models. Click Next after including these details
+
+* Connection: personal
+
+* Database: demo_user
+
+* Table: aoa_byom_models
+
+image::deploy_details2.png[ModelOps deploy2, width=50%]
+
+Now in the Scheduling step, you are able to enable scheduling and select what is the frequency/cadence of this scoring. Keep marked the Enable Scheduling checkbox and select "Manual" in this demo, inside clearscape.teradata.com in order to save resources the scheduling options are disabled. Any scheduling option is available since we can include a CRON expression.
+
+In this screen we will also select the dataset template to be used when scoring the model in production. The Prediction details of the dataset will be used such as the Input query, and output prediction table that we defined in the Datasets step.
+
+Click on Deploy to finalize this step
+
+image::deploy_details3.png[ModelOps deploy3, width=50%]
+
+A new Deployment job will be running by the ModelOps Agent. once this is finished a new deployment will be available in the Deployments section of the left-hand menu.
+
+image::deploy_job.png[ModelOps deploy job, width=50%]
+
+=== Deployment details including history of jobs, feature/prediction drift and performance monitoring
+
+Go to the left-hand menu Deployments, and see the new deployment from the BYOM model is available, click on it to see the details and go to the Jobs tab
+
+image::deployments.png[ModelOps deployments, width=50%]
+
+In the Jobs tab you will see the history of executions of this model deployed. Let's run now a new scoring using the Run now button. This button can be also scheduled externally through REST APIs
+
+image::deployment_jobs.png[ModelOps deployments, width=100%]
+
+After executing the scoring job, it should look like this:
+
+image::deployment_jobs2.png[ModelOps deployments, width=100%]
+
+And we can get into the output details of this job, by clicking on the three dots at the right, and view predictions
+
+image::deployment_predictions.png[ModelOps deployments, width=50%]
+
+Now that we have run a job in production, the default Monitoring capabilities are enabled, you can check both feature and prediction drift to see individually per feature the histogram calculation and the Population Stability Index (PSI) KPI for drift monitoring
+
+image::feature_drift.png[ModelOps feature drift deployments, width=100%]
+image::prediction_drift.png[ModelOps prediction drift deployments, width=100%]
+
+In the Performance metrics tab, we see that there is only a single metric data point, this is because performance monitoring relies on Evaluation jobs. So let's create a new dataset and run a new evaluation at this deployment to simulate we have new fresh data and want to check on the performance of my model by comparing the metrics with the previous evaluation.
+
+=== Performance monitoring with new dataset
+
+Let's create a new evaluation dataset in Datasets left-hand menu.
+
+We will use the same dataset template that we created and will create a new dataset with the following details
+
+* Name: evaluation2
+
+* Description: evaluation2
+
+* Scope: evaluation
+
+image::evaluation2.png[ModelOps evaluation2, width=50%]
+
+And let's simulate the new evaluation with a new dataset query
+
+[source, sql]
+----
+SELECT * FROM pima_patient_features WHERE patientid MOD 10 = 0
+----
+
+And click on create to generate new dataset for evaluation
+
+image::evaluation2_detail.png[ModelOps evaluation detail, width=50%]
+
+Now you can go back to your deployment to evaluate the model version deployed:
+
+image::deployment_evaluate.png[ModelOps evaluation detail, width=120%]
+
+Use the new dataset created in the Evaluation job panel:
+
+* Dataset template: dataset
+
+* Dataset: evaluate2
+
+and click on EVALUATE model
+
+image::deployment_evaluate2.png[ModelOps evaluation detail, width=50%]
+
+Once the Evaluation job is finished, then the performance metrics will show a new set of metrics with the new dataset used:
+
+image::performance.png[ModelOps performance monitoring, width=50%]
+
+== 8. Default and Custom alerting rules for Monitoring (ModelOps)
+
+=== Enabling alerting
+
+Default Alerts in ModelOps are activated at the models screen, There is a Enable Alerts column in this table, activate it to start with default alerting
+
+image::enable_alerts.png[ModelOps enabling alerts, width=120%]
+
+Once this alerts are enabled you can check on the definition of the default alert, by getting inside the model and getting into the ALERT tab:
+
+image::alert_configuration.png[ModelOps configuring alert, width=120%]
+
+=== Updating alerting rules
+
+We can create new alerts, like new rules for performance monitoring or update default alerting rules. 
+
+Let's do an alert edit, on the feature drift monitoring. click on the alert edit
+
+image::alert_configuration2.png[ModelOps configuring alert2, width=120%]
+
+Here you can update the fields. Let's update the value treshold from 0.2 to 0.18 and click on UPDATE
+
+image::alert_configuration3.png[ModelOps configuring alert3, width=50%]
+
+After editing the rule, your alerts screen should look like this:
+
+image::alert_configuration4.png[ModelOps configuring alert4, width=50%]
+
+=== Reviewing alerts
+
+Now that we have alert edited, we should wait 1 minute till we get a new alert into the ModelOps tool. This alert can be configured to send an email to a set of email addresses as well.
+
+Now we have received the alert, we can see a red circle in the alerts at the left-hand menu
+
+We can directly access to the model version from this screen by clicking on the modelid
+
+image::alert_new1.png[ModelOps new alert1, width=120%]
+
+Once we are in the model lifecycle screen, we see a direct access to Model Drift, let's get inside
+
+image::alert_new2.png[ModelOps new alert2, width=120%]
+
+Then we can see the individual features in red in the feature drift tab of my deployed model. This alert is indicating that the latest scoring data is drifted from the training data with that value of population stability index(PSI). And teams can then make proactive actions to evaluate the drift of the model and replace the model in production if is needed
+
+image::alert_new3.png[ModelOps new alert3, width=120%]
+
+== 9. Custom Evaluation metrics and charts (Notebook)
+
+Follow the Notebook attached in this quickstart to understand the methodology for creating custom Evaluation logic, metrics and charts
 
 == Summary
 
-In this quick start we have learned how to follow a full lifecycle of BYOM models into ModelOps and how to deploy it into Vantage. Then how we can schedule a batch scoring or test restful or on-demand scorings and start monitoring on Data Drift and Model Quality metrics.
+In this quick start we have learned what is the difference between BYOM functions and ModelOps BYOM pattern, How to import models with ModelOps graphical user interface, and how to automate the scoring and monitoring of the model getting Data Drift and Model QUality metrics alerts
 
 == Further reading
-* https://docs.teradata.com/search/documents?query=ModelOps&sort=last_update&virtual-field=title_only&content-lang=[+++ModelOps documentation+++].
+
+https://docs.teradata.com/search/documents?query=ModelOps&sort=last_update&virtual-field=title_only&content-lang=[ClearScape Analytics ModelOps User Guide]
 
 include::ROOT:partial$community_link.adoc[]
-
