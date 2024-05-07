@@ -41,3 +41,13 @@
     }
   });
 </script>
+<script>
+
+document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.nav-item-toggle');
+    buttons.forEach((button, index) => {
+        button.setAttribute('aria-label', `Toggle Button ${index + 1}`);
+    });
+});
+
+</script>
