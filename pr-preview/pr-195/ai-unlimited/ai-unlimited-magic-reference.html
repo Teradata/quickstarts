@@ -1941,6 +1941,16 @@ document.addEventListener("DOMContentLoaded", function () {
       elemento.parentNode.classList.add('is-current-page');
     }
   });
+</script>
+<script>
+
+document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.nav-item-toggle');
+    buttons.forEach((button, index) => {
+        button.setAttribute('aria-label', `Toggle Button ${index + 1}`);
+    });
+});
+
 </script><div class="nav-panel-explore" data-panel="explore">
   <div class="context" style="visibility: hidden;">
     <span class="title">Getting Started Guides</span>
