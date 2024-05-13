@@ -13,7 +13,9 @@ This quickstart explains how to use Terraform to manage Airbyte data pipelines a
 
 The Airbyte Terraform provider is available for users on Airbyte Cloud, OSS & Self-Managed Enterprise. 
 
-image::{dir}/airbyteconnection.png[Airbyte Connection in Airbyte Cloud UI, align="center" width=100%]
+Watch this concise explanation of how this integration works:
+
+video::Df8VcbWW_BM[youtube, width=100%]
 
 
 == Introduction
