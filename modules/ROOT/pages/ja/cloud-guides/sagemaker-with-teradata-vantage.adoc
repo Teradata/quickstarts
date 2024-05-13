@@ -185,7 +185,7 @@ image::cloud-guides/{page-image-directory}/select.endpoint.configuration.png[エ
 このハウツーでは、Vantageから学習データを抽出し、それを使ってAmazon SageMakerでモデルを学習させる方法を紹介しました。このソリューションでは、Jupyter Notebookを使用して Vantage からデータを抽出し、S3 バケットに書き込みました。SageMaker トレーニング ジョブは、S3 バケットからデータを読み取り、モデルを生成します。このモデルをサービスエンドポイントとして AWS にデプロイしました。
 
 == さらに詳しく
-* xref:../general/ml.html[SQL のみを使用して Vantage で ML モデルをトレーニングする方法]
+* link:../general/ml.html[SQL のみを使用して Vantage で ML モデルをトレーニングする方法]
 
 include::../partials/community_link.adoc[]
 

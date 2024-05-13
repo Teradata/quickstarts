@@ -1,0 +1,2 @@
+= Sections
+:page-layout: aiunlimited-page
