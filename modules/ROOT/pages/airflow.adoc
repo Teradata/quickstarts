@@ -91,7 +91,7 @@ Airflow connections may be defined in environment variables in either of one bel
 2. URI format
 
 +
-NOTE: The naming convention is AIRFLOW_CONN_{ CONN_ID }, all uppercase (note the single underscores surrounding CONN).
+NOTE: The naming convention is AIRFLOW_CONN_{CONN_ID}, all uppercase (note the single underscores surrounding CONN).
 So if your connection id is teradata_conn_id then the variable name should be AIRFLOW_CONN_TERADATA_CONN_ID
 +
 

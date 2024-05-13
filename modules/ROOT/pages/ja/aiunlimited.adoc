@@ -1,3 +1,0 @@
-= Sections
-:page-lang: ja
-:page-layout: aiunlimited-page
