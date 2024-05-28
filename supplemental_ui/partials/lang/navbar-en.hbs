@@ -14,7 +14,7 @@
                     Global 
                   </button>
                   <div id="myDropdown" class="nav-2 td-language-selector__dropdown dropdown-content1">
-                    <li lang="en-US" class="td-language-selector__menu-item" onclick="switchLanguage('en')">
+                    <li lang="en-US" class="td-language-selector__menu-item">
                       <a href="#" class="td-language-selector__location no-underline active-lan">Global</a>
                     </li>
                     <li lang="ja-JP" class="td-language-selector__menu-item" onclick="switchLanguage('ja')">
@@ -207,3 +207,9 @@
         </div>
       </nav>
   </nav>
+  <style>
+    .active-lan{
+      pointer-events: none; 
+      cursor: not-allowed;
+    }
+  </style>
