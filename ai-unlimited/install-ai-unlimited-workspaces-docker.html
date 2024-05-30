@@ -26,6 +26,7 @@
 <!-- End Google Tag Manager -->
 <link rel="stylesheet" href="../_/css/search.css">
 <link rel="stylesheet" href="../_/css/styles.css">
+<link rel="stylesheet" href="../_/css/fontawesome.all.min.css">
 <link rel="stylesheet" href="../_/css/newnavbar.css" >
 <link rel="stylesheet" href="../_/css/navbar.css">
 <link rel="stylesheet" href="../_/css/mt.css">
@@ -945,7 +946,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </script>
 <script src="../_/js/lang.js"></script>
 <script src="../_/js/translations/mt.js"></script>
-  </head>
+<script src="../_/js/redirect.js"></script>  </head>
   <body class="article">
 <!-- Adding CDN to use sql-formatter for unpkg -->
 <script src="https://unpkg.com/sql-formatter/dist/sql-formatter.min.js"></script>
@@ -973,7 +974,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     Global 
                   </button>
                   <div id="myDropdown" class="nav-2 td-language-selector__dropdown dropdown-content1">
-                    <li lang="en-US" class="td-language-selector__menu-item" onclick="switchLanguage('en')">
+                    <li lang="en-US" class="td-language-selector__menu-item">
                       <a href="#" class="td-language-selector__location no-underline active-lan">Global</a>
                     </li>
                     <li lang="ja-JP" class="td-language-selector__menu-item" onclick="switchLanguage('ja')">
@@ -1011,7 +1012,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       <li>
                         <button href="" onclick="docs()" class="header-nav__main-menu__link dropbtn">Docs</button>
                         <div id="myDocsDropdown" class="dropdown-content">
-                          <a href="https://docs.teradata.com/p/VantageCloud/Lake" class="dropdown-item mt">VantageCloud Lake Documentation</a>
+                          <a href="https://docs.teradata.com/p/VantageCloud/Lake" class="dropdown-item"  style="margin-top: 30px;">VantageCloud Lake Documentation</a>
+                          <a href="https://docs.teradata.com/p/ai-unlimited" class="dropdown-item">AI Unlimited</a>
                           <a href="https://docs.teradata.com/" class="dropdown-item">All Documentation</a> 
                         </div>  
                       </li>
@@ -1101,6 +1103,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                               <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/p/VantageCloud/Lake">VantageCloud Lake Documentation</a>
                             </li>
                             <li>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/p/ai-unlimited">AI Unlimited</a>
+                            </li>
+                            <li>
                               <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/">All Documentation</a>
                             </li>
                           </ul>
@@ -1161,7 +1166,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </section>
         </div>
       </nav>
-  </nav>  <!-- Navbar -->
+  </nav>
+  <style>
+    .active-lan{
+      pointer-events: none; 
+      cursor: not-allowed;
+    }
+  </style>  <!-- Navbar -->
 
   <script>
     var sectionElement = document.querySelector(".navbar-search");
@@ -1553,57 +1564,6 @@ document.addEventListener("DOMContentLoaded", function () {
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Teradata AI Unlimited</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="getting-started-with-ai-unlimited.html">Getting Started with Teradata AI Unlimited</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <span class="nav-text">Deploy locally using Docker</span>
-<ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="3">
-    <a class="nav-link" href="install-ai-unlimited-workspaces-docker.html">Deploy and Setup Teradata AI Unlimited Workspace Service Using Docker</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="install-ai-unlimited-interface-docker.html">Deploy a Teradata AI Unlimited Interface Using Docker</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="using-ai-unlimited-workspace-cli.html">Use Teradata AI Unlimited With Workspace Client</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <span class="nav-text">Deploy on AWS</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deploy-ai-unlimited-aws-cloudformation.html">Deploy Teradata AI Unlimited Workspace Service and Interface using AWS CloudFormation Template</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited-aws-permissions-policies.html">Control AWS Access and Permissions using Custom Permissions and Policies</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deploy-ai-unlimited-awscli-cloudformation.html">Deploy CloudFormation Template from AWS CLI</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="running-sample-ai-unlimited-workload.html">Run a Sample Workload in JupyterLab Using Teradata AI Unlimited</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <span class="nav-text">Reference</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ai-unlimited-magic-reference.html">Teradata AI Unlimited JupyterLab Magic Command Reference</a>
-  </li>
-</ul>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <span class="nav-text">VantageCloud Lake</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
@@ -1830,57 +1790,6 @@ document.addEventListener("DOMContentLoaded", function () {
       </li>
       <li class="nav-item is-active" data-depth="1">
         <button class="nav-item-toggle" title="nav-toggle" aria-label="nav-toogle"></button>
-        <span class="nav-text" style="cursor: pointer;">Teradata AI Unlimited</span>
-    <ul class="nav-list">
-      <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="../ai-unlimited/getting-started-with-ai-unlimited.html">Teradata AI Unlimited のスタートガイド</a>
-      </li>
-      <li class="nav-item is-active" data-depth="2">
-        <button class="nav-item-toggle" title="nav-toggle" aria-label="nav-toogle"></button>
-        <span class="nav-text" style="cursor: pointer;">Dockerを使用してローカルにデプロイ</span>
-    <ul class="nav-list">
-      <li class="nav-item is-active" data-depth="3">
-        <a class="nav-link" href="../ai-unlimited/install-ai-unlimited-workspaces-docker.html">Dockerを使用した Teradata AI Unlimited Workspaceサービスのデプロイとセットアップ</a>
-      </li>
-      <li class="nav-item is-active" data-depth="3">
-        <a class="nav-link" href="../ai-unlimited/install-ai-unlimited-interface-docker.html">Dockerを使用した Teradata AI Unlimited インターフェースのデプロイ</a>
-      </li>
-    </ul>
-      </li>
-      <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="../ai-unlimited/using-ai-unlimited-workspace-cli.html">Workspace Client で Teradata AI Unlimited を使用する</a>
-      </li>
-      <li class="nav-item is-active" data-depth="2">
-        <button class="nav-item-toggle" title="nav-toggle" aria-label="nav-toogle"></button>
-        <span class="nav-text" style="cursor: pointer;">AWSへのデプロイ</span>
-    <ul class="nav-list">
-      <li class="nav-item is-active" data-depth="3">
-        <a class="nav-link" href="../ai-unlimited/deploy-ai-unlimited-aws-cloudformation.html">AWS CloudFormation テンプレートを使用して Teradata AI Unlimited Workspace サービスとインターフェースをデプロイする</a>
-      </li>
-      <li class="nav-item is-active" data-depth="3">
-        <a class="nav-link" href="../ai-unlimited/ai-unlimited-aws-permissions-policies.html">カスタム権限とポリシーを使用してAWSのアクセスと権限を制御する</a>
-      </li>
-      <li class="nav-item is-active" data-depth="3">
-        <a class="nav-link" href="../ai-unlimited/deploy-ai-unlimited-awscli-cloudformation.html">AWS CLI から CloudFormation テンプレートをデプロイする</a>
-      </li>
-    </ul>
-      </li>
-      <li class="nav-item is-active" data-depth="2">
-        <a class="nav-link" href="../ai-unlimited/running-sample-ai-unlimited-workload.html">Teradata AI Unlimitedを使用してJupyterLabでサンプルワークロードを実行する</a>
-      </li>
-      <li class="nav-item is-active" data-depth="2">
-        <button class="nav-item-toggle" title="nav-toggle" aria-label="nav-toogle"></button>
-        <span class="nav-text" style="cursor: pointer;">参照</span>
-    <ul class="nav-list">
-      <li class="nav-item is-active" data-depth="3">
-        <a class="nav-link" href="../ai-unlimited/ai-unlimited-magic-reference.html">Teradata AI Unlimited JupyterLab マジック コマンド リファレンス</a>
-      </li>
-    </ul>
-      </li>
-    </ul>
-      </li>
-      <li class="nav-item is-active" data-depth="1">
-        <button class="nav-item-toggle" title="nav-toggle" aria-label="nav-toogle"></button>
         <span class="nav-text" style="cursor: pointer;">VantageCloud Lake</span>
     <ul class="nav-list">
       <li class="nav-item is-active" data-depth="2">
@@ -1975,8 +1884,6 @@ document.addEventListener('DOMContentLoaded', () => {
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li>Teradata AI Unlimited</li>
-    <li>Deploy locally using Docker</li>
     <li><a href="install-ai-unlimited-workspaces-docker.html">Deploy and Setup Teradata AI Unlimited Workspace Service Using Docker</a></li>
   </ul>
 </nav>

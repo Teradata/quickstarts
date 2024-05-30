@@ -23,6 +23,7 @@
 <!-- End Google Tag Manager -->
 <link rel="stylesheet" href="/_/css/search.css">
 <link rel="stylesheet" href="/_/css/styles.css">
+<link rel="stylesheet" href="/_/css/fontawesome.all.min.css">
 <link rel="stylesheet" href="/_/css/newnavbar.css" >
 <link rel="stylesheet" href="/_/css/navbar.css">
 <link rel="stylesheet" href="/_/css/mt.css">
@@ -942,7 +943,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </script>
 <script src="/_/js/lang.js"></script>
 <script src="/_/js/translations/mt.js"></script>
-  </head>
+<script src="/_/js/redirect.js"></script>  </head>
   <body class="status-404">
 <!-- Adding CDN to use sql-formatter for unpkg -->
 <script src="https://unpkg.com/sql-formatter/dist/sql-formatter.min.js"></script>
@@ -970,7 +971,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     Global 
                   </button>
                   <div id="myDropdown" class="nav-2 td-language-selector__dropdown dropdown-content1">
-                    <li lang="en-US" class="td-language-selector__menu-item" onclick="switchLanguage('en')">
+                    <li lang="en-US" class="td-language-selector__menu-item">
                       <a href="#" class="td-language-selector__location no-underline active-lan">Global</a>
                     </li>
                     <li lang="ja-JP" class="td-language-selector__menu-item" onclick="switchLanguage('ja')">
@@ -1008,7 +1009,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       <li>
                         <button href="" onclick="docs()" class="header-nav__main-menu__link dropbtn">Docs</button>
                         <div id="myDocsDropdown" class="dropdown-content">
-                          <a href="https://docs.teradata.com/p/VantageCloud/Lake" class="dropdown-item mt">VantageCloud Lake Documentation</a>
+                          <a href="https://docs.teradata.com/p/VantageCloud/Lake" class="dropdown-item"  style="margin-top: 30px;">VantageCloud Lake Documentation</a>
+                          <a href="https://docs.teradata.com/p/ai-unlimited" class="dropdown-item">AI Unlimited</a>
                           <a href="https://docs.teradata.com/" class="dropdown-item">All Documentation</a> 
                         </div>  
                       </li>
@@ -1098,6 +1100,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                               <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/p/VantageCloud/Lake">VantageCloud Lake Documentation</a>
                             </li>
                             <li>
+                              <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/p/ai-unlimited">AI Unlimited</a>
+                            </li>
+                            <li>
                               <a class="nav-2 py-4 d-block color-slate" href="https://docs.teradata.com/">All Documentation</a>
                             </li>
                           </ul>
@@ -1158,7 +1163,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </section>
         </div>
       </nav>
-  </nav>  <!-- Navbar -->
+  </nav>
+  <style>
+    .active-lan{
+      pointer-events: none; 
+      cursor: not-allowed;
+    }
+  </style>  <!-- Navbar -->
 
   <script>
     var sectionElement = document.querySelector(".navbar-search");
