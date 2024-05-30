@@ -63,20 +63,6 @@
 ** xref:business-intelligence:create-stunning-visualizations-in-power-bi-using-data-from-teradata-vantage.adoc[]
 ** xref:other-integrations:integrate-teradata-vantage-with-knime.adoc[]
 
-* Teradata AI Unlimited 
-** xref:ai-unlimited:getting-started-with-ai-unlimited.adoc[]
-** Deploy locally using Docker
-*** xref:ai-unlimited:install-ai-unlimited-workspaces-docker.adoc[]
-*** xref:ai-unlimited:install-ai-unlimited-interface-docker.adoc[]
-** xref:ai-unlimited:using-ai-unlimited-workspace-cli.adoc[]
-** Deploy on AWS
-*** xref:ai-unlimited:deploy-ai-unlimited-aws-cloudformation.adoc[]
-*** xref:ai-unlimited:ai-unlimited-aws-permissions-policies.adoc[]
-*** xref:ai-unlimited:deploy-ai-unlimited-awscli-cloudformation.adoc[]
-** xref:ai-unlimited:running-sample-ai-unlimited-workload.adoc[]
-** Reference
-*** xref:ai-unlimited:ai-unlimited-magic-reference.adoc[]
-
 * VantageCloud Lake
 ** xref:getting-started-with-vantagecloud-lake.adoc[]
 ** xref:vantagecloud-lake:vantagecloud-lake-demo-jupyter-docker.adoc[]
