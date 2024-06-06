@@ -1,0 +1,58 @@
+= Ejecutar Vantage Express en VMware
+:page-lang: es
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: 9 de enero de 2023
+:description: Ejecute Vantage Express en su portátil mediante VMware.
+:keywords: almacenes de datos, separación de almacenamiento informático, teradata, vantage, plataforma de datos en la nube, almacenamiento de objetos, inteligencia empresarial, análisis empresarial
+:icons: font
+
+include::../partials/getting.started.intro.adoc[]
+
+== Requisitos previos
+
+. Un ordenador que utilice uno de los siguientes sistemas operativos: Windows, Linux o MacOS basado en Intel.
++
+NOTE: Para sistemas MacOS M1/M2, consulte xref:getting.started.utm.adoc[].
+. 30 GB de espacio en disco y suficiente CPU y RAM para poder dedicar al menos un núcleo y 6 GB de RAM a la máquina virtual.
+. Derechos de administrador para poder instalar y ejecutar el software.
++
+// NOTE: No admin rights on your local machine? No problem! Have a look at how to run Vantage Express in link:#[AWS], link:#[Azure], link:#[Google Cloud].
+
+== Instalación
+
+=== Descargar el software requerido
+
+. La última versión de link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Express]. Si no ha utilizado el sitio web de descargas de Teradata antes, deberá registrarse.
+. link:https://www.vmware.com/products/workstation-player.html[VMware Workstation Player].
++
+IMPORTANT: Las organizaciones comerciales requieren licencias comerciales para utilizar VMware Workstation Player. Si no desea adquirir licencias de VMware, puede ejecutar Vantage Express en xref:getting.started.vbox.adoc[VirtualBox].
++
+IMPORTANT: VMware no ofrece VMware Workstation Player para MacOS. Si tiene un Mac, deberá instalar link:https://www.vmware.com/products/fusion/fusion-evaluation.html[VMware Fusion] en su lugar. Es un producto de pago, pero VMware ofrece una prueba gratuita de 30 días. Alternativamente, puede ejecutar Vantage Express en xref:getting.started.vbox.adoc[VirtualBox] o xref:getting.started.utm.adoc[UTM].
+. En Windows, también necesitará link:https://www.7-zip.org/download.html[7zip] para descomprimir Vantage Express.
+
+=== Ejecutar instaladores
+
+. Instale VMware Player o VMware Fusion ejecutando el instalador y aceptando los valores predeterminados.
+. Si está en Windows, instale `7zip`.
+
+=== Ejecutar Vantage Express
+
+. Vaya al directorio donde descargó Vantage Express y descomprima el archivo descargado.
+. Haga doble clic en el archivo `.vmx`. Esto iniciará la imagen de la máquina virtual en VMware Player/Fusion.
+include::../partials/run.vantage.adoc[]
+
+=== Ejecutar consultas de muestra
+
+. Ahora ejecutaremos algunas consultas en la máquina virtual. Para evitar problemas de copiar y pegar entre el host y la máquina virtual, abriremos este inicio rápido en la máquina virtual. Vaya al escritorio virtual, inicie Firefox y apúntelo a este inicio rápido.
+
+include::../partials/running.sample.queries.adoc[]
+
+include::../partials/getting.started.summary.adoc[]
+
+include::../partials/next.steps.adoc[]
+
+== Otras lecturas
+* link:https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20[Guía de instalación de Teradata® Studio™ y Studio™ Express]
+
+include::../partials/community_link.adoc[]

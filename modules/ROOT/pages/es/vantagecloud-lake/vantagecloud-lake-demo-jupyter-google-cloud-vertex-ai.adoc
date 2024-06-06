@@ -1,0 +1,158 @@
+= Ejecutar demostraciones de Teradata Jupyter Notebook para VantageCloud Lake en Google Cloud Vertex AI  
+:page-lang: es
+:experimental:
+:page-author: Janeth Graziani
+:page-email: Janeth.graziani@teradata.com
+:page-revdate: 24 de enero de 2024
+:description: Ejecute demostraciones de VantageCloud Lake utilizando cuadernos Jupyter en Google Vertex AI Workbench. 
+:keywords: almacenes de datos, separación de almacenamiento informático, teradata, vantage, plataforma de datos en la nube, inteligencia empresarial, análisis empresarial, jupyter, teradatasql, ipython-sql, teradatasqlalchemy, vantagecloud, vantagecloud lake, análisis de datos, ciencia de datos, vertex ai, nube de google
+:dir: vantage-lake-demo-jupyter-google-cloud-vertex-ai
+
+== Descripción general
+Este inicio rápido explica cómo ejecutar https://github.com/Teradata/lake-demos[demostraciones de Teradata Jupyter Notebook para VantageCloud Lake] en Vertex AI, la plataforma IA/ML para Google Cloud. 
+
+== Requisitos previos
+* Módulos Teradata para Jupyter **Versión de escritorio de Linux** (descargar https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[aquí], se requiere registro)
+* Cuenta de Google Cloud con https://console.cloud.google.com/flows/enableapi?apiid=notebooks.googleapis.com,aiplatform.googleapis.com&redirect=https://console.cloud.google.com&_ga=2.180323111.284679914.1706204112-1996764819.1705688373[Vertex AI y API Notebooks] habilitadas
+* Almacenamiento en Google Cloud para almacenar scripts de inicio y el paquete de extensiones de Teradata Jupyter
+* https://quickstarts.teradata.com/getting-started-with-vantagecloud-lake.html[Acceso a un entorno VantageCloud Lake]
+
+== Configuración del entorno Vertex AI Google Cloud
+
+Cuando crea una nueva instancia de cuaderno, puede especificar un script de inicio. Este script, que se ejecuta solo una vez después de la creación de la instancia, instalará el paquete de extensiones de Teradata Jupyter y clonará un repositorio de GitHub en la nueva instancia de notebooks administrada por el usuario.
+
+* Descargue el paquete de extensiones de Teradata Jupyter
+- Visite la https://downloads.teradata.com/download/tools/vantage-modules-for-jupyter[página de módulos Vantage para Jupyter]
+- Inicie sesión y descargue la versión Teradata Linux del paquete.
+
+* Crear depósito de almacenamiento en Google Cloud 
+     - Cree un depósito con un nombre relevante para el proyecto (por ejemplo, teradata_jupyter). 
+     - Asegúrese de que el nombre del depósito sea globalmente único. Por ejemplo, si el nombre teradata_jupyter ya se ha utilizado, no estará disponible para usuarios posteriores. 
+
+image::vantagecloud-lake/{dir}/bucket.png[Nuevo depósito,align="center" width=75%]
+
+* Cargue el paquete de extensiones de Jupyter descomprimido en su depósito de Google Cloud Storage como un archivo.
+
+* Escriba el siguiente script de inicio y guárdelo como `startup.sh` en su máquina local. 
+
+A continuación se muestra un script de ejemplo que recupera el paquete de extensiones de Teradata Jupyter del depósito de Google Cloud Storage e instala el kernel de Teradata SQL, las extensiones y clona el repositorio lake-demos. 
+
+[IMPORTANT]
+====
+Recuerde reemplazar teradata_jupyter en el comando gsutil cp.
+====
+[source, bash, id="vertex_ex_script", role="content-editable, emits-gtm-events"]
+----
+#! /bin/bash
+
+cd /home/jupyter
+mkdir teradata
+cd teradata
+gsutil cp gs://teradata_jupyter/* .
+unzip teradatasql*.zip
+
+# Install Teradata kernel
+cp teradatakernel /usr/local/bin
+
+jupyter kernelspec install ./teradatasql --prefix=/opt/conda
+
+# Install Teradata extensions
+pip install --find-links . teradata_preferences_prebuilt
+pip install --find-links . teradata_connection_manager_prebuilt
+pip install --find-links . teradata_sqlhighlighter_prebuilt
+pip install --find-links . teradata_resultset_renderer_prebuilt
+pip install --find-links . teradata_database_explorer_prebuilt
+
+# PIP install the Teradata Python library
+pip install teradataml==17.20.00.04
+
+# Install Teradata R library (optional, uncomment this line only if you use an environment that supports R)
+#Rscript -e "install.packages('tdplyr',repos=c('https://r-repo.teradata.com','https://cloud.r-project.org'))"
+
+# Clone the Teradata lake-demos repository
+su - jupyter -c "git clone https://github.com/Teradata/lake-demos.git"
+----
+* Suba este script a su depósito de almacenamiento de Google Cloud como un archivo
+
+image::vantagecloud-lake/{dir}/upload.png[archivos cargados al depósito,align="center" width=75%]
+
+=== Iniciar una instancia de cuaderno administrada por el usuario
+
+* Acceda a Vertex AI Workbench
+
+- Regrese a Vertex AI Workbench en la consola de Google Cloud.
+- Cree una nueva libreta administrada por el usuario a través de Opciones avanzadas o directamente en https://notebook.new/.
+
+* En Detalles, asigne un nombre a su cuaderno, seleccione su región y seleccione continuar.
+
+image::vantagecloud-lake/{dir}/detailsenv.png[detalles del entorno de cuaderno,align="center" width=75%]
+
+* En Entorno, seleccione **Navegar** para seleccionar su script startup.sh de su depósito de Google Cloud.
+
+image::vantagecloud-lake/{dir}/startupscript.png[seleccione el script de inicio,align="center" width=75%]
+
+* Seleccione Crear para iniciar el cuaderno. Es posible que el proceso de creación del cuaderno tarde unos minutos en completarse. Cuando termine, haga clic en OPEN JUPYTERLAB. 
+
+image::vantagecloud-lake/{dir}/activenotebook.png[cuaderno activo,align="center" width=75%]
+
+[IMPORTANT]
+====
+Tendrá que incluir esta IP en la lista blanca en su entorno VantageCloud Lake para permitir la conexión. Esta solución es apropiada en un entorno de prueba. Para entornos de producción, es posible que sea necesario configurar e incluir en la lista blanca una configuración de VPC, subredes y grupos de seguridad.
+====
+* En JupyterLab, abra un cuaderno con un kernel de Python y ejecute el siguiente comando para encontrar la dirección IP de la instancia de su cuaderno.
+
+image::vantagecloud-lake/{dir}/python3.png[kernel python3,align="center" width=75%]
+
+[source, python, role="content-editable"]
+----
+import requests
+def get_public_ip():
+    try:
+        response = requests.get('https://api.ipify.org')
+        return response.text
+    except requests.RequestException as e:
+        return "Error: " + str(e)
+my_public_ip = get_public_ip()
+print("My Public IP is:", my_public_ip)
+----
+
+== Configuración de VantageCloud Lake
+* En el entorno VantageCloud Lake, en configuración, agregue la IP de su instancia de notebook
+
+image::vantagecloud-lake/{dir}/sagemaker-lake.PNG[Iniciar JupyterLab,align="center" width=75%]
+
+== Editar vars.json
+Navegue hasta el directorio `lake-demos` en su cuaderno. 
+
+image::vantagecloud-lake/{dir}/notebooklauncher.png[lanzador de cuadernos,align="center" width=75%]
+
+Haga clic derecho en vars.json para abrir el archivo con el editor. 
+
+image::vantagecloud-lake/{dir}/openvars.png[vars.json,align="center" width=75%]
+
+Edite el archivo *https://github.com/Teradata/lake-demos/blob/main/vars.json[archivo vars.json]* para incluir las credenciales necesarias para ejecutar las demostraciones. +
+
+[cols="1,1"]
+|====
+| *Variable* | *Valor*
+| *"host"* 
+| Valor de IP pública de su entorno VantageCloud Lake
+| *"UES_URI"* 
+| Abra Analytics desde su entorno VantageCloud Lake
+| *"dbc"*
+| La contraseña maestra de su entorno VantageCloud Lake.
+|====
+
+Para recuperar una dirección IP pública y Open Analytics Endpoint, siga estas https://quickstarts.teradata.com/vantagecloud-lake/vantagecloud-lake-demo-jupyter-docker.html#_create_vantagecloud_lake_environment[instrucciones].
+
+====
+IMPORTANT: Cambie las contraseñas en el archivo vars.json. Verá que en el archivo vars.json de muestra, las contraseñas de todos los usuarios están predeterminadas en "password", esto es solo para cuestiones del archivo de muestra, debe cambiar todas estas contraseñas. campos a contraseñas seguras, protéjalas según sea necesario y siga otras mejores prácticas de administración de contraseñas
+====
+
+== Ejecutar demostraciones
+Ejecute todas las celdas en *0_Demo_Environment_Setup.ipynb* para configurar su entorno. Seguido de *1_Demo_Setup_Base_Data.ipynb* para cargar los datos base necesarios para la demostración.
+
+Para obtener más información sobre los cuadernos de demostración, vaya a la página https://github.com/Teradata/lake-demos[Demostraciones de Teradata Lake] en GitHub.
+
+== Resumen 
+En esta guía de inicio rápido, configuramos las cuadernos Google Cloud Vertex AI Workbench para ejecutar  https://github.com/Teradata/lake-demos[demostraciones de Teradata Jupyter Notebook para VantageCloud Lake].

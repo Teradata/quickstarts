@@ -1,0 +1,182 @@
+= Ejecutar Vantage Express en Azure
+:page-lang: es
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: 23 de agosto de 2022
+:description: Ejecute Vantage Express en Microsoft Azure.
+:keywords: almacenes de datos, separación de almacenamiento informático, teradata, vantage, plataforma de datos en la nube, almacenamiento de objetos, inteligencia empresarial, análisis empresarial
+:tabs:
+:experimental:
+
+include::../partials/use.csae.adoc[]
+
+== Descripción general
+
+Este tutorial demuestra cómo ejecutar Vantage Express en Microsoft Azure. Vantage Express contiene un Teradata SQL Engine completamente funcional.
+
+== Requisitos previos
+
+. Una cuenta de Azure. Puede crear una aquí: https://azure.microsoft.com/en-us/free/
+. Utilidad de línea de comandos `az` instalada en su máquina. Puede encontrar instrucciones de instalación aquí: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli.
+
+== Instalación
+
+. Configure la región predeterminada para la región más cercana a usted (para enumerar las ubicaciones ejecute `az account list-locations -o table`):
++
+[source, bash]
+----
+az config set defaults.location=<location>
+----
+
+. Cree un nuevo grupo de recursos llamado `tdve-resource-group` y agréguelo a los valores predeterminados:
++
+[source, bash]
+----
+az group create -n tdve-resource-group
+az config set defaults.group=tdve-resource-group
+----
+
+. Para crear una máquina virtual, necesitará un par de claves ssh. Si aún no lo tiene, cree uno:
++
+[source, bash]
+----
+az sshkey create --name vantage-ssh-key
+----
+
+. Restrinja el acceso a la clave privada. Reemplace `<path_to_private_key_file>` con la ruta de la clave privada devuelta por el comando anterior:
++
+[source, bash]
+----
+chmod 600 <path_to_private_key_file>
+----
+
+. Cree una máquina virtual Ubuntu con 4 CPU y 8 GB de RAM, un disco operativo de 30 GB y un disco de datos de 60 GB.
++
+[tabs]
+====
+Windows::
++
+--
+[source, powershell, role="content-editable emits-gtm-events", id="az_create_vm_win"]
+----
+az disk create -n teradata-vantage-express --size-gb 60
+az vm create `
+  --name teradata-vantage-express `
+  --image UbuntuLTS `
+  --admin-username azureuser `
+  --ssh-key-name vantage-ssh-key `
+  --size Standard_F4s_v2 `
+  --public-ip-sku Standard
+
+$diskId = (az disk show -n teradata-vantage-express --query 'id' -o tsv) | Out-String
+az vm disk attach --vm-name teradata-vantage-express --name $diskId
+----
+--
+MacOS::
++
+--
+[source, bash, role="content-editable emits-gtm-events", id="az_create_vm_macos"]
+----
+az disk create -n teradata-vantage-express --size-gb 60
+az vm create \
+  --name teradata-vantage-express \
+  --image UbuntuLTS \
+  --admin-username azureuser \
+  --ssh-key-name vantage-ssh-key \
+  --size Standard_F4s_v2 \
+  --public-ip-sku Standard
+
+DISK_ID=$(az disk show -n teradata-vantage-express --query 'id' -o tsv)
+az vm disk attach --vm-name teradata-vantage-express --name $DISK_ID
+----
+--
+Linux::
++
+--
+[source, bash, role="content-editable emits-gtm-events", id="az_create_vm_linux"]
+----
+az disk create -n teradata-vantage-express --size-gb 60
+az vm create \
+  --name teradata-vantage-express \
+  --image UbuntuLTS \
+  --admin-username azureuser \
+  --ssh-key-name vantage-ssh-key \
+  --size Standard_F4s_v2 \
+  --public-ip-sku Standard
+
+DISK_ID=$(az disk show -n teradata-vantage-express --query 'id' -o tsv)
+az vm disk attach --vm-name teradata-vantage-express --name $DISK_ID
+----
+--
+====
+. ssh a su máquina virtual. Reemplace `<path_to_private_key_file>` y `<vm_ip>` con valores que coincidan con su entorno:
++
+[source, bash, role="content-editable emits-gtm-events", id="az_ssh"]
+----
+ssh -i <path_to_private_key_file> azureuser@<vm_ip>
+----
+. Una vez en la máquina virtual, cambie al usuario `root`:
++
+[source, bash, role="content-editable emits-gtm-events", id="sudo"]
+----
+sudo -i
+----
+. Prepare el directorio de descarga de Vantage Express:
++
+[source, bash, role="content-editable emits-gtm-events", id="download_dir"]
+----
+mkdir /opt/downloads
+cd /opt/downloads
+----
+. Monte el disco de datos:
++
+[source, bash, role="content-editable emits-gtm-events", id="mount_data_disk"]
+----
+parted /dev/sdc --script mklabel gpt mkpart xfspart xfs 0% 100%
+mkfs.xfs /dev/sdc1
+partprobe /dev/sdc1
+export DISK_UUID=$(blkid | grep sdc1 | cut -d"\"" -f2)
+echo "UUID=$DISK_UUID  /opt/downloads   xfs   defaults,nofail   1   2" >> /etc/fstab
+----
+include::../partials/install.ve.in.public.cloud.adoc[]
+* Si desea conectarse a Vantage Express desde Internet, deberá abrir agujeros de firewall en su máquina virtual. También debe cambiar la contraseña predeterminada al usuario `dbc`:
+. Para cambiar la contraseña del usuario `dbc`, vaya a su máquina virtual e inicie bteq:
++
+[source, bash, role="content-editable emits-gtm-events", id="pw_change_bteq"]
+----
+bteq
+----
+. Inicie sesión en su base de datos usando `dbc` como usuario y contraseña:
++
+[source, teradata-sql, role="content-editable emits-gtm-events", id="pw_change_bteq_logon"]
+----
+.logon localhost/dbc
+----
+. Cambie la contraseña para el usuario `dbc`:
++
+[source, teradata-sql, role="content-editable emits-gtm-events", id="pw_change_mod_user"]
+----
+MODIFY USER dbc AS PASSWORD = new_password;
+----
+. Ahora puede abrir el puerto 1025 a Internet usando el comando de gcloud:
++
+[source%prewrap, bash, role="content-editable emits-gtm-events", id="az_fw_rule"]
+----
+az vm open-port --name teradata-vantage-express --port 1025
+----
+
+== Limpiar
+
+Para dejar de incurrir en cargos, elimine todos los recursos asociados con el grupo de recursos:
+[source, bash, role="content-editable emits-gtm-events", id="delete_resource_group"]
+----
+az group delete --no-wait -n tdve-resource-group
+----
+
+include::../partials/next.steps.adoc[]
+
+== Otras lecturas
+* link:https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20[Guía de instalación de Teradata® Studio™ y Studio™ Express]
+* link:https://docs.teradata.com/r/jmAxXLdiDu6NiyjT6hhk7g/root[Introducción a BTEQ]
+
+include::../partials/community_link.adoc[]

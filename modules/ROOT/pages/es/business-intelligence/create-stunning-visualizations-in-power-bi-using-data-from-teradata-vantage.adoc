@@ -1,0 +1,137 @@
+= Crear visualizaciones en Power BI mediante Vantage
+:page-lang: es
+:experimental:
+:page-author: Kevin Bogusch, Paul Ibberson
+:page-email: paul.ibberson2@teradata.com
+:page-revdate: 14 de enero de 2022
+:description: Conecte Teradata Vantage a Power BI Desktop.
+:keywords: almacenes de datos, separación de almacenamiento informático, teradata, vantage, plataforma de datos en la nube, almacenamiento de objetos, inteligencia empresarial, análisis empresarial, microsoft power bi, power bi
+:tabs:
+:page-image-directory: connect-power-bi
+
+
+== Descripción general
+
+NOTE: Esta guía incluye contenido de la documentación de productos de Microsoft y Teradata.
+
+Este artículo describe el proceso para conectar Power BI Desktop a Teradata Vantage para crear informes y visualizaciones espectaculares de sus datos.  Power BI admite Teradata Vantage como fuente de datos y puede usar los datos subyacentes como cualquier otra fuente de datos en Power BI Desktop.
+
+https://docs.microsoft.com/en-us/power-bi/power-bi-overview[Power BI] es una colección de servicios de software, aplicaciones y conectores que trabajan juntos para convertir sus fuentes de datos no relacionadas en información coherente, visualmente inmersiva e interactiva.
+
+.Power BI consta de:
+* Una aplicación de escritorio de Windows, llamada https://docs.microsoft.com/en-us/power-bi/fundamentals/desktop-what-is-desktop[Power BI Desktop]
+* Un servicio SaaS (software como servicio) en línea, llamado https://docs.microsoft.com/en-us/power-bi/fundamentals/power-bi-service-overview[servicio Power BI.]
+* Aplicaciones https://docs.microsoft.com/en-us/power-bi/consumer/mobile/mobile-apps-for-mobile-devices[móviles de Power BI] para dispositivos Windows, iOS y Android
+
+image::business-intelligence/{page-image-directory}/power.bi.elements.png[Elementos de Power BI, width=100%]
+
+Estos tres elementos (Power BI Desktop, el servicio Power BI y las aplicaciones móviles) están diseñados para permitir a las personas crear, compartir y consumir información empresarial de la forma que les resulte más eficaz a ellos o a su rol.
+
+image::business-intelligence/{page-image-directory}/power.bi.overview.blocks.png[Bloques de descripción general de Power BI, width=100%]
+
+Un cuarto elemento, https://docs.microsoft.com/en-us/power-bi/report-server/get-started[Power BI Report Server], le permite publicar informes de Power BI en un servidor de informes local, después de crearlos en Power BI Desktop.
+
+Power BI Desktop admite Vantage como fuente de datos de terceros, no como fuente de datos "nativa".  En su lugar, los informes publicados en el servicio Power BI deberán utilizar el componente https://docs.microsoft.com/en-us/power-bi/connect-data/service-gateway-onprem[puerta de enlace de datos local] para acceder a Vantage.
+
+Esta guía de introducción le mostrará cómo conectarse a Teradata Vantage. El conector Teradata de Power BI Desktop usa el https://downloads.teradata.com/download/connectivity/net-data-provider-for-teradata[proveedor de datos .NET para Teradata]. Debe instalar el controlador en ordenadores que usen Power BI Desktop. La instalación única del proveedor de datos .NET para Teradata admite la aplicación Power BI Desktop de 32 o 64 bits.
+
+== Requisitos previos
+Se espera que esté familiarizado con los servicios de Azure, Teradata Vantage y Power BI Desktop.
+
+Necesitará las siguientes cuentas y sistema.
+
+* Power BI Desktop es una aplicación gratuita para Windows. (Power BI Desktop no está disponible para Mac. Podrías ejecutarlo en una máquina virtual, como https://www.parallels.com/[Parallels] o https://www.vmware.com/products/fusion.html[VMware Fusion], o en el https://support.apple.com/en-vn/boot-camp[Boot Camp] de Apple, pero eso está fuera del alcance de este artículo).
+
+* Una instancia de Teradata Vantage con un usuario y contraseña. El usuario debe tener permiso para los datos que Power BI Desktop puede usar. Se debe poder acceder a Vantage desde Power BI Desktop.
++
+include::../partials/vantage_clearscape_analytics.adoc[]
+
+* El https://downloads.teradata.com/download/connectivity/net-data-provider-for-teradata[proveedor de datos .NET para Teradata].
+
+== Primeros pasos
+=== Instalar Power BI Desktop
+Puede instalar Power BI Desktop desde https://aka.ms/pbidesktopstore[Microsoft Store] o https://aka.ms/pbiSingleInstaller[descargar el instalador] y ejecutarlo directamente.
+
+=== Instale el proveedor de datos .NET para Teradata
+Descargue e instale la última versión del https://downloads.teradata.com/download/connectivity/net-data-provider-for-teradata[proveedor de datos .NET para Teradata.]
+
+Tenga en cuenta que hay varios archivos disponibles para descargar. El archivo que busca comienza con "tdnetdp".
+
+=== Conectarse a Teradata Vantage
+* Ejecute Power BI Desktop, que tiene un icono amarillo. 
+
+image::business-intelligence/{page-image-directory}/power.bi.icon.png[Icono de Power BI, width=30%]
+
+* Si se muestra la pantalla de inicio (presentación), haga clic en Obtener datos.
+
+image::business-intelligence/{page-image-directory}/power.bi.splash.screen.png[Pantalla de presentación de Power BI, width=70%]
+
+De lo contrario, si se encuentra en el formulario principal de Power BI, asegúrese de estar en la cinta _Hogar_ y haga clic en _Obtener datos_. Haga clic en _Más…_.
+
+image::business-intelligence/{page-image-directory}/power.bi.get.data.menu.png[Menú Obtener datos de Power BI, width=70%]
+
+* Haga clic en _Base de datos_ a la izquierda.
+* Desplácese por la lista de la derecha hasta que vea _Base de datos Teradata_. Haga clic en _Base de datos Teradata_ y luego haga clic en el botón _Conectar_.
+
+(“Teradata Database” y “Teradata Vantage” son sinónimos en este artículo).
+
+image::business-intelligence/{page-image-directory}/power.bi.database.picker.png[Selector de base de datos de Power BI, width=70%]
+
+* En la ventana que aparece, introduzca el nombre o la dirección IP de su sistema Vantage en el cuadro de texto. Puede elegir _Importar_ datos directamente en el modelo de datos de Power BI o conectarse directamente a la fuente de datos mediante https://docs.microsoft.com/en-us/power-bi/desktop-use-directquery[DirectQuery] y hacer clic en _OK_.
+
+image::business-intelligence/{page-image-directory}/power.bi.server.connect.png[Conexión del servidor Power BI, width=70%]
+
+(Haga clic en Opciones _avanzadas_ para enviar una declaración SQL hecha a mano).
+
+Para las credenciales, tiene la opción de conectarse con su _Windows_ inicio de sesión o nombre de usuario _Base de datos_ definido en Vantage, que es más común. Seleccione el método de autenticación    apropiado e introduzca su nombre de usuario y contraseña. Haga clic en _Conectar_.
+
+También tiene la opción de autenticarse con un servidor LDAP. Esta opción está oculta de forma predeterminada.
+
+Si configura la variable de entorno, _PBI_EnableTeradataLdap_, en _true_, entonces el método de autenticación LDAP estará disponible.
+
+image::business-intelligence/{page-image-directory}/power.bi.ldap.png[Conexión LDAP de Power BI, width=70%]
+
+Tenga en cuenta que LDAP no es compatible con la puerta de enlace de datos local, que se utiliza para los informes que se publican en el servicio Power BI. Si necesita autenticación LDAP y utiliza la puerta de enlace de datos local, deberá enviar un incidente a Microsoft y solicitar soporte.
+
+Como alternativa, puede https://docs.microsoft.com/en-us/power-bi/connect-data/service-gateway-sso-kerberos[configurar SSO basado en Kerberos desde el servicio Power BI en fuentes de datos locales] como Teradata.
+
+Una vez que se haya conectado al sistema Vantage, Power BI Desktop recuerda las credenciales para futuras conexiones al sistema. Puede modificar estas credenciales yendo a _Archivo > Opciones y configuraciones > Configuración de fuente de datos_.
+
+La ventana del Navegador aparece después de una conexión exitosa. Muestra los datos disponibles en el sistema Vantage. Puede seleccionar uno o más elementos para usar en Power BI Desktop.
+
+image::business-intelligence/{page-image-directory}/power.bi.navigator.png[Navegador de Power BI, width=90%]
+
+Puede obtener una vista previa de una tabla haciendo clic en su nombre. Si desea cargarla en Power BI Desktop, asegúrese de hacer clic en la casilla de verificación junto al nombre de la tabla.
+
+Puede _Cargar_ la tabla seleccionada, lo que la lleva a Power BI Desktop. También puede _Editar_ la consulta, que abre un editor de consultas para que pueda filtrar y refinar el conjunto de datos que desea cargar.
+
+_Editar_ puede llamarse _Transformar datos_, según la versión de Power BI Desktop que tenga.
+
+Para obtener información sobre cómo unir tablas, consulte la característica https://docs.microsoft.com/en-us/power-bi/desktop-create-and-manage-relationships[Crear y administrar relaciones en Power BI Desktop].
+
+Para publicar su informe, haga clic en _Publicar_ en la cinta _Hogar_ en Power BI Desktop.
+
+image::business-intelligence/{page-image-directory}/power.bi.publish.png[Publicación de Power BI, width=100%]
+
+Power BI Desktop le pedirá que guarde su informe. Elija _Mi espacio de trabajo_ y haga clic en _Seleccionar_. 
+
+image::business-intelligence/{page-image-directory}/power.bi.workspace.png[Publicación de Power BI en mi espacio de trabajo, width=90%]
+
+Una vez publicado el informe, haga clic en _Entendido_ para cerrar. También puede hacer clic en el enlace que tiene el nombre del informe en el enlace.
+
+image::business-intelligence/{page-image-directory}/power.bi.success.png[Power BI publicado con éxito, width=90%]
+
+Este es un ejemplo de un informe creado en Power BI Desktop.
+
+image::business-intelligence/{page-image-directory}/power.bi.report.png[Informe de Power BI, width=100%]
+
+== Siguientes pasos
+Puede combinar datos de muchos orígenes con Power BI Desktop. Consulte los siguientes enlaces para obtener más información.
+
+* https://docs.microsoft.com/en-us/power-bi/desktop-what-is-desktop[¿Qué es Power BI Desktop?]
+* https://docs.microsoft.com/en-us/power-bi/desktop-data-sources[Orígenes de datos en Power BI Desktop]
+* https://docs.microsoft.com/en-us/power-bi/desktop-shape-and-combine-data[Dar forma y combinar datos con Power BI Desktop]
+* https://docs.microsoft.com/en-us/power-bi/desktop-connect-excel[Conectarse a libros de Excel en Power BI Desktop]
+* https://docs.microsoft.com/en-us/power-bi/desktop-enter-data-directly-into-desktop[Introducir datos directamente en Power BI Desktop]
+
+include::../partials/community_link.adoc[]

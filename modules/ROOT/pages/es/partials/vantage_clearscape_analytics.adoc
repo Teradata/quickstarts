@@ -1,0 +1,1 @@
+NOTE: Si necesita una instancia de prueba de Vantage, puede aprovisionar una de forma gratuita en link:https://clearscape.teradata.com/sign-in?utm_source=dev_portal&utm_medium=quickstart_tutorial&utm_campaign=quickstarts[https://clearscape.teradata.com., window="_blank"]

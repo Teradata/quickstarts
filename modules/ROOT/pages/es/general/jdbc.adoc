@@ -1,0 +1,56 @@
+= Conectarse a Vantage mediante JDBC
+:page-lang: es
+:experimental:
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: 14 de noviembre de 2022
+:description: Cómo conectarse a Teradata Vantage mediante JDBC
+:keywords: almacenes de datos, separación de almacenamiento informático, teradata, vantage, plataforma de datos en la nube, JDBC, aplicaciones java, inteligencia empresarial, análisis empresarial
+
+== Descripción general
+
+Este tutorial demuestra cómo conectarse a Teradata Vantage mediante JDBC usando una aplicación Java de muestra: link:https://github.com/Teradata/jdbc-sample-app[].
+
+== Requisitos previos
+
+* Acceso a una instancia de Teradata Vantage.
++
+include::../partials/vantage_clearscape_analytics.adoc[]
+* JDK
+* Maven
+
+== Agregar dependencia a su proyecto maven
+
+Agregue el controlador JDBC de Teradata como dependencia a su archivo Maven POM XML:
+
+++++
+<script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fjdbc-sample-app%2Fblob%2Fmain%2Fpom.xml%23L109-L113&style=github&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on&fetchFromJsDelivr=on"></script>
+++++
+
+== Código para enviar una consulta
+
+NOTE: Este paso supone que su base de datos Vantage está disponible en `localhost` en el puerto `1025`. Si está ejecutando Vantage Express en su portátil, debe exponer el puerto de la máquina virtual a la máquina host. Consulte la documentación de su software de virtualización sobre cómo reenviar puertos.
+
+El proyecto está configurado. Todo lo que queda es cargar el controlador, pasar los parámetros de conexión y autenticación y ejecutar una consulta:
+
+++++
+<script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fjdbc-sample-app%2Fblob%2Fmain%2Fsrc%2Fmain%2Fjava%2Fcom%2Fteradata%2Fapp%2FApp.java%23L1-L51&style=github&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on&fetchFromJsDelivr=on"></script>
+++++
+
+== Ejecutar las pruebas
+
+Ejecute las pruebas:
+
+[source, bash, id="run_mvn", role="content-editable emits-gtm-events"]
+----
+mvn test
+----
+
+== Resumen
+
+Este tutorial demuestra cómo conectarse a Teradata Vantage mediante JDBC. Describió una aplicación Java de muestra con Maven como herramienta de compilación que utiliza el controlador JDBC de Teradata para enviar consultas SQL a Teradata Vantage.
+
+== Otras lecturas
+* link:https://teradata-docs.s3.amazonaws.com/doc/connectivity/jdbc/reference/current/frameset.html[Referencia del controlador JDBC de Teradata]
+
+include:../partials/community_link.adoc[]

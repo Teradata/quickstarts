@@ -1,0 +1,73 @@
+. Presione kbd:[ENTER] para seleccionar la partición de arranque `LINUX` resaltada.
++
+image::run-vantage/boot-manager-menu.png[Menú del administrador de arranque, width=500]
+. En la siguiente pantalla, presione kbd:[ENTER] nuevamente para seleccionar el kernel SUSE Linux predeterminado.
++
+image::run-vantage/grub-menu.png[Menú Grub, width=500]
+. Después de completar la secuencia de arranque, aparecerá un mensaje de inicio de sesión en la terminal como se muestra en la captura de pantalla a continuación. No introduzca nada en la terminal. Espere hasta que el sistema inicie la GUI.
++
+image::run-vantage/wait-for-gui.png[Esperar a la GUI, width=500]
+. Después de un tiempo, aparecerá el siguiente mensaje, asumiendo que no introdujo nada después del mensaje de inicio de sesión del comando anterior. Presione el botón `okay` en la pantalla siguiente.
++
+image::run-vantage/okay-the-security-popup.png[Ventana emergente de seguridad OK, width=500]
+. Una vez que la máquina virtual esté activa, verá su entorno de escritorio. Cuando se le solicite nombre de usuario/contraseña, introduzca `root` para ambos.
++
+image::run-vantage/vm.login.png[Inicio de sesión de máquina virtual, width=500]
+. La base de datos está configurada para iniciarse automáticamente con la máquina virtual. Para confirmar que la base de datos se ha iniciado, vaya al escritorio virtual e inicie `Gnome Terminal`.
++
+image::run-vantage/start-gnome-terminal.png[Iniciar Gnome Terminal, width=500]
+
+. En la terminal, ejecute el comando `pdestate`, que le informará si Vantage ya se inició:
++
+NOTE: Para pegar en Gnome Terminal, presione kbd:[SHIFT+CTRL+V].
++
+[source, bash, role="content-editable emits-gtm-events", id="pdestate"]
+----
+watch pdestate -a
+----
++
+Debe esperar hasta que vea el siguiente mensaje:
++
+----
+PDE state is RUN/STARTED.
+DBS state is 5: Logons are enabled - The system is quiescent
+----
++
+++++
+<details
+<summary class="title">Vea ejemplos de mensajes que devuelve <code>pdestate</code> cuando la base de datos aún se está inicializando.</summary>
+<div class="content">
+<div class="listingblock">
+
+<pre>El estado del PDE es DOWN/HARDSTOP.
+
+El estado de PDE es START/NETCONFIG.
+
+El estado de PDE es START/GDOSYNC.
+
+El estado de PDE es START/TVSASTART.
+
+El estado del PDE es START/READY.
+El estado de PDE es RUN/STARTED.
+
+El estado de DBS es 1/1: Inicio de DBS - Inicializando DBS Vprocs
+El estado de PDE es RUN/STARTED.
+
+El estado de DBS es 1/5: Inicio de DBS - Votación para la recuperación de transacciones
+El estado de PDE es RUN/STARTED.
+
+El estado de DBS es 1/4: Inicio de DBS - Iniciando particiones PE
+El estado de PDE es RUN/STARTED.</pre>
+</div>
+</div>
+</details>
+++++
+. Ahora que la base de datos está activa, regrese al escritorio virtual e inicie `Teradata Studio Express`.
++
+image::run-vantage/start-teradata-studio-express.png[Iniciar Teradata Studio Express, width=500]
+. Cuando lo inicie por primera vez, se le ofrecerá un recorrido. Una vez que cierre el recorrido, verá una ventana del asistente para agregar una nueva conexión. Seleccione `Teradata`:
++
+image::run-vantage/new.connection.profile.png[Nuevo perfil de conexión, width=500]
+. En la siguiente pantalla, conéctese a la base de datos en su host local usando `dbc` como nombre de usuario y contraseña:
++
+image::run-vantage/new.connection.png[Nueva conexión, width=500]

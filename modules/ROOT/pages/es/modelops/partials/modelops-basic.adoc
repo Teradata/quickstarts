@@ -1,0 +1,157 @@
+== Crear un nuevo proyecto o utilizar uno existente
+
+Agregar un nuevo proyecto
+
+* Crear proyecto
+
+* Detalles
+
+* Nombre: Demostración: your-name
+
+* Descripción: Demostración de ModelOps
+
+* Grupo: your-name
+
+* Ruta: https://github.com/Teradata/modelops-demo-models
+
+* Credenciales: Sin credenciales
+
+* Rama: maestro
+
+Aquí puede probar la conexión de git. Si está verde, guarde y continúe. Omita la configuración de conexión del servicio por ahora.
+
+Al crear un nuevo proyecto, ModelOps le pedirá una nueva conexión. 
+
+== Crear una conexión personal
+
+Conexión personal
+
+* Nombre: Vantage personal your-name
+
+* Descripción: entorno de demostración Vantage
+
+* Host: tdprd.td.teradata.com (interno solo para teradata transcend)
+
+* Base de datos: your-db
+
+* Base de datos VAL: TRNG_XSP (interna solo para teradata transcend)
+
+* Base de datos BYOM: TRNG_BYOM (interna solo para teradata transcend)
+
+* Mec. de inicio de sesión: TDNEGO
+
+* Username/Password
+
+== Validar permisos en base de datos SQL para VAL y BYOM
+
+Puede comprobar los permisos con el nuevo panel de control de estado en el panel de conexiones
+
+image::ModelOps_Healthcheck.png[Captura de pantalla de comprobación de estado de ModelOps, width=500]
+
+== Agregue un conjunto de datos para identificar tablas Vantage para evaluación y puntuación BYOM
+
+Creemos una nueva plantilla de conjunto de datos, luego 1 conjunto de datos para entrenamiento y 2 conjuntos de datos para evaluación para que podamos supervisar las métricas de calidad del modelo con 2 conjuntos de datos diferentes.
+
+Agregar conjuntos de datos
+
+* Crear plantilla de conjunto de datos
+
+* Catalogar
+
+* Nombre: PIMA
+
+* Descripción: Diabetes PIMA
+
+* Catálogo de funciones: Vantage
+
+* Base de datos: your-db
+
+* Tabla: aoa_feature_metadata
+
+Características
+Consulta:
+[source, teradata-sql, id="modelops_feature_query", role="emits-gtm-events"]
+----
+SELECT * FROM {your-db}.pima_patient_features
+----
+Clave de entidad: PatientId
+Características: NumTimesPrg, PlGlcConc, BloodP, SkinThick, TwoHourSerIns, BMI, DiPedFunc, Age
+
+Entidad y destino
+Consulta: 
+[source, teradata-sql]
+----
+SELECT * FROM {your-db}.pima_patient_diagnoses
+----
+Clave de entidad: PatientId
+Destino: HasDiabetes
+
+Predicciones
+
+* Base de datos: your-db
+
+* Tabla: pima_patient_predictions
+
+Selección de entidad: 
+
+Consulta: 
+[source, teradata-sql]
+----
+SELECT * FROM pima_patient_features WHERE patientid MOD 5 = 0
+----
+Solo para v6 (en v7 definirá esto en la pantalla BYOM sin código): Columna de destino BYOM: CAST(CAST(json_report AS JSON).JSONExtractValue('$.predicted_HasDiabetes') AS INT)
+
+== Crear conjunto de datos de entrenamiento
+
+Básico
+
+* Nombre: Train
+
+* Descripción: Conjunto de datos de entrenamiento
+
+* Alcance: Entrenamiento
+
+* Entidad y destino
+
+Consulta: 
+[source, teradata-sql]
+----
+SELECT * FROM {your-db}.pima_patient_diagnoses WHERE patientid MOD 5 = 1
+----
+
+== Crear conjunto de datos de evaluación 1
+
+Básico
+
+* Nombre: Evaluate
+
+* Descripción: Conjunto de datos de evaluación
+
+* Alcance: Evaluación
+
+* Entidad y destino
+
+Consulta: 
+[source, teradata-sql]
+----
+SELECT * FROM {your-db}.pima_patient_diagnoses WHERE patientid MOD 5 = 2
+----
+
+
+== Crear conjunto de datos de evaluación 2
+
+Básico
+
+* Nombre: Evaluate
+
+* Descripción: Conjunto de datos de evaluación
+
+* Alcance: Evaluación
+
+* Entidad y destino
+
+Consulta: 
+[source, teradata-sql]
+----
+SELECT * FROM {your-db}.pima_patient_diagnoses WHERE patientid MOD 5 = 3
+----

@@ -1,5 +1,5 @@
-window.onload = function() {
-    folder = window.location.pathname.split("/");
+window.addEventListener('load', function() {
+    var folder = window.location.pathname.split("/");
     console.log(folder[folder.length-2]);
 
     if (folder[folder.length-2] === 'ai-unlimited') {
@@ -10,4 +10,4 @@ window.onload = function() {
         
         window.location.href = 'https://teradata.github.io/ai-unlimited-docs/docs/install-ai-unlimited/';
     }
-};
+});

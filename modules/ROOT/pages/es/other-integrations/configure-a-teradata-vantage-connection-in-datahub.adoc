@@ -1,0 +1,138 @@
+= Configurar una conexión a Teradata Vantage en DataHub
+:page-lang: es
+:experimental:
+:page-author: Pablo Ibberson
+:page-email: paul.ibberson2@teradata.com
+:page-revdate: 19 de diciembre de 2023
+:page-image-directory: configure-a-teradata-connection-in-datahub
+:description: Configure una conexión a Teradata Vantage en DataHub.
+:keywords: almacenes de datos, separación de almacenamiento informático, teradata, vantage, plataforma de datos en la nube, almacenamiento de objetos, inteligencia empresarial, análisis empresarial, centro de datos, catálogo de datos, linaje de datos
+
+
+== Descripción general
+
+Este tutorial demuestra cómo crear una conexión a Teradata Vantage con DataHub e ingerir metadatos sobre tablas y vistas, junto con información de uso y linaje.
+
+== Requisitos previos
+
+* Acceso a una instancia de Teradata Vantage.
++
+include::../partials/vantage_clearscape_analytics.adoc[]
+
+* Centro de datos instalado. Consulte la link:https://datahubproject.io/docs/quickstart/[Guía de inicio rápido de DataHub]
+
+== Configurar centro de datos
+
+* Instale el complemento Teradata para DataHub en el entorno donde tiene instalado DataHub
++
+[source, bash]
+----
+pip install 'acryl-datahub[teradata]'
+----
+
+* Configure un usuario de Teradata y establezca privilegios para permitir que ese usuario lea las tablas del diccionario
++
+[source, sql ]
+----
+CREATE USER datahub FROM <database> AS PASSWORD = <password> PERM = 20000000;
+
+GRANT SELECT ON dbc.columns TO datahub;
+GRANT SELECT ON dbc.databases TO datahub;
+GRANT SELECT ON dbc.tables TO datahub;
+GRANT SELECT ON DBC.All_RI_ChildrenV TO datahub;
+GRANT SELECT ON DBC.ColumnsV TO datahub;
+GRANT SELECT ON DBC.IndicesV TO datahub;
+GRANT SELECT ON dbc.TableTextV TO datahub;
+GRANT SELECT ON dbc.TablesV TO datahub;
+GRANT SELECT ON dbc.dbqlogtbl TO datahub; -- if lineage or usage extraction is enabled
+----
+* Si desea ejecutar la creación de perfiles, debe otorgar permiso de selección en todas las tablas de las que desea crear perfiles.
+
+* Si desea extraer metadatos de linaje o uso, el registro de consultas debe estar habilitado y configurado en un tamaño que se ajuste a sus consultas (el tamaño de texto de consulta predeterminado que captura Teradata es de 200 caracteres como máximo). Un ejemplo de cómo puede configurarlo para todos los usuarios:
++
+[source, sql ]
+----
+-- set up query logging on all
+
+REPLACE QUERY LOGGING LIMIT SQLTEXT=2000 ON ALL;
+----
+
+== Agregar una conexión Teradata a DataHub
+Con DataHub en ejecución, abra la GUI de DataHub e inicie sesión.  En este ejemplo, esto se ejecuta en localhost:9002 
+
+. Inicie el asistente de nueva conexión haciendo clic en el icono del conector de ingesta 
++
+image::other-integrations/{page-image-directory}/ingestion-icon.png[Etiqueta de ingestión, width=75%]
++
+y luego seleccionando "Crear nueva fuente" 
++
+image::other-integrations/{page-image-directory}/create-new-source.png[Crear nueva fuente, width=50%]
+
+. Desplácese por la lista de fuentes disponibles y seleccione Otro 
++
+image::other-integrations/{page-image-directory}/select-other-source.png[Seleccionar fuente, width=50%]
+
+. Se necesita una receta para configurar la conexión a Teradata y definir las opciones requeridas, como capturar el linaje de tablas y columnas, perfilar los datos o recuperar estadísticas de uso.  A continuación se muestra una receta sencilla para empezar. El host, el nombre de usuario y la contraseña deben cambiarse para que coincidan con su entorno.
++
+[source, yaml]
+----
+pipeline_name: my-teradata-ingestion-pipeline
+source:
+  type: teradata
+  config:
+    host_port: "myteradatainstance.teradata.com:1025"
+    username: myuser
+    password: mypassword
+    #database_pattern:
+    #  allow:
+    #    - "my_database"
+    #  ignoreCase: true
+    include_table_lineage: true
+    include_usage_statistics: true
+    stateful_ingestion:
+      enabled: true
+----
++
+Pegar la receta en la ventana debería verse así: 
++
+image::other-integrations/{page-image-directory}/new-ingestion-source.png[Nueva fuente de ingestión, width=75%]
+
+. Haga clic en Siguiente y luego configure el programa requerido. 
++
+image::other-integrations/{page-image-directory}/set-schedule.png[Establecer horario, width=75%]
+
+. Haga clic en Siguiente para finalizar y asigne un nombre a la conexión. Haga clic en Avanzado para poder configurar la versión de CLI correcta. La compatibilidad de DataHub con Teradata empezó a estar disponible en CLI 0.12.x.  Sugiera seleccionar la versión más actual para garantizar la mejor compatibilidad.
++
+image::other-integrations/{page-image-directory}/finish-up.png[Terminar, width=75%]
+
+. Una vez guardada la nueva fuente, se puede ejecutar manualmente haciendo clic en Ejecutar. 
++
+image::other-integrations/{page-image-directory}/execute.png[Ejecutar, width=75%]
++
+Al hacer clic en "Exitoso" después de una ejecución exitosa, aparecerá un cuadro de diálogo similar a este donde podrá ver las bases de datos, tablas y vistas que se han incorporado a DataHub.  
++
+image::other-integrations/{page-image-directory}/ingestion-result.png[Resultado de la ingestión, width=75%]
+
+. Los metadatos ahora se pueden explorar en la GUI navegando:
+.. DataSets proporciona una lista de los conjuntos de datos (tablas y vistas) cargados
++
+image::other-integrations/{page-image-directory}/datasets.png[conjuntos de datos, width=75%]
+.. Entidades capturadas de la base de datos
++
+image::other-integrations/{page-image-directory}/entities-list.png[Entidades, width=75%]
+.. Esquema de una entidad que muestra nombres de columnas/campos, tipos de datos y uso si se ha capturado
++
+image::other-integrations/{page-image-directory}/schema.png[Visualización de esquema, width=75%]
+.. Linaje que proporciona una representación visual de cómo se vinculan los datos entre tablas y vistas
++
+image::other-integrations/{page-image-directory}/lineage-weather.png[Imagen de linaje, width=75%]
+
+== Resumen
+
+Este tutorial demostró cómo crear una conexión a Teradata Vantage con DataHub para capturar metadatos de tablas, vistas junto con estadísticas de linaje y uso.
+
+== Otras lecturas
+* https://datahubproject.io/docs/generated/ingestion/sources/teradata[Integrar DataHub con Teradata Vantage]
+* https://datahubproject.io/docs/metadata-ingestion/#recipes[Opciones de integración de DataHub para recetas]
+
+include::../partials/community_link.adoc[]

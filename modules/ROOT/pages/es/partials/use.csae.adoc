@@ -1,0 +1,1 @@
+NOTE: Ahora puede obtener una instancia alojada de Vantage de forma gratuita en link:https://clearscape.teradata.com/[].

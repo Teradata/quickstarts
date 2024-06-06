@@ -1,0 +1,138 @@
+= Ejecutar Vantage Express en Google Cloud
+:page-lang: es
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: 23 de agosto de 2022
+:description: Ejecute Vantage Express en Google Cloud.
+:keywords: almacenes de datos, separación de almacenamiento informático, teradata, vantage, plataforma de datos en la nube, almacenamiento de objetos, inteligencia empresarial, análisis empresarial
+:tabs:
+:experimental:
+
+include::../partials/use.csae.adoc[]
+
+== Descripción general
+
+Este tutorial demuestra cómo ejecutar Vantage Express en Google Cloud Platform. Vantage Express contiene un Teradata SQL Engine completamente funcional.
+
+NOTE: Si no desea pagar por el uso de la nube, puede instalar Vantage Express localmente usando link:getting.started.vmware.adoc[VMware], link:getting.started.vbox[VirtualBox] o link:getting.started.utm[UTM].
+
+== Requisitos previos
+
+. Una cuenta de Google Cloud.
+. Utilidad de línea de comandos `gcloud` instalada en su máquina. Puede encontrar instrucciones de instalación aquí: https://cloud.google.com/sdk/docs/install.
+
+
+== Instalación
+
+. Cree una máquina virtual Ubuntu con 4 CPU y 8 GB de RAM, un disco equilibrado de 70 GB. El siguiente comando crea una máquina virtual en la región `us-central1`. Para obtener el mejor rendimiento, reemplace la región  por la más cercana a usted. Para obtener la lista de regiones admitidas, consulte la link:https://cloud.google.com/compute/docs/regions-zones[documentación de regiones de Google Cloud].
++
+[tabs]
+====
+Windows::
++
+--
+Ejecutar en Powershell:
+[source, powershell, role="content-editable emits-gtm-events", id="gcloud_create_vm_win"]
+----
+gcloud compute instances create teradata-vantage-express `
+  --zone=us-central1-a `
+  --machine-type=n2-custom-4-8192 `
+  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced `
+  --enable-nested-virtualization `
+  --tags=ve
+----
+--
+MacOS::
++
+--
+[source, bash, role="content-editable emits-gtm-events", id="gcloud_create_vm_macos"]
+----
+gcloud compute instances create teradata-vantage-express \
+  --zone=us-central1-a \
+  --machine-type=n2-custom-4-8192 \
+  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
+  --enable-nested-virtualization \
+  --tags=ve
+----
+--
+Linux::
++
+--
+[source, bash, role="content-editable emits-gtm-events", id="gcloud_create_vm_linux"]
+----
+gcloud compute instances create teradata-vantage-express \
+  --zone=us-central1-a \
+  --machine-type=n2-custom-4-8192 \
+  --create-disk=boot=yes,device-name=ve-disk,image-project=ubuntu-os-cloud,image-family=ubuntu-2004-lts,size=70,type=pd-balanced \
+  --enable-nested-virtualization \
+  --tags=ve
+----
+--
+====
+. ssh a su máquina virtual:
++
+[source, bash, role="content-editable emits-gtm-events", id="gcloud_ssh"]
+----
+gcloud compute ssh teradata-vantage-express --zone=us-central1-a
+----
+. Cambiar al usuario `root`:
++
+[source, bash, role="content-editable emits-gtm-events", id="sudo"]
+----
+sudo -i
+----
+. Prepare el directorio de descarga de Vantage Express:
++
+[source, bash, role="content-editable emits-gtm-events", id="download_dir"]
+----
+mkdir /opt/downloads
+cd /opt/downloads
+----
+include::../partials/install.ve.in.public.cloud.adoc[]
+* Si desea conectarse a Vantage Express desde Internet, deberá abrir agujeros de firewall en su máquina virtual. También debe cambiar la contraseña predeterminada al usuario `dbc`:
+. Para cambiar la contraseña del usuario `dbc`, vaya a su máquina virtual e inicie bteq:
++
+[source, bash, role="content-editable emits-gtm-events", id="pw_change_bteq"]
+----
+bteq
+----
+. Inicie sesión en su base de datos usando `dbc` como usuario y contraseña:
++
+[source, teradata-sql, role="content-editable emits-gtm-events", id="pw_change_bteq_logon"]
+----
+.logon localhost/dbc
+----
+. Cambie la contraseña para el usuario `dbc`:
++
+[source, teradata-sql, role="content-editable emits-gtm-events", id="pw_change_mod_user"]
+----
+MODIFY USER dbc AS PASSWORD = new_password;
+----
+. Ahora puede abrir el puerto 1025 a Internet usando el comando de gcloud:
++
+[source%prewrap, bash, role="content-editable emits-gtm-events", id="gcloud_fw_rule"]
+----
+gcloud compute firewall-rules create vantage-express --allow=tcp:1025 --direction=IN --target-tags=ve
+----
+
+== Limpiar
+
+Para dejar de incurrir en cargos, elimine la máquina virtual:
+[source, bash, role="content-editable emits-gtm-events", id="delete_vm"]
+----
+gcloud compute instances delete teradata-vantage-express --zone=us-central1-a
+----
+
+Además, recuerde eliminar cualquier regla de firewall que haya agregado, por ejemplo:
+[source, bash, role="content-editable emits-gtm-events", id="delete_fw_rule"]
+----
+gcloud compute firewall-rules delete vantage-express
+----
+
+include::../partials/next.steps.adoc[]
+
+== Otras lecturas
+* link:https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20[Guía de instalación de Teradata® Studio™ y Studio™ Express]
+* link:https://docs.teradata.com/r/jmAxXLdiDu6NiyjT6hhk7g/root[Introducción a BTEQ]
+
+include::../partials/community_link.adoc[]

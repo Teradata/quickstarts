@@ -1,0 +1,30 @@
+= Utilice Teradata Studio/Express en Apple Mac M1/M2
+:page-lang: es
+:experimental:
+:page-author: Satish Chinthanippu
+:page-email: satish.chinthanippu@teradata.com
+:page-revdate: 14 de agosto de 2023
+:description: Ejecute Teradata Studio en Apple Mac M1/M2.
+:keywords: Teradata Studio, Teradata Studio Express, teradata, vantage, Mac, Apple Mac, Apple Mac M1, Apple Mac M2, procesador basado en Arm.
+:tabs:
+
+== Descripción general
+
+Este tutorial explica la instalación de Teradata Studio y Teradata Studio Express en máquinas Apple Mac M1/M2.
+
+== Pasos a seguir
+
+1. Instale y habilite el traductor binario Rosetta. Siga la link:https://support.apple.com/en-us/HT211861[Guía de instalación de Apple Mac Rosetta].
+2. Descargue e instale un JDK 11 basado en x86 de 64 bits de su proveedor preferido. Por ejemplo, puede descargar JDK 11 x86 de 64 bits desde link:https://www.azul.com/downloads/?version=java-11-lts&os=macos&architecture=x86-64-bit&package=jdkGet[Azul]
+3. Descargue la última versión de Teradata Studio o Teradata Studio Express desde la página de Descargas de Teradata:
+* link:https://downloads.teradata.com/download/tools/teradata-studio[Estudio Teradata]
+* link:https://downloads.teradata.com/download/tools/teradata-studio-express[Teradata Studio Express]
+4. Instale Teradata Studio/Teradata Studio Express. Consulte la link:{attachmentsdir}/Studio-Express-InstallGuide.pdf[Guía de instalación de Teradata Studio y Teradata Studio Express] para obtener más detalles.
+
+
+
+== Resumen
+
+Apple ha introducido procesadores basados ​​en ARM en las máquinas Apple MAC M1/M2. Las aplicaciones basadas en Intel x64 no funcionarán de forma predeterminada en procesadores basados ​​en ARM. Teradata Studio o Teradata Studio Express tampoco funcionan de forma predeterminada, ya que la versión actual de Studio macOS es una aplicación basada en Intel x64. Este tutorial muestra cómo instalar JDK basado en Intel x64 y Teradata Studio o Teradata Studio Express en Apple Mac M1/M2.
+
+include::../partials/community_link.adoc[]

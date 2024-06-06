@@ -1,0 +1,79 @@
+= Ejecutar Vantage Express en VirtualBox
+:page-lang: es
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: 9 de enero de 2023
+:description: Ejecute Vantage Express en su portátil usando VirtualBox.
+:keywords: almacenes de datos, separación de almacenamiento informático, teradata, vantage, plataforma de datos en la nube, almacenamiento de objetos, inteligencia empresarial, análisis empresarial
+:tabs:
+
+include::partial$getting.started.intro.adoc[]
+
+== Requisitos previos
+
+. Un ordenador que utilice uno de los siguientes sistemas operativos: Windows 10, Linux o MacOS basado en Intel.
++
+NOTE: Para sistemas MacOS M1/M2, consulte xref:getting.started.utm.adoc[].
+. 30 GB de espacio en disco y suficiente CPU y RAM para poder dedicar al menos un núcleo y 6 GB de RAM a la máquina virtual.
+. Derechos de administrador para poder instalar y ejecutar el software.
++
+// NOTE: No admin rights on your local machine? No problem! Have a look at how to run Vantage Express in link:#[AWS], link:#[Azure], link:#[Google Cloud].
+
+== Instalación
+
+=== Descargar el software requerido
+
+. La última versión de link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Express VirtualBox Open Virtual Appliance (OVA), window=_blank].
++
+NOTE: Si no ha utilizado el sitio web de Descargas de Teradata antes, primero deberá registrarse.
+. link:https://www.virtualbox.org/wiki/Downloads[VirtualBox, window=_blank], versión 6.1.
++
+NOTE: También puede instalar VirtualBox usando `brew` y otros administradores de paquetes.
+
+=== Ejecutar instaladores
+
+. Instale VirtualBox ejecutando el instalador y aceptando los valores predeterminados.
+
+NOTE: VirtualBox incluye funciones que requieren privilegios elevados. Cuando inicie VirtualBox por primera vez, se le pedirá que confirme este acceso elevado. Es posible que también deba reiniciar su máquina para activar el complemento del kernel de VirtualBox.
+
+=== Ejecutar Vantage Express
+
+. Inicie VirtualBox.
+. Vaya al menú `File -> Import Appliance...`.
+. En el campo `File`, seleccione el archivo OVA descargado.
+. En la siguiente pantalla, acepte los valores predeterminados y haga clic en `Import`.
+. De vuelta en el panel principal de VirtualBox, inicie el dispositivo Vantage Express haciendo doble clic en la máquina virtual `Vantage 17.20`.
++
+image::getting-started-vbox/start-vm.png[Iniciar máquina virtual, width=75%]
+
+include::partial$run.vantage.adoc[]
+
+=== Ejecutar consultas de muestra
+
+include::partial$running.sample.queries.adoc[]
+
+== Actualización de las extensiones de invitado de VirtualBox
+
+VirtualBox Guest Extensions es un software que se ejecuta en una máquina virtual. Hace que la máquina virtual se ejecute más rápido en VirtualBox. También mejora la resolución de la pantalla de la máquina virtual y su capacidad de respuesta al cambio de tamaño. Implementa un portapapeles bidireccional y arrastra y suelta entre el anfitrión y el invitado. VirtualBox Guest Extensions en la máquina virtual debe coincidir con la versión de su instalación de VirtualBox. Es probable que tenga que actualizar VirtualBox Guest Extensions para obtener un rendimiento óptimo.
+
+Para actualizar VirtualBox Guest Extensions:
+
+. Inserte el DVD de VirtualBox Guest Extensions haciendo clic en `SATA Port 3: [Optical Drive]` en la sección `Storage`:
++
+image::insert-guest-additions-dvd.png[Insertar DVD de adiciones para invitados, width=50%]
+. De vuelta en la ventana Máquina virtual, inicie la aplicación `Gnome Terminal`.
+. Ejecute el siguiente comando en la terminal:
++
+[source, bash, id="update_guest_additions", role="content-editable emits-gtm-events"]
+----
+mount /dev/cdrom /media/dvd; /media/dvd/VBoxLinuxAdditions.run
+----
+
+include::partial$getting.started.summary.adoc[]
+
+include::partial$next.steps.adoc[]
+
+== Otras lecturas
+* link:https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20[Guía de instalación de Teradata® Studio™ y Studio™ Express]
+
+include::ROOT:partial$community_link.adoc[]

@@ -1,0 +1,76 @@
+= Ejecutar Vantage Express en UTM
+:page-lang: es
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: 9 de enero de 2023
+:description: Ejecute Vantage Express en su Mac mediante UTM.
+:keywords: almacenes de datos, separación de almacenamiento informático, teradata, vantage, plataforma de datos en la nube, almacenamiento de objetos, inteligencia empresarial, análisis empresarial
+:icons: font
+
+include::partial$getting.started.intro.adoc[]
+
+== Requisitos previos
+
+. Un ordenador Mac. Se admiten chips Intel y M1/2.
++
+NOTE: Vantage Express se ejecuta en arquitectura x86. Cuando ejecuta la máquina virtual en chips M1/2, UTM tiene que emular x86. Esto es significativamente más lento que la virtualización. Si determina que Vantage Express en M1/M2 es demasiado lento para sus necesidades, considere ejecutar Vantage Express en la nube: xref:run-vantage-express-on-aws.adoc[AWS], xref:run-vantage-express-on-microsoft-azure.adoc[Azure], xref:vantage.express.gcp.adoc[Google Cloud].
+. 30 GB de espacio en disco y suficiente CPU y RAM para poder dedicar al menos un núcleo y 4 GB de RAM a la máquina virtual.
+. Derechos de administrador para poder instalar y ejecutar el software.
++
+NOTE: ¿No tiene derechos de administrador en su máquina local? Eche un vistazo a cómo ejecutar Vantage Express en xref:run-vantage-express-on-aws.adoc[AWS], xref:run-vantage-express-on-microsoft-azure.adoc[Azure], xref:vantage.express.gcp.adoc[Google Cloud].
+
+== Instalación
+
+=== Descargar el software requerido
+
+. La última versión de link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[Vantage Express]. Si no ha utilizado el sitio web de descargas de Teradata antes, deberá registrarse.
+. La última versión de link:https://mac.getutm.app/[UTM].
+
+=== Ejecutar el instalador de UTM
+
+. Instale UTM ejecutando el instalador y aceptando los valores predeterminados.
+
+=== Ejecutar Vantage Express
+
+. Vaya al directorio donde descargó Vantage Express y descomprima el archivo descargado.
+. Inicie UTM, haga clic en el signo `+` y seleccione `Virtualize` (para Mac Intel) o `Emulate` (para Mac M1).
+. En la pantalla `Operating System` seleccione `Other`.
+. En la pantalla `Other` seleccione `Skip ISO Boot`.
+. En la pantalla `Hardware` asigne al menos 4 GB de memoria y al menos 1 núcleo de CPU. Recomendamos 10 GB de RAM y 2 CPU.
++
+image::utm.hardware.png[Hardware UTM, width=500, align="left"]
+. En la pantalla `Storage` acepte los valores predeterminados haciendo clic en `Next`.
+. En la pantalla `Shared Direct`, haga clic en `Next`.
+. En la pantalla `Summary` marque `Open VM Settings` y haga clic en `Save`.
+. Vaya al asistente de configuración. Solo necesita ajustar las siguientes pestañas:
+* *QEMU* - deshabilite la opción `UEFI Boot`
+* *Red* - exponga los puertos ssh (22) y Vantage (1025) en el ordenador host:
++
+image::utm.network.png[Red UTM, width=500]
+. Unidades de asignación:
+* Elimine el valor predeterminado de `IDE Drive`.
+* Asigne las 3 unidades Vantage Express importando los archivos de disco desde el archivo zip de VM descargado. Asegúrese de asignarlos en el orden correcto, `-disk1`, `-disk2`, `-disk3`. El primer disco es de arranque y contiene la propia base de datos. Los discos 2 y 3 se denominan `pdisks` y contienen datos. A medida que importa los archivos, UTM los convertirá automáticamente del formato `vmdk` al formato `qcow2`. Asegúrese de que cada disco esté configurado usando la interfaz `IDE`:
++
+image::utm.drives.png[Unidades UTM, width=500]
++
+Una vez que haya terminado de asignar las 3 unidades, su configuración debería verse así:
++
+image::utm.final.png[Unidades UTM finales, width=500]
+. Guarde la configuración e inicie la máquina virtual.
+
+include::../partials/run.vantage.adoc[]
+
+=== Ejecutar consultas de muestra
+
+. Ahora ejecutaremos algunas consultas en la máquina virtual. Para evitar problemas de copiar y pegar entre el host y la máquina virtual, abriremos este inicio rápido en la máquina virtual. Vaya al escritorio virtual, inicie Firefox y apúntelo a este inicio rápido.
+
+include::../partials/running.sample.queries.adoc[]
+
+include::partial$getting.started.summary.adoc[]
+
+include::partial$next.steps.adoc[]
+
+== Otras lecturas
+* link:https://docs.teradata.com/r/Teradata-StudioTM-and-StudioTM-Express-Installation-Guide-17.20[Guía de instalación de Teradata® Studio™ y Studio™ Express]
+
+include::ROOT:partial$community_link.adoc[]

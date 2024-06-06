@@ -1,0 +1,118 @@
+. Instale VirtualBox y 7zip:
++
+[source, bash, role="content-editable emits-gtm-events", id="apt"]
+----
+apt update && apt-get install p7zip-full p7zip-rar virtualbox -y
+----
+. Recupere el comando curl para descargar Vantage Express.
+.. Vaya a la link:https://downloads.teradata.com/download/database/teradata-express-for-vmware-player[página de descarga de Vantage Expess] (es necesario registrarse).
+.. Haga clic en el enlace de descarga más reciente, por ejemplo, "Vantage Express 17.20". Verá una ventana emergente de acuerdo de licencia. No acepte la licencia todavía.
+.. Abra la vista de red en su navegador. Por ejemplo, en Chrome presione kbd:[F12] y navegue hasta la pestaña `Red`:
++
+image::browser.network.png[Pestaña Red del navegador, width=500]
+.. Acepte la licencia haciendo clic en el botón `I Agree` y cancele la descarga.
+.. En la vista de red, busque la última solicitud que comience con `VantageExpress`. Haga clic derecho sobre él y seleccione `Copy -> Copy as cURL`:
++
+image::browser.copy.curl.png[culr de copia del navegador, width=500]
+. Regrese a la sesión ssh y descargue Vantage Express pegando el comando curl. Agregue `-o ve.7z` al comando para guardar la descarga en un archivo llamado `ve.7z`. Puede eliminar todos los encabezados HTTP, por ejemplo:
++
+[source, bash, role="content-editable emits-gtm-events", id="download_ve"]
+----
+curl -o ve.7z 'http://d289lrf5tw1zls.cloudfront.net/database/teradata-express/VantageExpress17.20_Sles12_202108300444.7z?Expires=1638719978&Signature=GKBkNvery_long_signature__&Key-Pair-Id=********************'
+----
+. Descomprima el archivo descargado. Tardará varios minutos:
++
+[source, bash, role="content-editable emits-gtm-events", id="unzip"]
+----
+7z x ve.7z
+----
+. Inicie la máquina virtuarl en VirtualBox. El comando regresará inmediatamente, pero el proceso de inicio de la máquina virtual tardará varios minutos:
++
+[source, bash, role="content-editable emits-gtm-events", id="start_vim"]
+----
+export VM_IMAGE_DIR="/opt/downloads/VantageExpress17.20_Sles12"
+DEFAULT_VM_NAME="vantage-express"
+VM_NAME="${VM_NAME:-$DEFAULT_VM_NAME}"
+vboxmanage createvm --name "$VM_NAME" --register --ostype openSUSE_64
+vboxmanage modifyvm "$VM_NAME" --ioapic on --memory 6000 --vram 128 --nic1 nat --cpus 4
+vboxmanage storagectl "$VM_NAME" --name "SATA Controller" --add sata --controller IntelAhci
+vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk1*')"
+vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 1 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk2*')"
+vboxmanage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 2 --device 0 --type hdd --medium  "$(find $VM_IMAGE_DIR -name '*disk3*')"
+vboxmanage modifyvm "$VM_NAME" --natpf1 "tdssh,tcp,,4422,,22"
+vboxmanage modifyvm "$VM_NAME" --natpf1 "tddb,tcp,,1025,,1025"
+vboxmanage startvm "$VM_NAME" --type headless
+vboxmanage controlvm "$VM_NAME" keyboardputscancode 1c 1c
+----
+. ssh a la máquina virtual Vantage Express. Utilice `root` como contraseña:
++
+[source, bash, role="content-editable emits-gtm-events", id="ssh_to_ve"]
+----
+ssh -p 4422 root@localhost
+----
+. Valide que la DB esté activa:
++
+[source, bash, role="content-editable emits-gtm-events", id="pde"]
+----
+pdestate -a
+----
++
+Si el comando devuelve `PDE state is RUN/STARTED. DBS state is 5: Logons are enabled - The system is quiescent`, significa que Vantage Express se ha iniciado.
+Si el estado es diferente, repita `pdestate -a` hasta obtener el estado correcto.
+. Una vez que Vantage Express esté en funcionamiento, inicie el cliente de línea de comandos `bteq` del cliente. BTEQ (pronunciado “bi-tik”) es una herramienta cliente de propósito general basada en comandos que se utiliza para enviar consultas SQL a una base de datos Teradata.
++
+[source, bash, role="content-editable emits-gtm-events", id="bteq"]
+----
+bteq
+----
+. Una vez en bteq, conéctese a su instancia Vantage Express. Cuando se le solicite la contraseña, introduzca `dbc`:
++
+[source, bash, role="content-editable emits-gtm-events", id="bteq_logon"]
+----
+.logon localhost/dbc
+----
+
+== Ejecutar consultas de muestra
+
+. Usando el usuario `dbc`, crearemos una nueva base de datos llamada `HR`. Copie/pegue esta consulta y presione kbd:[Entrar]:
++
+include::partial$getting.started.queries.adoc[]
+
+== Configuración opcional
+
+* Si tiene intención de detener e iniciar la máquina virtual, es posible que desee agregar Vantage Express al inicio automático. ssh a su máquina virtual y ejecute los siguientes comandos:
++
+[source, bash, role="content-editable emits-gtm-events", id="autostart"]
+----
+sudo -i
+
+cat <<EOF >> /etc/default/virtualbox
+VBOXAUTOSTART_DB=/etc/vbox
+VBOXAUTOSTART_CONFIG=/etc/vbox/autostart.cfg
+EOF
+
+cat <<EOF > /etc/systemd/system/vantage-express.service
+[Unit]
+Description=vm1
+After=network.target virtualbox.service
+Before=runlevel2.target shutdown.target
+[Service]
+User=root
+Group=root
+Type=forking
+Restart=no
+TimeoutSec=5min
+IgnoreSIGPIPE=no
+KillMode=process
+GuessMainPID=no
+RemainAfterExit=yes
+ExecStart=/usr/bin/VBoxManage startvm vantage-express --type headless
+ExecStop=/usr/bin/VBoxManage controlvm vantage-express savestate
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+systemctl enable vantage-express
+systemctl start vantage-express
+----
