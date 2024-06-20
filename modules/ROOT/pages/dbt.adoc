@@ -60,16 +60,60 @@ source env/bin/activate
 --
 ====
 
-3. Install `dbt-teradata` module and its dependencies. The core dbt module is included as a dependency so you don't have to install it separately:
+3. Install `dbt-teradata` module:
 +
 [source, bash]
 ----
 pip install dbt-teradata
 ----
+  - dbt-core module is included as a dependency only up to version 1.7.x of dbt-teradata, so you don't have to install it separately.
+  - Starting from dbt-teradata 1.8.0 and above, dbt-core will not be installed as a dependency. Therefore, you need to explicitly install dbt-core.
+    Ensure you install dbt-core 1.8.0 or above.
+    You can do this with the following command:
+
+    pip install dbt-core>=1.8.0
+
+[NOTE]
+====
+More information on decoupling dbt adapters from dbt core versions can be found here: https://github.com/dbt-labs/dbt-core/discussions/9171
+====
+
+
 
 == Configure dbt
 
-We will now configure dbt to connect to your Vantage database. Create file `$HOME/.dbt/profiles.yml` with the following content. Adjust `<host>`, `<user>`, `<password>` to match your Teradata instance.
+We will now configure dbt to connect to your Vantage database.
+Create a file according to the platform mentioned below with the following content.
+
+[tabs]
+====
+Windows::
++
+--
+[source, bash]
+----
+c:\Users\<user name>\.dbt\profiles.yml
+----
+--
+MacOS::
++
+--
+[source, bash]
+----
+$HOME/.dbt/profiles.yml
+----
+--
+Linux::
++
+--
+[source, bash]
+----
+~/.dbt/profiles.yml
+----
+--
+====
+
+Adjust `<host>`, `<user>`, `<password>` to match your Teradata instance.
 
 [NOTE]
 .Database setup
