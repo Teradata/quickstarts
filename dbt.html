@@ -2011,14 +2011,45 @@ source env/bin/activate</code></pre>
 </div>
 </li>
 <li>
-<p>Install <code>dbt-teradata</code> module and its dependencies. The core dbt module is included as a dependency so you don&#8217;t have to install it separately:</p>
+<p>Install <code>dbt-teradata</code> module:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install dbt-teradata</code></pre>
 </div>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>dbt-core module is included as a dependency only up to version 1.7.x of dbt-teradata, so you don&#8217;t have to install it separately.</p>
+</li>
+<li>
+<p>Starting from dbt-teradata 1.8.0 and above, dbt-core will not be installed as a dependency. Therefore, you need to explicitly install dbt-core.
+Ensure you install dbt-core 1.8.0 or above.
+You can do this with the following command:</p>
+<div class="literalblock">
+<div class="content">
+<pre>pip install dbt-core&gt;=1.8.0</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
 </li>
 </ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>More information on decoupling dbt adapters from dbt core versions can be found here: <a href="https://github.com/dbt-labs/dbt-core/discussions/9171" class="bare">https://github.com/dbt-labs/dbt-core/discussions/9171</a></p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -2026,7 +2057,49 @@ source env/bin/activate</code></pre>
 <h2 id="_configure_dbt"><a class="anchor" href="#_configure_dbt"></a>Configure dbt</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We will now configure dbt to connect to your Vantage database. Create file <code>$HOME/.dbt/profiles.yml</code> with the following content. Adjust <code>&lt;host&gt;</code>, <code>&lt;user&gt;</code>, <code>&lt;password&gt;</code> to match your Teradata instance.</p>
+<p>We will now configure dbt to connect to your Vantage database.
+Create a file according to the platform mentioned below with the following content.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset2_windows"></a>Windows</p>
+</li>
+<li>
+<p><a id="tabset2_macos"></a>MacOS</p>
+</li>
+<li>
+<p><a id="tabset2_linux"></a>Linux</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset2_windows">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">c:\Users\&lt;user name&gt;\.dbt\profiles.yml</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_macos">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$HOME/.dbt/profiles.yml</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_linux">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">~/.dbt/profiles.yml</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Adjust <code>&lt;host&gt;</code>, <code>&lt;user&gt;</code>, <code>&lt;password&gt;</code> to match your Teradata instance.</p>
 </div>
 <div class="admonitionblock note">
 <table>
