@@ -60,25 +60,18 @@ source env/bin/activate
 --
 ====
 
-3. Install `dbt-teradata` module:
+3. Install `dbt-teradata` and `dbt-core` modules:
++
+[NOTE]
+.dbt dependencies
+====
+`dbt-core` module was included as a dependency only up to version 1.7.x of dbt-teradata. Starting from `dbt-teradata` 1.8.0 and above, `dbt-core` will not be installed as a dependency. Therefore, you need to explicitly install `dbt-core` in addition to installing `dbt-teradata`. More information on decoupling dbt adapters from `dbt-core` can be found here: https://github.com/dbt-labs/dbt-core/discussions/9171
+====
 +
 [source, bash]
 ----
-pip install dbt-teradata
+pip install dbt-teradata dbt-core
 ----
-  - dbt-core module is included as a dependency only up to version 1.7.x of dbt-teradata, so you don't have to install it separately.
-  - Starting from dbt-teradata 1.8.0 and above, dbt-core will not be installed as a dependency. Therefore, you need to explicitly install dbt-core.
-    Ensure you install dbt-core 1.8.0 or above.
-    You can do this with the following command:
-
-    pip install dbt-core>=1.8.0
-
-[NOTE]
-====
-More information on decoupling dbt adapters from dbt core versions can be found here: https://github.com/dbt-labs/dbt-core/discussions/9171
-====
-
-
 
 == Configure dbt
 
