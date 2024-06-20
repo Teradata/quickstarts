@@ -82,8 +82,7 @@ More information on decoupling dbt adapters from dbt core versions can be found 
 
 == Configure dbt
 
-We will now configure dbt to connect to your Vantage database.
-Create a file according to the platform mentioned below with the following content.
+Configure dbt to connect to your Vantage database. Create `profiles.yml` file in the location and with the content shown below.
 
 [tabs]
 ====
@@ -113,8 +112,6 @@ Linux::
 --
 ====
 
-Adjust `<host>`, `<user>`, `<password>` to match your Teradata instance.
-
 [NOTE]
 .Database setup
 ====
@@ -140,7 +137,7 @@ jaffle_shop:
   target: dev
 ----
 
-Now, that we have the profile file in place, we can validate the setup:
+Now, that you have the profile file in place, you can validate the setup:
 
 [source, bash]
 ----
@@ -217,7 +214,7 @@ dbt takes these raw data table and builds the following dimensional model, which
 
 === Create raw data tables
 
-In real life, we will be getting raw data from platforms like Segment, Stitch, Fivetran or another ETL tool. In our case, we will use dbt's `seed` functionality to create tables from csv files. The csv files are located in `./data` directory. Each csv file will produce one table. dbt will inspect the files and do type inference to decide what data types to use for columns.
+In real life, we will be getting raw data from platforms like Airbyte, Stitch, Fivetran or another ETL tool. In our case, we will use dbt's `seed` functionality to create tables from csv files. The csv files are located in `./data` directory. Each csv file will produce one table. dbt will inspect the files and do type inference to decide what data types to use for columns.
 
 Let's create the raw data tables:
 [source, bash]
