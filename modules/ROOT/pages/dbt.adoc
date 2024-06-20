@@ -82,7 +82,7 @@ More information on decoupling dbt adapters from dbt core versions can be found 
 
 == Configure dbt
 
-Configure dbt to connect to your Vantage database. Create `profiles.yml` file in the location and with the content shown below.
+Configure dbt to connect to your Vantage database. Create `profiles.yml` file in the location show below.
 
 [tabs]
 ====
@@ -99,7 +99,7 @@ MacOS::
 --
 [source, bash]
 ----
-$HOME/.dbt/profiles.yml
+~/.dbt/profiles.yml
 ----
 --
 Linux::
@@ -111,6 +111,8 @@ Linux::
 ----
 --
 ====
+
+Add the following config to `profile.yml` file. Adjust `<host>`, `<user>`, `<password>` to match your Teradata Vantage instance.
 
 [NOTE]
 .Database setup
