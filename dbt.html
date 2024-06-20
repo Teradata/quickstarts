@@ -2011,32 +2011,7 @@ source env/bin/activate</code></pre>
 </div>
 </li>
 <li>
-<p>Install <code>dbt-teradata</code> module:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install dbt-teradata</code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>dbt-core module is included as a dependency only up to version 1.7.x of dbt-teradata, so you don&#8217;t have to install it separately.</p>
-</li>
-<li>
-<p>Starting from dbt-teradata 1.8.0 and above, dbt-core will not be installed as a dependency. Therefore, you need to explicitly install dbt-core.
-Ensure you install dbt-core 1.8.0 or above.
-You can do this with the following command:</p>
-<div class="literalblock">
-<div class="content">
-<pre>pip install dbt-core&gt;=1.8.0</pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
+<p>Install <code>dbt-teradata</code> and <code>dbt-core</code> modules:</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2044,12 +2019,21 @@ You can do this with the following command:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
+<div class="title">dbt dependencies</div>
 <div class="paragraph">
-<p>More information on decoupling dbt adapters from dbt core versions can be found here: <a href="https://github.com/dbt-labs/dbt-core/discussions/9171" class="bare">https://github.com/dbt-labs/dbt-core/discussions/9171</a></p>
+<p><code>dbt-core</code> module was included as a dependency only up to version 1.7.x of dbt-teradata. Starting from <code>dbt-teradata</code> 1.8.0 and above, <code>dbt-core</code> will not be installed as a dependency. Therefore, you need to explicitly install <code>dbt-core</code> in addition to installing <code>dbt-teradata</code>. More information on decoupling dbt adapters from <code>dbt-core</code> can be found here: <a href="https://github.com/dbt-labs/dbt-core/discussions/9171" class="bare">https://github.com/dbt-labs/dbt-core/discussions/9171</a></p>
 </div>
 </td>
 </tr>
 </table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install dbt-teradata dbt-core</code></pre>
+</div>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
