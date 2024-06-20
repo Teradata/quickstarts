@@ -2057,8 +2057,7 @@ You can do this with the following command:</p>
 <h2 id="_configure_dbt"><a class="anchor" href="#_configure_dbt"></a>Configure dbt</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We will now configure dbt to connect to your Vantage database.
-Create a file according to the platform mentioned below with the following content.</p>
+<p>Configure dbt to connect to your Vantage database. Create <code>profiles.yml</code> file in the location and with the content shown below.</p>
 </div>
 <div class="tabset is-loading">
 <div class="ulist tabs">
@@ -2098,9 +2097,6 @@ Create a file according to the platform mentioned below with the following conte
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p>Adjust <code>&lt;host&gt;</code>, <code>&lt;user&gt;</code>, <code>&lt;password&gt;</code> to match your Teradata instance.</p>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2136,7 +2132,7 @@ Create a file according to the platform mentioned below with the following conte
 </div>
 </div>
 <div class="paragraph">
-<p>Now, that we have the profile file in place, we can validate the setup:</p>
+<p>Now, that you have the profile file in place, you can validate the setup:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2178,7 +2174,7 @@ Create a file according to the platform mentioned below with the following conte
 <div class="sect2">
 <h3 id="_create_raw_data_tables"><a class="anchor" href="#_create_raw_data_tables"></a>Create raw data tables</h3>
 <div class="paragraph">
-<p>In real life, we will be getting raw data from platforms like Segment, Stitch, Fivetran or another ETL tool. In our case, we will use dbt&#8217;s <code>seed</code> functionality to create tables from csv files. The csv files are located in <code>./data</code> directory. Each csv file will produce one table. dbt will inspect the files and do type inference to decide what data types to use for columns.</p>
+<p>In real life, we will be getting raw data from platforms like Airbyte, Stitch, Fivetran or another ETL tool. In our case, we will use dbt&#8217;s <code>seed</code> functionality to create tables from csv files. The csv files are located in <code>./data</code> directory. Each csv file will produce one table. dbt will inspect the files and do type inference to decide what data types to use for columns.</p>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s create the raw data tables:</p>
