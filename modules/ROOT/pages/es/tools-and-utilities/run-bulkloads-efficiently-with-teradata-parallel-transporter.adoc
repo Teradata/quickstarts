@@ -15,7 +15,7 @@ A menudo tenemos la necesidad de mover grandes volúmenes de datos a Vantage. Te
 == Requisitos previos
 
 * Acceso a una instancia de Teradata Vantage.
-+
+
 include::../partials/vantage_clearscape_analytics.adoc[]
 * Descargue Teradata Tools and Utilities (TTU) -  plataformas compatibles: link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-windows-installation-package[Windows], link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-mac-osx-installation-package[MacOS], link:https://downloads.teradata.com/download/tools/teradata-tools-and-utilities-linux-installation-package-0[Linux] (requiere registro).
 
@@ -24,17 +24,17 @@ include::../partials/vantage_clearscape_analytics.adoc[]
 [tabs]
 ====
 Windows::
-+
+
 --
 Descomprima el archivo descargado y ejecute `setup.exe`.
 --
 MacOS::
-+
+
 --
 Descomprima el archivo descargado y ejecute `TeradataToolsAndUtilitiesXX.XX.XX.pkg`.
 --
 Linux::
-+
+
 --
 Descomprima el archivo descargado, vaya al directorio descomprimido y ejecute:
 [source, bash]
@@ -269,6 +269,6 @@ Este tutorial demostró cómo incorporar grandes cantidades de datos en Vantage.
 == Otras lecturas
 * link:https://docs.teradata.com/r/Teradata-Parallel-Transporter-User-Guide/February-2022[Guía del usuario de Teradata® TPT]
 * link:https://docs.teradata.com/r/Teradata-Parallel-Transporter-Reference/February-2022[Referencia de Teradata® TPT]
-* xref:../general/nos.adoc[]
+
 
 include::../partials/community_link.adoc[]

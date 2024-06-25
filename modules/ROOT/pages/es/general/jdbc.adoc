@@ -53,4 +53,4 @@ Este tutorial demuestra cómo conectarse a Teradata Vantage mediante JDBC. Descr
 == Otras lecturas
 * link:https://teradata-docs.s3.amazonaws.com/doc/connectivity/jdbc/reference/current/frameset.html[Referencia del controlador JDBC de Teradata]
 
-include:../partials/community_link.adoc[]
+include::../partials/community_link.adoc[]

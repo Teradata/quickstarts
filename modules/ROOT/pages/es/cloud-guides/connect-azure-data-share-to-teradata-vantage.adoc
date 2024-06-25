@@ -629,4 +629,4 @@ CREATE MULTISET TABLE WeatherData_temp AS (
 WITH DATA
 ----
 
-include::ROOT:partial$community_link.adoc[]
+include::../partials/community_link.adoc[]

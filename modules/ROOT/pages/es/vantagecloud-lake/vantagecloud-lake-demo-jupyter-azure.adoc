@@ -15,8 +15,8 @@ Este inicio rápido detalla el proceso para ejecutar las https://github.com/Tera
 == Requisitos previos
 * Acceso a una cuenta de Microsoft Azure
 * Acceso a un entorno VantageCloud Lake
-+
-include::vantagecloud-lake:partial$vantagecloud-lake-request.adoc[]
+
+include::partials/vantagecloud-lake-request.adoc[]
 
 == Configuración de Microsoft Azure
 En esta sección cubriremos en detalle cada uno de los pasos a continuación:
