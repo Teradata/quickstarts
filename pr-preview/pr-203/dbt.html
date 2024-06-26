@@ -1037,7 +1037,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       </li>
                     </ul>  
                     <div class="head-nav__alt-menu-wrapper header-nav__element">
+                    
                       <ul class="header-nav__alt-menu d-flex justify-content-end list">
+                        <li class="button-free-demo">
+                          <a class="call-to-action-button-secondary" href="https://www.teradata.com/getting-started/demos/clearscape-analytics" target="_blank" title="Browse Content" rel="nofollow">
+                            Start free demo
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                              <path d="M9.35008 11.9669L8.63341 11.2669L11.4334 8.46686H2.66675V7.46686H11.4334L8.61675 4.6502L9.33341 3.9502L13.3501 7.96686L9.35008 11.9669Z" fill="#00233C"/>
+                            </svg>
+                          </a>  
+                        </li>
                         <li>
                           <section class="navbar-search" id="searchtextbox"> 
                             <div class="navbar-item">
@@ -1151,6 +1160,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     </li>
                   </ul>
                   <footer>
+                    <div class="container-wide header-nav-mobile__menu-listing-ul" style="padding: 14px 16px;">
+                     <a class="call-to-action-button-secondary" href="https://www.teradata.com/getting-started/demos/clearscape-analytics" target="_blank" title="Browse Content" rel="nofollow">
+                      Start free demo
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M9.35008 11.9669L8.63341 11.2669L11.4334 8.46686H2.66675V7.46686H11.4334L8.61675 4.6502L9.33341 3.9502L13.3501 7.96686L9.35008 11.9669Z" fill="#00233C"></path>
+                      </svg>
+                     </a>  
+                    </div>
                     <div class="header-nav-mobile__sub-menu background-grayLight mt-6 py-6 container-wide">
                       <ul class="row list">
                         <li class="col-6">
@@ -2234,10 +2251,25 @@ source env/bin/activate</code></pre>
 </div>
 </li>
 <li>
-<p>Install <code>dbt-teradata</code> module and its dependencies. The core dbt module is included as a dependency so you don&#8217;t have to install it separately:</p>
+<p>Install <code>dbt-teradata</code> and <code>dbt-core</code> modules:</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">dbt dependencies</div>
+<div class="paragraph">
+<p><code>dbt-core</code> module was included as a dependency only up to version 1.7.x of dbt-teradata. Starting from <code>dbt-teradata</code> 1.8.0 and above, <code>dbt-core</code> will not be installed as a dependency. Therefore, you need to explicitly install <code>dbt-core</code> in addition to installing <code>dbt-teradata</code>. More information on decoupling dbt adapters from <code>dbt-core</code> can be found here: <a href="https://github.com/dbt-labs/dbt-core/discussions/9171" class="bare">https://github.com/dbt-labs/dbt-core/discussions/9171</a></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install dbt-teradata</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install dbt-teradata dbt-core</code></pre>
 </div>
 </div>
 </li>
@@ -2249,7 +2281,48 @@ source env/bin/activate</code></pre>
 <h2 id="_configure_dbt"><a class="anchor" href="#_configure_dbt"></a>Configure dbt</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We will now configure dbt to connect to your Vantage database. Create file <code>$HOME/.dbt/profiles.yml</code> with the following content. Adjust <code>&lt;host&gt;</code>, <code>&lt;user&gt;</code>, <code>&lt;password&gt;</code> to match your Teradata instance.</p>
+<p>Configure dbt to connect to your Vantage database. Create <code>profiles.yml</code> file in the location show below.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset2_windows"></a>Windows</p>
+</li>
+<li>
+<p><a id="tabset2_macos"></a>MacOS</p>
+</li>
+<li>
+<p><a id="tabset2_linux"></a>Linux</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset2_windows">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">c:\Users\&lt;user name&gt;\.dbt\profiles.yml</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_macos">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">~/.dbt/profiles.yml</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_linux">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">~/.dbt/profiles.yml</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Add the following config to <code>profile.yml</code> file. Adjust <code>&lt;host&gt;</code>, <code>&lt;user&gt;</code>, <code>&lt;password&gt;</code> to match your Teradata Vantage instance.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2286,7 +2359,7 @@ source env/bin/activate</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Now, that we have the profile file in place, we can validate the setup:</p>
+<p>Now, that you have the profile file in place, you can validate the setup:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2328,7 +2401,7 @@ source env/bin/activate</code></pre>
 <div class="sect2">
 <h3 id="_create_raw_data_tables"><a class="anchor" href="#_create_raw_data_tables"></a>Create raw data tables</h3>
 <div class="paragraph">
-<p>In real life, we will be getting raw data from platforms like Segment, Stitch, Fivetran or another ETL tool. In our case, we will use dbt&#8217;s <code>seed</code> functionality to create tables from csv files. The csv files are located in <code>./data</code> directory. Each csv file will produce one table. dbt will inspect the files and do type inference to decide what data types to use for columns.</p>
+<p>In real life, we will be getting raw data from platforms like Airbyte, Stitch, Fivetran or another ETL tool. In our case, we will use dbt&#8217;s <code>seed</code> functionality to create tables from csv files. The csv files are located in <code>./data</code> directory. Each csv file will produce one table. dbt will inspect the files and do type inference to decide what data types to use for columns.</p>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s create the raw data tables:</p>
@@ -2434,6 +2507,10 @@ If you have any questions or need further assistance, please visit our <a href="
 </div>
 </article>
 <style>
+.button-free-demo {
+  display: none;
+}
+
 @media screen and (min-width: 1024px){
   .body {
     margin-top: 55px;
@@ -2547,6 +2624,11 @@ If you have any questions or need further assistance, please visit our <a href="
               <div>
                 <span class="h4 fontWeight-semiBold">Who we help</span>
                   <ul class="list">
+                    <li>
+                      <a href="https://www.teradata.com/trusted-ai" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Trusted AI | /trusted-ai">
+                        Trusted AI
+                      </a>
+                    </li>
                     <li>
                       <a href="https://www.teradata.com/Who-We-Help" data-celebrus="Footer Menu - Roles" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Roles | /Who-We-Help">Roles</a>
                     </li>
@@ -2752,6 +2834,7 @@ If you have any questions or need further assistance, please visit our <a href="
                               <span class="icon caret"></span>
                           </summary>
                           <ul class="pb-4 list">
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/trusted-ai" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Trusted AI | /trusted-ai">Trusted AI</a></li>
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Who-We-Help" data-celebrus="">Roles</a></li>
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Partners" data-celebrus="">Partners</a></li>
                               <li class="my-3"><a class="nav-2" href="https://teradata.my.site.com/teradataPRM/s/self-registration" data-celebrus="" target="_blank" rel="noopener">Partner registration</a></li>
