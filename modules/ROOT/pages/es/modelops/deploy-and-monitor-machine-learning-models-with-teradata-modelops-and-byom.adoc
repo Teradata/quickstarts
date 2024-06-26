@@ -1,0 +1,121 @@
+= ModelOps: importar e implementar su primer modelo BYOM
+:page-lang: es
+:experimental:
+:page-author: Pablo Escobar de la Oliva
+:page-email: pablo.escobardelaoliva@teradata.com
+:page-revdate: 29 de mayo de 2023
+:description: Tutorial para implementar y supervisar un modelo PMML en Vantage mediante ClearScape Analytics ModelOps
+:keywords: modelops, byom, python, clearscape analytics, teradata, almacenes de datos, teradata, vantage, plataforma de datos en la nube, aprendizaje automático, inteligencia artificial, inteligencia empresarial, análisis empresarial
+
+== Descripción general
+
+Este es un tutorial para personas no familiarizadas con ClearScape Analytics ModelOps. En el tutorial, podrá crear un nuevo proyecto en ModelOps, cargar los datos necesarios en Vantage y realizar un seguimiento del ciclo de vida completo de un modelo de demostración de Diabetes importado utilizando mecanismos BYOM.
+
+== Requisitos previos
+
+* Acceso a una instancia de Teradata Vantage con ClearScape Analytics (incluye ModelOps)
+
+* Capacidad para ejecutar Jupyter Notebooks
+
+include::../partials/vantage_clearscape_analytics.adoc[]
+
+Archivos necesarios
+
+
+Comencemos descargando los archivos necesarios para este tutorial. Descargue estos 4 archivos adjuntos y cárguelos en el sistema de archivos de su Notebook. Seleccione los archivos según su versión de ModelOps:
+
+ModelOps versión 6 (octubre de 2022):
+
+link:{attachmentsdir}/ModelOps_Training_v6.ipynb[Descargue el cuaderno de formación de ModelOps]
+
+link:{attachmentsdir}/BYOM_v6.ipynb[Descargue el archivo BYOM Notebook para un caso de uso de demostración]
+
+link:{attachmentsdir}/ModelOps_Data_files_v6.zip[Descargue archivos de datos para un caso de uso de demostración]
+
+link:{attachmentsdir}/ModelOps_BYOM_files_v6.zip[Descargue archivos de código BYOM para un caso de uso de demostración]
+
+Alternativamente, puede clonar con git los siguientes repositorios
+[source, cli]
+----
+git clone https://github.com/willfleury/modelops-getting-started
+git clone https://github.com/Teradata/modelops-demo-models/
+----
+
+ModelOps versión 7 (abril de 2023):
+
+link:{attachmentsdir}/ModelOps_Training_v7.ipynb[Descargue el cuaderno de formación de ModelOps]
+
+link:{attachmentsdir}/BYOM_v7.ipynb[Descargue el archivo BYOM Notebook para un caso de uso de demostración]
+
+link:{attachmentsdir}/ModelOps_Data_files_v7.zip[Descargue archivos de datos para un caso de uso de demostración]
+
+link:{attachmentsdir}/ModelOps_BYOM_files_v7.zip[Descargue archivos de código BYOM para un caso de uso de demostración]
+
+----
+git clone -b v7 https://github.com/willfleury/modelops-getting-started.git
+git clone https://github.com/Teradata/modelops-demo-models/
+----
+
+Configurar la base de datos y el entorno Jupyter 
+
+Siga el Jupyter Notebook ModelOps_Training para configurar la base de datos, las tablas y las bibliotecas necesarias para la demostración.
+
+== Entender dónde estamos en la metodología
+
+image::BYOM.png[Captura de pantalla BYOM de la metodología ModelOps, width=100%]
+
+include::partials/modelops-basic.adoc[]
+
+== Modelo de ciclo de vida para un nuevo BYOM
+
+Descargue y descomprima los archivos necesarios; los enlaces se encuentran en la parte superior del tutorial. Para el archivo PMML también puede descargar un PMML generado en el entrenamiento de un modelo GIT.
+
+* BYOM.ipynb
+
+* model.pmml 
+
+* requirements.txt
+
+* evaluation.py 
+
+* data_stats.json
+
+* __init__.py
+
+Definir el modelo BYOM con evaluación y seguimiento
+
+* Versión de importación
+
+* para v7 - BYOM no hay código disponible - Puede habilitar la evaluación automatizada y la supervisión del desfase de datos. 
+En la página de supervisión, use la columna de destino BYOM: CAST(CAST(json_report AS JSON).JSONExtractValue('$.predicted_HasDiabetes') AS INT)
+
+* Evaluar
+
+* Revisar el informe de evaluación, incluidas las estadísticas del conjunto de datos
+
+* Aprobar
+
+* Implementar en Vantage: motor, publicación, programación. Se requiere un conjunto de datos de puntuación
+Utilice su conexión y seleccione una base de datos. por ejemplo, "aoa_byom_models"
+
+* Implementaciones/ejecuciones
+
+* Evalúe nuevamente con el conjunto de datos 2: para supervisar el comportamiento de las métricas del modelo
+
+* Supervisar el desfase del modelo: datos y métricas
+
+* para v7: revise sus predicciones directamente desde Implementaciones -> página Trabajo
+
+* Abra el cuaderno BYOM para ejecutar la predicción PMML a partir del código SQL 
+
+* Retirar
+
+
+== Resumen
+
+En este inicio rápido, hemos aprendido cómo seguir un ciclo de vida completo de modelos BYOM en ModelOps y cómo implementarlo en Vantage. Entonces, ¿cómo podemos programar una puntuación por lotes o probar puntuaciones de restful o bajo demanda y comenzar a supervisar las métricas de desfase de datos y calidad del modelo?
+
+== Otras lecturas
+* https://docs.teradata.com/search/documents?query=ModelOps&sort=last_update&virtual-field=title_only&content-lang=[ClearScape Analytics ModelOps Guida de Usuario]
+
+include::../partials/community_link.adoc[]

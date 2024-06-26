@@ -1,0 +1,294 @@
+= Utilizar datos de referencia geográfica con Vantage
+:page-lang: es
+:experimental:
+:page-author: Rémi Turpaud
+:page-email: remi.turpaud@teradata.com
+:page-revdate: 14 de febrero de 2022
+:description: Cómo cargar y utilizar documentos GeoJson con Teradata Vantage
+:keywords: geoespacial, geojson, teradata, vantage, plataforma de datos en la nube, análisis, mapas, análisis 4d, datos abiertos
+
+== Descripción general
+
+Esta publicación demuestra cómo puede aprovechar cualquier conjunto de datos geográficos en formato GeoJson y utilizarlo para análisis geoespaciales en Teradata Vantage, con solo unas pocas líneas de código.
+
+Hoy recopilaremos datos geográficos de referencia (mapas oficiales, puntos de interés, etc.) de fuentes públicas y los utilizaremos para respaldar nuestros análisis diarios.
+
+Aprenderá dos métodos para obtener sus datos GeoJson en Teradata Vantage:
+
+1. Cárguelo como un documento único y utilice las funciones de análisis nativas de ClearScape para analizarlo en una tabla que se pueda utilizar para análisis.
+2. Transfórmelo ligeramente en Python nativo a medida que lo cargamos en Vantage para generar un conjunto de datos listo para análisis.
+
+El primer método es un patrón ELT directo para el procesamiento de formato semiestructurado en Vantage con una única declaración SQL, el segundo implica una preparación ligera en Python (puro) y puede permitir una mayor flexibilidad (por ejemplo, para agregar controles de calidad tempranos u optimizar la carga de documentos grandes).
+
+== Requisitos previos
+
+Necesitará:
+
+* Acceso a una instancia de Teradata Vantage.
++
+include::../partials/vantage_clearscape_analytics.adoc[]
+* Un intérprete de Python 3
+* Un cliente SQL
+
+== Opción 1: cargar un documento GeoJson en Vantage
+Aquí cargaremos un documento GeoJson como un objeto grande de un solo carácter (CLOB) en Vantage Data Store y usaremos una única declaración SQL, respaldada por funciones nativas de ClearScape Analytics, para analizar este documento en una estructura utilizable para análisis geoespaciales.
+
+=== Obtener y cargar el documento GeoJson
+El sitio web http://geojson.xyz/ es una fuente fantástica de datos geográficos abiertos en formato GeoJson. Cargaremos el conjunto de datos "Lugares poblados" que proporciona una lista de más de 1000 ciudades importantes del mundo.
+
+Abra su *Intérprete de Python 3* favorito y asegúrese de tener instalados los siguientes paquetes:
+
+* wget
+* teradatasql
+* getpass
+
+Descargue y lea el conjunto de datos de las ciudades:
+[source, python]
+----
+import wget
+world_cities=wget.download('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places.geojson')
+with open(world_cities) as geo_json:
+    jmap = jmap = geo_json.read()
+----
+
+=== Cargar el documento GeoJson en Vantage
+
+Modifique este código según sea necesario con su nombre de host Vantage, nombre de usuario y especifique un mecanismo de inicio de sesión avanzado, si lo hubiera (por ejemplo, LDAP, Kerberos...) con el parámetro _logmech_ si es necesario.
+Todos los parámetros de conexión están documentados en la página PyPi de teradatasql allí: https://pypi.org/project/teradatasql/
+
+El siguiente código simplemente crea una conexión Vantage y abre un cursor que crea una tabla y la carga con nuestro archivo.
+
+[source, python]
+----
+import teradatasql
+import getpass
+tdhost='<Your-Vantage-System-HostName-Here>'
+tdUser='<Your-Vantage-User-Name-Here>'
+
+# Create a connection to Teradata Vantage
+con = teradatasql.connect(None, host=tdhost, user=tdUser, password=getpass.getpass())
+
+# Create a table named geojson_src and load the JSON map into it as a single CLOB
+with con.cursor () as cur:
+    cur.execute ("create table geojson_src (geojson_nm VARCHAR(32), geojson_clob CLOB CHARACTER SET UNICODE);")
+    r=cur.execute ("insert into geojson_src (?, ?)", ['cities',jmap])
+----
+
+=== Utilizar el mapa de Vantage
+
+Ahora abra su *cliente SQL* favorito y conéctese a su sistema Vantage.
+
+Usaremos las funciones JSON de análisis de ClearScape para analizar nuestro documento GeoJson y extraer las propiedades más relevantes y la geometría misma (las coordenadas de la ciudad) para cada característica (cada característica representa una ciudad en este ejemplo).
+Luego usamos la función GeomFromGeoJSON para convertir nuestra geometría como un tipo de datos de geometría nativo de Vantage (ST_GEOMETRY).
+
+Para comodidad del usuario, empaquetaremos todo este código SQL en una vista:
+
+[source, python]
+----
+REPLACE VIEW cities_geo AS
+SEL city_name, country_name, region_name, code_country_isoa3, GeomFromGeoJSON(geom, 4326) city_coord
+FROM JSON_Table
+(ON (
+    SEL
+     geojson_nm id
+    ,cast(geojson_clob as JSON) jsonCol
+    FROM geojson_src where geojson_nm='cities'
+)
+USING rowexpr('$.features[*]')
+               colexpr('[ {"jsonpath" : "$.geometry",
+                           "type" : "VARCHAR(32000)"},
+                          {"jsonpath" : "$.properties.NAME",
+                           "type" : "VARCHAR(50)"},
+                          {"jsonpath" : "$.properties.SOV0NAME",
+                           "type" : "VARCHAR(50)"},
+                          {"jsonpath" : "$.properties.ADM1NAME",
+                           "type" : "VARCHAR(50)"},
+                          {"jsonpath" : "$.properties.SOV_A3",
+                           "type" : "VARCHAR(50)"}]')
+) AS JT(id, geom, city_name, country_name, region_name, code_country_isoa3);
+----
+
+Eso es todo, ahora puede ver los datos de geometría preparados como una tabla, lista para enriquecer sus análisis:
+
+[source, teradata-sql]
+----
+SEL TOP 5 * FROM cities_geo;
+----
+
+Resultado:
+
+[cols="1,1,1,1,1"]
+|===
+|city_name|country_name|region_name|code_country_isoa3|city_coord
+
+|Potenza|Italy|Basilicata|ITA|POINT (15.798996495640267 40.642002130098206)
+|Mariehamn|Finland|Finström|ALD|POINT (19.949004471869102 60.096996184895431)
+|Ramallah|Indeterminate||PSE|POINT (35.206209378189556 31.902944751424059)
+|Poitier|French Republic|Poitou-Charentes|FRA|POINT (0.333276528534554 46.583292255736581)
+|Clermont-Ferrand|French Republic|Auvergne|FRA|POINT (3.080008095928406 45.779982115759424)
+|===
+
+Calcule la distancia entre dos ciudades:
+
+[source, teradata-sql]
+----
+SEL b.city_coord.ST_SphericalDistance(l.city_coord)
+FROM
+(SEL city_coord FROM cities_geo WHERE city_name='Bordeaux') b
+CROSS JOIN (SEL city_coord FROM cities_geo WHERE city_name='Lvov') l
+----
+
+Resultado:
+
+[cols="1"]
+|===
+|city_coord.ST_SPHERICALDISTANCE(city_coord)
+|1.9265006861079421e+06
+|===
+
+== Opción 2: preparar un documento GeoJson con Python y cargarlo en Vantage
+
+El ejemplo anterior demostró cómo cargar un documento completo como un objeto grande en Teradata Vantage y utilizar funciones analíticas integradas para analizarlo en un conjunto de datos utilizable.
+
+Esto es práctico pero limitado: debemos analizar este documento cada vez que necesitemos usarlo, ya que el documento original no se puede utilizar directamente para análisis, los documentos JSON actualmente están limitados a 16 MB en Vantage y puede resultar inconveniente corregir la calidad de los datos o problemas de formato dentro del documento almacenado como CLOB.
+
+En este ejemplo, analizaremos nuestro documento JSON usando el paquete json de Python y lo cargaremos como una tabla que se puede usar directa y eficientemente para el análisis.
+
+Las funciones de manipulación de listas y json de Python, junto con el controlador Teradata SQL para Python, hacen que este proceso sea realmente simple y eficiente.
+
+Para este ejemplo, usaremos los límites de los países del mundo disponibles en https://datahub.io.
+
+
+Pongámonos manos a la obra.
+
+Abra su *Intérprete de Python 3* favorito y asegúrese de tener instalados los siguientes paquetes:
+
+* wget
+* teradatasql
+* getpass
+
+=== Obtener y cargar el documento GeoJson
+
+[source, python]
+----
+import wget
+countries_geojson=wget.download('https://datahub.io/core/geo-countries/r/countries.geojson')
+----
+
+=== Abra el archivo GeoJson y escríbalo como diccionario.
+import json
+with open(countries_geojson) as geo_json:
+    countries_json = json.load(geo_json)
+
+=== [Opcional] Verifique el contenido del archivo
+
+Lo bueno de cargar este JSON en la memoria, si está usando una terminal Python interactiva, es que ahora puede explorar el documento para comprender su estructura. Por ejemplo
+
+[source, python]
+----
+print(countries_json.keys())
+print(countries_json['type'])
+print(countries_json['features'][0]['properties'].keys())
+print(countries_json['features'][0]['geometry']['coordinates'])
+----
+
+Lo que tenemos aquí es una colección de GeoFeatures (como antes).
+
+Ahora modelaremos ligeramente estos datos en una tabla Vantage, para eso:
+
+- Cargaremos cada característica sin formato.
+- Extraeremos las propiedades que parezcan interesantes para un análisis inmediato (en nuestro ejemplo, el nombre del país y el código ISO).
+- Extraeremos la geometría misma y la cargaremos como una columna separada.
+
+Para cargar un conjunto de filas con un cursor teradatasql, necesitamos representar cada fila como una matriz (o tuplas) de valores y el conjunto de datos completo como una matriz de todas las matrices de filas.
+Esto es bastante fácil de hacer como lista de comprensión.
+
+Por ejemplo:
+
+[source, python]
+----
+[(f['properties']['ADMIN'], f['properties']['ISO_A3'], f['geometry']) for f in countries_json['features'][:1]]
+----
+
+NB: No aparece aquí, pero se recomienda para conjuntos de datos más completos. Considere cargar la carga útil completa y original de la característica como una columna separada (este es un documento JSON). Esto le permitirá volver al registro original y extraer nuevas propiedades que quizás haya pasado por alto durante su primer análisis pero que se han vuelto relevantes, directamente en SQL y sin tener que volver a cargar el archivo por completo.
+
+=== Crear una conexión Vantage y cargar nuestro archivo en una tabla provisional
+
+Modifique este código según sea necesario con su nombre de host Vantage, nombre de usuario y especifique un mecanismo de inicio de sesión avanzado, si lo hubiera (por ejemplo, LDAP, Kerberos...) con el parámetro _logmech_ si es necesario.
+Todos los parámetros de conexión están documentados en la página PyPi de teradatasql allí: https://pypi.org/project/teradatasql/
+
+El siguiente código simplemente crea una conexión Vantage y abre un cursor que crea una tabla y la carga con nuestra lista.
+
+[source, python]
+----
+import teradatasql
+import getpass
+tdhost='<Your-Vantage-System-HostName-Here>'
+tdUser='<Your-Vantage-User-Name-Here>'
+
+# Create a connection to Teradata Vantage
+con = teradatasql.connect(None, host=tdhost, user=tdUser, password=tdPassword)
+
+# Create a table and load our country names, codes, and geometries.
+with con.cursor () as cur:
+    cur.execute ("create table stg_countries_map (country_nm VARCHAR(32), ISO_A3_cd VARCHAR(32), boundaries_geo CLOB CHARACTER SET UNICODE);")
+    r=cur.execute ("insert into stg_countries_map (?, ?, ?)", [(f['properties']['ADMIN'], f['properties']['ISO_A3'], str(f['geometry'])) for f in countries_json['features']])
+----
+
+=== Crear nuestra tabla de referencia geográfica
+
+El siguiente código realiza la creación de la tabla desde el intérprete de Python. También puede ejecutar la declaración _sql_ definida a continuación en su cliente SQL preferido. También puede simplemente definir esta lógica como una vista SQL para evitar tener que actualizar esta tabla.
+
+Usaremos ClearScape Analytics, la función GeomFromGeoJSON para convertir nuestra geometría como un tipo de datos de geometría Vantage nativo (ST_GEOMETRY).
+
+[source, python]
+----
+# Now create our final reference table, casting the geometry CLOB as a ST_GEOMETRY object
+sql='''
+CREATE TABLE ref_countries_map AS
+(
+SEL
+ISO_A3_cd
+,country_nm
+,GeomFromGeoJSON(boundaries_geo, 4326) boundaries_geo
+FROM stg_countries_map
+) WITH DATA
+'''
+
+WITH con.cursor () AS cur:
+    cur.execute (sql)
+----
+
+=== Utilizar sus datos
+
+Eso es todo, ahora puede consultar sus tablas usando su *cliente SQL* favorito y los excelentes https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Geospatial-Data-Types-17.20[tipos de datos geoespaciales y funciones analíticas de Teradata].
+
+Por ejemplo, utilizando los dos conjuntos de datos que hemos cargado durante este tutorial, verifique en qué países están
+
+[source, teradata-sql]
+----
+SEL cty.city_name, cty.city_coord, ctry.country_nm
+FROM cities_geo cty
+LEFT JOIN ref_countries_map ctry
+	ON ctry.boundaries_geo.ST_Contains(cty.city_coord)=1
+WHERE cty.city_name LIKE 'a%'
+----
+
+[cols="1,1,1"]
+|===
+|city_name|city_coord|country_nm
+|Acapulco|POINT (-99.915979046410712 16.849990864016206)|Mexico
+Aosta|POINT (7.315002595706176 45.737001067072299)|Italy
+Ancona|POINT (13.499940550397127 43.600373554552903)|Italy
+Albany|POINT (117.891604776075155 -35.016946595501224)|Australia
+|===
+
+== Resumen
+
+Tenga en cuenta que ninguno de los códigos anteriores implementa ningún procedimiento de control o verificación para, por ejemplo, administrar el estado de las tablas de destino, administrar el bloqueo, controlar los códigos de error, etc. Esto pretende ser una demostración de las funciones disponibles para adquirir y utilizar datos de referencia geoespaciales.
+
+Considere usar https://pypi.org/project/teradatasqlalchemy/[SQLAlchemy ORM] si está definiendo su canalización en Python, xref:dbt.adoc[dbt] o su conjunto de herramientas de orquestación y ELT favorito para crear productos que pueda poner en funcionamiento.
+
+¡Ahora puede saber cómo obtener cualquier conjunto de datos geográficos abiertos y utilizarlo para aumentar sus análisis con Teradata Vantage!
+
+include::../partials/community_link.adoc[]

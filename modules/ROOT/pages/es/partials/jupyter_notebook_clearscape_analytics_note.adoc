@@ -1,0 +1,1 @@
+NOTE: Este tutorial le muestra cómo agregar Teradata Extensions a un entorno de Jupyter Notebooks. Una versión alojada de Jupyter Notebooks integrada con Teradata Extensions y herramientas de análisis está disponible para pruebas funcionales de forma gratuita en https://clearscape.teradata.com.

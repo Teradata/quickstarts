@@ -1,0 +1,9 @@
+:experimental:
+
+include::partial$use.csae.adoc[]
+
+== Descripción general
+
+Este tutorial muestra cómo obtener acceso a una base de datos de Teradata ejecutándola en su máquina local. Una vez que termine los pasos, tendrá una base de datos Teradata Vantage Express funcional en su ordenador.
+
+NOTE: A partir de la versión 17.20, Vantage Express incluye los siguientes paquetes de análisis: https://docs.teradata.com/r/Vantage-Analytics-Library-User-Guide/January-2022[Vantage Analytics Library], https://docs.teradata.com/r/Teradata-VantageTM-Bring-Your-Own-Model-User-Guide/May-2022[Bring Your Own Model (BYOM)], https://docs.teradata.com/r/Teradata-VantageTM-API-Integration-Guide-for-Cloud-Machine-Learning/April-2022[API Integration con AWS SageMaker].

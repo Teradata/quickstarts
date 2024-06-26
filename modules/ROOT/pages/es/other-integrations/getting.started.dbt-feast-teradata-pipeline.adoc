@@ -1,0 +1,315 @@
+= Utilizar dbt y FEAST para crear un almacén de funciones en Teradata Vantage
+:page-lang: es
+:experimental:
+:page-author: Ravi Chillanki
+:page-email: ravi.chillanki@teradata.com
+:page-revdate: 4 de agosto de 2023
+:description: Integración de dbt Feast con Teradata
+:keywords: almacenes de datos, separación de almacenamiento informático, teradata, vantage, plataforma de datos en la nube, almacenamiento de objetos, inteligencia empresarial, análisis empresarial, IA/ML, IA, ML, ingeniería de funciones, almacén de funciones, FEAST
+:tabs:
+
+== Descripción general
+
+Este tutorial muestra un enfoque para crear una canalización dbt que toma datos sin procesar y los convierte en funciones FEAST. La canalización aprovecha las  'link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Analytics-Database-Analytic-Functions-17.20[funciones de ClearScape Analytics]' para transformaciones de datos. El resultado de las transformaciones se carga en FEAST para materializar características que se pueden usar en modelos ML.
+
+== Introducción
+=== dbt
+link:https://www.getdbt.com/product/what-is-dbt/[dbt] (Data Build Tool) es una herramienta de transformación de datos que es la piedra angular de las pilas de datos modernas. Se encarga de la T en ELT (Extract Load Transform). Se supone que algún otro proceso trae datos sin procesar a su almacén o lago de datos. Luego, estos datos deben transformarse.
+
+=== Feast
+link:https://docs.feast.dev/[Feast] (Feature Store) es un sistema de datos flexible que utiliza tecnología existente para administrar y proporcionar funciones de aprendizaje automático a modelos en tiempo real. Permite la personalización para satisfacer necesidades específicas. También nos permite hacer que las funciones estén disponibles de manera coherente para entrenamiento y servicio, evitar la fuga de datos y desacoplar el aprendizaje automático de la infraestructura de datos.
+
+
+== Requisitos previos
+
+* Acceso a una instancia de base de datos Teradata Vantage.
+include::../partials/vantage_clearscape_analytics.adoc[]
+* Feast-Teradata  instalado localmente. Consulte las link:https://quickstarts.teradata.com/modelops/using-feast-feature-store-with-teradata-vantage.html#_overview[Instrucciones de instalación de Feast-Teradata.]
+
+* dbt instalado localmente. Consulte las link:https://quickstarts.teradata.com/dbt.html[Instrucciones de instalación de dbt.]
+
+== Objetivo
+El objetivo es crear una canalización de datos con Teradata Vantage como fuente y realizar la transformación de datos en algunas variables en dbt. La principal transformación de datos que hacemos en dbt es la codificación one-hot de varias columnas como género, estado civil, código de estado, etc. Además de eso, los datos de la columna del tipo de cuenta se transformarán realizando operaciones de agregación en un par de columnas. Todo esto en conjunto genera el conjunto de datos deseado con datos transformados. El conjunto de datos transformado se utiliza como entrada en FEAST para almacenar características. Luego, las funciones se utilizan para generar un conjunto de datos de entrenamiento para modelos.
+
+
+== Primeros pasos
+1. Cree un nuevo entorno Python para administrar dbt, feast y sus dependencias. Active el entorno:
++
+[source, bash]
+----
+python3 -m venv env
+source env/bin/activate
+----
+
+2. Clone el repositorio del tutorial y cambie el directorio al directorio del proyecto:
++
+[source, bash]
+----
+git clone https://github.com/Teradata/tdata-pipeline.git
+----
+La estructura de directorios del proyecto clonado se ve así:
++
+----
+tdata-pipeline/
+    feature_repo/
+        feature_views.py
+        feature_store.yml
+    dbt_transformation/
+        ...
+        macros
+        models
+        ...
+    generate_training_data.py
+    CreateDB.sql
+    dbt_project.yml
+----
+
+
+== Sobre el almacén bancario
+teddy_bank es un conjunto de datos ficticio de clientes bancarios, que consta principalmente de 3 tablas de clientes, cuentas y
+transacciones, con el siguiente diagrama entidad-relación:
+
+
+[erd, format=svg, width=100%]
+....
+# Entities
+
+
+[raw_customers] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+  *`cust_id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `income  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 1)", border: "1", border-color: "#ffffff"}
+  `age  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `years_with_bank  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `nbr_children  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `gender  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(1)", border: "1", border-color: "#ffffff"}
+  `marital_status  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(1)", border: "1", border-color: "#ffffff"}
+  `name_prefix  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(4)", border: "1", border-color: "#ffffff"}
+  `first_name  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(12)", border: "1", border-color: "#ffffff"}
+  `last_name  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(15)", border: "1", border-color: "#ffffff"}
+  `street_nbr  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(8)", border: "1", border-color: "#ffffff"}
+  `street_name  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(15)", border: "1", border-color: "#ffffff"}
+  `postal_code  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(5)", border: "1", border-color: "#ffffff"}
+  `city_name  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(16)", border: "1", border-color: "#ffffff"}
+  `state_code  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(2)", border: "1", border-color: "#ffffff"}
+
+
+[raw_accounts] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+  *`acct_nbr  ` {bgcolor: "#f9d6cd", color: "#000000", label: "VARCHAR(18)", border: "1", border-color: "#ffffff"}
+  +`cust_id  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `acct_type  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(2)", border: "1", border-color: "#ffffff"}
+  `account_active  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(1)", border: "1", border-color: "#ffffff"}
+  `acct_start_date  ` {bgcolor: "#fcece8", color: "#868686", label: "DATE", border: "1", border-color: "#ffffff"}
+  `acct_end_date  ` {bgcolor: "#fcece8", color: "#868686", label: "DATE", border: "1", border-color: "#ffffff"}
+  `starting_balance  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(11, 3)", border: "1", border-color: "#ffffff"}
+  `ending_balance  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(11, 3)", border: "1", border-color: "#ffffff"}
+
+[raw_transactions] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+  *`tran_id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  +`acct_nbr  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(18)", border: "1", border-color: "#ffffff"}
+  `tran_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(9, 2)", border: "1", border-color: "#ffffff"}
+  `principal_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 2)", border: "1", border-color: "#ffffff"}
+  `interest_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(11, 3)", border: "1", border-color: "#ffffff"}
+  `new_balance  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(9, 2)", border: "1", border-color: "#ffffff"}
+  `tran_date  ` {bgcolor: "#fcece8", color: "#868686", label: "DATE", border: "1", border-color: "#ffffff"}
+  `tran_time  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `channel  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(1)", border: "1", border-color: "#ffffff"}
+  `tran_code  ` {bgcolor: "#fcece8", color: "#868686", label: "VARCHAR(2)", border: "1", border-color: "#ffffff"}
+
+# Relationships
+
+raw_customers   1--* raw_accounts
+raw_accounts      1--* raw_transactions
+....
+
+dbt toma estos datos sin procesar y construye el siguiente modelo, que es más adecuado para herramientas de análisis y modelado de ML:
+
+[erd, format=svg, width=100%]
+....
+# Entities
+
+[`fact: Analytic_Dataset`] {bgcolor: "#f37843", color: "#ffffff", border: "0", border-color: "#ffffff"}
+  *`cust_id  ` {bgcolor: "#f9d6cd", color: "#000000", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `income  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 1)", border: "1", border-color: "#ffffff"}
+  `age  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `years_with_bank  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `nbr_children  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `marital_status_0  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `marital_status_1  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `marital_status_2  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `marital_status_other  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `gender_0  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `gender_1  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `gender_other  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `state_code_0  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `state_code_1  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `state_code_2  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `state_code_3  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `state_code_4  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `state_code_5  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `state_code_other  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `acct_type_0  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `acct_type_1  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `acct_type_2  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `acct_type_other  ` {bgcolor: "#fcece8", color: "#868686", label: "INTEGER", border: "1", border-color: "#ffffff"}
+  `CK_avg_bal  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
+  `CK_avg_tran_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
+  `CC_avg_bal  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
+  `CC_avg_tran_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
+  `SV_avg_bal  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
+  `SV_avg_tran_amt  ` {bgcolor: "#fcece8", color: "#868686", label: "FLOAT", border: "1", border-color: "#ffffff"}
+  `q1_trans_cnt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 0)", border: "1", border-color: "#ffffff"}
+  `q2_trans_cnt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 0)", border: "1", border-color: "#ffffff"}
+  `q3_trans_cnt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 0)", border: "1", border-color: "#ffffff"}
+  `q4_trans_cnt  ` {bgcolor: "#fcece8", color: "#868686", label: "DECIMAL(15, 0)", border: "1", border-color: "#ffffff"}
+  `event_timestamp  ` {bgcolor: "#fcece8", color: "#868686", label: "TIMESTAMP(0)", border: "1", border-color: "#ffffff"}
+  `created  ` {bgcolor: "#fcece8", color: "#868686", label: "TIMESTAMP(0)", border: "1", border-color: "#ffffff"}
+....
+
+
+== Configurar dbt
+Cree el archivo `$HOME/.dbt/profiles.yml` con el siguiente contenido. Ajuste `<host>`, `<user>`, `<password>` para que coincida con su instancia de Teradata.
+
+[NOTE]
+.Configuración de la base de datos
+====
+El siguiente perfil dbt apunta a una base de datos llamada `teddy_bank`. Puede cambiar el valor `schema` para que apunte a una base de datos existente en su instancia de Teradata Vantage:
+====
+
+[source, yaml, id="dbt_first_config", role="emits-gtm-events"]
+----
+dbt_transformation:
+  target: dev
+  outputs:
+    dev:
+      type: teradata
+      host: <host>
+      user: <user>
+      password: <password>
+      schema: teddy_bank
+      tmode: ANSI
+----
+Validar la configuración:
+
+[source, bash]
+----
+dbt debug
+----
+
+Si el comando de depuración devolvió errores, es probable que tenga un problema con el contenido de `profiles.yml`.
+
+== Configurar FEAST
+La configuración de Feast aborda la conexión a su base de datos Vantage. El archivo yaml creado al inicializar el proyecto de feast
+, `$HOME/.feast/feature_repo/feature_store.yml` puede contener los detalles de almacenamiento fuera de línea, almacenamiento en línea, proveedor
+y registro. Ajuste `<host>`, `<user>`, `<password>` para que coincida con su instancia de Teradata.
+
+[NOTE]
+.Configuración de la base de datos
+====
+El siguiente perfil dbt apunta a una base de datos llamada `teddy_bank`. Puede cambiar el valor `schema` para que apunte a una
+base de datos existente en su instancia de Teradata Vantage
+====
+
+=== Configuración de tienda sin conexión
+
+[source, yaml, id="feast_first_config", role="emits-gtm-events"]
+----
+project: td_pipeline
+registry:
+    registry_type: sql
+    path: teradatasql://<user>:<password>@<hostIP>/?database=teddy_bank&LOGMECH=TDNEGO
+provider: local
+offline_store:
+    type: feast_teradata.offline.teradata.TeradataOfflineStore
+    host: <host>
+    database: teddy_bank
+    user: <user>
+    password: <password>
+    log_mech: TDNEGO
+entity_key_serialization_version: 2
+----
+=== Sintaxis para el Registro SQL de Teradata
+[source, python]
+----
+path = 'teradatasql://'+ teradata_user +':' + teradata_password + '@'+host + '/?database=' +
+        teradata_database + '&LOGMECH=' + teradata_log_mech
+----
+== Ejecutar dbt
+En este paso, completaremos las siguientes tablas de datos: `customers`, `cuentas` y `transacciones`.
+
+[source, bash]
+----
+dbt seed
+----
+
+=== Crear el modelo dimensional
+Ahora que tenemos las tablas de datos sin procesar, podemos indicarle a dbt que cree el modelo dimensional:
+
+[source, bash]
+----
+dbt run --select Analytic_Dataset
+----
+
+== Ejecutar FEAST
+=== Definición del repositorio de funciones
+* `TeradataSource:` Fuente de datos para funciones almacenadas en Teradata (Enterprise o Lake) o accesibles a través de una tabla externa desde Teradata (NOS, QueryGrid)
+
+* `Entity:` Una colección de características relacionadas semánticamente.
+
+* `Feature View:` Una vista de características es un grupo de datos de características de una fuente de datos específica. Las vistas de características le permiten definir de forma coherente características y sus fuentes de datos, lo que permite la reutilización de grupos de características en un proyecto.
+
+
+[source, python]
+----
+DBT_source = TeradataSource( database=dbload, table=f"Analytic_Dataset", timestamp_field="event_timestamp")
+
+customer = Entity(name = "customer", join_keys = ['cust_id'])
+
+ads_fv = FeatureView(name="ads_fv",entities=[customer],source=DBT_source, schema=[
+        Field(name="age", dtype=Float32),
+        Field(name="income", dtype=Float32),
+        Field(name="q1_trans_cnt", dtype=Int64),
+        Field(name="q2_trans_cnt", dtype=Int64),
+        Field(name="q3_trans_cnt", dtype=Int64),
+        Field(name="q4_trans_cnt", dtype=Int64),
+    ],)
+----
+=== Generar datos de entrenamiento
+El enfoque para generar datos de entrenamiento puede variar. Dependiendo de los requisitos, 'entitydf' se puede unir a las tablas de datos de origen mediante la asignación de vistas de características. A continuación se muestra una función de ejemplo que genera un conjunto de datos de entrenamiento.
+[source, python]
+----
+def get_Training_Data():
+    # Initialize a FeatureStore with our current repository's configurations
+    store = FeatureStore(repo_path="feature_repo")
+    con = create_context(host = os.environ["latest_vm"], username = os.environ["dbc_pwd"],
+            password = os.environ["dbc_pwd"], database = "EFS")
+    entitydf = DataFrame('Analytic_Dataset').to_pandas()
+    entitydf.reset_index(inplace=True)
+    print(entitydf)
+    entitydf = entitydf[['cust_id','event_timestamp']]
+    training_data = store.get_historical_features(
+        entity_df=entitydf,
+        features=[
+        "ads_fv:age"
+        ,"ads_fv:income"
+        ,"ads_fv:q1_trans_cnt"
+        ,"ads_fv:q2_trans_cnt"
+        ,"ads_fv:q3_trans_cnt"
+        ,"ads_fv:q4_trans_cnt"
+        ],
+        full_feature_names=True
+    ).to_df()
+
+    return training_data
+
+
+----
+
+== Resumen
+Este tutorial demostró cómo usar dbt y FEAST con Teradata Vantage. El proyecto de muestra toma datos sin procesar de Teradata Vantage y produce funciones con dbt. Luego se crearon metadatos de características que forman la base para generar un conjunto de datos de entrenamiento para un modelo con FEAST; todas sus tablas correspondientes que crean el almacén de características también se generan en tiempo de ejecución dentro de la misma base de datos.
+
+== Otras lecturas
+* link:https://docs.getdbt.com/docs/[Documentación de dbt]
+* link:https://github.com/Teradata/dbt-teradata[Documentación del complemento dbt-teradata]
+* link:https://docs.feast.dev/tutorials/using-scalable-registry[Registro escalable de Feast]
+* link:https://medium.com/teradata/enabling-highly-scalable-feature-store-with-teradata-vantage-and-feast-e01008fa8fdb[Habilitar un almacén de funciones altamente escalable con Teradata Vantage y FEAST]
+* link:https://github.com/Teradata/tdata-pipeline[Repositorio de Git] para este proyecto.

@@ -1,0 +1,193 @@
+= Ejecutar demostraciones de Teradata Jupyter Notebook para VantageCloud Lake en Microsoft Azure
+:page-lang: es
+:experimental:
+:page-author: Daniel Herrera
+:page-email: daniel.herrera2@teradata.com
+:page-revdate: 26 de enero de 2024
+:description: Ejecutar demostraciones de Teradata Jupyter Notebook para VantageCloud Lake en Azure
+:keywords: almacenes de datos, separación de almacenamiento informático, teradata, vantage, plataforma de datos en la nube, inteligencia empresarial, análisis empresarial, jupyter, teradatasql, ipython-sql, computación en la nube, aprendizaje automático, sagemaker, vantagecloud, vantagecloud lake, lago
+:dir: vantagecloud-lake-demo-jupyter-azure
+:auxdir: vantagecloud-lake-demo-jupyter-sagemaker
+
+== Descripción general
+Este inicio rápido detalla el proceso para ejecutar las https://github.com/Teradata/lake-demos[demostraciones de Teradata Jupyter Notebook para VantageCloud Lake], en Microsoft Azure.
+
+== Requisitos previos
+* Acceso a una cuenta de Microsoft Azure
+* Acceso a un entorno VantageCloud Lake
+
+include::partials/vantagecloud-lake-request.adoc[]
+
+== Configuración de Microsoft Azure
+En esta sección cubriremos en detalle cada uno de los pasos a continuación:
+
+* Crear una aplicación web de Microsoft Azure basada en la imagen de Docker de las extensiones de Teradata Jupyter Lab
+* Configurar las extensiones de Jupyter Lab en la aplicación web de Azure
+* Cargar demostraciones de Vantagecloud Lake en la aplicación web de Azure de las extensiones de Jupyter Lab
+* Encontrar la IP de la aplicación web de Azure de las extensiones de Jupyter Lab
+
+=== Crear una aplicación web de Microsoft Azure basada en la imagen de Docker de las extensiones de Teradata Jupyter Lab
+* Inicie sesión en Microsoft Azure y haga clic en "Servicios de aplicación"
+
+image::vantagecloud-lake/{dir}/azure-console-0.PNG[Consola de Azure,align="center" width=75%]
+
+* En "Servicios de aplicaciones", haga clic en Aplicación web
+
+image::vantagecloud-lake/{dir}/azure-app-service-1.PNG[Crear una aplicación web de Azure,align="center" width=75%]
+
+* En la pestaña "Conceptos básicos":
+** Seleccione el grupo de recursos apropiado en el menú desplegable o cree uno nuevo.
+** Introduzca un nombre para su aplicación web.
+** Seleccione "Contenedor Docker" en las opciones del botón de opción "Publicar"
+** Seleccione "Linux" como sistema operativo
+** Seleccione la región apropiada del menú desplegable
+** Seleccione el plan de App Service adecuado. Si no tiene uno, se creará uno nuevo con las configuraciones predeterminadas.
++
+TIP: Para fines de la demostración de VantageCloud Lake, no se necesita redundancia
+** Después de completar esta pestaña, haga clic en la pestaña "Docker" para continuar
+
+image::vantagecloud-lake/{dir}/azure-app-service-2.PNG[Conceptos básicos de creación de aplicaciones web de Azure,align="center" width=75%]
+
+* En la pestaña "Docker":
+** Seleccione "Contenedor único" en el menú desplegable
+** En el menú desplegable "Fuente de imagen", seleccione "Docker Hub"
+** En el menú desplegable "Tipo de acceso", seleccione "Público"
+** En "Imagen y etiqueta" escriba `teradata/jupyterlab-extensions:latest`
++
+TIP: No se necesita un comando de inicio para este servicio de aplicaciones
+** Seleccione la pestaña "Revisar + Crear" para continuar
+
+image::vantagecloud-lake/{dir}/azure-app-service-3.PNG[Crear Docker de la aplicación web de Azure,align="center" width=75%]
+
+* En la pestaña "Revisar + Crear", haga clic en el botón "Crear"
+
+image::vantagecloud-lake/{dir}/azure-app-service-4.PNG[Crear revisión de la aplicación web de Azure,align="center" width=75%]
+
+* Cuando se complete la implementación, haga clic en el botón "Ir al recurso"
+
+image::vantagecloud-lake/{dir}/azure-app-service-deployment-complete-5.PNG[Creación de una aplicación web de Azure completa,align="center" width=75%]
+
+=== Configurar las extensiones de Jupyter Lab en la aplicación web de Azure
+* Seleccione Configuración en el panel derecho
+
+image::vantagecloud-lake/{dir}/azure-app-service-resource-6.PNG[Creación de una aplicación web de Azure completa,align="center" width=75%]
+
+* Agregue las siguientes configuraciones de aplicación
+
++
+[cols="1,1"]
+|====
+| *Configuración de la aplicación* | *Valor*
+| *accept_license* 
+| Y
+| *WEBSITES_PORT* 
+| 8888
+| *JUPYTER_TOKEN*
+| Defina el token de acceso de Jupyter Lab que le gustaría usar.
+|====
+
++
+IMPORTANT: Si no incluye la configuración "JUPYTER_TOKEN", el contenedor generará un nuevo token y lo registrará en la consola. Deberá recuperarlo de los registros de la aplicación. Si incluye la clave de configuración "JUPYTER_TOKEN" pero deja el valor en blanco, el sistema configurará el token como una cadena vacía, lo que dará como resultado un entorno de Jupyter Lab desprotegido y sin ningún token de seguridad.
+
+* Haga clic en Guardar, su aplicación se reiniciará
+
+image::vantagecloud-lake/{dir}/azure-app-service-resource-config-7.PNG[Configurar la aplicación web de Azure,align="center" width=75%]
+
+* Regrese a la pestaña Descripción general en el panel derecho
+
+=== Cargar demostraciones de Vantagecloud Lake en la aplicación web de Azure de las extensiones de Jupyter Lab
+* Haga clic en Dominio predeterminado
+
+image::vantagecloud-lake/{dir}/azure-app-service-resource-8.PNG[Configurar la aplicación web de Azure,align="center" width=75%]
+
+* En el diálogo de inicio de Jupyter Lab, introduzca el token de Jupyter definido y haga clic en Iniciar sesión
+
+image::vantagecloud-lake/{dir}/azure-jupyter-console-auth-9.PNG[Configurar la aplicación web de Azure,align="center" width=75%]
+
+* En la consola de Jupyter Lab, haga clic en el icono de git
+
+image::vantagecloud-lake/{dir}/azure-jupyter-console-10.PNG[Configurar la aplicación web de Azure,align="center" width=75%]
+
+* Copie el siguiente URI en el campo correspondiente
+** `https://github.com/Teradata/lake-demos.git`
+* Haga clic en Clonar
+
+image::vantagecloud-lake/{dir}/azure-jupyter-console-clone-11.PNG[Configurar la aplicación web de Azure,align="center" width=75%]
+
+* En la consola de Jupyter Lab, haga clic en la carpeta `lake-demos`
+
+image::vantagecloud-lake/{dir}/azure-jupyter-console-click-lake-demos-12.PNG[Configurar la aplicación web de Azure,align="center" width=75%]
+
+image::vantagecloud-lake/{dir}/azure-jupyter-console-lakedemos-13.PNG[Configurar la aplicación web de Azure,align="center" width=75%]
+
+=== Encontrar la IP de la aplicación web de Azure de las extensiones de Jupyter Lab
+* En JupyterLab, abra un cuaderno con el kernel Teradata Python y ejecute el siguiente comando para encontrar la dirección IP de su instancia del cuaderno.
+
++
+[source, python, id="lakedemos_azure_first_config", role="emits-gtm-events, content-editable"]
+----
+import requests
+def get_public_ip():
+    try:
+        response = requests.get('https://api.ipify.org')
+        return response.text
+    except requests.RequestException as e:
+        return "Error: " + str(e)
+my_public_ip = get_public_ip()
+print("My Public IP is:", my_public_ip)
+----
+
+** El siguiente paso es incluir esta IP en la lista blanca en su entorno VantageCloud Lake para permitir la conexión
+** Esto es para los fines de esta guía y las demostraciones de cuadernos. Para entornos de producción, es posible que se necesite una configuración de red más sólida
+** Azure App Service ofrece también una lista de todas las posibles direcciones IP que el servicio podría exponer. Esto está debajo de la pestaña de descripción general
+
+image::vantagecloud-lake/{dir}/azure-app-service-ips-14.PNG[JupyterLab cargado,align="center" width=75%]
+
+== Configuración de VantageCloud Lake
+* En el entorno VantageCloud Lake, en configuración, agregue la IP de su instancia de notebook
++
+TIP: Un entorno de lago admite listas blancas de múltiples direcciones
+
+image::vantagecloud-lake/{auxdir}/sagemaker-lake.PNG[Iniciar JupyterLab,align="center" width=75%]
+
+== Demostraciones de Jupyter Notebook para VantageCloud Lake
+
+=== Configuraciones
+* https://github.com/Teradata/lake-demos/blob/main/vars.json[vars.json] debe editarse para que coincida con la configuración de su entorno VantageCloud Lake +
+
+image::vantagecloud-lake/{auxdir}/sagemaker-vars.PNG[Iniciar JupyterLab,align="center" width=75%]
+
+* Específicamente se deben agregar los siguientes valores 
+
++
+[cols="1,1"]
+|====
+| *Variable* | *Valor*
+
+| *"host"* 
+| Valor de IP pública de su entorno VantageCloud Lake
+
+| *"UES_URI"* 
+| Abra Analytics desde su entorno VantageCloud Lake
+| *"dbc"*
+| La contraseña maestra de su entorno VantageCloud Lake
+|====
+
++
+* Verá que en el archivo vars.json de muestra, las contraseñas de todos los usuarios están predeterminadas en "password", esto es solo para fines ilustrativos, debe cambiar todos estos campos de contraseña a contraseñas seguras, protegerlas según sea necesario y seguir otras prácticas recomendadas de gestión de contraseñas.
+
+IMPORTANT: Recuerde cambiar todas las contraseñas en el archivo vars.json.
+
+== Ejecutar demostraciones
+Abra y ejecute todas las celdas en *0_Demo_Environment_Setup.ipynb* para configurar su entorno. Seguido de *1_Demo_Setup_Base_Data.ipynb* para cargar los datos base necesarios para la demostración.
+
+Para obtener más información sobre los cuadernos de demostración, vaya a la página https://github.com/Teradata/lake-demos[Demostraciones de Teradata Lake] en GitHub.
+
+== Resumen
+
+En este inicio rápido, aprendimos cómo ejecutar demostraciones de Jupyter notebooks para VantageCloud Lake en Microsoft Azure.
+
+== Otras lecturas
+
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin[Documentación de Teradata VantageCloud Lake]
+* https://quickstarts.teradata.com/jupyter.html[Utilizar Vantage desde un Jupyter Notebook]

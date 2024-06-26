@@ -7,6 +7,9 @@
     <ul class="nav-list">
       {{> sub-nav-menu-jp }}
     </ul>
+    <ul class="nav-list">
+      {{> sub-nav-menu-es }}
+    </ul>
   </nav>
 </div>
 {{/with}}
@@ -25,12 +28,24 @@
   if (language === 'en'){
     document.getElementById('ja').style.visibility = 'hidden';
     document.getElementById('ja').style.display = 'none';
+    document.getElementById('es').style.visibility = 'hidden';
+    document.getElementById('es').style.display = 'none';
   }
 
   if (language === 'ja'){
     document.getElementById('en').style.visibility = 'hidden';
     document.getElementById('en').style.display = 'none';
+    document.getElementById('es').style.visibility = 'hidden';
+    document.getElementById('es').style.display = 'none';
   }
+
+   if (language === 'es'){
+      document.getElementById('en').style.visibility = 'hidden';
+      document.getElementById('en').style.display = 'none';
+      document.getElementById('ja').style.visibility = 'hidden';
+      document.getElementById('ja').style.display = 'none';
+    }
+
 
   var parts = path.split('/');
   var pagina = parts[parts.length-2];

@@ -1,0 +1,191 @@
+= Utilizar AWS SageMaker con Teradata Vantage
+:page-lang: es
+:experimental:
+:page-author: Wenjie Tehan
+:page-email: wenjie.tehan@teradata.com
+:page-revdate: 8 de febrero de 2022
+:description: Utilizar AWS SageMaker con Teradata Vantage.
+:keywords: almacenes de datos, separación de almacenamiento informático, teradata, vantage, plataforma de datos en la nube, almacenamiento de objetos, inteligencia empresarial, análisis empresarial, inteligencia artificial, inteligencia artificial, aws sagemaker.
+:tabs:
+:page-image-directory: sagemaker-with-teradata-vantage
+
+== Descripción general
+
+Este tutorial le ayudará a integrar Amazon SageMaker con Teradata Vantage. El enfoque que explica esta guía es uno de los muchos enfoques potenciales para integrarse con el servicio.
+
+Amazon SageMaker proporciona una plataforma de aprendizaje automático totalmente administrada. Hay dos casos de uso para Amazon SageMaker y Teradata:
+
+1.	Los datos que residen en Teradata Vantage y Amazon SageMaker se utilizarán tanto para la definición del modelo como para la puntuación posterior. En este caso de uso, Teradata proporcionará datos en el entorno de Amazon S3 para que Amazon SageMaker pueda consumir conjuntos de datos de entrenamiento y prueba con el fin de desarrollar modelos. Teradata además pondría los datos a disposición a través de Amazon S3 para su posterior puntuación por parte de Amazon SageMaker. Según este modelo, Teradata es únicamente un repositorio de datos.
+
+2.	Los datos que residen en Teradata Vantage y Amazon SageMaker se utilizarán para la definición del modelo, y Teradata para la puntuación posterior. En este caso de uso, Teradata proporcionará datos en el entorno de Amazon S3 para que Amazon SageMaker pueda consumir conjuntos de datos de entrenamiento y prueba con el fin de desarrollar modelos. Teradata deberá importar el modelo de Amazon SageMaker a una tabla de Teradata para su posterior puntuación por parte de Teradata Vantage. Según este modelo, Teradata es un depósito de datos y un motor de puntuación.
+
+El primer caso de uso se analiza en este documento.
+
+Amazon SageMaker consume datos de prueba y entrenamiento de un depósito de Amazon S3. Este artículo describe cómo cargar conjuntos de datos de análisis de Teradata en un depósito de Amazon S3. Luego, los datos pueden estar disponibles para Amazon SageMaker para crear y entrenar modelos de aprendizaje automático e implementarlos en un entorno de producción.
+
+
+== Requisitos previos
+
+* Acceso a una instancia de Teradata Vantage.
++
+include::../partials/vantage_clearscape_analytics.adoc[]
+*	Permiso de IAM para acceder al depósito de Amazon S3 y utilizar el servicio Amazon SageMaker.
+*	Un depósito de Amazon S3 para almacenar datos de entrenamiento.
+
+== Cargar datos
+
+Amazon SageMaker entrena datos desde un depósito de Amazon S3. Los siguientes son los pasos para cargar datos de entrenamiento desde Vantage a un depósito de Amazon S3:
+
+1.	Vaya a la consola de Amazon SageMaker y cree una instancia de cuaderno. Consulte la link:https://docs.aws.amazon.com/sagemaker/latest/dg/gs-setup-working-env.html[Guía para desarrolladores de Amazon SageMaker] para obtener instrucciones sobre cómo crear una instancia de cuaderno:
++
+image::cloud-guides/{page-image-directory}/create.notebook.png[Crear instancia de cuaderno]
+
+2.	Abra la instancia de su cuaderno:
++
+image::cloud-guides/{page-image-directory}/open.notebook.instance.png[Abrir instancia de cuaderno]
+
+3. Inicie un nuevo archivo haciendo clic en `New -> conda_python3`:
++
+image::cloud-guides/{page-image-directory}/start.new.file.png[Iniciar nuevo archivo]
+
+4. Instale la biblioteca Teradata Python:
++
+[source, ipython]
+----
+!pip install teradataml
+----
+
+5. En una nueva celda, importe bibliotecas adicionales:
++
+[source, python]
+----
+import teradataml as tdml
+from teradataml import create_context, get_context, remove_context
+from teradataml.dataframe.dataframe import DataFrame
+import pandas as pd
+import boto3, os
+----
+
+6. En una celda nueva, conéctese a Teradata Vantage. Reemplace `<hostname>`, `<database user name>`, `<database password>` para que coincida con su entorno Vantage:
++
+[source, python]
+----
+create_context(host = '<hostname>', username = '<database user name>', password = '<database password>')
+----
+
+7. Recupere datos de la tabla donde reside el conjunto de datos de entrenamiento utilizando la API TeradataML DataFrame:
++
+[source, python]
+----
+train_data = tdml.DataFrame('table_with_training_data')
+trainDF = train_data.to_pandas()
+----
+
+8. Escriba datos en un archivo local:
++
+[source, python]
+----
+trainFileName = 'train.csv'
+trainDF.to_csv(trainFileName, header=None, index=False)
+----
+
+9. Cargue el archivo en Amazon S3:
++
+[source, python, id="sagemaker_first_usage", role="content-editable emits-gtm-events"]]
+----
+bucket = 'sagedemo'
+prefix = 'sagemaker/train'
+
+trainFile = open(trainFileName, 'rb')
+boto3.Session().resource('s3').Bucket(bucket).Object(os.path.join(prefix, localFile)).upload_fileobj(trainFile)
+----
+
+== Entrenar el modelo
+
+1. Seleccione `Training jobs` en el menú de la izquierda debajo de `Training`, luego haga clic en `Create training job`:
++
+image::cloud-guides/{page-image-directory}/create.training.job.png[Create training job]
+
+2. En la ventana `Create training job`, complete `Job name` (por ejemplo, `xgboost-bank`) y `Create a new role` para el rol de IAM. Elija `Any S3 bucket` para los depósitos de Amazon S3 y `Create role`:
++
+image::cloud-guides/{page-image-directory}/create.iam.role.png[Create IAM role,width=50%]
+
+3. De vuelta en la ventana `Create training job`, use `XGBoost` como algoritmo:
++
+image::cloud-guides/{page-image-directory}/choose.an.algorithm.png[Choose an algorithm,width=50%]
+
+4. Utilice el tipo de instancia `ml.m4.xlarge` predeterminado y 30 GB de volumen de almacenamiento adicional por instancia. Este es un trabajo de entrenamiento corto, no debería llevar más de 10 minutos.
++
+image::cloud-guides/{page-image-directory}/resource.configuration.png[Configuración de recursos,width=50%]
+
+5. Complete los siguientes hiperparámetros y deje los valores predeterminados para todo lo demás:
++
+----
+num_round=100
+silent=0
+eta=0.2
+gamma=4
+max_depth=5
+min_child_weight=6
+subsample=0.8
+objective='binary:logistic'
+----
+
+6. Para `Input data configuration`, introduzca el depósito de Amazon S3 donde almacenó sus datos de entrenamiento. El modo de entrada es `File`. El tipo de contenido es `csv`. `S3 location` es donde se subió el archivo a:
++
+image::cloud-guides/{page-image-directory}/input.data.configuration.png[Input data configuration,width=50%]
+
+7. Para `Output data configuration`, introduzca la ruta donde se almacenarán los datos de salida:
++
+image::cloud-guides/{page-image-directory}/output.data.configuration.png[Output data configuration,width=50%]
+
+8. Deje los valores predeterminados para todo lo demás y haga clic en "Crear trabajo de entrenamiento". Puede encontrar instrucciones detalladas sobre cómo configurar el trabajo de entrenamiento en la link:https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-mkt-algo-train.html#sagemaker-mkt-algo-train-console[Guía para desarrolladores de Amazon SageMaker].
+
+Una vez creado el trabajo de entrenamiento, Amazon SageMaker lanza las instancias de ML para entrenar el modelo y almacena los artefactos del modelo resultantes y otros resultados en `Output data configuration` (`path/<training job name>/output` de forma predeterminada).
+
+== Implementar el modelo
+
+Después de entrenar su modelo, impleméntelo usando un punto final persistente
+
+=== Crear un modelo
+
+1. Seleccione `Models` en `Inference` en el panel izquierdo, luego `Create model`. Complete el nombre del modelo (por ejemplo, `xgboost-bank`), y elija el rol de IAM que creó en el paso anterior.
+2.	Para `Container definition 1`, utilice `433757028032.dkr.ecr.us-west-2.amazonaws.com/xgboost:latest` como `Location of inference code image`. `Location of model artifacts` es la ruta de salida de su trabajo de entrenamiento
++
+image::cloud-guides/{page-image-directory}/container.definition.1.png[Container definition 1,,width=50%]
+3. Deje los valores predeterminados para todo lo demás, luego `Create model`.
+
+=== Crear una configuración de punto final
+
+1. Seleccione el modelo que acaba de crear y luego haga clic en `Create endpoint configuration`:
++
+image::cloud-guides/{page-image-directory}/create.endpoint.configuration.png[Create endpoint configuration]
+
+2. Complete el nombre (por ejemplo, `xgboost-bank`) y use los valores predeterminados para todo lo demás. El nombre del modelo y el trabajo de entrenamiento deberían completarse automáticamente. Haga clic en `Create endpoint configuration`.
+
+=== Create endpoint
+
+1. Seleccione `Inference` -> `Models` en el panel izquierdo, seleccione el modelo nuevamente y haga clic en `Create endpoint` esta vez:
++
+image::cloud-guides/{page-image-directory}/create.endpoint.png[Create endpoint]
+
+2. Complete el nombre (por ejemplo, `xgboost-bank`) y seleccione `Use an existing endpoint configuration`:
+image::cloud-guides/{page-image-directory}/attach.endpoint.configuration.png[Adjuntar configuración de punto final]
+
+3. Seleccione la configuración del punto final creada en el último paso y haga clic en `Select endpoint configuration`:
++
+image::cloud-guides/{page-image-directory}/select.endpoint.configuration.png[Select endpoint configuration,width=50%]
+
+4. Deje los valores predeterminados para todo lo demás y haga clic en `Create endpoint`.
+
+Ahora el modelo se implementa en el punto final y las aplicaciones cliente pueden utilizarlo.
+
+== Resumen
+
+Este tutorial demostró cómo extraer datos de entrenamiento de Vantage y usarlos para entrenar un modelo en Amazon SageMaker. La solución utilizó un cuaderno Jupyter para extraer datos de Vantage y escribirlos en un depósito de S3. Un trabajo de entrenamiento de SageMaker leyó datos del depósito de S3 y creó un modelo. El modelo se implementó en AWS como punto final de servicio.
+
+== Otras lecturas
+* xref:ROOT:ml.adoc[Entrenar modelos de ML en Vantage usando solo SQL]
+
+include::../partials/community_link.adoc[]
+

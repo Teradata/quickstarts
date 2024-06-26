@@ -1,11 +1,14 @@
-<aside class="toc sidebar" data-title="{{#if (ne page.attributes.lang 'ja')}}{{or page.attributes.toctitle 'Contents'}}{{else}}コンテンツ{{/if}}" data-levels="{{{or page.attributes.toclevels 2}}}"> 
+<aside class="toc sidebar" data-title="{{#if (eq page.attributes.lang 'es')}}{{or page.attributes.toctitle 'Contenido'}}{{else if (eq page.attributes.lang 'ja')}}コンテンツ{{else}}{{or page.attributes.toctitle 'Contents'}}{{/if}}" data-levels="{{{or page.attributes.toclevels 2}}}">
     <div class="page-controls">
-      {{#if (ne page.attributes.lang 'ja')}}
-        <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
-        <a href="{{page.editUrl}}"><div class="edit-on-github">Edit on GitHub</div></a>
-      {{else}}
+      {{#if (eq page.attributes.lang 'es')}}
+        <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Reportar un problema</div></a>
+        <a href="{{page.editUrl}}"><div class="edit-on-github">Editar en GitHub</div></a>
+      {{else if (eq page.attributes.lang 'ja')}}
         <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">問題を報告する</div></a>
         <a href="{{page.editUrl}}"><div class="edit-on-github">GitHub で編集する</div></a>
+      {{else}}
+        <a href="https://github.com/Teradata/quickstarts/issues"><div class="report-an-issue">Report an issue</div></a>
+        <a href="{{page.editUrl}}"><div class="edit-on-github">Edit on GitHub</div></a>
       {{/if}}
     </div>
   <div class="toc-menu"></div>

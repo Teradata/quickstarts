@@ -1,0 +1,7 @@
+. Una vez en Teradata Studio Express, vaya a la perspectiva `Query Development` (vaya al menú superior y seleccione `Window` -> `Query Development`).
+
+. Conéctese utilizando el perfil de conexión creado previamente haciendo doble clic en `Database Connections` -> `New Teradata`.
+
+. Usando el usuario `dbc`, crearemos una nueva base de datos llamada `HR`. Copie/pegue esta consulta y ejecútela presionando el botón ejecutar consulta (image:run.query.button.png[Botón Ejecutar consulta, 24, 24]) o presionando la tecla kbd:[F5]:
++
+include::partial$getting.started.queries.adoc[]

@@ -1,0 +1,49 @@
+= Configurar una conexión a Teradata Vantage en DBeaver
+:page-lang: es
+:experimental:
+:page-author: Adam Tworkiewicz
+:page-email: adam.tworkiewicz@teradata.com
+:page-revdate: 12 de septiembre de 2022
+:description: Configure a una conexión Teradata Vantage en DBeaver.
+:keywords: almacenes de datos, separación de almacenamiento informático, teradata, vantage, plataforma de datos en la nube, almacenamiento de objetos, inteligencia empresarial, análisis empresarial, dbeaver, dbeaver prod, sql ide
+:page-image-directory: configure-a-teradata-connection-in-dbeaver
+
+== Descripción general
+
+Este tutorial demuestra cómo crear una conexión a Teradata Vantage con DBeaver.
+
+== Requisitos previos
+
+* Acceso a una instancia de Teradata Vantage.
++
+include::../partials/vantage_clearscape_analytics.adoc[]
+* DBeaver instalado. Consulte link:https://dbeaver.io/download/[DBeaver Community] o link:https://dbeaver.com/download/[DBeaver PRO] para conocer las opciones de instalación.
+
+== Agregue una conexión Teradata a DBeaver
+
+1. Inicie el asistente de nueva conexión haciendo clic en el icono del enchufe (image:other-integrations/{page-image-directory}/plug-icon.png[title="Icono de enchufe Agregar conexión", width="16px"]) en la esquina superior izquierda de la ventana de la aplicación o vaya a `Database -> New Database Connection`.
+2. En la pantalla `Select your database`, comience a escribir `teradata` y seleccione el icono de Teradata.
++
+image::other-integrations/{page-image-directory}/select-your-database.png[Select your database, width=75%]
+3. En la pestaña principal, debe configurar todas las configuraciones de conexión principal. Las requeridas incluyen `Host`, `Port`, `Database`, `Username` y `Password`.
++
+TIP: En Teradata Vantage, cuando se crea un usuario, también se crea una base de datos correspondiente con el mismo. DBeaver requiere que acceda a la base de datos. Si no sabe a qué base de datos desea conectarse, use su nombre de usuario en el campo `database`.
++
+TIP: Con DBeaver PRO, no solo puede utilizar el orden estándar de tablas, sino también vincular tablas jerárquicamente a una base de datos o usuario específico. Expandir y contraer las bases de datos o los usuarios le ayudará a navegar de un área a otra sin saturar la ventana del Navegador de bases de datos. Marque la casilla `Show databases and users hierarchically` para habilitar esta configuración.
++
+TIP: En muchos entornos, solo se puede acceder a Teradata Vantage mediante el protocolo TLS. Cuando esté en DBeaver PRO, marque la opción `Use TLS protocol` para habilitar TLS.
++
+image::other-integrations/{page-image-directory}/teradata-connection-settings.png[Configuración de conexión de Teradata, width=75%]
+4. Haga clic en `Finish`.
+
+== Opcional: túnel SSH
+
+Si no se puede acceder a su base de datos directamente, puede utilizar un túnel SSH. Todas las configuraciones están disponibles en la pestaña `SSH`. DBeaver admite los siguientes métodos de autenticación: usuario/contraseña, clave pública, autenticación de agente SSH.
+
+image::other-integrations/{page-image-directory}/teradata-connection-settings-ssh.png[Configuración de conexión de Teradata SSH, width=75%]
+
+== Resumen
+
+Este tutorial demostró cómo crear una conexión a Teradata Vantage con DBeaver.
+
+include::../partials/community_link.adoc[]

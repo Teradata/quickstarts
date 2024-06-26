@@ -1,0 +1,3 @@
+== Resumen
+
+En esta guía hemos cubierto cómo crear rápidamente un entorno Teradata que funcione. Usamos Teradata Vantage Express en una máquina virtual que se ejecuta en VMware. En la misma máquina virtual, ejecutamos Teradata Studio Express para realizar consultas. Instalamos todo el software localmente y no tuvimos que pagar por los recursos de la nube.

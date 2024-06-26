@@ -1,0 +1,49 @@
+= Conectarse a Vantage mediante Python
+:page-lang: es
+:experimental:
+:page-author: Krutik Pathak
+:page-email: krutik.pathak@teradata.com
+:page-revdate: 2 de agosto de 2023
+:description: Cómo conectarse a Teradata Vantage utilizando el controlador de base de datos Python teradatasql
+:keywords: almacenes de datos, separación de almacenamiento informático, teradata, vantage, plataforma de datos en la nube, teradatasql, aplicaciones python, inteligencia empresarial, análisis empresarial
+
+== Descripción general
+
+Este tutorial demuestra cómo conectarse a Vantage utilizando link:https://github.com/Teradata/python-driver[teradatasql, window="_blank"], el controlador de base de datos Python para Teradata Vantage.
+
+== Requisitos previos
+
+* Python 3.4 de 64 bits o posterior.
+
+* Controlador `teradatasql` instalado en su sistema:
++
+[source, bash, id="teradatasql_pip_install", role="emits-gtm-events"]
+----
+pip install teradatasql
+----
++
+[NOTE]
+====
+El paquete `teradatasql` se ejecuta en Windows, macOS (10.14 Mojave o posterior) y Linux. Para Linux, actualmente solo se admite la arquitectura Linux x86-64.  
+====
+
+* Acceso a una instancia de Teradata Vantage. Actualmente, el controlador es compatible con Teradata Database 16.10 y versiones posteriores.
++
+include::../partials/vantage_clearscape_analytics.adoc[]
+
+== Código para enviar una consulta
+
+Este es un código Python simple para conectarse a Teradata Vantage usando `teradatasql`. Todo lo que queda es pasar los parámetros de conexión y autenticación y ejecutar una consulta:
+
+++++
+<script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2FTeradata%2Fdev-rel-python-driver-demo%2Fblob%2Fmain%2Fsrc%2Fteradata_python_connection.py&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></script>
+++++
+
+== Resumen
+
+Este tutorial demostró cómo conectarse a Teradata Vantage utilizando el controlador de base de datos Python `teradatasql`. Describía un código Python de muestra para enviar consultas SQL a Teradata Vantage usando `teradatasql`.
+
+== Otras lecturas
+* link:https://github.com/Teradata/python-driver[Referencia del controlador Python teradatasql, window="_blank"]
+
+include::../partials/community_link.adoc[]

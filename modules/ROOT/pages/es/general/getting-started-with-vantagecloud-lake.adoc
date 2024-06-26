@@ -1,0 +1,231 @@
+= Primeros pasos con VantageCloud Lake 
+:page-lang: es
+:experimental:
+:page-author: Vidhan Bhonsle
+:page-email: vidhan.bhonsle@teradata.com
+:page-revdate: 2 de enero de 2024
+:description: Cree su propio entorno en VantageCloud Lake
+:keywords: almacenes de datos, separación de almacenamiento informático, teradata, vantage, plataforma de datos en la nube, inteligencia empresarial, análisis empresarial, jupyter, teradatasql, ipython-sql, teradatasqlalchemy, vantagecloud, vantagecloud lake, dirección IP, internet público, lago
+
+== Descripción general
+
+Teradata VantageCloud Lake es la plataforma de datos y análisis nativa de la nube de próxima generación de Teradata. Proporciona patrones de implementación de Lakehouse junto con la capacidad de ejecutar cargas de trabajo elásticas independientes utilizando un diseño centrado en el almacenamiento de objetos. +
+Permite a las organizaciones desbloquear sus datos, activar análisis y acelerar el valor. Los clientes pueden optimizar su entorno de análisis utilizando recursos de clúster de computación especialmente configurados que se adapten mejor a sus requisitos de carga de trabajo. +
+
+image::VantageCloud.png[VantageCloud,align="center",width=50%]
+
+
+VantageCloud Lake proporciona todos los beneficios que esperaría de una solución en la nube, además de la tecnología diferenciada de Teradata, incluida la base de datos de análisis líder en la industria, ClearScape Analytics, y el tejido de datos QueryGrid.
+
+== Iniciar sesión en VantageCloud Lake
+
+IMPORTANT: Para obtener un enlace de inicio de sesión y credenciales de VantageCloud Lake, complete el https://www.teradata.com/about-us/contact[formulario de contacto] para comunicarse con el equipo de Teradata.   
+
+Vaya a la URL proporcionada por Teradata, por ejemplo, *_ourcompany.innovationlabs.teradata.com_* e inicie sesión:
+
+* Los clientes existentes pueden utilizar el nombre de usuario (dirección de correo electrónico) y la contraseña del administrador de su organización para iniciar sesión.
+* El nuevo cliente puede iniciar sesión con el nombre de usuario de administrador de su organización (de la carta de bienvenida: dirección de correo electrónico) y la contraseña que usted creó. 
+
+NOTE: Haga clic https://login.customer.teradata.com/ext/pwdreset/Identify?AdapterId=CDSCustomer[aquí] para restablecer la contraseña de administrador de la organización.
+
+image::lake_sign_on.png[Inscribirse,align="center",width=50%]
+
+Al iniciar sesión, accederá a la página de bienvenida de VantageCloud Lake.
+
+image::lake_welcome_page.png[Pagina de bienvenida,align="center",width=50%]
+
+La página de Bienvenida tiene un menú de navegación que no solo le brinda un control completo de sus entornos, sino que también le proporciona varias herramientas necesarias:
+
+image::lake_expanded_menu.png[Elementos del menú de navegación,align="right",float="right",width=60%]
+
+* Vantage: página de inicio del portal VantageCloud Lake
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin/Step-1-Signing-On-and-Creating-Your-First-Environment[Entornos]: cree sus entornos y vea todos los entornos creados
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Introduction-to-VantageCloud-Lake/VantageCloud-Lake-Organizations-and-Environments[Organización]: vea la configuración de las organizaciones, administre los administradores de la organización y vea la configuración y el estado de su cuenta
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Managing-Compute-Resources/Review-Consumption-Usage[Consumo]: supervise cómo su organización consume recursos informáticos y de almacenamiento
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Using-VantageCloud-Lake-Console-to-Manage-VantageCloud-Lake/Using-the-Consumption-Estimates[Calculadora de costes]: calcule el coste y el consumo de su entorno y de toda la organización. 
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Running-and-Monitoring-Queries/Monitoring-and-Managing-Queries[Consultas]: inspeccione las consultas de un entorno para comprender su eficiencia.
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Running-and-Monitoring-Queries[Editor]: cree y ejecute consultas en un editor.  
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Data-Copy[Copia de datos]: aprovisione, configure y ejecute trabajos de copia de datos (también conocidos como Data Mover) desde la consola de VantageCloud Lake.
+
+
+== Crear un entorno
+Para crear un entorno de clúster primario, haga clic en "Entornos" en el menú de navegación. En una nueva vista abierta, haga clic en el botón "Crear" situado en la parte superior derecha de la página.
+
+image::lake_environment_page.png[Página de entorno,align="center",width=75%]
+
+=== Configuración del entorno
+
+Complete los campos de configuración del entorno:
+
+[cols="1,1"]
+|====
+| *Artículo* | *Descripción*
+
+| Environment name 
+| Un nombre contextual para el nuevo entorno
+
+| Region 
+| La lista de regiones disponibles fue predeterminada durante el proceso de venta.
+
+| Package 
+| Hay dos paquetes de servicios disponibles para seleccionar: +
+Lake: soporte Premier en la nube 24 horas al día, 7 días a la semana +
+Lake+: soporte Premier prioritario en la nube 24x7 + modelos de datos de la industria 
+|====
+
+image::lake_environment_configuration.png[Configuración del entorno,align="center",width=50%]
+
+IMPORTANT: Las *Estimaciones de consumo*, a su derecha, proporcionan orientación para configurar el entorno. Consulte https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Using-VantageCloud-Lake-Console-to-Manage-VantageCloud-Lake/Using-the-Consumption-Estimates[Uso de las estimaciones de consumo] para obtener más detalles.   
+
+=== Configuración del clúster primario
+
+Complete los campos de configuración del clúster primario:
+
+[cols="1,2a"]
+|====
+| *Artículo* | *Descripción*
+
+| Instance size 
+| Seleccione un tamaño de instancia adecuado para su caso de uso: +
+[cols="2,1"]
+!===
+! Lake ! valor (en unidades)
+
+! XSmall
+! 2
+
+! Small
+! 4
+
+! Medium
+! 7
+
+! Large
+! 10
+
+! XLarge
+! 13
+
+! 2XLarge
+! 20
+
+! 3XLarge
+! 27
+
+!===
+
+[cols="2,1"]
+!===
+! Lake+ ! valor (en unidades)
+
+! XSmall
+! 2.4
+
+! Small
+! 4.8
+
+! Medium
+! 8.4
+
+! Large
+! 12
+
+! XLarge
+! 15.6
+
+! 2XLarge
+! 24
+
+! 3XLarge
+! 32.4
+
+!===
+
+| Instance count
+| 2 a 64 +
+Número de nodos en los clústeres primarios
+
+| Instance storage
+| De 1 a 72 TB por instancia
+
+|====
+
+image::lake_primary_cluster_config.png[Configuración del clúster primario,align="center",width=50%]
+
+=== Credenciales de base de datos
+
+Complete los campos de credenciales de la base de datos:
+
+[cols="1,1"]
+|====
+| *Artículo* | *Descripción*
+
+| Contraseña de DBC 
+La cuenta administrativa principal en un entorno Teradata Vantage se conoce como "dbc". Al igual que el usuario root en Linux, la cuenta dbc tiene privilegios administrativos completos. Se recomienda establecer usuarios administrativos adicionales para tareas rutinarias, después de crear el entorno, y abstenerse de compartir o utilizar las credenciales de dbc.
+Establezca la contraseña para dbc: +
+* Entre 8 y 64 caracteres +
+* Permite caracteres alfanuméricos y especiales +
+* Sin palabras del diccionario 
+
+|====
+
+image::lake_database_cred.png[Configuración del clúster primario,align="center",width=50%]
+
+=== Opciones avanzadas
+
+Para comenzar rápidamente, puede seleccionar *Usar valores predeterminados* o definir la configuración de opciones adicionales.
+
+image::lake_advanced_option_default.png[Opción avanzada con valor predeterminado del usuario,align="center",width=50%]
+
+[cols="1,1"]
+|====
+| *Artículo* | *Descripción*
+
+| AMPs per instance 
+| Gestión de carga de trabajo +
+Seleccione la cantidad de AMP por instancia para el tamaño de instancia que seleccionó.
+
+| AWS: Storage encryption
+| Configure el cifrado de los datos del cliente. Consulte https://docs.aws.amazon.com/kms/latest/developerguide/find-cmk-id-arn.html[Cómo encontrar el ID de la clave y el ARN de la clave] +
+* Gestionado por Teradata +
+* Gestionado por el cliente +
+* ARN de alias clave
+
+|====
+
+image::lake_advanced_option.png[Opción avanzada definida por el usuario,align="center",width=50%]
+
+Revise toda la información y haga clic en el botón *CREATE ENVIRONMENT*.
+
+image::lake_create_environment.png[Botón Crear entorno,align="center",width=50%]
+
+La implementación tarda unos minutos. Una vez completado, el entorno creado se puede encontrar en la sección *Entornos* como una vista de tarjeta (el nombre del entorno es quickstart_demo). 
+
+image::lake_available_environment.png[Entorno disponible recién creado,align="center",width=50%]
+
+== Entorno de acceso desde Internet público
+
+Solo se puede acceder al entorno creado a través de la consola. Para cambiar eso, haga clic en el entorno creado y vaya a la pestaña *SETTINGS*.
+
+image::lake_settings_menu.png[Menú de configuración del entorno creado,align="center",width=75%]
+
+En *SETTINGS*, seleccione la casilla de verificación *Conexión a Internet* y proporcione las direcciones IP en formato CIDR (por ejemplo, 192.168.2.0/24 especifica todas las direcciones IP en el rango: 192.168.2.0 a 192.168.2.255) con las que desea acceder su entorno. 
+
+NOTE: Encuentre más información sobre cómo configurar una conexión a Internet https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin/Step-2-Setting-the-Environment-Connection-Type/Setting-Up-an-Internet-Connection[aquí].
+
+image::lake_ip_addresses.png[Lista blanca de IP,align="center",width=50%]
+
+Haga clic en el botón *SAVE* situado en la parte superior derecha de la página para confirmar los cambios. +
+
+Vuelva a la sección *Entornos* y consulte su tarjeta de entorno. Ahora tiene acceso a *Internet publica*.
+
+image::lake_public_internet_cv.png[Vista de tarjeta de Internet pública,align="center",width=50%]
+
+
+== Resumen
+
+En este inicio rápido, aprendimos cómo crear un entorno en VantageCloud Lake y permitir el acceso a él desde la Internet pública.
+
+== Otras lecturas
+
+* https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Getting-Started-First-Sign-On-by-Organization-Admin[Documentación de Teradata VantageCloud Lake]

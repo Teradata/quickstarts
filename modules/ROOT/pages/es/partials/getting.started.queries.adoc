@@ -1,0 +1,80 @@
+[source, teradata-sql, id="first_query", role="emits-gtm-events"]
+----
+CREATE DATABASE HR
+AS PERMANENT = 60e6, -- 60MB
+    SPOOL = 120e6; -- 120MB
+----
++
+++++
+<div class="sidebarblock">
+    <div id="right" style="float: right">
+    <a style="cursor: pointer; color: grey" onclick="this.parentElement.parentElement.style.display = 'none'">x</a>
+  </div>
+  <div class="content">
+    <div class="paragraph">¿Pudo ejecutar la consulta?
+      <i class="far fa-thumbs-up click-icon" style="padding: 0rem 0.2rem;" onclick="toggleThumbs(this, 'first_query')"></i>
+      <i class="far fa-thumbs-down click-icon" onclick="toggleThumbs(this 'first_query')"></i>
+    </div>
+  </div>
+</div>
+<style>
+.closebtn {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+</style>
+++++
+. Creemos una tabla de muestra, insertemos algunos datos y consultemos. Primero crearemos una tabla para contener la información de los empleados:
++
+[source, teradata-sql]
+----
+
+CREATE SET TABLE HR.Employees (
+   GlobalID INTEGER,
+   FirstName VARCHAR(30),
+   LastName VARCHAR(30),
+   DateOfBirth DATE FORMAT 'YYYY-MM-DD',
+   JoinedDate DATE FORMAT 'YYYY-MM-DD',
+   DepartmentCode BYTEINT
+)
+UNIQUE PRIMARY INDEX ( GlobalID );
+----
+. Ahora, insertemos un registro:
++
+[source, teradata-sql]
+----
+INSERT INTO HR.Employees (
+   GlobalID,
+   FirstName,
+   LastName,
+   DateOfBirth,
+   JoinedDate,
+   DepartmentCode
+)
+VALUES (
+   101,
+   'Adam',
+   'Tworkowski',
+   '1980-01-05',
+   '2004-08-01',
+   01
+);
+----
+. Finalmente, veamos si podemos recuperar los datos:
++
+[source, teradata-sql]
+----
+SELECT * FROM HR.Employees;
+----
++
+Deberías obtener los siguientes resultados:
++
+----
+GlobalID  FirstName  LastName   DateOfBirth  JoinedDate  DepartmentCode
+--------  ---------  ---------- -----------  ----------  --------------
+     101  Adam       Tworkowski  1980-01-05  2004-08-01               1
+----
