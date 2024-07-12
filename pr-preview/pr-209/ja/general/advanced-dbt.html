@@ -1188,7 +1188,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="possible-banner-2">
   <div class="text-section">
       <p class="text-1">
-        If you imagine it, envision it, create it... Teradata makes it Possible. Join us. 
+        <span class="display-1">If you imagine it, envision it, create it... Teradata makes it Possible. Join us. </span>
+        <span class="display-2">"If you imagine it...Teradata makes it Possible. </span>
         <a class="register-now" href="https://www.teradata.com/events/possible" target="_blank" aria-label="If you imagine it, envision it, create it... Teradata makes it Possible. Join us." data-gtm-category="banner" data-gtm-action="leaderboard" data-gtm-label="Register now" data-intellimize-exp-417218923="true">
           Register now.
         </a> 
@@ -1229,6 +1230,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   font-weight: 400;
   line-height: normal;
   text-decoration-line: underline;
+}
+  .display-2{
+    display: none;
+  }
+@media (max-width: 600px) {
+  .text-section {
+    padding: 1px 0px 1px 0px;  
+  }
+  .display-1{
+    display: none;
+  }
+  .display-2{
+    display: block;
+  }
 }
 </style><!-- Possible Banner -->
 
