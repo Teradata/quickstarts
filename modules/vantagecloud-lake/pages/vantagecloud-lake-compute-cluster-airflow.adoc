@@ -1,0 +1,311 @@
+= Manage Vantage Cloud Lake Compute Cluster with Airflow
+:experimental:
+:page-author: Satish Chinthanippu
+:page-email: satish.chinthanippu@teradata.com
+:page-revdate: July 11th, 2024
+:description: Manage Vantage Cloud Lake Compute Cluster with Airflow
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, airflow, workflow, teradatasql, ipython-sql, cloud computing, machine learning, vantagecloud, vantagecloud lake, lake
+:dir: vantagecloud-lake-compute-cluster-airflow
+:auxdir: vantagecloud-lake-compute-cluster-airflow
+
+== Overview
+
+This tutorial demonstrates the process of utilizing the https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/index.html[Teradata Airflow Compute Cluster Operators] to manage the Vantage Cloud Lake Compute Cluster. The objective is to execute dbt models on the Lake Compute Cluster.
+
+== Prerequisites
+* Access to a VantageCloud Lake environment
++
+include::vantagecloud-lake:partial$vantagecloud-lake-request.adoc[]
+* Python 3.8, 3.9, 3.10 or 3.11 installed.
+* python3-env, python3-pip, pipx installed.
+[source, bash]
+sudo apt install -y python3-venv python3-pip pipx
+
+NOTE: Use `Windows PowerShell` command-line shell on `Windows` OS to try this quickstart example.
+
+== Install Apache Airflow
+1. Set the AIRFLOW_HOME environment variable. Airflow requires a home directory and uses ~/airflow by default, but you can set a different location if you prefer. The AIRFLOW_HOME environment variable is used to inform Airflow of the desired location.
++
+[source, bash]
+----
+export AIRFLOW_HOME=~/airflow
+----
+2. Install `apache-airflow` stable version 2.9.2 from PyPI repository.:
++
+[source, bash]
+----
+AIRFLOW_VERSION=2.9.2
+PYTHON_VERSION="$(python --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
+CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
+pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
+----
+3. Install the Airflow Teradata provider stable version from PyPI repository.
++
+[source, bash]
+----
+pip install "apache-airflow-providers-teradata"
+----
+
+== Install dbt
+1. Create a new python environment to manage dbt and its dependencies. Activate the environment:
++
+[tabs]
+====
+Windows::
++
+--
+[source, bash]
+----
+python -m venv env
+source env/bin/activate
+----
+--
+MacOS::
++
+--
+[source, bash]
+----
+python3 -m venv env
+source env/bin/activate
+----
+--
+Linux::
++
+--
+[source, bash]
+----
+python3 -m venv env
+source env/bin/activate
+----
+--
+====
+
+2. Install `dbt-teradata` and `dbt-core` modules:
++
+[source, bash]
+----
+pip install dbt-teradata dbt-core
+----
+
+== Create a database
+
+Let's create `jaffle_shop` database in Vantage lake instance with TD_OFSSTORAGE as default
+
+[source, teradata-sql]
+----
+CREATE DATABASE jaffle_shop
+AS DEFAULT STORAGE = TD_OFSSTORAGE OVERRIDE ON ERROR,
+PERMANENT = 120e6, -- 120MB
+    SPOOL = 120e6; -- 120MB
+----
+
+== Create a database user
+
+Let's create `lake_user` user in Vantage lake instance.
+
+[source, teradata-sql]
+----
+CREATE USER lake_user
+AS PERMANENT = 1000000,
+PASSWORD = lake_user,
+SPOOL = 1200000,
+DEFAULT DATABASE = jaffle_shop;
+----
+
+== Grant access to user
+
+Let's provide required privileges to user `lake_user` to manage compute cluster.
+
+[source, teradata-sql]
+----
+GRANT CREATE COMPUTE GROUP To lake_user;
+GRANT DROP COMPUTE GROUP TO lake_user;
+GRANT SELECT ON DBC TO lake_user;
+GRANT ALL ON jaffle_shop TO lake_user;
+----
+
+== Setup dbt project
+
+1. Clone the jaffle_shop repository and cd into the project directory:
++
+[source, bash]
+----
+git clone https://github.com/Teradata/jaffle_shop-dev.git jaffle_shop
+cd jaffle_shop
+----
+2. Create `profiles.yml` file. Add the following config to `profile.yml` file. Adjust `<host>` to match your Teradata Vantage lake instance.
++
+[source, yaml]
+----
+jaffle_shop:
+  outputs:
+    dev:
+      type: teradata
+      host: <host>
+      user: lake_user
+      password: lake_user
+      logmech: TD2
+      schema: jaffle_shop
+      tmode: ANSI
+      threads: 1
+      timeout_seconds: 300
+      priority: interactive
+      retries: 1
+  target: dev
+----
+
+== Define DAG in Airflow
+Define a dag to run dbt transformations defined in jaffle_shop dbt project using vantage cloud lake compute cluster.
+[source, python]
+----
+from airflow.operators.bash import BashOperator
+from datetime import datetime
+from airflow import DAG
+from airflow.providers.teradata.operators.teradata_compute_cluster import (
+        TeradataComputeClusterDecommissionOperator,
+        TeradataComputeClusterProvisionOperator,
+        TeradataComputeClusterResumeOperator,
+        TeradataComputeClusterSuspendOperator,
+    )
+from airflow.providers.teradata.operators.teradata import TeradataOperator
+
+import os
+
+PATH_TO_DBT_VENV = f"{os.environ['dbt_venv_dir']}"
+PATH_TO_DBT_PROJECT = f"{os.environ['dbt_project_home_dir']}"
+dbt_run_cmd = "dbt run "
+with DAG(
+    dag_id="explore_airflow_compute_cluster_operator",
+    max_active_runs=1,
+    max_active_tasks=10,
+    catchup=False,
+    start_date=datetime(2024, 1, 1),
+    default_args={"teradata_conn_id": "teradata_lake"},
+
+) as dag:
+    # provision compute cluster with given configuration and initially its in suspended mode
+    compute_cluster_provision_operation = TeradataComputeClusterProvisionOperator(
+        task_id="compute_cluster_provision_operation",
+        compute_profile_name="dbt_transformation_profile",
+        compute_group_name="dbt_transformation_group",
+        timeout=20,
+        query_strategy="STANDARD",
+        compute_map="TD_COMPUTE_XSMALL",
+        compute_attribute="MIN_COMPUTE_COUNT(1) MAX_COMPUTE_COUNT(5) INITIALLY_SUSPENDED('TRUE')",
+    )
+    # assign dbt_transformation_group as default group to lake_user
+    assign_compute_group_user = TeradataOperator(
+        task_id="assign_compute_group_user",
+        sql=r"""
+        MODIFY USER lake_user
+        AS COMPUTE GROUP = dbt_transformation_group;
+        """,
+    )
+    # resume compute cluster
+    compute_cluster_resume_operation = TeradataComputeClusterResumeOperator(
+        task_id="compute_cluster_resume_operation",
+        compute_profile_name="dbt_transformation_profile",
+        compute_group_name="dbt_transformation_group",
+    )
+
+    # run dbt transformation defined in dbt jaffle_shop project
+    transform_data = BashOperator(
+        task_id="transform_data",
+        bash_command="source $PATH_TO_DBT_VENV/bin/activate && dbt seed --profiles-dir $PATH_TO_DBT_PROJECT --project-dir $PATH_TO_DBT_PROJECT &&  dbt run --profiles-dir $PATH_TO_DBT_PROJECT --project-dir $PATH_TO_DBT_PROJECT -s path:models",
+        env={"PATH_TO_DBT_PROJECT": PATH_TO_DBT_PROJECT, "PATH_TO_DBT_VENV": PATH_TO_DBT_VENV},
+    )
+    # suspend compute cluster
+    compute_cluster_suspend_operation = TeradataComputeClusterSuspendOperator(
+        task_id="compute_cluster_suspend_operation",
+        compute_profile_name="dbt_transformation_profile",
+        compute_group_name="dbt_transformation_group",
+    )
+    # decommission compute cluster
+    compute_cluster_decommission_operation = TeradataComputeClusterDecommissionOperator(
+        task_id="compute_cluster_decommission_operation",
+        compute_profile_name="dbt_transformation_profile",
+        compute_group_name="dbt_transformation_group",
+        delete_compute_group=True,
+    )
+    # remove compute group for user
+    remove_compute_group_from_user = TeradataOperator(
+        task_id="remove_compute_group_from_user",
+        sql=r"""
+        MODIFY USER lake_user
+        AS COMPUTE GROUP = NULL
+        """,
+    )
+
+    (
+        compute_cluster_provision_operation
+        >> assign_compute_group_user
+        >> compute_cluster_resume_operation
+        >> transform_data
+        >> compute_cluster_suspend_operation
+        >> compute_cluster_decommission_operation
+        >> remove_compute_group_from_user
+    )
+----
+
+== Configure Airflow
+
+1. Configure the listed environment variables to activate the test connection button, preventing the loading of sample DAGs and default connections in Airflow UI.
++
+[source, bash]
+  export AIRFLOW__CORE__TEST_CONNECTION=Enabled
+  export AIRFLOW__CORE__LOAD_EXAMPLES=false
+  export AIRFLOW__CORE_LOAD_DEFAULT_CONNECTIONS=false
+
+2. Define the path of jaffle_shop project as an environment variable `dbt_project_home_dir`.
++
+[source, bash]
+export dbt_project_home_dir=../../jaffle_shop
++
+NOTE: Change `/../../` to path of jaffle_shop project path.
+
+3. Define the virtual environment path where dbt-teradata installed in <<Install dbt>> as an environment variable `dbt_venv_dir`.
+[source, bash]
+set dbt_venv_dir=/../../dbt_env/bin/activate
++
+NOTE: Change `/../../` to path where virtual environment path defined.
+
+== Start Airflow web server
+1. Run airflow web server
++
+[source, bash]
+----
+airflow standalone
+----
+5. Access the airflow UI. Visit https://localhost:8080 in the browser and log in with the admin account details shown in the terminal.
+
+== Define Airflow connection to Vantage Cloud Lake
+
+1. Click on Admin - Connections
+2. Click on + to define new connection to Teradata vantage cloud lake instance.
+3. Define new connection with id `teradata_lake` with Teradata vantage cloud lake instance details.
+* Connection Id: teradata_lake
+* Connection Type: Teradata.
+* Database Server URL (required): Teradata vantage cloud lake instance hostname to connect to.
+* Database: jaffle_shop
+* Login (required): lake_user
+* Password (required): lake_user
+
+== Load DAG
+
+Copy this dag file to $AIRFLOW_HOME/files/dags. Airflow loads DAGs from Python source files, which it looks for inside its configured DAG_FOLDER - $AIRFLOW_HOME/files/dags directory.
+
+== Run DAG
+
+Run the dag as shown in below image.
+
+image::{dir}/airflow-dag-run.png[Run dag,align="left" width=75%]
+
+== Summary
+
+In this quick start guide, we explored how to utilize Teradata Vantage Lake Compute Cluster to execute dbt transformations using Airflow compute cluster operators.
+
+== Further reading
+* link:https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html[Airflow DAGs reference]
+* link:https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/index.html[Airflow Teradata Compute Cluster Operators]
+
+
