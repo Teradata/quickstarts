@@ -277,7 +277,7 @@ with DAG(
     )
 ----
 
-== Configure Airflow
+== Configure Apache Airflow
 
 1. Configure the listed environment variables to activate the test connection button, preventing the loading of sample DAGs and default connections in Airflow UI.
 +
