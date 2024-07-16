@@ -10,7 +10,7 @@
 
 == Overview
 
-This tutorial demonstrates the process of utilizing the https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/index.html[Teradata Airflow Compute Cluster Operators] to manage the Vantage Cloud Lake Compute Cluster. The objective is to execute dbt models on the Lake Compute Cluster.
+This tutorial demonstrates the process of utilizing the https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/index.html[Teradata Airflow Compute Cluster Operators] to manage Vantage Cloud Lake Compute Clusters. The objective is to execute dbt models on the VantageCloud Lake Compute Clusters.
 
 == Prerequisites
 * Access to a VantageCloud Lake environment
