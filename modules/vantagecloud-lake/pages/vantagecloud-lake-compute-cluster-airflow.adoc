@@ -69,7 +69,7 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 --
 ====
 
-3. Install the Airflow Teradata provider stable version from PyPI repository.
+3. Install the Apache Airflow Teradata provider stable version from PyPI repository.
 +
 [source, bash]
 ----
