@@ -1,4 +1,4 @@
-= Manage Vantage Cloud Lake Compute Cluster with Airflow
+= Manage Vantage Cloud Lake Compute Clusters with Apache Airflow
 :experimental:
 :page-author: Satish Chinthanippu
 :page-email: satish.chinthanippu@teradata.com
