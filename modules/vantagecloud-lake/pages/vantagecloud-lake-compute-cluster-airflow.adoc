@@ -184,7 +184,7 @@ jaffle_shop:
   target: dev
 ----
 
-== Define DAG in Airflow
+== Define DAG in Apache Airflow
 Define a dag to run dbt transformations defined in jaffle_shop dbt project using vantage cloud lake compute cluster.
 [source, python]
 ----
