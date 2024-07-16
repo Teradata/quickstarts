@@ -2411,8 +2411,20 @@ source env/bin/activate</code></pre>
 <div class="sect1">
 <h2 id="_create_a_database"><a class="anchor" href="#_create_a_database"></a>Create a database</h2>
 <div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Use a database client like BTEQ, Lake Editor, Teradata Studio or  dbeaver to execute <code>CREATE DATABASE</code> query.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
-<p>Let&#8217;s create <code>jaffle_shop</code> database in Vantage lake instance with TD_OFSSTORAGE as default</p>
+<p>Let&#8217;s create <code>jaffle_shop</code> database in Vantage lake instance with TD_OFSSTORAGE as default.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2427,6 +2439,18 @@ PERMANENT = 120e6, -- 120MB
 <div class="sect1">
 <h2 id="_create_a_database_user"><a class="anchor" href="#_create_a_database_user"></a>Create a database user</h2>
 <div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Use a database client like BTEQ, Lake Editor, Teradata Studio or  dbeaver to execute <code>CREATE USER</code> query.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Let&#8217;s create <code>lake_user</code> user in Vantage lake instance.</p>
 </div>
@@ -2444,6 +2468,18 @@ DEFAULT DATABASE = jaffle_shop;</code></pre>
 <div class="sect1">
 <h2 id="_grant_access_to_user"><a class="anchor" href="#_grant_access_to_user"></a>Grant access to user</h2>
 <div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Use a database client like BTEQ, Lake Editor, Teradata Studio or  dbeaver to execute <code>GRANT ACCESS</code> queries.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Let&#8217;s provide required privileges to user <code>lake_user</code> to manage compute cluster.</p>
 </div>
@@ -2494,105 +2530,6 @@ cd jaffle_shop</code></pre>
 </div>
 </li>
 </ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_define_dag_in_apache_airflow"><a class="anchor" href="#_define_dag_in_apache_airflow"></a>Define DAG in Apache Airflow</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Define a dag to run dbt transformations defined in jaffle_shop dbt project using vantage cloud lake compute cluster.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">from airflow.operators.bash import BashOperator
-from datetime import datetime
-from airflow import DAG
-from airflow.providers.teradata.operators.teradata_compute_cluster import (
-        TeradataComputeClusterDecommissionOperator,
-        TeradataComputeClusterProvisionOperator,
-        TeradataComputeClusterResumeOperator,
-        TeradataComputeClusterSuspendOperator,
-    )
-from airflow.providers.teradata.operators.teradata import TeradataOperator
-
-import os
-
-PATH_TO_DBT_VENV = f"{os.environ['dbt_venv_dir']}"
-PATH_TO_DBT_PROJECT = f"{os.environ['dbt_project_home_dir']}"
-dbt_run_cmd = "dbt run "
-with DAG(
-    dag_id="explore_airflow_compute_cluster_operator",
-    max_active_runs=1,
-    max_active_tasks=10,
-    catchup=False,
-    start_date=datetime(2024, 1, 1),
-    default_args={"teradata_conn_id": "teradata_lake"},
-
-) as dag:
-    # provision compute cluster with given configuration and initially its in suspended mode
-    compute_cluster_provision_operation = TeradataComputeClusterProvisionOperator(
-        task_id="compute_cluster_provision_operation",
-        compute_profile_name="dbt_transformation_profile",
-        compute_group_name="dbt_transformation_group",
-        timeout=20,
-        query_strategy="STANDARD",
-        compute_map="TD_COMPUTE_XSMALL",
-        compute_attribute="MIN_COMPUTE_COUNT(1) MAX_COMPUTE_COUNT(5) INITIALLY_SUSPENDED('TRUE')",
-    )
-    # assign dbt_transformation_group as default group to lake_user
-    assign_compute_group_user = TeradataOperator(
-        task_id="assign_compute_group_user",
-        sql=r"""
-        MODIFY USER lake_user
-        AS COMPUTE GROUP = dbt_transformation_group;
-        """,
-    )
-    # resume compute cluster
-    compute_cluster_resume_operation = TeradataComputeClusterResumeOperator(
-        task_id="compute_cluster_resume_operation",
-        compute_profile_name="dbt_transformation_profile",
-        compute_group_name="dbt_transformation_group",
-    )
-
-    # run dbt transformation defined in dbt jaffle_shop project
-    transform_data = BashOperator(
-        task_id="transform_data",
-        bash_command="source $PATH_TO_DBT_VENV/bin/activate &amp;&amp; dbt seed --profiles-dir $PATH_TO_DBT_PROJECT --project-dir $PATH_TO_DBT_PROJECT &amp;&amp;  dbt run --profiles-dir $PATH_TO_DBT_PROJECT --project-dir $PATH_TO_DBT_PROJECT -s path:models",
-        env={"PATH_TO_DBT_PROJECT": PATH_TO_DBT_PROJECT, "PATH_TO_DBT_VENV": PATH_TO_DBT_VENV},
-    )
-    # suspend compute cluster
-    compute_cluster_suspend_operation = TeradataComputeClusterSuspendOperator(
-        task_id="compute_cluster_suspend_operation",
-        compute_profile_name="dbt_transformation_profile",
-        compute_group_name="dbt_transformation_group",
-    )
-    # decommission compute cluster
-    compute_cluster_decommission_operation = TeradataComputeClusterDecommissionOperator(
-        task_id="compute_cluster_decommission_operation",
-        compute_profile_name="dbt_transformation_profile",
-        compute_group_name="dbt_transformation_group",
-        delete_compute_group=True,
-    )
-    # remove compute group for user
-    remove_compute_group_from_user = TeradataOperator(
-        task_id="remove_compute_group_from_user",
-        sql=r"""
-        MODIFY USER lake_user
-        AS COMPUTE GROUP = NULL
-        """,
-    )
-
-    (
-        compute_cluster_provision_operation
-        &gt;&gt; assign_compute_group_user
-        &gt;&gt; compute_cluster_resume_operation
-        &gt;&gt; transform_data
-        &gt;&gt; compute_cluster_suspend_operation
-        &gt;&gt; compute_cluster_decommission_operation
-        &gt;&gt; remove_compute_group_from_user
-    )</code></pre>
-</div>
 </div>
 </div>
 </div>
@@ -2716,10 +2653,109 @@ Change <code>/../../</code> to path where virtual environment path defined.
 </div>
 </div>
 <div class="sect1">
+<h2 id="_define_dag_in_apache_airflow"><a class="anchor" href="#_define_dag_in_apache_airflow"></a>Define DAG in Apache Airflow</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Dags in airflow will be defined as python file. Similarly, define below dag to run dbt transformations defined in <code>jaffle_shop</code> dbt project using vantage cloud lake compute cluster. Copy below python code and save it as <code>airflow-vcl-compute-clusters-manage.py</code> under directory $AIRFLOW_HOME/files/dags.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">from airflow.operators.bash import BashOperator
+from datetime import datetime
+from airflow import DAG
+from airflow.providers.teradata.operators.teradata_compute_cluster import (
+        TeradataComputeClusterDecommissionOperator,
+        TeradataComputeClusterProvisionOperator,
+        TeradataComputeClusterResumeOperator,
+        TeradataComputeClusterSuspendOperator,
+    )
+from airflow.providers.teradata.operators.teradata import TeradataOperator
+
+import os
+
+PATH_TO_DBT_VENV = f"{os.environ['dbt_venv_dir']}"
+PATH_TO_DBT_PROJECT = f"{os.environ['dbt_project_home_dir']}"
+dbt_run_cmd = "dbt run "
+with DAG(
+    dag_id="explore_airflow_compute_cluster_operator",
+    max_active_runs=1,
+    max_active_tasks=10,
+    catchup=False,
+    start_date=datetime(2024, 1, 1),
+    default_args={"teradata_conn_id": "teradata_lake"},
+
+) as dag:
+    # provision compute cluster with given configuration and initially its in suspended mode
+    compute_cluster_provision_operation = TeradataComputeClusterProvisionOperator(
+        task_id="compute_cluster_provision_operation",
+        compute_profile_name="dbt_transformation_profile",
+        compute_group_name="dbt_transformation_group",
+        timeout=20,
+        query_strategy="STANDARD",
+        compute_map="TD_COMPUTE_XSMALL",
+        compute_attribute="MIN_COMPUTE_COUNT(1) MAX_COMPUTE_COUNT(5) INITIALLY_SUSPENDED('TRUE')",
+    )
+    # assign dbt_transformation_group as default group to lake_user
+    assign_compute_group_user = TeradataOperator(
+        task_id="assign_compute_group_user",
+        sql=r"""
+        MODIFY USER lake_user
+        AS COMPUTE GROUP = dbt_transformation_group;
+        """,
+    )
+    # resume compute cluster
+    compute_cluster_resume_operation = TeradataComputeClusterResumeOperator(
+        task_id="compute_cluster_resume_operation",
+        compute_profile_name="dbt_transformation_profile",
+        compute_group_name="dbt_transformation_group",
+    )
+
+    # run dbt transformation defined in dbt jaffle_shop project
+    transform_data = BashOperator(
+        task_id="transform_data",
+        bash_command="source $PATH_TO_DBT_VENV/bin/activate &amp;&amp; dbt seed --profiles-dir $PATH_TO_DBT_PROJECT --project-dir $PATH_TO_DBT_PROJECT &amp;&amp;  dbt run --profiles-dir $PATH_TO_DBT_PROJECT --project-dir $PATH_TO_DBT_PROJECT -s path:models",
+        env={"PATH_TO_DBT_PROJECT": PATH_TO_DBT_PROJECT, "PATH_TO_DBT_VENV": PATH_TO_DBT_VENV},
+    )
+    # suspend compute cluster
+    compute_cluster_suspend_operation = TeradataComputeClusterSuspendOperator(
+        task_id="compute_cluster_suspend_operation",
+        compute_profile_name="dbt_transformation_profile",
+        compute_group_name="dbt_transformation_group",
+    )
+    # decommission compute cluster
+    compute_cluster_decommission_operation = TeradataComputeClusterDecommissionOperator(
+        task_id="compute_cluster_decommission_operation",
+        compute_profile_name="dbt_transformation_profile",
+        compute_group_name="dbt_transformation_group",
+        delete_compute_group=True,
+    )
+    # remove compute group for user
+    remove_compute_group_from_user = TeradataOperator(
+        task_id="remove_compute_group_from_user",
+        sql=r"""
+        MODIFY USER lake_user
+        AS COMPUTE GROUP = NULL
+        """,
+    )
+
+    (
+        compute_cluster_provision_operation
+        &gt;&gt; assign_compute_group_user
+        &gt;&gt; compute_cluster_resume_operation
+        &gt;&gt; transform_data
+        &gt;&gt; compute_cluster_suspend_operation
+        &gt;&gt; compute_cluster_decommission_operation
+        &gt;&gt; remove_compute_group_from_user
+    )</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_load_dag"><a class="anchor" href="#_load_dag"></a>Load DAG</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Copy this dag file to $AIRFLOW_HOME/files/dags. Airflow loads DAGs from Python source files, which it looks for inside its configured DAG_FOLDER - $AIRFLOW_HOME/files/dags directory.</p>
+<p>When the dag file is copied to $AIRFLOW_HOME/files/dags, apache airflow loads the dag to airflow UI.</p>
 </div>
 </div>
 </div>
@@ -2750,7 +2786,7 @@ Change <code>/../../</code> to path where virtual environment path defined.
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html">Airflow DAGs reference</a></p>
+<p><a href="https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html">Apache Airflow DAGs reference</a></p>
 </li>
 <li>
 <p><a href="https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/index.html">Airflow Teradata Compute Cluster Operators</a></p>
