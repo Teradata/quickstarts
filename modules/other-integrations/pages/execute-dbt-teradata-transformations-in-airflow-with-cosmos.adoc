@@ -185,7 +185,6 @@ airflow standalone
 * Password (required): lake_user
 
 == Define DAG in Apache Airflow
-Define a dag to run dbt transformations defined in jaffle_shop dbt project against Teradata Vantage system using cosmos.
 Dags in airflow will be defined as python file. Similarly, define below dag to run dbt transformations defined in jaffle_shop dbt project against Teradata Vantage system using cosmos. Copy below python code and save it as `airflow-cosmos-dbt-teradata-integration.py` under directory $AIRFLOW_HOME/files/dags.
 [source, python]
 ----
