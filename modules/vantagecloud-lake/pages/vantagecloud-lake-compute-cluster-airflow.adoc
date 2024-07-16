@@ -13,7 +13,7 @@
 This tutorial demonstrates the process of utilizing the https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/index.html[Teradata Airflow Compute Cluster Operators] to manage Vantage Cloud Lake Compute Clusters. The objective is to execute dbt models on the VantageCloud Lake Compute Clusters.
 
 == Prerequisites
-* Access to a VantageCloud Lake environment
+* Ensure you have the necessary credentials and access rights to use Teradata Vantage Lake.
 +
 include::vantagecloud-lake:partial$vantagecloud-lake-request.adoc[]
 * Python 3.8, 3.9, 3.10 or 3.11 installed.
