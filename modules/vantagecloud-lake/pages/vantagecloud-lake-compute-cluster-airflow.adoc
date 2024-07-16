@@ -299,7 +299,7 @@ set dbt_venv_dir=/../../dbt_env/bin/activate
 +
 NOTE: Change `/../../` to path where virtual environment path defined.
 
-== Start Airflow web server
+== Start Apache Airflow web server
 1. Run airflow web server
 +
 [source, bash]
