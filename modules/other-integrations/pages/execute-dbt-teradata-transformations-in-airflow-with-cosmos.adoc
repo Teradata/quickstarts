@@ -1,0 +1,247 @@
+= Execute dbt teradata transformation jobs in Airflow using Astronomer Cosmos library
+:experimental:
+:page-author: Satish Chinthanippu
+:page-email: satish.chinthanippu@teradata.com
+:page-revdate: July 15th, 2024
+:description: Execute dbt teradata transformation jobs in Airflow using Astronomer Cosmos library
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, airflow, queries, dbt, cosmos, astronomer
+:dir: execute-dbt-teradata-transformations-in-airflow-with-cosmos
+:auxdir: execute-dbt-teradata-transformations-in-airflow-with-cosmos
+
+== Overview
+
+This tutorial demonstrates how to install Airflow on a local machine, configure the workflow to use dbt teradata to run dbt transformations using astronomer cosmos library, and run it against a Teradata Vantage database. Airflow is a task scheduling tool that is typically used to build data pipelines to process and load data. https://astronomer.github.io/astronomer-cosmos/[Astronomer cosmos] library simplify transformations with dbt in Apache Airflow. Using Cosmos, run your dbt Core projects as Apache Airflow DAGs and Task Groups with a few lines of code.
+In this example, we will explain how to use astronomer cosmos to run dbt teradata transformations in airflow against Teradata vantage database.
+
+== Prerequisites
+* Access to a Teradata Vantage instance, version 17.10 or higher.
++
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
+* Python 3.8, 3.9, 3.10 or 3.11 installed.
+* python3-env, python3-pip, pipx installed.
+[source, bash]
+sudo apt install -y python3-venv python3-pip pipx
+
+NOTE: Use `Windows PowerShell` command-line shell on `Windows` OS to try this quickstart example.
+
+== Install Apache Airflow
+1. Set the AIRFLOW_HOME environment variable. Airflow requires a home directory and uses ~/airflow by default, but you can set a different location if you prefer. The AIRFLOW_HOME environment variable is used to inform Airflow of the desired location.
++
+[source, bash]
+----
+export AIRFLOW_HOME=~/airflow
+----
+2. Install `apache-airflow` stable version 2.9.2 from PyPI repository.:
++
+[tabs]
+====
+Windows::
++
+--
+[source, bash]
+----
+AIRFLOW_VERSION=2.9.2
+PYTHON_VERSION="$(python --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
+CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
+pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
+----
+--
+MacOS::
++
+--
+[source, bash]
+----
+AIRFLOW_VERSION=2.9.2
+PYTHON_VERSION="$(python3 --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
+CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
+pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
+----
+--
+Linux::
++
+--
+[source, bash]
+----
+AIRFLOW_VERSION=2.9.2
+PYTHON_VERSION="$(python3 --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
+CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
+pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
+----
+--
+====
+
+3. Install the Airflow Teradata provider stable version from PyPI repository.
++
+[source, bash]
+----
+pip install "apache-airflow-providers-teradata"
+----
+
+== Install Astronomer Cosmos
+[source, bash]
+----
+pip install "astronomer-cosmos"
+----
+
+== Install dbt
+1. Create a new python environment to manage dbt and its dependencies. Activate the environment:
++
+[tabs]
+====
+Windows::
++
+--
+[source, bash]
+----
+python -m venv env
+source env/bin/activate
+----
+--
+MacOS::
++
+--
+[source, bash]
+----
+python3 -m venv env
+source env/bin/activate
+----
+--
+Linux::
++
+--
+[source, bash]
+----
+python3 -m venv env
+source env/bin/activate
+----
+--
+====
+
+2. Install `dbt-teradata` and `dbt-core` modules:
++
+[source, bash]
+----
+pip install dbt-teradata dbt-core
+----
+
+== Setup dbt project
+
+1. Clone the jaffle_shop repository and cd into the project directory:
++
+[source, bash]
+----
+git clone https://github.com/Teradata/jaffle_shop-dev.git jaffle_shop
+cd jaffle_shop
+----
+2. Make a new folder, dbt, inside $AIRFLOW_HOME/dags folder. Then, copy/paste jaffle_shop dbt project into $AIRFLOW_HOME/dags/dbt directory
++
+[source, bash]
+----
+mkdir -p $AIRFLOW_HOME/dags/dbt/
+cp -r jaffle_shop $AIRFLOW_HOME/dags/dbt/
+----
+
+== Define DAG in Airflow
+Define a dag to run dbt transformations defined in jaffle_shop dbt project against Teradata Vantage system using cosmos.
+[source, python]
+----
+import os
+from datetime import datetime
+
+from airflow import DAG
+from cosmos import DbtTaskGroup, ProjectConfig, ProfileConfig, ExecutionConfig
+from cosmos.profiles import TeradataUserPasswordProfileMapping
+
+PATH_TO_DBT_VENV = f"{os.environ['dbt_venv_dir']}"
+PATH_TO_DBT_PROJECT = f"{os.environ['dbt_project_home_dir']}"
+
+
+execution_config = ExecutionConfig(
+    dbt_executable_path=PATH_TO_DBT_VENV,
+)
+profile_config = ProfileConfig(
+    profile_name="generated_profile",
+    target_name="dev",
+    profile_mapping=TeradataUserPasswordProfileMapping(
+        conn_id="teradata_default",
+    ),
+)
+with DAG(
+    dag_id="execute_dbt_transformations_with_cosmos",
+    max_active_runs=1,
+    max_active_tasks=10,
+    catchup=False,
+    start_date=datetime(2024, 1, 1),
+
+) as dag:
+      transform_data = DbtTaskGroup(
+          group_id="transform_data",
+          project_config=ProjectConfig(PATH_TO_DBT_PROJECT),
+          profile_config=profile_config,
+          execution_config=execution_config,
+          default_args={"retries": 2},
+      )
+----
+
+== Configure Airflow
+
+1. Configure the listed environment variables to activate the test connection button, preventing the loading of sample DAGs and default connections in Airflow UI.
++
+[source, bash]
+  export AIRFLOW__CORE__TEST_CONNECTION=Enabled
+  export AIRFLOW__CORE__LOAD_EXAMPLES=false
+  export AIRFLOW__CORE_LOAD_DEFAULT_CONNECTIONS=false
+
+2. Define the path of jaffle_shop project as an environment variable `dbt_project_home_dir`.
++
+[source, bash]
+export dbt_project_home_dir=../../jaffle_shop
++
+NOTE: Change `/../../` to path of jaffle_shop project path.
+
+3. Define the virtual environment path where dbt-teradata installed in <<Install dbt>> as an environment variable `dbt_venv_dir`.
+[source, bash]
+set dbt_venv_dir=/../../dbt_env/bin/dbt
++
+NOTE: Change `/../../` to path where virtual environment path defined.
+
+== Start Airflow web server
+1. Run airflow web server
++
+[source, bash]
+----
+airflow standalone
+----
+2. Access the airflow UI. Visit https://localhost:8080 in the browser and log in with the admin account details shown in the terminal.
+
+== Define Airflow connection to Vantage Cloud Lake
+
+1. Click on Admin - Connections
+2. Click on + to define new connection to Teradata vantage cloud lake instance.
+3. Define new connection with id `teradata_default` with Teradata vantage cloud lake instance details.
+* Connection Id: teradata_lake
+* Connection Type: Teradata.
+* Database Server URL (required): Teradata vantage cloud lake instance hostname to connect to.
+* Database: jaffle_shop
+* Login (required): lake_user
+* Password (required): lake_user
+
+== Load DAG
+
+Copy this dag file to $AIRFLOW_HOME/files/dags. Airflow loads DAGs from Python source files, which it looks for inside its configured DAG_FOLDER - $AIRFLOW_HOME/files/dags directory.
+
+== Run DAGadmin-dropdown
+
+Run the dag as shown in below image.
+
+image::{dir}/airflow-dag.png[Run dag,align="left" width=75%]
+
+== Summary
+
+In this quick start guide, we explored how to utilize Astronomer Cosmos library in Airflow to execute dbt teradata transformations against Teradata Vantage instance.
+
+== Further reading
+* link:https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html[Airflow DAGs reference]
+* link:https://astronomer.github.io/astronomer-cosmos/[Benefits of Cosmos]
+* link:https://astronomer.github.io/astronomer-cosmos/profiles/TeradataUserPassword.html[Teradata Cosmos Profile]
+
