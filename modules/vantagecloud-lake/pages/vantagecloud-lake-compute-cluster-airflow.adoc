@@ -119,7 +119,9 @@ pip install dbt-teradata dbt-core
 
 == Create a database
 
-Let's create `jaffle_shop` database in Vantage lake instance with TD_OFSSTORAGE as default
+NOTE: Use a database client like BTEQ, Lake Editor, Teradata Studio or  dbeaver to execute below queries.
+
+Let's create `jaffle_shop` database in Vantage lake instance with TD_OFSSTORAGE as default.
 
 [source, teradata-sql]
 ----
@@ -184,8 +186,52 @@ jaffle_shop:
   target: dev
 ----
 
+== Configure Airflow
+
+1. Configure the listed environment variables to activate the test connection button, preventing the loading of sample DAGs and default connections in Airflow UI.
++
+[source, bash]
+  export AIRFLOW__CORE__TEST_CONNECTION=Enabled
+  export AIRFLOW__CORE__LOAD_EXAMPLES=false
+  export AIRFLOW__CORE_LOAD_DEFAULT_CONNECTIONS=false
+
+2. Define the path of jaffle_shop project as an environment variable `dbt_project_home_dir`.
++
+[source, bash]
+export dbt_project_home_dir=../../jaffle_shop
++
+NOTE: Change `/../../` to path of jaffle_shop project path.
+
+3. Define the virtual environment path where dbt-teradata installed in <<Install dbt>> as an environment variable `dbt_venv_dir`.
+[source, bash]
+set dbt_venv_dir=/../../dbt_env/bin/activate
++
+NOTE: Change `/../../` to path where virtual environment path defined.
+
+== Start Airflow web server
+1. Run airflow web server
++
+[source, bash]
+----
+airflow standalone
+----
+2. Access the airflow UI. Visit https://localhost:8080 in the browser and log in with the admin account details shown in the terminal.
+
+== Define Airflow connection to Vantage Cloud Lake
+
+1. Click on Admin - Connections
+2. Click on + to define new connection to Teradata vantage cloud lake instance.
+3. Define new connection with id `teradata_lake` with Teradata vantage cloud lake instance details.
+* Connection Id: teradata_lake
+* Connection Type: Teradata.
+* Database Server URL (required): Teradata vantage cloud lake instance hostname to connect to.
+* Database: jaffle_shop
+* Login (required): lake_user
+* Password (required): lake_user
+
 == Define DAG in Airflow
-Define a dag to run dbt transformations defined in jaffle_shop dbt project using vantage cloud lake compute cluster.
+Dags in airflow will be defined as python file. Similarly, Define below dag to run dbt transformations defined in `jaffle_shop` dbt project using vantage cloud lake compute cluster. Copy below python code and save it as `airflow-vcl-compute-clusters-manage.py` under directory $AIRFLOW_HOME/files/dags.
+
 [source, python]
 ----
 from airflow.operators.bash import BashOperator
@@ -277,52 +323,9 @@ with DAG(
     )
 ----
 
-== Configure Airflow
-
-1. Configure the listed environment variables to activate the test connection button, preventing the loading of sample DAGs and default connections in Airflow UI.
-+
-[source, bash]
-  export AIRFLOW__CORE__TEST_CONNECTION=Enabled
-  export AIRFLOW__CORE__LOAD_EXAMPLES=false
-  export AIRFLOW__CORE_LOAD_DEFAULT_CONNECTIONS=false
-
-2. Define the path of jaffle_shop project as an environment variable `dbt_project_home_dir`.
-+
-[source, bash]
-export dbt_project_home_dir=../../jaffle_shop
-+
-NOTE: Change `/../../` to path of jaffle_shop project path.
-
-3. Define the virtual environment path where dbt-teradata installed in <<Install dbt>> as an environment variable `dbt_venv_dir`.
-[source, bash]
-set dbt_venv_dir=/../../dbt_env/bin/activate
-+
-NOTE: Change `/../../` to path where virtual environment path defined.
-
-== Start Airflow web server
-1. Run airflow web server
-+
-[source, bash]
-----
-airflow standalone
-----
-5. Access the airflow UI. Visit https://localhost:8080 in the browser and log in with the admin account details shown in the terminal.
-
-== Define Airflow connection to Vantage Cloud Lake
-
-1. Click on Admin - Connections
-2. Click on + to define new connection to Teradata vantage cloud lake instance.
-3. Define new connection with id `teradata_lake` with Teradata vantage cloud lake instance details.
-* Connection Id: teradata_lake
-* Connection Type: Teradata.
-* Database Server URL (required): Teradata vantage cloud lake instance hostname to connect to.
-* Database: jaffle_shop
-* Login (required): lake_user
-* Password (required): lake_user
-
 == Load DAG
 
-Copy this dag file to $AIRFLOW_HOME/files/dags. Airflow loads DAGs from Python source files, which it looks for inside its configured DAG_FOLDER - $AIRFLOW_HOME/files/dags directory.
+When the dag file copied to $AIRFLOW_HOME/files/dags, apache airflow loads the dag to airflow UI.
 
 == Run DAG
 
