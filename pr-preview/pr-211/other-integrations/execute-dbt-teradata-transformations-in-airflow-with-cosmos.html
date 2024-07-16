@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Execute dbt teradata transformation jobs in Airflow using Astronomer Cosmos library :: Teradata Getting Started</title>
+    <title>Execute dbt teradata transformation jobs in Apache Airflow using Astronomer Cosmos library :: Teradata Getting Started</title>
     <link rel="canonical" href="https://quickstarts.teradata.com/other-integrations/execute-dbt-teradata-transformations-in-airflow-with-cosmos.html">
-    <meta name="description" content="Execute dbt teradata transformation jobs in Airflow using Astronomer Cosmos library">
+    <meta name="description" content="Execute dbt teradata transformation jobs in Apache Airflow using Astronomer Cosmos library">
     <meta name="keywords" content="data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, airflow, queries, dbt, cosmos, astronomer">
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../_/css/site.css">
 <meta http-equiv="Content-Language" content="en">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta property="og:title" content="Execute dbt teradata transformation jobs in Airflow using Astronomer Cosmos library :: Teradata Getting Started">
+<meta property="og:title" content="Execute dbt teradata transformation jobs in Apache Airflow using Astronomer Cosmos library :: Teradata Getting Started">
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Execute dbt teradata transformation jobs in Airflow using Astronomer Cosmos library" />
+<meta property="og:description" content="Execute dbt teradata transformation jobs in Apache Airflow using Astronomer Cosmos library" />
 <meta property="og:site_name" content="Teradata Getting Started">
 <meta property="og:image:height" content="336"/>
 <meta property="og:image" content="https://www.teradata.com/Content/Assets/default/teradata-logo-social.png">
@@ -2202,7 +2202,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="execute-dbt-teradata-transformations-in-airflow-with-cosmos.html">Execute dbt teradata transformation jobs in Airflow using Astronomer Cosmos library</a></li>
+    <li><a href="execute-dbt-teradata-transformations-in-airflow-with-cosmos.html">Execute dbt teradata transformation jobs in Apache Airflow using Astronomer Cosmos library</a></li>
   </ul>
 </nav>
 </div>
@@ -2216,12 +2216,12 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Execute dbt teradata transformation jobs in Airflow using Astronomer Cosmos library</h1>
+<h1 class="page">Execute dbt teradata transformation jobs in Apache Airflow using Astronomer Cosmos library</h1>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This tutorial demonstrates how to install Airflow on a local machine, configure the workflow to use dbt teradata to run dbt transformations using astronomer cosmos library, and run it against a Teradata Vantage database. Airflow is a task scheduling tool that is typically used to build data pipelines to process and load data. <a href="https://astronomer.github.io/astronomer-cosmos/">Astronomer cosmos</a> library simplify transformations with dbt in Apache Airflow. Using Cosmos, run your dbt Core projects as Apache Airflow DAGs and Task Groups with a few lines of code.
+<p>This tutorial demonstrates how to install Apache Airflow on a local machine, configure the workflow to use dbt teradata to run dbt transformations using astronomer cosmos library, and run it against a Teradata Vantage database. Apache Airflow is a task scheduling tool that is typically used to build data pipelines to process and load data. <a href="https://astronomer.github.io/astronomer-cosmos/">Astronomer cosmos</a> library simplify transformations with dbt in Apache Airflow. Using Cosmos, run your dbt Core projects as Apache Airflow DAGs and Task Groups with a few lines of code.
 In this example, we will explain how to use astronomer cosmos to run dbt teradata transformations in airflow against Teradata vantage database.</p>
 </div>
 </div>
@@ -2337,7 +2337,7 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 </div>
 </li>
 <li>
-<p>Install the Airflow Teradata provider stable version from PyPI repository.</p>
+<p>Install the Apache Airflow Teradata provider stable version from PyPI repository.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install "apache-airflow-providers-teradata"</code></pre>
@@ -2447,55 +2447,7 @@ cp -r jaffle_shop $AIRFLOW_HOME/dags/dbt/</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_define_dag_in_airflow"><a class="anchor" href="#_define_dag_in_airflow"></a>Define DAG in Airflow</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Define a dag to run dbt transformations defined in jaffle_shop dbt project against Teradata Vantage system using cosmos.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import os
-from datetime import datetime
-
-from airflow import DAG
-from cosmos import DbtTaskGroup, ProjectConfig, ProfileConfig, ExecutionConfig
-from cosmos.profiles import TeradataUserPasswordProfileMapping
-
-PATH_TO_DBT_VENV = f"{os.environ['dbt_venv_dir']}"
-PATH_TO_DBT_PROJECT = f"{os.environ['dbt_project_home_dir']}"
-
-
-execution_config = ExecutionConfig(
-    dbt_executable_path=PATH_TO_DBT_VENV,
-)
-profile_config = ProfileConfig(
-    profile_name="generated_profile",
-    target_name="dev",
-    profile_mapping=TeradataUserPasswordProfileMapping(
-        conn_id="teradata_default",
-    ),
-)
-with DAG(
-    dag_id="execute_dbt_transformations_with_cosmos",
-    max_active_runs=1,
-    max_active_tasks=10,
-    catchup=False,
-    start_date=datetime(2024, 1, 1),
-
-) as dag:
-      transform_data = DbtTaskGroup(
-          group_id="transform_data",
-          project_config=ProjectConfig(PATH_TO_DBT_PROJECT),
-          profile_config=profile_config,
-          execution_config=execution_config,
-          default_args={"retries": 2},
-      )</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_configure_airflow"><a class="anchor" href="#_configure_airflow"></a>Configure Airflow</h2>
+<h2 id="_configure_apache_airflow"><a class="anchor" href="#_configure_apache_airflow"></a>Configure Apache Airflow</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -2554,7 +2506,7 @@ Change <code>/../../</code> to path where virtual environment path defined.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_start_airflow_web_server"><a class="anchor" href="#_start_airflow_web_server"></a>Start Airflow web server</h2>
+<h2 id="_start_apache_airflow_web_server"><a class="anchor" href="#_start_apache_airflow_web_server"></a>Start Apache Airflow web server</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -2574,7 +2526,7 @@ Change <code>/../../</code> to path where virtual environment path defined.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_define_airflow_connection_to_vantage_cloud_lake"><a class="anchor" href="#_define_airflow_connection_to_vantage_cloud_lake"></a>Define Airflow connection to Vantage Cloud Lake</h2>
+<h2 id="_define_apache_airflow_connection_to_vantage_cloud_lake"><a class="anchor" href="#_define_apache_airflow_connection_to_vantage_cloud_lake"></a>Define Apache Airflow connection to Vantage Cloud Lake</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -2614,15 +2566,64 @@ Change <code>/../../</code> to path where virtual environment path defined.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_load_dag"><a class="anchor" href="#_load_dag"></a>Load DAG</h2>
+<h2 id="_define_dag_in_apache_airflow"><a class="anchor" href="#_define_dag_in_apache_airflow"></a>Define DAG in Apache Airflow</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Copy this dag file to $AIRFLOW_HOME/files/dags. Airflow loads DAGs from Python source files, which it looks for inside its configured DAG_FOLDER - $AIRFLOW_HOME/files/dags directory.</p>
+<p>Define a dag to run dbt transformations defined in jaffle_shop dbt project against Teradata Vantage system using cosmos.
+Dags in airflow will be defined as python file. Similarly, define below dag to run dbt transformations defined in jaffle_shop dbt project against Teradata Vantage system using cosmos. Copy below python code and save it as <code>airflow-cosmos-dbt-teradata-integration.py</code> under directory $AIRFLOW_HOME/files/dags.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import os
+from datetime import datetime
+
+from airflow import DAG
+from cosmos import DbtTaskGroup, ProjectConfig, ProfileConfig, ExecutionConfig
+from cosmos.profiles import TeradataUserPasswordProfileMapping
+
+PATH_TO_DBT_VENV = f"{os.environ['dbt_venv_dir']}"
+PATH_TO_DBT_PROJECT = f"{os.environ['dbt_project_home_dir']}"
+
+
+execution_config = ExecutionConfig(
+    dbt_executable_path=PATH_TO_DBT_VENV,
+)
+profile_config = ProfileConfig(
+    profile_name="generated_profile",
+    target_name="dev",
+    profile_mapping=TeradataUserPasswordProfileMapping(
+        conn_id="teradata_default",
+    ),
+)
+with DAG(
+    dag_id="execute_dbt_transformations_with_cosmos",
+    max_active_runs=1,
+    max_active_tasks=10,
+    catchup=False,
+    start_date=datetime(2024, 1, 1),
+
+) as dag:
+      transform_data = DbtTaskGroup(
+          group_id="transform_data",
+          project_config=ProjectConfig(PATH_TO_DBT_PROJECT),
+          profile_config=profile_config,
+          execution_config=execution_config,
+          default_args={"retries": 2},
+      )</code></pre>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_run_dagadmin_dropdown"><a class="anchor" href="#_run_dagadmin_dropdown"></a>Run DAGadmin-dropdown</h2>
+<h2 id="_load_dag"><a class="anchor" href="#_load_dag"></a>Load DAG</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When the dag file is copied to $AIRFLOW_HOME/files/dags, apache airflow loads the dag to airflow UI.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_run_dag"><a class="anchor" href="#_run_dag"></a>Run DAG</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Run the dag as shown in below image.</p>
@@ -2638,7 +2639,7 @@ Change <code>/../../</code> to path where virtual environment path defined.
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this quick start guide, we explored how to utilize Astronomer Cosmos library in Airflow to execute dbt teradata transformations against Teradata Vantage instance.</p>
+<p>In this quick start guide, we explored how to utilize Astronomer Cosmos library in apache airflow to execute dbt teradata transformations against Teradata Vantage instance.</p>
 </div>
 </div>
 </div>
@@ -2648,7 +2649,7 @@ Change <code>/../../</code> to path where virtual environment path defined.
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html">Airflow DAGs reference</a></p>
+<p><a href="https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html">Apache Airflow DAGs reference</a></p>
 </li>
 <li>
 <p><a href="https://astronomer.github.io/astronomer-cosmos/">Benefits of Cosmos</a></p>
