@@ -210,7 +210,7 @@ NOTE: You might need to change `/../../` to the specific path where you cloned t
 [source, bash]
 set dbt_venv_dir=/../../dbt_env/bin/activate
 +
-NOTE: Change `/../../` to path where virtual environment path defined.
+NOTE: You might need to change `/../../` to the specific path where the virtual environment is located.
 
 == Start Apache Airflow web server
 1. Run airflow web server
