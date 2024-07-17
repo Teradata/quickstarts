@@ -204,7 +204,7 @@ jaffle_shop:
 [source, bash]
 export dbt_project_home_dir=../../jaffle_shop
 +
-NOTE: Change `/../../` to path of jaffle_shop project path.
+NOTE: You might need to change `/../../` to the specific path where you cloned the jaffle_shop project.
 
 3. Define the virtual environment path where dbt-teradata installed in <<Install dbt>> as an environment variable `dbt_venv_dir`.
 [source, bash]
