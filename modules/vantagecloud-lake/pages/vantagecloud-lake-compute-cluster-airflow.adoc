@@ -224,7 +224,7 @@ airflow standalone
 == Define a connection to VantageCloud Lake in Apache Airflow
 
 1. Click on Admin - Connections
-2. Click on + to define new connection to Teradata vantage cloud lake instance.
+2. Click on + to define new connection to the Teradata VantageCloud Lake instance.
 3. Define new connection with id `teradata_lake` with Teradata vantage cloud lake instance details.
 * Connection Id: teradata_lake
 * Connection Type: Teradata.
