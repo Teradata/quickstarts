@@ -332,7 +332,7 @@ Once the dag file is copied to $AIRFLOW_HOME/files/dags, Apache Airflow loads th
 
 == Run DAG
 
-Run the dag as shown in below image.
+Run the dag as shown in the image below.
 
 image::{dir}/airflow-dag-run.png[Run dag,align="left" width=75%]
 
