@@ -221,7 +221,7 @@ airflow standalone
 ----
 2. Access the airflow UI. Visit https://localhost:8080 in the browser and log in with the admin account details shown in the terminal.
 
-== Define Apache Airflow connection to Vantage Cloud Lake
+== Define a connection to VantageCloud Lake in Apache Airflow
 
 1. Click on Admin - Connections
 2. Click on + to define new connection to Teradata vantage cloud lake instance.
