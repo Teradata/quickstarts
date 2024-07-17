@@ -121,7 +121,7 @@ pip install dbt-teradata dbt-core
 
 NOTE: Use a database client like BTEQ, Lake Editor, Teradata Studio or  dbeaver to execute `CREATE DATABASE` query.
 
-Let's create `jaffle_shop` database in Vantage lake instance with TD_OFSSTORAGE as default.
+Let's create the `jaffle_shop` database in the VantageCloud Lake instance with TD_OFSSTORAGE as default.
 
 [source, teradata-sql]
 ----
