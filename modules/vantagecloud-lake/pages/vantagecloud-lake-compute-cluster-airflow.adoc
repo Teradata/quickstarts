@@ -225,7 +225,7 @@ airflow standalone
 
 1. Click on Admin - Connections
 2. Click on + to define new connection to the Teradata VantageCloud Lake instance.
-3. Define new connection with id `teradata_lake` with Teradata vantage cloud lake instance details.
+3. Define a new connection with the Teradata VantageCloud Lake instance details. Assign the id `teradata_lake`
 * Connection Id: teradata_lake
 * Connection Type: Teradata.
 * Database Server URL (required): Teradata vantage cloud lake instance hostname to connect to.
