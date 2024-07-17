@@ -234,7 +234,7 @@ airflow standalone
 * Password (required): lake_user
 
 == Define DAG in Apache Airflow
-Dags in airflow will be defined as python file. Similarly, define below dag to run dbt transformations defined in `jaffle_shop` dbt project using vantage cloud lake compute cluster. Copy below python code and save it as `airflow-vcl-compute-clusters-manage.py` under directory $AIRFLOW_HOME/files/dags.
+Dags in airflow are defined as python files. The dag below runs the dbt transformations defined in the `jaffle_shop` dbt project using VantageCloud Lake compute clusters. Copy the python code below and save it as `airflow-vcl-compute-clusters-manage.py` under the directory $AIRFLOW_HOME/files/dags.
 
 [source, python]
 ----
