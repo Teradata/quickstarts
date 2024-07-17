@@ -2221,7 +2221,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This tutorial demonstrates how to install Apache Airflow on a local machine, configure the workflow to use dbt teradata to run dbt transformations using astronomer cosmos library, and run it against a Teradata Vantage database. Apache Airflow is a task scheduling tool that is typically used to build data pipelines to process and load data. <a href="https://astronomer.github.io/astronomer-cosmos/">Astronomer cosmos</a> library simplify transformations with dbt in Apache Airflow. Using Cosmos, run your dbt Core projects as Apache Airflow DAGs and Task Groups with a few lines of code.
+<p>This tutorial demonstrates how to install Apache Airflow on a local machine, configure the workflow to use dbt teradata to run dbt transformations using the astronomer cosmos library, and run it against a Teradata Vantage database. Apache Airflow is a task scheduling tool that is typically used to build data pipelines to process and load data. <a href="https://astronomer.github.io/astronomer-cosmos/">Astronomer cosmos</a> library simplifies orchestrating dbt data transformations in Apache Airflow. Using Cosmos, allows running dbt Core projects as Apache Airflow DAGs and Task Groups with a few lines of code.
 In this example, we will explain how to use astronomer cosmos to run dbt teradata transformations in airflow against Teradata vantage database.</p>
 </div>
 </div>
@@ -2337,7 +2337,7 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 </div>
 </li>
 <li>
-<p>Install the Apache Airflow Teradata provider stable version from PyPI repository.</p>
+<p>Install the Apache Airflow Teradata provider stable version from the corresponding PyPI repository.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install "apache-airflow-providers-teradata"</code></pre>
@@ -2475,14 +2475,14 @@ cp -r jaffle_shop $AIRFLOW_HOME/dags/dbt/</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Change <code>/../../</code> to path of jaffle_shop project path.
+You might need to change <code>/../../</code> to the specific path where you cloned the jaffle_shop project.
 </td>
 </tr>
 </table>
 </div>
 </li>
 <li>
-<p>Define the virtual environment path where dbt-teradata installed in <a href="#_install_dbt">Install dbt</a> as an environment variable <code>dbt_venv_dir</code>.</p>
+<p>Define the path to the virtual environment where dbt-teradata was installed as an environment variable <code>dbt_venv_dir</code>.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">set dbt_venv_dir=/../../dbt_env/bin/dbt</code></pre>
@@ -2495,7 +2495,7 @@ Change <code>/../../</code> to path of jaffle_shop project path.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Change <code>/../../</code> to path where virtual environment path defined.
+You might need to change <code>/../../</code> to the specific path where the virtual environment is located.
 </td>
 </tr>
 </table>
@@ -2569,7 +2569,7 @@ Change <code>/../../</code> to path where virtual environment path defined.
 <h2 id="_define_dag_in_apache_airflow"><a class="anchor" href="#_define_dag_in_apache_airflow"></a>Define DAG in Apache Airflow</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Dags in airflow will be defined as python file. Similarly, define below dag to run dbt transformations defined in jaffle_shop dbt project against Teradata Vantage system using cosmos. Copy below python code and save it as <code>airflow-cosmos-dbt-teradata-integration.py</code> under directory $AIRFLOW_HOME/files/dags.</p>
+<p>Dags in airflow are defined as python files. The dag below runs the dbt transformations defined in the <code>jaffle_shop</code> dbt project on a Teradata Vantage system using cosmos.Copy the python code below and save it as <code>airflow-cosmos-dbt-teradata-integration.py</code> under the directory $AIRFLOW_HOME/files/dags.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2617,7 +2617,7 @@ with DAG(
 <h2 id="_load_dag"><a class="anchor" href="#_load_dag"></a>Load DAG</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When the dag file is copied to $AIRFLOW_HOME/files/dags, apache airflow loads the dag to airflow UI.</p>
+<p>When the dag file is copied to $AIRFLOW_HOME/files/dags, Apache Airflow loads the dag to airflow UI.</p>
 </div>
 </div>
 </div>
@@ -2625,7 +2625,7 @@ with DAG(
 <h2 id="_run_dag"><a class="anchor" href="#_run_dag"></a>Run DAG</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Run the dag as shown in below image.</p>
+<p>Run the dag as shown in the image below.</p>
 </div>
 <div class="imageblock text-left">
 <div class="content">
@@ -2638,7 +2638,7 @@ with DAG(
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this quick start guide, we explored how to utilize Astronomer Cosmos library in apache airflow to execute dbt teradata transformations against Teradata Vantage instance.</p>
+<p>In this quick start guide, we explored how to utilize Astronomer Cosmos library in Apache Airflow to execute dbt teradata transformations against a Teradata Vantage instance.</p>
 </div>
 </div>
 </div>
