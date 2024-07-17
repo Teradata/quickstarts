@@ -135,7 +135,7 @@ PERMANENT = 120e6, -- 120MB
 
 NOTE: Use a database client like BTEQ, Lake Editor, Teradata Studio or  dbeaver to execute `CREATE USER` query.
 
-Let's create `lake_user` user in Vantage lake instance.
+Let's create a `lake_user` user in the VantageCloud Lake instance.
 
 [source, teradata-sql]
 ----
