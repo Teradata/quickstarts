@@ -228,7 +228,7 @@ airflow standalone
 3. Define a new connection with the Teradata VantageCloud Lake instance details. Assign the id `teradata_lake`
 * Connection Id: teradata_lake
 * Connection Type: Teradata.
-* Database Server URL (required): Teradata vantage cloud lake instance hostname to connect to.
+* Database Server URL (required): Teradata VantageCloud Lake instance hostname or IP to connect to.
 * Database: jaffle_shop
 * Login (required): lake_user
 * Password (required): lake_user
