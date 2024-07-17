@@ -169,7 +169,7 @@ GRANT ALL ON jaffle_shop TO lake_user;
 git clone https://github.com/Teradata/jaffle_shop-dev.git jaffle_shop
 cd jaffle_shop
 ----
-2. Create `profiles.yml` file. Add the following config to `profile.yml` file. Adjust `<host>` to match your Teradata Vantage lake instance.
+2. Create `profiles.yml` file. Add the following config to `profile.yml` file. Adjust `<host>` to match your Teradata VantageCloud Lake instance.
 +
 [source, yaml]
 ----
