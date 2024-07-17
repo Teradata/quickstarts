@@ -150,7 +150,7 @@ DEFAULT DATABASE = jaffle_shop;
 
 NOTE: Use a database client like BTEQ, Lake Editor, Teradata Studio or  dbeaver to execute `GRANT ACCESS` queries.
 
-Let's provide required privileges to user `lake_user` to manage compute cluster.
+Let's provide the required privileges to the user `lake_user` to manage compute clusters.
 
 [source, teradata-sql]
 ----
