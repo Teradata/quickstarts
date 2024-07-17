@@ -3,7 +3,7 @@
 :page-author: Satish Chinthanippu
 :page-email: satish.chinthanippu@teradata.com
 :page-revdate: July 11th, 2024
-:description: Manage Vantage Cloud Lake Compute Clusters with Apache Airflow
+:description: Manage VantageCloud Lake compute clusters with Apache Airflow
 :keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, business intelligence, enterprise analytics, airflow, workflow, teradatasql, ipython-sql, cloud computing, machine learning, vantagecloud, vantagecloud lake, lake
 :dir: vantagecloud-lake-compute-cluster-airflow
 :auxdir: vantagecloud-lake-compute-cluster-airflow
