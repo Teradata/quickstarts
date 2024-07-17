@@ -338,7 +338,7 @@ image::{dir}/airflow-dag-run.png[Run dag,align="left" width=75%]
 
 == Summary
 
-In this quick start guide, we explored how to utilize Teradata Vantage Lake Compute Cluster to execute dbt transformations using Airflow compute cluster operators.
+In this quick start guide, we explored how to utilize Teradata VantageCloud Lake compute clusters to execute dbt transformations using Teradata compute cluster operators for Airflow.
 
 == Further reading
 * link:https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html[Apache Airflow DAGs reference]
