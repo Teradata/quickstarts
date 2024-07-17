@@ -162,7 +162,7 @@ GRANT ALL ON jaffle_shop TO lake_user;
 
 == Setup dbt project
 
-1. Clone the jaffle_shop repository and cd into the project directory:
+1. Clone the jaffle_shop dbt demo repository and cd into the project directory:
 +
 [source, bash]
 ----
