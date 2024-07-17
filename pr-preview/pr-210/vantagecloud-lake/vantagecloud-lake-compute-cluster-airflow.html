@@ -2656,7 +2656,7 @@ You might need to change <code>/../../</code> to the specific path where the vir
 <h2 id="_define_dag_in_apache_airflow"><a class="anchor" href="#_define_dag_in_apache_airflow"></a>Define DAG in Apache Airflow</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Dags in airflow will be defined as python file. Similarly, define below dag to run dbt transformations defined in <code>jaffle_shop</code> dbt project using vantage cloud lake compute cluster. Copy below python code and save it as <code>airflow-vcl-compute-clusters-manage.py</code> under directory $AIRFLOW_HOME/files/dags.</p>
+<p>Dags in airflow are defined as python files. The dag below runs the dbt transformations defined in the <code>jaffle_shop</code> dbt project using VantageCloud Lake compute clusters. Copy the python code below and save it as <code>airflow-vcl-compute-clusters-manage.py</code> under the directory $AIRFLOW_HOME/files/dags.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2755,7 +2755,7 @@ with DAG(
 <h2 id="_load_dag"><a class="anchor" href="#_load_dag"></a>Load DAG</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When the dag file is copied to $AIRFLOW_HOME/files/dags, apache airflow loads the dag to airflow UI.</p>
+<p>Once the dag file is copied to $AIRFLOW_HOME/files/dags, apache airflow loads the dag to the airflow UI.</p>
 </div>
 </div>
 </div>
