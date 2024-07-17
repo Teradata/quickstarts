@@ -328,7 +328,7 @@ with DAG(
 ----
 == Load DAG
 
-When the dag file is copied to $AIRFLOW_HOME/files/dags, apache airflow loads the dag to airflow UI.
+Once the dag file is copied to $AIRFLOW_HOME/files/dags, apache airflow loads the dag to the airflow UI.
 
 == Run DAG
 
