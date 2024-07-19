@@ -32,6 +32,7 @@
 
 <link rel="preload" href="../_/css/mt.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="../_/css/mt.css"></noscript>
+
 <style>
 .footer-nav .footer_social .icon-social {
     width: 44px;
@@ -936,6 +937,7 @@ span.search-result-highlight {
 }
 
 </style>
+<script async type="text/javascript" src="https://assets.teradata.com/js/Celebrus/bsci.js"></script>
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
 <!-- Google Tag Manager -->
 <script>
@@ -2224,6 +2226,18 @@ document.addEventListener('DOMContentLoaded', () => {
 <p>This tutorial demonstrates how to install Apache Airflow on a local machine, configure the workflow to use dbt teradata to run dbt transformations using the astronomer cosmos library, and run it against a Teradata Vantage database. Apache Airflow is a task scheduling tool that is typically used to build data pipelines to process and load data. <a href="https://astronomer.github.io/astronomer-cosmos/">Astronomer cosmos</a> library simplifies orchestrating dbt data transformations in Apache Airflow. Using Cosmos, allows running dbt Core projects as Apache Airflow DAGs and Task Groups with a few lines of code.
 In this example, we will explain how to use astronomer cosmos to run dbt teradata transformations in airflow against Teradata vantage database.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Use <code><a href="https://learn.microsoft.com/en-us/windows/wsl/install">The Windows Subsystem for Linux (WSL)</a></code> on <code>Windows</code> to try this quickstart example.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -2247,18 +2261,60 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 </div>
 </li>
 <li>
-<p>Python 3.8, 3.9, 3.10 or 3.11 installed.</p>
+<p>Python 3.8, 3.9, 3.10 or 3.11 and python3-env, python3-pip installed.</p>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_linux"></a>Linux</p>
 </li>
 <li>
-<p>python3-env, python3-pip, pipx installed.</p>
+<p><a id="tabset1_windows"></a>Windows</p>
+</li>
+<li>
+<p><a id="tabset1_macos"></a>macOS</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_linux">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo apt install -y python3-venv python3-pip pipx</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo apt install -y python3-venv python3-pip</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_windows">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo apt install -y python3-venv python3-pip</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_macos">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">brew install python</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Refer <a href="https://docs.python-guide.org/starting/install3/osx/">Installation Guide</a> if you face any issues.</p>
+</div>
+</div>
 </div>
 </div>
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_apache_airflow_and_astronomer_cosmos"><a class="anchor" href="#_install_apache_airflow_and_astronomer_cosmos"></a>Install Apache Airflow and Astronomer Cosmos</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a new python environment to manage airflow and its dependencies. Activate the environment:</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2266,95 +2322,36 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Use <code>Windows PowerShell</code> command-line shell on <code>Windows</code> OS to try this quickstart example.
+This will install Apache Airflow as well.
 </td>
 </tr>
 </table>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_install_apache_airflow"><a class="anchor" href="#_install_apache_airflow"></a>Install Apache Airflow</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Set the AIRFLOW_HOME environment variable. Airflow requires a home directory and uses ~/airflow by default, but you can set a different location if you prefer. The AIRFLOW_HOME environment variable is used to inform Airflow of the desired location.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export AIRFLOW_HOME=~/airflow</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python3 -m venv airflow_env
+source airflow_env/bin/activate
+pip install "astronomer-cosmos"</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Install <code>apache-airflow</code> stable version 2.9.2 from PyPI repository.:</p>
-<div class="tabset is-loading">
-<div class="ulist tabs">
-<ul>
-<li>
-<p><a id="tabset1_windows"></a>Windows</p>
-</li>
-<li>
-<p><a id="tabset1_macos"></a>MacOS</p>
-</li>
-<li>
-<p><a id="tabset1_linux"></a>Linux</p>
-</li>
-</ul>
-</div>
-<div class="content">
-<div class="tab-pane" aria-labelledby="tabset1_windows">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">AIRFLOW_VERSION=2.9.2
-PYTHON_VERSION="$(python --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
-CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
-pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_macos">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">AIRFLOW_VERSION=2.9.2
-PYTHON_VERSION="$(python3 --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
-CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
-pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_linux">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">AIRFLOW_VERSION=2.9.2
-PYTHON_VERSION="$(python3 --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
-CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
-pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>Install the Apache Airflow Teradata provider stable version from the corresponding PyPI repository.</p>
+<p>Install the Apache Airflow Teradata provider</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install "apache-airflow-providers-teradata"</code></pre>
 </div>
 </div>
 </li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_install_astronomer_cosmos"><a class="anchor" href="#_install_astronomer_cosmos"></a>Install Astronomer Cosmos</h2>
-<div class="sectionbody">
+<li>
+<p>Set the AIRFLOW_HOME environment variable.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install "astronomer-cosmos"</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export AIRFLOW_HOME=~/airflow</code></pre>
 </div>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -2365,45 +2362,10 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 <ol class="arabic">
 <li>
 <p>Create a new python environment to manage dbt and its dependencies. Activate the environment:</p>
-<div class="tabset is-loading">
-<div class="ulist tabs">
-<ul>
-<li>
-<p><a id="tabset2_windows"></a>Windows</p>
-</li>
-<li>
-<p><a id="tabset2_macos"></a>MacOS</p>
-</li>
-<li>
-<p><a id="tabset2_linux"></a>Linux</p>
-</li>
-</ul>
-</div>
-<div class="content">
-<div class="tab-pane" aria-labelledby="tabset2_windows">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python -m venv env
-source env/bin/activate</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset2_macos">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python3 -m venv env
-source env/bin/activate</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset2_linux">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python3 -m venv env
-source env/bin/activate</code></pre>
-</div>
-</div>
-</div>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python3 -m venv dbt_env
+source dbt_env/bin/activate</code></pre>
 </div>
 </div>
 </li>
@@ -2428,8 +2390,7 @@ source env/bin/activate</code></pre>
 <p>Clone the jaffle_shop repository and cd into the project directory:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://github.com/Teradata/jaffle_shop-dev.git jaffle_shop
-cd jaffle_shop</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://github.com/Teradata/jaffle_shop-dev.git jaffle_shop</code></pre>
 </div>
 </div>
 </li>
@@ -2452,6 +2413,14 @@ cp -r jaffle_shop $AIRFLOW_HOME/dags/dbt/</code></pre>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
+<p>Switch to virtual environment where Apache Airflow was installed at <a href="#_install_apache_airflow_and_astronomer_cosmos">Install Apache Airflow and Astronomer Cosmos</a></p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">source airflow_env/bin/activate</code></pre>
+</div>
+</div>
+</li>
+<li>
 <p>Configure the listed environment variables to activate the test connection button, preventing the loading of sample DAGs and default connections in Airflow UI.</p>
 <div class="listingblock">
 <div class="content">
@@ -2465,27 +2434,15 @@ cp -r jaffle_shop $AIRFLOW_HOME/dags/dbt/</code></pre>
 <p>Define the path of jaffle_shop project as an environment variable <code>dbt_project_home_dir</code>.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export dbt_project_home_dir=../../jaffle_shop</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export dbt_project_home_dir=$AIRFLOW_HOME/dags/dbt/jaffle_shop</code></pre>
 </div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-You might need to change <code>/../../</code> to the specific path where you cloned the jaffle_shop project.
-</td>
-</tr>
-</table>
 </div>
 </li>
 <li>
 <p>Define the path to the virtual environment where dbt-teradata was installed as an environment variable <code>dbt_venv_dir</code>.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">set dbt_venv_dir=/../../dbt_env/bin/dbt</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export dbt_venv_dir=/../../dbt_env/bin/dbt</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -2495,7 +2452,7 @@ You might need to change <code>/../../</code> to the specific path where you clo
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-You might need to change <code>/../../</code> to the specific path where the virtual environment is located.
+You might need to change <code>/../../</code> to the specific path where the <code>dbt_env</code> virtual environment is located.
 </td>
 </tr>
 </table>
@@ -2520,6 +2477,11 @@ You might need to change <code>/../../</code> to the specific path where the vir
 </li>
 <li>
 <p>Access the airflow UI. Visit <a href="https://localhost:8080" class="bare">https://localhost:8080</a> in the browser and log in with the admin account details shown in the terminal.</p>
+<div class="imageblock text-left">
+<div class="content">
+<img src="_images/execute-dbt-teradata-transformations-in-airflow-with-cosmos/execute-dbt-teradata-cosmos-airflow.png" alt="Airflow Password" width="75%">
+</div>
+</div>
 </li>
 </ol>
 </div>
@@ -2537,26 +2499,26 @@ You might need to change <code>/../../</code> to the specific path where the vir
 <p>Click on + to define new connection to Teradata vantage cloud lake instance.</p>
 </li>
 <li>
-<p>Define new connection with id <code>teradata_default</code> with Teradata vantage cloud lake instance details.</p>
+<p>Define new connection with id <code>teradata_default</code> with Teradata instance details.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Connection Id: teradata_lake</p>
+<p>Connection Id: teradata_default</p>
 </li>
 <li>
-<p>Connection Type: Teradata.</p>
+<p>Connection Type: Teradata</p>
 </li>
 <li>
-<p>Database Server URL (required): Teradata vantage cloud lake instance hostname to connect to.</p>
+<p>Database Server URL (required): Teradata instance hostname to connect to.</p>
 </li>
 <li>
 <p>Database: jaffle_shop</p>
 </li>
 <li>
-<p>Login (required): lake_user</p>
+<p>Login (required): database user</p>
 </li>
 <li>
-<p>Password (required): lake_user</p>
+<p>Password (required): database user password</p>
 </li>
 </ul>
 </div>
@@ -2569,7 +2531,7 @@ You might need to change <code>/../../</code> to the specific path where the vir
 <h2 id="_define_dag_in_apache_airflow"><a class="anchor" href="#_define_dag_in_apache_airflow"></a>Define DAG in Apache Airflow</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Dags in airflow are defined as python files. The dag below runs the dbt transformations defined in the <code>jaffle_shop</code> dbt project on a Teradata Vantage system using cosmos.Copy the python code below and save it as <code>airflow-cosmos-dbt-teradata-integration.py</code> under the directory $AIRFLOW_HOME/files/dags.</p>
+<p>Dags in airflow are defined as python files. The dag below runs the dbt transformations defined in the <code>jaffle_shop</code> dbt project on a Teradata Vantage system using cosmos.Copy the python code below and save it as <code>airflow-cosmos-dbt-teradata-integration.py</code> under the directory $AIRFLOW_HOME/dags.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2617,7 +2579,7 @@ with DAG(
 <h2 id="_load_dag"><a class="anchor" href="#_load_dag"></a>Load DAG</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When the dag file is copied to $AIRFLOW_HOME/files/dags, Apache Airflow loads the dag to airflow UI.</p>
+<p>When the dag file is copied to $AIRFLOW_HOME/dags, Apache Airflow displays the dag in UI under DAGs section. It will take 2 to 3 minutes to load DAG in Apache Airflow UI.</p>
 </div>
 </div>
 </div>
@@ -2638,7 +2600,7 @@ with DAG(
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this quick start guide, we explored how to utilize Astronomer Cosmos library in Apache Airflow to execute dbt teradata transformations against a Teradata Vantage instance.</p>
+<p>In this quick start guide, we explored how to utilize Astronomer Cosmos library in Apache Airflow to execute <code>dbt transformations</code> against a Teradata Vantage instance.</p>
 </div>
 </div>
 </div>
@@ -2655,6 +2617,9 @@ with DAG(
 </li>
 <li>
 <p><a href="https://astronomer.github.io/astronomer-cosmos/profiles/TeradataUserPassword.html">Teradata Cosmos Profile</a></p>
+</li>
+<li>
+<p><a href="https://learn.microsoft.com/en-us/windows/wsl/install">Install WSL on windows</a></p>
 </li>
 </ul>
 </div>
