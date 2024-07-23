@@ -10,106 +10,73 @@
 
 == Overview
 
-This tutorial demonstrates the process of utilizing the https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/index.html[Teradata Airflow Compute Cluster Operators] to manage VantageCloud Lake compute clusters. The objective is to execute data transformation defined on dbt models through VantageCloud Lake compute clusters.
+This tutorial demonstrates the process of utilizing the https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/index.html[Teradata Airflow Compute Cluster Operators] to manage VantageCloud Lake compute clusters. The objective is to execute dbt transformations defined on https://github.com/Teradata/jaffle_shop-dev.git[jaffle_shop] dbt project through VantageCloud Lake compute clusters.
+
+NOTE: Use `https://learn.microsoft.com/en-us/windows/wsl/install[The Windows Subsystem for Linux (WSL)]` on `Windows` to try this quickstart example.
 
 == Prerequisites
 * Ensure you have the necessary credentials and access rights to use Teradata VantageCloud Lake.
 +
 include::vantagecloud-lake:partial$vantagecloud-lake-request.adoc[]
-* Python 3.8, 3.9, 3.10 or 3.11 installed.
-* python3-env, python3-pip, pipx installed.
-[source, bash]
-sudo apt install -y python3-venv python3-pip pipx
-
-NOTE: Use `Windows PowerShell` command-line shell on `Windows` OS to try this quickstart example.
-
-== Install Apache Airflow
-1. Set the AIRFLOW_HOME environment variable. Airflow requires a home directory and uses ~/airflow by default, but you can set a different location if you prefer. The AIRFLOW_HOME environment variable is used to inform Airflow of the desired location.
+* Python 3.8, 3.9, 3.10 or 3.11 and python3-env, python3-pip installed.
 +
-[source, bash]
-----
-export AIRFLOW_HOME=~/airflow
-----
-2. Install `apache-airflow` stable version 2.9.2 from PyPI repository.:
-+
-[tabs]
+[tabs, id="python_install"]
 ====
-Windows::
-+
---
-[source, bash]
-----
-AIRFLOW_VERSION=2.9.2
-PYTHON_VERSION="$(python --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
-CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
-pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
-----
---
-MacOS::
-+
---
-[source, bash]
-----
-AIRFLOW_VERSION=2.9.2
-PYTHON_VERSION="$(python3 --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
-CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
-pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
-----
---
 Linux::
 +
---
-[source, bash]
+[source,bash]
 ----
-AIRFLOW_VERSION=2.9.2
-PYTHON_VERSION="$(python3 --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
-CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
-pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
+sudo apt install -y python3-venv python3-pip
 ----
---
+WSL::
++
+[source,bash]
+----
+sudo apt install -y python3-venv python3-pip
+----
+macOS::
++
+[source,bash]
+----
+brew install python
+----
+ Refer https://docs.python-guide.org/starting/install3/osx/[Installation Guide] if you face any issues.
 ====
 
-3. Install the Apache Airflow Teradata provider stable version from PyPI repository.
+== Install Apache Airflow and Astronomer Cosmos
+1. Create a new python environment to manage airflow and its dependencies. Activate the environment:
++
+NOTE: This will install Apache Airflow as well.
++
+[source, bash]
+----
+python3 -m venv airflow_env
+source airflow_env/bin/activate
+pip install "astronomer-cosmos"
+----
+
++
+2. Install the Apache Airflow Teradata provider
 +
 [source, bash]
 ----
 pip install "apache-airflow-providers-teradata"
 ----
+3. Set the AIRFLOW_HOME environment variable.
++
+[source, bash]
+----
+export AIRFLOW_HOME=~/airflow
+----
 
 == Install dbt
 1. Create a new python environment to manage dbt and its dependencies. Activate the environment:
 +
-[tabs]
-====
-Windows::
-+
---
 [source, bash]
 ----
-python -m venv env
-source env/bin/activate
+python3 -m venv dbt_env
+source dbt_env/bin/activate
 ----
---
-MacOS::
-+
---
-[source, bash]
-----
-python3 -m venv env
-source env/bin/activate
-----
---
-Linux::
-+
---
-[source, bash]
-----
-python3 -m venv env
-source env/bin/activate
-----
---
-====
-
 2. Install `dbt-teradata` and `dbt-core` modules:
 +
 [source, bash]
@@ -119,7 +86,7 @@ pip install dbt-teradata dbt-core
 
 == Create a database
 
-NOTE: A database client connected to VantageCloud Lake is needed to execute SQL statements. https://downloads.teradata.com/download/tools/vantage-editor-desktop[Vantage Editor Desktop], or https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html[dbeaver] can be used for this purpose .
+NOTE: A database client connected to VantageCloud Lake is needed to execute SQL statements. https://downloads.teradata.com/download/tools/vantage-editor-desktop[Vantage Editor Desktop], or https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html[dbeaver] can be used for this purpose.
 
 Let's create the `jaffle_shop` database in the VantageCloud Lake instance with TD_OFSSTORAGE as default.
 
@@ -133,7 +100,7 @@ PERMANENT = 120e6, -- 120MB
 
 == Create a database user
 
-NOTE: Use a database client like BTEQ, Lake Editor, Teradata Studio or  dbeaver to execute `CREATE USER` query.
+NOTE: A database client connected to VantageCloud Lake is needed to execute SQL statements. https://downloads.teradata.com/download/tools/vantage-editor-desktop[Vantage Editor Desktop], or https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html[dbeaver] can be used to execute `CREATE USER` query.
 
 Let's create a `lake_user` user in the VantageCloud Lake instance.
 
@@ -148,7 +115,7 @@ DEFAULT DATABASE = jaffle_shop;
 
 == Grant access to user
 
-NOTE: Use a database client like BTEQ, Lake Editor, Teradata Studio or  dbeaver to execute `GRANT ACCESS` queries.
+NOTE: A database client connected to VantageCloud Lake is needed to execute SQL statements. https://downloads.teradata.com/download/tools/vantage-editor-desktop[Vantage Editor Desktop], or https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html[dbeaver] can be used to execute `GRANT ACCESS` queries.
 
 Let's provide the required privileges to the user `lake_user` to manage compute clusters.
 
@@ -162,55 +129,45 @@ GRANT ALL ON jaffle_shop TO lake_user;
 
 == Setup dbt project
 
-1. Clone the jaffle_shop dbt demo repository and cd into the project directory:
+1. Clone the jaffle_shop repository and cd into the project directory:
 +
 [source, bash]
 ----
 git clone https://github.com/Teradata/jaffle_shop-dev.git jaffle_shop
-cd jaffle_shop
 ----
-2. Create `profiles.yml` file. Add the following config to `profile.yml` file. Adjust `<host>` to match your Teradata VantageCloud Lake instance.
+2. Make a new folder, dbt, inside $AIRFLOW_HOME/dags folder. Then, copy/paste jaffle_shop dbt project into $AIRFLOW_HOME/dags/dbt directory
 +
-[source, yaml]
+[source, bash]
 ----
-jaffle_shop:
-  outputs:
-    dev:
-      type: teradata
-      host: <host>
-      user: lake_user
-      password: lake_user
-      logmech: TD2
-      schema: jaffle_shop
-      tmode: ANSI
-      threads: 1
-      timeout_seconds: 300
-      priority: interactive
-      retries: 1
-  target: dev
+mkdir -p $AIRFLOW_HOME/dags/dbt/
+cp -r jaffle_shop $AIRFLOW_HOME/dags/dbt/
 ----
 
 == Configure Apache Airflow
-
-1. Configure the listed environment variables to activate the test connection button, preventing the loading of sample DAGs and default connections in Airflow UI.
+1. Switch to virtual environment where Apache Airflow was installed at <<Install Apache Airflow and Astronomer Cosmos>>
++
+[source, bash]
+----
+source airflow_env/bin/activate
+----
+2. Configure the listed environment variables to activate the test connection button, preventing the loading of sample DAGs and default connections in Airflow UI.
 +
 [source, bash]
   export AIRFLOW__CORE__TEST_CONNECTION=Enabled
   export AIRFLOW__CORE__LOAD_EXAMPLES=false
   export AIRFLOW__CORE_LOAD_DEFAULT_CONNECTIONS=false
 
-2. Define the path of jaffle_shop project as an environment variable `dbt_project_home_dir`.
+3. Define the path of jaffle_shop project as an environment variable `dbt_project_home_dir`.
 +
 [source, bash]
-export dbt_project_home_dir=../../jaffle_shop
-+
-NOTE: You might need to change `/../../` to the specific path where you cloned the jaffle_shop project.
-
-3. Define the path to the virtual environment where dbt-teradata was installed as an environment variable `dbt_venv_dir`.
+----
+export dbt_project_home_dir=$AIRFLOW_HOME/dags/dbt/jaffle_shop
+----
+4. Define the path to the virtual environment where dbt-teradata was installed as an environment variable `dbt_venv_dir`.
 [source, bash]
-set dbt_venv_dir=/../../dbt_env/bin/activate
+export dbt_venv_dir=/../../dbt_env/bin/dbt
 +
-NOTE: You might need to change `/../../` to the specific path where the virtual environment is located.
+NOTE: You might need to change `/../../` to the specific path where the `dbt_env` virtual environment is located.
 
 == Start Apache Airflow web server
 1. Run airflow web server
@@ -220,15 +177,17 @@ NOTE: You might need to change `/../../` to the specific path where the virtual 
 airflow standalone
 ----
 2. Access the airflow UI. Visit https://localhost:8080 in the browser and log in with the admin account details shown in the terminal.
++
+image::{dir}/execute-dbt-teradata-cosmos-airflow.png[Airflow Password,align="left" width=75%]
 
 == Define a connection to VantageCloud Lake in Apache Airflow
 
 1. Click on Admin - Connections
-2. Click on + to define new connection to the Teradata VantageCloud Lake instance.
-3. Define a new connection with the Teradata VantageCloud Lake instance details. Assign the id `teradata_lake`
+2. Click on + to define new connection to Teradata VantageCloud Lake instance.
+3. Define new connection with id `teradata_lake` with Teradata VantageCloud Lake instance details.
 * Connection Id: teradata_lake
-* Connection Type: Teradata.
-* Database Server URL (required): Teradata VantageCloud Lake instance hostname or IP to connect to.
+* Connection Type: Teradata
+* Database Server URL (required): Teradata VantageCloud Lake instance hostname  or IP to connect to.
 * Database: jaffle_shop
 * Login (required): lake_user
 * Password (required): lake_user
@@ -328,7 +287,7 @@ with DAG(
 ----
 == Load DAG
 
-Once the dag file is copied to $AIRFLOW_HOME/files/dags, Apache Airflow loads the dag to the airflow UI.
+When the dag file is copied to $AIRFLOW_HOME/dags, Apache Airflow displays the dag in UI under DAGs section. It will take 2 to 3 minutes to load DAG in Apache Airflow UI.
 
 == Run DAG
 
@@ -342,6 +301,7 @@ In this quick start guide, we explored how to utilize Teradata VantageCloud Lake
 
 == Further reading
 * link:https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html[Apache Airflow DAGs reference]
+* link:https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Managing-Compute-Resources/Compute-Clusters[Teradata VantageCloud Lake Compute Clusters]
 * link:https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/index.html[Airflow Teradata Compute Cluster Operators]
 
 
