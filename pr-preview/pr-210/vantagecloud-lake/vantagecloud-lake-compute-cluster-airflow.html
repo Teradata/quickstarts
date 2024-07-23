@@ -2223,7 +2223,19 @@ document.addEventListener('DOMContentLoaded', () => {
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This tutorial demonstrates the process of utilizing the <a href="https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/index.html">Teradata Airflow Compute Cluster Operators</a> to manage VantageCloud Lake compute clusters. The objective is to execute data transformation defined on dbt models through VantageCloud Lake compute clusters.</p>
+<p>This tutorial demonstrates the process of utilizing the <a href="https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/index.html">Teradata Airflow Compute Cluster Operators</a> to manage VantageCloud Lake compute clusters. The objective is to execute dbt transformations defined on <a href="https://github.com/Teradata/jaffle_shop-dev.git">jaffle_shop</a> dbt project through VantageCloud Lake compute clusters.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Use <code><a href="https://learn.microsoft.com/en-us/windows/wsl/install">The Windows Subsystem for Linux (WSL)</a></code> on <code>Windows</code> to try this quickstart example.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -2248,18 +2260,60 @@ To request a VantageCloud Lake environment, refer to the form provided in this <
 </div>
 </li>
 <li>
-<p>Python 3.8, 3.9, 3.10 or 3.11 installed.</p>
+<p>Python 3.8, 3.9, 3.10 or 3.11 and python3-env, python3-pip installed.</p>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_linux"></a>Linux</p>
 </li>
 <li>
-<p>python3-env, python3-pip, pipx installed.</p>
+<p><a id="tabset1_wsl"></a>WSL</p>
+</li>
+<li>
+<p><a id="tabset1_macos"></a>macOS</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_linux">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo apt install -y python3-venv python3-pip pipx</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo apt install -y python3-venv python3-pip</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_wsl">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo apt install -y python3-venv python3-pip</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_macos">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">brew install python</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Refer <a href="https://docs.python-guide.org/starting/install3/osx/">Installation Guide</a> if you face any issues.</p>
+</div>
+</div>
 </div>
 </div>
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_apache_airflow_and_astronomer_cosmos"><a class="anchor" href="#_install_apache_airflow_and_astronomer_cosmos"></a>Install Apache Airflow and Astronomer Cosmos</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a new python environment to manage airflow and its dependencies. Activate the environment:</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2267,81 +2321,32 @@ To request a VantageCloud Lake environment, refer to the form provided in this <
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Use <code>Windows PowerShell</code> command-line shell on <code>Windows</code> OS to try this quickstart example.
+This will install Apache Airflow as well.
 </td>
 </tr>
 </table>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_install_apache_airflow"><a class="anchor" href="#_install_apache_airflow"></a>Install Apache Airflow</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Set the AIRFLOW_HOME environment variable. Airflow requires a home directory and uses ~/airflow by default, but you can set a different location if you prefer. The AIRFLOW_HOME environment variable is used to inform Airflow of the desired location.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export AIRFLOW_HOME=~/airflow</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python3 -m venv airflow_env
+source airflow_env/bin/activate
+pip install "astronomer-cosmos"</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Install <code>apache-airflow</code> stable version 2.9.2 from PyPI repository.:</p>
-<div class="tabset is-loading">
-<div class="ulist tabs">
-<ul>
-<li>
-<p><a id="tabset1_windows"></a>Windows</p>
-</li>
-<li>
-<p><a id="tabset1_macos"></a>MacOS</p>
-</li>
-<li>
-<p><a id="tabset1_linux"></a>Linux</p>
-</li>
-</ul>
-</div>
-<div class="content">
-<div class="tab-pane" aria-labelledby="tabset1_windows">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">AIRFLOW_VERSION=2.9.2
-PYTHON_VERSION="$(python --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
-CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
-pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_macos">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">AIRFLOW_VERSION=2.9.2
-PYTHON_VERSION="$(python3 --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
-CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
-pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_linux">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">AIRFLOW_VERSION=2.9.2
-PYTHON_VERSION="$(python3 --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
-CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
-pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>Install the Apache Airflow Teradata provider stable version from PyPI repository.</p>
+<p>Install the Apache Airflow Teradata provider</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install "apache-airflow-providers-teradata"</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Set the AIRFLOW_HOME environment variable.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export AIRFLOW_HOME=~/airflow</code></pre>
 </div>
 </div>
 </li>
@@ -2356,45 +2361,10 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 <ol class="arabic">
 <li>
 <p>Create a new python environment to manage dbt and its dependencies. Activate the environment:</p>
-<div class="tabset is-loading">
-<div class="ulist tabs">
-<ul>
-<li>
-<p><a id="tabset2_windows"></a>Windows</p>
-</li>
-<li>
-<p><a id="tabset2_macos"></a>MacOS</p>
-</li>
-<li>
-<p><a id="tabset2_linux"></a>Linux</p>
-</li>
-</ul>
-</div>
-<div class="content">
-<div class="tab-pane" aria-labelledby="tabset2_windows">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python -m venv env
-source env/bin/activate</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset2_macos">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python3 -m venv env
-source env/bin/activate</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset2_linux">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python3 -m venv env
-source env/bin/activate</code></pre>
-</div>
-</div>
-</div>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python3 -m venv dbt_env
+source dbt_env/bin/activate</code></pre>
 </div>
 </div>
 </li>
@@ -2420,7 +2390,7 @@ source env/bin/activate</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-A database client connected to VantageCloud Lake is needed to execute SQL statements. <a href="https://downloads.teradata.com/download/tools/vantage-editor-desktop">Vantage Editor Desktop</a>, or <a href="https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">dbeaver</a> can be used for this purpose .
+A database client connected to VantageCloud Lake is needed to execute SQL statements. <a href="https://downloads.teradata.com/download/tools/vantage-editor-desktop">Vantage Editor Desktop</a>, or <a href="https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">dbeaver</a> can be used for this purpose.
 </td>
 </tr>
 </table>
@@ -2448,7 +2418,7 @@ PERMANENT = 120e6, -- 120MB
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Use a database client like BTEQ, Lake Editor, Teradata Studio or  dbeaver to execute <code>CREATE USER</code> query.
+A database client connected to VantageCloud Lake is needed to execute SQL statements. <a href="https://downloads.teradata.com/download/tools/vantage-editor-desktop">Vantage Editor Desktop</a>, or <a href="https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">dbeaver</a> can be used to execute <code>CREATE USER</code> query.
 </td>
 </tr>
 </table>
@@ -2477,7 +2447,7 @@ DEFAULT DATABASE = jaffle_shop;</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Use a database client like BTEQ, Lake Editor, Teradata Studio or  dbeaver to execute <code>GRANT ACCESS</code> queries.
+A database client connected to VantageCloud Lake is needed to execute SQL statements. <a href="https://downloads.teradata.com/download/tools/vantage-editor-desktop">Vantage Editor Desktop</a>, or <a href="https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">dbeaver</a> can be used to execute <code>GRANT ACCESS</code> queries.
 </td>
 </tr>
 </table>
@@ -2501,33 +2471,19 @@ GRANT ALL ON jaffle_shop TO lake_user;</code></pre>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Clone the jaffle_shop dbt demo repository and cd into the project directory:</p>
+<p>Clone the jaffle_shop repository and cd into the project directory:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://github.com/Teradata/jaffle_shop-dev.git jaffle_shop
-cd jaffle_shop</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://github.com/Teradata/jaffle_shop-dev.git jaffle_shop</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Create <code>profiles.yml</code> file. Add the following config to <code>profile.yml</code> file. Adjust <code>&lt;host&gt;</code> to match your Teradata VantageCloud Lake instance.</p>
+<p>Make a new folder, dbt, inside $AIRFLOW_HOME/dags folder. Then, copy/paste jaffle_shop dbt project into $AIRFLOW_HOME/dags/dbt directory</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">jaffle_shop:
-  outputs:
-    dev:
-      type: teradata
-      host: &lt;host&gt;
-      user: lake_user
-      password: lake_user
-      logmech: TD2
-      schema: jaffle_shop
-      tmode: ANSI
-      threads: 1
-      timeout_seconds: 300
-      priority: interactive
-      retries: 1
-  target: dev</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir -p $AIRFLOW_HOME/dags/dbt/
+cp -r jaffle_shop $AIRFLOW_HOME/dags/dbt/</code></pre>
 </div>
 </div>
 </li>
@@ -2540,6 +2496,14 @@ cd jaffle_shop</code></pre>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
+<li>
+<p>Switch to virtual environment where Apache Airflow was installed at <a href="#_install_apache_airflow_and_astronomer_cosmos">Install Apache Airflow and Astronomer Cosmos</a></p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">source airflow_env/bin/activate</code></pre>
+</div>
+</div>
+</li>
 <li>
 <p>Configure the listed environment variables to activate the test connection button, preventing the loading of sample DAGs and default connections in Airflow UI.</p>
 <div class="listingblock">
@@ -2554,27 +2518,15 @@ cd jaffle_shop</code></pre>
 <p>Define the path of jaffle_shop project as an environment variable <code>dbt_project_home_dir</code>.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export dbt_project_home_dir=../../jaffle_shop</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export dbt_project_home_dir=$AIRFLOW_HOME/dags/dbt/jaffle_shop</code></pre>
 </div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-You might need to change <code>/../../</code> to the specific path where you cloned the jaffle_shop project.
-</td>
-</tr>
-</table>
 </div>
 </li>
 <li>
 <p>Define the path to the virtual environment where dbt-teradata was installed as an environment variable <code>dbt_venv_dir</code>.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">set dbt_venv_dir=/../../dbt_env/bin/activate</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export dbt_venv_dir=/../../dbt_env/bin/dbt</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -2584,7 +2536,7 @@ You might need to change <code>/../../</code> to the specific path where you clo
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-You might need to change <code>/../../</code> to the specific path where the virtual environment is located.
+You might need to change <code>/../../</code> to the specific path where the <code>dbt_env</code> virtual environment is located.
 </td>
 </tr>
 </table>
@@ -2609,6 +2561,11 @@ You might need to change <code>/../../</code> to the specific path where the vir
 </li>
 <li>
 <p>Access the airflow UI. Visit <a href="https://localhost:8080" class="bare">https://localhost:8080</a> in the browser and log in with the admin account details shown in the terminal.</p>
+<div class="imageblock text-left unresolved">
+<div class="content">
+<img src="vantagecloud-lake-compute-cluster-airflow/execute-dbt-teradata-cosmos-airflow.png" alt="Airflow Password" width="75%">
+</div>
+</div>
 </li>
 </ol>
 </div>
@@ -2623,20 +2580,20 @@ You might need to change <code>/../../</code> to the specific path where the vir
 <p>Click on Admin - Connections</p>
 </li>
 <li>
-<p>Click on + to define new connection to the Teradata VantageCloud Lake instance.</p>
+<p>Click on + to define new connection to Teradata VantageCloud Lake instance.</p>
 </li>
 <li>
-<p>Define a new connection with the Teradata VantageCloud Lake instance details. Assign the id <code>teradata_lake</code></p>
+<p>Define new connection with id <code>teradata_lake</code> with Teradata VantageCloud Lake instance details.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Connection Id: teradata_lake</p>
 </li>
 <li>
-<p>Connection Type: Teradata.</p>
+<p>Connection Type: Teradata</p>
 </li>
 <li>
-<p>Database Server URL (required): Teradata VantageCloud Lake instance hostname or IP to connect to.</p>
+<p>Database Server URL (required): Teradata VantageCloud Lake instance hostname  or IP to connect to.</p>
 </li>
 <li>
 <p>Database: jaffle_shop</p>
@@ -2757,7 +2714,7 @@ with DAG(
 <h2 id="_load_dag"><a class="anchor" href="#_load_dag"></a>Load DAG</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Once the dag file is copied to $AIRFLOW_HOME/files/dags, Apache Airflow loads the dag to the airflow UI.</p>
+<p>When the dag file is copied to $AIRFLOW_HOME/dags, Apache Airflow displays the dag in UI under DAGs section. It will take 2 to 3 minutes to load DAG in Apache Airflow UI.</p>
 </div>
 </div>
 </div>
@@ -2789,6 +2746,9 @@ with DAG(
 <ul>
 <li>
 <p><a href="https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html">Apache Airflow DAGs reference</a></p>
+</li>
+<li>
+<p><a href="https://docs.teradata.com/r/Teradata-VantageCloud-Lake/Managing-Compute-Resources/Compute-Clusters">Teradata VantageCloud Lake Compute Clusters</a></p>
 </li>
 <li>
 <p><a href="https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/index.html">Airflow Teradata Compute Cluster Operators</a></p>
