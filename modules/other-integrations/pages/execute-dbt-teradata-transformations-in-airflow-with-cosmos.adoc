@@ -11,7 +11,7 @@
 == Overview
 
 This tutorial demonstrates how to install Apache Airflow on a local machine, configure the workflow to use dbt teradata to run dbt transformations using the astronomer cosmos library, and run it against a Teradata Vantage database. Apache Airflow is a task scheduling tool that is typically used to build data pipelines to process and load data. https://astronomer.github.io/astronomer-cosmos/[Astronomer cosmos] library simplifies orchestrating dbt data transformations in Apache Airflow. Using Cosmos, allows running dbt Core projects as Apache Airflow DAGs and Task Groups with a few lines of code.
-In this example, we will explain how to use astronomer cosmos to run dbt teradata transformations in airflow against Teradata vantage database.
+In this example, we will explain how to use astronomer cosmos to run dbt transformations in airflow against Teradata Vantage database.
 
 NOTE: Use `https://learn.microsoft.com/en-us/windows/wsl/install[The Windows Subsystem for Linux (WSL)]` on `Windows` to try this quickstart example.
 
@@ -29,7 +29,7 @@ Linux::
 ----
 sudo apt install -y python3-venv python3-pip
 ----
-Windows::
+Windows - WSL::
 +
 [source,bash]
 ----
@@ -138,14 +138,14 @@ airflow standalone
 +
 image::{dir}/execute-dbt-teradata-cosmos-airflow.png[Airflow Password,align="left" width=75%]
 
-== Define Apache Airflow connection to Vantage Cloud Lake
+== Define Apache Airflow connection to Vantage
 
 1. Click on Admin - Connections
-2. Click on + to define new connection to Teradata vantage cloud lake instance.
-3. Define new connection with id `teradata_default` with Teradata instance details.
+2. Click on + to define new connection to Teradata Vantage instance.
+3. Define new connection with id `teradata_default` with Teradata Vantage instance details.
 * Connection Id: teradata_default
 * Connection Type: Teradata
-* Database Server URL (required): Teradata instance hostname to connect to.
+* Database Server URL (required): Teradata Vantage instance hostname to connect to.
 * Database: jaffle_shop
 * Login (required): database user
 * Password (required): database user password
