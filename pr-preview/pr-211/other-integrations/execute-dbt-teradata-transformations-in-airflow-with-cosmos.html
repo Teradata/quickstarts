@@ -2224,7 +2224,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <div class="sectionbody">
 <div class="paragraph">
 <p>This tutorial demonstrates how to install Apache Airflow on a local machine, configure the workflow to use dbt teradata to run dbt transformations using the astronomer cosmos library, and run it against a Teradata Vantage database. Apache Airflow is a task scheduling tool that is typically used to build data pipelines to process and load data. <a href="https://astronomer.github.io/astronomer-cosmos/">Astronomer cosmos</a> library simplifies orchestrating dbt data transformations in Apache Airflow. Using Cosmos, allows running dbt Core projects as Apache Airflow DAGs and Task Groups with a few lines of code.
-In this example, we will explain how to use astronomer cosmos to run dbt teradata transformations in airflow against Teradata vantage database.</p>
+In this example, we will explain how to use astronomer cosmos to run dbt transformations in airflow against Teradata Vantage database.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2269,7 +2269,7 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 <p><a id="tabset1_linux"></a>Linux</p>
 </li>
 <li>
-<p><a id="tabset1_windows"></a>Windows</p>
+<p><a id="tabset1_windows---wsl"></a>Windows - WSL</p>
 </li>
 <li>
 <p><a id="tabset1_macos"></a>macOS</p>
@@ -2284,7 +2284,7 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 </div>
 </div>
 </div>
-<div class="tab-pane" aria-labelledby="tabset1_windows">
+<div class="tab-pane" aria-labelledby="tabset1_windows---wsl">
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo apt install -y python3-venv python3-pip</code></pre>
@@ -2488,7 +2488,7 @@ You might need to change <code>/../../</code> to the specific path where the <co
 </div>
 </div>
 <div class="sect1">
-<h2 id="_define_apache_airflow_connection_to_vantage_cloud_lake"><a class="anchor" href="#_define_apache_airflow_connection_to_vantage_cloud_lake"></a>Define Apache Airflow connection to Vantage Cloud Lake</h2>
+<h2 id="_define_apache_airflow_connection_to_vantage"><a class="anchor" href="#_define_apache_airflow_connection_to_vantage"></a>Define Apache Airflow connection to Vantage</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -2496,10 +2496,10 @@ You might need to change <code>/../../</code> to the specific path where the <co
 <p>Click on Admin - Connections</p>
 </li>
 <li>
-<p>Click on + to define new connection to Teradata vantage cloud lake instance.</p>
+<p>Click on + to define new connection to Teradata Vantage instance.</p>
 </li>
 <li>
-<p>Define new connection with id <code>teradata_default</code> with Teradata instance details.</p>
+<p>Define new connection with id <code>teradata_default</code> with Teradata Vantage instance details.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -2509,7 +2509,7 @@ You might need to change <code>/../../</code> to the specific path where the <co
 <p>Connection Type: Teradata</p>
 </li>
 <li>
-<p>Database Server URL (required): Teradata instance hostname to connect to.</p>
+<p>Database Server URL (required): Teradata Vantage instance hostname to connect to.</p>
 </li>
 <li>
 <p>Database: jaffle_shop</p>
