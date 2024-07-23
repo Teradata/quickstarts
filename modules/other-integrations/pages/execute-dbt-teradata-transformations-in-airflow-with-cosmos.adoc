@@ -29,7 +29,7 @@ Linux::
 ----
 sudo apt install -y python3-venv python3-pip
 ----
-Windows - WSL::
+Windows(WSL)::
 +
 [source,bash]
 ----
