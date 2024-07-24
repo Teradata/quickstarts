@@ -123,6 +123,8 @@ Let's provide the required privileges to the user `lake_user` to manage compute 
 ----
 GRANT CREATE COMPUTE GROUP To lake_user;
 GRANT DROP COMPUTE GROUP TO lake_user;
+GRANT CREATE COMPUTE PROFILE To lake_user;
+GRANT DROP COMPUTE PROFILE TO lake_user;
 GRANT SELECT ON DBC TO lake_user;
 GRANT ALL ON jaffle_shop TO lake_user;
 ----
@@ -197,7 +199,6 @@ Dags in airflow are defined as python files. The dag below runs the dbt transfor
 
 [source, python]
 ----
-from airflow.operators.bash import BashOperator
 from datetime import datetime
 from airflow import DAG
 from airflow.providers.teradata.operators.teradata_compute_cluster import (
@@ -207,12 +208,24 @@ from airflow.providers.teradata.operators.teradata_compute_cluster import (
         TeradataComputeClusterSuspendOperator,
     )
 from airflow.providers.teradata.operators.teradata import TeradataOperator
+from cosmos import DbtTaskGroup, ProjectConfig, ProfileConfig, ExecutionConfig
+from cosmos.profiles import TeradataUserPasswordProfileMapping
 
 import os
 
 PATH_TO_DBT_VENV = f"{os.environ['dbt_venv_dir']}"
 PATH_TO_DBT_PROJECT = f"{os.environ['dbt_project_home_dir']}"
-dbt_run_cmd = "dbt run "
+
+execution_config = ExecutionConfig(
+    dbt_executable_path=PATH_TO_DBT_VENV,
+)
+profile_config = ProfileConfig(
+    profile_name="generated_profile",
+    target_name="dev",
+    profile_mapping=TeradataUserPasswordProfileMapping(
+        conn_id="teradata_lake",
+    ),
+)
 with DAG(
     dag_id="explore_airflow_compute_cluster_operator",
     max_active_runs=1,
@@ -230,7 +243,7 @@ with DAG(
         timeout=20,
         query_strategy="STANDARD",
         compute_map="TD_COMPUTE_XSMALL",
-        compute_attribute="MIN_COMPUTE_COUNT(1) MAX_COMPUTE_COUNT(5) INITIALLY_SUSPENDED('TRUE')",
+        compute_attribute="MIN_COMPUTE_COUNT(1) MAX_COMPUTE_COUNT(5) INITIALLY_SUSPENDED('FALSE')",
     )
     # assign dbt_transformation_group as default group to lake_user
     assign_compute_group_user = TeradataOperator(
@@ -240,25 +253,15 @@ with DAG(
         AS COMPUTE GROUP = dbt_transformation_group;
         """,
     )
-    # resume compute cluster
-    compute_cluster_resume_operation = TeradataComputeClusterResumeOperator(
-        task_id="compute_cluster_resume_operation",
-        compute_profile_name="dbt_transformation_profile",
-        compute_group_name="dbt_transformation_group",
-    )
 
     # run dbt transformation defined in dbt jaffle_shop project
-    transform_data = BashOperator(
-        task_id="transform_data",
-        bash_command="source $PATH_TO_DBT_VENV/bin/activate && dbt seed --profiles-dir $PATH_TO_DBT_PROJECT --project-dir $PATH_TO_DBT_PROJECT &&  dbt run --profiles-dir $PATH_TO_DBT_PROJECT --project-dir $PATH_TO_DBT_PROJECT -s path:models",
-        env={"PATH_TO_DBT_PROJECT": PATH_TO_DBT_PROJECT, "PATH_TO_DBT_VENV": PATH_TO_DBT_VENV},
-    )
-    # suspend compute cluster
-    compute_cluster_suspend_operation = TeradataComputeClusterSuspendOperator(
-        task_id="compute_cluster_suspend_operation",
-        compute_profile_name="dbt_transformation_profile",
-        compute_group_name="dbt_transformation_group",
-    )
+    transform_data = DbtTaskGroup(
+          group_id="transform_data",
+          project_config=ProjectConfig(PATH_TO_DBT_PROJECT),
+          profile_config=profile_config,
+          execution_config=execution_config,
+          default_args={"retries": 2},
+      )
     # decommission compute cluster
     compute_cluster_decommission_operation = TeradataComputeClusterDecommissionOperator(
         task_id="compute_cluster_decommission_operation",
@@ -278,9 +281,7 @@ with DAG(
     (
         compute_cluster_provision_operation
         >> assign_compute_group_user
-        >> compute_cluster_resume_operation
         >> transform_data
-        >> compute_cluster_suspend_operation
         >> compute_cluster_decommission_operation
         >> remove_compute_group_from_user
     )
