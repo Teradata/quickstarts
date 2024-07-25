@@ -2303,18 +2303,6 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 </div>
 </div>
 </li>
-<li>
-<p>An Azure account. You can start with a <a href="https://azure.microsoft.com/free/">free account</a>.</p>
-</li>
-<li>
-<p>Create an <a href="https://docs.microsoft.com/en-us/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal">Azure storage account</a> with name <code>azuretestquickstart</code></p>
-</li>
-<li>
-<p>Create a <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/blob-containers-portal">blob container</a> with name <code>quickstartdemo</code> under Azure storage account <code>azuretestquickstart</code></p>
-</li>
-<li>
-<p><a href="https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal">Upload</a> CSV/JSON/Parquest format files to <code>quickstartdemo</code> blob container.</p>
-</li>
 </ul>
 </div>
 </div>
@@ -2354,40 +2342,6 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 </div>
 </li>
 </ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_create_teradata_authorization"><a class="anchor" href="#_create_teradata_authorization"></a>Create Teradata Authorization</h2>
-<div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-A database client connected to Vantage is needed to execute SQL statements. <a href="https://downloads.teradata.com/download/tools/teradata-studio-express">Teradata Studio Express</a> or <a href="https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">dbeaver</a> can be used for this purpose.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE AUTHORIZATION azure_authorization USER 'azuretestquickstart' PASSWORD 'AZURE_BLOB_ACCOUNT_SECRET_KEY'</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Replace <code>AZURE_BLOB_ACCOUNT_SECRET_KEY</code> with Azure storage account <code>azuretestquickstart</code>  <a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&amp;bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json&amp;tabs=azure-portal">access key</a>
-</td>
-</tr>
-</table>
 </div>
 </div>
 </div>
@@ -2490,7 +2444,7 @@ Replace <code>AZURE_BLOB_ACCOUNT_SECRET_KEY</code> with Azure storage account <c
 <h2 id="_define_dag_in_apache_airflow"><a class="anchor" href="#_define_dag_in_apache_airflow"></a>Define DAG in Apache Airflow</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Dags in airflow are defined as python files. The dag below transfer CSV/JSON/Parquet data from Microsoft Azure Blob Storage to Teradata Vantage instance.Copy the python code below and save it as <code>airflow-azure-to-teradata-transfer-operator-demo.py</code> under the directory $AIRFLOW_HOME/dags.</p>
+<p>Dags in airflow are defined as python files. The dag below transfer CSV data from Teradata-supplied public blob containers to Teradata Vantage instance.Copy the python code below and save it as <code>airflow-azure-to-teradata-transfer-operator-demo.py</code> under the directory $AIRFLOW_HOME/dags.</p>
 </div>
 <div class="paragraph">
 <p>Refer <a href="https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/_api/airflow/providers/teradata/transfers/azure_blob_to_teradata/index.html">AzureBlobStorageToTeradataOperator</a> for more information on <code>Azure Blob Storage to Teradata</code> Transfer Operator.</p>
@@ -2523,10 +2477,9 @@ with DAG(
     # Transfer data from Azure blob storage to Teradata Vantage instance
     transfer_data_csv = AzureBlobStorageToTeradataOperator(
         task_id="transfer_data_blob_to_teradata_csv",
-        blob_source_key="/az/azuretestquickstart.blob.core.windows.net/quickstartdemo",
+        blob_source_key="/az/akiaxox5jikeotfww4ul.blob.core.windows.net/td-usgs/CSVDATA/",
         teradata_table="example_blob_teradata_csv",
         teradata_conn_id="teradata_default",
-        teradata_authorization_name="azure_authorization",
         trigger_rule="always",
     )
     # Get the number of records transferred from azure blob to teradata table
@@ -2567,6 +2520,65 @@ with DAG(
 <div class="content">
 <img src="_images/airflow-azure-to-teradata-transfer-operator-doc/dag.png" alt="Run dag" width="75%">
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_transfer_data_from_private_blob_storage_container_to_teradata_instance"><a class="anchor" href="#_transfer_data_from_private_blob_storage_container_to_teradata_instance"></a>Transfer data from Private Blob Storage Container to Teradata instance</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To successfully transfer data from a Private Blob Storage Container to a Teradata instance, the following prerequisites are necessary.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An Azure account. You can start with a <a href="https://azure.microsoft.com/free/">free account</a>.</p>
+</li>
+<li>
+<p>Create an <a href="https://docs.microsoft.com/en-us/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal">Azure storage account</a></p>
+</li>
+<li>
+<p>Create a <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/blob-containers-portal">blob container</a> under Azure storage account</p>
+</li>
+<li>
+<p><a href="https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal">Upload</a> CSV/JSON/Parquest format files to blob container</p>
+</li>
+<li>
+<p>Create Teradata Authorization object with Azure Blob Storage Account and Account Secret Key</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE AUTHORIZATION azure_authorization USER 'azuretestquickstart' PASSWORD 'AZURE_BLOB_ACCOUNT_SECRET_KEY'</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Replace <code>AZURE_BLOB_ACCOUNT_SECRET_KEY</code> with Azure storage account <code>azuretestquickstart</code>  <a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&amp;bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json&amp;tabs=azure-portal">access key</a>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Modify <code>blob_source_key</code> with YOUR-PRIVATE-OBJECT-STORE-URI in <code>transfer_data_csv</code> task and add <code>teradata_authorization_name</code> field with Teradata Authorization Object name</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">transfer_data_csv = AzureBlobStorageToTeradataOperator(
+        task_id="transfer_data_blob_to_teradata_csv",
+        blob_source_key="YOUR-OBJECT-STORE-URI",
+        teradata_table="example_blob_teradata_csv",
+        teradata_conn_id="teradata_default",
+        teradata_authorization_name="azure_authorization",
+        trigger_rule="always",
+    )</code></pre>
+</div>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>

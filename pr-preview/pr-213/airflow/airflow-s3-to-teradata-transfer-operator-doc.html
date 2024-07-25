@@ -2303,18 +2303,6 @@ If you need a test instance of Vantage, you can provision one for free at <a hre
 </div>
 </div>
 </li>
-<li>
-<p>Access to an <a href="https://aws.amazon.com">Amazon AWS account</a></p>
-</li>
-<li>
-<p>Create a <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html">S3 bucket</a> with name <code>awstestquickstart</code></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/uploading-an-object-bucket.html">Upload</a> CSV/JSON/Parquest format files to <code>awstestquickstart</code> S3 bucket.</p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey">Access Keys</a> to access AWS account</p>
-</li>
 </ul>
 </div>
 </div>
@@ -2354,40 +2342,6 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 </div>
 </li>
 </ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_create_teradata_authorization"><a class="anchor" href="#_create_teradata_authorization"></a>Create Teradata Authorization</h2>
-<div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-A database client connected to Vantage is needed to execute SQL statements. <a href="https://downloads.teradata.com/download/tools/teradata-studio-express">Teradata Studio Express</a> or <a href="https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html">dbeaver</a> can be used for this purpose.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE AUTHORIZATION aws_authorization USER 'AWSAccessKey' PASSWORD 'AWSSecretAccessKey'</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Replace <code>AWSAccessKey</code> and <code>AWSSecretAccessKey</code> with your AWS account <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html">access key</a>
-</td>
-</tr>
-</table>
 </div>
 </div>
 </div>
@@ -2490,7 +2444,7 @@ Replace <code>AWSAccessKey</code> and <code>AWSSecretAccessKey</code> with your 
 <h2 id="_define_dag_in_apache_airflow"><a class="anchor" href="#_define_dag_in_apache_airflow"></a>Define DAG in Apache Airflow</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Dags in airflow are defined as python files. The dag below transfer CSV/JSON/Parquet data from Amazon S3 to Teradata Vantage instance.Copy the python code below and save it as <code>airflow-aws-to-teradata-transfer-operator-demo.py</code> under the directory $AIRFLOW_HOME/dags.</p>
+<p>Dags in airflow are defined as python files. The dag below transfer data from Teradata-supplied public buckets to Teradata Vantage instance.Copy the python code below and save it as <code>airflow-aws-to-teradata-transfer-operator-demo.py</code> under the directory $AIRFLOW_HOME/dags.</p>
 </div>
 <div class="paragraph">
 <p>Refer <a href="https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/s3_to_teradata.html">S3ToTeradataOperator</a> for more information on <code>Amazon S3 to Teradata</code> Transfer Operator.</p>
@@ -2523,10 +2477,9 @@ with DAG(
     # Transfer data from S3 to Teradata Vantage instance
     transfer_data_csv = S3ToTeradataOperator(
         task_id="transfer_data_s3_to_teradata_csv",
-        s3_source_key="/s3/awstestquickstart.s3.amazonaws.com/",
+        s3_source_key="/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/",
         teradata_table="example_s3_teradata_csv",
         teradata_conn_id="teradata_default",
-        teradata_authorization_name="aws_authorization",
         trigger_rule="always",
     )
     # Get the number of records transferred from S3 to teradata table
@@ -2567,6 +2520,65 @@ with DAG(
 <div class="content">
 <img src="_images/airflow-s3-to-teradata-transfer-operator-doc/dag.png" alt="Run dag" width="75%">
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_transfer_data_from_private_amazon_s3_bucket_to_teradata_instance"><a class="anchor" href="#_transfer_data_from_private_amazon_s3_bucket_to_teradata_instance"></a>Transfer data from Private Amazon S3 bucket to Teradata instance</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To successfully transfer data from Private Amazon S3 bucket to a Teradata instance, the following prerequisites are necessary.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Access to an <a href="https://aws.amazon.com">Amazon AWS account</a></p>
+</li>
+<li>
+<p>Create a <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html">S3 bucket</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/uploading-an-object-bucket.html">Upload</a> CSV/JSON/Parquest format files to Private S3 bucket.</p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey">Access Keys</a> to access AWS account</p>
+</li>
+<li>
+<p>Create Teradata Authorization object with AWS Account Key and Account Secret Key</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE AUTHORIZATION aws_authorization USER 'AWSAccessKey' PASSWORD 'AWSSecretAccessKey'</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Replace <code>AWSAccessKey</code> and <code>AWSSecretAccessKey</code> with your AWS account <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html">access key</a>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Modify <code>blob_source_key</code> with YOUR-PRIVATE-OBJECT-STORE-URI in <code>transfer_data_csv</code> task and add <code>teradata_authorization_name</code> field with Teradata Authorization Object name</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">transfer_data_csv = S3ToTeradataOperator(
+        task_id="transfer_data_blob_to_teradata_csv",
+        s3_source_key="YOUR-OBJECT-STORE-URI",
+        teradata_table="example_blob_teradata_csv",
+        teradata_conn_id="teradata_default",
+        teradata_authorization_name="aws_authorization",
+        trigger_rule="always",
+    )</code></pre>
+</div>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
