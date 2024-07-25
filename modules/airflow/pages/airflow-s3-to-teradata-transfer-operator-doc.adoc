@@ -42,12 +42,6 @@ brew install python
 ----
  Refer https://docs.python-guide.org/starting/install3/osx/[Installation Guide] if you face any issues.
 ====
-* Access to an https://aws.amazon.com[Amazon AWS account]
-* Create a https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html[S3 bucket] with name `awstestquickstart`
-* https://docs.aws.amazon.com/AmazonS3/latest/userguide/uploading-an-object-bucket.html[Upload] CSV/JSON/Parquest format files to `awstestquickstart` S3 bucket.
-* https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey[Access Keys] to access AWS account
-
-
 
 == Install Apache Airflow
 1. Create a new python environment to manage airflow and its dependencies. Activate the environment.
@@ -75,15 +69,6 @@ pip install "apache-airflow-providers-teradata[amazon]"
 ----
 export AIRFLOW_HOME=~/airflow
 ----
-
-== Create Teradata Authorization
-NOTE: A database client connected to Vantage is needed to execute SQL statements. https://downloads.teradata.com/download/tools/teradata-studio-express[Teradata Studio Express] or https://quickstarts.teradata.com/other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html[dbeaver] can be used for this purpose.
-
-[source, teradata-sql]
-----
-CREATE AUTHORIZATION aws_authorization USER 'AWSAccessKey' PASSWORD 'AWSSecretAccessKey'
-----
-NOTE: Replace `AWSAccessKey` and `AWSSecretAccessKey` with your AWS account https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[access key]
 
 == Configure Apache Airflow
 1. Switch to virtual environment where Apache Airflow was installed at <<Install Apache Airflow>>
@@ -125,7 +110,7 @@ image::{dir}/airflow-console-password.png[Airflow Password,align="left" width=75
 Refer https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/connections/teradata.html[Teradata Connection] for more details.
 
 == Define DAG in Apache Airflow
-Dags in airflow are defined as python files. The dag below transfer CSV/JSON/Parquet data from Amazon S3 to Teradata Vantage instance.Copy the python code below and save it as `airflow-aws-to-teradata-transfer-operator-demo.py` under the directory $AIRFLOW_HOME/dags.
+Dags in airflow are defined as python files. The dag below transfer data from Teradata-supplied public buckets to Teradata Vantage instance.Copy the python code below and save it as `airflow-aws-to-teradata-transfer-operator-demo.py` under the directory $AIRFLOW_HOME/dags.
 
 Refer https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/s3_to_teradata.html[S3ToTeradataOperator] for more information on `Amazon S3 to Teradata` Transfer Operator.
 
@@ -158,10 +143,9 @@ with DAG(
     # Transfer data from S3 to Teradata Vantage instance
     transfer_data_csv = S3ToTeradataOperator(
         task_id="transfer_data_s3_to_teradata_csv",
-        s3_source_key="/s3/awstestquickstart.s3.amazonaws.com/",
+        s3_source_key="/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/",
         teradata_table="example_s3_teradata_csv",
         teradata_conn_id="teradata_default",
-        teradata_authorization_name="aws_authorization",
         trigger_rule="always",
     )
     # Get the number of records transferred from S3 to teradata table
@@ -191,6 +175,35 @@ When the dag file is copied to $AIRFLOW_HOME/dags, Apache Airflow displays the d
 Run the dag as shown in the image below.
 
 image::{dir}/dag.png[Run dag,align="left" width=75%]
+
+== Transfer data from Private Amazon S3 bucket to Teradata instance
+To successfully transfer data from Private Amazon S3 bucket to a Teradata instance, the following prerequisites are necessary.
+
+* Access to an https://aws.amazon.com[Amazon AWS account]
+* Create a https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html[S3 bucket]
+* https://docs.aws.amazon.com/AmazonS3/latest/userguide/uploading-an-object-bucket.html[Upload] CSV/JSON/Parquest format files to Private S3 bucket.
+* https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey[Access Keys] to access AWS account
+* Create Teradata Authorization object with AWS Account Key and Account Secret Key
++
+[source, teradata-sql]
+----
+CREATE AUTHORIZATION aws_authorization USER 'AWSAccessKey' PASSWORD 'AWSSecretAccessKey'
+----
+NOTE: Replace `AWSAccessKey` and `AWSSecretAccessKey` with your AWS account https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[access key]
+* Modify `blob_source_key` with YOUR-PRIVATE-OBJECT-STORE-URI in `transfer_data_csv` task and add `teradata_authorization_name` field with Teradata Authorization Object name
++
+[source, python]
+----
+transfer_data_csv = S3ToTeradataOperator(
+        task_id="transfer_data_blob_to_teradata_csv",
+        s3_source_key="YOUR-OBJECT-STORE-URI",
+        teradata_table="example_blob_teradata_csv",
+        teradata_conn_id="teradata_default",
+        teradata_authorization_name="aws_authorization",
+        trigger_rule="always",
+    )
+----
+
 
 == Summary
 This guide details the utilization of the Airflow Teradata Provider’s S3 Cloud Transfer Operator to seamlessly transfer CSV, JSON, and Parquet data from Amazon S3 to Teradata Vantage, facilitating streamlined data operations between these platforms.
