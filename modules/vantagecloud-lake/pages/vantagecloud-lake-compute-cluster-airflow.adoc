@@ -157,7 +157,7 @@ source airflow_env/bin/activate
 [source, bash]
   export AIRFLOW__CORE__TEST_CONNECTION=Enabled
   export AIRFLOW__CORE__LOAD_EXAMPLES=false
-  export AIRFLOW__CORE_LOAD_DEFAULT_CONNECTIONS=false
+  export AIRFLOW__CORE__LOAD_DEFAULT_CONNECTIONS=false
 
 3. Define the path of jaffle_shop project as an environment variable `dbt_project_home_dir`.
 +
