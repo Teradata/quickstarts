@@ -180,7 +180,7 @@ airflow standalone
 ----
 2. Access the airflow UI. Visit https://localhost:8080 in the browser and log in with the admin account details shown in the terminal.
 +
-image::{dir}/execute-dbt-teradata-cosmos-airflow.png[Airflow Password,align="left" width=75%]
+image::{dir}/airflow-console-password.png[Airflow Password,align="left" width=75%]
 
 == Define a connection to VantageCloud Lake in Apache Airflow
 
