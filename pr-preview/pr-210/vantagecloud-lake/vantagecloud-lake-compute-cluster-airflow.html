@@ -2657,7 +2657,7 @@ with DAG(
     default_args={"teradata_conn_id": "teradata_lake"},
 
 ) as dag:
-    # provision compute cluster with given configuration and initially its in suspended mode
+    # provision compute cluster with given configuration
     compute_cluster_provision_operation = TeradataComputeClusterProvisionOperator(
         task_id="compute_cluster_provision_operation",
         compute_profile_name="dbt_transformation_profile",
