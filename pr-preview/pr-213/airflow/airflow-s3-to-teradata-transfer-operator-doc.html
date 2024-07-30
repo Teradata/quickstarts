@@ -2477,7 +2477,8 @@ with DAG(
     # Transfer data from S3 to Teradata Vantage instance
     transfer_data_csv = S3ToTeradataOperator(
         task_id="transfer_data_s3_to_teradata_csv",
-        s3_source_key="/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/",
+        s3_source_key="/s3/td-usgs-public.s3.amazonaws.com/CSVDATA/09394500/2018/06/",
+        public_bucket=True,
         teradata_table="example_s3_teradata_csv",
         teradata_conn_id="teradata_default",
         trigger_rule="always",
