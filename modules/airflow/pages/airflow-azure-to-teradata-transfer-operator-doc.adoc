@@ -144,7 +144,8 @@ with DAG(
     # Transfer data from Azure blob storage to Teradata Vantage instance
     transfer_data_csv = AzureBlobStorageToTeradataOperator(
         task_id="transfer_data_blob_to_teradata_csv",
-        blob_source_key="/az/akiaxox5jikeotfww4ul.blob.core.windows.net/td-usgs/CSVDATA/",
+        blob_source_key="/az/akiaxox5jikeotfww4ul.blob.core.windows.net/td-usgs/CSVDATA/09380000/2018/06/",
+        public_bucket=True,
         teradata_table="example_blob_teradata_csv",
         teradata_conn_id="teradata_default",
         trigger_rule="always",
