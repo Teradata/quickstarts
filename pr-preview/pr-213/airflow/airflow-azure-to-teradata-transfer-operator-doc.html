@@ -2447,12 +2447,26 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 <p>DAGs in airflow are defined as python files. The DAG below transfers data from Teradata-supplied public blob containers to a Teradata Vantage instance. Copy the python code below and save it as <code>airflow-azure-to-teradata-transfer-operator-demo.py</code> under the directory $AIRFLOW_HOME/dags.</p>
 </div>
 <div class="paragraph">
-<p>This DAG is a very simple example that covers:
-* Droping the destination table if it exists
-* Transfer of the data stored in object storage
-* Get the number of transferred records
-* Write the number of transferred records to the log
-Refer <a href="https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/_api/airflow/providers/teradata/transfers/azure_blob_to_teradata/index.html">Azure Blob Storage To Teradata Operator</a> for more information on <code>Azure Blob Storage to Teradata</code> Transfer Operator.</p>
+<p>This DAG is a very simple example that covers:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Droping the destination table if it exists</p>
+</li>
+<li>
+<p>Transfer of the data stored in object storage</p>
+</li>
+<li>
+<p>Get the number of transferred records</p>
+</li>
+<li>
+<p>Write the number of transferred records to the log</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Refer <a href="https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/_api/airflow/providers/teradata/transfers/azure_blob_to_teradata/index.html">Azure Blob Storage To Teradata Operator</a> for more information on <code>Azure Blob Storage to Teradata</code> Transfer Operator.</p>
 </div>
 <div class="listingblock">
 <div class="content">
