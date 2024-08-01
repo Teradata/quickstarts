@@ -10,7 +10,7 @@
 
 == Overview
 
-This document provides instructions and guidance for transferring data in CSV, JSON and Parquet formats from Amazon S3 to Teradata Vantage using the Airflow Teradata Provider's https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/s3_to_teradata.html[S3 Cloud Transfer Operator]. It outlines the setup, configuration and execution steps required to establish a seamless data transfer pipeline between these platforms.
+This document provides instructions and guidance for transferring data in CSV, JSON and Parquet formats from Amazon S3 to Teradata Vantage using the Airflow Teradata Provider https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/s3_to_teradata.html[S3 Cloud Transfer Operator]. It outlines the setup, configuration and execution steps required to establish a seamless data transfer pipeline between these platforms.
 
 NOTE: Use `https://learn.microsoft.com/en-us/windows/wsl/install[The Windows Subsystem for Linux (WSL)]` on `Windows` to try this quickstart example.
 
@@ -57,7 +57,7 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 ----
 
 +
-2. Install Apache Airflow Teradata provider package and Amazon provider package.
+2. Install the Apache Airflow Teradata provider package and the Amazon provider package.
 +
 [source, bash]
 ----
@@ -71,21 +71,21 @@ export AIRFLOW_HOME=~/airflow
 ----
 
 == Configure Apache Airflow
-1. Switch to virtual environment where Apache Airflow was installed at <<Install Apache Airflow>>
+1. Switch to the virtual environment where Apache Airflow was installed at <<Install Apache Airflow>>
 +
 [source, bash]
 ----
 source airflow_env/bin/activate
 ----
-2. Configure the listed environment variables to activate the test connection button, preventing the loading of sample DAGs and default connections in Airflow UI.
+2. Configure the listed environment variables to activate the test connection button, preventing the loading of sample DAGs and default connections in the Airflow UI.
 +
 [source, bash]
   export AIRFLOW__CORE__TEST_CONNECTION=Enabled
   export AIRFLOW__CORE__LOAD_EXAMPLES=false
   export AIRFLOW__CORE__LOAD_DEFAULT_CONNECTIONS=false
 
-== Start Apache Airflow web server
-1. Run airflow web server
+== Start the Apache Airflow web server
+1. Run airflow's web server
 +
 [source, bash]
 ----
@@ -95,11 +95,11 @@ airflow standalone
 +
 image::{dir}/airflow-console-password.png[Airflow Password,align="left" width=75%]
 
-== Define Apache Airflow connection to Vantage
+== Define the Apache Airflow connection to Vantage
 
 1. Click on Admin - Connections
-2. Click on + to define new connection to Teradata Vantage instance.
-3. Define new connection with id `teradata_default` with Teradata Vantage instance details.
+2. Click on + to define a new connection to a Teradata Vantage instance.
+3. Assign the new connection the id `teradata_default` with Teradata Vantage instance details.
 * Connection Id: teradata_default
 * Connection Type: Teradata
 * Database Server URL (required): Teradata Vantage instance hostname to connect to.
@@ -110,7 +110,13 @@ image::{dir}/airflow-console-password.png[Airflow Password,align="left" width=75
 Refer https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/connections/teradata.html[Teradata Connection] for more details.
 
 == Define DAG in Apache Airflow
-Dags in airflow are defined as python files. The dag below transfer data from Teradata-supplied public buckets to Teradata Vantage instance.Copy the python code below and save it as `airflow-aws-to-teradata-transfer-operator-demo.py` under the directory $AIRFLOW_HOME/dags.
+DAGs in airflow are defined as python files. The DAG below transfers data from Teradata-supplied public buckets to a Teradata Vantage instance. Copy the python code below and save it as `airflow-aws-to-teradata-transfer-operator-demo.py` under the directory $AIRFLOW_HOME/DAGs.
+
+This DAG is a very simple example that covers:
+- Droping the destination table if it exists
+- Transfer of the data stored in object storage
+- Get the number of transferred records
+- Write the number of transferred records to the log
 
 Refer https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/s3_to_teradata.html[S3ToTeradataOperator] for more information on `Amazon S3 to Teradata` Transfer Operator.
 
@@ -169,22 +175,22 @@ with DAG(
 
 == Load DAG
 
-When the dag file is copied to $AIRFLOW_HOME/dags, Apache Airflow displays the dag in UI under DAGs section. It will take 2 to 3 minutes to load DAG in Apache Airflow UI.
+When the DAG file is copied to $AIRFLOW_HOME/dags, Apache Airflow displays the DAG in the UI under the DAGs section. It will take 2 to 3 minutes to load the DAG in the Apache Airflow UI.
 
 == Run DAG
 
-Run the dag as shown in the image below.
+Run the DAG as shown in the image below.
 
-image::{dir}/dag.png[Run dag,align="left" width=75%]
+image::{dir}/DAG.png[Run DAG,align="left" width=75%]
 
 == Transfer data from Private Amazon S3 bucket to Teradata instance
-To successfully transfer data from Private Amazon S3 bucket to a Teradata instance, the following prerequisites are necessary.
+To successfully transfer data from a Private Amazon S3 bucket to a Teradata instance, the following prerequisites are necessary.
 
 * Access to an https://aws.amazon.com[Amazon AWS account]
 * Create a https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html[S3 bucket]
 * https://docs.aws.amazon.com/AmazonS3/latest/userguide/uploading-an-object-bucket.html[Upload] CSV/JSON/Parquest format files to Private S3 bucket.
 * https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey[Access Keys] to access AWS account
-* Create Teradata Authorization object with AWS Account Key and Account Secret Key
+* Create a Teradata Authorization object with the AWS Account Key and the Account Secret Key
 +
 [source, teradata-sql]
 ----
@@ -210,7 +216,7 @@ transfer_data_csv = S3ToTeradataOperator(
 This guide details the utilization of the Airflow Teradata Provider’s S3 Cloud Transfer Operator to seamlessly transfer CSV, JSON, and Parquet data from Amazon S3 to Teradata Vantage, facilitating streamlined data operations between these platforms.
 
 == Further reading
-* link:https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html[Apache Airflow DAGs reference]
+* link:https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/DAGs.html[Apache Airflow DAGs reference]
 * link:https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/SQL-Data-Definition-Language-Syntax-and-Examples/Authorization-Statements-for-External-Routines/CREATE-AUTHORIZATION-and-REPLACE-AUTHORIZATION[Teradata Authorization]
 * link:https://learn.microsoft.com/en-us/windows/wsl/install[Install WSL on windows]
 
