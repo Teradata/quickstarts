@@ -2223,7 +2223,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This document provides instructions and guidance for transferring data in CSV, JSON and Parquet formats from Amazon S3 to Teradata Vantage using the Airflow Teradata Provider&#8217;s <a href="https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/s3_to_teradata.html">S3 Cloud Transfer Operator</a>. It outlines the setup, configuration and execution steps required to establish a seamless data transfer pipeline between these platforms.</p>
+<p>This document provides instructions and guidance for transferring data in CSV, JSON and Parquet formats from Amazon S3 to Teradata Vantage using the Airflow Teradata Provider <a href="https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/s3_to_teradata.html">S3 Cloud Transfer Operator</a>. It outlines the setup, configuration and execution steps required to establish a seamless data transfer pipeline between these platforms.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2326,7 +2326,7 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 </div>
 </li>
 <li>
-<p>Install Apache Airflow Teradata provider package and Amazon provider package.</p>
+<p>Install the Apache Airflow Teradata provider package and the Amazon provider package.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install "apache-airflow-providers-teradata[amazon]"</code></pre>
@@ -2351,7 +2351,7 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Switch to virtual environment where Apache Airflow was installed at <a href="#_install_apache_airflow">Install Apache Airflow</a></p>
+<p>Switch to the virtual environment where Apache Airflow was installed at <a href="#_install_apache_airflow">Install Apache Airflow</a></p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">source airflow_env/bin/activate</code></pre>
@@ -2359,7 +2359,7 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 </div>
 </li>
 <li>
-<p>Configure the listed environment variables to activate the test connection button, preventing the loading of sample DAGs and default connections in Airflow UI.</p>
+<p>Configure the listed environment variables to activate the test connection button, preventing the loading of sample DAGs and default connections in the Airflow UI.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">  export AIRFLOW__CORE__TEST_CONNECTION=Enabled
@@ -2373,12 +2373,12 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 </div>
 </div>
 <div class="sect1">
-<h2 id="_start_apache_airflow_web_server"><a class="anchor" href="#_start_apache_airflow_web_server"></a>Start Apache Airflow web server</h2>
+<h2 id="_start_the_apache_airflow_web_server"><a class="anchor" href="#_start_the_apache_airflow_web_server"></a>Start the Apache Airflow web server</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Run airflow web server</p>
+<p>Run airflow&#8217;s web server</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">airflow standalone</code></pre>
@@ -2398,7 +2398,7 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 </div>
 </div>
 <div class="sect1">
-<h2 id="_define_apache_airflow_connection_to_vantage"><a class="anchor" href="#_define_apache_airflow_connection_to_vantage"></a>Define Apache Airflow connection to Vantage</h2>
+<h2 id="_define_the_apache_airflow_connection_to_vantage"><a class="anchor" href="#_define_the_apache_airflow_connection_to_vantage"></a>Define the Apache Airflow connection to Vantage</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -2406,10 +2406,10 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 <p>Click on Admin - Connections</p>
 </li>
 <li>
-<p>Click on + to define new connection to Teradata Vantage instance.</p>
+<p>Click on + to define a new connection to a Teradata Vantage instance.</p>
 </li>
 <li>
-<p>Define new connection with id <code>teradata_default</code> with Teradata Vantage instance details.</p>
+<p>Assign the new connection the id <code>teradata_default</code> with Teradata Vantage instance details.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -2444,7 +2444,14 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 <h2 id="_define_dag_in_apache_airflow"><a class="anchor" href="#_define_dag_in_apache_airflow"></a>Define DAG in Apache Airflow</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Dags in airflow are defined as python files. The dag below transfer data from Teradata-supplied public buckets to Teradata Vantage instance.Copy the python code below and save it as <code>airflow-aws-to-teradata-transfer-operator-demo.py</code> under the directory $AIRFLOW_HOME/dags.</p>
+<p>DAGs in airflow are defined as python files. The DAG below transfers data from Teradata-supplied public buckets to a Teradata Vantage instance. Copy the python code below and save it as <code>airflow-aws-to-teradata-transfer-operator-demo.py</code> under the directory $AIRFLOW_HOME/DAGs.</p>
+</div>
+<div class="paragraph">
+<p>This DAG is a very simple example that covers:
+- Droping the destination table if it exists
+- Transfer of the data stored in object storage
+- Get the number of transferred records
+- Write the number of transferred records to the log</p>
 </div>
 <div class="paragraph">
 <p>Refer <a href="https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/s3_to_teradata.html">S3ToTeradataOperator</a> for more information on <code>Amazon S3 to Teradata</code> Transfer Operator.</p>
@@ -2507,7 +2514,7 @@ with DAG(
 <h2 id="_load_dag"><a class="anchor" href="#_load_dag"></a>Load DAG</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When the dag file is copied to $AIRFLOW_HOME/dags, Apache Airflow displays the dag in UI under DAGs section. It will take 2 to 3 minutes to load DAG in Apache Airflow UI.</p>
+<p>When the DAG file is copied to $AIRFLOW_HOME/dags, Apache Airflow displays the DAG in the UI under the DAGs section. It will take 2 to 3 minutes to load the DAG in the Apache Airflow UI.</p>
 </div>
 </div>
 </div>
@@ -2515,11 +2522,11 @@ with DAG(
 <h2 id="_run_dag"><a class="anchor" href="#_run_dag"></a>Run DAG</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Run the dag as shown in the image below.</p>
+<p>Run the DAG as shown in the image below.</p>
 </div>
-<div class="imageblock text-left">
+<div class="imageblock text-left unresolved">
 <div class="content">
-<img src="_images/airflow-s3-to-teradata-transfer-operator-doc/dag.png" alt="Run dag" width="75%">
+<img src="airflow-s3-to-teradata-transfer-operator-doc/DAG.png" alt="Run DAG" width="75%">
 </div>
 </div>
 </div>
@@ -2528,7 +2535,7 @@ with DAG(
 <h2 id="_transfer_data_from_private_amazon_s3_bucket_to_teradata_instance"><a class="anchor" href="#_transfer_data_from_private_amazon_s3_bucket_to_teradata_instance"></a>Transfer data from Private Amazon S3 bucket to Teradata instance</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To successfully transfer data from Private Amazon S3 bucket to a Teradata instance, the following prerequisites are necessary.</p>
+<p>To successfully transfer data from a Private Amazon S3 bucket to a Teradata instance, the following prerequisites are necessary.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2545,7 +2552,7 @@ with DAG(
 <p><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey">Access Keys</a> to access AWS account</p>
 </li>
 <li>
-<p>Create Teradata Authorization object with AWS Account Key and Account Secret Key</p>
+<p>Create a Teradata Authorization object with the AWS Account Key and the Account Secret Key</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-teradata-sql hljs" data-lang="teradata-sql">CREATE AUTHORIZATION aws_authorization USER 'AWSAccessKey' PASSWORD 'AWSSecretAccessKey'</code></pre>
@@ -2597,7 +2604,7 @@ Replace <code>AWSAccessKey</code> and <code>AWSSecretAccessKey</code> with your 
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html">Apache Airflow DAGs reference</a></p>
+<p><a href="https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/DAGs.html">Apache Airflow DAGs reference</a></p>
 </li>
 <li>
 <p><a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/SQL-Data-Definition-Language-Syntax-and-Examples/Authorization-Statements-for-External-Routines/CREATE-AUTHORIZATION-and-REPLACE-AUTHORIZATION">Teradata Authorization</a></p>
@@ -2725,7 +2732,20 @@ Replace <code>AWSAccessKey</code> and <code>AWSSecretAccessKey</code> with your 
 </svg>
 
 
-<!--Old Footer markup -->
+<section class="linksOfInterest">
+  <div class="linksOfInterestTitle">Also of interest</div>
+  <ul>
+    <li class="linkOfInterest_1">
+      <a class="footerNavLink" href="https://www.teradata.com/platform/ai-ml" target="_self" rel="noreferrer">Drive ROI with Trusted AI today</a>
+    </li>
+    <li class="linkOfInterest_1">
+      <a class="footerNavLink" href="https://www.teradata.com/solutions/big-data" target="_self" rel="noreferrer">Big data</a>
+    </li>
+    <li class="linkOfInterest_1">
+      <a class="footerNavLink" href="https://www.teradata.com/insights/data-security" target="_self" rel="noreferrer">Become an expert at defending your data</a>
+    </li>
+  </ul>
+</section>
 
 <!-- New Footer -->
  <!--footer-->
@@ -2745,6 +2765,9 @@ Replace <code>AWSAccessKey</code> and <code>AWSSecretAccessKey</code> with your 
                       <a href="https://www.teradata.com/Who-We-Help" data-celebrus="Footer Menu - Roles" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Roles | /Who-We-Help">Roles</a>
                     </li>
                     <li>
+                      <a href="https://www.teradata.com/Industries" data-celebrus="Footer Menu - Industries" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Industries | /Industries">Industries</a>
+                    </li>
+                    <li>
                       <a href="https://www.teradata.com/Partners" data-celebrus="Footer Menu - Partners" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Partners | /Partners">Partners</a>
                     </li>
                     <li>
@@ -2762,10 +2785,13 @@ Replace <code>AWSAccessKey</code> and <code>AWSSecretAccessKey</code> with your 
                       </a>
                     </li>
                     <li>
-                      <a href="https://www.teradata.com/Industries" data-celebrus="Footer Menu - Industries" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Industries | /Industries">Industries</a>
+                      <a href="https://www.teradata.com/solutions/business-use-cases" data-celebrus="Footer Menu - Solutions">Solutions</a>
                     </li>
                     <li>
                       <a href="https://www.teradata.com/Customers" data-celebrus="Footer Menu - Success stories" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Success stories | /Customers">Success stories</a>
+                    </li>
+                    <li>
+                      <a href="https://www.teradata.com/how-we-help/teradata-services" data-celebrus="Footer Menu - Services">Services</a>
                     </li>
                   </ul>
                 </div>
@@ -2778,20 +2804,20 @@ Replace <code>AWSAccessKey</code> and <code>AWSSecretAccessKey</code> with your 
                         <a href="https://www.teradata.com/Platform" data-celebrus="Footer Menu - Platform" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Platform | /Platform">Platform</a>
                       </li>
                       <li>
+                        <a href="https://www.teradata.com/Platform/VantageCloud" data-celebrus="Footer Menu - VantageCloud" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="VantageCloud | /Platform/VantageCloud">VantageCloud</a>
+                      </li>
+                      <li>
                         <a href="https://www.teradata.com/Platform/ClearScape-Analytics" data-celebrus="Footer Menu - ClearScape Analytics" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="ClearScape Analytics | /Platform/ClearScape-Analytics">ClearScape Analytics</a>
                       </li>
                       <li>
                         <a class="nav-2" href="https://www.teradata.com/platform/ai-ml" data-celebrus="">Unleash AI Innovation</a>
                       </li>
                       <li>
-                        <a href="https://www.teradata.com/Platform/Use-Cases" data-celebrus="Footer Menu - Use cases" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Use cases | /Platform/Use-Cases">Use cases</a>
+                        <a href="https://www.teradata.com/platform/workloads" data-celebrus="Footer Menu - Workloads" >Workloads</a>
                       </li>
                      <li>
                         <a href="https://www.teradata.com/Platform/Deployment" data-celebrus="Footer Menu - Deployment" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Deployment | /Platform/Deployment">Deployment
                         </a>
-                      </li>
-                      <li>
-                        <a href="https://www.teradata.com/Platform/VantageCloud" data-celebrus="Footer Menu - VantageCloud" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="VantageCloud | /Platform/VantageCloud">VantageCloud</a>
                       </li>
                     </ul>
                   </div>
@@ -2948,11 +2974,27 @@ Replace <code>AWSAccessKey</code> and <code>AWSSecretAccessKey</code> with your 
                           <ul class="pb-4 list">
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/trusted-ai" data-gtm-category="Footer" data-gtm-action="footer nav click" data-gtm-label="Trusted AI | /trusted-ai">Trusted AI</a></li>
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Who-We-Help" data-celebrus="">Roles</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Partners" data-celebrus="">Partners</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://teradata.my.site.com/teradataPRM/s/self-registration" data-celebrus="" target="_blank" rel="noopener">Partner registration</a></li>
-                              <li class="my-3"><a class="nav-2" href="https://teradata.my.site.com/teradataPRM/s/login/" data-celebrus="" target="_blank" rel="noopener">Partner portal login</a></li>
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Industries" data-celebrus="">Industries</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Partners" data-celebrus="">Partners</a></li>
+                              <li class="my-3">
+                                <a class="nav-2" href="https://teradata.my.site.com/teradataPRM/s/self-registration" data-celebrus="" target="_blank" rel="noopener">
+                                  Partner registration
+                                  <span class="material-symbols-outlined md-16 ms-2">
+                                    <img src="../_/img/small-external.svg" alt="External Icon" width="" height="">
+                                  </span>
+                                </a>
+                              </li>
+                              <li class="my-3">
+                                <a class="nav-2" href="https://teradata.my.site.com/teradataPRM/s/login/" data-celebrus="" target="_blank" rel="noopener">
+                                  Partner portal login
+                                  <span class="material-symbols-outlined md-16 ms-2">
+                                    <img src="../_/img/small-external.svg" alt="External Icon" width="" height="">
+                                  </span>
+                                </a>
+                              </li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/solutions/business-use-cases" >Solutions</a></li>
                               <li class="my-3"><a class="nav-2" href="https://www.teradata.com/Customers" data-celebrus="">Success stories</a></li>
+                              <li class="my-3"><a class="nav-2" href="https://www.teradata.com/how-we-help/teradata-services">Services</a></li>
                           </ul>
                       </details>
                       <details>
@@ -3063,7 +3105,7 @@ Replace <code>AWSAccessKey</code> and <code>AWSSecretAccessKey</code> with your 
   
           <div class="row footer-nav__baseline border-top-medium">
               <div class="col-12 col-lg-3 col-xl-4 px-lg-0">
-                  <span class="copyright">©2023 Teradata. All Rights Reserved</span>
+                  <span class="copyright">©2024 Teradata. All Rights Reserved</span>
               </div>
               <div class="col-12 col-lg-9 col-xl-8 d-flex justify-content-lg-end px-lg-0">
                   <ul class="d-flex flex-wrap justify-content-between nav-2 list">
