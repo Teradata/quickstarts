@@ -9,6 +9,7 @@ window.addEventListener('load', function() {
         
         window.location.href = 'https://teradata.github.io/ai-unlimited-docs/docs/install-ai-unlimited/';
     } else {
+        console.log(folder[folder.length-1]);
         const jsonLinks = `{
                 "teradata-vantage-engine-architecture-and-concepts.html": "https://teradata.github.io/ai-unlimited-docs/pr-preview/pr-20/quickstarts/introduction/teradata-vantage-engine-architecture-and-concepts/",
                 "getting.started.vmware.html": "https://teradata.github.io/ai-unlimited-docs/pr-preview/pr-20/quickstarts/get-access-to-vantage/on-your-local/getting-started-vmware/",
@@ -71,7 +72,7 @@ window.addEventListener('load', function() {
         if (matchingKey) {
             console.log(`Key: ${matchingKey}`);
             console.log(`URL: ${jsonObject[matchingKey]}`);
-            window.location.href = jsonObject[matchingKey];
+        //    window.location.href = jsonObject[matchingKey];
         }
     } 
 });
