@@ -185,7 +185,7 @@ When the DAG file is copied to $AIRFLOW_HOME/dags, Apache Airflow displays the D
 
 Run the DAG as shown in the image below.
 
-image::{dir}/DAG.png[Run DAG,align="left" width=75%]
+image::{dir}/dag.png[Run DAG,align="left" width=75%]
 
 == Transfer data from Private Amazon S3 bucket to Teradata instance
 To successfully transfer data from a Private Amazon S3 bucket to a Teradata instance, the following prerequisites are necessary.
