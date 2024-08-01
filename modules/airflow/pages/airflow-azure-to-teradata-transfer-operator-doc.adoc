@@ -10,7 +10,7 @@
 
 == Overview
 
-This document provides instructions and guidance for transferring data in CSV, JSON and Parquet formats from Microsoft Azure Blob Storage to Teradata Vantage using the Airflow Teradata Provider https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/azure_blob_to_teradata.html[Azure Cloud Transfer Operator]. It outlines the setup, configuration and execution steps required to establish a seamless data transfer pipeline between these platforms.
+This document provides instructions and guidance for transferring data in CSV, JSON and Parquet formats from Microsoft Azure Blob Storage to Teradata Vantage using the Airflow Teradata Provider and the https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/azure_blob_to_teradata.html[Azure Cloud Transfer Operator]. It outlines the setup, configuration and execution steps required to establish a seamless data transfer pipeline between these platforms.
 
 NOTE: Use `https://learn.microsoft.com/en-us/windows/wsl/install[The Windows Subsystem for Linux (WSL)]` on `Windows` to try this quickstart example.
 
@@ -113,11 +113,11 @@ Refer https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/c
 DAGs in airflow are defined as python files. The DAG below transfers data from Teradata-supplied public blob containers to a Teradata Vantage instance. Copy the python code below and save it as `airflow-azure-to-teradata-transfer-operator-demo.py` under the directory $AIRFLOW_HOME/dags.
 
 This DAG is a very simple example that covers:
-- Droping the destination table if it exists
-- Transfer of the data stored in object storage
-- Get the number of transferred records
-- Write the number of transferred records to the log
-Refer https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/_api/airflow/providers/teradata/transfers/azure_blob_to_teradata/index.html[AzureBlobStorageToTeradataOperator] for more information on `Azure Blob Storage to Teradata` Transfer Operator.
+* Droping the destination table if it exists
+* Transfer of the data stored in object storage
+* Get the number of transferred records
+* Write the number of transferred records to the log
+Refer https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/_api/airflow/providers/teradata/transfers/azure_blob_to_teradata/index.html[Azure Blob Storage To Teradata Operator] for more information on `Azure Blob Storage to Teradata` Transfer Operator.
 
 [source, python]
 ----
