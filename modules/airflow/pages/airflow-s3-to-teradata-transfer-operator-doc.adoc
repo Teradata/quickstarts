@@ -122,7 +122,7 @@ This DAG is a very simple example that covers:
 
 - Write the number of transferred records to the log
 
-Refer https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/s3_to_teradata.html[S3ToTeradataOperator] for more information on `Amazon S3 to Teradata` Transfer Operator.
+Refer https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/s3_to_teradata.html[S3 To Teradata Operator] for more information on `Amazon S3 to Teradata` Transfer Operator.
 
 [source, python]
 ----
