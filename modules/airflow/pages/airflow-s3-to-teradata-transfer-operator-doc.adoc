@@ -10,7 +10,7 @@
 
 == Overview
 
-This document provides instructions and guidance for transferring data in CSV, JSON and Parquet formats from Amazon S3 to Teradata Vantage using the Airflow Teradata Provider https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/s3_to_teradata.html[S3 Cloud Transfer Operator]. It outlines the setup, configuration and execution steps required to establish a seamless data transfer pipeline between these platforms.
+This document provides instructions and guidance for transferring data in CSV, JSON and Parquet formats from Amazon S3 to Teradata Vantage using the Airflow Teradata Provider and the https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/s3_to_teradata.html[S3 Cloud Transfer Operator]. It outlines the setup, configuration and execution steps required to establish a seamless data transfer pipeline between these platforms.
 
 NOTE: Use `https://learn.microsoft.com/en-us/windows/wsl/install[The Windows Subsystem for Linux (WSL)]` on `Windows` to try this quickstart example.
 
@@ -113,9 +113,13 @@ Refer https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/c
 DAGs in airflow are defined as python files. The DAG below transfers data from Teradata-supplied public buckets to a Teradata Vantage instance. Copy the python code below and save it as `airflow-aws-to-teradata-transfer-operator-demo.py` under the directory $AIRFLOW_HOME/DAGs.
 
 This DAG is a very simple example that covers:
+
 - Droping the destination table if it exists
+
 - Transfer of the data stored in object storage
+
 - Get the number of transferred records
+
 - Write the number of transferred records to the log
 
 Refer https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/operators/s3_to_teradata.html[S3ToTeradataOperator] for more information on `Amazon S3 to Teradata` Transfer Operator.
