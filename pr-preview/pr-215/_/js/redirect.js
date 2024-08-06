@@ -1,15 +1,20 @@
 window.addEventListener('load', function() {
-    var folder = window.location.pathname.split("/");
+    var currentUrl = window.location.href;
+    console.log(currentUrl);
+    if (currentUrl === 'https://quickstarts.teradata.com/pr-preview/pr-215/') {
+        window.location.href = 'https://teradata.github.io/ai-unlimited-docs/pr-preview/pr-20/quickstarts/';
+    } else {
+        var folder = window.location.pathname.split("/");
 
-    if (folder[folder.length-2] === 'ai-unlimited') {
-        var metaTag = document.createElement('meta');
-        metaTag.setAttribute('http-equiv', 'refresh');
-        metaTag.setAttribute('content', '5;url=https://teradata.github.io/ai-unlimited-docs/docs/install-ai-unlimited/');
-        document.head.appendChild(metaTag);
+        if (folder[folder.length-2] === 'ai-unlimited') {
+            var metaTag = document.createElement('meta');
+            metaTag.setAttribute('http-equiv', 'refresh');
+            metaTag.setAttribute('content', '5;url=https://teradata.github.io/ai-unlimited-docs/docs/install-ai-unlimited/');
+            document.head.appendChild(metaTag);
+            
+            window.location.href = 'https://teradata.github.io/ai-unlimited-docs/docs/install-ai-unlimited/';
+        }
         
-        window.location.href = 'https://teradata.github.io/ai-unlimited-docs/docs/install-ai-unlimited/';
-    }
-        console.log(folder[folder.length-1]);
         const jsonLinks = `{
                 "teradata-vantage-engine-architecture-and-concepts.html": "https://teradata.github.io/ai-unlimited-docs/pr-preview/pr-20/quickstarts/introduction/teradata-vantage-engine-architecture-and-concepts/",
                 "getting.started.vmware.html": "https://teradata.github.io/ai-unlimited-docs/pr-preview/pr-20/quickstarts/get-access-to-vantage/on-your-local/getting-started-vmware/",
@@ -66,13 +71,24 @@ window.addEventListener('load', function() {
                 "vantagecloud-lake/vantagecloud-lake-demo-jupyter-azure.html": "https://teradata.github.io/ai-unlimited-docs/pr-preview/pr-20/quickstarts/vantagecloud-lake/vantagecloud-lake-demo-jupyter-azure/"
             }`;
           
+        console.log(folder[folder.length-1]);
         const jsonObject = JSON.parse(jsonLinks);
         const matchingKey = Object.keys(jsonObject).find(key => key.includes(folder[folder.length-1]));
-    
-        if (matchingKey) {
-            console.log(`Key: ${matchingKey}`);
-            console.log(`URL: ${jsonObject[matchingKey]}`);
-        //    window.location.href = jsonObject[matchingKey];
-        }
 
+        //console.log("matchingKey:"+matchingKey);
+        //if (matchingKey) {
+        //    console.log(`Key: ${matchingKey}`);
+        //    console.log(`URL: ${jsonObject[matchingKey]}`);
+         //   window.location.href = jsonObject[matchingKey];
+       // }
+       console.log("matchingKey:"+matchingKey);
+       if (matchingKey) {
+           console.log(`Key: ${matchingKey}`);
+           console.log(`URL: ${jsonObject[matchingKey]}`);
+           var metaTag = document.createElement('meta');
+           metaTag.setAttribute('http-equiv', 'refresh');
+           metaTag.setAttribute('content', `0;url=${jsonObject[matchingKey]}`);
+           document.head.appendChild(metaTag);
+       }
+   }
 });
