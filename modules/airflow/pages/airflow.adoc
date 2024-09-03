@@ -102,7 +102,7 @@ The Teradata connection in airflow can be defined in the following ways:
 1. Using the Airflow Web UI
 2. Using Environment Variables
 
-=== Define a Teradata connection in Apache Airflow Web UI
+*Define a Teradata connection in Apache Airflow Web UI*
 
 1. Open the Admin -> Connections section of the UI. Click the Create link to create a new connection.
 +
@@ -121,7 +121,8 @@ image::{dir}/airflow-newconnection.png[Airflow New Connection, width=75%]
 Refer https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/connections/teradata.html[Teradata Connection] for more details.
 
 
-=== Define a Teradata connection as Environment Variable
+*Define a Teradata connection as Environment Variable*
+
 The Teradata connection can be defined as environment variables in one of the following formats.
 
 1. JSON format
@@ -132,7 +133,7 @@ NOTE: The naming convention for environment variables is `AIRFLOW_CONN_{CONN_ID}
 +
 
 
-==== JSON format example
+*JSON format example*
 
 
 [source, bash]
@@ -151,7 +152,7 @@ export AIRFLOW_CONN_TERADATA_DEFAULT='{
 
 ----
 
-==== URI format example
+*URI format example*
 
 
 [source, bash]
