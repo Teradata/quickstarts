@@ -2420,8 +2420,9 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 </li>
 </ol>
 </div>
-<div class="sect2">
-<h3 id="_define_a_teradata_connection_in_apache_airflow_web_ui"><a class="anchor" href="#_define_a_teradata_connection_in_apache_airflow_web_ui"></a>Define a Teradata connection in Apache Airflow Web UI</h3>
+<div class="paragraph">
+<p><strong>Define a Teradata connection in Apache Airflow Web UI</strong></p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2470,9 +2471,9 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 <div class="paragraph">
 <p>Refer <a href="https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/connections/teradata.html">Teradata Connection</a> for more details.</p>
 </div>
+<div class="paragraph">
+<p><strong>Define a Teradata connection as Environment Variable</strong></p>
 </div>
-<div class="sect2">
-<h3 id="_define_a_teradata_connection_as_environment_variable"><a class="anchor" href="#_define_a_teradata_connection_as_environment_variable"></a>Define a Teradata connection as Environment Variable</h3>
 <div class="paragraph">
 <p>The Teradata connection can be defined as environment variables in one of the following formats.</p>
 </div>
@@ -2498,8 +2499,9 @@ The naming convention for environment variables is <code>AIRFLOW_CONN_{CONN_ID}<
 </li>
 </ol>
 </div>
-<div class="sect3">
-<h4 id="_json_format_example"><a class="anchor" href="#_json_format_example"></a>JSON format example</h4>
+<div class="paragraph">
+<p><strong>JSON format example</strong></p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export AIRFLOW_CONN_TERADATA_DEFAULT='{
@@ -2515,9 +2517,9 @@ The naming convention for environment variables is <code>AIRFLOW_CONN_{CONN_ID}<
 }'</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><strong>URI format example</strong></p>
 </div>
-<div class="sect3">
-<h4 id="_uri_format_example"><a class="anchor" href="#_uri_format_example"></a>URI format example</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export AIRFLOW_CONN_TERADATA_DEFAULT='teradata://teradata_user:my-password@my-host/my-schema?tmode=TERA&amp;sslmode=verify-ca'</code></pre>
@@ -2525,8 +2527,6 @@ The naming convention for environment variables is <code>AIRFLOW_CONN_{CONN_ID}<
 </div>
 <div class="paragraph">
 <p>Refer <a href="https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/connections/teradata.html">Teradata Hook</a>  for detailed information on Teradata Connection in Airflow.</p>
-</div>
-</div>
 </div>
 </div>
 </div>
