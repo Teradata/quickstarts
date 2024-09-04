@@ -1523,7 +1523,16 @@ document.addEventListener("DOMContentLoaded", function () {
     <a class="nav-link" href="../../select-the-right-data-ingestion-tools-for-teradata-vantage.html">Select the right data ingestion solution for Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../../airflow.html">Use Apache Airflow with Teradata Vantage</a>
+    <a class="nav-link" href="../../airflow/airflow.html">Use Apache Airflow with Teradata Vantage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../airflow/airflow-azure-to-teradata-transfer-operator-doc.html">Data Transfer from Azure Blob to Teradata Vantage Using Apache Airflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../airflow/airflow-s3-to-teradata-transfer-operator-doc.html">Data Transfer from Amazon S3 to Teradata Vantage Using Apache Airflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../../dbt.html">dbt with Teradata Vantage</a>
@@ -1551,9 +1560,6 @@ document.addEventListener("DOMContentLoaded", function () {
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../../create-parquet-files-in-object-storage.html">Create Parquet files in object storage</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../../other-integrations/execute-airflow-workflows-that-use-dbt-with-teradata-vantage.html">Execute Airflow workflows that use dbt with Teradata Vantage</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../../cloud-guides/integrate-teradata-vantage-to-salesforce-using-amazon-appflow.html">Connect Teradata Vantage to Salesforce using Amazon Appflow</a>
@@ -2354,17 +2360,17 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 <ol class="arabic">
 <li>
 <p>UIの[Admin]&#8594;[Connections]セクションを開きます。[Create]リンクをクリックして、新しい接続を作成します。</p>
-<div class="imageblock">
+<div class="imageblock unresolved">
 <div class="content">
-<img src="../../_images/airflow/airflow-connection.png" alt="Airflow管理ドロップダウン" width="75%">
+<img src="airflow/airflow-connection.png" alt="Airflow管理ドロップダウン" width="75%">
 </div>
 </div>
 </li>
 <li>
 <p>新しい接続ページに入力の詳細を入力します。</p>
-<div class="imageblock">
+<div class="imageblock unresolved">
 <div class="content">
-<img src="../../_images/airflow/airflow-newconnection.png" alt="Airflowの新しい接続" width="75%">
+<img src="airflow/airflow-newconnection.png" alt="Airflowの新しい接続" width="75%">
 </div>
 </div>
 <div class="ulist">
