@@ -1,0 +1,238 @@
+= Use Apache Airflow with Teradata Vantage
+:experimental:
+:page-author: Satish Chinthanippu
+:page-email: satish.chinthanippu@teradata.com
+:page-revdate: February 06th, 2024
+:description: Use Apache Airflow with Teradata Vantage.
+:keywords: data warehouses, compute storage separation, teradata, vantage, cloud data platform, object storage, business intelligence, enterprise analytics, elt, airflow, workflow.
+:tabs:
+:dir: airflow
+
+== Overview
+
+This document provides detailed instructions and guidance on using Apache Airflow with Teradata Vantage to create a table using the `TeradataOperator`. It covers the setup, configuration, and execution steps required to create a table within Teradata Vantage. The `TeradataOperator` is specifically designed for executing queries on Teradata databases.
+
+NOTE: Use `https://learn.microsoft.com/en-us/windows/wsl/install[The Windows Subsystem for Linux (WSL)]` on `Windows` to try this quickstart example.
+
+== Prerequisites
+* Access to a Teradata Vantage instance, version 17.10 or higher.
++
+include::ROOT:partial$vantage_clearscape_analytics.adoc[]
+* Python 3.8, 3.9, 3.10 or 3.11 and python3-env, python3-pip installed.
++
+[tabs, id="python_install"]
+====
+Linux::
++
+[source,bash]
+----
+sudo apt install -y python3-venv python3-pip
+----
+WSL::
++
+[source,bash]
+----
+sudo apt install -y python3-venv python3-pip
+----
+macOS::
++
+[source,bash]
+----
+brew install python
+----
+ Refer https://docs.python-guide.org/starting/install3/osx/[Installation Guide] if you face any issues.
+====
+
+== Install Apache Airflow
+1. Create a new python environment to manage airflow and its dependencies. Activate the environment.
++
+[source, bash]
+----
+python3 -m venv airflow_env
+source airflow_env/bin/activate
+AIRFLOW_VERSION=2.9.3
+PYTHON_VERSION="$(python3 --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
+CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
+pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
+----
+
++
+2. Install the Apache Airflow Teradata provider package.
++
+[source, bash]
+----
+pip install "apache-airflow-providers-teradata"
+----
+3. Set the AIRFLOW_HOME environment variable.
++
+[source, bash]
+----
+export AIRFLOW_HOME=~/airflow
+----
+
+== Configure Apache Airflow
+1. Switch to the virtual environment where Apache Airflow was installed at <<Install Apache Airflow>>
++
+[source, bash]
+----
+source airflow_env/bin/activate
+----
+2. Configure the listed environment variables to activate the test connection button, preventing the loading of sample DAGs and default connections in the Airflow UI.
++
+[source, bash]
+  export AIRFLOW__CORE__TEST_CONNECTION=Enabled
+  export AIRFLOW__CORE__LOAD_EXAMPLES=false
+  export AIRFLOW__CORE__LOAD_DEFAULT_CONNECTIONS=false
+
+== Start the Apache Airflow web server
+1. Run airflow's web server
++
+[source, bash]
+----
+airflow standalone
+----
+2. Access the airflow UI. Visit https://localhost:8080 in the browser and log in with the admin account details shown in the terminal.
++
+image::{dir}/airflow-console-password.png[Airflow Password,align="left" width=75%]
+
+== Define the Apache Airflow connection to Vantage
+
+The Teradata connection in airflow can be defined in the following ways:
+
+1. Using the Airflow Web UI
+2. Using Environment Variables
+
+*Define a Teradata connection in Apache Airflow Web UI*
+
+1. Open the Admin -> Connections section of the UI. Click the Create link to create a new connection.
++
+image::{dir}/airflow-connection.png[Airflow admin dropdown, width=75%]
+2. Fill in input details in New Connection Page.
++
+image::{dir}/airflow-newconnection.png[Airflow New Connection, width=75%]
+* Connection Id: Unique ID of Teradata Connection.
+* Connection Type: Type of the system. Select Teradata.
+* Database Server URL (required): Teradata instance hostname to connect to.
+* Database (optional): Specify the name of the database to connect to
+* Login (required): Specify the user name to connect.
+* Password (required): Specify the password to connect.
+* Click on Test and Save.
+
+Refer https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/connections/teradata.html[Teradata Connection] for more details.
+
+
+*Define a Teradata connection as Environment Variable*
+
+The Teradata connection can be defined as environment variables in one of the following formats.
+
+1. JSON format
+2. URI format
+
++
+NOTE: The naming convention for environment variables is `AIRFLOW_CONN_{CONN_ID}` with all uppercase letters (note the single underscore surrounding `CONN`). For example, if your connection ID is `teradata_default`, the environment variable should be named `AIRFLOW_CONN_TERADATA_DEFAULT`.
++
+
+
+*JSON format example*
+
+
+[source, bash]
+----
+export AIRFLOW_CONN_TERADATA_DEFAULT='{
+    "conn_type": "teradata",
+    "login": "teradata_user",
+    "password": "my-password",
+    "host": "my-host",
+    "schema": "my-schema",
+    "extra": {
+        "tmode": "TERA",
+        "sslmode": "verify-ca"
+    }
+}'
+
+----
+
+*URI format example*
+
+
+[source, bash]
+----
+export AIRFLOW_CONN_TERADATA_DEFAULT='teradata://teradata_user:my-password@my-host/my-schema?tmode=TERA&sslmode=verify-ca'
+----
+
+Refer https://airflow.apache.org/docs/apache-airflow-providers-teradata/stable/connections/teradata.html[Teradata Hook]  for detailed information on Teradata Connection in Airflow.
+
+== Define a DAG in Airflow
+
+1. In airflow, DAGs are defined as Python code.
+2. Create a DAG as a python file like sample.py under DAG_FOLDER - $AIRFLOW_HOME/dags directory.
++
+[source, python]
+----
+from datetime import datetime
+from airflow import DAG
+from airflow.providers.teradata.operators.teradata import TeradataOperator
+CONN_ID = "teradata_default"
+with DAG(
+    dag_id="example_teradata_operator",
+    max_active_runs=1,
+    max_active_tasks=3,
+    catchup=False,
+    start_date=datetime(2023, 1, 1),
+) as dag:
+    create = TeradataOperator(
+        task_id="table_create",
+        teradata_conn_id=CONN_ID,
+        sql="""
+            CREATE TABLE my_users,
+            FALLBACK (
+                user_id decimal(10,0) NOT NULL GENERATED ALWAYS AS IDENTITY (
+                    START WITH 1
+                    INCREMENT BY 1
+                    MINVALUE 1
+                    MAXVALUE 2147483647
+                    NO CYCLE),
+                user_name VARCHAR(30)
+            ) PRIMARY INDEX (user_id);
+        """,
+    )
+----
+
+== Load DAG
+
+When the DAG file is copied to $AIRFLOW_HOME/dags, Apache Airflow displays the DAG in the UI under the DAGs section. It will take 2 to 3 minutes to load the DAG in the Apache Airflow UI.
+
+
+== Run DAG
+DAGs can be executed in one of two ways:
+
+1. Manually or via the API: You can trigger DAGs manually or through API calls.
+2. On a scheduled basis: DAGs can be set to run according to a schedule defined within their configuration.
+
+The `example_teradata_operator` DAG is configured to be triggered manually. To define a schedule, you can use any valid link:https://en.wikipedia.org/wiki/Cron[Crontab, window="_blank"] schedule value for the schedule argument.
+[source, python]
+----
+with DAG(
+    dag_id="example_teradata_operator",
+    max_active_runs=1,
+    max_active_tasks=3,
+    catchup=False,
+    schedule="0 0 * * *"
+    start_date=datetime(2023, 1, 1),
+) as dag:
+----
+
+Run the DAG manually as shown in the image below.
+
+image::{dir}/dag.png[Run DAG,align="left" width=75%]
+
+== Summary
+
+This tutorial demonstrated how to use Apache Airflow along with the Airflow Teradata provider to interact with a Teradata Vantage instance. The example DAG provided shows how to create the `my_users` table in the Teradata Vantage instance specified in the Connection UI.
+
+== Further reading
+* link:https://airflow.apache.org/docs/apache-airflow/stable/start.html[airflow documentation]
+* link:https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html[airflow DAGs]
+
+
+include::ROOT:partial$community_link.adoc[]
