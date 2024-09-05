@@ -3,6 +3,7 @@ const path = require('path');
 
 // JSON data
 const data = {
+    "index.html": "https://developers.teradata.com/",
     "teradata-vantage-engine-architecture-and-concepts.html": "https://developers.teradata.com/quickstarts/introduction/teradata-vantage-engine-architecture-and-concepts/",
     "getting.started.vmware.html": "https://developers.teradata.com/quickstarts/get-access-to-vantage/on-your-local/getting-started-vmware/",
     "getting.started.vbox.html": "https://developers.teradata.com/quickstarts/get-access-to-vantage/on-your-local/getting-started-vbox/",
