@@ -18,6 +18,7 @@ const data = {
     "nos.html": "https://developers.teradata.com/quickstarts/manage-data/nos/",
     "select-the-right-data-ingestion-tools-for-teradata-vantage.html": "https://developers.teradata.com/quickstarts/manage-data/select-the-right-data-ingestion-tools-for-teradata-vantage/",
     "airflow.html": "https://developers.teradata.com/quickstarts/manage-data/airflow/",
+    "airflow/airflow-azure-to-teradata-transfer-operator-doc.html": "https://developers.teradata.com/quickstarts/manage-data/airflow-azure-to-teradata-transfer-operator-doc/",
     "dbt.html": "https://developers.teradata.com/quickstarts/manage-data/dbt/",
     "advanced-dbt.html": "https://developers.teradata.com/quickstarts/manage-data/advanced-dbt/",
     "modelops/using-feast-feature-store-with-teradata-vantage.html": "https://developers.teradata.com/quickstarts/manage-data/using-feast-feature-store-with-teradata-vantage/",
