@@ -101,6 +101,25 @@ const data = {
     "/quickstarts/vantagecloud-lake/vantagecloud-lake-demo-jupyter-google-cloud-vertex-ai/",
   "vantagecloud-lake/vantagecloud-lake-demo-jupyter-azure.html":
     "/quickstarts/vantagecloud-lake/vantagecloud-lake-demo-jupyter-azure/",
+  // AI Unlimited redirects
+  "ai-unlimited/ai-unlimited-aws-permissions-policies.html":
+    "/ai-unlimited/install-ai-unlimited/",
+  "ai-unlimited/ai-unlimited-magic-reference.html":
+    "/ai-unlimited/explore-and-analyze-data/magic-commands/",
+  "ai-unlimited/deploy-ai-unlimited-aws-cloudformation.html":
+    "/ai-unlimited/install-ai-unlimited/",
+  "ai-unlimited/deploy-ai-unlimited-awscli-cloudformation.html":
+    "/ai-unlimited/install-ai-unlimited/",
+  "ai-unlimited/getting-started-with-ai-unlimited.html":
+    "/ai-unlimited/install-ai-unlimited/",
+  "ai-unlimited/install-ai-unlimited-interface-docker.html":
+    "/ai-unlimited/install-ai-unlimited/",
+  "ai-unlimited/install-ai-unlimited-workspaces-docker.html":
+    "/ai-unlimited/install-ai-unlimited/",
+  "ai-unlimited/running-sample-ai-unlimited-workload.html":
+    "/ai-unlimited/install-ai-unlimited/",
+  "ai-unlimited/using-ai-unlimited-workspace-cli.html":
+    "/ai-unlimited/install-ai-unlimited/",
 };
 
 // Template generator function
