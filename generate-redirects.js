@@ -107,7 +107,7 @@ const data = {
   "ai-unlimited/ai-unlimited-magic-reference.html":
     "/ai-unlimited/explore-and-analyze-data/magic-commands/",
   "ai-unlimited/deploy-ai-unlimited-aws-cloudformation.html":
-    "/ai-unlimited/install-ai-unlimited/",
+    "/ai-unlimited/install-ai-unlimited/deploy-manager-aws-console/",
   "ai-unlimited/deploy-ai-unlimited-awscli-cloudformation.html":
     "/ai-unlimited/install-ai-unlimited/",
   "ai-unlimited/getting-started-with-ai-unlimited.html":
@@ -115,7 +115,7 @@ const data = {
   "ai-unlimited/install-ai-unlimited-interface-docker.html":
     "/ai-unlimited/install-ai-unlimited/",
   "ai-unlimited/install-ai-unlimited-workspaces-docker.html":
-    "/ai-unlimited/install-ai-unlimited/",
+    "/ai-unlimited/resources/quickstart/run-ai-unlimited-jupyterlab-docker/",
   "ai-unlimited/running-sample-ai-unlimited-workload.html":
     "/ai-unlimited/install-ai-unlimited/",
   "ai-unlimited/using-ai-unlimited-workspace-cli.html":
