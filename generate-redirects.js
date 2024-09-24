@@ -5,33 +5,22 @@ const newBaseUrl = "https://developers.teradata.com";
 // JSON data
 const data = {
   "index.html": "/quickstarts/",
-  "teradata-vantage-engine-architecture-and-concepts.html":
-    "/quickstarts/introduction/teradata-vantage-engine-architecture-and-concepts/",
-  "getting.started.vmware.html":
-    "/quickstarts/get-access-to-vantage/on-your-local/getting-started-vmware/",
-  "getting.started.vbox.html":
-    "/quickstarts/get-access-to-vantage/on-your-local/getting-started-vbox/",
-  "getting.started.utm.html":
-    "/quickstarts/get-access-to-vantage/on-your-local/run-vantage-express-on-utm/",
-  "run-vantage-express-on-aws.html":
-    "/quickstarts/get-access-to-vantage/on-your-cloud-infrastructure/run-vantage-express-on-aws/",
-  "vantage.express.gcp.html":
-    "/quickstarts/get-access-to-vantage/on-your-cloud-infrastructure/vantage-express-gcp/",
-  "run-vantage-express-on-microsoft-azure.html":
-    "/quickstarts/get-access-to-vantage/on-your-cloud-infrastructure/run-vantage-express-on-microsoft-azure/",
-  "getting-started-with-csae.html":
-    "/quickstarts/get-access-to-vantage/clearscape-analytics-experience/getting-started-with-csae/",
-  "install-teradata-studio-on-mac-m1-m2.html":
-    "/quickstarts/connect-to-vantage/install-teradata-studio-on-mac-m1-m2/",
-  "other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html":
-    "/quickstarts/connect-to-vantage/configure-a-teradata-vantage-connection-in-dbeaver/",
+  "teradata-vantage-engine-architecture-and-concepts.html": "/quickstarts/introduction/teradata-vantage-engine-architecture-and-concepts/",
+  "getting.started.vmware.html": "/quickstarts/get-access-to-vantage/on-your-local/getting-started-vmware/",
+  "getting.started.vbox.html": "/quickstarts/get-access-to-vantage/on-your-local/getting-started-vbox/",
+  "getting.started.utm.html": "/quickstarts/get-access-to-vantage/on-your-local/run-vantage-express-on-utm/",
+  "run-vantage-express-on-aws.html": "/quickstarts/get-access-to-vantage/on-your-cloud-infrastructure/run-vantage-express-on-aws/",
+  "vantage.express.gcp.html": "/quickstarts/get-access-to-vantage/on-your-cloud-infrastructure/vantage-express-gcp/",
+  "run-vantage-express-on-microsoft-azure.html": "/quickstarts/get-access-to-vantage/on-your-cloud-infrastructure/run-vantage-express-on-microsoft-azure/",
+  "getting-started-with-csae.html": "/quickstarts/get-access-to-vantage/clearscape-analytics-experience/getting-started-with-csae/",
+  "install-teradata-studio-on-mac-m1-m2.html": "/quickstarts/connect-to-vantage/install-teradata-studio-on-mac-m1-m2/",
+  "other-integrations/configure-a-teradata-vantage-connection-in-dbeaver.html": "/quickstarts/connect-to-vantage/configure-a-teradata-vantage-connection-in-dbeaver/",
   "odbc.ubuntu.html": "/quickstarts/connect-to-vantage/configure-odbc/ubuntu/",
   "nos.html": "/quickstarts/manage-data/nos/",
-  "select-the-right-data-ingestion-tools-for-teradata-vantage.html":
-    "/quickstarts/manage-data/select-the-right-data-ingestion-tools-for-teradata-vantage/",
+  "select-the-right-data-ingestion-tools-for-teradata-vantage.html": "/quickstarts/manage-data/select-the-right-data-ingestion-tools-for-teradata-vantage/",
   "airflow.html": "/quickstarts/manage-data/airflow/",
-  "airflow/airflow-azure-to-teradata-transfer-operator-doc.html":
-    "/quickstarts/manage-data/airflow-azure-to-teradata-transfer-operator-doc/",
+  "other-integrations/execute-dbt-teradata-transformations-in-airflow-with-cosmos.html" : "/quickstarts/manage-data/execute-dbt-teradata-transformations-in-airflow-with-cosmos/",
+  "airflow/airflow-azure-to-teradata-transfer-operator-doc.html": "/quickstarts/manage-data/airflow-azure-to-teradata-transfer-operator-doc/",
   "dbt.html": "/quickstarts/manage-data/dbt/",
   "advanced-dbt.html": "/quickstarts/manage-data/advanced-dbt/",
   "modelops/using-feast-feature-store-with-teradata-vantage.html":
@@ -102,24 +91,15 @@ const data = {
   "vantagecloud-lake/vantagecloud-lake-demo-jupyter-azure.html":
     "/quickstarts/vantagecloud-lake/vantagecloud-lake-demo-jupyter-azure/",
   // AI Unlimited redirects
-  "ai-unlimited/ai-unlimited-aws-permissions-policies.html":
-    "/ai-unlimited/install-ai-unlimited/",
-  "ai-unlimited/ai-unlimited-magic-reference.html":
-    "/ai-unlimited/explore-and-analyze-data/magic-commands/",
-  "ai-unlimited/deploy-ai-unlimited-aws-cloudformation.html":
-    "/ai-unlimited/install-ai-unlimited/deploy-manager-aws-console/",
-  "ai-unlimited/deploy-ai-unlimited-awscli-cloudformation.html":
-    "/ai-unlimited/install-ai-unlimited/",
-  "ai-unlimited/getting-started-with-ai-unlimited.html":
-    "/ai-unlimited/install-ai-unlimited/",
-  "ai-unlimited/install-ai-unlimited-interface-docker.html":
-    "/ai-unlimited/install-ai-unlimited/",
-  "ai-unlimited/install-ai-unlimited-workspaces-docker.html":
-    "/ai-unlimited/resources/quickstart/run-ai-unlimited-jupyterlab-docker/",
-  "ai-unlimited/running-sample-ai-unlimited-workload.html":
-    "/ai-unlimited/install-ai-unlimited/",
-  "ai-unlimited/using-ai-unlimited-workspace-cli.html":
-    "/ai-unlimited/install-ai-unlimited/",
+  "ai-unlimited/ai-unlimited-aws-permissions-policies.html": "/ai-unlimited/install-ai-unlimited/",
+  "ai-unlimited/ai-unlimited-magic-reference.html": "/ai-unlimited/explore-and-analyze-data/magic-commands/",
+  "ai-unlimited/deploy-ai-unlimited-aws-cloudformation.html": "/ai-unlimited/install-ai-unlimited/deploy-manager-aws-console/",
+  "ai-unlimited/deploy-ai-unlimited-awscli-cloudformation.html": "/ai-unlimited/install-ai-unlimited/",
+  "ai-unlimited/getting-started-with-ai-unlimited.html": "/ai-unlimited/install-ai-unlimited/",
+  "ai-unlimited/install-ai-unlimited-interface-docker.html": "/ai-unlimited/install-ai-unlimited/",
+  "ai-unlimited/install-ai-unlimited-workspaces-docker.html": "/ai-unlimited/resources/quickstart/run-ai-unlimited-jupyterlab-docker/",
+  "ai-unlimited/running-sample-ai-unlimited-workload.html": "/ai-unlimited/install-ai-unlimited/", 
+  "ai-unlimited/using-ai-unlimited-workspace-cli.html": "/ai-unlimited/install-ai-unlimited/",
 };
 
 // Template generator function
