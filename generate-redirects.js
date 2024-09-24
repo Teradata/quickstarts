@@ -19,7 +19,7 @@ const data = {
   "nos.html": "/quickstarts/manage-data/nos/",
   "select-the-right-data-ingestion-tools-for-teradata-vantage.html": "/quickstarts/manage-data/select-the-right-data-ingestion-tools-for-teradata-vantage/",
   "airflow.html": "/quickstarts/manage-data/airflow/",
-  "execute-dbt-teradata-transformations-in-airflow-with-cosmos.html" : "/quickstarts/manage-data/execute-dbt-teradata-transformations-in-airflow-with-cosmos/",
+  "other-integrations/execute-dbt-teradata-transformations-in-airflow-with-cosmos.html" : "/quickstarts/manage-data/execute-dbt-teradata-transformations-in-airflow-with-cosmos/",
   "airflow/airflow-azure-to-teradata-transfer-operator-doc.html": "/quickstarts/manage-data/airflow-azure-to-teradata-transfer-operator-doc/",
   "dbt.html": "/quickstarts/manage-data/dbt/",
   "advanced-dbt.html": "/quickstarts/manage-data/advanced-dbt/",
