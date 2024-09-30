@@ -90,6 +90,8 @@ const data = {
     "/quickstarts/vantagecloud-lake/vantagecloud-lake-demo-jupyter-google-cloud-vertex-ai/",
   "vantagecloud-lake/vantagecloud-lake-demo-jupyter-azure.html":
     "/quickstarts/vantagecloud-lake/vantagecloud-lake-demo-jupyter-azure/",
+    "vantagecloud-lake/vantagecloud-lake-compute-cluster-airflow.html":"quickstarts/vantagecloud-lake/vantagecloud-lake-compute-cluster-airflow/",
+    "airflow/airflow.html": "/quickstarts/manage-data/airflow/",
   // AI Unlimited redirects
   "ai-unlimited/ai-unlimited-aws-permissions-policies.html": "/ai-unlimited/install-ai-unlimited/",
   "ai-unlimited/ai-unlimited-magic-reference.html": "/ai-unlimited/explore-and-analyze-data/magic-commands/",
@@ -118,6 +120,7 @@ function generateHTML(url) {
 function createRedirects(lang = "") {
   // Directory where the files will be saved
   const outputDir = path.join(__dirname, "static" + (lang ? `/${lang}` : ""));
+ 
   console.log(`Creating redirects in: ${outputDir}`);
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir);
