@@ -90,7 +90,7 @@ const data = {
     "/quickstarts/vantagecloud-lake/vantagecloud-lake-demo-jupyter-google-cloud-vertex-ai/",
   "vantagecloud-lake/vantagecloud-lake-demo-jupyter-azure.html":
     "/quickstarts/vantagecloud-lake/vantagecloud-lake-demo-jupyter-azure/",
-    "vantagecloud-lake/vantagecloud-lake-compute-cluster-airflow.html":"quickstarts/vantagecloud-lake/vantagecloud-lake-compute-cluster-airflow/",
+    "vantagecloud-lake/vantagecloud-lake-compute-cluster-airflow.html":"/quickstarts/vantagecloud-lake/vantagecloud-lake-compute-cluster-airflow/",
     "airflow/airflow.html": "/quickstarts/manage-data/airflow/",
   // AI Unlimited redirects
   "ai-unlimited/ai-unlimited-aws-permissions-policies.html": "/ai-unlimited/install-ai-unlimited/",
@@ -102,6 +102,19 @@ const data = {
   "ai-unlimited/install-ai-unlimited-workspaces-docker.html": "/ai-unlimited/resources/quickstart/run-ai-unlimited-jupyterlab-docker/",
   "ai-unlimited/running-sample-ai-unlimited-workload.html": "/ai-unlimited/install-ai-unlimited/", 
   "ai-unlimited/using-ai-unlimited-workspace-cli.html": "/ai-unlimited/install-ai-unlimited/",
+  
+  "mule-teradata-connector/release-notes.html" : "/quickstarts/create-applications/mule-teradata-connector-release-notes/",
+  "fastload.html": "/quickstarts/",
+  "jupyter-demos/index.html": "/quickstarts/",
+  "mule-teradata-connector/examples-configuration.html": "/quickstarts/create-applications/examples-configuration/",
+  "mule-teradata-connector/index.html": "/quickstarts/create-applications/teradata-connector-mule4/",
+  "explain-plan.html": "/quickstarts/",
+  "regulus/install-regulus-docker-image.html": "/quickstarts/",
+  "geojson-to-vantage.html": "/quickstarts/analyze-data/geojson-to-vantage/",
+  "jupyter-demos/gcp-vertex-ai-pipelines-vantage-byom-housing-example.html":  "/quickstarts/",
+  "cloud-guides/ingest-catalog-data-teradata-s3-with-glue.html":"/quickstarts/manage-data/ingest-catalog-data-teradata-s3-with-glue/",
+  "/other/getting.started.intro.html": "/quickstarts/",
+  "mule-teradata-connector/reference.html": "/quickstarts/create-applications/examples-configuration/",
 };
 
 // Template generator function
