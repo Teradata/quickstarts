@@ -104,16 +104,16 @@ const data = {
   "ai-unlimited/using-ai-unlimited-workspace-cli.html": "/ai-unlimited/install-ai-unlimited/",
   
   "mule-teradata-connector/release-notes.html" : "/quickstarts/create-applications/mule-teradata-connector-release-notes/",
-  "fastload.html": "/quickstarts/",
-  "jupyter-demos/index.html": "/quickstarts/",
+  "fastload.html": "/",
+  "jupyter-demos/index.html": "/",
   "mule-teradata-connector/examples-configuration.html": "/quickstarts/create-applications/examples-configuration/",
   "mule-teradata-connector/index.html": "/quickstarts/create-applications/teradata-connector-mule4/",
-  "explain-plan.html": "/quickstarts/",
-  "regulus/install-regulus-docker-image.html": "/quickstarts/",
+  "explain-plan.html": "/",
+  "regulus/install-regulus-docker-image.html": "/",
   "geojson-to-vantage.html": "/quickstarts/analyze-data/geojson-to-vantage/",
-  "jupyter-demos/gcp-vertex-ai-pipelines-vantage-byom-housing-example.html":  "/quickstarts/",
+  "jupyter-demos/gcp-vertex-ai-pipelines-vantage-byom-housing-example.html":  "/",
   "cloud-guides/ingest-catalog-data-teradata-s3-with-glue.html":"/quickstarts/manage-data/ingest-catalog-data-teradata-s3-with-glue/",
-  "/other/getting.started.intro.html": "/quickstarts/",
+  "/other/getting.started.intro.html": "/",
   "mule-teradata-connector/reference.html": "/quickstarts/create-applications/examples-configuration/",
 };
 
