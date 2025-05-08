@@ -104,7 +104,7 @@ const data = {
   "ai-unlimited/using-ai-unlimited-workspace-cli.html": "/ai-unlimited/install-ai-unlimited/",
   
   "mule-teradata-connector/release-notes.html" : "/quickstarts/create-applications/mule-teradata-connector-release-notes/",
-  "fastload.html": "/",
+  "fastload.html": "/quickstarts/manage-data/fastload/",
   "jupyter-demos/index.html": "/",
   "mule-teradata-connector/examples-configuration.html": "/quickstarts/create-applications/examples-configuration/",
   "mule-teradata-connector/index.html": "/quickstarts/create-applications/teradata-connector-mule4/",
